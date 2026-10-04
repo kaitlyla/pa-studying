@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "guides": {
+  "em": { "systems": [
+   { "title": "Cardiovascular", "pct": "20%", "category": "CV" },
+   { "title": "Orthopedics/Rheumatology", "pct": "15%", "category": null },
+   { "title": "Gastrointestinal/Nutritional", "pct": "10%", "category": "GI" },
+   { "title": "Pulmonary", "pct": "10%", "category": "PULM" },
+   { "title": "Neurology", "pct": "8%", "category": null },
+   { "title": "ENT/Ophthalmology", "pct": "7%", "category": "EENT" },
+   { "title": "Urology/Renal", "pct": "6%", "category": null },
+   { "title": "Dermatology", "pct": "5%", "category": null },
+   { "title": "Endocrinology", "pct": "5%", "category": "ENDO" },
+   { "title": "OBGYN", "pct": "5%", "category": null },
+   { "title": "Psychiatry/Behavioral Medicine", "pct": "5%", "category": "PSY" },
+   { "title": "Hematology", "pct": "4%", "category": null }
+  ] },
+  "fm": { "systems": [
+   { "title": "Cardiovascular", "pct": "15%", "category": "CV" },
+   { "title": "Pulmonary", "pct": "12%", "category": "PULM" },
+   { "title": "Gastrointestinal/Nutritional", "pct": "11%", "category": "GI" },
+   { "title": "EENT", "pct": "8%", "category": "EENT" },
+   { "title": "Obstetrics/Gynecology", "pct": "8%", "category": null },
+   { "title": "Orthopedics/Rheumatology", "pct": "8%", "category": null },
+   { "title": "Neurology", "pct": "6%", "category": null },
+   { "title": "Dermatology", "pct": "5%", "category": null },
+   { "title": "Endocrinology", "pct": "5%", "category": "ENDO" },
+   { "title": "Psychiatry/Behavioral Medicine", "pct": "5%", "category": "PSY" },
+   { "title": "Urology/Renal", "pct": "5%", "category": null },
+   { "title": "Hematology", "pct": "4%", "category": null },
+   { "title": "Infectious Diseases", "pct": "4%", "category": "ID" },
+   { "title": "Urgent Care", "pct": "4%", "category": null }
+  ] },
+  "im": { "systems": [
+   { "title": "Cardiovascular", "pct": "20%", "category": "CV" },
+   { "title": "Pulmonology", "pct": "15%", "category": "PULM" },
+   { "title": "GI/Nutritional", "pct": "12%", "category": "GI" },
+   { "title": "Orthopedics/Rheumatology", "pct": "12%", "category": null },
+   { "title": "Endocrinology", "pct": "8%", "category": "ENDO" },
+   { "title": "Neurology", "pct": "8%", "category": null },
+   { "title": "Urology/Renal", "pct": "8%", "category": null },
+   { "title": "Critical Care", "pct": "7%", "category": null },
+   { "title": "Hematology", "pct": "5%", "category": null },
+   { "title": "Infectious Disease", "pct": "5%", "category": "ID" }
+  ] },
+  "ob": { "systems": [
+   { "title": "Gynecology", "pct": "", "category": null },
+   { "title": "Obstetrics", "pct": "", "category": null }
+  ] },
+  "peds": { "systems": [
+   { "title": "Dermatology", "pct": "15%", "category": null },
+   { "title": "ENT/Ophthalmology", "pct": "15%", "category": "EENT" },
+   { "title": "Infectious Disease", "pct": "12%", "category": "ID" },
+   { "title": "Pulmonology", "pct": "12%", "category": "PULM" },
+   { "title": "Cardiovascular", "pct": "10%", "category": "CV" },
+   { "title": "Gastrointestinal/Nutritional System", "pct": "10%", "category": "GI" },
+   { "title": "Neurology/Developmental", "pct": "6%", "category": null },
+   { "title": "Psychiatry/Behavioral Medicine", "pct": "6%", "category": "PSY" },
+   { "title": "Orthopedics/Rheumatology", "pct": "5%", "category": null },
+   { "title": "Endocrinology", "pct": "3%", "category": "ENDO" },
+   { "title": "Hematology", "pct": "3%", "category": null },
+   { "title": "Urology/Renal", "pct": "3%", "category": null }
+  ] },
+  "psy": { "systems": [
+   { "title": "Depressive Disorders; Bipolar & Related Disorders", "pct": "", "category": "PSY" },
+   { "title": "Anxiety Disorders; Trauma & Stress-Related Disorders", "pct": "", "category": "PSY" },
+   { "title": "Substance-Related Disorders", "pct": "", "category": null },
+   { "title": "Schizophrenia Spectrum & Other Psychotic Disorders", "pct": "", "category": "PSY" },
+   { "title": "Disruptive, Impulse Control, & Conduct Disorders", "pct": "", "category": null },
+   { "title": "Neurodevelopmental Disorders", "pct": "", "category": null },
+   { "title": "Obsessive-Compulsive & Related Disorders", "pct": "", "category": null },
+   { "title": "Personality Disorders", "pct": "", "category": null },
+   { "title": "Somatic Symptom & Related Disorders", "pct": "", "category": null },
+   { "title": "Feeding & Eating Disorders", "pct": "", "category": null },
+   { "title": "Paraphilic Disorders; Sexual Dysfunction", "pct": "", "category": null },
+   { "title": "Sleep-Wake Disorders", "pct": "", "category": null },
+   { "title": "Dissociative Disorders", "pct": "", "category": null }
+  ] },
+  "surg": { "systems": [
+   { "title": "GI/Nutritional", "pct": "50%", "category": "GI" },
+   { "title": "Preoperative/Postoperative Care", "pct": "12%", "category": null },
+   { "title": "Cardiovascular", "pct": "9%", "category": "CV" },
+   { "title": "Endocrinology", "pct": "8%", "category": "ENDO" },
+   { "title": "Dermatology", "pct": "5%", "category": null },
+   { "title": "Neurology", "pct": "5%", "category": null },
+   { "title": "Urology/Renal", "pct": "5%", "category": null },
+   { "title": "Hematology", "pct": "3%", "category": null },
+   { "title": "Pulmonary", "pct": "3%", "category": "PULM" }
+  ] },
+  "pance": { "systems": [
+   { "title": "Cardiovascular", "pct": "13%", "category": "CV" },
+   { "title": "Pulmonary", "pct": "10%", "category": "PULM" },
+   { "title": "Gastrointestinal System/Nutrition", "pct": "9%", "category": "GI" },
+   { "title": "MSK/Rheumatology", "pct": "8%", "category": null },
+   { "title": "EENT", "pct": "7%", "category": "EENT" },
+   { "title": "Neurologic System", "pct": "7%", "category": null },
+   { "title": "Endocrine System", "pct": "7%", "category": "ENDO" },
+   { "title": "Reproductive System", "pct": "7%", "category": null },
+   { "title": "Infectious Disease", "pct": "6%", "category": "ID" },
+   { "title": "Psychiatry/Behavioral Medicine", "pct": "6%", "category": "PSY" },
+   { "title": "Renal System & GU System", "pct": "5% / 5%", "category": null, "match": "Renal System (5%) & GU System" },
+   { "title": "Dermatologic System", "pct": "5%", "category": null },
+   { "title": "Hematologic System", "pct": "5%", "category": null }
+  ] }
+ }
+}
