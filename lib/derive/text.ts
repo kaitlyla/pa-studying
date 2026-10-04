@@ -2,6 +2,7 @@
 import { columnCount, tableNode, type RowNodeLike } from "../content/tables.ts";
 import type { BlockFile, DocJSON } from "../content/types.ts";
 import { isNode, type PMNode } from "../schemaTypes.ts";
+import { placeCells } from "../wordFormat.ts";
 
 export type { PMNode };
 
@@ -32,6 +33,10 @@ export function searchText(text: string): string {
 export interface Row {
   id: string;
   kind: "heading" | "content";
+  /**
+   * Cell texts by grid column: a cell's text sits at its first column, and every column it covers
+   * beyond that (a column span), or that a row span from above covers, reads as "".
+   */
   cells: string[];
 }
 
@@ -41,13 +46,20 @@ export interface Table {
   rows: Row[];
 }
 
-/** Rows of a stored table node, with cell texts. */
+/**
+ * Rows of a stored table node (all of its rows, in order), with cell texts by grid column. Her name
+ * cell is often merged down over the row below, which stores no cell for it; reading cells by
+ * position would take that row's next cell for its name, so cells are placed on the table grid.
+ */
 export function readRows(rows: readonly RowNodeLike[]): Row[] {
-  return rows.map((r) => ({
+  const { cells: placed, columns } = placeCells(rows as readonly { content?: readonly PMNode[] }[]);
+  const out: Row[] = rows.map((r) => ({
     id: String(r.attrs?.id),
     kind: r.attrs?.kind === "heading" ? "heading" : "content",
-    cells: ((r.content ?? []) as PMNode[]).map(nodeText),
+    cells: Array<string>(columns).fill(""),
   }));
+  for (const p of placed) (out[p.row] as Row).cells[p.col] = nodeText(p.node);
+  return out;
 }
 
 /** The single table of a `table` block. */

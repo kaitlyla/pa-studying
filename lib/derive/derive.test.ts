@@ -14,7 +14,7 @@ import { B, C, D, G, GONE, P, R, S, tableDoc, U, writeFixture } from "../../tool
 import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
-import { CardMatcher, medsPanel, phraseMatcher, stubLabel } from "./pharm.ts";
+import { CardMatcher, medsPanel, phraseMatcher, stubLabel, topicText } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
@@ -23,7 +23,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { checkMembers, deriveTopics, publishedRows, publishedSections, sectionItems } from "./topics.ts";
+import { checkMembers, deriveTopics, publishedRows, publishedSections, sectionItems, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
@@ -135,6 +135,79 @@ describe("topics (40 §40.2)", () => {
     expect(t.topics.map((x) => [x.id, x.title, x.condition])).toEqual([[R(901), "Essential tremor", true]]);
     expect(t.proseBlocks).toEqual([]);
     expect(systemRowOrder([one], st, B(90))).toEqual([R(900), R(901)]);
+  });
+
+  describe("merged cells read on the table grid", () => {
+    type Cell = string | { text: string; rowspan?: number; colspan?: number };
+    /** A table block whose cells may span rows or columns, stored as the importer stores them. */
+    const merged = (id: string, columns: number, rows: [string, "heading" | "content", ...Cell[]][]): BlockFile => {
+      const cell = (c: Cell) => {
+        const { text, rowspan = 1, colspan = 1 } = typeof c === "string" ? { text: c } : c;
+        return { type: "table_cell", attrs: { colspan, rowspan }, content: [text === "" ? { type: "paragraph" } : { type: "paragraph", content: [{ type: "text", text }] }] };
+      };
+      const content = rows.map(([rid, kind, ...cells]) => ({ type: "table_row", attrs: { id: rid, kind }, content: cells.map(cell) }));
+      return { v: 1, id, kind: "table", doc: { type: "doc", content: [{ type: "table", attrs: { grid: Array(columns).fill(100) }, content }] }, meta: {} } as unknown as BlockFile;
+    };
+    const GCA = { text: "Giant Cell (Temporal) Arteritis", rowspan: 2 };
+    const notes = ["large & medium vessel vasculitis", "HA, jaw claudication", "increased ESR & CRP", "high-dose corticosteroids"];
+
+    it("a name cell merged down over the row below reads as an empty first cell there, so that row continues its topic", () => {
+      // IM Cardiovascular b_P33Q4DSSPV as imported: the second row stores 4 cells for a 5-column grid.
+      const b = merged(B(91), 5, [[R(910), "content", GCA, "About", "Clinical Manifestations", "Diagnostics", "Management"], [R(911), "content", ...notes]]);
+      expect(tableOf(b)?.rows.map((r) => r.cells)).toEqual([
+        ["Giant Cell (Temporal) Arteritis", "About", "Clinical Manifestations", "Diagnostics", "Management"],
+        ["", ...notes],
+      ]);
+      const t = deriveTopics([b], structureOf());
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[R(910), "Giant Cell (Temporal) Arteritis", [R(910), R(911)]]]);
+      expect(t.rows.get(R(911))?.topic).toBe(R(910));
+      expect(t.untitled).toEqual([]);
+      for (const n of notes) expect(topicText(t, t.topics[0] as Topic)).toContain(n);
+    });
+
+    it("as a heading row, the merged name titles the topic below it, whose cells align with the heading's columns", () => {
+      const b = merged(B(92), 5, [[R(920), "heading", GCA, "About", "CM", "Dx", "Mgmt"], [R(921), "content", ...notes]]);
+      const t = deriveTopics([b], structureOf());
+      expect(t.headings.get(R(920))).toEqual({ label: "Giant Cell (Temporal) Arteritis", columns: ["About", "CM", "Dx", "Mgmt"] });
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[R(921), "Giant Cell (Temporal) Arteritis", [R(921)]]]);
+      const row = t.tables.get(B(92))?.rows[1];
+      expect(row?.cells.slice(1)).toEqual(notes);
+      expect(row?.cells[1]).toBe(notes[0]); // under "About"
+    });
+
+    it("FM Heart Failure: rows under a merged name join it, not the topic before it, and the next name starts its own topic", () => {
+      // FM Cardiovascular b_7FQFC7QZ0W r_N063KS4CHX, with a three-row merge to show the span is followed.
+      const b = merged(B(93), 3, [
+        [R(930), "content", "Hypertension", "stage 1", "lifestyle"],
+        [R(931), "content", { text: "Heart Failure", rowspan: 3 }, "ACCF/AHA stages", "BNP"],
+        [R(932), "content", "L-side sxs", "echo"],
+        [R(933), "content", "R-side sxs", "loop diuretics"],
+        [R(934), "content", "Myocarditis", "viral", "supportive"],
+      ]);
+      const t = deriveTopics([b], structureOf());
+      expect(t.topics.map((x) => [x.title, x.rows])).toEqual([
+        ["Hypertension", [R(930)]],
+        ["Heart Failure", [R(931), R(932), R(933)]],
+        ["Myocarditis", [R(934)]],
+      ]);
+      expect(t.tables.get(B(93))?.rows[3]?.cells).toEqual(["", "R-side sxs", "loop diuretics"]);
+    });
+
+    it("a column-spanning cell sits in its first grid column and the columns it covers read as empty", () => {
+      const b = merged(B(94), 4, [
+        [R(940), "heading", "ARRHYTHMIAS", { text: "Presentation", colspan: 2 }, "Treatment"],
+        [R(941), "content", { text: "Atrial flutter", colspan: 2 }, "sawtooth", "rate control"],
+        [R(942), "content", "AF", "irregular", "no P", "anticoagulate"],
+      ]);
+      const t = deriveTopics([b], structureOf());
+      expect(t.headings.get(R(940))?.columns).toEqual(["Presentation", "", "Treatment"]);
+      expect(t.tables.get(B(94))?.rows.map((r) => r.cells)).toEqual([
+        ["ARRHYTHMIAS", "Presentation", "", "Treatment"],
+        ["Atrial flutter", "", "sawtooth", "rate control"],
+        ["AF", "irregular", "no P", "anticoagulate"],
+      ]);
+      expect(t.topics.map((x) => x.title)).toEqual(["Atrial flutter", "AF"]);
+    });
   });
 
   it("in a system with sections, the build fails naming a condition row with no members entry", () => {
