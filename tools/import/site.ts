@@ -8,7 +8,6 @@ export const SITE: SiteFile = {
   repo: "kaitlyla/pa-studying",
   tabs: ["eor", "pance", "labs", "imaging", "ekg", "anatomy", "other"],
   eors: ["em", "fm", "im", "ob", "peds", "psy", "surg"],
-  pance: "pance",
   guideNames: { em: "Emergency Medicine", fm: "Family Medicine", im: "Internal Medicine", ob: "OBGYN", peds: "Pediatrics", psy: "Psychiatry", surg: "Surgery", pance: "PANCE / EOC" },
 };
 
