@@ -8,7 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GUIDE_IDS, parseTrailers } from "../../lib/content/index.ts";
 import type { AsIsFile, UploadFile } from "../../lib/content/index.ts";
 import { writeContent } from "../../lib/content/fs.ts";
-import { commitImport, ghPath, IMPORT_SUBJECT, PART_BYTES, spawnRunner } from "./commit.ts";
+import { commitImport, ghPath, handOffInbox, IMPORT_SUBJECT, PART_BYTES, spawnRunner } from "./commit.ts";
 import type { Runner } from "./commit.ts";
 import { SITE } from "./site.ts";
 
@@ -73,7 +73,10 @@ const blob = async (ref: string, path: string): Promise<Buffer> => {
   });
 };
 
-describe("commitImport", () => {
+// Real git with a 16 MiB object runs past Vitest's 5 s default on her machine.
+const GIT_TIMEOUT = { timeout: 30_000 };
+
+describe("commitImport", GIT_TIMEOUT, () => {
   it("commits content and reports as her, pushes main, then pushes the PowerPoint in 16 MiB parts on inbox/<d_id> and dispatches it", async () => {
     // Just over one part, so the file is cut in two.
     const pptx = new Uint8Array(PART_BYTES + 1000).map((_, i) => (i * 31 + 7) & 255);
@@ -130,6 +133,63 @@ describe("commitImport", () => {
     expect(files.some((f) => f.startsWith("tools/"))).toBe(false);
     expect((await spawnRunner(remote)("git", ["ls-tree", "-r", "--name-only", `inbox/${D}`])).trim().split("\n")).toEqual([`inbox/${D}/part-000`, `inbox/${D}/upload.json`]);
     expect(gh).toHaveLength(1);
+  });
+});
+
+describe("handOffInbox", GIT_TIMEOUT, () => {
+  const ID_ENV = { GIT_AUTHOR_NAME: "t", GIT_AUTHOR_EMAIL: "t@example.test", GIT_COMMITTER_NAME: "t", GIT_COMMITTER_EMAIL: "t@example.test" };
+  const remoteRev = async (ref: string): Promise<string> => (await spawnRunner(remote)("git", ["rev-parse", ref])).trim();
+
+  it("pushes inbox/<d_id> as a child of origin/main as fetched now, never touching main, and dispatches it", async () => {
+    const pptx = new Uint8Array(5000).map((_, i) => (i * 13 + 1) & 255);
+    await setUp(pptx);
+    // The import is on main already.
+    await git("git", ["add", "--", "content"]);
+    await git("git", ["commit", "-m", "import"], { env: ID_ENV });
+    await git("git", ["push", "origin", "main"]);
+    // A local commit that was never pushed: the hand-off must not build on it.
+    await writeFile(join(root, "local.txt"), "x");
+    await git("git", ["add", "--", "local.txt"]);
+    await git("git", ["commit", "-m", "local only"], { env: ID_ENV });
+    const localHead = (await git("git", ["rev-parse", "HEAD"])).trim();
+    // origin/main moves on after this checkout last fetched it.
+    const other = join(root, "..", "other");
+    await spawnRunner(join(root, ".."))("git", ["clone", "-q", remote, other]);
+    await writeFile(join(other, "later.txt"), "y");
+    await spawnRunner(other)("git", ["add", "--", "later.txt"]);
+    await spawnRunner(other)("git", ["commit", "-m", "later"], { env: ID_ENV });
+    await spawnRunner(other)("git", ["push", "origin", "main"]);
+    const mainBefore = await remoteRev("main");
+    expect((await git("git", ["rev-parse", "refs/remotes/origin/main"])).trim()).not.toBe(mainBefore);
+
+    const gh: string[][] = [];
+    const inbox = await handOffInbox(root, { run: runner(gh), gh: "gh-test", log: () => undefined });
+
+    expect(await remoteRev("main")).toBe(mainBefore);
+    const ref = `inbox/${D}`;
+    const [who, , parents, message] = (await show(ref)).split("|");
+    expect(parents).toBe(mainBefore);
+    expect(parents).not.toBe(localHead);
+    expect(who).toBe(`${SITE.owner.commitName} <${SITE.owner.commitEmail}>`);
+    expect(message?.trim()).toBe(`Inbox: ${PPTX}`);
+    expect((await spawnRunner(remote)("git", ["ls-tree", "-r", "--name-only", ref])).trim().split("\n"))
+      .toEqual([`inbox/${D}/part-000`, `inbox/${D}/upload.json`]);
+    expect((await blob(ref, `inbox/${D}/part-000`)).equals(Buffer.from(pptx))).toBe(true);
+    const upload = JSON.parse((await blob(ref, `inbox/${D}/upload.json`)).toString("utf8")) as UploadFile;
+    const sha = Buffer.from(await crypto.subtle.digest("SHA-256", pptx)).toString("hex");
+    expect(upload).toEqual({ v: 1, id: D, fileName: PPTX, ext: "pptx", size: pptx.length, sha256: sha, parts: 1, replaces: null });
+    expect(gh).toEqual([["workflow", "run", "process-inbox.yml", "-f", `item=${D}`]]);
+    expect(inbox).toEqual([D]);
+  });
+
+  it("does nothing when no document is processing", async () => {
+    await setUp(new Uint8Array([1]));
+    const ready: AsIsFile = { v: 1, id: D, name: "Antibiotic Flower Charts", kind: "slides", original: PPTX, view: "v.pdf", pages: 1, text: "text.json", removed: null, state: "ready" };
+    await writeContent(root, `content/files/${D}/file.json`, ready);
+    const calls: string[] = [];
+    const run: Runner = (cmd, args) => { calls.push([cmd, ...args].join(" ")); return Promise.resolve(""); };
+    expect(await handOffInbox(root, { run, gh: "gh-test", log: () => undefined })).toEqual([]);
+    expect(calls).toEqual([]);
   });
 });
 

@@ -2,6 +2,7 @@
 // Run after the import output has been verified: it commits `content/` and the verifier's reports
 // as the repository's first content commit, pushes `main`, then for each processing document
 // pushes `inbox/<d_id>` (20 §20.2 layout, built with git locally) and dispatches process-inbox.yml.
+// `handOffInbox` alone does the hand-off for an import already on `main`.
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
@@ -62,23 +63,33 @@ export interface CommitOptions {
   log?: Log;
 }
 
+async function ownerEnv(root: string): Promise<Record<string, string>> {
+  const site = await readContent<SiteFile>(root, "content/site.json");
+  return {
+    GIT_AUTHOR_NAME: site.owner.commitName, GIT_AUTHOR_EMAIL: site.owner.commitEmail,
+    GIT_COMMITTER_NAME: site.owner.commitName, GIT_COMMITTER_EMAIL: site.owner.commitEmail,
+  };
+}
+
+/** Each processing document paired with its source path; throws if one has no slides source. */
+async function pendingOriginals(root: string): Promise<{ file: AsIsFile; path: string }[]> {
+  const pending = await processingFiles(root);
+  const sources = await loadSources(root);
+  return pending.map((f) => {
+    const src = sources.find((s) => s.kind === "slides" && baseName(s.path) === f.original);
+    if (!src) throw new Error(`content/files/${f.id}: no slides source named ${f.original} in sources.json`);
+    return { file: f, path: src.path };
+  });
+}
+
 /**
  * Commit and push the import, then hand each processing document to the inbox job. Author and
  * committer are `site.json.owner`'s commit identity.
  */
 export async function commitImport(root: string, { run, gh = ghPath(), log = console.log }: CommitOptions): Promise<{ commit: string; inbox: string[] }> {
-  const site = await readContent<SiteFile>(root, "content/site.json");
-  const env = {
-    GIT_AUTHOR_NAME: site.owner.commitName, GIT_AUTHOR_EMAIL: site.owner.commitEmail,
-    GIT_COMMITTER_NAME: site.owner.commitName, GIT_COMMITTER_EMAIL: site.owner.commitEmail,
-  };
-  const pending = await processingFiles(root);
-  const sources = await loadSources(root);
-  const originals = pending.map((f) => {
-    const src = sources.find((s) => s.kind === "slides" && baseName(s.path) === f.original);
-    if (!src) throw new Error(`content/files/${f.id}: no slides source named ${f.original} in sources.json`);
-    return { file: f, path: src.path };
-  });
+  const env = await ownerEnv(root);
+  // Refuse before committing anything if a hand-off could not be built.
+  await pendingOriginals(root);
 
   const paths = ["content"];
   if (existsSync(join(root, "tools", "import", "reports"))) paths.push("tools/import/reports");
@@ -88,6 +99,20 @@ export async function commitImport(root: string, { run, gh = ghPath(), log = con
   log(`committed ${commit}: ${IMPORT_SUBJECT}`);
   await run("git", ["push", "origin", "main"]);
   log("pushed main");
+  return { commit, inbox: await handOffInbox(root, { run, gh, log }) };
+}
+
+/**
+ * Push `inbox/<d_id>` for each processing document, as a child of `origin/main` (fetched first),
+ * and dispatch process-inbox.yml for it. Never touches `main`; author and committer are
+ * `site.json.owner`'s commit identity.
+ */
+export async function handOffInbox(root: string, { run, gh = ghPath(), log = console.log }: CommitOptions): Promise<string[]> {
+  const env = await ownerEnv(root);
+  const originals = await pendingOriginals(root);
+  if (originals.length === 0) return [];
+  await run("git", ["fetch", "origin", "main"]);
+  const parent = (await run("git", ["rev-parse", "refs/remotes/origin/main"])).trim();
 
   const inbox: string[] = [];
   for (const { file, path } of originals) {
@@ -108,11 +133,11 @@ export async function commitImport(root: string, { run, gh = ghPath(), log = con
     const itemTree = (await run("git", ["mktree"], { input: `${entries.join("\n")}\n` })).trim();
     const inboxTree = (await run("git", ["mktree"], { input: `040000 tree ${itemTree}\t${file.id}\n` })).trim();
     const rootTree = (await run("git", ["mktree"], { input: `040000 tree ${inboxTree}\tinbox\n` })).trim();
-    const inboxCommit = (await run("git", ["commit-tree", rootTree, "-p", commit, "-F", "-"], { input: `Inbox: ${file.original}\n`, env })).trim();
+    const inboxCommit = (await run("git", ["commit-tree", rootTree, "-p", parent, "-F", "-"], { input: `Inbox: ${file.original}\n`, env })).trim();
     await run("git", ["push", "origin", `${inboxCommit}:refs/heads/inbox/${file.id}`]);
     await run(gh, ["workflow", "run", "process-inbox.yml", "-f", `item=${file.id}`]);
     log(`pushed inbox/${file.id} (${file.original}, ${parts} part${parts === 1 ? "" : "s"}) and dispatched process-inbox.yml`);
     inbox.push(file.id);
   }
-  return { commit, inbox };
+  return inbox;
 }

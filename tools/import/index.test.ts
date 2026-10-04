@@ -19,9 +19,9 @@ afterEach(async () => {
 });
 
 describe("main", () => {
-  it.each([[["convert"]], [["commit", "now"]], [["--help"]]])("prints usage and exits 2 for %j", async (argv) => {
+  it.each([[["convert"]], [["commit", "now"]], [["inbox", "d_0000000001"]], [["--help"]]])("prints usage and exits 2 for %j", async (argv) => {
     expect(await main(argv, root)).toBe(2);
-    expect(errors).toEqual(["usage: node tools/import/index.ts [commit]"]);
+    expect(errors).toEqual(["usage: node tools/import/index.ts [commit | inbox]"]);
   });
 
   it("exits 1 with the reason when the import fails", async () => {
@@ -30,9 +30,10 @@ describe("main", () => {
     expect(errors[0]).toMatch(/^import failed: .*sources\.json/);
   });
 
-  it("exits 1 with the reason when the commit step fails", async () => {
-    expect(await main(["commit"], root)).toBe(1);
+  it.each(["commit", "inbox"])("exits 1 with the reason when the %s step fails", async (command) => {
+    // An empty root has no content/site.json, which both steps read first.
+    expect(await main([command], root)).toBe(1);
     expect(errors).toHaveLength(1);
-    expect(errors[0]).toMatch(/^import failed: /);
+    expect(errors[0]).toMatch(/^import failed: .*site\.json/);
   });
 });
