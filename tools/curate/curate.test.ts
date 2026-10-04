@@ -14,6 +14,7 @@ import { publish } from "../../lib/derive/publish.ts";
 import { B, C, D, doc, G, P, para, R, S, U, writeFixture } from "../build/test-fixture.ts";
 import { loadContent } from "../build/load.ts";
 import { run, USAGE } from "./index.ts";
+import { commitChanges } from "./tree.ts";
 
 let root: string;
 beforeEach(async () => {
@@ -379,6 +380,40 @@ describe("flags and concepts", () => {
     await refused(["concepts", await draft("a", { v: 1, concepts: [{ ...af, targets: [R(777)] }] })], new RegExp(`${R(777)} names nothing`), [CONCEPTS]);
     await refused(["concepts", await draft("b", { v: 1, concepts: [{ ...af, sourceKeys: { gold: ["k9"] } }] })], /no gold flag carries "k9"/, [CONCEPTS]);
     await refused(["concepts", await draft("c", { v: 1, concepts: [{ ...af, sourceKeys: { uspstf: ["k1"] } }] })], /no uspstf flag carries "k1"/, [CONCEPTS]);
+  });
+});
+
+describe("staged changes are checked by the build's own loader", () => {
+  const PSY_DECK = "content/slides/psy/deck.json";
+  const D4 = `content/files/${D(4)}/file.json`;
+
+  /** Commit `changes`, expecting a refusal; asserts its message and that the given files are byte-unchanged. */
+  async function refusedCommit(changes: { path: string; value: unknown }[], message: RegExp, unchanged: string[]): Promise<void> {
+    const before = await Promise.all(unchanged.map(text));
+    await expect(commitChanges(root, changes)).rejects.toThrow(message);
+    expect(await Promise.all(unchanged.map(text))).toEqual(before);
+  }
+
+  it("refuses a block file its owner does not list, writing nothing", async () => {
+    const stray = `${CV}/blocks/${B(99)}.json`;
+    const value = { v: 1, id: B(99), kind: "prose", doc: doc(para("stray")), meta: {} };
+    await refusedCommit([{ path: stray, value }], /block file is not listed by its owner/, [`${CV}/system.json`]);
+    expect(await readContentIfExists(root, stray)).toBeNull();
+  });
+
+  it("reads a removed document's own deck without its slide blocks, and refuses restoring the document while they are missing", async () => {
+    const deck = await read<DeckFile>(PSY_DECK);
+    expect(await commitChanges(root, [{ path: PSY_DECK, value: { ...deck, title: "Psych review" } }])).toEqual([PSY_DECK]);
+    expect((await read<DeckFile>(PSY_DECK)).title).toBe("Psych review");
+
+    const file = await read<Record<string, unknown>>(D4);
+    await refusedCommit([{ path: D4, value: { ...file, removed: null } }], new RegExp(`${S(40)}\\.json: listed block file is missing`), [D4, PSY_DECK]);
+  });
+
+  it("refuses a site file naming a guide the tree does not have, writing nothing", async () => {
+    const site = await read<{ eors: string[]; guideNames: Record<string, string> }>("content/site.json");
+    const value = { ...site, eors: [...site.eors, "im"], guideNames: { ...site.guideNames, im: "Internal Medicine" } };
+    await refusedCommit([{ path: "content/site.json", value }], /guides\/im\/guide\.json: file not found/, ["content/site.json"]);
   });
 });
 

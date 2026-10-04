@@ -5,8 +5,9 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   checkBlockDir, listDir, listGapBlocks, readContent, readContentIfExists, readStoredFile, readSystem, removeContent,
-  writeAsset, writeContent, writeStoredFile,
+  stagedTree, writeAsset, writeContent, writeStoredFile,
 } from "./fs.ts";
+import { serializeFile } from "./files.ts";
 import type { BlockFile, SystemFile } from "./types.ts";
 
 const id = (p: string, n: number): string => `${p}_${String(n).padStart(10, "0")}`;
@@ -76,6 +77,45 @@ describe("systems (20 §20.4)", () => {
     await writeSystem([1, 2], [1]);
     await expect(readSystem(root, "fm", "cardiovascular")).rejects.toThrow(/not listed by its owner/);
     await expect(checkBlockDir(root, `${sysBase}/blocks`, [id("b", 1), id("b", 2), id("b", 3)])).rejects.toThrow(/listed block file is missing/);
+  });
+});
+
+describe("staged trees", () => {
+  const blockPath = (n: number): string => `${sysBase}/blocks/${id("b", n)}.json`;
+  const staged = (entries: [string, unknown][]) =>
+    stagedTree(root, entries.map(([path, value]): [string, string | null] => [path, value === null ? null : serializeFile(path.replaceAll("\\", "/"), value)]));
+
+  it("reads staged files over the disk, hides staged deletions and lists both, writing nothing", async () => {
+    await writeSystem([1, 2]);
+    const tree = staged([
+      [blockPath(3), block(3)],
+      [blockPath(2), null],
+      [`${sysBase}/system.json`, { v: 1, id: "cardiovascular", blocks: [id("b", 1), id("b", 3)] }],
+      ["content/guides/fm/renal/system.json", { v: 1, id: "renal", blocks: [] }],
+    ]);
+
+    const { blocks } = await readSystem(tree, "fm", "cardiovascular");
+    expect(blocks.map((b) => b.id)).toEqual([id("b", 1), id("b", 3)]);
+    expect(await listDir(tree, `${sysBase}/blocks`)).toEqual([`${id("b", 1)}.json`, `${id("b", 3)}.json`]);
+    expect(await listDir(tree, "content/guides/fm")).toEqual(["cardiovascular", "renal"]);
+    await expect(readContent(tree, blockPath(2))).rejects.toThrow(/file not found/);
+    expect(await readContentIfExists(tree, blockPath(2))).toBeNull();
+
+    expect(await listDir(root, `${sysBase}/blocks`)).toEqual([`${id("b", 1)}.json`, `${id("b", 2)}.json`]);
+    expect(await listDir(root, "content/guides/fm")).toEqual(["cardiovascular"]);
+    expect(await readContentIfExists(root, blockPath(3))).toBeNull();
+  });
+
+  it("checks a blocks directory as staged: an unlisted staged block and a deleted listed block are refused", async () => {
+    await writeSystem([1]);
+    await expect(readSystem(staged([[blockPath(2), block(2)]]), "fm", "cardiovascular")).rejects.toThrow(/not listed by its owner/);
+    await expect(readSystem(staged([[blockPath(1), null]]), "fm", "cardiovascular")).rejects.toThrow(/listed block file is missing/);
+  });
+
+  it("takes backslash-separated staged paths as repository paths", async () => {
+    await writeSystem([1]);
+    const tree = staged([[`${sysBase}\\blocks\\${id("b", 1)}.json`, null]]);
+    expect(await listDir(tree, `${sysBase}/blocks`)).toEqual([]);
   });
 });
 

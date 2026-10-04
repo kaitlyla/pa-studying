@@ -96,7 +96,7 @@ export async function run(root: string, argv: readonly string[]): Promise<string
     default:
       throw new CurateError(USAGE);
   }
-  const written = await commitChanges(root, c, planned.changes);
+  const written = await commitChanges(root, planned.changes);
   return [...planned.notes, ...written.map((p) => `wrote ${p}`)];
 }
 

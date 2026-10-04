@@ -1,19 +1,20 @@
 // Reads the content tree through lib/content into the model lib/derive publishes from.
 import {
-  checkBlockDir, listDir, listGapBlocks, readContent, readContentIfExists, readSystem,
+  checkBlockDir, listDir, listGapBlocks, readContent, readContentIfExists, readSystem, type TreeRoot,
 } from "../../lib/content/fs.ts";
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GeneralFile,
   GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, VocabFile, WordDocFile,
 } from "../../lib/content/types.ts";
 import type { Content, DeckData, DocData, GapData, GuideData, PharmData } from "../../lib/derive/model.ts";
+import { PANCE } from "../../lib/derive/routes.ts";
 
-async function readBlocks<M = Record<string, unknown>>(root: string, dir: string, ids: readonly string[]): Promise<BlockFile<M>[]> {
+async function readBlocks<M = Record<string, unknown>>(root: TreeRoot, dir: string, ids: readonly string[]): Promise<BlockFile<M>[]> {
   await checkBlockDir(root, dir, ids);
   return Promise.all(ids.map((id) => readContent<BlockFile<M>>(root, `${dir}/${id}.json`)));
 }
 
-async function loadGuide(root: string, id: string, eor: boolean): Promise<GuideData> {
+async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<GuideData> {
   const base = `content/guides/${id}`;
   const file = await readContent<GuideFile>(root, `${base}/guide.json`);
   const preamble = await readBlocks(root, `${base}/_preamble/blocks`, file.preamble);
@@ -28,7 +29,7 @@ async function loadGuide(root: string, id: string, eor: boolean): Promise<GuideD
   return { file, preamble, general, systems };
 }
 
-async function loadDocs(root: string): Promise<Map<string, DocData>> {
+async function loadDocs(root: TreeRoot): Promise<Map<string, DocData>> {
   const docs = new Map<string, DocData>();
   for (const id of await listDir(root, "content/docs")) {
     const file = await readContent<WordDocFile>(root, `content/docs/${id}/doc.json`);
@@ -44,7 +45,7 @@ async function loadDocs(root: string): Promise<Map<string, DocData>> {
   return docs;
 }
 
-async function loadPharm(root: string): Promise<PharmData[]> {
+async function loadPharm(root: TreeRoot): Promise<PharmData[]> {
   const out: PharmData[] = [];
   for (const name of await listDir(root, "content/pharm")) {
     if (name === "cards.json") continue;
@@ -54,7 +55,7 @@ async function loadPharm(root: string): Promise<PharmData[]> {
   return out;
 }
 
-async function loadGaps(root: string): Promise<Map<string, GapData>> {
+async function loadGaps(root: TreeRoot): Promise<Map<string, GapData>> {
   const gaps = new Map<string, GapData>();
   for (const block of await listGapBlocks(root)) {
     gaps.set(block.id, { block, evidence: await readContentIfExists<EvidenceFile>(root, `content/gapfill/${block.id}.evidence.json`) });
@@ -62,7 +63,7 @@ async function loadGaps(root: string): Promise<Map<string, GapData>> {
   return gaps;
 }
 
-async function loadDecks(root: string, guides: readonly string[], docs: ReadonlyMap<string, DocData>): Promise<Map<string, DeckData>> {
+async function loadDecks(root: TreeRoot, guides: readonly string[], docs: ReadonlyMap<string, DocData>): Promise<Map<string, DeckData>> {
   const decks = new Map<string, DeckData>();
   for (const g of guides) {
     const file = await readContentIfExists<DeckFile>(root, `content/slides/${g}/deck.json`);
@@ -75,13 +76,13 @@ async function loadDecks(root: string, guides: readonly string[], docs: Readonly
 }
 
 /** Load the whole content tree under `root`. Every curation file the build reads must exist. */
-export async function loadContent(root: string): Promise<Content> {
+export async function loadContent(root: TreeRoot): Promise<Content> {
   const site = await readContent<SiteFile>(root, "content/site.json");
-  const ids = [...site.eors, site.pance];
+  const ids = [...site.eors, PANCE];
   const docs = await loadDocs(root);
   const [vocab, guides, cards, pharm, gaps, decks, reftabs, other, flags, concepts, checks] = await Promise.all([
     readContent<VocabFile>(root, "content/vocab/abbreviations.json"),
-    Promise.all(ids.map((g) => loadGuide(root, g, g !== site.pance))),
+    Promise.all(ids.map((g) => loadGuide(root, g, g !== PANCE))),
     readContent<CardsFile>(root, "content/pharm/cards.json"),
     loadPharm(root),
     loadGaps(root),
