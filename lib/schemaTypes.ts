@@ -1,12 +1,13 @@
 // The stored JSON shapes of lib/schema.ts's nodes and marks. schema.ts checks its attribute specs
 // against these types, so every consumer (importer, build, renderer, PDF, Word, editor) reads one
 // definition instead of redeclaring or casting.
+import type { DashStyle } from "./drawing.ts";
 
 export type Side = "top" | "right" | "bottom" | "left";
 export type TableSide = Side | "insideH" | "insideV";
 
 export type Border = {
-  /** Word ST_Border value, or a drawing's solid/dash/dot. */
+  /** Word ST_Border value, or for a text box outline a DrawingML preset dash (lib/drawing.ts DASH_STYLES). */
   style: string;
   widthPt: number;
   /** 6-digit uppercase hex, no `#`. */
@@ -31,7 +32,8 @@ export type ListMarker = {
   tabPt: number;
 };
 
-export type DrawingStroke = { color: string; widthPt: number; dash: string | null };
+/** `dash` is Word's `a:prstDash` value, stored as-is (Orchestrator ruling zeke-69273). */
+export type DrawingStroke = { color: string; widthPt: number; dash: DashStyle | null };
 
 export type DrawingShape = {
   geom: string;

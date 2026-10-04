@@ -3,6 +3,7 @@
 import { Schema } from "prosemirror-model";
 import type { NodeSpec, MarkSpec, AttributeSpec } from "prosemirror-model";
 import { idRegExp } from "./content/ids.ts";
+import { DASH_STYLES, isDashStyle } from "./drawing.ts";
 import type { MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
 
 type Check = (value: unknown) => void;
@@ -82,7 +83,8 @@ const markList: Check = (v) => {
   }
 };
 const grid: Check = (v) => { if (!Array.isArray(v) || !v.every(isNum)) fail("grid", v); };
-const stroke = nullable(shape({ color: hex, widthPt: num, dash: strOrNull }, "stroke"));
+const dashStyle: Check = (v) => { if (v !== null && !isDashStyle(v)) fail(`dash style (one of ${DASH_STYLES.join(", ")})`, v); };
+const stroke = nullable(shape({ color: hex, widthPt: num, dash: dashStyle }, "stroke"));
 const drawingShape = shape({
   geom: str, x: num, y: num, w: num, h: num, rot: num, flipH: bool, flipV: bool,
   stroke, fill: hexOrNull, head: strOrNull, tail: strOrNull, asset: assetOrNull,
