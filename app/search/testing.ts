@@ -16,26 +16,32 @@ export const VOCAB: VocabFile = {
 };
 
 /** Unit numbers of the named fixture units; every other unit up to SHARD_SIZE + 100 is imaging filler. */
-export const U = { ie: 0, angina: 1, gap: 2, acs: 3, update: 4, troponin: 5, cushion: SHARD_SIZE + 50 } as const;
+export const U = { ie: 0, angina: 1, gap: 2, acs: 3, update: 4, troponin: 5, liP1: 6, liP2: 7, cushion: SHARD_SIZE + 50 } as const;
 
-function unit(tab: string, title: string, loc: string, route: string, label: SearchUnit["label"], text: string): Omit<SearchUnit, "ord"> {
-  return { tab, title, loc, route, label, text };
+/** Imaging filler units: every unit number not in `U`. */
+export const FILLER_COUNT = SHARD_SIZE + 100 - Object.keys(U).length;
+
+function unit(tab: string, title: string, loc: string, route: string, at: string | null, label: SearchUnit["label"], text: string): Omit<SearchUnit, "ord"> {
+  return { tab, title, loc, route, at, label, text };
 }
 
 /** Units in site order (`ord` equals the unit number, as the build emits them). */
 export function fixtureUnits(): SearchUnit[] {
   const named = new Map<number, Omit<SearchUnit, "ord">>([
-    [U.ie, unit("eor", "Infective endocarditis", "EOR › Family Medicine › Cardiovascular", "#/eor/fm/t/r_ie", "notes", "Fever and a new murmur. Duke criteria. Antibiotic prophylaxis before dental work.")],
-    [U.angina, unit("eor", "Stable angina", "EOR › Family Medicine › Cardiovascular", "#/eor/fm/t/r_sa", "notes", "Chest pain with exertion; rule out MI. Nitrates first line. Endocarditis is not a cause.")],
-    [U.gap, unit("eor", "Endocarditis prophylaxis", "EOR › Family Medicine › Guidelines", "#/eor/fm/general/guidelines", "gap", "AHA guidance limits prophylaxis to the highest-risk cardiac conditions.")],
-    [U.acs, unit("pance", "Acute coronary syndrome", "PANCE › Cardiovascular", "#/pance/t/r_acs", "notes", "STEMI and NSTEMI: a myocardial infarction workup with serial troponin.")],
-    [U.update, unit("other", "ACC/AHA heart failure guideline", "Other › Guidelines › Updated guidelines", "#/other/guidelines/updates", "update", "New edition published. Treat hypertension in heart failure.")],
-    [U.troponin, unit("labs", "Troponin", "Labs", "#/labs/s_trop", "notes", "Rises in myocardial injury.")],
-    [U.cushion, unit("anatomy", "Endocardial cushion", "Anatomy", "#/anatomy/s_heart", "notes", "Embryology of the heart septa.")],
+    [U.ie, unit("eor", "Infective endocarditis", "EOR › Family Medicine › Cardiovascular", "#/eor/fm/t/r_ie", "r_ie", "notes", "Fever and a new murmur. Duke criteria. Antibiotic prophylaxis before dental work.")],
+    [U.angina, unit("eor", "Stable angina", "EOR › Family Medicine › Cardiovascular", "#/eor/fm/t/r_sa", "r_sa", "notes", "Chest pain with exertion; rule out MI. Nitrates first line. Endocarditis is not a cause.")],
+    [U.gap, unit("eor", "Endocarditis prophylaxis", "EOR › Family Medicine › Guidelines", "#/eor/fm/general/guidelines", "g_ie", "gap", "AHA guidance limits prophylaxis to the highest-risk cardiac conditions.")],
+    [U.acs, unit("pance", "Acute coronary syndrome", "PANCE › Cardiovascular", "#/pance/t/r_acs", "r_acs", "notes", "STEMI and NSTEMI: a myocardial infarction workup with serial troponin.")],
+    [U.update, unit("other", "ACC/AHA heart failure guideline", "Other › Guidelines › Updated guidelines", "#/other/guidelines/updates", "f_hf", "update", "New edition published. Treat hypertension in heart failure.")],
+    [U.troponin, unit("labs", "Troponin", "Labs", "#/labs/s_trop", "s_trop", "notes", "Rises in myocardial injury.")],
+    // Two pages of one document: they share a route and differ only in `at`.
+    [U.liP1, unit("other", "Lithium handout · p. 1", "Other › Physical exam", "#/file/d_li", "p1", "notes", "Lithium levels: draw 12 hours after the dose.")],
+    [U.liP2, unit("other", "Lithium handout · p. 2", "Other › Physical exam", "#/file/d_li", "p2", "notes", "Lithium toxicity: tremor, ataxia, confusion.")],
+    [U.cushion, unit("anatomy", "Endocardial cushion", "Anatomy", "#/anatomy/s_heart", "s_heart", "notes", "Embryology of the heart septa.")],
   ]);
   const out: SearchUnit[] = [];
   for (let n = 0; n < SHARD_SIZE + 100; n++) {
-    const u = named.get(n) ?? unit("imaging", `Film ${n}`, "Imaging", `#/imaging/s_${n}`, "notes", `Plain radiograph series ${n}.`);
+    const u = named.get(n) ?? unit("imaging", `Film ${n}`, "Imaging", `#/imaging/s_${n}`, null, "notes", `Plain radiograph series ${n}.`);
     out.push({ ...u, ord: n });
   }
   return out;

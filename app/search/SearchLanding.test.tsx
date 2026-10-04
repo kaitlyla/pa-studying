@@ -1,4 +1,4 @@
-import { act, useState, type ReactNode } from "react";
+import { act, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { navigate } from "../shell/route.ts";
@@ -114,19 +114,15 @@ describe("search landing", () => {
   });
 
   it("scrolls to the first match once the page's content renders after loading", async () => {
-    const ctl: { show?: () => void } = {};
-    function Late(): ReactNode {
-      const [ready, setReady] = useState(false);
-      ctl.show = () => setReady(true);
-      return ready ? <Content /> : <p>Loading…</p>;
-    }
+    // The page's data arrives later: same tree, re-rendered with its content.
+    const page = (ready: boolean): ReactNode => <Page>{ready ? <Content /> : <p>Loading…</p>}</Page>;
     await navigate("#/eor/fm/t/r_ie?q=endocard");
-    act(() => root.render(<Page><Late /></Page>));
+    act(() => root.render(page(false)));
     await act(async () => {
       await sleep(50);
     });
     expect(scrolled).toEqual([]);
-    act(() => ctl.show?.());
+    act(() => root.render(page(true)));
     await until(() => scrolled.length > 0, "scroll");
     expect(scrolled[0]?.textContent).toBe("Endocard");
   });
@@ -143,6 +139,47 @@ describe("search landing", () => {
     expect(bar()).toBeNull();
     expect(marks()).toEqual([]);
     expect(getSearchState().query).toBe("endocard");
+  });
+
+  function Pages(): ReactNode {
+    return (
+      <>
+        {["p1", "p2", "p3"].map((p) => (
+          <section key={p} data-anchor={p}>
+            <HitText text={`Lithium page ${p}: lithium levels.`} />
+          </section>
+        ))}
+      </>
+    );
+  }
+
+  it("lands on the match inside the result's own anchor when several results share the route", async () => {
+    await navigate("#/file/d_li?q=lithium&at=p2");
+    act(() => root.render(<Page><Pages /></Page>));
+    await until(() => scrolled.length > 0, "scroll");
+    expect(scrolled).toHaveLength(1);
+    expect(scrolled[0]?.closest("[data-anchor]")?.getAttribute("data-anchor")).toBe("p2");
+    expect(scrolled[0]?.textContent).toBe("Lithium");
+    // Every match on the page is still highlighted.
+    expect(marks()).toHaveLength(6);
+  });
+
+  it("falls back to the page's first match when the anchor is not on the page", async () => {
+    await navigate("#/file/d_li?q=lithium&at=p9");
+    act(() => root.render(<Page><Pages /></Page>));
+    await until(() => scrolled.length > 0, "scroll");
+    expect(scrolled).toEqual([container.querySelector("mark.hit")]);
+  });
+
+  it("Clear highlights also drops the anchor", async () => {
+    await navigate("#/file/d_li?q=lithium&at=p2");
+    act(() => root.render(<Page><Pages /></Page>));
+    await until(() => marks().length > 0, "highlights");
+    await act(async () => {
+      container.querySelector<HTMLButtonElement>(".hitbar button")?.click();
+      await sleep(0);
+    });
+    expect(location.hash).toBe("#/file/d_li");
   });
 
   it("shows no bar for a one-character ?q=", async () => {

@@ -6,7 +6,7 @@ import { SearchClient, setSearchClient } from "./client.ts";
 import { SearchBox } from "./SearchBox.tsx";
 import { DEBOUNCE_MS } from "./SearchPanel.tsx";
 import { resetSearchState } from "./store.ts";
-import { BASE, fakeSite, inProcessWorker, U, type FakeSite } from "./testing.ts";
+import { BASE, fakeSite, FILLER_COUNT, inProcessWorker, U, type FakeSite } from "./testing.ts";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -238,8 +238,9 @@ describe("SearchBox results", () => {
   it("lists every result, with no cap", async () => {
     render();
     await search("plain radiograph");
-    expect(rows()).toHaveLength(2093);
-    expect(chip("All").textContent).toBe("All 2093");
+    expect(FILLER_COUNT).toBeGreaterThan(2000);
+    expect(rows()).toHaveLength(FILLER_COUNT);
+    expect(chip("All").textContent).toBe(`All ${FILLER_COUNT}`);
   });
 
   it("counts results per tab, filters to one tab, and disables tabs with no results", async () => {
@@ -280,9 +281,32 @@ describe("opening and closing", () => {
       row(U.ie)?.click();
       await sleep(0);
     });
-    expect(location.hash).toBe("#/eor/fm/t/r_ie?q=endocard");
+    expect(location.hash).toBe("#/eor/fm/t/r_ie?q=endocard&at=r_ie");
     expect(panel()).toBeNull();
     expect(input().value).toBe("endocard");
+  });
+
+  it("opens a later result on a shared route with its own anchor", async () => {
+    render();
+    await search("lithium");
+    await revealRows();
+    expect(rows().map((r) => Number(r.dataset.unit))).toEqual([U.liP1, U.liP2]);
+    await act(async () => {
+      row(U.liP2)?.click();
+      await sleep(0);
+    });
+    expect(location.hash).toBe("#/file/d_li?q=lithium&at=p2");
+  });
+
+  it("leaves the anchor out of the address for a unit that has none", async () => {
+    render();
+    await search("series 9");
+    await revealRows();
+    await act(async () => {
+      row(9)?.click();
+      await sleep(0);
+    });
+    expect(location.hash).toBe("#/imaging/s_9?q=series%209");
   });
 
   it("Esc clears and closes without changing the route", async () => {

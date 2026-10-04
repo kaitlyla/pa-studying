@@ -37,7 +37,21 @@ export function HitText({ text }: { text: string }): ReactNode {
   );
 }
 
-/** The "Showing matches for 'x' · Clear highlights" bar; also scrolls to the first match. */
+/**
+ * The first match inside the element(s) marked `data-anchor="<at>"` (the result's own block, row,
+ * slide or page, since several results can share one route), preferring one that is displayed
+ * (the phone's stacked rows and the table both carry the anchor). Null when there is none.
+ */
+function firstInAnchor(root: Element, at: string | null): Element | null {
+  if (at === null) return null;
+  const marks = [...root.querySelectorAll("[data-anchor]")].flatMap((el) => {
+    const m = el.getAttribute("data-anchor") === at ? el.querySelector("mark.hit") : null;
+    return m ? [m] : [];
+  });
+  return marks.find((m) => m.getClientRects().length > 0) ?? marks[0] ?? null;
+}
+
+/** The "Showing matches for 'x' · Clear highlights" bar; also scrolls to the result's first match. */
 export function SearchLanding(): ReactNode {
   const route = useRoute();
   const q = route.query.q;
@@ -49,13 +63,14 @@ export function SearchLanding(): ReactNode {
     if (q) adoptQuery(q);
   }, [q]);
 
+  const at = route.query.at;
   useEffect(() => {
     if (!matcher) return;
     const root = barRef.current?.closest("main") ?? document.body;
     const scrollToFirst = (): boolean => {
       const first = root.querySelector("mark.hit");
       if (!first) return false;
-      first.scrollIntoView({ block: "center" });
+      (firstInAnchor(root, at) ?? first).scrollIntoView({ block: "center" });
       return true;
     };
     if (scrollToFirst()) return;
@@ -65,7 +80,7 @@ export function SearchLanding(): ReactNode {
     });
     mo.observe(root, { childList: true, subtree: true });
     return () => mo.disconnect();
-  }, [matcher, route.path]);
+  }, [matcher, route.path, at]);
 
   if (!active || q === null) return null;
   const clear = (): void => {

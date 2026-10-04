@@ -254,7 +254,7 @@ test.describe("landing and closing", () => {
     await search(page, q);
     const r = await reveal(page, n);
     await r.click();
-    await expect.poll(() => new URL(page.url()).hash).toBe(`${u.route}?q=${encodeURIComponent(q)}`);
+    await expect.poll(() => new URL(page.url()).hash).toBe(`${u.route}?q=${encodeURIComponent(q)}${u.at === null ? "" : `&at=${encodeURIComponent(u.at)}`}`);
     await expect(panel(page)).toBeHidden();
     const marks = page.locator("main mark.hit");
     await expect(marks.first()).toBeVisible();
@@ -265,6 +265,36 @@ test.describe("landing and closing", () => {
     await page.locator(".hitbar").getByRole("button", { name: "Clear highlights" }).click();
     await expect.poll(() => new URL(page.url()).hash).toBe(u.route);
     await expect(page.locator("main mark.hit")).toHaveCount(0);
+  });
+
+  test("a later result on a route shared with earlier results lands on its own match", async ({ page }) => {
+    // Two units on one route (e.g. two pages of a document), where the query matches both.
+    let pick: { n: number; q: string } | null = null;
+    const byRoute = new Map<string, number[]>();
+    units.forEach((u, i) => {
+      if (u.at !== null) byRoute.set(u.route, [...(byRoute.get(u.route) ?? []), i]);
+    });
+    for (const ns of byRoute.values()) {
+      if (ns.length < 2) continue;
+      const [first, ...later] = ns as [number, ...number[]];
+      for (const n of later) {
+        const q = [...new Set(tokens((units[n] as SearchUnit).text))].find(
+          (t) => plainWord(t) && tokens((units[first] as SearchUnit).text).some((x) => x.startsWith(t)),
+        );
+        if (q) {
+          pick = { n, q };
+          break;
+        }
+      }
+      if (pick) break;
+    }
+    if (!pick) throw new Error("no route with two units sharing a word");
+    const u = units[pick.n] as SearchUnit;
+    await search(page, pick.q);
+    await (await reveal(page, pick.n)).click();
+    const own = page.locator(`main [data-anchor="${u.at}"] mark.hit`).first();
+    await expect(own).toBeVisible();
+    await expect(own).toBeInViewport();
   });
 
   test("Esc, ✕ and an outside click close the panel and leave the route unchanged", async ({ page }) => {

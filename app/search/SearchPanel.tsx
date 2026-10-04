@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } fr
 import { queryRuns, type Hit, type SearchUnit } from "../../lib/search/index.ts";
 import { navigate } from "../shell/route.ts";
 import { Voice } from "../shell/owner.tsx";
+import { TABS } from "../shell/tabs.ts";
 import { searchClient } from "./client.ts";
 import type { SearchResults } from "./engine.ts";
 import { BackIcon, CloseIcon } from "./icons.tsx";
@@ -10,17 +11,6 @@ import { createMatcher } from "./match.ts";
 import { ResultRow } from "./ResultRow.tsx";
 import { clearSearch, closePanel, setQuery, useSearchState } from "./store.ts";
 import { useVocab } from "./useVocab.ts";
-
-/** Tabs in site order, with their chip labels. */
-export const SEARCH_TABS: readonly (readonly [string, string])[] = [
-  ["eor", "EOR"],
-  ["pance", "PANCE"],
-  ["labs", "Labs"],
-  ["imaging", "Imaging"],
-  ["ekg", "EKG"],
-  ["anatomy", "Anatomy"],
-  ["other", "Other"],
-];
 
 /** Results update this long after the last keystroke (search/run/happy/results). */
 export const DEBOUNCE_MS = 120;
@@ -69,7 +59,8 @@ export function SearchPanel({ phone }: { phone: boolean }): ReactNode {
   const keep = (h: Hit): boolean => tab === "all" || h.tab === tab;
 
   const open = (unit: SearchUnit, q: string): void => {
-    void navigate(`${unit.route}?q=${encodeURIComponent(q)}`).then((moved) => {
+    const at = unit.at ? `&at=${encodeURIComponent(unit.at)}` : "";
+    void navigate(`${unit.route}?q=${encodeURIComponent(q)}${at}`).then((moved) => {
       if (moved) {
         setFilter("all");
         closePanel();
@@ -154,7 +145,7 @@ export function SearchPanel({ phone }: { phone: boolean }): ReactNode {
           <button type="button" aria-pressed={tab === "all"} onClick={() => setFilter("all")}>
             All{total > 0 ? ` ${total}` : ""}
           </button>
-          {SEARCH_TABS.map(([id, label]) => {
+          {TABS.map(({ id, label }) => {
             const n = counts[id] ?? 0;
             return (
               <button key={id} type="button" aria-pressed={tab === id} disabled={n === 0} onClick={() => setFilter(id)}>
