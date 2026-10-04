@@ -9,7 +9,7 @@ import {
   CardMatcher, hasPharm, medsPanel, placeCards, searchHome, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
-  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavEntry, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
+  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
   PubFlag, PubGap, PubLink, PubPart, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
@@ -18,8 +18,9 @@ import {
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
-import { checkMembers, deriveTopics, publishedRows, publishedTopics, rowSection, sectionItems, type SystemTopics } from "./topics.ts";
+import { checkMembers, deriveTopics, navEntries, publishedRows, publishedTopics, rowSection, sectionItems, type SystemTopics } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
+import { docPath, navPath, systemPath } from "./published.ts";
 
 export interface PublishResult {
   /** Path relative to `dist/data/` → JSON value. */
@@ -527,7 +528,7 @@ export function publish(c: Content): PublishResult {
       guide: gid, title: c.site.guideNames[gid], source: g.file.source, page: g.file.page, basePt: g.file.basePt,
       systems: navSystems, general, slides: slidesNav, sidebarEnd, removed, pending,
     };
-    files.set(`g/${gid}/nav.json`, nav);
+    files.set(navPath(gid), nav);
   }
 
   function systemPages(s: Sys): NavJson["systems"][number] {
@@ -541,21 +542,6 @@ export function publish(c: Content): PublishResult {
     usedBlocks(s.data.blocks);
 
     const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle));
-
-    // nav entries
-    const entries: (NavEntry & { section: string | null })[] = [];
-    for (const b of s.data.blocks) {
-      const table = t.tables.get(b.id);
-      if (t.proseBlocks.includes(b.id)) {
-        if (st.listed[b.id] !== undefined) entries.push({ kind: "block", id: b.id, title: st.listed[b.id] as string, section: st.members[b.id] ?? null });
-        continue;
-      }
-      for (const r of table?.rows ?? []) {
-        const topic = t.topics.find((x) => x.id === r.id);
-        if (topic) entries.push({ kind: "topic", id: topic.id, title: topic.title, section: topic.section });
-      }
-    }
-    const strip = ({ kind, id, title }: NavEntry): NavEntry => ({ kind, id, title });
 
     // section pages
     const sections: SystemJson["sections"] = st.sections.map((sec) => ({ id: sec.id, title: sec.title, items: sectionItems(t, st, blockOrder, sec.id) }));
@@ -617,7 +603,7 @@ export function publish(c: Content): PublishResult {
       ...publishedRows(t),
       topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, notes: notesFor(pageIds),
     };
-    files.set(`g/${gid}/s/${sys}.json`, out);
+    files.set(systemPath(gid, sys), out);
 
     // search units: block/row order, then pharm units, then pharm files
     for (const b of s.data.blocks) {
@@ -676,11 +662,9 @@ export function publish(c: Content): PublishResult {
     }
     for (const d of st.pharmFiles) docUnit(d);
 
-    const nav = (sec: string | null): NavEntry[] => entries.filter((e) => e.section === sec).map(strip);
     return {
       id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
-      sections: st.sections.map((sec) => ({ id: sec.id, title: sec.title, entries: nav(sec.id) })),
-      entries: st.sections.length === 0 ? entries.map(strip) : [],
+      ...navEntries(t, st, blockOrder),
       pharm: hasPharm(s.pharm, placements) ? { sections: st.pharmSections.map((ps) => ({ id: ps.id, title: ps.title })) } : null,
     };
   }
@@ -721,7 +705,7 @@ export function publish(c: Content): PublishResult {
     if (d.kind === "word") {
       usedBlocks(d.blocks);
       const out: DocJson = { id, name: d.file.name, kind: "word", basePt: d.file.basePt, page: d.file.page, blocks: d.blocks.map(pub), notes: notesFor([id, ...d.blocks.map((b) => b.id)]) };
-      files.set(`docs/${id}.json`, out);
+      files.set(docPath(id), out);
     } else {
       const f = d.file;
       const names = [f.original, ...(f.view && f.view !== f.original ? [f.view] : [])];
@@ -730,7 +714,7 @@ export function publish(c: Content): PublishResult {
         id, name: f.name, kind: f.kind, original: `files/${id}/${f.original}`, view: f.view === null ? null : `files/${id}/${f.view}`,
         pages: f.pages ?? null, notes: notesFor([id]),
       };
-      files.set(`docs/${id}.json`, out);
+      files.set(docPath(id), out);
     }
   }
 

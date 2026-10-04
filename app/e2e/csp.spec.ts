@@ -6,11 +6,11 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { expect, test, type BrowserContext, type Locator, type Page, type Route } from "@playwright/test";
+import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
 import type { DocJson, NavEntry, NavJson, OtherJson, RefTabJson, SiteJson } from "../../lib/derive/published.ts";
 import { fileHash, guideViewHash, otherHash, REF_TABS, refHash, UPDATES_ROUTE, type GuideView } from "../../lib/derive/routes.ts";
 import { tokens, type SearchUnit } from "../../lib/search/index.ts";
-import { FakeGithub, routeFakeGithub, type FakeRequest } from "./fake-github.ts";
+import { FakeGithub, routeFakeGithub } from "./fake-github.ts";
 
 interface CspViolation {
   violatedDirective: string;
@@ -300,31 +300,6 @@ test("searching, loading results and opening one raises no violation", async ({ 
 
 // ---- sign-in through the fake --------------------------------------------------------------------
 
-/**
- * The popup's first navigation (the authorize page) happens before Playwright hands over the popup's
- * Page, so page routes cannot catch it; the popup's requests are routed on the context instead.
- */
-async function routeFakeGithubForPopups(context: BrowserContext, fake: FakeGithub, returnUrl: string): Promise<void> {
-  const forward = async (route: Route): Promise<void> => {
-    const r = route.request();
-    const req: FakeRequest = { method: r.method(), url: r.url(), headers: r.headers(), body: r.postData() };
-    const res = await fake.handle(req);
-    await route.fulfill({
-      status: res.status,
-      headers: res.headers,
-      body: res.body === null ? undefined : typeof res.body === "string" ? Buffer.from(res.body, "utf8") : Buffer.from(res.body),
-    });
-  };
-  await context.route("https://api.github.com/**", forward);
-  await context.route(`${WORKER_ORIGIN}/**`, forward);
-  // The popup closes itself after the exchange; its avatar (if it renders one first) never goes out.
-  await context.route("https://avatars.githubusercontent.com/**", (route) => route.fulfill({ status: 204 }));
-  await context.route("https://github.com/login/oauth/authorize**", async (route) => {
-    const state = new URL(route.request().url()).searchParams.get("state") ?? "";
-    await route.fulfill({ status: 302, headers: { location: `${returnUrl}?code=fake-code&state=${encodeURIComponent(state)}` } });
-  });
-}
-
 test("signing in through the fake GitHub and Worker raises no violation", async ({ page, context, baseURL }) => {
   if (!baseURL) throw new Error("the Playwright config sets no baseURL");
   const [owner, repo] = site.repo.split("/");
@@ -334,8 +309,9 @@ test("signing in through the fake GitHub and Worker raises no violation", async 
     workerOrigin: WORKER_ORIGIN,
     user: { login: site.owner.login, id: site.owner.id, avatar_url: `https://avatars.githubusercontent.com/u/${site.owner.id}` },
   });
-  await routeFakeGithub(page, fake, { workerOrigin: WORKER_ORIGIN, returnUrl: baseURL });
-  await routeFakeGithubForPopups(context, fake, baseURL);
+  // The popup's first navigation (the authorize page) happens before Playwright hands over the
+  // popup's Page, so page routes cannot catch it; routes on the context cover the popup too.
+  await routeFakeGithub(context, fake, { workerOrigin: WORKER_ORIGIN, returnUrl: baseURL });
 
   await open(page, "#/eor");
   await page.getByRole("button", { name: "Owner sign-in" }).click();

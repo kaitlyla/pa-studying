@@ -2,13 +2,15 @@
 // deployed site contains them, and patched into every published data file her device reads so a page
 // shows her save at once.
 import {
-  GAP_FILE_RE, idSource, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type SlideMeta,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type SlideMeta,
   type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
-import type { BuildJson, DocList, PubGap, SystemJson } from "../../lib/derive/published.ts";
-import { deriveTopics, publishedRows, publishedTopics, sectionItems } from "../../lib/derive/topics.ts";
-import { DATA_BASE, invalidateData, setDataOverlay } from "../data/load.ts";
+import {
+  DOC_PATH_RE, NAV_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocList, type NavJson, type PubGap, type SystemJson,
+} from "../../lib/derive/published.ts";
+import { deriveTopics, navEntries, publishedRows, publishedTopics, sectionItems } from "../../lib/derive/topics.ts";
+import { DATA_BASE, invalidateData, loadData, NotFoundError, setDataOverlay } from "../data/load.ts";
 import type { Git } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
 
@@ -27,12 +29,6 @@ interface Index {
   gaps: Map<string, GapFile>;
   docs: Map<string, DocState>;
 }
-
-const BLOCK_FILE_RE = new RegExp(`/blocks/(?<id>${idSource("b", "s")})\\.json$`);
-const WORD_DOC_RE = new RegExp(`^content/docs/(?<id>${idSource("d")})/doc\\.json$`);
-const AS_IS_FILE_RE = new RegExp(`^content/files/(?<id>${idSource("d")})/file\\.json$`);
-const SYSTEM_PAGE_RE = /^g\/([^/]+)\/s\/([^/]+)\.json$/;
-const DOC_PAGE_RE = new RegExp(`^docs/(?<id>${idSource("d")})\\.json$`);
 
 function indexFiles(files: Files): Index {
   const ix: Index = { blocks: new Map(), gaps: new Map(), docs: new Map() };
@@ -131,18 +127,41 @@ function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readon
   };
 }
 
+/** A system's patched page and structure, for re-deriving its sidebar entries. */
+export interface SystemNavSource {
+  sys: SystemJson;
+  structure: StructureFile;
+}
+
+/** The overlaid systems' sidebar entries, re-derived from their patched pages (a save can add, drop or re-id a topic). */
+function patchNav(nav: NavJson, systems: ReadonlyMap<string, SystemNavSource>): NavJson {
+  return {
+    ...nav,
+    systems: nav.systems.map((s) => {
+      const src = systems.get(s.id);
+      if (!src) return s;
+      const files: BlockFile[] = src.sys.blocks.map((b) => ({ v: 1, id: b.id, kind: b.kind, doc: b.doc, meta: {} }));
+      return { ...s, ...navEntries(deriveTopics(files, src.structure), src.structure, files.map((b) => b.id)) };
+    }),
+  };
+}
+
 /**
  * One published data file (`path` under dist/data/) with the overlaid content files applied.
- * `structure` supplies a system's structure.json when a table of it is overlaid but the structure is not.
+ * `structure` supplies a system's structure.json when a table of it is overlaid but the structure is not;
+ * `systems` the overlaid systems' patched pages, by system id, for a guide's nav.json.
  */
-export function patchPublished(path: string, json: unknown, files: Files, structure?: StructureFile | null): unknown {
+export function patchPublished(
+  path: string, json: unknown, files: Files, structure?: StructureFile | null, systems?: ReadonlyMap<string, SystemNavSource>,
+): unknown {
   if (files.size === 0) return json;
   const ix = indexFiles(files);
   let out = walk(json, ix);
+  if (systems && systems.size > 0 && NAV_PATH_RE.test(path)) out = patchNav(out as NavJson, systems);
 
-  const sys = SYSTEM_PAGE_RE.exec(path);
+  const sys = SYSTEM_PATH_RE.exec(path)?.groups;
   if (sys) {
-    const dir = `content/guides/${sys[1]}/${sys[2]}/`;
+    const dir = `content/guides/${sys.guide}/${sys.system}/`;
     const touched = [...files.keys()].some((p) => p.startsWith(dir));
     const st = (files.get(`${dir}structure.json`) as StructureFile | undefined) ?? structure ?? null;
     if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix);
@@ -163,7 +182,7 @@ export function patchPublished(path: string, json: unknown, files: Files, struct
       r.files = patchDocList(r.files, ix, tab.files);
     }
   }
-  const docId = DOC_PAGE_RE.exec(path)?.groups?.id;
+  const docId = DOC_PATH_RE.exec(path)?.groups?.id;
   if (docId) {
     const d = ix.docs.get(docId);
     if (d) out = { ...(out as object), name: d.name };
@@ -191,9 +210,9 @@ export function overlayEntries(): ReadonlyMap<string, OverlayEntry> {
 const filesOf = (): Map<string, unknown> => new Map([...entries].map(([p, e]) => [p, e.json]));
 
 async function structureFor(path: string): Promise<StructureFile | null> {
-  const m = SYSTEM_PAGE_RE.exec(path);
+  const m = SYSTEM_PATH_RE.exec(path)?.groups;
   if (!m || !git) return null;
-  const dir = `content/guides/${m[1]}/${m[2]}/`;
+  const dir = `content/guides/${m.guide}/${m.system}/`;
   if (entries.has(`${dir}structure.json`) || ![...entries.keys()].some((p) => p.startsWith(dir))) return null;
   try {
     const { Snapshot } = await import("./snapshot.ts");
@@ -203,9 +222,30 @@ async function structureFor(path: string): Promise<StructureFile | null> {
   }
 }
 
+/** The patched pages and structures of the guide's systems that have overlaid files. */
+async function navSources(guide: string, files: Files): Promise<Map<string, SystemNavSource>> {
+  const out = new Map<string, SystemNavSource>();
+  const prefix = `content/guides/${guide}/`;
+  const ids = new Set([...files.keys()].filter((p) => p.startsWith(prefix)).map((p) => p.slice(prefix.length).split("/")).filter((s) => s.length > 1).map((s) => s[0] as string));
+  for (const id of ids) {
+    const page = systemPath(guide, id);
+    const structure = (files.get(`${prefix}${id}/structure.json`) as StructureFile | undefined) ?? (await structureFor(page));
+    if (!structure) continue;
+    try {
+      out.set(id, { sys: await loadData<SystemJson>(page), structure });
+    } catch (e) {
+      // A directory that is not a published system has no sidebar entries to patch.
+      if (!(e instanceof NotFoundError)) throw e;
+    }
+  }
+  return out;
+}
+
 async function overlay(path: string, json: unknown): Promise<unknown> {
   if (entries.size === 0) return json;
-  return patchPublished(path, json, filesOf(), await structureFor(path));
+  const files = filesOf();
+  const guide = NAV_PATH_RE.exec(path)?.groups?.guide;
+  return patchPublished(path, json, files, await structureFor(path), guide === undefined ? undefined : await navSources(guide, files));
 }
 
 /** Drops every entry the deployed site already contains (compare status identical or ahead). */

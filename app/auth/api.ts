@@ -15,7 +15,7 @@ async function send(path: string, init: ApiInit, token: string): Promise<Respons
   const headers: Record<string, string> = {
     Authorization: `Bearer ${token}`,
     Accept: init.accept ?? "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
+    "X-GitHub-Api-Version": "2026-03-10",
   };
   let body: string | undefined;
   if (init.json !== undefined) {

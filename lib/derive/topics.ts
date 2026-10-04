@@ -3,7 +3,7 @@ import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
-import type { PubMedsCard, PubRow, PubSectionItem, PubTopic } from "./published.ts";
+import type { NavEntry, NavSystem, PubMedsCard, PubRow, PubSectionItem, PubTopic } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -197,6 +197,31 @@ export function sectionItems(t: SystemTopics, structure: StructureFile, blockIds
     if (rows.length > 0) items.push({ block: id, rows: withHeadings(t, rows) });
   }
   return items;
+}
+
+/**
+ * A system's sidebar (NavJson `systems[]` sections and entries, 40 §40.3) in the order of `blockIds`:
+ * each listed prose block, and each topic at its first row. A system without sections lists them flat.
+ * The build and the owner's post-save view both read this, so a save that changes a topic shows at once.
+ */
+export function navEntries(t: SystemTopics, structure: StructureFile, blockIds: readonly string[]): Pick<NavSystem, "sections" | "entries"> {
+  const entries: (NavEntry & { section: string | null })[] = [];
+  for (const id of blockIds) {
+    if (t.proseBlocks.includes(id)) {
+      const title = structure.listed[id];
+      if (title !== undefined) entries.push({ kind: "block", id, title, section: structure.members[id] ?? null });
+      continue;
+    }
+    for (const r of t.tables.get(id)?.rows ?? []) {
+      const topic = t.topics.find((x) => x.id === r.id);
+      if (topic) entries.push({ kind: "topic", id: topic.id, title: topic.title, section: topic.section });
+    }
+  }
+  const strip = ({ kind, id, title }: NavEntry): NavEntry => ({ kind, id, title });
+  return {
+    sections: structure.sections.map((sec) => ({ id: sec.id, title: sec.title, entries: entries.filter((e) => e.section === sec.id).map(strip) })),
+    entries: structure.sections.length === 0 ? entries.map(strip) : [],
+  };
 }
 
 /** Rows with each run's applicable heading row inserted once before the run. */

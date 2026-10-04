@@ -2,6 +2,18 @@
 import type { DocJSON, FileKind, Flag, GeneralKey, GuideId, PageSetup } from "../content/types.ts";
 import type { SiteIndex } from "./routes.ts";
 
+// ---- data file paths (relative to dist/data/) ----
+
+export const navPath = (guide: string): string => `g/${guide}/nav.json`;
+export const systemPath = (guide: string, system: string): string => `g/${guide}/s/${system}.json`;
+export const docPath = (docId: string): string => `docs/${docId}.json`;
+/** A guide's nav.json: `guide`. */
+export const NAV_PATH_RE = /^g\/(?<guide>[^/]+)\/nav\.json$/;
+/** A system page: `guide`, `system`. */
+export const SYSTEM_PATH_RE = /^g\/(?<guide>[^/]+)\/s\/(?<system>[^/]+)\.json$/;
+/** A document page: `id`. */
+export const DOC_PATH_RE = /^docs\/(?<id>[^/]+)\.json$/;
+
 /** A block as published: the stored envelope's id, kind and doc. */
 export interface PubBlock {
   id: string;

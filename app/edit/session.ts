@@ -16,7 +16,8 @@ import { Git, NetworkError } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
 import { recordSaved } from "./overlay.ts";
 import { Snapshot } from "./snapshot.ts";
-import { buildSave, loadUnit, UnitError, type EditUnit } from "./units.ts";
+import { buildSave, loadUnit, UnitError, type EditUnit, type SaveBuild } from "./units.ts";
+import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
 
 /** Edit start failed for want of a connection (plan wording). */
 export const OPEN_OFFLINE = "Couldn’t open this page for editing — no internet connection.";
@@ -76,8 +77,11 @@ let pendingDocs: Map<string, DocJSON> | null = null;
 let pendingDraftKey: string | null = null;
 /** The edited docs (as JSON) the last successful "Copy my changes" put on the clipboard. */
 let copiedEdits: string | null = null;
-/** The page whose edits a save conflict kept in the draft store, until she saves or lets them go. */
-let conflictDraftKey: string | null = null;
+/**
+ * The page whose stored draft stays until she saves or lets the changes go: kept by a save conflict,
+ * or restored for a save that was waiting on sign-in.
+ */
+let keptDraftKey: string | null = null;
 /** "Load newer version" is reading the page. */
 let loadingNewer = false;
 
@@ -166,9 +170,12 @@ async function load(key: string, commit?: string): Promise<EditUnit> {
   return loadUnit(key, await Snapshot.at(git, commit));
 }
 
+/** `e` is a lost connection (to GitHub or to the site's data), not an error of GitHub or the code. */
+export const isOffline = (e: unknown): boolean => e instanceof NetworkError || e instanceof DataOfflineError;
+
 /** The message for an edit start that threw `e`; anything but a lost connection or a vanished page is logged. */
 function openError(e: unknown): string {
-  if (e instanceof NetworkError || e instanceof DataOfflineError) return OPEN_OFFLINE;
+  if (isOffline(e)) return OPEN_OFFLINE;
   if (e instanceof UnitError) return OPEN_PAGE_CHANGED;
   console.error("Edit start failed", e);
   return OPEN_FAILED;
@@ -191,6 +198,10 @@ function slotIds(unit: EditUnit): Set<string> {
 export interface DraftStart {
   docs: Map<string, DocJSON>;
   commit: string;
+  /** It came from the draft store: delete it there once its docs are in the editors. */
+  stored?: boolean;
+  /** Run the save again once its docs are in the editors (a save was waiting on sign-in). */
+  resumeSave?: boolean;
 }
 
 /**
@@ -202,6 +213,8 @@ export async function startEdit(key: string, title: string, draft?: DraftStart):
   if (store.edit) return false;
   views.clear();
   pendingDocs = null;
+  pendingDraftKey = null;
+  resumeAfterApply = false;
   copiedEdits = null;
   set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0 }, pageBanner: null });
   try {
@@ -212,8 +225,13 @@ export async function startEdit(key: string, title: string, draft?: DraftStart):
       const slots = slotIds(unit);
       const docs = new Map([...draft.docs].filter(([slot]) => slots.has(slot)));
       pendingDocs = docs.size > 0 ? docs : null;
+      // Set before the editors mount: mounted regions register (and apply the draft) as soon as the unit is in the store.
+      pendingDraftKey = draft.stored === true ? key : null;
+      resumeAfterApply = pendingDocs !== null && draft.resumeSave === true;
     }
     setEdit({ unit, generation: now.generation + 1 });
+    // No doc of the draft fits the page any more: nothing to apply.
+    if (draft && pendingDocs === null) draftApplied();
     return true;
   } catch (e) {
     if (getEditStore().edit?.key === key) setEdit({ error: openError(e) });
@@ -226,8 +244,9 @@ export function discardEdit(): void {
   views.clear();
   pendingDocs = null;
   pendingDraftKey = null;
+  resumeAfterApply = false;
   copiedEdits = null;
-  dropConflictDraft();
+  dropKeptDraft();
   set({ edit: null, unsaved: null });
 }
 
@@ -266,6 +285,19 @@ export async function done(): Promise<void> {
 
 // ---- saving -------------------------------------------------------------------------------------
 
+/**
+ * The page to show after a save deleted the open topic's first row (its id): the topic its other rows
+ * joined in place of the old id, or the system page when they are in no topic.
+ */
+function hashAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMoved"]>): string {
+  const route = parseHash(currentHash());
+  const ids = route.kind === "guide" && route.view.kind === "topics" ? route.view.ids : [old];
+  const next = [...new Set(ids.flatMap((id) => (id !== old ? [id] : moved.topic !== null ? [moved.topic] : [])))];
+  return next.length > 0
+    ? guideViewHash(moved.guide, { kind: "topics", ids: next })
+    : guideViewHash(moved.guide, { kind: "system", system: moved.system });
+}
+
 /** Save (50 §50.4). Resolves to whether the edit closed with everything saved. */
 export async function save(): Promise<boolean> {
   const edit = store.edit;
@@ -290,8 +322,11 @@ export async function save(): Promise<boolean> {
       await recordSaved(build.files, outcome.commit);
       views.clear();
       copiedEdits = null;
-      dropConflictDraft();
-      set({ edit: null, unsaved: null, pageBanner: { key: edit.key, banner: { kind: "saved" } } });
+      dropKeptDraft();
+      const moved = build.topicMoved;
+      const key = moved ? (moved.topic !== null ? `topic:${moved.guide}:${moved.topic}` : `system:${moved.guide}:${moved.system}`) : edit.key;
+      set({ edit: null, unsaved: null, pageBanner: { key, banner: { kind: "saved" } } });
+      if (moved && unit.topic !== null) await navigate(hashAfterTopicMoved(unit.topic, moved));
       return true;
     }
     if (outcome.kind === "conflict") await keepConflictDraft();
@@ -303,7 +338,7 @@ export async function save(): Promise<boolean> {
       // The edits stay in the views; after sign-in the same save runs again.
       return (await waitForSignIn()) ? save() : false;
     }
-    const offline = e instanceof NetworkError || e instanceof DataOfflineError;
+    const offline = isOffline(e);
     if (!offline) console.error("Save failed", e);
     setEdit({ saving: false, banner: { kind: offline ? "offline" : "failed" } });
     return false;
@@ -362,7 +397,7 @@ export async function loadNewer(): Promise<void> {
     if (now?.key !== edit.key) return;
     views.clear();
     copiedEdits = null;
-    dropConflictDraft();
+    dropKeptDraft();
     setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied } });
   } catch (e) {
     if (getEditStore().edit?.key === edit.key) setEdit({ error: openError(e) });
@@ -417,15 +452,15 @@ async function keepConflictDraft(): Promise<void> {
   if (key === undefined) return;
   try {
     await saveDraft();
-    conflictDraftKey = key;
+    keptDraftKey = key;
   } catch (e) {
     console.warn("Couldn’t keep the conflicting changes on this device", e);
   }
 }
 
-function dropConflictDraft(): void {
-  const key = conflictDraftKey;
-  conflictDraftKey = null;
+function dropKeptDraft(): void {
+  const key = keptDraftKey;
+  keptDraftKey = null;
   if (key !== null) drafts.delete(key).catch((e: unknown) => console.warn("Couldn’t delete the kept draft", e));
 }
 
@@ -435,12 +470,15 @@ let resumeAfterApply = false;
 function draftApplied(): void {
   const key = pendingDraftKey;
   pendingDraftKey = null;
-  if (key !== null) drafts.delete(key).catch((e: unknown) => console.warn("Couldn’t delete the restored draft", e));
   if (resumeAfterApply) {
     resumeAfterApply = false;
+    // The stored copy stays until that save lands (or she lets the changes go).
+    keptDraftKey = key;
     showToast(SAVING_AGAIN);
     // After the registering editor's own setup finishes.
     queueMicrotask(() => void save());
+  } else if (key !== null) {
+    drafts.delete(key).catch((e: unknown) => console.warn("Couldn’t delete the restored draft", e));
   }
 }
 
@@ -453,13 +491,7 @@ function draftApplied(): void {
 export async function restoreDraft(key: string): Promise<boolean> {
   const d = await drafts.get(key);
   if (!d) return false;
-  const loaded = await startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), commit: d.commit });
-  if (!loaded) return false;
-  pendingDraftKey = key;
-  resumeAfterApply = pendingDocs !== null && d.resumeSave === true;
-  // No doc of the draft fits the page any more: nothing to apply.
-  if (pendingDocs === null) draftApplied();
-  return true;
+  return startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), commit: d.commit, stored: true, resumeSave: d.resumeSave === true });
 }
 
 /** `beforeunload` while an edit has unsaved changes shows the browser's prompt. */

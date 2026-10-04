@@ -7,7 +7,9 @@ export {
   memberTarget, newDeviceId, newId, seriesOfCiteKey, slug, SLUG_RE, SLUG_SOURCE,
 } from "./ids.ts";
 export type { AssetExt, IdPrefix } from "./ids.ts";
-export { GAP_FILE_RE, gapFilePath, isContentJSON, parseFile, serializeFile, serializeJSON, validateFile } from "./files.ts";
+export {
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, gapFilePath, WORD_DOC_RE, isContentJSON, parseFile, serializeFile, serializeJSON, validateFile,
+} from "./files.ts";
 export { checkTrackSeries, isCdcOrg } from "./validate.ts";
 export { addFlag } from "./flags.ts";
 export type { NewFlag } from "./flags.ts";

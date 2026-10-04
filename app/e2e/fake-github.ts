@@ -3,7 +3,7 @@
 // (through routeFakeGithub). Response shapes and error messages follow what the real API
 // answered when checked; object ids are real git sha1s for blobs and deterministic for the rest.
 import { createHash } from "node:crypto";
-import type { Page, Route } from "@playwright/test";
+import type { BrowserContext, Page, Route } from "@playwright/test";
 
 export interface FakeRequest {
   method: string;
@@ -783,8 +783,9 @@ export function fakeFetch(fake: FakeGithub): typeof fetch {
   return impl as typeof fetch;
 }
 
+/** Route GitHub, the Worker, the authorize page and avatars to `fake`, for one page or a whole context. */
 export async function routeFakeGithub(
-  page: Page,
+  target: Page | BrowserContext,
   fake: FakeGithub,
   opts: { workerOrigin: string; returnUrl: string },
 ): Promise<void> {
@@ -804,16 +805,16 @@ export async function routeFakeGithub(
       body: res.body === null ? undefined : typeof res.body === "string" ? Buffer.from(res.body, "utf8") : Buffer.from(res.body),
     });
   };
-  await page.route("https://api.github.com/**", handler);
-  await page.route(`${opts.workerOrigin}/**`, handler);
-  await page.route("https://github.com/login/oauth/authorize**", async (route) => {
+  await target.route("https://api.github.com/**", handler);
+  await target.route(`${opts.workerOrigin}/**`, handler);
+  await target.route("https://github.com/login/oauth/authorize**", async (route) => {
     const state = new URL(route.request().url()).searchParams.get("state") ?? "";
     await route.fulfill({
       status: 302,
       headers: { location: `${opts.returnUrl}?code=fake-code&state=${encodeURIComponent(state)}` },
     });
   });
-  await page.route("https://avatars.githubusercontent.com/**", async (route) => {
+  await target.route("https://avatars.githubusercontent.com/**", async (route) => {
     await route.fulfill({
       status: 200,
       headers: { "content-type": "image/png" },

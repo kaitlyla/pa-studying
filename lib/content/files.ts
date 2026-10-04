@@ -30,6 +30,18 @@ const pathRe = (source: string): RegExp => new RegExp(`^${source}$`);
 export const GAP_FILE_RE = pathRe(`content/gapfill/${ident("g")}\\.json`);
 export const gapFilePath = (gapId: string): string => `content/gapfill/${gapId}.json`;
 
+/** A Word page's record: `content/docs/<d_id>/doc.json`. */
+export const WORD_DOC_RE = pathRe(`content/docs/${ident("d")}/doc\\.json`);
+/** An as-is document's record: `content/files/<d_id>/file.json`. */
+export const AS_IS_FILE_RE = pathRe(`content/files/${ident("d")}/file\\.json`);
+/**
+ * Any block file, its id in `id`: a guide preamble's, a system's, a pharm file's or a Word page's
+ * (`b_`), or a deck slide (`s_`).
+ */
+export const BLOCK_FILE_RE = pathRe(
+  `content/(?:guides/${GUIDE}/(?:_preamble|${SLUG})|pharm/${SLUG}|docs/${idSource("d")}|slides/${GUIDE})/blocks/${named(idSource("b", "s"))}\\.json`,
+);
+
 /** Every JSON file of the content tree, by path pattern, with its validator. */
 const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/site\\.json"), validateSite],
@@ -43,9 +55,9 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/pharm/cards\\.json"), validateCards],
   [pathRe(`content/pharm/${named(SLUG)}/pharmfile\\.json`), validatePharmFile],
   [pathRe(`content/pharm/${SLUG}/blocks/${ident("b")}\\.json`), validateBlock],
-  [pathRe(`content/docs/${ident("d")}/doc\\.json`), validateWordDoc],
+  [WORD_DOC_RE, validateWordDoc],
   [pathRe(`content/docs/${idSource("d")}/blocks/${ident("b")}\\.json`), validateBlock],
-  [pathRe(`content/files/${ident("d")}/file\\.json`), validateAsIsFile],
+  [AS_IS_FILE_RE, validateAsIsFile],
   [pathRe(`content/files/${idSource("d")}/text\\.json`), validateFileText],
   [GAP_FILE_RE, validateGap],
   [pathRe(`content/gapfill/${ident("g")}\\.evidence\\.json`), validateEvidence],

@@ -54,6 +54,8 @@ export interface EditUnit {
   ids: string[];
   /** The document of a `doc:` key. */
   docId: string | null;
+  /** The topic id of a `topic:` key (its first stored row). */
+  topic: string | null;
   /** A Word page: Original is labelled "converted from your Word file". */
   fromWord: boolean;
 }
@@ -172,7 +174,9 @@ function guideScope(parts: readonly Part[], extra: readonly string[] = []): File
 /** Read the edit unit of a page key at the snapshot's commit. */
 export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
   const [kind, ...rest] = key.split(":");
-  const unit = (parts: Part[], scope = guideScope(parts)): EditUnit => ({ key, snapshot: snap, scope, parts, ids: partIds(parts), docId: null, fromWord: false });
+  const unit = (parts: Part[], scope = guideScope(parts), topic: string | null = null): EditUnit => ({
+    key, snapshot: snap, scope, parts, ids: partIds(parts), docId: null, topic, fromWord: false,
+  });
   const arg = (i: number): string => {
     const v = rest[i];
     if (v === undefined || v === "") throw new UnitError(`Malformed page key: ${key}`);
@@ -188,7 +192,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const topic = t.topics.find((x) => x.id === row);
       const block = sys.blocks.find((b) => b.id === topic?.block);
       if (!topic || !block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
-      return unit([rowsPart(sys, block, withHeadings(t, topic.rows), basePt, width)]);
+      const parts = [rowsPart(sys, block, withHeadings(t, topic.rows), basePt, width)];
+      return unit(parts, guideScope(parts), row);
     }
     case "section": {
       const [guide, system, section] = [arg(0), arg(1), arg(2)];
@@ -296,7 +301,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const blocks = await snap.many<BlockFile>(word.blocks.map((b) => `content/docs/${docId}/blocks/${b}.json`));
         blocks.forEach((b) => parts.push(blockPart(`content/docs/${docId}/blocks/${b.id}.json`, b, word.basePt, contentWidth(word.page))));
       }
-      return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, fromWord: word !== null };
+      return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, topic: null, fromWord: word !== null };
     }
     default:
       throw new UnitError(`Unknown page key: ${key}`);
@@ -312,6 +317,100 @@ export interface SaveBuild {
   files: Map<string, unknown>;
   /** Ids of the rows and blocks whose content changed (the Changed trailer). */
   changed: string[];
+  /**
+   * A topic page whose topic id (its first stored row) the save deletes: the topic its remaining rows
+   * belong to afterwards, or null when none of them is in a topic.
+   */
+  topicMoved?: { guide: string; system: string; topic: string | null };
+}
+
+type RowsPart = Extract<Part, { kind: "rows" }>;
+
+/** Each slot's doc of a unit (a version's content, for a restore). */
+function slotDocs(unit: EditUnit): Map<string, DocJSON> {
+  const out = new Map<string, DocJSON>();
+  for (const p of unit.parts) {
+    if (p.kind === "stub") continue;
+    if (p.kind === "gap") {
+      out.set(p.doc.id, p.doc.doc);
+      if (p.differs) out.set(p.differs.id, p.differs.doc);
+    } else out.set(p.slot.id, p.slot.doc);
+  }
+  return out;
+}
+
+/**
+ * A restore's rows of one table (50 §50.6): the version's page rows replace the current rows with
+ * their ids; the page's current rows absent from the version are deleted; a version row that no
+ * longer exists is re-inserted after the nearest row preceding it in the version that still exists,
+ * or before the nearest following one.
+ */
+function restoreRows(full: readonly RowJSON[], shown: readonly string[], oldFull: readonly RowJSON[], oldShown: readonly string[]): { rows: RowJSON[]; added: string[]; deleted: string[] } {
+  const keep = new Map(oldFull.filter((r) => oldShown.includes(rowId(r))).map((r) => [rowId(r), r]));
+  const deleted = shown.filter((id) => !keep.has(id));
+  const rows = full.filter((r) => !deleted.includes(rowId(r))).map((r) => keep.get(rowId(r)) ?? r);
+  const added: string[] = [];
+  const oldIds = oldFull.map(rowId);
+  for (const id of oldShown) {
+    const row = keep.get(id);
+    if (!row || full.some((r) => rowId(r) === id)) continue;
+    const ids = rows.map(rowId);
+    rows.splice(insertAt(ids, oldIds, id), 0, row);
+    added.push(id);
+  }
+  return { rows, added, deleted };
+}
+
+/** Where `id` goes in `list`: after the nearest item preceding it in `oldList` that `list` has, else before the nearest following one, else at the end. */
+function insertAt(list: readonly string[], oldList: readonly string[], id: string): number {
+  const at = oldList.indexOf(id);
+  for (let i = at - 1; i >= 0; i--) {
+    const j = list.indexOf(oldList[i] as string);
+    if (j !== -1) return j + 1;
+  }
+  for (let i = at + 1; i < oldList.length; i++) {
+    const j = list.indexOf(oldList[i] as string);
+    if (j !== -1) return j;
+  }
+  return list.length;
+}
+
+/**
+ * A deleted topic's first row hands its `members` entry to the topic's first remaining row, and rows
+ * recorded under the deleted id follow it there; otherwise the rest of the topic would lose its section.
+ * `before` is the structure the deletion applied to and `topics` its derivation.
+ */
+function handOver(structure: StructureFile, before: StructureFile, topics: ReturnType<typeof deriveTopics>, deleted: readonly string[]): StructureFile {
+  let members: Record<string, string> | null = null;
+  for (const id of deleted) {
+    const topic = topics.topics.find((t) => t.id === id);
+    const entry = before.members[id];
+    const heir = topic?.rows.find((r) => r !== id && !deleted.includes(r));
+    if (!topic || entry === undefined || heir === undefined) continue;
+    members ??= { ...structure.members };
+    for (const [k, v] of Object.entries(before.members)) if (v === id && k !== heir && !deleted.includes(k)) members[k] = heir;
+    members[heir] = entry;
+  }
+  return members === null ? structure : { ...structure, members };
+}
+
+/** `structure` with the `members`, `listed` and `conditionRows` entries `ids` had in `old`. */
+function withOldEntries(structure: StructureFile, old: StructureFile, ids: readonly string[]): StructureFile {
+  if (ids.length === 0) return structure;
+  const members = { ...structure.members };
+  const listed = { ...structure.listed };
+  for (const id of ids) {
+    const m = old.members[id];
+    if (m !== undefined) members[id] = m;
+    const l = old.listed[id];
+    if (l !== undefined) listed[id] = l;
+  }
+  const drugTables = structure.drugTables.map((d) => {
+    const before = old.drugTables.find((o) => o.block === d.block)?.conditionRows ?? [];
+    const back = ids.filter((id) => before.includes(id) && !d.conditionRows.includes(id));
+    return back.length > 0 ? { ...d, conditionRows: [...d.conditionRows, ...back] } : d;
+  });
+  return { ...structure, members, listed, drugTables };
 }
 
 /** Today's local date as ISO `YYYY-MM-DD`. */
@@ -330,9 +429,14 @@ function rowsOf(block: BlockFile): RowJSON[] {
  * The files a save writes: each edited doc put back into its file (rows spliced by id, 50 §50.4),
  * structure.json updated for added and deleted rows, gap and slide `ownerEdits` stamped, every file
  * serialized canonically and left out when its bytes are unchanged. `docs` maps slot id → edited doc;
- * a slot missing from it is unchanged.
+ * a slot missing from it is unchanged. With `restore` (the unit at a chosen version, 50 §50.6) the
+ * docs are the version's: rows are restored by id with their old structure.json entries, gaps get the
+ * version's doc and differs.
  */
-export function buildSave(unit: EditUnit, docs: ReadonlyMap<string, DocJSON>, today = localDate()): SaveBuild {
+export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, today = localDate(), restore?: EditUnit): SaveBuild {
+  const docs = restore ? slotDocs(restore) : edits;
+  const oldRows = (id: string): RowsPart | undefined => restore?.parts.find((p): p is RowsPart => p.kind === "rows" && p.block.id === id);
+  let lostTopic: { part: RowsPart; blocks: BlockFile[]; structure: StructureFile } | null = null;
   const original = new Map<string, string>();
   const next = new Map<string, unknown>();
   const changed = new Set<string>();
@@ -353,11 +457,17 @@ export function buildSave(unit: EditUnit, docs: ReadonlyMap<string, DocJSON>, to
   for (const part of unit.parts) {
     if (part.kind === "stub") continue;
     if (part.kind === "rows") {
-      const doc = docs.get(part.slot.id);
-      if (!doc) continue;
-      const edited = ((doc.content[0] as RowJSON | undefined)?.content ?? []) as RowJSON[];
       const full = rowsOf(part.block);
-      const spliced = spliceRows(full, part.shown, edited, rowId);
+      const old = restore ? oldRows(part.block.id) : undefined;
+      let spliced: { rows: RowJSON[]; added: string[]; deleted: string[] };
+      if (restore) {
+        spliced = restoreRows(full, part.shown, old ? rowsOf(old.block) : [], old?.shown ?? []);
+      } else {
+        const doc = docs.get(part.slot.id);
+        if (!doc) continue;
+        const edited = ((doc.content[0] as RowJSON | undefined)?.content ?? []) as RowJSON[];
+        spliced = spliceRows(full, part.shown, edited, rowId);
+      }
       const table = tableOrThrow(part.block);
       const block: BlockFile = { ...part.block, doc: { type: "doc", content: [{ ...table, content: spliced.rows }] } };
       const normalized = JSON.parse(canonical(part.path, block)) as BlockFile;
@@ -369,12 +479,21 @@ export function buildSave(unit: EditUnit, docs: ReadonlyMap<string, DocJSON>, to
       s.blocks = s.blocks.map((b) => (b.id === block.id ? normalized : b));
       if (spliced.added.length > 0 || spliced.deleted.length > 0) {
         const order = systemRowOrder(s.blocks, s.structure, block.id);
-        // A topic page's new rows above its first row stay with that topic (Orchestrator ruling 04:44Z).
-        const topic = unit.key.startsWith("topic:") ? unit.key.split(":")[2] : undefined;
-        s.structure = updateStructure(s.structure, {
-          order, added: spliced.added, deleted: spliced.deleted, table: block.id, ...(topic !== undefined ? { topic } : {}),
-        });
+        if (restore) {
+          // Restored rows get exactly the entries they had at the version (absent there → absent).
+          const cleared = updateStructure(s.structure, { order, deleted: spliced.deleted, table: block.id });
+          s.structure = old ? withOldEntries(cleared, old.sys.structure, spliced.added) : cleared;
+        } else {
+          // A topic page's new rows above its first row stay with that topic (Orchestrator ruling 04:44Z),
+          // while that row is still there: with it deleted there is no topic to join.
+          const topic = unit.topic !== null && order.includes(unit.topic) ? unit.topic : undefined;
+          const before = s.structure;
+          s.structure = handOver(updateStructure(s.structure, {
+            order, added: spliced.added, deleted: spliced.deleted, table: block.id, ...(topic !== undefined ? { topic } : {}),
+          }), before, deriveTopics(part.sys.blocks, before), spliced.deleted);
+        }
       }
+      if (unit.topic !== null && spliced.deleted.includes(unit.topic)) lostTopic = { part, blocks: s.blocks, structure: s.structure };
       continue;
     }
     if (part.kind === "block") {
@@ -386,8 +505,9 @@ export function buildSave(unit: EditUnit, docs: ReadonlyMap<string, DocJSON>, to
       continue;
     }
     if (part.kind === "gap") {
-      const doc = docs.get(part.doc.id) ?? part.gap.doc;
-      const differs = part.differs ? (docs.get(part.differs.id) ?? part.differs.doc) : null;
+      const old = restore?.parts.find((p): p is Extract<Part, { kind: "gap" }> => p.kind === "gap" && p.gap.id === part.gap.id);
+      const doc = old ? old.gap.doc : (docs.get(part.doc.id) ?? part.gap.doc);
+      const differs = old ? (old.gap.meta.differs?.doc ?? null) : part.differs ? (docs.get(part.differs.id) ?? part.differs.doc) : null;
       const plain: GapFile = { ...part.gap, doc, meta: { ...part.gap.meta, differs: differs ? { doc: differs } : null } };
       const edited = canonical(part.path, plain) !== canonical(part.path, part.gap);
       const gap: GapFile = edited ? { ...plain, meta: { ...plain.meta, ownerEdits: [...part.gap.meta.ownerEdits, today] } } : part.gap;
@@ -416,5 +536,18 @@ export function buildSave(unit: EditUnit, docs: ReadonlyMap<string, DocJSON>, to
     files.set(path, value);
   }
   if (unit.docId !== null && changes.length > 0) changed.add(unit.docId);
-  return { changes, files, changed: [...changed] };
+  const build: SaveBuild = { changes, files, changed: [...changed] };
+  if (lostTopic) build.topicMoved = { guide: lostTopic.part.sys.guide, system: lostTopic.part.sys.system, topic: topicAfter(unit, lostTopic) };
+  return build;
+}
+
+/** The topic that the first remaining row of a topic page's deleted topic belongs to after the save. */
+function topicAfter(unit: EditUnit, lost: { part: RowsPart; blocks: BlockFile[]; structure: StructureFile }): string | null {
+  const before = deriveTopics(lost.part.sys.blocks, lost.part.sys.structure).topics.find((t) => t.id === unit.topic)?.rows ?? [];
+  const after = deriveTopics(lost.blocks, lost.structure).topics;
+  for (const row of before) {
+    const t = after.find((x) => x.rows.includes(row));
+    if (t) return t.id;
+  }
+  return null;
 }

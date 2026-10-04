@@ -214,6 +214,30 @@ describe("building a save", () => {
     expect(json<StructureFile>(changeOf(build, CV_STRUCTURE)).members[R(105)]).toBe(R(101));
   });
 
+  it("deleting the topic's first row on its topic page saves, and reports where the topic's other rows went", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    expect(unit.topic).toBe(R(101));
+    const part = only(unit, "rows");
+    // Deleting R101 and adding a row above the rest: the topic-run join would look R101 up in the row order.
+    const edited = addRow(dropRow(part.slot.doc, R(101)), R(100), R(105), ["", "before the rest", ""]);
+    const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+    expect(rowIds(json<BlockFile>(changeOf(build, blockPath(10))).doc)).toEqual([R(100), R(105), R(102), R(103), R(104)]);
+    const members = json<StructureFile>(changeOf(build, CV_STRUCTURE)).members;
+    expect(members[R(101)]).toBeUndefined();
+    expect(Object.values(members)).not.toContain(R(101));
+    // R105 now opens the rows after the heading, and R102 (no title of its own) continues it.
+    expect(build.topicMoved).toEqual({ guide: "fm", system: "cardiovascular", topic: R(105) });
+  });
+
+  it("a topic page save that keeps its first row reports no move", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    const build = buildSave(unit, new Map([[part.slot.id, dropRow(part.slot.doc, R(102))]]), TODAY);
+    expect(build.changed).toEqual([R(102)]);
+    expect(build.topicMoved).toBeUndefined();
+  });
+
   it("a row added to a drug table gets no section in structure.json (drug rows live only in Pharm)", async () => {
     const unit = await unitAt("pharm:fm:cardiovascular:antianginals");
     const part = only(unit, "rows");

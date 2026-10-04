@@ -5,7 +5,9 @@ import { EditorView } from "prosemirror-view";
 import { createElement } from "react";
 import { parseTrailers, serializeFile, type BlockFile, type DocJSON } from "../../lib/content/index.ts";
 import { B, R } from "../../tools/build/test-fixture.ts";
-import { DATA_BASE } from "../data/load.ts";
+import { DATA_BASE, loadData } from "../data/load.ts";
+import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
+import { currentHash, guideViewHash, navigate } from "../shell/route.ts";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -129,6 +131,37 @@ describe("save", () => {
     expect(trailers).toMatchObject({ kind: "edit", page: KEY, changed: [R(102)] });
     expect(trailers?.device).toMatch(/^[0-9A-HJKMNP-TV-Z]{10}$/);
     expect(overlayEntries().get(BLOCK)?.commit).toBe(w.fake.head());
+  });
+
+  it("a save that deletes the topic's first row lands, then shows the topic its other rows are in now, sidebar included", async () => {
+    await navigate(guideViewHash("fm", { kind: "topics", ids: [R(101)] }));
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    const view = views[0];
+    if (!view) throw new Error("no editor");
+    let row: { from: number; to: number } | null = null;
+    view.state.doc.descendants((node, pos) => {
+      if (row === null && node.type.name === "table_row" && node.attrs.id === R(101)) row = { from: pos, to: pos + node.nodeSize };
+      return row === null;
+    });
+    if (row === null) throw new Error(`no row ${R(101)}`);
+    const { from, to } = row;
+    view.dispatch(view.state.tr.delete(from, to));
+
+    expect(await save()).toBe(true);
+
+    expect(repoText()).not.toContain(R(101));
+    const banner = getEditStore().pageBanner;
+    expect(banner?.banner).toEqual({ kind: "saved" });
+    expect(banner?.key).toBe(`topic:fm:${R(102)}`);
+    expect(currentHash()).toBe(guideViewHash("fm", { kind: "topics", ids: [R(102)] }));
+    const sys = await loadData<SystemJson>("g/fm/s/cardiovascular.json");
+    expect(sys.topics.map((t) => t.id)).not.toContain(R(101));
+    expect(sys.topics.find((t) => t.id === R(102))?.rows).toContain(R(102));
+    const nav = await loadData<NavJson>("g/fm/nav.json");
+    const entries = nav.systems.flatMap((s) => [...s.entries, ...s.sections.flatMap((x) => x.entries)]).map((e) => e.id);
+    expect(entries).toContain(R(102));
+    expect(entries).not.toContain(R(101));
   });
 
   it("ends in Saved. when the commit landed but the device couldn't keep the overlay copy", async () => {

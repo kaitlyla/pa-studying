@@ -12,10 +12,11 @@ import { askConfirm, UnsavedDialog } from "./dialogs.tsx";
 import { EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
-import { memoryStore } from "./idb.ts";
+import { memoryStore, type KvStore } from "./idb.ts";
+import { SAVING_AGAIN } from "../auth/auth.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, registerView, SAVE_FAILED, setDraftStoreForTests,
+  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, registerView, SAVE_FAILED, saveDraft, setDraftStoreForTests,
   showPageBanner, startEdit, viewChanged, type Draft,
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
@@ -321,5 +322,65 @@ describe("dialogs", () => {
     expect(await discard).toBe(true);
     expect(getEditStore().edit).toBeNull();
     expect(dialog()).toBeNull();
+  });
+});
+
+describe("a draft kept while a save waited on sign-in, reopened by the page's mounted region", () => {
+  const page = (
+    <>
+      <Toast />
+      <EditRegion pageKey={KEY}><p>published body</p></EditRegion>
+    </>
+  );
+
+  /** A stored resume-save draft of KEY with " (new)" typed; `deletedAt` records main's head at each delete. */
+  async function keptDraft(): Promise<{ store: KvStore<Draft>; deletedAt: string[] }> {
+    const inner = memoryStore<Draft>();
+    const deletedAt: string[] = [];
+    const store: KvStore<Draft> = {
+      get: (k) => inner.get(k),
+      put: (k, v) => inner.put(k, v),
+      entries: () => inner.entries(),
+      delete: (k) => {
+        deletedAt.push(w.fake.head());
+        return inner.delete(k);
+      },
+    };
+    setDraftStoreForTests(store);
+    await openAndType();
+    await saveDraft(true);
+    views.forEach((v) => v.destroy());
+    views = [];
+    act(() => discardEdit());
+    expect(await store.entries()).toHaveLength(1);
+    return { store, deletedAt };
+  }
+
+  it("saves once with the signed-in-again toast, and deletes the draft only after the commit", async () => {
+    const { store, deletedAt } = await keptDraft();
+    const before = w.fake.head();
+    // The region is on the page before she is known to be the owner, as after the sign-in redirect.
+    const root = await render(page);
+    asOwner(true);
+
+    await until(() => (getEditStore().pageBanner?.banner.kind === "saved" ? true : null), "the saved banner");
+    const head = w.fake.head();
+    expect(head).not.toBe(before);
+    expect(w.fake.commit(head)?.parents).toEqual([before]);
+    expect(w.fake.commit(head)?.message).toContain("Pa-Studying-Kind: edit");
+    expect(root.textContent).toContain(SAVING_AGAIN);
+    await vi.waitFor(async () => expect(await store.entries()).toEqual([]));
+    expect(deletedAt).toEqual([head]);
+  });
+
+  it("keeps the draft when that save can't reach GitHub", async () => {
+    const { store, deletedAt } = await keptDraft();
+    w.fake.fail((r) => r.method === "POST" && r.url.endsWith("/git/blobs"), "network", 10);
+    await render(page);
+    asOwner(true);
+
+    await until(() => (getEditStore().edit?.banner?.kind === "offline" ? true : null), "the offline banner");
+    expect(await store.entries()).toHaveLength(1);
+    expect(deletedAt).toEqual([]);
   });
 });
