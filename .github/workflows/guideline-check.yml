@@ -1,0 +1,52 @@
+name: guideline-check
+
+# Dispatched on the 1st of every month by the pa-studying-auth Worker's cron (plan 80 §80.2);
+# GitHub's own schedule trigger is not used because it is disabled after 60 days without activity.
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: guidelines
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Configure the commit identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Check the guideline sources
+        run: node tools/guidelines/index.ts --commit
+      - name: Push to main
+        run: |
+          for attempt in 0 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
+            git pull --rebase origin main
+          done
+          echo "::error::push to main was rejected after 3 rebase retries"
+          exit 1
+      - name: Publish
+        run: gh workflow run publish.yml --ref main
