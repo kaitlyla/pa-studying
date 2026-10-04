@@ -15,7 +15,10 @@ const MONTH_NAMES = [
 const MONTH_ALT = MONTH_NAMES.join("|");
 
 export interface UspstfRecord {
-  /** `subject#n`: n counts earlier rows with the same subject, from 1. */
+  /**
+   * The recommendation's identity (Orchestrator ruling, 2026-10-04 03:06Z, deviating from 80 §80.3.1):
+   * its page's identity path plus `#n`, where n counts the rows sharing that path in table order.
+   */
   key: string;
   subject: string;
   quote: string;
@@ -26,6 +29,11 @@ export interface UspstfRecord {
 }
 
 const monthNumber = (name: string): string => String(MONTH_NAMES.indexOf(name) + 1).padStart(2, "0");
+
+/** A recommendation page's identity path: lower-cased, with no host, query, fragment or trailing slash. */
+export function identityPath(url: string): string {
+  return new URL(url).pathname.toLowerCase().replace(/\/+$/, "");
+}
 const NO_SUP = new Set(["sup"]);
 
 /** Parse the A and B list. Throws when the table fails its sanity checks or a row cannot be read. */
@@ -48,18 +56,19 @@ export function parseAbPage(html: string): UspstfRecord[] {
     const link = elements(topic, "a").next().value;
     const href = link ? attr(link, "href") : null;
     if (!link || href === null) throw new Error(`USPSTF: row ${i + 1} has no topic link`);
-    const subject = norm(textOf(link));
-    const n = (occurrences.get(subject) ?? 0) + 1;
-    occurrences.set(subject, n);
+    const url = new URL(href, USPSTF_ORIGIN).href;
+    const path = identityPath(url);
+    const n = (occurrences.get(path) ?? 0) + 1;
+    occurrences.set(path, n);
     const released = new RegExp(`^(${MONTH_ALT})\\s+(\\d{4})`).exec(norm(textOf(date)));
     if (!released) throw new Error(`USPSTF: row ${i + 1} has no release month`);
     const record: UspstfRecord = {
-      key: `${subject}#${n}`,
-      subject,
+      key: `${path}#${n}`,
+      subject: norm(textOf(link)),
       quote: norm(textOf(statement, NO_SUP)),
       grade: norm(textOf(grade)),
       published: `${released[2]}-${monthNumber(released[1]!)}`,
-      url: new URL(href, USPSTF_ORIGIN).href,
+      url,
     };
     if (record.subject === "" || record.quote === "" || record.grade === "") throw new Error(`USPSTF: row ${i + 1} is incomplete`);
     return record;
@@ -76,8 +85,9 @@ export interface RecommendationRow {
 
 /**
  * Read the row for `subject` from a recommendation page's "Recommendation Summary" table: the row
- * whose Population equals the text after the subject's last ": ". Null when no row matches. Throws
- * when the page has no such table, or the matched row's release date cannot be found.
+ * whose Population equals the text after the subject's last ": ". Null when the page has no such
+ * table or no row matches (the recommendation is gone from the page). Throws when the matched row's
+ * release date cannot be found.
  */
 export function parseRecommendationPage(html: string, subject: string): RecommendationRow | null {
   const doc = parseHtml(html);
@@ -90,7 +100,7 @@ export function parseRecommendationPage(html: string, subject: string): Recommen
       break;
     }
   }
-  if (!table) throw new Error("USPSTF: no Recommendation Summary table");
+  if (!table) return null;
   const population = collapse(subject.slice(subject.lastIndexOf(": ") + 2));
   const row = rowsOf(table)
     .map((r) => cellsOf(r, "td"))

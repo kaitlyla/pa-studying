@@ -21,6 +21,17 @@ export const realNet: Net = {
   sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
 };
 
+/** A non-2xx answer; `status` lets a caller tell a removed page (404, 410) from a failure to retry. */
+export class HttpStatusError extends Error {
+  readonly status: number;
+
+  constructor(url: string, status: number) {
+    super(`GET ${url}: HTTP ${status}`);
+    this.name = "HttpStatusError";
+    this.status = status;
+  }
+}
+
 export class Http {
   readonly net: Net;
   #lastEutils = Number.NEGATIVE_INFINITY;
@@ -36,7 +47,7 @@ export class Http {
       redirect: "follow",
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
-    if (!response.ok) throw new Error(`GET ${url}: HTTP ${response.status}`);
+    if (!response.ok) throw new HttpStatusError(url, response.status);
     return response;
   }
 

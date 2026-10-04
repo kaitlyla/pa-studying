@@ -12,6 +12,7 @@ import { detectEdition, GINA_URL, GOLD_URL, PUBMED_SOURCES } from "./editions.ts
 import { EUTILS_SPACING_MS, EUTILS_TOOL, Http } from "./http.ts";
 import { main, probe } from "./index.ts";
 import { CHECKS_PATH, FLAGS_PATH, nextRunDate, runCheck } from "./run.ts";
+import type { SeenRecommendation } from "./run.ts";
 import { abPage, fakeNet, html, notFound, pubmedRoute, recommendationPage } from "./testing.ts";
 import type { AbRow, PubmedFixture } from "./testing.ts";
 import { parseAbPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
@@ -61,7 +62,8 @@ const GINA_PAGE = `<html><body><a href="/2026-gina-strategy-report/">2026 GINA S
 
 interface World {
   ab: string | Response | null;
-  recPages: Record<string, string | Response>;
+  /** Recommendation pages by URL; null is a network error. Any other URL answers 404. */
+  recPages: Record<string, string | Response | null>;
   gold: string | null;
   gina: string | null;
   pubmed: Record<string, PubmedFixture[]>;
@@ -78,7 +80,7 @@ function routeWorld(w: World): (url: URL) => Response | undefined {
   return (url) => {
     const bare = `${url.origin}${url.pathname}`;
     if (bare === USPSTF_AB_URL) return asResponse(w.ab);
-    if (Object.hasOwn(w.recPages, bare)) return asResponse(w.recPages[bare]!);
+    if (Object.hasOwn(w.recPages, bare)) return asResponse(w.recPages[bare] ?? null);
     if (bare === GOLD_URL) return asResponse(w.gold);
     if (bare === GINA_URL) return asResponse(w.gina);
     if (url.hostname === "eutils.ncbi.nlm.nih.gov") return pubmed(url);
@@ -93,30 +95,45 @@ afterEach(async () => { await rm(root, { recursive: true, force: true }); });
 
 async function run(w: World, today: string) {
   const fake = fakeNet(routeWorld(w));
-  const report = await runCheck(root, new Http(fake.net), today);
+  const log: string[] = [];
+  const report = await runCheck(root, new Http(fake.net), today, (l) => log.push(l));
   const flags = (await readContent<FlagsFile>(root, FLAGS_PATH)).flags;
   const checks = await readContent<ChecksFile>(root, CHECKS_PATH);
-  return { report, flags, checks, fake };
+  return { report, flags, checks, fake, log };
 }
 
 const status = (checks: ChecksFile, id: string) => checks.sources.find((s) => s.id === id);
 const current = (flags: Flag[]) => flags.filter((f) => f.supersededBy === null);
+const seenOf = (checks: ChecksFile) => checks.seen.uspstf as Record<string, SeenRecommendation>;
+const keyOf = (path: string, n = 1) => `/uspstf/recommendation/${path}#${n}`;
+const CHLAMYDIA_PATH = "chlamydia-and-gonorrhea-screening";
 
 describe("USPSTF A and B page (80 §80.3.1)", () => {
-  it("reads 30 records with occurrence keys, the release month, and the statement without footnote markers", () => {
+  it("reads 30 records keyed on their page path and position, with the release month and the statement without footnote markers", () => {
     const records = parseAbPage(abPage(baseRows()));
     expect(records).toHaveLength(30);
     expect(records[0]).toEqual({
-      key: `${CHLAMYDIA}#1`, subject: CHLAMYDIA, grade: "B", published: "2021-09",
+      key: keyOf(CHLAMYDIA_PATH, 1), subject: CHLAMYDIA, grade: "B", published: "2021-09",
       quote: "The USPSTF recommends screening for chlamydia in all sexually active women 24 years or younger.",
       url: "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/chlamydia-and-gonorrhea-screening",
     });
-    expect(records[1]!.key).toBe(`${CHLAMYDIA}#2`);
+    expect(records[1]!.key).toBe(keyOf(CHLAMYDIA_PATH, 2));
     expect(records[1]!.quote).toContain("gonorrhea");
     expect(records[2]!.published).toBe("2024-04");
     expect(records[3]!.quote).toBe("The USPSTF recommends screening for colorectal cancer in all adults aged 50 to 75 years.");
     expect(records[4]!.quote).toBe("The USPSTF recommends exercise interventions to prevent falls.\n\nSee the Practice Considerations section.");
-    expect(records[5]).toMatchObject({ key: "Topic 5: Screening: adults aged 5 years#1", published: "2014-07", grade: "B" });
+    expect(records[5]).toMatchObject({ key: keyOf("topic-5"), subject: "Topic 5: Screening: adults aged 5 years", published: "2014-07", grade: "B" });
+  });
+
+  it("normalizes the identity path: case, host, query, fragment and trailing slash do not matter; different link texts on one page share it", () => {
+    const rows = baseRows();
+    rows[7] = { ...rows[7]!, href: "https://www.uspreventiveservicestaskforce.org/USPSTF/Recommendation/Topic-6/?tab=1#summary" };
+    rows[8] = { ...rows[8]!, subject: "Something else entirely: Screening: adults" };
+    const records = parseAbPage(abPage(rows));
+    expect(records[6]!.key).toBe(keyOf("topic-6", 1));
+    expect(records[7]!.key).toBe(keyOf("topic-6", 2));
+    expect(records[7]!.url).toBe("https://www.uspreventiveservicestaskforce.org/USPSTF/Recommendation/Topic-6/?tab=1#summary");
+    expect(records[8]).toMatchObject({ key: keyOf("topic-8"), subject: "Something else entirely: Screening: adults" });
   });
 
   it("fails on header cells that differ, a short table, a row without a link or month, and a page with no table", () => {
@@ -138,16 +155,16 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
     });
     const uspstf = flags.filter((f) => f.source === "uspstf");
     expect(uspstf.map((f) => f.key).sort()).toEqual(expected.map((r) => r.key).sort());
-    expect(uspstf.find((f) => f.key === "Topic 20: Screening: adults aged 20 years#1")?.published).toBe("2021-01"); // the boundary
-    expect((checks.seen.uspstf as Record<string, string>)["Topic 17: Screening: adults aged 17 years#1"]).toBe("2020-07");
-    expect(uspstf.map((f) => f.key)).not.toContain("Topic 17: Screening: adults aged 17 years#1");
-    expect(uspstf.find((f) => f.key === `${CHLAMYDIA}#2`)).toMatchObject({
+    expect(uspstf.find((f) => f.key === keyOf("topic-20"))?.published).toBe("2021-01"); // the boundary
+    expect(seenOf(checks)[keyOf("topic-17")]!.published).toBe("2020-07");
+    expect(uspstf.map((f) => f.key)).not.toContain(keyOf("topic-17"));
+    expect(uspstf.find((f) => f.key === keyOf(CHLAMYDIA_PATH, 2))).toMatchObject({
       kind: "rec", by: "check", subject: CHLAMYDIA, guideline: CHLAMYDIA, org: USPSTF_ORG, grade: "B", published: "2021-09",
       flagged: "2026-10-01", supersededBy: null,
     });
-    expect(Object.keys(checks.seen.uspstf as object)).toHaveLength(30);
-    expect((checks.seen.uspstf as Record<string, string>)["Topic 5: Screening: adults aged 5 years#1"]).toBe("2014-07");
-    expect(checks.seenUrl[`${CHLAMYDIA}#2`]).toBe("https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/chlamydia-and-gonorrhea-screening");
+    expect(Object.keys(seenOf(checks))).toHaveLength(30);
+    expect(seenOf(checks)[keyOf("topic-5")]).toEqual({ published: "2014-07", subject: "Topic 5: Screening: adults aged 5 years", quote: "The USPSTF recommends screening 5." });
+    expect(checks.seenUrl[keyOf(CHLAMYDIA_PATH, 2)]).toBe("https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/chlamydia-and-gonorrhea-screening");
     expect(status(checks, "uspstf")).toEqual({ id: "uspstf", lastSuccess: "2026-10-01", lastAttempt: "2026-10-01", status: "ok" });
     expect(report.sources.find((s) => s.id === "uspstf")).toMatchObject({ ok: true, added: expected.length });
   });
@@ -162,12 +179,37 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
     const changed = await run(world({ ab: abPage(rows) }), "2026-12-01");
     expect(changed.flags).toHaveLength(first.flags.length + 1);
     const added = changed.flags.at(-1)!;
-    const key = "Hypertension in Adults: Screening: adults 18 years or older without known hypertension#1";
+    const key = keyOf("hypertension-in-adults-screening");
     expect(added).toMatchObject({ key, published: "2026-03", quote: "The USPSTF recommends screening for hypertension in adults 18 years or older.", flagged: "2026-12-01", supersededBy: null });
     const earlier = changed.flags.find((f) => f.key === key && f.id !== added.id)!;
     expect(earlier).toMatchObject({ published: "2024-04", supersededBy: added.id });
     expect(current(changed.flags).filter((f) => f.key === key)).toHaveLength(1);
-    expect((changed.checks.seen.uspstf as Record<string, string>)[key]).toBe("2026-03");
+    expect(seenOf(changed.checks)[key]!.published).toBe("2026-03");
+  });
+
+  it("a reworded population at the same page is a revision: its flag supersedes the old one, even in the same release month", async () => {
+    // Breast cancer screening, 2024: the population went from "women aged 50 to 74 years" to "women aged 40 to 74 years".
+    const before: AbRow = { subject: "Breast Cancer: Screening: women aged 50 to 74 years", statement: "The USPSTF recommends biennial screening mammography for women aged 50 to 74 years.", grade: "B", date: "April 2024", href: "/uspstf/recommendation/breast-cancer-screening" };
+    const first = await run(world({ ab: abPage([...baseRows(), before]) }), "2026-10-01");
+    const reworded: AbRow = { ...before, subject: BREAST };
+    const second = await run(world({ ab: abPage([...baseRows(), reworded]) }), "2026-11-01");
+    expect(second.flags).toHaveLength(first.flags.length + 1);
+    const key = keyOf("breast-cancer-screening");
+    const [old, revision] = second.flags.filter((f) => f.key === key);
+    expect(revision).toMatchObject({ subject: BREAST, guideline: BREAST, published: "2024-04", flagged: "2026-11-01", supersededBy: null });
+    expect(old).toMatchObject({ subject: "Breast Cancer: Screening: women aged 50 to 74 years", supersededBy: revision!.id });
+    expect(seenOf(second.checks)[key]!.subject).toBe(BREAST);
+  });
+
+  it("a changed statement at the same page and month is a revision too", async () => {
+    const first = await run(world(), "2026-10-01");
+    const rows = baseRows();
+    rows[3] = { ...rows[3]!, statement: "The USPSTF recommends screening for colorectal cancer in all adults aged 45 to 75 years." };
+    const second = await run(world({ ab: abPage(rows) }), "2026-11-01");
+    expect(second.flags).toHaveLength(first.flags.length + 1);
+    expect(current(second.flags).find((f) => f.key === keyOf("colorectal-cancer-screening"))).toMatchObject({
+      quote: "The USPSTF recommends screening for colorectal cancer in all adults aged 45 to 75 years.", published: "2021-05", flagged: "2026-11-01",
+    });
   });
 
   it.each([
@@ -201,42 +243,98 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
       { population: "Women   aged 40 to 74 years", recommendation: "The USPSTF recommends biennial screening mammography for women aged 40 to 74 years.<sup>1</sup>", grade: "B" },
     ], "April 30, 2024");
 
+    const breastKey = keyOf("breast-cancer-screening");
+    /** The breast row released in 2024, so the baseline flags it. */
+    const flaggedBreastRow: AbRow = { ...breastRow, subject: BREAST, statement: "The USPSTF recommends biennial screening mammography for women aged 40 to 74 years.", date: "April 2024" };
+
     it("is flagged from the matching Recommendation Summary row, and leaves seen", async () => {
       const first = await run(world({ ab: abPage([...baseRows(), breastRow]) }), "2026-10-01");
       expect(first.flags.some((f) => f.subject === BREAST)).toBe(false); // released 2016
       const second = await run(world({ recPages: { [breastUrl]: summary } }), "2026-11-01");
       expect(second.flags).toHaveLength(first.flags.length + 1);
       expect(second.flags.at(-1)).toMatchObject({
-        kind: "rec", source: "uspstf", key: `${BREAST}#1`, subject: BREAST, guideline: BREAST,
+        kind: "rec", source: "uspstf", key: breastKey, subject: BREAST, guideline: BREAST,
         quote: "The USPSTF recommends biennial screening mammography for women aged 40 to 74 years.", grade: "B",
         published: "2024-04", url: breastUrl, flagged: "2026-11-01", supersededBy: null,
       });
-      expect(second.checks.seen.uspstf).not.toHaveProperty(`${BREAST}#1`);
-      expect(second.checks.seenUrl).not.toHaveProperty(`${BREAST}#1`);
+      expect(second.checks.seen.uspstf).not.toHaveProperty(breastKey);
+      expect(second.checks.seenUrl).not.toHaveProperty(breastKey);
       expect(status(second.checks, "uspstf")).toMatchObject({ status: "ok" });
     });
 
-    it("makes no flag when no Population row matches, and still leaves seen", async () => {
-      const first = await run(world({ ab: abPage([...baseRows(), breastRow]) }), "2026-10-01");
-      const page = recommendationPage([{ population: "Women 75 years or older", recommendation: "Insufficient.", grade: "I" }], "April 30, 2024");
-      const second = await run(world({ recPages: { [breastUrl]: page } }), "2026-11-01");
-      expect(second.flags).toEqual(first.flags);
-      expect(second.checks.seen.uspstf).not.toHaveProperty(`${BREAST}#1`);
+    it("a matching row (the recommendation re-graded off the list) supersedes the identity's flag", async () => {
+      const first = await run(world({ ab: abPage([...baseRows(), flaggedBreastRow]) }), "2026-10-01");
+      const regraded = recommendationPage([{ population: "Women aged 40 to 74 years", recommendation: "The USPSTF concludes that the evidence is insufficient.", grade: "I" }], "May 1, 2026");
+      const second = await run(world({ recPages: { [breastUrl]: regraded } }), "2026-11-01");
+      const [old, now] = second.flags.filter((f) => f.key === breastKey);
+      expect(now).toMatchObject({ grade: "I", published: "2026-05", supersededBy: null });
+      expect(old).toMatchObject({ grade: "B", supersededBy: now!.id });
+      expect(old!.retired).toBeUndefined();
+      expect(first.flags.length + 1).toBe(second.flags.length);
     });
 
     it.each([
-      ["the page cannot be fetched", undefined],
-      ["the page has no Recommendation Summary table", "<html><body><h3>Recommendation Summary</h3><p>Moved.</p></body></html>"],
+      ["its page answers 404", html("Not found", 404)],
+      ["its page answers 410", html("Gone", 410)],
+      ["its page has no Recommendation Summary table", "<html><body><h3>Recommendation Summary</h3><p>Moved.</p></body></html>"],
+      ["no Population row matches", recommendationPage([{ population: "Women 75 years or older", recommendation: "Insufficient.", grade: "I" }], "April 30, 2024")],
+    ])("retires the identity when %s: its flag stays listed with the retired date, the job log reports it, and the A and B comparison still lands", async (_, page) => {
+      const first = await run(world({ ab: abPage([...baseRows(), flaggedBreastRow]) }), "2026-10-01");
+      const before = first.flags.find((f) => f.key === breastKey)!;
+      const rows = baseRows();
+      rows[2] = { ...rows[2]!, date: "March 2026" }; // a change elsewhere on the page in the same run
+      const second = await run(world({ ab: abPage(rows), recPages: { [breastUrl]: page } }), "2026-11-01");
+      expect(second.flags.find((f) => f.id === before.id)).toEqual({ ...before, retired: "2026-11-01" });
+      expect(second.flags.filter((f) => f.key === breastKey)).toHaveLength(1);
+      expect(second.log).toContain(`uspstf: retired ${breastKey} (${BREAST}): no longer on the A and B list or its page`);
+      expect(second.checks.seen.uspstf).not.toHaveProperty(breastKey);
+      expect(second.checks.seenUrl).not.toHaveProperty(breastKey);
+      expect(current(second.flags).find((f) => f.key === keyOf("hypertension-in-adults-screening"))!.published).toBe("2026-03");
+      expect(status(second.checks, "uspstf")).toMatchObject({ status: "ok", lastSuccess: "2026-11-01" });
+      // Retired once: the next run neither refetches nor re-reports it.
+      const third = await run(world({ ab: abPage(rows) }), "2026-12-01");
+      expect(third.flags).toEqual(second.flags);
+      expect(third.log.some((l) => l.includes("retired"))).toBe(false);
+      expect(third.fake.requests).not.toContain(breastUrl);
+    });
+
+    it("reports a retired identity that never had a flag in the job log only", async () => {
+      await run(world({ ab: abPage([...baseRows(), breastRow]) }), "2026-10-01");
+      const second = await run(world(), "2026-11-01");
+      expect(second.flags.some((f) => f.key === breastKey)).toBe(false);
+      expect(second.log).toContain(`uspstf: retired ${breastKey} (${BREAST}): no longer on the A and B list or its page`);
+      expect(second.checks.seen.uspstf).not.toHaveProperty(breastKey);
+    });
+
+    it("a slug change: the old page answers 404 and a new page appears; the old flag is retired, the new identity gets its own flag", async () => {
+      const first = await run(world({ ab: abPage([...baseRows(), flaggedBreastRow]) }), "2026-10-01");
+      const moved: AbRow = { ...flaggedBreastRow, href: "/uspstf/recommendation/breast-cancer-screening-2026", date: "June 2026" };
+      const second = await run(world({ ab: abPage([...baseRows(), moved]) }), "2026-11-01");
+      const old = second.flags.find((f) => f.key === breastKey)!;
+      const successor = second.flags.find((f) => f.key === keyOf("breast-cancer-screening-2026"))!;
+      expect(old).toEqual({ ...first.flags.find((f) => f.key === breastKey)!, retired: "2026-11-01" });
+      expect(successor).toMatchObject({ subject: BREAST, published: "2026-06", supersededBy: null, flagged: "2026-11-01" });
+      expect(successor.retired).toBeUndefined();
+      // No current, unretired flag of the departed identity remains to be placed.
+      expect(second.flags.filter((f) => f.key === breastKey && f.supersededBy === null && f.retired === undefined)).toEqual([]);
+      expect(Object.keys(seenOf(second.checks))).toContain(keyOf("breast-cancer-screening-2026"));
+    });
+
+    it.each([
+      ["the page answers 503", html("Unavailable", 503)],
+      ["the page answers 403", html("Forbidden", 403)],
+      ["the network fails", null],
       [
         "the matched row's page has no release date",
         recommendationPage([{ population: "women aged 40 to 74 years", recommendation: "The USPSTF recommends mammography.", grade: "B" }], "Undated")
           .replace("Updated March 3, 2025", "Updated recently"),
       ],
-    ])("fails the whole source when %s, so the key is retried", async (_, page) => {
-      const first = await run(world({ ab: abPage([...baseRows(), breastRow]) }), "2026-10-01");
-      const second = await run(world(page === undefined ? {} : { recPages: { [breastUrl]: page } }), "2026-11-01");
+    ])("fails the whole source when %s, so the identity is retried", async (_, page) => {
+      const first = await run(world({ ab: abPage([...baseRows(), flaggedBreastRow]) }), "2026-10-01");
+      const second = await run(world({ recPages: { [breastUrl]: page } }), "2026-11-01");
       expect(second.flags).toEqual(first.flags);
       expect(second.checks.seen.uspstf).toEqual(first.checks.seen.uspstf);
+      expect(second.checks.seenUrl).toEqual(first.checks.seenUrl);
       expect(status(second.checks, "uspstf")).toMatchObject({ status: "fail", lastSuccess: "2026-10-01" });
     });
   });
@@ -479,13 +577,13 @@ describe("a whole run (80 §80.3, §80.6)", () => {
 
   it("keeps flags it did not make, superseding an agent flag with the same key", async () => {
     const agentFlag: Flag = {
-      id: "u_0000000001", kind: "rec", source: "uspstf", by: "agent", key: `${CHLAMYDIA}#1`, subject: CHLAMYDIA, guideline: CHLAMYDIA,
+      id: "u_0000000001", kind: "rec", source: "uspstf", by: "agent", key: keyOf(CHLAMYDIA_PATH, 1), subject: CHLAMYDIA, guideline: CHLAMYDIA,
       org: USPSTF_ORG, published: "2021-09", quote: "Agent-quoted text.", grade: "B", url: "https://www.uspreventiveservicestaskforce.org/x",
       flagged: "2026-10-02", supersededBy: null, locator: "Recommendation Summary", verification: { verifier: "vera", at: "2026-10-03", result: "pass" },
     };
     await writeContent(root, FLAGS_PATH, { v: 1, flags: [agentFlag] });
     const { flags } = await run(world(), "2026-10-04");
-    const replacement = flags.find((f) => f.key === `${CHLAMYDIA}#1` && f.by === "check")!;
+    const replacement = flags.find((f) => f.key === keyOf(CHLAMYDIA_PATH, 1) && f.by === "check")!;
     expect(flags[0]).toEqual({ ...agentFlag, supersededBy: replacement.id });
   });
 

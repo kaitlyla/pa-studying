@@ -33,16 +33,24 @@ function recordedRoute(url: URL): Response {
 }
 
 describe("recorded USPSTF pages", () => {
-  it("the A and B page: 54 records, 52 subjects, the duplicated subjects keyed #2", () => {
+  it("the A and B page: 54 records on 47 recommendation pages; the 7 pages with two rows key their second row #2", () => {
     const records = parseAbPage(fixture("uspstf-ab.html"));
     expect(records).toHaveLength(54);
     expect(new Set(records.map((r) => r.subject)).size).toBe(52);
-    expect(records.filter((r) => r.key.endsWith("#2")).map((r) => r.subject)).toEqual([
-      "Chlamydia and Gonorrhea: Screening: sexually active women, including pregnant persons",
-      "Prevention of Dental Caries in Children Younger Than 5 Years: Screening and Interventions: children younger than 5 years",
+    // Counted from the recorded page's own hrefs: these seven pages each hold two rows.
+    expect(records.filter((r) => r.key.endsWith("#2")).map((r) => r.key)).toEqual([
+      "/uspstf/recommendation/chlamydia-and-gonorrhea-screening#2",
+      "/uspstf/recommendation/colorectal-cancer-screening#2",
+      "/uspstf/recommendation/human-immunodeficiency-virus-hiv-infection-screening#2",
+      "/uspstf/recommendation/osteoporosis-screening#2",
+      "/uspstf/recommendation/prevention-of-dental-caries-in-children-younger-than-age-5-years-screening-and-interventions1#2",
+      "/uspstf/recommendation/rh-d-incompatibility-screening#2",
+      "/uspstf/recommendation/tobacco-use-in-adults-and-pregnant-women-counseling-and-interventions#2",
     ]);
+    expect(new Set(records.map((r) => r.key.slice(0, r.key.lastIndexOf("#")))).size).toBe(47);
+    expect(new Set(records.map((r) => r.key)).size).toBe(54);
     expect(records[0]).toEqual({
-      key: "Abdominal Aortic Aneurysm: Screening: men aged 65 to 75 years who have ever smoked#1",
+      key: "/uspstf/recommendation/abdominal-aortic-aneurysm-screening#1",
       subject: "Abdominal Aortic Aneurysm: Screening: men aged 65 to 75 years who have ever smoked",
       quote: "The USPSTF recommends 1-time screening for abdominal aortic aneurysm (AAA) with ultrasonography in men aged 65 to 75 years who have ever smoked.",
       grade: "B", published: "2019-12",

@@ -1,10 +1,11 @@
 // One guideline check run (80 §80.3): every tracked source is checked independently; results land
 // only in content/updates/flags.json and content/updates/checks.json.
-import { FIXED_SOURCES, newId } from "../../lib/content/index.ts";
+import { citeKey, FIXED_SOURCES, newId, seriesOfCiteKey } from "../../lib/content/index.ts";
 import type { ChecksFile, FixedSource, Flag, FlagsFile, GapFile, Track } from "../../lib/content/index.ts";
 import { listGapBlocks, readContentIfExists, writeContent } from "../../lib/content/fs.ts";
 import { detectCited, detectEdition } from "./editions.ts";
 import type { Edition, EditionSource } from "./editions.ts";
+import { HttpStatusError } from "./http.ts";
 import type { Http } from "./http.ts";
 import { parseAbPage, parseRecommendationPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
 
@@ -38,7 +39,7 @@ export interface CitedSeries {
 }
 
 /** A flag before it gets its id and supersedes anything. */
-export type FlagDraft = Omit<Flag, "id" | "supersededBy" | "locator" | "verification">;
+export type FlagDraft = Omit<Flag, "id" | "supersededBy" | "locator" | "verification" | "retired">;
 
 /** What a successful detector changes: flags to add and the source's new `seen` value. */
 interface Outcome {
@@ -46,6 +47,8 @@ interface Outcome {
   seen: unknown;
   /** USPSTF only: the replacement `seenUrl`. */
   seenUrl?: Record<string, string>;
+  /** USPSTF only: keys whose recommendation is permanently gone; their current flags are retired. */
+  retired?: string[];
 }
 
 /** The cited series of the gap blocks (method other than `fixed`), by series id, in `label` order. */
@@ -69,31 +72,70 @@ export function nextRunDate(today: string): string {
   return m === 12 ? `${y + 1}-01-01` : `${y}-${String(m + 1).padStart(2, "0")}-01`;
 }
 
-const isMonthMap = (v: unknown): v is Record<string, string> =>
-  typeof v === "object" && v !== null && Object.values(v).every((x) => typeof x === "string");
+/** What the check remembers of a USPSTF recommendation, to tell a revision from no change. */
+export interface SeenRecommendation {
+  published: string;
+  subject: string;
+  quote: string;
+}
 
-async function checkUspstf(http: Http, seen: unknown, seenUrl: Record<string, string>, today: string): Promise<Outcome> {
+const isSeenMap = (v: unknown): v is Record<string, SeenRecommendation> =>
+  typeof v === "object" && v !== null && !Array.isArray(v) &&
+  Object.values(v).every((x: unknown) => {
+    const r = x as Partial<Record<keyof SeenRecommendation, unknown>> | null;
+    return typeof r === "object" && r !== null && typeof r.published === "string" && typeof r.subject === "string" && typeof r.quote === "string";
+  });
+
+/** A recommendation page answered 404 or 410: it was removed, not unreachable. */
+const isRemovedPage = (e: unknown): boolean => e instanceof HttpStatusError && (e.status === 404 || e.status === 410);
+
+/**
+ * USPSTF (80 §80.3.1 as amended by the Orchestrator rulings of 2026-10-04 03:06Z and 03:07Z):
+ * - identity is the recommendation page's path plus its position among rows sharing that path;
+ * - a new identity, or a changed release month, population (subject) or statement, makes a flag
+ *   that supersedes the identity's current flag;
+ * - an identity that left the A and B list is read from its own page: a matching Recommendation
+ *   Summary row makes a flag; a removed page (404/410), no summary table or no matching row retires
+ *   the identity. Only an unreachable page (network error, timeout, any other non-2xx) fails the source.
+ */
+async function checkUspstf(http: Http, seen: unknown, seenUrl: Record<string, string>, today: string, log: (line: string) => void): Promise<Outcome> {
   const records = parseAbPage(await http.text(USPSTF_AB_URL));
   const draft = (r: { key: string; subject: string; quote: string; grade: string; published: string; url: string }): FlagDraft => ({
     kind: "rec", source: "uspstf", by: "check", key: r.key, subject: r.subject, guideline: r.subject, org: USPSTF_ORG,
     published: r.published, quote: r.quote, grade: r.grade, url: r.url, flagged: today,
   });
-  const nextSeen = Object.fromEntries(records.map((r) => [r.key, r.published]));
+  const nextSeen: Record<string, SeenRecommendation> = Object.fromEntries(
+    records.map((r) => [r.key, { published: r.published, subject: r.subject, quote: r.quote }]),
+  );
   const nextSeenUrl = Object.fromEntries(records.map((r) => [r.key, r.url]));
   if (seen === undefined) {
     return { drafts: records.filter((r) => r.published >= BASELINE_MONTH).map(draft), seen: nextSeen, seenUrl: nextSeenUrl };
   }
-  if (!isMonthMap(seen)) throw new Error("checks.json seen.uspstf is not a key → month map");
-  const drafts = records.filter((r) => seen[r.key] !== r.published).map(draft);
-  // A key that left the page left the A and B list: its own page gives the new statement.
-  for (const key of Object.keys(seen).filter((k) => !Object.hasOwn(nextSeen, k))) {
+  if (!isSeenMap(seen)) throw new Error("checks.json seen.uspstf is not a key → {published, subject, quote} map");
+  const drafts = records
+    .filter((r) => {
+      const was = seen[r.key];
+      return !was || was.published !== r.published || was.subject !== r.subject || was.quote !== r.quote;
+    })
+    .map(draft);
+  const retired: string[] = [];
+  for (const [key, was] of Object.entries(seen).filter(([k]) => !Object.hasOwn(nextSeen, k))) {
     const url = seenUrl[key];
-    if (url === undefined) throw new Error(`no stored URL for ${key}`);
-    const subject = key.slice(0, key.lastIndexOf("#"));
-    const row = parseRecommendationPage(await http.text(url), subject);
-    if (row) drafts.push(draft({ key, subject, url, ...row }));
+    let row = null;
+    if (url !== undefined) {
+      try {
+        row = parseRecommendationPage(await http.text(url), was.subject);
+      } catch (e) {
+        if (!isRemovedPage(e)) throw e;
+      }
+    }
+    if (row) drafts.push(draft({ key, subject: was.subject, url: url!, ...row }));
+    else {
+      retired.push(key);
+      log(`uspstf: retired ${key} (${was.subject}): no longer on the A and B list or its page`);
+    }
   }
-  return { drafts, seen: nextSeen, seenUrl: nextSeenUrl };
+  return { drafts, seen: nextSeen, seenUrl: nextSeenUrl, retired };
 }
 
 function editionOutcome(source: string, edition: Edition, seen: unknown, org: string, today: string): Outcome {
@@ -113,6 +155,11 @@ function addFlag(flags: Flag[], draft: FlagDraft): void {
   const id = newId("u", new Set(flags.map((f) => f.id)));
   for (const f of flags) if (f.key === draft.key && f.supersededBy === null) f.supersededBy = id;
   flags.push({ id, ...draft, supersededBy: null });
+}
+
+/** Retire the current flag of `key`: it stays listed, and the build no longer places it. */
+function retireFlags(flags: Flag[], key: string, today: string): void {
+  for (const f of flags) if (f.key === key && f.supersededBy === null && f.retired === undefined) f.retired = today;
 }
 
 export interface SourceReport {
@@ -136,13 +183,14 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
 
   // A newly cited series starts at its cited edition; a series no longer cited is dropped.
   for (const [series, { edition }] of cited) {
-    if (!Object.hasOwn(checks.seen, `cite:${series}`)) checks.seen[`cite:${series}`] = edition;
+    if (!Object.hasOwn(checks.seen, citeKey(series))) checks.seen[citeKey(series)] = edition;
   }
   for (const key of Object.keys(checks.seen)) {
-    if (key.startsWith("cite:") && !cited.has(key.slice(5))) delete checks.seen[key];
+    const series = seriesOfCiteKey(key);
+    if (series !== null && !cited.has(series)) delete checks.seen[key];
   }
 
-  const order = [...FIXED_ORDER, ...[...cited.keys()].map((s) => `cite:${s}`)];
+  const order = [...FIXED_ORDER, ...[...cited.keys()].map(citeKey)];
   const previous = new Map(checks.sources.map((s) => [s.id, s]));
   const reports: SourceReport[] = [];
   checks.sources = [];
@@ -150,8 +198,9 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
     const row = { id, lastSuccess: previous.get(id)?.lastSuccess ?? null, lastAttempt: today, status: "fail" as "ok" | "fail" };
     checks.sources.push(row);
     try {
-      const outcome = await detect(http, id, checks, cited, today);
+      const outcome = await detect(http, id, checks, cited, today, log);
       for (const d of outcome.drafts) addFlag(flagsFile.flags, d);
+      for (const key of outcome.retired ?? []) retireFlags(flagsFile.flags, key, today);
       checks.seen[id] = outcome.seen;
       if (outcome.seenUrl) checks.seenUrl = outcome.seenUrl;
       row.status = "ok";
@@ -171,12 +220,12 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
   return { today, sources: reports };
 }
 
-async function detect(http: Http, id: string, checks: ChecksFile, cited: Map<string, CitedSeries>, today: string): Promise<Outcome> {
+async function detect(http: Http, id: string, checks: ChecksFile, cited: Map<string, CitedSeries>, today: string, log: (line: string) => void): Promise<Outcome> {
   const seen = checks.seen[id];
   if (isFixedSource(id)) {
-    if (id === "uspstf") return checkUspstf(http, seen, checks.seenUrl, today);
+    if (id === "uspstf") return checkUspstf(http, seen, checks.seenUrl, today, log);
     return editionOutcome(id, await detectEdition(http, id, today), seen, SOURCE_ORGS[id], today);
   }
-  const series = cited.get(id.slice(5))!;
+  const series = cited.get(seriesOfCiteKey(id)!)!;
   return editionOutcome(id, await detectCited(http, series.track, today), seen, series.track.org, today);
 }
