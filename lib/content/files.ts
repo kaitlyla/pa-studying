@@ -34,12 +34,20 @@ export const gapFilePath = (gapId: string): string => `content/gapfill/${gapId}.
 export const WORD_DOC_RE = pathRe(`content/docs/${ident("d")}/doc\\.json`);
 /** An as-is document's record: `content/files/<d_id>/file.json`. */
 export const AS_IS_FILE_RE = pathRe(`content/files/${ident("d")}/file\\.json`);
+/** Where block files live (`<dir>/blocks/<id>.json`), the id prefix each takes, and its validator. */
+const BLOCK_LOCATIONS: readonly { dir: string; prefix: IdPrefix; validator: Validator }[] = [
+  { dir: `content/guides/${GUIDE}/_preamble`, prefix: "b", validator: validateBlock },
+  { dir: `content/guides/${GUIDE}/${SLUG}`, prefix: "b", validator: validateBlock },
+  { dir: `content/pharm/${SLUG}`, prefix: "b", validator: validateBlock },
+  { dir: `content/docs/${idSource("d")}`, prefix: "b", validator: validateBlock },
+  { dir: `content/slides/${GUIDE}`, prefix: "s", validator: validateSlide },
+];
 /**
  * Any block file, its id in `id`: a guide preamble's, a system's, a pharm file's or a Word page's
  * (`b_`), or a deck slide (`s_`).
  */
 export const BLOCK_FILE_RE = pathRe(
-  `content/(?:guides/${GUIDE}/(?:_preamble|${SLUG})|pharm/${SLUG}|docs/${idSource("d")}|slides/${GUIDE})/blocks/${named(idSource("b", "s"))}\\.json`,
+  `(?:${BLOCK_LOCATIONS.map((l) => `${l.dir}/blocks/(?=${l.prefix}_)`).join("|")})${named(idSource(...new Set(BLOCK_LOCATIONS.map((l) => l.prefix))))}\\.json`,
 );
 
 /** Every JSON file of the content tree, by path pattern, with its validator. */
@@ -48,27 +56,23 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/vocab/abbreviations\\.json"), validateVocab],
   [pathRe(`content/guides/${named(GUIDE)}/guide\\.json`), validateGuide],
   [pathRe(`content/guides/${named(GUIDE)}/general\\.json`), validateGeneral],
-  [pathRe(`content/guides/${GUIDE}/_preamble/blocks/${ident("b")}\\.json`), validateBlock],
   [pathRe(`content/guides/${GUIDE}/${named(SLUG)}/system\\.json`), validateSystem],
   [pathRe(`content/guides/${GUIDE}/${SLUG}/structure\\.json`), validateStructure],
-  [pathRe(`content/guides/${GUIDE}/${SLUG}/blocks/${ident("b")}\\.json`), validateBlock],
   [pathRe("content/pharm/cards\\.json"), validateCards],
   [pathRe(`content/pharm/${named(SLUG)}/pharmfile\\.json`), validatePharmFile],
-  [pathRe(`content/pharm/${SLUG}/blocks/${ident("b")}\\.json`), validateBlock],
   [WORD_DOC_RE, validateWordDoc],
-  [pathRe(`content/docs/${idSource("d")}/blocks/${ident("b")}\\.json`), validateBlock],
   [AS_IS_FILE_RE, validateAsIsFile],
   [pathRe(`content/files/${idSource("d")}/text\\.json`), validateFileText],
   [GAP_FILE_RE, validateGap],
   [pathRe(`content/gapfill/${ident("g")}\\.evidence\\.json`), validateEvidence],
   [pathRe(`content/slides/${named(GUIDE)}/deck\\.json`), validateDeck],
-  [pathRe(`content/slides/${GUIDE}/blocks/${ident("s")}\\.json`), validateSlide],
   [pathRe("content/places/reftabs\\.json"), validateRefTabs],
   [pathRe("content/places/other\\.json"), validateOther],
   [pathRe("content/updates/flags\\.json"), validateFlags],
   [pathRe("content/updates/concepts\\.json"), validateConcepts],
   [pathRe("content/updates/checks\\.json"), validateChecks],
   [pathRe(`inbox/${ident("d")}/upload\\.json`), validateUpload],
+  ...BLOCK_LOCATIONS.map((l): [RegExp, Validator] => [pathRe(`${l.dir}/blocks/${ident(l.prefix)}\\.json`), l.validator]),
 ];
 
 function route(file: string): (v: unknown) => void {

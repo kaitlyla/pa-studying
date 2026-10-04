@@ -3,7 +3,7 @@ import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
-import type { NavEntry, NavSystem, PubMedsCard, PubRow, PubSectionItem, PubTopic } from "./published.ts";
+import type { NavEntry, NavSystem, PubMedsCard, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -197,6 +197,11 @@ export function sectionItems(t: SystemTopics, structure: StructureFile, blockIds
     if (rows.length > 0) items.push({ block: id, rows: withHeadings(t, rows) });
   }
   return items;
+}
+
+/** A system page's `sections`: each structure section in order, with its sectionItems. */
+export function publishedSections(t: SystemTopics, structure: StructureFile, blockIds: readonly string[]): SystemJson["sections"] {
+  return structure.sections.map((sec) => ({ id: sec.id, title: sec.title, items: sectionItems(t, structure, blockIds, sec.id) }));
 }
 
 /**

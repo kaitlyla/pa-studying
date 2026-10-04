@@ -1,6 +1,6 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
 import type { DocJSON, FileKind, Flag, GeneralKey, GuideId, PageSetup } from "../content/types.ts";
-import type { SiteIndex } from "./routes.ts";
+import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
 
@@ -12,6 +12,8 @@ export const generalPath = (guide: string, key: string): string => `g/${guide}/g
 export const workupPath = (guide: string): string => `g/${guide}/workup.json`;
 export const slidesPath = (guide: string): string => `g/${guide}/slides.json`;
 export const refPath = (tab: string): string => `ref/${tab}.json`;
+/** A reference tab page: `tab`, one of REF_TABS. */
+export const REF_PATH_RE = new RegExp(`^ref/(?<tab>${REF_TABS.join("|")})\\.json$`);
 export const OTHER_PATH = "other.json";
 export const UPDATES_PATH = "updates.json";
 export const SITE_PATH = "site.json";

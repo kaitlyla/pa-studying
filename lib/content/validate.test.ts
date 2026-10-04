@@ -2,7 +2,7 @@
 // violations 20 names.
 import { describe, expect, it } from "vitest";
 import { ContentError } from "./check.ts";
-import { isContentJSON, serializeFile, validateFile } from "./files.ts";
+import { BLOCK_FILE_RE, isContentJSON, serializeFile, validateFile } from "./files.ts";
 import { checkTrackSeries, isCdcOrg } from "./validate.ts";
 import type { GapFile } from "./types.ts";
 
@@ -544,5 +544,35 @@ describe("paths (20 §20.2)", () => {
     expect(isContentJSON("content/guides/derm/guide.json")).toBe(false);
     expect(isContentJSON(`content/assets/${"a".repeat(32)}.png`)).toBe(false);
     expect(() => validateFile("content/notes.json", {})).toThrow(/not a content JSON file/);
+  });
+
+  it("BLOCK_FILE_RE matches exactly the block routes: each location with its own id prefix", () => {
+    const S1 = id("s", 1);
+    const blocks: [string, string][] = [
+      [`content/guides/fm/_preamble/blocks/${B1}.json`, B1],
+      [`content/guides/fm/cardiovascular/blocks/${B1}.json`, B1],
+      [`content/pharm/cardio-med-list/blocks/${B1}.json`, B1],
+      [`content/docs/${D1}/blocks/${B1}.json`, B1],
+      [`content/slides/fm/blocks/${S1}.json`, S1],
+    ];
+    for (const [path, block] of blocks) {
+      expect(BLOCK_FILE_RE.exec(path)?.groups?.id, path).toBe(block);
+      expect(isContentJSON(path), path).toBe(true);
+    }
+    const wrongPrefix = [
+      `content/guides/fm/_preamble/blocks/${S1}.json`,
+      `content/guides/fm/cardiovascular/blocks/${S1}.json`,
+      `content/pharm/cardio-med-list/blocks/${S1}.json`,
+      `content/docs/${D1}/blocks/${S1}.json`,
+      `content/slides/fm/blocks/${B1}.json`,
+    ];
+    for (const path of wrongPrefix) {
+      expect(BLOCK_FILE_RE.test(path), path).toBe(false);
+      expect(isContentJSON(path), path).toBe(false);
+    }
+    for (const path of ["content/guides/fm/cardiovascular/structure.json", "content/slides/fm/deck.json", `content/gapfill/${G1}.json`, `content/docs/${D1}/doc.json`]) {
+      expect(isContentJSON(path), path).toBe(true);
+      expect(BLOCK_FILE_RE.test(path), path).toBe(false);
+    }
   });
 });

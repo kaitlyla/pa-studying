@@ -4,7 +4,7 @@ import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 import { BuildError } from "../../lib/derive/errors.ts";
-import type { BuildJson } from "../../lib/derive/published.ts";
+import { BUILD_PATH, type BuildJson } from "../../lib/derive/published.ts";
 
 export const SITE_LIMIT = 1_000_000_000;
 export const FILE_LIMIT = 100 * 1024 * 1024;
@@ -27,7 +27,7 @@ export async function finish(dist: string, limits: { file: number; site: number 
   }
   const total = files.reduce((n, f) => n + f.bytes, 0);
   if (total > limits.site) throw new BuildError("dist", `site is ${total} bytes; GitHub Pages sites must be at most ${limits.site}`);
-  const path = join(dist, "data", "build.json");
+  const path = join(dist, "data", ...BUILD_PATH.split("/"));
   const build = JSON.parse(await readFile(path, "utf8")) as BuildJson;
   await writeFile(path, JSON.stringify({ ...build, siteBytes: total }), "utf8");
   return total;

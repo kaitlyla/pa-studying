@@ -18,7 +18,7 @@ import {
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
-import { checkMembers, deriveTopics, navEntries, publishedRows, publishedTopics, rowSection, sectionItems, type SystemTopics } from "./topics.ts";
+import { checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
@@ -546,7 +546,7 @@ export function publish(c: Content): PublishResult {
     const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle));
 
     // section pages
-    const sections: SystemJson["sections"] = st.sections.map((sec) => ({ id: sec.id, title: sec.title, items: sectionItems(t, st, blockOrder, sec.id) }));
+    const sections = publishedSections(t, st, blockOrder);
 
     // stubs
     const stubs: SystemJson["stubs"] = {};

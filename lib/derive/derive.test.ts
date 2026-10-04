@@ -17,13 +17,13 @@ import type { Content, GuideData, SystemData } from "./model.ts";
 import { CardMatcher, medsPanel, phraseMatcher, stubLabel } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
-  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
+  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
   type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { checkMembers, deriveTopics, publishedRows, sectionItems } from "./topics.ts";
+import { checkMembers, deriveTopics, publishedRows, publishedSections, sectionItems } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
@@ -205,6 +205,28 @@ describe("topics (40 §40.2)", () => {
     const ct = deriveTopics(cv.blocks, cv.structure);
     for (const sec of sys.sections) expect(sec.items).toEqual(sectionItems(ct, cv.structure, cv.blocks.map((b) => b.id), sec.id));
     expect(publishedRows(ct)).toEqual({ rows: sys.rows, headings: sys.headings });
+  });
+
+  it("publishedSections lists the structure's sections in order, each titled, with its sectionItems", () => {
+    const [H, A, F, P1] = [R(920), R(921), R(923), B(93)];
+    const blocks = [
+      table(B(92), 2, [[H, "heading", "LABEL", "c"], [A, "content", "Alpha", "a"], [F, "content", "Foxtrot", "f"]]),
+      { v: 1, id: P1, kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} } as unknown as BlockFile,
+    ];
+    const st = structureOf({ sections: [{ id: "s2", title: "Second" }, { id: "s1", title: "First" }, { id: "s3", title: "Empty" }], members: { [A]: "s1", [F]: "s2", [P1]: "s2" } });
+    const t = deriveTopics(blocks, st);
+    expect(publishedSections(t, st, blocks.map((b) => b.id))).toEqual([
+      { id: "s2", title: "Second", items: [{ block: B(92), rows: [H, F] }, { block: P1, rows: null }] },
+      { id: "s1", title: "First", items: [{ block: B(92), rows: [H, A] }] },
+      { id: "s3", title: "Empty", items: [] },
+    ]);
+    expect(publishedSections(t, structureOf({ members: st.members }), blocks.map((b) => b.id))).toEqual([]);
+    // The published system page is exactly this.
+    const cv = system(base, "fm", "cardiovascular");
+    const ct = deriveTopics(cv.blocks, cv.structure);
+    const sections = file<SystemJson>("g/fm/s/cardiovascular.json").sections;
+    expect(sections.length).toBeGreaterThan(0);
+    expect(sections).toEqual(publishedSections(ct, cv.structure, cv.blocks.map((b) => b.id)));
   });
 
   it("every content row of a non-drug multi-column table ends in exactly one topic or untitled material", () => {
@@ -666,6 +688,13 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
       kinds.add(expected.get(path) as string);
     }
     expect([...kinds].sort()).toEqual(["doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "workup"]);
+  });
+
+  it("REF_PATH_RE matches exactly the reference tab paths refPath builds", () => {
+    for (const tab of REF_TABS) expect(REF_PATH_RE.exec(refPath(tab))?.groups?.tab).toBe(tab);
+    const others = [...out.files.keys()].filter((p) => !REF_TABS.some((tab) => p === refPath(tab)));
+    expect(others.length).toBeGreaterThan(10);
+    for (const p of [...others, refPath("nope"), `x/${refPath("labs")}`, `${refPath("labs")}.bak`]) expect(REF_PATH_RE.test(p), p).toBe(false);
   });
 
   it("every search unit sharing a route carries a distinct anchor", () => {
