@@ -106,6 +106,10 @@ export async function commitImport(root: string, { run, gh = ghPath(), log = con
  * Push `inbox/<d_id>` for each processing document, as a child of `origin/main` (fetched first),
  * and dispatch process-inbox.yml for it. Never touches `main`; author and committer are
  * `site.json.owner`'s commit identity.
+ *
+ * Re-running is the recovery when a dispatch or job failed: a branch already on origin is left as
+ * it is (a process-inbox run may be reading it) and only dispatched again, provided it holds the
+ * same file. Each document is handed off on its own; failures are reported together at the end.
  */
 export async function handOffInbox(root: string, { run, gh = ghPath(), log = console.log }: CommitOptions): Promise<string[]> {
   const env = await ownerEnv(root);
@@ -115,13 +119,39 @@ export async function handOffInbox(root: string, { run, gh = ghPath(), log = con
   const parent = (await run("git", ["rev-parse", "refs/remotes/origin/main"])).trim();
 
   const inbox: string[] = [];
+  const failures: string[] = [];
   for (const { file, path } of originals) {
+    try {
+      await handOffOne(file, path);
+      inbox.push(file.id);
+    } catch (e) {
+      failures.push(`${file.id} (${file.original}): ${(e as Error).message}`);
+    }
+  }
+  if (failures.length > 0) throw new Error(`inbox hand-off failed for ${failures.join("; ")}`);
+  return inbox;
+
+  async function handOffOne(file: AsIsFile, path: string): Promise<void> {
+    const branch = `refs/heads/inbox/${file.id}`;
     const bytes = new Uint8Array(await readFile(join(root, ...path.split("/"))));
     const ext = file.original.slice(file.original.lastIndexOf(".") + 1).toLowerCase() as UploadExt;
     const parts = Math.max(1, Math.ceil(bytes.length / PART_BYTES));
     const upload: UploadFile = {
       v: 1, id: file.id, fileName: file.original, ext, size: bytes.length, sha256: await sha256Hex(bytes), parts, replaces: null,
     };
+
+    if ((await run("git", ["ls-remote", "--heads", "origin", branch])).trim() !== "") {
+      const tracking = `refs/remotes/origin/inbox/${file.id}`;
+      await run("git", ["fetch", "--no-tags", "origin", `+${branch}:${tracking}`]);
+      const onOrigin = JSON.parse(await run("git", ["show", `${tracking}:${inboxUploadPath(file.id)}`])) as UploadFile;
+      if (onOrigin.sha256 !== upload.sha256 || onOrigin.size !== upload.size) {
+        throw new Error(`inbox/${file.id} on origin holds a different file (sha256 ${onOrigin.sha256}); delete that branch once no process-inbox run is using it, then re-run`);
+      }
+      await run(gh, ["workflow", "run", "process-inbox.yml", "-f", `item=${file.id}`]);
+      log(`inbox/${file.id} (${file.original}) is already on origin with the same file; dispatched process-inbox.yml again`);
+      return;
+    }
+
     const entries: string[] = [];
     for (let i = 0; i < parts; i++) {
       const blob = (await run("git", ["hash-object", "-w", "--stdin"], { input: bytes.subarray(i * PART_BYTES, (i + 1) * PART_BYTES) })).trim();
@@ -136,10 +166,8 @@ export async function handOffInbox(root: string, { run, gh = ghPath(), log = con
       rootTree = (await run("git", ["mktree"], { input: `040000 tree ${rootTree}\t${dir}\n` })).trim();
     }
     const inboxCommit = (await run("git", ["commit-tree", rootTree, "-p", parent, "-F", "-"], { input: `Inbox: ${file.original}\n`, env })).trim();
-    await run("git", ["push", "origin", `${inboxCommit}:refs/heads/inbox/${file.id}`]);
+    await run("git", ["push", "origin", `${inboxCommit}:${branch}`]);
     await run(gh, ["workflow", "run", "process-inbox.yml", "-f", `item=${file.id}`]);
     log(`pushed inbox/${file.id} (${file.original}, ${parts} part${parts === 1 ? "" : "s"}) and dispatched process-inbox.yml`);
-    inbox.push(file.id);
   }
-  return inbox;
 }

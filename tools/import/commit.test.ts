@@ -182,6 +182,61 @@ describe("handOffInbox", GIT_TIMEOUT, () => {
     expect(inbox).toEqual([D]);
   });
 
+  it("on a re-run with inbox/<d_id> already on origin, leaves that branch as it is and dispatches it again", async () => {
+    const pptx = new Uint8Array(3000).map((_, i) => (i * 7 + 3) & 255);
+    await setUp(pptx);
+    await git("git", ["add", "--", "content"]);
+    await git("git", ["commit", "-m", "import"], { env: ID_ENV });
+    await git("git", ["push", "origin", "main"]);
+    const gh: string[][] = [];
+    await handOffInbox(root, { run: runner(gh), gh: "gh-test", log: () => undefined });
+    const first = await remoteRev(`inbox/${D}`);
+    // main moves on, so a rebuilt inbox commit would no longer be a descendant of the branch.
+    await writeFile(join(root, "later.txt"), "z");
+    await git("git", ["add", "--", "later.txt"]);
+    await git("git", ["commit", "-m", "later"], { env: ID_ENV });
+    await git("git", ["push", "origin", "main"]);
+
+    const logs: string[] = [];
+    expect(await handOffInbox(root, { run: runner(gh), gh: "gh-test", log: (l) => logs.push(l) })).toEqual([D]);
+    expect(await remoteRev(`inbox/${D}`)).toBe(first);
+    expect(gh).toEqual([
+      ["workflow", "run", "process-inbox.yml", "-f", `item=${D}`],
+      ["workflow", "run", "process-inbox.yml", "-f", `item=${D}`],
+    ]);
+    expect(logs.at(-1)).toContain("already on origin");
+  });
+
+  it("refuses one document whose branch on origin holds a different file, and still hands off the next", async () => {
+    const D3 = "d_0000000003";
+    const OTHER = "Other Charts.pptx";
+    await setUp(new Uint8Array([1, 2, 3]));
+    await writeContent(root, `content/files/${D3}/file.json`, { v: 1, id: D3, name: "Other Charts", kind: "slides", original: OTHER, view: null, pages: null, text: null, removed: null, state: "processing" } satisfies AsIsFile);
+    await writeSources([
+      { path: SRC, kind: "slides", name: "Antibiotic Flower Charts", placement: { pharm: ["ID"] } },
+      { path: `M/${OTHER}`, kind: "slides", name: "Other Charts", placement: { pharm: ["ID"] } },
+    ]);
+    await writeFile(join(root, "M", OTHER), new Uint8Array([9, 9]));
+    await git("git", ["add", "--", "content"]);
+    await git("git", ["commit", "-m", "import"], { env: ID_ENV });
+    await git("git", ["push", "origin", "main"]);
+    // An earlier hand-off of different bytes left inbox/<D> on origin.
+    await writeFile(join(root, ...SRC.split("/")), new Uint8Array([4, 5, 6, 7]));
+    const gh: string[][] = [];
+    await handOffInbox(root, { run: runner(gh), gh: "gh-test", log: () => undefined });
+    const stale = await remoteRev(`inbox/${D}`);
+    await spawnRunner(remote)("git", ["update-ref", "-d", `refs/heads/inbox/${D3}`]);
+    await writeFile(join(root, ...SRC.split("/")), new Uint8Array([1, 2, 3]));
+    gh.length = 0;
+
+    await expect(handOffInbox(root, { run: runner(gh), gh: "gh-test", log: () => undefined }))
+      .rejects.toThrow(new RegExp(`inbox hand-off failed for ${D} \\(${PPTX}\\): inbox/${D} on origin holds a different file`));
+    expect(await remoteRev(`inbox/${D}`)).toBe(stale);
+    expect(gh).toEqual([["workflow", "run", "process-inbox.yml", "-f", `item=${D3}`]]);
+    const upload = JSON.parse((await blob(`inbox/${D3}`, `inbox/${D3}/upload.json`)).toString("utf8")) as UploadFile;
+    expect(upload.fileName).toBe(OTHER);
+  });
+
   it("does nothing when no document is processing", async () => {
     await setUp(new Uint8Array([1]));
     const ready: AsIsFile = { v: 1, id: D, name: "Antibiotic Flower Charts", kind: "slides", original: PPTX, view: "v.pdf", pages: 1, text: "text.json", removed: null, state: "ready" };
