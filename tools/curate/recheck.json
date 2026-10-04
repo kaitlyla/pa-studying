@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "checked": "2026-10-04",
+ "rule": "plan 90 §90.2.1: spine section lists and mockup workup presentation lists compared against the publishers' own documents",
+ "sources": [
+  {
+   "id": "paea-fm-2026",
+   "title": "Family Medicine End of Rotation™ Exam Topic List",
+   "publisher": "PA Education Association (PAEA)",
+   "effective": "Effective beginning July 2026 for all EOR exam administrations",
+   "url": "https://paeaonline.org/wp-content/uploads/2026/07/Family-Medicine-Topic-List-2026.pdf",
+   "listedOn": "https://paeaonline.org/assessment/end-of-rotation/blueprints-and-topic-lists",
+   "pages": 8,
+   "fetched": "2026-10-04",
+   "structure": "Condition categories are the left-aligned entries under each organ system heading; their indented entries are sub-topics (text x-offsets 95/329 vs 102/336 on page 1)."
+  },
+  {
+   "id": "paea-psy-2026",
+   "title": "Psychiatric & Behavioral Health End of Rotation™ Exam Topic List",
+   "publisher": "PA Education Association (PAEA)",
+   "effective": "Effective beginning July 2026 for all EOR exam administrations",
+   "url": "https://paeaonline.org/wp-content/uploads/2026/07/Psychiatric-Behavioral-Health-Topic-List-2026.pdf",
+   "listedOn": "https://paeaonline.org/assessment/end-of-rotation/blueprints-and-topic-lists",
+   "pages": 2,
+   "fetched": "2026-10-04",
+   "structure": "Bold disorder-group headings with percentages; the conditions are listed under each."
+  },
+  {
+   "id": "nccpa-pance-2025",
+   "title": "Content Blueprint for the Physician Assistant National Certifying Examination (PANCE)",
+   "publisher": "National Commission on Certification of Physician Assistants (NCCPA)",
+   "effective": "effective beginning January 2025 for all PANCE administrations",
+   "url": "https://nccpa.net/wp-content/uploads/PANCE-Blueprint.pdf",
+   "pages": 21,
+   "fetched": "2026-10-04",
+   "structure": "Under each organ system, condition categories are unbulleted lines; their examples are bulleted (•, o)."
+  }
+ ],
+ "lists": [
+  {
+   "id": "fm-cardiovascular-sections",
+   "compared": "UI spine guide-reader/section-names, FM Cardiovascular",
+   "against": "paea-fm-2026, page 1, \"Cardiovascular – 14%\"",
+   "result": "match",
+   "note": "The spine lists the 11 categories in order of first appearance in her guide; PAEA lists the same 11 alphabetically. No category is missing, renamed or extra.",
+   "items": [
+    { "item": "Coronary artery disease", "wording": "Coronary artery disease", "page": 1, "match": true },
+    { "item": "Arrhythmias/Conduction disorders", "wording": "Arrhythmias/Conduction disorders", "page": 1, "match": true },
+    { "item": "Cardiomyopathy", "wording": "Cardiomyopathy", "page": 1, "match": true },
+    { "item": "Traumatic, infectious, and inflammatory disorders", "wording": "Traumatic, infectious, and inflammatory disorders", "page": 1, "match": true },
+    { "item": "Heart failure", "wording": "Heart failure", "page": 1, "match": true },
+    { "item": "Lipid disorders", "wording": "Lipid disorders", "page": 1, "match": true },
+    { "item": "Hypertensive disorders", "wording": "Hypertensive disorders", "page": 1, "match": true },
+    { "item": "Vascular disorders", "wording": "Vascular disorders", "page": 1, "match": true },
+    { "item": "Congenital heart disease", "wording": "Congenital heart disease", "page": 1, "match": true },
+    { "item": "Valvular disorders", "wording": "Valvular disorders", "page": 1, "match": true },
+    { "item": "Hypotension", "wording": "Hypotension", "page": 1, "match": true }
+   ]
+  },
+  {
+   "id": "pance-cardiovascular-sections",
+   "compared": "UI spine guide-reader/section-names, PANCE Cardiovascular",
+   "against": "nccpa-pance-2025, page 2, \"Cardiovascular System (11%)\"",
+   "result": "match",
+   "note": "The spine lists the 12 categories in order of first appearance in her guide (Shock before Hypotension); NCCPA lists the same 12. No category is missing, renamed or extra.",
+   "items": [
+    { "item": "Cardiomyopathy", "wording": "Cardiomyopathy", "page": 2, "match": true },
+    { "item": "Conduction disorders/dysrhythmias", "wording": "Conduction disorders/dysrhythmias", "page": 2, "match": true },
+    { "item": "Congenital heart disease", "wording": "Congenital heart disease", "page": 2, "match": true },
+    { "item": "Coronary artery disease", "wording": "Coronary artery disease", "page": 2, "match": true },
+    { "item": "Heart failure", "wording": "Heart failure", "page": 2, "match": true },
+    { "item": "Hypertension", "wording": "Hypertension", "page": 2, "match": true },
+    { "item": "Shock", "wording": "Shock", "page": 2, "match": true },
+    { "item": "Hypotension", "wording": "Hypotension", "page": 2, "match": true },
+    { "item": "Lipid disorders", "wording": "Lipid disorders", "page": 2, "match": true },
+    { "item": "Traumatic, infectious, and inflammatory heart conditions", "wording": "Traumatic, infectious, and inflammatory heart conditions", "page": 2, "match": true },
+    { "item": "Valvular disorders", "wording": "Valvular disorders", "page": 2, "match": true },
+    { "item": "Vascular disease", "wording": "Vascular disease", "page": 2, "match": true }
+   ]
+  },
+  {
+   "id": "psy-workup",
+   "compared": "mockup site-data.js WORKUP.psy (16 presentations) and each one's 'Can point to' conditions",
+   "against": "paea-psy-2026",
+   "result": "differs",
+   "items": [
+    { "item": "Altered mental status (AMS)", "supported": "partly", "conds": [
+      { "cond": "Delirium", "match": false, "wording": null, "page": null },
+      { "cond": "Major neurocognitive disorder", "match": false, "wording": null, "page": null },
+      { "cond": "Substance intoxication/withdrawal", "match": true, "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1 } ],
+      "note": "Her PSYC EOR guide has an altered mental status note and notes on delirium and dementia (presentation from her guide, 90 §90.3.1)." },
+    { "item": "Overdose", "supported": "yes", "conds": [
+      { "cond": "Substance use disorders", "match": true, "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1 },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 } ] },
+    { "item": "Suicidal ideation (SI)", "supported": "yes", "conds": [
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 },
+      { "cond": "Bipolar disorder", "match": true, "wording": "Bipolar I disorder; Bipolar II disorder", "page": 1 },
+      { "cond": "Borderline personality disorder", "match": true, "wording": "Borderline personality disorder", "page": 2 } ],
+      "note": "The list also names \"Suicidal behaviors\" (page 1)." },
+    { "item": "Homicidal ideation", "supported": "yes", "conds": [
+      { "cond": "Schizophrenia", "match": true, "wording": "Schizophrenia", "page": 1 },
+      { "cond": "Antisocial personality disorder", "match": true, "wording": "Antisocial personality disorder", "page": 2 },
+      { "cond": "Substance intoxication", "match": true, "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1 } ] },
+    { "item": "Agitation / aggression", "supported": "partly", "conds": [
+      { "cond": "Delirium", "match": false, "wording": null, "page": null },
+      { "cond": "Schizophrenia", "match": true, "wording": "Schizophrenia", "page": 1 },
+      { "cond": "Bipolar disorder", "match": true, "wording": "Bipolar I disorder; Bipolar II disorder", "page": 1 },
+      { "cond": "Substance intoxication", "match": true, "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1 } ] },
+    { "item": "Hallucinations / new psychosis", "supported": "partly", "conds": [
+      { "cond": "Schizophrenia", "match": true, "wording": "Schizophrenia", "page": 1 },
+      { "cond": "Brief psychotic disorder", "match": true, "wording": "Brief psychotic disorder", "page": 1 },
+      { "cond": "Delirium", "match": false, "wording": null, "page": null },
+      { "cond": "Substance-induced psychosis", "match": "category", "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1, "note": "Not named as an item; only the disorder-group heading covers it." } ] },
+    { "item": "Mania", "supported": "yes", "conds": [
+      { "cond": "Bipolar I disorder", "match": true, "wording": "Bipolar I disorder", "page": 1 },
+      { "cond": "Substance-induced mood disorder", "match": "category", "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1, "note": "Not named as an item; only the disorder-group heading covers it." } ] },
+    { "item": "Depressed mood", "supported": "yes", "conds": [
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 },
+      { "cond": "Persistent depressive disorder", "match": true, "wording": "Persistent depressive disorder (dysthymia)", "page": 1 },
+      { "cond": "Bipolar disorder", "match": true, "wording": "Bipolar I disorder; Bipolar II disorder", "page": 1 } ] },
+    { "item": "Anxiety / panic attack", "supported": "yes", "conds": [
+      { "cond": "Panic disorder", "match": true, "wording": "Panic disorder", "page": 1 },
+      { "cond": "Generalized anxiety disorder", "match": true, "wording": "Generalized anxiety disorder", "page": 1 } ] },
+    { "item": "Alcohol withdrawal", "supported": "yes", "conds": [
+      { "cond": "Alcohol use disorder", "match": true, "wording": "Alcohol-related disorders", "page": 1 } ] },
+    { "item": "Substance intoxication", "supported": "yes", "conds": [
+      { "cond": "Substance use disorders", "match": true, "wording": "Substance-Related Disorders; Addictive Disorders – 15%", "page": 1 } ] },
+    { "item": "Fever and rigidity on psych meds", "supported": "no", "conds": [
+      { "cond": "Neuroleptic malignant syndrome", "match": false, "wording": null, "page": null },
+      { "cond": "Serotonin syndrome", "match": false, "wording": null, "page": null } ],
+      "note": "Neither condition is on the 2026 Psychiatric & Behavioral Health list. Her PSYC EOR guide has notes on both (serotonin syndrome 6 mentions, neuroleptic malignant 1)." },
+    { "item": "Catatonia", "supported": "yes", "conds": [
+      { "cond": "Schizophrenia", "match": true, "wording": "Schizophrenia", "page": 1 },
+      { "cond": "Bipolar disorder", "match": true, "wording": "Bipolar I disorder; Bipolar II disorder", "page": 1 },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 } ],
+      "note": "The list also names \"Catatonia\" (page 1)." },
+    { "item": "Memory loss / cognitive decline", "supported": "partly", "conds": [
+      { "cond": "Major neurocognitive disorder", "match": false, "wording": null, "page": null },
+      { "cond": "Delirium", "match": false, "wording": null, "page": null },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 } ] },
+    { "item": "Low weight / suspected eating disorder", "supported": "yes", "conds": [
+      { "cond": "Anorexia nervosa", "match": true, "wording": "Anorexia nervosa", "page": 2 },
+      { "cond": "Bulimia nervosa", "match": true, "wording": "Bulimia nervosa", "page": 2 } ] },
+    { "item": "Insomnia", "supported": "yes", "conds": [
+      { "cond": "Insomnia disorder", "match": true, "wording": "Insomnia", "page": 2 },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Major depressive disorder", "page": 1 },
+      { "cond": "Generalized anxiety disorder", "match": true, "wording": "Generalized anxiety disorder", "page": 1 } ] }
+   ]
+  },
+  {
+   "id": "fm-workup",
+   "compared": "mockup site-data.js WORKUP.fm (17 presentations) and each one's 'Can point to' conditions",
+   "against": "paea-fm-2026",
+   "result": "differs",
+   "items": [
+    { "item": "Chest pain", "supported": "partly", "conds": [
+      { "cond": "Coronary artery disease", "match": true, "wording": "Coronary artery disease", "page": 1 },
+      { "cond": "Pericarditis", "match": true, "wording": "Pericarditis", "page": 1 },
+      { "cond": "Pulmonary embolism", "match": false, "wording": null, "page": null },
+      { "cond": "GERD", "match": true, "wording": "Gastroesophageal reflux disease", "page": 3 } ],
+      "note": "Pulmonary embolism is not on the 2026 FM list (closest: \"Deep vein thrombosis\" and \"Arterial embolism/thrombosis\", page 1). Her FM guide mentions pulmonary embolism 3 times." },
+    { "item": "Shortness of breath", "supported": "yes", "conds": [
+      { "cond": "Heart failure", "match": true, "wording": "Heart failure", "page": 1 },
+      { "cond": "Asthma", "match": true, "wording": "Asthma", "page": 3 },
+      { "cond": "COPD", "match": true, "wording": "Chronic obstructive pulmonary disease", "page": 3 },
+      { "cond": "Pneumonia", "match": true, "wording": "Pneumonias", "page": 3 } ] },
+    { "item": "Palpitations", "supported": "yes", "conds": [
+      { "cond": "Atrial fibrillation", "match": true, "wording": "Arrhythmias/Conduction disorders › Atrial", "page": 1 },
+      { "cond": "PSVT", "match": true, "wording": "Arrhythmias/Conduction disorders › Atrial; Junctional", "page": 1 },
+      { "cond": "Hyperthyroidism", "match": true, "wording": "Hyper/Hypothyroidism", "page": 5 },
+      { "cond": "Panic disorder", "match": true, "wording": "Panic disorder", "page": 5 } ] },
+    { "item": "Syncope / dizziness", "supported": "yes", "conds": [
+      { "cond": "Arrhythmias", "match": true, "wording": "Arrhythmias/Conduction disorders", "page": 1 },
+      { "cond": "Aortic stenosis", "match": true, "wording": "Valvular disorders › Aortic", "page": 1 },
+      { "cond": "Orthostatic hypotension", "match": true, "wording": "Orthostatic hypotension", "page": 1 },
+      { "cond": "BPPV", "match": true, "wording": "Benign paroxysmal positional vertigo", "page": 2 } ],
+      "note": "The list also names \"Syncope, neurogenic\" (page 7)." },
+    { "item": "Elevated blood pressure", "supported": "yes", "conds": [
+      { "cond": "Hypertension", "match": true, "wording": "Hypertensive disorders › Primary hypertension; Secondary hypertension", "page": 1 },
+      { "cond": "Hypertensive crises", "match": "partly", "wording": "Severe asymptomatic hypertension (Hypertensive urgency)", "page": 1, "note": "The list names hypertensive urgency only; hypertensive emergency is not on the FM list." } ] },
+    { "item": "Cough", "supported": "yes", "conds": [
+      { "cond": "Acute bronchitis", "match": true, "wording": "Acute bronchitis", "page": 3 },
+      { "cond": "Pneumonia", "match": true, "wording": "Pneumonias", "page": 3 },
+      { "cond": "Asthma", "match": true, "wording": "Asthma", "page": 3 },
+      { "cond": "GERD", "match": true, "wording": "Gastroesophageal reflux disease", "page": 3 } ] },
+    { "item": "Sore throat", "supported": "yes", "conds": [
+      { "cond": "Pharyngitis", "match": true, "wording": "Pharyngitis", "page": 2 },
+      { "cond": "Infectious mononucleosis", "match": true, "wording": "Viral infections › Epstein-Barr virus", "page": 8 },
+      { "cond": "Peritonsillar abscess", "match": true, "wording": "Peritonsillar abscess/Retropharyngeal abscess", "page": 2 } ] },
+    { "item": "Abdominal pain", "supported": "yes", "conds": [
+      { "cond": "Appendicitis", "match": true, "wording": "Appendicitis", "page": 3 },
+      { "cond": "Cholecystitis", "match": true, "wording": "Cholecystitis", "page": 3 },
+      { "cond": "Peptic ulcer disease", "match": true, "wording": "Peptic ulcer disease", "page": 3 },
+      { "cond": "Diverticulitis", "match": true, "wording": "Diverticular disease", "page": 3 } ] },
+    { "item": "Headache", "supported": "yes", "conds": [
+      { "cond": "Migraine", "match": true, "wording": "Headache › Migraine", "page": 7 },
+      { "cond": "Tension headache", "match": true, "wording": "Headache › Tension", "page": 7 },
+      { "cond": "Cluster headache", "match": true, "wording": "Headache › Cluster", "page": 7 } ] },
+    { "item": "Low back pain", "supported": "yes", "conds": [
+      { "cond": "Low back strain", "match": true, "wording": "Traumatic conditions › Sprains/Strains", "page": 6 },
+      { "cond": "Lumbar disc herniation", "match": true, "wording": "Spine disorders › Disc disease", "page": 6 },
+      { "cond": "Spinal stenosis", "match": true, "wording": "Spinal stenosis", "page": 6 } ] },
+    { "item": "Joint pain", "supported": "yes", "conds": [
+      { "cond": "Osteoarthritis", "match": true, "wording": "Osteoarthritis", "page": 6 },
+      { "cond": "Gout", "match": true, "wording": "Gout/Pseudogout", "page": 6 },
+      { "cond": "Rheumatoid arthritis", "match": true, "wording": "Rheumatoid arthritis", "page": 6 } ] },
+    { "item": "Fatigue", "supported": "yes", "conds": [
+      { "cond": "Anemia", "match": true, "wording": "Anemias", "page": 8 },
+      { "cond": "Hypothyroidism", "match": true, "wording": "Hyper/Hypothyroidism", "page": 5 },
+      { "cond": "Diabetes mellitus", "match": true, "wording": "Diabetes mellitus", "page": 5 },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Depressive disorders", "page": 5 } ] },
+    { "item": "Leg swelling / edema", "supported": "yes", "conds": [
+      { "cond": "Heart failure", "match": true, "wording": "Heart failure", "page": 1 },
+      { "cond": "Deep vein thrombosis", "match": true, "wording": "Deep vein thrombosis", "page": 1 },
+      { "cond": "Venous insufficiency", "match": true, "wording": "Venous insufficiency", "page": 1 } ] },
+    { "item": "Dysuria", "supported": "yes", "conds": [
+      { "cond": "Cystitis", "match": true, "wording": "Cystitis", "page": 7 },
+      { "cond": "Pyelonephritis", "match": true, "wording": "Pyelonephritis", "page": 7 },
+      { "cond": "Urethritis", "match": true, "wording": "Urethritis", "page": 7 } ] },
+    { "item": "Rash", "supported": "yes", "conds": [
+      { "cond": "Contact dermatitis", "match": true, "wording": "Contact dermatitis", "page": 4 },
+      { "cond": "Atopic dermatitis", "match": true, "wording": "Atopic dermatitis", "page": 4 },
+      { "cond": "Cellulitis", "match": true, "wording": "Cellulitis", "page": 4 } ] },
+    { "item": "Fever", "supported": "yes", "conds": [
+      { "cond": "Influenza", "match": true, "wording": "Influenza", "page": 3 },
+      { "cond": "Pneumonia", "match": true, "wording": "Pneumonias", "page": 3 },
+      { "cond": "Urinary tract infection", "match": true, "wording": "Infectious disorders › Cystitis; Pyelonephritis", "page": 7 } ],
+      "note": "The list also names \"Fever › Fever without a source\" (page 8)." },
+    { "item": "Unintentional weight loss", "supported": "yes", "conds": [
+      { "cond": "Hyperthyroidism", "match": true, "wording": "Hyper/Hypothyroidism", "page": 5 },
+      { "cond": "Diabetes mellitus", "match": true, "wording": "Diabetes mellitus", "page": 5 },
+      { "cond": "Malignancy", "match": true, "wording": "Neoplasms › Malignant", "page": 3 },
+      { "cond": "Major depressive disorder", "match": true, "wording": "Depressive disorders", "page": 5 } ] }
+   ]
+  }
+ ],
+ "ruling": {
+  "by": "operator",
+  "at": "2026-10-04T03:19Z",
+  "relayed": "Leader shay-49353 (leader-01a1031f-c37d-78e1-86e6-f7280469f6f6), seq 382",
+  "text": "Keep them.",
+  "effect": "All 7 differences below are kept exactly as in the mockup (her guides cover those conditions). The Psychiatry and Family Medicine workup lists are written as in the mockup's site-data.js WORKUP; the FM and PANCE Cardiovascular section lists are used exactly as in the UI spine."
+ },
+ "differences": [
+  { "list": "psy-workup", "item": "Fever and rigidity on psych meds", "kind": "presentation unsupported", "detail": "Its conditions, neuroleptic malignant syndrome and serotonin syndrome, are not on PAEA's 2026 Psychiatric & Behavioral Health list. Her PSYC EOR guide has notes on both." },
+  { "list": "psy-workup", "item": "Altered mental status (AMS)", "kind": "conditions not on the list", "detail": "Delirium and Major neurocognitive disorder are not on the 2026 Psychiatric list; Substance intoxication/withdrawal is (Substance-Related Disorders, p. 1). AMS is one of her own presentations." },
+  { "list": "psy-workup", "item": "Agitation / aggression", "kind": "conditions not on the list", "detail": "Delirium is not on the 2026 Psychiatric list." },
+  { "list": "psy-workup", "item": "Hallucinations / new psychosis", "kind": "conditions not on the list", "detail": "Delirium is not on the 2026 Psychiatric list. Substance-induced psychosis is covered only by the disorder-group heading (Substance-Related Disorders, p. 1)." },
+  { "list": "psy-workup", "item": "Memory loss / cognitive decline", "kind": "conditions not on the list", "detail": "Major neurocognitive disorder and Delirium are not on the 2026 Psychiatric list; Major depressive disorder is (p. 1)." },
+  { "list": "fm-workup", "item": "Chest pain", "kind": "conditions not on the list", "detail": "Pulmonary embolism is not on PAEA's 2026 Family Medicine list. Her FM guide has pulmonary embolism notes." },
+  { "list": "fm-workup", "item": "Elevated blood pressure", "kind": "condition wording broader than the list", "detail": "\"Hypertensive crises\" covers urgency and emergency; the FM list names only \"Severe asymptomatic hypertension (Hypertensive urgency)\" (p. 1)." }
+ ]
+}
