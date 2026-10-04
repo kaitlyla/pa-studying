@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { PDFDocument, StandardFonts } from "@cantoo/pdf-lib";
 import { strToU8, zipSync } from "fflate";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { newId, parseTrailers, serializeFile } from "../../lib/content/index.ts";
 import type { AsIsFile, BlockFile, DeckFile, FileText, UploadExt, UploadFile, WordDocFile } from "../../lib/content/index.ts";
 import { readContent, readContentIfExists, readStoredFile, writeContent } from "../../lib/content/fs.ts";
@@ -18,6 +18,22 @@ import type { SourceReport } from "../verify/index.ts";
 import { main } from "./index.ts";
 import { processItem, sofficeConvert } from "./process.ts";
 import type { ProcessDeps, Soffice } from "./process.ts";
+
+// When set, the copy of the staged result into the content tree stops partway with EIO.
+const copy = vi.hoisted(() => ({ fails: false }));
+vi.mock("node:fs/promises", async (importOriginal) => {
+  const fs = await importOriginal<typeof import("node:fs/promises")>();
+  return {
+    ...fs,
+    cp: async (...args: Parameters<typeof fs.cp>): Promise<void> => {
+      if (!copy.fails) return fs.cp(...args);
+      const [from, to, options] = args;
+      await fs.cp(from, to, { ...options, filter: (src) => !src.endsWith("file.json") });
+      throw Object.assign(new Error("EIO: i/o error, copyfile"), { code: "EIO" });
+    },
+  };
+});
+afterEach(() => { copy.fails = false; });
 
 const WIN_SOFFICE = "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
 const HAS_SOFFICE = process.env.PA_SOFFICE !== undefined || existsSync(WIN_SOFFICE) || existsSync("/usr/bin/soffice");
@@ -333,6 +349,47 @@ describe("tools/inbox CLI", () => {
     const head = git("rev-parse", "HEAD");
     expect(await main(["--item", id], { root, deps: fakeDeps().deps })).toBe(0);
     expect(git("rev-parse", "HEAD")).toBe(head);
+  });
+
+  it("fails the job without a commit when moving the result into the tree throws partway, and a re-run from a fresh checkout succeeds", async () => {
+    git("init", "-q", "-b", "main");
+    git("config", "user.name", "test");
+    git("config", "user.email", "test@example.invalid");
+    git("config", "core.autocrlf", "false");
+    const id = await pendingAdd("Chart", "chart.png", "image");
+    const img = await png(4, 4);
+    await processItem(root, uploadOf(id, "chart.png", img), img, fakeDeps().deps);
+    const shown = await readContent<AsIsFile>(root, filePath(id));
+    await writeContent(root, filePath(id), { ...shown, replacing: { fileName: "chart2.png", at: "2026-10-04T20:00:00Z" } });
+    git("add", "-A");
+    git("commit", "-q", "-m", "Replace chart.png");
+
+    const bytes = await png(8, 8);
+    git("checkout", "-q", "-b", "upload");
+    await mkdir(join(root, "inbox", id), { recursive: true });
+    await writeFile(join(root, "inbox", id, "upload.json"), serializeFile(`inbox/${id}/upload.json`, uploadOf(id, "chart2.png", bytes, true)));
+    await writeFile(join(root, "inbox", id, "part-000"), bytes);
+    git("add", "-A");
+    git("commit", "-q", "-m", "Inbox: chart2.png");
+    const branch = git("rev-parse", "HEAD");
+    git("update-ref", `refs/remotes/origin/inbox/${id}`, "HEAD");
+    git("checkout", "-q", "main");
+    const head = git("rev-parse", "HEAD");
+
+    copy.fails = true;
+    await expect(main(["--item", id], { root, deps: fakeDeps().deps })).rejects.toThrow("EIO");
+    expect(git("rev-parse", "HEAD")).toBe(head);
+    expect(git("rev-parse", `refs/remotes/origin/inbox/${id}`)).toBe(branch);
+
+    // The re-run starts from a fresh checkout of main.
+    copy.fails = false;
+    git("checkout", "-q", "--", ".");
+    git("clean", "-fdq");
+    expect(await main(["--item", id], { root, deps: fakeDeps().deps })).toBe(0);
+    expect(git("log", "-1", "--format=%s")).toBe("Replace Chart with chart2.png\n");
+    expect(JSON.parse(git("show", `HEAD:content/files/${id}/file.json`))).toMatchObject({ original: "chart2.png", state: "ready" });
+    expect(new Uint8Array(execFileSync("git", ["show", `HEAD:content/files/${id}/chart2.png`], { cwd: root }))).toEqual(bytes);
+    expect(git("status", "--porcelain")).toBe("");
   });
 
   it("refuses an argument that isn't a d_ id", async () => {

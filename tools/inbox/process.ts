@@ -1,6 +1,8 @@
 // Processing one added or replaced document (50 §50.9 Processing job, steps 1–4). The item's
-// original is converted in a staging tree first, so a failure leaves the content tree untouched
-// apart from the failure record itself.
+// original is converted in a staging tree first, so a conversion failure leaves the content tree
+// untouched apart from the failure record itself. A failure while moving the staged result into
+// the tree throws instead: the job fails with nothing committed and the inbox branch kept, so the
+// item can be re-run from a fresh checkout.
 import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -176,8 +178,26 @@ export async function processItem(root: string, upload: UploadFile, bytes: Uint8
   const intact = bytes.length === upload.size && sha256 === upload.sha256;
   const stage = await mkdtemp(join(tmpdir(), "pa-inbox-"));
   try {
-    if (!intact) throw new Error(`the uploaded parts are ${bytes.length} bytes with SHA-256 ${sha256}; upload.json says ${upload.size} bytes with ${upload.sha256}`);
-    const replaced = await convertInto(stage, root, upload, bytes, current.file.name, current.file.removed, deps);
+    let replaced: string[];
+    try {
+      if (!intact) throw new Error(`the uploaded parts are ${bytes.length} bytes with SHA-256 ${sha256}; upload.json says ${upload.size} bytes with ${upload.sha256}`);
+      replaced = await convertInto(stage, root, upload, bytes, current.file.name, current.file.removed, deps);
+    } catch (e) {
+      deps.error(`::error::${upload.fileName} (${id}) couldn't be processed: ${(e as Error).stack ?? String(e)}`);
+      if (replace) {
+        const rest = { ...current.file };
+        delete rest.replacing;
+        await writeContent(root, current.kind === "word" ? `content/docs/${id}/doc.json` : `content/files/${id}/file.json`, rest);
+      } else {
+        const pending = current.file as AsIsFile;
+        // Only bytes that match upload.json are stored as her original.
+        if (intact) await writeStoredFile(root, id, pending.original, bytes);
+        await writeContent(root, `content/files/${id}/file.json`, { ...pending, state: "failed" } satisfies AsIsFile);
+      }
+      return { ok: false, message: commitMessage(`Inbox: ${oneLine(upload.fileName)} couldn't be shown`, { kind: "inbox", changed: [id] }) };
+    }
+    // Outside the catch: a throw here leaves the tree half-replaced, so it must fail the job
+    // rather than be recorded and committed as a failed item.
     // The document moves directory when its kind changes (50 §50.9 step 3).
     for (const dir of new Set([`content/docs/${id}`, `content/files/${id}`, ...replaced])) await removeContent(root, dir);
     await mkdir(join(root, "content"), { recursive: true });
@@ -186,19 +206,6 @@ export async function processItem(root: string, upload: UploadFile, bytes: Uint8
     const subject = replace ? `Replace ${oneLine(current.file.name)} with ${oneLine(upload.fileName)}` : `Inbox: ${oneLine(upload.fileName)}`;
     deps.log(`${id}: ${upload.fileName} processed`);
     return { ok: true, message: commitMessage(subject, trailers) };
-  } catch (e) {
-    deps.error(`::error::${upload.fileName} (${id}) couldn't be processed: ${(e as Error).stack ?? String(e)}`);
-    if (replace) {
-      const rest = { ...current.file };
-      delete rest.replacing;
-      await writeContent(root, current.kind === "word" ? `content/docs/${id}/doc.json` : `content/files/${id}/file.json`, rest);
-    } else {
-      const pending = current.file as AsIsFile;
-      // Only bytes that match upload.json are stored as her original.
-      if (intact) await writeStoredFile(root, id, pending.original, bytes);
-      await writeContent(root, `content/files/${id}/file.json`, { ...pending, state: "failed" } satisfies AsIsFile);
-    }
-    return { ok: false, message: commitMessage(`Inbox: ${oneLine(upload.fileName)} couldn't be shown`, { kind: "inbox", changed: [id] }) };
   } finally {
     await rm(stage, { recursive: true, force: true });
   }
