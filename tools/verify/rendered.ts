@@ -3,7 +3,8 @@
 import { spawn } from "node:child_process";
 import type { ChildProcess } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, join } from "node:path";
 import { chromium } from "@playwright/test";
 import type { BlockFile } from "../../lib/content/index.ts";
 import { readStored } from "./compare.ts";
@@ -55,23 +56,40 @@ function run(cmd: string, args: string[], cwd: string): Promise<void> {
   });
 }
 
-/** `npm run build:data`, `vite build`, then `vite preview` on a free port. */
+/**
+ * `vite preview` of `root`'s built site on a free port. Vite's own entry runs under this Node with no
+ * shell in between, so `stop()` ends the server itself (a shell wrapper's kill leaves it running on Windows).
+ */
+export async function startPreview(root: string): Promise<{ port: number; stop: () => Promise<void> }> {
+  const port = 4173 + Math.floor(Math.random() * 1000);
+  const pkgPath = createRequire(import.meta.url).resolve("vite/package.json");
+  const pkg = JSON.parse(await readFile(pkgPath, "utf8")) as { bin: { vite: string } };
+  const vite = join(dirname(pkgPath), pkg.bin.vite);
+  const child: ChildProcess = spawn(process.execPath, [vite, "preview", "--port", String(port), "--strictPort"], {
+    cwd: root, stdio: ["ignore", "pipe", "inherit"],
+  });
+  await new Promise<void>((resolve, reject) => {
+    child.once("exit", (code) => reject(new Error(`vite preview exited ${code}`)));
+    child.stdout?.on("data", (d: Buffer) => { if (String(d).includes(String(port))) resolve(); });
+  });
+  return {
+    port,
+    stop: async () => {
+      if (child.exitCode !== null || child.signalCode !== null) return;
+      const exited = new Promise<void>((resolve) => child.once("exit", () => resolve()));
+      child.kill();
+      await exited;
+    },
+  };
+}
+
+/** `npm run build:data`, `vite build`, then `vite preview`. */
 export async function buildAndPreview(root: string): Promise<{ base: string; stop: () => Promise<void> }> {
   const win = process.platform === "win32";
   await run(win ? "npm.cmd" : "npm", ["run", "build:data"], root);
   await run(win ? "npx.cmd" : "npx", ["vite", "build"], root);
-  const port = 4173 + Math.floor(Math.random() * 1000);
-  const child: ChildProcess = spawn(win ? "npx.cmd" : "npx", ["vite", "preview", "--port", String(port), "--strictPort"], {
-    cwd: root, shell: win, stdio: ["ignore", "pipe", "inherit"],
-  });
-  await new Promise<void>((resolve, reject) => {
-    child.on("exit", (code) => reject(new Error(`vite preview exited ${code}`)));
-    child.stdout?.on("data", (d: Buffer) => { if (String(d).includes(String(port))) resolve(); });
-  });
-  return {
-    base: `http://localhost:${port}/pa-studying/`,
-    stop: async () => { child.kill(); },
-  };
+  const preview = await startPreview(root);
+  return { base: `http://localhost:${preview.port}/pa-studying/`, stop: preview.stop };
 }
 
 /** Adds rendered-check discrepancies (and `unhosted` info at the import run) to each report. */
@@ -82,7 +100,6 @@ export async function renderedCheck(
   const browser = await chromium.launch();
   try {
     const hosts = JSON.parse(await readFile(join(root, "dist", "data", "hosts.json"), "utf8")) as Record<string, Host>;
-    const page = await browser.newPage();
     const byRoute = new Map<string, { report: SourceReport; block: BlockFile }[]>();
     for (const [report, blocks] of blocksBySource) {
       for (const block of blocks) {
@@ -98,13 +115,21 @@ export async function renderedCheck(
       }
     }
     for (const [route, items] of byRoute) {
-      await page.goto(server.base + route, { waitUntil: "networkidle" });
-      const loaded = await page.evaluate(async () => {
-        const imgs = [...document.querySelectorAll("img")];
-        for (const img of imgs) img.loading = "eager";
-        await Promise.all(imgs.map((img) => img.decode().catch(() => undefined)));
-        return { text: document.body.innerText, imgs: imgs.map((img) => ({ src: img.getAttribute("src") ?? "", ok: img.naturalWidth > 0 })) };
-      });
+      // A fresh page per route: routes differ only in the hash, and a hash-only goto on a reused page
+      // loads no new document, so networkidle would return while the previous route is still shown.
+      const page = await browser.newPage();
+      let loaded: { text: string; imgs: { src: string; ok: boolean }[] };
+      try {
+        await page.goto(server.base + route, { waitUntil: "networkidle" });
+        loaded = await page.evaluate(async () => {
+          const imgs = [...document.querySelectorAll("img")];
+          for (const img of imgs) img.loading = "eager";
+          await Promise.all(imgs.map((img) => img.decode().catch(() => undefined)));
+          return { text: document.body.innerText, imgs: imgs.map((img) => ({ src: img.getAttribute("src") ?? "", ok: img.naturalWidth > 0 })) };
+        });
+      } finally {
+        await page.close();
+      }
       for (const { report, block } of items) {
         const { texts, assets } = blockContent(block);
         const r = textsInOrder(loaded.text, texts);
