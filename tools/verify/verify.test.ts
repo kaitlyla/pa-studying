@@ -277,7 +277,10 @@ describe("rendered-check helpers", () => {
         { type: "drawing", attrs: { shapes: [{ asset: "b.png" }] }, content: [{ type: "drawing_text", content: [{ type: "paragraph", content: [{ type: "text", text: "grouped" }] }] }] },
       ],
     } as DocJSON;
-    expect(blockContent({ v: 1, id: "b_X", kind: "prose", doc, meta: {} })).toEqual({ texts: ["main", "boxed", "grouped"], assets: ["a.png", "b.png"] });
+    expect(blockContent({ v: 1, id: "b_X", kind: "prose", doc, meta: {} })).toEqual({
+      stories: [{ label: "main", texts: ["main"] }, { label: "text box 1", texts: ["boxed"] }, { label: "group text 1", texts: ["grouped"] }],
+      assets: ["a.png", "b.png"],
+    });
   });
 });
 

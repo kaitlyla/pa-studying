@@ -7,6 +7,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { chromium } from "@playwright/test";
 import type { BlockFile } from "../../lib/content/index.ts";
+import { HOSTS_PATH } from "../../lib/derive/published.ts";
 import { readStored } from "./compare.ts";
 import type { SourceReport } from "./index.ts";
 
@@ -38,13 +39,21 @@ export function textsInOrder(page: string, texts: readonly string[]): { missing:
   return { missing: null };
 }
 
-/** The paragraph texts and image assets a stored block shows. */
-export function blockContent(block: BlockFile): { texts: string[]; assets: string[] } {
+/**
+ * The paragraph texts a stored block shows, per story (its main flow, then each text box and group
+ * text), and its image assets. A text box renders at its anchor inside the main flow, so the texts of
+ * each story are in order only within that story.
+ */
+export function blockContent(block: BlockFile): { stories: { label: string; texts: string[] }[]; assets: string[] } {
   const s = readStored([block.doc]);
-  const stories = [s.main, ...s.textboxes, ...s.groupTexts];
+  const texts = (st: { paragraphs: { text: string }[] }): string[] => st.paragraphs.map((p) => p.text);
   return {
-    texts: s.main.paragraphs.map((p) => p.text).concat(s.textboxes.flatMap((t) => t.paragraphs.map((p) => p.text)), s.groupTexts.flatMap((t) => t.paragraphs.map((p) => p.text))),
-    assets: stories.flatMap((st) => st.pictures.map((p) => p.asset)),
+    stories: [
+      { label: "main", texts: texts(s.main) },
+      ...s.textboxes.map((t, i) => ({ label: `text box ${i + 1}`, texts: texts(t) })),
+      ...s.groupTexts.map((t, i) => ({ label: `group text ${i + 1}`, texts: texts(t) })),
+    ],
+    assets: [s.main, ...s.textboxes, ...s.groupTexts].flatMap((st) => st.pictures.map((p) => p.asset)),
   };
 }
 
@@ -99,7 +108,7 @@ export async function renderedCheck(
   const server = await (opts.serve ?? buildAndPreview)(root);
   const browser = await chromium.launch();
   try {
-    const hosts = JSON.parse(await readFile(join(root, "dist", "data", "hosts.json"), "utf8")) as Record<string, Host>;
+    const hosts = JSON.parse(await readFile(join(root, "dist", "data", ...HOSTS_PATH.split("/")), "utf8")) as Record<string, Host>;
     const byRoute = new Map<string, { report: SourceReport; block: BlockFile }[]>();
     for (const [report, blocks] of blocksBySource) {
       for (const block of blocks) {
@@ -131,10 +140,13 @@ export async function renderedCheck(
         await page.close();
       }
       for (const { report, block } of items) {
-        const { texts, assets } = blockContent(block);
-        const r = textsInOrder(loaded.text, texts);
-        if (r.missing !== null) {
-          report.discrepancies.push({ kind: "rendered", story: block.id, index: r.missing, expected: texts[r.missing], actual: `not shown in order on ${route}` });
+        const { stories, assets } = blockContent(block);
+        for (const { label, texts } of stories) {
+          const r = textsInOrder(loaded.text, texts);
+          if (r.missing !== null) {
+            const where = label === "main" ? "" : ` (${label})`;
+            report.discrepancies.push({ kind: "rendered", story: block.id, index: r.missing, expected: texts[r.missing], actual: `not shown in order on ${route}${where}` });
+          }
         }
         for (const asset of assets) {
           if (!loaded.imgs.some((i) => i.src.endsWith(asset) && i.ok)) {

@@ -98,6 +98,36 @@ describe("renderedCheck in Chromium", () => {
     expect(stopped).toBe(true);
   }, 60_000);
 
+  it("checks a text box's texts in order on their own, since the box renders at its anchor", async () => {
+    const withBox = (main: string, boxed: string): BlockFile => ({
+      v: 1, id: newId("b"), kind: "prose", meta: {},
+      doc: { type: "doc", content: [
+        { type: "paragraph", content: [{ type: "text", text: main }] },
+        { type: "textbox", content: [{ type: "paragraph", content: [{ type: "text", text: boxed }] }] },
+      ] } as DocJSON,
+    });
+    // On #/a the page shows "Alpha page" before "First words": a box anchored above the main text.
+    const shownEarlier = withBox("First words", "Alpha page");
+    const lost = withBox("First words", "Box words the page lacks");
+    await mkdir(join(root, "dist", "data"), { recursive: true });
+    await writeFile(join(root, "dist", "data", "hosts.json"), JSON.stringify({
+      [shownEarlier.id]: { route: "#/a", loc: "" }, [lost.id]: { route: "#/a", loc: "" },
+    }));
+    const report: SourceReport = { source: "notes.docx", counts: {}, discrepancies: [], info: [] };
+    const server = await serveApp();
+    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/pa-studying/`;
+    try {
+      await renderedCheck(root, new Map([[report, [shownEarlier, lost]]]), {
+        postCuration: true, log: () => undefined, serve: async () => ({ base, stop: async () => undefined }),
+      });
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+    }
+    expect(report.discrepancies).toEqual([
+      { kind: "rendered", story: lost.id, index: 0, expected: "Box words the page lacks", actual: "not shown in order on #/a (text box 1)" },
+    ]);
+  }, 60_000);
+
   it("reports an unhosted block as a discrepancy after curation", async () => {
     const lone = block("Lone");
     await mkdir(join(root, "dist", "data"), { recursive: true });
