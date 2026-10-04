@@ -2,7 +2,7 @@
 // and has per-slide Edit and Versions; her own Psychiatry deck opens on her first slide with the
 // contents under it and has "Download original" and document-level actions instead.
 import type { ReactNode } from "react";
-import type { DocJson, SlidesJson } from "../../lib/derive/published.ts";
+import { docPath, type DocJson, type SlidesJson } from "../../lib/derive/published.ts";
 import { DATA_BASE, useData } from "../data/load.ts";
 import { SlideNav, slideKeys } from "../files/SlideNav.tsx";
 import { inlineText, RichDoc, type PMNode } from "../render/RichDoc.tsx";
@@ -57,7 +57,7 @@ function SlideBody({ slide, n, total, basePt = GAP_BASE_PT }: { slide: Slide; n:
 
 function OwnDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n: number }): ReactNode {
   const site = useSite();
-  const doc = useData<DocJson>(`docs/${deck.file ?? ""}.json`);
+  const doc = useData<DocJson>(docPath(deck.file ?? ""));
   const total = deck.slides.length;
   if (n > total) throw new PageNotFound(`slide ${n}`);
   const go = (k: number): void => void navigate(guideViewHash(guide, { kind: "slides", n: k }));

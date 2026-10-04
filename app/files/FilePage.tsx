@@ -2,7 +2,7 @@
 // `from`; without it, from the document's first placement. Display by kind: Word → its blocks,
 // PDF → every page inline, image → full width (click opens the viewer), slides → one page at a time.
 import { Component, useState, type ReactNode } from "react";
-import type { DocJson, HostsJson } from "../../lib/derive/published.ts";
+import { docPath, type DocJson, type HostsJson } from "../../lib/derive/published.ts";
 import { fileLocation } from "../../lib/derive/routes.ts";
 import { DATA_BASE, NotFoundError, useData } from "../data/load.ts";
 import { UpdateNotes } from "../render/labels.tsx";
@@ -74,7 +74,7 @@ function FileBody({ doc }: { doc: DocJson }): ReactNode {
 
 function FileView({ id, from }: { id: string; from: string | null }): ReactNode {
   const site = useSite();
-  const doc = useData<DocJson>(`docs/${id}.json`);
+  const doc = useData<DocJson>(docPath(id));
   const hosts = useData<HostsJson>("hosts.json");
   const host = hosts[doc.id];
   const loc = fileLocation(site.index, from) ?? host?.loc ?? null;
