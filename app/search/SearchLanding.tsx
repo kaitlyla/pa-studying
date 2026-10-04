@@ -4,7 +4,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { queryRuns } from "../../lib/search/index.ts";
 import { navigate, useRoute } from "../shell/route.ts";
-import { createMatcher, segments, type Matcher } from "./match.ts";
+import { createMatcher, segments, type Matcher, type Range } from "./match.ts";
 import { adoptQuery } from "./store.ts";
 import { useVocab } from "./useVocab.ts";
 import "./search.css";
@@ -20,11 +20,42 @@ export function SearchHighlightProvider({ children }: { children?: ReactNode }):
   return <HighlightContext.Provider value={matcher}>{children}</HighlightContext.Provider>;
 }
 
-/** A text run with every search match wrapped in `<mark class="hit">`; plain text when no search is active. */
-export function HitText({ text }: { text: string }): ReactNode {
+/** The matches of the enclosing <HitBlock>'s joined text; null outside one or without a search. */
+const BlockRangesContext = createContext<readonly Range[] | null>(null);
+
+/**
+ * A paragraph or cell whose text runs render through `<HitText offset>`. Matches are found in the
+ * block's joined inline text, the text the index searched, so a word her formatting splits across
+ * runs ("M|itral S|tenosis") is still highlighted, piece by piece.
+ */
+export function HitBlock({ text, children }: { text: string; children?: ReactNode }): ReactNode {
   const matcher = useContext(HighlightContext);
+  // Tabs and line breaks read as spaces, as in the index's search text (60 §60.1); same length.
+  const ranges = useMemo(() => (matcher ? matcher.ranges(text.replace(/[\t\r\n]/g, " ")) : null), [matcher, text]);
+  return <BlockRangesContext.Provider value={ranges}>{children}</BlockRangesContext.Provider>;
+}
+
+/** The part of `ranges` inside `[offset, offset + length)`, relative to `offset`. */
+function sliceRanges(ranges: readonly Range[], offset: number, length: number): Range[] {
+  const out: Range[] = [];
+  for (const [a, b] of ranges) {
+    const s = Math.max(a, offset);
+    const e = Math.min(b, offset + length);
+    if (s < e) out.push([s - offset, e - offset]);
+  }
+  return out;
+}
+
+/**
+ * A text run with every search match wrapped in `<mark class="hit">`; plain text when no search is
+ * active. With `offset` (the run's start in the joined text of the enclosing <HitBlock>) the run
+ * shows its share of the block's matches; without it the run is matched on its own.
+ */
+export function HitText({ text, offset }: { text: string; offset?: number }): ReactNode {
+  const matcher = useContext(HighlightContext);
+  const block = useContext(BlockRangesContext);
   if (!matcher) return text;
-  const ranges = matcher.ranges(text);
+  const ranges = offset !== undefined && block ? sliceRanges(block, offset, text.length) : matcher.ranges(text);
   if (ranges.length === 0) return text;
   return segments(text, ranges).map((s, i) =>
     s.hit ? (
@@ -38,14 +69,16 @@ export function HitText({ text }: { text: string }): ReactNode {
 }
 
 /**
- * The first match inside the element(s) marked `data-anchor="<at>"` (the result's own block, row,
- * slide or page, since several results can share one route), preferring one that is displayed
- * (the phone's stacked rows and the table both carry the anchor). Null when there is none.
+ * The match to scroll to. With an `at` anchor whose element(s) are on the page (the result's own
+ * block, row, slide or page, since several results share one route), only a match inside them, one
+ * that is displayed first (the phone's stacked rows and the table both carry the anchor), or null
+ * until one renders. Without the anchor, the page's first match.
  */
-function firstInAnchor(root: Element, at: string | null): Element | null {
-  if (at === null) return null;
-  const marks = [...root.querySelectorAll("[data-anchor]")].flatMap((el) => {
-    const m = el.getAttribute("data-anchor") === at ? el.querySelector("mark.hit") : null;
+function scrollTarget(root: Element, at: string | null): Element | null {
+  const anchored = at === null ? [] : [...root.querySelectorAll("[data-anchor]")].filter((el) => el.getAttribute("data-anchor") === at);
+  if (anchored.length === 0) return root.querySelector("mark.hit");
+  const marks = anchored.flatMap((el) => {
+    const m = el.querySelector("mark.hit");
     return m ? [m] : [];
   });
   return marks.find((m) => m.getClientRects().length > 0) ?? marks[0] ?? null;
@@ -68,13 +101,13 @@ export function SearchLanding(): ReactNode {
     if (!matcher) return;
     const root = barRef.current?.closest("main") ?? document.body;
     const scrollToFirst = (): boolean => {
-      const first = root.querySelector("mark.hit");
-      if (!first) return false;
-      (firstInAnchor(root, at) ?? first).scrollIntoView({ block: "center" });
+      const target = scrollTarget(root, at);
+      if (!target) return false;
+      target.scrollIntoView({ block: "center" });
       return true;
     };
     if (scrollToFirst()) return;
-    // The page's data may still be loading: wait for the first match to render.
+    // The page's data may still be loading: wait for the match to render.
     const mo = new MutationObserver(() => {
       if (scrollToFirst()) mo.disconnect();
     });

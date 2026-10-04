@@ -3,7 +3,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { navigate } from "../shell/route.ts";
 import { SearchClient, setSearchClient } from "./client.ts";
-import { HitText, SearchHighlightProvider, SearchLanding } from "./SearchLanding.tsx";
+import { HitBlock, HitText, SearchHighlightProvider, SearchLanding } from "./SearchLanding.tsx";
 import { getSearchState, resetSearchState } from "./store.ts";
 import { BASE, fakeSite, inProcessWorker, type FakeSite } from "./testing.ts";
 
@@ -171,6 +171,54 @@ describe("search landing", () => {
     expect(scrolled).toEqual([container.querySelector("mark.hit")]);
   });
 
+  it("waits for the match inside the result's anchor rather than scrolling to an earlier match elsewhere", async () => {
+    // p1 already shows a match; p2 (the result's own unit) gets its text later.
+    const page = (ready: boolean): ReactNode => (
+      <Page>
+        <section data-anchor="p1">
+          <HitText text="Lithium toxicity." />
+        </section>
+        <section data-anchor="p2">{ready ? <HitText text="Check lithium levels." /> : "Loading…"}</section>
+      </Page>
+    );
+    await navigate("#/file/d_li?q=lithium&at=p2");
+    act(() => root.render(page(false)));
+    await until(() => marks().length > 0, "the earlier match");
+    await act(async () => {
+      await sleep(50);
+    });
+    expect(scrolled).toEqual([]);
+    act(() => root.render(page(true)));
+    await until(() => scrolled.length > 0, "scroll");
+    expect(scrolled).toHaveLength(1);
+    expect(scrolled[0]?.closest("[data-anchor]")?.getAttribute("data-anchor")).toBe("p2");
+  });
+
+  it("lands inside the anchor when its only match is split across formatted runs", async () => {
+    await navigate("#/file/d_li?q=lithium&at=p2");
+    act(() =>
+      root.render(
+        <Page>
+          <p data-anchor="p1">
+            <HitText text="Lithium toxicity." />
+          </p>
+          <p data-anchor="p2">
+            <HitBlock text="Lithium levels.">
+              <b>
+                <HitText text="Lith" offset={0} />
+              </b>
+              <HitText text="ium levels." offset={4} />
+            </HitBlock>
+          </p>
+        </Page>,
+      ),
+    );
+    await until(() => scrolled.length > 0, "scroll");
+    expect(scrolled).toHaveLength(1);
+    expect(scrolled[0]?.closest("[data-anchor]")?.getAttribute("data-anchor")).toBe("p2");
+    expect(scrolled[0]?.textContent).toBe("Lith");
+  });
+
   it("Clear highlights also drops the anchor", async () => {
     await navigate("#/file/d_li?q=lithium&at=p2");
     act(() => root.render(<Page><Pages /></Page>));
@@ -190,6 +238,40 @@ describe("search landing", () => {
     });
     expect(bar()).toBeNull();
     expect(marks()).toEqual([]);
+  });
+
+  /** A paragraph whose words her formatting splits into runs, rendered as the renderer does. */
+  function SplitRuns({ runs, block }: { runs: string[]; block: boolean }): ReactNode {
+    const starts = runs.map((_, i) => runs.slice(0, i).join("").length);
+    const pieces = runs.map((r, i) => (
+      <b key={i}>
+        <HitText text={r} offset={starts[i]} />
+      </b>
+    ));
+    return <p>{block ? <HitBlock text={runs.join("")}>{pieces}</HitBlock> : pieces}</p>;
+  }
+
+  it("highlights a mnemonic whose words are split across runs, matching the paragraph's joined text", async () => {
+    const runs = ["M", "itral ", "S", "tenosis: opening snap."];
+    await navigate("#/eor/fm/t/r_ie?q=mitral%20stenosis");
+    act(() => root.render(<Page><SplitRuns runs={runs} block /></Page>));
+    await until(() => marks().length > 0, "highlights");
+    expect(marks()).toEqual(["M", "itral", "S", "tenosis"]);
+    expect(container.querySelector("p")?.textContent).toBe(runs.join(""));
+    expect(scrolled[0]?.textContent).toBe("M");
+    // Matched run by run (no block), the split words are not found.
+    act(() => root.render(<Page><SplitRuns runs={runs} block={false} /></Page>));
+    await act(async () => {
+      await sleep(20);
+    });
+    expect(marks()).toEqual([]);
+  });
+
+  it("highlights a vocabulary meaning split across runs for its abbreviation's query", async () => {
+    await navigate("#/eor/fm/t/r_ie?q=MI");
+    act(() => root.render(<Page><SplitRuns runs={["Acute ", "myocardial", " ", "infarction", " today."]} block /></Page>));
+    await until(() => marks().length > 0, "highlights");
+    expect(marks()).toEqual(["myocardial", " ", "infarction"]);
   });
 
   it("renders HitText as plain text outside a provider", () => {
