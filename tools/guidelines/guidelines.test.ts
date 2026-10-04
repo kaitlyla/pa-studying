@@ -15,7 +15,7 @@ import { CHECKS_PATH, FLAGS_PATH, nextRunDate, runCheck } from "./run.ts";
 import type { SeenRecommendation } from "./run.ts";
 import { abPage, fakeNet, html, notFound, pubmedRoute, recommendationPage } from "./testing.ts";
 import type { AbRow, PubmedFixture } from "./testing.ts";
-import { assignUspstfKeys, parseAbPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
+import { assignUspstfKeys, parseAbRows, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
 
 const CHLAMYDIA = "Chlamydia and Gonorrhea: Screening: sexually active women, including pregnant persons";
 const BREAST = "Breast Cancer: Screening: women aged 40 to 74 years";
@@ -110,7 +110,7 @@ const CHLAMYDIA_PATH = "chlamydia-and-gonorrhea-screening";
 
 describe("USPSTF A and B page (80 §80.3.1)", () => {
   it("reads 30 records keyed on their page path and position, with the release month and the statement without footnote markers", () => {
-    const records = parseAbPage(abPage(baseRows()));
+    const records = assignUspstfKeys(parseAbRows(abPage(baseRows())));
     expect(records).toHaveLength(30);
     expect(records[0]).toEqual({
       key: keyOf(CHLAMYDIA_PATH, 1), subject: CHLAMYDIA, grade: "B", published: "2021-09",
@@ -129,7 +129,7 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
     const rows = baseRows();
     rows[7] = { ...rows[7]!, href: "https://www.uspreventiveservicestaskforce.org/USPSTF/Recommendation/Topic-6/?tab=1#summary" };
     rows[8] = { ...rows[8]!, subject: "Something else entirely: Screening: adults" };
-    const records = parseAbPage(abPage(rows));
+    const records = assignUspstfKeys(parseAbRows(abPage(rows)));
     expect(records[6]!.key).toBe(keyOf("topic-6", 1));
     expect(records[7]!.key).toBe(keyOf("topic-6", 2));
     expect(records[7]!.url).toBe("https://www.uspreventiveservicestaskforce.org/USPSTF/Recommendation/Topic-6/?tab=1#summary");
@@ -138,18 +138,18 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
 
   it("fails on header cells that differ, a short table, a row without a link or month, and a page with no table", () => {
     const rows = baseRows();
-    expect(() => parseAbPage(abPage(rows, ["Topic", "Description", "Grade", "Release Date"]))).toThrow(/unexpected header cells/);
-    expect(() => parseAbPage(abPage(rows.slice(0, 29)))).toThrow(/29 data rows, expected at least 30/);
-    expect(() => parseAbPage(abPage(rows.map((r, i) => (i === 7 ? { ...r, date: "Pending" } : r))))).toThrow(/row 8 has no release month/);
-    expect(() => parseAbPage(abPage(rows).replace("<td><a href='/uspstf/recommendation/topic-9'>", "<td><a>"))).toThrow(/row 10 has no topic link/);
-    expect(() => parseAbPage(abPage(rows).replace("<td>B</td>", "<td>B</td><td>extra</td>"))).toThrow(/row 1 has 5 cells/);
-    expect(() => parseAbPage(abPage(rows).replace("<td>B</td>", "<td> </td>"))).toThrow(/row 1 is incomplete/);
-    expect(() => parseAbPage("<html><body><p>Maintenance</p></body></html>")).toThrow(/no table/);
+    expect(() => parseAbRows(abPage(rows, ["Topic", "Description", "Grade", "Release Date"]))).toThrow(/unexpected header cells/);
+    expect(() => parseAbRows(abPage(rows.slice(0, 29)))).toThrow(/29 data rows, expected at least 30/);
+    expect(() => parseAbRows(abPage(rows.map((r, i) => (i === 7 ? { ...r, date: "Pending" } : r))))).toThrow(/row 8 has no release month/);
+    expect(() => parseAbRows(abPage(rows).replace("<td><a href='/uspstf/recommendation/topic-9'>", "<td><a>"))).toThrow(/row 10 has no topic link/);
+    expect(() => parseAbRows(abPage(rows).replace("<td>B</td>", "<td>B</td><td>extra</td>"))).toThrow(/row 1 has 5 cells/);
+    expect(() => parseAbRows(abPage(rows).replace("<td>B</td>", "<td> </td>"))).toThrow(/row 1 is incomplete/);
+    expect(() => parseAbRows("<html><body><p>Maintenance</p></body></html>")).toThrow(/no table/);
   });
 
   it("baseline mode flags exactly the records released 2021-01 or later, and records every key in seen", async () => {
     const { flags, checks, report } = await run(world(), "2026-10-01");
-    const expected = parseAbPage(abPage(baseRows())).filter((r) => {
+    const expected = assignUspstfKeys(parseAbRows(abPage(baseRows()))).filter((r) => {
       const [y, m] = r.published.split("-").map(Number) as [number, number];
       return y > 2021 || (y === 2021 && m >= 1);
     });

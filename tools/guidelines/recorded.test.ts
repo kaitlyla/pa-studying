@@ -12,7 +12,7 @@ import { GINA_URL, GOLD_URL, PUBMED_SOURCES } from "./editions.ts";
 import { Http } from "./http.ts";
 import { CHECKS_PATH, FLAGS_PATH, runCheck } from "./run.ts";
 import { fakeNet, html, json, notFound } from "./testing.ts";
-import { parseAbPage, parseRecommendationPage, USPSTF_AB_URL } from "./uspstf.ts";
+import { assignUspstfKeys, parseAbRows, parseRecommendationPage, USPSTF_AB_URL } from "./uspstf.ts";
 
 const fixture = (name: string): string => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), "utf8");
 
@@ -34,7 +34,7 @@ function recordedRoute(url: URL): Response {
 
 describe("recorded USPSTF pages", () => {
   it("the A and B page: 54 records on 47 recommendation pages; the 7 pages with two rows key their second row #2", () => {
-    const records = parseAbPage(fixture("uspstf-ab.html"));
+    const records = assignUspstfKeys(parseAbRows(fixture("uspstf-ab.html")));
     expect(records).toHaveLength(54);
     expect(new Set(records.map((r) => r.subject)).size).toBe(52);
     // Counted from the recorded page's own hrefs: these seven pages each hold two rows.
@@ -81,7 +81,7 @@ describe("a baseline run over the recorded responses", () => {
     const report = await runCheck(root, new Http(fakeNet(recordedRoute).net), "2026-10-04");
     expect(report.sources.map((s) => [s.id, s.ok])).toEqual([["uspstf", true], ["gold", true], ["gina", true], ["ada", true], ["hf", true], ["cpr", true]]);
     const { flags } = await readContent<FlagsFile>(root, FLAGS_PATH);
-    const recorded = parseAbPage(fixture("uspstf-ab.html"));
+    const recorded = assignUspstfKeys(parseAbRows(fixture("uspstf-ab.html")));
     expect(flags.filter((f) => f.kind === "rec").map((f) => f.key)).toEqual(recorded.filter((r) => r.published >= "2021-01").map((r) => r.key));
     expect(flags.filter((f) => f.kind === "edition").map((f) => [f.guideline, f.url])).toEqual([
       ["2026 GOLD Report", "https://goldcopd.org/2026-gold-report-and-pocket-guide/"],

@@ -24,11 +24,6 @@ export interface UspstfRow {
   url: string;
 }
 
-export interface UspstfRecord extends UspstfRow {
-  /** The recommendation's identity: see `assignUspstfKeys`. */
-  key: string;
-}
-
 const monthNumber = (name: string): string => String(MONTH_NAMES.indexOf(name) + 1).padStart(2, "0");
 
 /** A recommendation page's identity path: lower-cased, with no host, query, fragment or trailing slash. */
@@ -102,14 +97,6 @@ export function assignUspstfKeys<T extends { url: string; subject: string; quote
     }
   }
   return rows.map((row, i) => ({ ...row, key: keys[i]! }));
-}
-
-/**
- * Parse and key the A and B list (see `assignUspstfKeys` for `stored` and `reserved`). Throws when
- * the table fails its sanity checks or a row cannot be read.
- */
-export function parseAbPage(html: string, stored?: Readonly<Record<string, StoredRecommendation>>, reserved?: Iterable<string>): UspstfRecord[] {
-  return assignUspstfKeys(parseAbRows(html), stored, reserved);
 }
 
 /** Parse the A and B list's rows in table order. Throws when the table fails its sanity checks or a row cannot be read. */
