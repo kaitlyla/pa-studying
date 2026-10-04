@@ -4,23 +4,9 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import type { Content } from "../../lib/derive/model.ts";
 import * as cmd from "./commands.ts";
 import { commitChanges, CurateError, load } from "./tree.ts";
-
-export const USAGE = `usage: node tools/curate/index.ts <command> …
-  split <blockId> <paragraphIndex>
-  rows <tableBlockId> <rowId>=heading|content …
-  structure <guide> <system> <file.json>
-  pharm-parts <file-slug> <file.json>
-  cards <file.json>
-  general <guide> <file.json>
-  places <file.json>
-  gap <g_id|new> <file.json>
-  slides <guide> <file.json>
-  flags <file.json>
-  concepts <file.json>`;
-
-const COMMANDS: readonly (string | undefined)[] = ["split", "rows", "structure", "pharm-parts", "cards", "general", "places", "gap", "slides", "flags", "concepts"];
 
 /** A curator-authored draft file; its shape is checked by the command and by lib/content. */
 async function readDraft<T>(path: string): Promise<T> {
@@ -32,70 +18,44 @@ async function readDraft<T>(path: string): Promise<T> {
   }
 }
 
-function arity(args: readonly string[], n: number): void {
-  if (args.length !== n) throw new CurateError(USAGE);
+interface Command {
+  name: string;
+  usage: string;
+  /** The number of arguments; with `more`, the least number. */
+  arity: number;
+  more?: boolean;
+  /** Plan the command's writes; `at(i)` is argument `i`, `args` all of them. */
+  run(c: Content, at: (i: number) => string, args: readonly string[]): cmd.Planned | Promise<cmd.Planned>;
 }
+
+const COMMANDS: readonly Command[] = [
+  { name: "split", usage: "<blockId> <paragraphIndex>", arity: 2, run: (c, at) => cmd.split(c, at(0), Number(at(1))) },
+  { name: "rows", usage: "<tableBlockId> <rowId>=heading|content …", arity: 2, more: true, run: (c, at, args) => cmd.rows(c, at(0), args.slice(1)) },
+  { name: "structure", usage: "<guide> <system> <file.json>", arity: 3, run: async (c, at) => cmd.structure(c, at(0), at(1), await readDraft(at(2))) },
+  { name: "pharm-parts", usage: "<file-slug> <file.json>", arity: 2, run: async (c, at) => cmd.pharmParts(c, at(0), await readDraft(at(1))) },
+  { name: "cards", usage: "<file.json>", arity: 1, run: async (c, at) => cmd.cards(c, await readDraft(at(0))) },
+  { name: "general", usage: "<guide> <file.json>", arity: 2, run: async (c, at) => cmd.general(c, at(0), await readDraft(at(1))) },
+  { name: "places", usage: "<file.json>", arity: 1, run: async (c, at) => cmd.places(c, await readDraft(at(0))) },
+  { name: "gap", usage: "<g_id|new> <file.json>", arity: 2, run: async (c, at) => cmd.gap(c, at(0), await readDraft(at(1))) },
+  { name: "slides", usage: "<guide> <file.json>", arity: 2, run: async (c, at) => cmd.slides(c, at(0), await readDraft(at(1))) },
+  { name: "flags", usage: "<file.json>", arity: 1, run: async (c, at) => cmd.flags(c, await readDraft(at(0))) },
+  { name: "concepts", usage: "<file.json>", arity: 1, run: async (c, at) => cmd.concepts(c, await readDraft(at(0))) },
+];
+
+export const USAGE = ["usage: node tools/curate/index.ts <command> …", ...COMMANDS.map((k) => `  ${k.name} ${k.usage}`)].join("\n");
 
 /** Run one command against the content tree under `root`; returns the lines to print. */
 export async function run(root: string, argv: readonly string[]): Promise<string[]> {
   const [name, ...args] = argv;
-  if (!COMMANDS.includes(name)) throw new CurateError(USAGE);
+  const command = COMMANDS.find((k) => k.name === name);
+  if (!command || (command.more ? args.length < command.arity : args.length !== command.arity)) throw new CurateError(USAGE);
   /** Argument `i`; a missing one is a usage error. */
   const at = (i: number): string => {
     const v = args[i];
     if (v === undefined) throw new CurateError(USAGE);
     return v;
   };
-  const c = await load(root);
-  let planned: cmd.Planned;
-  switch (name) {
-    case "split":
-      arity(args, 2);
-      planned = cmd.split(c, at(0), Number(at(1)));
-      break;
-    case "rows":
-      if (args.length < 2) throw new CurateError(USAGE);
-      planned = cmd.rows(c, at(0), args.slice(1));
-      break;
-    case "structure":
-      arity(args, 3);
-      planned = cmd.structure(c, at(0), at(1), await readDraft(at(2)));
-      break;
-    case "pharm-parts":
-      arity(args, 2);
-      planned = cmd.pharmParts(c, at(0), await readDraft(at(1)));
-      break;
-    case "cards":
-      arity(args, 1);
-      planned = cmd.cards(c, await readDraft(at(0)));
-      break;
-    case "general":
-      arity(args, 2);
-      planned = cmd.general(c, at(0), await readDraft(at(1)));
-      break;
-    case "places":
-      arity(args, 1);
-      planned = cmd.places(c, await readDraft(at(0)));
-      break;
-    case "gap":
-      arity(args, 2);
-      planned = cmd.gap(c, at(0), await readDraft(at(1)));
-      break;
-    case "slides":
-      arity(args, 2);
-      planned = cmd.slides(c, at(0), await readDraft(at(1)));
-      break;
-    case "flags":
-      arity(args, 1);
-      planned = cmd.flags(c, await readDraft(at(0)));
-      break;
-    case "concepts":
-      arity(args, 1);
-      planned = cmd.concepts(c, await readDraft(at(0)));
-      break;
-    default:
-      throw new CurateError(USAGE);
-  }
+  const planned = await command.run(await load(root), at, args);
   const written = await commitChanges(root, planned.changes);
   return [...planned.notes, ...written.map((p) => `wrote ${p}`)];
 }
