@@ -4,8 +4,6 @@ import { useData } from "../data/load.ts";
 import type { Crumb } from "../shell/Page.tsx";
 import { guideBase, guideViewHash, PANCE } from "../shell/route.ts";
 
-export { navPath, systemPath };
-
 export const useSite = (): SiteJson => useData<SiteJson>(SITE_PATH);
 export const useNav = (g: string): NavJson => useData<NavJson>(navPath(g));
 export const useSystem = (g: string, s: string): SystemJson => useData<SystemJson>(systemPath(g, s));
