@@ -1,6 +1,6 @@
 // One guideline check run (80 §80.3): every tracked source is checked independently; results land
 // only in content/updates/flags.json and content/updates/checks.json.
-import { citeKey, FIXED_SOURCES, newId, seriesOfCiteKey } from "../../lib/content/index.ts";
+import { addFlag, citeKey, FIXED_SOURCES, seriesOfCiteKey } from "../../lib/content/index.ts";
 import type { ChecksFile, FixedSource, Flag, FlagsFile, GapFile, Track } from "../../lib/content/index.ts";
 import { listGapBlocks, readContentIfExists, writeContent } from "../../lib/content/fs.ts";
 import { detectCited, detectEdition } from "./editions.ts";
@@ -151,13 +151,6 @@ function editionOutcome(source: string, edition: Edition, seen: unknown, org: st
   return { drafts, seen: isNew || seen === undefined ? edition.year : seen };
 }
 
-/** Add a flag; the current flag with the same key (if any) is superseded by it. */
-function addFlag(flags: Flag[], draft: FlagDraft): void {
-  const id = newId("u", new Set(flags.map((f) => f.id)));
-  for (const f of flags) if (f.key === draft.key && f.supersededBy === null) f.supersededBy = id;
-  flags.push({ id, ...draft, supersededBy: null });
-}
-
 /** Retire the current flag of `key`: it stays listed, and the build no longer places it. */
 function retireFlags(flags: Flag[], key: string, today: string): void {
   for (const f of flags) if (f.key === key && f.supersededBy === null && f.retired === undefined) f.retired = today;
@@ -178,6 +171,7 @@ export interface RunReport {
 /** Run every detector and write flags.json and checks.json. `today` is the run's UTC ISO date. */
 export async function runCheck(root: string, http: Http, today: string, log: (line: string) => void = () => undefined): Promise<RunReport> {
   const flagsFile = (await readContentIfExists<FlagsFile>(root, FLAGS_PATH)) ?? { v: 1, flags: [] };
+  const taken = new Set<string>();
   const checks = (await readContentIfExists<ChecksFile>(root, CHECKS_PATH))
     ?? { v: 1, lastRun: null, nextRun: null, sources: [], seen: {}, seenUrl: {} };
   const cited = citedSeries(await listGapBlocks(root));
@@ -201,7 +195,7 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
     try {
       const flagKeys = flagsFile.flags.filter((f) => f.source === id).map((f) => f.key);
       const outcome = await detect(http, id, checks, flagKeys, cited, today, log);
-      for (const d of outcome.drafts) addFlag(flagsFile.flags, d);
+      for (const d of outcome.drafts) addFlag(flagsFile.flags, d, taken);
       for (const key of outcome.retired ?? []) retireFlags(flagsFile.flags, key, today);
       checks.seen[id] = outcome.seen;
       if (outcome.seenUrl) checks.seenUrl = outcome.seenUrl;

@@ -9,6 +9,8 @@ export {
 export type { AssetExt, IdPrefix } from "./ids.ts";
 export { GAP_FILE_RE, gapFilePath, isContentJSON, parseFile, serializeFile, serializeJSON, validateFile } from "./files.ts";
 export { checkTrackSeries, isCdcOrg } from "./validate.ts";
+export { addFlag } from "./flags.ts";
+export type { NewFlag } from "./flags.ts";
 export { spliceRows, systemRowOrder, updateStructure } from "./splice.ts";
 export { columnCount, resolutionRows, tableNode } from "./tables.ts";
 export type { RowNodeLike, TableBlockLike, TableNodeLike } from "./tables.ts";

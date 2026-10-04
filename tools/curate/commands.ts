@@ -1,6 +1,6 @@
 // The curation commands (plan 90 §90.1). Each builds the file changes for one curation step from
 // the loaded content and a curator-authored draft; tree.ts validates, checks and writes them.
-import { isId, newId } from "../../lib/content/index.ts";
+import { addFlag, isId, newId } from "../../lib/content/index.ts";
 import type { IdPrefix } from "../../lib/content/index.ts";
 import { tableNode } from "../../lib/content/tables.ts";
 import type {
@@ -409,20 +409,14 @@ export function slides(c: Content, guide: string, draft: { title?: string; slide
  */
 export function flags(c: Content, draft: { flags?: Omit<Flag, "id" | "supersededBy">[] }): Planned {
   if (!Array.isArray(draft.flags) || draft.flags.length === 0) throw new CurateError("flags: the draft needs a non-empty flags array");
-  const mint = minter(c);
+  const taken = takenIds(c);
   const all: Flag[] = clone(c.flags.flags);
   const notes: string[] = [];
   for (const f of draft.flags) {
     if (f.by !== "agent") throw new CurateError(`flags: "${f.key}" must be by "agent"`);
     if ("id" in f || "supersededBy" in f) throw new CurateError(`flags: "${f.key}" must not carry id or supersededBy; they are assigned`);
-    const id = mint("u");
-    for (const prev of all) {
-      if (prev.key === f.key && prev.supersededBy === null) {
-        prev.supersededBy = id;
-        notes.push(`${prev.id} superseded by ${id}`);
-      }
-    }
-    all.push({ ...f, id, supersededBy: null } as Flag);
+    const { id, superseded } = addFlag(all, f, taken);
+    for (const prev of superseded) notes.push(`${prev} superseded by ${id}`);
     notes.push(`flag ${f.key} → ${id}`);
   }
   const file: FlagsFile = { v: 1, flags: all };
