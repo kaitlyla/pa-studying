@@ -3,7 +3,7 @@
 import { loadData } from "../data/load.ts";
 import { getOwner, setOwner, type OwnerState } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
-import type { SiteJson } from "../../lib/derive/published.ts";
+import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import { githubFetch } from "./api.ts";
 import {
   clearAuth, exchangeReturnCode, onAuthMessage, prepareSignIn, readAuth, setSignedOutHandler, signOut, SignedOutError,
@@ -125,7 +125,7 @@ export async function checkOwner(): Promise<boolean> {
   let push: boolean;
   let site: SiteJson;
   try {
-    site = await loadData<SiteJson>("site.json");
+    site = await loadData<SiteJson>(SITE_PATH);
     const [u, r] = await Promise.all([githubFetch("/user"), githubFetch(`/repos/${site.repo}`)]);
     if (!u.ok || !r.ok) return getOwner().owner;
     user = (await u.json()) as GithubUser;

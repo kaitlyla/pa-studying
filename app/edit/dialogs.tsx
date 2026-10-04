@@ -108,7 +108,9 @@ export function UnsavedDialog(): ReactNode {
           actions={<>
             <button className="btn" onClick={() => resolveUnsaved("stay")} data-ref="unsaved-stay">Keep editing</button>
             <button className="btn danger" onClick={() => resolveUnsaved("discard")} data-ref="unsaved-discard">Discard changes</button>
-            <button className="btn pri" onClick={() => resolveUnsaved("save")} data-ref="unsaved-save">Save and continue</button>
+            {unsaved.conflict
+              ? <button className="btn pri" onClick={() => resolveUnsaved("copy")} data-ref="unsaved-copy">Copy my changes</button>
+              : <button className="btn pri" onClick={() => resolveUnsaved("save")} data-ref="unsaved-save">Save and continue</button>}
           </>}
         >
           <p>Your edits to this page haven’t been saved. If you discard them, the page stays as it was last saved.</p>

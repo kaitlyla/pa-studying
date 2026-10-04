@@ -18,7 +18,7 @@ import { createEditorState, editorProps, PICTURE_REFUSED } from "./editor/state.
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
-  COPY_DONE, COPY_FAILED, copyChanges, dismissBanner, done, loadNewer, registerView, restoreDraft, save, SAVE_FAILED, startEdit,
+  copyWithToast, dismissBanner, done, loadNewer, registerView, restoreDraft, save, SAVE_FAILED, startEdit,
   useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import type { Part, Slot } from "./units.ts";
@@ -195,11 +195,6 @@ function Toolbar(): ReactNode {
 }
 
 // ---- banners ------------------------------------------------------------------------------------
-
-/** "Copy my changes", with a toast saying whether the clipboard took them. */
-async function copyWithToast(): Promise<void> {
-  showToast((await copyChanges()) ? COPY_DONE : COPY_FAILED);
-}
 
 export function SaveBanner({ banner }: { banner: Banner }): ReactNode {
   const dismiss = <button type="button" className="linkbtn" onClick={dismissBanner}>Dismiss</button>;

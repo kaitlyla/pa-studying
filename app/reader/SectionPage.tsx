@@ -7,6 +7,7 @@ import { PageHead } from "../shell/Page.tsx";
 import { PlacedBlock, rowsByBlock } from "./blocks.tsx";
 import { guideCrumbs, systemCrumb, useNav, useSite, useSystem } from "./data.ts";
 import { PdfMenu } from "./PdfMenu.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 export function SectionPage({ guide, system: sysId, section: secId }: { guide: string; system: string; section: string }): ReactNode {
   const site = useSite();
@@ -17,7 +18,7 @@ export function SectionPage({ guide, system: sysId, section: secId }: { guide: s
   if (!section) throw new PageNotFound(`section ${sysId}/${secId}`);
   const blocks = new Map(system.blocks.map((b) => [b.id, b]));
   const count = nav.systems.find((s) => s.id === sysId)?.sections.find((s) => s.id === secId)?.entries.length ?? 0;
-  const pageKey = `section:${guide}:${system.id}:${section.id}`;
+  const pageKey = buildPageKey("section", guide, system.id, section.id);
   return (
     <div className="section-page">
       <PageHead

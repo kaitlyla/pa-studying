@@ -257,6 +257,30 @@ describe("building a save", () => {
     expect(topics.topics.find((t) => t.rows.includes(R(102)))?.rows).toEqual([R(105), R(106), R(102)]);
   });
 
+  it("clearing a topic's name on its page reports where its rows went, and the rows recorded under it keep its section", async () => {
+    // A blank row added above R131 on its topic page is recorded under it (Orchestrator ruling 04:44Z).
+    const first = await unitAt(`topic:fm:${R(131)}`);
+    const fp = only(first, "rows");
+    const above = buildSave(first, new Map([[fp.slot.id, addRow(fp.slot.doc, null, R(135), ["", "above heart failure"])]]), TODAY);
+    expect(json<StructureFile>(changeOf(above, CV_STRUCTURE)).members[R(135)]).toBe(R(131));
+    w.fake.commitFiles(Object.fromEntries(above.changes.map((c) => [c.path, changeOf(above, c.path) ?? null])));
+
+    const unit = await unitAt(`topic:fm:${R(131)}`);
+    const part = only(unit, "rows");
+    const build = buildSave(unit, new Map([[part.slot.id, setCell(part.slot.doc, R(131), 0, "")]]), TODAY);
+
+    // R131 has no heading above it, so it continues the topic before it: Stable angina (R104).
+    expect(build.topicMoved).toEqual({ guide: "fm", system: "cardiovascular", topic: R(104) });
+    const structure = json<StructureFile>(changeOf(build, CV_STRUCTURE));
+    expect(structure.members[R(135)]).toBe("other");
+    const saved = json<BlockFile>(changeOf(build, blockPath(13)));
+    const blocks = part.sys.blocks.map((b) => (b.id === saved.id ? saved : b));
+    const topics = deriveTopics(blocks, structure);
+    expect(() => checkMembers("cardiovascular", topics, structure)).not.toThrow();
+    expect(topics.topics.map((t) => t.id)).not.toContain(R(131));
+    expect(topics.topics.find((t) => t.id === R(104))?.rows).toEqual(expect.arrayContaining([R(135), R(131)]));
+  });
+
   it("refuses a save whose structure the build would reject, before anything is written", async () => {
     const unit = await unitAt(`topic:fm:${R(101)}`);
     const part = only(unit, "rows");

@@ -17,6 +17,7 @@ import { navigate } from "../shell/route.ts";
 import { openImageViewer } from "./imageViewer.tsx";
 import { PdfPage, PdfPages, PdfStatus, usePdf } from "./pdf.tsx";
 import { SlideNav, slideKeys } from "./SlideNav.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 const fileUrl = (path: string): string => `${DATA_BASE}${path}`;
 
@@ -82,7 +83,7 @@ function FileView({ id, from }: { id: string; from: string | null }): ReactNode 
   const parts = loc ? loc.split(" › ") : [];
   const crumbs: Crumb[] = parts.map((label, i) => (i === parts.length - 1 && from ? { label, to: from } : { label }));
   crumbs.push({ label: doc.name });
-  const pageKey = `doc:${doc.id}`;
+  const pageKey = buildPageKey("doc", doc.id);
   const word = doc.kind === "word";
   return (
     <div className="file-page">

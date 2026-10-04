@@ -7,9 +7,10 @@ import {
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
-  DOC_PATH_RE, NAV_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocList, type NavJson, type PubGap, type SystemJson,
+  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocList, type NavJson, type PubGap,
+  type SystemJson,
 } from "../../lib/derive/published.ts";
-import { deriveTopics, navEntries, publishedRows, publishedTopics, sectionItems } from "../../lib/derive/topics.ts";
+import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
 import { DATA_BASE, invalidateData, loadData, NotFoundError, setDataOverlay } from "../data/load.ts";
 import type { Git } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
@@ -106,6 +107,9 @@ function walk(v: unknown, ix: Index): unknown {
   return out;
 }
 
+/** A published page's blocks in the content-file shape lib/derive takes. */
+const asBlockFiles = (blocks: SystemJson["blocks"]): BlockFile[] => blocks.map((b) => ({ v: 1, id: b.id, kind: b.kind, doc: b.doc, meta: {} }));
+
 /** Re-derives a system page's rows, topics and sections from its (patched) blocks and structure. */
 function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readonly string[] | null, ix: Index): SystemJson {
   const byId = new Map(sys.blocks.map((b) => [b.id, b]));
@@ -114,16 +118,14 @@ function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readon
     const o = ix.blocks.get(id);
     return o ? { id, kind: o.kind, doc: o.doc } : byId.get(id);
   }).filter((b): b is SystemJson["blocks"][number] => b !== undefined);
-  const files: BlockFile[] = blocks.map((b) => ({ v: 1, id: b.id, kind: b.kind, doc: b.doc, meta: {} }));
-  const t = deriveTopics(files, structure);
+  const t = deriveTopics(asBlockFiles(blocks), structure);
   const meds = new Map(sys.topics.map((x) => [x.id, x.meds]));
-  const blockIds = blocks.map((b) => b.id);
   return {
     ...sys,
     blocks,
     ...publishedRows(t),
     topics: publishedTopics(t, (x) => meds.get(x.id) ?? []),
-    sections: structure.sections.map((sec) => ({ id: sec.id, title: sec.title, items: sectionItems(t, structure, blockIds, sec.id) })),
+    sections: publishedSections(t, structure, blocks.map((b) => b.id)),
   };
 }
 
@@ -140,8 +142,7 @@ function patchNav(nav: NavJson, systems: ReadonlyMap<string, SystemNavSource>): 
     systems: nav.systems.map((s) => {
       const src = systems.get(s.id);
       if (!src) return s;
-      const files: BlockFile[] = src.sys.blocks.map((b) => ({ v: 1, id: b.id, kind: b.kind, doc: b.doc, meta: {} }));
-      return { ...s, ...navEntries(deriveTopics(files, src.structure), src.structure, files.map((b) => b.id)) };
+      return { ...s, ...navEntries(deriveTopics(asBlockFiles(src.sys.blocks), src.structure), src.structure, src.sys.blocks.map((b) => b.id)) };
     }),
   };
 }
@@ -166,17 +167,17 @@ export function patchPublished(
     const st = (files.get(`${dir}structure.json`) as StructureFile | undefined) ?? structure ?? null;
     if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix);
   }
-  if (path === "other.json") {
+  if (path === OTHER_PATH) {
     const other = files.get("content/places/other.json") as OtherFile | undefined;
     if (other) {
       const o = out as { sections: { id: string; files: DocList }[] };
       o.sections = o.sections.map((s) => ({ ...s, files: patchDocList(s.files, ix, other.sections.find((x) => x.id === s.id)?.files ?? []) }));
     }
   }
-  const ref = /^ref\/([a-z]+)\.json$/.exec(path);
-  if (ref) {
+  const refTab = REF_PATH_RE.exec(path)?.groups?.tab;
+  if (refTab) {
     const tabs = files.get("content/places/reftabs.json") as RefTabsFile | undefined;
-    const tab = tabs?.[ref[1] as keyof Omit<RefTabsFile, "v">] as RefTabsFile["labs"] | undefined;
+    const tab = tabs?.[refTab as keyof Omit<RefTabsFile, "v">] as RefTabsFile["labs"] | undefined;
     if (tab) {
       const r = out as { files: DocList };
       r.files = patchDocList(r.files, ix, tab.files);
@@ -253,7 +254,7 @@ export async function pruneOverlay(): Promise<void> {
   if (entries.size === 0 || !git) return;
   let build: BuildJson;
   try {
-    const res = await fetch(`${DATA_BASE}build.json`, { cache: "no-store" });
+    const res = await fetch(`${DATA_BASE}${BUILD_PATH}`, { cache: "no-store" });
     if (!res.ok) return;
     build = (await res.json()) as BuildJson;
   } catch {

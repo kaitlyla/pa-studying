@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { PDFDocument, StandardFonts } from "@cantoo/pdf-lib";
 import { strToU8, zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { newId, parseTrailers, serializeFile } from "../../lib/content/index.ts";
+import { inboxItemDir, inboxUploadPath, newId, parseTrailers, partName, serializeFile } from "../../lib/content/index.ts";
 import type { AsIsFile, BlockFile, DeckFile, FileText, UploadExt, UploadFile, WordDocFile } from "../../lib/content/index.ts";
 import { readContent, readContentIfExists, readStoredFile, writeContent } from "../../lib/content/fs.ts";
 import { buildDocx, para, png, run } from "../../lib/docx/fixtures.ts";
@@ -329,10 +329,10 @@ describe("tools/inbox CLI", () => {
     const bytes = await png(6, 6);
     const half = Math.floor(bytes.length / 2);
     git("checkout", "-q", "-b", "upload");
-    await mkdir(join(root, "inbox", id), { recursive: true });
-    await writeFile(join(root, "inbox", id, "upload.json"), serializeFile(`inbox/${id}/upload.json`, uploadOf(id, "ecg.png", bytes, null, 2)));
-    await writeFile(join(root, "inbox", id, "part-000"), bytes.subarray(0, half));
-    await writeFile(join(root, "inbox", id, "part-001"), bytes.subarray(half));
+    await mkdir(join(root, inboxItemDir(id)), { recursive: true });
+    await writeFile(join(root, inboxUploadPath(id)), serializeFile(inboxUploadPath(id), uploadOf(id, "ecg.png", bytes, null, 2)));
+    await writeFile(join(root, inboxItemDir(id), partName(0)), bytes.subarray(0, half));
+    await writeFile(join(root, inboxItemDir(id), partName(1)), bytes.subarray(half));
     git("add", "-A");
     git("commit", "-q", "-m", "Inbox: ecg.png");
     git("update-ref", `refs/remotes/origin/inbox/${id}`, "HEAD");
@@ -366,9 +366,9 @@ describe("tools/inbox CLI", () => {
 
     const bytes = await png(8, 8);
     git("checkout", "-q", "-b", "upload");
-    await mkdir(join(root, "inbox", id), { recursive: true });
-    await writeFile(join(root, "inbox", id, "upload.json"), serializeFile(`inbox/${id}/upload.json`, uploadOf(id, "chart2.png", bytes, true)));
-    await writeFile(join(root, "inbox", id, "part-000"), bytes);
+    await mkdir(join(root, inboxItemDir(id)), { recursive: true });
+    await writeFile(join(root, inboxUploadPath(id)), serializeFile(inboxUploadPath(id), uploadOf(id, "chart2.png", bytes, true)));
+    await writeFile(join(root, inboxItemDir(id), partName(0)), bytes);
     git("add", "-A");
     git("commit", "-q", "-m", "Inbox: chart2.png");
     const branch = git("rev-parse", "HEAD");

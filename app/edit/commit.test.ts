@@ -112,12 +112,26 @@ describe("commit protocol", () => {
     expect(writesAtConflict).toBe(3);
   });
 
-  it("PATCH 422 with the ref unchanged: failure, no retry", async () => {
+  it("PATCH 422 with the ref unchanged: refused, no retry", async () => {
     const req = await request([{ path: A, content: "a1\n" }]);
     fake.fail(isPatch, { status: 422 }, 5);
     const out = await commitChanges(req);
-    expect(out).toEqual({ kind: "failed" });
+    expect(out).toEqual({ kind: "refused" });
     expect(fake.writes().filter((r) => r.url.endsWith("/git/commits"))).toHaveLength(1);
+    expect(fake.readFile(A)).toBe("a0\n");
+  });
+
+  it("main moving outside the file set before every PATCH: refused after three rounds", async () => {
+    const req = await request([{ path: A, content: "a1\n" }]);
+    let n = 0;
+    fake.fail((r) => {
+      if (!isPatch(r)) return false;
+      fake.commitFiles({ [OTHER]: `o${++n}\n` }, { message: "Edit: Renal" });
+      return true;
+    }, { status: 422 }, 10);
+    const out = await commitChanges(req);
+    expect(out).toEqual({ kind: "refused" });
+    expect(n).toBe(3);
     expect(fake.readFile(A)).toBe("a0\n");
   });
 
@@ -152,7 +166,7 @@ describe("commit protocol", () => {
     const req = await request([{ path: A, content: "a1\n" }]);
     fake.fail((r) => r.url.endsWith("/git/ref/heads/main"), "network", 3);
     const out = await commitChanges(req);
-    expect(out).toEqual({ kind: "failed" });
+    expect(out).toEqual({ kind: "offline" });
     expect(vi.mocked(retry.sleep).mock.calls).toEqual([[2000], [4000]]);
     expect(fake.writes()).toEqual([]);
   });

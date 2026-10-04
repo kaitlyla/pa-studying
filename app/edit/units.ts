@@ -7,11 +7,13 @@ import {
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
 import { checkMembers, deriveTopics, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
+import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
 import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
 import type { TreeChange } from "./github.ts";
+import { parsePageKey } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
 /** Content width for pictures outside a guide or Word page (US Letter with 1-inch margins). */
@@ -107,7 +109,7 @@ const blockPath = (sys: SystemCtx, id: string): string => `content/guides/${sys.
 
 /** The system whose sidebar lists a topic (first row id) or listed block (published nav.json). */
 async function systemOf(guide: string, kind: "topic" | "block", id: string): Promise<string> {
-  const nav = await loadData<NavJson>(`g/${guide}/nav.json`);
+  const nav = await loadData<NavJson>(navPath(guide));
   for (const s of nav.systems) {
     const entries = [...s.entries, ...s.sections.flatMap((x) => x.entries)];
     if (entries.some((e) => e.kind === kind && e.id === id)) return s.id;
@@ -173,19 +175,15 @@ function guideScope(parts: readonly Part[], extra: readonly string[] = []): File
 
 /** Read the edit unit of a page key at the snapshot's commit. */
 export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
-  const [kind, ...rest] = key.split(":");
+  const k = parsePageKey(key);
+  if (k === null) throw new UnitError(`Malformed page key: ${key}`);
   const unit = (parts: Part[], scope = guideScope(parts), topic: string | null = null): EditUnit => ({
     key, snapshot: snap, scope, parts, ids: partIds(parts), docId: null, topic, fromWord: false,
   });
-  const arg = (i: number): string => {
-    const v = rest[i];
-    if (v === undefined || v === "") throw new UnitError(`Malformed page key: ${key}`);
-    return v;
-  };
 
-  switch (kind) {
+  switch (k.kind) {
     case "topic": {
-      const [guide, row] = [arg(0), arg(1)];
+      const { guide, row } = k;
       const sys = await loadSystem(snap, guide, await systemOf(guide, "topic", row));
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
@@ -196,7 +194,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       return unit(parts, guideScope(parts), row);
     }
     case "section": {
-      const [guide, system, section] = [arg(0), arg(1), arg(2)];
+      const { guide, system, section } = k;
       const sys = await loadSystem(snap, guide, system);
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
@@ -209,7 +207,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       return unit(parts);
     }
     case "system": {
-      const [guide, system] = [arg(0), arg(1)];
+      const { guide, system } = k;
       const sys = await loadSystem(snap, guide, system);
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
@@ -224,7 +222,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       return unit(parts);
     }
     case "listed": {
-      const [guide, blockId] = [arg(0), arg(1)];
+      const { guide, block: blockId } = k;
       const sys = await loadSystem(snap, guide, await systemOf(guide, "block", blockId));
       const { basePt, width } = await guideFacts(snap, guide);
       const block = sys.blocks.find((b) => b.id === blockId);
@@ -232,12 +230,12 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       return unit([blockPart(blockPath(sys, block.id), block, basePt, width)]);
     }
     case "pharm": {
-      const [guide, system, section] = [arg(0), arg(1), arg(2)];
+      const { guide, system, section } = k;
       const sys = await loadSystem(snap, guide, system);
       const { basePt, width } = await guideFacts(snap, guide);
       const ps = sys.structure.pharmSections.find((s) => s.id === section);
       if (!ps) throw new UnitError(`Pharm section ${section} is no longer in ${system}`);
-      const published = await loadData<SystemJson>(`g/${guide}/s/${system}.json`);
+      const published = await loadData<SystemJson>(systemPath(guide, system));
       const cards = published.pharm?.sections.find((s) => s.id === section)?.cards ?? [];
       const files = await pharmFiles(snap);
       const parts: Part[] = [];
@@ -262,35 +260,35 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       return unit(parts, guideScope(parts, [sys.structurePath]));
     }
     case "general": {
-      const [guide, gkey] = [arg(0), arg(1)];
+      const { guide, key: gkey } = k;
       const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
       return unit(await gapParts(snap, general.topics.find((t) => t.key === gkey)?.gaps ?? []));
     }
     case "workup": {
-      const [guide, item] = [arg(0), arg(1)];
+      const { guide, item } = k;
       const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
       return unit(await gapParts(snap, [general.workup.find((w) => w.id === item)?.gap]));
     }
     case "ref": {
-      const [tab, sub] = [arg(0), arg(1)];
+      const { tab, sub } = k;
       const tabs = await snap.json<RefTabsFile>("content/places/reftabs.json");
       const t = tabs[tab as keyof Omit<RefTabsFile, "v">] as RefTabsFile["labs"] | undefined;
       return unit(await gapParts(snap, t?.subs.find((s) => s.id === sub)?.gaps ?? []));
     }
     case "other": {
-      const section = arg(0);
+      const { section } = k;
       const other = await snap.json<OtherFile>("content/places/other.json");
       const s = other.sections.find((x) => x.id === section);
       return unit(await gapParts(snap, [s?.lead, ...(s?.gaps ?? [])]));
     }
     case "slide": {
-      const [guide, slideId] = [arg(0), arg(1)];
+      const { guide, slide: slideId } = k;
       const path = `content/slides/${guide}/blocks/${slideId}.json`;
       const block = await snap.json<BlockFile<SlideMeta>>(path);
       return unit([{ kind: "slide", path, block, slot: { id: slideId, doc: block.doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT } }]);
     }
     case "doc": {
-      const docId = arg(0);
+      const docId = k.doc;
       const dirs = [`content/docs/${docId}/`, `content/files/${docId}/`];
       const deck = await snap.jsonIfExists<DeckFile>("content/slides/psy/deck.json");
       if (deck?.file === docId) dirs.push("content/slides/psy/");
@@ -303,8 +301,6 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       }
       return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, topic: null, fromWord: word !== null };
     }
-    default:
-      throw new UnitError(`Unknown page key: ${key}`);
   }
 }
 
@@ -396,6 +392,20 @@ function handOver(structure: StructureFile, before: StructureFile, topics: Retur
     for (const k of recorded) members[k] = heir ?? entry;
   }
   return members === null ? structure : { ...structure, members };
+}
+
+/**
+ * Row `topic` no longer starts a topic but is still there, so it goes wherever the positional rule puts
+ * it (40 §40.2). The rows recorded under it take its own `members` entry, as handOver gives them when
+ * there is no heir: they then follow it and keep its section instead of naming a topic that is gone.
+ */
+function releaseRecorded(structure: StructureFile, topic: string): StructureFile {
+  const entry = structure.members[topic];
+  const members = Object.fromEntries(Object.entries(structure.members).flatMap(([k, v]): [string, string][] => {
+    if (v !== topic) return [[k, v]];
+    return entry === undefined ? [] : [[k, entry]];
+  }));
+  return { ...structure, members };
 }
 
 /**
@@ -535,6 +545,17 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
     if (canonical(part.path, plain) !== canonical(part.path, part.block)) {
       changed.add(part.block.id);
       put(part.path, part.block, JSON.parse(canonical(part.path, { ...plain, meta: { ...part.block.meta, ownerEdits: [...(part.block.meta.ownerEdits ?? []), today] } })));
+    }
+  }
+  if (lostTopic === null && unit.topic !== null) {
+    // Her topic's first row stays but no longer starts a topic (its name was cleared): the page is gone
+    // as surely as if the row were deleted.
+    const topic = unit.topic;
+    const part = unit.parts.find((p): p is RowsPart => p.kind === "rows" && rowsOf(p.block).some((r) => rowId(r) === topic));
+    const s = part && systems.get(part.sys.structurePath);
+    if (part && s && !deriveTopics(s.blocks, s.structure).topics.some((t) => t.id === topic)) {
+      s.structure = releaseRecorded(s.structure, topic);
+      lostTopic = { part, blocks: s.blocks, structure: s.structure };
     }
   }
   checkSystems(systems.values());

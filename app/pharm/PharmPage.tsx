@@ -17,6 +17,7 @@ import { Voice } from "../shell/owner.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { guideViewHash, PANCE, useRoute } from "../shell/route.ts";
 import { CardNotes, ClassCard } from "./ClassCard.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 const topicTitle = (system: SystemJson, id: string): string => system.topics.find((t) => t.id === id)?.title ?? id;
 
@@ -207,7 +208,7 @@ export function PharmPage({ guide, system: sysId, section: secId, target }: { gu
   const pharmHash = guideViewHash(guide, { kind: "pharm", system: system.id, section: null, target: null });
   const crumbs = [...guideCrumbs(site, guide), systemCrumb(guide, system), sec ? { label: "Pharm", to: pharmHash } : { label: "Pharm" }];
   if (sec) crumbs.push({ label: sec.title });
-  const pageKey = sec ? `pharm:${guide}:${system.id}:${sec.id}` : null;
+  const pageKey = sec ? buildPageKey("pharm", guide, system.id, sec.id) : null;
   const focus = target ?? route.query.at;
   return (
     <div className="pharm-page">

@@ -11,6 +11,7 @@ import { EditControls, EditRegion } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { ThreeParts } from "./ThreeParts.tsx";
 import { WorkupPage } from "./WorkupPage.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 /** "Only what <EOR> needs is shown here. Full how-to: <Tab> tab › how to interpret". */
 function HowTo({ tab, eor }: { tab: RefTabId; eor: string }): ReactNode {
@@ -28,7 +29,7 @@ function GeneralTopic({ guide, topic: key }: { guide: string; topic: GeneralKey 
   const data = useData<GeneralJson>(generalPath(guide, key));
   const name = guideName(site, guide);
   const title = `${data.label} for ${name}`;
-  const pageKey = `general:${guide}:${key}`;
+  const pageKey = buildPageKey("general", guide, key);
   return (
     <div className="general-page">
       <PageHead

@@ -9,6 +9,7 @@ import { NotesBlock } from "./blocks.tsx";
 import { guideCrumbs, systemCrumb, useNav, useSite, useSystem } from "./data.ts";
 import { PdfMenu } from "./PdfMenu.tsx";
 import { locateEntry } from "./TopicsPage.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 export function BlockPage({ guide, block: id }: { guide: string; block: string }): ReactNode {
   const nav = useNav(guide);
@@ -30,7 +31,7 @@ function BlockBody({ guide, id, at }: { guide: string; id: string; at: { system:
   const crumbs: Crumb[] = [...guideCrumbs(site, guide), systemCrumb(guide, system)];
   if (sec) crumbs.push({ label: sec.title, to: guideViewHash(guide, { kind: "section", system: system.id, section: sec.id }) });
   crumbs.push({ label: title });
-  const pageKey = `listed:${guide}:${block.id}`;
+  const pageKey = buildPageKey("listed", guide, block.id);
   return (
     <div className="block-page">
       <PageHead

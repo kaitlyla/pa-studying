@@ -15,6 +15,7 @@ import { DocActions, EditControls, EditRegion } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { guideViewHash, navigate, versionsHash } from "../shell/route.ts";
 import { guideCrumbs, guideName, useSite } from "./data.ts";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 type Slide = SlidesJson["slides"][number];
 
@@ -77,7 +78,7 @@ function OwnDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n: numbe
               </a>
             )}
             <DocActions doc={doc} />
-            <Link className="btn own-only" to={versionsHash(`doc:${doc.id}`)}>
+            <Link className="btn own-only" to={versionsHash(buildPageKey("doc", doc.id))}>
               Versions
             </Link>
           </>
@@ -109,7 +110,7 @@ function GeneratedDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n:
   const go = (k: number): void => void navigate(guideViewHash(guide, { kind: "slides", n: k }));
   const slide = deck.slides[n - 1] as Slide;
   const name = guideName(site, guide);
-  const pageKey = `slide:${guide}:${slide.id}`;
+  const pageKey = buildPageKey("slide", guide, slide.id);
   const slideName = `Review slide ${n} for ${name}`;
   return (
     <div className="slides-page" onKeyDown={slideKeys(n, total, go)}>

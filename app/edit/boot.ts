@@ -4,7 +4,7 @@
 import { onOwnerChange, setBeforeSignInNavigate, setSignOutGuard } from "../auth/auth.ts";
 import { setNavigationGuard } from "../shell/route.ts";
 import { startOverlay, stopOverlay } from "./overlay.ts";
-import { confirmLeave, keepEditsSignedOut, onBeforeUnload, repo, saveDraft } from "./session.ts";
+import { confirmLeave, keepEditsSignedOut, leavingFor, onBeforeUnload, repo, saveDraft } from "./session.ts";
 
 let started = false;
 
@@ -24,10 +24,16 @@ async function ownerChanged(owner: boolean): Promise<void> {
   }
 }
 
+/** The check on every in-app navigation: a page banner stays on its own route; unsaved edits ask first. */
+export function guardNavigation(toHash: string): Promise<boolean> {
+  leavingFor(toHash);
+  return confirmLeave();
+}
+
 export function startEditing(): void {
   if (started) return;
   started = true;
-  setNavigationGuard(() => confirmLeave());
+  setNavigationGuard(guardNavigation);
   setSignOutGuard(confirmLeave);
   setBeforeSignInNavigate((saveWaiting) => saveDraft(saveWaiting));
   window.addEventListener("beforeunload", onBeforeUnload);

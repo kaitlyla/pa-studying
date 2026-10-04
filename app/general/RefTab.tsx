@@ -13,6 +13,7 @@ import { Voice } from "../shell/owner.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { fileHash, refHash, useRoute } from "../shell/route.ts";
 import { ThreeParts } from "./ThreeParts.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 export function RefSidebar({ tab, onNavigate }: { tab: RefTabId; onNavigate: () => void }): ReactNode {
   const ref = useData<RefTabJson>(refPath(tab));
@@ -91,7 +92,7 @@ export function RefTabPage({ tab, sub: subId }: { tab: RefTabId; sub: string | n
   }
   const sub = ref.subs.find((s) => s.id === subId);
   if (!sub) throw new PageNotFound(`${tab}/${subId}`);
-  const pageKey = `ref:${tab}:${sub.id}`;
+  const pageKey = buildPageKey("ref", tab, sub.id);
   return (
     <div className="ref-page">
       <PageHead crumbs={[{ label, to: refHash(tab) }, { label: sub.title }]} title={<Txt text={sub.title} />} actions={<EditControls pageKey={pageKey} title={sub.title} />} />

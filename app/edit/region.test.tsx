@@ -4,7 +4,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, type ReactNode } from "react";
 import { EditorView } from "prosemirror-view";
-import { R } from "../../tools/build/test-fixture.ts";
+import { B, R } from "../../tools/build/test-fixture.ts";
 import { setOwner } from "../shell/owner.tsx";
 import { hideToast, Toast } from "../shell/toast.tsx";
 import { asOwner, click, mount, until, type Mounted } from "../testing.tsx";
@@ -18,7 +18,7 @@ import { AUTH_KEY, CHANNEL_NAME } from "../auth/config.ts";
 import { startEditing } from "./boot.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, mountedEditor, registerView, SAVE_FAILED, saveDraft,
+  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, loadNewer, mountedEditor, registerView, save, SAVE_FAILED, saveDraft,
   setDraftStoreForTests, showPageBanner, startEdit, viewChanged, type Draft,
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
@@ -324,6 +324,32 @@ describe("dialogs", () => {
     expect(await discard).toBe(true);
     expect(getEditStore().edit).toBeNull();
     expect(dialog()).toBeNull();
+  });
+
+  it("after a conflict, Load newer version's dialog has no Save and continue; Copy my changes copies and loads", async () => {
+    const written: string[] = [];
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async (t: string) => { written.push(t); } } });
+    await openAndType();
+    await render(<><Toast /><UnsavedDialog /></>);
+    const block = `content/guides/fm/cardiovascular/blocks/${B(10)}.json`;
+    const theirs = (w.fake.readFile(block) ?? "").replace("chest pain on exertion", "chest pain on exertion, relieved by rest");
+    w.fake.commitFiles({ [block]: theirs }, { message: "Edit: Stable angina" });
+    expect(await inAct(() => save())).toBe(false);
+    expect(edit().banner?.kind).toBe("conflict");
+
+    const load = inAct(() => loadNewer());
+    expect(dialog()?.textContent).toContain("You have unsaved changes");
+    expect(button("Save and continue")).toBeUndefined();
+    expect(button("Keep editing")).toBeDefined();
+    expect(button("Discard changes")).toBeDefined();
+    await click(button("Copy my changes"));
+    await load;
+
+    expect(written).toHaveLength(1);
+    await until(() => document.body.textContent?.includes(COPY_DONE), "the copied toast");
+    expect(dialog()).toBeNull();
+    expect(edit().banner).toMatchObject({ kind: "loaded", copied: true });
+    expect(edit().unit?.snapshot.commit).toBe(w.fake.head());
   });
 });
 

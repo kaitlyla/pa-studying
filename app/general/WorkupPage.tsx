@@ -12,6 +12,7 @@ import { Link } from "../shell/Link.tsx";
 import { EditControls, EditRegion } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { guideViewHash } from "../shell/route.ts";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 export function WorkupPage({ guide, item: itemId }: { guide: string; item: string | null }): ReactNode {
   const site = useSite();
@@ -29,7 +30,7 @@ export function WorkupPage({ guide, item: itemId }: { guide: string; item: strin
     </>
   );
   if (item) {
-    const pageKey = `workup:${guide}:${item.id}`;
+    const pageKey = buildPageKey("workup", guide, item.id);
     return (
       <div className="workup-page">
         <PageHead crumbs={crumbs} title={head} actions={<EditControls pageKey={pageKey} title={`${item.title} — ${label} for ${name}`} />} />

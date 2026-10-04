@@ -2,7 +2,7 @@
 // It reads the item from the fetched inbox branch, processes it into `content/` and commits the
 // result. process-inbox.yml then pushes, deletes the branch and dispatches publish.
 import { execFileSync } from "node:child_process";
-import { ID_RE, parseFile } from "../../lib/content/index.ts";
+import { ID_RE, inboxItemDir, inboxUploadPath, parseFile, partName, UPLOAD_NAME } from "../../lib/content/index.ts";
 import type { UploadFile } from "../../lib/content/index.ts";
 import { verifyWordDoc } from "../verify/index.ts";
 import { processItem, sofficeConvert } from "./process.ts";
@@ -30,12 +30,11 @@ export async function main(argv: readonly string[], options: MainOptions = {}): 
   // The parts can each be 16 MiB; git's stdout is read whole.
   const git = (args: string[], input?: string): Buffer =>
     execFileSync("git", args, { cwd: root, input, maxBuffer: 256 * 1024 * 1024, stdio: ["pipe", "pipe", "pipe"] });
-  const blob = (name: string): Buffer => git(["cat-file", "blob", `${inboxRef(id)}:inbox/${id}/${name}`]);
+  const blob = (name: string): Buffer => git(["cat-file", "blob", `${inboxRef(id)}:${inboxItemDir(id)}/${name}`]);
 
-  const uploadPath = `inbox/${id}/upload.json`;
-  const upload = parseFile<UploadFile>(uploadPath, blob("upload.json").toString("utf8"));
+  const upload = parseFile<UploadFile>(inboxUploadPath(id), blob(UPLOAD_NAME).toString("utf8"));
   const parts: Buffer[] = [];
-  for (let i = 0; i < upload.parts; i++) parts.push(blob(`part-${String(i).padStart(3, "0")}`));
+  for (let i = 0; i < upload.parts; i++) parts.push(blob(partName(i)));
 
   const result = await processItem(root, upload, new Uint8Array(Buffer.concat(parts)), deps);
   if (result === null) return 0;

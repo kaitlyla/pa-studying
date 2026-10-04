@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import type { EditorView } from "prosemirror-view";
 import { commitMessage, type DocJSON } from "../../lib/content/index.ts";
-import type { SiteJson } from "../../lib/derive/published.ts";
+import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import { SignedOutError } from "../auth/session.ts";
 import { SAVING_AGAIN, waitForSignIn } from "../auth/auth.ts";
 import { showToast } from "../shell/toast.tsx";
@@ -16,6 +16,7 @@ import { Git, NetworkError } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
 import { recordSaved } from "./overlay.ts";
 import { Snapshot } from "./snapshot.ts";
+import { buildPageKey } from "./pageKey.ts";
 import { buildSave, loadUnit, UnitError, type EditUnit, type SaveBuild } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
 
@@ -57,21 +58,32 @@ export interface EditState {
   generation: number;
 }
 
+/** Her answer to "You have unsaved changes". */
+export type UnsavedChoice = "stay" | "discard" | "save" | "copy";
+
 export interface UnsavedPrompt {
-  resolve: (choice: "stay" | "discard" | "save") => void;
+  resolve: (choice: UnsavedChoice) => void;
+  /**
+   * The edit's last save hit a conflict: saving again would be refused the same way, so the dialog
+   * offers "Copy my changes" in place of "Save and continue".
+   */
+  conflict: boolean;
 }
 
 interface Store {
   edit: EditState | null;
-  /** A banner shown on a page after its edit closed ("Saved.", "Restored"), by page key. */
-  pageBanner: { key: string; banner: Banner } | null;
+  /**
+   * A banner shown on a page after its edit closed ("Saved.", "Restored"), by page key. `hash` is the
+   * route it was shown on: leaving that route drops it.
+   */
+  pageBanner: { key: string; banner: Banner; hash: string } | null;
   unsaved: UnsavedPrompt | null;
 }
 
 let store: Store = { edit: null, pageBanner: null, unsaved: null };
 const listeners = new Set<() => void>();
 const views = new Map<string, { view: EditorView; initial: DocJSON }>();
-/** Docs to put into the editors once they mount (a restored draft). */
+/** Docs to put into the editors once they mount: a restored draft's, or a closed editor's unsaved changes. */
 let pendingDocs: Map<string, DocJSON> | null = null;
 /** The stored draft being restored: deleted once all its docs are in mounted editors. */
 let pendingDraftKey: string | null = null;
@@ -84,6 +96,20 @@ let copiedEdits: string | null = null;
 let keptDraftKey: string | null = null;
 /** "Load newer version" is reading the page. */
 let loadingNewer = false;
+/** The restored draft wants its save run again once its docs are in the editors. */
+let resumeAfterApply = false;
+/** A save of the open edit hit a conflict: it edits an outdated version until "Load newer version". */
+let conflicted = false;
+
+/** Forget the editors and everything waiting on them (an edit starts, closes, or reloads). */
+function resetEditState(): void {
+  views.clear();
+  pendingDocs = null;
+  pendingDraftKey = null;
+  resumeAfterApply = false;
+  copiedEdits = null;
+  conflicted = false;
+}
 
 function set(next: Partial<Store>): void {
   store = { ...store, ...next };
@@ -114,7 +140,7 @@ export function useIsEditing(pageKey?: string): boolean {
 let gitPromise: Promise<{ git: Git; site: SiteJson }> | null = null;
 
 export async function repo(): Promise<{ git: Git; site: SiteJson }> {
-  gitPromise ??= loadData<SiteJson>("site.json").then((site) => ({ git: new Git(site.repo), site }));
+  gitPromise ??= loadData<SiteJson>(SITE_PATH).then((site) => ({ git: new Git(site.repo), site }));
   return gitPromise.catch((e: unknown) => {
     gitPromise = null;
     throw e;
@@ -228,11 +254,7 @@ export interface DraftStart {
  */
 export async function startEdit(key: string, title: string, draft?: DraftStart): Promise<boolean> {
   if (store.edit) return false;
-  views.clear();
-  pendingDocs = null;
-  pendingDraftKey = null;
-  resumeAfterApply = false;
-  copiedEdits = null;
+  resetEditState();
   set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0 }, pageBanner: null });
   try {
     const unit = await load(key, draft?.commit);
@@ -258,11 +280,7 @@ export async function startEdit(key: string, title: string, draft?: DraftStart):
 
 /** Leave edit mode without saving: she let the changes go, so a conflict's kept draft goes too. */
 export function discardEdit(): void {
-  views.clear();
-  pendingDocs = null;
-  pendingDraftKey = null;
-  resumeAfterApply = false;
-  copiedEdits = null;
+  resetEditState();
   dropKeptDraft();
   set({ edit: null, unsaved: null });
 }
@@ -270,8 +288,8 @@ export function discardEdit(): void {
 // ---- unsaved changes ------------------------------------------------------------------------------
 
 /** Opens "You have unsaved changes" and resolves to her choice. */
-async function askUnsaved(): Promise<"stay" | "discard" | "save"> {
-  const choice = await new Promise<"stay" | "discard" | "save">((resolve) => set({ unsaved: { resolve } }));
+async function askUnsaved(): Promise<UnsavedChoice> {
+  const choice = await new Promise<UnsavedChoice>((resolve) => set({ unsaved: { resolve, conflict: conflicted } }));
   set({ unsaved: null });
   return choice;
 }
@@ -284,14 +302,16 @@ export async function confirmLeave(): Promise<boolean> {
   }
   const choice = await askUnsaved();
   if (choice === "stay") return false;
-  if (choice === "discard") {
+  // After "Copy my changes" they are on her clipboard, so she may let them go; a failed copy keeps her here.
+  if (choice === "copy" && !(await copyWithToast())) return false;
+  if (choice === "discard" || choice === "copy") {
     discardEdit();
     return true;
   }
   return save();
 }
 
-export function resolveUnsaved(choice: "stay" | "discard" | "save"): void {
+export function resolveUnsaved(choice: UnsavedChoice): void {
   store.unsaved?.resolve(choice);
 }
 
@@ -304,15 +324,17 @@ export async function done(): Promise<void> {
 
 /**
  * The page to show after a save deleted the open topic's first row (its id): the topic its other rows
- * joined in place of the old id, or the system page when they are in no topic.
+ * joined in place of the old id, or the system page when they are in no topic. `key` is the edit
+ * region on that page that shows "Saved.".
  */
-function hashAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMoved"]>): string {
+function pageAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMoved"]>): { hash: string; key: string } {
   const route = parseHash(currentHash());
   const ids = route.kind === "guide" && route.view.kind === "topics" ? route.view.ids : [old];
   const next = [...new Set(ids.flatMap((id) => (id !== old ? [id] : moved.topic !== null ? [moved.topic] : [])))];
-  return next.length > 0
-    ? guideViewHash(moved.guide, { kind: "topics", ids: next })
-    : guideViewHash(moved.guide, { kind: "system", system: moved.system });
+  const shown = moved.topic !== null && next.includes(moved.topic) ? moved.topic : next[0];
+  return shown !== undefined
+    ? { hash: guideViewHash(moved.guide, { kind: "topics", ids: next }), key: buildPageKey("topic", moved.guide, shown) }
+    : { hash: guideViewHash(moved.guide, { kind: "system", system: moved.system }), key: buildPageKey("system", moved.guide, moved.system) };
 }
 
 /** Save (50 §50.4). Resolves to whether the edit closed with everything saved. */
@@ -337,18 +359,26 @@ export async function save(): Promise<boolean> {
     });
     if (outcome.kind === "saved") {
       await recordSaved(build.files, outcome.commit);
-      views.clear();
-      pendingDocs = null;
-      copiedEdits = null;
+      resetEditState();
       dropKeptDraft();
+      set({ edit: null, unsaved: null, pageBanner: null });
       const moved = build.topicMoved;
-      const key = moved ? (moved.topic !== null ? `topic:${moved.guide}:${moved.topic}` : `system:${moved.guide}:${moved.system}`) : edit.key;
-      set({ edit: null, unsaved: null, pageBanner: { key, banner: { kind: "saved" } } });
-      if (moved && unit.topic !== null) await navigate(hashAfterTopicMoved(unit.topic, moved));
+      let key = edit.key;
+      if (moved && unit.topic !== null) {
+        const page = pageAfterTopicMoved(unit.topic, moved);
+        await navigate(page.hash);
+        key = page.key;
+      }
+      showPageBanner(key, { kind: "saved" });
       return true;
     }
-    if (outcome.kind === "conflict") await keepConflictDraft();
-    setEdit({ saving: false, banner: outcome.kind === "conflict" ? { kind: "conflict", at: versionTime(outcome.at) } : { kind: "offline" } });
+    if (outcome.kind === "conflict") {
+      conflicted = true;
+      await keepDraft("Couldn’t keep the conflicting changes on this device");
+      setEdit({ saving: false, banner: { kind: "conflict", at: versionTime(outcome.at) } });
+    } else {
+      setEdit({ saving: false, banner: { kind: outcome.kind === "offline" ? "offline" : "failed" } });
+    }
     return false;
   } catch (e) {
     if (e instanceof SignedOutError) {
@@ -388,6 +418,13 @@ export async function copyChanges(): Promise<boolean> {
   return true;
 }
 
+/** "Copy my changes", with a toast saying whether the clipboard took them. Resolves to whether it did. */
+export async function copyWithToast(): Promise<boolean> {
+  const ok = await copyChanges();
+  showToast(ok ? COPY_DONE : COPY_FAILED);
+  return ok;
+}
+
 /**
  * "Load newer version": re-run edit start and show the loaded banner. Changes she hasn't copied are
  * only let go after "You have unsaved changes"; the editors are replaced only once the newer version
@@ -397,13 +434,17 @@ export async function loadNewer(): Promise<void> {
   const edit = store.edit;
   if (!edit?.unit || edit.saving || loadingNewer) return;
   const edited = editedDocs();
-  const copied = edited.size > 0 && copiedEdits === editsKey(edited);
+  let copied = edited.size > 0 && copiedEdits === editsKey(edited);
   if (edited.size > 0 && !copied) {
     const choice = await askUnsaved();
     if (choice === "stay") return;
     if (choice === "save") {
       await save();
       return;
+    }
+    if (choice === "copy") {
+      if (!(await copyWithToast())) return;
+      copied = true;
     }
   }
   const at = edit.banner?.kind === "conflict" ? edit.banner.at : "";
@@ -413,9 +454,7 @@ export async function loadNewer(): Promise<void> {
     const unit = await load(edit.key);
     const now = getEditStore().edit;
     if (now?.key !== edit.key) return;
-    views.clear();
-    pendingDocs = null;
-    copiedEdits = null;
+    resetEditState();
     dropKeptDraft();
     setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied } });
   } catch (e) {
@@ -430,9 +469,14 @@ export function dismissBanner(): void {
   else set({ pageBanner: null });
 }
 
-/** A page-level banner after the edit closed (Restore uses it). */
+/** A page-level banner after the edit closed (Restore uses it), on the current route. */
 export function showPageBanner(key: string, banner: Banner): void {
-  set({ pageBanner: { key, banner } });
+  set({ pageBanner: { key, banner, hash: currentHash() } });
+}
+
+/** Navigation to `toHash` is about to happen: a page banner shown on another route goes. */
+export function leavingFor(toHash: string): void {
+  if (store.pageBanner && store.pageBanner.hash !== toHash) set({ pageBanner: null });
 }
 
 // ---- drafts (50 §50.3) ------------------------------------------------------------------------------
@@ -465,41 +509,29 @@ export async function saveDraft(resumeSave = false): Promise<void> {
   await drafts.put(edit.key, draft);
 }
 
-/** A conflict keeps her edits on the device until she saves or lets them go. */
-async function keepConflictDraft(): Promise<void> {
-  const key = store.edit?.key;
-  if (key === undefined) return;
-  try {
-    await saveDraft();
-    keptDraftKey = key;
-  } catch (e) {
-    console.warn("Couldn’t keep the conflicting changes on this device", e);
-  }
-}
-
-/**
- * She stopped being the owner on this device (the sign-in expired, or she signed out in another tab)
- * with unsaved changes open: they are kept on the device too, until she saves or lets them go.
- */
-export async function keepEditsSignedOut(): Promise<void> {
+/** Unsaved changes stay on the device as a draft until she saves or lets them go; `failed` is logged if they can't. */
+async function keepDraft(failed: string): Promise<void> {
   const key = store.edit?.key;
   if (key === undefined || !isDirty()) return;
   try {
     await saveDraft();
     keptDraftKey = key;
   } catch (e) {
-    console.warn("Couldn’t keep the unsaved changes on this device", e);
+    console.warn(failed, e);
   }
 }
+
+/**
+ * She stopped being the owner on this device (the sign-in expired, or she signed out in another tab)
+ * with unsaved changes open: they are kept on the device.
+ */
+export const keepEditsSignedOut = (): Promise<void> => keepDraft("Couldn’t keep the unsaved changes on this device");
 
 function dropKeptDraft(): void {
   const key = keptDraftKey;
   keptDraftKey = null;
   if (key !== null) drafts.delete(key).catch((e: unknown) => console.warn("Couldn’t delete the kept draft", e));
 }
-
-/** The restored draft wants its save run again once its docs are in the editors. */
-let resumeAfterApply = false;
 
 function draftApplied(): void {
   const key = pendingDraftKey;

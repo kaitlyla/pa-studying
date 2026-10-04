@@ -12,6 +12,7 @@ import { AddDocument, EditControls, EditRegion } from "../shell/mounts.tsx";
 import { Voice } from "../shell/owner.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { ThreeParts } from "./ThreeParts.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 export const GUIDELINES = "guidelines";
 
@@ -58,7 +59,7 @@ export function OtherPage({ section: id }: { section: string | null }): ReactNod
   if (id === null) return <Grid other={other} />;
   const s = other.sections.find((x) => x.id === id);
   if (!s) throw new PageNotFound(`other/${id}`);
-  const pageKey = `other:${s.id}`;
+  const pageKey = buildPageKey("other", s.id);
   return (
     <div className="other-page">
       <PageHead

@@ -6,8 +6,10 @@ import { createElement } from "react";
 import { parseTrailers, serializeFile, type BlockFile, type DocJSON } from "../../lib/content/index.ts";
 import { B, R } from "../../tools/build/test-fixture.ts";
 import { DATA_BASE, loadData } from "../data/load.ts";
-import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
-import { currentHash, guideViewHash, navigate } from "../shell/route.ts";
+import { systemPath, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
+import { currentHash, guideViewHash, navigate, setNavigationGuard } from "../shell/route.ts";
+import { guardNavigation } from "./boot.ts";
+import { buildPageKey } from "./pageKey.ts";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -98,6 +100,23 @@ function typeAfter(text: string, added: string): void {
   throw new Error(`"${text}" is in no editor`);
 }
 
+/** Deletes table row `id` in whichever mounted editor holds it. */
+function deleteRow(id: string): void {
+  for (const view of views) {
+    let row: { from: number; to: number } | null = null;
+    view.state.doc.descendants((node, pos) => {
+      if (row === null && node.type.name === "table_row" && node.attrs.id === id) row = { from: pos, to: pos + node.nodeSize };
+      return row === null;
+    });
+    if (row !== null) {
+      const { from, to } = row;
+      view.dispatch(view.state.tr.delete(from, to));
+      return;
+    }
+  }
+  throw new Error(`no row ${id} in the editors`);
+}
+
 const editorText = (): string => views.map((v) => v.state.doc.textContent).join("\n");
 const repoText = (): string => w.fake.readFile(BLOCK) ?? "";
 
@@ -123,7 +142,7 @@ describe("save", () => {
     expect(await save()).toBe(true);
 
     expect(getEditStore().edit).toBeNull();
-    expect(getEditStore().pageBanner).toEqual({ key: KEY, banner: { kind: "saved" } });
+    expect(getEditStore().pageBanner).toEqual({ key: KEY, banner: { kind: "saved" }, hash: currentHash() });
     expect(repoText()).toContain("more AF text (new)");
     const head = w.fake.commit(w.fake.head());
     expect(head?.message.split("\n")[0]).toBe("Edit: Atrial fibrillation");
@@ -137,16 +156,7 @@ describe("save", () => {
     await navigate(guideViewHash("fm", { kind: "topics", ids: [R(101)] }));
     expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
     mountEditors();
-    const view = views[0];
-    if (!view) throw new Error("no editor");
-    let row: { from: number; to: number } | null = null;
-    view.state.doc.descendants((node, pos) => {
-      if (row === null && node.type.name === "table_row" && node.attrs.id === R(101)) row = { from: pos, to: pos + node.nodeSize };
-      return row === null;
-    });
-    if (row === null) throw new Error(`no row ${R(101)}`);
-    const { from, to } = row;
-    view.dispatch(view.state.tr.delete(from, to));
+    deleteRow(R(101));
 
     expect(await save()).toBe(true);
 
@@ -162,6 +172,30 @@ describe("save", () => {
     const entries = nav.systems.flatMap((s) => [...s.entries, ...s.sections.flatMap((x) => x.entries)]).map((e) => e.id);
     expect(entries).toContain(R(102));
     expect(entries).not.toContain(R(101));
+  });
+
+  it("deleting a one-row topic on a compare page shows Saved. on the page she lands on, and not on a page she opens later", async () => {
+    const off = setNavigationGuard(guardNavigation);
+    try {
+      const sys = await loadData<SystemJson>(systemPath("fm", "cardiovascular"));
+      const lone = sys.topics.find((t) => t.rows.at(-1) === t.id && t.rows.length <= 2);
+      const other = sys.topics.find((t) => t !== lone);
+      if (!lone || !other) throw new Error("the fixture has no one-row topic beside another topic");
+      await navigate(guideViewHash("fm", { kind: "topics", ids: [lone.id, other.id] }));
+      expect(await startEdit(buildPageKey("topic", "fm", lone.id), lone.title)).toBe(true);
+      mountEditors();
+      deleteRow(lone.id);
+
+      expect(await save()).toBe(true);
+
+      const landed = guideViewHash("fm", { kind: "topics", ids: [other.id] });
+      expect(currentHash()).toBe(landed);
+      expect(getEditStore().pageBanner).toEqual({ key: buildPageKey("topic", "fm", other.id), banner: { kind: "saved" }, hash: landed });
+      expect(await navigate(guideViewHash("fm", { kind: "system", system: "cardiovascular" }))).toBe(true);
+      expect(getEditStore().pageBanner).toBeNull();
+    } finally {
+      off();
+    }
   });
 
   it("ends in Saved. when the commit landed but the device couldn't keep the overlay copy", async () => {
@@ -211,6 +245,17 @@ describe("save", () => {
     expect(await save()).toBe(false);
     expect(edit().banner).toEqual({ kind: "offline" });
   });
+
+  it("GitHub refusing the ref update with main unmoved shows the failed banner, not offline", async () => {
+    await openAndType();
+    const before = w.fake.head();
+    w.fake.fail((r) => r.method === "PATCH" && r.url.includes("/git/refs/heads/main"), { status: 422 }, 5);
+
+    expect(await save()).toBe(false);
+    expect(edit().banner).toEqual({ kind: "failed" });
+    expect(w.fake.head()).toBe(before);
+    expect(editorText()).toContain("more AF text (new)");
+  });
 });
 
 describe("unsaved changes", () => {
@@ -240,6 +285,7 @@ describe("unsaved changes", () => {
   it("Save and continue saves, then lets the action go ahead", async () => {
     await openAndType();
     const leave = confirmLeave();
+    expect(getEditStore().unsaved?.conflict).toBe(false);
     resolveUnsaved("save");
     expect(await leave).toBe(true);
     expect(repoText()).toContain("more AF text (new)");
@@ -419,6 +465,51 @@ describe("after a conflict: Copy my changes and Load newer version", () => {
     written = [];
     expect(await copyChanges()).toBe(true);
     expect(written[0]).toContain("more AF text (new)");
+  });
+
+  it("Load newer version's dialog offers Copy my changes instead of a Save that would conflict again; Copy then loads", async () => {
+    const at = await conflict();
+    const head = w.fake.head();
+
+    const load = loadNewer();
+    expect(getEditStore().unsaved?.conflict).toBe(true);
+    resolveUnsaved("copy");
+    await load;
+
+    expect(written).toHaveLength(1);
+    expect(written[0]).toContain("more AF text (new)");
+    expect(edit().banner).toEqual({ kind: "loaded", at, copied: true });
+    expect(edit().unit?.snapshot.commit).toBe(head);
+    expect(w.fake.head()).toBe(head);
+  });
+
+  it("a Copy the clipboard refuses keeps her in the conflict with her changes", async () => {
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    stubClipboard(() => Promise.reject(new DOMException("denied", "NotAllowedError")));
+    const at = await conflict();
+    const base = edit().unit?.snapshot.commit;
+
+    const load = loadNewer();
+    resolveUnsaved("copy");
+    await load;
+
+    expect(edit().banner).toEqual({ kind: "conflict", at });
+    expect(edit().unit?.snapshot.commit).toBe(base);
+    expect(editorText()).toContain("more AF text (new)");
+  });
+
+  it("leaving the page after a conflict offers Copy my changes, not Save; Copy lets her leave with nothing committed", async () => {
+    await conflict();
+    const head = w.fake.head();
+
+    const leave = confirmLeave();
+    expect(getEditStore().unsaved?.conflict).toBe(true);
+    resolveUnsaved("copy");
+    expect(await leave).toBe(true);
+
+    expect(written[0]).toContain("more AF text (new)");
+    expect(getEditStore().edit).toBeNull();
+    expect(w.fake.head()).toBe(head);
   });
 
   it("the conflict keeps her changes in the draft store until she lets them go", async () => {

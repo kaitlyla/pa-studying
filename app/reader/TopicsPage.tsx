@@ -13,6 +13,7 @@ import { guideViewHash, navigate } from "../shell/route.ts";
 import { notesAt, NotesBlock } from "./blocks.tsx";
 import { guideCrumbs, systemCrumb, topicHash, useNav, useSite, useSystem } from "./data.ts";
 import { PdfMenu } from "./PdfMenu.tsx";
+import { buildPageKey } from "../edit/pageKey.ts";
 
 /** The system (and section) whose sidebar lists the topic or listed block `id`. */
 export function locateEntry(nav: NavJson, id: string): { system: string; section: string | null } | null {
@@ -43,7 +44,7 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
   const topic = topicIn(system, id);
   const first = topic.rows.map((r) => system.rows[r]).find((r) => r !== undefined);
   const block = first ? system.blocks.find((b) => b.id === first.block) : undefined;
-  const pageKey = `topic:${guide}:${topic.id}`;
+  const pageKey = buildPageKey("topic", guide, topic.id);
   return (
     <section className="tcard" aria-label={topic.title} data-topic={topic.id}>
       <div className="tcard-h">

@@ -12,8 +12,10 @@ export type CommitOutcome =
   | { kind: "saved"; commit: string }
   /** Another device changed the file set; `at` is that save's author date (ISO). Nothing was written. */
   | { kind: "conflict"; at: string; path: string }
-  /** Network failure, GitHub kept failing, or the ref update failed without a race: the offline banner. */
-  | { kind: "failed" };
+  /** The network failed, after the retries: the offline banner, whose Try again can work. Nothing was written to main. */
+  | { kind: "offline" }
+  /** GitHub refused the ref update with main unmoved, or main kept moving for every round: the failed banner. */
+  | { kind: "refused" };
 
 export interface CommitRequest {
   git: Git;
@@ -50,7 +52,7 @@ export function firstChanged(before: ReadonlyMap<string, string>, after: Readonl
 /**
  * Run the protocol: re-read `main`; if it moved, a change in the file set since `base` is a conflict;
  * otherwise blobs, a tree on head's tree, a commit with parent head, and a fast-forward PATCH. A
- * PATCH that fails is classified by re-reading the ref: unchanged → failed; moved → another round
+ * PATCH that fails is classified by re-reading the ref: unchanged → refused; moved → another round
  * against the new head (at most 3). SignedOutError propagates (the save waits for sign-in).
  */
 export async function commitChanges(req: CommitRequest): Promise<CommitOutcome> {
@@ -86,12 +88,12 @@ export async function commitChanges(req: CommitRequest): Promise<CommitOutcome> 
       const now = await git.ref();
       // The PATCH was applied but its answer was lost or an error: the save is on main.
       if (now === commit) return { kind: "saved", commit };
-      if (now === head) return { kind: "failed" };
+      if (now === head) return { kind: "refused" };
       head = now;
     }
-    return { kind: "failed" };
+    return { kind: "refused" };
   } catch (e) {
-    if (e instanceof NetworkError) return { kind: "failed" };
+    if (e instanceof NetworkError) return { kind: "offline" };
     throw e;
   }
 }
