@@ -1,0 +1,7795 @@
+{
+ "v": 1,
+ "id": "b_1T5X98E0R3",
+ "kind": "table",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "table",
+    "attrs": {
+     "grid": [
+      126,
+      94.5,
+      85.5,
+      157.5,
+      166.5,
+      144
+     ],
+     "indentPt": -27.25,
+     "borders": {
+      "top": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "right": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "bottom": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "left": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideH": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideV": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      }
+     },
+     "cellMarginPt": {
+      "top": 0,
+      "right": 2.15,
+      "bottom": 0,
+      "left": 2.15
+     }
+    },
+    "content": [
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_EYV8M85H7Z",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "FLUIDS"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 3,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_FM1SJVBJ17",
+       "kind": "content",
+       "minHeightPt": 88.15,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "IV Fluids"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Osmolality"
+           },
+           {
+            "type": "text",
+            "text": ": dissolved particles per unit mass ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "mOsm/kg"
+           },
+           {
+            "type": "text",
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Osmolarity"
+           },
+           {
+            "type": "text",
+            "text": ": solutes concentration per unit volume ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "mOsm/L"
+           },
+           {
+            "type": "text",
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 3,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "anchored",
+          "attrs": {
+           "offsetPt": 1.3792913385826773
+          },
+          "content": [
+           {
+            "type": "image_block",
+            "attrs": {
+             "asset": "a1d1f3a33ddd115197bb08f2ff9b197b.png",
+             "widthPt": 331,
+             "heightPt": 86.55,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Crystalloids"
+           },
+           {
+            "type": "text",
+            "text": ": aqueous solutions w/ varying concentrations of "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "electrolytes"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Most commonly used fluids in hospital setting, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "intravascular (ECF) volume"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Types"
+           },
+           {
+            "type": "text",
+            "text": ": isotonic, hypotonic, hypertonic"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Colloids"
+           },
+           {
+            "type": "text",
+            "text": ": solutions that contain "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "larger molecular weight solutes"
+           },
+           {
+            "type": "text",
+            "text": " (e.g., albumin, starch)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "solutes mostly remain confined to intravascular compartment"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "NOT routinely used for fluid resuscitation"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Natural Colloids"
+           },
+           {
+            "type": "text",
+            "text": ": albumin, FFP"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Artificial Colloids"
+           },
+           {
+            "type": "text",
+            "text": ": gelatins, dextrans, hydroxyethyl starch (HES)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_9REDBNBQQM",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "PLASMA"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Composition (mEq/L) & Osmolarity (mOsm/L)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 3,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Tonicity"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_GSSPGD6B9J",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Human Plasma "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 135-145"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎K: 3.5-5.0"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "HCO3 (buffer)"
+           },
+           {
+            "type": "text",
+            "text": ": 22-26"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Glucose"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "0.07-0.11g/dL"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Osmolarity"
+           },
+           {
+            "type": "text",
+            "text": " ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "~290"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 96-106"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Ca: 2.2-2.6"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Mg: 0.8-1.2"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FBE4D5"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Capacity of ECF to create osmotic gradient ⇢"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Isotonic"
+           },
+           {
+            "type": "text",
+            "text": " (osmolarity ~250-375mOsm/L): "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Hypotonic"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "Hypertonic"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FBE4D5"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "causes H2O to move into or out of ICF"
+           }
+          ]
+         },
+         {
+          "type": "anchored",
+          "attrs": {
+           "offsetPt": 203.2
+          },
+          "content": [
+           {
+            "type": "image_block",
+            "attrs": {
+             "asset": "493a46f243162413eeb2a3090ce23c0b.png",
+             "widthPt": 103.02976377952756,
+             "heightPt": 21.251102362204726,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "IV solutes = plasma solutes"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "increases intravascular volume"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "IV solutes < plasma solutes"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "dilutes intravascular ECF causing H2O "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " interstitial/ICF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "IV solutes > plasma solutes"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "concentrates intravascular ECF causing H2O"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " ⇢"
+           },
+           {
+            "type": "text",
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "ECF"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_AY1B3VY2MM",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "ISOTONIC CRYSTALLOIDS"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Composition (mEq/L) & Osmolarity (mOsm/L)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Effect on Fluid Compartments"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Clinical Applications"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Risks"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_HPKDSYGXDD",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "0.9% NaCl, Normal Saline (NS)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "0.9% NaCl (NS)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 154"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 308"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 154"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 3,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": "NO NET H2O SHIFT"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": " ECFV"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "⊘Δ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "in ICFV"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "LR & Plasma-Lyte A"
+           },
+           {
+            "type": "text",
+            "text": " ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "C6A7E9"
+              }
+             }
+            ],
+            "text": "balanced solutions"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "mild buffer action that counters acidosis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "*q1L of blood loss requires 3L of isotonic fluid "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 3,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "fluid resuscitation"
+           },
+           {
+            "type": "text",
+            "text": ", maintenance "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "mild"
+           },
+           {
+            "type": "text",
+            "text": " hyponatremia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "NS"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "early DKA"
+           },
+           {
+            "type": "text",
+            "text": ", shock, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "blood transfusions"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "metabolic alkalosis"
+           },
+           {
+            "type": "text",
+            "text": ", hypercalcemia, TBI "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "LR"
+           },
+           {
+            "type": "text",
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎hypovolemia due to "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "third spacing"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "burns, fistula drainage, trauma"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎diarrhea, hemorrhage, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "pancreatitis"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 3,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "fluid overload"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "  "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "*caution in HF, edema, renal failure "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "NS"
+           },
+           {
+            "type": "text",
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "hyperchloremic metabolic acidosis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎hypernatremia "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "LR"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "liver failure"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": " ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "lactate accumulation"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "avoid in renal failure"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": " ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "hyperkalemia"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "incompatible w/ transfusions"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_5NPW0ANTKZ",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Lactated Ringer’s Solution (LR)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "Lactated Ringer’s (LR)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 130"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎K: 4"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "Lactate (buffer)"
+           },
+           {
+            "type": "text",
+            "text": ": 28"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": "273"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 109"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Ca: 3"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_08K0ZWC2HE",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Plasma-Lyte A"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "Plasma-Lyte A"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 140"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎K: 5"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "Acetate (buffer)"
+           },
+           {
+            "type": "text",
+            "text": ": 27"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 294"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 98"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Mg: 3"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "Gluconate (buffer)"
+           },
+           {
+            "type": "text",
+            "text": ": 23"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_EBAZ1AS6BF",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "HYPOTONIC CRYSTALLOIDS"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Composition (mEq/L) & Osmolarity (mOsm/L)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Effect on Fluid Compartments"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Clinical Applications"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Risks"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_280VBRM5GX",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "0.45% NaCl (½NS), Half Normal Saline"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "0.45% NaCl (½NS)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 77"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 154"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 77"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Net H2O shift"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": "plasma/interstitial "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": " ICF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "⇡ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "ECFV"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": ", ⇡ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "ICFV"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Cell ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "SWELLS"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "hypovolemic hypernatremia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "dialysis, diuretics, DKA"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "0.45%NS (½NS)"
+           },
+           {
+            "type": "text",
+            "text": ": DKA "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "after"
+           },
+           {
+            "type": "text",
+            "text": " NS & "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "before"
+           },
+           {
+            "type": "text",
+            "text": " dextrose  "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D5W"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "alcohol/starvation ketosis"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "  "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "CAUTION "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": " CEREBRAL EDEMA"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎hyponatremia, pulmonary edema"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "not for rapid rehydration"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D5W"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "hyperglycemia, hypokalemia"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_V2HKS9C7PT",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "5% Dextrose in Water (D5W)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "5% Dextrose "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "5d/dL dextrose"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "= "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "170cal/L"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 252 (iso) "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " free water (hypo)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_NRHEKBGA2E",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "HYPERTONIC CRYSTALLOIDS"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Composition (mEq/L) & Osmolarity (mOsm/L)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Effect on Fluid Compartments"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Clinical Applications"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "E4DAA8",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Risks"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_5WV0KNMFSY",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "3% NaCl, 5% NaCl"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "3% NaCl"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 513"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 513"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 1027"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "FFFCE6"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "5% NaCl"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Na: 856"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Cl: 856"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 1711"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 4,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Net H2O shift"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": "ICF "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "BBD8BF"
+              }
+             }
+            ],
+            "text": " ECF"
+           },
+           {
+            "type": "text",
+            "text": "  "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "⇡ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "ECFV"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": ", ⇣ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "ICFV"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Cell ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "SHRINKS"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 4,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "severe hyponatremia, cerebral edema ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": " ICP)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D5½NS"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "DKA once BG <250mg/dL"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "  "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "*MC postop fluids "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D5NS"
+           },
+           {
+            "type": "text",
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": "SIADH, Addisonian crisis"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "6166FD"
+              }
+             }
+            ],
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D50W"
+           },
+           {
+            "type": "text",
+            "text": ": rapid reversal of hypoglycemia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D50W + insulin"
+           },
+           {
+            "type": "text",
+            "text": ": adjunctive tx of "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "hyperkalemia"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 4,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "CAUTION "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": " CEREBRAL DEMYELINATION"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎HF, pulmonary edema, fluid overload "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "AVOID"
+           },
+           {
+            "type": "text",
+            "text": " ⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "renal/cardiac disease"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "D50W"
+           },
+           {
+            "type": "text",
+            "text": ": hyperglycemia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "incompatible w/ transfusions"
+           },
+           {
+            "type": "text",
+            "text": "  "
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_R8J4KF169F",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "5% Dextrose + 0.45% NaCl (D5½NS)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "5% Dextrose "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "5d/dL dextrose"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "= "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "170cal/L"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 406 (hyper) "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " ½NS (hypo)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_PNXH28RE6S",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "5% Dextrose + 0.9% NaCl (D5NS)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "5% Dextrose + LR (D5LR)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "5% Dextrose "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "5d/dL dextrose"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "= "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "170cal/L"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "D5NS Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 560 (hyper) "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " NS (iso)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "D5LR Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 525 (hyper) "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " LR (iso)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_W2GMEVE2W7",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "50% Dextrose in Water (D50W)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FFFCE6",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "70D0D9"
+              }
+             }
+            ],
+            "text": "50% Dextrose "
+           },
+           {
+            "type": "text",
+            "text": "⇢ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": "50d/dL dextrose"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4D81E8"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "text": "= "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "1700cal/L"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Osmolarity "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " 2523 (hyper) "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇢"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C300E3"
+              }
+             }
+            ],
+            "text": " free water (hypo)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {}
+}

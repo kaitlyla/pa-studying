@@ -1,0 +1,6800 @@
+{
+ "v": 1,
+ "id": "b_3SRNR9E3FK",
+ "kind": "table",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "table",
+    "attrs": {
+     "grid": [
+      94.5,
+      148.5,
+      94.5,
+      67.5,
+      369
+     ],
+     "indentPt": -27.25,
+     "borders": {
+      "top": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "right": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "bottom": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "left": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideH": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideV": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      }
+     },
+     "cellMarginPt": {
+      "top": 0,
+      "right": 2.15,
+      "bottom": 0,
+      "left": 2.15
+     }
+    },
+    "content": [
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_91EB2306Y0",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "USE"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "ADRs/Considerations"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_1K4JKVYFQC",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 7,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class I AADs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Na channel blockers"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ conduction velocity"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ automaticity"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 3,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class IA"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇡ refractory period "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " AP duration "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "block K channels"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "Widen QRS, prolong QT (torsades)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 3,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "PSVTs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "PVCs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "AFIB/flutter"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "Ventricular arrhythmias"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Quinidine"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎GI (diarrhea), antimuscarinic effects (⇡ HR), ⇡ mortality in AFIB/flutter (control AV conduction before initiating)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "cinchonism"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(tinnitus, vision/hearing loss, HA, delirium), alpha blockade (hypotension)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_VH44M5WCCN",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Procainamide"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎hypotension (if LV dysfunction), "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "drug-induced lupus erythematous (DILE)"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", thrombocytopenia "
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_ZPANG49AM0",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Disopyramide"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎antimuscarinic effects (⇡ HR), "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "anticholinergic"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(blurry vision, urinary retention), heart failure"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_V40MG8AHSQ",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class IB"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "*strongest effect on "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "ischemic"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": " cells"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " AP duration"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", ⊘effect on refractory period"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "Ventricular"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": " arrhythmias"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "*esp. after MI"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Lidocaine"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "CNS toxicity"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", tremor, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "orally inactive"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " (3% bioavailability) "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Contraindications: "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "WPW"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_7EQ9NY95TT",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Mexiletine"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎nausea, blood dyscrasias, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "DRESS"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", hepatotoxicity "
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_ZHW8SJC49G",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class IC"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ conduction velocity ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "widen QRS"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⊘"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "effect on AP duration"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "/refractory period"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "PSVTs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "AFIB/flutter"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " (cardioversion)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Refractory VT (last resort)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Propafenone"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "taste disturbance"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(metallic taste), dizziness, visual disturbances"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Contraindications: SA/AV node disorders, HF/MI, LVH, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "bronchospastic disease"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(modest β-blocking effects)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_NRHJXGKKAG",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Flecainide "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "proarrhythmic effects in AFIB & ventricular arrhythmias"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(can cause/worsen)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_QKD10W23D2",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "USE"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_7GQS5B0TM4",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class II AADs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Beta blockers"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Indirectly block Ca channels"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ SA/AV node activity ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " automaticity"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Prolong AV repolarization"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "prolong PR"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ conduction velocity"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "AFIB/flutter"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "rate control"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "PSVT, PVCs, PACs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "Ventricular arrhythmias "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Metoprolol"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Propranolol"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Carvedilol"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Contraindications: AV block, bradycardia, HF, asthma/COPD"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "hypoglycemia symptom-masking"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", hyperkalemia, dyslipidemia, depression"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "98DBD9"
+              }
+             }
+            ],
+            "text": "avoid use in pheochromocytoma or cocaine use"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " (unopposed ⍺1 agonism ⇡ BP & causes vasoconstriction)"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_WZ1Y363GP5",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "USE"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_TZMQPZ5CAQ",
+       "kind": "content",
+       "minHeightPt": 9.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 2,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class III AADs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "K channel blockers"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "*delayed rectifier K "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "  channels"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Delay repolarization ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "QT prolongation"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " AP duration"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇡"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " refractory period"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⊘effect on conduction velocity"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "AFIB/flutter (cardioversion)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Dronedarone"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Ibutilide, Dofetilide"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Sotalol "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎QT prolongation ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "torsades"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "), additive ⊖chronotropic effects"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎avoid grape juice & St. John’s Wort"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_34RNFJ9S63",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "K blockade "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "plus"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Na blockade"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " conduction velocity"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Ca blockade"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " SA/AV conduction"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "AFIB/flutter (cardioversion)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "VT"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Amiodarone"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "98DBD9"
+              }
+             }
+            ],
+            "text": "DOC in HF/CAD"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " (not associated w/ ⇡ mortality risk), contraindicated in iodine allergies, ⇣ digoxin dose by 50% "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Boxed Warnings"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": QT prolongation ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "torsades"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "), "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "pulmonary fibrosis"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", hepatotoxicity "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "thyroid dysfunction"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(hypo/hyper), neurotoxicity, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "corneal microdeposits"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", photosensitivity ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "blue discoloration"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_W2PHT3G46H",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "USE"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_FYKVCH83FN",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Class IV AADs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Ca channel blockers"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "(long-acting Ca channels)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " SA/AV conduction"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", ⊖chronotropy ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣ "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "HR"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ automaticity, ⇡ refractory period "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Prolong AV repolarization"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": "prolong PR"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "AFIB/flutter"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "rate control"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "MAT"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Verapamil"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Diltiazem"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": " "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎should "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "NOT"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " be used w/ LV systolic dysfunction (HFrEF) or decompensated HF d/t ⊖inotropic effects"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎edema, HA, dizziness, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "gingival hyperplasia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Warnings: sinus bradycardia, AV nodal block, hypotension, HF, ⇡ LFTs"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_WFV9HFNT85",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "USE"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FF7E79",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_EDCTV8D90V",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Adenosine"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Block AV node"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ conduction velocity, ⇡ refractory period "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "PSVTs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "rapid conversion to NSR"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "facial flushing"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", chest pain/pressure, dizziness, transient hypotension, dizziness"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Contraindications: 2"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "vertAlign",
+              "attrs": {
+               "value": "sup"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "nd"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "/3"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "vertAlign",
+              "attrs": {
+               "value": "sup"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "rd"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " degree heart block, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "SSS"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ", symptomatic bradycardia, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "bronchospastic lung disease"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_EF7WVHH813",
+       "kind": "content",
+       "minHeightPt": 2.85,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "Digoxin "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "Block AV node"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "⇣ conduction velocity, ⇡ refractory period"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "Enhance vagal tone"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": " ("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": "⇣"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C140FF"
+              }
+             }
+            ],
+            "text": " HR"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ")"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 2,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": "AFIB/flutter"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4081FF"
+              }
+             }
+            ],
+            "text": " "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "("
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "rate control"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ") "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "shade",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "digoxin toxicity"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": N/V, visual changes (halos, yellow or blurred vision), lethargy, life-threatening arrhythmias"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎⇣ dose by 50% when used w/ amiodarone, narrow TI (monitoring required)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "▪︎Contraindications: "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "VFIB"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {}
+}
