@@ -336,7 +336,7 @@ describe("site, guides and systems (20 §20.3, §20.4)", () => {
     v: 1, name: "PA Studying",
     owner: { login: "kaitlyla", id: 337482200, commitName: "kaitlyla", commitEmail: "337482200+kaitlyla@users.noreply.github.com" },
     repo: "kaitlyla/pa-studying", tabs: ["eor", "pance", "labs", "imaging", "ekg", "anatomy", "other"],
-    eors: ["em", "fm", "im", "ob", "peds", "psy", "surg"], pance: "pance",
+    eors: ["em", "fm", "im", "ob", "peds", "psy", "surg"],
     guideNames: { em: "Emergency Medicine", fm: "Family Medicine", im: "Internal Medicine", ob: "OBGYN", peds: "Pediatrics", psy: "Psychiatry", surg: "Surgery", pance: "PANCE / EOC" },
   };
   const page = { widthPt: 792, heightPt: 612, margins: { top: 36, right: 36, bottom: 36, left: 36 } };
@@ -415,9 +415,17 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { v: 1, sections: [], members: {}, listed: {}, drugTables: [], pharmSections: [], pharmFiles: [] })).toBe("ok");
   });
 
+  it("accepts a row recorded under a topic (ruling 04:44Z), with or without sections", () => {
+    const R3 = id("r", 3);
+    expect(verdict(sPath, { ...structure, members: { ...structure.members, [R3]: R1 } })).toBe("ok");
+    expect(verdict(sPath, { ...structure, sections: [], members: { [R3]: R1 } })).toBe("ok");
+  });
+
   it.each([
     ["other not last", { sections: [...structure.sections].reverse() }, /"other" last/],
-    ["members without sections", { sections: [] }, /\{\} when sections is \[\]/],
+    ["section members without sections", { sections: [] }, /a topic id \(sections is \[\]\)/],
+    ["a block recorded under a topic", { members: { ...structure.members, [b1]: R1 } }, /a topic id only on another row/],
+    ["a row recorded under itself", { members: { [R1]: R1 } }, /a topic id only on another row/],
     ["a member in an unknown section", { members: { [R1]: "valvular" } }, /section id of this system/],
     ["a member key that is not a row or block", { members: { [D1]: "other" } }, /a r_ or b_ id/],
     ["a drug table in an unknown pharm section", { drugTables: [{ block: b2, pharmSection: "diuretics", conditionRows: [] }] }, /pharm section id/],

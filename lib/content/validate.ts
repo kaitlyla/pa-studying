@@ -24,6 +24,7 @@ export type Validator = (v: unknown, ctx: Ctx, expectId?: string) => void;
 
 const id = (...prefixes: IdPrefix[]): Checker => re(idRegExp(...prefixes), `a ${prefixes.map((p) => `${p}_`).join(" or ")} id`);
 const slugC = re(SLUG_RE, "a slug");
+const ROW_ID_RE = idRegExp("r");
 const guideC = oneOf(...GUIDE_IDS);
 const month = re(ISO_MONTH_RE, "a month (YYYY-MM)");
 const sha40 = re(/^[0-9a-f]{40}$/, "a 40-hex commit sha");
@@ -256,7 +257,7 @@ export const validateSite: Validator = whole(shapeOf<SiteFile>({
   v: v1, name: nonEmpty,
   owner: shapeOf<SiteFile["owner"]>({ login: nonEmpty, id: int, commitName: nonEmpty, commitEmail: nonEmpty }, {}),
   repo: re(/^[A-Za-z0-9-]+\/[A-Za-z0-9._-]+$/, "owner/repo"),
-  tabs: uniqueArr(nonEmpty), eors: uniqueArr(guideC), pance: guideC,
+  tabs: uniqueArr(nonEmpty), eors: uniqueArr(guideC),
   guideNames: record(guideC, nonEmpty),
 }, {}));
 
@@ -357,7 +358,7 @@ export const validateStructure: Validator = (v, ctx) => {
   shapeOf<StructureFile>({
     v: v1,
     sections: arr(shapeOf<StructureFile["sections"][number]>({ id: slugC, title: nonEmpty }, {})),
-    members: record(id("r", "b"), slugC),
+    members: record(id("r", "b"), str),
     listed: record(id("b"), str),
     drugTables: arr(shapeOf<StructureFile["drugTables"][number]>({ block: id("b"), pharmSection: slugC, conditionRows: uniqueArr(id("r")) }, {})),
     pharmSections: arr(shapeOf<StructureFile["pharmSections"][number]>({
@@ -370,9 +371,14 @@ export const validateStructure: Validator = (v, ctx) => {
   uniqueArr(str)(sectionIds, ".sections[].id", ctx);
   const otherAt = sectionIds.indexOf("other");
   if (otherAt !== -1 && otherAt !== sectionIds.length - 1) bad(ctx, ".sections", `"other" last`, sectionIds);
-  if (sectionIds.length === 0 && Object.keys(s.members).length > 0) bad(ctx, ".members", "{} when sections is []");
-  for (const [k, sec] of Object.entries(s.members)) {
-    if (!sectionIds.includes(sec)) bad(ctx, `.members.${k}`, "a section id of this system", sec);
+  // A value is a section id, or (rows only) the id of the topic the row is recorded under
+  // (Orchestrator ruling 2026-10-04 04:44Z); a system without sections has only the latter.
+  for (const [k, value] of Object.entries(s.members)) {
+    if (ROW_ID_RE.test(value)) {
+      if (!ROW_ID_RE.test(k) || value === k) bad(ctx, `.members.${k}`, "a topic id only on another row", value);
+    } else if (!sectionIds.includes(value)) {
+      bad(ctx, `.members.${k}`, sectionIds.length === 0 ? "a topic id (sections is [])" : "a section id of this system or a topic id", value);
+    }
   }
   const pharmIds = s.pharmSections.map((x) => x.id);
   uniqueArr(str)(pharmIds, ".pharmSections[].id", ctx);

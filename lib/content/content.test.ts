@@ -81,7 +81,50 @@ describe("splice (50 §50.4)", () => {
       };
       const order = systemRowOrder([block], s, b(1));
       // X now sits after A2, so the nearest topic above it is A (section s2), not the first section.
-      expect(updateStructure(s, { order, added: out.added }).members[X]).toBe("s2");
+      expect(updateStructure(s, { order, added: out.added, table: b(1) }).members[X]).toBe("s2");
+    });
+
+    // Orchestrator ruling 2026-10-04 04:44Z: saved from F's topic page, a row added above F is
+    // recorded as a member of F's topic, so it stays with F instead of continuing A.
+    describe("recording rows added above the page's topic (ruling 04:44Z)", () => {
+      const s: StructureFile = {
+        v: 1, sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }], members: { [A]: "s2", [F]: "s1", [G]: "s2" }, listed: {},
+        drugTables: [], pharmSections: [], pharmFiles: [],
+      };
+
+      it("records a row added directly above the topic's first row under that topic", () => {
+        const out = updateStructure(s, { order: [H, A, A2, X, F, F2, G], added: [X], table: b(1), topic: F });
+        expect(out.members[X]).toBe(F);
+      });
+
+      it("keeps the membership when a later save adds another row above it", () => {
+        const first = updateStructure(s, { order: [H, A, A2, X, F, F2, G], added: [X], table: b(1), topic: F });
+        const second = updateStructure(first, { order: [H, A, A2, Y, X, F, F2, G], added: [Y], table: b(1), topic: F });
+        expect(second.members[X]).toBe(F);
+        expect(second.members[Y]).toBe(F);
+        // A re-save with no new rows leaves both recorded.
+        expect(updateStructure(second, { order: [H, A, A2, Y, X, F, F2, G], table: b(1), topic: F }).members).toEqual(second.members);
+      });
+
+      it("records only the run directly above the topic: other new rows follow the positional rule", () => {
+        const out = updateStructure(s, { order: [H, A, A2, F, F2, X, G], added: [X], table: b(1), topic: F });
+        expect(out.members[X]).toBe("s1");
+      });
+
+      it("drops a recorded membership when its topic row is deleted", () => {
+        const out = updateStructure({ ...s, members: { ...s.members, [X]: F } }, { order: [H, A, A2, X, F2, G], deleted: [F], table: b(1), topic: F2 });
+        expect(out.members).not.toHaveProperty(X);
+        expect(out.members).not.toHaveProperty(F);
+      });
+
+      it("records the row in a system without sections too", () => {
+        const flat = { ...s, sections: [], members: {} };
+        expect(updateStructure(flat, { order: [H, A, A2, X, F, F2, G], added: [X], table: b(1), topic: F }).members).toEqual({ [X]: F });
+      });
+
+      it("refuses a topic missing from the row order", () => {
+        expect(() => updateStructure(s, { order: [H, X], added: [X], table: b(1), topic: F })).toThrow(/Topic .* not in the system's row order/);
+      });
     });
   });
 
@@ -95,6 +138,8 @@ describe("splice (50 §50.4)", () => {
 describe("structure.json members (ruling 2B)", () => {
   const [A, B, C, X, Y] = [r(1), r(2), r(3), r(5), r(6)];
   const P = b(1);
+  /** The edited (non-drug) table. */
+  const T = b(5);
   const structure: StructureFile = {
     v: 1,
     sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }],
@@ -106,7 +151,7 @@ describe("structure.json members (ruling 2B)", () => {
   };
 
   it("gives a new row after B the section of B's topic", () => {
-    const out = updateStructure(structure, { order: [A, B, X, C], added: [X] });
+    const out = updateStructure(structure, { order: [A, B, X, C], added: [X], table: T });
     expect(out.members[X]).toBe("s2");
   });
 
@@ -118,17 +163,17 @@ describe("structure.json members (ruling 2B)", () => {
   });
 
   it("gives a new first row of the system the first section", () => {
-    const out = updateStructure(structure, { order: [Y, A, B], added: [Y] });
+    const out = updateStructure(structure, { order: [Y, A, B], added: [Y], table: T });
     expect(out.members[Y]).toBe("s1");
   });
 
   it("skips continuation rows (no members key) to find the topic above", () => {
-    const out = updateStructure(structure, { order: [A, C, X], added: [X] });
+    const out = updateStructure(structure, { order: [A, C, X], added: [X], table: T });
     expect(out.members[X]).toBe("s1");
   });
 
   it("removes deleted ids from members, listed and conditionRows, and leaves the input untouched", () => {
-    const out = updateStructure(structure, { order: [A, C], deleted: [B, P] });
+    const out = updateStructure(structure, { order: [A, C], deleted: [B, P], table: T });
     expect(out.members).toEqual({ [A]: "s1" });
     expect(out.listed).toEqual({});
     expect(out.drugTables[0]?.conditionRows).toEqual([C]);
@@ -138,11 +183,11 @@ describe("structure.json members (ruling 2B)", () => {
 
   it("adds no members entry in a system without sections", () => {
     const flat = { ...structure, sections: [], members: {} };
-    expect(updateStructure(flat, { order: [A, X], added: [X] }).members).toEqual({});
+    expect(updateStructure(flat, { order: [A, X], added: [X], table: T }).members).toEqual({});
   });
 
   it("refuses a new row missing from the row order", () => {
-    expect(() => updateStructure(structure, { order: [A], added: [X] })).toThrow(/not in the system's row order/);
+    expect(() => updateStructure(structure, { order: [A], added: [X], table: T })).toThrow(/not in the system's row order/);
   });
 
   it("resolves across the system's non-drug multi-column tables, but within a drug table only", () => {

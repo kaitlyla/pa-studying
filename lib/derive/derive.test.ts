@@ -8,8 +8,10 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { removeContent } from "../content/fs.ts";
 import { systemRowOrder } from "../content/splice.ts";
 import type { BlockFile, StructureFile } from "../content/types.ts";
+import { schema } from "../schema.ts";
 import { loadContent } from "../../tools/build/load.ts";
 import { B, C, D, G, GONE, P, R, S, tableDoc, U, writeFixture } from "../../tools/build/test-fixture.ts";
+import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
 import { CardMatcher, medsPanel, phraseMatcher, stubLabel } from "./pharm.ts";
@@ -136,6 +138,48 @@ describe("topics (40 §40.2)", () => {
     const e = buildError(() => checkMembers("fm/cardiovascular", deriveTopics(cv().blocks, st), st));
     expect(e.id).toBe(R(123));
     expect(e.message).toMatch(/condition row/);
+  });
+
+  // Orchestrator ruling 2026-10-04 04:44Z: a row recorded in `members` under a later topic row shows
+  // with that topic, ahead of its first row, instead of continuing the topic above it.
+  describe("rows recorded under a topic (ruling 04:44Z)", () => {
+    const rows = (...r: Parameters<typeof tableDoc>[1]) => table(B(91), 2, r);
+    const [H, A, X, F, Y] = [R(910), R(911), R(912), R(913), R(914)];
+
+    it("a blank row recorded under the next topic joins it, not the topic above", () => {
+      const blocks = [rows([A, "content", "Alpha", "a"], [X, "content", "", "x text"], [F, "content", "Foxtrot", "f"])];
+      expect(deriveTopics(blocks, structureOf()).rows.get(X)?.topic).toBe(A); // positional rule without the record
+      const t = deriveTopics(blocks, structureOf({ members: { [X]: F } }));
+      expect(t.topics.map((x) => [x.id, x.rows])).toEqual([[A, [A]], [F, [X, F]]]);
+      expect(t.rows.get(X)?.topic).toBe(F);
+    });
+
+    it("a labeled heading row above a recorded row still titles the topic below it", () => {
+      const blocks = [rows([H, "heading", "Stable angina", "P"], [X, "content", "", "x"], [F, "content", "", "f"])];
+      const t = deriveTopics(blocks, structureOf({ members: { [X]: F } }));
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[F, "Stable angina", [X, F]]]);
+    });
+
+    it("several recorded rows keep table order, and a row with first-cell text still starts its own topic", () => {
+      const blocks = [rows([A, "content", "Alpha", "a"], [Y, "content", "", "y"], [X, "content", "Xray", "x"], [F, "content", "Foxtrot", "f"])];
+      const t = deriveTopics(blocks, structureOf({ members: { [Y]: F, [X]: F } }));
+      expect(t.topics.map((x) => [x.id, x.rows])).toEqual([[A, [A]], [X, [X]], [F, [Y, F]]]);
+    });
+
+    it("takes the section of the topic it is recorded under", () => {
+      const blocks = [rows([A, "content", "Alpha", "a"], [X, "content", "Xray", "x"], [Y, "content", "", "y"], [F, "content", "Foxtrot", "f"])];
+      const st = structureOf({ sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }], members: { [A]: "s1", [X]: F, [Y]: F, [F]: "s2" } });
+      const t = deriveTopics(blocks, st);
+      expect(t.topics.map((x) => [x.id, x.section])).toEqual([[A, "s1"], [X, "s2"], [F, "s2"]]);
+      expect(() => checkMembers("fm/x", t, st)).not.toThrow();
+    });
+
+    it("fails the build when the recorded topic row is not a later row of the same table", () => {
+      const blocks = [rows([F, "content", "Foxtrot", "f"], [X, "content", "", "x"])];
+      const e = buildError(() => deriveTopics(blocks, structureOf({ members: { [X]: F } })));
+      expect(e.id).toBe(X);
+      expect(e.message).toMatch(/not a later topic or untitled row of the same table/);
+    });
   });
 
   it("every content row of a non-drug multi-column table ends in exactly one topic or untitled material", () => {
@@ -366,6 +410,82 @@ describe("pharm (40 §40.4–§40.5)", () => {
 });
 
 describe("published data and invariants (40 §40.1, §40.8)", () => {
+  it("shows a row recorded under a topic with that topic in every published view (ruling 04:44Z)", () => {
+    // X is a blank row added above Heart failure (R131) from its topic page. Positionally it would
+    // continue Stable angina (R104, section cad) like R130 above it.
+    const X = R(132);
+    const c = mutated((x) => {
+      const s = system(x, "fm", "cardiovascular");
+      const block = s.blocks.find((b) => b.id === B(13)) as BlockFile;
+      const rowsOf = (block.doc as { content: { content: { attrs: { id: string } }[] }[] }).content[0]?.content ?? [];
+      const at = rowsOf.findIndex((r) => r.attrs.id === R(131));
+      const copy = structuredClone(rowsOf[at - 1]) as { attrs: { id: string } };
+      copy.attrs.id = X;
+      const retext = (n: { text?: string; content?: unknown[] }): void => {
+        if (n.text === "angina continues here") n.text = "orthopnea clue";
+        for (const k of n.content ?? []) retext(k as { text?: string; content?: unknown[] });
+      };
+      retext(copy as never);
+      rowsOf.splice(at, 0, copy);
+      s.structure.members[X] = R(131);
+    });
+    const res = publish(c);
+    const sys = res.files.get("g/fm/s/cardiovascular.json") as SystemJson;
+    const topicOf = (id: string) => sys.topics.find((t) => t.id === id);
+    // topic page and system page
+    expect(sys.rows[X]?.topic).toBe(R(131));
+    expect(topicOf(R(131))?.rows).toEqual([X, R(131)]);
+    expect(topicOf(R(104))?.rows).not.toContain(X);
+    // section pages
+    const items = (sec: string) => sys.sections.find((s) => s.id === sec)?.items.flatMap((i) => i.rows ?? []) ?? [];
+    expect(items("other")).toContain(X);
+    expect(items("cad")).not.toContain(X);
+    // hosts (search results, links, the PDF's internal links)
+    const hosts = res.files.get("hosts.json") as HostsJson;
+    expect(hosts[X]).toEqual(hosts[R(131)]);
+    // search units
+    const unit = (title: string) => res.units.find((u) => u.title === title && u.label === "notes");
+    expect(unit("Heart failure")?.text).toContain("orthopnea clue");
+    expect(unit("Stable angina")?.text).not.toContain("orthopnea clue");
+  });
+
+  // Orchestrator ruling 2026-10-04 04:45Z (adds to 60 §60.1).
+  it("gives untitled rows and heading rows their own search units, routed to the page that shows them", () => {
+    const unit = (at: string) => out.units.find((u) => u.at === at);
+    const hosts = file<HostsJson>("hosts.json");
+    expect(unit(R(200))).toMatchObject({ title: "Pulmonary", route: hosts[R(200)]?.route, label: "notes", text: " untitled lead" });
+    expect(unit(R(100))).toMatchObject({ title: "ARRHYTHMIAS", route: "#/eor/fm/s/cardiovascular", text: "ARRHYTHMIAS Presentation Treatment" });
+    // A drug table's heading row is shown on its pharm section.
+    expect(unit(R(120))).toMatchObject({ title: "ANTIANGINALS", route: hosts[R(120)]?.route, loc: "EOR › Family Medicine › Cardiovascular pharm" });
+    expect(hosts[R(120)]?.route).toMatch(/\/pharm\/cardiovascular\//);
+  });
+
+  it("puts every shown text block in at least one search unit, and reports any that is missing", () => {
+    const hosts = file<HostsJson>("hosts.json");
+    expect(uncoveredText(base, out.units, hosts)).toEqual([]);
+    // Without the untitled-row and heading-row units, their text is reported.
+    const without = out.units.filter((u) => u.at !== R(200) && u.at !== R(100));
+    expect(uncoveredText(base, without, hosts)).toEqual([
+      { id: R(100), text: "ARRHYTHMIAS" }, { id: R(100), text: "Presentation" }, { id: R(100), text: "Treatment" },
+      { id: R(200), text: "untitled lead" },
+    ]);
+  });
+
+  it("checks text inside text boxes too", () => {
+    const c = mutated((x) => {
+      const b = system(x, "fm", "cardiovascular").blocks.find((y) => y.id === B(11)) as BlockFile;
+      const doc = b.doc as { content: unknown[] };
+      // Built through the schema, so the stored form carries every default attribute.
+      doc.content.push(schema.nodeFromJSON({
+        type: "textbox", attrs: { widthPt: 100 }, content: [{ type: "paragraph", content: [{ type: "text", text: "boxed pearl" }] }],
+      }).toJSON());
+    });
+    const res = publish(c);
+    const hosts = res.files.get("hosts.json") as HostsJson;
+    expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+    expect(uncoveredText(c, res.units.filter((u) => u.at !== B(11)), hosts)).toContainEqual({ id: B(11), text: "boxed pearl" });
+  });
+
   it("fails naming a structure.json id that does not exist", () => {
     const c = mutated((x) => {
       system(x, "fm", "cardiovascular").structure.members[GONE] = "cad";

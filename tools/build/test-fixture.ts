@@ -42,7 +42,7 @@ const SITE = {
   owner: { login: "kaitlyla", id: 337482200, commitName: "kaitlyla", commitEmail: "337482200+kaitlyla@users.noreply.github.com" },
   repo: "kaitlyla/pa-studying",
   tabs: ["eor", "pance", "labs", "imaging", "ekg", "anatomy", "other"],
-  eors: ["fm", "psy"], pance: "pance",
+  eors: ["fm", "psy"],
   guideNames: { fm: "Family Medicine", psy: "Psychiatry", pance: "PANCE / EOC" },
 };
 

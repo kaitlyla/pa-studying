@@ -2,20 +2,44 @@
 import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { resolutionRows } from "../content/tables.ts";
+import { idRegExp } from "../content/ids.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
-  /** The first row's id. */
+  /** The id of the row that starts the topic (40 §40.2). */
   id: string;
   title: string;
   /** The table block holding the first row. */
   block: string;
   /** Formed from a drug table's condition rows. */
   condition: boolean;
-  /** The first row and its continuation rows, in order. */
+  /**
+   * The topic's rows in table order: rows recorded under it in `members` (which sit above its
+   * starting row), the starting row, and its continuation rows.
+   */
   rows: string[];
-  /** `members[id]`, or null in a system without sections. */
+  /** The section of its starting row's `members` entry, or null in a system without sections. */
   section: string | null;
+}
+
+const ROW_ID_RE = idRegExp("r");
+
+/**
+ * The topic a row is recorded under: a `members` value that is a row id (Orchestrator ruling
+ * 2026-10-04 04:44Z, a blank row added above a topic's first row from its page). Otherwise null.
+ */
+function recordedTopic(structure: StructureFile, rowId: string): string | null {
+  const v = structure.members[rowId];
+  return v !== undefined && ROW_ID_RE.test(v) ? v : null;
+}
+
+/** The section `members` gives an id: a section id directly, or through the topic it is recorded under. */
+function memberSection(t: SystemTopics, structure: StructureFile, id: string): string | null {
+  const v = structure.members[id];
+  if (v === undefined || !ROW_ID_RE.test(v)) return v ?? null;
+  const topic = t.rows.get(v)?.topic ?? v;
+  const s = structure.members[topic];
+  return s === undefined || ROW_ID_RE.test(s) ? null : s;
 }
 
 export interface RowInfo {
@@ -67,6 +91,8 @@ export function deriveTopics(blocks: readonly BlockFile[], structure: StructureF
     let heading: string | null = null;
     let headingAbove: string | null = null;
     let last: Topic | null = null;
+    /** Rows recorded under a topic row not yet reached, by that row's id. */
+    const attached = new Map<string, string[]>();
     const start = (rowId: string, title: string): Topic => {
       const topic: Topic = { id: rowId, title, block: block.id, condition: conditions !== undefined, rows: [rowId], section: null };
       out.topics.push(topic);
@@ -83,31 +109,46 @@ export function deriveTopics(blocks: readonly BlockFile[], structure: StructureF
       }
       const info: RowInfo = { block: block.id, kind: "content", heading, topic: null, drug: false };
       out.rows.set(row.id, info);
-      const label = headingAbove === null ? "" : collapse(out.headings.get(headingAbove)?.label ?? "");
-      headingAbove = null;
       if (conditions && !conditions.has(row.id)) {
+        headingAbove = null;
         info.drug = true;
         continue;
       }
       const text = collapse(firstCell(row));
+      const recorded = recordedTopic(structure, row.id);
+      if (text === "" && recorded !== null) {
+        // Shown with the topic of a later row, so it neither starts nor continues one here, and a
+        // labeled heading row above it still applies to the row it was added above.
+        attached.set(recorded, [...(attached.get(recorded) ?? []), row.id]);
+        continue;
+      }
+      const label = headingAbove === null ? "" : collapse(out.headings.get(headingAbove)?.label ?? "");
+      headingAbove = null;
       let topic: Topic | null;
       if (text !== "") topic = start(row.id, text);
       else if (label !== "") topic = start(row.id, label);
       else if (last) topic = last;
       else if (!conditions && carry) topic = carry;
       else topic = null;
+      const joining = attached.get(row.id) ?? [];
+      attached.delete(row.id);
       if (topic === null) {
-        out.untitled.push(row.id);
+        out.untitled.push(...joining, row.id);
         continue;
       }
-      if (topic.id !== row.id) topic.rows.push(row.id);
+      for (const id of joining) (out.rows.get(id) as RowInfo).topic = topic.id;
+      if (topic.id === row.id) topic.rows.unshift(...joining);
+      else topic.rows.push(...joining, row.id);
       info.topic = topic.id;
       last = topic;
+    }
+    for (const [target, ids] of attached) {
+      throw new BuildError(ids[0] as string, `members records it under ${target}, which is not a later topic or untitled row of the same table`);
     }
     if (!conditions && last) carry = last;
   }
 
-  for (const topic of out.topics) topic.section = structure.sections.length > 0 ? (structure.members[topic.id] ?? null) : null;
+  for (const topic of out.topics) topic.section = structure.sections.length > 0 ? memberSection(out, structure, topic.id) : null;
   return out;
 }
 
@@ -117,9 +158,9 @@ export function deriveTopics(blocks: readonly BlockFile[], structure: StructureF
  */
 export function rowSection(t: SystemTopics, structure: StructureFile, rowId: string): string | null {
   const info = t.rows.get(rowId);
-  if (!info || info.drug) return null;
+  if (!info || info.drug || structure.sections.length === 0) return null;
   if (info.topic !== null) return t.topics.find((x) => x.id === info.topic)?.section ?? null;
-  return structure.members[rowId] ?? null;
+  return memberSection(t, structure, rowId);
 }
 
 /** Rows with each run's applicable heading row inserted once before the run. */
@@ -143,6 +184,7 @@ export function checkMembers(systemId: string, t: SystemTopics, structure: Struc
   if (structure.sections.length === 0) return;
   const sections = new Set(structure.sections.map((s) => s.id));
   for (const [id, section] of Object.entries(structure.members)) {
+    if (ROW_ID_RE.test(section)) continue; // recorded under a topic; deriveTopics checks the topic row
     if (!sections.has(section)) throw new BuildError(id, `members names section "${section}", which ${systemId} does not have`);
   }
   const need = (id: string, what: string): void => {

@@ -14,7 +14,7 @@ import type {
   WorkupJson,
 } from "./published.ts";
 import {
-  fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, pharmLoc, REF_TABS,
+  fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, PANCE, pharmLoc, REF_TABS,
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
@@ -87,12 +87,12 @@ export function publish(c: Content): PublishResult {
 
   // ---- index and per-system derivations --------------------------------------------------------
   const ix: SiteIndex = {
-    pance: c.site.pance,
+    pance: PANCE,
     guideNames: { ...c.site.guideNames },
     systems: Object.fromEntries(c.guides.map((g) => [g.file.id, Object.fromEntries(g.file.systems.map((s) => [s.id, s.title]))])),
     other: Object.fromEntries(c.other.sections.map((s) => [s.id, s.title])),
   };
-  const isPanceGuide = (g: GuideData): boolean => g.file.id === c.site.pance;
+  const isPanceGuide = (g: GuideData): boolean => g.file.id === PANCE;
   const tabOf = (g: GuideData): string => (isPanceGuide(g) ? "pance" : "eor");
 
   const parts = new Map<string, { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }>();
@@ -231,11 +231,13 @@ export function publish(c: Content): PublishResult {
     }
     for (const [id, info] of s.topics.rows) {
       const ps = pharmSectionOf(s, info.block);
-      if (info.drug && ps !== null) hosts[id] = { route: view(s, pharmView(sys, ps, id)), loc: pharmLoc(ix, g0(s), sys) };
+      // A drug table is shown in full only on its pharm section, heading rows included.
+      const inDrugTable = info.drug || (info.kind === "heading" && st.drugTables.some((d) => d.block === info.block));
+      if (inDrugTable && ps !== null) hosts[id] = { route: view(s, pharmView(sys, ps, id)), loc: pharmLoc(ix, g0(s), sys) };
       else if (info.topic !== null) {
         hosts[id] = { route: topicRoute(s, info.topic), loc: systemLoc(ix, g0(s), sys, secTitle(s, rowSection(s.topics, st, id))) };
       } else {
-        const sec = info.kind === "content" && st.sections.length > 0 ? (st.members[id] ?? null) : null;
+        const sec = info.kind === "content" ? rowSection(s.topics, st, id) : null;
         hosts[id] = sec ? { route: secRoute(s, sec), loc: systemLoc(ix, g0(s), sys, secTitle(s, sec)) } : { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
       }
     }
@@ -417,7 +419,7 @@ export function publish(c: Content): PublishResult {
     owner: { ...c.site.owner },
     tabs: c.site.tabs,
     eors: [],
-    pance: { id: c.site.pance, name: c.site.guideNames[c.site.pance], systems: [] },
+    pance: { id: PANCE, name: c.site.guideNames[PANCE], systems: [] },
     guideNames: { ...c.site.guideNames },
     index: ix,
   };
@@ -655,6 +657,15 @@ export function publish(c: Content): PublishResult {
           });
         } else if (info?.drug) {
           units.push({ tab, title: collapse(firstCell(r)), loc: pharmLoc(ix, gid, sys), route: hosts[r.id]?.route ?? "", at: r.id, label: "notes", text: searchText(r.cells.join("\n")) });
+        } else if (info && (info.kind === "heading" || info.topic === null)) {
+          // Heading rows and untitled rows belong to no topic unit, so each is its own unit, routed
+          // to the page that shows it (Orchestrator ruling 2026-10-04 04:45Z, adding to 60 §60.1).
+          const label = info.heading === null ? "" : collapse(t.headings.get(info.heading)?.label ?? "");
+          const host = hosts[r.id];
+          units.push({
+            tab, title: label || st.listed[b.id] || (summary?.title ?? sys), loc: host?.loc ?? systemLoc(ix, gid, sys), route: host?.route ?? sysRoute(s),
+            at: r.id, label: "notes", text: searchText(r.cells.join("\n")),
+          });
         }
       }
     }

@@ -23,7 +23,6 @@ export interface SiteFile {
   repo: string;
   tabs: string[];
   eors: GuideId[];
-  pance: GuideId;
   guideNames: Record<GuideId, string>;
 }
 

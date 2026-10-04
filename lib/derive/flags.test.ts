@@ -21,7 +21,7 @@ function content(flags: Flag[], sourceKeys: string[]): Content {
   const file: AsIsFile = { v: 1, id: DOC, name: "Screening chart.pdf", kind: "pdf", original: "chart.pdf", view: "chart.pdf", pages: 1, text: null, removed: null };
   const tab = { subs: [], files: [] };
   return {
-    site: { v: 1, name: "PA Studying", owner: { login: "kaitlyla", id: 1, commitName: "k", commitEmail: "k@example.invalid" }, repo: "kaitlyla/pa-studying", tabs: [], eors: [], pance: "pance", guideNames: {} } as unknown as Content["site"],
+    site: { v: 1, name: "PA Studying", owner: { login: "kaitlyla", id: 1, commitName: "k", commitEmail: "k@example.invalid" }, repo: "kaitlyla/pa-studying", tabs: [], eors: [], guideNames: {} } as unknown as Content["site"],
     vocab: { v: 1, entries: [] },
     guides: [],
     cards: { v: 1, cards: [] },

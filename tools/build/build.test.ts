@@ -7,6 +7,7 @@ import { BuildError } from "../../lib/derive/errors.ts";
 import type { BuildJson, FontMapJson, SiteJson } from "../../lib/derive/published.ts";
 import { FONTS } from "../../lib/fonts.ts";
 import { loadIndex, runSearch, SHARD_SIZE, Vocab, type SearchUnit } from "../../lib/search/index.ts";
+import { searchCoverage } from "./coverage.ts";
 import { finish, FILE_LIMIT, SITE_LIMIT } from "./finish.ts";
 import { build, currentCommit, isoNow } from "./index.ts";
 import { D, PNG, writeFixture } from "./test-fixture.ts";
@@ -30,6 +31,13 @@ beforeAll(async () => {
 });
 afterAll(async () => {
   await rm(root, { recursive: true, force: true });
+});
+
+describe("search coverage (ruling 2026-10-04 04:45Z)", () => {
+  it("finds every shown text of the content tree in a search unit", async () => {
+    // lib/derive/derive.test.ts shows the check reports text that a unit misses.
+    await expect(searchCoverage(root)).resolves.toEqual([]);
+  });
 });
 
 describe("build:data", () => {

@@ -72,31 +72,52 @@ export function spliceRows<R>(full: readonly R[], shown: readonly string[], edit
  * Apply added and deleted rows/blocks to a system's structure.json (50 §50.4, operator ruling 2B).
  * - `order`: the system's row ids in 40 §40.2 resolution order (after the splice), so the nearest
  *   topic above a new row is the nearest earlier id carrying a `members` entry;
- * - a new row in a system with sections joins that topic's section, or the first section when no
- *   row above it has one; a new row of the drug table `table` gets a section only when it is one
- *   of that table's `conditionRows`, since drug rows live only in Pharm;
- * - a deleted id leaves `members`, `listed` and every `drugTables[].conditionRows`.
+ * - `table`: the edited table block;
+ * - `topic`: when saving a topic page, that topic's id. Each new row in the run directly above the
+ *   topic's first row (rows already recorded as its members don't break the run) is recorded as
+ *   `members[row] = topic`, so it shows with that topic in every view (Orchestrator ruling
+ *   2026-10-04 04:44Z);
+ * - any other new row in a system with sections joins the section of the topic above it, or the
+ *   first section when no row above it has one; a new row of a drug table gets a `members` entry
+ *   only when it is one of that table's `conditionRows`, since drug rows live only in Pharm;
+ * - a deleted id leaves `members` (as a key and as a topic value), `listed` and every
+ *   `drugTables[].conditionRows`.
  * Returns a new object; the input is not modified.
  */
 export function updateStructure(
   structure: StructureFile,
-  change: { order: readonly string[]; added?: readonly string[]; deleted?: readonly string[]; table?: string },
+  change: { order: readonly string[]; added?: readonly string[]; deleted?: readonly string[]; table: string; topic?: string },
 ): StructureFile {
   const drugTable = structure.drugTables.find((d) => d.block === change.table);
   const added = new Set(change.added ?? []);
   const deleted = new Set(change.deleted ?? []);
   const members: Record<string, string> = {};
-  for (const [k, v] of Object.entries(structure.members)) if (!deleted.has(k)) members[k] = v;
+  for (const [k, v] of Object.entries(structure.members)) if (!deleted.has(k) && !deleted.has(v)) members[k] = v;
   const listed: Record<string, string> = {};
   for (const [k, v] of Object.entries(structure.listed)) if (!deleted.has(k)) listed[k] = v;
   const drugTables = structure.drugTables.map((d) => ({ ...d, conditionRows: d.conditionRows.filter((r) => !deleted.has(r)) }));
+
+  const joined = new Set<string>();
+  if (change.topic !== undefined) {
+    const topic = change.topic;
+    const at = change.order.indexOf(topic);
+    if (at === -1) throw new Error(`Topic ${topic} is not in the system's row order`);
+    for (let i = at - 1; i >= 0; i--) {
+      const id = change.order[i] as string;
+      if (added.has(id)) {
+        if (drugTable && !drugTable.conditionRows.includes(id)) break;
+        members[id] = topic;
+        joined.add(id);
+      } else if (members[id] !== topic) break;
+    }
+  }
 
   const firstSection = structure.sections[0]?.id;
   if (firstSection !== undefined) {
     for (const id of added) {
       const at = change.order.indexOf(id);
       if (at === -1) throw new Error(`New row ${id} is not in the system's row order`);
-      if (drugTable && !drugTable.conditionRows.includes(id)) continue;
+      if (joined.has(id) || (drugTable && !drugTable.conditionRows.includes(id))) continue;
       const above = change.order.slice(0, at).reverse().find((prev) => !added.has(prev) && prev in members);
       members[id] = (above !== undefined ? members[above] : undefined) ?? firstSection;
     }
