@@ -405,7 +405,7 @@ describe("after a conflict: Copy my changes and Load newer version", () => {
 
 describe("a save waiting on sign-in when the page left for GitHub", () => {
   it("saves once the restored draft is in the editors, with the signed-in-again toast", async () => {
-    const toast = mount(createElement(Toast));
+    const toast = await mount(createElement(Toast));
     await openAndType();
     await saveDraft(true);
     destroyEditors();

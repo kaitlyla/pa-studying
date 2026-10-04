@@ -21,17 +21,22 @@ import { buildSave, loadUnit, UnitError, type EditUnit } from "./units.ts";
 /** Edit start failed for want of a connection (plan wording). */
 export const OPEN_OFFLINE = "Couldn’t open this page for editing — no internet connection.";
 /**
- * PLACEHOLDER wording (no signed design text yet): edit start found the page gone from its system,
- * e.g. its first row was deleted on another device after this tab loaded its sidebar.
+ * Edit start found the page gone from its system, e.g. its first row was deleted on another device
+ * after this tab loaded its sidebar (design editing/edit/edges/stale).
  */
-export const OPEN_PAGE_CHANGED = "This page was changed on another device. Reload the page to edit the current version.";
-/** PLACEHOLDER wording: edit start failed for another reason (the error is logged to the console). */
+export const OPEN_PAGE_CHANGED = "This page changed since you opened it. Reload the page to edit the current version.";
+/** Edit start failed for another reason; the error is logged to the console (design openfail). */
 export const OPEN_FAILED = "Couldn’t open this page for editing.";
+/** The save banner when GitHub refused the save or the files didn't validate (design savefail). */
+export const SAVE_FAILED = {
+  title: "Couldn’t save.",
+  body: "Something went wrong. Your changes are still here, and the last saved version is unchanged.",
+} as const;
 
 export type Banner =
   | { kind: "saved" }
   | { kind: "offline" }
-  /** PLACEHOLDER wording in SaveBanner: GitHub refused the save or the files didn't validate (not a connection problem). */
+  /** GitHub refused the save or the files didn't validate (not a connection problem): SAVE_FAILED. */
   | { kind: "failed" }
   | { kind: "conflict"; at: string }
   /** `copied`: her changes were copied before the reload, so the banner may say they're on the clipboard. */
@@ -307,8 +312,8 @@ export async function save(): Promise<boolean> {
 
 /** Toast after "Copy my changes" put them on the clipboard (mockup wording). */
 export const COPY_DONE = "Your changes were copied.";
-/** PLACEHOLDER wording (no signed design text yet): the browser refused the clipboard write. */
-export const COPY_FAILED = "Couldn’t copy your changes. They are still here.";
+/** The browser refused the clipboard write (design copyfail). */
+export const COPY_FAILED = "Copy didn’t work. Select the text and copy it yourself.";
 
 const editsKey = (docs: Map<string, DocJSON>): string => JSON.stringify([...docs]);
 

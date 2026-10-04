@@ -18,8 +18,8 @@ import { createEditorState, editorProps, PICTURE_REFUSED } from "./editor/state.
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
-  COPY_DONE, COPY_FAILED, copyChanges, dismissBanner, done, loadNewer, registerView, restoreDraft, save, startEdit, useEdit,
-  viewChanged, type Banner,
+  COPY_DONE, COPY_FAILED, copyChanges, dismissBanner, done, loadNewer, registerView, restoreDraft, save, SAVE_FAILED, startEdit,
+  useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import type { Part, Slot } from "./units.ts";
 import "./edit.css";
@@ -209,10 +209,10 @@ export function SaveBanner({ banner }: { banner: Banner }): ReactNode {
     case "offline":
       return <div className="banner err" role="alert" data-ref="save-failed"><span className="bt"><b>Couldn’t save — no internet connection.</b> Your changes are still here, and the last saved version is unchanged.</span><span className="ba"><button type="button" className="btn pri" onClick={() => void save()} data-ref="save-retry">Try again</button></span></div>;
     case "failed":
-      // PLACEHOLDER wording, pending the Designer: not a connection problem, so no Try again.
+      // Not a connection problem, so no Try again.
       return (
         <div className="banner err" role="alert" data-ref="save-error">
-          <span className="bt"><b>Couldn’t save.</b> Something went wrong. Your changes are still here, and the last saved version is unchanged.</span>
+          <span className="bt"><b>{SAVE_FAILED.title}</b> {SAVE_FAILED.body}</span>
           <span className="ba"><button type="button" className="btn" onClick={() => void copyWithToast()} data-ref="save-error-copy">Copy my changes</button></span>
         </div>
       );
