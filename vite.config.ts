@@ -52,6 +52,12 @@ export default defineConfig({
   },
   test: {
     root: projectRoot,
+    coverage: {
+      provider: "v8",
+      include: ["{lib,app,tools,worker}/**/*.{ts,tsx}"],
+      exclude: ["**/*.test.{ts,tsx}", "app/e2e/**", "**/*.d.ts", "**/node_modules/**"],
+      thresholds: { lines: 90, statements: 90 },
+    },
     projects: [
       {
         extends: true,

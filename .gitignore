@@ -9,6 +9,10 @@
 !/package-lock.json
 !/tsconfig.json
 !/vite.config.ts
+!/eslint.config.js
 !/worker/
 node_modules/
 dist/
+.wrangler/
+test-results/
+playwright-report/

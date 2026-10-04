@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "pa-studying-auth",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  // The monthly guideline-check cron ("0 9 1 * *", plan 80) is added with guideline-check.yml (step S8).
+  "triggers": { "crons": [] }
+}
