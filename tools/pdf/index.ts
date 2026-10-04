@@ -4,7 +4,7 @@
 //                                            build one guide's whole PDF locally; no release calls
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import type { NavJson, SiteJson } from "../../lib/derive/published.ts";
+import { navPath, SITE_PATH, type NavJson, type SiteJson } from "../../lib/derive/published.ts";
 import { wholeGuideAsset } from "../../lib/pdf/index.ts";
 import { buildGuidePdf, loadFontmap, nodeRenderer, type PdfRenderer } from "./build.ts";
 import { decide, guideDigest, headCommit, publish, releaseRecord, spawnRun, type Run } from "./release.ts";
@@ -24,7 +24,7 @@ async function readJson<T>(path: string): Promise<T> {
 
 /** Every guide: rebuild when stale (release.ts `decide`), upload, and record HEAD and the data digest. Returns the guides rebuilt. */
 export async function runAll(o: Options): Promise<string[]> {
-  const site = await readJson<SiteJson>(join(o.dataDir, "site.json"));
+  const site = await readJson<SiteJson>(join(o.dataDir, SITE_PATH));
   const guides = [...site.eors.map((e) => e.id), site.pance.id];
   const renderer = o.renderer ?? nodeRenderer(o.dataDir, o.fontsDir, await loadFontmap(o.dataDir));
   const head = headCommit(o.run);
@@ -38,7 +38,7 @@ export async function runAll(o: Options): Promise<string[]> {
       continue;
     }
     o.log(`${g}: regenerating (${decision.reason})`);
-    const nav = await readJson<NavJson>(join(o.dataDir, "g", g, "nav.json"));
+    const nav = await readJson<NavJson>(join(o.dataDir, navPath(g)));
     const file = join(o.outDir, wholeGuideAsset(nav.source));
     await mkdir(dirname(file), { recursive: true });
     await writeFile(file, await buildGuidePdf(o.dataDir, g, renderer));

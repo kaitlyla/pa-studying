@@ -5,7 +5,7 @@ import { join, resolve, sep } from "node:path";
 import { PDFDocument } from "@cantoo/pdf-lib";
 import pdfMake from "pdfmake";
 import sharp from "sharp";
-import type { FontMapJson, HomeJson, NavJson, SystemJson } from "../../lib/derive/published.ts";
+import { FONTMAP_PATH, homePath, navPath, systemPath, type FontMapJson, type HomeJson, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
 import { buildDocDefinition, embedsAsStored, imageKey, storedMime, imageRequests, pdfFonts, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
 
 async function readJson<T>(path: string): Promise<T> {
@@ -54,27 +54,24 @@ export async function mergePdfs(parts: readonly Uint8Array[]): Promise<Uint8Arra
   return out.save();
 }
 
-const FONTMAP_FILE = "fonts/fontmap.json";
-const navFile = (guide: string): string => `g/${guide}/nav.json`;
-
 /**
  * Every `dist/data/` file a guide's whole PDF is built from, relative to that directory: the only
  * paths buildGuidePdf and loadFontmap read, so the release digest (release.ts) covers exactly them.
  * Pictures are named by their content hash inside these files.
  */
 function guidePaths(guide: string, nav: NavJson): { nav: string; home: string; systems: string[]; fontmap: string } {
-  return { nav: navFile(guide), home: `g/${guide}/home.json`, systems: nav.systems.map((s) => `g/${guide}/s/${s.id}.json`), fontmap: FONTMAP_FILE };
+  return { nav: navPath(guide), home: homePath(guide), systems: nav.systems.map((s) => systemPath(guide, s.id)), fontmap: FONTMAP_PATH };
 }
 
 /** guidePaths as one ordered list. */
 export async function consumedFiles(dataDir: string, guide: string): Promise<string[]> {
-  const p = guidePaths(guide, await readJson<NavJson>(join(dataDir, navFile(guide))));
+  const p = guidePaths(guide, await readJson<NavJson>(join(dataDir, navPath(guide))));
   return [p.nav, p.home, ...p.systems, p.fontmap];
 }
 
 /** The guide's whole PDF: its preamble (when it has one), then every system in guide order. */
 export async function buildGuidePdf(dataDir: string, guide: string, renderer: PdfRenderer): Promise<Uint8Array> {
-  const nav = await readJson<NavJson>(join(dataDir, navFile(guide)));
+  const nav = await readJson<NavJson>(join(dataDir, navPath(guide)));
   const paths = guidePaths(guide, nav);
   const home = await readJson<HomeJson>(join(dataDir, paths.home));
   const parts: Uint8Array[] = [];
@@ -87,5 +84,5 @@ export async function buildGuidePdf(dataDir: string, guide: string, renderer: Pd
 }
 
 export async function loadFontmap(dataDir: string): Promise<FontMapJson> {
-  return readJson<FontMapJson>(join(dataDir, FONTMAP_FILE));
+  return readJson<FontMapJson>(join(dataDir, FONTMAP_PATH));
 }

@@ -1,6 +1,6 @@
 // Browser PDF downloads (plan 70 §70.1–§70.2): the menu (OB6, app/reader) calls downloadPdf with the
 // page data it has loaded, overlay included, so the file reflects her latest saved edits.
-import type { FontMapJson } from "../../lib/derive/published.ts";
+import { FONTMAP_PATH, type FontMapJson } from "../../lib/derive/published.ts";
 import {
   buildDocDefinition,
   embedsAsStored,
@@ -62,7 +62,7 @@ export const browserEnvironment: PdfEnvironment = {
     const mod = (await import("pdfmake/build/pdfmake.js")) as unknown as { default?: PdfMake } & PdfMake;
     return mod.default ?? mod;
   },
-  fontmap: () => loadData<FontMapJson>("fonts/fontmap.json"),
+  fontmap: () => loadData<FontMapJson>(FONTMAP_PATH),
   fontUrl: (file) => new URL(`${import.meta.env.BASE_URL}fonts/${file}`, window.location.href).href,
   async image(v) {
     const res = await fetch(`${DATA_BASE}assets/${v.asset}`);
