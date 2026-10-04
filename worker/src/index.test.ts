@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import worker, { DISPATCH_RETRY_DELAY_MS, SITE_ORIGIN, SITE_URL, type Env } from "./index.ts";
+import worker, { DISPATCH_RETRY_DELAY_MS, SITE_ORIGIN, SITE_URL, mintAppJwt, type Env } from "./index.ts";
 
 const CLIENT_ID = "Iv23liTESTCLIENT";
 const CLIENT_SECRET = "test-client-secret";
@@ -181,6 +181,74 @@ describe("POST /revoke", () => {
     const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), env);
     expect(response.status).toBe(502);
     expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+  });
+});
+
+describe("failure paths", () => {
+  it("answers a malformed JSON body with 400 invalid_request and calls nothing", async () => {
+    const calls = mockFetch();
+    const response = await worker.fetch(
+      request("/token", { body: "{not json", headers: { "Content-Type": "application/json" } }),
+      env,
+    );
+    expect(response.status).toBe(400);
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(await response.json()).toStrictEqual({ error: "invalid_request" });
+    expect(calls).toHaveLength(0);
+  });
+
+  it("answers a body missing code_verifier with 400 invalid_request and calls nothing", async () => {
+    const calls = mockFetch();
+    const response = await worker.fetch(postJson("/token", { code: "c" }), env);
+    expect(response.status).toBe(400);
+    expect(await response.json()).toStrictEqual({ error: "invalid_request" });
+    expect(calls).toHaveLength(0);
+  });
+
+  it("answers 502 upstream_unreachable when GitHub cannot be reached", async () => {
+    mockFetch(new TypeError("fetch failed"));
+    const response = await worker.fetch(postJson("/token", { code: "c", code_verifier: "v" }), env);
+    expect(response.status).toBe(502);
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(await response.json()).toStrictEqual({ error: "upstream_unreachable" });
+  });
+
+  it("answers 502 upstream_invalid_response when GitHub replies with something other than JSON", async () => {
+    mockFetch(new Response("<html>Service unavailable</html>", { status: 503, headers: { "Content-Type": "text/html" } }));
+    const response = await worker.fetch(postJson("/refresh", { refresh_token: "ghr_old" }), env);
+    expect(response.status).toBe(502);
+    expect(await response.json()).toStrictEqual({ error: "upstream_invalid_response" });
+  });
+
+  it("answers 502 upstream_invalid_response when GitHub's reply lacks the token fields", async () => {
+    mockFetch(jsonResponse(200, { access_token: "ghu_access", expires_in: 28800 }));
+    const response = await worker.fetch(postJson("/token", { code: "c", code_verifier: "v" }), env);
+    expect(response.status).toBe(502);
+    const body = await response.json();
+    expect(body).toStrictEqual({ error: "upstream_invalid_response" });
+    expect(JSON.stringify(body)).not.toContain("ghu_access");
+  });
+
+  it("answers /revoke with 502 and an empty body when GitHub cannot be reached", async () => {
+    mockFetch(new TypeError("fetch failed"));
+    const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), env);
+    expect(response.status).toBe(502);
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(await response.text()).toBe("");
+  });
+
+  it("answers /revoke with 502 and calls nothing while REVOKE_MODE is unset", async () => {
+    const calls = mockFetch();
+    const withoutMode: Env = { ...env };
+    delete withoutMode.REVOKE_MODE;
+    const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), withoutMode);
+    expect(response.status).toBe(502);
+    expect(calls).toHaveLength(0);
+  });
+
+  it("refuses a GH_APP_KEY that is not PKCS#8 PEM", async () => {
+    const pkcs1 = env.GH_APP_KEY.replace(/BEGIN PRIVATE KEY/, "BEGIN RSA PRIVATE KEY").replace(/END PRIVATE KEY/, "END RSA PRIVATE KEY");
+    await expect(mintAppJwt({ ...env, GH_APP_KEY: pkcs1 })).rejects.toThrow("GH_APP_KEY must be a PKCS#8 PEM private key");
   });
 });
 
