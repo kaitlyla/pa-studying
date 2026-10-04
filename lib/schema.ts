@@ -3,8 +3,11 @@
 import { Schema } from "prosemirror-model";
 import type { NodeSpec, MarkSpec, AttributeSpec } from "prosemirror-model";
 import { idRegExp } from "./content/ids.ts";
+import type { MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
 
 type Check = (value: unknown) => void;
+/** Exactly one attribute spec per field of a stored attrs type (lib/schemaTypes.ts). */
+type Specs<T> = { [K in keyof T]-?: AttributeSpec };
 
 function fail(what: string, value: unknown): never {
   throw new RangeError(`Invalid ${what}: ${JSON.stringify(value)}`);
@@ -89,14 +92,14 @@ const shapes: Check = (v) => { if (!Array.isArray(v)) fail("shapes", v); v.forEa
 const a = (validate: Check, dflt?: unknown): AttributeSpec =>
   dflt === undefined ? { validate } : { validate, default: dflt };
 
-const imageAttrs: Record<string, AttributeSpec> = {
+const imageAttrs = {
   asset: a(asset),
   widthPt: a(num),
   heightPt: a(num),
   rot: a(oneOf(0, 90, 180, 270), 0),
   flipH: a(bool, false),
   flipV: a(bool, false),
-};
+} satisfies Specs<NodeAttrs["image"]>;
 
 const nodes: Record<string, NodeSpec> = {
   doc: { content: "(block | slide_card | heading_line)+" },
@@ -114,7 +117,7 @@ const nodes: Record<string, NodeSpec> = {
       shade: a(hexOrNull, null),
       borders: a(paraBorders, null),
       marker: a(marker, null),
-    },
+    } satisfies Specs<NodeAttrs["paragraph"]>,
   },
   heading_line: { content: "inline*" },
   text: { group: "inline" },
@@ -124,14 +127,16 @@ const nodes: Record<string, NodeSpec> = {
   anchored: {
     group: "block",
     content: "image_block | textbox | drawing",
-    attrs: { offsetPt: a(num, 0) },
+    attrs: { offsetPt: a(num, 0) } satisfies Specs<NodeAttrs["anchored"]>,
   },
-  image_block: { atom: true, attrs: imageAttrs },
-  rule: { group: "block", atom: true, attrs: { color: a(hex), widthPt: a(num) } },
+  image_block: { atom: true, attrs: imageAttrs satisfies Specs<NodeAttrs["image_block"]> },
+  rule: { group: "block", atom: true, attrs: { color: a(hex), widthPt: a(num) } satisfies Specs<NodeAttrs["rule"]> },
   textbox: {
     group: "block",
     content: "block+",
-    attrs: { widthPt: a(num), fill: a(hexOrNull, null), border: a(borderOrNull, null), inline: a(bool, false) },
+    attrs: {
+      widthPt: a(num), fill: a(hexOrNull, null), border: a(borderOrNull, null), inline: a(bool, false),
+    } satisfies Specs<NodeAttrs["textbox"]>,
   },
   // ProseMirror requires every required content position (anchored's child, a table's rows) to admit
   // a node it can generate, i.e. one whose attributes all have defaults. `drawing` and `table_row`
@@ -140,18 +145,22 @@ const nodes: Record<string, NodeSpec> = {
   drawing: {
     group: "block",
     content: "drawing_text*",
-    attrs: { widthPt: a(num, null), heightPt: a(num, null), shapes: a(shapes, []) },
+    attrs: { widthPt: a(num, null), heightPt: a(num, null), shapes: a(shapes, []) } satisfies Specs<NodeAttrs["drawing"]>,
   },
   drawing_text: {
     content: "block+",
-    attrs: { x: a(num), y: a(num), w: a(num), h: a(num), fill: a(hexOrNull, null), border: a(borderOrNull, null) },
+    attrs: {
+      x: a(num), y: a(num), w: a(num), h: a(num), fill: a(hexOrNull, null), border: a(borderOrNull, null),
+    } satisfies Specs<NodeAttrs["drawing_text"]>,
   },
   table: {
     group: "block",
     content: "table_row+",
     tableRole: "table",
     isolating: true,
-    attrs: { grid: a(grid), indentPt: a(num, 0), borders: a(tableBorders), cellMarginPt: a(margins) },
+    attrs: {
+      grid: a(grid), indentPt: a(num, 0), borders: a(tableBorders), cellMarginPt: a(margins),
+    } satisfies Specs<NodeAttrs["table"]>,
   },
   table_row: {
     content: "table_cell+",
@@ -162,7 +171,7 @@ const nodes: Record<string, NodeSpec> = {
       minHeightPt: a(numOrNull, null),
       repeatHeader: a(bool, false),
       cantSplit: a(bool, false),
-    },
+    } satisfies Specs<NodeAttrs["table_row"]>,
   },
   table_cell: {
     content: "block+",
@@ -175,7 +184,7 @@ const nodes: Record<string, NodeSpec> = {
       fill: a(hexOrNull, null),
       vAlign: a(oneOf("top", "center", "bottom"), "top"),
       borders: a(cellBorders, null),
-    },
+    } satisfies Specs<NodeAttrs["table_cell"]>,
   },
   slide_card: { content: "paragraph+" },
 };
@@ -184,20 +193,20 @@ const nodes: Record<string, NodeSpec> = {
 const marks: Record<string, MarkSpec> = {
   link: {
     inclusive: false,
-    attrs: { href: a((v) => { if (!isAllowedHref(v)) fail("link href", v); }) },
+    attrs: { href: a((v) => { if (!isAllowedHref(v)) fail("link href", v); }) } satisfies Specs<MarkAttrs["link"]>,
   },
   bold: {},
   italic: {},
-  underline: { attrs: { style: a(str, "single") } },
-  strike: { attrs: { double: a(bool, false) } },
-  vertAlign: { attrs: { value: a(oneOf("sup", "sub")) } },
+  underline: { attrs: { style: a(str, "single") } satisfies Specs<MarkAttrs["underline"]> },
+  strike: { attrs: { double: a(bool, false) } satisfies Specs<MarkAttrs["strike"]> },
+  vertAlign: { attrs: { value: a(oneOf("sup", "sub")) } satisfies Specs<MarkAttrs["vertAlign"]> },
   caps: {},
   smallCaps: {},
-  size: { attrs: { pt: a((v) => { if (!isNum(v) || v <= 0) fail("size", v); }) } },
-  color: { attrs: { hex: a(hex) } },
-  highlight: { attrs: { hex: a(hex) } },
-  shade: { attrs: { hex: a(hex) } },
-  font: { attrs: { family: a(str) } },
+  size: { attrs: { pt: a((v) => { if (!isNum(v) || v <= 0) fail("size", v); }) } satisfies Specs<MarkAttrs["size"]> },
+  color: { attrs: { hex: a(hex) } satisfies Specs<MarkAttrs["color"]> },
+  highlight: { attrs: { hex: a(hex) } satisfies Specs<MarkAttrs["highlight"]> },
+  shade: { attrs: { hex: a(hex) } satisfies Specs<MarkAttrs["shade"]> },
+  font: { attrs: { family: a(str) } satisfies Specs<MarkAttrs["font"]> },
 };
 
 export const schema: Schema = new Schema({ nodes, marks });

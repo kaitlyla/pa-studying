@@ -1,7 +1,8 @@
 // HTTP access for the guideline check (80 §80.1, §80.2): Node fetch with the job's User-Agent,
 // redirects followed and a 30 s timeout; NCBI E-utilities requests spaced at least 400 ms apart.
+import { SITE_URL } from "../../lib/site.ts";
 
-export const USER_AGENT = "PA-Studying-guideline-check (+https://kaitlyla.github.io/pa-studying/)";
+export const USER_AGENT = `PA-Studying-guideline-check (+${SITE_URL})`;
 export const FETCH_TIMEOUT_MS = 30_000;
 export const EUTILS_BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils";
 export const EUTILS_TOOL = "pa-studying-guideline-check";

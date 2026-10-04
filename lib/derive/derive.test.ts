@@ -15,7 +15,7 @@ import type { Content, GuideData, SystemData } from "./model.ts";
 import { CardMatcher, medsPanel, phraseMatcher, stubLabel } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import type { DocList, GeneralJson, HostsJson, NavJson, OtherJson, SiteJson, SlidesJson, SystemJson, UpdatesJson } from "./published.ts";
-import { fileLocation } from "./routes.ts";
+import { fileLocation, parseHash } from "./routes.ts";
 import { tableOf } from "./text.ts";
 import { checkMembers, deriveTopics } from "./topics.ts";
 
@@ -469,6 +469,26 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(hosts[B(11)]?.route).toBe(`#/eor/fm/b/${B(11)}`);
     expect(hosts[G(2)]).toEqual({ route: "#/eor/fm/workup/ams", loc: "EOR › Family Medicine › Initial workup" });
     expect(hosts[S(2)]?.route).toBe("#/eor/fm/slides/2");
+  });
+
+  it("every route the build emits round-trips through the shared parser", () => {
+    const routes = new Set<string>();
+    const collect = (v: unknown): void => {
+      if (Array.isArray(v)) v.forEach(collect);
+      else if (v !== null && typeof v === "object") {
+        for (const [k, x] of Object.entries(v)) {
+          if (k === "route" && typeof x === "string") routes.add(x);
+          else collect(x);
+        }
+      }
+    };
+    collect([...out.files.values(), out.units]);
+    expect(routes.size).toBeGreaterThan(20);
+    for (const r of routes) {
+      const parsed = parseHash(r);
+      expect(parsed.kind, r).not.toBe("notfound");
+      expect(parsed.path, r).toBe(r);
+    }
   });
 
   it("every search unit sharing a route carries a distinct anchor", () => {

@@ -14,8 +14,8 @@ import type {
   WorkupJson,
 } from "./published.ts";
 import {
-  fileLocation, GENERAL_LABELS, generalLoc, guideLoc, guideRoute, otherLoc, pharmLoc, REF_TABS, systemLoc, TAB_LABELS, UPDATES_LOC,
-  UPDATES_ROUTE, type SiteIndex,
+  fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, pharmLoc, REF_TABS,
+  refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
 import { checkMembers, deriveTopics, rowSection, withHeadings, type SystemTopics } from "./topics.ts";
@@ -39,8 +39,12 @@ interface Sys {
   data: SystemData;
   topics: SystemTopics;
   pharm: PharmSystem;
-  base: string;
 }
+
+/** A route on the system's guide. */
+const view = (s: Sys, v: GuideView): string => guideViewHash(s.guide.file.id, v);
+const pharmView = (system: string, section: string | null = null, target: string | null = null): GuideView =>
+  ({ kind: "pharm", system, section, target });
 
 const pub = (b: BlockFile): PubBlock => ({ id: b.id, kind: b.kind, doc: b.doc });
 
@@ -105,7 +109,7 @@ export function publish(c: Content): PublishResult {
   for (const g of c.guides) {
     for (const data of g.systems) {
       const topics = deriveTopics(data.blocks, data.structure);
-      const s: Sys = { guide: g, data, topics, pharm: { guide: g.file.id, system: data.file.id, structure: data.structure, topics }, base: guideRoute(ix, g.file.id) };
+      const s: Sys = { guide: g, data, topics, pharm: { guide: g.file.id, system: data.file.id, structure: data.structure, topics } };
       systems.push(s);
       for (const b of data.blocks) blockSys.set(b.id, s);
       for (const id of topics.rows.keys()) rowSys.set(id, s);
@@ -207,10 +211,11 @@ export function publish(c: Content): PublishResult {
   };
 
   // ---- hosts: guide blocks, rows, pharm -------------------------------------------------------
-  for (const g of c.guides) for (const b of g.preamble) hosts[b.id] = { route: guideRoute(ix, g.file.id), loc: guideLoc(ix, g.file.id) };
+  for (const g of c.guides) for (const b of g.preamble) hosts[b.id] = { route: guideBase(g.file.id), loc: guideLoc(ix, g.file.id) };
   const secTitle = (s: Sys, id: string | null): string | null => (id === null ? null : (s.data.structure.sections.find((x) => x.id === id)?.title ?? null));
-  const sysRoute = (s: Sys): string => `${s.base}/s/${s.data.file.id}`;
-  const secRoute = (s: Sys, sec: string): string => `${s.base}/sec/${s.data.file.id}/${sec}`;
+  const sysRoute = (s: Sys): string => view(s, { kind: "system", system: s.data.file.id });
+  const secRoute = (s: Sys, sec: string): string => view(s, { kind: "section", system: s.data.file.id, section: sec });
+  const topicRoute = (s: Sys, topic: string): string => view(s, { kind: "topics", ids: [topic] });
   const pharmSectionOf = (s: Sys, block: string): string | null => s.data.structure.drugTables.find((d) => d.block === block)?.pharmSection ?? null;
   const g0 = (s: Sys): string => s.guide.file.id;
   for (const s of systems) {
@@ -218,17 +223,17 @@ export function publish(c: Content): PublishResult {
     const sys = s.data.file.id;
     for (const b of s.data.blocks) {
       const ps = pharmSectionOf(s, b.id);
-      if (ps !== null) hosts[b.id] = { route: `${s.base}/pharm/${sys}/${ps}`, loc: pharmLoc(ix, g0(s), sys) };
-      else if (st.listed[b.id] !== undefined) hosts[b.id] = { route: `${s.base}/b/${b.id}`, loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
+      if (ps !== null) hosts[b.id] = { route: view(s, pharmView(sys, ps)), loc: pharmLoc(ix, g0(s), sys) };
+      else if (st.listed[b.id] !== undefined) hosts[b.id] = { route: view(s, { kind: "block", id: b.id }), loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
       else if (s.topics.proseBlocks.includes(b.id) && st.members[b.id] !== undefined && st.sections.length > 0) {
         hosts[b.id] = { route: secRoute(s, st.members[b.id] as string), loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
       } else hosts[b.id] = { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
     }
     for (const [id, info] of s.topics.rows) {
       const ps = pharmSectionOf(s, info.block);
-      if (info.drug && ps !== null) hosts[id] = { route: `${s.base}/pharm/${sys}/${ps}/${id}`, loc: pharmLoc(ix, g0(s), sys) };
+      if (info.drug && ps !== null) hosts[id] = { route: view(s, pharmView(sys, ps, id)), loc: pharmLoc(ix, g0(s), sys) };
       else if (info.topic !== null) {
-        hosts[id] = { route: `${s.base}/t/${info.topic}`, loc: systemLoc(ix, g0(s), sys, secTitle(s, rowSection(s.topics, st, id))) };
+        hosts[id] = { route: topicRoute(s, info.topic), loc: systemLoc(ix, g0(s), sys, secTitle(s, rowSection(s.topics, st, id))) };
       } else {
         const sec = info.kind === "content" && st.sections.length > 0 ? (st.members[id] ?? null) : null;
         hosts[id] = sec ? { route: secRoute(s, sec), loc: systemLoc(ix, g0(s), sys, secTitle(s, sec)) } : { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
@@ -246,7 +251,7 @@ export function publish(c: Content): PublishResult {
     }
   }
   for (const [id, h] of pharmHome) {
-    const route = `${h.s.base}/pharm/${h.s.data.file.id}/${h.section}${id.startsWith("c_") ? `/${id}` : ""}`;
+    const route = view(h.s, pharmView(h.s.data.file.id, h.section, id.startsWith("c_") ? id : null));
     const place = { route, loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) };
     hosts[id] = place;
     const ps = id.startsWith("c_") ? cardParts(id) : [parts.get(id)].filter((x) => x !== undefined);
@@ -257,6 +262,7 @@ export function publish(c: Content): PublishResult {
   }
 
   // ---- first placements of documents and gap blocks (site order) ----------------------------------
+  // A document's first placement is the list route it is first opened from (its File page `from`).
   const docHome = new Map<string, { from: string; tab: string }>();
   const gapHome = new Map<string, { place: Place; tab: string }>();
   const placeDoc = (id: string, from: string, tab: string): void => {
@@ -267,35 +273,34 @@ export function publish(c: Content): PublishResult {
   };
   for (const g of c.guides) {
     const gid = g.file.id;
-    const base = guideRoute(ix, gid);
-    for (const data of g.systems) for (const d of data.structure.pharmFiles) placeDoc(d, `${base}/pharm/${data.file.id}`, tabOf(g));
+    for (const data of g.systems) for (const d of data.structure.pharmFiles) placeDoc(d, guideViewHash(gid, pharmView(data.file.id)), tabOf(g));
     for (const t of g.general?.topics ?? []) {
-      for (const d of t.files) placeDoc(d, `${base}/general/${t.key}`, tabOf(g));
-      for (const gap of t.gaps) placeGap(gap, { route: `${base}/general/${t.key}`, loc: generalLoc(ix, gid, t.key) }, tabOf(g));
+      const route = guideViewHash(gid, { kind: "general", key: t.key });
+      for (const d of t.files) placeDoc(d, route, tabOf(g));
+      for (const gap of t.gaps) placeGap(gap, { route, loc: generalLoc(ix, gid, t.key) }, tabOf(g));
     }
-    for (const w of g.general?.workup ?? []) placeGap(w.gap, { route: `${base}/workup/${w.id}`, loc: `${guideLoc(ix, gid)} › Initial workup` }, tabOf(g));
-    if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, base, tabOf(g));
+    for (const w of g.general?.workup ?? []) placeGap(w.gap, { route: guideViewHash(gid, { kind: "workup", item: w.id }), loc: workupLoc(ix, gid) }, tabOf(g));
+    if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, guideBase(gid), tabOf(g));
     const deck = c.decks.get(gid);
-    if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, `${base}/slides`, tabOf(g));
+    if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, guideViewHash(gid, { kind: "slides", n: 1 }), tabOf(g));
   }
   for (const tab of REF_TABS) {
-    for (const sub of c.reftabs[tab].subs) for (const gap of sub.gaps) placeGap(gap, { route: `#/${tab}/${sub.id}`, loc: `${TAB_LABELS[tab]} › ${sub.title}` }, tab);
-    for (const d of c.reftabs[tab].files) placeDoc(d, `#/${tab}`, tab);
+    for (const sub of c.reftabs[tab].subs) for (const gap of sub.gaps) placeGap(gap, { route: refHash(tab, sub.id), loc: refLoc(tab, sub.title) }, tab);
+    for (const d of c.reftabs[tab].files) placeDoc(d, refHash(tab), tab);
   }
   for (const sec of c.other.sections) {
-    const place = { route: `#/other/${sec.id}`, loc: otherLoc(ix, sec.id) };
+    const place = { route: otherHash(sec.id), loc: otherLoc(ix, sec.id) };
     if (sec.lead) placeGap(sec.lead, place, "other");
     for (const d of sec.files) placeDoc(d, place.route, "other");
     for (const gap of sec.gaps ?? []) placeGap(gap, place, "other");
   }
   const docLoc = (d: string): string => {
     const home = docHome.get(d);
-    if (!home) return "";
-    return fileLocation(ix, home.from) ?? (home.from.endsWith("/slides") ? `${guideLoc(ix, home.from.split("/")[2] ?? "")} › Review slides` : "");
+    return home ? (fileLocation(ix, home.from) ?? "") : "";
   };
   for (const [d, doc] of c.docs) {
     if (!visible(doc) || !docHome.has(d)) continue;
-    const place = { route: `#/file/${d}`, loc: docLoc(d) };
+    const place = { route: fileHash(d, null), loc: docLoc(d) };
     hosts[d] = place;
     if (doc.kind === "word") for (const b of doc.blocks) hosts[b.id] = place;
   }
@@ -304,7 +309,7 @@ export function publish(c: Content): PublishResult {
     const deck = c.decks.get(g.file.id);
     if (!deck || !deckShown(deck)) continue;
     deck.slides.forEach((s, i) => {
-      hosts[s.id] = { route: `${guideRoute(ix, g.file.id)}/slides/${i + 1}`, loc: `${guideLoc(ix, g.file.id)} › Review slides` };
+      hosts[s.id] = { route: guideViewHash(g.file.id, { kind: "slides", n: i + 1 }), loc: slidesLoc(ix, g.file.id) };
     });
   }
   for (const f of c.flags.flags) hosts[f.id] = { route: UPDATES_ROUTE, loc: UPDATES_LOC };
@@ -324,7 +329,7 @@ export function publish(c: Content): PublishResult {
       const name = d.file.name;
       if (d.file.removed) out.removed.push({ id, name, at: d.file.removed.at });
       else if (d.kind === "file" && (d.file.state === "processing" || d.file.state === "failed")) out.pending.push({ id, name, state: d.file.state });
-      else out.files.push({ id, name, kind: d.file.kind, route: `#/file/${id}` });
+      else out.files.push({ id, name, kind: d.file.kind, route: fileHash(id, null) });
     }
     return out;
   };
@@ -367,7 +372,7 @@ export function publish(c: Content): PublishResult {
     const home = docHome.get(id);
     if (!d || !home || !visible(d) || docUnits.has(id)) return;
     docUnits.add(id);
-    const base = { tab: home.tab, loc: docLoc(id), route: `#/file/${id}`, label: "notes" as const };
+    const base = { tab: home.tab, loc: docLoc(id), route: fileHash(id, null), label: "notes" as const };
     if (d.kind === "word") {
       for (const b of d.blocks) {
         const table = (b.doc.content as PMNode[]).find((n) => n.type === "table");
@@ -418,7 +423,7 @@ export function publish(c: Content): PublishResult {
   };
   for (const g of c.guides) {
     const gid = g.file.id;
-    const base = guideRoute(ix, gid);
+    const base = guideBase(gid);
     const tab = tabOf(g);
     const summaries = g.file.systems.map((s) => ({ id: s.id, title: s.title, pct: s.pct }));
     if (isPanceGuide(g)) site.pance.systems = summaries;
@@ -458,7 +463,7 @@ export function publish(c: Content): PublishResult {
         const workup: WorkupJson = { guide: gid, items: g.general.workup.map((w) => ({ id: w.id, title: w.title, conds: w.conds, gap: gap(w.gap) })) };
         files.set(`g/${gid}/workup.json`, workup);
         for (const w of g.general.workup) {
-          units.push({ tab, title: collapse(w.title), loc: `${guideLoc(ix, gid)} › Initial workup`, route: `${base}/workup/${w.id}`, at: null, label: "notes", text: searchText(`${w.title}\n${w.conds}`) });
+          units.push({ tab, title: collapse(w.title), loc: workupLoc(ix, gid), route: guideViewHash(gid, { kind: "workup", item: w.id }), at: null, label: "notes", text: searchText(`${w.title}\n${w.conds}`) });
           gapUnit(w.gap);
         }
       }
@@ -501,7 +506,7 @@ export function publish(c: Content): PublishResult {
         deck.slides.forEach((sl, i) => {
           const heading = (sl.doc.content as PMNode[]).find((n) => n.type === "heading_line");
           units.push({
-            tab, title: collapse(heading ? nodeText(heading) : ""), loc: `${guideLoc(ix, gid)} › Review slides`, route: `${base}/slides/${i + 1}`,
+            tab, title: collapse(heading ? nodeText(heading) : ""), loc: slidesLoc(ix, gid), route: guideViewHash(gid, { kind: "slides", n: i + 1 }),
             at: sl.id, label: "slides", text: searchText(docText(sl.doc)),
           });
         });
@@ -645,7 +650,7 @@ export function publish(c: Content): PublishResult {
         const topic = t.topics.find((x) => x.id === r.id);
         if (topic) {
           units.push({
-            tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: `${s.base}/t/${topic.id}`,
+            tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
             at: topic.id, label: "notes", text: searchText(topicText(t, topic)),
           });
         } else if (info?.drug) {

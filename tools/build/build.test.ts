@@ -69,7 +69,7 @@ describe("build:data", () => {
     expect(fm.fonts).toEqual(FONTS.map((f) => ({ family: f.family, file: f.file })));
     expect(fm.map[String("A".codePointAt(0))]).toBe(0);
     expect(fm.map[String(0x2295)]).toBe(1); // ⊕: not in Carlito, in Noto Sans Math
-    expect(fm.map[String(0xf0000)]).toBe(FONTS.length - 1);
+    expect(fm.fonts[fm.map[String(0xf0000)] ?? -1]?.family).toBe("DejaVu Sans");
     expect(fm.map[String(0x0a)]).toBeUndefined();
   });
 
