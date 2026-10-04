@@ -4,14 +4,17 @@
 import { onOwnerChange, setBeforeSignInNavigate, setSignOutGuard } from "../auth/auth.ts";
 import { setNavigationGuard } from "../shell/route.ts";
 import { startOverlay, stopOverlay } from "./overlay.ts";
-import { confirmLeave, onBeforeUnload, repo, saveDraft } from "./session.ts";
+import { confirmLeave, keepEditsSignedOut, onBeforeUnload, repo, saveDraft } from "./session.ts";
 
 let started = false;
 
 /** The owner's overlay follows the owner state; an unreachable site.json leaves it off this session. */
 async function ownerChanged(owner: boolean): Promise<void> {
   if (!owner) {
+    // Before the editors close with the owner state: her unsaved changes must outlive them.
+    const kept = keepEditsSignedOut();
     stopOverlay();
+    await kept;
     return;
   }
   try {

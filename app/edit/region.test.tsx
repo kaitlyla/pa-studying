@@ -13,11 +13,13 @@ import { EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.t
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
-import { SAVING_AGAIN } from "../auth/auth.ts";
+import { cancelSignIn, checkOwner, continueWithGithub, getAuthUi, SAVING_AGAIN, startOwnerCheck } from "../auth/auth.ts";
+import { AUTH_KEY, CHANNEL_NAME } from "../auth/config.ts";
+import { startEditing } from "./boot.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, registerView, SAVE_FAILED, saveDraft, setDraftStoreForTests,
-  showPageBanner, startEdit, viewChanged, type Draft,
+  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, mountedEditor, registerView, SAVE_FAILED, saveDraft,
+  setDraftStoreForTests, showPageBanner, startEdit, viewChanged, type Draft,
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 
@@ -382,5 +384,156 @@ describe("a draft kept while a save waited on sign-in, reopened by the page's mo
     await until(() => (getEditStore().edit?.banner?.kind === "offline" ? true : null), "the offline banner");
     expect(await store.entries()).toHaveLength(1);
     expect(deletedAt).toEqual([]);
+  });
+});
+
+// Runs last in this file: the boot wiring and the owner check it starts stay registered for the module.
+describe("her unsaved changes when she stops being the owner while the edit is open", () => {
+  const page = (
+    <>
+      <Toast />
+      <EditRegion pageKey={KEY}><p>published body</p></EditRegion>
+    </>
+  );
+  const TYPED = "more AF text (kept)";
+  let drafts: KvStore<Draft>;
+  let other: BroadcastChannel;
+
+  beforeEach(() => {
+    drafts = memoryStore<Draft>();
+    setDraftStoreForTests(drafts);
+    startEditing();
+    startOwnerCheck();
+    other = new BroadcastChannel(CHANNEL_NAME);
+  });
+
+  afterEach(() => {
+    other.close();
+    act(() => cancelSignIn());
+  });
+
+  const editorIn = (root: ParentNode): Element | null => root.querySelector('[data-ref="edit-area"] [contenteditable="true"]');
+  const atHead = (text: string): boolean => [...w.fake.listFiles().keys()].some((p) => w.fake.readFile(p)?.includes(text) === true);
+
+  /** Signs in as the owner with a fresh token pair, the way a finished sign-in stores it. */
+  function storeNewSignIn(): void {
+    const t = w.fake.issueTokens();
+    const exp = Date.now() + 3600_000;
+    localStorage.setItem(AUTH_KEY, JSON.stringify({ access: t.access_token, accessExp: exp, refresh: t.refresh_token, refreshExp: exp }));
+  }
+
+  /** The owner opens the page's real EditRegion for editing and types " (kept)" into its editor. */
+  async function openAndTypeInRegion(): Promise<HTMLElement> {
+    await act(async () => {
+      expect(await checkOwner()).toBe(true);
+    });
+    const root = await render(page);
+    await act(async () => {
+      expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    });
+    await until(() => editorIn(root), "the editor");
+    const unit = edit().unit;
+    const slots = unit?.parts.flatMap((p) => (p.kind === "stub" || p.kind === "gap" ? [] : [p.slot.id])) ?? [];
+    act(() => {
+      for (const slot of slots) {
+        const view = mountedEditor(slot);
+        let at = -1;
+        view?.state.doc.descendants((node, pos) => {
+          if (at === -1 && node.isText && node.text?.includes("more AF text")) at = pos + node.text.indexOf("more AF text") + "more AF text".length;
+          return at === -1;
+        });
+        if (view && at !== -1) {
+          view.dispatch(view.state.tr.insertText(" (kept)", at));
+          return;
+        }
+      }
+      throw new Error("no mounted editor holds the AF text");
+    });
+    expect(edit().dirty).toBe(true);
+    expect(atHead(TYPED)).toBe(false);
+    return root;
+  }
+
+  /** Save runs into an expired sign-in: the refresh is refused, so she is signed out mid-save. */
+  async function saveIntoExpiredSignIn(root: HTMLElement): Promise<void> {
+    w.fake.validTokens.delete("test-token");
+    await click(q(root, "edit-save"));
+    await until(() => getAuthUi().dialog === "expired", "the sign-in-again dialog");
+    // The editors closed with the owner state: what she typed is no longer in any mounted editor.
+    await until(() => editorIn(root) === null, "the editors to close");
+  }
+
+  it("a sign-in that expires during Save, renewed in the popup, saves what she typed", async () => {
+    const root = await openAndTypeInRegion();
+    const before = w.fake.head();
+    await saveIntoExpiredSignIn(root);
+
+    storeNewSignIn();
+    await act(async () => {
+      other.postMessage({ type: "signed-in" });
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    await until(() => (getEditStore().pageBanner?.banner.kind === "saved" ? true : null), "the saved banner");
+    const head = w.fake.head();
+    expect(w.fake.commit(head)?.parents).toEqual([before]);
+    expect(atHead(TYPED)).toBe(true);
+    await vi.waitFor(async () => expect(await drafts.entries()).toEqual([]));
+  });
+
+  it("with the sign-in popup blocked, the stored draft holds what she typed and saves after the return", async () => {
+    const root = await openAndTypeInRegion();
+    await saveIntoExpiredSignIn(root);
+    vi.spyOn(window, "open").mockReturnValue(null);
+    // jsdom logs the sign-in page load it can't perform.
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    await until(() => getAuthUi().prepared, "the sign-in attempt");
+    continueWithGithub();
+
+    const stored = await vi.waitFor(async () => {
+      const d = await drafts.get(KEY);
+      expect(d?.resumeSave).toBe(true);
+      return d;
+    });
+    expect(JSON.stringify(stored?.docs)).toContain(TYPED);
+
+    // The page load leaves only the stored draft: this page's editors and memory go.
+    mounted.forEach((m) => m.unmount());
+    mounted = [];
+    act(() => discardEdit());
+    if (stored) await drafts.put(KEY, stored);
+
+    storeNewSignIn();
+    await render(page);
+    await act(async () => {
+      expect(await checkOwner()).toBe(true);
+    });
+    await until(() => (getEditStore().pageBanner?.banner.kind === "saved" ? true : null), "the saved banner");
+    expect(atHead(TYPED)).toBe(true);
+    await vi.waitFor(async () => expect(await drafts.entries()).toEqual([]));
+  });
+
+  it("a sign-out in another tab keeps what she typed, on the device and back in the editor when she signs in", async () => {
+    const root = await openAndTypeInRegion();
+    localStorage.removeItem(AUTH_KEY);
+    await act(async () => {
+      other.postMessage({ type: "signed-out" });
+      await new Promise((r) => setTimeout(r, 0));
+    });
+    await until(() => editorIn(root) === null, "the editors to close");
+    expect(edit().dirty).toBe(true);
+    await vi.waitFor(async () => expect(JSON.stringify((await drafts.get(KEY))?.docs)).toContain(TYPED));
+
+    storeNewSignIn();
+    await act(async () => {
+      other.postMessage({ type: "signed-in" });
+      await new Promise((r) => setTimeout(r, 0));
+    });
+    await until(() => editorIn(root)?.textContent?.includes(TYPED), "the editor with her text");
+
+    await click(q(root, "edit-save"));
+    await until(() => (getEditStore().pageBanner?.banner.kind === "saved" ? true : null), "the saved banner");
+    expect(atHead(TYPED)).toBe(true);
+    await vi.waitFor(async () => expect(await drafts.entries()).toEqual([]));
   });
 });

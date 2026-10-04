@@ -138,15 +138,31 @@ export function registerView(slot: string, view: EditorView, initial: DocJSON): 
   }
   viewChanged();
   return () => {
-    if (views.get(slot)?.view === view) views.delete(slot);
+    if (views.get(slot)?.view !== view) return;
+    views.delete(slot);
+    // The editor went away while its edit is still open (she was signed out, or the page re-suspended):
+    // its changes wait for it to mount again, and save and drafts still take them meanwhile.
+    if (store.edit && !view.state.doc.eq(schema.nodeFromJSON(initial))) {
+      (pendingDocs ??= new Map()).set(slot, view.state.doc.toJSON() as DocJSON);
+    }
   };
+}
+
+/** Changes of editors that are not mounted: a restored draft waiting for them, or a closed editor's. */
+function unmountedDocs(): [string, DocJSON][] {
+  return [...(pendingDocs ?? [])].filter(([slot]) => !views.has(slot));
+}
+
+/** The mounted editor of `slot` in the open edit. */
+export function mountedEditor(slot: string): EditorView | undefined {
+  return views.get(slot)?.view;
 }
 
 function isDirty(): boolean {
   for (const { view, initial } of views.values()) {
     if (!view.state.doc.eq(schema.nodeFromJSON(initial))) return true;
   }
-  return false;
+  return unmountedDocs().length > 0;
 }
 
 /** An editor's document changed: recompute dirty. */
@@ -160,6 +176,7 @@ function editedDocs(): Map<string, DocJSON> {
   for (const [slot, { view, initial }] of views) {
     if (!view.state.doc.eq(schema.nodeFromJSON(initial))) out.set(slot, view.state.doc.toJSON() as DocJSON);
   }
+  for (const [slot, doc] of unmountedDocs()) out.set(slot, doc);
   return out;
 }
 
@@ -321,6 +338,7 @@ export async function save(): Promise<boolean> {
     if (outcome.kind === "saved") {
       await recordSaved(build.files, outcome.commit);
       views.clear();
+      pendingDocs = null;
       copiedEdits = null;
       dropKeptDraft();
       const moved = build.topicMoved;
@@ -396,6 +414,7 @@ export async function loadNewer(): Promise<void> {
     const now = getEditStore().edit;
     if (now?.key !== edit.key) return;
     views.clear();
+    pendingDocs = null;
     copiedEdits = null;
     dropKeptDraft();
     setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied } });
@@ -455,6 +474,21 @@ async function keepConflictDraft(): Promise<void> {
     keptDraftKey = key;
   } catch (e) {
     console.warn("Couldn’t keep the conflicting changes on this device", e);
+  }
+}
+
+/**
+ * She stopped being the owner on this device (the sign-in expired, or she signed out in another tab)
+ * with unsaved changes open: they are kept on the device too, until she saves or lets them go.
+ */
+export async function keepEditsSignedOut(): Promise<void> {
+  const key = store.edit?.key;
+  if (key === undefined || !isDirty()) return;
+  try {
+    await saveDraft();
+    keptDraftKey = key;
+  } catch (e) {
+    console.warn("Couldn’t keep the unsaved changes on this device", e);
   }
 }
 
