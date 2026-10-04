@@ -3,6 +3,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import type { DocJSON, GapFile, StructureFile, BlockFile } from "../../lib/content/index.ts";
 import type { SystemJson } from "../../lib/derive/published.ts";
+import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
 import { B, D, G, R, S } from "../../tools/build/test-fixture.ts";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
@@ -228,6 +229,41 @@ describe("building a save", () => {
     expect(Object.values(members)).not.toContain(R(101));
     // R105 now opens the rows after the heading, and R102 (no title of its own) continues it.
     expect(build.topicMoved).toEqual({ guide: "fm", system: "cardiovascular", topic: R(105) });
+  });
+
+  it("deleting a topic's first row from the system page keeps the rows recorded above it with the rest of the topic, in a tree the build accepts", async () => {
+    // Two blank rows added above R101 on its topic page are recorded under it (Orchestrator ruling 04:44Z).
+    const topicUnit = await unitAt(`topic:fm:${R(101)}`);
+    const tp = only(topicUnit, "rows");
+    const above = addRow(addRow(tp.slot.doc, R(100), R(105), ["", "first above", ""]), R(105), R(106), ["", "second above", ""]);
+    const first = buildSave(topicUnit, new Map([[tp.slot.id, above]]), TODAY);
+    expect(json<StructureFile>(changeOf(first, CV_STRUCTURE)).members).toMatchObject({ [R(105)]: R(101), [R(106)]: R(101) });
+    w.fake.commitFiles(Object.fromEntries(first.changes.map((c) => [c.path, changeOf(first, c.path) ?? null])));
+
+    const unit = await unitAt("system:fm:cardiovascular");
+    const part = only(unit, "rows");
+    const section = part.sys.structure.members[R(101)];
+    expect(section).toBe("other");
+    const build = buildSave(unit, new Map([[part.slot.id, dropRow(part.slot.doc, R(101))]]), TODAY);
+
+    const structure = json<StructureFile>(changeOf(build, CV_STRUCTURE));
+    expect(structure.members[R(102)]).toBe(section);
+    expect(structure.members[R(105)]).toBe(R(102));
+    expect(structure.members[R(106)]).toBe(R(102));
+    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+    const blocks = part.sys.blocks.map((b) => (b.id === saved.id ? saved : b));
+    const topics = deriveTopics(blocks, structure);
+    expect(() => checkMembers("cardiovascular", topics, structure)).not.toThrow();
+    expect(topics.topics.find((t) => t.rows.includes(R(102)))?.rows).toEqual([R(105), R(106), R(102)]);
+  });
+
+  it("refuses a save whose structure the build would reject, before anything is written", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    // R102 recorded under R101, a topic row above it: the build can't place it.
+    part.sys.structure = { ...part.sys.structure, members: { ...part.sys.structure.members, [R(102)]: R(101) } };
+    expect(() => buildSave(unit, new Map([[part.slot.id, setCell(part.slot.doc, R(102), 1, "more AF text, revised")]]), TODAY))
+      .toThrow(`members records it under ${R(101)}`);
   });
 
   it("a topic page save that keeps its first row reports no move", async () => {

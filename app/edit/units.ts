@@ -6,7 +6,7 @@ import {
   type PageSetup, type PharmFile, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
-import { deriveTopics, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
 import { GAP_BASE_PT } from "../render/index.ts";
@@ -376,8 +376,10 @@ function insertAt(list: readonly string[], oldList: readonly string[], id: strin
 }
 
 /**
- * A deleted topic's first row hands its `members` entry to the topic's first remaining row, and rows
- * recorded under the deleted id follow it there; otherwise the rest of the topic would lose its section.
+ * A deleted topic's first row hands its `members` entry to the topic's next remaining row below it, and
+ * the rows recorded under the deleted id (all above it) are recorded under that row instead, so they stay
+ * with the rest of the topic. With no remaining row below, the recorded rows take the entry themselves.
+ * Otherwise the rest of the topic would lose its section, or name a target the build can't place.
  * `before` is the structure the deletion applied to and `topics` its derivation.
  */
 function handOver(structure: StructureFile, before: StructureFile, topics: ReturnType<typeof deriveTopics>, deleted: readonly string[]): StructureFile {
@@ -385,13 +387,25 @@ function handOver(structure: StructureFile, before: StructureFile, topics: Retur
   for (const id of deleted) {
     const topic = topics.topics.find((t) => t.id === id);
     const entry = before.members[id];
-    const heir = topic?.rows.find((r) => r !== id && !deleted.includes(r));
-    if (!topic || entry === undefined || heir === undefined) continue;
+    if (!topic || entry === undefined) continue;
+    const heir = topic.rows.slice(topic.rows.indexOf(id) + 1).find((r) => !deleted.includes(r));
+    const recorded = Object.keys(before.members).filter((k) => before.members[k] === id && !deleted.includes(k));
+    if (heir === undefined && recorded.length === 0) continue;
     members ??= { ...structure.members };
-    for (const [k, v] of Object.entries(before.members)) if (v === id && k !== heir && !deleted.includes(k)) members[k] = heir;
-    members[heir] = entry;
+    if (heir !== undefined) members[heir] = entry;
+    for (const k of recorded) members[k] = heir ?? entry;
   }
   return members === null ? structure : { ...structure, members };
+}
+
+/**
+ * The build's own checks on each system a save changes (40 §40.1/§40.2): a save never commits a tree
+ * the next publish would reject. Throws the build's error.
+ */
+function checkSystems(systems: Iterable<{ sys: SystemCtx; structure: StructureFile; blocks: BlockFile[] }>): void {
+  for (const { sys, structure, blocks } of systems) {
+    checkMembers(sys.system, deriveTopics(blocks, structure), structure);
+  }
 }
 
 /** `structure` with the `members`, `listed` and `conditionRows` entries `ids` had in `old`. */
@@ -523,6 +537,7 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
       put(part.path, part.block, JSON.parse(canonical(part.path, { ...plain, meta: { ...part.block.meta, ownerEdits: [...(part.block.meta.ownerEdits ?? []), today] } })));
     }
   }
+  checkSystems(systems.values());
   for (const { sys, structure } of systems.values()) {
     if (structure !== sys.structure) put(sys.structurePath, sys.structure, structure);
   }
