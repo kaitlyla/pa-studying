@@ -595,7 +595,8 @@ describe("review slides", () => {
     expect(deck.slides.map(slideTitle)).toEqual(["High-yield review slides", "Atrial fibrillation"]);
   });
 
-  it("her own deck opens on her first slide with the contents under it, Download original and Versions", async () => {
+  /** Serves psy's review slides as her own deck, stored as document D(4). */
+  function serveOwnDeck(): void {
     const own: SlidesJson = { ...deck, guide: "psy", kind: "own", title: "Psych review slides", file: D(4) };
     const doc: DocJson = { id: D(4), name: "Psych review slides", kind: "slides", original: `files/${D(4)}/psych.pptx`, notes: {} };
     const psyNav = files.get("g/psy/nav.json") as NavJson;
@@ -605,7 +606,10 @@ describe("review slides", () => {
     data.set("g/psy/nav.json", { ...psyNav, slides: { title: "Psych review slides" } });
     server.restore();
     server = serveData(data);
+  }
 
+  it("her own deck opens on her first slide with the contents under it, Download original and Versions", async () => {
+    serveOwnDeck();
     const a = await renderApp("#/eor/psy/slides/1");
     app = a;
     const c = a.container;
@@ -619,7 +623,7 @@ describe("review slides", () => {
     const original = must(byText<HTMLAnchorElement>(c, ".main a.btn", "Download original"), "Download original");
     expect(original.getAttribute("href")).toBe(`${DATA_BASE}files/${D(4)}/psych.pptx`);
     expect(original.hasAttribute("download")).toBe(true);
-    expect(byText(c, ".main a.btn", "Versions")?.getAttribute("href")).toBe(versionsHash(`doc:${D(4)}`));
+    expect(c.querySelector('.main button.own-only[data-ref="deck-versions"]')?.textContent).toBe("Versions");
     asOwner(true);
     expect(visibleText(must(c.querySelector(".rs-label"), "badge"))).toBe("Review slides · Not included in PDF downloads");
     // Her own deck is replaced, not text-edited: no per-slide Edit/Versions even for the signed-in owner.
@@ -636,6 +640,25 @@ describe("review slides", () => {
     quietErrors();
     await go("#/eor/psy/slides/3");
     await until(() => notFound(c), "own slide 3 not on site");
+  });
+
+  it("her deck's Versions opens the deck document's history, and Back to the page returns to the slide she was on", async () => {
+    serveOwnDeck();
+    asOwner(true);
+    // No GitHub is served here, so the history itself fails to load (and logs); only the page frame matters.
+    quietErrors();
+    const a = await renderApp("#/eor/psy/slides/2");
+    app = a;
+    const c = a.container;
+    await click(await until(() => c.querySelector('.main [data-ref="deck-versions"]'), "the deck's Versions"));
+
+    const versions = await until(() => c.querySelector('[data-surface="versions"]'), "the Versions page");
+    expect(parseHash(location.hash)).toEqual(parseHash(versionsHash(`doc:${D(4)}`)));
+    expect(versions.querySelector("h1")?.textContent).toBe("Versions of “Psych review slides”");
+
+    await click(versions.querySelector('[data-ref="versions-back"]'));
+    await until(() => c.querySelector(".slide")?.getAttribute("aria-label") === "Slide 2: Atrial fibrillation", "back on own slide 2");
+    expect(location.hash).toBe("#/eor/psy/slides/2");
   });
 });
 

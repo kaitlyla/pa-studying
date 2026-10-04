@@ -11,9 +11,9 @@ import { Txt } from "../render/Text.tsx";
 import { PageNotFound } from "../shell/errors.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
-import { DocActions, EditControls, EditRegion } from "../shell/mounts.tsx";
+import { DocActions, EditControls, EditRegion, openVersions } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
-import { guideViewHash, navigate, versionsHash } from "../shell/route.ts";
+import { guideViewHash, navigate } from "../shell/route.ts";
 import { guideCrumbs, guideName, useSite } from "./data.ts";
 import { buildPageKey } from "../edit/pageKey.ts";
 
@@ -78,9 +78,9 @@ function OwnDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n: numbe
               </a>
             )}
             <DocActions doc={doc} />
-            <Link className="btn own-only" to={versionsHash(buildPageKey("doc", doc.id))}>
+            <button type="button" className="btn own-only" onClick={() => void openVersions(buildPageKey("doc", doc.id), title)} data-ref="deck-versions">
               Versions
-            </Link>
+            </button>
           </>
         }
       />

@@ -6,7 +6,7 @@ import type { DocJson, PendingDoc, RemovedDoc } from "../../lib/derive/published
 type C<P> = (props: P) => ReactNode;
 const none = (): ReactNode => null;
 
-export { EditControls, EditRegion } from "../edit/EditRegion.tsx";
+export { EditControls, EditRegion, openVersions } from "../edit/EditRegion.tsx";
 export { UnsavedDialog } from "../edit/dialogs.tsx";
 export { OwnerAvatar, SignInDialog, SignInLink, completeSignInReturn, startAuth } from "../auth/index.ts";
 
