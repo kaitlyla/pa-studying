@@ -7,7 +7,7 @@ import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { commitMessage, serializeFile } from "../../lib/content/index.ts";
+import { commitMessage, inboxItemDir, inboxUploadPath, partName, serializeFile, UPLOAD_NAME } from "../../lib/content/index.ts";
 import type { AsIsFile, SiteFile, UploadExt, UploadFile } from "../../lib/content/index.ts";
 import { listDir, readContent } from "../../lib/content/fs.ts";
 import { baseName, loadSources } from "./sources.ts";
@@ -125,14 +125,16 @@ export async function handOffInbox(root: string, { run, gh = ghPath(), log = con
     const entries: string[] = [];
     for (let i = 0; i < parts; i++) {
       const blob = (await run("git", ["hash-object", "-w", "--stdin"], { input: bytes.subarray(i * PART_BYTES, (i + 1) * PART_BYTES) })).trim();
-      entries.push(`100644 blob ${blob}\tpart-${String(i).padStart(3, "0")}`);
+      entries.push(`100644 blob ${blob}\t${partName(i)}`);
     }
-    const uploadText = serializeFile(`inbox/${file.id}/upload.json`, upload);
+    const uploadText = serializeFile(inboxUploadPath(file.id), upload);
     const uploadBlob = (await run("git", ["hash-object", "-w", "--stdin"], { input: uploadText })).trim();
-    entries.push(`100644 blob ${uploadBlob}\tupload.json`);
-    const itemTree = (await run("git", ["mktree"], { input: `${entries.join("\n")}\n` })).trim();
-    const inboxTree = (await run("git", ["mktree"], { input: `040000 tree ${itemTree}\t${file.id}\n` })).trim();
-    const rootTree = (await run("git", ["mktree"], { input: `040000 tree ${inboxTree}\tinbox\n` })).trim();
+    entries.push(`100644 blob ${uploadBlob}\t${UPLOAD_NAME}`);
+    // Wrap the item's tree in each directory of its path, innermost first.
+    let rootTree = (await run("git", ["mktree"], { input: `${entries.join("\n")}\n` })).trim();
+    for (const dir of inboxItemDir(file.id).split("/").reverse()) {
+      rootTree = (await run("git", ["mktree"], { input: `040000 tree ${rootTree}\t${dir}\n` })).trim();
+    }
     const inboxCommit = (await run("git", ["commit-tree", rootTree, "-p", parent, "-F", "-"], { input: `Inbox: ${file.original}\n`, env })).trim();
     await run("git", ["push", "origin", `${inboxCommit}:refs/heads/inbox/${file.id}`]);
     await run(gh, ["workflow", "run", "process-inbox.yml", "-f", `item=${file.id}`]);
