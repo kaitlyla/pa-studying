@@ -13,6 +13,8 @@ permissions: {}
 concurrency:
   group: inbox
   cancel-in-progress: false
+  # Every dispatched upload must run; the default queue keeps one pending run and cancels the rest.
+  queue: max
 
 jobs:
   process:

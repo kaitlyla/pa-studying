@@ -1,0 +1,24 @@
+# Text is stored and checked out with LF on every machine (lib/content accepts only LF).
+* text=auto eol=lf
+
+# Stored originals and slices must stay byte-identical: never convert them, even when Git's
+# text detection would call them text (an RTF-in-.doc, a PDF or a slice with no NUL byte).
+content/assets/** binary
+content/files/** -text
+content/files/*/file.json text eol=lf
+inbox/** binary
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.doc binary
+*.docx binary
+*.ppt binary
+*.pptx binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
