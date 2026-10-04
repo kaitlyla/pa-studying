@@ -1,0 +1,72 @@
+{
+  "probedAt": "2026-10-04T03:01:08.366Z",
+  "clientId": "Iv23liINMwnm7zCj9dpi",
+  "steps": [
+    {
+      "step": "exchange",
+      "request": {
+        "method": "POST",
+        "url": "https://github.com/login/oauth/access_token",
+        "body": {
+          "client_id": "Iv23liINMwnm7zCj9dpi",
+          "client_secret": "[redacted]",
+          "code": "[redacted]",
+          "redirect_uri": "http://127.0.0.1:8977/callback",
+          "code_verifier": "[redacted]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "access_token": "[redacted]",
+          "expires_in": 28800,
+          "refresh_token": "[redacted]",
+          "refresh_token_expires_in": 15724800,
+          "token_type": "bearer",
+          "scope": ""
+        }
+      }
+    },
+    {
+      "step": "delete-token",
+      "request": {
+        "method": "DELETE",
+        "url": "https://api.github.com/applications/Iv23liINMwnm7zCj9dpi/token",
+        "headers": {
+          "Authorization": "Basic [redacted]"
+        },
+        "body": {
+          "access_token": "[redacted]"
+        }
+      },
+      "response": {
+        "status": 204,
+        "body": null
+      }
+    },
+    {
+      "step": "refresh-after-delete",
+      "request": {
+        "method": "POST",
+        "url": "https://github.com/login/oauth/access_token",
+        "body": {
+          "client_id": "Iv23liINMwnm7zCj9dpi",
+          "client_secret": "[redacted]",
+          "grant_type": "refresh_token",
+          "refresh_token": "[redacted]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "error": "bad_refresh_token",
+          "error_description": "The refresh token passed is incorrect or expired.",
+          "error_uri": "https://docs.github.com/apps/managing-oauth-apps/troubleshooting-oauth-app-access-token-request-errors/#bad-verification-code"
+        }
+      }
+    }
+  ],
+  "result": {
+    "REVOKE_MODE": "token"
+  }
+}

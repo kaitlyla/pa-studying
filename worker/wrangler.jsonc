@@ -4,6 +4,8 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
-  // The monthly guideline-check cron ("0 9 1 * *", plan 80) is added with guideline-check.yml (step S8).
-  "triggers": { "crons": [] }
+  "triggers": { "crons": ["0 9 1 * *"] },
+  // Measured by tools/setup/revoke-probe.mjs on 2026-10-04 (recorded in tools/setup/revoke-probe.json):
+  // deleting an access token also invalidates its refresh token, so sign-out revokes the single token.
+  "vars": { "REVOKE_MODE": "token" }
 }

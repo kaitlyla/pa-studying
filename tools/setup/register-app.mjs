@@ -49,7 +49,7 @@ const manifest = {
   redirect_url: `${LOOPBACK}/registered`,
   callback_urls: [SITE_URL, `${LOOPBACK}/callback`],
   public: false,
-  default_permissions: { contents: "write", actions: "write", metadata: "read" },
+  default_permissions: EXPECTED_PERMISSIONS,
   default_events: [],
   request_oauth_on_install: false,
 };
