@@ -92,7 +92,7 @@ describe("browserEnvironment", () => {
     const fetch = vi.fn(async () => respond(JSON.stringify(fontmap)));
     vi.stubGlobal("fetch", fetch);
     expect(await browserEnvironment.fontmap()).toEqual(fontmap);
-    expect(fetch).toHaveBeenCalledWith(`${DATA_BASE}fonts/fontmap.json`);
+    expect(fetch).toHaveBeenCalledWith(`${DATA_BASE}fonts/fontmap.json`, { cache: "no-cache" });
   });
 
   it("resolves font files under the site's /fonts/", () => {
