@@ -3,10 +3,12 @@
 import type { FontMapJson } from "../../lib/derive/published.ts";
 import {
   buildDocDefinition,
+  embedsAsStored,
   imageKey,
   imageRequests,
   pdfFileName,
   pdfFonts,
+  storedMime,
   type DocDefinition,
   type ImageData,
   type ImageVariant,
@@ -34,19 +36,10 @@ export interface PdfEnvironment {
   image(v: ImageVariant): Promise<string>;
 }
 
-const MIME: Record<string, string> = { png: "image/png", jpeg: "image/jpeg", jpg: "image/jpeg", gif: "image/gif" };
-
 function base64(bytes: Uint8Array): string {
   let bin = "";
   for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   return btoa(bin);
-}
-
-const extOf = (asset: string): string => asset.slice(asset.lastIndexOf(".") + 1).toLowerCase();
-
-/** True when the stored bytes can be embedded as they are: PNG/JPEG, not turned or flipped. */
-export function embedsAsStored(v: ImageVariant): boolean {
-  return extOf(v.asset) !== "gif" && v.rot === 0 && !v.flipH && !v.flipV;
 }
 
 /** Draws an image turned and flipped as stored (flips first, then the rotation) and encodes PNG. */
@@ -75,7 +68,7 @@ export const browserEnvironment: PdfEnvironment = {
     const res = await fetch(`${DATA_BASE}assets/${v.asset}`);
     if (!res.ok) throw new Error(`PDF: image ${v.asset}: HTTP ${res.status}`);
     const blob = await res.blob();
-    if (embedsAsStored(v)) return `data:${MIME[extOf(v.asset)]};base64,${base64(new Uint8Array(await blob.arrayBuffer()))}`;
+    if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${base64(new Uint8Array(await blob.arrayBuffer()))}`;
     const png = await convertToPng(blob, v);
     return `data:image/png;base64,${base64(new Uint8Array(await png.arrayBuffer()))}`;
   },

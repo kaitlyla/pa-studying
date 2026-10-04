@@ -7,7 +7,7 @@ import serverPdfMake from "pdfmake";
 import { describe, expect, it } from "vitest";
 import { imageKey, imageRequests, type DocDefinition, type ImageVariant } from "../../lib/pdf/index.ts";
 import { block, cardioSystem, doc, fmNav, FONTS_DIR, fontmapFor, para, txt, wordDoc } from "../../lib/pdf/testing.ts";
-import { downloadPdf, embedsAsStored, pdfFileName, type PdfEnvironment, type PdfMake } from "./download.ts";
+import { downloadPdf, pdfFileName, type PdfEnvironment, type PdfMake } from "./download.ts";
 
 const PNG = `${"a".repeat(32)}.png`;
 const GIF = `${"b".repeat(32)}.gif`;
@@ -94,19 +94,5 @@ describe("downloadPdf", () => {
     });
     await expect(downloadPdf({ kind: "doc" }, { doc: w }, env)).rejects.toThrow(`PDF: image ${PNG}: HTTP 404`);
     expect(env.downloads).toEqual([]);
-  });
-});
-
-describe("embedsAsStored", () => {
-  it.each([
-    [{ asset: PNG, rot: 0, flipH: false, flipV: false }, true],
-    [{ asset: "c".repeat(32) + ".jpeg", rot: 0, flipH: false, flipV: false }, true],
-    [{ asset: "c".repeat(32) + ".JPG", rot: 0, flipH: false, flipV: false }, true],
-    [{ asset: GIF, rot: 0, flipH: false, flipV: false }, false],
-    [{ asset: PNG, rot: 90, flipH: false, flipV: false }, false],
-    [{ asset: PNG, rot: 0, flipH: true, flipV: false }, false],
-    [{ asset: PNG, rot: 0, flipH: false, flipV: true }, false],
-  ])("%j → %s", (v, expected) => {
-    expect(embedsAsStored(v)).toBe(expected);
   });
 });

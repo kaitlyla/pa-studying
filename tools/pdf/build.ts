@@ -6,9 +6,7 @@ import { PDFDocument } from "@cantoo/pdf-lib";
 import pdfMake from "pdfmake";
 import sharp from "sharp";
 import type { FontMapJson, HomeJson, NavJson, SystemJson } from "../../lib/derive/published.ts";
-import { buildDocDefinition, imageKey, imageRequests, pdfFonts, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
-
-const MIME: Record<string, string> = { png: "image/png", jpeg: "image/jpeg", jpg: "image/jpeg" };
+import { buildDocDefinition, embedsAsStored, imageKey, storedMime, imageRequests, pdfFonts, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
 
 async function readJson<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf8")) as T;
@@ -17,9 +15,7 @@ async function readJson<T>(path: string): Promise<T> {
 /** An image variant as a data URL: PNG/JPEG bytes as stored; GIF and turned/flipped pictures as PNG via sharp. */
 export async function imageDataUrl(assetsDir: string, v: ImageVariant): Promise<string> {
   const bytes = await readFile(join(assetsDir, v.asset));
-  const ext = v.asset.slice(v.asset.lastIndexOf(".") + 1).toLowerCase();
-  const mime = MIME[ext];
-  if (mime && v.rot === 0 && !v.flipH && !v.flipV) return `data:${mime};base64,${bytes.toString("base64")}`;
+  if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${bytes.toString("base64")}`;
   // sharp mirrors (flip, flop) before it rotates, matching the stored transform's order.
   const png = await sharp(bytes).flip(v.flipV).flop(v.flipH).rotate(v.rot).png().toBuffer();
   return `data:image/png;base64,${png.toString("base64")}`;
@@ -58,20 +54,38 @@ export async function mergePdfs(parts: readonly Uint8Array[]): Promise<Uint8Arra
   return out.save();
 }
 
+const FONTMAP_FILE = "fonts/fontmap.json";
+const navFile = (guide: string): string => `g/${guide}/nav.json`;
+
+/**
+ * Every `dist/data/` file a guide's whole PDF is built from, relative to that directory: the only
+ * paths buildGuidePdf and loadFontmap read, so the release digest (release.ts) covers exactly them.
+ * Pictures are named by their content hash inside these files.
+ */
+function guidePaths(guide: string, nav: NavJson): { nav: string; home: string; systems: string[]; fontmap: string } {
+  return { nav: navFile(guide), home: `g/${guide}/home.json`, systems: nav.systems.map((s) => `g/${guide}/s/${s.id}.json`), fontmap: FONTMAP_FILE };
+}
+
+/** guidePaths as one ordered list. */
+export async function consumedFiles(dataDir: string, guide: string): Promise<string[]> {
+  const p = guidePaths(guide, await readJson<NavJson>(join(dataDir, navFile(guide))));
+  return [p.nav, p.home, ...p.systems, p.fontmap];
+}
+
 /** The guide's whole PDF: its preamble (when it has one), then every system in guide order. */
 export async function buildGuidePdf(dataDir: string, guide: string, renderer: PdfRenderer): Promise<Uint8Array> {
-  const dir = join(dataDir, "g", guide);
-  const nav = await readJson<NavJson>(join(dir, "nav.json"));
-  const home = await readJson<HomeJson>(join(dir, "home.json"));
+  const nav = await readJson<NavJson>(join(dataDir, navFile(guide)));
+  const paths = guidePaths(guide, nav);
+  const home = await readJson<HomeJson>(join(dataDir, paths.home));
   const parts: Uint8Array[] = [];
   if (home.preamble.length > 0) parts.push(await renderer.render({ kind: "preamble" }, { nav, home }));
-  for (const s of nav.systems) {
-    const system = await readJson<SystemJson>(join(dir, "s", `${s.id}.json`));
+  for (const path of paths.systems) {
+    const system = await readJson<SystemJson>(join(dataDir, path));
     parts.push(await renderer.render({ kind: "system" }, { nav, system }));
   }
   return mergePdfs(parts);
 }
 
 export async function loadFontmap(dataDir: string): Promise<FontMapJson> {
-  return readJson<FontMapJson>(join(dataDir, "fonts", "fontmap.json"));
+  return readJson<FontMapJson>(join(dataDir, FONTMAP_FILE));
 }

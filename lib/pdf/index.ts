@@ -11,6 +11,7 @@ import type { DocDefinition, ImageVariant, PdfInput, PdfScope } from "./types.ts
 
 export type { Content, DocDefinition, ImageData, ImageVariant, PdfInput, PdfScope } from "./types.ts";
 export { imageKey } from "./types.ts";
+export { EMBED_MIME, embedsAsStored, storedMime } from "./images.ts";
 export { pdfFonts, CARLITO_FACES } from "./fonts.ts";
 
 /** One stored doc with the base size its `size` marks are relative to. */

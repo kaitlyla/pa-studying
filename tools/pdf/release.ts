@@ -8,7 +8,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { NavJson } from "../../lib/derive/published.ts";
+import { consumedFiles } from "./build.ts";
 
 export interface RunResult {
   code: number;
@@ -31,16 +31,7 @@ function must(r: RunResult, what: string): string {
 
 export const releaseTag = (guide: string): string => `pdf-${guide}`;
 
-/**
- * The `dist/data/` files a guide's whole PDF is built from, in a fixed order: its nav, home and system
- * files, and the font map. Pictures are named by their content hash inside these files.
- */
-export async function consumedFiles(dataDir: string, guide: string): Promise<string[]> {
-  const nav = JSON.parse(await readFile(join(dataDir, "g", guide, "nav.json"), "utf8")) as NavJson;
-  return [`g/${guide}/nav.json`, `g/${guide}/home.json`, ...nav.systems.map((s) => `g/${guide}/s/${s.id}.json`), "fonts/fontmap.json"];
-}
-
-/** SHA-256 over each consumed file's path and bytes. None of them carries a build timestamp. */
+/** SHA-256 over the path and bytes of each file the guide's PDF reads (build.ts consumedFiles). None carries a build timestamp. */
 export async function guideDigest(dataDir: string, guide: string): Promise<string> {
   const hash = createHash("sha256");
   for (const path of await consumedFiles(dataDir, guide)) {

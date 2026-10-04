@@ -2,7 +2,7 @@
 // conversion, the release decision, and the CLI.
 import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { PDFDocument } from "@cantoo/pdf-lib";
 import { getDocument, OPS } from "pdfjs-dist/legacy/build/pdf.mjs";
 import sharp from "sharp";
@@ -13,9 +13,9 @@ import { FONTS, isVariationSelector } from "../../lib/fonts.ts";
 import { schema } from "../../lib/schema.ts";
 import { block, cardioSystem, cell, doc, fmHome, fmNav, FONTS_DIR, fontmapFor, FORBIDDEN, para, pulmSystem, row, table, txt, wordDoc } from "../../lib/pdf/testing.ts";
 import type { PdfInput, PdfScope } from "../../lib/pdf/index.ts";
-import { buildGuidePdf, imageDataUrl, mergePdfs, nodeRenderer, type PdfRenderer } from "./build.ts";
+import { buildGuidePdf, consumedFiles, imageDataUrl, loadFontmap, mergePdfs, nodeRenderer, type PdfRenderer } from "./build.ts";
 import { main, runAll } from "./index.ts";
-import { consumedFiles, decide, guideDigest, headCommit, outsideBuild, publish, releaseRecord, type Run, type RunResult } from "./release.ts";
+import { decide, guideDigest, headCommit, outsideBuild, publish, releaseRecord, type Run, type RunResult } from "./release.ts";
 
 const PNG = `${"a".repeat(32)}.png`;
 const GIF = `${"b".repeat(32)}.gif`;
@@ -303,11 +303,39 @@ describe("releaseRecord", () => {
   });
 });
 
+describe("consumedFiles", () => {
+  it("lists exactly the data files buildGuidePdf and loadFontmap read", async () => {
+    const dataDir = join(tmp, "data");
+    await writeData(dataDir);
+    const files = await consumedFiles(dataDir, "fm");
+    expect(files).toContain("g/fm/s/pulmonary.json");
+
+    // With only the listed files (and the content-addressed assets) present, the build still works.
+    const only = join(tmp, "only");
+    for (const f of files) {
+      await mkdir(dirname(join(only, f)), { recursive: true });
+      await copyFile(join(dataDir, f), join(only, f));
+    }
+    const build = async (dir: string): Promise<number> => {
+      await loadFontmap(dir);
+      return (await PDFDocument.load(await buildGuidePdf(dir, "fm", recordingRenderer()))).getPageCount();
+    };
+    expect(await build(only)).toBe(3);
+
+    // And each listed file is read: without it the build fails.
+    for (const f of files) {
+      const bytes = await readFile(join(only, f));
+      await rm(join(only, f));
+      await expect(build(only), f).rejects.toThrow(/ENOENT/);
+      await writeFile(join(only, f), bytes);
+    }
+  });
+});
+
 describe("guideDigest", () => {
   it("changes when any file the guide's PDF reads changes, and only then", async () => {
     const dataDir = join(tmp, "data");
     await writeData(dataDir);
-    expect(await consumedFiles(dataDir, "fm")).toEqual(["g/fm/nav.json", "g/fm/home.json", "g/fm/s/cardiovascular.json", "g/fm/s/pulmonary.json", "fonts/fontmap.json"]);
     const base = await guideDigest(dataDir, "fm");
     expect(base).toMatch(/^[0-9a-f]{64}$/);
 
