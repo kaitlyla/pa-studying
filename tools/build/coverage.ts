@@ -4,13 +4,13 @@
 import { pathToFileURL } from "node:url";
 import { uncoveredText, type Uncovered } from "../../lib/derive/coverage.ts";
 import { publish } from "../../lib/derive/publish.ts";
-import type { HostsJson } from "../../lib/derive/published.ts";
+import { HOSTS_PATH, type HostsJson } from "../../lib/derive/published.ts";
 import { loadContent } from "./load.ts";
 
 export async function searchCoverage(root: string): Promise<Uncovered[]> {
   const content = await loadContent(root);
   const out = publish(content);
-  return uncoveredText(content, out.units, out.files.get("hosts.json") as HostsJson);
+  return uncoveredText(content, out.units, out.files.get(HOSTS_PATH) as HostsJson);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

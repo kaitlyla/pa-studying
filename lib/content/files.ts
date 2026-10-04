@@ -30,6 +30,14 @@ const pathRe = (source: string): RegExp => new RegExp(`^${source}$`);
 export const GAP_FILE_RE = pathRe(`content/gapfill/${ident("g")}\\.json`);
 export const gapFilePath = (gapId: string): string => `content/gapfill/${gapId}.json`;
 
+/** An inbox item's directory (50 §50.7): `inbox/<d_id>`, holding UPLOAD_NAME and the parts. */
+export const inboxItemDir = (docId: string): string => `inbox/${docId}`;
+/** The item's upload record, inside its directory. */
+export const UPLOAD_NAME = "upload.json";
+export const inboxUploadPath = (docId: string): string => `${inboxItemDir(docId)}/${UPLOAD_NAME}`;
+/** The `i`th (0-based) part of the uploaded bytes, inside the item directory: `part-000`, `part-001`, … */
+export const partName = (i: number): string => `part-${String(i).padStart(3, "0")}`;
+
 /** A Word page's record: `content/docs/<d_id>/doc.json`. */
 export const WORD_DOC_RE = pathRe(`content/docs/${ident("d")}/doc\\.json`);
 /** An as-is document's record: `content/files/<d_id>/file.json`. */
@@ -71,7 +79,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/updates/flags\\.json"), validateFlags],
   [pathRe("content/updates/concepts\\.json"), validateConcepts],
   [pathRe("content/updates/checks\\.json"), validateChecks],
-  [pathRe(`inbox/${ident("d")}/upload\\.json`), validateUpload],
+  [pathRe(`${inboxItemDir(ident("d"))}/${UPLOAD_NAME.replace(".", "\\.")}`), validateUpload],
   ...BLOCK_LOCATIONS.map((l): [RegExp, Validator] => [pathRe(`${l.dir}/blocks/${ident(l.prefix)}\\.json`), l.validator]),
 ];
 

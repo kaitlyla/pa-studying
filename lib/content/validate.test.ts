@@ -2,7 +2,7 @@
 // violations 20 names.
 import { describe, expect, it } from "vitest";
 import { ContentError } from "./check.ts";
-import { BLOCK_FILE_RE, isContentJSON, serializeFile, validateFile } from "./files.ts";
+import { BLOCK_FILE_RE, inboxItemDir, inboxUploadPath, isContentJSON, partName, serializeFile, UPLOAD_NAME, validateFile } from "./files.ts";
 import { checkTrackSeries, isCdcOrg } from "./validate.ts";
 import type { GapFile } from "./types.ts";
 
@@ -544,6 +544,16 @@ describe("paths (20 §20.2)", () => {
     expect(isContentJSON("content/guides/derm/guide.json")).toBe(false);
     expect(isContentJSON(`content/assets/${"a".repeat(32)}.png`)).toBe(false);
     expect(() => validateFile("content/notes.json", {})).toThrow(/not a content JSON file/);
+  });
+
+  it("names the inbox item layout: the upload record the validator routes, and zero-padded parts", () => {
+    expect(inboxItemDir(D1)).toBe(`inbox/${D1}`);
+    expect(inboxUploadPath(D1)).toBe(`${inboxItemDir(D1)}/${UPLOAD_NAME}`);
+    expect(isContentJSON(inboxUploadPath(D1))).toBe(true);
+    expect(isContentJSON(`${inboxItemDir(D1)}/${partName(0)}`)).toBe(false);
+    expect(isContentJSON(inboxUploadPath(B1))).toBe(false);
+    expect(() => validateFile(inboxUploadPath(D1), {})).toThrow(ContentError);
+    expect([0, 1, 12, 999].map(partName)).toEqual(["part-000", "part-001", "part-012", "part-999"]);
   });
 
   it("BLOCK_FILE_RE matches exactly the block routes: each location with its own id prefix", () => {
