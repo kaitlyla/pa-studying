@@ -6,7 +6,7 @@ import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import type { DocJSON } from "../../lib/content/index.ts";
 import { GapChip } from "../render/index.ts";
-import { navigate, versionsHash } from "../shell/route.ts";
+import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
@@ -22,6 +22,7 @@ import {
   useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import type { Part, Slot } from "./units.ts";
+import { rememberVersionsOrigin } from "./versions.ts";
 import "./edit.css";
 
 export { useIsEditing } from "./session.ts";
@@ -86,17 +87,21 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
   return <div className="notes edit-slot" ref={host} />;
 }
 
-function GapFrame({ part }: { part: Extract<Part, { kind: "gap" }> }): ReactNode {
+type SlotView = (slot: Slot) => ReactNode;
+
+const editorView: SlotView = (slot) => <SlotEditor slot={slot} />;
+
+function GapFrame({ part, slotView }: { part: Extract<Part, { kind: "gap" }>; slotView: SlotView }): ReactNode {
   const m = part.gap.meta;
   return (
     <section className="gap" aria-label={m.title}>
       <div className="gap-h"><GapChip /><h3>{m.title}</h3></div>
       <div className="gap-meta">Relevant to: <b>{m.relevantTo}</b> · Written {m.written}</div>
-      <SlotEditor slot={part.doc} />
+      {slotView(part.doc)}
       {part.differs && (
         <div className="gap-diff">
           <b>Differs from your notes.</b>
-          <SlotEditor slot={part.differs} />
+          {slotView(part.differs)}
         </div>
       )}
       <div className="gap-src"><b>Sources</b><ol>{m.sources.map((s, i) => <li key={i}>{s.name}. {s.org}. {s.year}.</li>)}</ol></div>
@@ -104,14 +109,15 @@ function GapFrame({ part }: { part: Extract<Part, { kind: "gap" }> }): ReactNode
   );
 }
 
-function PartView({ part }: { part: Part }): ReactNode {
+/** One part of an edit unit: its slots shown by `slotView` (editors here; read-only in Versions' View). */
+export function PartView({ part, slotView = editorView }: { part: Part; slotView?: SlotView }): ReactNode {
   switch (part.kind) {
     case "stub":
       return <div className="stub"><span className="stub-t">{part.label}</span> drug table — edited on its pharm section</div>;
     case "gap":
-      return <GapFrame part={part} />;
+      return <GapFrame part={part} slotView={slotView} />;
     default:
-      return <SlotEditor slot={part.slot} />;
+      return slotView(part.slot);
   }
 }
 
@@ -265,6 +271,12 @@ export function EditRegion({ pageKey, children }: { pageKey: string; title?: str
   );
 }
 
+/** Opens Versions of `pageKey`, remembering the page title and route for its heading and Back. */
+export function openVersions(pageKey: string, title: string): Promise<boolean> {
+  rememberVersionsOrigin(pageKey, { title, back: currentHash() });
+  return navigate(versionsHash(pageKey));
+}
+
 /** Edit and Versions (owner only, hidden while any edit is open). */
 export function EditControls({ pageKey, title }: { pageKey: string; title: string }): ReactNode {
   const { edit } = useEdit();
@@ -273,7 +285,7 @@ export function EditControls({ pageKey, title }: { pageKey: string; title: strin
   return (
     <>
       <button type="button" className="btn" onClick={() => void startEdit(pageKey, title)} data-ref="edit-page">Edit</button>
-      <button type="button" className="btn" onClick={() => void navigate(versionsHash(pageKey))} data-ref="edit-versions">Versions</button>
+      <button type="button" className="btn" onClick={() => void openVersions(pageKey, title)} data-ref="edit-versions">Versions</button>
     </>
   );
 }

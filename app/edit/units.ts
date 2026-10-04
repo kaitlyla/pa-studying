@@ -36,11 +36,18 @@ export interface SystemCtx {
   blocks: BlockFile[];
 }
 
+/** The file whose block list holds a block (`system.json`, `pharmfile.json` with the part, or `doc.json`). */
+export interface BlockOwner {
+  path: string;
+  /** The pharm file part listing the block. */
+  part?: string;
+}
+
 export type Part =
   /** Rows of one table block (a topic's, a section's or the whole table), spliced back by row id. */
   | { kind: "rows"; slot: Slot; path: string; block: BlockFile; shown: string[]; sys: SystemCtx }
-  /** A whole prose block (or one-column table, or a Word page block). */
-  | { kind: "block"; slot: Slot; path: string; block: BlockFile }
+  /** A whole prose block (or one-column table, or a Word page block). `owner`: the file whose list holds it. */
+  | { kind: "block"; slot: Slot; path: string; block: BlockFile; owner: BlockOwner }
   /** A gap block: its doc, and its differs doc when it has one. */
   | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null }
   | { kind: "slide"; slot: Slot; path: string; block: BlockFile<SlideMeta> }
@@ -58,7 +65,7 @@ export interface EditUnit {
   docId: string | null;
   /** The topic id of a `topic:` key (its first stored row). */
   topic: string | null;
-  /** A Word page: Original is labelled "converted from your Word file". */
+  /** Converted from her Word files (guide, pharm and Word pages): Original is labelled "converted from your Word file". */
   fromWord: boolean;
 }
 
@@ -106,6 +113,7 @@ async function loadSystem(snap: Snapshot, guide: string, system: string): Promis
 }
 
 const blockPath = (sys: SystemCtx, id: string): string => `content/guides/${sys.guide}/${sys.system}/blocks/${id}.json`;
+const systemOwner = (sys: SystemCtx): BlockOwner => ({ path: `content/guides/${sys.guide}/${sys.system}/system.json` });
 
 /** The system whose sidebar lists a topic (first row id) or listed block (published nav.json). */
 async function systemOf(guide: string, kind: "topic" | "block", id: string): Promise<string> {
@@ -124,9 +132,12 @@ function rowsPart(sys: SystemCtx, block: BlockFile, shown: string[], basePt: num
   };
 }
 
-function blockPart(path: string, block: BlockFile, basePt: number, width: number): Part {
-  return { kind: "block", path, block, slot: { id: block.id, doc: block.doc, basePt, pageContentPt: width } };
+function blockPart(path: string, block: BlockFile, owner: BlockOwner, basePt: number, width: number): Part {
+  return { kind: "block", path, block, owner, slot: { id: block.id, doc: block.doc, basePt, pageContentPt: width } };
 }
+
+const sysBlockPart = (sys: SystemCtx, block: BlockFile, basePt: number, width: number): Part =>
+  blockPart(blockPath(sys, block.id), block, systemOwner(sys), basePt, width);
 
 function gapPart(gap: GapFile): Part {
   const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT });
@@ -144,7 +155,7 @@ async function gapParts(snap: Snapshot, ids: readonly (string | null | undefined
 /** All rows of a table that take part in resolution are its full content; one-column tables edit as blocks. */
 function wholeBlockPart(sys: SystemCtx, block: BlockFile, basePt: number, width: number, proseLike: boolean): Part {
   if (block.kind === "table" && !proseLike) return rowsPart(sys, block, tableOrThrow(block).content.map(rowId), basePt, width);
-  return blockPart(blockPath(sys, block.id), block, basePt, width);
+  return sysBlockPart(sys, block, basePt, width);
 }
 
 async function pharmFiles(snap: Snapshot): Promise<{ dir: string; file: PharmFile }[]> {
@@ -173,12 +184,16 @@ function guideScope(parts: readonly Part[], extra: readonly string[] = []): File
   return { files: [...files].sort(), dirs: [] };
 }
 
+const WORD_KINDS: ReadonlySet<string> = new Set(["topic", "section", "system", "listed", "pharm"]);
+
 /** Read the edit unit of a page key at the snapshot's commit. */
 export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
   const k = parsePageKey(key);
   if (k === null) throw new UnitError(`Malformed page key: ${key}`);
+  // Guide and pharm pages were converted from her Word guides and med lists; gap blocks and generated slides were not.
+  const fromWord = WORD_KINDS.has(k.kind);
   const unit = (parts: Part[], scope = guideScope(parts), topic: string | null = null): EditUnit => ({
-    key, snapshot: snap, scope, parts, ids: partIds(parts), docId: null, topic, fromWord: false,
+    key, snapshot: snap, scope, parts, ids: partIds(parts), docId: null, topic, fromWord,
   });
 
   switch (k.kind) {
@@ -188,9 +203,18 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const topic = t.topics.find((x) => x.id === row);
-      const block = sys.blocks.find((b) => b.id === topic?.block);
-      if (!topic || !block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
-      const parts = [rowsPart(sys, block, withHeadings(t, topic.rows), basePt, width)];
+      if (!topic) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
+      // A topic continues into the next table when that table's first rows have no name: one rows editor per table.
+      const byBlock = new Map<string, string[]>();
+      for (const id of withHeadings(t, topic.rows)) {
+        const b = t.rows.get(id)?.block ?? topic.block;
+        byBlock.set(b, [...(byBlock.get(b) ?? []), id]);
+      }
+      const parts = [...byBlock].map(([id, shown]) => {
+        const block = sys.blocks.find((b) => b.id === id);
+        if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
+        return rowsPart(sys, block, shown, basePt, width);
+      });
       return unit(parts, guideScope(parts), row);
     }
     case "section": {
@@ -202,7 +226,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const parts = sectionItems(t, sys.structure, sys.blocks.map((b) => b.id), section).map((item): Part => {
         const b = byId.get(item.block);
         if (!b) throw new UnitError(`Block ${item.block} is no longer in ${sys.system}`);
-        return item.rows === null ? blockPart(blockPath(sys, b.id), b, basePt, width) : rowsPart(sys, b, item.rows, basePt, width);
+        return item.rows === null ? sysBlockPart(sys, b, basePt, width) : rowsPart(sys, b, item.rows, basePt, width);
       });
       return unit(parts);
     }
@@ -227,7 +251,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { basePt, width } = await guideFacts(snap, guide);
       const block = sys.blocks.find((b) => b.id === blockId);
       if (!block) throw new UnitError(`Block ${blockId} is no longer in ${sys.system}`);
-      return unit([blockPart(blockPath(sys, block.id), block, basePt, width)]);
+      return unit([sysBlockPart(sys, block, basePt, width)]);
     }
     case "pharm": {
       const { guide, system, section } = k;
@@ -246,7 +270,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
             const fresh = part.blocks.filter((b) => !seen.has(b));
             fresh.forEach((b) => seen.add(b));
             const blocks = await snap.many<BlockFile>(fresh.map((b) => `${dir}/blocks/${b}.json`));
-            blocks.forEach((b) => parts.push(blockPart(`${dir}/blocks/${b.id}.json`, b, file.basePt, width)));
+            const owner = { path: `${dir}/pharmfile.json`, part: part.id };
+            blocks.forEach((b) => parts.push(blockPart(`${dir}/blocks/${b.id}.json`, b, owner, file.basePt, width)));
           }
         }
       };
@@ -297,7 +322,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const parts: Part[] = [];
       if (word && word.removed === null) {
         const blocks = await snap.many<BlockFile>(word.blocks.map((b) => `content/docs/${docId}/blocks/${b}.json`));
-        blocks.forEach((b) => parts.push(blockPart(`content/docs/${docId}/blocks/${b.id}.json`, b, word.basePt, contentWidth(word.page))));
+        const owner = { path: `content/docs/${docId}/doc.json` };
+        blocks.forEach((b) => parts.push(blockPart(`content/docs/${docId}/blocks/${b.id}.json`, b, owner, word.basePt, contentWidth(word.page))));
       }
       return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, topic: null, fromWord: word !== null };
     }
@@ -575,6 +601,68 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
   const build: SaveBuild = { changes, files, changed: [...changed] };
   if (lostTopic) build.topicMoved = { guide: lostTopic.part.sys.guide, system: lostTopic.part.sys.system, topic: topicAfter(unit, lostTopic) };
   return build;
+}
+
+type BlockPartT = Extract<Part, { kind: "block" }>;
+
+/**
+ * A restore of a guide, pharm, gap or slide page (50 §50.6): the version's content saved over the
+ * current files as if she had typed it (buildSave in restore mode), plus each block of the version
+ * whose file no longer exists re-created with its id, re-inserted into its owner list by the
+ * nearest-neighbour rule, and given the structure.json entries it and its rows had at the version.
+ * `unit` is the page at main's head, `version` the page at the chosen commit. Nothing outside the
+ * page is written.
+ */
+export async function buildRestore(unit: EditUnit, version: EditUnit, today = localDate()): Promise<SaveBuild> {
+  const build = buildSave(unit, new Map(), today, version);
+  const lost = version.parts.filter((p): p is BlockPartT | RowsPart => (p.kind === "block" || p.kind === "rows") && !unit.snapshot.has(p.path));
+  if (lost.length === 0) return build;
+
+  const files = new Map(build.files);
+  const now = async <T>(path: string): Promise<T> => (files.has(path) ? (files.get(path) as T) : unit.snapshot.json<T>(path));
+  const changed = new Set(build.changed);
+  const systems = new Set<string>();
+  for (const p of lost) {
+    const owner = p.kind === "rows" ? systemOwner(p.sys) : p.owner;
+    files.set(p.path, p.block);
+    changed.add(p.block.id);
+    const oldOwner = await version.snapshot.json<SystemFile | PharmFile | WordDocFile>(owner.path);
+    const list = await now<SystemFile | PharmFile | WordDocFile>(owner.path);
+    const put = (ids: string[], oldIds: readonly string[]): string[] =>
+      ids.includes(p.block.id) ? ids : ids.toSpliced(insertAt(ids, oldIds, p.block.id), 0, p.block.id);
+    let next: SystemFile | PharmFile | WordDocFile = { ...list, blocks: put(list.blocks, oldOwner.blocks) };
+    if (owner.part !== undefined && "parts" in next && "parts" in oldOwner) {
+      const oldPart = oldOwner.parts.find((x) => x.id === owner.part)?.blocks ?? [];
+      next = { ...next, parts: next.parts.map((x) => (x.id === owner.part ? { ...x, blocks: put(x.blocks, oldPart) } : x)) };
+    }
+    files.set(owner.path, next);
+    if (owner.path.endsWith("/system.json")) {
+      const structurePath = owner.path.replace(/system\.json$/, "structure.json");
+      const ids = [p.block.id, ...(p.kind === "rows" ? p.shown : [])];
+      if (p.kind === "rows") p.shown.forEach((id) => changed.add(id));
+      const old = await version.snapshot.json<StructureFile>(structurePath);
+      files.set(structurePath, withOldEntries(await now<StructureFile>(structurePath), old, ids));
+      systems.add(owner.path);
+    }
+  }
+  // The build's own checks on each system that got a block back (40 §40.1/§40.2).
+  for (const sysPath of systems) {
+    const dir = sysPath.replace(/system\.json$/, "");
+    const sys = await now<SystemFile>(sysPath);
+    const blocks = await Promise.all(sys.blocks.map((b) => now<BlockFile>(`${dir}blocks/${b}.json`)));
+    const structure = await now<StructureFile>(`${dir}structure.json`);
+    checkMembers(sys.id, deriveTopics(blocks, structure), structure);
+  }
+
+  const changes: TreeChange[] = [];
+  const out = new Map<string, unknown>();
+  for (const [path, value] of files) {
+    const text = canonical(path, value);
+    if (unit.snapshot.has(path) && text === (await unit.snapshot.text(path))) continue;
+    changes.push({ path, content: text });
+    out.set(path, value);
+  }
+  return { ...build, changes, files: out, changed: [...changed] };
 }
 
 /** The topic that the first remaining row of a topic page's deleted topic belongs to after the save. */

@@ -93,6 +93,21 @@ describe("loading a page key", () => {
     expect(unit.snapshot.commit).toBe(w.fake.head());
   });
 
+  it("topic continuing into the next table: one rows editor per table, and a save writes each table's rows into that table", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    expect(unit.parts.map((p) => (p.kind === "rows" ? [p.block.id, p.shown] : p.kind))).toEqual([
+      [B(10), [R(103), R(104)]],
+      [B(13), [R(130)]],
+    ]);
+    const cont = only(unit, "rows", 1);
+    const build = buildSave(unit, new Map([[cont.slot.id, setCell(cont.slot.doc, R(130), 1, "angina, continued")]]), TODAY);
+    expect(build.changes.map((c) => c.path)).toEqual([blockPath(13)]);
+    expect(build.changed).toEqual([R(130)]);
+    const saved = json<BlockFile>(changeOf(build, blockPath(13)));
+    expect(rowIds(saved.doc)).toEqual([R(130), R(131)]);
+    expect(cellText(rowsOfDoc(saved.doc)[0] as Node, 1)).toBe("angina, continued");
+  });
+
   it("section: the same rows and blocks as the published section page", async () => {
     const unit = await unitAt("section:fm:cardiovascular:cad");
     const sys = fx.published.get("g/fm/s/cardiovascular.json") as SystemJson;

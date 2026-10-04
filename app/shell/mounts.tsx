@@ -26,4 +26,4 @@ export const RemovedDocs: C<{ items: readonly RemovedDoc[] }> = none;
 /** Processing / failed entries (owner only). */
 export const PendingDocs: C<{ items: readonly PendingDoc[] }> = none;
 
-export const VersionsPage: C<{ pageKey: string }> = none;
+export { VersionsPage } from "../edit/VersionsPage.tsx";

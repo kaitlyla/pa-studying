@@ -190,13 +190,12 @@ describe("pages", () => {
     expect(a.container.querySelector("main .notfound")).toBeNull();
   });
 
-  it("renders nothing for the versions page until the owner's page mounts there", async () => {
-    const a = await renderApp("#/versions/x");
+  it("a visitor on a versions page gets the not-on-site page (Versions is the owner's)", async () => {
+    const a = await renderApp(`#/versions/topic:fm:${R(101)}`);
     app = a;
     await flush();
-    expect(a.container.querySelector("main .notfound")).toBeNull();
-    expect(a.container.querySelector("main h1")).toBeNull();
-    expect(a.container.querySelector("main .loading")).toBeNull();
+    expect(a.container.querySelector("main .notfound h1")?.textContent).toBe("This page isn't on the site");
+    expect(a.container.querySelector('main [data-surface="versions"]')).toBeNull();
   });
 
   it("shows the not-on-site page for an unknown route, and its link goes to the EOR guides", async () => {
