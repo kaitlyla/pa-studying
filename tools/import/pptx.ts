@@ -4,6 +4,8 @@ import { XMLSerializer } from "@xmldom/xmldom";
 import { strFromU8, strToU8, unzipSync, zipSync } from "fflate";
 import { Node } from "prosemirror-model";
 import type { DocJSON } from "../../lib/content/index.ts";
+import { drawingColor, readTheme } from "../../lib/docx/drawingml.ts";
+import type { Theme } from "../../lib/docx/drawingml.ts";
 import { resolveTarget } from "../../lib/docx/package.ts";
 import { isSymbolCode, isSymbolFont, mapSymbol } from "../../lib/docx/symbols.ts";
 import { child, children, descendants, kids, NS, parseXml } from "../../lib/docx/xml.ts";
@@ -93,75 +95,29 @@ function mapRunText(text: string, symFont: string | null, latinFont: string | nu
   return out;
 }
 
-/** Theme colors for `a:schemeClr` (theme `a:clrScheme`, through the master's `p:clrMap`). */
-type SchemeColors = Map<string, string>;
-
-function hexOf(el: XmlElement | null, scheme: SchemeColors): string | null {
-  if (!el) return null;
-  const srgb = child(el, NS_A, "srgbClr");
-  if (srgb) return applyLum(srgb, (srgb.getAttribute("val") ?? "").toUpperCase());
-  const sch = child(el, NS_A, "schemeClr");
-  if (sch) {
-    const base = scheme.get(sch.getAttribute("val") ?? "");
-    return base ? applyLum(sch, base) : null;
-  }
-  return null;
-}
-
-/** Apply `a:lumMod` / `a:lumOff` (percent × 1000) in HSL, as Office does for theme tints. */
-function applyLum(colorEl: XmlElement, hex: string): string | null {
-  if (!/^[0-9A-F]{6}$/.test(hex)) return null;
-  const mod = Number(child(colorEl, NS_A, "lumMod")?.getAttribute("val") ?? "100000") / 100000;
-  const off = Number(child(colorEl, NS_A, "lumOff")?.getAttribute("val") ?? "0") / 100000;
-  if (mod === 1 && off === 0) return hex;
-  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255) as [number, number, number];
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h = 0;
-  let s = 0;
-  const l = (max + min) / 2;
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
-    h /= 6;
-  }
-  const l2 = Math.min(1, Math.max(0, l * mod + off));
-  const hue = (p: number, q: number, t: number): number => {
-    const u = t < 0 ? t + 1 : t > 1 ? t - 1 : t;
-    if (u < 1 / 6) return p + (q - p) * 6 * u;
-    if (u < 1 / 2) return q;
-    if (u < 2 / 3) return p + (q - p) * (2 / 3 - u) * 6;
-    return p;
-  };
-  let rgb: number[];
-  if (s === 0) rgb = [l2, l2, l2];
-  else {
-    const q = l2 < 0.5 ? l2 * (1 + s) : l2 + s - l2 * s;
-    const p = 2 * l2 - q;
-    rgb = [hue(p, q, h + 1 / 3), hue(p, q, h), hue(p, q, h - 1 / 3)];
-  }
-  return rgb.map((v) => Math.round(v * 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+/** The color of a holder (`a:solidFill`, `a:highlight`): its color element, resolved by lib/docx. */
+function holderColor(holder: XmlElement | null, theme: Theme): string | null {
+  return drawingColor(holder ? (kids(holder)[0] ?? null) : null, theme);
 }
 
 const UNDERLINE: Readonly<Record<string, string>> = { sng: "single", dbl: "double" };
 
-function runMarks(rPr: XmlElement | null, font: string | null, scheme: SchemeColors): TextRun["marks"] {
+function runMarks(rPr: XmlElement | null, font: string | null, theme: Theme): TextRun["marks"] {
   const marks: TextRun["marks"] = [];
   const on = (name: string): boolean => ["1", "true"].includes(rPr?.getAttribute(name) ?? "");
   if (on("b")) marks.push({ type: "bold" });
   if (on("i")) marks.push({ type: "italic" });
   const u = rPr?.getAttribute("u");
   if (u && u !== "none") marks.push({ type: "underline", attrs: { style: UNDERLINE[u] ?? u } });
-  const color = hexOf(child(rPr, NS_A, "solidFill"), scheme);
+  const color = holderColor(child(rPr, NS_A, "solidFill"), theme);
   if (color) marks.push({ type: "color", attrs: { hex: color } });
-  const hl = hexOf(child(rPr, NS_A, "highlight"), scheme);
+  const hl = holderColor(child(rPr, NS_A, "highlight"), theme);
   if (hl) marks.push({ type: "highlight", attrs: { hex: hl } });
   if (font) marks.push({ type: "font", attrs: { family: font } });
   return marks;
 }
 
-function readPara(p: XmlElement, scheme: SchemeColors): Para {
+function readPara(p: XmlElement, theme: Theme): Para {
   const level = Number(child(p, NS_A, "pPr")?.getAttribute("lvl") ?? "0");
   const runs: TextRun[] = [];
   for (const el of kids(p)) {
@@ -175,13 +131,13 @@ function readPara(p: XmlElement, scheme: SchemeColors): Para {
     const raw = (child(el, NS_A, "t")?.textContent ?? "").normalize("NFC");
     const sym = child(rPr, NS_A, "sym")?.getAttribute("typeface") ?? null;
     const latin = child(rPr, NS_A, "latin")?.getAttribute("typeface") ?? null;
-    for (const piece of mapRunText(raw, sym, latin)) runs.push({ text: piece.text, marks: runMarks(rPr, piece.font, scheme) });
+    for (const piece of mapRunText(raw, sym, latin)) runs.push({ text: piece.text, marks: runMarks(rPr, piece.font, theme) });
   }
   return { el: p, level: Number.isInteger(level) && level >= 0 ? level : 0, runs, text: runs.map((r) => r.text).join("") };
 }
 
 /** Every shape on a slide holding text, in document order, each with its paragraphs. */
-function slideShapes(slide: XmlElement, scheme: SchemeColors): Para[][] {
+function slideShapes(slide: XmlElement, theme: Theme): Para[][] {
   const tree = child(child(slide, NS_P, "cSld"), NS_P, "spTree");
   if (!tree) return [];
   const shapes: Para[][] = [];
@@ -189,7 +145,7 @@ function slideShapes(slide: XmlElement, scheme: SchemeColors): Para[][] {
     for (const ce of kids(el)) {
       if (ce.namespaceURI === NS_P && ce.localName === "grpSp") walk(ce);
       else if (ce.namespaceURI === NS_P && (ce.localName === "sp" || ce.localName === "graphicFrame" || ce.localName === "cxnSp")) {
-        shapes.push(descendants(ce, NS_A, "p").map((p) => readPara(p, scheme)));
+        shapes.push(descendants(ce, NS_A, "p").map((p) => readPara(p, theme)));
       }
     }
   };
@@ -197,32 +153,17 @@ function slideShapes(slide: XmlElement, scheme: SchemeColors): Para[][] {
   return shapes;
 }
 
-/** Theme colors by scheme name, mapped through the first slide master's `p:clrMap`. */
-function schemeColors(entries: Entries): SchemeColors {
-  const out: SchemeColors = new Map();
-  const themeName = Object.keys(entries).filter((n) => /^ppt\/theme\/theme\d+\.xml$/.test(n)).sort()[0];
-  if (!themeName) return out;
-  const scheme = descendants(rootOf(entries, themeName), NS_A, "clrScheme")[0];
-  if (!scheme) return out;
-  const base = new Map<string, string>();
-  for (const el of kids(scheme)) {
-    const val = child(el, NS_A, "srgbClr")?.getAttribute("val") ?? child(el, NS_A, "sysClr")?.getAttribute("lastClr");
-    if (el.localName && val) base.set(el.localName, val.toUpperCase());
-  }
-  for (const [k, v] of base) out.set(k, v);
-  const masterName = Object.keys(entries).filter((n) => /^ppt\/slideMasters\/slideMaster\d+\.xml$/.test(n)).sort()[0];
+/** The deck's theme (first theme part), with aliases mapped through the first slide master's `p:clrMap`. */
+function themeOf(entries: Entries): Theme {
+  const first = (re: RegExp): string | undefined => Object.keys(entries).filter((n) => re.test(n)).sort()[0];
+  const themeName = first(/^ppt\/theme\/theme\d+\.xml$/);
+  const masterName = first(/^ppt\/slideMasters\/slideMaster\d+\.xml$/);
   const clrMap = masterName ? child(rootOf(entries, masterName), NS_P, "clrMap") : null;
-  const mapping: Record<string, string> = { bg1: "lt1", tx1: "dk1", bg2: "lt2", tx2: "dk2" };
-  for (const alias of Object.keys(mapping)) {
-    const target = clrMap?.getAttribute(alias) || mapping[alias];
-    const hex = target ? base.get(target) : undefined;
-    if (hex) out.set(alias, hex);
-  }
-  return out;
+  return readTheme(themeName ? rootOf(entries, themeName) : null, null, clrMap);
 }
 
-function slideParas(entries: Entries, name: string, scheme: SchemeColors): Para[][] {
-  return slideShapes(rootOf(entries, name), scheme);
+function slideParas(entries: Entries, name: string, theme: Theme): Para[][] {
+  return slideShapes(rootOf(entries, name), theme);
 }
 
 // ---- as-is decks: search text ---------------------------------------------------------------
@@ -233,8 +174,8 @@ function slideParas(entries: Entries, name: string, scheme: SchemeColors): Para[
  */
 export function slideTexts(bytes: Uint8Array): string[] {
   const entries = unzipSync(bytes);
-  const scheme = schemeColors(entries);
-  return slideParts(entries).map((name) => slideParas(entries, name, scheme).flat().map((p) => p.text).join("\n"));
+  const theme = themeOf(entries);
+  return slideParts(entries).map((name) => slideParas(entries, name, theme).flat().map((p) => p.text).join("\n"));
 }
 
 // ---- the psych review deck ------------------------------------------------------------------
@@ -292,8 +233,8 @@ export function slideDoc(shapes: readonly Para[][]): DocJSON {
 /** The deck's slides as docs, in `p:sldIdLst` order (30 §30.10 psych review deck). */
 export function convertDeck(bytes: Uint8Array): DocJSON[] {
   const entries = unzipSync(bytes);
-  const scheme = schemeColors(entries);
-  return slideParts(entries).map((name) => slideDoc(slideParas(entries, name, scheme)));
+  const theme = themeOf(entries);
+  return slideParts(entries).map((name) => slideDoc(slideParas(entries, name, theme)));
 }
 
 /** Her requested edit (fidelity/rules/psychslide): on slide 2, this paragraph is removed. */
@@ -304,10 +245,13 @@ export interface ParaOutline {
   level: number;
 }
 
+/** An empty theme, for reading paragraph text where colors do not matter. */
+const TEXT_ONLY: Theme = readTheme(null, null);
+
 /** The slide's paragraph texts and levels in document order (every `a:p`, empty ones included). */
 function outline(entries: Entries, name: string): ParaOutline[] {
   return descendants(rootOf(entries, name), NS_A, "p").map((p) => {
-    const para = readPara(p, new Map());
+    const para = readPara(p, TEXT_ONLY);
     return { text: para.text, level: para.level };
   });
 }
@@ -341,7 +285,7 @@ export async function editPsychDeck(bytes: Uint8Array): Promise<{ bytes: Uint8Ar
   if (!slidePart) throw new Error("psych deck: no slide 2");
   const { doc, root } = parsePart(entries, slidePart);
   const paras = descendants(root, NS_A, "p");
-  const target = paras.filter((p) => readPara(p, new Map()).text === PSYCH_REMOVED_LINE);
+  const target = paras.filter((p) => readPara(p, TEXT_ONLY).text === PSYCH_REMOVED_LINE);
   if (target.length !== 1) throw new Error(`slide 2: expected exactly one paragraph "${PSYCH_REMOVED_LINE}", found ${target.length}`);
   const removed = target[0] as XmlElement;
   const next = paras[paras.indexOf(removed) + 1];

@@ -4,6 +4,9 @@ import { describe, expect, it } from "vitest";
 import { Node } from "prosemirror-model";
 import { validateFile } from "../../lib/content/index.ts";
 import type { DocJSON } from "../../lib/content/index.ts";
+import { drawingColor, readTheme } from "../../lib/docx/drawingml.ts";
+import { kids, parseXml } from "../../lib/docx/xml.ts";
+import type { Element as XmlElement } from "../../lib/docx/xml.ts";
 import { schema } from "../../lib/schema.ts";
 import { applyPsychEdit, convertDeck, editPsychDeck, PSYCH_REMOVED_LINE, slideParts, slideTexts } from "./pptx.ts";
 
@@ -140,6 +143,35 @@ describe("convertDeck", () => {
     const colors = ((doc?.content[1] as { content: { marks?: { attrs: { hex: string } }[] }[] }).content).map((t) => t.marks?.[0]?.attrs.hex ?? null);
     // accent1 4472C4 with its HSL lightness halved is 203864; black with lightness 0 × 0.5 + 0.5 is mid gray.
     expect(colors).toEqual(["4472C4", "000000", "203864", "808080", null]);
+  });
+
+  it("resolves tint, shade and every color kind exactly as the Word converter does (lib/docx drawingColor)", () => {
+    const themeXml = `<a:theme ${NS}><a:themeElements><a:clrScheme name="x"><a:dk1><a:sysClr val="windowText" lastClr="000000"/></a:dk1><a:lt1><a:srgbClr val="FFFFFF"/></a:lt1><a:accent1><a:srgbClr val="4472C4"/></a:accent1></a:clrScheme></a:themeElements></a:theme>`;
+    // This master swaps the text alias onto light 1, so tx1 is white here.
+    const master = strToU8(`<p:sldMaster ${NS}><p:clrMap bg1="dk1" tx1="lt1" bg2="lt2" tx2="dk2"/></p:sldMaster>`);
+    const colorEls = [
+      '<a:schemeClr val="accent1"><a:tint val="50000"/></a:schemeClr>',
+      '<a:schemeClr val="accent1"><a:shade val="50000"/></a:schemeClr>',
+      '<a:srgbClr val="4472C4"><a:tint val="50000"/></a:srgbClr>',
+      '<a:prstClr val="red"><a:shade val="50000"/></a:prstClr>',
+      '<a:sysClr val="windowText" lastClr="123456"/>',
+      '<a:scrgbClr r="100000" g="0" b="50000"/>',
+      '<a:schemeClr val="tx1"/>',
+    ];
+    const runs = colorEls.map((c, i) => r(String(i), "", `<a:solidFill>${c}</a:solidFill>`)).join("");
+    const [doc] = convertDeck(pptx([sp(p(r("T"))) + sp(p(runs))], { extra: { "ppt/theme/theme1.xml": strToU8(themeXml), "ppt/slideMasters/slideMaster1.xml": master } }));
+    const colors = ((doc?.content[1] as { content: { marks?: { attrs: { hex: string } }[] }[] }).content).map((t) => t.marks?.[0]?.attrs.hex ?? null);
+
+    // Independently: tint moves each channel toward 255 by (1 − 0.5); shade scales it by 0.5.
+    expect(colors).toEqual(["A2B9E2", "223962", "A2B9E2", "800000", "123456", "FF0080", "FFFFFF"]);
+    // And the same as lib/docx resolves each element under the same theme and mapping.
+    const firstKid = (xml: string): XmlElement | null => {
+      const root = parseXml(xml, "test").documentElement;
+      return root ? (kids(root)[0] ?? null) : null;
+    };
+    const theme = readTheme(parseXml(themeXml, "theme").documentElement, null, firstKid(strFromU8(master)));
+    const viaDocx = colorEls.map((c) => drawingColor(firstKid(`<x ${NS}>${c}</x>`), theme));
+    expect(colors).toEqual(viaDocx);
   });
 });
 
