@@ -206,15 +206,21 @@ describe("useData", () => {
   }
 
   it("suspends until the file loads, and re-reads it after an invalidation", async () => {
-    bodies.set("v.json", { v: 1 });
-    const m = mount(createElement(Suspense, { fallback: createElement("p", { className: "wait" }, "loading") }, createElement(Show, { path: "v.json" })));
+    // The first reply is held back so the suspended state can be observed.
+    let release: (r: Response) => void = () => {};
+    held.set("v.json", [new Promise<Response>((r) => (release = r))]);
+    const m = await mount(createElement(Suspense, { fallback: createElement("p", { className: "wait" }, "loading") }, createElement(Show, { path: "v.json" })));
     mounted = m;
     expect(m.container.querySelector(".wait")?.textContent).toBe("loading");
+    expect(m.container.querySelector(".v")).toBeNull();
+    release(new Response(JSON.stringify({ v: 1 }), { status: 200 }));
     await until(() => m.container.querySelector(".v")?.textContent === "value 1", "the first value");
     expect(requests).toEqual([url("v.json")]);
 
     bodies.set("v.json", { v: 2 });
-    act(() => invalidateData("v.json"));
+    await act(async () => {
+      invalidateData("v.json");
+    });
     await until(() => m.container.querySelector(".v")?.textContent === "value 2", "the reloaded value");
     expect(requests).toEqual([url("v.json"), url("v.json")]);
   });

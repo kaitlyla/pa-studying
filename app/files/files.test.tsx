@@ -302,8 +302,8 @@ describe("image viewer", () => {
     expect(document.activeElement).toBe(opener);
   });
 
-  it("opens from openImageViewer and starts each new image at Fit", () => {
-    const m = mount(<ImageViewer />);
+  it("opens from openImageViewer and starts each new image at Fit", async () => {
+    const m = await mount(<ImageViewer />);
     try {
       expect(m.container.querySelector('[role="dialog"]')).toBeNull();
       act(() => openImageViewer("/data/files/a.png"));
@@ -329,9 +329,9 @@ describe("image viewer", () => {
 describe("SlideNav", () => {
   const labels = ["Intro", "Middle", "End"];
 
-  it("moves with Previous and Next, disables them at the ends, and jumps with the select", () => {
+  it("moves with Previous and Next, disables them at the ends, and jumps with the select", async () => {
     const go = vi.fn<(n: number) => void>();
-    const m = mount(<SlideNav n={2} total={3} go={go} labels={labels} />);
+    const m = await mount(<SlideNav n={2} total={3} go={go} labels={labels} />);
     try {
       const prev = (): HTMLButtonElement => need(byText<HTMLButtonElement>(m.container, "button", "Previous"), "Previous");
       const next = (): HTMLButtonElement => need(byText<HTMLButtonElement>(m.container, "button", "Next"), "Next");
@@ -382,8 +382,8 @@ describe("SlideNav", () => {
     }
   });
 
-  it("reads as a fraction when asked", () => {
-    const m = mount(<SlideNav n={2} total={5} go={() => {}} labels={labels} format="fraction" />);
+  it("reads as a fraction when asked", async () => {
+    const m = await mount(<SlideNav n={2} total={5} go={() => {}} labels={labels} format="fraction" />);
     try {
       expect(need(m.container.querySelector('[aria-live="polite"]'), "position").textContent).toBe("2 / 5");
     } finally {
@@ -391,7 +391,7 @@ describe("SlideNav", () => {
     }
   });
 
-  it("slideKeys moves with the arrow keys, but not past the ends, from a field, or once handled", () => {
+  it("slideKeys moves with the arrow keys, but not past the ends, from a field, or once handled", async () => {
     const go = vi.fn<(n: number) => void>();
     const Keys = ({ n, total }: { n: number; total: number }): ReactNode => (
       <div className="viewer" tabIndex={0} onKeyDown={slideKeys(n, total, go)}>
@@ -402,7 +402,7 @@ describe("SlideNav", () => {
         <span className="handled">x</span>
       </div>
     );
-    const m = mount(<Keys n={2} total={3} />);
+    const m = await mount(<Keys n={2} total={3} />);
     try {
       const viewer = need(m.container.querySelector(".viewer"), "viewer");
       expect(key(viewer, "ArrowRight")).toBe(false);
@@ -443,7 +443,7 @@ describe("FileChip and FileChips", () => {
     expect(labs.pending.map((f) => f.id)).toEqual([D(7)]);
 
     await go(`${route}?q=tsh`);
-    const m = mount(<FileChips list={labs} />);
+    const m = await mount(<FileChips list={labs} />);
     try {
       const chips = Array.from(m.container.querySelectorAll<HTMLAnchorElement>(".fchips a.fchip"));
       expect(chips.map((c) => [need(c.querySelector(".ftype"), "kind").textContent, need(c.querySelector("b"), "name").textContent, c.getAttribute("href")])).toEqual([
@@ -467,7 +467,7 @@ describe("FileChip and FileChips", () => {
     const image = need(renal.files[0], "renal pharm file");
 
     await go("#/other/guidelines");
-    const m = mount(<FileChip file={pdf} />);
+    const m = await mount(<FileChip file={pdf} />);
     try {
       const chip = need(m.container.querySelector<HTMLAnchorElement>("a.fchip"), "pdf chip");
       expect(need(chip.querySelector(".ftype.pdf"), "pdf kind").textContent).toBe("PDF");
@@ -485,9 +485,9 @@ describe("FileChip and FileChips", () => {
     }
   });
 
-  it("renders no chip row when a place has no visible documents", () => {
+  it("renders no chip row when a place has no visible documents", async () => {
     const labs = published("g/fm/general/labs.json", isGeneral).files;
-    const m = mount(<FileChips list={{ files: [], removed: labs.removed, pending: labs.pending }} />);
+    const m = await mount(<FileChips list={{ files: [], removed: labs.removed, pending: labs.pending }} />);
     try {
       expect(m.container.querySelector(".fchips")).toBeNull();
       expect(m.container.textContent).toBe("");
@@ -500,8 +500,8 @@ describe("FileChip and FileChips", () => {
 // ---- PDF status ---------------------------------------------------------------------------------------
 
 describe("PdfStatus", () => {
-  it("shows Loading while a PDF opens and an alert when it cannot be shown", () => {
-    const m = mount(<PdfStatus error={false} />);
+  it("shows Loading while a PDF opens and an alert when it cannot be shown", async () => {
+    const m = await mount(<PdfStatus error={false} />);
     try {
       expect(need(m.container.querySelector(".loading"), "loading").textContent).toBe("Loading…");
       expect(m.container.querySelector('[role="alert"]')).toBeNull();

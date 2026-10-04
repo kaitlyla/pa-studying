@@ -191,7 +191,8 @@ describe("pharm pages", () => {
     expect(pg.textContent).not.toContain("MOA: block L-type channels");
     expect(pg.textContent).not.toContain("Antianginal overview");
     expect(allButtonText(pg)).toBe("Expand all");
-    expect(scrolled).toEqual([]);
+    // The sidebar scrolls its own current entry into view; the page itself must not scroll.
+    expect(scrolled.filter((e) => pg.contains(e))).toEqual([]);
   });
 
   it("Expand all opens every card and becomes Collapse all, which closes them all", async () => {
@@ -265,7 +266,7 @@ describe("pharm pages", () => {
     const sec = antianginals(systemJson(CV));
     const a = await renderSection(`${SEC_HASH}/${C(2)}`);
     const pg = pharmPage(a);
-    await until(() => scrolled.length > 0, "scroll to the card");
+    await until(() => scrolled.some((e) => pg.contains(e)), "scroll to the card");
     const state = expandedState(pg);
     expect(state[C(2)]).toBe("true");
     for (const k of keysOf(sec).filter((k) => k !== C(2))) expect(state[k]).toBe("false");
@@ -278,7 +279,7 @@ describe("pharm pages", () => {
     const sec = antianginals(systemJson(CV));
     const a = await renderSection(`${SEC_HASH}/${R(124)}`);
     const pg = pharmPage(a);
-    await until(() => scrolled.length > 0, "scroll to the row");
+    await until(() => scrolled.some((e) => pg.contains(e)), "scroll to the row");
     const row = need(pg.querySelector(`[data-anchor="${R(124)}"]`), "Ranolazine row");
     expect(row.textContent).toContain("Ranolazine");
     expect(scrolled).toContain(row);
@@ -295,7 +296,7 @@ describe("pharm pages", () => {
     expect(cv.cards[holder]?.title).toBe("Nitrates");
     const a = await renderSection(`${SEC_HASH}?at=${P(3)}`);
     const pg = pharmPage(a);
-    await until(() => scrolled.length > 0, "scroll to the part");
+    await until(() => scrolled.some((e) => pg.contains(e)), "scroll to the part");
     const state = expandedState(pg);
     expect(state[holder]).toBe("true");
     for (const k of keysOf(sec).filter((k) => k !== holder)) expect(state[k]).toBe("false");

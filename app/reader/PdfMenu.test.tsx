@@ -30,10 +30,10 @@ beforeAll(async () => {
   page = { label: "This system", name: "Cardiovascular", scope: { kind: "system" }, input: { nav, system } };
 });
 
-beforeEach(() => {
+beforeEach(async () => {
   pdf.downloadPdf.mockReset();
   errors = vi.spyOn(console, "error").mockImplementation(() => {});
-  ui = mount(
+  ui = await mount(
     <>
       <PdfMenu site={site} guide="fm" nav={nav} page={page} />
       <Toast />

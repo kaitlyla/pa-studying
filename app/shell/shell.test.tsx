@@ -41,8 +41,8 @@ const extra: Mounted[] = [];
 const originalMatchMedia = Object.getOwnPropertyDescriptor(window, "matchMedia");
 
 /** Mounts `node` and unmounts it after the test. */
-function track(node: ReactNode): Mounted {
-  const m = mount(node);
+async function track(node: ReactNode): Promise<Mounted> {
+  const m = await mount(node);
   extra.push(m);
   return m;
 }
@@ -395,7 +395,7 @@ describe("page head", () => {
   it("on phone offers the table switch and the Contents button only when a drawer is provided", async () => {
     stubPhone(true);
     const open = vi.fn();
-    const withDrawer = track(
+    const withDrawer = await track(
       <DrawerContext.Provider value={open}>
         <PageHead crumbs={[{ label: "Here" }]} title="Title" tables actions={<button type="button">Act</button>} />
       </DrawerContext.Provider>,
@@ -406,14 +406,14 @@ describe("page head", () => {
     await click(byText(withDrawer.container, "button.contents-btn", "Contents"));
     expect(open).toHaveBeenCalledTimes(1);
 
-    const noDrawer = track(<PageHead crumbs={[{ label: "Here" }]} title="Plain" />);
+    const noDrawer = await track(<PageHead crumbs={[{ label: "Here" }]} title="Plain" />);
     expect(noDrawer.container.querySelector("button.contents-btn")).toBeNull();
     expect(noDrawer.container.querySelector(".layout-tog")).toBeNull();
   });
 
-  it("on laptop shows neither the switch nor the Contents button", () => {
+  it("on laptop shows neither the switch nor the Contents button", async () => {
     const open = vi.fn();
-    const m = track(
+    const m = await track(
       <DrawerContext.Provider value={open}>
         <PageHead crumbs={[{ label: "Here" }]} title="Title" tables />
       </DrawerContext.Provider>,
@@ -422,14 +422,14 @@ describe("page head", () => {
     expect(m.container.querySelector(".layout-tog")).toBeNull();
   });
 
-  it("useStacked is true only on phone with Stacked chosen", () => {
-    const laptop = track(<Stacked />);
+  it("useStacked is true only on phone with Stacked chosen", async () => {
+    const laptop = await track(<Stacked />);
     expect(laptop.container.textContent).toBe("false");
     laptop.unmount();
     extra.splice(extra.indexOf(laptop), 1);
 
     stubPhone(true);
-    const phone = track(
+    const phone = await track(
       <>
         <Stacked />
         <TableModeSwitch />
@@ -440,8 +440,8 @@ describe("page head", () => {
     expect(phone.container.querySelector("output")?.textContent).toBe("false");
   });
 
-  it("Crumbs link every crumb with a target and mark the last as the current page", () => {
-    const m = track(<Crumbs items={[{ label: "EOR", to: "#/eor" }, { label: "Middle" }, { label: "Here" }]} />);
+  it("Crumbs link every crumb with a target and mark the last as the current page", async () => {
+    const m = await track(<Crumbs items={[{ label: "EOR", to: "#/eor" }, { label: "Middle" }, { label: "Here" }]} />);
     const nav = need(m.container.querySelector('nav.crumbs[aria-label="Location"]'), "crumbs");
     const crumbs = [...nav.querySelectorAll(":scope > .crumb")];
     expect(crumbs.map((c) => c.textContent)).toEqual(["EOR", "›Middle", "›Here"]);
@@ -457,7 +457,7 @@ describe("preferences", () => {
     return <output>{`${String(useSidebarHidden())} ${useTableMode()}`}</output>;
   }
 
-  it("keep working in memory when storage is unavailable", () => {
+  it("keep working in memory when storage is unavailable", async () => {
     const get = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("denied");
     });
@@ -466,7 +466,7 @@ describe("preferences", () => {
     });
     try {
       act(() => reloadPrefs());
-      const m = track(<Prefs />);
+      const m = await track(<Prefs />);
       expect(m.container.textContent).toBe("false stacked");
       act(() => {
         setSidebarHidden(true);
@@ -497,12 +497,12 @@ describe("owner", () => {
     expect(visibleText(foot)).not.toContain("Anything not from your notes is marked");
   });
 
-  it("Voice renders both wordings and the stylesheet shows the one that applies; setOwner drives useOwner", () => {
+  it("Voice renders both wordings and the stylesheet shows the one that applies; setOwner drives useOwner", async () => {
     function Who(): ReactNode {
       const o = useOwner();
       return <i>{o.owner ? `owner ${o.login ?? ""}` : "visitor"}</i>;
     }
-    const m = track(
+    const m = await track(
       <div>
         <p id="both">
           <Voice owner="Your notes" visitor="Her notes" />
@@ -547,11 +547,11 @@ describe("page boundary", () => {
     throw error;
   }
 
-  it("shows the not-on-site page for a missing data file or id, without logging it", () => {
+  it("shows the not-on-site page for a missing data file or id, without logging it", async () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     try {
       const missing = new NotFoundError("guides/x.json");
-      const m = track(
+      const m = await track(
         <PageBoundary resetKey="a">
           <Boom error={missing} />
         </PageBoundary>,
@@ -561,7 +561,7 @@ describe("page boundary", () => {
       expect(spy.mock.calls.some((c) => c[0] === missing)).toBe(false);
 
       const noId = new PageNotFound("topic r_1");
-      const n = track(
+      const n = await track(
         <PageBoundary resetKey="a">
           <Boom error={noId} />
         </PageBoundary>,
@@ -573,11 +573,11 @@ describe("page boundary", () => {
     }
   });
 
-  it("shows a plain message for any other failure, logs it, and clears it when the route changes", () => {
+  it("shows a plain message for any other failure, logs it, and clears it when the route changes", async () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     try {
       const broken = new Error("boom");
-      const m = track(
+      const m = await track(
         <PageBoundary resetKey="a">
           <Boom error={broken} />
         </PageBoundary>,
@@ -624,8 +624,8 @@ describe("page boundary", () => {
 });
 
 describe("toast", () => {
-  it("shows the message, Undo runs its callback, Dismiss hides it, and it hides itself after its time", () => {
-    const m = track(<Toast />);
+  it("shows the message, Undo runs its callback, Dismiss hides it, and it hides itself after its time", async () => {
+    const m = await track(<Toast />);
     const region = need(m.container.querySelector('.toast-region[role="status"]'), "region");
     expect(region.getAttribute("aria-live")).toBe("polite");
     expect(region.querySelector(".toast")).toBeNull();
@@ -704,7 +704,7 @@ describe("Link", () => {
     };
     document.addEventListener("click", record);
     try {
-      const m = track(
+      const m = await track(
         <Link to="/eor/fm" className="go" title="Family Medicine">
           Go
         </Link>,
@@ -728,7 +728,7 @@ describe("Link", () => {
       expect(location.hash).toBe("#/eor/fm");
 
       const own = vi.fn((e: { preventDefault: () => void }) => e.preventDefault());
-      const n = track(
+      const n = await track(
         <Link to="#/pance" className="own" onClick={own}>
           PANCE
         </Link>,
@@ -745,8 +745,8 @@ describe("Link", () => {
 });
 
 describe("focus trap", () => {
-  it("skips disabled controls and does nothing without focusable content", () => {
-    const m = track(
+  it("skips disabled controls and does nothing without focusable content", async () => {
+    const m = await track(
       <div>
         <div className="withbtns" onKeyDown={trapTab}>
           <button type="button">One</button>
@@ -778,8 +778,8 @@ describe("focus trap", () => {
 describe("Icon", () => {
   const NAMES: IconName[] = ["search", "chev", "plus", "x", "dl", "menu", "hide", "show", "pill", "gap", "upd", "ext", "back"];
 
-  it("draws every icon as a hidden 16px line drawing unless sized", () => {
-    const m = track(
+  it("draws every icon as a hidden 16px line drawing unless sized", async () => {
+    const m = await track(
       <div>
         {NAMES.map((n) => (
           <span key={n} data-n={n}>

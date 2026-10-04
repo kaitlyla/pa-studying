@@ -24,8 +24,8 @@ afterEach(() => {
   asOwner(false);
 });
 
-function render(node: ReactNode): HTMLDivElement {
-  ui = mount(node);
+async function render(node: ReactNode): Promise<HTMLDivElement> {
+  ui = await mount(node);
   return ui.container;
 }
 
@@ -65,9 +65,9 @@ describe("lengths and paragraphs", () => {
     expect(em(1, 3)).toBe("0.3333em");
   });
 
-  it("applies indents, spacing, the three line rules, alignment, shade and borders", () => {
+  it("applies indents, spacing, the three line rules, alignment, shade and borders", async () => {
     const border = { style: "single", widthPt: 1.1, color: "FF0000" };
-    const c = render(
+    const c = await render(
       <RichDoc
         basePt={11}
         doc={docOf(
@@ -87,14 +87,14 @@ describe("lengths and paragraphs", () => {
     expect(styleOf(p1).textAlign).toBe("justify");
     expect(styleOf(p1).background).toContain("rgb(255, 255, 0)");
     expect(styleOf(p2).lineHeight).toBe("1.2em");
-    expect(styleOf(p2).borderTop).toBe("0.1em solid #FF0000");
+    expect(styleOf(p2).borderTop).toBe("0.1em solid rgb(255, 0, 0)");
     expect(styleOf(p3).lineHeight).toBe("2em");
     expect(styleOf(p3).textAlign).toBe("center");
   });
 
-  it("draws a list marker as a tab-wide inline block in its own font", () => {
+  it("draws a list marker as a tab-wide inline block in its own font", async () => {
     const marker = { text: "•", font: "Symbol", marks: [{ type: "bold" }], tabPt: 18 };
-    const c = render(<RichDoc basePt={9} doc={docOf(para("item", { marker }))} />);
+    const c = await render(<RichDoc basePt={9} doc={docOf(para("item", { marker }))} />);
     const m = c.querySelector<HTMLElement>("span.marker");
     expect(m?.textContent).toBe("•");
     expect(m?.style.width).toBe("2em");
@@ -104,21 +104,21 @@ describe("lengths and paragraphs", () => {
     expect(c.querySelector("p")?.textContent).toBe("•item");
   });
 
-  it("keeps an empty paragraph's height with a line break", () => {
-    const c = render(<RichDoc basePt={11} doc={docOf(para([]))} />);
+  it("keeps an empty paragraph's height with a line break", async () => {
+    const c = await render(<RichDoc basePt={11} doc={docOf(para([]))} />);
     expect(c.querySelector("p")?.innerHTML).toContain("<br>");
   });
 
-  it("renders hard breaks and drops page breaks", () => {
-    const c = render(<RichDoc basePt={11} doc={docOf(para([text("a"), { type: "hard_break" }, text("b"), { type: "page_break" }, text("c")]))} />);
+  it("renders hard breaks and drops page breaks", async () => {
+    const c = await render(<RichDoc basePt={11} doc={docOf(para([text("a"), { type: "hard_break" }, text("b"), { type: "page_break" }, text("c")]))} />);
     expect(c.querySelector("p")?.innerHTML).toBe("a<br>bc");
   });
 });
 
 describe("marks", () => {
-  it("renders each mark as its element or style", () => {
+  it("renders each mark as its element or style", async () => {
     const run = (t: string, ...marks: MarkJSON[]): PMNode => text(t, marks);
-    const c = render(
+    const c = await render(
       <RichDoc
         basePt={10}
         doc={docOf(
@@ -173,7 +173,7 @@ describe("marks", () => {
 
   it("opens external links in a new tab with rel noopener noreferrer, keeps internal #/ links in-app, and drops unsafe hrefs", async () => {
     const link = (t: string, href: string): PMNode => text(t, [{ type: "link", attrs: { href } }]);
-    const c = render(
+    const c = await render(
       <RichDoc
         basePt={11}
         doc={docOf(para([link("ext", "https://www.uspstf.org/x"), link("int", "#/eor/fm/s/cardiovascular"), link("mail", "mailto:a@b.c"), link("bad", "javascript:alert(1)")]))}
@@ -214,8 +214,8 @@ describe("tables", () => {
     expect(tableColumns([7])).toEqual([100]);
   });
 
-  it("draws spans, fills and vertical alignment, with the 11% floor on the colgroup", () => {
-    const c = render(
+  it("draws spans, fills and vertical alignment, with the 11% floor on the colgroup", async () => {
+    const c = await render(
       <RichDoc
         basePt={11}
         doc={docOf(
@@ -241,10 +241,10 @@ describe("tables", () => {
     expect(styleOf(trs[1]).height).toBe("2em");
   });
 
-  it("uses outer borders on the table's edges and inside borders between cells, and a cell's own side over both", () => {
+  it("uses outer borders on the table's edges and inside borders between cells, and a cell's own side over both", async () => {
     const outer = { style: "single", widthPt: 2.2, color: "000000" };
     const inside = { style: "dashed", widthPt: 1.1, color: "999999" };
-    const c = render(
+    const c = await render(
       <RichDoc
         basePt={11}
         doc={docOf(
@@ -255,14 +255,16 @@ describe("tables", () => {
       />,
     );
     const [a, b] = [...c.querySelectorAll<HTMLTableCellElement>("td")];
-    expect(a?.style.borderLeft).toBe("0.2em solid #000000");
-    expect(a?.style.borderRight).toBe("0.1em dashed #999999");
-    expect(b?.style.borderLeft).toBe("none");
-    expect(b?.style.borderRight).toBe("0.2em solid #000000");
+    // jsdom reports colours in rgb() form.
+    expect(a?.style.borderLeft).toBe("0.2em solid rgb(0, 0, 0)");
+    expect(a?.style.borderRight).toBe("0.1em dashed rgb(153, 153, 153)");
+    // jsdom serializes the `none` shorthand as "medium"; the side's style is what shows no line.
+    expect(b?.style.borderLeftStyle).toBe("none");
+    expect(b?.style.borderRight).toBe("0.2em solid rgb(0, 0, 0)");
     expect(borderCss({ style: "NIL", widthPt: 1, color: "000000" }, 11)).toBe("none");
   });
 
-  it("shows only the requested rows, giving a span cut by hidden rows the shown rows it covers", () => {
+  it("shows only the requested rows, giving a span cut by hidden rows the shown rows it covers", async () => {
     const t = tableNode([50, 50], [
       row("h", [cell("Head"), cell("H2")], "heading"),
       row("a", [cell("Span", { rowspan: 3 }), cell("a2")]),
@@ -273,17 +275,17 @@ describe("tables", () => {
     expect(drawn.map((r) => r.row.id)).toEqual(["h", "b", "c"]);
     // The span starting in hidden row "a" is drawn in "b", covering b and c.
     expect(drawn[1]?.cells.map((x) => [x.cell.col, x.rowspan])).toEqual([[0, 2], [1, 1]]);
-    const c = render(<RichDoc basePt={11} doc={docOf(t)} rows={["h", "c"]} />);
+    const c = await render(<RichDoc basePt={11} doc={docOf(t)} rows={["h", "c"]} />);
     expect([...c.querySelectorAll("tr")].map((tr) => tr.getAttribute("data-anchor"))).toEqual(["h", "c"]);
     expect(c.textContent).not.toContain("a2");
   });
 
-  it("stacks rows on the phone: label, name, then each column under its heading, fills kept", () => {
+  it("stacks rows on the phone: label, name, then each column under its heading, fills kept", async () => {
     const t = tableNode([30, 35, 35], [
       row("h", [cell("ARRHYTHMIAS", { fill: "FFC000" }), cell("Presentation"), cell("Treatment")], "heading"),
       row("r", [cell("AF"), cell("irregular"), cell("diltiazem")]),
     ]);
-    const c = render(<RichDoc basePt={11} doc={docOf(t)} stacked />);
+    const c = await render(<RichDoc basePt={11} doc={docOf(t)} stacked />);
     expect(c.querySelector("table")).toBeNull();
     const label = c.querySelector<HTMLElement>(".stk-label");
     expect(label?.textContent).toBe("ARRHYTHMIAS");
@@ -298,10 +300,10 @@ describe("tables", () => {
     ]);
   });
 
-  it("shows a nested table in full as a grid even in stacked mode", () => {
+  it("shows a nested table in full as a grid even in stacked mode", async () => {
     const inner = tableNode([50, 50], [row("i1", [cell("x"), cell("y")])]);
     const outerCell: PMNode = { type: "table_cell", attrs: { colspan: 1, rowspan: 1, colwidth: null, fill: null, vAlign: "top", borders: null }, content: [inner] };
-    const c = render(<RichDoc basePt={11} doc={docOf(tableNode([100], [row("o1", [outerCell])]))} rows={["o1"]} />);
+    const c = await render(<RichDoc basePt={11} doc={docOf(tableNode([100], [row("o1", [outerCell])]))} rows={["o1"]} />);
     expect(c.querySelectorAll("table").length).toBe(2);
     expect(c.querySelector("table table td")?.textContent).toBe("x");
   });
@@ -310,27 +312,28 @@ describe("tables", () => {
 describe("pictures, text boxes, anchored content, drawings and rules", () => {
   const image = { asset: "0123456789abcdef0123456789abcdef.png", widthPt: 110, heightPt: 55, rot: 90, flipH: true, flipV: false };
 
-  it("rotates and flips a picture with a CSS transform and sizes it in em", () => {
+  it("rotates and flips a picture with a CSS transform and sizes it in em", async () => {
     expect(imageTransform({ rot: 90, flipH: true, flipV: false })).toBe("rotate(90deg) scaleX(-1)");
     expect(imageTransform({ rot: 0, flipH: false, flipV: true })).toBe("scaleY(-1)");
     expect(imageTransform({ rot: 0, flipH: false, flipV: false })).toBeUndefined();
-    const c = render(<RichDoc basePt={11} doc={docOf({ type: "image_block", attrs: image })} />);
+    const c = await render(<RichDoc basePt={11} doc={docOf({ type: "image_block", attrs: image })} />);
     const img = c.querySelector<HTMLImageElement>(".pic-block img");
     expect(img?.getAttribute("src")).toMatch(/data\/assets\/0123456789abcdef0123456789abcdef\.png$/);
     expect(img?.style.width).toBe("10em");
     expect(img?.style.transform).toBe("rotate(90deg) scaleX(-1)");
   });
 
-  it("clamps an anchored child's offset to the container: min(offset, 100% − child width)", () => {
+  it("clamps an anchored child's offset to the container: min(offset, 100% − child width)", async () => {
     expect(anchoredOffset(220, 110, 11)).toBe("min(20em, calc(100% - 10em))");
-    const c = render(<RichDoc basePt={11} doc={docOf({ type: "anchored", attrs: { offsetPt: 220 }, content: [{ type: "image_block", attrs: image }] })} />);
+    const c = await render(<RichDoc basePt={11} doc={docOf({ type: "anchored", attrs: { offsetPt: 220 }, content: [{ type: "image_block", attrs: image }] })} />);
     const holder = c.querySelector<HTMLElement>(".anchored > div");
-    expect(holder?.style.marginLeft).toBe("min(20em, calc(100% - 10em))");
+    // jsdom serializes the calc() inside min() without the calc keyword; the exact string is asserted above.
+    expect(holder?.style.marginLeft).toBe("min(20em, 100% - 10em)");
     expect(holder?.querySelector("img")).not.toBeNull();
   });
 
-  it("draws a text box with its width, border, fill and Word's default insets", () => {
-    const c = render(
+  it("draws a text box with its width, border, fill and Word's default insets", async () => {
+    const c = await render(
       <RichDoc
         basePt={12}
         doc={docOf({ type: "textbox", attrs: { widthPt: 120, fill: "F2F2F2", border: { style: "single", widthPt: 1.2, color: "000000" }, inline: true }, content: [para("boxed")] })}
@@ -339,13 +342,13 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     const box = c.querySelector<HTMLElement>(".textbox");
     expect(box?.textContent).toBe("boxed");
     expect(box?.style.width).toBe("10em");
-    expect(box?.style.border).toBe("0.1em solid #000000");
+    expect(box?.style.border).toBe("0.1em solid rgb(0, 0, 0)");
     expect(box?.style.padding).toBe("0.3em 0.6em");
     expect(box?.style.display).toBe("inline-block");
     expect(box?.style.background).toContain("rgb(242, 242, 242)");
   });
 
-  it("draws each shape kind through the shared drawing module, with its text frames", () => {
+  it("draws each shape kind through the shared drawing module, with its text frames", async () => {
     const shape = (geom: string, over: Partial<DrawingShape> = {}): DrawingShape => ({
       geom, x: 0, y: 0, w: 40, h: 20, rot: 0, flipH: false, flipV: false, stroke: { color: "000000", widthPt: 1, dash: null }, fill: null, head: null, tail: null, asset: null, ...over,
     });
@@ -361,7 +364,7 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
       shape("picture", { asset: "fedcba9876543210fedcba9876543210.png" }),
       shape("cloud"),
     ];
-    const c = render(
+    const c = await render(
       <RichDoc
         basePt={10}
         doc={docOf({
@@ -390,14 +393,14 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     expect(fo?.textContent).toBe("label");
   });
 
-  it("renders a rule as <hr> in its colour and width", () => {
-    const c = render(<RichDoc basePt={10} doc={docOf({ type: "rule", attrs: { color: "7F7F7F", widthPt: 1.5 } })} />);
+  it("renders a rule as <hr> in its colour and width", async () => {
+    const c = await render(<RichDoc basePt={10} doc={docOf({ type: "rule", attrs: { color: "7F7F7F", widthPt: 1.5 } })} />);
     const hr = c.querySelector<HTMLElement>("hr.rule");
-    expect(hr?.style.borderTop).toBe("0.15em solid #7F7F7F");
+    expect(hr?.style.borderTop).toBe("0.15em solid rgb(127, 127, 127)");
   });
 
-  it("renders a slide card with its heading and items, and a heading line as h3", () => {
-    const c = render(
+  it("renders a slide card with its heading and items, and a heading line as h3", async () => {
+    const c = await render(
       <RichDoc basePt={11} doc={docOf({ type: "heading_line", content: [text("Title")] }, { type: "slide_card", content: [para("Presentation"), para("Irregularly irregular")] })} />,
     );
     expect(c.querySelector("h3.heading-line")?.textContent).toBe("Title");
@@ -405,16 +408,16 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     expect(c.querySelector(".sd-card p")?.textContent).toBe("Irregularly irregular");
   });
 
-  it("ignores node types it does not know", () => {
-    const c = render(<RichDoc basePt={11} doc={docOf({ type: "mystery", content: [para("hidden")] }, para("shown"))} />);
+  it("ignores node types it does not know", async () => {
+    const c = await render(<RichDoc basePt={11} doc={docOf({ type: "mystery", content: [para("hidden")] }, para("shown"))} />);
     expect(c.textContent).toBe("shown");
   });
 });
 
 describe("pharm notes aids", () => {
-  it("draws a divider paragraph as a rule with its text still in the DOM, and bolds a lead label", () => {
+  it("draws a divider paragraph as a rule with its text still in the DOM, and bolds a lead label", async () => {
     const doc = docOf(para("- - - - - -"), para([text("Clin "), text("Use: angina", [{ type: "italic" }])]), para("no label here"));
-    const c = render(<RichDoc basePt={11} doc={doc} pharmNotes />);
+    const c = await render(<RichDoc basePt={11} doc={doc} pharmNotes />);
     const div = c.querySelector(".pdiv");
     expect(div?.querySelector("hr")).not.toBeNull();
     expect(div?.querySelector(".vh")?.textContent).toBe("- - - - - -");
@@ -425,8 +428,8 @@ describe("pharm notes aids", () => {
     expect(c.querySelectorAll("p")[1]?.querySelector(".lead-label")).toBeNull();
   });
 
-  it("applies neither aid outside pharm notes", () => {
-    const c = render(<RichDoc basePt={11} doc={docOf(para("------"), para("MOA: x"))} />);
+  it("applies neither aid outside pharm notes", async () => {
+    const c = await render(<RichDoc basePt={11} doc={docOf(para("------"), para("MOA: x"))} />);
     expect(c.querySelector(".pdiv")).toBeNull();
     expect(c.querySelector(".lead-label")).toBeNull();
     expect(c.querySelectorAll("p")[0]?.textContent).toBe("------");
@@ -453,8 +456,8 @@ describe("labels for content not from her notes", () => {
     ...over,
   });
 
-  it("gap block: dashed container for everyone, with title, Relevant to, Written, content and numbered sources", () => {
-    const c = render(<GapBlock gap={gap()} />);
+  it("gap block: dashed container for everyone, with title, Relevant to, Written, content and numbered sources", async () => {
+    const c = await render(<GapBlock gap={gap()} />);
     const sec = c.querySelector("section.gap");
     expect(sec?.getAttribute("data-anchor")).toBe("g_0000000001");
     expect(sec?.querySelector("h3")?.textContent).toBe("TSH in AF");
@@ -470,9 +473,9 @@ describe("labels for content not from her notes", () => {
     expect(open?.getAttribute("target")).toBe("_blank");
   });
 
-  it("gap block: badge, 'Edited by you · date' and the Differs callout only for the owner", () => {
+  it("gap block: badge, 'Edited by you · date' and the Differs callout only for the owner", async () => {
     const g = gap({ ownerEdits: ["2026-10-02T10:00:00Z", "2026-10-03T09:00:00Z"], differs: { type: "doc", content: [para("Your notes say 12 weeks.")] } });
-    const c = render(<GapBlock gap={g} />);
+    const c = await render(<GapBlock gap={g} />);
     const visitor = visibleText(c);
     expect(visitor).not.toContain("Not from your notes");
     expect(visitor).not.toContain("Edited by you");
@@ -485,15 +488,15 @@ describe("labels for content not from her notes", () => {
     expect(owner).toContain("Differs from your notes. Your notes say 12 weeks.");
   });
 
-  it("gap block: a note placed at the gap shows at its top", () => {
-    const c = render(<GapBlock gap={gap({ notes: [note] })} />);
+  it("gap block: a note placed at the gap shows at its top", async () => {
+    const c = await render(<GapBlock gap={gap({ notes: [note] })} />);
     const sec = c.querySelector("section.gap");
     expect(sec?.firstElementChild?.matches("aside.upd")).toBe(true);
     expect(sec?.firstElementChild?.getAttribute("data-anchor")).toBe(note.id);
   });
 
-  it("update note: badge and details for everyone, '— not from your notes' only for the owner", () => {
-    const c = render(<UpdateNote note={note} />);
+  it("update note: badge and details for everyone, '— not from your notes' only for the owner", async () => {
+    const c = await render(<UpdateNote note={note} />);
     const aside = c.querySelector("aside.upd");
     expect(aside?.querySelector(".ut")?.textContent).toBe("GOLD 2025 report");
     expect(visibleText(c)).toContain("Updated guideline");
@@ -508,23 +511,23 @@ describe("labels for content not from her notes", () => {
     expect(visibleText(c)).toContain("— not from your notes");
   });
 
-  it("update note: no quote, grade or link when absent or not a web URL", () => {
-    const c = render(<UpdateNote note={{ ...note, quote: null, grade: null, url: "javascript:alert(1)" }} />);
+  it("update note: no quote, grade or link when absent or not a web URL", async () => {
+    const c = await render(<UpdateNote note={{ ...note, quote: null, grade: null, url: "javascript:alert(1)" }} />);
     expect(c.querySelector("blockquote")).toBeNull();
     expect(c.textContent).not.toContain("Grade");
     expect(c.querySelector("a")).toBeNull();
   });
 
-  it("Review slides badge: '— made from your notes' only on generated decks, and only for the owner", () => {
+  it("Review slides badge: '— made from your notes' only on generated decks, and only for the owner", async () => {
     asOwner(true);
-    const gen = render(<ReviewSlidesBadge generated />);
+    const gen = await render(<ReviewSlidesBadge generated />);
     expect(visibleText(gen)).toBe("Review slides — made from your notes · Not included in PDF downloads");
     ui?.unmount();
-    const own = render(<ReviewSlidesBadge generated={false} />);
+    const own = await render(<ReviewSlidesBadge generated={false} />);
     expect(visibleText(own)).toBe("Review slides · Not included in PDF downloads");
     asOwner(false);
     ui?.unmount();
-    const visitor = render(<ReviewSlidesBadge generated />);
+    const visitor = await render(<ReviewSlidesBadge generated />);
     expect(visibleText(visitor)).toBe("Review slides · Not included in PDF downloads");
   });
 });
@@ -546,7 +549,7 @@ describe("search landing on rendered notes", () => {
         row("r_later", [cell("Toxicity"), cell("lithium tremor")]),
       ]);
       await navigate(`#/eor/psy/s/x?q=lithium&at=r_later`);
-      const c = render(
+      const c = await render(
         <SearchHighlightProvider>
           <main>
             <SearchLanding />

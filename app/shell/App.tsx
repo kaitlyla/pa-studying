@@ -159,7 +159,7 @@ export class PageBoundary extends Component<{ children?: ReactNode; resetKey: st
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    if (!(error instanceof NotFoundError)) console.error(error, info.componentStack);
+    if (!(error instanceof NotFoundError || error instanceof PageNotFound)) console.error(error, info.componentStack);
   }
 
   render(): ReactNode {

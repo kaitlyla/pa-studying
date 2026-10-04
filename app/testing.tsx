@@ -1,6 +1,7 @@
 // Test-only: the published data of tools/build/test-fixture.ts (built by the real lib/derive publish)
 // served to the app through a fetch stub, and a harness that renders the app at a route and waits
 // for its data. Not part of the site bundle (nothing outside *.test.tsx imports it).
+import { readFileSync } from "node:fs";
 import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
@@ -14,7 +15,6 @@ import { DATA_BASE, invalidateData } from "./data/load.ts";
 import { App } from "./shell/App.tsx";
 import { setOwner } from "./shell/owner.tsx";
 import { navigate } from "./shell/route.ts";
-import siteCss from "./styles.css?raw";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -119,12 +119,17 @@ export interface Mounted {
   unmount: () => void;
 }
 
-/** Renders `node` into a fresh container in the document. */
-export function mount(node: ReactNode): Mounted {
+/**
+ * Renders `node` into a fresh container in the document. The render runs in an awaited act: a tree
+ * that suspends inside a synchronous act is never retried when its data arrives.
+ */
+export async function mount(node: ReactNode): Promise<Mounted> {
   const container = document.createElement("div");
   document.body.append(container);
   const root = createRoot(container);
-  act(() => root.render(node));
+  await act(async () => {
+    root.render(node);
+  });
   return {
     container,
     root,
@@ -155,12 +160,16 @@ export function asOwner(owner: boolean): void {
 
 let ownerCss: HTMLStyleElement | null = null;
 
-/** Installs the site stylesheet's owner/visitor rules (app/styles.css) so visibility can be checked. */
+/**
+ * Installs the site stylesheet (app/styles.css) so owner/visitor visibility and layout display
+ * (which `visibleText` reads) can be checked.
+ */
 export function installOwnerCss(): void {
   if (ownerCss) return;
-  const rules = siteCss.split("\n").filter((l) => /\.(own|vis)-only\b/.test(l) && l.includes("{"));
+  // Read from disk: Vitest does not process CSS imports (a `?raw` import arrives empty), and in the
+  // jsdom project import.meta.url is not a file: URL. Vitest's root is the project root.
   ownerCss = document.createElement("style");
-  ownerCss.textContent = rules.join("\n");
+  ownerCss.textContent = readFileSync(join(process.cwd(), "app", "styles.css"), "utf8");
   document.head.append(ownerCss);
 }
 
@@ -172,18 +181,32 @@ export function shown(el: Element | null): boolean {
   return el !== null;
 }
 
-/** The text a reader sees in `root`: hidden elements (by CSS or `hidden`) left out, whitespace collapsed. */
+/**
+ * The text a reader sees in `root`: hidden elements (by CSS or `hidden`) left out, whitespace
+ * collapsed. Like `innerText`, which jsdom lacks, block-level boxes are set apart from their
+ * neighbours: elements whose display is not inline, and the children of a flex or grid container
+ * (which browsers blockify).
+ */
 export function visibleText(root: Element): string {
   const parts: string[] = [];
-  const walk = (n: Node): void => {
+  const walk = (n: Node, inLayout: boolean): void => {
     if (n.nodeType === Node.TEXT_NODE) {
       parts.push(n.textContent ?? "");
       return;
     }
-    if (n instanceof Element && (getComputedStyle(n).display === "none" || (n as HTMLElement).hidden)) return;
-    n.childNodes.forEach(walk);
+    if (!(n instanceof Element)) {
+      n.childNodes.forEach((c) => walk(c, false));
+      return;
+    }
+    const display = getComputedStyle(n).display;
+    if (display === "none" || (n as HTMLElement).hidden) return;
+    const block = inLayout || n.tagName === "BR" || !(display.startsWith("inline") || display === "contents");
+    const layout = /(^|-)(flex|grid)$/.test(display);
+    if (block) parts.push(" ");
+    n.childNodes.forEach((c) => walk(c, layout));
+    if (block) parts.push(" ");
   };
-  walk(root);
+  walk(root, false);
   return parts.join("").replace(/\s+/g, " ").trim();
 }
 
