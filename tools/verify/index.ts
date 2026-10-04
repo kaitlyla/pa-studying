@@ -7,13 +7,14 @@ import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { ContentError, slug } from "../../lib/content/index.ts";
-import type { AsIsFile, BlockFile, CardsFile, DeckFile, FileText, GuideFile, PharmFile, WordDocFile } from "../../lib/content/index.ts";
+import type { AsIsFile, BlockFile, CardsFile, DeckFile, FileText, GuideFile, PharmFile, VocabFile, WordDocFile } from "../../lib/content/index.ts";
 import { checkBlockDir, listDir, readContent, readContentIfExists, readStoredFile } from "../../lib/content/fs.ts";
 import type { Counts, Discrepancy, ReadAsset } from "./compare.ts";
 import { align, compareDocx, readStored } from "./compare.ts";
 import { deckParagraphs } from "./deck.ts";
 import type { InfoEntry } from "./extract.ts";
 import { extract } from "./extract.ts";
+import { compareVocab, skippedInfo, vocabEntries } from "./vocab.ts";
 
 export interface SourceReport {
   source: string;
@@ -194,9 +195,23 @@ async function verifyDeck(root: string, row: SourceRow, bytes: Uint8Array): Prom
   return report;
 }
 
-/** Verifies one source row of `tools/import/sources.json`; null for rows with nothing to compare. */
+async function verifyVocab(source: string, bytes: Uint8Array, root: string): Promise<SourceReport> {
+  const { tables, entries, skipped } = vocabEntries(bytes);
+  const stored = await readContentIfExists<VocabFile>(root, "content/vocab/abbreviations.json");
+  return {
+    source,
+    counts: { tables, rows: entries.length + skipped.length },
+    discrepancies: compareVocab(entries, stored),
+    info: skippedInfo(skipped),
+  };
+}
+
+/**
+ * Verifies one source row of `tools/import/sources.json`; null for a proven duplicate, which is not
+ * imported (the importer proves it identical before skipping it, 30 §30.2).
+ */
 export async function verifySource(root: string, row: SourceRow): Promise<SourceReport | null> {
-  if (row.kind === "duplicate" || row.kind === "vocab") return null;
+  if (row.kind === "duplicate") return null;
   const bytes = new Uint8Array(await readFile(join(root, ...row.path.split("/"))));
   const name = basename(row.path);
   try {
@@ -212,6 +227,8 @@ export async function verifySource(root: string, row: SourceRow): Promise<Source
         return await verifyPharm(root, name, bytes);
       case "deck":
         return await verifyDeck(root, row, bytes);
+      case "vocab":
+        return await verifyVocab(name, bytes, root);
       default:
         return await verifyAsIs(root, row, bytes);
     }
@@ -236,9 +253,15 @@ export async function runVerify(root: string, opts: RunOptions = {}): Promise<nu
   const log = opts.log ?? console.log;
   const sources = (JSON.parse(await readFile(join(root, "tools", "import", "sources.json"), "utf8")) as { sources: SourceRow[] }).sources;
   const reports: SourceReport[] = [];
+  const lines: (SourceReport | { source: string; skipped: string })[] = [];
   for (const row of sources) {
     const r = await verifySource(root, row);
-    if (r) reports.push(r);
+    if (r) {
+      reports.push(r);
+      lines.push(r);
+    } else {
+      lines.push({ source: basename(row.path), skipped: "proven duplicate" });
+    }
   }
   if (opts.rendered) {
     const { renderedCheck } = await import("./rendered.ts");
@@ -252,10 +275,16 @@ export async function runVerify(root: string, opts: RunOptions = {}): Promise<nu
   const dir = join(root, ...REPORT_DIR.split("/"));
   await mkdir(dir, { recursive: true });
   for (const r of reports) await writeFile(join(dir, reportName(r.source)), `${JSON.stringify(r, null, 1)}\n`, "utf8");
-  const summary = { sources: reports.map((r) => ({ source: r.source, discrepancies: r.discrepancies.length })) };
+  const summary = {
+    sources: lines.map((l) => ("skipped" in l ? l : { source: l.source, discrepancies: l.discrepancies.length })),
+  };
   await writeFile(join(dir, "summary.json"), `${JSON.stringify(summary, null, 1)}\n`, "utf8");
   const bad = reports.filter((r) => r.discrepancies.length);
-  for (const r of reports) log(`${r.discrepancies.length ? "FAIL" : "ok  "} ${r.source}${r.discrepancies.length ? ` — ${r.discrepancies.length} discrepancies` : ""}`);
+  for (const l of lines) {
+    if ("skipped" in l) { log(`skip ${l.source} — ${l.skipped}`); continue; }
+    const n = l.discrepancies.length;
+    log(`${n ? "FAIL" : "ok  "} ${l.source}${n ? ` — ${n} discrepancies` : ""}`);
+  }
   log(bad.length ? `${bad.length} of ${reports.length} sources have discrepancies` : `all ${reports.length} sources complete`);
   return bad.length ? 1 : 0;
 }

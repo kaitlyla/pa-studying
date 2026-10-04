@@ -153,7 +153,8 @@ describe("startPreview", () => {
       await expect(fetch(url)).rejects.toThrow();
       await preview.stop();
     } finally {
-      await rm(root, { recursive: true, force: true });
+      // Windows can hold the exited server's working directory open for a moment.
+      await rm(root, { recursive: true, force: true, maxRetries: 20, retryDelay: 100 });
     }
   }, 60_000);
 });

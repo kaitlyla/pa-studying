@@ -353,8 +353,10 @@ describe("verifyWordDoc / verifySource / runVerify on a content root", () => {
     const lines: string[] = [];
     expect(await runVerify(root, { log: (l) => lines.push(l) })).toBe(0);
     const dir = join(root, "tools", "import", "reports");
-    const summary = JSON.parse(await readFile(join(dir, "summary.json"), "utf8")) as { sources: { source: string; discrepancies: number }[] };
-    expect(summary.sources).toEqual([{ source: "notes.docx", discrepancies: 0 }, { source: "chart.png", discrepancies: 0 }]);
+    const summary = JSON.parse(await readFile(join(dir, "summary.json"), "utf8")) as { sources: unknown[] };
+    expect(summary.sources).toEqual([
+      { source: "notes.docx", discrepancies: 0 }, { source: "chart.png", discrepancies: 0 }, { source: "dup.docx", skipped: "proven duplicate" },
+    ]);
     const word = JSON.parse(await readFile(join(dir, reportName("notes.docx")), "utf8")) as { discrepancies: unknown[] };
     expect(word.discrepancies).toEqual([]);
     expect(lines.at(-1)).toBe("all 2 sources complete");
@@ -498,8 +500,7 @@ describe("verifyWordDoc / verifySource / runVerify on a content root", () => {
     expect(noGuide.discrepancies).toEqual([expect.objectContaining({ kind: "file", story: "content", expected: "readable content" })]);
   });
 
-  it("verifySource skips duplicate and vocab rows", async () => {
+  it("verifySource skips only a proven duplicate, without reading it", async () => {
     expect(await verifySource(root, { path: "x.docx", kind: "duplicate", name: "x", placement: null })).toBeNull();
-    expect(await verifySource(root, { path: "v.docx", kind: "vocab", name: "v", placement: null })).toBeNull();
   });
 });
