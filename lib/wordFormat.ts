@@ -1,6 +1,7 @@
 // How stored Word formatting reads, shared by the screen renderer (app/render) and the PDF builder
 // (lib/pdf) so both draw a document the same way. Renderer-neutral and browser-safe: each renderer maps
 // these answers to CSS or to pdfmake.
+import type { Side, TableSide } from "./schemaTypes.ts";
 
 /** Word's default tab stops: every 36 pt from the text margin. */
 export const TAB_STOP_PT = 36;
@@ -30,20 +31,18 @@ export function borderVisible<B extends { style: string; widthPt: number }>(b: B
   return s !== "none" && s !== "nil";
 }
 
-export type Side = "top" | "right" | "bottom" | "left";
-
 /**
  * The border a cell side starts from: the table's outer border on the table's edge, its inside
  * border otherwise. A cell's own border for that side, when stored, replaces it (`cellSide`).
  */
-export function edgeBorder<B>(table: Partial<Record<Side | "insideH" | "insideV", B | null>>, side: Side, onEdge: boolean): B | null {
+export function edgeBorder<B>(table: Partial<Record<TableSide, B | null>>, side: Side, onEdge: boolean): B | null {
   if (onEdge) return table[side] ?? null;
   return (side === "top" || side === "bottom" ? table.insideH : table.insideV) ?? null;
 }
 
 /** A cell side's border: the cell's own when it stores that side (null included), else `edgeBorder`. */
 export function cellSide<B>(
-  table: Partial<Record<Side | "insideH" | "insideV", B | null>>,
+  table: Partial<Record<TableSide, B | null>>,
   cell: Partial<Record<Side, B | null>> | null | undefined,
   side: Side,
   onEdge: boolean,
