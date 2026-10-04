@@ -1,6 +1,6 @@
 // The Updated guidelines list and source status (80 §80.5).
 import type { ReactNode } from "react";
-import type { PubFlag, UpdatesJson } from "../../lib/derive/published.ts";
+import { UPDATES_PATH, type PubFlag, type UpdatesJson } from "../../lib/derive/published.ts";
 import { useData } from "../data/load.ts";
 import { UpdateNote, UpdChip } from "../render/labels.tsx";
 import { Txt } from "../render/Text.tsx";
@@ -75,7 +75,7 @@ export function sourceStatus(s: UpdatesJson["sources"][number], lastRun: string 
 }
 
 export function UpdatesPage(): ReactNode {
-  const u = useData<UpdatesJson>("updates.json");
+  const u = useData<UpdatesJson>(UPDATES_PATH);
   const byId = new Map(u.sources.map((s) => [s.id, s]));
   const rows = [...FIXED_SOURCES.map((f) => ({ id: f.id, name: f.name })), ...u.series.map((s) => ({ id: s.id, name: s.label }))];
   return (

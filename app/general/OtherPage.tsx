@@ -1,7 +1,7 @@
 // The Other tab (UI other-tab): a grid of sections; each section page has its lead gap block, its
 // links and files, and (Legal, Screenings) its gaps. Guidelines also points to Updated guidelines.
 import { Suspense, type ReactNode } from "react";
-import type { OtherJson, UpdatesJson } from "../../lib/derive/published.ts";
+import { OTHER_PATH, UPDATES_PATH, type OtherJson, type UpdatesJson } from "../../lib/derive/published.ts";
 import { otherHash, UPDATES_ROUTE } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
 import { UpdChip } from "../render/labels.tsx";
@@ -16,7 +16,7 @@ import { ThreeParts } from "./ThreeParts.tsx";
 export const GUIDELINES = "guidelines";
 
 function UpdatesEntry(): ReactNode {
-  const u = useData<UpdatesJson>("updates.json");
+  const u = useData<UpdatesJson>(UPDATES_PATH);
   return (
     <div className="howto" data-ref="updates-entry">
       <UpdChip /> <Link to={UPDATES_ROUTE}>Updated guidelines</Link> — {u.flags.length} {u.flags.length === 1 ? "flag" : "flags"}
@@ -54,7 +54,7 @@ function Grid({ other }: { other: OtherJson }): ReactNode {
 }
 
 export function OtherPage({ section: id }: { section: string | null }): ReactNode {
-  const other = useData<OtherJson>("other.json");
+  const other = useData<OtherJson>(OTHER_PATH);
   if (id === null) return <Grid other={other} />;
   const s = other.sections.find((x) => x.id === id);
   if (!s) throw new PageNotFound(`other/${id}`);

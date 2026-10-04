@@ -1,13 +1,13 @@
 // The EOR picker (eor-picker): one card per rotation, in picker order.
 import type { ReactNode } from "react";
-import type { SiteJson } from "../../lib/derive/published.ts";
+import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import { useData } from "../data/load.ts";
 import { Link } from "../shell/Link.tsx";
 import { guideBase } from "../shell/route.ts";
 import { systemsWord } from "../reader/data.ts";
 
 export function Picker(): ReactNode {
-  const site = useData<SiteJson>("site.json");
+  const site = useData<SiteJson>(SITE_PATH);
   return (
     <div className="pick">
       <h1>EOR study guides</h1>

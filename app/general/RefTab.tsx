@@ -1,7 +1,7 @@
 // Reference tabs (Labs, Imaging, EKG, Anatomy; UI reference-tab): a landing page with the tab's topics
 // and files, and a page per topic in the three-part layout. The sidebar lists topics, then files.
 import type { ReactNode } from "react";
-import type { RefTabJson } from "../../lib/derive/published.ts";
+import { refPath, type RefTabJson } from "../../lib/derive/published.ts";
 import { TAB_LABELS, type RefTabId } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
 import { FileChips } from "../files/FileChip.tsx";
@@ -13,8 +13,6 @@ import { Voice } from "../shell/owner.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { fileHash, refHash, useRoute } from "../shell/route.ts";
 import { ThreeParts } from "./ThreeParts.tsx";
-
-const refPath = (tab: string): string => `ref/${tab}.json`;
 
 export function RefSidebar({ tab, onNavigate }: { tab: RefTabId; onNavigate: () => void }): ReactNode {
   const ref = useData<RefTabJson>(refPath(tab));

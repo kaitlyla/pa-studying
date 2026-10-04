@@ -16,8 +16,12 @@ import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
 import { CardMatcher, medsPanel, phraseMatcher, stubLabel } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
-import type { DocList, GeneralJson, HostsJson, NavJson, OtherJson, SiteJson, SlidesJson, SystemJson, UpdatesJson } from "./published.ts";
-import { fileLocation, parseHash } from "./routes.ts";
+import {
+  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
+  type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
+} from "./published.ts";
+import { GENERAL_KEYS } from "../content/types.ts";
+import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
 import { tableOf } from "./text.ts";
 import { checkMembers, deriveTopics, publishedRows, sectionItems } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
@@ -644,6 +648,24 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
       expect(parsed.kind, r).not.toBe("notfound");
       expect(parsed.path, r).toBe(r);
     }
+  });
+
+  it("writes every published file at the path its shared builder gives, using every builder", () => {
+    const expected = new Map<string, string>([[SITE_PATH, "site"], [HOSTS_PATH, "hosts"], [UPDATES_PATH, "updates"], [OTHER_PATH, "other"]]);
+    for (const g of base.guides) {
+      const gid = g.file.id;
+      expected.set(homePath(gid), "home").set(navPath(gid), "nav").set(workupPath(gid), "workup").set(slidesPath(gid), "slides");
+      for (const s of g.systems) expected.set(systemPath(gid, s.file.id), "system");
+      for (const key of GENERAL_KEYS) expected.set(generalPath(gid, key), "general");
+    }
+    for (const tab of REF_TABS) expected.set(refPath(tab), "ref");
+    for (const id of base.docs.keys()) expected.set(docPath(id), "doc");
+    const kinds = new Set<string>();
+    for (const path of out.files.keys()) {
+      expect(expected.has(path), path).toBe(true);
+      kinds.add(expected.get(path) as string);
+    }
+    expect([...kinds].sort()).toEqual(["doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "workup"]);
   });
 
   it("every search unit sharing a route carries a distinct anchor", () => {

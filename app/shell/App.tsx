@@ -1,7 +1,7 @@
 // The site frame (site-shell): header with tabs and search, sidebar (laptop: panel or 40px rail;
 // phone: drawer), the page, the footer, and the overlays. Routes per 10 §10.4.
 import { Component, Suspense, useEffect, useRef, useState, type ErrorInfo, type KeyboardEvent, type ReactNode } from "react";
-import type { SiteJson } from "../../lib/derive/published.ts";
+import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import type { RefTabId } from "../../lib/derive/routes.ts";
 import { NotFoundError, useData } from "../data/load.ts";
 import { FilePage } from "../files/FilePage.tsx";
@@ -81,7 +81,7 @@ function SidebarContent({ which, onNavigate }: { which: NonNullable<SidebarKind>
 // ---- header and footer -----------------------------------------------------------------------------
 
 function Brand(): ReactNode {
-  const site = useData<SiteJson>("site.json");
+  const site = useData<SiteJson>(SITE_PATH);
   return site.name;
 }
 

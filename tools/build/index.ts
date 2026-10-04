@@ -4,7 +4,7 @@ import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { publish } from "../../lib/derive/publish.ts";
-import type { BuildJson } from "../../lib/derive/published.ts";
+import { BUILD_PATH, FONTMAP_PATH, SEARCH_INDEX_PATH, SEARCH_VOCAB_PATH, unitsPath, type BuildJson } from "../../lib/derive/published.ts";
 import { buildIndex, SHARD_SIZE, Vocab } from "../../lib/search/index.ts";
 import { buildFontMap } from "./fonts.ts";
 import { loadContent } from "./load.ts";
@@ -37,22 +37,23 @@ export async function build(opts: BuildOptions): Promise<BuildJson> {
 
   await rm(out, { recursive: true, force: true });
   await mkdir(out, { recursive: true });
-  for (const [path, value] of result.files) await writeJSON(join(out, ...path.split("/")), value);
+  const at = (path: string): string => join(out, ...path.split("/"));
+  for (const [path, value] of result.files) await writeJSON(at(path), value);
   for (const name of result.assets) await copyInto(join(opts.root, "content", "assets", name), join(out, "assets", name));
   for (const f of result.stored) await copyInto(join(opts.root, "content", "files", f.doc, f.name), join(out, "files", f.doc, f.name));
 
   const vocab = new Vocab(content.vocab.entries);
-  await writeJSON(join(out, "search", "index.json"), buildIndex(vocab, result.units));
+  await writeJSON(at(SEARCH_INDEX_PATH), buildIndex(vocab, result.units));
   for (let i = 0; i * SHARD_SIZE < result.units.length; i++) {
-    await writeJSON(join(out, "search", `units-${i}.json`), result.units.slice(i * SHARD_SIZE, (i + 1) * SHARD_SIZE));
+    await writeJSON(at(unitsPath(i)), result.units.slice(i * SHARD_SIZE, (i + 1) * SHARD_SIZE));
   }
-  await writeJSON(join(out, "search", "vocab.json"), content.vocab);
+  await writeJSON(at(SEARCH_VOCAB_PATH), content.vocab);
 
   const { fontmap, uncovered } = buildFontMap(result.codePoints, opts.fontsDir ?? join(opts.root, "app", "public", "fonts"));
-  await writeJSON(join(out, "fonts", "fontmap.json"), fontmap);
+  await writeJSON(at(FONTMAP_PATH), fontmap);
 
   const buildJson: BuildJson = { commit: opts.commit, builtAt: opts.builtAt, siteBytes: 0, dropped: result.dropped, uncoveredGlyphs: uncovered };
-  await writeJSON(join(out, "build.json"), buildJson);
+  await writeJSON(at(BUILD_PATH), buildJson);
   return buildJson;
 }
 

@@ -2,7 +2,7 @@
 // and has per-slide Edit and Versions; her own Psychiatry deck opens on her first slide with the
 // contents under it and has "Download original" and document-level actions instead.
 import type { ReactNode } from "react";
-import { docPath, type DocJson, type SlidesJson } from "../../lib/derive/published.ts";
+import { docPath, slidesPath, type DocJson, type SlidesJson } from "../../lib/derive/published.ts";
 import { DATA_BASE, useData } from "../data/load.ts";
 import { SlideNav, slideKeys } from "../files/SlideNav.tsx";
 import { inlineText, RichDoc, type PMNode } from "../render/RichDoc.tsx";
@@ -150,7 +150,7 @@ function GeneratedDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n:
 }
 
 export function ReviewSlidesPage({ guide, n }: { guide: string; n: number }): ReactNode {
-  const deck = useData<SlidesJson>(`g/${guide}/slides.json`);
+  const deck = useData<SlidesJson>(slidesPath(guide));
   if (deck.kind === "own") return <OwnDeck guide={guide} deck={deck} n={n} />;
   return <GeneratedDeck guide={guide} deck={deck} n={n} />;
 }

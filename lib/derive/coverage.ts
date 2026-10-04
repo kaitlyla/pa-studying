@@ -20,7 +20,7 @@ const TEXTBLOCKS = new Set(["paragraph", "heading_line"]);
 const WORD = /[\p{L}\p{N}]+/gu;
 
 /** Every text block (paragraph or heading line, wherever it sits: cells, text boxes, drawings) with text, by owner. */
-function textBlocks(block: BlockFile, hosts: HostsJson, out: Uncovered[]): void {
+function textBlocks(block: BlockFile<unknown>, hosts: HostsJson, out: Uncovered[]): void {
   const walk = (n: PMNode, owner: string): void => {
     const row = n.type === "table_row" && typeof n.attrs?.id === "string" ? n.attrs.id : null;
     const here = row !== null && hosts[row] !== undefined ? row : owner;
@@ -40,15 +40,15 @@ function textBlocks(block: BlockFile, hosts: HostsJson, out: Uncovered[]): void 
  * removed and pending documents and unused pharm-notes blocks are not shown, so not checked.
  */
 export function uncoveredText(content: Content, units: readonly SearchUnit[], hosts: HostsJson): Uncovered[] {
-  const blocks: BlockFile[] = [];
+  const blocks: BlockFile<unknown>[] = [];
   for (const g of content.guides) {
     blocks.push(...g.preamble);
     for (const s of g.systems) blocks.push(...s.blocks);
   }
   for (const d of content.docs.values()) if (d.kind === "word") blocks.push(...d.blocks);
   for (const p of content.pharm) blocks.push(...p.blocks);
-  for (const gap of content.gaps.values()) blocks.push(gap.block as unknown as BlockFile);
-  for (const deck of content.decks.values()) blocks.push(...(deck.slides as BlockFile[]));
+  for (const gap of content.gaps.values()) blocks.push(gap.block);
+  for (const deck of content.decks.values()) blocks.push(...deck.slides);
 
   const shown: Uncovered[] = [];
   for (const b of blocks) {

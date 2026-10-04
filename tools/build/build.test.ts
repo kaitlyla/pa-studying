@@ -4,7 +4,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { BuildError } from "../../lib/derive/errors.ts";
-import type { BuildJson, FontMapJson, SiteJson } from "../../lib/derive/published.ts";
+import {
+  BUILD_PATH, FONTMAP_PATH, SEARCH_INDEX_PATH, SEARCH_VOCAB_PATH, unitsPath, type BuildJson, type FontMapJson, type SiteJson,
+} from "../../lib/derive/published.ts";
 import { FONTS } from "../../lib/fonts.ts";
 import { loadIndex, runSearch, SHARD_SIZE, Vocab, type SearchUnit } from "../../lib/search/index.ts";
 import { searchCoverage } from "./coverage.ts";
@@ -61,19 +63,19 @@ describe("build:data", () => {
   });
 
   it("writes a search index that loads and answers, the units in site-ordered shards, and the vocabulary", async () => {
-    const units = await json<SearchUnit[]>("search/units-0.json");
+    const units = await json<SearchUnit[]>(unitsPath(0));
     expect(units.length).toBeGreaterThan(0);
     expect(units.length).toBeLessThanOrEqual(SHARD_SIZE);
     expect(units.map((u) => u.ord)).toEqual(units.map((_, i) => i));
-    await expect(stat(join(out, "search", "units-1.json"))).rejects.toThrow();
-    const vocabFile = await json<{ v: number; entries: { abbr: string[]; meanings: string[] }[] }>("search/vocab.json");
+    await expect(read(unitsPath(1))).rejects.toThrow();
+    const vocabFile = await json<{ v: number; entries: { abbr: string[]; meanings: string[] }[] }>(SEARCH_VOCAB_PATH);
     expect(vocabFile.entries).toEqual([{ abbr: ["AF"], meanings: ["atrial fibrillation"] }]);
-    const hits = runSearch(loadIndex(await read("search/index.json")), new Vocab(vocabFile.entries), "asthma");
+    const hits = runSearch(loadIndex(await read(SEARCH_INDEX_PATH)), new Vocab(vocabFile.entries), "asthma");
     expect(hits?.titles.map((h) => units[h.n]?.title)).toContain("Asthma");
   });
 
   it("maps each content code point to the first vendored font with its glyph, falling back to DejaVu Sans", async () => {
-    const fm = await json<FontMapJson>("fonts/fontmap.json");
+    const fm = await json<FontMapJson>(FONTMAP_PATH);
     expect(fm.fonts).toEqual(FONTS.map((f) => ({ family: f.family, file: f.file })));
     expect(fm.map[String("A".codePointAt(0))]).toBe(0);
     expect(fm.map[String(0x2295)]).toBe(1); // ⊕: not in Carlito, in Noto Sans Math
@@ -82,7 +84,7 @@ describe("build:data", () => {
   });
 
   it("records the commit, build time, dropped references and uncovered glyphs in build.json", async () => {
-    const b = await json<BuildJson>("build.json");
+    const b = await json<BuildJson>(BUILD_PATH);
     expect(b).toEqual(result);
     expect(b).toMatchObject({ commit: COMMIT, builtAt: "2026-10-04T05:00:00Z", siteBytes: 0, uncoveredGlyphs: ["U+F0000"] });
     expect(b.dropped.map((d) => d.file)).toEqual([

@@ -20,7 +20,9 @@ import {
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
 import { checkMembers, deriveTopics, navEntries, publishedRows, publishedTopics, rowSection, sectionItems, type SystemTopics } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
-import { docPath, navPath, systemPath } from "./published.ts";
+import {
+  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
+} from "./published.ts";
 
 export interface PublishResult {
   /** Path relative to `dist/data/` → JSON value. */
@@ -433,7 +435,7 @@ export function publish(c: Content): PublishResult {
     // home
     usedBlocks(g.preamble);
     const home: HomeJson = { guide: gid, title: c.site.guideNames[gid], preamble: g.preamble.map(pub), systems: summaries, notes: notesFor(g.preamble.map((b) => b.id)) };
-    files.set(`g/${gid}/home.json`, home);
+    files.set(homePath(gid), home);
     for (const b of g.preamble) {
       units.push({ tab, title: firstLine(b), loc: guideLoc(ix, gid), route: base, at: b.id, label: "notes", text: searchText(docText(b.doc)) });
     }
@@ -456,13 +458,13 @@ export function publish(c: Content): PublishResult {
           guide: gid, key, label: GENERAL_LABELS[key], howto: t.howto,
           links: links(`content/guides/${gid}/general.json`, t.links), files: docList(t.files), gaps: t.gaps.map(gap),
         };
-        files.set(`g/${gid}/general/${key}.json`, out);
+        files.set(generalPath(gid, key), out);
         for (const d of t.files) docUnit(d);
         for (const id of t.gaps) gapUnit(id);
       }
       if (g.general.workup.length > 0) {
         const workup: WorkupJson = { guide: gid, items: g.general.workup.map((w) => ({ id: w.id, title: w.title, conds: w.conds, gap: gap(w.gap) })) };
-        files.set(`g/${gid}/workup.json`, workup);
+        files.set(workupPath(gid), workup);
         for (const w of g.general.workup) {
           units.push({ tab, title: collapse(w.title), loc: workupLoc(ix, gid), route: guideViewHash(gid, { kind: "workup", item: w.id }), at: null, label: "notes", text: searchText(`${w.title}\n${w.conds}`) });
           gapUnit(w.gap);
@@ -503,7 +505,7 @@ export function publish(c: Content): PublishResult {
             ownerEdits: sl.meta.ownerEdits ?? [],
           })),
         };
-        files.set(`g/${gid}/slides.json`, out);
+        files.set(slidesPath(gid), out);
         deck.slides.forEach((sl, i) => {
           const heading = (sl.doc.content as PMNode[]).find((n) => n.type === "heading_line");
           units.push({
@@ -677,7 +679,7 @@ export function publish(c: Content): PublishResult {
       subs: rt.subs.map((sub) => ({ id: sub.id, title: sub.title, links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap) })),
       files: docList(rt.files),
     };
-    files.set(`ref/${tab}.json`, out);
+    files.set(refPath(tab), out);
     for (const sub of rt.subs) for (const id of sub.gaps) gapUnit(id);
     for (const d of rt.files) docUnit(d);
   }
@@ -687,7 +689,7 @@ export function publish(c: Content): PublishResult {
       ...(sec.gaps ? { gaps: sec.gaps.map(gap) } : {}),
     })),
   };
-  files.set("other.json", other);
+  files.set(OTHER_PATH, other);
   for (const sec of c.other.sections) {
     if (sec.lead) gapUnit(sec.lead);
     for (const d of sec.files) docUnit(d);
@@ -747,11 +749,11 @@ export function publish(c: Content): PublishResult {
       .sort((a, b) => (a.published === b.published ? b.flagged.localeCompare(a.flagged) : b.published.localeCompare(a.published)))
       .map(pubFlag),
   };
-  files.set("updates.json", updates);
+  files.set(UPDATES_PATH, updates);
   for (const f of c.flags.flags) for (const s of [f.guideline, f.org, f.quote ?? ""]) for (const ch of s) codePoints.add(ch.codePointAt(0) ?? 0);
 
-  files.set("site.json", site);
-  files.set("hosts.json", hosts);
+  files.set(SITE_PATH, site);
+  files.set(HOSTS_PATH, hosts);
   return { files, units: units.map((u, ord) => ({ ...u, ord })), assets, stored, dropped, codePoints };
 }
 

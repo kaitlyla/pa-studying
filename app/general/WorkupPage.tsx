@@ -1,7 +1,7 @@
 // Initial workup of common presentations (general-topic/workup): an alphabetical list; each item opens
 // a page showing only its gap block.
 import type { ReactNode } from "react";
-import type { WorkupJson } from "../../lib/derive/published.ts";
+import { workupPath, type WorkupJson } from "../../lib/derive/published.ts";
 import { GENERAL_LABELS } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
 import { GapBlock, GapChip } from "../render/labels.tsx";
@@ -15,7 +15,7 @@ import { guideViewHash } from "../shell/route.ts";
 
 export function WorkupPage({ guide, item: itemId }: { guide: string; item: string | null }): ReactNode {
   const site = useSite();
-  const data = useData<WorkupJson>(`g/${guide}/workup.json`);
+  const data = useData<WorkupJson>(workupPath(guide));
   const name = guideName(site, guide);
   const label = GENERAL_LABELS.workup;
   const listHash = guideViewHash(guide, { kind: "workup", item: null });

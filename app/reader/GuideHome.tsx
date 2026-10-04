@@ -1,7 +1,7 @@
 // Guide home (40 §40.3, ruling D4): the title, the PDF menu, whatever comes before her first system
 // heading rendered as her notes with no label, then the system list with percentages.
 import type { ReactNode } from "react";
-import type { HomeJson } from "../../lib/derive/published.ts";
+import { homePath, type HomeJson } from "../../lib/derive/published.ts";
 import { useData } from "../data/load.ts";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Link } from "../shell/Link.tsx";
@@ -15,7 +15,7 @@ import { PdfMenu } from "./PdfMenu.tsx";
 export function GuideHome({ guide }: { guide: string }): ReactNode {
   const site = useSite();
   const nav = useNav(guide);
-  const home = useData<HomeJson>(`g/${guide}/home.json`);
+  const home = useData<HomeJson>(homePath(guide));
   const crumbs = guide === PANCE ? [{ label: "PANCE" }] : [{ label: "EOR", to: "#/eor" }, { label: guideName(site, guide) }];
   return (
     <div className="guide-home">

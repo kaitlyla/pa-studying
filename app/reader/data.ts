@@ -1,12 +1,12 @@
 // Data paths and shared lookups for the guide reader (40 §40.8).
-import { navPath, systemPath, type NavJson, type SiteJson, type SystemJson } from "../../lib/derive/published.ts";
+import { navPath, SITE_PATH, systemPath, type NavJson, type SiteJson, type SystemJson } from "../../lib/derive/published.ts";
 import { useData } from "../data/load.ts";
 import type { Crumb } from "../shell/Page.tsx";
 import { guideBase, guideViewHash, PANCE } from "../shell/route.ts";
 
 export { navPath, systemPath };
 
-export const useSite = (): SiteJson => useData<SiteJson>("site.json");
+export const useSite = (): SiteJson => useData<SiteJson>(SITE_PATH);
 export const useNav = (g: string): NavJson => useData<NavJson>(navPath(g));
 export const useSystem = (g: string, s: string): SystemJson => useData<SystemJson>(systemPath(g, s));
 

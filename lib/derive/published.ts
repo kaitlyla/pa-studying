@@ -7,6 +7,21 @@ import type { SiteIndex } from "./routes.ts";
 export const navPath = (guide: string): string => `g/${guide}/nav.json`;
 export const systemPath = (guide: string, system: string): string => `g/${guide}/s/${system}.json`;
 export const docPath = (docId: string): string => `docs/${docId}.json`;
+export const homePath = (guide: string): string => `g/${guide}/home.json`;
+export const generalPath = (guide: string, key: string): string => `g/${guide}/general/${key}.json`;
+export const workupPath = (guide: string): string => `g/${guide}/workup.json`;
+export const slidesPath = (guide: string): string => `g/${guide}/slides.json`;
+export const refPath = (tab: string): string => `ref/${tab}.json`;
+export const OTHER_PATH = "other.json";
+export const UPDATES_PATH = "updates.json";
+export const SITE_PATH = "site.json";
+export const HOSTS_PATH = "hosts.json";
+// Written by tools/build beside publish's files.
+export const BUILD_PATH = "build.json";
+export const FONTMAP_PATH = "fonts/fontmap.json";
+export const SEARCH_INDEX_PATH = "search/index.json";
+export const SEARCH_VOCAB_PATH = "search/vocab.json";
+export const unitsPath = (shard: number): string => `search/units-${shard}.json`;
 /** A guide's nav.json: `guide`. */
 export const NAV_PATH_RE = /^g\/(?<guide>[^/]+)\/nav\.json$/;
 /** A system page: `guide`, `system`. */
