@@ -81,6 +81,8 @@ export function fakeSite(units: SearchUnit[] = fixtureUnits(), vocabFile: VocabF
 export function inProcessWorker(fetcher: typeof fetch): WorkerLike {
   const page: WorkerLike = {
     onmessage: null,
+    onerror: null,
+    onmessageerror: null,
     postMessage(message: WorkerRequest) {
       queueMicrotask(() => scope.onmessage?.({ data: message } as MessageEvent<WorkerRequest>));
     },
@@ -93,4 +95,21 @@ export function inProcessWorker(fetcher: typeof fetch): WorkerLike {
   };
   serveEngine(scope, fetcher);
   return page;
+}
+
+/** A Worker whose script never starts: every message is lost and an error event fires instead. */
+export function brokenWorker(): WorkerLike & { terminated: boolean } {
+  const w = {
+    onmessage: null,
+    onerror: null as ((ev: Event) => void) | null,
+    onmessageerror: null,
+    terminated: false,
+    postMessage() {
+      queueMicrotask(() => w.onerror?.(new Event("error")));
+    },
+    terminate() {
+      w.terminated = true;
+    },
+  };
+  return w;
 }

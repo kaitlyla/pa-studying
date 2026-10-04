@@ -7,6 +7,11 @@ import type { SearchResults, WorkerRequest, WorkerResponse } from "./engine.ts";
 export interface WorkerLike {
   postMessage(message: WorkerRequest): void;
   onmessage: ((ev: MessageEvent<WorkerResponse>) => void) | null;
+  /** The worker script failed to load or threw. */
+  onerror: ((ev: Event) => void) | null;
+  /** A message from the worker could not be deserialized. */
+  onmessageerror?: ((ev: MessageEvent) => void) | null;
+  terminate?(): void;
 }
 
 export type LoadStatus = "idle" | "loading" | "ready" | "failed";
@@ -49,7 +54,10 @@ export class SearchClient {
   private ensureWorker(): WorkerLike {
     if (this.worker) return this.worker;
     const worker = this.createWorker();
+    worker.onerror = () => this.dropWorker(worker, "The search worker failed to start.");
+    worker.onmessageerror = () => this.dropWorker(worker, "The search worker sent an unreadable message.");
     worker.onmessage = (ev) => {
+      if (this.worker !== worker) return;
       const msg = ev.data;
       if (msg.type === "results") {
         const resolve = this.pending.get(msg.id);
@@ -66,6 +74,27 @@ export class SearchClient {
     };
     this.worker = worker;
     return worker;
+  }
+
+  /**
+   * A broken worker: fail the load and every pending search, and forget the worker so the next
+   * load (Try again) starts a fresh one.
+   */
+  private dropWorker(worker: WorkerLike, message: string): void {
+    if (this.worker !== worker) return;
+    this.worker = null;
+    worker.onmessage = null;
+    worker.onerror = null;
+    worker.onmessageerror = null;
+    worker.terminate?.();
+    const settle = this.settleLoad;
+    this.settleLoad = null;
+    this.loading = null;
+    const pending = [...this.pending.values()];
+    this.pending.clear();
+    this.setStatus("failed");
+    settle?.reject(new Error(message));
+    for (const resolve of pending) resolve(null);
   }
 
   /** Load the index into the worker (first focus of the search box). Retries after a failure. */

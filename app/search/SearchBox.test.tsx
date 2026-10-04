@@ -6,7 +6,7 @@ import { SearchClient, setSearchClient } from "./client.ts";
 import { SearchBox } from "./SearchBox.tsx";
 import { DEBOUNCE_MS } from "./SearchPanel.tsx";
 import { resetSearchState } from "./store.ts";
-import { BASE, fakeSite, FILLER_COUNT, inProcessWorker, U, type FakeSite } from "./testing.ts";
+import { BASE, brokenWorker, fakeSite, FILLER_COUNT, inProcessWorker, U, type FakeSite } from "./testing.ts";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -176,6 +176,23 @@ describe("SearchBox states", () => {
     const retry = [...container.querySelectorAll("button")].find((b) => b.textContent === "Try again");
     act(() => retry?.click());
     await until(() => rows().length === 4, "results after retry");
+  });
+});
+
+describe("SearchBox worker failure", () => {
+  it("shows the failed state when the worker cannot start, and Try again starts a fresh worker", async () => {
+    let made = 0;
+    setSearchClient(
+      new SearchClient(() => (made++ === 0 ? brokenWorker() : inProcessWorker(site.fetch)), BASE, site.fetch),
+    );
+    render();
+    act(() => input().focus());
+    typeInto(input(), "endocard");
+    await until(() => status().startsWith("Search couldn't load."), "worker failure");
+    const retry = [...container.querySelectorAll("button")].find((b) => b.textContent === "Try again");
+    act(() => retry?.click());
+    await until(() => rows().length === 4, "results from a fresh worker");
+    expect(made).toBe(2);
   });
 });
 

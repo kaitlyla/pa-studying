@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { SearchClient } from "./client.ts";
+import { SearchClient, type WorkerLike } from "./client.ts";
 import { loadEngine, serveEngine, type WorkerRequest, type WorkerResponse } from "./engine.ts";
-import { BASE, fakeSite, inProcessWorker, U } from "./testing.ts";
+import { BASE, brokenWorker, fakeSite, inProcessWorker, U } from "./testing.ts";
 
 const ns = (hits: { n: number }[]): number[] => hits.map((h) => h.n);
 
@@ -129,6 +129,47 @@ describe("SearchClient", () => {
     expect(client.getStatus()).toBe("failed");
     site.failing.clear();
     await client.load();
+    expect(client.getStatus()).toBe("ready");
+  });
+
+  it("fails the load and pending searches when the worker cannot start, and a retry makes a fresh worker", async () => {
+    const site = fakeSite();
+    const made: WorkerLike[] = [];
+    const broken = brokenWorker();
+    client = new SearchClient(() => {
+      const w = made.length === 0 ? broken : inProcessWorker(site.fetch);
+      made.push(w);
+      return w;
+    }, BASE, site.fetch);
+    const loading = client.load();
+    const pendingSearch = client.search("endocard");
+    await expect(loading).rejects.toThrow("The search worker failed to start.");
+    await expect(pendingSearch).resolves.toBeNull();
+    expect(client.getStatus()).toBe("failed");
+    expect(broken.terminated).toBe(true);
+    await client.load();
+    expect(made).toHaveLength(2);
+    expect(client.getStatus()).toBe("ready");
+    expect(ns((await client.search("endocard"))?.titles ?? [])).toEqual([U.ie, U.gap, U.cushion]);
+  });
+
+  it("fails the load on an unreadable worker message and ignores the dropped worker afterwards", async () => {
+    const site = fakeSite();
+    const made: WorkerLike[] = [];
+    client = new SearchClient(() => {
+      const w = inProcessWorker(site.fetch);
+      made.push(w);
+      return w;
+    }, BASE, site.fetch);
+    const loading = client.load();
+    const first = made[0];
+    first?.onmessageerror?.(new MessageEvent("messageerror"));
+    await expect(loading).rejects.toThrow("The search worker sent an unreadable message.");
+    expect(client.getStatus()).toBe("failed");
+    // The dropped worker's handlers are detached, so its late "loaded" reply changes nothing.
+    expect(first?.onmessage).toBeNull();
+    await client.load();
+    expect(made).toHaveLength(2);
     expect(client.getStatus()).toBe("ready");
   });
 
