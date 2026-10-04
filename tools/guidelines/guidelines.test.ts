@@ -15,7 +15,7 @@ import { CHECKS_PATH, FLAGS_PATH, nextRunDate, runCheck } from "./run.ts";
 import type { SeenRecommendation } from "./run.ts";
 import { abPage, fakeNet, html, notFound, pubmedRoute, recommendationPage } from "./testing.ts";
 import type { AbRow, PubmedFixture } from "./testing.ts";
-import { parseAbPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
+import { assignUspstfKeys, parseAbPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
 
 const CHLAMYDIA = "Chlamydia and Gonorrhea: Screening: sexually active women, including pregnant persons";
 const BREAST = "Breast Cancer: Screening: women aged 40 to 74 years";
@@ -187,16 +187,20 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
     expect(seenOf(changed.checks)[key]!.published).toBe("2026-03");
   });
 
-  it("a reworded population at the same page is a revision: its flag supersedes the old one, even in the same release month", async () => {
+  it("a reworded population and statement on a single-row page is a revision: its flag supersedes the old one, even in the same release month", async () => {
     // Breast cancer screening, 2024: the population went from "women aged 50 to 74 years" to "women aged 40 to 74 years".
     const before: AbRow = { subject: "Breast Cancer: Screening: women aged 50 to 74 years", statement: "The USPSTF recommends biennial screening mammography for women aged 50 to 74 years.", grade: "B", date: "April 2024", href: "/uspstf/recommendation/breast-cancer-screening" };
     const first = await run(world({ ab: abPage([...baseRows(), before]) }), "2026-10-01");
-    const reworded: AbRow = { ...before, subject: BREAST };
+    const reworded: AbRow = { ...before, subject: BREAST, statement: "The USPSTF recommends biennial screening mammography for women aged 40 to 74 years." };
     const second = await run(world({ ab: abPage([...baseRows(), reworded]) }), "2026-11-01");
     expect(second.flags).toHaveLength(first.flags.length + 1);
     const key = keyOf("breast-cancer-screening");
     const [old, revision] = second.flags.filter((f) => f.key === key);
-    expect(revision).toMatchObject({ subject: BREAST, guideline: BREAST, published: "2024-04", flagged: "2026-11-01", supersededBy: null });
+    expect(revision).toMatchObject({
+      subject: BREAST, guideline: BREAST, quote: "The USPSTF recommends biennial screening mammography for women aged 40 to 74 years.",
+      published: "2024-04", flagged: "2026-11-01", supersededBy: null,
+    });
+    expect(second.log.some((l) => l.includes("retired"))).toBe(false);
     expect(old).toMatchObject({ subject: "Breast Cancer: Screening: women aged 50 to 74 years", supersededBy: revision!.id });
     expect(seenOf(second.checks)[key]!.subject).toBe(BREAST);
   });
@@ -209,6 +213,74 @@ describe("USPSTF A and B page (80 §80.3.1)", () => {
     expect(second.flags).toHaveLength(first.flags.length + 1);
     expect(current(second.flags).find((f) => f.key === keyOf("colorectal-cancer-screening"))).toMatchObject({
       quote: "The USPSTF recommends screening for colorectal cancer in all adults aged 45 to 75 years.", published: "2021-05", flagged: "2026-11-01",
+    });
+  });
+
+  describe("keys stay bound to their rows (Orchestrator ruling 2026-10-04 04:40Z)", () => {
+    const COLORECTAL_PATH = "colorectal-cancer-screening";
+    const older: AbRow = {
+      subject: "Colorectal Cancer: Screening: adults aged 45 to 49 years", statement: "The USPSTF recommends screening for colorectal cancer in adults aged 45 to 49 years.",
+      grade: "B", date: "May 2021", href: `/uspstf/recommendation/${COLORECTAL_PATH}`,
+    };
+    /** baseRows with the 45–49 row inserted above the 50–75 row, as USPSTF did in 2021. */
+    const withInsert = (): AbRow[] => { const rows = baseRows(); rows.splice(3, 0, older); return rows; };
+
+    it("the colorectal insert: the 50–75 key keeps 50–75, and 45–49 gets a new ordinal", async () => {
+      const first = await run(world(), "2026-10-01");
+      const fiftyKey = keyOf(COLORECTAL_PATH, 1);
+      const fifty = first.flags.find((f) => f.key === fiftyKey)!;
+      expect(fifty.subject).toBe("Colorectal Cancer: Screening: adults aged 50 to 75 years");
+      const second = await run(world({ ab: abPage(withInsert()) }), "2026-11-01");
+      expect(second.flags.find((f) => f.id === fifty.id)).toEqual(fifty); // not superseded, not retired
+      expect(second.flags.filter((f) => f.key === fiftyKey)).toHaveLength(1);
+      expect(second.flags.at(-1)).toMatchObject({ key: keyOf(COLORECTAL_PATH, 2), subject: older.subject, supersededBy: null, flagged: "2026-11-01" });
+      expect(second.flags).toHaveLength(first.flags.length + 1);
+      expect(seenOf(second.checks)[fiftyKey]!.subject).toBe(fifty.subject);
+      expect(seenOf(second.checks)[keyOf(COLORECTAL_PATH, 2)]!.subject).toBe(older.subject);
+      expect(second.log.some((l) => l.includes("retired"))).toBe(false);
+    });
+
+    it("a removed row: the remaining row keeps its key and is not flagged again; the removed row's key retires", async () => {
+      const first = await run(world({ ab: abPage(withInsert()) }), "2026-10-01");
+      // Baseline keys in table order: 45–49 is #1, 50–75 is #2.
+      const remaining = first.flags.find((f) => f.key === keyOf(COLORECTAL_PATH, 2))!;
+      const removed = first.flags.find((f) => f.key === keyOf(COLORECTAL_PATH, 1))!;
+      expect([removed.subject, remaining.subject]).toEqual([older.subject, "Colorectal Cancer: Screening: adults aged 50 to 75 years"]);
+      const second = await run(world(), "2026-11-01"); // its page answers 404
+      expect(second.flags).toHaveLength(first.flags.length);
+      expect(second.flags.find((f) => f.id === remaining.id)).toEqual(remaining);
+      expect(second.flags.find((f) => f.id === removed.id)).toEqual({ ...removed, retired: "2026-11-01" });
+      expect(Object.keys(seenOf(second.checks)).filter((k) => k.includes(COLORECTAL_PATH))).toEqual([keyOf(COLORECTAL_PATH, 2)]);
+    });
+
+    it("unequal leftovers are not paired: the stored keys retire and every new row takes a new ordinal", async () => {
+      const first = await run(world(), "2026-10-01");
+      const rows = baseRows();
+      const replacement = (n: number): AbRow => ({
+        subject: `Chlamydia and Gonorrhea: Screening: group ${n}`, statement: `The USPSTF recommends screening group ${n}.`,
+        grade: "B", date: "June 2026", href: `/uspstf/recommendation/${CHLAMYDIA_PATH}`,
+      });
+      rows.splice(0, 2, replacement(1), replacement(2), replacement(3));
+      const second = await run(world({ ab: abPage(rows) }), "2026-11-01");
+      for (const n of [1, 2]) {
+        const old = first.flags.find((f) => f.key === keyOf(CHLAMYDIA_PATH, n))!;
+        expect(second.flags.find((f) => f.id === old.id)).toEqual({ ...old, retired: "2026-11-01" });
+      }
+      const added = second.flags.slice(first.flags.length);
+      expect(added.map((f) => [f.key, f.subject])).toEqual([3, 4, 5].map((n) => [keyOf(CHLAMYDIA_PATH, n), `Chlamydia and Gonorrhea: Screening: group ${n - 2}`]));
+      expect(added.every((f) => f.supersededBy === null && f.retired === undefined)).toBe(true);
+    });
+
+    it("assignUspstfKeys: population first, then statement, then table order for equal leftovers; a new ordinal skips stored and reserved keys", () => {
+      const url = "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/p";
+      const row = (subject: string, quote: string) => ({ url, subject, quote });
+      const stored = { "/uspstf/recommendation/p#1": { subject: "A", quote: "a" }, "/uspstf/recommendation/p#2": { subject: "B", quote: "b" } };
+      const keysOf = (rows: { url: string; subject: string; quote: string }[], reserved: string[] = []) =>
+        assignUspstfKeys(rows, stored, reserved).map((r) => r.key.slice(r.key.indexOf("#")));
+      expect(keysOf([row("B", "b2"), row("A2", "a")])).toEqual(["#2", "#1"]); // population, then statement
+      expect(keysOf([row("Y", "y"), row("X", "x")])).toEqual(["#1", "#2"]); // two left over each side: table order
+      expect(keysOf([row("Y", "y"), row("A", "a"), row("X", "x")], ["/uspstf/recommendation/p#7"])).toEqual(["#8", "#1", "#9"]);
+      expect(assignUspstfKeys([row("A", "a"), row("A", "a")]).map((r) => r.key)).toEqual(["/uspstf/recommendation/p#1", "/uspstf/recommendation/p#2"]);
     });
   });
 

@@ -7,7 +7,8 @@ import { detectCited, detectEdition } from "./editions.ts";
 import type { Edition, EditionSource } from "./editions.ts";
 import { HttpStatusError } from "./http.ts";
 import type { Http } from "./http.ts";
-import { parseAbPage, parseRecommendationPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
+import { assignUspstfKeys, parseAbRows, parseRecommendationPage, USPSTF_AB_URL, USPSTF_ORG } from "./uspstf.ts";
+import type { StoredRecommendation } from "./uspstf.ts";
 
 export const FLAGS_PATH = "content/updates/flags.json";
 export const CHECKS_PATH = "content/updates/checks.json";
@@ -73,10 +74,8 @@ export function nextRunDate(today: string): string {
 }
 
 /** What the check remembers of a USPSTF recommendation, to tell a revision from no change. */
-export interface SeenRecommendation {
+export interface SeenRecommendation extends StoredRecommendation {
   published: string;
-  subject: string;
-  quote: string;
 }
 
 const isSeenMap = (v: unknown): v is Record<string, SeenRecommendation> =>
@@ -90,16 +89,19 @@ const isSeenMap = (v: unknown): v is Record<string, SeenRecommendation> =>
 const isRemovedPage = (e: unknown): boolean => e instanceof HttpStatusError && (e.status === 404 || e.status === 410);
 
 /**
- * USPSTF (80 §80.3.1 as amended by the Orchestrator rulings of 2026-10-04 03:06Z and 03:07Z):
- * - identity is the recommendation page's path plus its position among rows sharing that path;
+ * USPSTF (80 §80.3.1 as amended by the Orchestrator rulings of 2026-10-04 03:06Z, 03:07Z and 04:40Z):
+ * - identity is the recommendation page's path plus `#n`, bound to its row by `assignUspstfKeys`;
  * - a new identity, or a changed release month, population (subject) or statement, makes a flag
  *   that supersedes the identity's current flag;
  * - an identity that left the A and B list is read from its own page: a matching Recommendation
  *   Summary row makes a flag; a removed page (404/410), no summary table or no matching row retires
  *   the identity. Only an unreachable page (network error, timeout, any other non-2xx) fails the source.
  */
-async function checkUspstf(http: Http, seen: unknown, seenUrl: Record<string, string>, today: string, log: (line: string) => void): Promise<Outcome> {
-  const records = parseAbPage(await http.text(USPSTF_AB_URL));
+async function checkUspstf(http: Http, seen: unknown, seenUrl: Record<string, string>, flagKeys: readonly string[], today: string, log: (line: string) => void): Promise<Outcome> {
+  const rows = parseAbRows(await http.text(USPSTF_AB_URL));
+  if (seen !== undefined && !isSeenMap(seen)) throw new Error("checks.json seen.uspstf is not a key → {published, subject, quote} map");
+  // Normal mode keeps every key ever flagged out of reach of a new row, so a new row never supersedes a retired flag.
+  const records = seen === undefined ? assignUspstfKeys(rows) : assignUspstfKeys(rows, seen, flagKeys);
   const draft = (r: { key: string; subject: string; quote: string; grade: string; published: string; url: string }): FlagDraft => ({
     kind: "rec", source: "uspstf", by: "check", key: r.key, subject: r.subject, guideline: r.subject, org: USPSTF_ORG,
     published: r.published, quote: r.quote, grade: r.grade, url: r.url, flagged: today,
@@ -111,7 +113,6 @@ async function checkUspstf(http: Http, seen: unknown, seenUrl: Record<string, st
   if (seen === undefined) {
     return { drafts: records.filter((r) => r.published >= BASELINE_MONTH).map(draft), seen: nextSeen, seenUrl: nextSeenUrl };
   }
-  if (!isSeenMap(seen)) throw new Error("checks.json seen.uspstf is not a key → {published, subject, quote} map");
   const drafts = records
     .filter((r) => {
       const was = seen[r.key];
@@ -198,7 +199,8 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
     const row = { id, lastSuccess: previous.get(id)?.lastSuccess ?? null, lastAttempt: today, status: "fail" as "ok" | "fail" };
     checks.sources.push(row);
     try {
-      const outcome = await detect(http, id, checks, cited, today, log);
+      const flagKeys = flagsFile.flags.filter((f) => f.source === id).map((f) => f.key);
+      const outcome = await detect(http, id, checks, flagKeys, cited, today, log);
       for (const d of outcome.drafts) addFlag(flagsFile.flags, d);
       for (const key of outcome.retired ?? []) retireFlags(flagsFile.flags, key, today);
       checks.seen[id] = outcome.seen;
@@ -220,10 +222,10 @@ export async function runCheck(root: string, http: Http, today: string, log: (li
   return { today, sources: reports };
 }
 
-async function detect(http: Http, id: string, checks: ChecksFile, cited: Map<string, CitedSeries>, today: string, log: (line: string) => void): Promise<Outcome> {
+async function detect(http: Http, id: string, checks: ChecksFile, flagKeys: readonly string[], cited: Map<string, CitedSeries>, today: string, log: (line: string) => void): Promise<Outcome> {
   const seen = checks.seen[id];
   if (isFixedSource(id)) {
-    if (id === "uspstf") return checkUspstf(http, seen, checks.seenUrl, today, log);
+    if (id === "uspstf") return checkUspstf(http, seen, checks.seenUrl, flagKeys, today, log);
     return editionOutcome(id, await detectEdition(http, id, today), seen, SOURCE_ORGS[id], today);
   }
   const series = cited.get(seriesOfCiteKey(id)!)!;
