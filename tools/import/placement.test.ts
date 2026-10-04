@@ -2,6 +2,7 @@
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { GUIDE_IDS, validateFile } from "../../lib/content/index.ts";
+import { REF_TABS } from "../../lib/derive/routes.ts";
 import { buildOther, buildRefTabs, initialStructure, pharmFilesFor, sidebarEndOf } from "./placement.ts";
 import type { PlacedDoc } from "./placement.ts";
 import { loadGuides, loadSources } from "./sources.ts";
@@ -95,6 +96,13 @@ describe("pre-curation files", () => {
     expect(r.imaging.files).toEqual([]);
     expect(r.ekg.files).toEqual([]);
     expect(() => validateFile("content/places/reftabs.json", r)).not.toThrow();
+  });
+
+  it("reftabs.json files each document under the tab its placement names, for every route tab", () => {
+    const perTab = REF_TABS.map((tab, i) => ({ id: d(10 + i), placement: { reftabs: tab } }));
+    const r = buildRefTabs([...perTab].reverse());
+    expect(Object.keys(r).sort()).toEqual(["v", ...REF_TABS].sort());
+    for (const { id, placement } of perTab) expect(r[placement.reftabs].files, placement.reftabs).toEqual([id]);
   });
 
   it("other.json has the 9 sections in order, gaps only on legal and screenings, no lead", () => {

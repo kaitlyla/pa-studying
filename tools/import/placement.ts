@@ -1,8 +1,9 @@
 // Where each imported document is listed (30 §30.2 placements, 20 §20.7–§20.8), and the
 // pre-curation curation files the build reads (30 §30.14).
-import type { OtherFile, RefTabsFile, StructureFile } from "../../lib/content/index.ts";
+import type { OtherFile, RefTab, RefTabsFile, StructureFile } from "../../lib/content/index.ts";
 import { OTHER_SECTION_IDS } from "../../lib/content/index.ts";
-import { REFTAB_KEYS } from "./sources.ts";
+import { REF_TABS } from "../../lib/derive/routes.ts";
+import type { RefTabId } from "../../lib/derive/routes.ts";
 import type { Category, Placement } from "./sources.ts";
 
 /** A document already given its id, with its inventory placement. */
@@ -38,13 +39,14 @@ export const OTHER_TITLES: Readonly<Record<(typeof OTHER_SECTION_IDS)[number], s
   notes: "Note templates & documentation",
 };
 
+/** Each reference tab, keyed by its id, lists the documents placed on it in inventory order. */
 export function buildRefTabs(docs: readonly PlacedDoc[]): RefTabsFile {
-  const tab = (key: string) => ({
+  const tab = (id: RefTabId): RefTab => ({
     subs: [],
-    files: docs.filter((d) => d.placement !== null && "reftabs" in d.placement && d.placement.reftabs === key).map((d) => d.id),
+    files: docs.filter((d) => d.placement !== null && "reftabs" in d.placement && d.placement.reftabs === id).map((d) => d.id),
   });
-  const [labs, imaging, ekg, anatomy] = REFTAB_KEYS.map(tab) as [ReturnType<typeof tab>, ReturnType<typeof tab>, ReturnType<typeof tab>, ReturnType<typeof tab>];
-  return { v: 1, labs, imaging, ekg, anatomy };
+  const tabs = Object.fromEntries(REF_TABS.map((id) => [id, tab(id)])) as Record<RefTabId, RefTab>;
+  return { v: 1, ...tabs };
 }
 
 /** `gaps: []` only on legal and screenings; `lead: null` everywhere (30 §30.14, 20 §20.8). */

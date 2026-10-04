@@ -3,6 +3,8 @@ import { access, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { GUIDE_IDS, OTHER_SECTION_IDS } from "../../lib/content/index.ts";
 import type { GuideId } from "../../lib/content/index.ts";
+import { REF_TABS } from "../../lib/derive/routes.ts";
+import type { RefTabId } from "../../lib/derive/routes.ts";
 
 export const SOURCE_KINDS = ["guide", "word", "pharm", "pdf", "image", "slides", "deck", "vocab", "duplicate"] as const;
 export type SourceKind = (typeof SOURCE_KINDS)[number];
@@ -11,13 +13,11 @@ export type SourceKind = (typeof SOURCE_KINDS)[number];
 export const CATEGORIES = ["CV", "PULM", "EENT", "GI", "ID", "PSY", "ENDO"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
-export const REFTAB_KEYS = ["labs", "imaging", "ekg", "anatomy"] as const;
-export type RefTabKey = (typeof REFTAB_KEYS)[number];
 export type OtherSectionId = (typeof OTHER_SECTION_IDS)[number];
 
 export type Placement =
   | { guide: GuideId }
-  | { reftabs: RefTabKey }
+  | { reftabs: RefTabId }
   | { other: OtherSectionId }
   | { pharm: Category[] }
   | { sidebarEnd: "pance" }
@@ -84,7 +84,7 @@ function checkPlacement(file: string, at: string, kind: SourceKind, p: unknown):
   if (!allowed.includes(key)) fail(file, `${at}.placement: ${key} is not a placement for kind ${kind}`);
   const ok =
     (key === "guide" || key === "deck") ? has(GUIDE_IDS, value)
-      : key === "reftabs" ? has(REFTAB_KEYS, value)
+      : key === "reftabs" ? has(REF_TABS, value)
         : key === "other" ? has(OTHER_SECTION_IDS, value)
           : key === "pharm" ? Array.isArray(value) && value.length > 0 && value.every((c) => has(CATEGORIES, c)) && new Set(value).size === value.length
             : key === "sidebarEnd" ? value === "pance"
