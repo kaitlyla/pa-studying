@@ -1,0 +1,48 @@
+/* Search box, results panel and landing highlights (search/layout, search/states, guide-reader/search-landing). */
+
+.srch-box { position: relative; }
+.srch-box input { width: 280px; height: 34px; border: 1px solid #c9ced8; border-radius: 17px; padding: 0 32px 0 34px; font-size: 14px; background: #f6f7f9; }
+.srch-box input:focus { background: #fff; border-color: #2b55a3; outline: none; box-shadow: 0 0 0 3px rgba(43, 85, 163, 0.2); }
+.srch-ico { position: absolute; left: 11px; top: 9px; color: #6b7280; pointer-events: none; }
+.srch-clr { position: absolute; right: 6px; top: 6px; border: 0; background: none; width: 22px; height: 22px; border-radius: 11px; color: #5b6472; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.srch-clr:hover { background: #e3e6eb; }
+
+.srch-icon-btn { border: 0; background: none; min-width: 40px; min-height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; color: #1f2430; cursor: pointer; }
+.srch-icon-btn:hover { background: #eef0f4; }
+
+.srch-panel { position: absolute; right: 0; top: calc(100% + 8px); width: 640px; max-width: calc(100vw - 32px); max-height: calc(100vh - 80px); overflow: auto; background: #fff; border: 1px solid #c9ced8; border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); z-index: 40; text-align: left; }
+.srch-panel.full { position: fixed; inset: 0; width: auto; max-width: none; max-height: none; border: 0; border-radius: 0; box-shadow: none; z-index: 60; }
+.srch-top { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #eceef2; padding: 8px 12px; z-index: 2; }
+.srch-phone-in { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.srch-phone-in input { flex: 1; height: 38px; border: 1px solid #2b55a3; border-radius: 19px; padding: 0 14px; font-size: 16px; }
+
+.srch-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.srch-chips button { border: 1px solid #c9ced8; background: #fff; border-radius: 14px; padding: 3px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.srch-chips button[aria-pressed="true"] { background: #1f2430; color: #fff; border-color: #1f2430; }
+.srch-chips button:disabled { opacity: 0.4; cursor: default; }
+
+.srch-status { padding: 18px 14px; color: #4a5263; font-size: 14px; }
+.srch-status:has(> .srch-sr) { padding: 0; }
+.srch-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.srch-link { border: 0; background: none; padding: 0; color: #2b55a3; text-decoration: underline; cursor: pointer; font: inherit; }
+
+.srch-grp { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; font-weight: 700; padding: 10px 14px 4px; }
+.srch-row { display: block; width: 100%; min-height: 56px; text-align: left; border: 0; border-top: 1px solid #f0f1f4; background: none; padding: 9px 14px; font: inherit; color: inherit; cursor: pointer; }
+.srch-row:hover, .srch-row:focus-visible { background: #f3f5f9; }
+.srch-row.pending { color: #8a92a0; cursor: default; }
+/* Content not from her notes keeps its dashed slate-blue box for everyone (general-topic/gap-block). */
+.srch-row.gap { border: 1.5px dashed #6b7fa8; background: #f3f6fb; border-radius: 6px; margin: 4px 0; }
+.srch-row > span { display: block; }
+.srch-row-t { font-weight: 600; display: flex !important; align-items: center; gap: 8px; flex-wrap: wrap; }
+.srch-loc { font-size: 12px; color: #5b6472; margin: 2px 0; }
+.srch-ex { font-size: 13px; color: #3a4150; }
+.srch-via { font-size: 12px; color: #5b6472; margin-top: 3px; font-style: italic; }
+.srch-row mark { background: #ffe066; color: inherit; }
+
+.srch-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; border-radius: 10px; padding: 1px 8px; }
+.srch-chip.gap { border: 1.5px dashed #6b7fa8; color: #3d5180; background: #eef2f9; }
+.srch-chip.upd { border: 1.5px solid #8a5a2b; color: #fff; background: #8a5a2b; }
+
+/* Landing: yellow plus an outline, so matches never rely on color alone. */
+mark.hit { background: #ffe066; color: inherit; outline: 2px solid #c99a00; border-radius: 2px; }
+.hitbar { position: sticky; top: 0; z-index: 5; background: #fff8d6; border: 1px solid #e6cf6a; border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; font-size: 13px; }
