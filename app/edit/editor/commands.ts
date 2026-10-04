@@ -1,0 +1,541 @@
+// Toolbar commands of the editor (plan 50 §50.3): her current editor's controls, with lengths in pt.
+import { Fragment } from "prosemirror-model";
+import type { Mark, MarkType, Node as PMNode, ResolvedPos } from "prosemirror-model";
+import { NodeSelection, TextSelection } from "prosemirror-state";
+import type { EditorState, Transaction } from "prosemirror-state";
+import { TableMap } from "prosemirror-tables";
+import { schema } from "../../../lib/schema.ts";
+import { newId } from "../../../lib/content/index.ts";
+import { M, N as nodes } from "./types.ts";
+
+/** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
+export const CONFIRMED_DELETE = "pa-confirmed-delete";
+
+export type Dispatch = (tr: Transaction) => void;
+export type Command = (state: EditorState, dispatch?: Dispatch) => boolean;
+/** Shows a confirm dialog with these paragraphs; resolves true when she confirms. */
+export type Confirm = (lines: string[]) => Promise<boolean>;
+/** The live editor (an EditorView): read again after a dialog, since she may keep typing while it is open. */
+export interface LiveEditor {
+  readonly state: EditorState;
+  dispatch: Dispatch;
+}
+
+/**
+ * Where `node` sits in `doc` now. Unchanged subtrees keep their node objects across transactions, so
+ * the node is found by identity: at its old position, else anywhere. Null when it was changed or removed.
+ */
+function livePos(doc: PMNode, node: PMNode, oldPos: number): number | null {
+  if (oldPos + node.nodeSize <= doc.content.size && doc.nodeAt(oldPos) === node) return oldPos;
+  let found: number | null = null;
+  doc.descendants((child, pos) => {
+    if (found !== null) return false;
+    if (child === node) {
+      found = pos;
+      return false;
+    }
+    return true;
+  });
+  return found;
+}
+
+/** The owning document's facts the commands need. */
+export interface DocContext {
+  basePt: number;
+  /** Page content width in pt (page width minus side margins): the picture size limit outside tables. */
+  pageContentPt: number;
+}
+
+export const roundHalf = (x: number): number => Math.round(x * 2) / 2;
+
+const { bold, underline, highlight, shade, size } = M;
+
+// ---- marks ---------------------------------------------------------------------------------------
+
+function toggle(type: MarkType, attrs: Record<string, unknown> | null): Command {
+  return (state, dispatch) => {
+    const { from, to, empty, $from } = state.selection;
+    const has = empty
+      ? !!type.isInSet(state.storedMarks ?? $from.marks())
+      : state.doc.rangeHasMark(from, to, type);
+    if (!dispatch) return true;
+    const tr = state.tr;
+    if (empty) {
+      dispatch(has ? tr.removeStoredMark(type) : tr.addStoredMark(type.create(attrs)));
+    } else {
+      dispatch((has ? tr.removeMark(from, to, type) : tr.addMark(from, to, type.create(attrs))).scrollIntoView());
+    }
+    return true;
+  };
+}
+
+export const toggleBold: Command = toggle(bold, null);
+export const toggleUnderline: Command = toggle(underline, { style: "single" });
+
+export const addHighlight: Command = (state, dispatch) => {
+  const mark = (highlight).create({ hex: "FFFF00" });
+  const { from, to, empty } = state.selection;
+  if (dispatch) dispatch(empty ? state.tr.addStoredMark(mark) : state.tr.addMark(from, to, mark));
+  return true;
+};
+
+export const removeHighlight: Command = (state, dispatch) => {
+  const { from, to, empty } = state.selection;
+  if (dispatch) {
+    const tr = state.tr;
+    if (empty) {
+      tr.removeStoredMark(highlight).removeStoredMark(shade);
+    } else {
+      tr.removeMark(from, to, highlight).removeMark(from, to, shade);
+    }
+    dispatch(tr);
+  }
+  return true;
+};
+
+/** A− / A+: each text run becomes max(4, roundHalf(cur ± 1)); the `size` mark goes when it equals basePt. */
+export function changeSize(delta: 1 | -1, ctx: DocContext): Command {
+  return (state, dispatch) => {
+    const { from, to, empty } = state.selection;
+    if (empty) return false;
+    const tr = state.tr;
+    state.doc.nodesBetween(from, to, (node, pos) => {
+      if (!node.isText) return true;
+      const start = Math.max(from, pos);
+      const end = Math.min(to, pos + node.nodeSize);
+      const cur = size.isInSet(node.marks)?.attrs.pt as number | undefined ?? ctx.basePt;
+      const next = Math.max(4, roundHalf(cur + delta));
+      tr.removeMark(start, end, size);
+      if (next !== ctx.basePt) tr.addMark(start, end, size.create({ pt: next }));
+      return false;
+    });
+    if (dispatch) dispatch(tr);
+    return true;
+  };
+}
+
+// ---- paragraphs ----------------------------------------------------------------------------------
+
+/** The paragraphs the selection touches (the cursor's paragraph for an empty selection), with positions. */
+function selectedParagraphs(state: EditorState): { node: PMNode; pos: number }[] {
+  const out: { node: PMNode; pos: number }[] = [];
+  const { from, to } = state.selection;
+  state.doc.nodesBetween(from, to, (node, pos) => {
+    if (node.type === nodes.paragraph) {
+      out.push({ node, pos });
+      return false;
+    }
+    return true;
+  });
+  if (out.length === 0) {
+    const $from = state.selection.$from;
+    for (let d = $from.depth; d > 0; d--) {
+      if ($from.node(d).type === nodes.paragraph) {
+        out.push({ node: $from.node(d), pos: $from.before(d) });
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function updateParagraphs(state: EditorState, dispatch: Dispatch | undefined, change: (p: PMNode) => Record<string, unknown>): boolean {
+  const paras = selectedParagraphs(state);
+  if (paras.length === 0) return false;
+  if (dispatch) {
+    const tr = state.tr;
+    for (const { node, pos } of paras) tr.setNodeMarkup(pos, undefined, { ...node.attrs, ...change(node) });
+    dispatch(tr);
+  }
+  return true;
+}
+
+/** `fontPt` of a paragraph: the `size` mark of its first text, or the document's basePt. */
+export function fontPt(p: PMNode, basePt: number): number {
+  let found: number | null = null;
+  p.descendants((n) => {
+    if (found !== null) return false;
+    if (n.isText) {
+      found = (size.isInSet(n.marks)?.attrs.pt as number | undefined) ?? basePt;
+      return false;
+    }
+    return true;
+  });
+  return found ?? basePt;
+}
+
+/** Tighter (−1) / Looser (+1): an exact line height one step from the current one, floored at 0.8 × font size. */
+export function changeLineSpacing(dir: 1 | -1, ctx: DocContext): Command {
+  return (state, dispatch) => updateParagraphs(state, dispatch, (p) => {
+    const f = fontPt(p, ctx.basePt);
+    const step = Math.max(0.5, roundHalf(0.1 * f));
+    const line = p.attrs.line as { rule: string; value: number } | null;
+    const now = line === null ? 1.22 * f : line.rule === "auto" ? line.value * 1.22 * f : line.value;
+    return { line: { rule: "exact", value: Math.max(roundHalf(0.8 * f), roundHalf(now + dir * step)) } };
+  });
+}
+
+/** Above −/+ (`spaceBefore`) and Below −/+ (`spaceAfter`): ± 2 pt, floored at 0. */
+export function changeSpace(which: "spaceBefore" | "spaceAfter", dir: 1 | -1): Command {
+  return (state, dispatch) => updateParagraphs(state, dispatch, (p) => ({
+    [which]: Math.max(0, (p.attrs[which] as number) + dir * 2),
+  }));
+}
+
+/** Move paragraph left/right: `indLeft` ± 9 pt (negative allowed). */
+export function moveParagraph(dir: 1 | -1): Command {
+  return (state, dispatch) => updateParagraphs(state, dispatch, (p) => ({
+    indLeft: roundHalf((p.attrs.indLeft as number) + dir * 9),
+  }));
+}
+
+/** Enter: split the paragraph, giving the new one all of its attributes (marker included). */
+export const splitParagraph: Command = (state, dispatch) => {
+  const { $from, $to } = state.selection;
+  if ($from.parent.type !== nodes.paragraph || !$from.sameParent($to)) return false;
+  if (state.selection instanceof NodeSelection) return false;
+  if (dispatch) {
+    const tr = state.tr.deleteSelection();
+    const marks = state.storedMarks ?? $from.marks();
+    tr.split(tr.mapping.map($from.pos), 1, [{ type: nodes.paragraph, attrs: { ...$from.parent.attrs } }]);
+    tr.ensureMarks(marks);
+    dispatch(tr.scrollIntoView());
+  }
+  return true;
+};
+
+// ---- tables --------------------------------------------------------------------------------------
+
+interface TableAt {
+  table: PMNode;
+  /** Position of the table node. */
+  pos: number;
+  map: TableMap;
+  /** Grid row of the cursor's cell. */
+  row: number;
+  /** Position (relative to the table's content start) of the cursor's cell. */
+  cellRel: number;
+}
+
+function tableAt($pos: ResolvedPos): TableAt | null {
+  for (let d = $pos.depth; d > 0; d--) {
+    if ($pos.node(d).type === nodes.table_cell && d >= 2 && $pos.node(d - 2).type === nodes.table) {
+      const table = $pos.node(d - 2);
+      const tableStart = $pos.start(d - 2);
+      const cellRel = $pos.before(d) - tableStart;
+      const map = TableMap.get(table);
+      return { table, pos: $pos.before(d - 2), map, row: map.findCell(cellRel).top, cellRel };
+    }
+  }
+  return null;
+}
+
+interface GridCell {
+  node: PMNode;
+  top: number;
+  left: number;
+}
+
+/** Every cell with its grid position, grouped by the row it starts in. */
+function cellsByRow(t: PMNode, map: TableMap): GridCell[][] {
+  const rows: GridCell[][] = Array.from({ length: map.height }, () => []);
+  const seen = new Set<number>();
+  for (let i = 0; i < map.map.length; i++) {
+    const rel = map.map[i] as number;
+    if (seen.has(rel)) continue;
+    seen.add(rel);
+    const rect = map.findCell(rel);
+    rows[rect.top]?.push({ node: t.nodeAt(rel) as PMNode, top: rect.top, left: rect.left });
+  }
+  for (const r of rows) r.sort((a, b) => a.left - b.left);
+  return rows;
+}
+
+function rowIdsOf(doc: PMNode): Set<string> {
+  const ids = new Set<string>();
+  doc.descendants((n) => {
+    if (n.type === nodes.table_row && typeof n.attrs.id === "string") ids.add(n.attrs.id);
+    return true;
+  });
+  return ids;
+}
+
+function firstTextMarks(node: PMNode): readonly Mark[] {
+  let marks: readonly Mark[] | null = null;
+  node.descendants((n) => {
+    if (marks) return false;
+    if (n.isText) {
+      marks = n.marks;
+      return false;
+    }
+    return true;
+  });
+  return marks ?? [];
+}
+
+function firstParagraph(cell: PMNode): PMNode | null {
+  let p: PMNode | null = null;
+  cell.descendants((n) => {
+    if (p) return false;
+    if (n.type === nodes.paragraph) {
+      p = n;
+      return false;
+    }
+    return true;
+  });
+  return p;
+}
+
+/**
+ * Row ↑ / Row ↓ (her editor's span-aware rule): a new content row above or below the cursor's row. A
+ * merged cell spanning the insertion boundary grows by one row; every other column gets a blank cell
+ * modeled on the cursor row's cell there. The caret moves to the first new cell.
+ */
+export function insertRow(where: "above" | "below"): Command {
+  return (state, dispatch) => {
+    const at = tableAt(state.selection.$from);
+    if (!at) return false;
+    const { table, map } = at;
+    const rows = cellsByRow(table, map);
+    const modelRow = table.child(at.row);
+    const boundary = where === "above" ? at.row : at.row + 1;
+
+    const grow = new Set<PMNode>();
+    const newCells: PMNode[] = [];
+    let caretMarks: readonly Mark[] = [];
+    for (let c = 0; c < map.width;) {
+      const rel = map.map[at.row * map.width + c] as number;
+      const rect = map.findCell(rel);
+      const cell = table.nodeAt(rel) as PMNode;
+      const spans = rect.top < boundary && boundary < rect.bottom;
+      if (spans) {
+        grow.add(cell);
+      } else {
+        const para = firstParagraph(cell);
+        const blank = nodes.table_cell.create(
+          {
+            colspan: rect.right - c,
+            rowspan: 1,
+            colwidth: null,
+            fill: cell.attrs.fill,
+            vAlign: cell.attrs.vAlign,
+            borders: cell.attrs.borders,
+          },
+          nodes.paragraph.create(para ? { ...para.attrs } : null),
+        );
+        if (newCells.length === 0) caretMarks = firstTextMarks(cell);
+        newCells.push(blank);
+      }
+      c = rect.right;
+    }
+    if (newCells.length === 0) return false;
+    if (!dispatch) return true;
+
+    const newRow = nodes.table_row.create(
+      {
+        id: newId("r", rowIdsOf(state.doc)),
+        kind: "content",
+        minHeightPt: modelRow.attrs.minHeightPt,
+        repeatHeader: false,
+        cantSplit: modelRow.attrs.cantSplit,
+      },
+      newCells,
+    );
+    const outRows: PMNode[] = [];
+    for (let r = 0; r < map.height; r++) {
+      if (r === boundary) outRows.push(newRow);
+      const cells = (rows[r] ?? []).map(({ node }) =>
+        grow.has(node) ? node.type.create({ ...node.attrs, rowspan: (node.attrs.rowspan as number) + 1 }, node.content, node.marks) : node);
+      outRows.push(table.child(r).type.create(table.child(r).attrs, cells));
+    }
+    if (boundary === map.height) outRows.push(newRow);
+    const newTable = table.type.create(table.attrs, outRows);
+
+    const tr = state.tr.replaceWith(at.pos, at.pos + table.nodeSize, newTable);
+    // Position of the first new cell's paragraph content.
+    let pos = at.pos + 1;
+    for (let r = 0; r < boundary; r++) pos += (outRows[r] as PMNode).nodeSize;
+    const caret = pos + 1 /* into row */ + 1 /* into cell */ + 1; /* into paragraph */
+    tr.setSelection(TextSelection.create(tr.doc, caret));
+    if (caretMarks.length) tr.setStoredMarks(caretMarks);
+    dispatch(tr.scrollIntoView());
+    return true;
+  };
+}
+
+/** The confirm text of Delete row: her editor's wording. */
+export function deleteRowPrompt(row: PMNode, pictures: number): string[] {
+  const text = row.textBetween(0, row.content.size, " ", " ").replace(/\s+/g, " ").trim();
+  const cut = text.length > 80 ? `${text.slice(0, 80)}…` : text;
+  const lines = ["Delete this table row?", cut];
+  if (pictures > 0) lines.push(`This row also holds ${pictures} picture(s), which will be deleted too.`);
+  return lines;
+}
+
+function countPictures(node: PMNode): number {
+  let n = 0;
+  node.descendants((c) => {
+    if (c.type === nodes.image || c.type === nodes.image_block) n++;
+    return true;
+  });
+  return n;
+}
+
+/**
+ * Delete row, after her confirm. Refused on a one-row table. Cells spanning into the row shrink; a
+ * merged cell starting in the row moves to the next row with one row fewer.
+ */
+export function deleteRow(confirm: Confirm): (editor: LiveEditor) => Promise<boolean> {
+  return async (editor) => {
+    const at = tableAt(editor.state.selection.$from);
+    if (!at) return false;
+    const { table, map } = at;
+    if (map.height <= 1 || table.childCount <= 1) return false;
+    const rows = cellsByRow(table, map);
+    const r = at.row;
+    const pictures = (rows[r] ?? []).reduce((sum, c) => sum + countPictures(c.node), 0);
+    if (!(await confirm(deleteRowPrompt(table.child(r), pictures)))) return false;
+
+    const outRows: PMNode[] = [];
+    for (let i = 0; i < map.height; i++) {
+      if (i === r) continue;
+      let cells: GridCell[] = (rows[i] ?? []).map((c) => {
+        const span = c.node.attrs.rowspan as number;
+        if (i < r && c.top + span > r) {
+          return { ...c, node: c.node.type.create({ ...c.node.attrs, rowspan: span - 1 }, c.node.content, c.node.marks) };
+        }
+        return c;
+      });
+      if (i === r + 1) {
+        const moved = (rows[r] ?? [])
+          .filter((c) => (c.node.attrs.rowspan as number) > 1)
+          .map((c) => ({
+            ...c,
+            node: c.node.type.create({ ...c.node.attrs, rowspan: (c.node.attrs.rowspan as number) - 1 }, c.node.content, c.node.marks),
+          }));
+        cells = [...cells, ...moved].sort((a, b) => a.left - b.left);
+      }
+      outRows.push(table.child(i).type.create(table.child(i).attrs, cells.map((c) => c.node)));
+    }
+    const newTable = table.type.create(table.attrs, outRows);
+    // The document may have changed while the dialog was open: delete only from the same, unchanged table.
+    const live = editor.state;
+    const pos = livePos(live.doc, table, at.pos);
+    if (pos === null) return false;
+    const tr = live.tr.replaceWith(pos, pos + table.nodeSize, newTable);
+    tr.setMeta(CONFIRMED_DELETE, true);
+    const target = Math.min(pos + 1, tr.doc.content.size);
+    tr.setSelection(TextSelection.near(tr.doc.resolve(target)));
+    editor.dispatch(tr.scrollIntoView());
+    return true;
+  };
+}
+
+// ---- pictures ------------------------------------------------------------------------------------
+
+function selectedPicture(state: EditorState): NodeSelection | null {
+  const sel = state.selection;
+  if (sel instanceof NodeSelection && (sel.node.type === nodes.image || sel.node.type === nodes.image_block)) return sel;
+  return null;
+}
+
+/** The width limit for a picture at `$pos`: its table cell's grid width, else the page content width. */
+function pictureLimit($pos: ResolvedPos, ctx: DocContext): number {
+  const at = tableAt($pos);
+  if (!at) return ctx.pageContentPt;
+  const rect = at.map.findCell(at.cellRel);
+  const grid = at.table.attrs.grid as number[];
+  let w = 0;
+  for (let c = rect.left; c < rect.right; c++) w += grid[c] ?? 0;
+  return w;
+}
+
+/** Picture − / +: width × 1/1.15 or × 1.15, clamped to [24, cell or page width]; height scaled alike. */
+export function resizePicture(dir: 1 | -1, ctx: DocContext): Command {
+  return (state, dispatch) => {
+    const sel = selectedPicture(state);
+    if (!sel) return false;
+    const { widthPt, heightPt } = sel.node.attrs as { widthPt: number; heightPt: number };
+    const max = Math.max(24, pictureLimit(sel.$from, ctx));
+    const width = Math.min(max, Math.max(24, widthPt * (dir > 0 ? 1.15 : 1 / 1.15)));
+    const factor = width / widthPt;
+    if (dispatch) {
+      const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, widthPt: width, heightPt: heightPt * factor });
+      tr.setSelection(NodeSelection.create(tr.doc, sel.from));
+      dispatch(tr);
+    }
+    return true;
+  };
+}
+
+/** Delete picture: confirm "Delete this picture?", then remove it with its `anchored` wrapper if any. */
+export function deletePicture(confirm: Confirm): (editor: LiveEditor) => Promise<boolean> {
+  return async (editor) => {
+    const sel = selectedPicture(editor.state);
+    if (!sel) return false;
+    const picture = sel.node;
+    if (!(await confirm(["Delete this picture?"]))) return false;
+    // The document may have changed while the dialog was open: delete only the same, unchanged picture.
+    const live = editor.state;
+    const at = livePos(live.doc, picture, sel.from);
+    if (at === null) return false;
+    const $pos = live.doc.resolve(at);
+    let from = at;
+    let to = at + picture.nodeSize;
+    if ($pos.parent.type === nodes.anchored) {
+      from = $pos.before($pos.depth);
+      to = $pos.after($pos.depth);
+    }
+    const tr = live.tr.delete(from, to).setMeta(CONFIRMED_DELETE, true);
+    editor.dispatch(tr.scrollIntoView());
+    return true;
+  };
+}
+
+/** Kinds of node a transaction may not lose without a confirm. */
+const GUARDED = new Set(["image", "image_block", "textbox", "drawing", "anchored"]);
+
+export function guardedCount(doc: PMNode): number {
+  let n = 0;
+  doc.descendants((c) => {
+    if (GUARDED.has(c.type.name)) n++;
+    return true;
+  });
+  return n;
+}
+
+// ---- copy -----------------------------------------------------------------------------------------
+
+/** Plain text of a doc for "Copy my changes": paragraphs and table rows as lines, cells tab-separated. */
+export function docLines(doc: PMNode): string[] {
+  const lines: string[] = [];
+  const walk = (node: PMNode): void => {
+    if (node.type === nodes.table_row) {
+      const cells: string[] = [];
+      node.forEach((cell) => {
+        cells.push(cell.textBetween(0, cell.content.size, " ", " ").replace(/\s+/g, " ").trim());
+      });
+      lines.push(cells.join("\t"));
+      return;
+    }
+    if (node.isTextblock) {
+      lines.push(node.textContent);
+      return;
+    }
+    node.forEach(walk);
+  };
+  walk(doc);
+  return lines;
+}
+
+/** Plain text pasted at `$at`: one paragraph per line, each with the paragraph's attributes and the position's marks. */
+export function plainTextSlice(text: string, $at: ResolvedPos): Fragment {
+  const marks = $at.marks();
+  const lines = text.replace(/\r\n?/g, "\n").split("\n");
+  const para = $at.parent.type === nodes.paragraph ? $at.parent : null;
+  if (lines.length === 1 || !para) {
+    const joined = lines.join(" ");
+    return joined ? Fragment.from(schema.text(joined, marks)) : Fragment.empty;
+  }
+  return Fragment.from(lines.map((line) => nodes.paragraph.create({ ...para.attrs }, line ? schema.text(line, marks) : null)));
+}

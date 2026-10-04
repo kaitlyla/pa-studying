@@ -1,0 +1,58 @@
+/* The owner's edit mode, banners, versions and document dialogs (UI guide-reader/edit-mode, save-problems, versions). */
+
+.btn.danger { color: #a3261d; border-color: #e0b4b0; }
+
+/* toolbar: tools wrap on a laptop; on a phone the tools row scrolls and the status row stays below */
+.etb { position: sticky; top: 0; z-index: 8; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 10px; padding: 6px; border: 1px solid #c9ced8; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .06); }
+.etb-tools { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; }
+.etb .tb { min-width: 32px; height: 32px; padding: 0 7px; border: 1px solid transparent; border-radius: 5px; background: none; font-size: 13px; color: #1f2430; }
+.etb .tb:hover { border-color: #d3d8e0; background: #eef0f4; }
+.etb .tb:focus-visible { outline: 2px solid #2b55a3; outline-offset: 1px; }
+.etb .sep { width: 1px; height: 22px; margin: 0 4px; background: #dde1e8; }
+.etb .tb-group { display: inline-flex; align-items: center; gap: 2px; padding: 0 4px; border-left: 1px solid #eceef2; }
+.etb .tb-gl { font-size: 12px; color: #5b6472; margin-right: 2px; white-space: nowrap; }
+.etb .tb-hl { padding: 0 3px; background: #ff0; }
+.etb .estat { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 12px; color: #5b6472; }
+.etb.phone { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 6px; }
+.etb.phone .etb-tools { flex-wrap: nowrap; overflow-x: auto; width: 100%; }
+.etb.phone .estat { justify-content: flex-end; width: 100%; margin-left: 0; padding-top: 6px; border-top: 1px solid #e3e6ec; }
+.etb.phone .estat > span:first-child { margin-right: auto; }
+.etb.phone .tb, .etb.phone .btn { min-width: 40px; min-height: 40px; }
+
+/* editors */
+.editing .edit-slot { margin-bottom: 8px; }
+.editing .ProseMirror { outline: 2px solid #9db5e3; outline-offset: -2px; white-space: pre-wrap; word-wrap: break-word; }
+.editing .ProseMirror:focus { outline: 2px solid #2b55a3; }
+.editing .ProseMirror-selectednode { outline: 3px solid #2b55a3; }
+.editing .stub { display: block; margin: 6px 0; }
+.edit-loading { color: #5b6472; }
+
+/* banners */
+.banner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px 12px; border-radius: 8px; font-size: 14px; }
+.banner.err { border: 1px solid #f1b3ab; background: #fdecea; color: #6e1d14; }
+.banner.ok { border: 1px solid #cfe5d5; background: #eef7f0; color: #1f4a2c; }
+.banner.info { border: 1px solid #c6d3ee; background: #eef2fa; color: #23365e; }
+.banner .bt { flex: 1; min-width: 200px; }
+.banner .ba { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* versions and document lists */
+.vlist { margin: 0; padding: 0; list-style: none; border: 1px solid #e3e6eb; border-radius: 8px; }
+.vlist li { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 12px; border-top: 1px solid #eceef2; }
+.vlist li:first-child { border-top: 0; }
+.vlist .vt { flex: 1; min-width: 180px; }
+.vlist .vt small { display: block; color: #6b7280; }
+.vbadge { padding: 2px 6px; border-radius: 4px; background: #e3e8f2; color: #23365e; font-size: 11px; font-weight: 700; }
+.version-preview { margin-top: 14px; }
+.version-preview .frame { padding: 8px; border: 1px dashed #c9ced8; border-radius: 6px; }
+.rm-docs { margin-top: 10px; }
+.rm-docs .vlist { margin-top: 8px; }
+
+/* dialog fields */
+.fld { display: flex; flex-direction: column; gap: 4px; margin: 0 0 12px; font-size: 13px; font-weight: 600; color: #2a3140; }
+.fld input[type=text] { min-height: 40px; padding: 8px 10px; border: 1px solid #c3c9d4; border-radius: 6px; font: inherit; font-weight: 400; }
+.fld input[type=file] { min-height: 40px; font: inherit; font-weight: 400; }
+.dlg .fld-err { color: #a3261b; font-weight: 600; }
+.dlg .fld-err::before { content: "⚠ "; }
+label.btn { position: relative; cursor: pointer; }
+label.btn:focus-within { outline: 2px solid #2b55a3; outline-offset: 2px; }
+.sr-file { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
