@@ -9,7 +9,7 @@ import {
   num, one, oneOf, re, record, shapeOf, str, uniqueArr,
 } from "./check.ts";
 import type { Checker, Ctx } from "./check.ts";
-import { idRegExp, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
+import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
@@ -24,7 +24,6 @@ export type Validator = (v: unknown, ctx: Ctx, expectId?: string) => void;
 
 const id = (...prefixes: IdPrefix[]): Checker => re(idRegExp(...prefixes), `a ${prefixes.map((p) => `${p}_`).join(" or ")} id`);
 const slugC = re(SLUG_RE, "a slug");
-const ROW_ID_RE = idRegExp("r");
 const guideC = oneOf(...GUIDE_IDS);
 const month = re(ISO_MONTH_RE, "a month (YYYY-MM)");
 const sha40 = re(/^[0-9a-f]{40}$/, "a 40-hex commit sha");
@@ -374,9 +373,10 @@ export const validateStructure: Validator = (v, ctx) => {
   // A value is a section id, or (rows only) the id of the topic the row is recorded under
   // (Orchestrator ruling 2026-10-04 04:44Z); a system without sections has only the latter.
   for (const [k, value] of Object.entries(s.members)) {
-    if (ROW_ID_RE.test(value)) {
-      if (!ROW_ID_RE.test(k) || value === k) bad(ctx, `.members.${k}`, "a topic id only on another row", value);
-    } else if (!sectionIds.includes(value)) {
+    const target = memberTarget(value);
+    if ("topic" in target) {
+      if (!isId("r", k) || target.topic === k) bad(ctx, `.members.${k}`, "a topic id only on another row", value);
+    } else if (!sectionIds.includes(target.section)) {
       bad(ctx, `.members.${k}`, sectionIds.length === 0 ? "a topic id (sections is [])" : "a section id of this system or a topic id", value);
     }
   }

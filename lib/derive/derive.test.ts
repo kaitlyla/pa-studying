@@ -19,7 +19,8 @@ import { publish, type PublishResult } from "./publish.ts";
 import type { DocList, GeneralJson, HostsJson, NavJson, OtherJson, SiteJson, SlidesJson, SystemJson, UpdatesJson } from "./published.ts";
 import { fileLocation, parseHash } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { checkMembers, deriveTopics } from "./topics.ts";
+import { checkMembers, deriveTopics, publishedRows, sectionItems } from "./topics.ts";
+import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
   ({ v: 1, id, kind: "table", doc: tableDoc(columns, rows), meta: {} }) as unknown as BlockFile;
@@ -180,6 +181,26 @@ describe("topics (40 §40.2)", () => {
       expect(e.id).toBe(X);
       expect(e.message).toMatch(/not a later topic or untitled row of the same table/);
     });
+  });
+
+  it("sectionItems: whole member prose blocks, and each table's rows shown under the section with their heading row once per run", () => {
+    const [H, A, A2, F, P1, P2] = [R(920), R(921), R(922), R(923), B(93), B(94)];
+    const blocks = [
+      table(B(92), 2, [[H, "heading", "LABEL", "c"], [A, "content", "Alpha", "a"], [A2, "content", "", "a2"], [F, "content", "Foxtrot", "f"]]),
+      { v: 1, id: P1, kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} } as unknown as BlockFile,
+      { v: 1, id: P2, kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} } as unknown as BlockFile,
+    ];
+    const st = structureOf({ sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }], members: { [A]: "s1", [F]: "s2", [P1]: "s2", [P2]: "s1" } });
+    const t = deriveTopics(blocks, st);
+    const ids = blocks.map((b) => b.id);
+    expect(sectionItems(t, st, ids, "s1")).toEqual([{ block: B(92), rows: [H, A, A2] }, { block: P2, rows: null }]);
+    expect(sectionItems(t, st, ids, "s2")).toEqual([{ block: B(92), rows: [H, F] }, { block: P1, rows: null }]);
+    // The published system page uses the same items.
+    const sys = file<SystemJson>("g/fm/s/cardiovascular.json");
+    const cv = system(base, "fm", "cardiovascular");
+    const ct = deriveTopics(cv.blocks, cv.structure);
+    for (const sec of sys.sections) expect(sec.items).toEqual(sectionItems(ct, cv.structure, cv.blocks.map((b) => b.id), sec.id));
+    expect(publishedRows(ct)).toEqual({ rows: sys.rows, headings: sys.headings });
   });
 
   it("every content row of a non-drug multi-column table ends in exactly one topic or untitled material", () => {
@@ -447,6 +468,20 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const unit = (title: string) => res.units.find((u) => u.title === title && u.label === "notes");
     expect(unit("Heart failure")?.text).toContain("orthopnea clue");
     expect(unit("Stable angina")?.text).not.toContain("orthopnea clue");
+  });
+
+  it("addDoc lists a removed document as removed (whatever its state), a processing or failed upload as pending, else as a file", () => {
+    const list = { files: [], removed: [], pending: [] };
+    addDoc(list, D(91), { name: "Gone", kind: "pdf", removed: { at: "2026-10-01T00:00:00Z" }, state: "failed" });
+    addDoc(list, D(92), { name: "Busy", kind: "pdf", removed: null, state: "processing" });
+    addDoc(list, D(93), { name: "Broken", kind: "pdf", removed: null, state: "failed" });
+    addDoc(list, D(94), { name: "Ready", kind: "pdf", removed: null, state: "ready" });
+    addDoc(list, D(95), { name: "Word page", kind: "word", removed: null });
+    expect(list).toEqual({
+      removed: [{ id: D(91), name: "Gone", at: "2026-10-01T00:00:00Z" }],
+      pending: [{ id: D(92), name: "Busy", state: "processing" }, { id: D(93), name: "Broken", state: "failed" }],
+      files: [{ id: D(94), name: "Ready", kind: "pdf", route: `#/file/${D(94)}` }, { id: D(95), name: "Word page", kind: "word", route: `#/file/${D(95)}` }],
+    });
   });
 
   // Orchestrator ruling 2026-10-04 04:45Z (adds to 60 §60.1).

@@ -18,7 +18,8 @@ import {
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
-import { checkMembers, deriveTopics, rowSection, withHeadings, type SystemTopics } from "./topics.ts";
+import { checkMembers, deriveTopics, publishedRows, publishedTopics, rowSection, sectionItems, type SystemTopics } from "./topics.ts";
+import { addDoc } from "./doclist.ts";
 
 export interface PublishResult {
   /** Path relative to `dist/data/` → JSON value. */
@@ -328,10 +329,7 @@ export function publish(c: Content): PublishResult {
     for (const id of ids) {
       const d = c.docs.get(id);
       if (!d) throw new BuildError(id, "listed document does not exist");
-      const name = d.file.name;
-      if (d.file.removed) out.removed.push({ id, name, at: d.file.removed.at });
-      else if (d.kind === "file" && (d.file.state === "processing" || d.file.state === "failed")) out.pending.push({ id, name, state: d.file.state });
-      else out.files.push({ id, name, kind: d.file.kind, route: fileHash(id, null) });
+      addDoc(out, id, { name: d.file.name, kind: d.file.kind, removed: d.file.removed, ...(d.kind === "file" ? { state: d.file.state } : {}) });
     }
     return out;
   };
@@ -542,11 +540,7 @@ export function publish(c: Content): PublishResult {
     const blockOrder = s.data.blocks.map((b) => b.id);
     usedBlocks(s.data.blocks);
 
-    const topics: PubTopic[] = t.topics.map((topic) => ({
-      id: topic.id, title: topic.title, section: topic.section, condition: topic.condition,
-      rows: withHeadings(t, topic.rows),
-      meds: medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle),
-    }));
+    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle));
 
     // nav entries
     const entries: (NavEntry & { section: string | null })[] = [];
@@ -564,18 +558,7 @@ export function publish(c: Content): PublishResult {
     const strip = ({ kind, id, title }: NavEntry): NavEntry => ({ kind, id, title });
 
     // section pages
-    const sections: SystemJson["sections"] = st.sections.map((sec) => {
-      const items: SystemJson["sections"][number]["items"] = [];
-      for (const b of s.data.blocks) {
-        if (t.proseBlocks.includes(b.id)) {
-          if (st.members[b.id] === sec.id) items.push({ block: b.id, rows: null });
-          continue;
-        }
-        const rows = (t.tables.get(b.id)?.rows ?? []).filter((r) => r.kind === "content" && rowSection(t, st, r.id) === sec.id).map((r) => r.id);
-        if (rows.length > 0) items.push({ block: b.id, rows: withHeadings(t, rows) });
-      }
-      return { id: sec.id, title: sec.title, items };
-    });
+    const sections: SystemJson["sections"] = st.sections.map((sec) => ({ id: sec.id, title: sec.title, items: sectionItems(t, st, blockOrder, sec.id) }));
 
     // stubs
     const stubs: SystemJson["stubs"] = {};
@@ -631,8 +614,7 @@ export function publish(c: Content): PublishResult {
     const out: SystemJson = {
       guide: gid, id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
       blocks: s.data.blocks.map(pub),
-      rows: Object.fromEntries([...t.rows].map(([id, r]) => [id, { block: r.block, kind: r.kind, heading: r.kind === "heading" ? null : r.heading, topic: r.topic }])),
-      headings: Object.fromEntries(t.headings),
+      ...publishedRows(t),
       topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, notes: notesFor(pageIds),
     };
     files.set(`g/${gid}/s/${sys}.json`, out);

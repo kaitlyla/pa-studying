@@ -2,7 +2,8 @@
 import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { resolutionRows } from "../content/tables.ts";
-import { idRegExp } from "../content/ids.ts";
+import { memberTarget } from "../content/ids.ts";
+import type { PubMedsCard, PubRow, PubSectionItem, PubTopic } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -22,24 +23,25 @@ export interface Topic {
   section: string | null;
 }
 
-const ROW_ID_RE = idRegExp("r");
-
 /**
- * The topic a row is recorded under: a `members` value that is a row id (Orchestrator ruling
- * 2026-10-04 04:44Z, a blank row added above a topic's first row from its page). Otherwise null.
+ * The topic a row is recorded under (Orchestrator ruling 2026-10-04 04:44Z, a blank row added above
+ * a topic's first row from its page), or null.
  */
 function recordedTopic(structure: StructureFile, rowId: string): string | null {
   const v = structure.members[rowId];
-  return v !== undefined && ROW_ID_RE.test(v) ? v : null;
+  const target = v === undefined ? null : memberTarget(v);
+  return target !== null && "topic" in target ? target.topic : null;
 }
 
-/** The section `members` gives an id: a section id directly, or through the topic it is recorded under. */
+/** The section of an id's `members` entry: its section, or the section of the topic it is recorded under. */
 function memberSection(t: SystemTopics, structure: StructureFile, id: string): string | null {
-  const v = structure.members[id];
-  if (v === undefined || !ROW_ID_RE.test(v)) return v ?? null;
-  const topic = t.rows.get(v)?.topic ?? v;
-  const s = structure.members[topic];
-  return s === undefined || ROW_ID_RE.test(s) ? null : s;
+  const sectionOf = (v: string | undefined): string | null => {
+    const target = v === undefined ? null : memberTarget(v);
+    return target !== null && "section" in target ? target.section : null;
+  };
+  const topic = recordedTopic(structure, id);
+  if (topic === null) return sectionOf(structure.members[id]);
+  return sectionOf(structure.members[t.rows.get(topic)?.topic ?? topic]);
 }
 
 export interface RowInfo {
@@ -163,6 +165,40 @@ export function rowSection(t: SystemTopics, structure: StructureFile, rowId: str
   return memberSection(t, structure, rowId);
 }
 
+/** The system's rows and heading rows as published in `SystemJson.rows` / `.headings` (40 §40.8). */
+export function publishedRows(t: SystemTopics): { rows: Record<string, PubRow>; headings: Record<string, HeadingRow> } {
+  return {
+    rows: Object.fromEntries([...t.rows].map(([id, r]) => [id, { block: r.block, kind: r.kind, heading: r.kind === "heading" ? null : r.heading, topic: r.topic }])),
+    headings: Object.fromEntries(t.headings),
+  };
+}
+
+/** The system's topics as published in `SystemJson.topics`, each with its meds panel from `meds`. */
+export function publishedTopics(t: SystemTopics, meds: (topic: Topic) => PubMedsCard[]): PubTopic[] {
+  return t.topics.map((topic) => ({
+    id: topic.id, title: topic.title, section: topic.section, condition: topic.condition, rows: withHeadings(t, topic.rows), meds: meds(topic),
+  }));
+}
+
+/**
+ * A section page's items (40 §40.3), in the order of `blockIds` (the system's blocks): each
+ * prose/one-column block that `members` puts in the section, whole (`rows: null`); for each table,
+ * its content rows shown under the section, each run preceded once by its heading row. The build,
+ * the owner's post-save view and the editor's section unit all read this, so they match.
+ */
+export function sectionItems(t: SystemTopics, structure: StructureFile, blockIds: readonly string[], section: string): PubSectionItem[] {
+  const items: PubSectionItem[] = [];
+  for (const id of blockIds) {
+    if (t.proseBlocks.includes(id)) {
+      if (structure.members[id] === section) items.push({ block: id, rows: null });
+      continue;
+    }
+    const rows = (t.tables.get(id)?.rows ?? []).filter((r) => r.kind === "content" && rowSection(t, structure, r.id) === section).map((r) => r.id);
+    if (rows.length > 0) items.push({ block: id, rows: withHeadings(t, rows) });
+  }
+  return items;
+}
+
 /** Rows with each run's applicable heading row inserted once before the run. */
 export function withHeadings(t: SystemTopics, rowIds: readonly string[]): string[] {
   const out: string[] = [];
@@ -184,7 +220,7 @@ export function checkMembers(systemId: string, t: SystemTopics, structure: Struc
   if (structure.sections.length === 0) return;
   const sections = new Set(structure.sections.map((s) => s.id));
   for (const [id, section] of Object.entries(structure.members)) {
-    if (ROW_ID_RE.test(section)) continue; // recorded under a topic; deriveTopics checks the topic row
+    if ("topic" in memberTarget(section)) continue; // recorded under a topic; deriveTopics checks the topic row
     if (!sections.has(section)) throw new BuildError(id, `members names section "${section}", which ${systemId} does not have`);
   }
   const need = (id: string, what: string): void => {

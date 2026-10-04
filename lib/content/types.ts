@@ -138,6 +138,11 @@ export interface PharmFile {
 export interface StructureFile {
   v: 1;
   sections: { id: string; title: string }[];
+  /**
+   * Row or block id → a section id (the section it is shown under), or, for a row, the id of the
+   * topic row it is recorded under (Orchestrator ruling 2026-10-04 04:44Z). Decode with
+   * `memberTarget` (ids.ts).
+   */
   members: Record<string, string>;
   listed: Record<string, string>;
   drugTables: { block: string; pharmSection: string; conditionRows: string[] }[];

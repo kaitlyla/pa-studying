@@ -27,6 +27,11 @@ export function isId(prefix: IdPrefix, value: unknown): value is string {
   return typeof value === "string" && ID_RE[prefix].test(value);
 }
 
+/** What a structure.json `members` value names: a row id is a recorded topic, anything else a section id. */
+export function memberTarget(value: string): { topic: string } | { section: string } {
+  return isId("r", value) ? { topic: value } : { section: value };
+}
+
 /** `n` Crockford characters from crypto.getRandomValues (32 divides 256, so `byte & 31` is uniform). */
 export function crockford(n: number): string {
   const bytes = new Uint8Array(n);

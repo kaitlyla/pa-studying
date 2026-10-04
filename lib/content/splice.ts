@@ -70,15 +70,15 @@ export function spliceRows<R>(full: readonly R[], shown: readonly string[], edit
 
 /**
  * Apply added and deleted rows/blocks to a system's structure.json (50 §50.4, operator ruling 2B).
- * - `order`: the system's row ids in 40 §40.2 resolution order (after the splice), so the nearest
- *   topic above a new row is the nearest earlier id carrying a `members` entry;
+ * - `order`: the system's row ids in 40 §40.2 resolution order (after the splice);
  * - `table`: the edited table block;
  * - `topic`: when saving a topic page, that topic's id. Each new row in the run directly above the
  *   topic's first row (rows already recorded as its members don't break the run) is recorded as
  *   `members[row] = topic`, so it shows with that topic in every view (Orchestrator ruling
  *   2026-10-04 04:44Z);
- * - any other new row in a system with sections joins the section of the topic above it, or the
- *   first section when no row above it has one; a new row of a drug table gets a `members` entry
+ * - any other new row in a system with sections takes the `members` value of the nearest earlier
+ *   row that has one (a section id, or a topic it is recorded under), or the first section when no
+ *   row above it has one; a new row of a drug table gets a `members` entry
  *   only when it is one of that table's `conditionRows`, since drug rows live only in Pharm;
  * - a deleted id leaves `members` (as a key and as a topic value), `listed` and every
  *   `drugTables[].conditionRows`.

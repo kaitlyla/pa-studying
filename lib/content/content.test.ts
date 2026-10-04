@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { commitMessage, parseTrailers } from "./commit.ts";
 import { parseFile, serializeFile } from "./files.ts";
 import { readContent, writeContent } from "./fs.ts";
+import { memberTarget } from "./ids.ts";
 import { spliceRows, systemRowOrder, updateStructure } from "./splice.ts";
 import type { StructureFile } from "./types.ts";
 
@@ -91,6 +92,12 @@ describe("splice (50 §50.4)", () => {
         v: 1, sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }], members: { [A]: "s2", [F]: "s1", [G]: "s2" }, listed: {},
         drugTables: [], pharmSections: [], pharmFiles: [],
       };
+
+      it("memberTarget reads a row id as a recorded topic and anything else as a section", () => {
+        expect(memberTarget(F)).toEqual({ topic: F });
+        expect(memberTarget("s1")).toEqual({ section: "s1" });
+        expect(memberTarget(b(1))).toEqual({ section: b(1) });
+      });
 
       it("records a row added directly above the topic's first row under that topic", () => {
         const out = updateStructure(s, { order: [H, A, A2, X, F, F2, G], added: [X], table: b(1), topic: F });
