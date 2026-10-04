@@ -1,0 +1,76 @@
+name: process-inbox
+
+on:
+  workflow_dispatch:
+    inputs:
+      item:
+        description: The added document's d_ id
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: inbox
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      actions: write
+    env:
+      ITEM: ${{ inputs.item }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check the item id
+        run: |
+          if ! [[ "$ITEM" =~ ^d_[0-9A-Za-z]{10}$ ]]; then
+            echo "::error::item must be a d_ id, got: $ITEM"
+            exit 1
+          fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Fetch the inbox branch
+        run: git fetch --depth=1 origin "refs/heads/inbox/$ITEM:refs/remotes/origin/inbox/$ITEM"
+      - name: Read the item's extension
+        id: upload
+        run: |
+          ext=$(git show "refs/remotes/origin/inbox/$ITEM:inbox/$ITEM/upload.json" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(String(JSON.parse(s).ext).toLowerCase()))')
+          echo "ext=$ext" >> "$GITHUB_OUTPUT"
+      - name: Install LibreOffice
+        if: contains(fromJSON('["ppt","pptx","doc"]'), steps.upload.outputs.ext)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libreoffice-impress-nogui libreoffice-writer-nogui
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Configure the commit identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Process the item
+        run: node tools/inbox/index.ts --item "$ITEM"
+      - name: Push to main
+        run: |
+          for attempt in 0 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
+            git pull --rebase origin main
+          done
+          echo "::error::push to main was rejected after 3 rebase retries"
+          exit 1
+      - name: Delete the inbox branch
+        run: git push origin --delete "inbox/$ITEM"
+      - name: Publish
+        run: gh workflow run publish.yml --ref main
