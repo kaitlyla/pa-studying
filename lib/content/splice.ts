@@ -14,8 +14,11 @@ export interface SpliceResult<R> {
  * - `full`: every row of the stored table, in order;
  * - `shown`: the ids of the rows the editor showed (the partial before editing);
  * - `edited`: the partial after editing.
- * An existing id replaces that row; a shown id missing from `edited` is deleted; a new id is
- * inserted directly after the edited row preceding it (or before the first one following it).
+ * An existing id replaces that row; a shown id missing from `edited` is deleted. New rows are
+ * inserted directly before the existing row that follows them in `edited`, so rows hidden between
+ * two shown rows stay above them; new rows after the last existing row go directly after it
+ * (Orchestrator ruling 2026-10-04 03:16Z, replacing plan 50 §50.4's anchor-after rule). With no
+ * existing row in `edited`, they take the place of the first shown row, or end the table.
  */
 export function spliceRows<R>(full: readonly R[], shown: readonly string[], edited: readonly R[], idOf: (row: R) => string): SpliceResult<R> {
   const fullIds = new Set(full.map(idOf));
@@ -29,36 +32,38 @@ export function spliceRows<R>(full: readonly R[], shown: readonly string[], edit
     editedIds.add(id);
   }
 
-  // Group each run of new rows with the existing row it follows; new rows before any existing row lead.
-  const leading: R[] = [];
-  const after = new Map<string, R[]>();
+  // Each run of new rows goes before the existing row that follows it; a trailing run goes after
+  // the last existing row.
+  const before = new Map<string, R[]>();
   const replacement = new Map<string, R>();
-  let anchor: string | null = null;
+  let pending: R[] = [];
+  let last: string | null = null;
   for (const row of edited) {
     const id = idOf(row);
     if (fullIds.has(id)) {
       replacement.set(id, row);
-      anchor = id;
-    } else if (anchor === null) {
-      leading.push(row);
+      if (pending.length > 0) before.set(id, pending);
+      pending = [];
+      last = id;
     } else {
-      after.set(anchor, [...(after.get(anchor) ?? []), row]);
+      pending.push(row);
     }
   }
+  const trailing = last === null ? [] : pending;
+  const orphans = last === null ? pending : [];
 
   const rows: R[] = [];
   const deleted: string[] = [];
-  const firstKept = full.map(idOf).find((id) => replacement.has(id));
   const firstShown = full.map(idOf).find((id) => shownIds.has(id));
-  const leadBefore = firstKept ?? firstShown;
   for (const row of full) {
     const id = idOf(row);
-    if (id === leadBefore) rows.push(...leading);
+    if (id === firstShown) rows.push(...orphans);
+    rows.push(...(before.get(id) ?? []));
     if (!shownIds.has(id)) rows.push(row);
-    else if (replacement.has(id)) rows.push(replacement.get(id) as R, ...(after.get(id) ?? []));
+    else if (replacement.has(id)) rows.push(replacement.get(id) as R, ...(id === last ? trailing : []));
     else deleted.push(id);
   }
-  if (leadBefore === undefined) rows.push(...leading);
+  if (firstShown === undefined) rows.push(...orphans);
   const added = edited.map(idOf).filter((id) => !fullIds.has(id));
   return { rows, added, deleted };
 }
@@ -68,14 +73,16 @@ export function spliceRows<R>(full: readonly R[], shown: readonly string[], edit
  * - `order`: the system's row ids in 40 §40.2 resolution order (after the splice), so the nearest
  *   topic above a new row is the nearest earlier id carrying a `members` entry;
  * - a new row in a system with sections joins that topic's section, or the first section when no
- *   row above it has one;
+ *   row above it has one; a new row of the drug table `table` gets a section only when it is one
+ *   of that table's `conditionRows`, since drug rows live only in Pharm;
  * - a deleted id leaves `members`, `listed` and every `drugTables[].conditionRows`.
  * Returns a new object; the input is not modified.
  */
 export function updateStructure(
   structure: StructureFile,
-  change: { order: readonly string[]; added?: readonly string[]; deleted?: readonly string[] },
+  change: { order: readonly string[]; added?: readonly string[]; deleted?: readonly string[]; table?: string },
 ): StructureFile {
+  const drugTable = structure.drugTables.find((d) => d.block === change.table);
   const added = new Set(change.added ?? []);
   const deleted = new Set(change.deleted ?? []);
   const members: Record<string, string> = {};
@@ -89,6 +96,7 @@ export function updateStructure(
     for (const id of added) {
       const at = change.order.indexOf(id);
       if (at === -1) throw new Error(`New row ${id} is not in the system's row order`);
+      if (drugTable && !drugTable.conditionRows.includes(id)) continue;
       const above = change.order.slice(0, at).reverse().find((prev) => !added.has(prev) && prev in members);
       members[id] = (above !== undefined ? members[above] : undefined) ?? firstSection;
     }

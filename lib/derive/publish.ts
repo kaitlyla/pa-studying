@@ -1,0 +1,777 @@
+// Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
+// 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
+import { citeKey } from "../content/ids.ts";
+import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type Link } from "../content/types.ts";
+import type { SearchUnit } from "../search/index.ts";
+import { BuildError } from "./errors.ts";
+import type { Content, DocData, GuideData, SystemData } from "./model.ts";
+import {
+  CardMatcher, hasPharm, medsPanel, placeCards, searchHome, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
+} from "./pharm.ts";
+import type {
+  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavEntry, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
+  PubFlag, PubGap, PubLink, PubPart, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
+  WorkupJson,
+} from "./published.ts";
+import {
+  fileLocation, GENERAL_LABELS, generalLoc, guideLoc, guideRoute, otherLoc, pharmLoc, REF_TABS, systemLoc, TAB_LABELS, UPDATES_LOC,
+  UPDATES_ROUTE, type SiteIndex,
+} from "./routes.ts";
+import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
+import { checkMembers, deriveTopics, rowSection, withHeadings, type SystemTopics } from "./topics.ts";
+
+export interface PublishResult {
+  /** Path relative to `dist/data/` → JSON value. */
+  files: Map<string, unknown>;
+  /** Search units in site order (`ord` = index). */
+  units: SearchUnit[];
+  /** Asset file names referenced by published blocks. */
+  assets: Set<string>;
+  /** Stored files of visible as-is documents to copy to `files/<doc>/<name>`. */
+  stored: { doc: string; name: string }[];
+  dropped: { file: string; id: string }[];
+  /** Code points of every published doc's text and markers. */
+  codePoints: Set<number>;
+}
+
+interface Sys {
+  guide: GuideData;
+  data: SystemData;
+  topics: SystemTopics;
+  pharm: PharmSystem;
+  base: string;
+}
+
+const pub = (b: BlockFile): PubBlock => ({ id: b.id, kind: b.kind, doc: b.doc });
+
+/** True when the document is shown to visitors. */
+function visible(d: DocData): boolean {
+  if (d.file.removed) return false;
+  return d.kind === "word" || d.file.state === undefined || d.file.state === "ready";
+}
+
+/** Gap block text the evidence claims must match (90 §90.4). */
+function gapText(g: Content["gaps"] extends Map<string, infer V> ? V : never): string {
+  const differs = g.block.meta.differs ? docText(g.block.meta.differs.doc) : "";
+  return collapse(`${docText(g.block.doc)}\n${differs}`);
+}
+
+/** The items of a generated slide: every slide_card paragraph after the card heading (90 §90.5). */
+function slideItems(doc: { content: unknown[] }): string[] {
+  const items: string[] = [];
+  for (const n of doc.content as PMNode[]) {
+    if (n.type !== "slide_card") continue;
+    (n.content ?? []).slice(1).forEach((p) => items.push(nodeText(p)));
+  }
+  return items;
+}
+
+export function publish(c: Content): PublishResult {
+  const files = new Map<string, unknown>();
+  const units: Omit<SearchUnit, "ord">[] = [];
+  const assets = new Set<string>();
+  const codePoints = new Set<number>();
+  const stored: PublishResult["stored"] = [];
+  const dropped: PublishResult["dropped"] = [];
+  const hosts: HostsJson = {};
+  const usedBlocks = (bs: Iterable<{ doc: BlockFile["doc"] }>): void => {
+    for (const b of bs) {
+      assetsOf(b.doc, assets);
+      codePointsOf(b.doc, codePoints);
+    }
+  };
+
+  // ---- index and per-system derivations --------------------------------------------------------
+  const ix: SiteIndex = {
+    pance: c.site.pance,
+    guideNames: { ...c.site.guideNames },
+    systems: Object.fromEntries(c.guides.map((g) => [g.file.id, Object.fromEntries(g.file.systems.map((s) => [s.id, s.title]))])),
+    other: Object.fromEntries(c.other.sections.map((s) => [s.id, s.title])),
+  };
+  const isPanceGuide = (g: GuideData): boolean => g.file.id === c.site.pance;
+  const tabOf = (g: GuideData): string => (isPanceGuide(g) ? "pance" : "eor");
+
+  const parts = new Map<string, { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }>();
+  const pharmBlocks = new Map<string, BlockFile>();
+  for (const pf of c.pharm) {
+    for (const p of pf.file.parts) parts.set(p.id, { part: p, file: pf });
+    for (const b of pf.blocks) pharmBlocks.set(b.id, b);
+  }
+  const cardIds = new Set(c.cards.cards.map((x) => x.id));
+
+  const systems: Sys[] = [];
+  const rowSys = new Map<string, Sys>();
+  const blockSys = new Map<string, Sys>();
+  for (const g of c.guides) {
+    for (const data of g.systems) {
+      const topics = deriveTopics(data.blocks, data.structure);
+      const s: Sys = { guide: g, data, topics, pharm: { guide: g.file.id, system: data.file.id, structure: data.structure, topics }, base: guideRoute(ix, g.file.id) };
+      systems.push(s);
+      for (const b of data.blocks) blockSys.set(b.id, s);
+      for (const id of topics.rows.keys()) rowSys.set(id, s);
+    }
+  }
+  for (const s of systems) checkStructure(s);
+  for (const s of systems) checkMembers(`${s.guide.file.id}/${s.data.file.id}`, s.topics, s.data.structure);
+
+  function checkStructure(s: Sys): void {
+    const st = s.data.structure;
+    const here = (id: string): boolean => blockSys.get(id) === s || rowSys.get(id) === s;
+    const unknown = (id: string, what: string): never => {
+      throw new BuildError(id, `structure.json of ${s.guide.file.id}/${s.data.file.id} names ${what} that does not exist`);
+    };
+    for (const id of Object.keys(st.members)) if (!here(id)) unknown(id, "a row or block");
+    for (const id of Object.keys(st.listed)) if (blockSys.get(id) !== s) unknown(id, "a block");
+    const sections = new Set(st.pharmSections.map((p) => p.id));
+    for (const d of st.drugTables) {
+      if (!s.topics.tables.has(d.block)) unknown(d.block, "a table block");
+      for (const r of d.conditionRows) if (s.topics.rows.get(r)?.block !== d.block) unknown(r, "a row of its drug table");
+      if (!sections.has(d.pharmSection)) unknown(d.pharmSection, "a pharm section");
+    }
+    for (const ps of st.pharmSections) {
+      for (const t of ps.tables) if (!st.drugTables.some((d) => d.block === t)) unknown(t, "a drug table");
+      for (const p of [ps.overview, ps.lo]) if (p !== null && !parts.has(p)) unknown(p, "a pharm part");
+      for (const card of ps.also) if (!cardIds.has(card)) unknown(card, "a card");
+    }
+    for (const d of st.pharmFiles) if (!c.docs.has(d)) unknown(d, "a document");
+  }
+
+  // ---- evidence invariants (90 §90.4, §90.5) ------------------------------------------------------
+  for (const [id, g] of c.gaps) {
+    const ev = g.evidence;
+    if (!ev || ev.verification.result !== "pass") throw new BuildError(id, "gap block lacks a passing evidence record");
+    const claims = collapse(ev.claims.map((x) => x.text).join(" "));
+    if (g.block.meta.ownerEdits.length === 0 && claims !== gapText(g)) throw new BuildError(id, "gap block text no longer matches its verified claims");
+  }
+  for (const deck of c.decks.values()) {
+    if (deck.file.kind !== "generated") continue;
+    for (const slide of deck.slides) {
+      const items = slideItems(slide.doc);
+      if (items.length === 0 || (slide.meta.ownerEdits?.length ?? 0) > 0) continue;
+      const evidence = (slide.meta.evidence ?? []).map((e) => e.item);
+      if (slide.meta.verification?.result !== "pass" || items.length !== evidence.length || items.some((t, i) => t !== evidence[i])) {
+        throw new BuildError(slide.id, "generated slide lacks a passing evidence record for its current items");
+      }
+    }
+  }
+
+  // ---- pharm cards --------------------------------------------------------------------------------
+  const matcher = new CardMatcher(c.cards.cards);
+  const placements: Placements = placeCards(systems.map((s) => s.pharm), matcher, new Set(c.pharm.map((p) => p.file.id)));
+  const cardParts = (card: string): { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }[] =>
+    [...parts.values()].filter((p) => p.part.role === "card" && p.part.card === card);
+  const cardTitle = (card: string): string => cardParts(card)[0]?.part.title ?? c.cards.cards.find((x) => x.id === card)?.aliases[0] ?? card;
+
+  // ---- existence and flags -------------------------------------------------------------------------
+  const docBlocks = new Map<string, string>();
+  for (const [d, doc] of c.docs) if (doc.kind === "word" && visible(doc)) for (const b of doc.blocks) docBlocks.set(b.id, d);
+  const preambleBlock = new Map<string, GuideData>();
+  for (const g of c.guides) for (const b of g.preamble) preambleBlock.set(b.id, g);
+  const slideIds = new Set<string>();
+  for (const deck of c.decks.values()) for (const s of deck.slides) slideIds.add(s.id);
+  const exists = (id: string): boolean =>
+    rowSys.has(id) || blockSys.has(id) || preambleBlock.has(id) || c.gaps.has(id) || c.docs.has(id) || docBlocks.has(id) || pharmBlocks.has(id) || slideIds.has(id);
+  const shown = (id: string): boolean => {
+    const d = c.docs.get(id);
+    return d === undefined || visible(d);
+  };
+
+  const placedFlags = new Map<string, Flag[]>();
+  for (const concept of c.concepts.concepts) {
+    for (const target of concept.targets) {
+      if (!exists(target)) {
+        dropped.push({ file: "content/updates/concepts.json", id: target });
+        continue;
+      }
+      if (!shown(target)) continue;
+      for (const flag of c.flags.flags) {
+        // A retired flag's recommendation is gone from its source, so it is listed but never placed;
+        // concepts name flags by identity key (Orchestrator rulings, 2026-10-04 03:06Z/03:07Z).
+        if (flag.kind !== "rec" || flag.supersededBy !== null || flag.retired !== undefined) continue;
+        if (flag.by === "agent" && flag.verification?.result !== "pass") continue;
+        if (!(concept.sourceKeys[flag.source] ?? []).includes(flag.key)) continue;
+        const list = placedFlags.get(target) ?? [];
+        if (!list.includes(flag)) list.push(flag);
+        placedFlags.set(target, list);
+      }
+    }
+  }
+  const note = (f: Flag): FlagNote => ({ id: f.id, guideline: f.guideline, org: f.org, published: f.published, quote: f.quote, grade: f.grade, url: f.url, flagged: f.flagged });
+  const notesFor = (ids: Iterable<string>): Notes => {
+    const out: Notes = {};
+    for (const id of ids) {
+      const fs = placedFlags.get(id);
+      if (fs) out[id] = fs.map(note);
+    }
+    return out;
+  };
+
+  // ---- hosts: guide blocks, rows, pharm -------------------------------------------------------
+  for (const g of c.guides) for (const b of g.preamble) hosts[b.id] = { route: guideRoute(ix, g.file.id), loc: guideLoc(ix, g.file.id) };
+  const secTitle = (s: Sys, id: string | null): string | null => (id === null ? null : (s.data.structure.sections.find((x) => x.id === id)?.title ?? null));
+  const sysRoute = (s: Sys): string => `${s.base}/s/${s.data.file.id}`;
+  const secRoute = (s: Sys, sec: string): string => `${s.base}/sec/${s.data.file.id}/${sec}`;
+  const pharmSectionOf = (s: Sys, block: string): string | null => s.data.structure.drugTables.find((d) => d.block === block)?.pharmSection ?? null;
+  const g0 = (s: Sys): string => s.guide.file.id;
+  for (const s of systems) {
+    const st = s.data.structure;
+    const sys = s.data.file.id;
+    for (const b of s.data.blocks) {
+      const ps = pharmSectionOf(s, b.id);
+      if (ps !== null) hosts[b.id] = { route: `${s.base}/pharm/${sys}/${ps}`, loc: pharmLoc(ix, g0(s), sys) };
+      else if (st.listed[b.id] !== undefined) hosts[b.id] = { route: `${s.base}/b/${b.id}`, loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
+      else if (s.topics.proseBlocks.includes(b.id) && st.members[b.id] !== undefined && st.sections.length > 0) {
+        hosts[b.id] = { route: secRoute(s, st.members[b.id] as string), loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
+      } else hosts[b.id] = { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
+    }
+    for (const [id, info] of s.topics.rows) {
+      const ps = pharmSectionOf(s, info.block);
+      if (info.drug && ps !== null) hosts[id] = { route: `${s.base}/pharm/${sys}/${ps}/${id}`, loc: pharmLoc(ix, g0(s), sys) };
+      else if (info.topic !== null) {
+        hosts[id] = { route: `${s.base}/t/${info.topic}`, loc: systemLoc(ix, g0(s), sys, secTitle(s, rowSection(s.topics, st, id))) };
+      } else {
+        const sec = info.kind === "content" && st.sections.length > 0 ? (st.members[id] ?? null) : null;
+        hosts[id] = sec ? { route: secRoute(s, sec), loc: systemLoc(ix, g0(s), sys, secTitle(s, sec)) } : { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
+      }
+    }
+  }
+  /** First pharm section (site order) using each card and each overview/LO part. */
+  const pharmHome = new Map<string, { s: Sys; section: string }>();
+  for (const s of systems) {
+    for (const ps of s.data.structure.pharmSections) {
+      for (const card of sectionCards(placements.get(sectionKey(g0(s), s.data.file.id, ps.id)))) {
+        if (!pharmHome.has(card)) pharmHome.set(card, { s, section: ps.id });
+      }
+      for (const p of [ps.overview, ps.lo]) if (p !== null && !pharmHome.has(p)) pharmHome.set(p, { s, section: ps.id });
+    }
+  }
+  for (const [id, h] of pharmHome) {
+    const route = `${h.s.base}/pharm/${h.s.data.file.id}/${h.section}${id.startsWith("c_") ? `/${id}` : ""}`;
+    const place = { route, loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) };
+    hosts[id] = place;
+    const ps = id.startsWith("c_") ? cardParts(id) : [parts.get(id)].filter((x) => x !== undefined);
+    for (const p of ps) {
+      if (id.startsWith("c_")) hosts[p.part.id] = place;
+      for (const b of p.part.blocks) hosts[b] = place;
+    }
+  }
+
+  // ---- first placements of documents and gap blocks (site order) ----------------------------------
+  const docHome = new Map<string, { from: string; tab: string }>();
+  const gapHome = new Map<string, { place: Place; tab: string }>();
+  const placeDoc = (id: string, from: string, tab: string): void => {
+    if (!docHome.has(id)) docHome.set(id, { from, tab });
+  };
+  const placeGap = (id: string, place: Place, tab: string): void => {
+    if (!gapHome.has(id)) gapHome.set(id, { place, tab });
+  };
+  for (const g of c.guides) {
+    const gid = g.file.id;
+    const base = guideRoute(ix, gid);
+    for (const data of g.systems) for (const d of data.structure.pharmFiles) placeDoc(d, `${base}/pharm/${data.file.id}`, tabOf(g));
+    for (const t of g.general?.topics ?? []) {
+      for (const d of t.files) placeDoc(d, `${base}/general/${t.key}`, tabOf(g));
+      for (const gap of t.gaps) placeGap(gap, { route: `${base}/general/${t.key}`, loc: generalLoc(ix, gid, t.key) }, tabOf(g));
+    }
+    for (const w of g.general?.workup ?? []) placeGap(w.gap, { route: `${base}/workup/${w.id}`, loc: `${guideLoc(ix, gid)} › Initial workup` }, tabOf(g));
+    if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, base, tabOf(g));
+    const deck = c.decks.get(gid);
+    if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, `${base}/slides`, tabOf(g));
+  }
+  for (const tab of REF_TABS) {
+    for (const sub of c.reftabs[tab].subs) for (const gap of sub.gaps) placeGap(gap, { route: `#/${tab}/${sub.id}`, loc: `${TAB_LABELS[tab]} › ${sub.title}` }, tab);
+    for (const d of c.reftabs[tab].files) placeDoc(d, `#/${tab}`, tab);
+  }
+  for (const sec of c.other.sections) {
+    const place = { route: `#/other/${sec.id}`, loc: otherLoc(ix, sec.id) };
+    if (sec.lead) placeGap(sec.lead, place, "other");
+    for (const d of sec.files) placeDoc(d, place.route, "other");
+    for (const gap of sec.gaps ?? []) placeGap(gap, place, "other");
+  }
+  const docLoc = (d: string): string => {
+    const home = docHome.get(d);
+    if (!home) return "";
+    return fileLocation(ix, home.from) ?? (home.from.endsWith("/slides") ? `${guideLoc(ix, home.from.split("/")[2] ?? "")} › Review slides` : "");
+  };
+  for (const [d, doc] of c.docs) {
+    if (!visible(doc) || !docHome.has(d)) continue;
+    const place = { route: `#/file/${d}`, loc: docLoc(d) };
+    hosts[d] = place;
+    if (doc.kind === "word") for (const b of doc.blocks) hosts[b.id] = place;
+  }
+  for (const [id, home] of gapHome) if (c.gaps.has(id)) hosts[id] = home.place;
+  for (const g of c.guides) {
+    const deck = c.decks.get(g.file.id);
+    if (!deck || !deckShown(deck)) continue;
+    deck.slides.forEach((s, i) => {
+      hosts[s.id] = { route: `${guideRoute(ix, g.file.id)}/slides/${i + 1}`, loc: `${guideLoc(ix, g.file.id)} › Review slides` };
+    });
+  }
+  for (const f of c.flags.flags) hosts[f.id] = { route: UPDATES_ROUTE, loc: UPDATES_LOC };
+
+  function deckShown(deck: NonNullable<ReturnType<typeof c.decks.get>>): boolean {
+    if (deck.file.kind !== "own" || deck.file.file === null) return true;
+    const d = c.docs.get(deck.file.file);
+    return d !== undefined && visible(d);
+  }
+
+  // ---- shared resolvers ---------------------------------------------------------------------------
+  const docList = (ids: readonly string[]): DocList => {
+    const out: DocList = { files: [], removed: [], pending: [] };
+    for (const id of ids) {
+      const d = c.docs.get(id);
+      if (!d) throw new BuildError(id, "listed document does not exist");
+      const name = d.file.name;
+      if (d.file.removed) out.removed.push({ id, name, at: d.file.removed.at });
+      else if (d.kind === "file" && (d.file.state === "processing" || d.file.state === "failed")) out.pending.push({ id, name, state: d.file.state });
+      else out.files.push({ id, name, kind: d.file.kind, route: `#/file/${id}` });
+    }
+    return out;
+  };
+  const links = (file: string, ls: readonly Link[]): PubLink[] => {
+    const out: PubLink[] = [];
+    for (const l of ls) {
+      const host = hosts[l.target];
+      if (!exists(l.target) || !host) {
+        dropped.push({ file, id: l.target });
+        continue;
+      }
+      out.push({ target: l.target, title: targetTitle(l.target), covers: l.covers, route: host.route, loc: host.loc, flagged: placedFlags.has(l.target) });
+    }
+    return out;
+  };
+  const gap = (id: string): PubGap => {
+    const g = c.gaps.get(id);
+    if (!g) throw new BuildError(id, "listed gap block does not exist");
+    const m = g.block.meta;
+    usedBlocks([g.block, ...(m.differs ? [m.differs] : [])]);
+    return {
+      id, title: m.title, relevantTo: m.relevantTo, written: m.written, doc: g.block.doc, differs: m.differs?.doc ?? null,
+      sources: m.sources.map((s) => ({ name: s.name, org: s.org, year: s.year, url: s.url })), ownerEdits: m.ownerEdits,
+      notes: (placedFlags.get(id) ?? []).map(note),
+    };
+  };
+  const gapUnits = new Set<string>();
+  const gapUnit = (id: string): void => {
+    const g = c.gaps.get(id);
+    const home = gapHome.get(id);
+    if (!g || !home || gapUnits.has(id)) return;
+    gapUnits.add(id);
+    const m = g.block.meta;
+    const text = [docText(g.block.doc), m.relevantTo, m.differs ? docText(m.differs.doc) : "", ...m.sources.map((s) => s.name)].join("\n");
+    units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label: "gap", text: searchText(text) });
+  };
+  const docUnits = new Set<string>();
+  const docUnit = (id: string): void => {
+    const d = c.docs.get(id);
+    const home = docHome.get(id);
+    if (!d || !home || !visible(d) || docUnits.has(id)) return;
+    docUnits.add(id);
+    const base = { tab: home.tab, loc: docLoc(id), route: `#/file/${id}`, label: "notes" as const };
+    if (d.kind === "word") {
+      for (const b of d.blocks) {
+        const table = (b.doc.content as PMNode[]).find((n) => n.type === "table");
+        if (b.kind === "table" && table) {
+          for (const r of table.content ?? []) units.push({ ...base, title: d.file.name, at: String(r.attrs?.id), text: searchText(nodeText(r)) });
+        } else units.push({ ...base, title: d.file.name, at: b.id, text: searchText(docText(b.doc)) });
+      }
+    } else {
+      (d.text?.pages ?? []).forEach((t, i) => units.push({ ...base, title: `${d.file.name} · p. ${i + 1}`, at: `p${i + 1}`, text: searchText(t) }));
+    }
+  };
+  /** Text of a pharm part's notes blocks. */
+  const partText = (blocks: readonly string[]): string => blocks.map((id) => {
+    const b = pharmBlocks.get(id);
+    return b ? docText(b.doc) : "";
+  }).join("\n");
+  const firstLine = (b: BlockFile): string => collapse(docText(b.doc).split("\n").find((l) => l.trim() !== "") ?? "");
+  /** A link target's name, as search titles it. */
+  const targetTitle = (id: string): string => {
+    const rs = rowSys.get(id);
+    if (rs) {
+      const info = rs.topics.rows.get(id);
+      const topic = rs.topics.topics.find((t) => t.id === info?.topic);
+      if (topic) return topic.title;
+      if (info?.kind === "heading") return collapse(rs.topics.headings.get(id)?.label ?? "");
+      const row = rs.topics.tables.get(info?.block ?? "")?.rows.find((r) => r.id === id);
+      return row ? collapse(firstCell(row)) : "";
+    }
+    const bs = blockSys.get(id);
+    const block = bs?.data.blocks.find((b) => b.id === id) ?? preambleBlock.get(id)?.preamble.find((b) => b.id === id);
+    if (block) return bs?.data.structure.listed[id] ?? firstLine(block);
+    const g = c.gaps.get(id);
+    if (g) return collapse(g.block.meta.title);
+    const d = c.docs.get(docBlocks.get(id) ?? id);
+    return d ? d.file.name : "";
+  };
+
+  // ---- guides ---------------------------------------------------------------------------------
+  const site: SiteJson = {
+    name: c.site.name,
+    repo: c.site.repo,
+    owner: { ...c.site.owner },
+    tabs: c.site.tabs,
+    eors: [],
+    pance: { id: c.site.pance, name: c.site.guideNames[c.site.pance], systems: [] },
+    guideNames: { ...c.site.guideNames },
+    index: ix,
+  };
+  for (const g of c.guides) {
+    const gid = g.file.id;
+    const base = guideRoute(ix, gid);
+    const tab = tabOf(g);
+    const summaries = g.file.systems.map((s) => ({ id: s.id, title: s.title, pct: s.pct }));
+    if (isPanceGuide(g)) site.pance.systems = summaries;
+    else site.eors.push({ id: gid, name: c.site.guideNames[gid], systems: summaries, general: g.general?.topics.length ?? 0 });
+
+    // home
+    usedBlocks(g.preamble);
+    const home: HomeJson = { guide: gid, title: c.site.guideNames[gid], preamble: g.preamble.map(pub), systems: summaries, notes: notesFor(g.preamble.map((b) => b.id)) };
+    files.set(`g/${gid}/home.json`, home);
+    for (const b of g.preamble) {
+      units.push({ tab, title: firstLine(b), loc: guideLoc(ix, gid), route: base, at: b.id, label: "notes", text: searchText(docText(b.doc)) });
+    }
+
+    // systems
+    const navSystems: NavJson["systems"] = [];
+    for (const data of g.systems) {
+      const s = systems.find((x) => x.data === data) as Sys;
+      navSystems.push(systemPages(s));
+    }
+
+    // general topics and workup
+    const general: NavJson["general"] = [];
+    if (g.general) {
+      for (const key of GENERAL_KEYS) {
+        const t = g.general.topics.find((x) => x.key === key);
+        if (!t) continue;
+        general.push({ key, label: GENERAL_LABELS[key] });
+        const out: GeneralJson = {
+          guide: gid, key, label: GENERAL_LABELS[key], howto: t.howto,
+          links: links(`content/guides/${gid}/general.json`, t.links), files: docList(t.files), gaps: t.gaps.map(gap),
+        };
+        files.set(`g/${gid}/general/${key}.json`, out);
+        for (const d of t.files) docUnit(d);
+        for (const id of t.gaps) gapUnit(id);
+      }
+      if (g.general.workup.length > 0) {
+        const workup: WorkupJson = { guide: gid, items: g.general.workup.map((w) => ({ id: w.id, title: w.title, conds: w.conds, gap: gap(w.gap) })) };
+        files.set(`g/${gid}/workup.json`, workup);
+        for (const w of g.general.workup) {
+          units.push({ tab, title: collapse(w.title), loc: `${guideLoc(ix, gid)} › Initial workup`, route: `${base}/workup/${w.id}`, at: null, label: "notes", text: searchText(`${w.title}\n${w.conds}`) });
+          gapUnit(w.gap);
+        }
+      }
+    }
+
+    // slides
+    let slidesNav: NavJson["slides"] = null;
+    const removed: NavJson["removed"] = [];
+    const pending: NavJson["pending"] = [];
+    const deck = c.decks.get(gid);
+    if (deck) {
+      const own = deck.file.kind === "own" && deck.file.file !== null;
+      if (own) {
+        const list = docList([deck.file.file as string]);
+        removed.push(...list.removed);
+        pending.push(...list.pending);
+      }
+      if (deckShown(deck)) {
+        const title = own ? (c.docs.get(deck.file.file as string)?.file.name ?? deck.file.title) : deck.file.title;
+        slidesNav = { title };
+        usedBlocks(deck.slides);
+        const out: SlidesJson = {
+          guide: gid, kind: deck.file.kind, title, file: deck.file.file,
+          slides: deck.slides.map((sl) => ({
+            id: sl.id, doc: sl.doc,
+            summarizes: (sl.meta.summarizes ?? []).flatMap((r) => {
+              const rs = rowSys.get(r);
+              const host = hosts[r];
+              if (!rs || !host) {
+                dropped.push({ file: `content/slides/${gid}/blocks/${sl.id}.json`, id: r });
+                return [];
+              }
+              const topic = rs.topics.rows.get(r)?.topic ?? null;
+              return [{ id: r, title: rs.topics.topics.find((x) => x.id === topic)?.title ?? "", route: host.route }];
+            }),
+            ownerEdits: sl.meta.ownerEdits ?? [],
+          })),
+        };
+        files.set(`g/${gid}/slides.json`, out);
+        deck.slides.forEach((sl, i) => {
+          const heading = (sl.doc.content as PMNode[]).find((n) => n.type === "heading_line");
+          units.push({
+            tab, title: collapse(heading ? nodeText(heading) : ""), loc: `${guideLoc(ix, gid)} › Review slides`, route: `${base}/slides/${i + 1}`,
+            at: sl.id, label: "slides", text: searchText(docText(sl.doc)),
+          });
+        });
+      }
+    }
+
+    // PANCE sidebar end
+    let sidebarEnd: NavJson["sidebarEnd"] = null;
+    if (g.file.sidebarEnd) {
+      const list = docList([g.file.sidebarEnd]);
+      sidebarEnd = list.files[0] ?? null;
+      removed.push(...list.removed);
+      pending.push(...list.pending);
+      docUnit(g.file.sidebarEnd);
+    }
+
+    const nav: NavJson = {
+      guide: gid, title: c.site.guideNames[gid], source: g.file.source, page: g.file.page, basePt: g.file.basePt,
+      systems: navSystems, general, slides: slidesNav, sidebarEnd, removed, pending,
+    };
+    files.set(`g/${gid}/nav.json`, nav);
+  }
+
+  function systemPages(s: Sys): NavJson["systems"][number] {
+    const gid = s.guide.file.id as GuideId;
+    const sys = s.data.file.id;
+    const st = s.data.structure;
+    const t = s.topics;
+    const tab = tabOf(s.guide);
+    const summary = s.guide.file.systems.find((x) => x.id === sys);
+    const blockOrder = s.data.blocks.map((b) => b.id);
+    usedBlocks(s.data.blocks);
+
+    const topics: PubTopic[] = t.topics.map((topic) => ({
+      id: topic.id, title: topic.title, section: topic.section, condition: topic.condition,
+      rows: withHeadings(t, topic.rows),
+      meds: medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle),
+    }));
+
+    // nav entries
+    const entries: (NavEntry & { section: string | null })[] = [];
+    for (const b of s.data.blocks) {
+      const table = t.tables.get(b.id);
+      if (t.proseBlocks.includes(b.id)) {
+        if (st.listed[b.id] !== undefined) entries.push({ kind: "block", id: b.id, title: st.listed[b.id] as string, section: st.members[b.id] ?? null });
+        continue;
+      }
+      for (const r of table?.rows ?? []) {
+        const topic = t.topics.find((x) => x.id === r.id);
+        if (topic) entries.push({ kind: "topic", id: topic.id, title: topic.title, section: topic.section });
+      }
+    }
+    const strip = ({ kind, id, title }: NavEntry): NavEntry => ({ kind, id, title });
+
+    // section pages
+    const sections: SystemJson["sections"] = st.sections.map((sec) => {
+      const items: SystemJson["sections"][number]["items"] = [];
+      for (const b of s.data.blocks) {
+        if (t.proseBlocks.includes(b.id)) {
+          if (st.members[b.id] === sec.id) items.push({ block: b.id, rows: null });
+          continue;
+        }
+        const rows = (t.tables.get(b.id)?.rows ?? []).filter((r) => r.kind === "content" && rowSection(t, st, r.id) === sec.id).map((r) => r.id);
+        if (rows.length > 0) items.push({ block: b.id, rows: withHeadings(t, rows) });
+      }
+      return { id: sec.id, title: sec.title, items };
+    });
+
+    // stubs
+    const stubs: SystemJson["stubs"] = {};
+    for (const d of st.drugTables) {
+      const table = t.tables.get(d.block);
+      if (table) stubs[d.block] = { label: stubLabel(table), section: d.pharmSection };
+    }
+
+    // pharm
+    const cards: Record<string, PubCard> = {};
+    const partsOut: Record<string, PubPart> = {};
+    const notesBlocks: Record<string, PubBlock> = {};
+    const useCard = (card: string): void => {
+      if (cards[card]) return;
+      const ps = cardParts(card);
+      const file = c.pharm.find((p) => p.file.id === c.cards.cards.find((x) => x.id === card)?.file) ?? ps[0]?.file;
+      const blocks = ps.flatMap((p) => p.part.blocks);
+      cards[card] = {
+        title: cardTitle(card), file: file?.file.fileName ?? "", basePt: file?.file.basePt ?? 0, blocks,
+        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks })),
+      };
+      for (const id of blocks) {
+        const b = pharmBlocks.get(id);
+        if (b) notesBlocks[id] = pub(b);
+      }
+    };
+    const usePart = (id: string | null): void => {
+      const p = id === null ? undefined : parts.get(id);
+      if (!p || id === null || (p.part.role !== "overview" && p.part.role !== "lo")) return;
+      partsOut[id] = { title: p.part.title, role: p.part.role, file: p.file.file.fileName, basePt: p.file.file.basePt, blocks: p.part.blocks };
+      for (const b of p.part.blocks) {
+        const block = pharmBlocks.get(b);
+        if (block) notesBlocks[b] = pub(block);
+      }
+    };
+    for (const topic of topics) for (const m of topic.meds) if (m.card) useCard(m.card);
+    let pharm: SystemJson["pharm"] = null;
+    if (hasPharm(s.pharm, placements)) {
+      const pharmSections: PubPharmSection[] = st.pharmSections.map((ps) => {
+        const placed = placements.get(sectionKey(gid, sys, ps.id));
+        const list = sectionCards(placed);
+        list.forEach(useCard);
+        usePart(ps.overview);
+        usePart(ps.lo);
+        const treats = topics.filter((tp) => tp.meds.some((m) => m.rows.some((r) => ps.tables.includes(t.rows.get(r)?.block ?? "")))).map((tp) => tp.id);
+        return { id: ps.id, title: ps.title, tables: ps.tables, cards: list, alsoFrom: placed?.tableCards.length ?? 0, overview: ps.overview, lo: ps.lo, treats };
+      });
+      pharm = { sections: pharmSections, files: docList(st.pharmFiles) };
+    }
+    usedBlocks(Object.values(notesBlocks));
+
+    const pageIds = [...blockOrder, ...t.rows.keys()];
+    const out: SystemJson = {
+      guide: gid, id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
+      blocks: s.data.blocks.map(pub),
+      rows: Object.fromEntries([...t.rows].map(([id, r]) => [id, { block: r.block, kind: r.kind, heading: r.kind === "heading" ? null : r.heading, topic: r.topic }])),
+      headings: Object.fromEntries(t.headings),
+      topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, notes: notesFor(pageIds),
+    };
+    files.set(`g/${gid}/s/${sys}.json`, out);
+
+    // search units: block/row order, then pharm units, then pharm files
+    for (const b of s.data.blocks) {
+      if (t.proseBlocks.includes(b.id)) {
+        const sec = st.sections.length > 0 ? (st.members[b.id] ?? null) : null;
+        units.push({
+          tab, title: st.listed[b.id] ?? firstLine(b), loc: systemLoc(ix, gid, sys, secTitle(s, sec)), route: hosts[b.id]?.route ?? sysRoute(s),
+          at: b.id, label: "notes", text: searchText(docText(b.doc)),
+        });
+        continue;
+      }
+      for (const r of t.tables.get(b.id)?.rows ?? []) {
+        const info = t.rows.get(r.id);
+        const topic = t.topics.find((x) => x.id === r.id);
+        if (topic) {
+          units.push({
+            tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: `${s.base}/t/${topic.id}`,
+            at: topic.id, label: "notes", text: searchText(topicText(t, topic)),
+          });
+        } else if (info?.drug) {
+          units.push({ tab, title: collapse(firstCell(r)), loc: pharmLoc(ix, gid, sys), route: hosts[r.id]?.route ?? "", at: r.id, label: "notes", text: searchText(r.cells.join("\n")) });
+        }
+      }
+    }
+    for (const ps of st.pharmSections) {
+      const here = (id: string): boolean => {
+        const h = pharmHome.get(id);
+        return h?.s === s && h.section === ps.id;
+      };
+      for (const p of [ps.overview, ps.lo]) {
+        const part = p === null ? undefined : parts.get(p);
+        if (!part || p === null || !here(p)) continue;
+        units.push({
+          tab, title: part.part.role === "overview" ? "Overview" : "Learning objectives", loc: pharmLoc(ix, gid, sys), route: hosts[p]?.route ?? "",
+          at: p, label: "notes", text: searchText(partText(part.part.blocks)),
+        });
+      }
+      for (const card of sectionCards(placements.get(sectionKey(gid, sys, ps.id)))) {
+        if (!here(card) || searchHome(card, systems.map((x) => x.pharm), placements)?.section !== ps.id) continue;
+        for (const p of cardParts(card)) {
+          units.push({
+            tab, title: collapse(p.part.title), loc: pharmLoc(ix, gid, sys), route: hosts[card]?.route ?? "",
+            at: p.part.id, label: "notes", text: searchText(partText(p.part.blocks)),
+          });
+        }
+      }
+    }
+    for (const d of st.pharmFiles) docUnit(d);
+
+    const nav = (sec: string | null): NavEntry[] => entries.filter((e) => e.section === sec).map(strip);
+    return {
+      id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
+      sections: st.sections.map((sec) => ({ id: sec.id, title: sec.title, entries: nav(sec.id) })),
+      entries: st.sections.length === 0 ? entries.map(strip) : [],
+      pharm: hasPharm(s.pharm, placements) ? { sections: st.pharmSections.map((ps) => ({ id: ps.id, title: ps.title })) } : null,
+    };
+  }
+
+  // ---- reference tabs and Other ---------------------------------------------------------------
+  for (const tab of REF_TABS) {
+    const rt = c.reftabs[tab];
+    const out: RefTabJson = {
+      tab, label: TAB_LABELS[tab],
+      subs: rt.subs.map((sub) => ({ id: sub.id, title: sub.title, links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap) })),
+      files: docList(rt.files),
+    };
+    files.set(`ref/${tab}.json`, out);
+    for (const sub of rt.subs) for (const id of sub.gaps) gapUnit(id);
+    for (const d of rt.files) docUnit(d);
+  }
+  const other: OtherJson = {
+    sections: c.other.sections.map((sec) => ({
+      id: sec.id, title: sec.title, lead: sec.lead ? gap(sec.lead) : null, links: links("content/places/other.json", sec.links), files: docList(sec.files),
+      ...(sec.gaps ? { gaps: sec.gaps.map(gap) } : {}),
+    })),
+  };
+  files.set("other.json", other);
+  for (const sec of c.other.sections) {
+    if (sec.lead) gapUnit(sec.lead);
+    for (const d of sec.files) docUnit(d);
+    for (const id of sec.gaps ?? []) gapUnit(id);
+    if (sec.id === "guidelines") {
+      for (const f of c.flags.flags) {
+        units.push({ tab: "other", title: collapse(f.guideline), loc: UPDATES_LOC, route: UPDATES_ROUTE, at: f.id, label: "update", text: searchText([f.guideline, f.org, f.quote ?? ""].join("\n")) });
+      }
+    }
+  }
+
+  // ---- documents ---------------------------------------------------------------------------------
+  for (const [id, d] of c.docs) {
+    if (!visible(d)) continue;
+    if (d.kind === "word") {
+      usedBlocks(d.blocks);
+      const out: DocJson = { id, name: d.file.name, kind: "word", basePt: d.file.basePt, page: d.file.page, blocks: d.blocks.map(pub), notes: notesFor([id, ...d.blocks.map((b) => b.id)]) };
+      files.set(`docs/${id}.json`, out);
+    } else {
+      const f = d.file;
+      const names = [f.original, ...(f.view && f.view !== f.original ? [f.view] : [])];
+      for (const name of names) stored.push({ doc: id, name });
+      const out: DocJson = {
+        id, name: f.name, kind: f.kind, original: `files/${id}/${f.original}`, view: f.view === null ? null : `files/${id}/${f.view}`,
+        pages: f.pages ?? null, notes: notesFor([id]),
+      };
+      files.set(`docs/${id}.json`, out);
+    }
+  }
+
+  // ---- updates ---------------------------------------------------------------------------------
+  const series = new Map<string, { id: string; label: string; org: string }>();
+  for (const g of c.gaps.values()) {
+    for (const src of g.block.meta.sources) {
+      if (src.track && src.track.method !== "fixed") series.set(src.track.series, { id: citeKey(src.track.series), label: src.track.label, org: src.track.org });
+    }
+  }
+  const placedAt = new Map<string, string[]>();
+  for (const [target, fs] of placedFlags) for (const f of fs) placedAt.set(f.id, [...(placedAt.get(f.id) ?? []), target]);
+  const pubFlag = (f: Flag): PubFlag => {
+    const addedTo: Place[] = [];
+    for (const target of placedAt.get(f.id) ?? []) {
+      const h = hosts[target];
+      if (h && !addedTo.some((p) => p.route === h.route && p.loc === h.loc)) addedTo.push(h);
+    }
+    return {
+      id: f.id, kind: f.kind, source: f.source, key: f.key, subject: f.subject, guideline: f.guideline, org: f.org, published: f.published,
+      quote: f.quote, grade: f.grade, url: f.url, flagged: f.flagged, supersededBy: f.supersededBy, addedTo,
+    };
+  };
+  const updates: UpdatesJson = {
+    lastRun: c.checks.lastRun,
+    nextRun: c.checks.nextRun,
+    sources: c.checks.sources,
+    series: [...series.values()].sort((a, b) => a.label.localeCompare(b.label)),
+    flags: [...c.flags.flags]
+      .sort((a, b) => (a.published === b.published ? b.flagged.localeCompare(a.flagged) : b.published.localeCompare(a.published)))
+      .map(pubFlag),
+  };
+  files.set("updates.json", updates);
+  for (const f of c.flags.flags) for (const s of [f.guideline, f.org, f.quote ?? ""]) for (const ch of s) codePoints.add(ch.codePointAt(0) ?? 0);
+
+  files.set("site.json", site);
+  files.set("hosts.json", hosts);
+  return { files, units: units.map((u, ord) => ({ ...u, ord })), assets, stored, dropped, codePoints };
+}
+
+export { GENERAL_KEYS };
+export type { GeneralKey };

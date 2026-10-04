@@ -20,7 +20,7 @@ describe("splice (50 §50.4)", () => {
   const [A, B, C, D, X] = [r(1), r(2), r(3), r(4), r(5)];
   const full = [row(A, "a"), row(B, "b"), row(C, "c"), row(D, "d")];
 
-  it("replaces edited rows and inserts a new row after the edited row preceding it", () => {
+  it("replaces edited rows and inserts a new row before the edited row following it", () => {
     const edited = [row(B, "b'"), row(X, "x"), row(C, "c")];
     const out = spliceRows(full, [B, C], edited, (x) => x.id);
     expect(out.rows).toEqual([row(A, "a"), row(B, "b'"), row(X, "x"), row(C, "c"), row(D, "d")]);
@@ -46,6 +46,45 @@ describe("splice (50 §50.4)", () => {
     expect(out.deleted).toEqual([B, C]);
   });
 
+  // Orchestrator ruling 2026-10-04 03:16Z: on a topic page the rows of earlier topics are hidden
+  // between the shown rows, so a new row goes before the shown row that follows it.
+  describe("on a topic page (rows of earlier topics hidden)", () => {
+    const [H, A, A2, F, F2, G, Y] = [r(10), r(11), r(12), r(13), r(14), r(15), r(16)];
+    const table = [row(H, "h"), row(A, "a"), row(A2, "a2"), row(F, "f"), row(F2, "f2"), row(G, "g")];
+
+    it("puts a row added above the topic's first row after the hidden rows, directly before it", () => {
+      const out = spliceRows(table, [H, F, F2], [row(H, "h"), row(X, "x"), row(F, "f"), row(F2, "f2")], (x) => x.id);
+      expect(ids(out.rows)).toEqual([H, A, A2, X, F, F2, G]);
+      expect(out.added).toEqual([X]);
+    });
+
+    it("puts a row added at the end of a topic directly after its last row, before the next topic", () => {
+      const out = spliceRows(table, [H, A, A2], [row(H, "h"), row(A, "a"), row(A2, "a2"), row(X, "x")], (x) => x.id);
+      expect(ids(out.rows)).toEqual([H, A, A2, X, F, F2, G]);
+    });
+
+    it("keeps several adjacent new rows together and in order", () => {
+      const out = spliceRows(table, [H, F, F2], [row(H, "h"), row(X, "x"), row(Y, "y"), row(F, "f"), row(F2, "f2")], (x) => x.id);
+      expect(ids(out.rows)).toEqual([H, A, A2, X, Y, F, F2, G]);
+      expect(out.added).toEqual([X, Y]);
+    });
+
+    it("files the new row under the topic it now continues (40 §40.2) and that topic's section", () => {
+      const s: StructureFile = {
+        v: 1, sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }], members: { [A]: "s2", [F]: "s1" }, listed: {},
+        drugTables: [], pharmSections: [], pharmFiles: [],
+      };
+      const out = spliceRows(table, [H, F, F2], [row(H, "h"), row(X, "x"), row(F, "f"), row(F2, "f2")], (x) => x.id);
+      const block = {
+        id: b(1),
+        doc: { content: [{ type: "table", attrs: { grid: [50, 50] }, content: out.rows.map((x) => ({ attrs: { id: x.id } })) }] },
+      };
+      const order = systemRowOrder([block], s, b(1));
+      // X now sits after A2, so the nearest topic above it is A (section s2), not the first section.
+      expect(updateStructure(s, { order, added: out.added }).members[X]).toBe("s2");
+    });
+  });
+
   it("refuses an edited table holding a row that was not shown, or a row twice", () => {
     expect(() => spliceRows(full, [B], [row(B, "b"), row(D, "d")], (x) => x.id)).toThrow(/not part of the edited table/);
     expect(() => spliceRows(full, [B], [row(B, "b"), row(B, "b")], (x) => x.id)).toThrow(/twice/);
@@ -69,6 +108,13 @@ describe("structure.json members (ruling 2B)", () => {
   it("gives a new row after B the section of B's topic", () => {
     const out = updateStructure(structure, { order: [A, B, X, C], added: [X] });
     expect(out.members[X]).toBe("s2");
+  });
+
+  it("gives a plain drug row added to a drug table no section, but a declared condition row one", () => {
+    const plain = updateStructure(structure, { order: [B, X, C], added: [X], table: b(9) });
+    expect(plain.members).not.toHaveProperty(X);
+    const conditions = { ...structure, drugTables: [{ block: b(9), pharmSection: "antianginals", conditionRows: [B, C, X] }] };
+    expect(updateStructure(conditions, { order: [B, X, C], added: [X], table: b(9) }).members[X]).toBe("s2");
   });
 
   it("gives a new first row of the system the first section", () => {
@@ -108,6 +154,14 @@ describe("structure.json members (ruling 2B)", () => {
     const blocks = [table(b(5), [A]), prose, table(b(6), [r(7)], 1), table(b(9), [B, C]), table(b(8), [X])];
     expect(systemRowOrder(blocks, structure, b(8))).toEqual([A, X]);
     expect(systemRowOrder(blocks, structure, b(9))).toEqual([B, C]);
+  });
+
+  it("resolves the rows of a one-column drug table (40 §40.2: drug tables resolve whatever their column count)", () => {
+    const oneCol = { id: b(7), doc: { content: [{ type: "table", attrs: { grid: [100] }, content: [{ attrs: { id: A } }, { attrs: { id: B } }] }] } };
+    const s = { ...structure, drugTables: [{ block: b(7), pharmSection: "antianginals", conditionRows: [B] }] };
+    expect(systemRowOrder([oneCol], s, b(7))).toEqual([A, B]);
+    // The same table as a non-drug table behaves as a prose block and resolves no rows.
+    expect(systemRowOrder([oneCol], { ...structure, drugTables: [] }, b(7))).toEqual([]);
   });
 });
 
