@@ -1,0 +1,311 @@
+// Stored content records (plan 20). Field names and shapes are the repository data contract.
+
+export const GUIDE_IDS = ["em", "fm", "im", "ob", "peds", "psy", "surg", "pance"] as const;
+export type GuideId = (typeof GUIDE_IDS)[number];
+
+/** ProseMirror doc JSON (validated against lib/schema.ts). */
+export interface DocJSON {
+  type: "doc";
+  content: unknown[];
+}
+
+export interface PageSetup {
+  widthPt: number;
+  heightPt: number;
+  margins: { top: number; right: number; bottom: number; left: number };
+}
+
+// 20.3
+export interface SiteFile {
+  v: 1;
+  name: string;
+  owner: { login: string; id: number; commitName: string; commitEmail: string };
+  repo: string;
+  tabs: string[];
+  eors: GuideId[];
+  pance: GuideId;
+  guideNames: Record<GuideId, string>;
+}
+
+// 20.4
+export interface GuideFile {
+  v: 1;
+  id: GuideId;
+  source: string;
+  page: PageSetup;
+  basePt: number;
+  preamble: string[];
+  systems: { id: string; title: string; pct: string }[];
+  /** PANCE only: the document shown as the guide's last sidebar item (20 §20.8). */
+  sidebarEnd?: string;
+}
+
+export interface SystemFile {
+  v: 1;
+  id: string;
+  blocks: string[];
+}
+
+export type BlockKind = "prose" | "table" | "gap" | "slide";
+
+/** The block envelope shared by every block kind (20 §20.4). */
+export interface BlockFile<M = Record<string, unknown>> {
+  v: 1;
+  id: string;
+  kind: BlockKind;
+  doc: DocJSON;
+  meta: M;
+}
+
+// 20.5
+export interface Removed {
+  at: string;
+  from: string;
+}
+
+/** A replacement in progress on the current, still-shown document (20 §20.5). */
+export interface Replacing {
+  fileName: string;
+  at: string;
+}
+
+export interface WordDocFile {
+  v: 1;
+  id: string;
+  name: string;
+  kind: "word";
+  source: string;
+  page: PageSetup;
+  basePt: number;
+  blocks: string[];
+  removed: Removed | null;
+  replacing?: Replacing;
+}
+
+export type FileKind = "word" | "pdf" | "image" | "slides";
+
+export interface AsIsFile {
+  v: 1;
+  id: string;
+  name: string;
+  kind: FileKind;
+  original: string;
+  view: string | null;
+  pages?: number | null;
+  text?: string | null;
+  removed: Removed | null;
+  state?: "processing" | "ready" | "failed";
+  replacing?: Replacing;
+}
+
+export interface FileText {
+  pages: string[];
+}
+
+/** File types that can be added (50 §50.7), as stored in `upload.json` `ext`. */
+export const UPLOAD_EXTS = ["doc", "docx", "pdf", "png", "jpg", "jpeg", "ppt", "pptx"] as const;
+export type UploadExt = (typeof UPLOAD_EXTS)[number];
+
+export interface UploadFile {
+  v: 1;
+  id: string;
+  fileName: string;
+  ext: UploadExt;
+  size: number;
+  sha256: string;
+  parts: number;
+  replaces: null | true;
+}
+
+// 20.6
+export interface PharmPart {
+  id: string;
+  role: "overview" | "lo" | "card";
+  title: string;
+  card: string | null;
+  blocks: string[];
+}
+
+export interface PharmFile {
+  v: 1;
+  id: string;
+  fileName: string;
+  basePt: number;
+  blocks: string[];
+  parts: PharmPart[];
+}
+
+// 20.7
+export interface StructureFile {
+  v: 1;
+  sections: { id: string; title: string }[];
+  members: Record<string, string>;
+  listed: Record<string, string>;
+  drugTables: { block: string; pharmSection: string; conditionRows: string[] }[];
+  pharmSections: {
+    id: string;
+    title: string;
+    tables: string[];
+    overview: string | null;
+    lo: string | null;
+    also: string[];
+  }[];
+  pharmFiles: string[];
+}
+
+export interface CardsFile {
+  v: 1;
+  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>> }[];
+}
+
+// 20.8
+export interface Link {
+  target: string;
+  covers: string;
+}
+
+export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "workup"] as const;
+export type GeneralKey = (typeof GENERAL_KEYS)[number];
+
+export interface GeneralFile {
+  v: 1;
+  topics: { key: GeneralKey; howto: string | null; links: Link[]; files: string[]; gaps: string[] }[];
+  workup: { id: string; title: string; conds: string; gap: string }[];
+}
+
+export interface RefTab {
+  subs: { id: string; title: string; links: Link[]; gaps: string[] }[];
+  files: string[];
+}
+
+export interface RefTabsFile {
+  v: 1;
+  labs: RefTab;
+  imaging: RefTab;
+  ekg: RefTab;
+  anatomy: RefTab;
+}
+
+export const OTHER_SECTION_IDS = ["emergency", "vaccines", "guidelines", "screenings", "legal", "pa", "vitamins", "pe", "notes"] as const;
+
+export interface OtherFile {
+  v: 1;
+  sections: { id: string; title: string; lead: string | null; files: string[]; links: Link[]; gaps?: string[] }[];
+}
+
+// 20.9
+/** The fixed guideline sources of 80 §80.3. */
+export const FIXED_SOURCES = ["gold", "gina", "ada", "hf", "cpr", "uspstf"] as const;
+export type FixedSource = (typeof FIXED_SOURCES)[number];
+
+export interface TrackBase {
+  series: string;
+  label: string;
+  org: string;
+  edition: number;
+}
+export type Track =
+  | (TrackBase & { method: "fixed"; source: FixedSource })
+  | (TrackBase & { method: "pubmed"; term: string; title: string })
+  | (TrackBase & { method: "page"; url: string; pattern: string })
+  | (TrackBase & { method: "none" });
+
+export interface GapSource {
+  name: string;
+  org: string;
+  year: string;
+  url: string | null;
+  type: "guideline" | "reference" | "course";
+  track: Track | null;
+}
+
+export interface GapMeta {
+  title: string;
+  relevantTo: string;
+  written: string;
+  differs: { doc: DocJSON } | null;
+  sources: GapSource[];
+  ownerEdits: string[];
+}
+
+export type GapFile = BlockFile<GapMeta> & { kind: "gap" };
+
+export interface EvidenceFile {
+  v: 1;
+  block: string;
+  author: string;
+  claims: { text: string; source: number; quote: string; locator: string; accessed: string }[];
+  verification: {
+    verifier: string;
+    at: string;
+    result: "pass" | "fail";
+    notes: { claim: number; issue: string; resolution: string }[];
+  };
+}
+
+// 20.10
+export interface DeckFile {
+  v: 1;
+  guide: GuideId;
+  kind: "own" | "generated";
+  title: string;
+  file: string | null;
+  slides: string[];
+}
+
+export interface SlideMeta {
+  summarizes?: string[];
+  evidence?: { item: string; row: string; quote: string }[];
+  verification?: { verifier: string; at: string; result: "pass" | "fail"; notes: unknown[] };
+  ownerEdits?: string[];
+}
+
+// 20.11
+export interface VocabFile {
+  v: 1;
+  entries: { abbr: string[]; meanings: string[] }[];
+}
+
+// 20.12
+export interface Flag {
+  id: string;
+  kind: "rec" | "edition";
+  source: string;
+  by: "check" | "agent";
+  key: string;
+  subject: string | null;
+  guideline: string;
+  org: string;
+  published: string;
+  quote: string | null;
+  grade: string | null;
+  url: string;
+  flagged: string;
+  supersededBy: string | null;
+  /**
+   * ISO date on which the guideline check found the recommendation permanently gone from its
+   * source; a retired flag is listed but never placed (Orchestrator rulings, 2026-10-04 03:06Z/03:07Z).
+   */
+  retired?: string;
+  locator?: string;
+  verification?: { verifier: string; at: string; result: "pass" | "fail" };
+}
+
+export interface FlagsFile {
+  v: 1;
+  flags: Flag[];
+}
+
+export interface ConceptsFile {
+  v: 1;
+  concepts: { id: string; title: string; sourceKeys: Record<string, string[]>; targets: string[] }[];
+}
+
+export interface ChecksFile {
+  v: 1;
+  lastRun: string | null;
+  nextRun: string | null;
+  sources: { id: string; lastSuccess: string | null; lastAttempt: string; status: "ok" | "fail" }[];
+  seen: Record<string, unknown>;
+  seenUrl: Record<string, string>;
+}

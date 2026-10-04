@@ -1,0 +1,540 @@
+// Validation of every stored record (plan 20): each file kind accepts its contract and refuses the
+// violations 20 names.
+import { describe, expect, it } from "vitest";
+import { ContentError } from "./check.ts";
+import { isContentJSON, serializeFile, validateFile } from "./files.ts";
+import { checkTrackSeries, isCdcOrg } from "./validate.ts";
+import type { GapFile } from "./types.ts";
+
+const id = (p: string, n: number): string => `${p}_${String(n).padStart(10, "0")}`;
+const B1 = id("b", 1);
+const D1 = id("d", 1);
+const G1 = id("g", 1);
+const G2 = id("g", 2);
+
+const para = (text: string, attrs: Record<string, unknown> = {}) => ({ type: "paragraph", attrs, content: [{ type: "text", text }] });
+const doc = (...content: unknown[]) => ({ type: "doc", content });
+const borders6 = { top: null, right: null, bottom: null, left: null, insideH: null, insideV: null };
+const table = (...rowIds: string[]) => ({
+  type: "table",
+  attrs: { grid: [100, 200], borders: borders6, cellMarginPt: { top: 0, right: 5.4, bottom: 0, left: 5.4 } },
+  content: rowIds.map((rid) => ({
+    type: "table_row", attrs: { id: rid },
+    content: [{ type: "table_cell", content: [para("x")] }, { type: "table_cell", content: [para("y")] }],
+  })),
+});
+
+/** Validate after normalization (serializeFile), returning the thrown message or "ok". */
+function verdict(path: string, value: unknown): string {
+  try {
+    serializeFile(path, value);
+    return "ok";
+  } catch (e) {
+    if (!(e instanceof ContentError)) throw e;
+    return e.message;
+  }
+}
+
+const blockPath = `content/guides/fm/cardiovascular/blocks/${B1}.json`;
+const block = (kind: string, d: unknown, extra: Record<string, unknown> = {}) => ({ v: 1, id: B1, kind, doc: d, meta: {}, ...extra });
+
+describe("rich-text schema (20 §20.13)", () => {
+  it("accepts a prose block and a table block", () => {
+    expect(verdict(blockPath, block("prose", doc(para("Angina"), { type: "rule", attrs: { color: "A0A0A0", widthPt: 1 } })))).toBe("ok");
+    expect(verdict(blockPath, block("table", doc(table(id("r", 1), id("r", 2)))))).toBe("ok");
+  });
+
+  it("fills attribute defaults on write so the stored doc round-trips unchanged", () => {
+    const text = serializeFile(blockPath, block("prose", doc({ type: "paragraph", content: [{ type: "text", text: "a" }] })));
+    const stored = JSON.parse(text);
+    expect(stored.doc.content[0].attrs).toEqual({
+      indLeft: 0, indRight: 0, indFirst: 0, spaceBefore: 0, spaceAfter: 0, line: null, align: "left", shade: null, borders: null, marker: null,
+    });
+    expect(() => validateFile(blockPath, stored)).not.toThrow();
+  });
+
+  it("refuses a stored doc that does not round-trip (missing defaults are not repaired on read)", () => {
+    const raw = block("prose", doc({ type: "paragraph", content: [{ type: "text", text: "a" }] }));
+    expect(() => validateFile(blockPath, raw)).toThrow(/round-trip/);
+  });
+
+  it.each([
+    ["javascript: link", [{ type: "link", attrs: { href: "javascript:alert(1)" } }], /link href/],
+    ["lowercase color", [{ type: "color", attrs: { hex: "1f3864" } }], /color/],
+    ["bad vertAlign", [{ type: "vertAlign", attrs: { value: "super" } }], /one of/],
+    ["zero size", [{ type: "size", attrs: { pt: 0 } }], /size/],
+    ["unknown mark", [{ type: "glow" }], /glow/],
+  ])("refuses a %s", (_name, marks, message) => {
+    const v = block("prose", doc({ type: "paragraph", content: [{ type: "text", marks, text: "a" }] }));
+    expect(verdict(blockPath, v)).toMatch(message);
+  });
+
+  it("refuses unknown node keys, node types and marks instead of dropping them on write", () => {
+    expect(verdict(blockPath, block("prose", doc({ type: "paragraph", attr: { indLeft: 9 }, content: [] })))).toMatch(/unknown key attr on paragraph/);
+    expect(verdict(blockPath, block("prose", doc({ type: "heading", content: [] })))).toMatch(/unknown node type "heading"/);
+    expect(verdict(blockPath, block("prose", doc({ type: "paragraph", content: [{ type: "text", marks: [{ type: "bold", attrs: { weight: 700 } }], text: "a" }] })))).toMatch(/Unsupported attribute weight for bold/);
+    expect(verdict(blockPath, block("prose", doc({ type: "paragraph", attrs: 3, content: [] })))).toMatch(/attrs of paragraph must be an object/);
+    expect(verdict(blockPath, block("prose", doc("text")))).toMatch(/a node must be an object/);
+    expect(verdict(blockPath, block("prose", doc({ type: "paragraph", content: [{ type: "text", marks: [{ type: "toString" }], text: "a" }] })))).toMatch(/unknown mark "toString"/);
+    expect(verdict(blockPath, block("prose", doc({ type: "constructor" })))).toMatch(/unknown node type "constructor"/);
+  });
+
+  it("refuses inherited Object property names as keys (toString, constructor, __proto__)", () => {
+    const bordersWith = (k: string) => JSON.parse(`{"top":null,"right":null,"bottom":null,"left":null,"${k}":null}`) as Record<string, unknown>;
+    for (const k of ["toString", "constructor", "__proto__"]) {
+      expect(verdict(blockPath, block("prose", doc(para("a", { borders: bordersWith(k) }))))).toMatch(new RegExp(`unknown key ${k}`));
+      const site = JSON.parse(`{"v":1,"${k}":1}`) as Record<string, unknown>;
+      expect(verdict("content/site.json", site)).toMatch(new RegExp(`\\.${k}: expected no such key`));
+    }
+    // A required key is not satisfied by an inherited property.
+    expect(verdict("content/files/d_0000000001/text.json", {})).toMatch(/\.pages: expected a value/);
+  });
+
+  it("accepts http(s), mailto and internal #/ links", () => {
+    for (const href of ["https://example.org/x", "http://a.b", "mailto:x@y.z", "#/fm/cardiovascular"]) {
+      const v = block("prose", doc({ type: "paragraph", content: [{ type: "text", marks: [{ type: "link", attrs: { href } }], text: "a" }] }));
+      expect(verdict(blockPath, v)).toBe("ok");
+    }
+  });
+
+  it.each([
+    ["paragraph line rule", para("a", { line: { rule: "double", value: 1 } }), /line rule/],
+    ["paragraph line shape", para("a", { line: { rule: "auto" } }), /line/],
+    ["paragraph alignment", para("a", { align: "middle" }), /one of/],
+    ["paragraph borders", para("a", { borders: { top: { style: "single", widthPt: 1, color: "000000" } } }), /missing right/],
+    ["marker without tabPt", para("a", { marker: { text: "•", font: null, marks: [] } }), /missing tabPt/],
+    ["marker with an invalid mark", para("a", { marker: { text: "•", font: null, marks: [{ type: "size", attrs: { pt: -1 } }], tabPt: 9 } }), /size/],
+    ["marker marks not a list", para("a", { marker: { text: "•", font: null, marks: {}, tabPt: 9 } }), /mark list/],
+    ["image asset path", { type: "paragraph", content: [{ type: "image", attrs: { asset: "../x.png", widthPt: 10, heightPt: 10 } }] }, /asset/],
+    ["image rotation", { type: "paragraph", content: [{ type: "image", attrs: { asset: `${"a".repeat(32)}.png`, widthPt: 10, heightPt: 10, rot: 45 } }] }, /one of/],
+    ["text box border", { type: "textbox", attrs: { widthPt: 100, border: { style: "single", widthPt: 1 } }, content: [para("a")] }, /missing color/],
+    ["drawing shape", { type: "drawing", attrs: { widthPt: 10, heightPt: 10, shapes: [{ geom: "rect" }] }, content: [] }, /missing x/],
+    ["drawing shapes not a list", { type: "drawing", attrs: { widthPt: 10, heightPt: 10, shapes: {} }, content: [] }, /shapes/],
+    ["anchored with two children", { type: "anchored", content: [{ type: "image_block", attrs: { asset: `${"a".repeat(32)}.gif`, widthPt: 1, heightPt: 1 } }, { type: "image_block", attrs: { asset: `${"a".repeat(32)}.gif`, widthPt: 1, heightPt: 1 } }] }, /invalid rich text/],
+    ["unknown attribute", para("a", { color: "000000" }), /Unsupported attribute/],
+  ])("refuses an invalid %s", (_name, node, message) => {
+    expect(verdict(blockPath, block("prose", doc(node)))).toMatch(message);
+  });
+
+  it("accepts pictures, anchored content, text boxes, drawings and breaks", () => {
+    const asset = `${"0123456789abcdef".repeat(2)}.jpeg`;
+    const shape = { geom: "rect", x: 0, y: 0, w: 10, h: 10, rot: 0, flipH: false, flipV: true, stroke: { color: "000000", widthPt: 1, dash: null }, fill: "FFFFFF", head: null, tail: "arrow", asset: null };
+    const v = block("prose", doc(
+      { type: "paragraph", content: [{ type: "text", text: "a" }, { type: "hard_break" }, { type: "page_break" }, { type: "image", attrs: { asset, widthPt: 20, heightPt: 10, rot: 90, flipH: true } }] },
+      { type: "anchored", attrs: { offsetPt: 10 }, content: [{ type: "image_block", attrs: { asset, widthPt: 20, heightPt: 10 } }] },
+      { type: "textbox", attrs: { widthPt: 100, fill: "FFFF00", border: { style: "single", widthPt: 0.5, color: "000000" }, inline: true }, content: [para("box")] },
+      { type: "drawing", attrs: { widthPt: 50, heightPt: 50, shapes: [shape] }, content: [{ type: "drawing_text", attrs: { x: 1, y: 1, w: 10, h: 10 }, content: [para("t")] }] },
+      para("p", { line: { rule: "exact", value: 12 }, shade: "D9D9D9", borders: { top: null, right: null, bottom: { style: "single", widthPt: 1, color: "000000" }, left: null } }),
+    ));
+    expect(verdict(blockPath, v)).toBe("ok");
+  });
+
+  it("refuses an invalid table, row or cell attribute", () => {
+    const t = table(id("r", 1));
+    const withRow = (attrs: Record<string, unknown>) => ({ ...t, content: [{ ...t.content[0], attrs: { id: id("r", 1), ...attrs } }] });
+    expect(verdict(blockPath, block("table", doc({ ...t, content: [{ ...t.content[0], attrs: { id: "row1" } }] })))).toMatch(/row id/);
+    expect(verdict(blockPath, block("table", doc(withRow({ kind: "body" }))))).toMatch(/one of/);
+    expect(verdict(blockPath, block("table", doc(withRow({ minHeightPt: "1" }))))).toMatch(/number or null/);
+    const cell = (attrs: Record<string, unknown>) => ({ ...t, content: [{ ...t.content[0], content: [{ type: "table_cell", attrs, content: [para("x")] }] }] });
+    expect(verdict(blockPath, block("table", doc(cell({ colwidth: [100] }))))).toMatch(/null/);
+    expect(verdict(blockPath, block("table", doc(cell({ rowspan: 0 }))))).toMatch(/positive integer/);
+    expect(verdict(blockPath, block("table", doc(cell({ borders: { diagonal: null } }))))).toMatch(/unknown side/);
+    expect(verdict(blockPath, block("table", doc(cell({ borders: "none" }))))).toMatch(/cell borders/);
+    expect(verdict(blockPath, block("table", doc(cell({ borders: { top: null, left: { style: "single", widthPt: 1, color: "000000" } }, vAlign: "center", fill: "FF0000" }))))).toBe("ok");
+    expect(verdict(blockPath, block("table", doc({ ...t, attrs: { ...t.attrs, grid: ["1"] } })))).toMatch(/grid/);
+  });
+});
+
+describe("block envelopes (20 §20.4, §20.10)", () => {
+  it("holds exactly one table node in a table block, and no table in a prose block", () => {
+    expect(verdict(blockPath, block("table", doc(table(id("r", 1)), para("after"))))).toMatch(/exactly one table/);
+    expect(verdict(blockPath, block("prose", doc(table(id("r", 1)))))).toMatch(/non-table/);
+    expect(verdict(blockPath, block("prose", doc({ type: "heading_line", content: [] })))).toMatch(/non-table/);
+  });
+
+  it("requires meta {} on guide blocks and the id of the file name", () => {
+    expect(verdict(blockPath, block("prose", doc(para("a")), { meta: { x: 1 } }))).toMatch(/\{\}/);
+    expect(verdict(blockPath, { ...block("prose", doc(para("a"))), id: id("b", 2) })).toMatch(/from the file's path/);
+    expect(verdict(blockPath, { ...block("prose", doc(para("a"))), extra: true })).toMatch(/no such key/);
+    expect(verdict(blockPath, { ...block("prose", doc(para("a"))), v: 2 })).toMatch(/\.v: expected 1/);
+  });
+
+  it("accepts guide, preamble, pharm and Word-page blocks at their paths", () => {
+    const v = block("prose", doc(para("a")));
+    for (const p of [
+      `content/guides/fm/_preamble/blocks/${B1}.json`,
+      `content/pharm/cardio-med-list-1-1/blocks/${B1}.json`,
+      `content/docs/${D1}/blocks/${B1}.json`,
+    ]) expect(verdict(p, v)).toBe("ok");
+  });
+
+  it("validates slides: a title line, then lead paragraphs and cards", () => {
+    const S1 = id("s", 1);
+    const path = `content/slides/fm/blocks/${S1}.json`;
+    const slide = (d: unknown, meta: Record<string, unknown> = {}) => ({ v: 1, id: S1, kind: "slide", doc: d, meta });
+    const title = { type: "heading_line", content: [{ type: "text", text: "Cardiology" }] };
+    const card = { type: "slide_card", content: [para("Heading"), para("Body")] };
+    expect(verdict(path, slide(doc(title, para("lead"), card), {
+      summarizes: [id("r", 1)], evidence: [{ item: "x", row: id("r", 1), quote: "x" }],
+      verification: { verifier: "ana-1", at: "2026-10-06", result: "pass", notes: [] }, ownerEdits: ["2026-10-07"],
+    }))).toBe("ok");
+    expect(verdict(path, slide(doc(para("no title"))))).toMatch(/heading_line followed/);
+    expect(verdict(path, slide(doc(title, table(id("r", 1)))))).toMatch(/heading_line followed/);
+    expect(verdict(path, slide(doc(title), { summary: [] }))).toMatch(/no such key/);
+    expect(verdict(path, { ...slide(doc(title)), id: id("s", 2) })).toMatch(/from the file's path/);
+  });
+});
+
+describe("documents (20 §20.5)", () => {
+  const filePath = `content/files/${D1}/file.json`;
+  const pdf = { v: 1, id: D1, name: "ACLS algorithms", kind: "pdf", original: "ACLS.pdf", view: "ACLS.pdf", pages: 20, text: "text.json", removed: null };
+
+  it("accepts imported pdf, image and slides files", () => {
+    expect(verdict(filePath, pdf)).toBe("ok");
+    expect(verdict(filePath, { v: 1, id: D1, name: "Chart", kind: "image", original: "c.png", view: "c.png", removed: null })).toBe("ok");
+    expect(verdict(filePath, { v: 1, id: D1, name: "Deck", kind: "slides", original: "d.pptx", view: "d.pdf", pages: 12, text: "text.json", removed: null })).toBe("ok");
+    expect(verdict(filePath, { v: 1, id: D1, name: "Psych deck", kind: "slides", original: "d.pptx", view: null, pages: 40, text: null, removed: null })).toBe("ok");
+  });
+
+  it("checks the kind rules of a ready file", () => {
+    expect(verdict(filePath, { ...pdf, view: "other.pdf" })).toMatch(/view is the original/);
+    expect(verdict(filePath, { ...pdf, kind: "word" })).toMatch(/ready file/);
+    expect(verdict(filePath, { v: 1, id: D1, name: "Chart", kind: "image", original: "c.png", view: "c.png", pages: 1, removed: null })).toMatch(/no pages or text/);
+    expect(verdict(filePath, { v: 1, id: D1, name: "Deck", kind: "slides", original: "d.pptx", view: "d.pdf", removed: null })).toMatch(/slide count/);
+  });
+
+  it("accepts a processing entry only with view, pages and text null, and a failed entry", () => {
+    const processing = { v: 1, id: D1, name: "Lipids", kind: "word", original: "Lipids.docx", view: null, pages: null, text: null, removed: null, state: "processing" };
+    expect(verdict(filePath, processing)).toBe("ok");
+    expect(verdict(filePath, { ...processing, pages: 3 })).toMatch(/all null while processing/);
+    expect(verdict(filePath, { ...processing, state: "failed" })).toBe("ok");
+    expect(verdict(filePath, { ...processing, state: "done" })).toMatch(/one of/);
+  });
+
+  it("refuses a removed object lacking a field, with a non-UTC time or a short sha", () => {
+    const from = "0123456789abcdef0123456789abcdef01234567";
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00Z", from } })).toBe("ok");
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00.123Z", from } })).toBe("ok");
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00Z" } })).toMatch(/from: expected a value/);
+    expect(verdict(filePath, { ...pdf, removed: { from } })).toMatch(/at: expected a value/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00+02:00", from } })).toMatch(/ISO-8601 UTC/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04", from } })).toMatch(/ISO-8601 UTC/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-02-31T10:00:00Z", from } })).toMatch(/ISO-8601 UTC/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2025-02-29T00:00:00Z", from } })).toMatch(/ISO-8601 UTC/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2024-02-29T00:00:00Z", from } })).toBe("ok");
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00Z", from: from.slice(0, 39) } })).toMatch(/40-hex/);
+    expect(verdict(filePath, { ...pdf, removed: { at: "2026-10-04T02:31:00Z", from: from.toUpperCase() } })).toMatch(/40-hex/);
+  });
+
+  it("validates a replacing marker, the Word page record and the text record", () => {
+    expect(verdict(filePath, { ...pdf, replacing: { fileName: "ACLS 2025.pdf", at: "2026-10-05T10:00:00Z" } })).toBe("ok");
+    expect(verdict(filePath, { ...pdf, replacing: { fileName: "ACLS 2025.pdf" } })).toMatch(/at: expected a value/);
+    const page = { widthPt: 612, heightPt: 792, margins: { top: 72, right: 72, bottom: 72, left: 72 } };
+    const word = { v: 1, id: D1, name: "Vaccine notes", kind: "word", source: "vaccine_notes.docx", page, basePt: 11, blocks: [B1], removed: null };
+    expect(verdict(`content/docs/${D1}/doc.json`, word)).toBe("ok");
+    expect(verdict(`content/docs/${D1}/doc.json`, { ...word, id: id("d", 2) })).toMatch(/from the file's path/);
+    expect(verdict(`content/docs/${D1}/doc.json`, { ...word, blocks: [B1, B1] })).toMatch(/no duplicate/);
+    expect(verdict(`content/files/${D1}/text.json`, { pages: ["page 1", "page 2"] })).toBe("ok");
+    expect(verdict(`content/files/${D1}/text.json`, { pages: [1] })).toMatch(/a string/);
+  });
+
+  it("validates the inbox upload record", () => {
+    const up = { v: 1, id: D1, fileName: "Lipids.docx", ext: "docx", size: 1024, sha256: "a".repeat(64), parts: 1, replaces: null };
+    expect(verdict(`inbox/${D1}/upload.json`, up)).toBe("ok");
+    expect(verdict(`inbox/${D1}/upload.json`, { ...up, replaces: true })).toBe("ok");
+    expect(verdict(`inbox/${D1}/upload.json`, { ...up, replaces: false })).toMatch(/null or true/);
+    expect(verdict(`inbox/${D1}/upload.json`, { ...up, ext: "txt" })).toMatch(/one of/);
+    expect(verdict(`inbox/${D1}/upload.json`, { ...up, id: id("d", 2) })).toMatch(/expected d_0000000001/);
+  });
+});
+
+describe("gap-fill (20 §20.9)", () => {
+  const path = `content/gapfill/${G1}.json`;
+  const track = { series: "idsa-cap", label: "IDSA/ATS community-acquired pneumonia guideline", org: "IDSA/ATS", edition: 2019, method: "pubmed", term: "community acquired pneumonia", title: "(\\d{4}) .*Pneumonia" };
+  const source = (over: Record<string, unknown> = {}) => ({ name: "CAP guideline", org: "IDSA/ATS", year: "2019", url: "https://example.org", type: "guideline", track, ...over });
+  const gap = (sources: unknown[], over: Record<string, unknown> = {}): GapFile => ({
+    v: 1, id: G1, kind: "gap", doc: doc(para("Draw lithium 12 h post-dose.")) as GapFile["doc"],
+    meta: { title: "Lithium level", relevantTo: "Bipolar I disorder", written: "2026-10", differs: null, sources: sources as GapFile["meta"]["sources"], ownerEdits: [], ...over },
+  });
+
+  it("accepts a tracked guideline, an untracked CDC guideline and a reference", () => {
+    expect(verdict(path, gap([
+      source(),
+      source({ org: "CDC", track: null }),
+      source({ org: "Advisory Committee on Immunization Practices (ACIP)", track: null }),
+      source({ org: "Centers for Disease Control and Prevention", track: null }),
+      source({ type: "reference", org: "UpToDate", track: null, url: null }),
+      source({ type: "course", org: "EMU", track: null }),
+    ], { differs: { doc: doc(para("Your notes say 8 h.")) }, ownerEdits: ["2026-10-07"] }))).toBe("ok");
+  });
+
+  it("refuses a non-CDC guideline source with track null, and a tracked CDC or non-guideline source", () => {
+    expect(verdict(path, gap([source({ track: null })]))).toMatch(/a track for a non-CDC guideline source/);
+    expect(verdict(path, gap([source({ org: "CDC" })]))).toMatch(/only non-CDC guideline sources are tracked/);
+    expect(verdict(path, gap([source({ type: "reference" })]))).toMatch(/only non-CDC guideline sources are tracked/);
+  });
+
+  it("validates each track method's fields", () => {
+    const base = { series: "gold", label: "GOLD report", org: "GOLD", edition: 2025 };
+    expect(verdict(path, gap([source({ track: { ...base, method: "fixed", source: "gold" } })]))).toBe("ok");
+    expect(verdict(path, gap([source({ track: { ...base, method: "fixed", source: "nice" } })]))).toMatch(/one of/);
+    expect(verdict(path, gap([source({ track: { ...base, method: "page", url: "https://goldcopd.org", pattern: "(\\d{4}) GOLD Report" } })]))).toBe("ok");
+    expect(verdict(path, gap([source({ track: { ...base, method: "page", url: "https://goldcopd.org", pattern: "(\\d{4}) (\\d{4})" } })]))).toMatch(/exactly one/);
+    expect(verdict(path, gap([source({ track: { ...base, method: "page", url: "https://goldcopd.org", pattern: "(\\d{4}" } })]))).toMatch(/valid regular expression/);
+    expect(verdict(path, gap([source({ track: { ...base, method: "pubmed", term: "x", title: "(\\d+)" } })]))).toMatch(/exactly one/);
+    expect(verdict(path, gap([source({ track: { ...base, method: "none" } })]))).toBe("ok");
+    expect(verdict(path, gap([source({ track: { ...base, method: "none", url: "https://x" } })]))).toMatch(/no such key/);
+    expect(verdict(path, gap([source({ track: { ...base, method: "rss" } })]))).toMatch(/method/);
+    expect(verdict(path, gap([source({ track: "gold" })]))).toMatch(/track object/);
+  });
+
+  it("refuses two tracks of one series that differ in anything but the edition", () => {
+    const other = { ...track, edition: 2007 };
+    expect(verdict(path, gap([source(), source({ track: other })]))).toBe("ok");
+    expect(verdict(path, gap([source(), source({ track: { ...track, method: "page", url: "https://x.org", pattern: "(\\d{4})", term: undefined, title: undefined } })]))).toMatch(/no such key|differs/);
+    const a = gap([source()]);
+    const bGap = { ...gap([source({ track: { ...track, term: "pneumonia" } })]), id: G2 };
+    expect(() => checkTrackSeries([a, bGap])).toThrow(/differs from the one in g_0000000001/);
+    expect(() => checkTrackSeries([a, { ...bGap, meta: { ...bGap.meta, sources: [source({ track: { ...track, edition: 2026 } })] } } as GapFile])).not.toThrow();
+  });
+
+  it("checks the gap envelope, dates and the differs doc", () => {
+    expect(verdict(path, gap([], { written: "2026-13" }))).toMatch(/month/);
+    expect(verdict(path, gap([], { ownerEdits: ["10/07/2026"] }))).toMatch(/ISO date/);
+    expect(verdict(path, gap([], { ownerEdits: ["2026-02-31"] }))).toMatch(/ISO date/);
+    expect(verdict(path, gap([], { ownerEdits: ["2026-04-31"] }))).toMatch(/ISO date/);
+    expect(verdict(path, gap([], { ownerEdits: ["2026-02-28"] }))).toBe("ok");
+    expect(verdict(path, gap([], { differs: { doc: doc({ type: "heading_line", content: [] }) } }))).toMatch(/only block nodes/);
+    expect(verdict(path, gap([], { differs: { doc: doc({ type: "paragraph", attrs: { align: "middle" } }) } }))).toMatch(/^content\/gapfill\/g_0000000001\.json: \.meta\.differs\.doc: invalid rich text/);
+    expect(verdict(path, gap([], { differs: { doc: doc({ type: "glow" }) } }))).toMatch(/\.meta\.differs\.doc\.content\[0\]: invalid rich text: unknown node type/);
+    expect(verdict(path, { ...gap([]), doc: doc({ type: "paragraph", attrs: { align: "middle" } }) })).toMatch(/: \.doc: invalid rich text/);
+    expect(verdict(path, { ...gap([]), doc: doc({ type: "slide_card", content: [para("x")] }) })).toMatch(/only block nodes/);
+    expect(verdict(path, { ...gap([]), id: G2 })).toMatch(/from the file's path/);
+  });
+
+  it("names CDC/ACIP organizations", () => {
+    expect(isCdcOrg("CDC")).toBe(true);
+    expect(isCdcOrg("ACIP")).toBe(true);
+    expect(isCdcOrg("Centers for Disease Control and Prevention")).toBe(true);
+    expect(isCdcOrg("American Diabetes Association")).toBe(false);
+  });
+
+  it("validates the evidence record", () => {
+    const ev = {
+      v: 1, block: G1, author: "ana-1",
+      claims: [{ text: "Draw 12 h post-dose.", source: 0, quote: "12 hours", locator: "section 2.2", accessed: "2026-10-05" }],
+      verification: { verifier: "bo-2", at: "2026-10-06", result: "pass", notes: [{ claim: 0, issue: "i", resolution: "r" }] },
+    };
+    expect(verdict(`content/gapfill/${G1}.evidence.json`, ev)).toBe("ok");
+    expect(verdict(`content/gapfill/${G1}.evidence.json`, { ...ev, block: G2 })).toMatch(/from the file's path/);
+    expect(verdict(`content/gapfill/${G1}.evidence.json`, { ...ev, verification: { ...ev.verification, result: "ok" } })).toMatch(/one of/);
+  });
+});
+
+describe("site, guides and systems (20 §20.3, §20.4)", () => {
+  const site = {
+    v: 1, name: "PA Studying",
+    owner: { login: "kaitlyla", id: 337482200, commitName: "kaitlyla", commitEmail: "337482200+kaitlyla@users.noreply.github.com" },
+    repo: "kaitlyla/pa-studying", tabs: ["eor", "pance", "labs", "imaging", "ekg", "anatomy", "other"],
+    eors: ["em", "fm", "im", "ob", "peds", "psy", "surg"], pance: "pance",
+    guideNames: { em: "Emergency Medicine", fm: "Family Medicine", im: "Internal Medicine", ob: "OBGYN", peds: "Pediatrics", psy: "Psychiatry", surg: "Surgery", pance: "PANCE / EOC" },
+  };
+  const page = { widthPt: 792, heightPt: 612, margins: { top: 36, right: 36, bottom: 36, left: 36 } };
+  const guide = { v: 1, id: "fm", source: "Family Medicine EOR.docx", page, basePt: 10, preamble: [], systems: [{ id: "cardiovascular", title: "Cardiovascular", pct: "15%" }] };
+
+  it("accepts the planned site.json and refuses an unknown guide", () => {
+    expect(verdict("content/site.json", site)).toBe("ok");
+    expect(verdict("content/site.json", { ...site, eors: ["fm", "derm"] })).toMatch(/one of/);
+    expect(verdict("content/site.json", { ...site, guideNames: { ...site.guideNames, derm: "Derm" } })).toMatch(/one of/);
+  });
+
+  it("validates guide.json: id of its directory, unique systems, sidebarEnd only on PANCE", () => {
+    expect(verdict("content/guides/fm/guide.json", guide)).toBe("ok");
+    expect(verdict("content/guides/im/guide.json", guide)).toMatch(/\.id: expected im \(from the file's path\)/);
+    expect(verdict("content/guides/fm/guide.json", { ...guide, systems: [...guide.systems, ...guide.systems] })).toMatch(/no duplicate/);
+    expect(verdict("content/guides/fm/guide.json", { ...guide, sidebarEnd: D1 })).toMatch(/PANCE/);
+    expect(verdict("content/guides/pance/guide.json", { ...guide, id: "pance", sidebarEnd: D1 })).toBe("ok");
+  });
+
+  it("validates system.json against its directory", () => {
+    expect(verdict("content/guides/fm/cardiovascular/system.json", { v: 1, id: "cardiovascular", blocks: [B1] })).toBe("ok");
+    expect(verdict("content/guides/fm/cardiovascular/system.json", { v: 1, id: "renal", blocks: [B1] })).toMatch(/\.id: expected cardiovascular \(from the file's path\)/);
+    expect(verdict("content/guides/fm/cardiovascular/system.json", { v: 1, id: "cardiovascular", blocks: ["b1"] })).toMatch(/b_ id/);
+  });
+});
+
+describe("pharm (20 §20.6, §20.7)", () => {
+  const [b1, b2, b3] = [id("b", 1), id("b", 2), id("b", 3)];
+  const C1 = id("c", 1);
+  const path = "content/pharm/cardio-med-list-1-1/pharmfile.json";
+  const pf = (parts: unknown[], blocks = [b1, b2, b3]) => ({ v: 1, id: "cardio-med-list-1-1", fileName: "cardio med list 1 (1)", basePt: 11, blocks, parts });
+  const part = (n: number, role: string, blocks: string[], card: string | null = null) => ({ id: id("p", n), role, title: "T", card, blocks });
+
+  it("accepts parts that slice the blocks contiguously, in order, exactly once", () => {
+    expect(verdict(path, pf([part(1, "overview", [b1]), part(2, "card", [b2], C1), part(3, "lo", [b3])]))).toBe("ok");
+  });
+
+  it.each([
+    ["a gap", [part(1, "overview", [b1]), part(2, "card", [b3], C1)], /next block/],
+    ["an uncovered tail", [part(1, "overview", [b1]), part(2, "card", [b2], C1)], /every block exactly once/],
+    ["out of order", [part(1, "card", [b2], C1), part(2, "lo", [b1, b3])], /next block/],
+    ["a card part without a card", [part(1, "card", [b1, b2, b3])], /card id exactly/],
+    ["an lo part with a card", [part(1, "lo", [b1, b2, b3], C1)], /card id exactly/],
+    ["an overview after the start", [part(1, "lo", [b1]), part(2, "overview", [b2, b3])], /overview only as the first/],
+    ["an empty part", [part(1, "lo", []), part(2, "lo", [b1, b2, b3])], /non-empty slice/],
+    ["a repeated part id", [part(1, "lo", [b1]), part(1, "lo", [b2, b3])], /no duplicate/],
+  ])("refuses parts with %s", (_name, parts, message) => {
+    expect(verdict(path, pf(parts))).toMatch(message);
+  });
+
+  it("requires the file slug as id", () => {
+    expect(verdict(path, { ...pf([part(1, "lo", [b1, b2, b3])]), id: "cardio" })).toMatch(/\.id: expected cardio-med-list-1-1 \(from the file's path\)/);
+  });
+
+  it("validates cards.json", () => {
+    const cards = { v: 1, cards: [{ id: C1, file: "cardio-med-list-1-1", aliases: ["CCB", "amlodipine"], home: { fm: "cardiovascular", pance: "cardiovascular" } }] };
+    expect(verdict("content/pharm/cards.json", cards)).toBe("ok");
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [...cards.cards, ...cards.cards] })).toMatch(/no duplicate/);
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...cards.cards[0], home: { xx: "a" } }] })).toMatch(/one of/);
+  });
+
+  const R1 = id("r", 1);
+  const structure = {
+    v: 1,
+    sections: [{ id: "coronary-artery-disease", title: "Coronary artery disease" }, { id: "other", title: "Cardiovascular — other" }],
+    members: { [R1]: "coronary-artery-disease", [b1]: "other" },
+    listed: { [b1]: "Murmurs" },
+    drugTables: [{ block: b2, pharmSection: "antianginals", conditionRows: [id("r", 2)] }],
+    pharmSections: [{ id: "antianginals", title: "Antianginals", tables: [b2], overview: id("p", 1), lo: null, also: [C1] }],
+    pharmFiles: [D1],
+  };
+  const sPath = "content/guides/fm/cardiovascular/structure.json";
+
+  it("accepts a curated structure.json and the pre-curation empty form", () => {
+    expect(verdict(sPath, structure)).toBe("ok");
+    expect(verdict(sPath, { v: 1, sections: [], members: {}, listed: {}, drugTables: [], pharmSections: [], pharmFiles: [] })).toBe("ok");
+  });
+
+  it.each([
+    ["other not last", { sections: [...structure.sections].reverse() }, /"other" last/],
+    ["members without sections", { sections: [] }, /\{\} when sections is \[\]/],
+    ["a member in an unknown section", { members: { [R1]: "valvular" } }, /section id of this system/],
+    ["a member key that is not a row or block", { members: { [D1]: "other" } }, /a r_ or b_ id/],
+    ["a drug table in an unknown pharm section", { drugTables: [{ block: b2, pharmSection: "diuretics", conditionRows: [] }] }, /pharm section id/],
+    ["a drug table listed twice", { drugTables: [structure.drugTables[0], structure.drugTables[0]] }, /no duplicate/],
+    ["duplicate section ids", { sections: [structure.sections[0], structure.sections[0]] }, /no duplicate/],
+    ["duplicate pharm section ids", { pharmSections: [structure.pharmSections[0], structure.pharmSections[0]] }, /no duplicate/],
+  ])("refuses %s", (_name, over, message) => {
+    expect(verdict(sPath, { ...structure, ...over })).toMatch(message);
+  });
+});
+
+describe("places (20 §20.8)", () => {
+  const otherSections = ["emergency", "vaccines", "guidelines", "screenings", "legal", "pa", "vitamins", "pe", "notes"]
+    .map((sid) => ({ id: sid, title: sid, lead: null as string | null, files: [] as string[], links: [] as unknown[] }));
+  const other = (f: (s: (typeof otherSections)[number]) => Record<string, unknown> = (s) => s) => ({ v: 1, sections: otherSections.map(f) });
+
+  it("accepts gaps on legal and screenings and a lead on vaccines", () => {
+    expect(verdict("content/places/other.json", other((s) => (
+      s.id === "legal" || s.id === "screenings" ? { ...s, gaps: [G1] } : s.id === "vaccines" ? { ...s, lead: G2 } : s
+    )))).toBe("ok");
+  });
+
+  it("refuses a gaps key on any other section", () => {
+    expect(verdict("content/places/other.json", other((s) => (s.id === "vaccines" ? { ...s, gaps: [] } : s)))).toMatch(/no gaps key outside legal and screenings/);
+  });
+
+  it("refuses a lead outside vaccines, and sections out of the signed order", () => {
+    expect(verdict("content/places/other.json", other((s) => (s.id === "legal" ? { ...s, lead: G1 } : s)))).toMatch(/null outside vaccines/);
+    expect(verdict("content/places/other.json", { v: 1, sections: [...otherSections].reverse() })).toMatch(/9 sections in order/);
+  });
+
+  const general = {
+    v: 1,
+    topics: [
+      { key: "labs", howto: "labs", links: [{ target: id("r", 1), covers: "Lithium level — Bipolar I disorder" }], files: [D1], gaps: [G1] },
+      { key: "workup", howto: null, links: [], files: [], gaps: [] },
+    ],
+    workup: [
+      { id: "ams", title: "Altered mental status (AMS)", conds: "Delirium", gap: G1 },
+      { id: "si", title: "suicidal ideation", conds: "MDD", gap: G2 },
+    ],
+  };
+
+  it("validates general.json: key order, alphabetical workup, EOR guides only", () => {
+    expect(verdict("content/guides/psy/general.json", general)).toBe("ok");
+    expect(verdict("content/guides/psy/general.json", { ...general, topics: [...general.topics].reverse() })).toMatch(/in the order/);
+    expect(verdict("content/guides/psy/general.json", { ...general, topics: [general.topics[0], general.topics[0]] })).toMatch(/in the order/);
+    expect(verdict("content/guides/psy/general.json", { ...general, workup: [...general.workup].reverse() })).toMatch(/alphabetical/);
+    expect(verdict("content/guides/psy/general.json", { ...general, topics: [{ ...general.topics[0], links: [{ target: D1, covers: "x" }] }] })).toMatch(/a r_ or b_ id/);
+    expect(verdict("content/guides/pance/general.json", general)).toMatch(/no general\.json/);
+  });
+
+  it("validates reftabs.json", () => {
+    const tab = { subs: [{ id: "cbc", title: "CBC", links: [], gaps: [G1] }], files: [D1] };
+    expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab, anatomy: tab })).toBe("ok");
+    expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab })).toMatch(/anatomy/);
+  });
+});
+
+describe("slides, vocabulary and updates (20 §20.10–§20.12)", () => {
+  it("validates deck.json: own decks name their document, generated decks do not", () => {
+    expect(verdict("content/slides/psy/deck.json", { v: 1, guide: "psy", kind: "own", title: "Psych review slides", file: D1, slides: [id("s", 1)] })).toBe("ok");
+    expect(verdict("content/slides/fm/deck.json", { v: 1, guide: "fm", kind: "generated", title: "High-yield review slides", file: null, slides: [] })).toBe("ok");
+    expect(verdict("content/slides/fm/deck.json", { v: 1, guide: "fm", kind: "generated", title: "x", file: D1, slides: [] })).toMatch(/exactly for an own deck/);
+    expect(verdict("content/slides/fm/deck.json", { v: 1, guide: "psy", kind: "own", title: "x", file: D1, slides: [] })).toMatch(/\.guide: expected fm \(from the file's path\)/);
+  });
+
+  it("validates the abbreviation vocabulary", () => {
+    expect(verdict("content/vocab/abbreviations.json", { v: 1, entries: [{ abbr: ["MI"], meanings: ["myocardial infarction"] }] })).toBe("ok");
+    expect(verdict("content/vocab/abbreviations.json", { v: 1, entries: [{ abbr: [""], meanings: [] }] })).toMatch(/non-empty/);
+  });
+
+  const flag = {
+    id: id("u", 1), kind: "rec", source: "uspstf", by: "check", key: "Breast Cancer: Screening#1", subject: "Breast Cancer: Screening",
+    guideline: "Breast Cancer: Screening", org: "USPSTF", published: "2024-04", quote: "Biennial mammography", grade: "B",
+    url: "https://www.uspreventiveservicestaskforce.org/", flagged: "2026-10-01", supersededBy: null,
+  };
+
+  it("validates flags: sources, agent fields and unique ids", () => {
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [flag] })).toBe("ok");
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, id: id("u", 2), source: "cite:idsa-cap", kind: "edition" }] })).toBe("ok");
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, source: "nice" }] })).toMatch(/cite:<series>/);
+    const agent = { ...flag, by: "agent", locator: "p. 3", verification: { verifier: "bo-2", at: "2026-10-06", result: "pass" } };
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [agent] })).toBe("ok");
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, by: "agent" }] })).toMatch(/locator/);
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, locator: "p. 3" }] })).toMatch(/no such key/);
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [flag, flag] })).toMatch(/no duplicate/);
+  });
+
+  it("accepts a retired date on check and agent flags, and refuses one that is not an ISO date", () => {
+    const agent = { ...flag, by: "agent", locator: "p. 3", verification: { verifier: "bo-2", at: "2026-10-06", result: "pass" } };
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, retired: "2026-11-01" }] })).toBe("ok");
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...agent, retired: "2026-11-01" }] })).toBe("ok");
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...flag, retired: "2026-11" }] })).toMatch(/\.retired: expected an ISO date/);
+    expect(verdict("content/updates/flags.json", { v: 1, flags: [{ ...agent, retired: null }] })).toMatch(/\.retired: expected an ISO date/);
+  });
+
+  it("validates concepts and checks", () => {
+    expect(verdict("content/updates/concepts.json", { v: 1, concepts: [{ id: "breast-cancer-screening", title: "Breast cancer screening", sourceKeys: { uspstf: ["k"] }, targets: [id("r", 1), G1, D1] }] })).toBe("ok");
+    expect(verdict("content/updates/concepts.json", { v: 1, concepts: [{ id: "x", title: "X", sourceKeys: {}, targets: [id("u", 1)] }] })).toMatch(/a r_ or b_ or g_ or d_ id/);
+    const checks = {
+      v: 1, lastRun: "2026-11-01", nextRun: "2026-12-01",
+      sources: [{ id: "uspstf", lastSuccess: null, lastAttempt: "2026-11-01", status: "fail" }],
+      seen: { uspstf: { k: "2024-04" }, gold: 2026, "cite:idsa-cap": 2019 }, seenUrl: { k: "https://x" },
+    };
+    expect(verdict("content/updates/checks.json", checks)).toBe("ok");
+    expect(verdict("content/updates/checks.json", { ...checks, seen: { gold: "2026" } })).toMatch(/a year/);
+    expect(verdict("content/updates/checks.json", { ...checks, lastRun: "Nov 1" })).toMatch(/ISO date/);
+  });
+});
+
+describe("paths (20 §20.2)", () => {
+  it("knows the content JSON files and refuses anything else", () => {
+    expect(isContentJSON("content/site.json")).toBe(true);
+    expect(isContentJSON(`content/guides/fm/cardiovascular/blocks/${B1}.json`)).toBe(true);
+    expect(isContentJSON("content/guides/derm/guide.json")).toBe(false);
+    expect(isContentJSON(`content/assets/${"a".repeat(32)}.png`)).toBe(false);
+    expect(() => validateFile("content/notes.json", {})).toThrow(/not a content JSON file/);
+  });
+});

@@ -1,0 +1,214 @@
+// Plan 99 §99.1 `lib/content/content.test.ts`: splice, members, commit trailers, serialization.
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { commitMessage, parseTrailers } from "./commit.ts";
+import { parseFile, serializeFile } from "./files.ts";
+import { readContent, writeContent } from "./fs.ts";
+import { spliceRows, systemRowOrder, updateStructure } from "./splice.ts";
+import type { StructureFile } from "./types.ts";
+
+const r = (n: number): string => `r_${String(n).padStart(10, "0")}`;
+const b = (n: number): string => `b_${String(n).padStart(10, "0")}`;
+
+interface Row { id: string; text: string }
+const row = (id: string, text: string): Row => ({ id, text });
+const ids = (rows: Row[]): string[] => rows.map((x) => x.id);
+
+describe("splice (50 §50.4)", () => {
+  const [A, B, C, D, X] = [r(1), r(2), r(3), r(4), r(5)];
+  const full = [row(A, "a"), row(B, "b"), row(C, "c"), row(D, "d")];
+
+  it("replaces edited rows and inserts a new row after the edited row preceding it", () => {
+    const edited = [row(B, "b'"), row(X, "x"), row(C, "c")];
+    const out = spliceRows(full, [B, C], edited, (x) => x.id);
+    expect(out.rows).toEqual([row(A, "a"), row(B, "b'"), row(X, "x"), row(C, "c"), row(D, "d")]);
+    expect(out.added).toEqual([X]);
+    expect(out.deleted).toEqual([]);
+  });
+
+  it("deletes a shown row missing from the edited partial", () => {
+    const out = spliceRows(full, [B, C, D], [row(B, "b'"), row(C, "c")], (x) => x.id);
+    expect(out.rows).toEqual([row(A, "a"), row(B, "b'"), row(C, "c")]);
+    expect(out.deleted).toEqual([D]);
+    expect(out.added).toEqual([]);
+  });
+
+  it("inserts a new row with no edited row above it before the first edited row following it", () => {
+    const out = spliceRows(full, [B, C], [row(X, "x"), row(B, "b"), row(C, "c")], (x) => x.id);
+    expect(ids(out.rows)).toEqual([A, X, B, C, D]);
+  });
+
+  it("keeps new rows where the deleted partial was when every shown row is deleted", () => {
+    const out = spliceRows(full, [B, C], [row(X, "x")], (x) => x.id);
+    expect(ids(out.rows)).toEqual([A, X, D]);
+    expect(out.deleted).toEqual([B, C]);
+  });
+
+  it("refuses an edited table holding a row that was not shown, or a row twice", () => {
+    expect(() => spliceRows(full, [B], [row(B, "b"), row(D, "d")], (x) => x.id)).toThrow(/not part of the edited table/);
+    expect(() => spliceRows(full, [B], [row(B, "b"), row(B, "b")], (x) => x.id)).toThrow(/twice/);
+    expect(() => spliceRows(full, [X], [], (x) => x.id)).toThrow(/not in the table/);
+  });
+});
+
+describe("structure.json members (ruling 2B)", () => {
+  const [A, B, C, X, Y] = [r(1), r(2), r(3), r(5), r(6)];
+  const P = b(1);
+  const structure: StructureFile = {
+    v: 1,
+    sections: [{ id: "s1", title: "S1" }, { id: "s2", title: "S2" }],
+    members: { [A]: "s1", [B]: "s2", [P]: "s1" },
+    listed: { [P]: "Murmurs" },
+    drugTables: [{ block: b(9), pharmSection: "antianginals", conditionRows: [B, C] }],
+    pharmSections: [{ id: "antianginals", title: "Antianginals", tables: [b(9)], overview: null, lo: null, also: [] }],
+    pharmFiles: [],
+  };
+
+  it("gives a new row after B the section of B's topic", () => {
+    const out = updateStructure(structure, { order: [A, B, X, C], added: [X] });
+    expect(out.members[X]).toBe("s2");
+  });
+
+  it("gives a new first row of the system the first section", () => {
+    const out = updateStructure(structure, { order: [Y, A, B], added: [Y] });
+    expect(out.members[Y]).toBe("s1");
+  });
+
+  it("skips continuation rows (no members key) to find the topic above", () => {
+    const out = updateStructure(structure, { order: [A, C, X], added: [X] });
+    expect(out.members[X]).toBe("s1");
+  });
+
+  it("removes deleted ids from members, listed and conditionRows, and leaves the input untouched", () => {
+    const out = updateStructure(structure, { order: [A, C], deleted: [B, P] });
+    expect(out.members).toEqual({ [A]: "s1" });
+    expect(out.listed).toEqual({});
+    expect(out.drugTables[0]?.conditionRows).toEqual([C]);
+    expect(structure.members[B]).toBe("s2");
+    expect(structure.drugTables[0]?.conditionRows).toEqual([B, C]);
+  });
+
+  it("adds no members entry in a system without sections", () => {
+    const flat = { ...structure, sections: [], members: {} };
+    expect(updateStructure(flat, { order: [A, X], added: [X] }).members).toEqual({});
+  });
+
+  it("refuses a new row missing from the row order", () => {
+    expect(() => updateStructure(structure, { order: [A], added: [X] })).toThrow(/not in the system's row order/);
+  });
+
+  it("resolves across the system's non-drug multi-column tables, but within a drug table only", () => {
+    const table = (id: string, rows: string[], cols = 2) => ({
+      id,
+      doc: { content: [{ type: "table", attrs: { grid: Array(cols).fill(50) }, content: rows.map((x) => ({ attrs: { id: x } })) }] },
+    });
+    const prose = { id: b(2), doc: { content: [{ type: "paragraph" }] } };
+    const blocks = [table(b(5), [A]), prose, table(b(6), [r(7)], 1), table(b(9), [B, C]), table(b(8), [X])];
+    expect(systemRowOrder(blocks, structure, b(8))).toEqual([A, X]);
+    expect(systemRowOrder(blocks, structure, b(9))).toEqual([B, C]);
+  });
+});
+
+describe("commit trailers (50 §50.4)", () => {
+  it("writes Kind, Page, Changed and Device for an edit", () => {
+    const msg = commitMessage("Edit: Coronary artery disease", {
+      kind: "edit", page: `topic:fm:${r(1)}`, changed: [r(1), r(5)], device: "7K3M0Q9XZA",
+    });
+    expect(msg).toBe(
+      "Edit: Coronary artery disease\n\n" +
+      "Pa-Studying-Kind: edit\n" +
+      `Pa-Studying-Page: topic:fm:${r(1)}\n` +
+      `Pa-Studying-Changed: ${r(1)},${r(5)}\n` +
+      "Pa-Studying-Device: 7K3M0Q9XZA",
+    );
+    expect(parseTrailers(msg)).toEqual({ kind: "edit", page: `topic:fm:${r(1)}`, changed: [r(1), r(5)], device: "7K3M0Q9XZA" });
+  });
+
+  it("writes Restored-From for a restore and File for a doc-replace", () => {
+    const d = `d_${"0".repeat(9)}1`;
+    const restore = commitMessage("Restore: Cardiology", { kind: "restore", page: "system:fm:cardiovascular", changed: [b(1)], restoredFrom: "2026-10-04T02:31:00Z" });
+    expect(restore).toContain("\nPa-Studying-Restored-From: 2026-10-04T02:31:00Z");
+    const replace = commitMessage("Replace: ACLS", { kind: "doc-replace", changed: [d], file: "ACLS 2025.pdf" });
+    expect(parseTrailers(replace)).toEqual({ kind: "doc-replace", changed: [d], file: "ACLS 2025.pdf" });
+  });
+
+  it("writes only Kind for the import", () => {
+    expect(commitMessage("Import her source files", { kind: "import" })).toBe("Import her source files\n\nPa-Studying-Kind: import");
+  });
+
+  it("refuses incomplete or malformed trailers", () => {
+    expect(() => commitMessage("Edit: x", { kind: "edit", changed: [r(1)], device: "7K3M0Q9XZA" })).toThrow(/Pa-Studying-Page/);
+    expect(() => commitMessage("Edit: x", { kind: "edit", page: "p", changed: [r(1)] })).toThrow(/Pa-Studying-Device/);
+    expect(() => commitMessage("Edit: x", { kind: "edit", page: "p", device: "7K3M0Q9XZA" })).toThrow(/Pa-Studying-Changed/);
+    expect(() => commitMessage("R", { kind: "restore", page: "p", changed: [r(1)] })).toThrow(/Restored-From/);
+    expect(() => commitMessage("R", { kind: "restore", page: "p", changed: [r(1)], restoredFrom: "yesterday" })).toThrow(/ISO/);
+    expect(() => commitMessage("R", { kind: "doc-replace", changed: [`d_${"0".repeat(10)}`] })).toThrow(/Pa-Studying-File/);
+    expect(() => commitMessage("E", { kind: "edit", page: "p", changed: ["row-1"], device: "7K3M0Q9XZA" })).toThrow(/not an id/);
+    expect(() => commitMessage("E", { kind: "edit", page: "p", changed: [r(1)], device: "short" })).toThrow(/Crockford/);
+    expect(() => commitMessage("E", { kind: "edit", page: "a\nPa-Studying-Kind: import", changed: [r(1)], device: "7K3M0Q9XZA" })).toThrow(/single line/);
+    expect(() => commitMessage("two\nlines", { kind: "import" })).toThrow(/single line/);
+    expect(() => commitMessage("x", { kind: "push" as never })).toThrow(/Unknown commit kind/);
+  });
+
+  it("requires every doc-* commit to list its document's d_ id in Changed", () => {
+    const d = `d_${"0".repeat(10)}`;
+    for (const kind of ["doc-add", "doc-rename", "doc-remove", "doc-restore"] as const) {
+      expect(() => commitMessage("Doc", { kind, changed: [b(1)] })).toThrow(/needs the document's d_ id/);
+      expect(commitMessage("Doc", { kind, changed: [d] })).toContain(`\nPa-Studying-Changed: ${d}`);
+    }
+    expect(() => commitMessage("Doc", { kind: "doc-replace", changed: [b(1)], file: "x.pdf" })).toThrow(/needs the document's d_ id/);
+  });
+
+  it("reads no trailers from a message without a Pa-Studying Kind", () => {
+    expect(parseTrailers("Initial commit")).toBeNull();
+    expect(parseTrailers("x\n\nPa-Studying-Kind: other")).toBeNull();
+  });
+});
+
+describe("serialization (20: stable formatting)", () => {
+  let root: string;
+  beforeEach(async () => { root = await mkdtemp(join(tmpdir(), "pa-content-")); });
+  afterEach(async () => { await rm(root, { recursive: true, force: true }); });
+
+  const path = `content/guides/fm/cardiovascular/blocks/${b(1)}.json`;
+  const block = {
+    v: 1, id: b(1), kind: "prose", meta: {},
+    doc: { type: "doc", content: [{ type: "paragraph", attrs: { indLeft: 18, marker: { text: "•", font: null, marks: [{ type: "bold" }], tabPt: 18 } },
+      content: [{ type: "text", marks: [{ type: "bold" }, { type: "color", attrs: { hex: "1F3864" } }], text: "Stable angina → nitrates, café" }] }] },
+  };
+
+  it("rewrites a file read from disk without changes as identical bytes", async () => {
+    expect(await writeContent(root, path, block)).toBe(true);
+    const disk = join(root, ...path.split("/"));
+    const before = await readFile(disk);
+    const read = await readContent(root, path);
+    expect(await writeContent(root, path, read)).toBe(false);
+    const after = await readFile(disk);
+    expect(after.equals(before)).toBe(true);
+    // Re-serializing the parsed record gives the same bytes even when the file is rewritten.
+    await writeFile(disk, serializeFile(path, read), "utf8");
+    expect((await readFile(disk)).equals(before)).toBe(true);
+  });
+
+  it("stores UTF-8 without BOM, 1-space indent, LF and a trailing newline", async () => {
+    await writeContent(root, path, block);
+    const bytes = await readFile(join(root, ...path.split("/")));
+    expect([...bytes.subarray(0, 3)]).not.toEqual([0xef, 0xbb, 0xbf]);
+    const text = bytes.toString("utf8");
+    expect(text).toContain("→");
+    expect(text).not.toContain("\r");
+    expect(text.endsWith("}\n")).toBe(true);
+    expect(text.split("\n")[1]).toBe(' "v": 1,');
+  });
+
+  it("refuses to read a file that is not in canonical form", () => {
+    const text = serializeFile(path, block);
+    expect(() => parseFile(path, String.fromCharCode(0xfeff) + text)).toThrow(/canonical/);
+    expect(() => parseFile(path, text.replace(/\n/g, "\r\n"))).toThrow(/canonical/);
+    expect(() => parseFile(path, JSON.stringify(JSON.parse(text), null, 2) + "\n")).toThrow(/canonical/);
+    expect(() => parseFile(path, "{")).toThrow(/not JSON/);
+    expect(parseFile(path, text)).toEqual(JSON.parse(text));
+  });
+});
