@@ -6,7 +6,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "npm run build:data && vite build",
+    "build": "npm run build:data && vite build && node tools/build/finish.ts",
     "build:data": "node tools/build/index.ts",
     "import": "node tools/import/index.ts",
     "test": "vitest run",
