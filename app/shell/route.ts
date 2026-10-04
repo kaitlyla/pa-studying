@@ -3,6 +3,7 @@
 // builders) is lib/derive/routes.ts, shared with the build.
 import { useSyncExternalStore } from "react";
 import { parseHash, type Route } from "../../lib/derive/routes.ts";
+import { retryFailedReads } from "../data/load.ts";
 
 export {
   PANCE,
@@ -31,6 +32,7 @@ function setCurrent(hash: string): void {
   if (hash !== current) {
     current = hash;
     currentRoute = parseHash(hash);
+    retryFailedReads();
   }
   for (const l of listeners) l();
 }

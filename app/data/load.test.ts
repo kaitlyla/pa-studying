@@ -1,7 +1,7 @@
-import { act, createElement, Suspense, type ReactNode } from "react";
+import { act, Component, createElement, Suspense, type ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mount, until, type Mounted } from "../testing.tsx";
-import { DATA_BASE, DataOfflineError, invalidateData, loadData, NotFoundError, setDataOverlay, useData } from "./load.ts";
+import { DATA_BASE, DataOfflineError, invalidateData, loadData, NotFoundError, retryFailedReads, setDataOverlay, useData } from "./load.ts";
 
 const originalFetch = globalThis.fetch;
 /** Full URLs requested, in order. */
@@ -223,5 +223,47 @@ describe("useData", () => {
     });
     await until(() => m.container.querySelector(".v")?.textContent === "value 2", "the reloaded value");
     expect(requests).toEqual([url("v.json"), url("v.json")]);
+  });
+
+  class Catch extends Component<{ children?: ReactNode }, { error: unknown }> {
+    state: { error: unknown } = { error: null };
+    static getDerivedStateFromError(error: unknown): { error: unknown } {
+      return { error };
+    }
+    render(): ReactNode {
+      const { error } = this.state;
+      if (error === null) return this.props.children;
+      return createElement("p", { className: "err" }, error instanceof NotFoundError ? `missing ${error.path}` : "other");
+    }
+  }
+  const failing = (): ReactNode =>
+    createElement(Catch, null, createElement(Suspense, { fallback: createElement("p", { className: "wait" }, "loading") }, createElement(Show, { path: "gone.json" })));
+
+  it("a missing file reaches the error boundary after one request, and is fetched again only after a navigation", async () => {
+    const m = await mount(failing());
+    mounted = m;
+    await until(() => m.container.querySelector(".err")?.textContent === "missing gone.json", "the error boundary");
+    // React renders again after the rejection; that render must reuse the failed read, not fetch anew.
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
+    expect(requests).toEqual([url("gone.json")]);
+
+    // Another page reading the same path before any navigation gets the same failure.
+    m.unmount();
+    const again = await mount(failing());
+    mounted = again;
+    await until(() => again.container.querySelector(".err") !== null, "the error boundary again");
+    expect(requests).toEqual([url("gone.json")]);
+
+    // After a navigation the read is retried, and the file now exists.
+    again.unmount();
+    mounted = null;
+    bodies.set("gone.json", { v: 3 });
+    retryFailedReads();
+    const after = await mount(failing());
+    mounted = after;
+    await until(() => after.container.querySelector(".v")?.textContent === "value 3", "the retried value");
+    expect(requests).toEqual([url("gone.json"), url("gone.json")]);
   });
 });

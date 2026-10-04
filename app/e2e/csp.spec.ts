@@ -177,7 +177,9 @@ interface RouteCase {
 }
 
 function docCase(kind: DocJson["kind"], ready: (page: Page) => Promise<void>): RouteCase {
-  const d = docs.find((x) => x.kind === kind);
+  // A slides document is shown from its `view` PDF; her own deck's document has none (20 §20.10:
+  // its slide blocks are its view, on the review-slides route), so its file page shows no slide.
+  const d = docs.find((x) => x.kind === kind && (kind !== "slides" || x.view !== null));
   return { name: `a ${kind} document's file page`, hash: d ? fileHash(d.id, null) : null, title: d?.name, ready, doc: true };
 }
 

@@ -51,18 +51,32 @@ async function fetchJson(path: string): Promise<unknown> {
   return overlay ? overlay(path, json) : json;
 }
 
+/**
+ * Failed reads, as rendering saw them, until the next navigation. React renders a component again
+ * after the promise it suspended on rejects; if that render started a new fetch, a missing or
+ * unreachable file would be fetched again and again and the page would never leave "Loading…".
+ */
+const failedReads = new Map<string, Promise<unknown>>();
+
 /** Loads `dist/data/<path>` once per session (until invalidated). */
 export function loadData<T>(path: string): Promise<T> {
   let p = cache.get(path);
   if (!p) {
-    p = fetchJson(path);
-    cache.set(path, p);
-    // A failed fetch is not kept, so a later visit retries.
-    p.catch(() => {
-      if (cache.get(path) === p) cache.delete(path);
+    const fetched = fetchJson(path);
+    p = fetched;
+    cache.set(path, fetched);
+    // A failed fetch is not kept here, so a later load retries; rendering keeps it in failedReads.
+    fetched.catch(() => {
+      if (cache.get(path) === fetched) cache.delete(path);
+      failedReads.set(path, fetched);
     });
   }
   return p as Promise<T>;
+}
+
+/** Lets the pages of a new location retry the reads that failed (called on every navigation). */
+export function retryFailedReads(): void {
+  failedReads.clear();
 }
 
 /** Installs (or removes, with null) the owner's local overlay and reloads every page's data. */
@@ -73,8 +87,13 @@ export function setDataOverlay(fn: Overlay | null): void {
 
 /** Drops cached data (one path, or everything) so the next read fetches again. */
 export function invalidateData(path?: string): void {
-  if (path === undefined) cache.clear();
-  else cache.delete(path);
+  if (path === undefined) {
+    cache.clear();
+    failedReads.clear();
+  } else {
+    cache.delete(path);
+    failedReads.delete(path);
+  }
   bump();
 }
 
@@ -91,5 +110,5 @@ const getVersion = (): number => version;
  */
 export function useData<T>(path: string): T {
   useSyncExternalStore(subscribe, getVersion);
-  return use(loadData<T>(path));
+  return use((failedReads.get(path) as Promise<T> | undefined) ?? loadData<T>(path));
 }

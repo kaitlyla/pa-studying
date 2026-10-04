@@ -26,7 +26,7 @@ import { NotOnSite } from "./NotOnSite.tsx";
 import { trapTab } from "./focus.ts";
 import { Icon } from "./Icon.tsx";
 import { Link } from "./Link.tsx";
-import { OwnerAvatar, PageBanner, SignInDialog, SignInLink, UnsavedDialog, VersionsPage } from "./mounts.tsx";
+import { OwnerAvatar, SignInDialog, SignInLink, UnsavedDialog, VersionsPage } from "./mounts.tsx";
 import { DrawerContext } from "./Page.tsx";
 import { setSidebarHidden, useSidebarHidden } from "./prefs.ts";
 import { useIsPhone } from "./responsive.ts";
@@ -316,7 +316,6 @@ export function App(): ReactNode {
           <div className="main-in">
             <DrawerContext.Provider value={openDrawer}>
               <SearchHighlightProvider>
-                <PageBanner />
                 <SearchLanding />
                 <PageBoundary resetKey={routeKey}>
                   <Suspense fallback={<div className="loading">Loading…</div>}>
