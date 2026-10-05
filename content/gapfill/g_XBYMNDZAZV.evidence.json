@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "author": "mona-20869",
+ "claims": [
+  {
+   "text": "X-ray is first-line in trauma: fracture type (transverse, oblique, spiral, comminuted, greenstick, avulsion) and displacement, angulation or rotation.",
+   "source": 0,
+   "quote": "X-ray (1st-line trauma): frxs -transverse, oblique, spiral, comminuted, greenstick, avulsion + displace/angulation/rotation",
+   "locator": "Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "MRI shows soft tissue: rotator cuff and meniscal tears, ACL/UCL injuries, tendon ruptures, muscle and marrow edema, occult fractures.",
+   "source": 0,
+   "quote": "MRI = soft tissue (cuff/meniscal tears, ACL/UCL, tendon ruptures, musc/marrow edema, occult frx)",
+   "locator": "Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "CT shows bony detail: comminuted fractures, intra-articular fragments, and occult fractures of the scaphoid, tibial plateau and calcaneus.",
+   "source": 0,
+   "quote": "CT = bony detail (comminuted, intra-articular fragments, occult frx: scaphoid, tibial plateau, calcaneus)",
+   "locator": "Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Radiation adds up over a lifetime, so weigh repeat exposure; a low-dose CT is about 1.0 mSv.",
+   "source": 0,
+   "quote": "Radiation cumulative over lifetime → weigh repeat exposure; low-dose CT ≈ 1.0 mSv",
+   "locator": "Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Disc herniation on MRI: disc beyond its margin compressing the thecal sac or a root, with loss of the bright T2 signal.",
+   "source": 0,
+   "quote": "Spinal: disc herniate = disc beyond margin w thecal/root compress (loss of bright T2)",
+   "locator": "Imaging",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "juno-57055 (Detective task 01a10a50-eeea-7570-9d50-2c7b54b114d9, dispatched by shay-49353, 2026-10-05T04:37Z); verdict fixes re-checked by shay-49353 at 2026-10-05T04:41Z",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": []
+ },
+ "block": "g_XBYMNDZAZV"
+}
