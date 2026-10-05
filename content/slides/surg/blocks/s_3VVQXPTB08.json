@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "id": "s_3VVQXPTB08",
+ "kind": "slide",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "heading_line",
+    "content": [
+     {
+      "type": "text",
+      "text": "Melanoma"
+     }
+    ]
+   },
+   {
+    "type": "slide_card",
+    "content": [
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Treatment"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "TX: wide excision"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Breslow thickness (tumor depth) & presence/absence of ulceration guides excision margins & whether to perform sentinel lymph node biopsy (SLNB)"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "SLNB Indications:"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "melanoma ≥0.8mm"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "summarizes": [
+   "r_NTWM742K9G"
+  ],
+  "evidence": [
+   {
+    "item": "TX: wide excision",
+    "row": "r_NTWM742K9G",
+    "quote": "TX: wide excision"
+   },
+   {
+    "item": "Breslow thickness (tumor depth) & presence/absence of ulceration guides excision margins & whether to perform sentinel lymph node biopsy (SLNB)",
+    "row": "r_NTWM742K9G",
+    "quote": "▪︎Breslow thickness (tumor depth) & presence/absence of ulceration guides excision \n margins & whether to perform sentinel lymph node biopsy (SLNB)"
+   },
+   {
+    "item": "SLNB Indications:",
+    "row": "r_NTWM742K9G",
+    "quote": "SLNB Indications:"
+   },
+   {
+    "item": "melanoma ≥0.8mm",
+    "row": "r_NTWM742K9G",
+    "quote": "▪︎melanoma ≥0.8mm"
+   }
+  ],
+  "verification": {
+   "verifier": "detective task 01a109dc-9c70-7103-9bba-b0f86405cb14 (surg S13 round 2)",
+   "at": "2026-10-05",
+   "result": "pass",
+   "notes": []
+  }
+ }
+}
