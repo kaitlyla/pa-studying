@@ -1,5 +1,834 @@
 {
  "v": 1,
- "topics": [],
- "workup": []
+ "topics": [
+  {
+   "key": "labs",
+   "howto": null,
+   "links": [
+    {
+     "target": "b_432VBS684S",
+     "covers": "Acid/base: reference ranges and compensation (ABG interpretation)"
+    },
+    {
+     "target": "r_YYTRB0FBPN",
+     "covers": "High anion gap (MUKPILES) vs non-gap metabolic acidosis"
+    },
+    {
+     "target": "r_QGKX4SVDDS",
+     "covers": "DKA: glucose, pH, anion gap, bicarbonate, urine/serum ketones"
+    },
+    {
+     "target": "b_M1SBGV20T3",
+     "covers": "Nonketotic hyperglycemia (HHS) vs DKA: no ketones, normal pH and anion gap"
+    },
+    {
+     "target": "r_3P1VZQW8MN",
+     "covers": "HHS: glucose >600, plasma osmolality >320, pH >7.3"
+    },
+    {
+     "target": "r_33D3PX16F4",
+     "covers": "Hypokalemia: serum K thresholds, magnesium"
+    },
+    {
+     "target": "r_2HQHNDSR2Q",
+     "covers": "Hyperkalemia: workup labs and EKG changes"
+    },
+    {
+     "target": "r_V9Y1E3D7Q3",
+     "covers": "Hyponatremia: types by serum osmolality"
+    },
+    {
+     "target": "r_3W96XYBE15",
+     "covers": "Diabetes insipidus: serum and urine osmolality, fluid deprivation test"
+    },
+    {
+     "target": "r_NYSDYPGSCQ",
+     "covers": "Prerenal AKI: BUN/Cr ratio, FENa, urine Na and osmolality"
+    },
+    {
+     "target": "r_GTNA4H94EA",
+     "covers": "ATN: BUN/Cr ratio, FENa, urine osmolality, muddy brown casts"
+    },
+    {
+     "target": "r_GRBBHWN94N",
+     "covers": "ACS: high-sensitivity troponin and CK-MB timing"
+    },
+    {
+     "target": "r_DMHKPNWT9P",
+     "covers": "Myocarditis: ESR/CRP, troponin and CK-MB"
+    },
+    {
+     "target": "r_SD0186969Y",
+     "covers": "Heart failure: BNP/NT-proBNP cutoffs and other labs"
+    },
+    {
+     "target": "r_HVCYKNYB1T",
+     "covers": "DVT: D-dimer to rule out with low/moderate pretest probability"
+    },
+    {
+     "target": "r_0WHGKK44T4",
+     "covers": "PE: Wells/PERC pretest probability, CBC/CMP, ABG"
+    },
+    {
+     "target": "r_2V1MAEEFAP",
+     "covers": "DIC: fibrinogen, D-dimer, PT/PTT, platelets"
+    },
+    {
+     "target": "r_1WJ7GCQT20",
+     "covers": "B12 deficiency: CBC with peripheral smear"
+    },
+    {
+     "target": "r_H6B6RADXYC",
+     "covers": "Aplastic anemia: CBC with smear, reticulocytes, marrow biopsy"
+    },
+    {
+     "target": "r_HZ68FS6TAM",
+     "covers": "Hemophilia: prolonged aPTT, mixing studies"
+    },
+    {
+     "target": "r_E59FKM6720",
+     "covers": "Cirrhosis: hepatic encephalopathy from ammonia accumulation"
+    },
+    {
+     "target": "r_VGPM9NHENZ",
+     "covers": "Jaundice: serum bilirubin"
+    },
+    {
+     "target": "r_1AH5AS9JMF",
+     "covers": "Acute pancreatitis: lipase/amylase ≥3x ULN"
+    },
+    {
+     "target": "b_431QX2TN86",
+     "covers": "Transfusion: 1 unit PRBCs raises Hgb by 1 g/dL"
+    },
+    {
+     "target": "r_5KAYWXRF6V",
+     "covers": "Abruptio placentae workup: CBC, type and cross, fibrinogen"
+    },
+    {
+     "target": "r_NK4BCGDBNN",
+     "covers": "Septic shock: SIRS criteria, lactate"
+    },
+    {
+     "target": "r_8JQF2984A0",
+     "covers": "Infective endocarditis: blood cultures x3 before antibiotics"
+    },
+    {
+     "target": "r_87ND3QS34T",
+     "covers": "Septic arthritis: blood cultures, ESR/CRP, procalcitonin, arthrocentesis"
+    },
+    {
+     "target": "r_6VS7TQK9N0",
+     "covers": "Ectopic pregnancy: quantitative beta-hCG doubling"
+    },
+    {
+     "target": "r_KDT07ZY8JS",
+     "covers": "Abortion: CBC, blood type and Rh screen, serial beta-hCG, anti-D"
+    },
+    {
+     "target": "r_33V8HG0FR9",
+     "covers": "PID workup: UPT, NAAT, vaginal discharge microscopy, HIV, RPR/VDRL"
+    },
+    {
+     "target": "r_MYGVN2G3V4",
+     "covers": "Bacterial vaginosis: wet mount clue cells, pH, whiff test"
+    },
+    {
+     "target": "r_DQEQFRQD6Q",
+     "covers": "Candidiasis: KOH prep pseudohyphae"
+    },
+    {
+     "target": "r_DN0SPFBXP9",
+     "covers": "Epididymitis: UA, NAAT for gonorrhea and chlamydia"
+    },
+    {
+     "target": "r_Y0WRDE4980",
+     "covers": "Compartment syndrome: compartment pressure >30 mmHg, CK and myoglobin"
+    },
+    {
+     "target": "r_WZFEAQJXGE",
+     "covers": "NMS: CK >1000 IU/L, leukocytosis"
+    },
+    {
+     "target": "b_QDDATM511J",
+     "covers": "Palpitations labs: CMP, CBC, TSH, urine tox"
+    },
+    {
+     "target": "r_3X8H28JKST",
+     "covers": "Burns labs: CBC, electrolytes, BUN/Cr, glucose, VBG, carboxyhemoglobin"
+    },
+    {
+     "target": "r_3F77K9X7KM",
+     "covers": "Hyperthyroidism: TSH, TSH receptor antibodies"
+    },
+    {
+     "target": "r_P9E5GCPSBK",
+     "covers": "Hypothyroidism: TSH, FT4/FT3"
+    },
+    {
+     "target": "r_5NSV66DQBK",
+     "covers": "Adrenal crisis labs: Na, K, glucose, cortisol, ACTH, renin"
+    },
+    {
+     "target": "r_TJTDSJM9T2",
+     "covers": "Adrenal insufficiency: cosyntropin (ACTH) stimulation test"
+    },
+    {
+     "target": "r_1Q3VWH3HYE",
+     "covers": "Bacterial meningitis: when to CT before LP, CSF pattern"
+    },
+    {
+     "target": "r_4TBF75YTH7",
+     "covers": "SAH: LP for xanthochromia if CT negative"
+    },
+    {
+     "target": "r_FDB8VFXE2V",
+     "covers": "Guillain-Barré: CSF high protein with normal WBC"
+    }
+   ],
+   "files": [
+    "d_5K8ARJRYFN",
+    "d_W5CH6PSWEG",
+    "d_6CC54CR960",
+    "d_9T1BK0WDG3",
+    "d_77CRGHXNDK",
+    "d_ET2PJXFNTB",
+    "d_W0DJ0C3768",
+    "d_37E1NN0SQA"
+   ],
+   "gaps": [
+    "g_KCKJXMH67B",
+    "g_S1RTCD4G0N",
+    "g_VZN2EG3F59",
+    "g_0GRKSZJ0Z7"
+   ]
+  },
+  {
+   "key": "ekg",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_HGGDBYFKBC",
+     "covers": "Bundle branch and fascicular blocks: QRS duration, axis deviation"
+    },
+    {
+     "target": "r_GRBBHWN94N",
+     "covers": "ACS: UA vs NSTEMI vs STEMI"
+    },
+    {
+     "target": "r_Z7ZXW5S41Q",
+     "covers": "Vasospastic angina: transient ST elevation/depression"
+    },
+    {
+     "target": "r_7HPFTJBC7N",
+     "covers": "Acute pericarditis: diffuse ST elevation and PR depression"
+    },
+    {
+     "target": "r_TX5M3803MC",
+     "covers": "Pericardial effusion: electrical alternans, low-voltage QRS"
+    },
+    {
+     "target": "r_8P8CD6GVF5",
+     "covers": "Cardiac tamponade: Beck's triad, pulsus paradoxus"
+    },
+    {
+     "target": "r_JX7KVPYCFS",
+     "covers": "AV blocks: PR prolongation through complete block"
+    },
+    {
+     "target": "r_2WYW6E351D",
+     "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves"
+    },
+    {
+     "target": "r_FTS2QAQ42D",
+     "covers": "Atrial flutter: sawtooth flutter waves"
+    },
+    {
+     "target": "r_PMGRZSY7AY",
+     "covers": "AVNRT: rate 120-200, P wave buried in QRS"
+    },
+    {
+     "target": "r_WY20ZGPBDF",
+     "covers": "AVRT: orthodromic narrow QRS vs antidromic"
+    },
+    {
+     "target": "r_1MY8CNWPFB",
+     "covers": "WPW: delta wave, short PR, wide QRS"
+    },
+    {
+     "target": "r_1EBDB0BTMM",
+     "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome"
+    },
+    {
+     "target": "r_729JW02J9B",
+     "covers": "Ventricular fibrillation: findings and ACLS algorithm"
+    },
+    {
+     "target": "r_90MQMM6CTA",
+     "covers": "Torsades: acquired QT prolongation (drugs, electrolytes)"
+    },
+    {
+     "target": "r_RK3A67SRRD",
+     "covers": "PVCs: causes"
+    },
+    {
+     "target": "r_2HQHNDSR2Q",
+     "covers": "Hyperkalemia: peaked T waves to QRS widening, sine waves"
+    },
+    {
+     "target": "r_ZQKXZ9XTDM",
+     "covers": "Syncope: initial evaluation with EKG"
+    }
+   ],
+   "files": [
+    "d_TJXEABW6N3"
+   ],
+   "gaps": [
+    "g_07A1KT0539",
+    "g_KJFBJMHA6B",
+    "g_HBEBN7KPE3"
+   ]
+  },
+  {
+   "key": "imaging",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_SD0186969Y",
+     "covers": "Heart failure: CXR findings"
+    },
+    {
+     "target": "r_W0WAE1GS23",
+     "covers": "Pneumothorax: CXR pleural line, deep sulcus sign"
+    },
+    {
+     "target": "b_YJ5QKHWK4N",
+     "covers": "Ottawa ankle/foot rules"
+    },
+    {
+     "target": "r_1VE4MDYDK8",
+     "covers": "Ankle sprain: Ottawa rules, XR views"
+    },
+    {
+     "target": "r_QPGDCHZEQY",
+     "covers": "Ischemic stroke: noncontrast head CT first, CT/MR angiography"
+    },
+    {
+     "target": "r_4R2PM8YR5G",
+     "covers": "Epidural hematoma: lens-shaped bleed on CT"
+    },
+    {
+     "target": "r_9B7DKWTTEZ",
+     "covers": "Subdural hematoma: crescent-shaped bleed on CT"
+    },
+    {
+     "target": "r_4TBF75YTH7",
+     "covers": "SAH: noncontrast CT, then LP if negative"
+    },
+    {
+     "target": "r_0CB2GY6C6V",
+     "covers": "TIA: CT/MRI and CT/MR angiography"
+    },
+    {
+     "target": "r_0WHGKK44T4",
+     "covers": "PE: pretest probability before imaging"
+    },
+    {
+     "target": "r_DEA1XJ4JTJ",
+     "covers": "Hypertensive emergencies: chest CTA for dissection, brain CT for stroke"
+    },
+    {
+     "target": "r_16B61APQCQ",
+     "covers": "Appendicitis: ultrasound first, CT"
+    },
+    {
+     "target": "r_NRDH752SVD",
+     "covers": "Kidney stones: noncontrast CT, KUB"
+    },
+    {
+     "target": "r_GT7PE7JCQ2",
+     "covers": "Mesenteric ischemia: CTA abdomen and pelvis"
+    },
+    {
+     "target": "r_GRTRWK72EC",
+     "covers": "Bowel obstruction: XR/CT air-fluid levels, 3-6-9 rule"
+    },
+    {
+     "target": "r_WATBT4X7YT",
+     "covers": "AAA: focused bedside ultrasound in unstable patients"
+    },
+    {
+     "target": "r_6VS7TQK9N0",
+     "covers": "Ectopic pregnancy: transvaginal ultrasound"
+    },
+    {
+     "target": "r_HVCYKNYB1T",
+     "covers": "DVT: D-dimer and imaging"
+    },
+    {
+     "target": "r_3GC4PGPD27",
+     "covers": "Herniated disk: MRI for red flags"
+    },
+    {
+     "target": "r_5720KFY8KN",
+     "covers": "Cauda equina: MRI without contrast"
+    },
+    {
+     "target": "r_ZD5XCRK3ZB",
+     "covers": "Epiglottitis: lateral neck XR thumbprint sign"
+    },
+    {
+     "target": "r_PV9ZA7K3QN",
+     "covers": "Croup: frontal neck XR steeple sign"
+    },
+    {
+     "target": "r_QX2Z5JH1QW",
+     "covers": "Peritonsillar abscess: ultrasound, CT"
+    },
+    {
+     "target": "r_T9RHDT62P8",
+     "covers": "Vertebral fractures: NEXUS criteria for C-spine imaging"
+    }
+   ],
+   "files": [
+    "d_JDA68C1JKZ"
+   ],
+   "gaps": [
+    "g_XM9AJJBPYQ",
+    "g_5TA0VH5ZGG",
+    "g_Q6P6728M0X"
+   ]
+  },
+  {
+   "key": "anatomy",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_KCC9NR4EDF",
+     "covers": "Shoulder dislocation"
+    },
+    {
+     "target": "r_CHHDE6BXWZ",
+     "covers": "Clavicle fractures"
+    },
+    {
+     "target": "r_6GKRRHQMKM",
+     "covers": "Proximal humerus fracture: axillary nerve injury"
+    },
+    {
+     "target": "r_54EK8PBCRB",
+     "covers": "Ankle fractures: Weber classification"
+    },
+    {
+     "target": "r_Y0WRDE4980",
+     "covers": "Compartment syndrome"
+    },
+    {
+     "target": "r_5720KFY8KN",
+     "covers": "Cauda equina syndrome"
+    },
+    {
+     "target": "r_MK3DWVAD1T",
+     "covers": "Spinal cord injury: mechanism of injury"
+    },
+    {
+     "target": "b_A35KMFTZJ5",
+     "covers": "Heart auscultation areas and murmur maneuvers"
+    },
+    {
+     "target": "r_VAAC9BQ48H",
+     "covers": "Orbital floor (blowout) fracture"
+    },
+    {
+     "target": "r_CK16W8WTFW",
+     "covers": "Zoster: single-dermatome rash"
+    }
+   ],
+   "files": [
+    "d_Q4VZAM3D1A"
+   ],
+   "gaps": [
+    "g_CKEDX2G399",
+    "g_2P26YQBM6W",
+    "g_B81D0V2871"
+   ]
+  },
+  {
+   "key": "procedures",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_P0KJ292634",
+     "covers": "Pilonidal abscess: I&D"
+    },
+    {
+     "target": "b_3VHT2TQNSA",
+     "covers": "Dental abscess: I&D"
+    },
+    {
+     "target": "r_KCC9NR4EDF",
+     "covers": "Shoulder dislocation: reduction, sling"
+    },
+    {
+     "target": "r_FFDWHQKB58",
+     "covers": "Humeral shaft fracture: coaptation splint"
+    },
+    {
+     "target": "r_1E6NW5DAYG",
+     "covers": "Supracondylar fracture: long arm posterior splint"
+    },
+    {
+     "target": "r_MV99D8D0BV",
+     "covers": "Radial head fracture: sling or posterior long arm splint"
+    },
+    {
+     "target": "r_VFD5J15MCJ",
+     "covers": "Obstructive shock: needle decompression, pericardiocentesis"
+    },
+    {
+     "target": "r_ZD30TFZQEZ",
+     "covers": "Pleural effusion/hemothorax: chest tube"
+    },
+    {
+     "target": "r_8P8CD6GVF5",
+     "covers": "Cardiac tamponade"
+    },
+    {
+     "target": "r_3X8H28JKST",
+     "covers": "Burns: management, labs, tetanus"
+    },
+    {
+     "target": "r_1Q3VWH3HYE",
+     "covers": "Bacterial meningitis: when to CT before LP"
+    },
+    {
+     "target": "r_Q7VWKY9MJD",
+     "covers": "Epistaxis: anterior and posterior nasal packing"
+    },
+    {
+     "target": "r_FTS2QAQ42D",
+     "covers": "Atrial flutter: cardioversion if unstable"
+    },
+    {
+     "target": "r_GQ9K3Y1PM3",
+     "covers": "Sick sinus: atropine, temporary and permanent pacing"
+    },
+    {
+     "target": "r_729JW02J9B",
+     "covers": "VF: CPR and defibrillation"
+    },
+    {
+     "target": "r_PZE9ZYD8CR",
+     "covers": "Ear foreign body removal"
+    },
+    {
+     "target": "r_VPTCF3TRD0",
+     "covers": "Nasal foreign body removal"
+    },
+    {
+     "target": "r_9F291SG8VE",
+     "covers": "Ocular foreign body: fluorescein, removal"
+    }
+   ],
+   "files": [],
+   "gaps": [
+    "g_ZSAP4YH3WV",
+    "g_E27VANXBPM",
+    "g_V6FDXEQKSF",
+    "g_YKNBKT074W",
+    "g_D05R5FSV2M"
+   ]
+  },
+  {
+   "key": "guidelines",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_729JW02J9B",
+     "covers": "VF: ACLS algorithm"
+    },
+    {
+     "target": "r_GRBBHWN94N",
+     "covers": "Acute coronary syndrome"
+    },
+    {
+     "target": "r_10KHQJYQGV",
+     "covers": "Thrombolytics (tPA, rPA, TNK)"
+    },
+    {
+     "target": "r_DEA1XJ4JTJ",
+     "covers": "Hypertensive crises: stroke BP thresholds for thrombolysis"
+    },
+    {
+     "target": "r_NK4BCGDBNN",
+     "covers": "Septic shock"
+    },
+    {
+     "target": "r_SD0186969Y",
+     "covers": "Heart failure"
+    },
+    {
+     "target": "r_0WHGKK44T4",
+     "covers": "PE: Wells score and PERC"
+    },
+    {
+     "target": "r_T9RHDT62P8",
+     "covers": "NEXUS C-spine criteria"
+    },
+    {
+     "target": "b_YJ5QKHWK4N",
+     "covers": "Ottawa ankle/foot rules"
+    },
+    {
+     "target": "r_QGKX4SVDDS",
+     "covers": "DKA"
+    },
+    {
+     "target": "r_GNFEE2TFD7",
+     "covers": "Gonorrhea: ceftriaxone 500 mg IM"
+    },
+    {
+     "target": "r_PAMV0HYXWV",
+     "covers": "Chlamydia: doxycycline x7d"
+    },
+    {
+     "target": "r_33V8HG0FR9",
+     "covers": "PID: inpatient regimen"
+    }
+   ],
+   "files": [
+    "d_K2HQWKWZ66",
+    "d_7WX9CZ2ATD",
+    "d_NE0SGWWQ2A"
+   ],
+   "gaps": [
+    "g_MTEWC9E8GN",
+    "g_RB0YZH3SJD",
+    "g_X2HDPHFGYH",
+    "g_GS075WVM9C",
+    "g_SYAC0557DC",
+    "g_245N3YBGFE"
+   ]
+  },
+  {
+   "key": "screenings",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_RE47SM5RAV",
+     "covers": "Alcohol: AUDIT-C, CAGE, MAST"
+    }
+   ],
+   "files": [
+    "d_20G6CYE64N",
+    "d_FXJMG7FXF7",
+    "d_V1A5FR2H7F"
+   ],
+   "gaps": [
+    "g_SVEE0WANWK",
+    "g_1J2E12NH6H"
+   ]
+  },
+  {
+   "key": "workup",
+   "howto": null,
+   "links": [],
+   "files": [],
+   "gaps": []
+  }
+ ],
+ "workup": [
+  {
+   "id": "abdominal-pain",
+   "title": "Abdominal pain",
+   "conds": "Acute appendicitis, Acute cholecystitis, Acute pancreatitis, Bowel perforation, Obstruction, Ischemic bowel disease, Ectopic pregnancy, Aortic aneurysm",
+   "gap": "g_HCA1VNWC2F"
+  },
+  {
+   "id": "ams",
+   "title": "Altered mental status (AMS)",
+   "conds": "Delirium, Hypoglycemia, Toxidromes, Stroke, Encephalitis, Sepsis, Electrolyte disturbances",
+   "gap": "g_PH4CM021HV"
+  },
+  {
+   "id": "back-pain",
+   "title": "Back pain",
+   "conds": "Cauda equina syndrome, Disc disease, Spinal epidural abscess, Aortic aneurysm/dissection, Uro/Nephrolithiasis, Pyelonephritis",
+   "gap": "g_18245GVXJM"
+  },
+  {
+   "id": "chest-pain",
+   "title": "Chest pain",
+   "conds": "Acute coronary syndrome, Aortic dissection, Pulmonary embolism, Pneumothorax, Pericarditis, Boerhaave syndrome",
+   "gap": "g_1X9D8TBR8R"
+  },
+  {
+   "id": "dizziness-vertigo",
+   "title": "Dizziness / vertigo",
+   "conds": "Vertigo, Stroke, Cerebellar dysfunction, Arrhythmias/Conduction disorders",
+   "gap": "g_3EVFPRCGZ4"
+  },
+  {
+   "id": "doe",
+   "title": "Dyspnea on exertion",
+   "conds": "Heart failure, Coronary artery disease, Chronic obstructive pulmonary disease exacerbation, Anemias",
+   "gap": "g_70ZW6HZ6VJ"
+  },
+  {
+   "id": "ear-pain",
+   "title": "Ear pain",
+   "conds": "Otitis externa, Otitis media, Mastoiditis, Barotrauma, Tympanic membrane perforation, Foreign body",
+   "gap": "g_JDGC5TNDSG"
+  },
+  {
+   "id": "edema",
+   "title": "Edema",
+   "conds": "Heart failure, Deep vein thrombosis, Cirrhosis, Chronic kidney disease",
+   "gap": "g_1MGKYN3YAY"
+  },
+  {
+   "id": "eye-pain-vision-loss",
+   "title": "Eye pain / vision loss",
+   "conds": "Glaucoma (acute angle closure), Retinal detachment, Retinal vascular occlusion, Optic neuritis, Corneal abrasion/ulcer, Globe rupture",
+   "gap": "g_8NHA55ENVR"
+  },
+  {
+   "id": "fever",
+   "title": "Fever",
+   "conds": "Sepsis, Bacteremia, Pneumonias, Pyelonephritis, Encephalitis, Fever without a source",
+   "gap": "g_M2WSDPDWWV"
+  },
+  {
+   "id": "gi-bleeding",
+   "title": "GI bleeding",
+   "conds": "Gastrointestinal bleeding, Peptic ulcer disease, Esophageal varices, Mallory-Weiss tear, Diverticular disease",
+   "gap": "g_S1RTCD4G0N"
+  },
+  {
+   "id": "headache",
+   "title": "Headache",
+   "conds": "Subarachnoid hemorrhage, Migraine, Cluster, Tension, Increased intracranial pressure, Encephalitis",
+   "gap": "g_0XEV1X1WSY"
+  },
+  {
+   "id": "hematuria-flank-pain",
+   "title": "Hematuria / flank pain",
+   "conds": "Uro/Nephrolithiasis, Pyelonephritis, Blunt and penetrating pelvic trauma, Renal disease",
+   "gap": "g_YFQ9PD9N61"
+  },
+  {
+   "id": "hemoptysis",
+   "title": "Hemoptysis",
+   "conds": "Acute bronchitis, Neoplasms — Malignant, Tuberculosis, Bronchiectasis, Pulmonary embolism",
+   "gap": "g_03VGEVGQ9C"
+  },
+  {
+   "id": "joint-pain",
+   "title": "Joint pain / swelling",
+   "conds": "Septic arthritis, Gout/Pseudogout, Fractures/Dislocations, Reactive arthritis",
+   "gap": "g_TCYWNEQ8Q8"
+  },
+  {
+   "id": "ataxia",
+   "title": "Loss of coordination / ataxia",
+   "conds": "Cerebellar dysfunction, Stroke, Vertigo, Degenerative/Neuromuscular disease, Substances",
+   "gap": "g_ASMFHT5MFP"
+  },
+  {
+   "id": "nasal-congestion",
+   "title": "Nasal congestion",
+   "conds": "Acute/Chronic rhinosinusitis",
+   "gap": "g_VNRTKBMY5P"
+  },
+  {
+   "id": "nausea-vomiting",
+   "title": "Nausea / vomiting",
+   "conds": "Acute infectious gastroenteritis (viral, bacterial), Peptic ulcer disease, Obstruction (small bowel, large bowel, volvulus), Acute pancreatitis, Acute cholecystitis, Diabetic ketoacidosis",
+   "gap": "g_VZN2EG3F59"
+  },
+  {
+   "id": "overdose",
+   "title": "Overdose / poisoning",
+   "conds": "Toxidromes, Acetaminophen poisoning, Substances, Carbon monoxide poisoning",
+   "gap": "g_KCKJXMH67B"
+  },
+  {
+   "id": "palpitations",
+   "title": "Palpitations",
+   "conds": "Arrhythmias/Conduction disorders, Hyper/Hypothyroidism, Hypoglycemia, Substances",
+   "gap": "g_4NJ7FQ7R87"
+  },
+  {
+   "id": "rash",
+   "title": "Rash",
+   "conds": "Toxic epidermal necrolysis, Erythema multiforme, Urticaria, Drug eruptions, Viral exanthems, Vector-borne illnesses, Cellulitis",
+   "gap": "g_YCZHABVR51"
+  },
+  {
+   "id": "red-eye",
+   "title": "Red eye",
+   "conds": "Conjunctivitis, Keratitis, Glaucoma (acute angle closure), Uveitis, Scleritis",
+   "gap": "g_KENXNEAAQM"
+  },
+  {
+   "id": "seizure",
+   "title": "Seizure",
+   "conds": "Epilepsy, Status epilepticus, Hypoglycemia, Electrolyte disturbances, Head trauma, Substances",
+   "gap": "g_0GRKSZJ0Z7"
+  },
+  {
+   "id": "dyspnea",
+   "title": "Shortness of breath (acute)",
+   "conds": "Asthma exacerbation, COPD exacerbation, Heart failure, Pulmonary embolism, Pneumothorax, Pneumonias, Anaphylaxis",
+   "gap": "g_70ZW6HZ6VJ"
+  },
+  {
+   "id": "sore-throat",
+   "title": "Sore throat",
+   "conds": "Pharyngitis, Peritonsillar abscess/Retropharyngeal abscess, Epiglottitis, Angioedema",
+   "gap": "g_SQ9J7P0KG7"
+  },
+  {
+   "id": "si",
+   "title": "Suicidal ideation",
+   "conds": "Suicidal ideation, Depressive disorders, Bipolar and related disorders, Substance-related disorders",
+   "gap": "g_SVEE0WANWK"
+  },
+  {
+   "id": "syncope",
+   "title": "Syncope",
+   "conds": "Vasovagal hypotension, Orthostatic hypotension, Arrhythmias/Conduction disorders, Aortic stenosis, Pulmonary embolism, Neurogenic syncope",
+   "gap": "g_WCNFMMD6RY"
+  },
+  {
+   "id": "testicular-pain",
+   "title": "Testicular / scrotal pain",
+   "conds": "Testicular torsion, Epididymitis, Orchitis, Hernias (incarcerated/strangulated)",
+   "gap": "g_Q6P6728M0X"
+  },
+  {
+   "id": "trauma",
+   "title": "Trauma (multisystem)",
+   "conds": "Blunt and penetrating chest/abdominal/pelvic trauma, Head trauma/TBI, Spinal cord injury, Hemorrhagic shock",
+   "gap": "g_5TA0VH5ZGG"
+  },
+  {
+   "id": "tremors",
+   "title": "Tremors",
+   "conds": "Hypoglycemia, Thyroid storm, Substances, Toxidromes, Degenerative/Neuromuscular disease",
+   "gap": "g_7A2P6KYGG4"
+  },
+  {
+   "id": "vaginal-bleeding-pregnancy",
+   "title": "Vaginal bleeding in pregnancy",
+   "conds": "Ectopic pregnancy, Abortion, Abruptio placentae, Placenta previa",
+   "gap": "g_Z7VN5P9G1S"
+  },
+  {
+   "id": "weakness-focal-deficit",
+   "title": "Weakness / focal neurologic deficit",
+   "conds": "Stroke, Transient ischemic attack, Guillain-Barré syndrome, Spinal cord injury, Hypoglycemia",
+   "gap": "g_NYTGZVANJ1"
+  }
+ ]
 }

@@ -1,0 +1,50 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "ECG may show J (Osborn) waves, with a longer PR interval, QT interval and QRS duration.",
+   "source": 0,
+   "quote": "An electrocardiogram (ECG) may show J (Osborn) waves (see figure Abnormal ECG showing J [Osborn] waves [V4]) and prolongation of the PR and QT intervals as well as of the QRS duration.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Labs: CBC, glucose (including bedside), electrolytes, BUN, creatinine and ABG; ABGs are not corrected for temperature.",
+   "source": 0,
+   "quote": "Laboratory tests include complete blood count, glucose (including bedside measurement), electrolytes, blood urea nitrogen (BUN), creatinine, and arterial blood gases (ABGs). ABGs are not corrected for low temperature.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cause unclear: serum alcohol, TSH, free thyroxine and cortisol.",
+   "source": 0,
+   "quote": "If the cause of hypothermia is unclear, testing to detect contributing factors includes measuring a serum alcohol level, thyroid stimulating hormone (TSH), free thyroxine, and cortisol.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 2,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 0,
+    "issue": "claim dropped the source's \"may show\"",
+    "resolution": "claim now says \"ECG may show\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_07A1KT0539"
+}

@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "History and exam usually identify the cause.",
+   "source": 0,
+   "quote": "In most patients, history and physical examination are sufficient to identify the likely etiology of tremor.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Brain MRI or CT for acute onset, rapid progression, or focal neurologic signs.",
+   "source": 0,
+   "quote": "However, MRI or CT of the brain should be done if Tremor onset is acute. Progression is rapid. Focal neurologic signs suggest a structural lesion (eg, stroke, brain tumor, a demyelinating disorder).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Unclear cause: TSH and T4 for hyperthyroidism.",
+   "source": 0,
+   "quote": "Thyroid-stimulating hormone (TSH) and thyroxine (T4) are measured to check for hyperthyroidism.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Calcium and parathyroid hormone for hyper- or hypoparathyroidism.",
+   "source": 0,
+   "quote": "Calcium and parathyroid hormone are measured to check for hyperparathyroidism or hypoparathyroidism.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Glucose testing (hemoglobin A1C) to exclude hypoglycemia.",
+   "source": 0,
+   "quote": "Glucose testing (hemoglobin A1C) is done to exclude hypoglycemia.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Toxic encephalopathy: BUN and ammonia; unexplained refractory hypertension: plasma free metanephrines.",
+   "source": 0,
+   "quote": "In patients with toxic encephalopathy, the underlying condition is usually readily apparent, but measurement of blood urea nitrogen and ammonia levels can help confirm the etiology. Measurement of free metanephrines in plasma is indicated in patients with unexplained refractory hypertension.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Under 40 with unexplained tremor: serum ceruloplasmin and urinary copper for Wilson disease.",
+   "source": 0,
+   "quote": "Serum ceruloplasmin and urinary copper levels should be measured to check for Wilson disease if patients are < 40 and have tremor with an unclear cause",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_7A2P6KYGG4"
+}

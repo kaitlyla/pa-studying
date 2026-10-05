@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Nasal bones are commonly fractured facial bones; the maxilla, orbit, cribriform plate and nasolacrimal ducts can be injured too.",
+   "source": 0,
+   "quote": "The nasal bones are commonly fractured facial bones because of their central location and protrusion. Depending on the mechanism of injury, fractures of the maxilla, orbit, or cribriform plate and injury to the nasolacrimal ducts may occur concurrently.",
+   "locator": "Overview",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Septal hematoma looks like a purplish bulge on the septum.",
+   "source": 0,
+   "quote": "Septal hematoma appears as a purplish bulge on the septum.",
+   "locator": "Symptoms and Signs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Drain a septal hematoma right away to prevent cartilage necrosis (saddle nose).",
+   "source": 0,
+   "quote": "Septal hematomas must be immediately incised and drained to prevent avascular or septic necrosis of the septal cartilage.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cribriform plate fracture can cause a CSF leak, raising the risk of meningitis or brain abscess.",
+   "source": 0,
+   "quote": "Cribriform plate fracture may cause a cerebrospinal fluid (CSF) leak, with increased risk of meningitis or brain abscess.",
+   "locator": "Overview",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Imaging: plain films don't help in an uncomplicated nasal fracture; CT of the facial bones if other fractures are suspected.",
+   "source": 0,
+   "quote": "Plain radiographs of an uncomplicated nasal fracture are not helpful because their sensitivity and specificity are poor. If other facial fractures or complications are suspected, CT of facial bones is performed.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected CSF rhinorrhea: test the discharge for beta-2-transferrin; bedside glucose strips are not reliable.",
+   "source": 0,
+   "quote": "If CSF rhinorrhea is suspected, testing nasal discharge for beta-2-transferrin is an effective test for detecting CSF (1). Bedside glucose test strips do not accurately identify CSF rhinorrhea and are not recommended.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Reduction timing: usually after 3 to 5 days, within 2 weeks.",
+   "source": 0,
+   "quote": "Reduction is usually deferred for 3 to 5 days after injury to allow swelling to subside but should take place within 2 weeks of the injury, before bony callus formation.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "claim said \"most commonly\"; the source says only \"commonly fractured\"",
+    "resolution": "\"most\" dropped; \"can be injured\" carries the source's \"may occur\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 5,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_B81D0V2871"
+}

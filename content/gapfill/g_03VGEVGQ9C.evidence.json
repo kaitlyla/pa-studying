@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Massive hemoptysis: treat and stabilize, usually in the ICU, before testing.",
+   "source": 0,
+   "quote": "Patients with massive hemoptysis require treatment and stabilization, usually in an intensive care unit, before testing.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Always image: usually a chest x-ray; sometimes CT first (eg, known bronchiectasis).",
+   "source": 0,
+   "quote": "Imaging should always be performed, typically chest radiography, although sometimes (eg, with known bronchiectasis) CT is the initial test.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Normal x-ray, consistent history, not massive: treat empirically for bronchitis; abnormal results or no supporting history need CT and bronchoscopy.",
+   "source": 0,
+   "quote": "Patients with normal results, a consistent history, and nonmassive hemoptysis can undergo empiric treatment for bronchitis. Patients with abnormal results and patients without a supporting history should undergo CT and bronchoscopy.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected PE: CT angiography, or less often V/Q scanning.",
+   "source": 0,
+   "quote": "CT angiography or, less commonly, ventilation/perfusion scanning with or without pulmonary arteriography can confirm the diagnosis of pulmonary embolism.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Labs: CBC, platelet count, PT and PTT.",
+   "source": 0,
+   "quote": "Patients usually should have a complete blood count, a platelet count, and measurement of prothrombin time (PT) and partial thromboplastin time (PTT).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Urinalysis for glomerulonephritis; serologies for anti-GBM disease, granulomatosis with polyangiitis or SLE if suspected.",
+   "source": 0,
+   "quote": "Serologies for anti-GBM disease, granulomatosis with polyangiitis, and systemic lupus erythematosus should be obtained if these conditions are suspected. Urinalysis should be performed to look for signs of glomerulonephritis (hematuria, proteinuria, casts).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possible TB: TB skin test and sputum culture first; negative results don't end the workup if no other diagnosis is found.",
+   "source": 0,
+   "quote": "TB skin testing and sputum culture should be done as the initial tests for active TB, but negative results do not preclude the need to induce sputum or do fiberoptic bronchoscopy to obtain samples for further acid-fast bacillus testing if an alternative diagnosis is not found.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_03VGEVGQ9C"
+}

@@ -1,0 +1,54 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Urine pregnancy test in every female of childbearing age.",
+   "source": 0,
+   "quote": "All females of childbearing age should be given a urine pregnancy test.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Severe vomiting, vomiting over 1 day, or dehydration: electrolytes, BUN, creatinine, glucose, urinalysis, sometimes liver tests.",
+   "source": 0,
+   "quote": "Patients with severe vomiting, vomiting lasting over 1 day, or signs of dehydration on examination should have other laboratory tests (eg, electrolytes, blood urea nitrogen, creatinine, glucose, urinalysis, sometimes liver tests).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Red flag findings: test for the cause the symptoms suggest.",
+   "source": 0,
+   "quote": "Patients with red flag findings should have testing appropriate to the symptoms",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Acute vomiting with diarrhea in a healthy patient with a benign exam is very likely infectious gastroenteritis; further assessment can wait.",
+   "source": 0,
+   "quote": "Acute vomiting accompanied by diarrhea in an otherwise healthy patient with a benign examination is highly likely to be infectious gastroenteritis; further assessment may be deferred.",
+   "locator": "Evaluation, Interpretation of findings",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Chronic vomiting: the same labs plus upper endoscopy, small-bowel radiographs, and gastric emptying and motility tests.",
+   "source": 0,
+   "quote": "The assessment of chronic vomiting usually includes the previously listed laboratory tests plus upper GI endoscopy, small-bowel radiographs, and tests to assess gastric emptying and antral-duodenal motility.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 3,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_VZN2EG3F59"
+}

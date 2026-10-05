@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Urinalysis first to tell true hematuria from red urine.",
+   "source": 0,
+   "quote": "Before testing proceeds, true hematuria should be distinguished from red urine by urinalysis.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Red urine without RBCs suggests myoglobinuria, hemoglobinuria, porphyria, or a medication or food.",
+   "source": 0,
+   "quote": "Red urine without red blood cells (RBCs) suggests myoglobinuria or hemoglobinuria, porphyria, or ingestion of certain medications or foods.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Casts, protein or dysmorphic RBCs point to a glomerular disorder.",
+   "source": 0,
+   "quote": "Presence of casts, protein, or dysmorphic RBCs (unusually shaped, with spicules, folding, and blebs) indicates a glomerular disorder.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Urine culture is usually done, because cystitis can show mostly RBCs.",
+   "source": 0,
+   "quote": "However, because urinalysis shows predominantly RBCs in some patients with cystitis, urine culture is usually done.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Gross hematuria or unexplained systemic symptoms: ultrasound or CT of the abdomen and pelvis.",
+   "source": 0,
+   "quote": "Patients with gross hematuria or unexplained systemic symptoms require ultrasonography or CT of the abdomen and pelvis.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Glomerular picture: BUN, creatinine, electrolytes, urinalysis and urine protein/creatinine ratio.",
+   "source": 0,
+   "quote": "If urine or clinical findings suggest a glomerular disorder, renal function is evaluated by measuring blood urea nitrogen, serum creatinine, and electrolytes; doing a urinalysis; and periodically determining the urine protein/creatinine ratio.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected stone: urinalysis and usually imaging.",
+   "source": 1,
+   "quote": "Patients suspected of having a calculus causing colic require urinalysis and usually an imaging study.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pyuria suggests infection, especially with foul-smelling urine or fever.",
+   "source": 1,
+   "quote": "Pyuria suggests infection, particularly if combined with suggestive clinical findings, such as foul-smelling urine or a fever.",
+   "locator": "Diagnosis, Urinalysis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Noncontrast CT is the preferred first imaging in most patients: it shows the stone's location, the degree of obstruction, and other causes such as aortic aneurysm.",
+   "source": 1,
+   "quote": "Noncontrast CT is the preferred initial imaging study in most patients. This study can detect the location of a calculus as well as the degree of obstruction. Moreover, CT may also reveal other causes of the pain (eg, aortic aneurysm).",
+   "locator": "Diagnosis, Imaging tests",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Typical symptoms: ultrasound or abdominal radiographs can usually confirm a stone with little or no radiation.",
+   "source": 1,
+   "quote": "For patients with typical symptoms, ultrasonography or abdominal radiographs can usually confirm presence of a calculus with minimal or no radiation exposure.",
+   "locator": "Diagnosis, Imaging tests",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Don't miss a dissecting aortic aneurysm, especially in older patients: renal artery involvement can cause hematuria and ureteral-type pain.",
+   "source": 1,
+   "quote": "Dissecting aortic aneurysm must be considered, particularly in older patients, because, if a renal artery is affected, it can cause hematuria, pain that radiates along a ureteral distribution, or both.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Strain the urine and send the stone for analysis.",
+   "source": 1,
+   "quote": "The calculus is obtained by straining the urine (or, if necessary, during operative removal) and sent to the laboratory for stone analysis.",
+   "locator": "Diagnosis, Identifying the cause",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 2,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 3,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 8,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 8,
+    "issue": "claim dropped the source's \"in most patients\"",
+    "resolution": "claim now says \"in most patients\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_YFQ9PD9N61"
+}

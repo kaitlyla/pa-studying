@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Always image with more than transiently impaired consciousness, GCS < 15, focal findings, persistent vomiting, seizures, loss of consciousness, or a suspected fracture.",
+   "source": 0,
+   "quote": "Imaging should always be done in patients with more than transiently impaired consciousness, GCS score < 15, focal neurologic findings, persistent vomiting, seizures, a history of loss of consciousness, or clinically suspected fractures.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possibly not needed after brief loss of consciousness (< 5 seconds) or transient amnesia in a patient who is alert with GCS 15.",
+   "source": 1,
+   "quote": "Some evidence suggests that CT is not necessary in patients with brief loss of consciousness (ie, < 5 seconds) or transient amnesia or disorientation but who are alert with a GCS of 15 during examination.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Canadian CT Head Rule is for minor head injury: loss of consciousness, amnesia or confusion, with a GCS score of at least 13–15.",
+   "source": 2,
+   "quote": "The definition of “minor head injury” used when deriving this rule included “a history of loss of consciousness (LOC), amnesia or confusion as well as a GCS score of at least 13–15”",
+   "locator": "Methods, Intervention",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "High risk: GCS not 15 within 2 hours, suspected open skull fracture, any sign of basal skull fracture, vomiting ≥ 2 episodes, or age ≥ 65 years.",
+   "source": 2,
+   "quote": "five high-risk factors (“failure to reach a Glasgow Coma Scale (GCS) score of 15 within 2 hours, suspected open skull fracture, any sign of basal skull fracture, vomiting ≥2 episodes or age ≥65 years”)",
+   "locator": "Methods, Intervention",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Medium risk: amnesia before impact > 30 minutes, or a dangerous mechanism of injury.",
+   "source": 2,
+   "quote": "two medium-risk factors (“amnesia before impact >30min and dangerous mechanism of injury”)",
+   "locator": "Methods, Intervention",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "CT only with any one of these findings; the rule doesn't apply to patients on anticoagulants or with bleeding disorders.",
+   "source": 3,
+   "quote": "CT Head is only required for mild head injury patients with any one of these findings—Rule is not applicable for patients on anticoagulants or with bleeding disorders.",
+   "locator": "Table 1, Canadian CT head rule criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Children: the PECARN algorithm helps limit radiation from head CT.",
+   "source": 1,
+   "quote": "For children with head injury, the Pediatric Emergency Care Applied Research Network (PECARN) has developed an algorithm that may help limit radiation exposure from head CT",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Epidural hematoma on CT: lenticular hyperdensity over the middle meningeal artery.",
+   "source": 0,
+   "quote": "CT: Hyperdensity in epidural space, classically lenticular-shaped and located over the middle meningeal artery (temporal fossa) due to a temporal bone fracture",
+   "locator": "Table: Common Types of Traumatic Brain Injury",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Subdural hematoma on CT: crescent-shaped hyperdensity.",
+   "source": 0,
+   "quote": "CT: Hyperdensity in subdural space, classically crescent-shaped",
+   "locator": "Table: Common Types of Traumatic Brain Injury",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 7,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 8,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_XM9AJJBPYQ"
+}

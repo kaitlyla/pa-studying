@@ -1,0 +1,90 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Topical anesthetic test: if anesthetic drops abolish the pain in a red eye, the cause is probably corneal.",
+   "source": 0,
+   "quote": "If topical anesthetic drops (eg, proparacaine) abolish pain in a red eye, the cause is probably a corneal disorder.",
+   "locator": "Evaluation, Interpretation of findings",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Elevated intraocular pressure: suspect acute angle-closure glaucoma.",
+   "source": 1,
+   "quote": "If intraocular pressure is elevated, acute angle closure glaucoma should be suspected",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Eye pain: testing is not usually needed; gonioscopy if glaucoma is suspected from raised intraocular pressure.",
+   "source": 0,
+   "quote": "Testing is not usually necessary, with some exceptions (see table Some Causes of Eye Pain). Gonioscopy is performed if glaucoma is suspected based on increased intraocular pressure.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "CT or MRI for suspected orbital pseudotumor or orbital cellulitis, or sinusitis that isn't clinically clear.",
+   "source": 0,
+   "quote": "Imaging, usually with CT or MRI, is performed if orbital pseudotumor or orbital cellulitis is suspected, or if sinusitis is suspected but the diagnosis is not clinically clear.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected optic neuritis: MRI to look for demyelinating brain lesions suggesting multiple sclerosis.",
+   "source": 0,
+   "quote": "When optic neuritis is suspected, MRI should be performed to assess for demyelinating lesions in the brain suggesting multiple sclerosis.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms or signs of optic nerve or retinal ischemia (eg, temporal headaches, jaw claudication, temporal artery tenderness): ESR, CRP and platelet count.",
+   "source": 1,
+   "quote": "Erythrocyte sedimentation rate (ESR), C-reactive protein, and platelet count are performed for all patients with symptoms (eg, temporal headaches, jaw claudication, proximal myalgias, stiffness) or signs (eg, temporal artery tenderness or induration, pale retina, papilledema) suggesting optic nerve or retinal ischemia",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ultrasound to view the retina when it isn't clearly visible on dilated indirect ophthalmoscopy.",
+   "source": 1,
+   "quote": "Ultrasound is performed to view the retina if the retina is not clearly visible with pupillary dilation and indirect ophthalmoscopy performed by an ophthalmologist.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "MRI or CT when vascular ischemia (eg, central retinal artery) is suspected.",
+   "source": 1,
+   "quote": "MRI or CT scan when vascular ischemia is suspected (eg central retinal artery)",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 2,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 4,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 5,
+    "issue": "claim added giant cell arteritis, which the quote does not name",
+    "resolution": "giant cell arteritis dropped; claim now names symptoms or signs of optic nerve or retinal ischemia; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_8NHA55ENVR"
+}

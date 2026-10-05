@@ -1,0 +1,95 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Suspected CNS infection (bacterial or viral meningitis, encephalitis).",
+   "source": 0,
+   "quote": "Suspected central nervous system (CNS) infection (acute bacterial meningitis, viral meningitis, encephalitis, subacute or chronic meningitis)",
+   "locator": "Indications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected subarachnoid hemorrhage not seen on neuroimaging, or when imaging isn't immediately available.",
+   "source": 0,
+   "quote": "Suspected spontaneous subarachnoid hemorrhage not diagnosed on neuroimaging or if immediate neuroimaging is not available",
+   "locator": "Indications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Other: Guillain-Barré syndrome, leptomeningeal metastases.",
+   "source": 0,
+   "quote": "Other CNS conditions, including Guillain-Barré syndrome, leptomeningeal metastases (carcinomatous meningitis), genetic metabolic encephalopathies",
+   "locator": "Indications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Absolute contraindication: infection at or near the insertion site.",
+   "source": 0,
+   "quote": "Suspected infection (eg, cellulitis, abscess) at or near the site of needle insertion",
+   "locator": "Contraindications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "CT or MRI first if there are focal deficits, altered mental status, papilledema or signs of herniation.",
+   "source": 0,
+   "quote": "If there are suggestive findings (eg, focal neurologic deficits, altered mental status, papilledema, signs of herniation), do CT or MRI before lumbar puncture.",
+   "locator": "Contraindications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Coagulopathy (eg, INR >1.5 including therapeutic anticoagulation, platelets < 50,000/mcL, or a raised aPTT) can lead to spinal hematoma; consider correcting it first.",
+   "source": 0,
+   "quote": "Coagulopathy (eg, international normalized ratio [INR] >1.5, including therapeutic anticoagulation; thrombocytopenia [< 50,000/mcL, 50 × 109/L], or pathologically increased activated partial thromboplastin time), which can lead to spinal hematoma from lumbar puncture: Consider correcting prior to procedure.",
+   "locator": "Contraindications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "If the LP is delayed, treat suspected meningitis right away, after blood cultures.",
+   "source": 0,
+   "quote": "When lumbar puncture is deferred, begin treatment of suspected acute bacterial meningitis or subarachnoid hemorrhage immediately. For suspected meningitis, do blood cultures prior to initiation of antibiotics.",
+   "locator": "Contraindications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Bacteremia is not a contraindication.",
+   "source": 0,
+   "quote": "Bacteremia has not been shown to predispose to meningitis after lumbar puncture and thus is not a contraindication.",
+   "locator": "Contraindications",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 2,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 4,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 5,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 5,
+    "issue": "quote stopped before the spinal-hematoma clause the claim asserts",
+    "resolution": "quote extended through \"Consider correcting prior to procedure.\"; claim now names INR >1.5, platelets < 50,000/mcL and raised aPTT; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_E27VANXBPM"
+}

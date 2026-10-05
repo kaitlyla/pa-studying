@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Possible stroke: neuroimaging and bedside glucose are mandatory.",
+   "source": 0,
+   "quote": "Although diagnosis is clinical, neuroimaging and bedside glucose testing are mandatory.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "CT or MRI first to exclude intracerebral hemorrhage, subdural or epidural hematoma, or a tumor.",
+   "source": 0,
+   "quote": "Neuroimaging with CT or MRI is performed first to exclude intracerebral hemorrhage, subdural or epidural hematoma, and a rapidly growing, bleeding, or suddenly symptomatic tumor.",
+   "locator": "Diagnosis, Brain assessment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected large vessel occlusion: CTA or MRA, especially within 24 hours of onset.",
+   "source": 0,
+   "quote": "Guidelines recommend that all patients with clinical suspicion of large vessel occlusion should undergo vessel imaging (CTA or MRA), especially within 24 hours of symptom onset given advances in acute stroke treatment.",
+   "locator": "Diagnosis, Brain assessment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Stroke bloods: CBC, metabolic panel, PT/PTT, fasting glucose, hemoglobin A1C and lipids.",
+   "source": 0,
+   "quote": "Routine blood testing typically includes complete blood count (CBC), metabolic panel, prothrombin time/partial thromboplastin time (PT/PTT), fasting blood glucose, hemoglobin A1C, and lipid profile.",
+   "locator": "Diagnosis, Blood-related causes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Sudden or severe weakness or any respiratory symptoms: forced vital capacity and maximal inspiratory force; VC < 15 mL/kg or inspiratory force < 20 cm H2O means higher risk of ventilatory failure.",
+   "source": 1,
+   "quote": "If sudden or severe true general weakness or any respiratory symptoms are present, forced vital capacity and maximal inspiratory force must be tested to assess risk of acute ventilatory failure. Patients with vital capacity < 15 mL/kg or inspiratory force < 20 cm H2O are at increased risk.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Routine labs are usually done unless the cause is obvious: CBC, electrolytes with calcium and magnesium, glucose, kidney and liver tests, TSH, ESR, hepatitis C serology.",
+   "source": 1,
+   "quote": "Unless the cause is obvious, routine laboratory tests (CBC, electrolytes [including calcium and magnesium], glucose, kidney and liver function tests, TSH, ESR, hepatitis C serologic testing) are usually done.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Brain upper motor neuron signs: MRI (CT if MRI isn't possible).",
+   "source": 1,
+   "quote": "If brain upper motor neuron dysfunction is suspected, the key test is MRI. CT is used when MRI testing is not possible (eg, in patients with an older, non-MRI compatible cardiac pacemaker).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected myelopathy: spinal MRI.",
+   "source": 1,
+   "quote": "If myelopathy is suspected, MRI can detect lesions in the spinal cord.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Neuropathy, myopathy or neuromuscular junction disorder: EMG and nerve conduction studies.",
+   "source": 1,
+   "quote": "If polyneuropathies, myopathies, or neuromuscular junction disorders are suspected, the key tests that help differentiate these mechanisms of weakness are electrodiagnostic testing (electromyography and nerve conduction studies).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Even when acute, these studies help separate Guillain-Barré syndrome, botulism and other neuromuscular junction disorders.",
+   "source": 1,
+   "quote": "However, these studies can help differentiate among certain acute disorders, such as acute demyelinating neuropathy (eg, Guillain-Barré syndrome), acute botulism, and other acute neuromuscular junction disorders.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possible myasthenia gravis: ice pack test and acetylcholine receptor antibodies.",
+   "source": 1,
+   "quote": "If findings suggest myasthenia gravis, an ice pack test and serologic testing (eg, acetylcholine receptor antibody levels, sometimes anti–muscle-specific tyrosine kinase antibodies)",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 5,
+    "issue": "claim dropped the source's \"are usually done\"",
+    "resolution": "claim now says routine labs \"are usually done\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_NYTGZVANJ1"
+}

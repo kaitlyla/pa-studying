@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "C-spine imaging (preferably CT) for everyone except awake, alert, sober patients with no focal deficits, midline tenderness or distracting injury.",
+   "source": 0,
+   "quote": "Cervical spine imaging can be deferred in patients who are not intoxicated, do not have focal neurologic findings, have no midline cervical spine tenderness or distracting injuries (eg, femur fracture), and are awake and alert. All others should have cervical spine imaging, preferably using CT.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "E-FAST for intraperitoneal blood, especially in unstable patients; CT if stable.",
+   "source": 0,
+   "quote": "Bedside E-FAST examination can be useful to identify intraperitoneal blood, particularly for unstable patients; it is sensitive for significant volumes of intraperitoneal blood and thus the need for immediate laparotomy. If patients are stable, CT is the preferred study",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Chest x-ray shows airway disruption, lung injury, hemothorax, pneumothorax and a widened mediastinum; chest CT is more sensitive.",
+   "source": 0,
+   "quote": "Chest radiograph can identify airway disruption, lung injury, hemothorax, and pneumothorax; it can also suggest thoracic aorta tears (eg, by mediastinal widening). However, chest CT is more sensitive for most intrathoracic injuries and is often preferred.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected pelvic fracture: CT of the pelvis.",
+   "source": 0,
+   "quote": "If pelvic fracture is suspected, CT of the pelvis is performed; it is more accurate than plain radiographs.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Head CT for altered mental status, focal neurologic signs, or loss of consciousness.",
+   "source": 0,
+   "quote": "Head CT is typically performed in patients with altered mental status or focal neurologic abnormalities and in patients who sustained loss of consciousness.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected spinal cord injury: MRI.",
+   "source": 0,
+   "quote": "Patients with suspected spinal cord injury should be imaged using MRI.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possible aortic injury (deceleration, pulse deficits, asymmetric BP): may need CT angiography or other aortic imaging.",
+   "source": 0,
+   "quote": "Aortic injury should be considered in patients with severe deceleration chest injury or suggestive signs (eg, pulse deficits or asymmetric blood pressure measurements, end-organ ischemia, suggestive findings on chest radiograph); these patients may require CT angiography or other aortic imaging.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Significant blunt chest injury: cardiac monitor and ECG.",
+   "source": 0,
+   "quote": "All patients suspected of having significant blunt chest injury should be placed on a cardiac monitor and have an ECG to detect myocardial injury and arrhythmias.",
+   "locator": "Evaluation, Imaging studies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Labs: CBC, serial hemoglobin, blood gas, urine for blood, glucose, type and crossmatch, coagulation studies.",
+   "source": 0,
+   "quote": "Laboratory tests that may be useful include: Complete blood count to establish a baseline Serial hemoglobin levels to assess for bleeding Blood gas determination for partial pressure of oxygen, partial pressure of carbon dioxide, and base deficit Urine examination for blood Glucose to evaluate for hypoglycemia Type and crossmatch for possible blood transfusion Coagulation studies",
+   "locator": "Evaluation, Laboratory evaluation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Perfusion: serum lactate and base deficit to catch early or partly treated shock.",
+   "source": 0,
+   "quote": "Measures of perfusion (serum lactate, base deficit on arterial blood gas measurement, and, in patients with a catheterized central vein, central venous oxygen saturation) are indicated to help identify early or partially treated shock.",
+   "locator": "Evaluation, Laboratory evaluation",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 6,
+    "issue": "claim dropped the source's \"may require … or other aortic imaging\"",
+    "resolution": "claim now says \"may need CT angiography or other aortic imaging\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 7,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   },
+   {
+    "claim": 9,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_5TA0VH5ZGG"
+}

@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Most red eyes are conjunctivitis.",
+   "source": 0,
+   "quote": "Most cases are caused by conjunctivitis.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Testing is usually unnecessary; viral cultures may help if herpes simplex or zoster is suspected and the diagnosis isn't clear.",
+   "source": 0,
+   "quote": "Testing is usually unnecessary. Viral cultures may help if herpes simplex or herpes zoster is suspected and the diagnosis is not clear clinically.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Corneal ulcers are cultured by an ophthalmologist; gonioscopy in glaucoma.",
+   "source": 0,
+   "quote": "Corneal ulcers are cultured by an ophthalmologist. Gonioscopy is performed in patients with glaucoma.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Uveitis without an obvious cause: consider autoimmune testing; scleritis is worked up as an ophthalmologist directs.",
+   "source": 0,
+   "quote": "Testing for autoimmune disorders may be worthwhile in patients with uveitis and no obvious cause (eg, trauma). Patients with scleritis undergo further testing as directed by an ophthalmologist.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "claim dropped the source's \"may help\" for viral cultures",
+    "resolution": "claim now says viral cultures \"may help\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_KENXNEAAQM"
+}

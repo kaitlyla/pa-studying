@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "CBC for large-volume or occult blood loss; significant bleeding also needs coagulation studies (platelets, PT, PTT) and liver tests.",
+   "source": 0,
+   "quote": "CBC should be obtained in patients with large-volume or occult blood loss. Patients with more significant bleeding also require coagulation studies (eg, platelet count, prothrombin time [PT], partial thromboplastin time [PTT]) and liver tests (eg, bilirubin, alkaline phosphatase, albumin, aspartate aminotransferase [AST], alanine aminotransferase [ALT]).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Type and cross-match if bleeding is ongoing; repeat hemoglobin and hematocrit up to every 6 hours in severe bleeding.",
+   "source": 0,
+   "quote": "Type and cross-match are performed if bleeding is ongoing. Hemoglobin and hematocrit may be repeated up to every 6 hours in patients with severe bleeding.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Nasogastric aspiration and lavage for every suspected upper GI bleed; up to 15% of upper GI bleeds have no blood in the aspirate.",
+   "source": 0,
+   "quote": "Nasogastric aspiration and lavage should be performed in all patients with suspected upper GI bleeding (eg, hematemesis, coffee-ground emesis, melena, massive rectal bleeding). Bloody nasogastric aspirate indicates active upper GI bleeding, but up to 15% of patients with upper GI bleeding have no blood in the nasogastric aspirate",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Upper endoscopy for upper GI bleeding: rapidly when bleeding is significant, deferrable for 24 hours if it stops or is minimal.",
+   "source": 0,
+   "quote": "Upper endoscopy (examination of the esophagus, stomach, and duodenum) should be performed for upper GI bleeding. Because endoscopy may be therapeutic as well as diagnostic, it should be performed rapidly for significant bleeding but may be deferred for 24 hours if bleeding stops or is minimal.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hematochezia: colonoscopy (sigmoidoscopy and anoscopy may be enough for typical hemorrhoidal bleeding).",
+   "source": 0,
+   "quote": "Flexible sigmoidoscopy and anoscopy may be all that is required acutely for patients with symptoms typical of hemorrhoidal bleeding. All other patients with hematochezia should have colonoscopy",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ACG 2023: CT angiography first for ongoing hemodynamically significant hematochezia.",
+   "source": 0,
+   "quote": "The 2023 American College of Gastroenterology guidelines on management of patients with acute lower GI bleeding suggest CT angiography as the initial diagnostic test in patients with ongoing hemodynamically significant hematochezia",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote not verbatim at the live page: the extractor added spaces at inline-link boundaries",
+    "resolution": "extractor fixed; link-boundary spaces removed; quote matched verbatim in the verifier's saved live copy with the verifier's extractor; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_S1RTCD4G0N"
+}

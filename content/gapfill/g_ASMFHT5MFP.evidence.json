@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Cerebellar disorder: take a thorough family history and look for acquired systemic disorders.",
+   "source": 0,
+   "quote": "Diagnosis of cerebellar disorders includes a thorough family history and search for acquired systemic disorders.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Neuroimaging, typically MRI; genetic testing if the family history suggests it.",
+   "source": 0,
+   "quote": "Neuroimaging, typically MRI, is done. Genetic testing is done if family history is suggestive.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Acute symptoms with headache, neurologic abnormalities or other central signs: generally gadolinium-enhanced MRI.",
+   "source": 1,
+   "quote": "generally gadolinium-enhanced magnetic resonance imaging (MRI) is indicated for patients with acute symptoms who have headache, neurologic abnormalities, or any other findings suggestive of a central nervous system etiology.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possible stroke: neuroimaging and bedside glucose are mandatory.",
+   "source": 2,
+   "quote": "Although diagnosis is clinical, neuroimaging and bedside glucose testing are mandatory.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "leo-27296 (Detective task 01a109ff-b515-7500-8dd7-053efc5b50d9, dispatched by shay-49353; check time 2026-10-05T03:13Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "claim dropped the source's \"generally\" for MRI",
+    "resolution": "claim now says \"generally gadolinium-enhanced MRI\"; re-checked OK by shay-49353 at 2026-10-05T03:18Z"
+   }
+  ]
+ },
+ "block": "g_ASMFHT5MFP"
+}
