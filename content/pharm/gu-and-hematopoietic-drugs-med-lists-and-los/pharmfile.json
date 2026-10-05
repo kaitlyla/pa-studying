@@ -5,12 +5,36 @@
  "basePt": 8,
  "blocks": [
   "b_FQD1MDT10G",
+  "b_WMQQH2EKBA",
+  "b_EQYRY2JENN",
+  "b_R2HX1NT020",
+  "b_02PMR55ZJ7",
+  "b_5J16ABVW7W",
+  "b_ZB8R9WR1RF",
+  "b_VFWT7QPJV9",
+  "b_297VV83G1A",
+  "b_RAP3SC7214",
+  "b_W5CWVAQHG0",
+  "b_EVJ35V5AWF",
+  "b_YF87HPG240",
+  "b_B45MEMX2R4",
+  "b_BV1Z9B5XR2",
+  "b_46TDPDWCPB",
   "b_A3HENGWS4Y",
   "b_YN6Z6FJZ6W",
   "b_THB3PD0Y67",
   "b_039P8ZKNRG",
   "b_3VGXNDXPQX",
   "b_7FHWZDE00H",
+  "b_C7MZFD46DG",
+  "b_AD3JKZ05ZJ",
+  "b_6N872PGAJ6",
+  "b_CHJZFFHCVC",
+  "b_9E2TKVJP00",
+  "b_5MDBRM44QZ",
+  "b_SMP4D38MYK",
+  "b_ASYK6CG73F",
+  "b_CSFCRRH7M4",
   "b_H6Y72FNZ5X",
   "b_8D09QB9Y1A",
   "b_RA1RQ5J2QS",
@@ -20,18 +44,234 @@
  ],
  "parts": [
   {
-   "id": "p_24GXEZ488Z",
+   "id": "p_KYMADG01W2",
    "role": "overview",
-   "title": "",
+   "title": "Med List: GU",
    "card": null,
    "blocks": [
-    "b_FQD1MDT10G",
+    "b_FQD1MDT10G"
+   ]
+  },
+  {
+   "id": "p_54CD30QHD5",
+   "role": "card",
+   "title": "BPH: a1 antagonists (a-blockers)",
+   "card": "c_JZXRT57XCA",
+   "blocks": [
+    "b_WMQQH2EKBA"
+   ]
+  },
+  {
+   "id": "p_F02MDRZ0EW",
+   "role": "card",
+   "title": "5-a-Reductase Inhibitors",
+   "card": "c_RSH2P68PKM",
+   "blocks": [
+    "b_EQYRY2JENN"
+   ]
+  },
+  {
+   "id": "p_H98H10XT67",
+   "role": "card",
+   "title": "Phosphodiesterase Type-5 (PDE-5) Inhibitors",
+   "card": "c_1SA1XQD0EP",
+   "blocks": [
+    "b_R2HX1NT020"
+   ]
+  },
+  {
+   "id": "p_A9088VADCJ",
+   "role": "card",
+   "title": "Anticholinergics (discussed with urinary incontinence drugs)",
+   "card": "c_0PWHBNFEX1",
+   "blocks": [
+    "b_02PMR55ZJ7"
+   ]
+  },
+  {
+   "id": "p_87X096S44W",
+   "role": "card",
+   "title": "B3 agonist:",
+   "card": "c_51ZW8R97EC",
+   "blocks": [
+    "b_5J16ABVW7W"
+   ]
+  },
+  {
+   "id": "p_0VTHPNJCYD",
+   "role": "card",
+   "title": "Erectile Dysfunction: Phosphodiesterase Type-5 (PDE-5) Inhibitors",
+   "card": "c_THCN8Q5P7Q",
+   "blocks": [
+    "b_ZB8R9WR1RF"
+   ]
+  },
+  {
+   "id": "p_HNXMPZA1VJ",
+   "role": "card",
+   "title": "Injected vasodilators",
+   "card": "c_XXERWABHTH",
+   "blocks": [
+    "b_VFWT7QPJV9"
+   ]
+  },
+  {
+   "id": "p_V8HE369VM4",
+   "role": "card",
+   "title": "Testosterone Replacement",
+   "card": "c_ZDQV5WB19A",
+   "blocks": [
+    "b_297VV83G1A"
+   ]
+  },
+  {
+   "id": "p_2E0HZ59PHT",
+   "role": "card",
+   "title": "Alprostadil (Muse, Caverject, Edex)",
+   "card": "c_NJW9KXWDVH",
+   "blocks": [
+    "b_RAP3SC7214"
+   ]
+  },
+  {
+   "id": "p_MQECX3R9C0",
+   "role": "card",
+   "title": "Stress Incontinence: Topical/Vaginal Estrogens",
+   "card": "c_28Z3H593E5",
+   "blocks": [
+    "b_W5CWVAQHG0"
+   ]
+  },
+  {
+   "id": "p_KXRJQB71BJ",
+   "role": "card",
+   "title": "Serotonin/Norepinephrine Reuptake Inhibitor (Antidepressant)",
+   "card": "c_8HXV3AWE3T",
+   "blocks": [
+    "b_EVJ35V5AWF"
+   ]
+  },
+  {
+   "id": "p_T3GJ2R9MWZ",
+   "role": "card",
+   "title": "Overflow Incontinence",
+   "card": "c_7AQP4YFNE3",
+   "blocks": [
+    "b_YF87HPG240"
+   ]
+  },
+  {
+   "id": "p_RRBWFDTPT9",
+   "role": "card",
+   "title": "Urge Incontinence: β3-adrenergic agonist",
+   "card": "c_9AZRP2RMDN",
+   "blocks": [
+    "b_B45MEMX2R4"
+   ]
+  },
+  {
+   "id": "p_Z08ENX0P28",
+   "role": "card",
+   "title": "Antimuscarinic agents",
+   "card": "c_X7KEZNHGME",
+   "blocks": [
+    "b_BV1Z9B5XR2"
+   ]
+  },
+  {
+   "id": "p_D302SH4QH3",
+   "role": "lo",
+   "title": "LOs Genitourinary",
+   "card": null,
+   "blocks": [
+    "b_46TDPDWCPB",
     "b_A3HENGWS4Y",
     "b_YN6Z6FJZ6W",
     "b_THB3PD0Y67",
     "b_039P8ZKNRG",
     "b_3VGXNDXPQX",
-    "b_7FHWZDE00H",
+    "b_7FHWZDE00H"
+   ]
+  },
+  {
+   "id": "p_S2RQ3Z74SV",
+   "role": "card",
+   "title": "Med List: Hematopoietic Drugs — Minerals: Iron",
+   "card": "c_FH3EV4GFD7",
+   "blocks": [
+    "b_C7MZFD46DG"
+   ]
+  },
+  {
+   "id": "p_EX0P5GEKQY",
+   "role": "card",
+   "title": "Ferrous salts (oral)",
+   "card": "c_3EJW0DQPB4",
+   "blocks": [
+    "b_AD3JKZ05ZJ"
+   ]
+  },
+  {
+   "id": "p_MDBV5QKRMG",
+   "role": "card",
+   "title": "Parenteral Iron formulations",
+   "card": "c_RR2ZFHT1SR",
+   "blocks": [
+    "b_6N872PGAJ6"
+   ]
+  },
+  {
+   "id": "p_MGA6HW83H1",
+   "role": "card",
+   "title": "Vitamins",
+   "card": "c_8V57JQB39P",
+   "blocks": [
+    "b_CHJZFFHCVC"
+   ]
+  },
+  {
+   "id": "p_PSQEWCWKG3",
+   "role": "card",
+   "title": "Folic Acid",
+   "card": "c_HRBA2EA6QF",
+   "blocks": [
+    "b_9E2TKVJP00"
+   ]
+  },
+  {
+   "id": "p_2DMQ4HTCM1",
+   "role": "card",
+   "title": "Hematopoietic Growth Factors: Erythropoiesis-Stimulating Agents",
+   "card": "c_3V7VMFYHTJ",
+   "blocks": [
+    "b_5MDBRM44QZ"
+   ]
+  },
+  {
+   "id": "p_4GRZRD44FH",
+   "role": "card",
+   "title": "Myeloid Growth Factors: G-CSF",
+   "card": "c_HVCAWXD13J",
+   "blocks": [
+    "b_SMP4D38MYK"
+   ]
+  },
+  {
+   "id": "p_46ANA9TEPC",
+   "role": "card",
+   "title": "Granulocyte macrophage colony stimulating factor (GM-CSF)",
+   "card": "c_MAJPRFT48K",
+   "blocks": [
+    "b_ASYK6CG73F"
+   ]
+  },
+  {
+   "id": "p_JP1BZ128HE",
+   "role": "lo",
+   "title": "LOs Hematopoietic Drugs",
+   "card": null,
+   "blocks": [
+    "b_CSFCRRH7M4",
     "b_H6Y72FNZ5X",
     "b_8D09QB9Y1A",
     "b_RA1RQ5J2QS",

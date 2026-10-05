@@ -5,6 +5,20 @@
  "basePt": 8,
  "blocks": [
   "b_J2KMPBXH3N",
+  "b_YRXBW53BHZ",
+  "b_SYESCMKYN1",
+  "b_25VGQV19K9",
+  "b_DE4BAP0QD8",
+  "b_16RMTB9Y49",
+  "b_E9APP6HH5J",
+  "b_RVV5BYD7JD",
+  "b_ZVAEFQ5YFZ",
+  "b_DQTB2D8R06",
+  "b_E3DCCE81HA",
+  "b_7Q9730A41S",
+  "b_APGR3S34CR",
+  "b_KACHKBZK15",
+  "b_S63GJVGEHQ",
   "b_1VAWED2P94",
   "b_6QNFBVB3N5",
   "b_51W4957TRF",
@@ -24,17 +38,159 @@
  ],
  "parts": [
   {
-   "id": "p_WB9YFQPTNN",
+   "id": "p_1RKN1GK0AC",
    "role": "overview",
-   "title": "",
+   "title": "AntiPlatelets Pharm II Exam 3 Med List: Antithrombotics",
    "card": null,
    "blocks": [
-    "b_J2KMPBXH3N",
-    "b_1VAWED2P94",
+    "b_J2KMPBXH3N"
+   ]
+  },
+  {
+   "id": "p_2RZH1BEBH6",
+   "role": "card",
+   "title": "Nonsteroidal Antiinflammatory Drug (NSAID):",
+   "card": "c_FHBEK18ECJ",
+   "blocks": [
+    "b_YRXBW53BHZ"
+   ]
+  },
+  {
+   "id": "p_NT3W2PE1B2",
+   "role": "card",
+   "title": "Adenosine Diphosphate Inhibitors: P2Y12 -i",
+   "card": "c_GC3ARVE1M9",
+   "blocks": [
+    "b_SYESCMKYN1"
+   ]
+  },
+  {
+   "id": "p_69T1G45D8J",
+   "role": "card",
+   "title": "Glycoprotein IIb/IIIa Antagonists:",
+   "card": "c_5ZYSXFNM9B",
+   "blocks": [
+    "b_25VGQV19K9"
+   ]
+  },
+  {
+   "id": "p_KP8HN5T3BQ",
+   "role": "card",
+   "title": "Additional Anti-Platelet Directed Drugs:",
+   "card": "c_5Q5AHW0S2K",
+   "blocks": [
+    "b_DE4BAP0QD8"
+   ]
+  },
+  {
+   "id": "p_9AQPY83QMR",
+   "role": "card",
+   "title": "Anticoagulants: Vitamin K Antagonist",
+   "card": "c_JMD5FWCZJV",
+   "blocks": [
+    "b_16RMTB9Y49"
+   ]
+  },
+  {
+   "id": "p_4R34S3J7KT",
+   "role": "card",
+   "title": "Direct Thrombin Inhibitors:",
+   "card": "c_CT8T2JFNS0",
+   "blocks": [
+    "b_E9APP6HH5J"
+   ]
+  },
+  {
+   "id": "p_PCY02GN6RT",
+   "role": "card",
+   "title": "Heparin and Related Drugs",
+   "card": "c_1W9T6QFWR7",
+   "blocks": [
+    "b_RVV5BYD7JD"
+   ]
+  },
+  {
+   "id": "p_EZ787WWRFD",
+   "role": "card",
+   "title": "Factor Xa Inhibitors:",
+   "card": "c_0MBJ1P5NT5",
+   "blocks": [
+    "b_ZVAEFQ5YFZ"
+   ]
+  },
+  {
+   "id": "p_EXR5P9GRQX",
+   "role": "card",
+   "title": "Fibrinolytics:",
+   "card": "c_ZJVQB3DDA6",
+   "blocks": [
+    "b_DQTB2D8R06"
+   ]
+  },
+  {
+   "id": "p_9PYH6CD1JA",
+   "role": "card",
+   "title": "Key Monitoring Parameters: Aspirin",
+   "card": "c_FHBEK18ECJ",
+   "blocks": [
+    "b_E3DCCE81HA"
+   ]
+  },
+  {
+   "id": "p_BK24CR0XNH",
+   "role": "card",
+   "title": "Key Monitoring Parameters: Warfarin",
+   "card": "c_JMD5FWCZJV",
+   "blocks": [
+    "b_7Q9730A41S"
+   ]
+  },
+  {
+   "id": "p_DSEWH1MVRY",
+   "role": "card",
+   "title": "Key Monitoring Parameters: Heparin, LMWH and Fondaparinux",
+   "card": "c_1W9T6QFWR7",
+   "blocks": [
+    "b_APGR3S34CR"
+   ]
+  },
+  {
+   "id": "p_MRKKCSGTAW",
+   "role": "card",
+   "title": "Key Monitoring Parameters: Direct Thrombin Inhibitors and Factor Xa Inhibitors",
+   "card": "c_CT8T2JFNS0",
+   "blocks": [
+    "b_KACHKBZK15"
+   ]
+  },
+  {
+   "id": "p_4BV2HP7XV0",
+   "role": "card",
+   "title": "Reversal agents",
+   "card": "c_GEQ38H1TVH",
+   "blocks": [
+    "b_S63GJVGEHQ",
+    "b_1VAWED2P94"
+   ]
+  },
+  {
+   "id": "p_EYPWWKHFJN",
+   "role": "card",
+   "title": "Normal Hemostasis",
+   "card": "c_CE7BYRNA0N",
+   "blocks": [
     "b_6QNFBVB3N5",
     "b_51W4957TRF",
     "b_0N7WTGKCS2",
-    "b_G5K2J5PB0D",
+    "b_G5K2J5PB0D"
+   ]
+  },
+  {
+   "id": "p_WEGP2TPR69",
+   "role": "lo",
+   "title": "Antithrombotic/Thrombolytics LOs",
+   "card": null,
+   "blocks": [
     "b_EQT5SB6NC8",
     "b_2PG9EC68VK",
     "b_DXC30BPBVW",

@@ -5,6 +5,45 @@
  "basePt": 8,
  "blocks": [
   "b_TRHT1QX52V",
+  "b_TNR4T7NNWD",
+  "b_7VYPW89WFN",
+  "b_D78QN12TWP",
+  "b_YY6MW05WW9",
+  "b_VM5X1D5PNB",
+  "b_1J82SF8QAG",
+  "b_XTJ9TTP9P0",
+  "b_G0XX2WA1JZ",
+  "b_3W2YMA3QVP",
+  "b_5VF956E9VV",
+  "b_1J60F8H9GV",
+  "b_ZKZ30RXXNA",
+  "b_Z2GTFVRXZ0",
+  "b_1BHNS3THRW",
+  "b_JRQH10PY1K",
+  "b_EKMMG47D29",
+  "b_XWZ5G2K3PN",
+  "b_72TH18C5T3",
+  "b_F0FR2T38CY",
+  "b_ESY263FWXP",
+  "b_BCXTQ33KQ9",
+  "b_87TPT6K1QD",
+  "b_453P8V5830",
+  "b_4YPQ7PTDKA",
+  "b_65W7ZX014P",
+  "b_0KNMBNMT8E",
+  "b_TZ49GQF3Q9",
+  "b_ST44DZKAGH",
+  "b_TCZY6A7ZV6",
+  "b_MTQWA0T2ZT",
+  "b_ATYQPEH2F1",
+  "b_FBRMTXBHJ0",
+  "b_1DNY0276XF",
+  "b_1TQG78V7EM",
+  "b_CJ0THTYQA5",
+  "b_ESKV5GQ4FV",
+  "b_5JP78VQ8FA",
+  "b_40AZ33AC1S",
+  "b_QH3REEVXTS",
   "b_VTGMQFQ959",
   "b_8PYMXJ7AA6",
   "b_TRKMQ9R308",
@@ -22,12 +61,363 @@
  ],
  "parts": [
   {
-   "id": "p_FETNXNGT71",
+   "id": "p_5JFX0114DR",
    "role": "overview",
-   "title": "",
+   "title": "GI Medication List: OTC-recommend active ingredients and names",
    "card": null,
    "blocks": [
-    "b_TRHT1QX52V",
+    "b_TRHT1QX52V"
+   ]
+  },
+  {
+   "id": "p_XP9V3GM9GH",
+   "role": "card",
+   "title": "Serotonin 5-HT3 Receptor Antagonists:",
+   "card": "c_Z3W9VNTMAH",
+   "blocks": [
+    "b_TNR4T7NNWD"
+   ]
+  },
+  {
+   "id": "p_R4MVA19EE0",
+   "role": "card",
+   "title": "Dopamine D2 Receptor Antagonists:",
+   "card": "c_B5WV8AJCNS",
+   "blocks": [
+    "b_7VYPW89WFN"
+   ]
+  },
+  {
+   "id": "p_R552P042YE",
+   "role": "card",
+   "title": "Phenothiazines",
+   "card": "c_FHJ5EZAEK6",
+   "blocks": [
+    "b_D78QN12TWP"
+   ]
+  },
+  {
+   "id": "p_S298YXYTRV",
+   "role": "card",
+   "title": "Butyrophenones",
+   "card": "c_YBD74XV7V6",
+   "blocks": [
+    "b_YY6MW05WW9"
+   ]
+  },
+  {
+   "id": "p_B7P357EDKE",
+   "role": "card",
+   "title": "Benzamides",
+   "card": "c_M1Y90NS53A",
+   "blocks": [
+    "b_VM5X1D5PNB"
+   ]
+  },
+  {
+   "id": "p_TYFT5RB4JM",
+   "role": "card",
+   "title": "Benzodiazepines",
+   "card": "c_H0Q2MF2J7G",
+   "blocks": [
+    "b_1J82SF8QAG"
+   ]
+  },
+  {
+   "id": "p_2RHM7SCKD8",
+   "role": "card",
+   "title": "H1 Antihistamines: OTC",
+   "card": "c_YN5JKKW1N1",
+   "blocks": [
+    "b_XTJ9TTP9P0"
+   ]
+  },
+  {
+   "id": "p_M207PDKMBH",
+   "role": "card",
+   "title": "Antimuscarinic",
+   "card": "c_HG6XQ00GBZ",
+   "blocks": [
+    "b_G0XX2WA1JZ"
+   ]
+  },
+  {
+   "id": "p_Z8VXTNDPFE",
+   "role": "card",
+   "title": "Neurokinin-1 Receptor Antagonist",
+   "card": "c_YW4GDJBHAS",
+   "blocks": [
+    "b_3W2YMA3QVP"
+   ]
+  },
+  {
+   "id": "p_H42M17YQ4Y",
+   "role": "card",
+   "title": "Corticosteroids",
+   "card": "c_244067WQDW",
+   "blocks": [
+    "b_5VF956E9VV"
+   ]
+  },
+  {
+   "id": "p_CKFMQVCB6A",
+   "role": "card",
+   "title": "Non-Pharm",
+   "card": "c_0GMQ3W9M9V",
+   "blocks": [
+    "b_1J60F8H9GV"
+   ]
+  },
+  {
+   "id": "p_HCF8VRPWJV",
+   "role": "card",
+   "title": "GERD/PUD: PPIs",
+   "card": "c_63QY6YSHKS",
+   "blocks": [
+    "b_ZKZ30RXXNA"
+   ]
+  },
+  {
+   "id": "p_9BVJXKB7DM",
+   "role": "card",
+   "title": "H2RAs",
+   "card": "c_F324EPRYCJ",
+   "blocks": [
+    "b_Z2GTFVRXZ0"
+   ]
+  },
+  {
+   "id": "p_C1GVFD4PW6",
+   "role": "card",
+   "title": "Potassium-Competitive Acid Blocker (PCAB)",
+   "card": "c_A95K2VEGGY",
+   "blocks": [
+    "b_1BHNS3THRW"
+   ]
+  },
+  {
+   "id": "p_NHEDB0DJQ4",
+   "role": "card",
+   "title": "Antacids",
+   "card": "c_FJWES39ZXG",
+   "blocks": [
+    "b_JRQH10PY1K"
+   ]
+  },
+  {
+   "id": "p_6NHCTG5TMX",
+   "role": "card",
+   "title": "Antiflatulent",
+   "card": "c_BCZGW0EXH1",
+   "blocks": [
+    "b_EKMMG47D29"
+   ]
+  },
+  {
+   "id": "p_B69NE3942A",
+   "role": "card",
+   "title": "Cytoprotective Drugs",
+   "card": "c_ZV3PYTWDRT",
+   "blocks": [
+    "b_XWZ5G2K3PN"
+   ]
+  },
+  {
+   "id": "p_FBN313DCC2",
+   "role": "card",
+   "title": "Prokinetic Agents",
+   "card": "c_4HXQA1FGPJ",
+   "blocks": [
+    "b_72TH18C5T3"
+   ]
+  },
+  {
+   "id": "p_JA66GBRW1A",
+   "role": "card",
+   "title": "IBD: Aminosalicylates",
+   "card": "c_YQ1GFXBC9D",
+   "blocks": [
+    "b_F0FR2T38CY"
+   ]
+  },
+  {
+   "id": "p_A3N24X89Q6",
+   "role": "card",
+   "title": "Glucocorticoids",
+   "card": "c_CSF60KE111",
+   "blocks": [
+    "b_ESY263FWXP"
+   ]
+  },
+  {
+   "id": "p_Q9882G67WN",
+   "role": "card",
+   "title": "Anti-TNF Antibodies",
+   "card": "c_R4ZA7XX945",
+   "blocks": [
+    "b_BCXTQ33KQ9"
+   ]
+  },
+  {
+   "id": "p_21GKV392V3",
+   "role": "card",
+   "title": "Other Drugs and/or Drug Classes Used for IBD Treatment:",
+   "card": "c_21ATJFZ464",
+   "blocks": [
+    "b_87TPT6K1QD"
+   ]
+  },
+  {
+   "id": "p_FT583XZQ27",
+   "role": "card",
+   "title": "Thiopurines (Purine Analogs)",
+   "card": "c_TKRFBKYGNF",
+   "blocks": [
+    "b_453P8V5830"
+   ]
+  },
+  {
+   "id": "p_8ZKX5YS4A4",
+   "role": "card",
+   "title": "Anti-integrin Therapy",
+   "card": "c_KSRP94XSBR",
+   "blocks": [
+    "b_4YPQ7PTDKA"
+   ]
+  },
+  {
+   "id": "p_2T3GFZJ0EK",
+   "role": "card",
+   "title": "Constipation: Laxatives — Bulk-Forming",
+   "card": "c_JB56RPMPJM",
+   "blocks": [
+    "b_65W7ZX014P"
+   ]
+  },
+  {
+   "id": "p_61WFC385N7",
+   "role": "card",
+   "title": "Stool Softeners (Emollient Laxatives or Surfactants): OTC",
+   "card": "c_JWRB3N0P7B",
+   "blocks": [
+    "b_0KNMBNMT8E"
+   ]
+  },
+  {
+   "id": "p_EK21WXVF2F",
+   "role": "card",
+   "title": "Lubricant: OTC",
+   "card": "c_TTK5AMRH1P",
+   "blocks": [
+    "b_TZ49GQF3Q9"
+   ]
+  },
+  {
+   "id": "p_GYQ95Z4QSE",
+   "role": "card",
+   "title": "Saline: OTC",
+   "card": "c_Q6606VX35Y",
+   "blocks": [
+    "b_ST44DZKAGH"
+   ]
+  },
+  {
+   "id": "p_SQ66HARBJN",
+   "role": "card",
+   "title": "Osmotic: OTC",
+   "card": "c_RW36455VS8",
+   "blocks": [
+    "b_TCZY6A7ZV6"
+   ]
+  },
+  {
+   "id": "p_DHB4A4EESJ",
+   "role": "card",
+   "title": "Stimulant: OTC",
+   "card": "c_PFAY0V1ZF6",
+   "blocks": [
+    "b_MTQWA0T2ZT"
+   ]
+  },
+  {
+   "id": "p_6DQ8X3XZX7",
+   "role": "card",
+   "title": "Opioid Constipation: Methylnaltrexone (Relistor), Naldemedine (Symproic), Naloxegol (Movantik)",
+   "card": "c_73WE1VVQ09",
+   "blocks": [
+    "b_ATYQPEH2F1"
+   ]
+  },
+  {
+   "id": "p_RE8XN4GCBA",
+   "role": "card",
+   "title": "Antidiarrheal Agents",
+   "card": "c_64K0606W4M",
+   "blocks": [
+    "b_FBRMTXBHJ0"
+   ]
+  },
+  {
+   "id": "p_DPAN0N8M0P",
+   "role": "card",
+   "title": "Hemorrhoids: Vasoconstrictors",
+   "card": "c_3SW8QFFWRX",
+   "blocks": [
+    "b_1DNY0276XF"
+   ]
+  },
+  {
+   "id": "p_WG0RX3V48B",
+   "role": "card",
+   "title": "Protectants",
+   "card": "c_CQCXBM3WDG",
+   "blocks": [
+    "b_1TQG78V7EM"
+   ]
+  },
+  {
+   "id": "p_WNM6YQXVPR",
+   "role": "card",
+   "title": "Astringents",
+   "card": "c_C3GDGXE7JJ",
+   "blocks": [
+    "b_CJ0THTYQA5"
+   ]
+  },
+  {
+   "id": "p_7M8EYN4BR0",
+   "role": "card",
+   "title": "Hemorrhoids: Local Anesthetics",
+   "card": "c_CS6DSN0ZKW",
+   "blocks": [
+    "b_ESKV5GQ4FV"
+   ]
+  },
+  {
+   "id": "p_W4913V6NRX",
+   "role": "card",
+   "title": "Counterirritants- don’t’ need to memorize specific names",
+   "card": "c_2J98S2JZV7",
+   "blocks": [
+    "b_5JP78VQ8FA"
+   ]
+  },
+  {
+   "id": "p_FGH5JG02XG",
+   "role": "card",
+   "title": "Hemorrhoids: Corticosteroids",
+   "card": "c_BKNMRCR0MV",
+   "blocks": [
+    "b_40AZ33AC1S"
+   ]
+  },
+  {
+   "id": "p_82SD6G4XHP",
+   "role": "lo",
+   "title": "Pharmacotherapeutics II LOs Gastroenterology",
+   "card": null,
+   "blocks": [
+    "b_QH3REEVXTS",
     "b_VTGMQFQ959",
     "b_8PYMXJ7AA6",
     "b_TRKMQ9R308",
