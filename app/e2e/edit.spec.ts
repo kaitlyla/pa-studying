@@ -9,6 +9,8 @@ import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
 import { buildPageKey } from "../edit/pageKey.ts";
+import { COLUMN_STEP_PT } from "../edit/editor/commands.ts";
+import { tableColumns } from "../render/styles.ts";
 import { commitMessage, inboxItemDir, partName, serializeFile } from "../../lib/content/index.ts";
 import {
   BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
@@ -690,6 +692,69 @@ test.describe("toolbar limits", () => {
     for (let i = 0; i < leftMoves; i++) indent = roundHalf(indent - 9);
     expect(numAttr(p, "indLeft")).toBe(indent);
     expect(numAttr(p, "indLeft")).toBeLessThan(0);
+  });
+
+  test("the size box sets 7.5 pt, and the save keeps it", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const marker = newMarker();
+    // As typeMarker does, at the start of the topic row's second cell, but with 7.5 chosen first: what
+    // she types next takes it.
+    const slot = ref(page, "edit-area").locator(".edit-slot").first();
+    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await page.keyboard.press("Home");
+    await ref(page, "tb-size").selectOption("7.5");
+    await expect(ref(page, "tb-size")).toHaveValue("7.5");
+    await page.keyboard.type(marker);
+    await expect(slot).toContainText(marker);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const saved = savedParagraph(fake, marker);
+    const run = firstText(nodeAt(saved.after, saved.path));
+    expect(String(run.text).startsWith(marker)).toBe(true);
+    expect(sizeMark(run)).toBe(7.5);
+  });
+
+  test("Column Wider widens the cursor's column, and the save keeps the widths and the page shows them", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const tableWith = (json: unknown): Rec => {
+      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
+      return nodeAt(json, tablePath);
+    };
+    const before = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))).grid as number[];
+    const sum = before.reduce((a, b) => a + b, 0);
+    const shown = tableColumns(before).map((p) => (p * sum) / 100);
+
+    // The topic row's second cell, as typeMarker uses (the first is the topic's name).
+    const slot = ref(page, "edit-area").locator(".edit-slot").first();
+    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await expect(ref(page, "tb-col-wider")).toBeVisible();
+    await clickN(ref(page, "tb-col-wider"), 3);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))).grid as number[];
+    expect(saved).toHaveLength(before.length);
+    expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
+    expect((saved[1] ?? 0) - (shown[1] ?? 0)).toBeCloseTo(3 * COLUMN_STEP_PT, 1);
+    // Exactly one other column paid for it.
+    const others = saved.map((w, i) => w - (shown[i] ?? 0)).filter((d, i) => i !== 1 && Math.abs(d) > 0.1);
+    expect(others).toHaveLength(1);
+    expect(others[0]).toBeCloseTo(-3 * COLUMN_STEP_PT, 1);
+
+    // The page, now read, draws the saved widths.
+    const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
+    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
+    expect(widths).toHaveLength(saved.length);
+    tableColumns(saved).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
   });
 
   test("Delete row asks before each delete and is refused, with no dialog, on a one-row table", async ({ page, context, baseURL }) => {

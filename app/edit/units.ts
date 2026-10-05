@@ -550,21 +550,27 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
     if (part.kind === "stub" || part.kind === "below") continue;
     if (part.kind === "rows") {
       const full = rowsOf(part.block);
+      const table = tableOrThrow(part.block);
       const old = restore ? oldRows(part.block.id) : undefined;
       let spliced: { rows: RowJSON[]; added: string[]; deleted: string[] };
+      // The table's own attributes (column widths, cell margins) come with the edited or restored table.
+      let attrs = table.attrs;
       if (restore) {
         spliced = restoreRows(full, part.shown, old ? rowsOf(old.block) : [], old?.shown ?? []);
+        if (old) attrs = tableOrThrow(old.block).attrs;
       } else {
         const doc = docs.get(part.slot.id);
         if (!doc) continue;
-        const edited = ((doc.content[0] as RowJSON | undefined)?.content ?? []) as RowJSON[];
-        spliced = spliceRows(full, part.shown, edited, rowId);
+        const editedTable = doc.content[0] as RowJSON | undefined;
+        spliced = spliceRows(full, part.shown, (editedTable?.content ?? []) as RowJSON[], rowId);
+        attrs = editedTable?.attrs ?? attrs;
       }
-      const table = tableOrThrow(part.block);
-      const block: BlockFile = { ...part.block, doc: { type: "doc", content: [{ ...table, content: spliced.rows }] } };
+      const block: BlockFile = { ...part.block, doc: { type: "doc", content: [{ ...table, attrs, content: spliced.rows }] } };
       const normalized = JSON.parse(canonical(part.path, block)) as BlockFile;
       const before = new Map(full.map((r) => [rowId(r), JSON.stringify(r)]));
-      for (const r of rowsOf(normalized)) if (before.get(rowId(r)) !== JSON.stringify(r)) changed.add(rowId(r));
+      // A change to the table's attributes changes how every one of its rows is drawn.
+      const tableChanged = JSON.stringify(tableOrThrow(normalized).attrs) !== JSON.stringify(table.attrs);
+      for (const r of rowsOf(normalized)) if (tableChanged || before.get(rowId(r)) !== JSON.stringify(r)) changed.add(rowId(r));
       spliced.deleted.forEach((id) => changed.add(id));
       put(part.path, part.block, normalized);
       const s = sysState(part.sys);

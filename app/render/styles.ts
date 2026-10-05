@@ -122,9 +122,12 @@ export function runStyle(marks: readonly MarkJSON[], basePt: number): CSSPropert
   return any ? s : null;
 }
 
+/** The narrowest the screen draws a table's first (name) column, in % of the table (guide-reader/table-spacing). */
+export const MIN_FIRST_COLUMN_PCT = 11;
+
 /**
- * Column widths as percentages of the grid sum. A first column under 11% is set to 11% and the
- * others are scaled down proportionally (guide-reader/table-spacing).
+ * Column widths as percentages of the grid sum. A first column under MIN_FIRST_COLUMN_PCT is set to
+ * it and the others are scaled down proportionally.
  */
 export function tableColumns(grid: readonly number[]): number[] {
   const sum = grid.reduce((a, b) => a + b, 0);
@@ -132,9 +135,10 @@ export function tableColumns(grid: readonly number[]): number[] {
   if (sum <= 0) return grid.map(() => 100 / grid.length);
   const pct = grid.map((g) => (100 * g) / sum);
   const first = pct[0] ?? 0;
-  if (grid.length > 1 && first < 11) {
+  if (grid.length > 1 && first < MIN_FIRST_COLUMN_PCT) {
     const rest = 100 - first;
-    return pct.map((p, i) => (i === 0 ? 11 : rest > 0 ? (p * 89) / rest : 89 / (grid.length - 1)));
+    const others = 100 - MIN_FIRST_COLUMN_PCT;
+    return pct.map((p, i) => (i === 0 ? MIN_FIRST_COLUMN_PCT : rest > 0 ? (p * others) / rest : others / (grid.length - 1)));
   }
   return pct;
 }

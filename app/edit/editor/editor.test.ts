@@ -8,13 +8,14 @@ import { EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import {
-  changeCellMargins, changeLineSpacing, changeSize, changeSpace, CONFIRMED_DELETE, deletePicture, deleteRow, deleteRowPrompt,
+  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
   docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveParagraph, removeHighlight, resizePicture, selectionSize,
   setHighlight, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
+import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
 
 const ctx = { basePt: 11, pageContentPt: 540 };
 const ASSET = `${"a".repeat(32)}.png`;
@@ -382,6 +383,75 @@ describe("text size", () => {
     const odd = sizeOptions(13.5);
     expect(odd).toContain(13.5);
     expect(odd).toEqual([...odd].sort((x, y) => x - y));
+  });
+
+  it("the size box offers 7.5 and the half sizes down to 6, and sets 7.5 pt", () => {
+    const list = sizeOptions(11);
+    expect(list.slice(0, 5)).toEqual([6, 6.5, 7, 7.5, 8]);
+    const state = run(selectText(createEditorState(docOf(para([text("small")]))), 1, 6), setSize(7.5, ctx));
+    expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "size", attrs: { pt: 7.5 } }]);
+    expect(selectionSize(selectText(state, 1, 6), ctx)).toBe(7.5);
+  });
+});
+
+describe("column width", () => {
+  const gridOf = (state: EditorState): unknown => state.doc.firstChild?.attrs.grid;
+  const three = (grid: number[]): EditorState =>
+    createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B"), cell("C")]), row(rid(2), [cell("D", { colspan: 2 }), cell("E")])], grid)));
+
+  it("Wider moves the cell's right border one step, taking it from the column to its right; Narrower gives it back", () => {
+    let state = run(at(three([100, 200, 300]), "B"), changeColumnWidth(1));
+    expect(gridOf(state)).toEqual([100, 200 + COLUMN_STEP_PT, 300 - COLUMN_STEP_PT]);
+    state = run(state, changeColumnWidth(-1));
+    state = run(state, changeColumnWidth(-1));
+    expect(gridOf(state)).toEqual([100, 200 - COLUMN_STEP_PT, 300 + COLUMN_STEP_PT]);
+  });
+
+  it("in the last column moves its left border, and in a merged cell the border after its last column", () => {
+    let state = run(at(three([100, 200, 300]), "C"), changeColumnWidth(1));
+    expect(gridOf(state)).toEqual([100, 200 - COLUMN_STEP_PT, 300 + COLUMN_STEP_PT]);
+    state = run(at(three([100, 200, 300]), "D"), changeColumnWidth(1));
+    expect(gridOf(state)).toEqual([100, 200 + COLUMN_STEP_PT, 300 - COLUMN_STEP_PT]);
+  });
+
+  it("stops at the narrowest column, and at the screen's first-column minimum", () => {
+    let state = at(three([100, 200, 300]), "B");
+    for (let i = 0; i < 40; i++) state = run(state, changeColumnWidth(1));
+    expect(gridOf(state)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    state = at(state, "A");
+    for (let i = 0; i < 40; i++) state = run(state, changeColumnWidth(-1));
+    expect((gridOf(state) as number[])[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100, 6);
+  });
+
+  it("starts from the widths the screen draws, so a narrow first column is saved as shown", () => {
+    const grid = [30, 270, 300];
+    const shown = tableColumns(grid).map((p) => (p * 600) / 100);
+    const state = run(at(three(grid), "B"), changeColumnWidth(1));
+    const saved = gridOf(state) as number[];
+    expect(saved[0]).toBeCloseTo(shown[0] ?? 0, 1);
+    expect(saved[1]).toBeCloseTo((shown[1] ?? 0) + COLUMN_STEP_PT, 1);
+    expect(saved[2]).toBeCloseTo((shown[2] ?? 0) - COLUMN_STEP_PT, 1);
+    // What the screen then draws is what was saved.
+    expect(tableColumns(saved)[0]).toBeCloseTo(100 * (saved[0] ?? 0) / 600, 1);
+  });
+
+  it("redraws the editor's columns from the new grid", () => {
+    const view = new EditorView(document.createElement("div"), { state: at(three([100, 200, 300]), "B"), nodeViews: nodeViews(11), markViews: markViews(11) });
+    try {
+      expect(changeColumnWidth(1)(view.state, view.dispatch)).toBe(true);
+      const cols = [...view.dom.querySelectorAll("col")].map((c) => c.style.width);
+      expect(cols).toEqual(tableColumns(gridOf(view.state) as number[]).map((p) => `${p}%`));
+      expect(cols[1]).not.toBe(`${100 * 200 / 600}%`);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("does nothing outside a table or in a one-column table", () => {
+    const outside = selectText(createEditorState(docOf(para([text("p")]))), 1, 1);
+    expect(changeColumnWidth(1)(outside)).toBe(false);
+    const one = at(createEditorState(docOf(table([row(rid(1), [cell("A")])], [300]))), "A");
+    expect(changeColumnWidth(1)(one)).toBe(false);
   });
 });
 

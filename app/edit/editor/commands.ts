@@ -6,6 +6,7 @@ import type { EditorState, Transaction } from "prosemirror-state";
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import { newId } from "../../../lib/content/index.ts";
+import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
 import { M, N as nodes } from "./types.ts";
 
 /** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
@@ -166,10 +167,10 @@ export function setSize(pt: number, ctx: DocContext): Command {
   return mapSize(ctx, () => pt);
 }
 
-/** Word's font size list, which the size box offers. */
-const SIZE_LIST = [8, 9, 10, 10.5, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36];
+/** The size box's list: Word's font size list, led by the sizes 6 to 7.5 in half points for small text. */
+const SIZE_LIST = [6, 6.5, 7, 7.5, 8, 9, 10, 10.5, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36];
 
-/** The size box's choices: Word's list, plus the current size when it is not on it. */
+/** The size box's choices: the list, plus the current size when it is not on it. */
 export function sizeOptions(current: number | null): number[] {
   return current === null || SIZE_LIST.includes(current) ? SIZE_LIST : [...SIZE_LIST, current].sort((x, y) => x - y);
 }
@@ -455,6 +456,43 @@ export function changeCellMargins(which: "sides" | "topBottom", dir: 1 | -1): Co
       const tr = state.tr.setNodeMarkup(at.pos, undefined, { ...at.table.attrs, cellMarginPt: next });
       dispatch(tr);
     }
+    return true;
+  };
+}
+
+/** One click of Column narrower / wider, in pt; and the narrowest a column may get. */
+export const COLUMN_STEP_PT = 9;
+export const MIN_COLUMN_PT = 18;
+
+/** Grid widths are kept to 1/20 pt (Word's twips). */
+const roundTwip = (x: number): number => Math.round(x * 20) / 20;
+
+/**
+ * Column narrower (−1) / wider (+1) for the cursor's cell: its right border moves one step (its left
+ * border when the cell ends the table), trading width with the column beside it, so the table keeps its
+ * width. The widths start from the ones the screen draws (tableColumns, which widens a narrow first
+ * column), so the PDF matches the screen afterwards. No column goes under MIN_COLUMN_PT, nor the first
+ * under the screen's first-column minimum; at a limit nothing changes.
+ */
+export function changeColumnWidth(dir: 1 | -1): Command {
+  return (state, dispatch) => {
+    const at = tableAt(state.selection.$from);
+    if (!at) return false;
+    const grid = at.table.attrs.grid as number[];
+    const rect = at.map.findCell(at.cellRel);
+    const ends = rect.right >= at.map.width;
+    const col = ends ? rect.left : rect.right - 1;
+    const beside = ends ? rect.left - 1 : rect.right;
+    if (beside < 0 || Math.max(col, beside) >= grid.length) return false;
+    const sum = grid.reduce((x, y) => x + y, 0);
+    const widths = tableColumns(grid).map((pct) => roundTwip((pct * sum) / 100));
+    const floor = (i: number): number => (i === 0 ? Math.max(MIN_COLUMN_PT, (MIN_FIRST_COLUMN_PCT * sum) / 100) : MIN_COLUMN_PT);
+    const [grow, shrink] = dir > 0 ? [col, beside] : [beside, col];
+    const step = roundTwip(Math.min(COLUMN_STEP_PT, (widths[shrink] ?? 0) - floor(shrink)));
+    if (step <= 0) return true;
+    widths[grow] = roundTwip((widths[grow] ?? 0) + step);
+    widths[shrink] = roundTwip((widths[shrink] ?? 0) - step);
+    if (dispatch) dispatch(state.tr.setNodeMarkup(at.pos, undefined, { ...at.table.attrs, grid: widths }));
     return true;
   };
 }

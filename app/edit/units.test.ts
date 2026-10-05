@@ -213,6 +213,24 @@ describe("building a save", () => {
     expect(build.files.get(blockPath(10))).toEqual(saved);
   });
 
+  it("a topic page's new column widths and cell margins are saved on the table, naming every row it draws", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    const edited = clone(part.slot.doc);
+    const table = edited.content[0] as Node;
+    const grid = (table.attrs?.grid as number[]).map((g, i) => (i === 0 ? g + 9 : i === 1 ? g - 9 : g));
+    const cellMarginPt = { top: 2, right: 6.4, bottom: 2, left: 6.4 };
+    table.attrs = { ...table.attrs, grid, cellMarginPt };
+    const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+    expect(build.changes.map((c) => c.path)).toEqual([blockPath(10)]);
+    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+    expect((saved.doc.content[0] as Node).attrs).toMatchObject({ grid, cellMarginPt });
+    // The rows the topic page did not show are kept, and are drawn with the new widths too.
+    expect(rowIds(saved.doc)).toEqual([R(100), R(101), R(102), R(103), R(104)]);
+    expect(build.changed).toEqual([R(100), R(101), R(102), R(103), R(104)]);
+  });
+
   it("an added row goes after the topic's last row, before the hidden rows that follow, and joins the section above it", async () => {
     const unit = await unitAt(`topic:fm:${R(101)}`);
     const part = only(unit, "rows");

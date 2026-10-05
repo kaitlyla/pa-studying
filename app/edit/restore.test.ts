@@ -221,6 +221,25 @@ describe("restore: one topic after a sibling edit", () => {
     expect(w.fake.readFile(blockPath(10))).toBe(w.fake.readFile(blockPath(10), v));
     expect(w.fake.readFile(CV_STRUCTURE)).toBe(w.fake.readFile(CV_STRUCTURE, v));
   });
+
+  it("a column-width save is a version of the topic, and restoring the version before it brings the old widths back", async () => {
+    const v = await saveRows(A, (d) => setCell(d, R(101), 1, "irregular"), edit(A, [R(101)]), "2026-10-02T09:00:00Z");
+    const oldGrid = ((read<BlockFile>(blockPath(10)).doc.content[0] as Node).attrs?.grid) as number[];
+    const widened = await saveTable(A, B(10), (d) => {
+      const out = clone(d);
+      const t = out.content[0] as Node;
+      t.attrs = { ...t.attrs, grid: oldGrid.map((g, i) => (i === 0 ? g - 9 : i === 1 ? g + 9 : g)) };
+      return out;
+    }, "2026-10-03T09:00:00Z");
+    expect(widened.changed).toContain(R(101));
+
+    const { versions } = await versionsOf(A);
+    expect(versions.map((x) => x.sha)).toEqual([widened.sha, v]);
+    const result = await restoreVersion({ git: w.git, author: AUTHOR, key: A, title: "Atrial fibrillation", version: versions[1] as Version });
+    expect(result.kind).toBe("saved");
+    expect((read<BlockFile>(blockPath(10)).doc.content[0] as Node).attrs?.grid).toEqual(oldGrid);
+    expect(w.fake.readFile(blockPath(10))).toBe(w.fake.readFile(blockPath(10), v));
+  });
 });
 
 describe("restore: a document across a change of kind", () => {

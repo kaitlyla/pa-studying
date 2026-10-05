@@ -11,7 +11,7 @@ import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import {
-  changeCellMargins, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
+  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
   moveParagraph, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, toggleBold, toggleItalic,
   toggleUnderline, type Command, type DocContext,
 } from "./editor/commands.ts";
@@ -267,6 +267,13 @@ function Toolbar(): ReactNode {
             <Tool label="More space at cell sides" run={plainCmd(changeCellMargins("sides", 1))} refk="tb-cell-sides-more">Sides +</Tool>
             <Tool label="Less space at cell top and bottom" run={plainCmd(changeCellMargins("topBottom", -1))} refk="tb-cell-tb-less">Top/bottom −</Tool>
             <Tool label="More space at cell top and bottom" run={plainCmd(changeCellMargins("topBottom", 1))} refk="tb-cell-tb-more">Top/bottom +</Tool>
+          </span>
+        )}
+        {inTable && (
+          <span className="tb-group" role="group" aria-label="Column width">
+            <span className="tb-gl">Column</span>
+            <Tool label="Make this column narrower" run={plainCmd(changeColumnWidth(-1))} refk="tb-col-narrower">Narrower</Tool>
+            <Tool label="Make this column wider" run={plainCmd(changeColumnWidth(1))} refk="tb-col-wider">Wider</Tool>
           </span>
         )}
         <span className="sep" />
