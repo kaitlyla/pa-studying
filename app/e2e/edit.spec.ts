@@ -825,7 +825,9 @@ function saveFromAnotherDevice(fake: FakeGithub, t: TopicTarget, date: string): 
   const added = ` ${newMarker()}`;
   const json: unknown = JSON.parse(need(fake.readFile(t.blockPath), t.blockPath));
   const rowPath = need(findPath(json, (n) => n.type === "table_row" && attrsOf(n).id === t.id), "topic row");
-  const text = nodeAt(json, [...rowPath, ...need(findPath(nodeAt(json, rowPath), (n) => n.type === "text"), "text in the topic row")]);
+  // The second cell, as typeMarker does: the first is the topic's name, and editing it renames the topic.
+  const cellPath = [...rowPath, "content", 1];
+  const text = nodeAt(json, [...cellPath, ...need(findPath(nodeAt(json, cellPath), (n) => n.type === "text"), "text in the topic row's second cell")]);
   text.text = `${String(text.text)}${added}`;
   fake.commitFiles(
     { [t.blockPath]: serializeFile(t.blockPath, json) },
@@ -860,7 +862,7 @@ test("a conflict shows the other save's time, copies the rows tab-separated, and
 
   await ref(page, "conflict-load-newer").click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(ref(page, "loaded")).toHaveText(`Showing the newer version saved at ${at}. Your copied changes are on the clipboard.`);
+  await expect(ref(page, "loaded").locator(".bt")).toHaveText(`Showing the newer version saved at ${at}. Your copied changes are on the clipboard.`);
   await expect(area).toContainText(theirs);
   await expect(area).not.toContainText(marker);
 });
