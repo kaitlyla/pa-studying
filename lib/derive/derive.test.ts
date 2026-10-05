@@ -540,9 +540,48 @@ describe("pharm (40 §40.4–§40.5)", () => {
     const s = { guide: "fm", system: "x", structure: st, topics: t };
     const tremor = t.topics.find((x) => x.id === R(910));
     if (!tremor) throw new Error("no topic");
-    // Comes from step 2 too: drop the following table to prove the first-cell match alone finds it.
+    // No heading row labels a treatment column, so all of the topic's text is searched.
     const panel = medsPanel(s, [B(92), B(91)], tremor, new CardMatcher([]), (c) => c);
     expect(panel).toEqual([{ card: null, title: "Beta-blocker (non-selective)", rows: [R(920)], section: "x", target: R(920) }]);
+  });
+
+  describe("a meds panel offers only drugs named in the condition's treatment column", () => {
+    // EM Cardiovascular as imported: infective endocarditis sits in the block just before the antiarrhythmics table.
+    const drugs = table(B(92), 2, [
+      [R(920), "content", "Amiodarone", "class III"],
+      [R(921), "content", "Beta blockers", "class II"],
+      [R(922), "content", "Adenosine", "AV nodal"],
+    ]);
+    const panelFor = (conditions: ReturnType<typeof table>, id: string) => {
+      const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "antiarrhythmics", conditionRows: [] }] });
+      const t = deriveTopics([conditions, drugs], st);
+      const topic = t.topics.find((x) => x.id === id);
+      if (!topic) throw new Error(`no topic ${id}`);
+      return medsPanel({ guide: "em", system: "cardiovascular", structure: st, topics: t }, [B(91), B(92)], topic, new CardMatcher([]), (c) => c).map((m) => m.title);
+    };
+    const cardio = table(B(91), 3, [
+      [R(910), "heading", "CARDIO", "Etiology", "Management"],
+      [R(911), "content", "Infective endocarditis", "staph aureus", "vancomycin + ceftriaxone"],
+      [R(912), "content", "AV block", "beta blockers, CCBs", "pacing"],
+      [R(913), "content", "Atrial fibrillation", "", "rate control; amiodarone for rhythm"],
+    ]);
+
+    it("a drug table following the condition contributes nothing it does not name", () => {
+      expect(panelFor(cardio, R(911))).toEqual([]);
+    });
+
+    it("a drug named only as a cause is not offered; one named in Management is", () => {
+      expect(panelFor(cardio, R(912))).toEqual([]);
+      expect(panelFor(cardio, R(913))).toEqual(["Amiodarone"]);
+    });
+
+    it("a column under a Management heading cell that spans it counts as treatment", () => {
+      const spanned = table(B(91), 4, [
+        [R(910), "heading", "ARRHYTHMIAS", "About", "Management", ""],
+        [R(911), "content", "SVT", "beta blockers can cause it", "vagal maneuvers", "adenosine"],
+      ]);
+      expect(panelFor(spanned, R(911))).toEqual(["Adenosine"]);
+    });
   });
 
   it("card order follows table rows, then `also`; a card unplaced in a home guide is appended to that home system's first pharm section", () => {
@@ -601,12 +640,8 @@ describe("pharm (40 §40.4–§40.5)", () => {
     expect(stubLabel(t)).toBe("BETA BLOCKERS");
   });
 
-  it("meds panel: the following drug table, grouped by card, with a card-less row as its own card", () => {
-    expect(meds(R(101))).toEqual([
-      { card: C(2), title: "Nitrates", rows: [R(120), R(121)], section: "antianginals", target: C(2) },
-      { card: C(1), title: "Calcium Channel Blockers", rows: [R(120), R(122)], section: "antianginals", target: C(1) },
-      { card: null, title: "Ranolazine", rows: [R(120), R(124)], section: "antianginals", target: R(124) },
-    ]);
+  it("meds panel: only the following table's rows its treatment names (diltiazem → the CCB card), not the whole table", () => {
+    expect(meds(R(101))).toEqual([{ card: C(1), title: "Calcium Channel Blockers", rows: [R(120), R(122)], section: "antianginals", target: C(1) }]);
   });
 
   it("a condition-row topic has no following table: only same-system alias rows, and never a condition row", () => {

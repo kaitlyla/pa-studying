@@ -323,7 +323,8 @@
     "clonazepam",
     "diazepam",
     "flurazepam",
-    "chlordiazepoxide"
+    "chlordiazepoxide",
+    "BDZ"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -439,7 +440,6 @@
    "id": "c_1FA98GAQXX",
    "file": "behavioral-health-med-list-and-los-6",
    "aliases": [
-    "1st gen",
     "haloperidol",
     "perphenazine",
     "prochlorperazine",
@@ -449,7 +449,8 @@
     "trifluoperazine",
     "thiothixene",
     "loxapine",
-    "pimozide"
+    "pimozide",
+    "APs"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -459,7 +460,6 @@
    "id": "c_YJ8ZNY90PE",
    "file": "behavioral-health-med-list-and-los-6",
    "aliases": [
-    "2nd gen",
     "quetiapine",
     "olanzapine",
     "clozapine",
@@ -472,7 +472,8 @@
     "cariprazine",
     "asenapine",
     "iloperidone",
-    "lumateperone"
+    "lumateperone",
+    "APs"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -482,8 +483,7 @@
    "id": "c_QSQHPTR1JH",
    "file": "behavioral-health-med-list-and-los-6",
    "aliases": [
-    "Stimulants",
-    "stimulant"
+    "Stimulants"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -1164,7 +1164,8 @@
     "SGLT2 inhibitor",
     "SGLT2i",
     "dapagliflozin",
-    "empagliflozin"
+    "empagliflozin",
+    "SGLT2s"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1790,8 +1791,7 @@
    "file": "los-thyroid-antithyroid-obesity-osteo-filled-4",
    "aliases": [
     "Other Antithyroid Agents",
-    "potassium iodide",
-    "propranolol"
+    "potassium iodide"
    ],
    "home": {
     "pance": "endocrine-system"
@@ -1885,7 +1885,8 @@
     "GLP-1 RA",
     "liraglutide",
     "semaglutide",
-    "tirzepatide"
+    "tirzepatide",
+    "GLP-1s"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2172,11 +2173,6 @@
    "id": "c_TS5NSW2WNP",
    "file": "med-list-nsaids-pain",
    "aliases": [
-    "venlafaxine",
-    "amitriptyline",
-    "topiramate",
-    "metoprolol",
-    "propranolol",
     "rimegepant",
     "atogepant"
    ],
@@ -2191,7 +2187,6 @@
     "prochlorperazine",
     "metoclopramide",
     "promethazine",
-    "chlorpromazine",
     "dexamethasone",
     "diphenhydramine",
     "ondansetron"
@@ -2205,7 +2200,6 @@
    "file": "med-list-nsaids-pain",
    "aliases": [
     "colchicine",
-    "anakinra",
     "rilonacept",
     "canakinumab"
    ],
@@ -2798,8 +2792,7 @@
    "id": "c_CS6DSN0ZKW",
    "file": "gi-los-and-med-list-1",
    "aliases": [
-    "benzocaine",
-    "lidocaine"
+    "benzocaine"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2819,9 +2812,7 @@
   {
    "id": "c_BKNMRCR0MV",
    "file": "gi-los-and-med-list-1",
-   "aliases": [
-    "hydrocortisone"
-   ],
+   "aliases": [],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    }

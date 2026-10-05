@@ -158,10 +158,40 @@ export function topicText(t: SystemTopics, topic: Topic): string {
   return topic.rows.map((id) => rows.get(id)?.cells.join("\n") ?? "").join("\n");
 }
 
+/** A heading-row column label that names her treatment column ("Management", "Treatment", "DX/TX", …). */
+const TREATMENT_COLUMN = /\b(?:management|treatment|tx)\b/i;
+
 /**
- * The meds panel under a condition topic (40 §40.5): the following drug table's rows, plus
- * same-system drug rows whose first cell (or an alias of a card matching it) occurs in the topic,
- * grouped by class card. Condition rows are never offered.
+ * The topic's treatment text: the cells under its heading rows' treatment columns, or all its cells
+ * when no heading row above it labels one. A column whose label reads empty belongs to the labeled
+ * column to its left, since a heading cell spanning several columns reads empty in the ones it covers.
+ * Drugs named elsewhere in her notes — as a cause, a risk factor, a diagnostic maneuver — do not treat
+ * the condition.
+ */
+export function treatmentText(t: SystemTopics, topic: Topic): string {
+  const rows = new Map<string, Row>();
+  for (const table of t.tables.values()) for (const r of table.rows) rows.set(r.id, r);
+  const parts: string[] = [];
+  let labeled = false;
+  for (const id of topic.rows) {
+    const heading = t.rows.get(id)?.heading;
+    const columns = heading ? (t.headings.get(heading)?.columns ?? []) : [];
+    let treatment = false;
+    columns.forEach((label, i) => {
+      if (collapse(label) !== "") treatment = TREATMENT_COLUMN.test(label);
+      if (!treatment) return;
+      labeled = true;
+      parts.push(rows.get(id)?.cells[i + 1] ?? "");
+    });
+  }
+  return labeled ? parts.join("\n") : topicText(t, topic);
+}
+
+/**
+ * The meds panel under a condition topic (40 §40.5): the system's drug rows whose first cell, or an
+ * alias of a card matching it, occurs in the topic's treatment text, grouped by class card. A drug
+ * table's place in her guide says nothing about which conditions it treats — her groups never close,
+ * so a table can follow conditions it has nothing to do with — and condition rows are never offered.
  */
 export function medsPanel(s: PharmSystem, blockOrder: readonly string[], topic: Topic, matcher: CardMatcher, cardTitle: (card: string) => string): MedsCard[] {
   const drugBlocks = blockOrder.filter((b) => s.structure.drugTables.some((d) => d.block === b));
@@ -178,12 +208,7 @@ export function medsPanel(s: PharmSystem, blockOrder: readonly string[], topic: 
       picked.push(r);
     }
   };
-  if (!topic.condition) {
-    const at = blockOrder.indexOf(topic.block);
-    const following = drugBlocks.find((b) => blockOrder.indexOf(b) > at);
-    if (following) rowsOf(following).forEach(add);
-  }
-  const text = topicText(s.topics, topic);
+  const text = treatmentText(s.topics, topic);
   for (const block of drugBlocks) {
     for (const r of rowsOf(block)) {
       const first = firstCell(r);

@@ -89,7 +89,7 @@ export async function writeFixture(root: string): Promise<void> {
     [R(101), "content", "Atrial  fibrillation\n(AF)", "irregularly irregular", "rate control with diltiazem"],
     [R(102), "content", "", "more AF text", ""],
     [R(103), "heading", "Stable angina", "P", "T"],
-    [R(104), "content", "", "chest pain on exertion", "nitrates; aspirin"],
+    [R(104), "content", "", "chest pain on exertion", "nitrates; aspirin; ranolazine"],
   ])));
   await w(`${cv}/blocks/${B(11)}.json`, block(B(11), "prose", doc(para("Murmurs"), para("Systolic ⊕ ", {
     type: "image", attrs: { asset, widthPt: 10, heightPt: 10, rot: 0, flipH: false, flipV: false },
