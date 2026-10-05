@@ -57,7 +57,7 @@ interface Failure {
   failed: string;
 }
 const SAVE_FAILURE: Failure = { offline: SAVE_OFFLINE, failed: SAVE_FAILED.title };
-/** "Download original" could not get her file (wording proposed to the operator by the Leader, 2026-10-05; not yet approved). */
+/** "Download original" could not get her file (agent decision, shay-49353, 2026-10-05 01:41Z). */
 export const DOWNLOAD_FAILURE: Failure = {
   offline: "Couldn’t download the file — no internet connection.",
   failed: "Couldn’t download the file.",
