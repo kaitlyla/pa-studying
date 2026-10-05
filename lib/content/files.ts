@@ -58,6 +58,14 @@ export const BLOCK_FILE_RE = pathRe(
   `(?:${BLOCK_LOCATIONS.map((l) => `${l.dir}/blocks/(?=${l.prefix}_)`).join("|")})${named(idSource(...new Set(BLOCK_LOCATIONS.map((l) => l.prefix))))}\\.json`,
 );
 
+/**
+ * A topic's "below" block: her own notes and pictures shown after the topic (after its table and meds
+ * panel), `content/guides/<g>/<system>/below/<topic id>.json`, the topic in `topic`. A prose block.
+ */
+export const TOPIC_BELOW_RE = pathRe(`content/guides/${GUIDE}/${SLUG}/below/(?<topic>${idSource("r")})\\.json`);
+export const topicBelowDir = (guide: string, system: string): string => `content/guides/${guide}/${system}/below`;
+export const topicBelowPath = (guide: string, system: string, topic: string): string => `${topicBelowDir(guide, system)}/${topic}.json`;
+
 /** Every JSON file of the content tree, by path pattern, with its validator. */
 const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/site\\.json"), validateSite],
@@ -80,6 +88,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/updates/concepts\\.json"), validateConcepts],
   [pathRe("content/updates/checks\\.json"), validateChecks],
   [pathRe(`${inboxItemDir(ident("d"))}/${UPLOAD_NAME.replace(".", "\\.")}`), validateUpload],
+  [TOPIC_BELOW_RE, validateBlock],
   ...BLOCK_LOCATIONS.map((l): [RegExp, Validator] => [pathRe(`${l.dir}/blocks/${ident(l.prefix)}\\.json`), l.validator]),
 ];
 

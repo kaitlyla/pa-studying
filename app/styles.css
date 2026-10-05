@@ -162,7 +162,7 @@ a { color: #2b55a3; }
 .pdiv hr { margin: 0; border: 0; border-top: 1px solid #d6dbe4; }
 .ntw { overflow-x: auto; margin: 0 0 .4em; }
 table.nt { width: 100%; min-width: 760px; table-layout: fixed; border-collapse: collapse; }
-table.nt td { padding: 7px 10px; vertical-align: top; line-height: 1.45; overflow-wrap: break-word; }
+table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word; }
 .stacked .stk, .stk { margin-bottom: 4px; border: 1px solid #000; }
 .stk-label { padding: 4px 8px; border: 1px solid #000; border-bottom: 0; font-weight: 700; font-size: .92em; }
 .stk-name { padding: 6px 8px; border-bottom: 1px solid #000; font-weight: 700; }

@@ -80,15 +80,18 @@ const changeOf = (build: ReturnType<typeof buildSave>, path: string): string | u
 };
 
 describe("loading a page key", () => {
-  it("topic: one rows editor with the topic's rows and its heading; the block and structure.json are its files", async () => {
+  it("topic: one rows editor with the topic's rows and its heading, then its empty below area; the block and structure.json are its files", async () => {
     const unit = await unitAt(`topic:fm:${R(101)}`);
     const part = only(unit, "rows");
-    expect(unit.parts).toHaveLength(1);
+    expect(unit.parts.map((p) => p.kind)).toEqual(["rows", "below"]);
+    const below = only(unit, "below");
+    expect(below.block).toBeNull();
+    expect(below.path).toBe(`${CV}/below/${R(101)}.json`);
     expect(part.shown).toEqual([R(100), R(101), R(102)]);
     expect(rowIds(part.slot.doc)).toEqual([R(100), R(101), R(102)]);
     expect(part.slot.basePt).toBe(10);
     expect(part.slot.pageContentPt).toBe(792 - 36 - 36);
-    expect(unit.scope).toEqual({ files: [blockPath(10), CV_STRUCTURE].sort(), dirs: [] });
+    expect(unit.scope).toEqual({ files: [blockPath(10), CV_STRUCTURE, below.path].sort(), dirs: [] });
     expect(unit.ids).toEqual([R(100), R(101), R(102)]);
     expect(unit.snapshot.commit).toBe(w.fake.head());
   });
@@ -98,6 +101,7 @@ describe("loading a page key", () => {
     expect(unit.parts.map((p) => (p.kind === "rows" ? [p.block.id, p.shown] : p.kind))).toEqual([
       [B(10), [R(103), R(104)]],
       [B(13), [R(130)]],
+      "below",
     ]);
     const cont = only(unit, "rows", 1);
     const build = buildSave(unit, new Map([[cont.slot.id, setCell(cont.slot.doc, R(130), 1, "angina, continued")]]), TODAY);
@@ -119,7 +123,7 @@ describe("loading a page key", () => {
 
   it("system: whole tables as rows editors, prose as blocks, and the drug table as its stub", async () => {
     const unit = await unitAt("system:fm:cardiovascular");
-    expect(unit.parts.map((p) => [p.kind, p.kind === "stub" ? p.block : p.kind === "gap" ? p.gap.id : p.block.id])).toEqual([
+    expect(unit.parts.map((p) => [p.kind, p.kind === "stub" ? p.block : p.kind === "gap" ? p.gap.id : p.kind === "below" ? p.topic : p.block.id])).toEqual([
       ["rows", B(10)], ["block", B(11)], ["stub", B(12)], ["rows", B(13)], ["block", B(14)],
     ]);
     const stub = only(unit, "stub");
@@ -372,6 +376,85 @@ describe("building a save", () => {
     const build = buildSave(unit, new Map([[block.slot.id, edited]]), TODAY);
     expect(build.changes.map((c) => c.path)).toEqual([`content/docs/${D(5)}/blocks/${B(60)}.json`]);
     expect(build.changed).toEqual([B(60), D(5)]);
+  });
+});
+
+describe("a topic's below area", () => {
+  const belowPath = (topic: string): string => `${CV}/below/${topic}.json`;
+  const prose = (text: string): DocJSON => ({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] }) as DocJSON;
+  const textOf = (doc: DocJSON): string[] => (doc.content as Node[]).map((p) => (p.content ?? []).map((t) => t.text ?? "").join(""));
+  const commit = (build: ReturnType<typeof buildSave>): void => {
+    w.fake.commitFiles(Object.fromEntries(build.changes.map((c) => [c.path, changeOf(build, c.path) ?? null])));
+  };
+  /** Saves `text` into topic R101's below area and commits it; returns the saved block. */
+  async function addBelow(text: string): Promise<BlockFile> {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const build = buildSave(unit, new Map([[only(unit, "below").slot.id, prose(text)]]), TODAY);
+    commit(build);
+    return json<BlockFile>(changeOf(build, belowPath(R(101))));
+  }
+
+  it("leaving the empty area untouched, or saving it still empty, writes nothing", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const below = only(unit, "below");
+    expect(buildSave(unit, new Map(), TODAY).changes).toEqual([]);
+    expect(buildSave(unit, new Map([[below.slot.id, below.slot.doc]]), TODAY).changes).toEqual([]);
+  });
+
+  it("typing in it writes a new prose block at the topic's below path", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const build = buildSave(unit, new Map([[only(unit, "below").slot.id, prose("ECG strip here")]]), TODAY);
+    expect(build.changes.map((c) => c.path)).toEqual([belowPath(R(101))]);
+    const saved = json<BlockFile>(changeOf(build, belowPath(R(101))));
+    expect(saved.kind).toBe("prose");
+    expect(saved.id).toMatch(/^b_/);
+    expect(textOf(saved.doc)).toEqual(["ECG strip here"]);
+    expect(build.changed).toEqual([saved.id]);
+  });
+
+  it("once saved, the topic page loads it, an edit rewrites it in place, and emptying it deletes the file", async () => {
+    const first = await addBelow("first note");
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const below = only(unit, "below");
+    expect(below.block?.id).toBe(first.id);
+    expect(textOf(below.slot.doc)).toEqual(["first note"]);
+    expect(unit.ids).toContain(first.id);
+
+    const edit = buildSave(unit, new Map([[below.slot.id, prose("second note")]]), TODAY);
+    expect(edit.changes.map((c) => c.path)).toEqual([belowPath(R(101))]);
+    const rewritten = json<BlockFile>(changeOf(edit, belowPath(R(101))));
+    expect(rewritten.id).toBe(first.id);
+    expect(textOf(rewritten.doc)).toEqual(["second note"]);
+
+    const emptied = buildSave(unit, new Map([[below.slot.id, { type: "doc", content: [{ type: "paragraph" }] } as DocJSON]]), TODAY);
+    expect(emptied.changes).toEqual([{ path: belowPath(R(101)), sha: null }]);
+    expect(emptied.files.get(belowPath(R(101)))).toBeNull();
+    expect(emptied.changed).toEqual([first.id]);
+  });
+
+  it("shows under its table on the section and system pages, after the table holding the topic's last row", async () => {
+    const saved = await addBelow("under the table");
+    // R101 is in section "other" (see the system-page delete test above).
+    const section = await unitAt("section:fm:cardiovascular:other");
+    const kinds = (u: EditUnit): string[] => u.parts.map((p) => (p.kind === "below" ? `below ${p.topic}` : p.kind === "rows" ? `rows ${p.block.id}` : p.kind));
+    expect(kinds(section)).toContain(`below ${R(101)}`);
+    expect(kinds(section)[kinds(section).indexOf(`below ${R(101)}`) - 1]).toBe(`rows ${B(10)}`);
+    expect(only(section, "below").block?.id).toBe(saved.id);
+
+    const system = await unitAt("system:fm:cardiovascular");
+    expect(kinds(system).slice(0, 2)).toEqual([`rows ${B(10)}`, `below ${R(101)}`]);
+  });
+
+  it("follows its topic when a save gives the topic a new first row", async () => {
+    const saved = await addBelow("follows the topic");
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    const edited = addRow(dropRow(part.slot.doc, R(101)), R(100), R(105), ["", "before the rest", ""]);
+    const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+    expect(build.topicMoved?.topic).toBe(R(105));
+    expect(json<BlockFile>(changeOf(build, belowPath(R(105))))).toEqual(saved);
+    expect(build.changes).toContainEqual({ path: belowPath(R(101)), sha: null });
   });
 });
 

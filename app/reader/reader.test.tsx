@@ -468,6 +468,33 @@ describe("topics page", () => {
     expect(c.querySelector(`section.tcard[data-topic="${R(101)}"]`)).not.toBeNull();
   });
 
+  it("a topic's below block shows after its meds panel, and on its section page under the table holding its last row", async () => {
+    const BELOW = B(900);
+    const withBelow = structuredClone(cv);
+    const murmurs = must(cv.blocks.find((b) => b.id === B(11)), "B11 prose");
+    const st = must(withBelow.topics.find((t) => t.id === stable().id), "Stable angina");
+    st.below = { id: BELOW, kind: "prose", doc: murmurs.doc };
+    server.restore();
+    server = serveData(new Map([...files, ["g/fm/s/cardiovascular.json", withBelow]]));
+    expect(st.rows.at(-1)).toBe(R(130));
+
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    const card = await until(() => c.querySelector<HTMLElement>(`section.tcard[data-topic="${stable().id}"]`), "Stable angina card");
+    const below = must(card.querySelector(`[data-anchor="${BELOW}"]`), "below block");
+    expect(below.textContent).toContain("Systolic");
+    const meds = must(card.querySelector(".meds"), "meds panel");
+    expect(meds.compareDocumentPosition(below) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
+    await go("#/eor/fm/sec/cardiovascular/cad");
+    const page = await until(() => c.querySelector<HTMLElement>(".section-page"), "section page");
+    const shown = must(page.querySelector(`[data-anchor="${BELOW}"]`), "below block on the section page");
+    const tableOfLastRow = must(page.querySelector(`div.notes[data-anchor="${B(13)}"]`), "B13 table");
+    expect(tableOfLastRow.nextElementSibling).toBe(shown);
+    expect(page.querySelectorAll(`[data-anchor="${BELOW}"]`)).toHaveLength(1);
+  });
+
   it("topics from two systems compare without a page PDF scope; a flat system's topic has no section crumb", async () => {
     const a = await renderApp(`#/eor/fm/t/${R(101)},${R(201)}`);
     app = a;

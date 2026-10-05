@@ -836,6 +836,60 @@ function saveFromAnotherDevice(fake: FakeGithub, t: TopicTarget, date: string): 
   return added.trim();
 }
 
+test.describe("pictures and highlight colors", () => {
+  // A 1×1 PNG no guide holds.
+  const PNG_BYTES = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
+
+  test("a picture added below the topic shows at once and is saved with its bytes and the below block", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const below = area.getByRole("region", { name: "Below the meds — your notes and pictures" });
+    await below.locator(".ProseMirror p").first().click();
+    const chooser = page.waitForEvent("filechooser");
+    await ref(page, "tb-pic-add").click();
+    await (await chooser).setFiles({ name: "ecg.png", mimeType: "image/png", buffer: PNG_BYTES });
+    // ProseMirror adds its own `img.ProseMirror-separator` after an inline node ending a paragraph.
+    const img = below.locator("img:not(.ProseMirror-separator)");
+    await expect(img).toHaveCount(1);
+    await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(1);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const name = `${createHash("sha256").update(PNG_BYTES).digest("hex").slice(0, 32)}.png`;
+    expect(Buffer.from(need(fake.readBytes(`content/assets/${name}`), "the saved picture"))).toEqual(PNG_BYTES);
+    const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
+    expect(belowFiles).toHaveLength(1);
+    expect(belowFiles[0]?.[1]).toContain(name);
+    // The saved picture shows on the page from this device before the site redeploys.
+    await expect(page.locator(`section.tcard img`).last()).toHaveJSProperty("naturalWidth", 1);
+  });
+
+  test("a highlight color from the picker is saved on the selected text", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const marker = newMarker();
+    await typeMarker(page, marker);
+    for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+    await ref(page, "tb-highlight").click();
+    await expect(ref(page, "tb-highlight-colors").locator('[data-ref^="tb-hl-"]')).toHaveCount(15);
+    await ref(page, "tb-hl-00FF00").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = savedParagraph(fake, marker);
+    const run = firstText(nodeAt(saved.after, saved.path));
+    expect(String(run.text).startsWith(marker)).toBe(true);
+    expect(run.marks).toContainEqual({ type: "highlight", attrs: { hex: "00FF00" } });
+  });
+});
+
 test("a conflict shows the other save's time, copies the rows tab-separated, and loads the newer version", async ({ page, context, baseURL }) => {
   const t = needTopic();
   const { fake } = await world(context, baseURL, { seed: true });

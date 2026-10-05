@@ -2,6 +2,11 @@
 
 .btn.danger { color: #a3261d; border-color: #e0b4b0; }
 
+/* a topic's below area while editing */
+.below-edit { margin-top: 14px; padding-top: 8px; border-top: 1px dashed #c9ced8; }
+.below-edit .below-h { margin-bottom: 4px; font-size: 12px; color: #5b6472; }
+.below-edit .edit-slot { min-height: 2.4em; }
+
 /* toolbar: tools wrap on a laptop; on a phone the tools row scrolls and the status row stays below */
 .etb { position: sticky; top: 0; z-index: 8; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 10px; padding: 6px; border: 1px solid #c9ced8; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .06); }
 .etb-tools { display: flex; flex: 1 1 auto; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; }
@@ -12,6 +17,11 @@
 .etb .tb-group { display: inline-flex; align-items: center; gap: 2px; padding: 0 4px; border-left: 1px solid #eceef2; }
 .etb .tb-gl { font-size: 12px; color: #5b6472; margin-right: 2px; white-space: nowrap; }
 .etb .tb-hl { padding: 0 3px; background: #ff0; }
+.etb .tb-pop { position: relative; display: inline-flex; }
+.etb .tb-swatches { position: absolute; top: 36px; left: 0; z-index: 9; display: flex; flex-wrap: wrap; gap: 2px; width: max-content; max-width: 240px; padding: 4px; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .14); }
+.etb .swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #9aa3b2; border-radius: 3px; vertical-align: middle; }
+.etb .tb-size { height: 32px; padding: 0 4px; border: 1px solid #d3d8e0; border-radius: 5px; background: #fff; font-size: 13px; }
+.edit-slot img[draggable="true"] { cursor: grab; }
 .etb .estat { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 12px; color: #5b6472; }
 .etb.phone { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 6px; }
 .etb.phone .etb-tools { flex-wrap: nowrap; overflow-x: auto; width: 100%; }

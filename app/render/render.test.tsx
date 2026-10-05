@@ -11,7 +11,7 @@ import { navigate } from "../shell/route.ts";
 import { asOwner, installOwnerCss, mount, until, visibleText, type Mounted } from "../testing.tsx";
 import { GapBlock, ReviewSlidesBadge, UpdateNote } from "./labels.tsx";
 import { RichDoc } from "./RichDoc.tsx";
-import { anchoredOffset, borderCss, em, imageTransform, paragraphStyle, runStyle, tableColumns, underlineStyle } from "./styles.ts";
+import { anchoredOffset, borderCss, cellPadding, em, imageTransform, WORD_CELL_MARGINS, paragraphStyle, runStyle, tableColumns, underlineStyle } from "./styles.ts";
 import { layoutTable, selectRows } from "./tableLayout.ts";
 
 let ui: Mounted | null = null;
@@ -346,6 +346,22 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     expect(box?.style.padding).toBe("0.3em 0.6em");
     expect(box?.style.display).toBe("inline-block");
     expect(box?.style.background).toContain("rgb(242, 242, 242)");
+  });
+
+  it("pads cells with the reading padding at Word's default margins, grown or shrunk by her margin changes", async () => {
+    expect(cellPadding(WORD_CELL_MARGINS, 12)).toBe("7px 10px 7px 10px");
+    expect(cellPadding({ top: 2.4, right: 0, bottom: 1.2, left: 10.8 }, 12)).toBe(
+      "max(0px, calc(7px + 0.2em)) max(0px, calc(10px + -0.45em)) max(0px, calc(7px + 0.1em)) max(0px, calc(10px + 0.45em))",
+    );
+
+    const plain = await render(<RichDoc basePt={12} doc={docOf(tableNode([100], [row("r_PLAIN00001", [cell("a")])]))} />);
+    expect(styleOf(plain.querySelector("td")).padding).toBe("7px 10px");
+    const changed = await render(
+      <RichDoc basePt={12} doc={docOf(tableNode([100], [row("r_WIDER00001", [cell("a")])], { cellMarginPt: { top: 2.4, right: 5.4, bottom: 2.4, left: 5.4 } }))} />,
+    );
+    const td = styleOf(changed.querySelector("td"));
+    expect(td.paddingTop).toContain("0.2em");
+    expect(td.paddingLeft).toBe("10px");
   });
 
   it("draws each shape kind through the shared drawing module, with its text frames", async () => {

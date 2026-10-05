@@ -7,7 +7,7 @@ import { UpdateNotes } from "../render/labels.tsx";
 import { Txt } from "../render/Text.tsx";
 import { PageNotFound } from "../shell/errors.ts";
 import { Icon } from "../shell/Icon.tsx";
-import { EditControls, EditRegion } from "../shell/mounts.tsx";
+import { EditControls, EditRegion, useIsEditing } from "../shell/mounts.tsx";
 import { PageHead, type Crumb } from "../shell/Page.tsx";
 import { guideViewHash, navigate } from "../shell/route.ts";
 import { notesAt, NotesBlock } from "./blocks.tsx";
@@ -45,6 +45,7 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
   const first = topic.rows.map((r) => system.rows[r]).find((r) => r !== undefined);
   const block = first ? system.blocks.find((b) => b.id === first.block) : undefined;
   const pageKey = buildPageKey("topic", guide, topic.id);
+  const editing = useIsEditing(pageKey);
   return (
     <section className="tcard" aria-label={topic.title} data-topic={topic.id}>
       <div className="tcard-h">
@@ -70,6 +71,8 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
         {block && <NotesBlock block={block} basePt={nav.basePt} rows={topic.rows} />}
       </EditRegion>
       <MedsPanel guide={guide} system={system} topic={topic} basePt={nav.basePt} />
+      {/* Her own notes and pictures below the topic; while editing, they are in the editor above. */}
+      {topic.below && !editing && <NotesBlock block={topic.below} basePt={nav.basePt} />}
     </section>
   );
 }

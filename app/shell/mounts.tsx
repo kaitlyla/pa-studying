@@ -1,5 +1,5 @@
 // Where the owner's parts (OB9: 50, 10 §10.7 app side) mount in the reading site.
-export { EditControls, EditRegion, openVersions } from "../edit/EditRegion.tsx";
+export { EditControls, EditRegion, openVersions, useIsEditing } from "../edit/EditRegion.tsx";
 export { UnsavedDialog } from "../edit/dialogs.tsx";
 export { OwnerAvatar, SignInDialog, SignInLink, completeSignInReturn, startAuth } from "../auth/index.ts";
 

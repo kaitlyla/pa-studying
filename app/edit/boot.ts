@@ -5,6 +5,7 @@
 import { onOwnerChange, setBeforeSignInNavigate, setSignOutGuard } from "../auth/auth.ts";
 import { setNavigationGuard } from "../shell/route.ts";
 import { startOverlay, stopOverlay } from "./overlay.ts";
+import { startLocalPictures, stopLocalPictures } from "./pictures.ts";
 import { confirmLeave, keepEditsSignedOut, leavingFor, onBeforeUnload, repo, saveDraft } from "./session.ts";
 import { onUploadBeforeUnload } from "./upload.ts";
 
@@ -16,9 +17,11 @@ async function ownerChanged(owner: boolean): Promise<void> {
     // Before the editors close with the owner state: her unsaved changes must outlive them.
     const kept = keepEditsSignedOut();
     stopOverlay();
+    stopLocalPictures();
     await kept;
     return;
   }
+  void startLocalPictures();
   try {
     await startOverlay((await repo()).git);
   } catch (e) {

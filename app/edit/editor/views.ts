@@ -191,8 +191,8 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
       const pos = getPos();
       const $pos = pos === undefined ? null : view.state.doc.resolve(pos);
       const tableNode = $pos?.node($pos.depth - 1);
-      const borders = tableNode?.type === N.table ? attrsOf(tableNode, "table").borders : null;
-      const td = el("td", cellStyle(a, basePt, borders, cellEdges(view, getPos))) as HTMLTableCellElement;
+      const t = tableNode?.type === N.table ? attrsOf(tableNode, "table") : null;
+      const td = el("td", cellStyle(a, basePt, t?.borders ?? null, cellEdges(view, getPos), t?.cellMarginPt)) as HTMLTableCellElement;
       td.colSpan = a.colspan;
       td.rowSpan = a.rowspan;
       return plain(td, td, node);

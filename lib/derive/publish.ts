@@ -544,7 +544,8 @@ export function publish(c: Content): PublishResult {
     const blockOrder = s.data.blocks.map((b) => b.id);
     usedBlocks(s.data.blocks);
 
-    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle));
+    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle), s.data.below);
+    usedBlocks(topics.flatMap((x) => (x.below ? [x.below] : [])));
 
     // section pages
     const sections = publishedSections(t, st, blockOrder);
@@ -622,9 +623,10 @@ export function publish(c: Content): PublishResult {
         const info = t.rows.get(r.id);
         const topic = t.topics.find((x) => x.id === r.id);
         if (topic) {
+          const below = s.data.below.get(topic.id);
           units.push({
             tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
-            at: topic.id, label: "notes", text: searchText(topicText(t, topic)),
+            at: topic.id, label: "notes", text: searchText(below ? `${topicText(t, topic)}\n${docText(below.doc)}` : topicText(t, topic)),
           });
         } else if (info?.drug) {
           units.push({ tab, title: collapse(firstCell(r)), loc: pharmLoc(ix, gid, sys), route: hosts[r.id]?.route ?? "", at: r.id, label: "notes", text: searchText(r.cells.join("\n")) });

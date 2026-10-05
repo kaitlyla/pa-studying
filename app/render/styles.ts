@@ -5,7 +5,7 @@
 // renders as L / basePt em, so her proportions hold on every screen.
 import type { CSSProperties } from "react";
 import { FONT_FAMILIES } from "../../lib/fonts.ts";
-import type { Border, CellBorders, ImageAttrs, MarkJSON, ParagraphAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
+import type { Border, CellBorders, CellMargins, ImageAttrs, MarkJSON, ParagraphAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
 import { borderVisible, cellSide, TAB_STOP_PT, TEXTBOX_INSET_X_PT, TEXTBOX_INSET_Y_PT, underlineKind, type UnderlineKind } from "../../lib/wordFormat.ts";
 
 export type { Border, MarkJSON, ParagraphAttrs, TableBorders } from "../../lib/schemaTypes.ts";
@@ -153,8 +153,31 @@ export interface CellEdges {
   left: boolean;
 }
 
-export function cellStyle(a: CellAttrs, basePt: number, table: TableBorders | null, edges: CellEdges): CSSProperties {
-  const s: CSSProperties = { verticalAlign: a.vAlign === "center" ? "middle" : (a.vAlign ?? "top") };
+/** Word's default table cell margins (pt): what the screen's reading padding of a cell stands for. */
+export const WORD_CELL_MARGINS: CellMargins = { top: 0, right: 5.4, bottom: 0, left: 5.4 };
+/** The screen's reading padding of a cell with Word's default margins (px). */
+const READING_PAD_Y_PX = 7;
+const READING_PAD_X_PX = 10;
+
+/**
+ * A cell's padding on screen: the reading padding, grown or shrunk by how far the table's margins are
+ * from Word's default, so a table she never changed looks as it always has and her changes show.
+ */
+export function cellPadding(m: CellMargins, basePt: number): string {
+  const side = (px: number, pt: number, dflt: number): string => {
+    const d = pt - dflt;
+    return d === 0 ? `${px}px` : `max(0px, calc(${px}px + ${em(d, basePt)}))`;
+  };
+  return [
+    side(READING_PAD_Y_PX, m.top, WORD_CELL_MARGINS.top),
+    side(READING_PAD_X_PX, m.right, WORD_CELL_MARGINS.right),
+    side(READING_PAD_Y_PX, m.bottom, WORD_CELL_MARGINS.bottom),
+    side(READING_PAD_X_PX, m.left, WORD_CELL_MARGINS.left),
+  ].join(" ");
+}
+
+export function cellStyle(a: CellAttrs, basePt: number, table: TableBorders | null, edges: CellEdges, margins: CellMargins = WORD_CELL_MARGINS): CSSProperties {
+  const s: CSSProperties = { verticalAlign: a.vAlign === "center" ? "middle" : (a.vAlign ?? "top"), padding: cellPadding(margins, basePt) };
   if (a.fill) s.background = hexColor(a.fill);
   if (table) {
     s.borderTop = borderCss(cellSide(table, a.borders, "top", edges.top), basePt);

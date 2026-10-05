@@ -3,7 +3,7 @@ import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
-import type { NavEntry, NavSystem, PubMedsCard, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
+import type { NavEntry, NavSystem, PubBlock, PubMedsCard, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -215,11 +215,34 @@ export function publishedRows(t: SystemTopics): { rows: Record<string, PubRow>; 
   };
 }
 
-/** The system's topics as published in `SystemJson.topics`, each with its meds panel from `meds`. */
-export function publishedTopics(t: SystemTopics, meds: (topic: Topic) => PubMedsCard[]): PubTopic[] {
-  return t.topics.map((topic) => ({
-    id: topic.id, title: topic.title, section: topic.section, condition: topic.condition, rows: withHeadings(t, topic.rows), meds: meds(topic),
-  }));
+/**
+ * The system's topics as published in `SystemJson.topics`, each with its meds panel from `meds` and
+ * its block from `below` (topic id → the block she added below it).
+ */
+export function publishedTopics(t: SystemTopics, meds: (topic: Topic) => PubMedsCard[], below: ReadonlyMap<string, BlockFile>): PubTopic[] {
+  return t.topics.map((topic) => {
+    const b = below.get(topic.id);
+    return {
+      id: topic.id, title: topic.title, section: topic.section, condition: topic.condition, rows: withHeadings(t, topic.rows), meds: meds(topic),
+      below: b ? { id: b.id, kind: b.kind, doc: b.doc } : null,
+    };
+  });
+}
+
+/**
+ * Where a topic's below block shows besides its own page (her choice: section and system pages and
+ * their PDFs too): right under the table holding the topic's last row, wherever that row is shown.
+ * Of `topics`, those with a below block whose last row is among `shown` (one table's rows on a page),
+ * in topic order.
+ */
+export function topicsBelow<T extends { rows: readonly string[] }>(topics: readonly T[], shown: readonly string[], hasBelow: (topic: T) => boolean): T[] {
+  const set = new Set(shown);
+  return topics.filter((t) => hasBelow(t) && t.rows.length > 0 && set.has(t.rows[t.rows.length - 1] as string));
+}
+
+/** The published below blocks under a table showing `shown` rows (topicsBelow over PubTopic). */
+export function belowUnder(topics: readonly PubTopic[], shown: readonly string[]): PubBlock[] {
+  return topicsBelow(topics, shown, (t) => t.below !== null && t.below !== undefined).map((t) => t.below as PubBlock);
 }
 
 /**

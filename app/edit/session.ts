@@ -15,9 +15,10 @@ import { deviceId, versionTime } from "./format.ts";
 import { Git, NetworkError } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
 import { recordSaved } from "./overlay.ts";
+import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
-import { buildSave, loadUnit, UnitError, type EditUnit, type SaveBuild } from "./units.ts";
+import { buildSave, loadUnit, slotDocs, UnitError, type EditUnit, type SaveBuild } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
 
 /** Edit start failed for want of a connection (plan wording). */
@@ -350,17 +351,19 @@ export async function save(): Promise<boolean> {
   if (!edit || !unit || edit.saving) return false;
   setEdit({ saving: true, banner: null });
   try {
-    const build = buildSave(unit, editedDocs());
+    const docs = editedDocs();
+    const build = buildSave(unit, docs);
     if (build.changes.length === 0) {
       discardEdit();
       return true;
     }
     const { git, site } = await repo();
+    const pictures = await pictureChanges(git, docs.values(), slotDocs(unit).values(), unit.snapshot.files);
     const message = commitMessage(`Edit: ${edit.title}`, {
       kind: "edit", page: edit.key, changed: build.changed.length > 0 ? build.changed : unit.ids.slice(0, 1), device: deviceId(),
     });
     const outcome = await commitChanges({
-      git, base: unit.snapshot.commit, baseFiles: unit.snapshot.files, scope: unit.scope, changes: build.changes, message,
+      git, base: unit.snapshot.commit, baseFiles: unit.snapshot.files, scope: unit.scope, changes: [...build.changes, ...pictures], message,
       author: { name: site.owner.commitName, email: site.owner.commitEmail },
     });
     if (outcome.kind === "saved") {

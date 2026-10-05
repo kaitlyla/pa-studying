@@ -9,7 +9,7 @@ import { setOwner } from "../shell/owner.tsx";
 import { hideToast, Toast } from "../shell/toast.tsx";
 import { asOwner, click, mount, until, type Mounted } from "../testing.tsx";
 import { askConfirm, UnsavedDialog } from "./dialogs.tsx";
-import { EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
+import { BELOW_LABEL, EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -170,7 +170,11 @@ describe("EditControls and EditRegion", () => {
 
     const editor = await until(() => root.querySelector('[data-ref="edit-area"] [contenteditable="true"]'), "the editor");
     expect(editor.closest("[hidden]")).toBeNull();
-    expect(root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]')).toHaveLength(1);
+    // The topic's rows, then its below area.
+    const editors = root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]');
+    expect(editors).toHaveLength(2);
+    expect(editors[0]?.closest(".below-edit")).toBeNull();
+    expect(editors[1]?.closest(`section.below-edit[aria-label="${BELOW_LABEL}"]`)).not.toBeNull();
     expect(q(root, "edit-area")?.textContent).not.toContain("Opening for editing…");
     expect(published(root).closest("[hidden]")).not.toBeNull();
     expect(q(root, "edit-page")).toBeNull();

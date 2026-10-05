@@ -11,9 +11,11 @@ import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import {
-  addHighlight, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, insertRow, moveParagraph,
-  removeHighlight, resizePicture, toggleBold, toggleUnderline, type Command, type DocContext,
+  changeCellMargins, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
+  moveParagraph, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, toggleBold, toggleItalic,
+  toggleUnderline, type Command, type DocContext,
 } from "./editor/commands.ts";
+import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
@@ -109,6 +111,9 @@ function GapFrame({ part, slotView }: { part: Extract<Part, { kind: "gap" }>; sl
   );
 }
 
+/** The heading of a topic's below area while editing (it shows after the meds panel when read). */
+export const BELOW_LABEL = "Below the meds — your notes and pictures";
+
 /** One part of an edit unit: its slots shown by `slotView` (editors here; read-only in Versions' View). */
 export function PartView({ part, slotView = editorView }: { part: Part; slotView?: SlotView }): ReactNode {
   switch (part.kind) {
@@ -116,6 +121,13 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
       return <div className="stub"><span className="stub-t">{part.label}</span> drug table — edited on its pharm section</div>;
     case "gap":
       return <GapFrame part={part} slotView={slotView} />;
+    case "below":
+      return (
+        <section className="below-edit" aria-label={BELOW_LABEL}>
+          <div className="below-h">{BELOW_LABEL}</div>
+          {slotView(part.slot)}
+        </section>
+      );
     default:
       return slotView(part.slot);
   }
@@ -141,6 +153,60 @@ function Tool({ label, run, children, refk }: { label: string; run: () => void; 
   );
 }
 
+/** "Highlight" opens these swatches; picking one highlights the selection in it. */
+function HighlightPicker({ run }: { run: (c: Command) => void }): ReactNode {
+  const [open, setOpen] = useState(false);
+  return (
+    <span className="tb-pop">
+      <Tool label="Highlight" run={() => setOpen((o) => !o)} refk="tb-highlight"><span className="tb-hl">H</span> ▾</Tool>
+      {open && (
+        <span className="tb-swatches" role="group" aria-label="Highlight colors" data-ref="tb-highlight-colors">
+          {HIGHLIGHT_COLORS.map((c) => (
+            <Tool key={c.hex} label={`Highlight ${c.name}`} run={() => { setOpen(false); run(setHighlight(c.hex)); }} refk={`tb-hl-${c.hex}`}>
+              <span className="swatch" style={{ background: `#${c.hex}` }} />
+            </Tool>
+          ))}
+          <Tool label="Remove highlight" run={() => { setOpen(false); run(removeHighlight); }} refk="tb-unhighlight"><s>H</s></Tool>
+        </span>
+      )}
+    </span>
+  );
+}
+
+/** "Add picture": a file picker; the chosen picture goes in at the cursor of the editor she was in. */
+function AddPicture({ a }: { a: Active | null }): ReactNode {
+  const input = useRef<HTMLInputElement>(null);
+  const target = useRef<Active | null>(null);
+  const picked = async (file: File | undefined): Promise<void> => {
+    const at = target.current;
+    if (!file || !at) return;
+    const pic = await addPictureFile(file);
+    if (typeof pic === "string") {
+      showToast(pic);
+      return;
+    }
+    insertPicture(pic, at.ctx)(at.view.state, at.view.dispatch);
+    at.view.focus();
+  };
+  return (
+    <>
+      <Tool label="Add picture" run={() => { target.current = a; input.current?.click(); }} refk="tb-pic-add">Add picture</Tool>
+      <input
+        ref={input}
+        type="file"
+        accept={PICTURE_ACCEPT}
+        hidden
+        data-ref="tb-pic-file"
+        onChange={(e) => {
+          const file = e.currentTarget.files?.[0];
+          e.currentTarget.value = "";
+          void picked(file);
+        }}
+      />
+    </>
+  );
+}
+
 function Toolbar(): ReactNode {
   const { edit } = useEdit();
   const a = useActive();
@@ -153,15 +219,28 @@ function Toolbar(): ReactNode {
   const plainCmd = (c: Command) => cmd(() => c);
   const sel = a?.view.state.selection;
   const picture = sel instanceof NodeSelection && (sel.node.type.name === "image" || sel.node.type.name === "image_block");
+  const inTable = a ? changeCellMargins("sides", 1)(a.view.state) : false;
+  const sizeNow = a ? selectionSize(a.view.state, a.ctx) : null;
   return (
     <div className={phone ? "etb phone" : "etb"} data-ref="edit-toolbar">
       <div className="etb-tools" role="toolbar" aria-label="Formatting tools">
         <Tool label="Bold" run={plainCmd(toggleBold)} refk="tb-bold"><b>B</b></Tool>
+        <Tool label="Italic" run={plainCmd(toggleItalic)} refk="tb-italic"><i>I</i></Tool>
         <Tool label="Underline" run={plainCmd(toggleUnderline)} refk="tb-underline"><u>U</u></Tool>
-        <Tool label="Highlight" run={plainCmd(addHighlight)} refk="tb-highlight"><span className="tb-hl">H</span></Tool>
-        <Tool label="Remove highlight" run={plainCmd(removeHighlight)} refk="tb-unhighlight"><s>H</s></Tool>
+        <HighlightPicker run={(c) => plainCmd(c)()} />
         <span className="sep" />
         <Tool label="Smaller text" run={cmd((c) => changeSize(-1, c))} refk="tb-smaller">A−</Tool>
+        <select
+          className="tb-size"
+          aria-label="Text size"
+          title="Text size"
+          data-ref="tb-size"
+          value={sizeNow === null ? "" : String(sizeNow)}
+          disabled={!a}
+          onChange={(e) => cmd((c) => setSize(Number(e.currentTarget.value), c))()}
+        >
+          {sizeOptions(sizeNow).map((pt) => <option key={pt} value={String(pt)}>{pt}</option>)}
+        </select>
         <Tool label="Bigger text" run={cmd((c) => changeSize(1, c))} refk="tb-bigger">A+</Tool>
         <Tool label="Move paragraph left" run={plainCmd(moveParagraph(-1))} refk="tb-left">⇤</Tool>
         <Tool label="Move paragraph right" run={plainCmd(moveParagraph(1))} refk="tb-right">⇥</Tool>
@@ -181,6 +260,17 @@ function Toolbar(): ReactNode {
         <Tool label="Insert row above" run={plainCmd(insertRow("above"))} refk="tb-row-above">Row ↑</Tool>
         <Tool label="Insert row below" run={plainCmd(insertRow("below"))} refk="tb-row-below">Row ↓</Tool>
         <Tool label="Delete row" run={() => { if (a) void deleteRow(editorConfirm)(a.view); }} refk="tb-row-delete">Delete row</Tool>
+        {inTable && (
+          <span className="tb-group" role="group" aria-label="Cell text margins">
+            <span className="tb-gl">Cell margins</span>
+            <Tool label="Less space at cell sides" run={plainCmd(changeCellMargins("sides", -1))} refk="tb-cell-sides-less">Sides −</Tool>
+            <Tool label="More space at cell sides" run={plainCmd(changeCellMargins("sides", 1))} refk="tb-cell-sides-more">Sides +</Tool>
+            <Tool label="Less space at cell top and bottom" run={plainCmd(changeCellMargins("topBottom", -1))} refk="tb-cell-tb-less">Top/bottom −</Tool>
+            <Tool label="More space at cell top and bottom" run={plainCmd(changeCellMargins("topBottom", 1))} refk="tb-cell-tb-more">Top/bottom +</Tool>
+          </span>
+        )}
+        <span className="sep" />
+        <AddPicture a={a} />
         {picture && (
           <>
             <span className="sep" />

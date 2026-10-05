@@ -9,7 +9,7 @@ import { EditorState, Plugin } from "prosemirror-state";
 import type { EditorProps } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
-import { CONFIRMED_DELETE, guardedCount, plainTextSlice, splitParagraph, toggleBold, toggleUnderline } from "./commands.ts";
+import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline } from "./commands.ts";
 
 /** Her editor's status text when an edit would remove a picture (`_editor/editor.js` refusePictureRemoval). */
 export const PICTURE_REFUSED = "That would remove a picture. To remove a picture, click it and press \"Delete picture\".";
@@ -42,6 +42,7 @@ export function editorPlugins(opts: EditorOptions = {}): Plugin[] {
       "Mod-y": redo,
       "Shift-Mod-z": redo,
       "Mod-b": toggleBold,
+      "Mod-i": toggleItalic,
       "Mod-u": toggleUnderline,
       Enter: chainCommands(splitParagraph, baseKeymap.Enter as NonNullable<typeof baseKeymap.Enter>),
     }),
@@ -65,7 +66,8 @@ export function htmlToText(html: string): string {
 
 /**
  * Paste inserts plain text only (each line a paragraph with the caret paragraph's attributes); this is
- * the only paste path, so no formatting from the source survives. Drops are refused.
+ * the only paste path, so no formatting from the source survives. The one drop allowed is a picture
+ * dragged to a new place in the same editor; every other drop is refused.
  */
 export const editorProps: EditorProps = {
   handlePaste: (view, event) => {
@@ -79,5 +81,6 @@ export const editorProps: EditorProps = {
     view.dispatch(view.state.tr.replaceSelection(new Slice(content, open, open)).scrollIntoView());
     return true;
   },
-  handleDrop: () => true,
+  // `moved` is true only for a move-drag that started in this same editor (ProseMirror's own drag).
+  handleDrop: (_view, _event, slice, moved) => !isPictureMove(slice, moved),
 };

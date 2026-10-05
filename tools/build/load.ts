@@ -6,12 +6,21 @@ import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GeneralFile,
   GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, VocabFile, WordDocFile,
 } from "../../lib/content/types.ts";
+import { TOPIC_BELOW_RE, topicBelowDir, topicBelowPath } from "../../lib/content/files.ts";
 import type { Content, DeckData, DocData, GapData, GuideData, PharmData } from "../../lib/derive/model.ts";
 import { PANCE } from "../../lib/derive/routes.ts";
 
 async function readBlocks<M = Record<string, unknown>>(root: TreeRoot, dir: string, ids: readonly string[]): Promise<BlockFile<M>[]> {
   await checkBlockDir(root, dir, ids);
   return Promise.all(ids.map((id) => readContent<BlockFile<M>>(root, `${dir}/${id}.json`)));
+}
+
+/** A system's below-topic blocks, by topic id. */
+async function readBelow(root: TreeRoot, guide: string, system: string): Promise<Map<string, BlockFile>> {
+  const dir = topicBelowDir(guide, system);
+  const topics = (await listDir(root, dir)).flatMap((name) => TOPIC_BELOW_RE.exec(`${dir}/${name}`)?.groups?.topic ?? []);
+  const blocks = await Promise.all(topics.map((t) => readContent<BlockFile>(root, topicBelowPath(guide, system, t))));
+  return new Map(topics.map((t, i) => [t, blocks[i] as BlockFile]));
 }
 
 async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<GuideData> {
@@ -23,7 +32,7 @@ async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<Guid
     file.systems.map(async (s) => {
       const { system, blocks } = await readSystem(root, id, s.id);
       const structure = await readContent<StructureFile>(root, `${base}/${s.id}/structure.json`);
-      return { file: system, structure, blocks };
+      return { file: system, structure, blocks, below: await readBelow(root, id, s.id) };
     }),
   );
   return { file, preamble, general, systems };

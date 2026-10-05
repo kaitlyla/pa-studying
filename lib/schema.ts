@@ -125,7 +125,8 @@ const nodes: Record<string, NodeSpec> = {
   text: { group: "inline" },
   hard_break: { group: "inline", inline: true, atom: true, selectable: false },
   page_break: { group: "inline", inline: true, atom: true, selectable: false },
-  image: { group: "inline", inline: true, atom: true, draggable: false, attrs: imageAttrs },
+  // Draggable so the editor can move a picture by dragging it (only such moves are dropped).
+  image: { group: "inline", inline: true, atom: true, draggable: true, attrs: imageAttrs },
   anchored: {
     group: "block",
     content: "image_block | textbox | drawing",

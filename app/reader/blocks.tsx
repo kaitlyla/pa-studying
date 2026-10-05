@@ -2,6 +2,7 @@
 // update-note placement by target id (40 §40.7).
 import type { ReactNode } from "react";
 import type { FlagNote, Notes, PubBlock, SystemJson } from "../../lib/derive/published.ts";
+import { belowUnder } from "../../lib/derive/topics.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Link } from "../shell/Link.tsx";
@@ -85,6 +86,9 @@ export function PlacedBlock({
   blockRows: readonly string[];
 }): ReactNode {
   const stub = system.stubs[block.id];
+  // Her below blocks of the topics ending in the rows shown here follow the table.
+  const below = (shown: readonly string[]): ReactNode =>
+    belowUnder(system.topics, shown).map((b) => <NotesBlock key={b.id} block={b} basePt={basePt} />);
   if (stub) {
     const cond = rows ?? conditionRows(system, block.id);
     return (
@@ -93,6 +97,7 @@ export function PlacedBlock({
           <>
             <UpdateNotes notes={notesAt(system.notes, cond)} />
             <NotesBlock block={block} basePt={basePt} rows={cond} />
+            {below(cond)}
           </>
         )}
         <DrugTableStub guide={guide} system={system} label={stub.label} section={stub.section} />
@@ -104,6 +109,7 @@ export function PlacedBlock({
     <>
       <UpdateNotes notes={notesAt(system.notes, [block.id, ...shown])} />
       <NotesBlock block={block} basePt={basePt} rows={rows} />
+      {below(shown)}
     </>
   );
 }

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { schema } from "../schema.ts";
 import { buildDocDefinition, imageRequests, pdfFileName, scopeTitle, wholeGuideAsset, wholeGuideUrl, type PdfInput, type PdfScope } from "./index.ts";
 import { FontSplitter } from "./fonts.ts";
-import { cardioSystem, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, pulmSystem, wordDoc } from "./testing.ts";
+import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, wordDoc } from "./testing.ts";
 
 const nav = fmNav();
 const system = cardioSystem();
@@ -49,6 +49,20 @@ describe("scope content", () => {
     const def = buildDocDefinition(scope, input, fontmap);
     const text = inlines(def.content).map((i) => String(i.text)).join("\n");
     for (const f of FORBIDDEN) expect(text).not.toContain(f);
+  });
+
+  it("puts a topic's below block after its rows on its page, and after the table holding its last row in its section and system", () => {
+    const s = cardioSystem();
+    const angina = s.topics.find((t) => t.id === "r_AAAAAAAAA1");
+    if (!angina) throw new Error("no Angina topic");
+    angina.below = block("b_AAAAAAAABW", "prose", doc(para("BELOW note")));
+    const input: PdfInput = { nav, system: s };
+    const scoped = (scope: PdfScope): string[] => lines(buildDocDefinition(scope, input, fontmap).content);
+    expect(scoped({ kind: "topics", ids: ["r_AAAAAAAAA1"] })).toEqual([...T1_HEAD, ...T1_A, "BELOW note"]);
+    expect(scoped({ kind: "section", id: "cad" })).toEqual([...T1_HEAD, ...T1_A, "BELOW note", "Murmurs note"]);
+    // Myocarditis' section shows the same table but not Angina's last row.
+    expect(scoped({ kind: "section", id: "inf" })).toEqual([...T1_HEAD, ...T1_B]);
+    expect(scoped({ kind: "system" })).toEqual([INTRO, ...T1_HEAD, ...T1_A, ...T1_B, "BELOW note", ...D1, "Murmurs note", ...D2]);
   });
 
   it("uses the guide's page, margins and base size", () => {

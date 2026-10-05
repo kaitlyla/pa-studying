@@ -9,6 +9,8 @@ export interface SystemData {
   file: SystemFile;
   structure: StructureFile;
   blocks: BlockFile[];
+  /** Topic id → the block she added below that topic (`below/<topic>.json`). */
+  below: Map<string, BlockFile>;
 }
 
 export interface GuideData {

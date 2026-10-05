@@ -1,12 +1,13 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  gapFilePath, serializeFile, spliceRows, systemRowOrder, tableNode, updateStructure,
+  gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure,
   type BlockFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
   type PageSetup, type PharmFile, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
-import { checkMembers, deriveTopics, fitTitled, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
+import { schema } from "../../lib/schema.ts";
+import { checkMembers, deriveTopics, fitTitled, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -18,6 +19,14 @@ import type { Snapshot } from "./snapshot.ts";
 
 /** Content width for pictures outside a guide or Word page (US Letter with 1-inch margins). */
 const DEFAULT_CONTENT_PT = 468;
+
+/** The doc of a topic's below area before she adds anything: one empty paragraph, with its stored attributes. */
+const EMPTY_DOC = schema.node("doc", null, [schema.node("paragraph")]).toJSON() as DocJSON;
+
+/** A doc with nothing in it: only paragraphs, all empty. */
+function isBlankDoc(doc: DocJSON): boolean {
+  return doc.content.every((n) => (n as { type: string }).type === "paragraph" && ((n as { content?: unknown[] }).content ?? []).length === 0);
+}
 
 /** One editor: a doc and the facts its toolbar needs. */
 export interface Slot {
@@ -51,7 +60,9 @@ export type Part =
   | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null }
   | { kind: "slide"; slot: Slot; path: string; block: BlockFile<SlideMeta> }
   /** A drug table on a system page: shown as its stub, edited on its pharm section. */
-  | { kind: "stub"; block: string; label: string };
+  | { kind: "stub"; block: string; label: string }
+  /** A topic's below block (`path`): null `block` while she has added none; the slot then holds an empty doc. */
+  | { kind: "below"; slot: Slot; path: string; block: BlockFile | null; topic: string; sys: SystemCtx };
 
 export interface EditUnit {
   key: string;
@@ -143,6 +154,20 @@ function blockPart(path: string, block: BlockFile, owner: BlockOwner, basePt: nu
 const sysBlockPart = (sys: SystemCtx, block: BlockFile, basePt: number, width: number): Part =>
   blockPart(blockPath(sys, block.id), block, { kind: "system", sys }, basePt, width);
 
+function belowPart(sys: SystemCtx, topic: string, block: BlockFile | null, basePt: number, width: number): Part {
+  return {
+    kind: "below", path: topicBelowPath(sys.guide, sys.system, topic), block, topic, sys,
+    slot: { id: `${topic}:below`, doc: block?.doc ?? EMPTY_DOC, basePt, pageContentPt: width },
+  };
+}
+
+/** The below blocks shown under a table whose `shown` rows a section or system page shows (topicsBelow). */
+async function belowParts(snap: Snapshot, sys: SystemCtx, t: SystemTopics, shown: readonly string[], basePt: number, width: number): Promise<Part[]> {
+  const topics = topicsBelow(t.topics, shown, (x) => snap.has(topicBelowPath(sys.guide, sys.system, x.id)));
+  const blocks = await snap.many<BlockFile>(topics.map((x) => topicBelowPath(sys.guide, sys.system, x.id)));
+  return topics.map((x, i) => belowPart(sys, x.id, blocks[i] as BlockFile, basePt, width));
+}
+
 function gapPart(gap: GapFile): Part {
   const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT });
   return {
@@ -174,6 +199,7 @@ function partIds(parts: readonly Part[]): string[] {
     if (p.kind === "rows") ids.push(...p.shown);
     else if (p.kind === "block" || p.kind === "slide") ids.push(p.block.id);
     else if (p.kind === "gap") ids.push(p.gap.id);
+    else if (p.kind === "below" && p.block) ids.push(p.block.id);
   }
   return ids;
 }
@@ -219,6 +245,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
         return rowsPart(sys, block, shown, basePt, width);
       });
+      // Her below area, after the topic's tables (an empty editor until she adds something).
+      parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, width));
       return unit(parts, guideScope(parts), row);
     }
     case "section": {
@@ -227,11 +255,13 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const byId = new Map(sys.blocks.map((b) => [b.id, b]));
-      const parts = sectionItems(t, sys.structure, sys.blocks.map((b) => b.id), section).map((item): Part => {
+      const parts: Part[] = [];
+      for (const item of sectionItems(t, sys.structure, sys.blocks.map((b) => b.id), section)) {
         const b = byId.get(item.block);
         if (!b) throw new UnitError(`Block ${item.block} is no longer in ${sys.system}`);
-        return item.rows === null ? sysBlockPart(sys, b, basePt, width) : rowsPart(sys, b, item.rows, basePt, width);
-      });
+        if (item.rows === null) parts.push(sysBlockPart(sys, b, basePt, width));
+        else parts.push(rowsPart(sys, b, item.rows, basePt, width), ...(await belowParts(snap, sys, t, item.rows, basePt, width)));
+      }
       return unit(parts);
     }
     case "system": {
@@ -240,13 +270,13 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { basePt, width } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const drug = new Map(sys.structure.drugTables.map((d) => [d.block, d]));
-      const parts = sys.blocks.map((b): Part => {
-        if (drug.has(b.id)) {
-          const stored = t.tables.get(b.id);
-          return { kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" };
-        }
-        return wholeBlockPart(sys, b, basePt, width, t.proseBlocks.includes(b.id));
-      });
+      const parts: Part[] = [];
+      for (const b of sys.blocks) {
+        const stored = t.tables.get(b.id);
+        if (drug.has(b.id)) parts.push({ kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" });
+        else parts.push(wholeBlockPart(sys, b, basePt, width, t.proseBlocks.includes(b.id)));
+        parts.push(...(await belowParts(snap, sys, t, (stored?.rows ?? []).map((r) => r.id), basePt, width)));
+      }
       return unit(parts);
     }
     case "listed": {
@@ -353,8 +383,8 @@ export interface SaveBuild {
 
 type RowsPart = Extract<Part, { kind: "rows" }>;
 
-/** Each slot's doc of a unit (a version's content, for a restore). */
-function slotDocs(unit: EditUnit): Map<string, DocJSON> {
+/** Each slot's doc of a unit (the page as opened, or a version's content for a restore). */
+export function slotDocs(unit: EditUnit): Map<string, DocJSON> {
   const out = new Map<string, DocJSON>();
   for (const p of unit.parts) {
     if (p.kind === "stub") continue;
@@ -516,7 +546,8 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
   };
 
   for (const part of unit.parts) {
-    if (part.kind === "stub") continue;
+    // A topic's below block is written once its topic's id after the save is known (below).
+    if (part.kind === "stub" || part.kind === "below") continue;
     if (part.kind === "rows") {
       const full = rowsOf(part.block);
       const old = restore ? oldRows(part.block.id) : undefined;
@@ -602,6 +633,33 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
     if (structure !== sys.structure) put(sys.structurePath, sys.structure, structure);
   }
 
+  const deleted: string[] = [];
+  for (const part of unit.parts) {
+    if (part.kind !== "below") continue;
+    const edited = docs.get(part.slot.id);
+    const doc = edited ?? part.block?.doc ?? null;
+    if (doc === null || isBlankDoc(doc)) {
+      // Emptied: the file goes (an untouched empty area has none).
+      if (part.block && edited) {
+        deleted.push(part.path);
+        changed.add(part.block.id);
+      }
+      continue;
+    }
+    // It follows its topic when the save gives the topic a new id. With no topic left, or when the
+    // topic it joins already has a below block, it stays where it is (kept in Git, not shown).
+    const s = systems.get(part.sys.structurePath);
+    const topic = s ? topicNow(part.sys, part.topic, s.blocks, s.structure) : part.topic;
+    const dest = topic === null ? part.path : topicBelowPath(part.sys.guide, part.sys.system, topic);
+    const path = dest !== part.path && (unit.snapshot.has(dest) || next.has(dest)) ? part.path : dest;
+    const block: BlockFile = { ...(part.block ?? { v: 1, id: newId("b", new Set(part.sys.blocks.map((b) => b.id))), kind: "prose", meta: {} }), doc };
+    const normalized = JSON.parse(canonical(path, block)) as BlockFile;
+    if (!part.block || JSON.stringify(normalized.doc) !== JSON.stringify(part.block.doc)) changed.add(block.id);
+    if (part.block && path === part.path) put(path, part.block, normalized);
+    else next.set(path, normalized);
+    if (part.block && path !== part.path) deleted.push(part.path);
+  }
+
   const changes: TreeChange[] = [];
   const files = new Map<string, unknown>();
   for (const [path, value] of next) {
@@ -610,9 +668,15 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
     changes.push({ path, content: text });
     files.set(path, value);
   }
+  for (const path of deleted) {
+    changes.push({ path, sha: null });
+    files.set(path, null);
+  }
   if (unit.docId !== null && changes.length > 0) changed.add(unit.docId);
   const build: SaveBuild = { changes, files, changed: [...changed] };
-  if (lostTopic) build.topicMoved = { guide: lostTopic.part.sys.guide, system: lostTopic.part.sys.system, topic: topicAfter(unit, lostTopic) };
+  if (lostTopic && unit.topic !== null) {
+    build.topicMoved = { guide: lostTopic.part.sys.guide, system: lostTopic.part.sys.system, topic: topicNow(lostTopic.part.sys, unit.topic, lostTopic.blocks, lostTopic.structure) };
+  }
   return build;
 }
 
@@ -680,6 +744,12 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
   const changes: TreeChange[] = [];
   const out = new Map<string, unknown>();
   for (const [path, value] of files) {
+    if (value === null) {
+      // A file the save deletes (an emptied below block).
+      changes.push({ path, sha: null });
+      out.set(path, null);
+      continue;
+    }
     const text = canonical(path, value);
     if (unit.snapshot.has(path) && text === (await unit.snapshot.text(path))) continue;
     changes.push({ path, content: text });
@@ -688,10 +758,14 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
   return { ...build, changes, files: out, changed: [...changed] };
 }
 
-/** The topic that the first remaining row of a topic page's deleted topic belongs to after the save. */
-function topicAfter(unit: EditUnit, lost: { part: RowsPart; blocks: BlockFile[]; structure: StructureFile }): string | null {
-  const before = deriveTopics(lost.part.sys.blocks, lost.part.sys.structure).topics.find((t) => t.id === unit.topic)?.rows ?? [];
-  const after = deriveTopics(lost.blocks, lost.structure).topics;
+/**
+ * Topic `topic` of `sys` after a save leaves the system with `blocks` and `structure`: itself while it
+ * still exists, else the topic its first remaining row belongs to, else null.
+ */
+function topicNow(sys: SystemCtx, topic: string, blocks: BlockFile[], structure: StructureFile): string | null {
+  const after = deriveTopics(blocks, structure).topics;
+  if (after.some((t) => t.id === topic)) return topic;
+  const before = deriveTopics(sys.blocks, sys.structure).topics.find((t) => t.id === topic)?.rows ?? [];
   for (const row of before) {
     const t = after.find((x) => x.rows.includes(row));
     if (t) return t.id;

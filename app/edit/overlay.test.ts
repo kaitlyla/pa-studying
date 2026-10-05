@@ -87,6 +87,18 @@ describe("patchPublished", () => {
     expect(withStructure.topics.map((t) => t.id)).toEqual(pub<SystemJson>(SYS).topics.map((t) => t.id));
   });
 
+  it("shows a saved below block on its topic, and drops one the save deleted", () => {
+    const structure = fileJson<StructureFile>(`${CV}/structure.json`);
+    const path = `${CV}/below/${R(101)}.json`;
+    const below: BlockFile = { v: 1, id: B(901), kind: "prose", doc: para("notes under AF"), meta: {} } as BlockFile;
+    const added = patchPublished(SYS, pub<SystemJson>(SYS), new Map([[path, below]]), structure) as SystemJson;
+    expect(added.topics.find((t) => t.id === R(101))?.below).toEqual({ id: B(901), kind: "prose", doc: para("notes under AF") });
+    expect(added.topics.filter((t) => t.id !== R(101)).every((t) => t.below === null)).toBe(true);
+
+    const removed = patchPublished(SYS, added, new Map([[path, null]]), structure) as SystemJson;
+    expect(removed.topics.find((t) => t.id === R(101))?.below).toBeNull();
+  });
+
   it("patches a saved gap block wherever it is shown, with its owner edits", () => {
     const gap = fileJson<GapFile>(`content/gapfill/${G(1)}.json`);
     const saved: GapFile = { ...gap, doc: para("Check TSH and free T4."), meta: { ...gap.meta, ownerEdits: ["2026-10-04"] } };

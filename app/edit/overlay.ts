@@ -2,7 +2,7 @@
 // deployed site contains them, and patched into every published data file her device reads so a page
 // shows her save at once.
 import {
-  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type ReplaceFailed,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, TOPIC_BELOW_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type ReplaceFailed,
   type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
@@ -115,8 +115,11 @@ function walk(v: unknown, ix: Index): unknown {
 /** A published page's blocks in the content-file shape lib/derive takes. */
 const asBlockFiles = (blocks: SystemJson["blocks"]): BlockFile[] => blocks.map((b) => ({ v: 1, id: b.id, kind: b.kind, doc: b.doc, meta: {} }));
 
-/** Re-derives a system page's rows, topics and sections from its (patched) blocks and structure. */
-function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readonly string[] | null, ix: Index): SystemJson {
+/**
+ * Re-derives a system page's rows, topics and sections from its (patched) blocks and structure.
+ * `below`: the overlaid below blocks by topic id (null: deleted).
+ */
+function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readonly string[] | null, ix: Index, below: ReadonlyMap<string, BlockFile | null>): SystemJson {
   const byId = new Map(sys.blocks.map((b) => [b.id, b]));
   const ids = order ?? sys.blocks.map((b) => b.id);
   const blocks = ids.map((id) => {
@@ -125,11 +128,16 @@ function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readon
   }).filter((b): b is SystemJson["blocks"][number] => b !== undefined);
   const t = deriveTopics(asBlockFiles(blocks), structure);
   const meds = new Map(sys.topics.map((x) => [x.id, x.meds]));
+  const belowNow = new Map(sys.topics.flatMap((x) => (x.below ? asBlockFiles([x.below]).map((b): [string, BlockFile] => [x.id, b]) : [])));
+  for (const [topic, b] of below) {
+    if (b) belowNow.set(topic, b);
+    else belowNow.delete(topic);
+  }
   return {
     ...sys,
     blocks,
     ...publishedRows(t),
-    topics: publishedTopics(t, (x) => meds.get(x.id) ?? []),
+    topics: publishedTopics(t, (x) => meds.get(x.id) ?? [], belowNow),
     sections: publishedSections(t, structure, blocks.map((b) => b.id)),
   };
 }
@@ -180,7 +188,12 @@ export function patchPublished(
     const dir = `content/guides/${sys.guide}/${sys.system}/`;
     const touched = [...files.keys()].some((p) => p.startsWith(dir));
     const st = (files.get(`${dir}structure.json`) as StructureFile | undefined) ?? structure ?? null;
-    if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix);
+    const below = new Map<string, BlockFile | null>();
+    for (const [p, json] of files) {
+      const topic = p.startsWith(dir) ? TOPIC_BELOW_RE.exec(p)?.groups?.topic : undefined;
+      if (topic) below.set(topic, json as BlockFile | null);
+    }
+    if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix, below);
   }
   if (path === OTHER_PATH) {
     const other = files.get("content/places/other.json") as OtherFile | undefined;

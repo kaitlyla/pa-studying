@@ -28,6 +28,7 @@ export const N = {
 
 export const M = {
   bold: markType("bold"),
+  italic: markType("italic"),
   underline: markType("underline"),
   highlight: markType("highlight"),
   shade: markType("shade"),

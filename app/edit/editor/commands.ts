@@ -1,6 +1,6 @@
 // Toolbar commands of the editor (plan 50 §50.3): her current editor's controls, with lengths in pt.
 import { Fragment } from "prosemirror-model";
-import type { Mark, MarkType, Node as PMNode, ResolvedPos } from "prosemirror-model";
+import type { Mark, MarkType, Node as PMNode, ResolvedPos, Slice } from "prosemirror-model";
 import { NodeSelection, TextSelection } from "prosemirror-state";
 import type { EditorState, Transaction } from "prosemirror-state";
 import { TableMap } from "prosemirror-tables";
@@ -48,7 +48,7 @@ export interface DocContext {
 
 export const roundHalf = (x: number): number => Math.round(x * 2) / 2;
 
-const { bold, underline, highlight, shade, size } = M;
+const { bold, italic, underline, highlight, shade, size } = M;
 
 // ---- marks ---------------------------------------------------------------------------------------
 
@@ -70,14 +70,40 @@ function toggle(type: MarkType, attrs: Record<string, unknown> | null): Command 
 }
 
 export const toggleBold: Command = toggle(bold, null);
+export const toggleItalic: Command = toggle(italic, null);
 export const toggleUnderline: Command = toggle(underline, { style: "single" });
 
-export const addHighlight: Command = (state, dispatch) => {
-  const mark = (highlight).create({ hex: "FFFF00" });
-  const { from, to, empty } = state.selection;
-  if (dispatch) dispatch(empty ? state.tr.addStoredMark(mark) : state.tr.addMark(from, to, mark));
-  return true;
-};
+/**
+ * The colors the Highlight control offers: Word's highlight palette in Word's order (her choice), with
+ * the hex values the importer gives Word's highlight names.
+ */
+export const HIGHLIGHT_COLORS: readonly { name: string; hex: string }[] = [
+  { name: "yellow", hex: "FFFF00" },
+  { name: "bright green", hex: "00FF00" },
+  { name: "turquoise", hex: "00FFFF" },
+  { name: "pink", hex: "FF00FF" },
+  { name: "blue", hex: "0000FF" },
+  { name: "red", hex: "FF0000" },
+  { name: "dark blue", hex: "000080" },
+  { name: "teal", hex: "008080" },
+  { name: "green", hex: "008000" },
+  { name: "violet", hex: "800080" },
+  { name: "dark red", hex: "800000" },
+  { name: "dark yellow", hex: "808000" },
+  { name: "gray 50%", hex: "808080" },
+  { name: "gray 25%", hex: "C0C0C0" },
+  { name: "black", hex: "000000" },
+];
+
+/** Highlight the selection (or what she types next) in `hex`, replacing any highlight it had. */
+export function setHighlight(hex: string): Command {
+  return (state, dispatch) => {
+    const mark = highlight.create({ hex });
+    const { from, to, empty } = state.selection;
+    if (dispatch) dispatch(empty ? state.tr.addStoredMark(mark) : state.tr.addMark(from, to, mark));
+    return true;
+  };
+}
 
 export const removeHighlight: Command = (state, dispatch) => {
   const { from, to, empty } = state.selection;
@@ -93,25 +119,72 @@ export const removeHighlight: Command = (state, dispatch) => {
   return true;
 };
 
-/** A− / A+: each text run becomes max(4, roundHalf(cur ± 1)); the `size` mark goes when it equals basePt. */
-export function changeSize(delta: 1 | -1, ctx: DocContext): Command {
+/** The smallest text size the size controls set. */
+export const MIN_SIZE_PT = 4;
+
+const sizeOf = (marks: readonly Mark[], basePt: number): number => (size.isInSet(marks)?.attrs.pt as number | undefined) ?? basePt;
+
+/**
+ * Each text run of the selection takes the size `next(current)`; the `size` mark goes when that is
+ * basePt. With nothing selected, what she types next takes it.
+ */
+function mapSize(ctx: DocContext, next: (cur: number) => number): Command {
   return (state, dispatch) => {
-    const { from, to, empty } = state.selection;
-    if (empty) return false;
+    const { from, to, empty, $from } = state.selection;
     const tr = state.tr;
-    state.doc.nodesBetween(from, to, (node, pos) => {
-      if (!node.isText) return true;
-      const start = Math.max(from, pos);
-      const end = Math.min(to, pos + node.nodeSize);
-      const cur = size.isInSet(node.marks)?.attrs.pt as number | undefined ?? ctx.basePt;
-      const next = Math.max(4, roundHalf(cur + delta));
-      tr.removeMark(start, end, size);
-      if (next !== ctx.basePt) tr.addMark(start, end, size.create({ pt: next }));
-      return false;
-    });
+    const apply = (cur: number): Mark | null => {
+      const pt = Math.max(MIN_SIZE_PT, roundHalf(next(cur)));
+      return pt === ctx.basePt ? null : size.create({ pt });
+    };
+    if (empty) {
+      const mark = apply(sizeOf(state.storedMarks ?? $from.marks(), ctx.basePt));
+      tr.removeStoredMark(size);
+      if (mark) tr.addStoredMark(mark);
+    } else {
+      state.doc.nodesBetween(from, to, (node, pos) => {
+        if (!node.isText) return true;
+        const start = Math.max(from, pos);
+        const end = Math.min(to, pos + node.nodeSize);
+        const mark = apply(sizeOf(node.marks, ctx.basePt));
+        tr.removeMark(start, end, size);
+        if (mark) tr.addMark(start, end, mark);
+        return false;
+      });
+    }
     if (dispatch) dispatch(tr);
     return true;
   };
+}
+
+/** A− / A+: each text run becomes max(4, roundHalf(cur ± 1)). */
+export function changeSize(delta: 1 | -1, ctx: DocContext): Command {
+  return mapSize(ctx, (cur) => cur + delta);
+}
+
+/** The size box: every text run of the selection becomes `pt`. */
+export function setSize(pt: number, ctx: DocContext): Command {
+  return mapSize(ctx, () => pt);
+}
+
+/** Word's font size list, which the size box offers. */
+const SIZE_LIST = [8, 9, 10, 10.5, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36];
+
+/** The size box's choices: Word's list, plus the current size when it is not on it. */
+export function sizeOptions(current: number | null): number[] {
+  return current === null || SIZE_LIST.includes(current) ? SIZE_LIST : [...SIZE_LIST, current].sort((x, y) => x - y);
+}
+
+/** The text size the size box shows: the first selected text's, or at the cursor what she types next. */
+export function selectionSize(state: EditorState, ctx: DocContext): number {
+  const { from, to, empty, $from } = state.selection;
+  if (empty) return sizeOf(state.storedMarks ?? $from.marks(), ctx.basePt);
+  let found: number | null = null;
+  state.doc.nodesBetween(from, to, (node) => {
+    if (found !== null) return false;
+    if (node.isText) found = sizeOf(node.marks, ctx.basePt);
+    return found === null;
+  });
+  return found ?? sizeOf($from.marks(), ctx.basePt);
 }
 
 // ---- paragraphs ----------------------------------------------------------------------------------
@@ -363,6 +436,29 @@ export function insertRow(where: "above" | "below"): Command {
   };
 }
 
+/** One click of the cell text margin controls, in pt; and their largest margin. */
+export const CELL_MARGIN_STEP_PT = 1;
+export const MAX_CELL_MARGIN_PT = 36;
+
+/**
+ * Cell text margins of the cursor's table: "sides" moves its cells' left and right margins, "topBottom"
+ * their top and bottom ones, by one step each, within [0, MAX_CELL_MARGIN_PT].
+ */
+export function changeCellMargins(which: "sides" | "topBottom", dir: 1 | -1): Command {
+  return (state, dispatch) => {
+    const at = tableAt(state.selection.$from);
+    if (!at) return false;
+    const m = at.table.attrs.cellMarginPt as { top: number; right: number; bottom: number; left: number };
+    const step = (v: number): number => Math.min(MAX_CELL_MARGIN_PT, Math.max(0, roundHalf(v + dir * CELL_MARGIN_STEP_PT)));
+    const next = which === "sides" ? { ...m, left: step(m.left), right: step(m.right) } : { ...m, top: step(m.top), bottom: step(m.bottom) };
+    if (dispatch) {
+      const tr = state.tr.setNodeMarkup(at.pos, undefined, { ...at.table.attrs, cellMarginPt: next });
+      dispatch(tr);
+    }
+    return true;
+  };
+}
+
 /** The confirm text of Delete row: her editor's wording. */
 export function deleteRowPrompt(row: PMNode, pictures: number): string[] {
   const text = row.textBetween(0, row.content.size, " ", " ").replace(/\s+/g, " ").trim();
@@ -466,6 +562,53 @@ export function resizePicture(dir: 1 | -1, ctx: DocContext): Command {
     }
     return true;
   };
+}
+
+/** A picture file she chose, stored content-addressed (its `asset` name), with its size in pixels. */
+export interface NewPicture {
+  asset: string;
+  widthPx: number;
+  heightPx: number;
+}
+
+/** CSS pixels per pt: a picture is first shown at its natural pixel size, as Word inserts one. */
+const PX_PER_PT = 4 / 3;
+
+/**
+ * Add picture: the picture goes in at the cursor (after the selected picture, so none is replaced),
+ * at its natural size shrunk to fit the table cell or page there, and is then selected.
+ */
+export function insertPicture(pic: NewPicture, ctx: DocContext): Command {
+  return (state, dispatch) => {
+    if (pic.widthPx <= 0 || pic.heightPx <= 0) return false;
+    const sel = state.selection;
+    const at = sel instanceof NodeSelection ? sel.to : sel.from;
+    const $at = state.doc.resolve(at);
+    const natural = pic.widthPx / PX_PER_PT;
+    const widthPt = Math.min(natural, Math.max(24, pictureLimit($at, ctx)));
+    const node = nodes.image.create({ asset: pic.asset, widthPt, heightPt: (widthPt * pic.heightPx) / pic.widthPx });
+    if (!dispatch) return true;
+    // Collapsed first, so no selected text is replaced.
+    const tr = state.tr.setSelection(TextSelection.near($at)).replaceSelectionWith(node, false);
+    // The selection ends up just after the inserted picture.
+    const $end = tr.selection.$from;
+    const before = $end.nodeBefore;
+    if (before?.type === nodes.image) tr.setSelection(NodeSelection.create(tr.doc, $end.pos - before.nodeSize));
+    dispatch(tr.scrollIntoView());
+    return true;
+  };
+}
+
+/**
+ * A drop she may make: moving (not copying) a picture dragged within the same editor. Everything
+ * else dropped is refused, as before; text is moved with cut and paste.
+ */
+export function isPictureMove(slice: Slice, moved: boolean): boolean {
+  if (!moved || slice.content.childCount !== 1) return false;
+  let only: PMNode | null = slice.content.firstChild;
+  // A dragged inline picture comes wrapped in the paragraph it left.
+  while (only && only.type !== nodes.image && only.childCount === 1) only = only.firstChild;
+  return only?.type === nodes.image;
 }
 
 /** Delete picture: confirm "Delete this picture?", then remove it with its `anchored` wrapper if any. */

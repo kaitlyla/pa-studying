@@ -16,6 +16,7 @@ import {
   type PdfScope,
 } from "../../lib/pdf/index.ts";
 import { DATA_BASE, loadData } from "../data/load.ts";
+import { localAssetOf } from "../render/RichDoc.tsx";
 
 export type { PdfInput, PdfScope } from "../../lib/pdf/index.ts";
 export { pdfFileName, wholeGuideUrl } from "../../lib/pdf/index.ts";
@@ -57,6 +58,12 @@ export async function convertToPng(blob: Blob, v: ImageVariant): Promise<Blob> {
   return canvas.convertToBlob({ type: "image/png" });
 }
 
+async function siteAsset(asset: string): Promise<Blob> {
+  const res = await fetch(`${DATA_BASE}assets/${asset}`);
+  if (!res.ok) throw new Error(`PDF: image ${asset}: HTTP ${res.status}`);
+  return res.blob();
+}
+
 export const browserEnvironment: PdfEnvironment = {
   async pdfMake() {
     const mod = (await import("pdfmake/build/pdfmake.js")) as unknown as { default?: PdfMake } & PdfMake;
@@ -65,9 +72,7 @@ export const browserEnvironment: PdfEnvironment = {
   fontmap: () => loadData<FontMapJson>(FONTMAP_PATH),
   fontUrl: (file) => new URL(`${import.meta.env.BASE_URL}fonts/${file}`, window.location.href).href,
   async image(v) {
-    const res = await fetch(`${DATA_BASE}assets/${v.asset}`);
-    if (!res.ok) throw new Error(`PDF: image ${v.asset}: HTTP ${res.status}`);
-    const blob = await res.blob();
+    const blob = localAssetOf(v.asset)?.blob ?? (await siteAsset(v.asset));
     if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${base64(new Uint8Array(await blob.arrayBuffer()))}`;
     const png = await convertToPng(blob, v);
     return `data:image/png;base64,${base64(new Uint8Array(await png.arrayBuffer()))}`;

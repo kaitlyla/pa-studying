@@ -9,7 +9,7 @@ export {
 export type { AssetExt, IdPrefix } from "./ids.ts";
 export {
   AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, gapFilePath, inboxItemDir, inboxUploadPath, partName, UPLOAD_NAME, WORD_DOC_RE, isContentJSON,
-  parseFile, serializeFile, serializeJSON, validateFile,
+  parseFile, serializeFile, serializeJSON, TOPIC_BELOW_RE, topicBelowDir, topicBelowPath, validateFile,
 } from "./files.ts";
 export { checkTrackSeries, isCdcOrg } from "./validate.ts";
 export { addFlag } from "./flags.ts";

@@ -1,5 +1,5 @@
 // Rendering of stored rich text (plan 40 §40.6) and the content labels (40 §40.7).
-export { RichDoc, assetUrl, inlineText, withMarks, DIVIDER_RE, LEAD_LABEL_RE, type RichDocProps, type PMNode } from "./RichDoc.tsx";
+export { RichDoc, assetUrl, localAssetOf, setLocalAssets, type LocalAsset, inlineText, withMarks, DIVIDER_RE, LEAD_LABEL_RE, type RichDocProps, type PMNode } from "./RichDoc.tsx";
 export { Drawing, type Shape } from "./Drawing.tsx";
 export {
   em,

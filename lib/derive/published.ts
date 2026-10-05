@@ -226,6 +226,8 @@ export interface PubTopic {
   rows: string[];
   /** Meds panel cards (empty when there are none). */
   meds: PubMedsCard[];
+  /** Her notes and pictures below the topic (after its meds panel); null when she added none. */
+  below: PubBlock | null;
 }
 
 export interface PubSectionItem {

@@ -2,7 +2,7 @@
 // (10 §10.6 control 2): every node becomes a React element and every text is a React text child.
 import { createContext, Fragment, useContext, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import { isAllowedHref } from "../../lib/schema.ts";
-import { isMark, isNode, type ImageAttrs, type ListMarker, type MarkJSON, type MarkName, type NodeJSON, type PMNode, type TableBorders } from "../../lib/schemaTypes.ts";
+import { isMark, isNode, type CellMargins, type ImageAttrs, type ListMarker, type MarkJSON, type MarkName, type NodeJSON, type PMNode, type TableBorders } from "../../lib/schemaTypes.ts";
 import { DATA_BASE } from "../data/load.ts";
 import { openImageViewer } from "../files/imageViewer.tsx";
 import { navigate } from "../shell/route.ts";
@@ -25,9 +25,30 @@ import { layoutTable, selectRows, type DrawRow, type PlacedCell } from "./tableL
 
 export type { PMNode } from "../../lib/schemaTypes.ts";
 
-/** URL of a stored image (`dist/data/assets/<sha>.<ext>`). */
+/** This device's copy of a picture: its bytes and an object URL showing them. */
+export interface LocalAsset {
+  blob: Blob;
+  url: string;
+}
+
+let localAsset: ((asset: string) => LocalAsset | null) | null = null;
+
+/**
+ * Pictures the owner added that the deployed site may not serve yet: `find` gives this device's copy
+ * of such a picture, or null to use the site's. Null turns it off (visitors).
+ */
+export function setLocalAssets(find: ((asset: string) => LocalAsset | null) | null): void {
+  localAsset = find;
+}
+
+/** This device's copy of a picture she added, or null. */
+export function localAssetOf(asset: string): LocalAsset | null {
+  return localAsset?.(asset) ?? null;
+}
+
+/** URL of a stored image (`dist/data/assets/<sha>.<ext>`), or this device's copy of one she just added. */
 export function assetUrl(asset: string): string {
-  return `${DATA_BASE}assets/${asset}`;
+  return localAssetOf(asset)?.url ?? `${DATA_BASE}assets/${asset}`;
 }
 
 interface Ctx {
@@ -194,14 +215,22 @@ export interface TableView {
   stacked: boolean;
 }
 
-function Cell({ placed, rowspan, edges, borders }: { placed: PlacedCell; rowspan: number; edges: { top: boolean; right: boolean; bottom: boolean; left: boolean }; borders: TableBorders | null }): ReactNode {
+interface CellProps {
+  placed: PlacedCell;
+  rowspan: number;
+  edges: { top: boolean; right: boolean; bottom: boolean; left: boolean };
+  borders: TableBorders | null;
+  margins: CellMargins;
+}
+
+function Cell({ placed, rowspan, edges, borders, margins }: CellProps): ReactNode {
   const { basePt } = useContext(RenderCtx);
   const cell = placed.node;
   return (
     <td
       colSpan={placed.colspan > 1 ? placed.colspan : undefined}
       rowSpan={rowspan > 1 ? rowspan : undefined}
-      style={cellStyle(isNode(cell, "table_cell") ? cell.attrs : {}, basePt, borders, edges)}
+      style={cellStyle(isNode(cell, "table_cell") ? cell.attrs : {}, basePt, borders, edges, margins)}
     >
       <Blocks nodes={placed.node.content ?? []} />
     </td>
@@ -236,6 +265,7 @@ function GridTable({ node, rows }: { node: PMNode & NodeJSON<"table">; rows: Dra
                     placed={c.cell}
                     rowspan={c.rowspan}
                     borders={borders}
+                    margins={a.cellMarginPt}
                     edges={{ top: ri === 0, bottom: ri + c.rowspan - 1 >= last, left: c.cell.col === 0, right: c.cell.col + c.cell.colspan >= columns }}
                   />
                 ))}

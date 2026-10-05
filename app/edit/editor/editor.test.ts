@@ -8,8 +8,9 @@ import { EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import {
-  addHighlight, changeLineSpacing, changeSize, changeSpace, CONFIRMED_DELETE, deletePicture, deleteRow, deleteRowPrompt,
-  docLines, moveParagraph, removeHighlight, resizePicture, splitParagraph, toggleBold, toggleUnderline, insertRow,
+  changeCellMargins, changeLineSpacing, changeSize, changeSpace, CONFIRMED_DELETE, deletePicture, deleteRow, deleteRowPrompt,
+  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveParagraph, removeHighlight, resizePicture, selectionSize,
+  setHighlight, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
@@ -350,9 +351,63 @@ describe("text size", () => {
     expect(state.doc.firstChild?.firstChild?.marks[0]?.attrs.pt).toBe(4);
   });
 
-  it("is a no-op on an empty selection", () => {
-    const state = selectText(createEditorState(docOf(para([text("w")]))), 1, 1);
-    expect(changeSize(1, ctx)(state, () => { throw new Error("dispatched"); })).toBe(false);
+  it("with nothing selected sets the size of what she types next", () => {
+    let state = selectText(createEditorState(docOf(para([text("w")]))), 2, 2);
+    state = run(state, changeSize(1, ctx));
+    expect(state.storedMarks?.map((m) => m.toJSON())).toEqual([{ type: "size", attrs: { pt: 12 } }]);
+    state = state.apply(state.tr.insertText("x"));
+    expect(state.doc.firstChild?.lastChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "size", attrs: { pt: 12 } }]);
+    expect(state.doc.firstChild?.firstChild?.marks).toEqual([]);
+  });
+
+  it("the size box sets each selected run to the chosen size, and its base size removes the mark", () => {
+    let state = selectText(createEditorState(docOf(para([text("a", [{ type: "size", attrs: { pt: 9 } }]), text("b")]))), 1, 3);
+    state = run(state, setSize(16, ctx));
+    expect(state.doc.firstChild?.childCount).toBe(1);
+    expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "size", attrs: { pt: 16 } }]);
+    state = run(state, setSize(11, ctx));
+    expect(state.doc.firstChild?.firstChild?.marks).toEqual([]);
+  });
+
+  it("the size box shows the first selected text's size, or at the cursor the size of what she types next", () => {
+    const state = createEditorState(docOf(para([text("a"), text("b", [{ type: "size", attrs: { pt: 14 } }])])));
+    expect(selectionSize(selectText(state, 2, 3), ctx)).toBe(14);
+    expect(selectionSize(selectText(state, 1, 3), ctx)).toBe(11);
+    expect(selectionSize(selectText(state, 3, 3), ctx)).toBe(14);
+  });
+
+  it("the size box offers Word's list, plus a current size that is not on it, in order", () => {
+    expect(sizeOptions(11)).toContain(36);
+    expect(sizeOptions(11).filter((x) => x === 11)).toHaveLength(1);
+    const odd = sizeOptions(13.5);
+    expect(odd).toContain(13.5);
+    expect(odd).toEqual([...odd].sort((x, y) => x - y));
+  });
+});
+
+describe("cell text margins", () => {
+  const marginsOf = (state: EditorState): unknown => state.doc.firstChild?.attrs.cellMarginPt;
+  const inCell = (): EditorState => at(createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B")])]))), "A");
+
+  it("Sides + and Top/bottom + widen the table's margins by 1 pt; − narrows them", () => {
+    let state = run(inCell(), changeCellMargins("sides", 1));
+    expect(marginsOf(state)).toEqual({ top: 0, right: 6.5, bottom: 0, left: 6.5 });
+    state = run(state, changeCellMargins("topBottom", 1));
+    expect(marginsOf(state)).toEqual({ top: 1, right: 6.5, bottom: 1, left: 6.5 });
+    state = run(state, changeCellMargins("sides", -1));
+    expect(marginsOf(state)).toEqual({ top: 1, right: 5.5, bottom: 1, left: 5.5 });
+  });
+
+  it("stop at 0 and at the largest margin", () => {
+    let state = run(inCell(), changeCellMargins("topBottom", -1));
+    expect(marginsOf(state)).toEqual(MARGINS);
+    for (let i = 0; i < 40; i++) state = run(state, changeCellMargins("sides", 1));
+    expect(marginsOf(state)).toEqual({ top: 0, right: MAX_CELL_MARGIN_PT, bottom: 0, left: MAX_CELL_MARGIN_PT });
+  });
+
+  it("do nothing outside a table", () => {
+    const state = selectText(createEditorState(docOf(para([text("p")]))), 1, 1);
+    expect(changeCellMargins("sides", 1)(state, () => { throw new Error("dispatched"); })).toBe(false);
   });
 });
 
@@ -402,15 +457,94 @@ describe("marks", () => {
     expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.type.name)).toEqual(["underline"]);
   });
 
-  it("Highlight adds FFFF00; Remove highlight clears highlight and shade", () => {
+  it("Italic toggles on and off, and Mod-i is bound to it", () => {
+    let state = selectText(createEditorState(docOf(para([text("ab")]))), 1, 3);
+    state = run(state, toggleItalic);
+    expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "italic" }]);
+    state = run(state, toggleItalic);
+    expect(state.doc.firstChild?.firstChild?.marks).toEqual([]);
+
+    const host = document.createElement("div");
+    const view = new EditorView(host, { state: selectText(createEditorState(docOf(para([text("ab")]))), 1, 3), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
+    view.someProp("handleKeyDown", (f) => f(view, new KeyboardEvent("keydown", { key: "i", ctrlKey: true })));
+    expect(view.state.doc.firstChild?.firstChild?.marks.map((m) => m.type.name)).toEqual(["italic"]);
+    view.destroy();
+  });
+
+  it("Highlight in a chosen color replaces the old color and keeps the shade; Remove highlight clears both", () => {
     let state = selectText(createEditorState(docOf(para([text("ab", [{ type: "shade", attrs: { hex: "CCCCCC" } }])]))), 1, 3);
-    state = run(state, addHighlight);
+    state = run(state, setHighlight("FFFF00"));
+    state = run(state, setHighlight("00FFFF"));
     expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([
-      { type: "highlight", attrs: { hex: "FFFF00" } },
+      { type: "highlight", attrs: { hex: "00FFFF" } },
       { type: "shade", attrs: { hex: "CCCCCC" } },
     ]);
     state = run(state, removeHighlight);
     expect(state.doc.firstChild?.firstChild?.marks).toEqual([]);
+  });
+
+  it("Highlight with nothing selected highlights what she types next", () => {
+    let state = run(selectText(createEditorState(docOf(para([text("a")]))), 2, 2), setHighlight("FF00FF"));
+    state = state.apply(state.tr.insertText("b"));
+    expect(state.doc.firstChild?.lastChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "highlight", attrs: { hex: "FF00FF" } }]);
+  });
+});
+
+describe("add and move pictures", () => {
+  const pic = (widthPx: number, heightPx: number) => ({ asset: ASSET, widthPx, heightPx });
+  const images = (state: EditorState): PMNode[] => {
+    const out: PMNode[] = [];
+    state.doc.descendants((n) => { if (n.type === schema.nodes.image) out.push(n); });
+    return out;
+  };
+
+  it("goes in at the cursor at its natural size (96 px = 72 pt), selected", () => {
+    const state = run(selectText(createEditorState(docOf(para([text("ab")]))), 2, 2), insertPicture(pic(96, 48), ctx));
+    expect(state.doc.firstChild?.toJSON().content.map((n: { type: string }) => n.type)).toEqual(["text", "image", "text"]);
+    expect(images(state)[0]?.attrs).toEqual({ asset: ASSET, widthPt: 72, heightPt: 36, rot: 0, flipH: false, flipV: false });
+    expect(state.selection instanceof NodeSelection && state.selection.node.type.name).toBe("image");
+  });
+
+  it("shrinks to the page width, or to its table cell's width, keeping its proportions", () => {
+    let state = run(selectText(createEditorState(docOf(para([text("ab")]))), 1, 1), insertPicture(pic(1440, 720), ctx));
+    expect(images(state)[0]?.attrs).toMatchObject({ widthPt: 540, heightPt: 270 });
+    state = run(at(createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B")])], [100, 300]))), "A"), insertPicture(pic(1440, 720), ctx));
+    expect(images(state)[0]?.attrs).toMatchObject({ widthPt: 100, heightPt: 50 });
+  });
+
+  it("never replaces selected text or a selected picture", () => {
+    let state = run(selectText(createEditorState(docOf(para([text("abc")]))), 1, 3), insertPicture(pic(96, 96), ctx));
+    expect(state.doc.textContent).toBe("abc");
+    state = run(state, insertPicture({ asset: `${"b".repeat(32)}.png`, widthPx: 96, heightPx: 96 }, ctx));
+    expect(images(state).map((n) => n.attrs.asset)).toEqual([ASSET, `${"b".repeat(32)}.png`]);
+  });
+
+  it("a picture with no size is refused", () => {
+    const state = createEditorState(docOf(para([text("a")])));
+    expect(insertPicture(pic(0, 10), ctx)(state, () => { throw new Error("dispatched"); })).toBe(false);
+  });
+
+  it("only moving a dragged picture within the editor is a drop she may make", () => {
+    const state = createEditorState(docOf(para([text("a"), { type: "image", attrs: { asset: ASSET, widthPt: 20, heightPt: 20 } }])));
+    // A dragged picture: the paragraph it left, open, holding only the picture.
+    const picSlice = state.doc.slice(2, 3);
+    const textSlice = state.doc.slice(1, 2);
+    expect(isPictureMove(picSlice, true)).toBe(true);
+    expect(isPictureMove(state.doc.slice(1, 3), true)).toBe(false);
+    expect(isPictureMove(picSlice, false)).toBe(false);
+    expect(isPictureMove(textSlice, true)).toBe(false);
+    const drop = (slice: unknown, moved: boolean): unknown => editorProps.handleDrop?.call(null as never, null as never, null as never, slice as never, moved);
+    expect(drop(picSlice, true)).toBe(false);
+    expect(drop(picSlice, false)).toBe(true);
+    expect(drop(textSlice, true)).toBe(true);
+  });
+
+  it("a moved picture is not counted as lost by the picture guard", () => {
+    let state = createEditorState(docOf(para([text("a"), { type: "image", attrs: { asset: ASSET, widthPt: 20, heightPt: 20 } }]), para([text("b")])));
+    const slice = state.doc.slice(2, 3);
+    state = state.apply(state.tr.delete(2, 3).replace(5, 5, slice));
+    expect(images(state)).toHaveLength(1);
+    expect(state.doc.child(1).childCount).toBe(2);
   });
 });
 

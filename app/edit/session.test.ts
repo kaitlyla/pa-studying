@@ -19,6 +19,7 @@ import {
   OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, startEdit,
   viewChanged, type Draft,
 } from "./session.ts";
+import { addPictureFile, pictureSize, setPictureStoreForTests, stopLocalPictures } from "./pictures.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import { docLines } from "./editor/commands.ts";
 import { SAVING_AGAIN } from "../auth/auth.ts";
@@ -210,6 +211,34 @@ describe("save", () => {
     expect(repoText()).toContain("more AF text (new)");
     expect(overlayEntries().get(BLOCK)?.commit).toBe(w.fake.head());
     expect(warn).toHaveBeenCalled();
+  });
+
+  it("a picture added under the topic is committed with its bytes in the same save as the below block", async () => {
+    Object.defineProperty(URL, "createObjectURL", { configurable: true, value: () => "blob:test/1" });
+    Object.defineProperty(URL, "revokeObjectURL", { configurable: true, value: () => undefined });
+    setPictureStoreForTests(memoryStore<Blob>());
+    vi.spyOn(pictureSize, "of").mockResolvedValue({ width: 40, height: 20 });
+    try {
+      const bytes = new Uint8Array([137, 80, 78, 71, 9, 9]);
+      const pic = await addPictureFile(new File([bytes as BlobPart], "ecg.png"));
+      if (typeof pic === "string") throw new Error(pic);
+      expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+      mountEditors();
+      const below = views[edit().unit?.parts.findIndex((p) => p.kind === "below") ?? -1];
+      if (!below) throw new Error("no below editor");
+      below.dispatch(below.state.tr.insert(1, below.state.schema.node("image", { asset: pic.asset, widthPt: 30, heightPt: 15 })));
+
+      expect(await save()).toBe(true);
+
+      expect(w.fake.readBytes(`content/assets/${pic.asset}`)).toEqual(bytes);
+      const block = JSON.parse(w.fake.readFile(`content/guides/fm/cardiovascular/below/${R(101)}.json`) ?? "null") as BlockFile;
+      expect(JSON.stringify(block.doc)).toContain(pic.asset);
+      expect(w.fake.commit(w.fake.head())?.parents).toHaveLength(1);
+    } finally {
+      stopLocalPictures();
+      Reflect.deleteProperty(URL, "createObjectURL");
+      Reflect.deleteProperty(URL, "revokeObjectURL");
+    }
   });
 
   it("closes without a commit when nothing changed", async () => {
