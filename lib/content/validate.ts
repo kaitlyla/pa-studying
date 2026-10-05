@@ -3,7 +3,7 @@
 // ContentError on the first violation. Nothing is ever repaired. Record shapes are keyed to the
 // interfaces in types.ts through `shapeOf`, so a field added to a type must be validated too.
 import { Node } from "prosemirror-model";
-import { schema } from "../schema.ts";
+import { ASSET_RE, schema } from "../schema.ts";
 import {
   arr, bad, bool, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
   num, one, oneOf, re, record, shapeOf, str, uniqueArr,
@@ -14,7 +14,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -193,6 +193,16 @@ const gapSource: Checker = (v, at, ctx) => {
   if (!mustTrack && s.track !== null) bad(ctx, `${at}.track`, "null (only non-CDC guideline sources are tracked)", s.track);
 };
 
+const posInt: Checker = (v, at, ctx) => { if (!Number.isInteger(v) || (v as number) < 1) bad(ctx, at, "a positive integer", v); };
+const httpsUrl = re(/^https:\/\/\S+$/, "an https URL");
+const gapFigure = shapeOf<GapFigure>({
+  asset: re(ASSET_RE, "a stored asset name"), width: posInt, height: posInt, caption: nonEmpty,
+  credit: shapeOf<GapFigure["credit"]>({
+    author: nonEmpty, license: nonEmpty, licenseUrl: nullable(httpsUrl), page: httpsUrl, changes: nullable(nonEmpty),
+  }, {}),
+  evidence: shapeOf<GapFigure["evidence"]>({ quote: nonEmpty, accessed: isoDate }, {}),
+}, {});
+
 export const validateGap: Validator = (v, ctx, expectId) => {
   shapeOf<GapFile>({
     v: v1, id: id("g"), kind: one("gap"), doc: anyValue,
@@ -200,7 +210,7 @@ export const validateGap: Validator = (v, ctx, expectId) => {
       title: nonEmpty, relevantTo: str, written: month,
       differs: nullable(shapeOf<NonNullable<GapMeta["differs"]>>({ doc: anyValue }, {})),
       sources: arr(gapSource), ownerEdits: arr(isoDate),
-    }, {}),
+    }, { figures: arr(gapFigure) }),
   }, {})(v, "", ctx);
   const g = v as GapFile;
   expectField(ctx, "id", g.id, expectId);

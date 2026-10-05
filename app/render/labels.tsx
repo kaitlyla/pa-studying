@@ -2,10 +2,10 @@
 // guide-reader/update-note). Owner-only wording is rendered with the `own-only` class and hidden by
 // CSS for visitors, so a page she saved still reads neutrally to visitors.
 import type { ReactNode } from "react";
-import type { FlagNote, PubGap } from "../../lib/derive/published.ts";
+import type { FlagNote, PubFigure, PubGap } from "../../lib/derive/published.ts";
 import { formatDate, latest } from "../shell/format.ts";
 import { Icon } from "../shell/Icon.tsx";
-import { RichDoc } from "./RichDoc.tsx";
+import { assetUrl, RichDoc } from "./RichDoc.tsx";
 import { Txt } from "./Text.tsx";
 
 /** Site-written content is authored at this base size. */
@@ -68,6 +68,54 @@ export function UpdateNotes({ notes }: { notes: readonly FlagNote[] | undefined 
   return notes.map((n) => <UpdateNote key={n.id} note={n} />);
 }
 
+/**
+ * A gap block's example images, each opening full size, with its caption and its credit line: author,
+ * license, a link to the source's file page and any change made. The same wording for everyone.
+ */
+export function GapFigures({ figures }: { figures: readonly PubFigure[] }): ReactNode {
+  if (figures.length === 0) return null;
+  return (
+    <div className="gap-figs">
+      {figures.map((f) => {
+        const url = assetUrl(f.asset);
+        const c = f.credit;
+        return (
+          <figure key={f.asset} className="gap-fig">
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" />
+            </a>
+            <figcaption>
+              <span className="fig-cap">
+                <Txt text={f.caption} />
+              </span>
+              <span className="fig-credit">
+                Image: <Txt text={c.author} /> ·{" "}
+                {isWebUrl(c.licenseUrl) ? (
+                  <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer license">
+                    <Txt text={c.license} />
+                  </a>
+                ) : (
+                  <Txt text={c.license} />
+                )}{" "}
+                ·{" "}
+                <a href={c.page} target="_blank" rel="noopener noreferrer">
+                  Source <Icon n="ext" size={11} />
+                </a>
+                {c.changes !== null && (
+                  <>
+                    {" "}
+                    · Changes: <Txt text={c.changes} />
+                  </>
+                )}
+              </span>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </div>
+  );
+}
+
 /** A gap-filled block (general-topic/gap-block). */
 export function GapBlock({ gap }: { gap: PubGap }): ReactNode {
   const edited = latest(gap.ownerEdits);
@@ -84,6 +132,7 @@ export function GapBlock({ gap }: { gap: PubGap }): ReactNode {
       <div className="gap-meta">
         Relevant to: <b><Txt text={gap.relevantTo} /></b> · Written {formatDate(gap.written)}
       </div>
+      <GapFigures figures={gap.figures} />
       <div className="notes gap-body">
         <RichDoc doc={gap.doc} basePt={GAP_BASE_PT} />
       </div>

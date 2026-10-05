@@ -7,7 +7,7 @@ import {
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
-  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson, type PubGap,
+  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson, type PubGap,
   type SystemJson,
 } from "../../lib/derive/published.ts";
 import { PANCE } from "../../lib/derive/routes.ts";
@@ -90,7 +90,7 @@ function patchDocList(list: DocList, ix: Index, append: readonly string[] = []):
 }
 
 function patchGap(g: PubGap, gap: GapFile): PubGap {
-  return { ...g, doc: gap.doc, differs: gap.meta.differs?.doc ?? null, ownerEdits: gap.meta.ownerEdits };
+  return { ...g, doc: gap.doc, differs: gap.meta.differs?.doc ?? null, ownerEdits: gap.meta.ownerEdits, figures: pubFigures(gap.meta) };
 }
 
 /** Walks published JSON, replacing overlaid block docs, gap blocks, slides and document lists. */

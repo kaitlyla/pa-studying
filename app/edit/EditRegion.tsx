@@ -5,7 +5,8 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import type { DocJSON } from "../../lib/content/index.ts";
-import { GapChip } from "../render/index.ts";
+import { pubFigures } from "../../lib/derive/published.ts";
+import { GapChip, GapFigures } from "../render/index.ts";
 import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
@@ -99,6 +100,7 @@ function GapFrame({ part, slotView }: { part: Extract<Part, { kind: "gap" }>; sl
     <section className="gap" aria-label={m.title}>
       <div className="gap-h"><GapChip /><h3>{m.title}</h3></div>
       <div className="gap-meta">Relevant to: <b>{m.relevantTo}</b> · Written {m.written}</div>
+      <GapFigures figures={pubFigures(m)} />
       {slotView(part.doc)}
       {part.differs && (
         <div className="gap-diff">

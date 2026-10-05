@@ -1,7 +1,8 @@
 // The stored-doc renderer and the content labels (40 §40.6–§40.7; 99 §99.1 render.test.tsx).
 import { act, type ReactNode } from "react";
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import type { FlagNote, PubGap } from "../../lib/derive/published.ts";
+import type { FlagNote, PubFigure, PubGap } from "../../lib/derive/published.ts";
+import { DATA_BASE } from "../data/load.ts";
 import type { DrawingShape, MarkJSON, PMNode } from "../../lib/schemaTypes.ts";
 import { SearchClient, setSearchClient } from "../search/client.ts";
 import { SearchHighlightProvider, SearchLanding } from "../search/SearchLanding.tsx";
@@ -482,8 +483,49 @@ describe("labels for content not from her notes", () => {
       { name: "Local note", org: "Clinic", year: "2020", url: null },
     ],
     ownerEdits: [],
+    figures: [],
     notes: [],
     ...over,
+  });
+  const strip: PubFigure = {
+    asset: `${"ab".repeat(16)}.png`, width: 800, height: 300, caption: "Atrial fibrillation, lead II",
+    credit: { author: "Jane Roe", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", page: "https://commons.wikimedia.org/wiki/File:AF.png", changes: "Cropped to lead II" },
+  };
+
+  it("gap block: no figure area when the block has no images", async () => {
+    const c = await render(<GapBlock gap={gap()} />);
+    expect(c.querySelector(".gap-figs")).toBeNull();
+  });
+
+  it("gap block: each image before the text, opening full size, with its caption as alt text and its credit line", async () => {
+    const pd: PubFigure = { ...strip, asset: `${"cd".repeat(16)}.jpg`, caption: "Hyperkalemia", credit: { ...strip.credit, author: "US Gov", license: "Public domain", licenseUrl: null, changes: null } };
+    const c = await render(<GapBlock gap={gap({ figures: [strip, pd] })} />);
+    const figs = [...c.querySelectorAll("section.gap .gap-figs figure")];
+    expect(figs).toHaveLength(2);
+    expect(c.querySelector(".gap-figs")?.nextElementSibling?.matches(".gap-body")).toBe(true);
+    const img = figs[0]?.querySelector("img");
+    expect(img?.getAttribute("src")).toBe(`${DATA_BASE}assets/${strip.asset}`);
+    expect(img?.getAttribute("alt")).toBe("Atrial fibrillation, lead II");
+    expect([img?.getAttribute("width"), img?.getAttribute("height")]).toEqual(["800", "300"]);
+    expect(img?.parentElement?.getAttribute("href")).toBe(`${DATA_BASE}assets/${strip.asset}`);
+    expect(figs[0]?.querySelector(".fig-credit")?.textContent).toBe("Image: Jane Roe · CC BY-SA 4.0 · Source  · Changes: Cropped to lead II");
+    const links = [...(figs[0]?.querySelectorAll(".fig-credit a") ?? [])].map((a) => [a.textContent?.trim(), a.getAttribute("href"), a.getAttribute("target")]);
+    expect(links).toEqual([
+      ["CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "_blank"],
+      ["Source", "https://commons.wikimedia.org/wiki/File:AF.png", "_blank"],
+    ]);
+    // Public domain: the license is plain text and an unchanged file states no change.
+    expect(figs[1]?.querySelector(".fig-credit")?.textContent).toBe("Image: US Gov · Public domain · Source ");
+    expect([...(figs[1]?.querySelectorAll(".fig-credit a") ?? [])].map((a) => a.textContent?.trim())).toEqual(["Source"]);
+  });
+
+  it("gap block: the credit line reads the same for visitors and the owner", async () => {
+    const c = await render(<GapBlock gap={gap({ figures: [strip] })} />);
+    const credit = (): string => visibleText(c.querySelector(".gap-figs") as HTMLElement);
+    const visitor = credit();
+    expect(visitor).toContain("Image: Jane Roe");
+    asOwner(true);
+    expect(credit()).toBe(visitor);
   });
 
   it("gap block: dashed container for everyone, with title, Relevant to, Written, content and numbered sources", async () => {

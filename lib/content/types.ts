@@ -314,6 +314,33 @@ export interface GapSource {
   track: Track | null;
 }
 
+/**
+ * An example image shown in a gap block: a freely licensed file stored under `content/assets/`, with
+ * the credit its license requires and the quoted source description that shows what it depicts.
+ */
+export interface GapFigure {
+  /** Content-addressed file name under `content/assets/`. */
+  asset: string;
+  /** Pixel size of the stored file. */
+  width: number;
+  height: number;
+  /** What the image shows; also its alternative text. */
+  caption: string;
+  credit: {
+    author: string;
+    /** License name as the source states it, e.g. "CC BY-SA 4.0", "Public domain". */
+    license: string;
+    /** The license's deed; null when the source has none (public domain). */
+    licenseUrl: string | null;
+    /** The source's page for this file. */
+    page: string;
+    /** Changes made to the source file, or null when it is stored unchanged. */
+    changes: string | null;
+  };
+  /** The source description's wording that states what the image shows, quoted verbatim. */
+  evidence: { quote: string; accessed: string };
+}
+
 export interface GapMeta {
   title: string;
   relevantTo: string;
@@ -321,6 +348,7 @@ export interface GapMeta {
   differs: { doc: DocJSON } | null;
   sources: GapSource[];
   ownerEdits: string[];
+  figures?: GapFigure[];
 }
 
 export type GapFile = BlockFile<GapMeta> & { kind: "gap" };

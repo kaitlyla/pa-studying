@@ -1134,6 +1134,28 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(buildError(() => publish(c)).id).toBe(GONE);
   });
 
+  it("publishes a gap block's figures without their evidence, ships their files and makes the captions searchable", () => {
+    const asset = `${"e1".repeat(16)}.png`;
+    const figure = {
+      asset, width: 900, height: 300, caption: "Atrial fibrillation rhythm strip",
+      credit: { author: "Jane Roe", license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/", page: "https://commons.wikimedia.org/wiki/File:AF.png", changes: null },
+      evidence: { quote: "Atrial fibrillation", accessed: "2026-10-05" },
+    };
+    const c = mutated((x) => {
+      const g = x.gaps.get(G(1));
+      if (g) g.block.meta.figures = [figure];
+    });
+    const res = publish(c);
+    const labs = res.files.get(refPath("labs")) as { subs: { gaps: { id: string; figures: unknown[] }[] }[] };
+    const published = { asset, width: 900, height: 300, caption: figure.caption, credit: figure.credit };
+    expect(labs.subs[0]?.gaps.find((g) => g.id === G(1))?.figures).toEqual([published]);
+    expect(labs.subs[0]?.gaps.find((g) => g.id === G(1))?.figures[0]).not.toHaveProperty("evidence");
+    expect(res.assets.has(asset)).toBe(true);
+    expect(res.units.find((u) => u.at === G(1))?.text).toContain("Atrial fibrillation rhythm strip");
+    // A block without figures publishes an empty list and ships nothing extra.
+    expect(publish(base).assets.has(asset)).toBe(false);
+  });
+
   it("fails naming a gap block without a passing evidence record, or whose text no longer matches its claims", () => {
     const fail = mutated((x) => {
       const ev = x.gaps.get(G(1))?.evidence;

@@ -325,6 +325,25 @@ describe("gap-fill (20 §20.9)", () => {
     expect(verdict(path, { ...gap([]), id: G2 })).toMatch(/from the file's path/);
   });
 
+  it("accepts example images with their credit and evidence, and refuses malformed ones", () => {
+    const fig = (over: Record<string, unknown> = {}, credit: Record<string, unknown> = {}) => ({
+      asset: `${"0f".repeat(16)}.jpg`, width: 1200, height: 400, caption: "Atrial fibrillation",
+      credit: { author: "Jane Roe", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", page: "https://commons.wikimedia.org/wiki/File:AF.jpg", changes: null, ...credit },
+      evidence: { quote: "ECG showing atrial fibrillation", accessed: "2026-10-05" },
+      ...over,
+    });
+    expect(verdict(path, gap([], { figures: [fig(), fig({}, { license: "Public domain", licenseUrl: null, changes: "Cropped" })] }))).toBe("ok");
+    expect(verdict(path, gap([], { figures: [] }))).toBe("ok");
+    expect(verdict(path, gap([], { figures: [fig({ asset: "assets/x.png" })] }))).toMatch(/\.meta\.figures\[0\]\.asset: expected a stored asset name/);
+    expect(verdict(path, gap([], { figures: [fig({ asset: `${"0f".repeat(16)}.svg` })] }))).toMatch(/stored asset name/);
+    expect(verdict(path, gap([], { figures: [fig({ width: 0 })] }))).toMatch(/\.width: expected a positive integer/);
+    expect(verdict(path, gap([], { figures: [fig({ caption: " " })] }))).toMatch(/\.caption: expected a non-empty string/);
+    expect(verdict(path, gap([], { figures: [fig({}, { page: "http://commons.wikimedia.org/wiki/File:AF.jpg" })] }))).toMatch(/\.credit\.page: expected an https URL/);
+    expect(verdict(path, gap([], { figures: [fig({}, { changes: "" })] }))).toMatch(/\.credit\.changes: expected a non-empty string/);
+    expect(verdict(path, gap([], { figures: [fig({ evidence: { quote: "x", accessed: "2026-10" } })] }))).toMatch(/\.evidence\.accessed: expected an ISO date/);
+    expect(verdict(path, gap([], { figures: [fig({ alt: "x" })] }))).toMatch(/no such key/);
+  });
+
   it("names CDC/ACIP organizations", () => {
     expect(isCdcOrg("CDC")).toBe(true);
     expect(isCdcOrg("ACIP")).toBe(true);

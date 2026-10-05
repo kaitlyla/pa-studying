@@ -13,6 +13,7 @@ import type {
   PubFlag, PubGap, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
+import { pubFigures } from "./published.ts";
 import {
   fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, PANCE, pharmLoc, REF_TABS,
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
@@ -393,9 +394,11 @@ export function publish(c: Content): PublishResult {
     if (!g) throw new BuildError(id, "listed gap block does not exist");
     const m = g.block.meta;
     usedBlocks([g.block, ...(m.differs ? [m.differs] : [])]);
+    const figures = pubFigures(m);
+    for (const f of figures) assets.add(f.asset);
     return {
       id, title: m.title, relevantTo: m.relevantTo, written: m.written, doc: g.block.doc, differs: m.differs?.doc ?? null,
-      sources: m.sources.map((s) => ({ name: s.name, org: s.org, year: s.year, url: s.url })), ownerEdits: m.ownerEdits,
+      sources: m.sources.map((s) => ({ name: s.name, org: s.org, year: s.year, url: s.url })), ownerEdits: m.ownerEdits, figures,
       notes: (placedFlags.get(id) ?? []).map(note),
     };
   };
@@ -406,7 +409,9 @@ export function publish(c: Content): PublishResult {
     if (!g || !home || gapUnits.has(id)) return;
     gapUnits.add(id);
     const m = g.block.meta;
-    const text = [docText(g.block.doc), m.relevantTo, m.differs ? docText(m.differs.doc) : "", ...m.sources.map((s) => s.name)].join("\n");
+    const text = [
+      docText(g.block.doc), m.relevantTo, m.differs ? docText(m.differs.doc) : "", ...m.sources.map((s) => s.name), ...(m.figures ?? []).map((f) => f.caption),
+    ].join("\n");
     units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label: "gap", text: searchText(text) });
   };
   /** Search units of one of her Word-page blocks: one per table row, else one for the block. */

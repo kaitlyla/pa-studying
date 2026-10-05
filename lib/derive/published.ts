@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -97,6 +97,13 @@ export interface PubLink extends Place {
   flagged: boolean;
 }
 
+export type PubFigure = Omit<GapFigure, "evidence">;
+
+/** A gap block's figures as published: everything but the evidence, which stays in content. */
+export function pubFigures(meta: GapMeta): PubFigure[] {
+  return (meta.figures ?? []).map((f) => ({ asset: f.asset, width: f.width, height: f.height, caption: f.caption, credit: f.credit }));
+}
+
 /** A resolved gap block (40 §40.7). */
 export interface PubGap {
   id: string;
@@ -107,6 +114,8 @@ export interface PubGap {
   differs: DocJSON | null;
   sources: { name: string; org: string; year: string; url: string | null }[];
   ownerEdits: string[];
+  /** Example images, each with its credit (the stored figures without their evidence). */
+  figures: PubFigure[];
   /** Notes placed at this gap id (shown at the top of the gap block). */
   notes: FlagNote[];
 }

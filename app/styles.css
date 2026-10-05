@@ -201,6 +201,12 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .gap-diff { margin: 8px 0; padding: 6px 10px; border-left: 3px solid #5d6f96; background: #fff; font-size: 13px; }
 .gap-src { margin-top: 8px; padding-top: 6px; border-top: 1px dashed #b8c2d8; font-size: 12px; color: #3a4358; }
 .gap-src ol { margin: 4px 0 0; padding-left: 18px; }
+.gap-figs { margin: 8px 0 4px; }
+.gap-fig { margin: 0 0 8px; padding: 6px; border: 1px solid #c9d1e3; border-radius: 6px; background: #fff; }
+.gap-fig img { display: block; max-width: 100%; height: auto; }
+.gap-fig figcaption { margin-top: 4px; font-size: 12px; color: #3a4358; }
+.fig-cap { display: block; font-weight: 600; }
+.fig-credit { display: block; color: #4a5263; overflow-wrap: anywhere; }
 .sec-index { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 4px 0 10px; font-size: 13px; }
 .ref-sec .gap { margin-bottom: 4px; }
 .sec-links { margin: 0 0 14px 6px; font-size: 12px; color: #5b6472; }
