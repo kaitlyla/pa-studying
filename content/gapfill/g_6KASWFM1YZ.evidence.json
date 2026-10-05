@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Hyperkalemia: ECG changes are frequently visible once potassium is > 5.5 mEq/L.",
+   "source": 0,
+   "quote": "ECG changes (see figure ECG Patterns in Hyperkalemia ) are frequently visible when serum potassium is > 5.5 mEq/L (> 5.5 mmol/L).",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Early hyperkalemia: longer PR interval, shorter QT interval, and tall, symmetric, peaked T waves.",
+   "source": 0,
+   "quote": "Slowing of conduction is characterized by an increased PR interval and shortening of the QT interval. Tall, symmetric, peaked T waves are visible initially.",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Potassium > 6.5 mEq/L: wider QRS, loss of the P wave, nodal and escape ventricular rhythms; finally a sine wave pattern, then ventricular fibrillation or asystole.",
+   "source": 0,
+   "quote": "Potassium > 6.5 mEq/L (> 6.5 mmol/L) causes further slowing of conduction with widening of the QRS interval, disappearance of the P wave, and nodal and escape ventricular arrhythmias. Finally, the QRS complex degenerates into a sine wave pattern, and ventricular fibrillation or asystole ensues.",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hypokalemia: cardiac effects are usually minimal until potassium is < 3 mEq/L.",
+   "source": 1,
+   "quote": "Cardiac effects of hypokalemia are usually minimal until serum potassium concentrations are < 3 mEq/L",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hypokalemia arrhythmias: premature ventricular and atrial beats, ventricular and supraventricular tachyarrhythmias, and second- or third-degree AV block.",
+   "source": 1,
+   "quote": "Hypokalemia may cause premature ventricular beats and premature atrial contractions , ventricular and supraventricular tachyarrhythmias , and second- or third-degree atrioventricular block .",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Significant preexisting heart disease or digoxin: even mild hypokalemia can cause conduction abnormalities.",
+   "source": 1,
+   "quote": "Patients with significant preexisting heart disease and patients receiving digoxin are at risk of cardiac conduction abnormalities as a result of even mild hypokalemia.",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "zara-19901 (Detective task 01a109d5-3b24-7450-97e2-6ad74362f36c, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "Dropped the quote's 'significant preexisting' qualifier on heart disease.",
+    "resolution": "Revised to 'Significant preexisting heart disease or digoxin: …'; re-checked OK by shay-49353 at 2026-10-05T02:21Z."
+   }
+  ]
+ },
+ "block": "g_6KASWFM1YZ"
+}

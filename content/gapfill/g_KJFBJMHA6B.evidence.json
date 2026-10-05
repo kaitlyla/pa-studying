@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "S1Q3T3 (S wave in lead I, Q wave and inverted T wave in lead III) or a new right bundle branch block may reflect sudden right ventricular enlargement; moderately specific but seen in only about 5% of patients.",
+   "source": 0,
+   "quote": "An S1Q3T3 (S wave in lead I, Q wave in lead III, inverted T wave in lead III) or a new right bundle branch block may indicate the effect of abrupt rise in RV size affecting RV conduction pathways; these findings are moderately specific but insensitive, occurring in only about 5% of patients",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Other findings: right axis deviation (R > S in V1), P-pulmonale, and T-wave inversion in V1 to V4.",
+   "source": 0,
+   "quote": "Right axis deviation (R > S in V1) and P-pulmonale may be present. T-wave inversion in leads V1 to V4 also occurs.",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "zara-19901 (Detective task 01a109d5-3b24-7450-97e2-6ad74362f36c, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "'reflects' stated as certain what the source hedges.",
+    "resolution": "Revised to 'may reflect sudden right ventricular enlargement'; re-checked OK by shay-49353 at 2026-10-05T02:21Z."
+   }
+  ]
+ },
+ "block": "g_KJFBJMHA6B"
+}
