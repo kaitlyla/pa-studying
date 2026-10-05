@@ -370,11 +370,13 @@ export function GuideSidebar({ guide, onNavigate }: { guide: string; onNavigate:
               </div>
             </li>
           </ul>
-          <div className="side-docs">
-            <RemovedDocs items={nav.removed} />
-            <PendingDocs items={nav.pending} />
-          </div>
         </>
+      )}
+      {guide === PANCE && (
+        <div className="side-docs">
+          <RemovedDocs items={nav.removed} />
+          <PendingDocs items={nav.pending} />
+        </div>
       )}
     </div>
   );

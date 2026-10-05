@@ -146,6 +146,8 @@ interface TopicTarget {
   title: string;
   hash: string;
   key: string;
+  /** The topic's system page. */
+  systemHash: string;
   /** Repository path of the table block that holds the topic's first row. */
   blockPath: string;
 }
@@ -159,7 +161,7 @@ const topic: TopicTarget | null = inGuides((g, nav) => {
     for (const f of readdirSync(dir)) {
       const json = readJson(join(dir, f));
       if (findPath(json, (n) => n.type === "table_row" && attrsOf(n).id === e.id)) {
-        return { g, id: e.id, title: e.title, hash: guideViewHash(g, { kind: "topics", ids: [e.id] }), key: buildPageKey("topic", g, e.id), blockPath: repoPath(join(dir, f)) };
+        return { g, id: e.id, title: e.title, hash: guideViewHash(g, { kind: "topics", ids: [e.id] }), key: buildPageKey("topic", g, e.id), systemHash: guideViewHash(g, { kind: "system", system: e.system }), blockPath: repoPath(join(dir, f)) };
       }
     }
   }
@@ -260,6 +262,20 @@ interface World {
   buildFetches: () => number;
 }
 
+/**
+ * GitHub Pages answers a missing data file (an unpublished document's docs/<d>.json) with 404;
+ * `vite preview` would answer it with index.html.
+ */
+async function missingDataIs404(context: BrowserContext): Promise<void> {
+  await context.route(
+    (url) => {
+      const rel = /\/data\/(.+)$/.exec(decodeURIComponent(url.pathname))?.[1];
+      return rel !== undefined && rel !== BUILD_PATH && !existsSync(join(DATA, ...rel.split("/")));
+    },
+    (route) => route.fulfill({ status: 404, body: "" }),
+  );
+}
+
 async function world(context: BrowserContext, baseURL: string | undefined, opts: { seed?: boolean; login?: string; siteBytes?: number } = {}): Promise<World> {
   if (!baseURL) throw new Error("the Playwright config sets no baseURL");
   const [owner, repo] = site.repo.split("/");
@@ -282,6 +298,7 @@ async function world(context: BrowserContext, baseURL: string | undefined, opts:
     const body: BuildJson = { commit: build.commit, builtAt: IMPORT_DATE, siteBytes: build.siteBytes, dropped: [], uncoveredGlyphs: [] };
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });
   });
+  await missingDataIs404(context);
   return { fake, seed, build, buildFetches: () => fetches };
 }
 
@@ -334,11 +351,15 @@ async function startEditing(page: Page): Promise<Locator> {
   return area;
 }
 
-/** Types `marker` at the start of the first editable slot. */
+/**
+ * Types `marker` at the start of the first paragraph in the second cell of the topic's first row
+ * (not the name cell, which would rename the topic).
+ */
 async function typeMarker(page: Page, marker: string): Promise<void> {
   const slot = ref(page, "edit-area").locator(".edit-slot").first();
-  await slot.click({ position: { x: 3, y: 3 } });
-  await page.keyboard.press("Control+Home");
+  const p = slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first();
+  await p.click({ position: { x: 1, y: 2 } });
+  await page.keyboard.press("Home");
   await page.keyboard.type(marker);
   await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
   await expect(slot).toContainText(marker);
@@ -674,7 +695,8 @@ test.describe("toolbar limits", () => {
   test("Delete row asks before each delete and is refused, with no dialog, on a one-row table", async ({ page, context, baseURL }) => {
     const t = needTopic();
     await world(context, baseURL, { seed: true });
-    await openPage(page, t.hash);
+    // The system page: a topic page shows only one table, which may hold a picture or a single row.
+    await openPage(page, t.systemHash);
     await signIn(page);
     const area = await startEditing(page);
     const tables = area.locator("table.nt");
@@ -720,7 +742,7 @@ test.describe("toolbar limits", () => {
     const area = await startEditing(page);
     const img = area.locator(`img[src$="${pic.asset}"]`);
     await expect(img).toHaveCount(1);
-    const row = area.locator("table.nt > tbody > tr").filter({ has: img }).last();
+    const row = area.locator("table.nt > tbody > tr").filter({ has: page.locator(`img[src$="${pic.asset}"]`) }).last();
     const pictures = await row.locator("img").count();
     const tableRows = row.locator("xpath=..").locator(":scope > tr");
     const rowsBefore = await tableRows.count();
@@ -1055,7 +1077,7 @@ test("a pharm section opens every card for editing, and Done returns the cards t
 
   const area = await startEditing(page);
   for (const text of texts) {
-    await expect(area.locator('.edit-slot[contenteditable="true"]').filter({ hasText: text }).first()).toBeVisible();
+    await expect(area.locator('.edit-slot [contenteditable="true"]').filter({ hasText: text }).first()).toBeVisible();
   }
   await ref(page, "edit-done").click();
   await expect(ref(page, "edit-area")).toHaveCount(0);
@@ -1459,6 +1481,7 @@ test.describe("processing and failed documents", () => {
     await expect(ref(pending, "pending-download")).toHaveText("Download original");
 
     const visitor = await browser.newContext({ baseURL });
+    await missingDataIs404(visitor);
     try {
       const v = await visitor.newPage();
       await open(v, hash);
@@ -1490,6 +1513,7 @@ test.describe("processing and failed documents", () => {
     await expect(ref(page, "doc-remove")).toBeVisible();
 
     const visitor = await browser.newContext({ baseURL });
+    await missingDataIs404(visitor);
     try {
       const v = await visitor.newPage();
       await open(v, hash);

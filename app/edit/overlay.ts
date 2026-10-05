@@ -10,6 +10,7 @@ import {
   BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson, type PubGap,
   type SystemJson,
 } from "../../lib/derive/published.ts";
+import { PANCE } from "../../lib/derive/routes.ts";
 import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
 import { DATA_BASE, invalidateData, loadData, NotFoundError, setDataOverlay } from "../data/load.ts";
 import type { Git } from "./github.ts";
@@ -152,6 +153,15 @@ function patchNav(nav: NavJson, systems: ReadonlyMap<string, SystemNavSource>): 
 }
 
 /**
+ * The sidebar's own document lists: the PANCE sidebar document and the owner-only removed/pending lists.
+ * Nav carries them as `sidebarEnd` plus `removed`/`pending` rather than a DocList, so `walk` misses them.
+ */
+function patchNavDocs(nav: NavJson, ix: Index): NavJson {
+  const list = patchDocList({ files: nav.sidebarEnd ? [nav.sidebarEnd] : [], removed: nav.removed, pending: nav.pending }, ix);
+  return { ...nav, sidebarEnd: nav.guide === PANCE ? (list.files[0] ?? null) : nav.sidebarEnd, removed: list.removed, pending: list.pending };
+}
+
+/**
  * One published data file (`path` under dist/data/) with the overlaid content files applied.
  * `structure` supplies a system's structure.json when a table of it is overlaid but the structure is not;
  * `systems` the overlaid systems' patched pages, by system id, for a guide's nav.json.
@@ -162,6 +172,7 @@ export function patchPublished(
   if (files.size === 0) return json;
   const ix = indexFiles(files);
   let out = walk(json, ix);
+  if (NAV_PATH_RE.test(path)) out = patchNavDocs(out as NavJson, ix);
   if (systems && systems.size > 0 && NAV_PATH_RE.test(path)) out = patchNav(out as NavJson, systems);
 
   const sys = SYSTEM_PATH_RE.exec(path)?.groups;
