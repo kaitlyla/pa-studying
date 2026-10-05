@@ -2,8 +2,42 @@
  "v": 1,
  "sections": [],
  "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "listed": {
+  "b_TNH8R2T6XE": "Sleep-Wake Disorders"
+ },
+ "drugTables": [
+  {
+   "block": "b_SYSVKSASKR",
+   "pharmSection": "insomnia",
+   "conditionRows": []
+  },
+  {
+   "block": "b_4C77GEPE77",
+   "pharmSection": "hypersomnolence-and-narcolepsy",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "insomnia",
+   "title": "Insomnia",
+   "tables": [
+    "b_SYSVKSASKR"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "hypersomnolence-and-narcolepsy",
+   "title": "Hypersomnolence and narcolepsy",
+   "tables": [
+    "b_4C77GEPE77"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

@@ -3,11 +3,48 @@
  "sections": [],
  "members": {},
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_Q4M8VV6HP8",
+   "pharmSection": "bipolar-disorder",
+   "conditionRows": []
+  },
+  {
+   "block": "b_GDBK71BB64",
+   "pharmSection": "depression",
+   "conditionRows": [
+    "r_CEEX5DZ1WB"
+   ]
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "bipolar-disorder",
+   "title": "Bipolar disorder",
+   "tables": [
+    "b_Q4M8VV6HP8"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "depression",
+   "title": "Depression",
+   "tables": [
+    "b_GDBK71BB64"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_YRZTTQKKKT",
   "d_T4RDNVC8X1"
- ]
+ ],
+ "titled": {
+  "r_CEEX5DZ1WB": 0
+ }
 }

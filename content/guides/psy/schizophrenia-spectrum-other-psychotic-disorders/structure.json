@@ -3,11 +3,37 @@
  "sections": [],
  "members": {},
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_AV60R682A2",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  },
+  {
+   "block": "b_DA25QRWXZ1",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "antipsychotics",
+   "title": "Antipsychotics",
+   "tables": [
+    "b_AV60R682A2",
+    "b_DA25QRWXZ1"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_YRZTTQKKKT",
   "d_T4RDNVC8X1"
- ]
+ ],
+ "titled": {
+  "r_HHCF6DJ4XV": 0
+ }
 }

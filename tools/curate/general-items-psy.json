@@ -1,0 +1,118 @@
+{
+  "v": 1,
+  "guide": "psy",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto; keys = signed EORS psy general (labs, ekg, imaging, guidelines, screenings, workup); PAEA Psychiatric & Behavioral Health 2026 list; Leader S10 ruling (selection recorded here, general.json written in S12)",
+  "topics": {
+    "labs": {
+      "prominent": false,
+      "howto": "labs",
+      "why": "Only medication-monitoring and rule-out labs are needed (design general/topics/relevant example; signed mockup psy:labs prominent false, how labs); her guide has no labs section.",
+      "items": [
+        { "item": "Lithium level", "covers": "Bipolar I disorder; Bipolar II disorder (her guide: Lithium row, BPD PHARM)" },
+        { "item": "Renal function (BUN/creatinine) and electrolytes", "covers": "Lithium monitoring — Bipolar I disorder (her guide: Lithium row monitoring BUN/Cr, electrolytes)" },
+        { "item": "TSH and calcium/PTH", "covers": "Lithium monitoring (hypothyroidism, hyperparathyroidism) — Bipolar I disorder (her guide: Lithium row TSH/PTH, calcium); TSH also in the workup of Major depressive disorder (her guide: Dementia Overview row)" },
+        { "item": "Valproate level, LFTs, CBC with platelets and ammonia", "covers": "Valproate monitoring — Bipolar I disorder (her guide: Valproate row)" },
+        { "item": "Carbamazepine level, CBC, LFTs, BUN/Cr, UA, sodium, eye exam/IOP; HLA-B*1502 before starting", "covers": "Carbamazepine/oxcarbazepine monitoring — Bipolar I disorder (her guide: Carbamazepine row)" },
+        { "item": "Pregnancy test before teratogenic mood stabilizers", "covers": "Valproate, carbamazepine, lithium — Bipolar I disorder (her guide: Valproate row, fetal-risk warning)" },
+        { "item": "Absolute neutrophil count (ANC) for clozapine", "covers": "Clozapine — Schizophrenia (her guide: Clozapine row)" },
+        { "item": "Metabolic monitoring: fasting glucose/HbA1c and lipid panel", "covers": "Second-generation antipsychotics — Schizophrenia; Schizoaffective disorder; Bipolar I disorder (her guide: SGAP rows)" },
+        { "item": "Prolactin", "covers": "Antipsychotic hyperprolactinemia — Schizophrenia (her guide: Risperidone row, Tuberoinfundibular pathway row)" },
+        { "item": "Sodium (hyponatremia/SIADH)", "covers": "SSRIs — Major depressive disorder; carbamazepine/oxcarbazepine — Bipolar I disorder" },
+        { "item": "Electrolytes, magnesium, phosphate and amylase in eating disorders", "covers": "Anorexia nervosa; Bulimia nervosa; Avoidant/restrictive food intake disorder; refeeding syndrome (her guide: Anorexia and Bulimia diagnostics, Refeeding syndrome note)" },
+        { "item": "Urine drug screen", "covers": "Substance-related disorders; new psychosis — Schizophrenia, Brief psychotic disorder (her guide: Schizophrenia exam/workup)" },
+        { "item": "Blood alcohol level, LFTs (AST:ALT), GGT and MCV", "covers": "Alcohol-related disorders (her guide: Alcohol row)" },
+        { "item": "Acetaminophen and salicylate levels after an ingestion", "covers": "Suicidal behaviors (overdose)" },
+        { "item": "Creatine kinase (CK)", "covers": "Neuroleptic malignant syndrome (her guide: NMS row); stimulant intoxication — Stimulant-related disorders (her guide: Stimulants row)" },
+        { "item": "Medical rule-out labs for new psychiatric or cognitive symptoms: CBC, CMP, TSH, B12/folate, RPR, HIV", "covers": "Major depressive disorder; Schizophrenia; Brief psychotic disorder (her guide: Dementia Overview row, Psychosis row)" }
+      ]
+    },
+    "ekg": {
+      "prominent": false,
+      "howto": "ekg",
+      "why": "Only QTc and drug-related changes are needed (design general/topics/relevant and prominent: her psych guide has no arrhythmia section; signed mockup psy:ekg prominent false, how ekg).",
+      "items": [
+        { "item": "QTc prolongation", "covers": "Antipsychotics — Schizophrenia (her guide: FGAP/SGAP rows, Ziprasidone); citalopram/TCAs — Major depressive disorder (her guide: SSRIs, TCAs rows); methadone — Opioid-related disorders (her guide: Methadone row); pitolisant — Narcolepsy (her guide: Pitolisant row)" },
+        { "item": "TCA toxicity: wide QRS, terminal R in aVR, sinus tachycardia", "covers": "Major depressive disorder (TCAs); Suicidal behaviors (overdose) (her guide: TCAs row)" },
+        { "item": "Lithium changes: T-wave flattening/inversion, sinus node dysfunction", "covers": "Bipolar I disorder (her guide: Lithium row — cardiac arrhythmia, abnormal T waves)" },
+        { "item": "Clozapine myocarditis: sinus tachycardia and ST/T changes", "covers": "Schizophrenia (her guide: Clozapine row — EKG, troponin)" },
+        { "item": "Baseline cardiac evaluation before stimulants", "covers": "Attention-deficit/hyperactivity disorder (her guide: Stimulants row)" },
+        { "item": "Bradycardia, QT prolongation and hypokalemia changes (U waves)", "covers": "Anorexia nervosa; Bulimia nervosa (her guide: Anorexia nervosa row — QT)" },
+        { "item": "Ischemia and arrhythmia in stimulant intoxication", "covers": "Stimulant-related disorders (cocaine) (her guide: Stimulants row)" }
+      ]
+    },
+    "imaging": {
+      "prominent": false,
+      "howto": "imaging",
+      "why": "Imaging is used only to rule out structural causes and for specific complications; her guide has no imaging section.",
+      "items": [
+        { "item": "Brain MRI/CT to exclude structural causes in first-episode psychosis or catatonia", "covers": "Schizophrenia; Brief psychotic disorder; Catatonia" },
+        { "item": "MRI patterns of the dementias (diffuse cortical atrophy, white matter lesions, frontotemporal atrophy)", "covers": "Her guide: Dementia table (Alzheimer, Vascular, Frontotemporal rows)" },
+        { "item": "DEXA bone density", "covers": "Anorexia nervosa (osteopenia/osteoporosis)" },
+        { "item": "Neuroimaging to exclude neurologic disease when indicated", "covers": "Functional neurologic symptom disorder" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "Treatment guidelines apply to ≥3 listed conditions; no top tab carries a guidelines how-to, so howto is null.",
+      "items": [
+        { "item": "Major depressive disorder treatment guideline (APA / VA-DoD)", "covers": "Major depressive disorder" },
+        { "item": "Bipolar disorder management guideline (VA-DoD / CANMAT-ISBD)", "covers": "Bipolar I disorder; Bipolar II disorder" },
+        { "item": "Schizophrenia treatment guideline (APA)", "covers": "Schizophrenia; Schizoaffective disorder" },
+        { "item": "PTSD and acute stress disorder guideline (VA-DoD)", "covers": "Posttraumatic stress disorder; Acute stress disorder" },
+        { "item": "Eating disorders treatment guideline (APA)", "covers": "Anorexia nervosa; Bulimia nervosa; Binge eating disorders" },
+        { "item": "Borderline personality disorder treatment guideline (APA)", "covers": "Borderline personality disorder" },
+        { "item": "Alcohol withdrawal management and alcohol use disorder pharmacotherapy guidelines (ASAM; APA)", "covers": "Alcohol-related disorders" },
+        { "item": "Opioid use disorder treatment guideline (ASAM)", "covers": "Opioid-related disorders" },
+        { "item": "ADHD clinical practice guideline (AAP)", "covers": "Attention-deficit/hyperactivity disorder" },
+        { "item": "Chronic insomnia treatment guidelines (AASM)", "covers": "Insomnia" },
+        { "item": "Central disorders of hypersomnolence treatment guideline (AASM)", "covers": "Narcolepsy; Hypersomnolence" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Screening applies to ≥3 listed conditions; no top tab carries a screenings how-to, so howto is null.",
+      "items": [
+        { "item": "Depression screening (PHQ-2/PHQ-9), adults and adolescents 12–18 — USPSTF B", "covers": "Major depressive disorder" },
+        { "item": "Anxiety screening (GAD-7), adults and children 8–18 — USPSTF B", "covers": "Generalized anxiety disorder; Panic disorder; Social anxiety disorder; Separation anxiety disorder" },
+        { "item": "Unhealthy alcohol use screening (AUDIT-C) — USPSTF B", "covers": "Alcohol-related disorders (her guide: Alcohol row — AUDIT-C, CAGE)" },
+        { "item": "Unhealthy drug use screening, adults — USPSTF B", "covers": "Substance-related disorders" },
+        { "item": "Tobacco use screening and cessation — USPSTF A", "covers": "Tobacco-related disorders (her guide: Tobacco row — 5 A's)" },
+        { "item": "Intimate partner violence screening, women of reproductive age — USPSTF B", "covers": "Intimate partner violence" },
+        { "item": "Perinatal depression prevention counseling for those at increased risk — USPSTF B", "covers": "Major depressive disorder (peripartum)" },
+        { "item": "Suicide risk screening tools (ASQ, C-SSRS)", "covers": "Suicidal behaviors" },
+        { "item": "Bipolar screening before starting an antidepressant (MDQ)", "covers": "Bipolar I disorder; Bipolar II disorder" },
+        { "item": "Eating disorder screening (SCOFF)", "covers": "Anorexia nervosa; Bulimia nervosa; Binge eating disorders" },
+        { "item": "ADHD rating scales (Vanderbilt)", "covers": "Attention-deficit/hyperactivity disorder" },
+        { "item": "Autism screening (M-CHAT-R/F at 18 and 24 months)", "covers": "Autism spectrum disorder" },
+        { "item": "Adolescent psychosocial screening (HEADSS)", "covers": "Suicidal behaviors; Substance-related disorders; Major depressive disorder" },
+        { "item": "Elder abuse and child abuse/neglect recognition", "covers": "Elder abuse and neglect; Child abuse and neglect" }
+      ]
+    },
+    "workup": {
+      "prominent": true,
+      "howto": null,
+      "why": "The workup topic is the presentation list below (§90.3.1 workup); no top tab.",
+      "items": []
+    }
+  },
+  "workup": [
+    { "id": "agitation", "title": "Agitation / aggression", "conds": "Delirium, Schizophrenia, Bipolar disorder, Substance intoxication" },
+    { "id": "etoh-wd", "title": "Alcohol withdrawal", "conds": "Alcohol use disorder" },
+    { "id": "ams", "title": "Altered mental status (AMS)", "conds": "Delirium, Major neurocognitive disorder, Substance intoxication/withdrawal" },
+    { "id": "panic", "title": "Anxiety / panic attack", "conds": "Panic disorder, Generalized anxiety disorder" },
+    { "id": "catatonia", "title": "Catatonia", "conds": "Schizophrenia, Bipolar disorder, Major depressive disorder" },
+    { "id": "depressed", "title": "Depressed mood", "conds": "Major depressive disorder, Persistent depressive disorder, Bipolar disorder" },
+    { "id": "fever-rigidity", "title": "Fever and rigidity on psych meds", "conds": "Neuroleptic malignant syndrome, Serotonin syndrome" },
+    { "id": "psychosis", "title": "Hallucinations / new psychosis", "conds": "Schizophrenia, Brief psychotic disorder, Delirium, Substance-induced psychosis" },
+    { "id": "hi", "title": "Homicidal ideation", "conds": "Schizophrenia, Antisocial personality disorder, Substance intoxication" },
+    { "id": "insomnia", "title": "Insomnia", "conds": "Insomnia disorder, Major depressive disorder, Generalized anxiety disorder" },
+    { "id": "eating", "title": "Low weight / suspected eating disorder", "conds": "Anorexia nervosa, Bulimia nervosa" },
+    { "id": "mania", "title": "Mania", "conds": "Bipolar I disorder, Substance-induced mood disorder" },
+    { "id": "memory", "title": "Memory loss / cognitive decline", "conds": "Major neurocognitive disorder, Delirium, Major depressive disorder" },
+    { "id": "overdose", "title": "Overdose", "conds": "Substance use disorders, Major depressive disorder" },
+    { "id": "intox", "title": "Substance intoxication", "conds": "Substance use disorders" },
+    { "id": "si", "title": "Suicidal ideation (SI)", "conds": "Major depressive disorder, Bipolar disorder, Borderline personality disorder" }
+  ]
+}

@@ -2,8 +2,27 @@
  "v": 1,
  "sections": [],
  "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "listed": {
+  "b_209AF4HCH1": "Substance-Related Disorders"
+ },
+ "drugTables": [
+  {
+   "block": "b_0XNYFDQDDS",
+   "pharmSection": "substance-related-disorders",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "substance-related-disorders",
+   "title": "Substance-related disorders",
+   "tables": [
+    "b_0XNYFDQDDS"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }
