@@ -634,6 +634,34 @@ describe("pharm (40 §40.4–§40.5)", () => {
     });
   });
 
+  it("a drug row matching several cards files under the cards the treatment text names, not every card it matches", () => {
+    // FM Orthopedics as imported: her gout table's "NSAIDs: Naproxen Indomethacin" row also matches the
+    // naproxen (Propionic Acid) and indomethacin (Acetic acid) cards; rotator cuff says only "NSAIDs".
+    const cards = new CardMatcher([
+      { id: C(7), file: "f", aliases: ["NSAIDs", "NSAID"], home: {} },
+      { id: C(8), file: "f", aliases: ["naproxen", "ibuprofen"], home: {} },
+      { id: C(9), file: "f", aliases: ["indomethacin"], home: {} },
+    ]);
+    const blocks = [
+      table(B(91), 3, [
+        [R(910), "heading", "SHOULDER", "About", "Management"],
+        [R(911), "content", "Rotator cuff injuries", "supraspinatus", "Tear: conservative (e.g., PT, NSAIDs, steroid injections) vs surgery"],
+        [R(912), "content", "Gout flare", "MSU crystals", "naproxen or colchicine"],
+      ]),
+      table(B(92), 2, [[R(920), "content", "NSAIDs: Naproxen Indomethacin", "first-line"]]),
+    ];
+    const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "gout", conditionRows: [] }] });
+    const t = deriveTopics(blocks, st);
+    const s = { guide: "fm", system: "orthopedics-rheumatology", structure: st, topics: t };
+    const panel = (id: string) => {
+      const topic = t.topics.find((x) => x.id === id);
+      if (!topic) throw new Error(`no topic ${id}`);
+      return medsPanel(s, [B(91), B(92)], topic, cards, (c) => c).map((m) => [m.card, m.rows]);
+    };
+    expect(panel(R(911))).toEqual([[C(7), [R(920)]]]);
+    expect(panel(R(912))).toEqual([[C(8), [R(920)]]]);
+  });
+
   it("card order follows table rows, then `also`; a card unplaced in a home guide is appended to that home system's first pharm section", () => {
     const ps = page("fm", "cardiovascular").pharm?.sections[0];
     // Nitroglycerin → Nitrates (C2), Amlodipine → CCB (C1), Ranolazine → none; C3 has home fm/cardiovascular.

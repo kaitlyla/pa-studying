@@ -189,7 +189,8 @@ export function treatmentText(t: SystemTopics, topic: Topic): string {
 
 /**
  * The meds panel under a condition topic (40 §40.5): the system's drug rows whose first cell, or an
- * alias of a card matching it, occurs in the topic's treatment text, grouped by class card. A drug
+ * alias of a card matching it, occurs in the topic's treatment text, grouped under the matching
+ * cards her treatment text names (every matching card when only the row's own name occurs). A drug
  * table's place in her guide says nothing about which conditions it treats — her groups never close,
  * so a table can follow conditions it has nothing to do with — and condition rows are never offered.
  */
@@ -200,26 +201,25 @@ export function medsPanel(s: PharmSystem, blockOrder: readonly string[], topic: 
     const drug = s.structure.drugTables.find((d) => d.block === block);
     return table && drug ? contentRows(table, drug.conditionRows) : [];
   };
-  const picked: Row[] = [];
+  const picked: { row: Row; cards: string[] }[] = [];
   const seen = new Set<string>();
-  const add = (r: Row): void => {
-    if (!seen.has(r.id)) {
-      seen.add(r.id);
-      picked.push(r);
-    }
-  };
   const text = treatmentText(s.topics, topic);
   for (const block of drugBlocks) {
     for (const r of rowsOf(block)) {
       const first = firstCell(r);
-      if (collapse(first) === "") continue;
-      if (phraseMatcher([first])(text) || matcher.matching(first).some((c) => matcher.cardIn(c, text))) add(r);
+      if (collapse(first) === "" || seen.has(r.id)) continue;
+      // A row naming several classes ("NSAIDs: Naproxen Indomethacin") files only under the cards
+      // her text names: "NSAIDs" in her text means the NSAIDs card, not the naproxen sub-class card.
+      const cards = matcher.matching(first);
+      const named = cards.filter((c) => matcher.cardIn(c, text));
+      if (named.length === 0 && !phraseMatcher([first])(text)) continue;
+      seen.add(r.id);
+      picked.push({ row: r, cards: named.length > 0 ? named : cards });
     }
   }
 
   const groups: { card: string | null; title: string; rows: Row[] }[] = [];
-  for (const r of picked) {
-    const cards = matcher.matching(firstCell(r));
+  for (const { row: r, cards } of picked) {
     if (cards.length === 0) {
       groups.push({ card: null, title: collapse(firstCell(r)), rows: [r] });
       continue;
