@@ -78,7 +78,7 @@ export function OtherPage({ section: id }: { section: string | null }): ReactNod
         </Suspense>
       )}
       <EditRegion pageKey={pageKey} title={s.title}>
-        <ThreeParts links={s.links} files={s.files} gaps={s.gaps} lead={s.lead} coveredFor={s.title} />
+        <ThreeParts links={s.links} files={s.files} gaps={s.gaps} lead={s.lead} notes={s.notes} coveredFor={s.title} />
       </EditRegion>
     </div>
   );

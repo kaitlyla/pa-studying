@@ -579,6 +579,18 @@ describe("places (20 §20.8)", () => {
     expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(id("g", 2)), imaging: empty, ekg: empty, anatomy: empty })).toMatch(/links\[0\]\.gap: expected one of this sub's gaps/);
     expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(D1), imaging: empty, ekg: empty, anatomy: empty })).toMatch(/a g_ id/);
   });
+
+  it("validates a place's notes: headings, and her Word-page blocks with an optional column of 1 or more", () => {
+    const withNotes = (notes: unknown) => ({ subs: [{ id: "cbc", title: "CBC", notes, links: [], gaps: [] }], files: [] });
+    const empty = { subs: [], files: [] };
+    const reftabs = (notes: unknown) => verdict("content/places/reftabs.json", { v: 1, labs: withNotes(notes), imaging: empty, ekg: empty, anatomy: empty });
+    expect(reftabs([{ heading: "Fat-soluble" }, { block: id("b", 1) }, { block: id("b", 1), column: 3 }])).toBe("ok");
+    for (const bad of [[{ heading: "" }], [{ block: G1 }], [{ block: id("b", 1), column: 0 }], [{ block: id("b", 1), column: 1.5 }], [{ heading: "x", block: id("b", 1) }], [{}]]) {
+      expect(reftabs(bad), JSON.stringify(bad)).toMatch(/notes\[0\]: expected a note: \{ heading \} or \{ block, column\? \}/);
+    }
+    expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: id("b", 1), column: 2 }] } : s)))).toBe("ok");
+    expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: D1 }] } : s)))).toMatch(/notes\[0\]/);
+  });
 });
 
 describe("slides, vocabulary and updates (20 §20.10–§20.12)", () => {

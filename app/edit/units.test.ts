@@ -162,6 +162,32 @@ describe("loading a page key", () => {
     expect((await unitAt("other:emergency")).parts).toEqual([]);
   });
 
+  it("ref and other keys: her Word-page blocks shown as notes come first (each once, edited whole), then the gap blocks", async () => {
+    const REFTABS = "content/places/reftabs.json";
+    const OTHER = "content/places/other.json";
+    const tabs = json<{ labs: { subs: Record<string, unknown>[] } }>(w.fake.readFile(REFTABS));
+    tabs.labs.subs = tabs.labs.subs.map((s) => ({ ...s, notes: [{ heading: "Thyroid" }, { block: B(61) }, { block: B(61), column: 1 }, { block: B(60) }] }));
+    const other = json<{ sections: Record<string, unknown>[] }>(w.fake.readFile(OTHER));
+    other.sections = other.sections.map((s) => (s.id === "vaccines" ? { ...s, notes: [{ block: B(60) }, { block: B(9999) }] } : s));
+    w.fake.commitFiles({ [REFTABS]: serializeFile(REFTABS, tabs), [OTHER]: serializeFile(OTHER, other) });
+
+    const docDir = `content/docs/${D(5)}`;
+    const ref = await unitAt("ref:labs:cbc");
+    expect(ref.parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind === "block" ? p.block.id : p.kind))).toEqual([B(61), B(60), G(1)]);
+    const table = only(ref, "block");
+    expect(table.path).toBe(`${docDir}/blocks/${B(61)}.json`);
+    expect(table.owner).toEqual({ kind: "doc", path: `${docDir}/doc.json` });
+    expect(table.slot.basePt).toBe(11);
+    expect(table.slot.pageContentPt).toBe(792 - 36 - 36);
+    expect(ref.scope.files).toEqual([`${docDir}/blocks/${B(60)}.json`, `${docDir}/blocks/${B(61)}.json`, `content/gapfill/${G(1)}.json`]);
+    // The lead gap block, then the notes (a block on no page of hers is left out), then any gaps.
+    expect((await unitAt("other:vaccines")).parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind === "block" ? p.block.id : p.kind))).toEqual([G(3), B(60)]);
+
+    const build = buildSave(ref, new Map([[table.slot.id, setCell(table.slot.doc, R(601), 1, "low (edited)")]]), TODAY);
+    expect(build.changes.map((c) => c.path)).toEqual([`${docDir}/blocks/${B(61)}.json`]);
+    expect(build.changed).toEqual([B(61)]);
+  });
+
   it("slide: the one slide", async () => {
     const unit = await unitAt(`slide:fm:${S(2)}`);
     expect(only(unit, "slide").path).toBe(`content/slides/fm/blocks/${S(2)}.json`);

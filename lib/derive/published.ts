@@ -366,10 +366,16 @@ export interface PubRefLink extends PubLink {
   gap?: string;
 }
 
+/**
+ * One of her notes on a place page (content PlaceNote): a heading, or a block of one of her Word pages
+ * with that page's base size; `column` (or null): show only the table's first column and that one.
+ */
+export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null };
+
 export interface RefTabJson {
   tab: string;
   label: string;
-  subs: { id: string; title: string; links: PubRefLink[]; gaps: PubGap[] }[];
+  subs: { id: string; title: string; notes: PubNote[]; links: PubRefLink[]; gaps: PubGap[] }[];
   files: DocList;
 }
 
@@ -378,6 +384,7 @@ export interface OtherJson {
     id: string;
     title: string;
     lead: PubGap | null;
+    notes: PubNote[];
     links: PubLink[];
     files: DocList;
     /** Present only on sections whose stored record has `gaps` (OTHER_GAP_SECTIONS). */

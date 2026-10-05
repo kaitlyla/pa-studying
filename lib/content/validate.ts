@@ -14,7 +14,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
+  FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -466,10 +466,20 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
   }, null);
 };
 
+const columnC: Checker = (v, at, ctx) => {
+  if (!Number.isInteger(v) || (v as number) < 1) bad(ctx, at, "a column number (1 or more)", v);
+};
+const placeNote = either(
+  "a note: { heading } or { block, column? }",
+  shapeOf<Extract<PlaceNote, { heading: string }>>({ heading: nonEmpty }, {}),
+  shapeOf<Extract<PlaceNote, { block: string }>>({ block: id("b") }, { column: columnC }),
+);
+const placeNotes = arr(placeNote);
+
 const refLink = shapeOf<RefLink>({ target: id("r", "b"), covers: str }, { gap: id("g") });
 /** A link's `gap` names one of its own sub's gap blocks: the section it is shown under. */
 const refSub: Checker = (v, at, ctx) => {
-  shapeOf<RefTab["subs"][number]>({ id: slugC, title: nonEmpty, links: arr(refLink), gaps: uniqueArr(id("g")) }, {})(v, at, ctx);
+  shapeOf<RefTab["subs"][number]>({ id: slugC, title: nonEmpty, links: arr(refLink), gaps: uniqueArr(id("g")) }, { notes: placeNotes })(v, at, ctx);
   const sub = v as RefTab["subs"][number];
   sub.links.forEach((l, i) => {
     if (l.gap !== undefined && !sub.gaps.includes(l.gap)) bad(ctx, `${at}.links[${i}].gap`, "one of this sub's gaps", l.gap);
@@ -483,7 +493,7 @@ export const validateOther: Validator = (v, ctx) => {
     v: v1,
     sections: arr(shapeOf<OtherFile["sections"][number]>(
       { id: oneOf(...OTHER_SECTION_IDS), title: nonEmpty, lead: nullable(id("g")), files: uniqueArr(id("d")), links: arr(link) },
-      { gaps: uniqueArr(id("g")) },
+      { notes: placeNotes, gaps: uniqueArr(id("g")) },
     )),
   }, {})(v, "", ctx);
   const sections = (v as OtherFile).sections;

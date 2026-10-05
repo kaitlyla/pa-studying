@@ -181,6 +181,11 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .stub { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0 12px; padding: 8px 12px; border: 1px dashed #9aa3b2; border-radius: 6px; font-size: 13px; color: #3a4150; text-decoration: none; }
 .stub-t { font-weight: 600; }
 .wordpage { max-width: 860px; padding: 24px 28px; border: 1px solid #dde1e8; border-radius: 6px; background: #fff; }
+.place-notes { margin: 8px 0 16px; }
+.place-notes > .notes { margin: 0 0 10px; }
+.pn-h { margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #dde1e8; font-size: 17px; }
+.place-notes > .pn-h:first-child { margin-top: 4px; }
+.pn-col { margin: 14px 0 6px; font-size: 14.5px; color: #22407a; }
 
 /* ---- labels (40 §40.7) ---- */
 .lab-chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; white-space: nowrap; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }

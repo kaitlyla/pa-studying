@@ -334,6 +334,22 @@ describe("general and places", () => {
     await refused(["places", await draft("s", { other })], /no gaps key outside screenings, legal, pe/, files);
     await refused(["places", await draft("t", {})], /needs reftabs and\/or other/, files);
   });
+
+  it("writes notes naming her Word-page blocks, and refuses a notes block that is not on one", async () => {
+    const files = ["content/places/other.json", "content/places/reftabs.json"];
+    const reftabs = await read<RefTabsFile>("content/places/reftabs.json");
+    const cbc = must(reftabs.labs.subs[0], "labs sub");
+    cbc.notes = [{ heading: "Thyroid" }, { block: B(61), column: 1 }];
+    const other = await read<OtherFile>("content/places/other.json");
+    must(other.sections.find((s) => s.id === "vitamins"), "vitamins").notes = [{ block: B(60) }];
+    await run(root, ["places", await draft("n1", { reftabs, other })]);
+    expect((await read<RefTabsFile>("content/places/reftabs.json")).labs.subs[0]?.notes).toEqual([{ heading: "Thyroid" }, { block: B(61), column: 1 }]);
+    expect((await read<OtherFile>("content/places/other.json")).sections.find((s) => s.id === "vitamins")?.notes).toEqual([{ block: B(60) }]);
+
+    // A guide block is a block, but not one of her Word pages'.
+    cbc.notes = [{ block: B(10) }];
+    await refused(["places", await draft("n2", { reftabs })], new RegExp(`${B(10)} names nothing`), files);
+  });
 });
 
 describe("gap", () => {

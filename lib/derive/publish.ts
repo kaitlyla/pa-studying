@@ -1,7 +1,7 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
 import { citeKey } from "../content/ids.ts";
-import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type RefLink } from "../content/types.ts";
+import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type PlaceNote, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
@@ -9,7 +9,7 @@ import {
   CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
-  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
+  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard, PubNote,
   PubFlag, PubGap, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
@@ -174,7 +174,15 @@ export function publish(c: Content): PublishResult {
 
   // ---- existence and flags -------------------------------------------------------------------------
   const docBlocks = new Map<string, string>();
-  for (const [d, doc] of c.docs) if (doc.kind === "word" && visible(doc)) for (const b of doc.blocks) docBlocks.set(b.id, d);
+  /** The blocks of visible Word pages, each with its page's base size. */
+  const wordBlocks = new Map<string, { block: BlockFile; basePt: number }>();
+  for (const [d, doc] of c.docs) {
+    if (doc.kind !== "word" || !visible(doc)) continue;
+    for (const b of doc.blocks) {
+      docBlocks.set(b.id, d);
+      wordBlocks.set(b.id, { block: b, basePt: doc.file.basePt });
+    }
+  }
   const preambleBlock = new Map<string, GuideData>();
   for (const g of c.guides) for (const b of g.preamble) preambleBlock.set(b.id, g);
   const slideIds = new Set<string>();
@@ -331,6 +339,14 @@ export function publish(c: Content): PublishResult {
     if (doc.kind === "word") for (const b of doc.blocks) hosts[b.id] = place;
   }
   for (const [id, home] of gapHome) if (c.gaps.has(id)) hosts[id] = home.place;
+  // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page.
+  const noteHome = new Map<string, { place: Place; tab: string; title: string }>();
+  const placeNotes = (notes: readonly PlaceNote[] | undefined, place: Place, tab: string, title: string): void => {
+    for (const n of notes ?? []) if ("block" in n && wordBlocks.has(n.block) && !noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
+  };
+  for (const tab of REF_TABS) for (const sub of c.reftabs[tab].subs) placeNotes(sub.notes, { route: refHash(tab, sub.id), loc: refLoc(tab, sub.title) }, tab, sub.title);
+  for (const sec of c.other.sections) placeNotes(sec.notes, { route: otherHash(sec.id), loc: otherLoc(ix, sec.id) }, "other", sec.title);
+  for (const [id, home] of noteHome) hosts[id] = home.place;
   for (const g of c.guides) {
     const deck = c.decks.get(g.file.id);
     if (!deck || !deckShown(deck)) continue;
@@ -393,6 +409,13 @@ export function publish(c: Content): PublishResult {
     const text = [docText(g.block.doc), m.relevantTo, m.differs ? docText(m.differs.doc) : "", ...m.sources.map((s) => s.name)].join("\n");
     units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label: "gap", text: searchText(text) });
   };
+  /** Search units of one of her Word-page blocks: one per table row, else one for the block. */
+  const wordBlockUnits = (base: Omit<SearchUnit, "ord" | "title" | "at" | "text">, title: string, b: BlockFile): void => {
+    const table = (b.doc.content as PMNode[]).find((n) => n.type === "table");
+    if (b.kind === "table" && table) {
+      for (const r of table.content ?? []) units.push({ ...base, title, at: String(r.attrs?.id), text: searchText(nodeText(r)) });
+    } else units.push({ ...base, title, at: b.id, text: searchText(docText(b.doc)) });
+  };
   const docUnits = new Set<string>();
   const docUnit = (id: string): void => {
     const d = c.docs.get(id);
@@ -401,15 +424,36 @@ export function publish(c: Content): PublishResult {
     docUnits.add(id);
     const base = { tab: home.tab, loc: docLoc(id), route: fileHash(id, null), label: "notes" as const };
     if (d.kind === "word") {
-      for (const b of d.blocks) {
-        const table = (b.doc.content as PMNode[]).find((n) => n.type === "table");
-        if (b.kind === "table" && table) {
-          for (const r of table.content ?? []) units.push({ ...base, title: d.file.name, at: String(r.attrs?.id), text: searchText(nodeText(r)) });
-        } else units.push({ ...base, title: d.file.name, at: b.id, text: searchText(docText(b.doc)) });
-      }
+      // A block shown as notes on a place page is found there instead (noteUnit).
+      for (const b of d.blocks) if (!noteHome.has(b.id)) wordBlockUnits(base, d.file.name, b);
     } else {
       (d.text?.pages ?? []).forEach((t, i) => units.push({ ...base, title: `${d.file.name} · p. ${i + 1}`, at: `p${i + 1}`, text: searchText(t) }));
     }
+  };
+  /** A place's notes; a block no longer on a visible Word page (its page removed, or the block deleted) is dropped. */
+  const placeNoteList = (file: string, ns: readonly PlaceNote[] | undefined): PubNote[] => {
+    const out: PubNote[] = [];
+    for (const n of ns ?? []) {
+      if ("heading" in n) {
+        out.push({ heading: n.heading });
+        continue;
+      }
+      const w = wordBlocks.get(n.block);
+      if (!w) dropped.push({ file, id: n.block });
+      else out.push({ block: pub(w.block), basePt: w.basePt, column: n.column ?? null });
+    }
+    return out;
+  };
+  const noteUnits = new Set<string>();
+  const noteUnit = (id: string): void => {
+    const home = noteHome.get(id);
+    const w = wordBlocks.get(id);
+    if (!home || !w || noteUnits.has(id)) return;
+    noteUnits.add(id);
+    wordBlockUnits({ tab: home.tab, loc: home.place.loc, route: home.place.route, label: "notes" }, home.title, w.block);
+  };
+  const noteUnitsOf = (ns: readonly PlaceNote[] | undefined): void => {
+    for (const n of ns ?? []) if ("block" in n) noteUnit(n.block);
   };
   /** Text of a pharm part's notes blocks. */
   const partText = (blocks: readonly string[]): string => blocks.map((id) => {
@@ -721,22 +765,29 @@ export function publish(c: Content): PublishResult {
     const rt = c.reftabs[tab];
     const out: RefTabJson = {
       tab, label: TAB_LABELS[tab],
-      subs: rt.subs.map((sub) => ({ id: sub.id, title: sub.title, links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap) })),
+      subs: rt.subs.map((sub) => ({
+        id: sub.id, title: sub.title, notes: placeNoteList("content/places/reftabs.json", sub.notes), links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap),
+      })),
       files: docList(rt.files),
     };
     files.set(refPath(tab), out);
-    for (const sub of rt.subs) for (const id of sub.gaps) gapUnit(id);
+    for (const sub of rt.subs) {
+      noteUnitsOf(sub.notes);
+      for (const id of sub.gaps) gapUnit(id);
+    }
     for (const d of rt.files) docUnit(d);
   }
   const other: OtherJson = {
     sections: c.other.sections.map((sec) => ({
-      id: sec.id, title: sec.title, lead: sec.lead ? gap(sec.lead) : null, links: links("content/places/other.json", sec.links), files: docList(sec.files),
+      id: sec.id, title: sec.title, lead: sec.lead ? gap(sec.lead) : null, notes: placeNoteList("content/places/other.json", sec.notes),
+      links: links("content/places/other.json", sec.links), files: docList(sec.files),
       ...(sec.gaps ? { gaps: sec.gaps.map(gap) } : {}),
     })),
   };
   files.set(OTHER_PATH, other);
   for (const sec of c.other.sections) {
     if (sec.lead) gapUnit(sec.lead);
+    noteUnitsOf(sec.notes);
     for (const d of sec.files) docUnit(d);
     for (const id of sec.gaps ?? []) gapUnit(id);
     if (sec.id === "guidelines") {

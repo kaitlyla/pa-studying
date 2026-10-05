@@ -6,6 +6,7 @@ import { refPath, type PubRefLink, type RefTabJson } from "../../lib/derive/publ
 import { TAB_LABELS, type RefTabId } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
 import { FileChips } from "../files/FileChip.tsx";
+import { PlaceNotes } from "./PlaceNotes.tsx";
 import { GapBlock, UpdChip } from "../render/labels.tsx";
 import { Txt } from "../render/Text.tsx";
 import { PageNotFound } from "../shell/errors.ts";
@@ -168,7 +169,7 @@ function SectionIndex({ gaps }: { gaps: RefSub["gaps"] }): ReactNode {
 }
 
 /**
- * A reference-tab topic's body: its sections (the gap blocks, in order),
+ * A reference-tab topic's body: her own notes shown here, then its sections (the gap blocks, in order),
  * each followed by a compact list of where her notes have it (links whose `gap` names it), then the
  * links that belong to no section.
  */
@@ -177,6 +178,7 @@ export function RefSubBody({ sub }: { sub: RefSub }): ReactNode {
   const rest = sub.links.filter((l) => l.gap === undefined || !sectionIds.has(l.gap));
   return (
     <>
+      <PlaceNotes notes={sub.notes} />
       {sub.gaps.length > 2 && <SectionIndex gaps={sub.gaps} />}
       {sub.gaps.map((g) => {
         const own = sub.links.filter((l) => l.gap === g.id);

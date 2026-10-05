@@ -1,9 +1,9 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure,
+  gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
-  type PageSetup, type PharmFile, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
+  type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
@@ -114,6 +114,8 @@ async function guideFacts(snap: Snapshot, guide: string): Promise<{ basePt: numb
 /** A block file in a directory that keeps its blocks under `blocks/` (a system, a pharm file, a Word page). */
 const blockFileIn = (dir: string, id: string): string => `${dir}/blocks/${id}.json`;
 const systemDir = (guide: string, system: string): string => `content/guides/${guide}/${system}`;
+/** The directory of a file path. */
+const dirOf = (path: string): string => path.slice(0, path.lastIndexOf("/"));
 
 async function loadSystem(snap: Snapshot, guide: string, system: string): Promise<SystemCtx> {
   const dir = systemDir(guide, system);
@@ -179,6 +181,25 @@ function gapPart(gap: GapFile): Part {
 async function gapParts(snap: Snapshot, ids: readonly (string | null | undefined)[]): Promise<Part[]> {
   const present = ids.filter((id): id is string => typeof id === "string");
   return (await snap.many<GapFile>(present.map(gapFilePath))).map(gapPart);
+}
+
+/**
+ * The Word-page blocks a place page shows as notes (PlaceNote), each once in order, edited whole as on
+ * their File page. A block no longer on a page of hers that is shown is left out, as the page leaves it out.
+ */
+async function placeNoteParts(snap: Snapshot, notes: readonly PlaceNote[] | undefined): Promise<Part[]> {
+  const ids = [...new Set((notes ?? []).flatMap((n) => ("block" in n ? [n.block] : [])))];
+  const docFiles = [...snap.files.keys()].filter((p) => WORD_DOC_RE.test(p));
+  const parts: Part[] = [];
+  for (const id of ids) {
+    const docFile = docFiles.find((p) => snap.has(blockFileIn(dirOf(p), id)));
+    if (!docFile) continue;
+    const word = await snap.json<WordDocFile>(docFile);
+    if (word.removed !== null || !word.blocks.includes(id)) continue;
+    const path = blockFileIn(dirOf(docFile), id);
+    parts.push(blockPart(path, await snap.json<BlockFile>(path), { kind: "doc", path: docFile }, word.basePt, contentWidth(word.page)));
+  }
+  return parts;
 }
 
 /** All rows of a table that take part in resolution are its full content; one-column tables edit as blocks. */
@@ -332,13 +353,14 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { tab, sub } = k;
       const tabs = await snap.json<RefTabsFile>("content/places/reftabs.json");
       const t = tabs[tab as keyof Omit<RefTabsFile, "v">] as RefTabsFile["labs"] | undefined;
-      return unit(await gapParts(snap, t?.subs.find((s) => s.id === sub)?.gaps ?? []));
+      const s = t?.subs.find((x) => x.id === sub);
+      return unit([...(await placeNoteParts(snap, s?.notes)), ...(await gapParts(snap, s?.gaps ?? []))]);
     }
     case "other": {
       const { section } = k;
       const other = await snap.json<OtherFile>("content/places/other.json");
       const s = other.sections.find((x) => x.id === section);
-      return unit(await gapParts(snap, [s?.lead, ...(s?.gaps ?? [])]));
+      return unit([...(await gapParts(snap, [s?.lead])), ...(await placeNoteParts(snap, s?.notes)), ...(await gapParts(snap, s?.gaps ?? []))]);
     }
     case "slide": {
       const { guide, slide: slideId } = k;

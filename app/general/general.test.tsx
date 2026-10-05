@@ -93,6 +93,15 @@ function cbcSub(): unknown {
   return ref.subs[0];
 }
 
+/** Block `i` of the published Thyroid notes Word page. */
+function thyroidBlock(i: number): { id: string } {
+  const doc = record(files.get(`docs/${D(5)}.json`), "thyroid doc");
+  if (!("blocks" in doc) || !Array.isArray(doc.blocks)) throw new Error("thyroid doc has no blocks");
+  const b = record(doc.blocks[i], `thyroid block ${i}`);
+  if (!("id" in b) || typeof b.id !== "string") throw new Error("block without id");
+  return { ...b, id: b.id };
+}
+
 function flagCount(): number {
   const u = record(files.get("updates.json"), "updates.json");
   if (!("flags" in u) || !Array.isArray(u.flags)) throw new Error("updates.json has no flags");
@@ -368,7 +377,7 @@ describe("reference tab", () => {
       [REF]: {
         ...record(files.get(REF), REF),
         subs: [{
-          id: "cbc", title: "CBC", gaps: [g1, g2, g3],
+          id: "cbc", title: "CBC", notes: [], gaps: [g1, g2, g3],
           links: [
             { ...first, covers: "Atrial flutter", gap: G(902) },
             { ...first, target: R(902), title: "Flutter (IM)", covers: "Atrial flutter", gap: G(902), flagged: true },
@@ -411,8 +420,32 @@ describe("reference tab", () => {
     }
   });
 
+  it("shows her own notes above the sections: headings, whole blocks, and a table's column under its header", async () => {
+    const sub = record(cbcSub(), "cbc");
+    serveWith({
+      [REF]: {
+        ...record(files.get(REF), REF),
+        subs: [{ ...sub, notes: [{ heading: "Thyroid labs" }, { block: thyroidBlock(0), basePt: 11, column: null }, { block: thyroidBlock(1), basePt: 11, column: 1 }] }],
+      },
+    });
+    const a = await renderApp("#/labs/cbc");
+    app = a;
+    const notes = await until(() => a.container.querySelector(".ref-page .place-notes"), "CBC notes");
+    expect(notes.querySelector("h2.pn-h")?.textContent).toBe("Thyroid labs");
+    const blocks = [...notes.querySelectorAll(".notes")];
+    expect(blocks.map((b) => b.getAttribute("data-anchor"))).toEqual([thyroidBlock(0).id, thyroidBlock(1).id]);
+    expect(at(blocks, 0).textContent).toContain("TSH first");
+    // Column 1 of the table: its first-row text heads it; the rows after the first show their first cell and that column.
+    expect(notes.querySelector("h3.pn-col")?.textContent).toBe("high");
+    const column = at(blocks, 1);
+    expect([...column.querySelectorAll("tr")].map((r) => [...r.querySelectorAll("td")].map((c) => c.textContent))).toEqual([["T3", "low"]]);
+    const section = a.container.querySelector(".ref-page .ref-sec");
+    if (!section) throw new Error("no section");
+    expect(before(notes, section)).toBe(true);
+  });
+
   it("tells the owner a topic with no gaps is covered, without naming a guide", async () => {
-    serveWith({ [REF]: { ...record(files.get(REF), REF), subs: [{ id: "cbc", title: "CBC", links: [], gaps: [] }] } });
+    serveWith({ [REF]: { ...record(files.get(REF), REF), subs: [{ id: "cbc", title: "CBC", notes: [], links: [], gaps: [] }] } });
     const a = await renderApp("#/labs/cbc");
     app = a;
     const covered = await until(() => a.container.querySelector(".ref-page .covered"), "covered note");
@@ -488,6 +521,27 @@ describe("Other tab", () => {
     const chip = byText(a.container, ".other-page .fchip", "ACLS algorithms");
     expect(chip?.getAttribute("href")).toBe(`#/file/${D(1)}?from=${encodeURIComponent("#/other/guidelines")}`);
     expect(visibleText(at(a.container.querySelectorAll(".other-page .gsec h2"), 1))).toBe("Files 1");
+  });
+
+  it("shows a section's own notes in part 1, without an empty notes-links heading", async () => {
+    const other = record(files.get("other.json"), "other.json");
+    if (!("sections" in other) || !Array.isArray(other.sections)) throw new Error("other.json has no sections");
+    serveWith({
+      "other.json": {
+        ...other,
+        sections: other.sections.map((s: unknown) => {
+          const sec = record(s, "section");
+          return "id" in sec && sec.id === "vitamins" ? { ...sec, notes: [{ heading: "Fat-soluble vitamins" }, { block: thyroidBlock(0), basePt: 11, column: null }] } : sec;
+        }),
+      },
+    });
+    const a = await renderApp("#/other/vitamins");
+    app = a;
+    const notes = await until(() => a.container.querySelector(".other-page .place-notes"), "vitamins notes");
+    expect(notes.querySelector("h2.pn-h")?.textContent).toBe("Fat-soluble vitamins");
+    expect(notes.querySelector(".notes")?.textContent).toContain("TSH first");
+    expect(a.container.querySelectorAll(".other-page .gsec")).toHaveLength(0);
+    expect(visibleText(a.container)).not.toContain("In the notes 0");
   });
 
   it("lists no file chip for a section whose only file was removed", async () => {

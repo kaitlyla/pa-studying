@@ -1225,3 +1225,60 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(out.units.find((u) => u.route === "#/eor/fm/workup/ams")?.at).toBeNull();
   });
 });
+
+describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () => {
+  const CBC = refHash("labs", "cbc");
+  const VITAMINS = otherHash("vitamins");
+  /** The fixture with the Thyroid notes table on Labs › CBC (twice: whole, then its column 1) and its prose block on Other › Vitamins. */
+  const withNotes = (): Content => mutated((x) => {
+    const cbc = x.reftabs.labs.subs[0] as (typeof x.reftabs.labs.subs)[number];
+    cbc.notes = [{ heading: "Thyroid" }, { block: B(61) }, { block: B(61), column: 1 }];
+    const vitamins = x.other.sections.find((s) => s.id === "vitamins") as (typeof x.other.sections)[number];
+    vitamins.notes = [{ block: B(60) }];
+  });
+
+  it("publishes each note in order with its block and its Word page's base size; a place without notes has none", () => {
+    const res = publish(withNotes());
+    const ref = res.files.get(refPath("labs")) as { subs: { notes: unknown[] }[] };
+    const t61 = (out.files.get(docPath(D(5))) as DocJson).blocks?.[1];
+    expect(t61?.id).toBe(B(61));
+    expect(ref.subs[0]?.notes).toEqual([
+      { heading: "Thyroid" },
+      { block: t61, basePt: 11, column: null },
+      { block: t61, basePt: 11, column: 1 },
+    ]);
+    const other = res.files.get(OTHER_PATH) as OtherJson;
+    expect(other.sections.find((s) => s.id === "vitamins")?.notes.map((n) => ("block" in n ? n.block.id : n.heading))).toEqual([B(60)]);
+    expect(other.sections.find((s) => s.id === "emergency")?.notes).toEqual([]);
+    expect(file<OtherJson>(OTHER_PATH).sections.every((s) => s.notes.length === 0)).toBe(true);
+  });
+
+  it("opens a block shown as notes on its place page, and search finds it there instead of on the File page", () => {
+    const c = withNotes();
+    const res = publish(c);
+    const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+    expect(hosts[B(61)]).toEqual({ route: CBC, loc: "Labs › CBC" });
+    expect(hosts[B(60)]?.route).toBe(VITAMINS);
+    expect(hosts[D(5)]?.route).toBe(`#/file/${D(5)}`);
+    // The table's rows are found on Labs › CBC once (not once per note), the prose block on Vitamins.
+    expect(res.units.filter((u) => u.route === CBC && u.label === "notes").map((u) => [u.at, u.title, u.tab])).toEqual([
+      [R(600), "CBC", "labs"], [R(601), "CBC", "labs"],
+    ]);
+    expect(res.units.filter((u) => u.route === VITAMINS).map((u) => [u.at, u.title, u.tab])).toEqual([[B(60), "Vitamins", "other"]]);
+    expect(res.units.filter((u) => u.route === `#/file/${D(5)}`)).toEqual([]);
+    expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+  });
+
+  it("drops a note whose block is on no shown Word page, and hosts nothing for it", () => {
+    const c = mutated((x) => {
+      (x.reftabs.labs.subs[0] as (typeof x.reftabs.labs.subs)[number]).notes = [{ block: B(60) }, { block: GONE }];
+      const d5 = x.docs.get(D(5));
+      if (d5) d5.file.removed = { at: "2026-10-05T10:00:00Z", from: "b".repeat(40) };
+    });
+    const res = publish(c);
+    expect((res.files.get(refPath("labs")) as { subs: { notes: unknown[] }[] }).subs[0]?.notes).toEqual([]);
+    expect(res.dropped).toContainEqual({ file: "content/places/reftabs.json", id: B(60) });
+    expect(res.dropped).toContainEqual({ file: "content/places/reftabs.json", id: GONE });
+    expect((res.files.get(HOSTS_PATH) as HostsJson)[B(60)]).toBeUndefined();
+  });
+});
