@@ -23,11 +23,13 @@ export interface Segment {
 export class FontSplitter {
   private readonly families: string[];
   private readonly map: Record<string, number>;
+  private readonly draw: Record<string, string>;
   private readonly lastResort: string;
 
   constructor(fontmap: FontMapJson) {
     this.families = fontmap.fonts.map((f) => f.family);
     this.map = fontmap.map;
+    this.draw = fontmap.draw;
     this.lastResort = this.families.includes(LAST_RESORT_FAMILY) ? LAST_RESORT_FAMILY : (this.families.at(-1) ?? TEXT_FAMILY);
   }
 
@@ -42,21 +44,26 @@ export class FontSplitter {
     return cp <= 0x024f ? TEXT_FAMILY : this.lastResort;
   }
 
-  /** Variation selectors removed, then consecutive characters of one family grouped. */
+  /**
+   * Variation selectors removed and each code point of the map's `draw` replaced by its drawn form,
+   * then consecutive characters of one family grouped.
+   */
   split(text: string): Segment[] {
     const out: Segment[] = [];
-    for (const ch of text) {
-      const cp = ch.codePointAt(0) ?? 0;
+    for (const original of text) {
+      const cp = original.codePointAt(0) ?? 0;
       if (isVariationSelector(cp)) continue;
-      const last = out.at(-1);
-      // A line break draws no glyph, so it stays in the run it ends.
-      if (last && ch === "\n") {
-        last.text += ch;
-        continue;
+      for (const ch of this.draw[String(cp)] ?? original) {
+        const last = out.at(-1);
+        // A line break draws no glyph, so it stays in the run it ends.
+        if (last && ch === "\n") {
+          last.text += ch;
+          continue;
+        }
+        const family = this.familyOf(ch.codePointAt(0) ?? 0);
+        if (last && last.family === family) last.text += ch;
+        else out.push({ text: ch, family });
       }
-      const family = this.familyOf(cp);
-      if (last && last.family === family) last.text += ch;
-      else out.push({ text: ch, family });
     }
     return out;
   }

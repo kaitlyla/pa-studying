@@ -314,6 +314,13 @@ describe("general and places", () => {
     await refused(["general", "pance", await draft("e", gen())], /no general\.json/, [GEN]);
   });
 
+  it("refuses a link the build would drop: a one-column table's row is shown only as its block", async () => {
+    const linking = (target: string): GeneralFile => gen({ topics: [{ key: "labs", howto: null, links: [{ target, covers: "Mnemonic" }], files: [], gaps: [] }] });
+    await refused(["general", "fm", await draft("a", linking(R(140)))], new RegExp(`${GEN}: ${R(140)} is dropped by the build`), [GEN]);
+    await run(root, ["general", "fm", await draft("b", linking(B(14)))]);
+    expect((await read<GeneralFile>(GEN)).topics[0]?.links).toEqual([{ target: B(14), covers: "Mnemonic" }]);
+  });
+
   it("writes reftabs.json and other.json and refuses names of nothing", async () => {
     const other = await read<OtherFile>("content/places/other.json");
     const section = (id: string) => must(other.sections.find((s) => s.id === id), id);

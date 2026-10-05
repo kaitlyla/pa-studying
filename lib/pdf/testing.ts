@@ -5,24 +5,17 @@ import { join } from "node:path";
 import * as fontkit from "fontkit";
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import type { DocJson, FontMapJson, HomeJson, NavJson, PubBlock, PubRow, SystemJson } from "../derive/published.ts";
-import { FONTS, isVariationSelector } from "../fonts.ts";
+import { FONTS, fontCoverage } from "../fonts.ts";
 import type { Content } from "./types.ts";
 
 export const FONTS_DIR = join(import.meta.dirname, "..", "..", "app", "public", "fonts");
 
-/** For every code point of `texts` (variation selectors and line breaks excluded), the first font whose cmap has it. */
+/** The font map of every code point of `texts`, from the vendored fonts' cmaps (the build's rule, lib/fonts.ts). */
 export function fontmapFor(texts: readonly string[]): FontMapJson {
   const fonts = FONTS.map((f) => fontkit.openSync(join(FONTS_DIR, f.file)));
-  const map: Record<string, number> = {};
-  for (const t of texts) {
-    for (const ch of t) {
-      const cp = ch.codePointAt(0) ?? 0;
-      if (isVariationSelector(cp) || cp === 9 || cp === 10) continue;
-      const i = fonts.findIndex((f) => f.hasGlyphForCodePoint(cp));
-      map[String(cp)] = i === -1 ? FONTS.length - 1 : i;
-    }
-  }
-  return { fonts: FONTS.map((f) => ({ ...f })), map };
+  const codePoints = texts.flatMap((t) => [...t].map((ch) => ch.codePointAt(0) ?? 0));
+  const { map, draw } = fontCoverage(codePoints, (i, cp) => fonts[i]?.hasGlyphForCodePoint(cp) ?? false);
+  return { fonts: FONTS.map((f) => ({ ...f })), map, draw };
 }
 
 // ---- rich text builders -------------------------------------------------------------------------

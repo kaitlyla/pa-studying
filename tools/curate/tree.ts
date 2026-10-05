@@ -46,12 +46,17 @@ function writeOrder(a: [string, string | null], b: [string, string | null]): num
 
 /**
  * Validate the changes, load the tree with them staged over it and check it with the build's
- * invariants, then write them. Returns the paths written or deleted. Nothing is written when any
- * check fails.
+ * invariants, then write them. A written file may not name anything the build would drop (a target
+ * that does not exist or is shown nowhere). Returns the paths written or deleted. Nothing is written
+ * when any check fails.
  */
 export async function commitChanges(root: string, changes: readonly Change[]): Promise<string[]> {
   const staged = normalize(changes);
-  publish(await loadContent(stagedTree(root, staged)));
+  const { dropped } = publish(await loadContent(stagedTree(root, staged)));
+  const own = dropped.filter((d) => staged.has(d.file));
+  if (own.length > 0) {
+    throw new CurateError(own.map((d) => `${d.file}: ${d.id} is dropped by the build (it does not exist or is shown nowhere)`).join("; "));
+  }
   const done: string[] = [];
   for (const [path, text] of [...staged].sort(writeOrder)) {
     if (text === null) await removeContent(root, path);

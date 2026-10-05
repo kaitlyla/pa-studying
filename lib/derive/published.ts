@@ -444,7 +444,13 @@ export interface FontMapJson {
   fonts: { family: string; file: string }[];
   /**
    * Decimal code point → index into `fonts`, for every code point of the content's text and
-   * paragraph markers except U+FE00–U+FE0F and control characters. Uncovered code points map to DejaVu Sans.
+   * paragraph markers except U+FE00–U+FE0F, control characters and the code points in `draw` (whose
+   * replacement characters are listed instead). Uncovered code points map to DejaVu Sans.
    */
   map: Record<string, number>;
+  /**
+   * Decimal code point → the text a PDF draws in its place: a code point no vendored font has whose
+   * compatibility form (NFKC) they do — U+FE58 SMALL EM DASH draws as U+2014. Stored text keeps the original.
+   */
+  draw: Record<string, string>;
 }

@@ -158,6 +158,14 @@ describe("fonts", () => {
     expect(fontOf("Intro")).toBe("Carlito");
   });
 
+  it("draws a character no vendored font has as its compatibility form in that form's font", () => {
+    // U+FE58 SMALL EM DASH (a list marker in her pharm notes) is in none of the fonts; NFKC gives U+2014, which Carlito has.
+    const small = String.fromCodePoint(0xfe58);
+    const fm = fontmapFor([`${small} Keppra`]);
+    expect(fm.draw).toEqual({ [String(0xfe58)]: String.fromCodePoint(0x2014) });
+    expect(new FontSplitter(fm).split(`${small} Keppra`)).toEqual([{ text: `${String.fromCodePoint(0x2014)} Keppra`, family: "Carlito" }]);
+  });
+
   it("strips variation selectors from PDF text only, leaving the stored text intact", () => {
     const s = cardioSystem();
     const def = buildDocDefinition({ kind: "system" }, { nav, system: s }, fontmap);
