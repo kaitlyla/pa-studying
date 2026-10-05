@@ -1,0 +1,54 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Kawasaki disease is diagnosed clinically: fever for ≥ 5 days plus 4 of the 5 criteria.",
+   "source": 0,
+   "quote": "Diagnosis is made if fever ≥ 38.0° C (about 100.4° F) has occurred for ≥ 5 days and 4 of the following 5 criteria are noted:",
+   "locator": "Table: Criteria for Diagnosis of Kawasaki Disease",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Kawasaki disease: serial ECG and echocardiography.",
+   "source": 0,
+   "quote": "Serial ECG and echocardiography",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Labs to rule out mimics of Kawasaki disease: CBC, ESR, CRP, albumin, liver enzymes, throat and blood cultures, urinalysis and chest X-ray.",
+   "source": 0,
+   "quote": "Testing to rule out other disorders: complete blood count, erythrocyte sedimentation rate, C-reactive protein, albumin , liver enzymes, throat and blood cultures, urinalysis, chest radiograph",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Scarlet fever (group A strep): a positive rapid antigen test confirms it; confirm a negative one with throat culture in children.",
+   "source": 1,
+   "quote": "Thus, positive results can establish the diagnosis, but negative results, at least in children, should be confirmed by culture.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ASO and anti-DNase B titers help with post-streptococcal complications such as rheumatic fever, not with the acute infection.",
+   "source": 1,
+   "quote": "Antistreptococcal antibody tests are not useful in diagnosing acute GABHS infection because antibodies first develop several weeks after GABHS infection begins and a single high antibody titer is more likely to reflect an infection that occurred in the distant past. Antibodies are most useful in diagnosis of poststreptococcal sequelae, such as rheumatic fever and glomerulonephritis. Antistreptolysin O (ASO) and antideoxyribonuclease B (anti-DNase B) titers begin to increase about 1 week after the GABHS infection and peak about 1 to 2 months after the infection.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 4,
+    "issue": "claim names ASO and anti-DNase B; quote says only 'Antistreptococcal antibody tests'",
+    "resolution": "quote extended through the contiguous ASO/anti-DNase B sentence; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_MAG4XMNHBN"
+}

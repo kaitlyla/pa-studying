@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "First labs: CBC, ESR or CRP, urinalysis, and a pregnancy test when indicated.",
+   "source": 0,
+   "quote": "Initial laboratory tests should include a complete blood count, erythrocyte sedimentation rate or C-reactive protein, a pregnancy test, if indicated, and urinalysis.",
+   "locator": "Diagnostic Evaluation, Laboratory",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Other labs as the picture suggests: liver function tests, amylase and/or lipase, STI testing, and stool studies including occult blood.",
+   "source": 0,
+   "quote": "Other tests may include liver function tests; amylase, lipase, or both for pancreatitis; sexually transmitted infection testing ( Chlamydia trachomatis, Neisseria gonorrhoeae ); and stool studies ( Escherichia coli and Campylobacter, Cryptosporidium, Salmonella , and Shigella species), including evaluation for occult blood.",
+   "locator": "Diagnostic Evaluation, Laboratory",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ultrasound is the first-line imaging for undifferentiated acute abdominal pain in children, and uses no radiation.",
+   "source": 0,
+   "quote": "Ultrasonography is relatively inexpensive and does not expose the patient to radiation. It is the first-line imaging choice for undifferentiated acute abdominal pain, unless history or physical examination identifies a specific diagnosis.",
+   "locator": "Diagnostic Testing, Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected appendicitis: ultrasound first, then CT or MRI if it is equivocal.",
+   "source": 0,
+   "quote": "Ultrasonography is the imaging tool of choice for evaluation of appendicitis, followed by CT or magnetic resonance imaging (MRI) for equivocal findings.",
+   "locator": "Diagnostic Testing, Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Abdominal X-ray can show a stone, a mass, an ingested foreign body, free air from perforation, or constipation.",
+   "source": 0,
+   "quote": "Radiography may identify a renal or ureteric calculus, abdominal mass, ingested foreign body (including bezoars), bowel perforation with free air, and constipation.",
+   "locator": "Diagnostic Testing, Imaging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "WBC is often 12,000 to 15,000/mcL in appendicitis, but a normal count does not exclude it.",
+   "source": 1,
+   "quote": "Laboratory studies typically show leukocytosis (12,000 to 15,000/mcL [12.00 to 15.00 × 10 9 /L]), but this finding is highly variable; a normal white blood cell count should not be used to exclude appendicitis.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "locator 'Diagnostic Testing, Laboratory Tests' does not exist on the page",
+    "resolution": "locator 'Diagnostic Evaluation, Laboratory'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   },
+   {
+    "claim": 1,
+    "issue": "locator 'Diagnostic Testing, Laboratory Tests' does not exist on the page",
+    "resolution": "locator 'Diagnostic Evaluation, Laboratory'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_WQ9CD7WZY7"
+}

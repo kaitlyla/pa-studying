@@ -1,0 +1,26 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "USPSTF: children 6 and older with BMI at or above the 95th percentile get comprehensive, intensive behavioral interventions.",
+   "source": 0,
+   "quote": "The USPSTF recommends that clinicians provide or refer children and adolescents 6 years or older with a high body mass index (BMI) (≥95th percentile for age and sex) to comprehensive, intensive behavioral interventions.",
+   "locator": "Recommendation Summary",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "claim says (grade B) but the quote is the recommendation sentence only",
+    "resolution": "'(grade B)' dropped from the claim (the grade is not contiguous with the sentence in the saved copy); re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_YD9JTH0RQ4"
+}

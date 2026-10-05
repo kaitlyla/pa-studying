@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "CBC with WBC and platelet counts, RBC indices and a peripheral smear.",
+   "source": 0,
+   "quote": "Laboratory evaluation begins with a complete blood count (CBC), including white blood cell (WBC) and platelet counts, RBC indices and morphology, and examination of the peripheral smear.",
+   "locator": "Testing in Anemia",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Reticulocyte count shows how well the marrow is compensating.",
+   "source": 0,
+   "quote": "The reticulocyte count demonstrates how well the bone marrow is compensating for the anemia.",
+   "locator": "Testing in Anemia",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Next tests by pattern: chemistries, ferritin, haptoglobin, direct antiglobulin test, folate, B12, urinalysis, fecal occult blood, and sometimes bone marrow aspiration and biopsy.",
+   "source": 0,
+   "quote": "These tests aid in further characterizing the anemia and determining its cause and may include blood chemistries, ferritin, haptoglobin, direct antiglobulin test, folate, and vitamin B12 measurement, as well as urinalysis, fecal occult blood determination, and sometimes bone marrow aspiration and biopsy.",
+   "locator": "Testing in Anemia",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected lead poisoning: CBC, electrolytes, BUN, creatinine, glucose and whole blood lead level; abdominal X-ray for lead particles; long-bone X-rays in children.",
+   "source": 1,
+   "quote": "Evaluation includes complete blood count and measurement of serum electrolytes, blood urea nitrogen (BUN), serum creatinine, plasma glucose, and whole blood lead levels (PbBs). An abdominal radiograph should be taken to look for lead particles, which are radiopaque. Radiographs of long bones are taken in children.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Microcytic or normocytic anemia suggests lead toxicity, especially with a high reticulocyte count or basophilic stippling.",
+   "source": 1,
+   "quote": "Normocytic or microcytic anemia suggests lead toxicity, particularly when the reticulocyte count is elevated or red blood cell basophilic stippling occurs",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Capillary lead tests are fine for screening; confirm any positive with a blood lead level (PbB).",
+   "source": 1,
+   "quote": "Capillary blood testing for lead is accurate, inexpensive, and quick. All positive tests should be confirmed with PbB.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Blood lead ≥ 3.5 mcg/dL: clinical assessment and, if needed, testing for iron, calcium and vitamin C deficiency.",
+   "source": 1,
+   "quote": "Children with PbB ≥ 3.5 mcg/dL (0.17 micromol/L) should be assessed clinically and, if necessary, with testing for nutritional and vitamin deficiencies (eg, iron , calcium , vitamin C deficiencies)",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "claim said 'venous' blood lead level; the page does not",
+    "resolution": "'venous' dropped ('a blood lead level (PbB)'); re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_S5NWM8ZYF0"
+}

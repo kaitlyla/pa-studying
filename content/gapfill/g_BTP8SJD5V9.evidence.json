@@ -1,0 +1,26 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "USPSTF (grade B): screen vision at least once between ages 3 and 5 to find amblyopia or its risk factors.",
+   "source": 0,
+   "quote": "The USPSTF recommends vision screening at least once in all children aged 3 to 5 years to detect amblyopia or its risk factors. B",
+   "locator": "Recommendation Summary",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "claim says (grade B) but the quote is the recommendation sentence only",
+    "resolution": "quote extended with the row's trailing grade cell \" B\"; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_BTP8SJD5V9"
+}

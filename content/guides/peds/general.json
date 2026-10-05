@@ -1,5 +1,791 @@
 {
  "v": 1,
- "topics": [],
- "workup": []
+ "topics": [
+  {
+   "key": "labs",
+   "howto": null,
+   "links": [
+    {
+     "target": "b_ZFKJXVGWBM",
+     "covers": "Anemia: MCV classes, reticulocyte count, RBC indices"
+    },
+    {
+     "target": "r_SFS2QJ26R7",
+     "covers": "Iron deficiency anemia: iron studies"
+    },
+    {
+     "target": "r_N6QWQ7ENS1",
+     "covers": "Lead poisoning: lead level, iron studies"
+    },
+    {
+     "target": "r_F5HMM3KFX5",
+     "covers": "Alpha thalassemia: electrophoresis, newborn screen"
+    },
+    {
+     "target": "r_XQHJ515A8R",
+     "covers": "Beta thalassemia: iron studies, smear"
+    },
+    {
+     "target": "r_05V2HSZVH1",
+     "covers": "Sickle cell: electrophoresis"
+    },
+    {
+     "target": "r_2F9AHSGJH5",
+     "covers": "B12 deficiency"
+    },
+    {
+     "target": "r_KGZDKS607Y",
+     "covers": "Folate deficiency"
+    },
+    {
+     "target": "r_A32WE5E26X",
+     "covers": "Anemia of chronic disease: ferritin"
+    },
+    {
+     "target": "r_7CPGAA646C",
+     "covers": "Hemolytic anemias: haptoglobin, bilirubin, smear"
+    },
+    {
+     "target": "r_4TJK5ADZMT",
+     "covers": "G6PD deficiency"
+    },
+    {
+     "target": "r_5GV6EAJTYQ",
+     "covers": "Hereditary spherocytosis: smear"
+    },
+    {
+     "target": "r_KXH0TM7AY7",
+     "covers": "AIHA: hemolysis labs"
+    },
+    {
+     "target": "r_W6ZCC1GVN2",
+     "covers": "Acute leukemias: CBC, smear"
+    },
+    {
+     "target": "b_FTE607MRDF",
+     "covers": "Bleeding disorders: platelets, PT/aPTT"
+    },
+    {
+     "target": "r_JBM2QMTXTX",
+     "covers": "ITP: platelet count"
+    },
+    {
+     "target": "r_D5E1559YXG",
+     "covers": "Hemophilia: aPTT, factor levels"
+    },
+    {
+     "target": "r_AQXGGFM4A2",
+     "covers": "Von Willebrand disease"
+    },
+    {
+     "target": "r_9SMM47AZS1",
+     "covers": "Vitamin K deficiency: PT"
+    },
+    {
+     "target": "r_RBV4PJ56TY",
+     "covers": "DIC: coags, smear"
+    },
+    {
+     "target": "r_M7KKF1AH3Q",
+     "covers": "HUS: schistocytes, creatinine, hemolysis labs"
+    },
+    {
+     "target": "r_KQAXE1N65E",
+     "covers": "TTP: hemolysis labs"
+    },
+    {
+     "target": "r_NJZ52RV96B",
+     "covers": "Type 1 DM: glucose, ketones, DKA"
+    },
+    {
+     "target": "r_W22BP527ZR",
+     "covers": "Type 2 DM: glucose, A1C"
+    },
+    {
+     "target": "b_N1HQ50HKX0",
+     "covers": "Diabetes monitoring: A1C targets"
+    },
+    {
+     "target": "b_SDTT03YEEQ",
+     "covers": "Dehydration: labs of little value"
+    },
+    {
+     "target": "r_DY0DCCR246",
+     "covers": "Pyloric stenosis: hypokalemic hypochloremic metabolic alkalosis"
+    },
+    {
+     "target": "r_57AYQDYJ8S",
+     "covers": "Glomerulonephritis: BUN/creatinine, UA, ASO"
+    },
+    {
+     "target": "r_8RT9E13T1Y",
+     "covers": "Cystitis: UA, urine culture"
+    },
+    {
+     "target": "r_BFJTE3GSG0",
+     "covers": "Pyelonephritis: UA, culture"
+    },
+    {
+     "target": "r_75GAW05XE6",
+     "covers": "VUR: UA, creatinine"
+    },
+    {
+     "target": "r_5MJZT5B3ZX",
+     "covers": "Nephrotic syndrome: proteinuria, albumin, lipids"
+    },
+    {
+     "target": "r_PDHAFJ268H",
+     "covers": "Hyperthyroidism: TSH, T4"
+    },
+    {
+     "target": "r_P0E2YP0BGW",
+     "covers": "Hypothyroidism: TSH, T4, newborn screen"
+    },
+    {
+     "target": "r_3YTV11HMZW",
+     "covers": "Hypercalcemia: calcium, PTH, vitamin D"
+    },
+    {
+     "target": "r_REK84Y7WKP",
+     "covers": "Hypercalcemia causes: lab pattern table"
+    },
+    {
+     "target": "r_9SN3N9AJTP",
+     "covers": "Vitamin D deficiency"
+    },
+    {
+     "target": "r_7BNR7ZA1V6",
+     "covers": "Neonatal hepatitis: cholestasis (dx of exclusion; liver bx)"
+    },
+    {
+     "target": "r_S7SZV77NG0",
+     "covers": "HAV serology"
+    },
+    {
+     "target": "r_KXXX1CPV74",
+     "covers": "HBV serology"
+    },
+    {
+     "target": "r_6862AHA678",
+     "covers": "HCV serology"
+    },
+    {
+     "target": "r_Q97CYDM5EQ",
+     "covers": "HDV serology"
+    },
+    {
+     "target": "r_XFNFNJYXSD",
+     "covers": "HEV serology"
+    },
+    {
+     "target": "r_SBDM162RDJ",
+     "covers": "Pharyngitis: testing"
+    },
+    {
+     "target": "r_KK1SX2A2DB",
+     "covers": "Strep pharyngitis: rapid antigen test, culture"
+    },
+    {
+     "target": "r_2R4XGBD50Z",
+     "covers": "Acute rheumatic fever: ASO, ESR/CRP"
+    },
+    {
+     "target": "r_49PDDEHMK3",
+     "covers": "EBV: monospot"
+    },
+    {
+     "target": "r_GYPZW9D07D",
+     "covers": "Meningitis: CSF"
+    },
+    {
+     "target": "r_MBVYZ0PX0Y",
+     "covers": "Viral meningitis: CSF"
+    },
+    {
+     "target": "r_ZFY61HXFM1",
+     "covers": "Bacterial meningitis: CSF"
+    },
+    {
+     "target": "r_2A5E40YHXK",
+     "covers": "Cystic fibrosis: sweat chloride"
+    },
+    {
+     "target": "r_RN01TK1415",
+     "covers": "Kawasaki disease: ESR, CRP, labs"
+    },
+    {
+     "target": "r_X72JTVTVTQ",
+     "covers": "Febrile neutropenia: CBC, cultures, UA"
+    }
+   ],
+   "files": [
+    "d_5K8ARJRYFN",
+    "d_W5CH6PSWEG",
+    "d_6CC54CR960",
+    "d_9T1BK0WDG3",
+    "d_77CRGHXNDK",
+    "d_ET2PJXFNTB",
+    "d_W0DJ0C3768",
+    "d_37E1NN0SQA"
+   ],
+   "gaps": [
+    "g_163XHM61DR",
+    "g_E11A3Y2JJF",
+    "g_ZR6AMR8STK"
+   ]
+  },
+  {
+   "key": "ekg",
+   "howto": "ekg",
+   "links": [
+    {
+     "target": "r_HM8R05WW8C",
+     "covers": "ASD: incomplete RBBB"
+    },
+    {
+     "target": "r_V82AN66WA8",
+     "covers": "PDA: LVH, LAE"
+    },
+    {
+     "target": "r_0F17R3KP2G",
+     "covers": "Coarctation: LVH"
+    },
+    {
+     "target": "r_Z6SCGZDP4M",
+     "covers": "Tetralogy of Fallot: RVH, RAE"
+    },
+    {
+     "target": "r_9AQ2EQZKD0",
+     "covers": "VSD: LVH"
+    },
+    {
+     "target": "r_2R4XGBD50Z",
+     "covers": "Acute rheumatic fever: prolonged PR"
+    },
+    {
+     "target": "r_EBKSTTB3KA",
+     "covers": "Syncope: WPW, long/short QT, Brugada"
+    },
+    {
+     "target": "r_54FQBCG5C3",
+     "covers": "Hypertrophic cardiomyopathy: LVH"
+    },
+    {
+     "target": "r_RN01TK1415",
+     "covers": "Kawasaki disease: EKG for complications"
+    },
+    {
+     "target": "r_A3CGNBEJN3",
+     "covers": "Infective endocarditis: conduction disease"
+    },
+    {
+     "target": "r_3YTV11HMZW",
+     "covers": "Hypercalcemia: short QT"
+    }
+   ],
+   "files": [
+    "d_TJXEABW6N3"
+   ],
+   "gaps": [
+    "g_N4KBQCMQ4T"
+   ]
+  },
+  {
+   "key": "imaging",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_DY0DCCR246",
+     "covers": "Pyloric stenosis: abdominal US, upper GI string sign"
+    },
+    {
+     "target": "r_JTMKW1CPQJ",
+     "covers": "Intussusception: US target sign, air/contrast enema"
+    },
+    {
+     "target": "r_P81XE504P4",
+     "covers": "Appendicitis: US first in children"
+    },
+    {
+     "target": "r_2K39T2H1DQ",
+     "covers": "Hirschsprung: contrast enema transition zone"
+    },
+    {
+     "target": "r_MGWDEJH69X",
+     "covers": "Duodenal atresia: double bubble, upper GI"
+    },
+    {
+     "target": "r_BRBRWD1NMC",
+     "covers": "GERD: upper GI series"
+    },
+    {
+     "target": "r_6007N5YZ9Z",
+     "covers": "Epiglottitis: thumbprint sign"
+    },
+    {
+     "target": "r_TS7NMFRPQ7",
+     "covers": "Croup: steeple sign"
+    },
+    {
+     "target": "r_3AMJ0C1ZYJ",
+     "covers": "Bacterial tracheitis: steeple sign"
+    },
+    {
+     "target": "r_YPYE60TERZ",
+     "covers": "Retropharyngeal abscess: lateral neck X-ray, CT"
+    },
+    {
+     "target": "r_KCNKWPV3HZ",
+     "covers": "Peritonsillar abscess: US/CT"
+    },
+    {
+     "target": "r_5GYD6JG8ZP",
+     "covers": "Pneumonia: CXR patterns"
+    },
+    {
+     "target": "r_9QVZ00PES8",
+     "covers": "Foreign body aspiration: expiratory CXR"
+    },
+    {
+     "target": "r_X2AFBV7T1P",
+     "covers": "RDS: ground glass, air bronchograms"
+    },
+    {
+     "target": "r_2A5E40YHXK",
+     "covers": "Cystic fibrosis: CXR"
+    },
+    {
+     "target": "r_WMGEW54XSR",
+     "covers": "Bronchiolitis: CXR nonspecific"
+    },
+    {
+     "target": "r_6JAAXKQRDD",
+     "covers": "DDH: US under 4 months, AP X-ray after"
+    },
+    {
+     "target": "r_06H248ZKFQ",
+     "covers": "SCFE: X-ray"
+    },
+    {
+     "target": "r_W7J5GTQ36V",
+     "covers": "Legg-Calvé-Perthes: X-ray, MRI"
+    },
+    {
+     "target": "r_8RT9E13T1Y",
+     "covers": "Febrile UTI: renal/bladder US"
+    },
+    {
+     "target": "r_75GAW05XE6",
+     "covers": "VUR: VCUG"
+    },
+    {
+     "target": "r_92PAFHWS79",
+     "covers": "Wilms tumor: abdominal US, CT/MRI"
+    },
+    {
+     "target": "r_2A1803ZGQF",
+     "covers": "Testicular torsion: Doppler US"
+    },
+    {
+     "target": "r_QCVNRSM0WE",
+     "covers": "Hydrocele: testicular US"
+    },
+    {
+     "target": "r_XVTQB2TFB5",
+     "covers": "Cryptorchidism: scrotal US, MRI"
+    },
+    {
+     "target": "r_HM8R05WW8C",
+     "covers": "ASD: echo"
+    },
+    {
+     "target": "r_V82AN66WA8",
+     "covers": "PDA: echo"
+    },
+    {
+     "target": "r_Z6SCGZDP4M",
+     "covers": "Tetralogy of Fallot: echo, boot-shaped heart"
+    },
+    {
+     "target": "r_9AQ2EQZKD0",
+     "covers": "VSD: echo"
+    },
+    {
+     "target": "r_RN01TK1415",
+     "covers": "Kawasaki disease: echo"
+    },
+    {
+     "target": "r_A3CGNBEJN3",
+     "covers": "Infective endocarditis: echo"
+    },
+    {
+     "target": "r_KR9P1TR318",
+     "covers": "Astrocytoma: CT/MRI"
+    },
+    {
+     "target": "r_CQGEHWC1QN",
+     "covers": "Medulloblastoma: MRI"
+    },
+    {
+     "target": "r_9Z4XT1R1CM",
+     "covers": "Ependymoma: CT/MRI"
+    },
+    {
+     "target": "r_49EWQEVFCV",
+     "covers": "Scoliosis: Cobb angle"
+    },
+    {
+     "target": "r_H0TP7PPYNJ",
+     "covers": "Osteosarcoma: sunburst"
+    },
+    {
+     "target": "r_C0QHN8PMWC",
+     "covers": "Ewing sarcoma: onion skin"
+    }
+   ],
+   "files": [
+    "d_JDA68C1JKZ"
+   ],
+   "gaps": [
+    "g_J98EAJ0AR2",
+    "g_YJASTKQS2T"
+   ]
+  },
+  {
+   "key": "anatomy",
+   "howto": "anatomy",
+   "links": [
+    {
+     "target": "r_V9C16A71X8",
+     "covers": "Osgood-Schlatter: tibial tuberosity, patellar tendon insertion"
+    },
+    {
+     "target": "r_N9JARP8MTD",
+     "covers": "Radial head and annular ligament"
+    },
+    {
+     "target": "r_06H248ZKFQ",
+     "covers": "SCFE: slip through the growth plate"
+    },
+    {
+     "target": "r_W7J5GTQ36V",
+     "covers": "Legg-Calvé-Perthes: ischemia of the capital femoral epiphysis"
+    },
+    {
+     "target": "r_EWQG9EJAVH",
+     "covers": "Acute otitis media: eustachian tube blockage"
+    }
+   ],
+   "files": [
+    "d_Q4VZAM3D1A"
+   ],
+   "gaps": [
+    "g_8A243ETRY1",
+    "g_7YDWQNH7TS",
+    "g_6DM3TRVT7D"
+   ]
+  },
+  {
+   "key": "procedures",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_N9JARP8MTD",
+     "covers": "Nursemaid's elbow: supination-flexion reduction"
+    },
+    {
+     "target": "r_FVNVVF02VX",
+     "covers": "Nasal foreign body removal"
+    },
+    {
+     "target": "r_30100HD5CE",
+     "covers": "Ear foreign body removal, irrigation"
+    },
+    {
+     "target": "r_JQHHBJ9HJ9",
+     "covers": "Paraphimosis: manual reduction"
+    },
+    {
+     "target": "r_JTMKW1CPQJ",
+     "covers": "Intussusception: air/contrast enema reduction"
+    }
+   ],
+   "files": [],
+   "gaps": [
+    "g_GAH502NBGX",
+    "g_008WTJ7NCQ",
+    "g_B2PR6R3HMC",
+    "g_JVJTNDQD7K"
+   ]
+  },
+  {
+   "key": "guidelines",
+   "howto": null,
+   "links": [
+    {
+     "target": "b_1P335V0QJA",
+     "covers": "Immunization Guidelines (her vaccine notes)"
+    },
+    {
+     "target": "r_ZE38CRGW6N",
+     "covers": "Asthma: management basics"
+    },
+    {
+     "target": "r_V973RS5FTB",
+     "covers": "Asthma"
+    },
+    {
+     "target": "r_8RT9E13T1Y",
+     "covers": "Febrile UTI: AAP renal/bladder US at 2 to 24 months"
+    },
+    {
+     "target": "r_4540XWD970",
+     "covers": "Obesity: BMI yearly"
+    },
+    {
+     "target": "r_7EE1HW5PQQ",
+     "covers": "Safe sleep: back to sleep (birth)"
+    },
+    {
+     "target": "r_784VAJ13Q3",
+     "covers": "Safe sleep: back to sleep (6 months)"
+    }
+   ],
+   "files": [],
+   "gaps": [
+    "g_5T8XMMCJ0G",
+    "g_CCJMHN3C3T",
+    "g_Z3WP8781TR",
+    "g_BXXN29M0QK",
+    "g_XP2YXJ5R6Z",
+    "g_96KTKZE0JQ",
+    "g_X83DCPD3BY",
+    "g_1XK347T2YX",
+    "g_1V857N1MGW",
+    "g_C4YBZWE2VC",
+    "g_12DVCGHHN7",
+    "g_SJJTHEG6X8"
+   ]
+  },
+  {
+   "key": "screenings",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_4540XWD970",
+     "covers": "Obesity: BMI yearly, USPSTF screening from age 6"
+    },
+    {
+     "target": "b_W4ZPN1KPZ0",
+     "covers": "Hearing: newborn tests (ABR, OAE)"
+    },
+    {
+     "target": "r_WGRH3E5MA9",
+     "covers": "15 months: hearing/vision risk"
+    },
+    {
+     "target": "r_10ZH8RRP5B",
+     "covers": "4 years: vision/hearing screening"
+    },
+    {
+     "target": "r_KRE69NRK4Z",
+     "covers": "3 years: blood pressure"
+    },
+    {
+     "target": "r_SFZ9CTMH5X",
+     "covers": "12 months: anemia screening"
+    },
+    {
+     "target": "r_N6QWQ7ENS1",
+     "covers": "Lead poisoning"
+    },
+    {
+     "target": "r_4GZ8YNVA9S",
+     "covers": "2 years: begin hyperlipidemia screening"
+    },
+    {
+     "target": "r_P0E2YP0BGW",
+     "covers": "Congenital hypothyroidism: newborn screening"
+    },
+    {
+     "target": "b_4W6DDZXT7X",
+     "covers": "Strabismus: cover test"
+    }
+   ],
+   "files": [
+    "d_20G6CYE64N",
+    "d_FXJMG7FXF7",
+    "d_V1A5FR2H7F"
+   ],
+   "gaps": [
+    "g_29X1T5E722",
+    "g_3W07ZGDVG2",
+    "g_YG9HW3RYJE",
+    "g_YD9JTH0RQ4",
+    "g_BTP8SJD5V9",
+    "g_CGMV0QF2EA",
+    "g_VS0XMHQH40",
+    "g_2Z83GNA05Q",
+    "g_163XHM61DR"
+   ]
+  }
+ ],
+ "workup": [
+  {
+   "id": "abdominal-pain",
+   "title": "Abdominal pain",
+   "conds": "Appendicitis, Intussusception, Volvulus, Functional constipation, Acute gastroenteritis, Inflammatory bowel disease",
+   "gap": "g_WQ9CD7WZY7"
+  },
+  {
+   "id": "ams",
+   "title": "Altered mental status",
+   "conds": "Meningitis, Diabetic ketoacidosis, Ingestion of harmful substances, Traumatic brain injury, Hypoglycemia",
+   "gap": "g_CAYP7QJSNE"
+  },
+  {
+   "id": "bleeding-bruising",
+   "title": "Bruising and bleeding",
+   "conds": "Coagulation disorders, Immune thrombocytopenic purpura, Leukemias, Child abuse and neglect (her guide: Bleeding Disorders note)",
+   "gap": "g_VP85G0DRPA"
+  },
+  {
+   "id": "constipation",
+   "title": "Constipation",
+   "conds": "Functional constipation, Hirschsprung disease, Fecal impaction/encopresis",
+   "gap": "g_2ST6JQF97R"
+  },
+  {
+   "id": "cough",
+   "title": "Cough",
+   "conds": "Asthma, Acute bronchiolitis, Pneumonias, Pertussis, Cystic fibrosis, Foreign body aspiration",
+   "gap": "g_NY3A05XF1G"
+  },
+  {
+   "id": "dehydration",
+   "title": "Dehydration",
+   "conds": "Acute gastroenteritis, Pyloric stenosis, Diabetic ketoacidosis (her guide: Dehydration note)",
+   "gap": "g_T1Y62NE9PM"
+  },
+  {
+   "id": "diarrhea",
+   "title": "Diarrhea",
+   "conds": "Acute gastroenteritis, Foodborne illness, Celiac disease, Inflammatory bowel disease",
+   "gap": "g_2217CWFM7R"
+  },
+  {
+   "id": "ear-pain",
+   "title": "Ear pain",
+   "conds": "Otitis media, Otitis externa, Mastoiditis, Foreign body",
+   "gap": "g_9ZXCNS9BW0"
+  },
+  {
+   "id": "failure-to-thrive",
+   "title": "Failure to thrive",
+   "conds": "Failure to thrive, Cystic fibrosis, Celiac disease, Congenital heart disease",
+   "gap": "g_SBGHS9ZHJ6"
+  },
+  {
+   "id": "fever-rash",
+   "title": "Fever and rash",
+   "conds": "Viral exanthems (Measles, Rubella, Roseola, Erythema infectiosum, Varicella, Hand, foot, and mouth disease), Kawasaki disease, Scarlet fever (her guide: exanthem rows)",
+   "gap": "g_MAG4XMNHBN"
+  },
+  {
+   "id": "fever-infant",
+   "title": "Fever in the infant",
+   "conds": "Fever in the infant, Sepsis, Meningitis, Cystitis",
+   "gap": "g_ZR6AMR8STK"
+  },
+  {
+   "id": "headache",
+   "title": "Headache",
+   "conds": "Headache (migraine, tension, idiopathic intracranial hypertension), Meningitis, Neoplasms of the central nervous system",
+   "gap": "g_PN47C1Y8YP"
+  },
+  {
+   "id": "hearing-loss",
+   "title": "Hearing loss",
+   "conds": "Hearing disorders, Otitis media, Cerumen impaction (her guide: Hearing Impairment note)",
+   "gap": "g_T625M2RNK7"
+  },
+  {
+   "id": "hearing-heart-murmur",
+   "title": "Heart murmur",
+   "conds": "Congenital heart disease, Valvular disorders",
+   "gap": "g_P18VYHKWEN"
+  },
+  {
+   "id": "jaundice",
+   "title": "Jaundice in the newborn",
+   "conds": "Neonatal hyperbilirubinemia, Biliary/Duodenal atresia, Hepatitis",
+   "gap": "g_E11A3Y2JJF"
+  },
+  {
+   "id": "limp",
+   "title": "Limp",
+   "conds": "Developmental dysplasia of the hip, Slipped capital femoral epiphysis, Avascular necrosis, Juvenile idiopathic arthritis, Fractures/Dislocations",
+   "gap": "g_B1XBHYX8BB"
+  },
+  {
+   "id": "pallor-fatigue",
+   "title": "Pallor and fatigue",
+   "conds": "Anemias, Lead poisoning, Leukemias",
+   "gap": "g_S5NWM8ZYF0"
+  },
+  {
+   "id": "red-eye",
+   "title": "Red eye",
+   "conds": "Conjunctivitis, Orbital/Periorbital cellulitis",
+   "gap": "g_FJF5BFMZ7J"
+  },
+  {
+   "id": "scrotal-pain",
+   "title": "Scrotal pain or swelling",
+   "conds": "Testicular torsion, Hydrocele, Orchitis, Testicular mass",
+   "gap": "g_DFH6FVK1RR"
+  },
+  {
+   "id": "seizure",
+   "title": "Seizure",
+   "conds": "Febrile seizure, Seizure disorders, Meningitis",
+   "gap": "g_H2TNB65403"
+  },
+  {
+   "id": "short-stature",
+   "title": "Short stature",
+   "conds": "Growth hormone deficiency, Turner syndrome, Physical growth parameters (her guide: Short Stature row)",
+   "gap": "g_81QDDWNWE6"
+  },
+  {
+   "id": "sore-throat",
+   "title": "Sore throat",
+   "conds": "Pharyngitis, Peritonsillar abscess/Retropharyngeal abscess, Epiglottitis, Epstein-Barr virus",
+   "gap": "g_1PZCC6T1CQ"
+  },
+  {
+   "id": "stridor",
+   "title": "Stridor",
+   "conds": "Laryngotracheobronchitis (croup), Epiglottitis, Foreign body aspiration",
+   "gap": "g_988EGCZ33H"
+  },
+  {
+   "id": "syncope",
+   "title": "Syncope",
+   "conds": "Syncope, neurogenic (her guide: Syncope row)",
+   "gap": "g_GENTZYHWHA"
+  },
+  {
+   "id": "vomiting",
+   "title": "Vomiting",
+   "conds": "Pyloric stenosis, Acute gastroenteritis, Intussusception, Volvulus, Gastroesophageal reflux disease",
+   "gap": "g_HKMB88RQMZ"
+  },
+  {
+   "id": "wheezing",
+   "title": "Wheezing",
+   "conds": "Asthma, Acute bronchiolitis, Foreign body aspiration",
+   "gap": "g_BVKF90GJVB"
+  }
+ ]
 }

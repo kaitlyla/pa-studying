@@ -1,0 +1,50 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Blood spot screen may include PKU, galactosemia, maple syrup urine disease, congenital adrenal hyperplasia, sickle cell disease and hypothyroidism.",
+   "source": 0,
+   "quote": "they may include phenylketonuria , tyrosinemia , biotinidase deficiency, homocystinuria , maple syrup urine disease , galactosemia , congenital adrenal hyperplasia , sickle cell disease , and hypothyroidism",
+   "locator": "Screening Tests for Newborns (overview)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Critical congenital heart disease: pulse oximetry at 24 hours or older, without oxygen.",
+   "source": 0,
+   "quote": "Screening for critical congenital heart disease (CCHD) using pulse oximetry is part of routine newborn assessment. The screening is performed when infants are ≥ 24 hours old, without supplemental oxygen",
+   "locator": "Screening Tests for Newborns (CCHD screening discussion)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hearing: screened in the first month of life for all US infants.",
+   "source": 0,
+   "quote": "Currently, hearing screening is performed in the first month of life for all infants born in the United States",
+   "locator": "Screening Tests for Newborns (hearing screening discussion)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "locator named a section that does not exist on the page",
+    "resolution": "locator renamed to 'Screening Tests for Newborns (…)'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   },
+   {
+    "claim": 1,
+    "issue": "locator named a section that does not exist on the page",
+    "resolution": "locator renamed to 'Screening Tests for Newborns (…)'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   },
+   {
+    "claim": 2,
+    "issue": "locator named a section that does not exist on the page",
+    "resolution": "locator renamed to 'Screening Tests for Newborns (…)'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_163XHM61DR"
+}

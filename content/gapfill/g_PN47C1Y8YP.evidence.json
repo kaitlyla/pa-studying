@@ -1,0 +1,54 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Most headaches need no tests.",
+   "source": 0,
+   "quote": "Most patients can be diagnosed without testing.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "MRI (± MRA) as soon as possible for thunderclap headache, altered mental status, meningismus, papilledema or an acute focal deficit; CT if MRI is not available.",
+   "source": 0,
+   "quote": "MRI (and perhaps magnetic resonance angiography [MRA]) should be done as soon as possible in patients with any of the following findings: Thunderclap headache Altered mental status Meningismus Papilledema Acute focal neurologic deficit If MRI is not immediately available, CT can be used.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Neuroimaging, usually MRI, also for a new headache, a change in pattern, a focal deficit of subacute onset, cancer or HIV.",
+   "source": 0,
+   "quote": "Neuroimaging, usually MRI, should also be done if patients have any of the following: Focal neurologic deficit of subacute or uncertain onset New onset Age > 50 years Cancer HIV infection Change in an established headache pattern",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lumbar puncture with CSF analysis when meningitis, subarachnoid hemorrhage or encephalitis is considered, if imaging allows.",
+   "source": 0,
+   "quote": "In addition, if meningitis , subarachnoid hemorrhage , encephalitis, or any cause of meningismus is being considered, lumbar puncture and cerebrospinal fluid (CSF) analysis should be done, if not contraindicated by imaging results.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Idiopathic intracranial hypertension: MRI with MR venography, then CSF opening pressure and CSF analysis.",
+   "source": 0,
+   "quote": "Neuroimaging (preferably MRI with magnetic resonance venography), followed by measurement of CSF opening pressure and cell count culture and analysis",
+   "locator": "Table: Some Characteristics of Headache Disorders by Cause (Idiopathic intracranial hypertension row)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "peds-s12 verifier session (Detective task 01a109ea-33e0-7253-8d22-5bca8b034ffd, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 4,
+    "issue": "locator 'Table: Some Causes of Headache' does not exist",
+    "resolution": "locator 'Table: Some Characteristics of Headache Disorders by Cause (Idiopathic intracranial hypertension row)'; re-checked by shay-49353 at 2026-10-05T03:01Z"
+   }
+  ]
+ },
+ "block": "g_PN47C1Y8YP"
+}

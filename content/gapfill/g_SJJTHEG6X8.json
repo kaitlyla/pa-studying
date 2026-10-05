@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " AAP, Sleep-Related Infant Deaths: Updated 2022 Recommendations for Reducing Infant Deaths in the Sleep Environment."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Safe infant sleep: current guideline",
+  "relevantTo": "Sudden unexplained infant death",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "Sleep-Related Infant Deaths: Updated 2022 Recommendations for Reducing Infant Deaths in the Sleep Environment",
+    "org": "American Academy of Pediatrics (AAP)",
+    "year": "2022",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/35726558/",
+    "type": "guideline",
+    "track": {
+     "series": "aap-safe-sleep",
+     "label": "AAP safe infant sleep recommendations",
+     "org": "American Academy of Pediatrics (AAP)",
+     "edition": 2022,
+     "method": "pubmed",
+     "term": "sleep-related[ti] AND infant[ti] AND deaths[ti] AND recommendations[ti] AND Pediatrics[ta]",
+     "title": "Updated (\\d{4}) Recommendations for Reducing Infant Deaths"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_SJJTHEG6X8"
+}
