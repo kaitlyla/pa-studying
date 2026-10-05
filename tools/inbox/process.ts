@@ -184,10 +184,12 @@ export async function processItem(root: string, upload: UploadFile, bytes: Uint8
       replaced = await convertInto(stage, root, upload, bytes, current.file.name, current.file.removed, deps);
     } catch (e) {
       deps.error(`::error::${upload.fileName} (${id}) couldn't be processed: ${(e as Error).stack ?? String(e)}`);
-      if (replace) {
-        const rest = { ...current.file };
-        delete rest.replacing;
-        await writeContent(root, current.kind === "word" ? `content/docs/${id}/doc.json` : `content/files/${id}/file.json`, rest);
+      if (replace && current.file.replacing) {
+        // The document stays as it was, with a note for her that the replacement failed (Orchestrator
+        // ruling 2026-10-04 20:39Z, amending 50 §50.9 step 4).
+        const { replacing, ...rest } = current.file;
+        const marked = { ...rest, replaceFailed: { fileName: replacing.fileName, at: replacing.at } };
+        await writeContent(root, current.kind === "word" ? `content/docs/${id}/doc.json` : `content/files/${id}/file.json`, marked);
       } else {
         const pending = current.file as AsIsFile;
         // Only bytes that match upload.json are stored as her original.

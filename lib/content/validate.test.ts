@@ -238,6 +238,19 @@ describe("documents (20 §20.5)", () => {
     expect(verdict(`content/files/${D1}/text.json`, { pages: [1] })).toMatch(/a string/);
   });
 
+  it("validates a failed-replacement marker on as-is and Word records", () => {
+    const marker = { fileName: "chart2.png", at: "2026-10-04T20:00:00Z" };
+    expect(verdict(filePath, { ...pdf, replaceFailed: marker })).toBe("ok");
+    expect(verdict(filePath, { ...pdf, replaceFailed: { fileName: "chart2.png" } })).toMatch(/at: expected a value/);
+    expect(verdict(filePath, { ...pdf, replaceFailed: { ...marker, fileName: "" } })).toMatch(/fileName/);
+    expect(verdict(filePath, { ...pdf, replaceFailed: { ...marker, at: "Oct 4" } })).toMatch(/ISO-8601 UTC/);
+    expect(verdict(filePath, { ...pdf, replaceFailed: { ...marker, extra: 1 } })).toMatch(/extra/);
+    const page = { widthPt: 612, heightPt: 792, margins: { top: 72, right: 72, bottom: 72, left: 72 } };
+    const word = { v: 1, id: D1, name: "Vaccine notes", kind: "word", source: "vaccine_notes.docx", page, basePt: 11, blocks: [B1], removed: null };
+    expect(verdict(`content/docs/${D1}/doc.json`, { ...word, replaceFailed: marker })).toBe("ok");
+    expect(verdict(`content/docs/${D1}/doc.json`, { ...word, replaceFailed: { at: marker.at } })).toMatch(/fileName: expected a value/);
+  });
+
   it("validates the inbox upload record", () => {
     const up = { v: 1, id: D1, fileName: "Lipids.docx", ext: "docx", size: 1024, sha256: "a".repeat(64), parts: 1, replaces: null };
     expect(verdict(`inbox/${D1}/upload.json`, up)).toBe("ok");

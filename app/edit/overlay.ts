@@ -2,12 +2,12 @@
 // deployed site contains them, and patched into every published data file her device reads so a page
 // shows her save at once.
 import {
-  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type SlideMeta,
-  type StructureFile, type SystemFile, type WordDocFile,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type ReplaceFailed,
+  type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
-  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocList, type NavJson, type PubGap,
+  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson, type PubGap,
   type SystemJson,
 } from "../../lib/derive/published.ts";
 import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
@@ -29,10 +29,12 @@ interface Index {
   blocks: Map<string, BlockFile>;
   gaps: Map<string, GapFile>;
   docs: Map<string, DocState>;
+  /** Each overlaid document's failed-replacement marker (null: none). */
+  replaceFailed: Map<string, ReplaceFailed | null>;
 }
 
 function indexFiles(files: Files): Index {
-  const ix: Index = { blocks: new Map(), gaps: new Map(), docs: new Map() };
+  const ix: Index = { blocks: new Map(), gaps: new Map(), docs: new Map(), replaceFailed: new Map() };
   for (const [path, json] of files) {
     const block = BLOCK_FILE_RE.exec(path)?.groups?.id;
     if (block) ix.blocks.set(block, json as BlockFile);
@@ -42,11 +44,13 @@ function indexFiles(files: Files): Index {
     if (word) {
       const d = json as WordDocFile;
       ix.docs.set(word, { name: d.name, removed: d.removed, kind: "word" });
+      ix.replaceFailed.set(word, d.replaceFailed ?? null);
     }
     const asIs = AS_IS_FILE_RE.exec(path)?.groups?.id;
     if (asIs) {
       const f = json as AsIsFile;
       ix.docs.set(asIs, { name: f.name, removed: f.removed, state: f.state, kind: f.kind });
+      ix.replaceFailed.set(asIs, f.replaceFailed ?? null);
     }
   }
   return ix;
@@ -186,7 +190,13 @@ export function patchPublished(
   const docId = DOC_PATH_RE.exec(path)?.groups?.id;
   if (docId) {
     const d = ix.docs.get(docId);
-    if (d) out = { ...(out as object), name: d.name };
+    if (d) {
+      const doc: DocJson = { ...(out as DocJson), name: d.name };
+      delete doc.replaceFailed;
+      const failed = ix.replaceFailed.get(docId);
+      if (failed) doc.replaceFailed = failed;
+      out = doc;
+    }
   }
   return out;
 }

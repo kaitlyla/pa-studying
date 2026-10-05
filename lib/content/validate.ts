@@ -15,7 +15,7 @@ import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_SECTION_IDS, UPLOAD_EXTS 
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
-  RefTab, RefTabsFile, Removed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
+  RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   UploadFile, VocabFile, WordDocFile,
 } from "./types.ts";
 
@@ -283,11 +283,12 @@ export const validateSystem: Validator = (v, ctx, expectId) => {
 
 const removed = nullable(shapeOf<Removed>({ at: isoUtc, from: sha40 }, {}));
 const replacing = shapeOf<Replacing>({ fileName: nonEmpty, at: isoUtc }, {});
+const replaceFailed = shapeOf<ReplaceFailed>({ fileName: nonEmpty, at: isoUtc }, {});
 
 export const validateWordDoc: Validator = (v, ctx, expectId) => {
   shapeOf<WordDocFile>(
     { v: v1, id: id("d"), name: nonEmpty, kind: one("word"), source: nonEmpty, page, basePt: num, blocks: uniqueArr(id("b")), removed },
-    { replacing },
+    { replacing, replaceFailed },
   )(v, "", ctx);
   expectField(ctx, "id", (v as WordDocFile).id, expectId);
 };
@@ -295,7 +296,7 @@ export const validateWordDoc: Validator = (v, ctx, expectId) => {
 export const validateAsIsFile: Validator = (v, ctx, expectId) => {
   shapeOf<AsIsFile>(
     { v: v1, id: id("d"), name: nonEmpty, kind: oneOf("word", "pdf", "image", "slides"), original: nonEmpty, view: nullable(nonEmpty), removed },
-    { pages: nullable(int), text: nullable(one("text.json")), state: oneOf("processing", "ready", "failed"), replacing },
+    { pages: nullable(int), text: nullable(one("text.json")), state: oneOf("processing", "ready", "failed"), replacing, replaceFailed },
   )(v, "", ctx);
   const f = v as AsIsFile;
   expectField(ctx, "id", f.id, expectId);

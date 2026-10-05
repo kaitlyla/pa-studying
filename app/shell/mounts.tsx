@@ -10,6 +10,8 @@ export { EditControls, EditRegion, openVersions } from "../edit/EditRegion.tsx";
 export { UnsavedDialog } from "../edit/dialogs.tsx";
 export { OwnerAvatar, SignInDialog, SignInLink, completeSignInReturn, startAuth } from "../auth/index.ts";
 
+export { ReplaceFailedNote } from "../edit/DocActions.tsx";
+
 /** Rename / Replace / Remove on a document's page (owner only). */
 export const DocActions: C<{ doc: DocJson }> = none;
 

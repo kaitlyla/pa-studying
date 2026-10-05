@@ -68,6 +68,16 @@ export interface Replacing {
   at: string;
 }
 
+/**
+ * The last replacement couldn't be processed; the document shown is the one it would have replaced.
+ * `at` is when she chose the new file. Cleared by a successful replace or by her dismissing the note
+ * (Orchestrator ruling 2026-10-04 20:39Z, amending 50 §50.9 step 4).
+ */
+export interface ReplaceFailed {
+  fileName: string;
+  at: string;
+}
+
 export interface WordDocFile {
   v: 1;
   id: string;
@@ -79,6 +89,7 @@ export interface WordDocFile {
   blocks: string[];
   removed: Removed | null;
   replacing?: Replacing;
+  replaceFailed?: ReplaceFailed;
 }
 
 export type FileKind = "word" | "pdf" | "image" | "slides";
@@ -95,6 +106,7 @@ export interface AsIsFile {
   removed: Removed | null;
   state?: "processing" | "ready" | "failed";
   replacing?: Replacing;
+  replaceFailed?: ReplaceFailed;
 }
 
 export interface FileText {

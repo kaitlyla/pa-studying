@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GeneralKey, GuideId, PageSetup } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -358,6 +358,8 @@ export interface DocJson {
   pages?: number | null;
   /** Notes placed at this document id or its blocks. */
   notes: Notes;
+  /** Her last replacement of this document couldn't be processed (shown to the owner only). */
+  replaceFailed?: ReplaceFailed;
 }
 
 // ---- updates.json, hosts.json ---------------------------------------------------------------------

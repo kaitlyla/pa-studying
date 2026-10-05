@@ -235,7 +235,10 @@ describe("processItem: replaces", () => {
     const id = await pendingAdd("Cardio", "cardio.docx", "word");
     const docx = buildDocx({ body: para(run("Chest pain")) });
     await processItem(root, uploadOf(id, "cardio.docx", docx), docx, fakeDeps().deps);
-    await writeContent(root, docPath(id), { ...(await readContent<WordDocFile>(root, docPath(id))), name: "Cardio notes", replacing });
+    // An earlier replacement failed: the note goes once a replacement succeeds.
+    await writeContent(root, docPath(id), {
+      ...(await readContent<WordDocFile>(root, docPath(id))), name: "Cardio notes", replacing, replaceFailed: { fileName: "old.pdf", at: "2026-10-03T20:00:00Z" },
+    });
 
     const bytes = await makePdf([["Chest pain"]]);
     const result = await processItem(root, uploadOf(id, "new.pdf", bytes, true), bytes, fakeDeps().deps);
@@ -246,6 +249,7 @@ describe("processItem: replaces", () => {
     const file = await readContent<AsIsFile>(root, filePath(id));
     expect(file).toMatchObject({ name: "Cardio notes", kind: "pdf", original: "new.pdf", removed: null, state: "ready" });
     expect(file.replacing).toBeUndefined();
+    expect(file.replaceFailed).toBeUndefined();
   });
 
   it("moves an as-is document to docs/ when it is replaced with a Word file, removing its old stored files", async () => {
@@ -262,7 +266,7 @@ describe("processItem: replaces", () => {
     expect((await readContent<WordDocFile>(root, docPath(id))).replacing).toBeUndefined();
   });
 
-  it("leaves the current document untouched and clears replacing when the replacement fails", async () => {
+  it("keeps the current document and records the failed replacement on it when the replacement fails", async () => {
     const id = await pendingAdd("Chart", "chart.png", "image");
     const img = await png(4, 4);
     await processItem(root, uploadOf(id, "chart.png", img), img, fakeDeps().deps);
@@ -274,7 +278,7 @@ describe("processItem: replaces", () => {
     const result = await processItem(root, { ...uploadOf(id, "new.pdf", bytes, true), size: 1 }, bytes, deps);
     expect(result?.ok).toBe(false);
     expect(parseTrailers(result?.message ?? "")).toMatchObject({ kind: "inbox", changed: [id] });
-    expect(await readContent<AsIsFile>(root, filePath(id))).toEqual(shown);
+    expect(await readContent<AsIsFile>(root, filePath(id))).toEqual({ ...shown, replaceFailed: { fileName: "new.pdf", at: replacing.at } });
     expect(await readStoredFile(root, id, "chart.png")).toEqual(img);
     expect(existsSync(join(root, "content", "files", id, "new.pdf"))).toBe(false);
     expect(errors).toHaveLength(1);

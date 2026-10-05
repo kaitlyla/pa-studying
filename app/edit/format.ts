@@ -9,6 +9,13 @@ export function versionTime(iso: string): string {
   return d.toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
 }
 
+/** "Oct 4" for an ISO time (the failed-replacement note, design editing/docs/rules/replacefail). */
+export function shortDate(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
 /** localStorage `pa.device`: a 10-character Crockford id created on first use (the Device trailer). */
 export function deviceId(): string {
   let id = localStorage.getItem(DEVICE_KEY);

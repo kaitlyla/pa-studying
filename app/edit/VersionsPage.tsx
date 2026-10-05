@@ -15,15 +15,15 @@ import { Dialog } from "./dialogs.tsx";
 import { PartView } from "./EditRegion.tsx";
 import { versionTime } from "./format.ts";
 import { recordSaved } from "./overlay.ts";
-import { isOffline, repo, SAVE_FAILED, showPageBanner } from "./session.ts";
+import { isOffline, LOAD_NEWER, repo, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE, showPageBanner } from "./session.ts";
 import type { EditUnit, Slot } from "./units.ts";
 import { pageHash, restoreVersion, versionsOrigin, VersionHistory, viewVersion, type Version } from "./versions.ts";
 
 type Problem = { kind: "offline" } | { kind: "failed" } | { kind: "conflict"; at: string };
 
-/** The list couldn't be read for want of a connection (placeholder wording, pending the Designer). */
+/** The list couldn't be read for want of a connection (design editing/versions/edges/loadfail). */
 export const VERSIONS_OFFLINE = "Couldn’t load the versions — no internet connection.";
-/** The list couldn't be read for another reason; the error is logged (placeholder wording, pending the Designer). */
+/** The list couldn't be read for another reason; the error is logged (design editing/versions/edges/loadfail). */
 export const VERSIONS_FAILED = "Couldn’t load the versions.";
 
 const readOnly = (slot: Slot): ReactNode => (
@@ -75,15 +75,15 @@ function ProblemBanner({ problem, retry, reload }: { problem: Problem; retry: ()
     case "offline":
       return (
         <div className="banner err" role="alert" data-ref="restore-failed">
-          <span className="bt"><b>Couldn’t save — no internet connection.</b></span>
+          <span className="bt"><b>{SAVE_OFFLINE}</b></span>
           <span className="ba"><button type="button" className="btn pri" onClick={retry}>Try again</button></span>
         </div>
       );
     case "conflict":
       return (
         <div className="banner err" role="alert" data-ref="restore-conflict">
-          <span className="bt"><b>Not saved — this page was saved from another device at {problem.at} after you opened it.</b> Nothing was overwritten.</span>
-          <span className="ba"><button type="button" className="btn pri" onClick={reload}>Load newer version</button></span>
+          <span className="bt"><b>{SAVE_CONFLICT(problem.at)}</b> Nothing was overwritten.</span>
+          <span className="ba"><button type="button" className="btn pri" onClick={reload}>{LOAD_NEWER}</button></span>
         </div>
       );
     case "failed":

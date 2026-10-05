@@ -9,7 +9,7 @@ import { UpdateNotes } from "../render/labels.tsx";
 import { useSite } from "../reader/data.ts";
 import { NotesBlock } from "../reader/blocks.tsx";
 import { Icon } from "../shell/Icon.tsx";
-import { DocActions, EditControls, EditRegion, PendingDocPage } from "../shell/mounts.tsx";
+import { DocActions, EditControls, EditRegion, PendingDocPage, ReplaceFailedNote } from "../shell/mounts.tsx";
 import { NotOnSite } from "../shell/NotOnSite.tsx";
 import { useOwner } from "../shell/owner.tsx";
 import { PageHead, type Crumb } from "../shell/Page.tsx";
@@ -110,6 +110,7 @@ function FileView({ id, from }: { id: string; from: string | null }): ReactNode 
           </>
         }
       />
+      <ReplaceFailedNote doc={doc} />
       <UpdateNotes notes={doc.notes[doc.id]} />
       {word ? (
         <EditRegion pageKey={pageKey} title={doc.name}>

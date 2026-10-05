@@ -18,7 +18,7 @@ import { createEditorState, editorProps, PICTURE_REFUSED } from "./editor/state.
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
-  copyWithToast, dismissBanner, done, loadNewer, registerView, restoreDraft, save, SAVE_FAILED, startEdit,
+  copyWithToast, dismissBanner, done, LOAD_NEWER, loadNewer, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE, startEdit,
   useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import type { Part, Slot } from "./units.ts";
@@ -208,7 +208,7 @@ export function SaveBanner({ banner }: { banner: Banner }): ReactNode {
     case "saved":
       return <div className="banner ok" role="status" data-ref="save-success"><span className="bt"><b>Saved.</b> Everyone will see the change on the site within a few minutes. Search and the sidebar update too.</span><span className="ba">{dismiss}</span></div>;
     case "offline":
-      return <div className="banner err" role="alert" data-ref="save-failed"><span className="bt"><b>Couldn’t save — no internet connection.</b> Your changes are still here, and the last saved version is unchanged.</span><span className="ba"><button type="button" className="btn pri" onClick={() => void save()} data-ref="save-retry">Try again</button></span></div>;
+      return <div className="banner err" role="alert" data-ref="save-failed"><span className="bt"><b>{SAVE_OFFLINE}</b> Your changes are still here, and the last saved version is unchanged.</span><span className="ba"><button type="button" className="btn pri" onClick={() => void save()} data-ref="save-retry">Try again</button></span></div>;
     case "failed":
       // Not a connection problem, so no Try again.
       return (
@@ -220,10 +220,10 @@ export function SaveBanner({ banner }: { banner: Banner }): ReactNode {
     case "conflict":
       return (
         <div className="banner err" role="alert" data-ref="save-conflict">
-          <span className="bt"><b>Not saved — this page was saved from another device at {banner.at} after you opened it.</b> Nothing was overwritten. Copy your changes, then load the newer version and add them back.</span>
+          <span className="bt"><b>{SAVE_CONFLICT(banner.at)}</b> Nothing was overwritten. Copy your changes, then load the newer version and add them back.</span>
           <span className="ba">
             <button type="button" className="btn" onClick={() => void copyWithToast()} data-ref="conflict-copy">Copy my changes</button>
-            <button type="button" className="btn pri" onClick={() => void loadNewer()} data-ref="conflict-load-newer">Load newer version</button>
+            <button type="button" className="btn pri" onClick={() => void loadNewer()} data-ref="conflict-load-newer">{LOAD_NEWER}</button>
           </span>
         </div>
       );

@@ -2,7 +2,7 @@
 // deployed site contains them, and dropped once it does.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import type { BlockFile, DocJSON, GapFile, OtherFile, StructureFile, WordDocFile, AsIsFile } from "../../lib/content/index.ts";
-import type { DocList, PubGap, SystemJson } from "../../lib/derive/published.ts";
+import type { DocJson, DocList, PubGap, SystemJson } from "../../lib/derive/published.ts";
 import { B, D, G, R } from "../../tools/build/test-fixture.ts";
 import { loadData } from "../data/load.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -133,6 +133,19 @@ describe("patchPublished", () => {
     const doc: WordDocFile = { ...fileJson<WordDocFile>(`content/docs/${D(5)}/doc.json`), name: "Thyroid notes (2026)" };
     const out = patchPublished(`docs/${D(5)}.json`, pub(`docs/${D(5)}.json`), new Map([[`content/docs/${D(5)}/doc.json`, doc]])) as { name: string };
     expect(out.name).toBe("Thyroid notes (2026)");
+  });
+
+  it("carries an overlaid record's failed-replacement marker onto its page, and drops a published one the record no longer has", () => {
+    const marker = { fileName: "chart2.png", at: "2026-10-04T12:00:00Z" };
+    const path = `docs/${D(1)}.json`;
+    const record = `content/files/${D(1)}/file.json`;
+    const failed = patchPublished(path, pub(path), new Map([[record, { ...fileJson<AsIsFile>(record), replaceFailed: marker }]])) as DocJson;
+    expect(failed.replaceFailed).toEqual(marker);
+    expect(failed.name).toBe(pub<DocJson>(path).name);
+
+    const dismissed = patchPublished(path, { ...pub<DocJson>(path), replaceFailed: marker }, new Map([[record, fileJson<AsIsFile>(record)]])) as DocJson;
+    expect(dismissed).not.toHaveProperty("replaceFailed");
+    expect(dismissed).toEqual(pub(path));
   });
 
   it("leaves gap blocks it has no file for untouched", () => {

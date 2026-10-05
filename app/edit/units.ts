@@ -13,7 +13,7 @@ import { loadData } from "../data/load.ts";
 import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
 import type { TreeChange } from "./github.ts";
-import { parsePageKey } from "./pageKey.ts";
+import { parsePageKey, type PageKind } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
 /** Content width for pictures outside a guide or Word page (US Letter with 1-inch margins). */
@@ -36,12 +36,11 @@ export interface SystemCtx {
   blocks: BlockFile[];
 }
 
-/** The file whose block list holds a block (`system.json`, `pharmfile.json` with the part, or `doc.json`). */
-export interface BlockOwner {
-  path: string;
-  /** The pharm file part listing the block. */
-  part?: string;
-}
+/** The file whose block list holds a block: a system's `system.json`, a `pharmfile.json` part, or a Word page's `doc.json`. */
+export type BlockOwner =
+  | { kind: "system"; sys: SystemCtx }
+  | { kind: "pharm"; path: string; part: string }
+  | { kind: "doc"; path: string };
 
 export type Part =
   /** Rows of one table block (a topic's, a section's or the whole table), spliced back by row id. */
@@ -101,19 +100,24 @@ async function guideFacts(snap: Snapshot, guide: string): Promise<{ basePt: numb
   return { basePt: g.basePt, width: contentWidth(g.page) };
 }
 
+/** A block file in a directory that keeps its blocks under `blocks/` (a system, a pharm file, a Word page). */
+const blockFileIn = (dir: string, id: string): string => `${dir}/blocks/${id}.json`;
+const systemDir = (guide: string, system: string): string => `content/guides/${guide}/${system}`;
+
 async function loadSystem(snap: Snapshot, guide: string, system: string): Promise<SystemCtx> {
-  const dir = `content/guides/${guide}/${system}`;
+  const dir = systemDir(guide, system);
   const file = await snap.json<SystemFile>(`${dir}/system.json`);
   const structurePath = `${dir}/structure.json`;
   const [structure, blocks] = await Promise.all([
     snap.json<StructureFile>(structurePath),
-    snap.many<BlockFile>(file.blocks.map((b) => `${dir}/blocks/${b}.json`)),
+    snap.many<BlockFile>(file.blocks.map((b) => blockFileIn(dir, b))),
   ]);
   return { guide, system, structurePath, structure, blocks };
 }
 
-const blockPath = (sys: SystemCtx, id: string): string => `content/guides/${sys.guide}/${sys.system}/blocks/${id}.json`;
-const systemOwner = (sys: SystemCtx): BlockOwner => ({ path: `content/guides/${sys.guide}/${sys.system}/system.json` });
+const blockPath = (sys: SystemCtx, id: string): string => blockFileIn(systemDir(sys.guide, sys.system), id);
+const systemFilePath = (sys: SystemCtx): string => `${systemDir(sys.guide, sys.system)}/system.json`;
+const ownerPath = (owner: BlockOwner): string => (owner.kind === "system" ? systemFilePath(owner.sys) : owner.path);
 
 /** The system whose sidebar lists a topic (first row id) or listed block (published nav.json). */
 async function systemOf(guide: string, kind: "topic" | "block", id: string): Promise<string> {
@@ -137,7 +141,7 @@ function blockPart(path: string, block: BlockFile, owner: BlockOwner, basePt: nu
 }
 
 const sysBlockPart = (sys: SystemCtx, block: BlockFile, basePt: number, width: number): Part =>
-  blockPart(blockPath(sys, block.id), block, systemOwner(sys), basePt, width);
+  blockPart(blockPath(sys, block.id), block, { kind: "system", sys }, basePt, width);
 
 function gapPart(gap: GapFile): Part {
   const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT });
@@ -184,7 +188,7 @@ function guideScope(parts: readonly Part[], extra: readonly string[] = []): File
   return { files: [...files].sort(), dirs: [] };
 }
 
-const WORD_KINDS: ReadonlySet<string> = new Set(["topic", "section", "system", "listed", "pharm"]);
+const WORD_KINDS: ReadonlySet<PageKind> = new Set<PageKind>(["topic", "section", "system", "listed", "pharm"]);
 
 /** Read the edit unit of a page key at the snapshot's commit. */
 export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
@@ -269,9 +273,9 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
           for (const part of file.parts.filter(pred)) {
             const fresh = part.blocks.filter((b) => !seen.has(b));
             fresh.forEach((b) => seen.add(b));
-            const blocks = await snap.many<BlockFile>(fresh.map((b) => `${dir}/blocks/${b}.json`));
-            const owner = { path: `${dir}/pharmfile.json`, part: part.id };
-            blocks.forEach((b) => parts.push(blockPart(`${dir}/blocks/${b.id}.json`, b, owner, file.basePt, width)));
+            const blocks = await snap.many<BlockFile>(fresh.map((b) => blockFileIn(dir, b)));
+            const owner: BlockOwner = { kind: "pharm", path: `${dir}/pharmfile.json`, part: part.id };
+            blocks.forEach((b) => parts.push(blockPart(blockFileIn(dir, b.id), b, owner, file.basePt, width)));
           }
         }
       };
@@ -321,9 +325,10 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const word = await snap.jsonIfExists<WordDocFile>(`content/docs/${docId}/doc.json`);
       const parts: Part[] = [];
       if (word && word.removed === null) {
-        const blocks = await snap.many<BlockFile>(word.blocks.map((b) => `content/docs/${docId}/blocks/${b}.json`));
-        const owner = { path: `content/docs/${docId}/doc.json` };
-        blocks.forEach((b) => parts.push(blockPart(`content/docs/${docId}/blocks/${b.id}.json`, b, owner, word.basePt, contentWidth(word.page))));
+        const dir = `content/docs/${docId}`;
+        const blocks = await snap.many<BlockFile>(word.blocks.map((b) => blockFileIn(dir, b)));
+        const owner: BlockOwner = { kind: "doc", path: `${dir}/doc.json` };
+        blocks.forEach((b) => parts.push(blockPart(blockFileIn(dir, b.id), b, owner, word.basePt, contentWidth(word.page))));
       }
       return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, topic: null, fromWord: word !== null };
     }
@@ -629,38 +634,46 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
   const files = new Map(build.files);
   const now = async <T>(path: string): Promise<T> => (files.has(path) ? (files.get(path) as T) : unit.snapshot.json<T>(path));
   const changed = new Set(build.changed);
-  const systems = new Set<string>();
+  /** Each system that got a block back, by its system.json path. */
+  const systems = new Map<string, SystemCtx>();
   for (const p of lost) {
-    const owner = p.kind === "rows" ? systemOwner(p.sys) : p.owner;
+    const owner: BlockOwner = p.kind === "rows" ? { kind: "system", sys: p.sys } : p.owner;
+    const path = ownerPath(owner);
     files.set(p.path, p.block);
     changed.add(p.block.id);
-    const oldOwner = await version.snapshot.json<SystemFile | PharmFile | WordDocFile>(owner.path);
-    const list = await now<SystemFile | PharmFile | WordDocFile>(owner.path);
+    const oldOwner = await version.snapshot.json<SystemFile | PharmFile | WordDocFile>(path);
+    const list = await now<SystemFile | PharmFile | WordDocFile>(path);
     const put = (ids: string[], oldIds: readonly string[]): string[] =>
       ids.includes(p.block.id) ? ids : ids.toSpliced(insertAt(ids, oldIds, p.block.id), 0, p.block.id);
     let next: SystemFile | PharmFile | WordDocFile = { ...list, blocks: put(list.blocks, oldOwner.blocks) };
-    if (owner.part !== undefined && "parts" in next && "parts" in oldOwner) {
-      const oldPart = oldOwner.parts.find((x) => x.id === owner.part)?.blocks ?? [];
-      next = { ...next, parts: next.parts.map((x) => (x.id === owner.part ? { ...x, blocks: put(x.blocks, oldPart) } : x)) };
+    switch (owner.kind) {
+      case "pharm": {
+        const pharm = next as PharmFile;
+        const oldPart = (oldOwner as PharmFile).parts.find((x) => x.id === owner.part)?.blocks ?? [];
+        next = { ...pharm, parts: pharm.parts.map((x) => (x.id === owner.part ? { ...x, blocks: put(x.blocks, oldPart) } : x)) };
+        break;
+      }
+      case "system": {
+        const { structurePath } = owner.sys;
+        const ids = [p.block.id, ...(p.kind === "rows" ? p.shown : [])];
+        if (p.kind === "rows") p.shown.forEach((id) => changed.add(id));
+        const old = await version.snapshot.json<StructureFile>(structurePath);
+        files.set(structurePath, withOldEntries(await now<StructureFile>(structurePath), old, ids));
+        systems.set(path, owner.sys);
+        break;
+      }
+      case "doc":
+        break;
     }
-    files.set(owner.path, next);
-    if (owner.path.endsWith("/system.json")) {
-      const structurePath = owner.path.replace(/system\.json$/, "structure.json");
-      const ids = [p.block.id, ...(p.kind === "rows" ? p.shown : [])];
-      if (p.kind === "rows") p.shown.forEach((id) => changed.add(id));
-      const old = await version.snapshot.json<StructureFile>(structurePath);
-      files.set(structurePath, withOldEntries(await now<StructureFile>(structurePath), old, ids));
-      systems.add(owner.path);
-    }
+    files.set(path, next);
   }
   // The build's own checks on each system that got a block back (40 §40.1/§40.2).
-  for (const sysPath of systems) {
-    const dir = sysPath.replace(/system\.json$/, "");
-    const sys = await now<SystemFile>(sysPath);
-    const blocks = await Promise.all(sys.blocks.map((b) => now<BlockFile>(`${dir}blocks/${b}.json`)));
-    const stored = await now<StructureFile>(`${dir}structure.json`);
+  for (const [path, ctx] of systems) {
+    const sys = await now<SystemFile>(path);
+    const blocks = await Promise.all(sys.blocks.map((b) => now<BlockFile>(blockPath(ctx, b))));
+    const stored = await now<StructureFile>(ctx.structurePath);
     const structure = fitTitled(blocks, stored);
-    if (structure !== stored) files.set(`${dir}structure.json`, structure);
+    if (structure !== stored) files.set(ctx.structurePath, structure);
     checkMembers(sys.id, deriveTopics(blocks, structure), structure);
   }
 

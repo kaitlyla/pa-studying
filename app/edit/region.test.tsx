@@ -18,7 +18,8 @@ import { AUTH_KEY, CHANNEL_NAME } from "../auth/config.ts";
 import { startEditing } from "./boot.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, loadNewer, mountedEditor, registerView, save, SAVE_FAILED, saveDraft,
+  confirmLeave, COPY_DONE, COPY_FAILED, discardEdit, getEditStore, LOAD_NEWER, loadNewer, mountedEditor, registerView, save, SAVE_CONFLICT, SAVE_FAILED,
+  SAVE_OFFLINE, saveDraft,
   setDraftStoreForTests, showPageBanner, startEdit, viewChanged, type Draft,
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
@@ -216,7 +217,8 @@ describe("SaveBanner", () => {
 
   it("offline offers Try again", async () => {
     const root = await render(<SaveBanner banner={{ kind: "offline" }} />);
-    expect(root.textContent).toContain("Couldn’t save — no internet connection.");
+    expect(root.querySelector(".bt b")?.textContent).toBe(SAVE_OFFLINE);
+    expect(SAVE_OFFLINE).toBe("Couldn’t save — no internet connection.");
     expect(q(root, "save-retry")?.textContent).toBe("Try again");
   });
 
@@ -231,9 +233,11 @@ describe("SaveBanner", () => {
 
   it("conflict names the other save's time and offers copy and load newer", async () => {
     const root = await render(<SaveBanner banner={{ kind: "conflict", at: "Oct 4, 2026, 3:15 PM" }} />);
-    expect(root.textContent).toContain("Oct 4, 2026, 3:15 PM");
+    expect(root.querySelector(".bt b")?.textContent).toBe(SAVE_CONFLICT("Oct 4, 2026, 3:15 PM"));
+    expect(SAVE_CONFLICT("Oct 4, 2026, 3:15 PM")).toBe("Not saved — this page was saved from another device at Oct 4, 2026, 3:15 PM after you opened it.");
     expect(q(root, "conflict-copy")?.textContent).toBe("Copy my changes");
-    expect(q(root, "conflict-load-newer")?.textContent).toBe("Load newer version");
+    expect(q(root, "conflict-load-newer")?.textContent).toBe(LOAD_NEWER);
+    expect(LOAD_NEWER).toBe("Load newer version");
   });
 
   it("loaded mentions the clipboard only when the changes were copied", async () => {

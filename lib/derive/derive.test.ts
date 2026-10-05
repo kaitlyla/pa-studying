@@ -18,7 +18,7 @@ import { CardMatcher, medsPanel, phraseMatcher, stubLabel, topicText } from "./p
 import { publish, type PublishResult } from "./publish.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
-  type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
+  type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
@@ -654,6 +654,21 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const unit = (title: string) => res.units.find((u) => u.title === title && u.label === "notes");
     expect(unit("Heart failure")?.text).toContain("orthopnea clue");
     expect(unit("Stable angina")?.text).not.toContain("orthopnea clue");
+  });
+
+  it("publishes a failed-replacement marker on the document it belongs to, Word or as-is", () => {
+    const marker = { fileName: "chart2.png", at: "2026-10-04T20:00:00Z" };
+    const c = mutated((x) => {
+      for (const id of [D(1), D(5)]) {
+        const d = x.docs.get(id);
+        if (!d) throw new Error(`no document ${id}`);
+        d.file.replaceFailed = marker;
+      }
+    });
+    const res = publish(c);
+    expect((res.files.get(docPath(D(1))) as DocJson).replaceFailed).toEqual(marker);
+    expect((res.files.get(docPath(D(5))) as DocJson).replaceFailed).toEqual(marker);
+    expect(file<DocJson>(docPath(D(1)))).not.toHaveProperty("replaceFailed");
   });
 
   it("addDoc lists a removed document as removed (whatever its state), a processing or failed upload as pending, else as a file", () => {

@@ -3,7 +3,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { commitMessage, parseTrailers, serializeFile, type BlockFile, type DocJSON, type StructureFile, type SystemFile, type Trailers } from "../../lib/content/index.ts";
 import { fileHash, guideViewHash, otherHash, refHash } from "../../lib/derive/routes.ts";
-import { B, D, G, R } from "../../tools/build/test-fixture.ts";
+import { B, D, G, R, S } from "../../tools/build/test-fixture.ts";
 import { DEVICE_KEY } from "../auth/config.ts";
 import { versionTime } from "./format.ts";
 import type { CommitInfo } from "./github.ts";
@@ -289,6 +289,26 @@ describe("buildRestore", () => {
     expect(build.changed).toContain(B(11));
   });
 
+  it("re-creates a deleted table of a system with its rows' structure entries, through the system owner", async () => {
+    const key = "system:fm:cardiovascular";
+    const version = await unitAt(key);
+    const sys = read<SystemFile>(CV_SYSTEM);
+    const structure = read<StructureFile>(CV_STRUCTURE);
+    land({
+      [blockPath(13)]: null,
+      [CV_SYSTEM]: { ...sys, blocks: sys.blocks.filter((b) => b !== B(13)) },
+      [CV_STRUCTURE]: { ...structure, members: without(structure.members, R(131)) },
+    }, "Curate: drop the heart failure table", { kind: "curation" }, "2026-10-02T09:00:00Z");
+
+    const unit = await unitAt(key);
+    const build = await buildRestore(unit, version, TODAY);
+    const written = new Map(build.changes.map((c) => [c.path, "content" in c ? c.content : null]));
+    expect([...written.keys()].sort()).toEqual([blockPath(13), CV_STRUCTURE, CV_SYSTEM].sort());
+    expect((JSON.parse(written.get(CV_SYSTEM) ?? "null") as SystemFile).blocks).toEqual(sys.blocks);
+    expect((JSON.parse(written.get(CV_STRUCTURE) ?? "null") as StructureFile).members[R(131)]).toBe("other");
+    expect(build.changed).toEqual(expect.arrayContaining([B(13), R(130), R(131)]));
+  });
+
   it("with nothing lost, is the restore-mode save", async () => {
     const key = `topic:fm:${R(101)}`;
     const version = await unitAt(key);
@@ -338,6 +358,18 @@ describe("pageVersions", () => {
     const v = c("2026-10-03T00:00:00Z", edit("k", [R(101)]));
     const versions = pageVersions([later, v, curated, old], ids, { ...opts, fromWord: false });
     expect(versions.map((x) => [x.sha, x.label])).toEqual([[v.sha, "Your edit"], [curated.sha, ORIGINAL_PUBLISHED]]);
+  });
+
+  it("a page converted from her Word guides gets the Word Original label; a slide gets the published one", async () => {
+    const origin = c("2026-10-02T00:00:00Z", { kind: "import" });
+    const labelOf = async (key: string): Promise<string | undefined> => {
+      const unit = await unitAt(key);
+      return pageVersions([origin], unit.ids, { ...opts, fromWord: unit.fromWord })[0]?.label;
+    };
+    expect(await labelOf(`topic:fm:${R(101)}`)).toBe(ORIGINAL_FROM_WORD);
+    expect(await labelOf(`listed:fm:${B(11)}`)).toBe(ORIGINAL_FROM_WORD);
+    expect(await labelOf(`slide:fm:${S(2)}`)).toBe(ORIGINAL_PUBLISHED);
+    expect(ORIGINAL_FROM_WORD).not.toBe(ORIGINAL_PUBLISHED);
   });
 
   it("with no versions, the newest origin commit is the Original and Current", () => {

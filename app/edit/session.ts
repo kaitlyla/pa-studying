@@ -34,6 +34,12 @@ export const SAVE_FAILED = {
   title: "Couldn’t save.",
   body: "Something went wrong. Your changes are still here, and the last saved version is unchanged.",
 } as const;
+/** First sentence of a save banner when the connection failed (a save, a restore). */
+export const SAVE_OFFLINE = "Couldn’t save — no internet connection.";
+/** First sentence of a save banner when another device saved the page first; `at` is that save's time. */
+export const SAVE_CONFLICT = (at: string): string => `Not saved — this page was saved from another device at ${at} after you opened it.`;
+/** The conflict banner's button. */
+export const LOAD_NEWER = "Load newer version";
 
 export type Banner =
   | { kind: "saved" }
