@@ -196,6 +196,14 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .gap-diff { margin: 8px 0; padding: 6px 10px; border-left: 3px solid #5d6f96; background: #fff; font-size: 13px; }
 .gap-src { margin-top: 8px; padding-top: 6px; border-top: 1px dashed #b8c2d8; font-size: 12px; color: #3a4358; }
 .gap-src ol { margin: 4px 0 0; padding-left: 18px; }
+.sec-index { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 4px 0 10px; font-size: 13px; }
+.ref-sec .gap { margin-bottom: 4px; }
+.sec-links { margin: 0 0 14px 6px; font-size: 12px; color: #5b6472; }
+.sl-h { font-weight: 700; color: #4a5263; }
+.lgroups { list-style: none; margin: 2px 0 0; padding: 0; }
+.lgroups li { margin: 1px 0; }
+.lg-c { margin-right: 6px; font-weight: 600; color: #3a4358; }
+.sec-rest .lgroups { font-size: 13px; }
 .upd { margin: 6px 0 10px; padding: 10px 12px; border: 1px solid #e3b56d; border-left: 5px solid #8a4b00; border-radius: 6px; background: #fff7e8; font-size: 13px; line-height: 1.45; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
 .upd-h { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .upd .ut { font-weight: 700; }

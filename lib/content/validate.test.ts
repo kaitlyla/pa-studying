@@ -571,6 +571,14 @@ describe("places (20 §20.8)", () => {
     expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab, anatomy: tab })).toBe("ok");
     expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab })).toMatch(/anatomy/);
   });
+
+  it("validates a reftab link's section: `gap` must be one of its own sub's gaps", () => {
+    const withLink = (gap: string) => ({ subs: [{ id: "cbc", title: "CBC", links: [{ target: id("r", 1), covers: "x", gap }], gaps: [G1] }], files: [] });
+    const empty = { subs: [], files: [] };
+    expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(G1), imaging: empty, ekg: empty, anatomy: empty })).toBe("ok");
+    expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(id("g", 2)), imaging: empty, ekg: empty, anatomy: empty })).toMatch(/links\[0\]\.gap: expected one of this sub's gaps/);
+    expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(D1), imaging: empty, ekg: empty, anatomy: empty })).toMatch(/a g_ id/);
+  });
 });
 
 describe("slides, vocabulary and updates (20 §20.10–§20.12)", () => {

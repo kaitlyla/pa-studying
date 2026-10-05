@@ -244,8 +244,16 @@ export interface GeneralFile {
   workup: { id: string; title: string; conds: string; gap: string }[];
 }
 
+/**
+ * A reference-tab link. `gap`: one of the same sub's gap blocks, the section the link is shown
+ * under (where that section can be found in her notes); without it the link is listed after the sections.
+ */
+export interface RefLink extends Link {
+  gap?: string;
+}
+
 export interface RefTab {
-  subs: { id: string; title: string; links: Link[]; gaps: string[] }[];
+  subs: { id: string; title: string; links: RefLink[]; gaps: string[] }[];
   files: string[];
 }
 

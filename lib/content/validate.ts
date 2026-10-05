@@ -15,7 +15,7 @@ import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTI
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
-  RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
+  RefLink, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
 
@@ -466,7 +466,16 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
   }, null);
 };
 
-const refTab = shapeOf<RefTab>({ subs: arr(shapeOf<RefTab["subs"][number]>({ id: slugC, title: nonEmpty, links: arr(link), gaps: uniqueArr(id("g")) }, {})), files: uniqueArr(id("d")) }, {});
+const refLink = shapeOf<RefLink>({ target: id("r", "b"), covers: str }, { gap: id("g") });
+/** A link's `gap` names one of its own sub's gap blocks: the section it is shown under. */
+const refSub: Checker = (v, at, ctx) => {
+  shapeOf<RefTab["subs"][number]>({ id: slugC, title: nonEmpty, links: arr(refLink), gaps: uniqueArr(id("g")) }, {})(v, at, ctx);
+  const sub = v as RefTab["subs"][number];
+  sub.links.forEach((l, i) => {
+    if (l.gap !== undefined && !sub.gaps.includes(l.gap)) bad(ctx, `${at}.links[${i}].gap`, "one of this sub's gaps", l.gap);
+  });
+};
+const refTab = shapeOf<RefTab>({ subs: arr(refSub), files: uniqueArr(id("d")) }, {});
 export const validateRefTabs: Validator = whole(shapeOf<RefTabsFile>({ v: v1, labs: refTab, imaging: refTab, ekg: refTab, anatomy: refTab }, {}));
 
 export const validateOther: Validator = (v, ctx) => {

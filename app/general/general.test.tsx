@@ -321,31 +321,94 @@ describe("reference tab", () => {
     expect(openFile.getAttribute("aria-current")).toBe("page");
   });
 
-  it("shows a topic in the three-part layout with its link and gap", async () => {
+  it("shows a topic's sections first, then the links that belong to no section", async () => {
     const a = await renderApp("#/labs/cbc");
     app = a;
     await until(() => byText(a.container, ".ref-page h1", "CBC") && a.container.querySelector(".ref-page .gap"), "CBC page");
     const page = a.container.querySelector(".ref-page");
     if (!page) throw new Error("no ref page");
     expect(page.querySelector(".crumbs a")?.getAttribute("href")).toBe("#/labs");
-    const parts = page.querySelectorAll(".gsec");
-    expect(parts).toHaveLength(2);
+    const section = page.querySelector(`.ref-sec section.gap[data-anchor="${G(1)}"]`);
+    expect(section?.querySelector("h3")?.textContent).toBe("TSH in AF");
+    expect(page.querySelector(".ref-sec .sec-links")).toBeNull();
+    const rest = page.querySelector(".sec-rest");
+    if (!section || !rest) throw new Error("no section or no rest");
+    expect(before(section, rest)).toBe(true);
+    expect(visibleText(rest.querySelector("h2") ?? rest)).toBe("Also in the notes");
     const published = linksOf(cbcSub(), "cbc");
     expect(published.map((l) => l.target)).toEqual([R(201)]);
     const asthma = at(published, 0);
-    const link = at(parts, 0).querySelector(".lnk a");
-    expect(link?.querySelector(".lt")?.textContent).toBe(asthma.title);
     expect(asthma.title).toContain("Asthma");
+    const link = rest.querySelector(".lgroups li a");
+    expect(link?.textContent).toBe(asthma.loc);
+    expect(link?.getAttribute("title")).toBe(asthma.title);
     expect(link?.getAttribute("href")).toBe(asthma.route);
-    expect(at(parts, 1).querySelector(`section.gap[data-anchor="${G(1)}"] h3`)?.textContent).toBe("TSH in AF");
+    expect(page.querySelector(".sec-index")).toBeNull();
     expect(page.querySelector(".fchip")).toBeNull();
     asOwner(true);
+    expect(visibleText(rest.querySelector("h2") ?? rest)).toBe("Also in your notes");
     expect(a.container.textContent).not.toContain("Your notes and files cover this.");
     expect(visibleText(page)).not.toContain(NOTHING);
 
     const current = a.container.querySelector(".side-in a.open");
     expect(current?.textContent).toBe("CBC");
     expect(current?.getAttribute("aria-current")).toBe("page");
+  });
+
+  it("lists a section's own links under it, one line per covers text, and indexes the sections", async () => {
+    const sub = record(cbcSub(), "cbc");
+    if (!("gaps" in sub) || !Array.isArray(sub.gaps) || !("links" in sub) || !Array.isArray(sub.links)) throw new Error("cbc has no gaps or links");
+    const g1 = record(sub.gaps[0], "gap");
+    const raw = linksOf(cbcSub(), "cbc");
+    const first = { ...record(sub.links[0], "cbc link"), flagged: false };
+    const g2 = { ...g1, id: G(902), title: "Second section" };
+    const g3 = { ...g1, id: G(903), title: "Third section" };
+    const loc = at(raw, 0).loc;
+    serveWith({
+      [REF]: {
+        ...record(files.get(REF), REF),
+        subs: [{
+          id: "cbc", title: "CBC", gaps: [g1, g2, g3],
+          links: [
+            { ...first, covers: "Atrial flutter", gap: G(902) },
+            { ...first, target: R(902), title: "Flutter (IM)", covers: "Atrial flutter", gap: G(902), flagged: true },
+            { ...first, target: R(903), covers: "Loose link" },
+          ],
+        }],
+      },
+    });
+    const scrolled: Element[] = [];
+    const saved = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function (this: Element) { scrolled.push(this); };
+    try {
+      const a = await renderApp("#/labs/cbc");
+      app = a;
+      const page = await until(() => a.container.querySelector(".ref-page .sec-index") && a.container.querySelector(".ref-page"), "CBC sections");
+      const secs = [...page.querySelectorAll(".ref-sec")];
+      expect(secs.map((s) => s.querySelector("h3")?.textContent)).toEqual(["TSH in AF", "Second section", "Third section"]);
+      expect(at(secs, 0).querySelector(".sec-links")).toBeNull();
+      const own = at(secs, 1).querySelector(".sec-links");
+      if (!own) throw new Error("no section links");
+      expect(visibleText(own.querySelector(".sl-h") ?? own)).toBe("In the notes");
+      const lines = own.querySelectorAll(".lgroups li");
+      expect(lines).toHaveLength(1);
+      const line = at(lines, 0);
+      expect(line.querySelector(".lg-c")?.textContent).toBe("Atrial flutter");
+      // Both links share one place, so each names its topic too.
+      expect([...line.querySelectorAll("a")].map((x) => x.textContent)).toEqual([`${loc} › ${at(raw, 0).title}`, `${loc} › Flutter (IM)`]);
+      expect(line.querySelectorAll(".updc")).toHaveLength(1);
+      const rest = page.querySelector(".sec-rest");
+      expect(rest?.querySelectorAll(".lgroups li")).toHaveLength(1);
+      expect(rest?.querySelector(".lg-c")?.textContent).toBe("Loose link");
+
+      const jump = byText(page, ".sec-index button", "Third section");
+      await click(jump);
+      expect(scrolled.some((e) => e.getAttribute("data-anchor") === G(903))).toBe(true);
+      asOwner(true);
+      expect(visibleText(own.querySelector(".sl-h") ?? own)).toBe("In your notes");
+    } finally {
+      Element.prototype.scrollIntoView = saved;
+    }
   });
 
   it("tells the owner a topic with no gaps is covered, without naming a guide", async () => {

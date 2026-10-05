@@ -361,10 +361,15 @@ export interface SlidesJson {
   slides: { id: string; doc: DocJSON; summarizes: { id: string; title: string; route: string }[]; ownerEdits: string[] }[];
 }
 
+/** A reference-tab link; `gap`: the sub's gap block (section) it is shown under (content RefLink). */
+export interface PubRefLink extends PubLink {
+  gap?: string;
+}
+
 export interface RefTabJson {
   tab: string;
   label: string;
-  subs: { id: string; title: string; links: PubLink[]; gaps: PubGap[] }[];
+  subs: { id: string; title: string; links: PubRefLink[]; gaps: PubGap[] }[];
   files: DocList;
 }
 

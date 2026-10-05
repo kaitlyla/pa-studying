@@ -1,7 +1,7 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
 import { citeKey } from "../content/ids.ts";
-import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type Link } from "../content/types.ts";
+import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
@@ -10,7 +10,7 @@ import {
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
-  PubFlag, PubGap, PubLink, PubPart, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
+  PubFlag, PubGap, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
 import {
@@ -356,15 +356,19 @@ export function publish(c: Content): PublishResult {
     }
     return out;
   };
-  const links = (file: string, ls: readonly Link[]): PubLink[] => {
-    const out: PubLink[] = [];
+  /** Only reference-tab links carry `gap` (RefLink); it passes through as stored. */
+  const links = (file: string, ls: readonly RefLink[]): PubRefLink[] => {
+    const out: PubRefLink[] = [];
     for (const l of ls) {
       const host = hosts[l.target];
       if (!exists(l.target) || !host) {
         dropped.push({ file, id: l.target });
         continue;
       }
-      out.push({ target: l.target, title: targetTitle(l.target), covers: l.covers, route: host.route, loc: host.loc, flagged: placedFlags.has(l.target) });
+      out.push({
+        target: l.target, title: targetTitle(l.target), covers: l.covers, route: host.route, loc: host.loc, flagged: placedFlags.has(l.target),
+        ...(l.gap !== undefined ? { gap: l.gap } : {}),
+      });
     }
     return out;
   };
