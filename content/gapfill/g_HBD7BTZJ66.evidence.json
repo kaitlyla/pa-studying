@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Two zones: a conducting zone (no gas exchange) and a respiratory zone.",
+   "source": 0,
+   "quote": "Functionally, the respiratory system can be divided into a conducting zone and a respiratory zone. The conducting zone of the respiratory system includes the organs and structures not directly involved in gas exchange.",
+   "locator": "22.1 introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Nasal conchae: superior, middle and inferior conchae project from each lateral wall of the nasal cavity.",
+   "source": 0,
+   "quote": "Each lateral wall of the nasal cavity has three bony projections, called the superior, middle, and inferior nasal conchae.",
+   "locator": "The Nose and its Adjacent Structures",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pharynx: nasopharynx, oropharynx and laryngopharynx.",
+   "source": 0,
+   "quote": "The pharynx is divided into three major regions: the nasopharynx, the oropharynx, and the laryngopharynx",
+   "locator": "The Pharynx",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Larynx: connects the pharynx to the trachea; its three large cartilages are the thyroid cartilage (anterior), epiglottis (superior) and cricoid cartilage (inferior).",
+   "source": 0,
+   "quote": "The larynx is a cartilaginous structure inferior to the laryngopharynx that connects the pharynx to the trachea and helps regulate the volume of air that enters and leaves the lungs (Figure 22.7). The structure of the larynx is formed by several pieces of cartilage. Three large cartilage pieces—the thyroid cartilage (anterior), epiglottis (superior), and cricoid cartilage (inferior)—form the major structure of the larynx.",
+   "locator": "The Larynx",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cricoid: the thick cricoid cartilage forms a ring.",
+   "source": 0,
+   "quote": "The thick cricoid cartilage forms a ring, with a wide posterior region and a thinner anterior region.",
+   "locator": "The Larynx",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lobes: the right lung has three lobes (superior, middle, inferior); the left has two (superior, inferior).",
+   "source": 1,
+   "quote": "The right lung consists of three lobes: the superior, middle, and inferior lobes. The left lung consists of two lobes: the superior and inferior lobes.",
+   "locator": "Gross Anatomy of the Lungs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cardiac notch: an indentation of the left lung that makes room for the heart.",
+   "source": 1,
+   "quote": "The cardiac notch is an indentation on the surface of the left lung, and it allows space for the heart",
+   "locator": "Gross Anatomy of the Lungs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Right vs left: the right lung is shorter and wider; the left occupies a smaller volume.",
+   "source": 1,
+   "quote": "The right lung is shorter and wider than the left lung, and the left lung occupies a smaller volume than the right.",
+   "locator": "Gross Anatomy of the Lungs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pleura: the visceral pleura covers the lungs and lines the fissures; the parietal pleura attaches to the thoracic wall, mediastinum and diaphragm; the pleural cavity lies between them.",
+   "source": 1,
+   "quote": "The visceral pleura is the layer that is superficial to the lungs, and extends into and lines the lung fissures (Figure 22.14). In contrast, the parietal pleura is the outer layer that connects to the thoracic wall, the mediastinum, and the diaphragm. The visceral and parietal pleurae connect to each other at the hilum. The pleural cavity is the space between the visceral and parietal layers.",
+   "locator": "Pleura of the Lungs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ribs: true ribs 1–7, false ribs 8–12, of which 11–12 are floating ribs.",
+   "source": 2,
+   "quote": "The ribs are classified as true ribs (1–7) and false ribs (8–12). The last two pairs of false ribs are also known as floating ribs (11–12).",
+   "locator": "Figure 7.32 Thoracic Cage",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Sternum: manubrium, body and xiphoid process.",
+   "source": 2,
+   "quote": "The sternum consists of the manubrium, body, and xiphoid process.",
+   "locator": "Figure 7.32 Thoracic Cage",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Sternal angle: where the manubrium meets the body; the second rib attaches here, so it is the landmark for counting ribs.",
+   "source": 2,
+   "quote": "The manubrium and body join together at the sternal angle, so called because the junction between these two components is not flat, but forms a slight bend. The second rib attaches to the sternum at the sternal angle. Since the first rib is hidden behind the clavicle, the second rib is the highest rib that can be identified by palpation. Thus, the sternal angle and second rib are important landmarks for the identification and counting of the lower ribs.",
+   "locator": "Sternum",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 3,
+    "issue": "'connects the pharynx to the trachea' was not in the quote.",
+    "resolution": "Quote extended to start at the larynx definition sentence; re-check passed."
+   },
+   {
+    "claim": 9,
+    "issue": "'12 pairs' was not in the quote.",
+    "resolution": "Dropped from the claim; re-check passed."
+   }
+  ]
+ },
+ "block": "g_HBD7BTZJ66"
+}

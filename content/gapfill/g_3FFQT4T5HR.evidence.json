@@ -1,0 +1,75 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Origins: the right subclavian artery arises from the brachiocephalic artery, the left directly from the aortic arch.",
+   "source": 0,
+   "quote": "The right subclavian artery arises from the brachiocephalic artery while the left subclavian artery arises from the aortic arch",
+   "locator": "Table: Aortic Arch Branches and Brain Circulation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Renamed as it goes: the subclavian artery is renamed the axillary artery as it exits the thorax into the axillary region; most of the vessel continues into the upper arm as the brachial artery.",
+   "source": 0,
+   "quote": "As the subclavian artery exits the thorax into the axillary region, it is renamed the axillary artery. Although it does branch and supply blood to the region near the head of the humerus (via the humeral circumflex arteries), the majority of the vessel continues into the upper arm, or brachium, and becomes the brachial artery (Figure 20.31).",
+   "locator": "Arteries Serving the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Elbow split: as it approaches the coronoid fossa, the brachial artery bifurcates into the radial and ulnar arteries.",
+   "source": 0,
+   "quote": "As the brachial artery approaches the coronoid fossa, it bifurcates into the radial and ulnar arteries, which continue into the forearm, or antebrachium.",
+   "locator": "Arteries Serving the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Palmar arches: at the wrist the radial and ulnar arteries fuse into the superficial and deep palmar arches, which supply the hand and the digital arteries.",
+   "source": 0,
+   "quote": "The radial artery and ulnar artery parallel their namesake bones, giving off smaller branches until they reach the wrist, or carpal region. At this level, they fuse to form the superficial and deep palmar arches that supply blood to the hand, as well as the digital arteries that supply blood to the digits.",
+   "locator": "Arteries Serving the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Median cubital vein: links the cephalic and basilic veins in the antecubital region; a frequent site for drawing blood.",
+   "source": 0,
+   "quote": "Median cubital vein Superficial vessel located in the antecubital region that links the cephalic vein to the basilic vein in the form of a v; a frequent site from which to draw blood",
+   "locator": "Table: Veins of the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Superficial veins: the basilic vein (along with the brachial vein) and the cephalic vein both lead to the axillary vein.",
+   "source": 0,
+   "quote": "Basilic vein Superficial vein of the arm that arises from the median antebrachial vein, intersects with the median cubital vein, parallels the ulnar vein, and continues into the upper arm; along with the brachial vein, it leads to the axillary vein Median cubital vein Superficial vessel located in the antecubital region that links the cephalic vein to the basilic vein in the form of a v; a frequent site from which to draw blood Cephalic vein Superficial vessel in the upper arm; leads to the axillary vein",
+   "locator": "Table: Veins of the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Brachial vein: the deeper arm vein, formed from the radial and ulnar veins.",
+   "source": 0,
+   "quote": "Brachial vein Deeper vein of the arm that forms from the radial and ulnar veins in the lower arm; leads to the axillary vein",
+   "locator": "Table: Veins of the Upper Limbs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Back to the heart: the axillary vein becomes the subclavian vein at the body wall, which joins the external and internal jugular veins to form the brachiocephalic vein.",
+   "source": 0,
+   "quote": "On both the left and right sides, the subclavian vein forms when the axillary vein passes through the body wall from the axillary region. It fuses with the external and internal jugular veins from the head and neck to form the brachiocephalic vein.",
+   "locator": "Veins of the Thoracic Region",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "The quote was the textbook's left-side example while the claim was general.",
+    "resolution": "Quote changed to the general Table 20.8 text (subclavian renamed axillary, continuing as brachial); re-check passed."
+   }
+  ]
+ },
+ "block": "g_3FFQT4T5HR"
+}

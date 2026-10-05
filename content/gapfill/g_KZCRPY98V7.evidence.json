@@ -1,0 +1,40 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "NPDB: a web-based repository of reports on medical malpractice payments and certain adverse actions against practitioners.",
+   "source": 0,
+   "quote": "The National Practitioner Data Bank (NPDB) is a web-based repository of reports containing information on medical malpractice payments and certain adverse actions related to health care practitioners, providers, and suppliers.",
+   "locator": "About Us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Why it exists: it keeps practitioners from moving state to state without disclosure of previous damaging performance.",
+   "source": 0,
+   "quote": "it is a workforce tool that prevents practitioners from moving state to state without disclosure or discovery of previous damaging performance.",
+   "locator": "About Us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Who sees it: eligible entities report and query; you can see your own reports, and the reports are not public.",
+   "source": 0,
+   "quote": "Federal regulations authorize eligible entities to report to and/or query the NPDB. Individuals and organizations who are subjects of these reports have access to their own information. The reports are confidential, and not available to the public.",
+   "locator": "About Us",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "'Confidential federal' was not in this claim's quote.",
+    "resolution": "Changed to 'a web-based repository', as quoted; re-check passed."
+   }
+  ]
+ },
+ "block": "g_KZCRPY98V7"
+}

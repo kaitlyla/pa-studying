@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Scrotum: keeps the testes 2 to 4°C below core temperature for efficient sperm production.",
+   "source": 0,
+   "quote": "The testes are located in a skin-covered, highly pigmented, muscular sack called the scrotum that extends from the body behind the penis (see Figure 27.2). This location is important in sperm production, which occurs within the testes, and proceeds more efficiently when the testes are kept 2 to 4°C below core body temperature.",
+   "locator": "Scrotum",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cremaster and dartos: the cremaster muscles descend from the internal oblique; with the dartos they elevate the testes in the cold.",
+   "source": 0,
+   "quote": "Descending from the internal oblique muscle of the abdominal wall are the two cremaster muscles, which cover each testis like a muscular net. By contracting simultaneously, the dartos and cremaster muscles can elevate the testes in cold weather (or water), moving the testes closer to the body and decreasing the surface area of the scrotum to retain heat.",
+   "locator": "Scrotum",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Testes: each about 4 to 5 cm long.",
+   "source": 0,
+   "quote": "Paired ovals, adult testes are each approximately 4 to 5 cm in length and are housed within the scrotum",
+   "locator": "Testes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Coverings: the tunica vaginalis (serous, parietal and visceral layers) and beneath it the tough tunica albuginea.",
+   "source": 0,
+   "quote": "The outer tunica vaginalis is a serous membrane that has both a parietal and a thin visceral layer. Beneath the tunica vaginalis is the tunica albuginea, a tough, white, dense connective tissue layer covering the testis itself.",
+   "locator": "Testes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Epididymis: a coiled tube attached to the testis where newly formed sperm mature.",
+   "source": 0,
+   "quote": "moved to the epididymis (plural = epididymides), a coiled tube attached to the testis where newly formed sperm continue to mature",
+   "locator": "Role of the Epididymis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Storage: mature sperm are stored in the tail of the epididymis until ejaculation.",
+   "source": 0,
+   "quote": "The more mature sperm are then stored in the tail of the epididymis (the final section) until ejaculation occurs.",
+   "locator": "Role of the Epididymis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ductus (vas) deferens: carries sperm out of the scrotum within the spermatic cord.",
+   "source": 0,
+   "quote": "Sperm exit the scrotum through the ductus deferens, which is bundled in the spermatic cord.",
+   "locator": "27.1 introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Semen: the seminal vesicles and prostate add fluid to the sperm.",
+   "source": 0,
+   "quote": "The seminal vesicles and prostate gland add fluids to the sperm to create semen.",
+   "locator": "27.1 introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Testicular artery: a branch of the abdominal aorta that runs to the testes as part of the spermatic cord.",
+   "source": 1,
+   "quote": "Testicular artery Branch of the abdominal aorta; ultimately travels outside the body cavity to the testes and forms one component of the spermatic cord",
+   "locator": "Table: Vessels of the Abdominal Aorta",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "The quote did not name the scrotum.",
+    "resolution": "Quote extended to start at the scrotum sentence; re-check passed."
+   },
+   {
+    "claim": 4,
+    "issue": "The lead 'Epididymis' was not in the quote.",
+    "resolution": "Quote extended to start at 'moved to the epididymis'; re-check passed."
+   }
+  ]
+ },
+ "block": "g_AGKBMJMP26"
+}

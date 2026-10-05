@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Bony pelvis: the two hip bones, the sacrum and the coccyx.",
+   "source": 0,
+   "quote": "The bony pelvis is the entire structure formed by the two hip bones, the sacrum, and, attached inferiorly to the sacrum, the coccyx",
+   "locator": "8.3 introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hip bone: the ilium, ischium and pubis, which fuse in the late teenage years.",
+   "source": 0,
+   "quote": "Each adult hip bone is formed by three separate bones that fuse together during the late teenage years. These bony components are the ilium, ischium, and pubis",
+   "locator": "Hip Bone",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Sacroiliac joint: the largely immobile joint between the ilium and sacrum.",
+   "source": 0,
+   "quote": "The ilium is the fan-like, superior region that forms the largest part of the hip bone. It is firmly united to the sacrum at the largely immobile sacroiliac joint",
+   "locator": "Hip Bone",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pubic symphysis: where the two pubic bones join.",
+   "source": 0,
+   "quote": "The pubis curves medially, where it joins to the pubis of the opposite hip bone at a specialized joint called the pubic symphysis.",
+   "locator": "Hip Bone",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "False vs true pelvis: the greater (false) pelvis is the broad upper region; the lesser (true) pelvis below holds the bladder and other pelvic organs.",
+   "source": 0,
+   "quote": "The broad, superior region, defined laterally by the large, fan-like portion of the upper hip bone, is called the greater pelvis (greater pelvic cavity; false pelvis). This broad area is occupied by portions of the small and large intestines, and because it is more closely associated with the abdominal cavity, it is sometimes referred to as the false pelvis. More inferiorly, the narrow, rounded space of the lesser pelvis (lesser pelvic cavity; true pelvis) contains the bladder and other pelvic organs, and thus is also known as the true pelvis.",
+   "locator": "Pelvis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pelvic brim (inlet): the upper margin of the true pelvis.",
+   "source": 0,
+   "quote": "The pelvic brim (also known as the pelvic inlet) forms the superior margin of the lesser pelvis, separating it from the greater pelvis.",
+   "locator": "Pelvis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Female pelvis: adapted for childbirth: broader, with a larger subpubic angle, a rounder pelvic brim and a wider, shallower lesser pelvic cavity.",
+   "source": 0,
+   "quote": "The female pelvis is adapted for childbirth and is broader, with a larger subpubic angle, a rounder pelvic brim, and a wider and more shallow lesser pelvic cavity than the male pelvis.",
+   "locator": "Figure 8.15 Male and Female Pelvis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "The quote's 'It' referred to the ilium, which the quote did not name.",
+    "resolution": "Quote extended to start at the ilium sentence; re-check passed."
+   }
+  ]
+ },
+ "block": "g_X9YNQZ2PTH"
+}

@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Mid-level practitioner: to the DEA, a PA authorized by their state to dispense controlled substances is a mid-level practitioner.",
+   "source": 0,
+   "quote": "Examples of mid-level practitioners include, but are not limited to, health care providers such as nurse practitioners, nurse midwives, nurse anesthetists, clinical nurse specialists and physician assistants who are authorized to dispense controlled substances by the State in which they practice.",
+   "locator": "§ 1300.01, Mid-level practitioner",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Definition: a mid-level practitioner is a practitioner other than a physician, dentist, veterinarian or podiatrist who is licensed, registered or otherwise permitted by the United States or the jurisdiction where they practice to dispense a controlled substance in professional practice.",
+   "source": 0,
+   "quote": "Mid-level practitioner means an individual practitioner, other than a physician, dentist, veterinarian, or podiatrist, who is licensed, registered, or otherwise permitted by the United States or the jurisdiction in which he/she practices, to dispense a controlled substance in the course of professional practice.",
+   "locator": "§ 1300.01, Mid-level practitioner",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Prescribing counts: under federal law, \"dispense\" includes prescribing and administering a controlled substance.",
+   "source": 2,
+   "quote": "The term “dispense” means to deliver a controlled substance to an ultimate user or research subject by, or pursuant to the lawful order of, a practitioner, including the prescribing and administering of a controlled substance",
+   "locator": "21 U.S.C. § 802(10)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "DEA registration: everyone who dispenses a controlled substance must obtain a DEA registration unless exempted by law.",
+   "source": 1,
+   "quote": "Every person who manufactures, distributes, dispenses, imports, or exports any controlled substance or who proposes to engage in the manufacture, distribution, dispensing, importation or exportation of any controlled substance shall obtain a registration unless exempted by law",
+   "locator": "§ 1301.11(a)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "Claim dropped 'the United States or' and its lead was not supported by the quote.",
+    "resolution": "Lead changed to 'Definition:' and the claim now follows the quoted definition; re-check passed."
+   }
+  ]
+ },
+ "block": "g_C5YNERK8WX"
+}

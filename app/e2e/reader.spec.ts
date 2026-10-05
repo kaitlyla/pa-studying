@@ -603,10 +603,10 @@ test.describe("general topics, workup and Other", () => {
     await expect.poll(() => hashOf(page)).toBe(listHash);
   });
 
-  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal, Physical exam and Documentation, plus the Vaccines lead", async ({ page }) => {
+  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal, PA professional, Physical exam and Documentation, plus the Vaccines lead", async ({ page }) => {
     const other = read<OtherJson>("other.json");
     expect(other.sections).toHaveLength(9);
-    expect(other.sections.filter((s) => s.gaps !== undefined).map((s) => s.id)).toEqual(["screenings", "legal", "pe", "notes"]);
+    expect(other.sections.filter((s) => s.gaps !== undefined).map((s) => s.id)).toEqual(["screenings", "legal", "pa", "pe", "notes"]);
     const leads = other.sections.filter((s) => s.lead !== null);
     expect(leads.map((s) => s.title)).toHaveLength(1);
     expect(leads[0]?.title).toMatch(/vaccine/i);

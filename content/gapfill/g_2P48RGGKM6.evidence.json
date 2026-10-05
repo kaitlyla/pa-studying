@@ -1,0 +1,96 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Liver: the largest gland in the body.",
+   "source": 0,
+   "quote": "The liver is the largest gland in the body, weighing about three pounds in an adult.",
+   "locator": "The Liver",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Location: under the diaphragm in the right upper quadrant, protected by the surrounding ribs.",
+   "source": 0,
+   "quote": "The liver lies inferior to the diaphragm in the right upper quadrant of the abdominal cavity and receives protection from the surrounding ribs.",
+   "locator": "The Liver",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Falciform ligament: with the ligamentum teres, a remnant of the umbilical vein separating the right and left lobes anteriorly.",
+   "source": 0,
+   "quote": "The falciform ligament and ligamentum teres hepatis are actually remnants of the umbilical vein, and separate the right and left lobes anteriorly.",
+   "locator": "The Liver",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Porta hepatis: where the hepatic artery and hepatic portal vein enter the liver.",
+   "source": 0,
+   "quote": "The porta hepatis (“gate to the liver”) is where the hepatic artery and hepatic portal vein enter the liver.",
+   "locator": "The Liver",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Dual blood supply: the hepatic artery brings oxygenated blood; the portal vein brings nutrient-rich, partly deoxygenated blood from the intestine and actually supplies more of the liver's oxygen.",
+   "source": 0,
+   "quote": "the hepatic artery delivers oxygenated blood from the heart to the liver. The hepatic portal vein delivers partially deoxygenated blood containing nutrients absorbed from the small intestine and actually supplies more oxygen to the liver than do the much smaller hepatic arteries.",
+   "locator": "The Liver",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Bile ducts: the right and left hepatic ducts merge into the common hepatic duct, which joins the cystic duct to form the common bile duct.",
+   "source": 0,
+   "quote": "The bile ducts unite to form the larger right and left hepatic ducts, which themselves merge and exit the liver as the common hepatic duct. This duct then joins with the cystic duct from the gallbladder, forming the common bile duct through which bile flows into the small intestine.",
+   "locator": "Bile",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pancreas: head in the C-curve of the duodenum, body extending left, tail at the hilum of the spleen.",
+   "source": 0,
+   "quote": "Its head is nestled into the “c-shaped” curvature of the duodenum with the body extending to the left about 15.2 cm (6 in) and ending as a tapering tail in the hilum of the spleen.",
+   "locator": "The Pancreas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Exocrine and endocrine: the pancreas both secretes digestive enzymes and releases hormones into the blood.",
+   "source": 0,
+   "quote": "It is a curious mix of exocrine (secreting digestive enzymes) and endocrine (releasing hormones into the blood) functions",
+   "locator": "The Pancreas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Islets: small islands of endocrine cells scattered among the exocrine acini.",
+   "source": 0,
+   "quote": "Scattered through the sea of exocrine acini are small islands of endocrine cells, the islets of Langerhans.",
+   "locator": "The Pancreas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ampulla: the main pancreatic duct joins the common bile duct just before the duodenum, at the hepatopancreatic ampulla; its sphincter controls release of bile and pancreatic juice.",
+   "source": 0,
+   "quote": "The larger duct fuses with the common bile duct (carrying bile from the liver and gallbladder) just before entering the duodenum via a common opening (the hepatopancreatic ampulla). The smooth muscle sphincter of the hepatopancreatic ampulla controls the release of pancreatic juice and bile into the small intestine.",
+   "locator": "The Pancreas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Gallbladder: stores, concentrates and releases bile.",
+   "source": 0,
+   "quote": "The gallbladder primarily stores, concentrates, and releases bile.",
+   "locator": "23.6 introduction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "The quote began 'This duct…' and did not name the common hepatic duct.",
+    "resolution": "Quote extended to start at the hepatic ducts sentence; claim names the common hepatic duct; re-check passed."
+   }
+  ]
+ },
+ "block": "g_2P48RGGKM6"
+}

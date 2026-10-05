@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "author": "fia-94619",
+ "claims": [
+  {
+   "text": "Anterior supply: the internal carotid artery enters the skull through the carotid canal of the temporal bone.",
+   "source": 0,
+   "quote": "The internal carotid artery enters the cranium through the carotid canal in the temporal bone.",
+   "locator": "Arterial Blood Supply to the Brain",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Posterior supply: the vertebral arteries run through the transverse foramina of the cervical vertebrae and enter the skull through the foramen magnum.",
+   "source": 0,
+   "quote": "A second set of vessels that supply the CNS are the vertebral arteries, which are protected as they pass through the neck region by the transverse foramina of the cervical vertebrae. The vertebral arteries enter the cranium through the foramen magnum of the occipital bone.",
+   "locator": "Arterial Blood Supply to the Brain",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Basilar artery: formed by the two vertebral arteries; it supplies the brain stem and cerebellum.",
+   "source": 0,
+   "quote": "The two vertebral arteries then merge into the basilar artery, which gives rise to branches to the brain stem and cerebellum.",
+   "locator": "Arterial Blood Supply to the Brain",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Circle of Willis: the internal carotids and basilar branches join so the brain stays perfused even if one part narrows or is blocked.",
+   "source": 0,
+   "quote": "The left and right internal carotid arteries and branches of the basilar artery all become the circle of Willis, a confluence of arteries that can maintain perfusion of the brain even if narrowing or a blockage limits flow through one part (Figure 13.15).",
+   "locator": "Arterial Blood Supply to the Brain",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ACA and MCA: both branch from the internal carotid; the anterior cerebral artery supplies the frontal lobe, the middle cerebral artery the temporal and parietal lobes.",
+   "source": 1,
+   "quote": "Anterior cerebral artery Arises from the internal carotid artery; supplies blood to the frontal lobe of the cerebrum Middle cerebral artery Another branch of the internal carotid artery; supplies blood to the temporal and parietal lobes of the cerebrum",
+   "locator": "Table: Aortic Arch Branches and Brain Circulation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "PCA: a branch of the basilar artery that supplies the posterior cerebrum and brain stem.",
+   "source": 1,
+   "quote": "Posterior cerebral artery Branch of the basilar artery that forms a portion of the posterior segment of the arterial circle of Willis; supplies blood to the posterior portion of the cerebrum and brain stem",
+   "locator": "Table: Aortic Arch Branches and Brain Circulation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Dura mater: a thick, strong protective sheath over the entire brain and spinal cord.",
+   "source": 0,
+   "quote": "The dura mater is a thick fibrous layer and a strong protective sheath over the entire brain and spinal cord.",
+   "locator": "Protective Coverings of the CNS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Arachnoid mater: a thin fibrous membrane forming a loose sac around the CNS.",
+   "source": 0,
+   "quote": "The arachnoid mater is a membrane of thin fibrous tissue that forms a loose sac around the CNS.",
+   "locator": "Protective Coverings of the CNS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pia mater: the thin membrane directly on the surface of the CNS, following the gyri and sulci.",
+   "source": 0,
+   "quote": "Directly adjacent to the surface of the CNS is the pia mater, a thin fibrous membrane that follows the convolutions of gyri and sulci in the cerebral cortex",
+   "locator": "Protective Coverings of the CNS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Subarachnoid space: filled with circulating CSF, which cushions the brain and spinal cord.",
+   "source": 0,
+   "quote": "The subarachnoid space is filled with circulating CSF, which also provides a liquid cushion to the brain and spinal cord.",
+   "locator": "Arachnoid Mater",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Venous drainage: blood leaves the brain through a series of sinuses that connect to the jugular veins.",
+   "source": 0,
+   "quote": "Blood drains from the brain through a series of sinuses that connect to the jugular veins.",
+   "locator": "Figure 13.16 Dural Sinuses and Veins",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivan-80801 (all-rounder-01a10cdb-b912-7bc2-a8d9-a9ab4bf4aac4), Documentation builder session",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 6,
+    "issue": "'outer' was not in the quote.",
+    "resolution": "Claim reworded to the quote's 'thick, strong protective sheath'; re-check passed."
+   },
+   {
+    "claim": 7,
+    "issue": "'the middle layer' was not in the quote.",
+    "resolution": "Dropped; re-check passed."
+   },
+   {
+    "claim": 10,
+    "issue": "'dural sinuses' was only in the figure title, not the quote.",
+    "resolution": "Claim now says 'a series of sinuses'; re-check passed."
+   }
+  ]
+ },
+ "block": "g_KPWD286TJN"
+}
