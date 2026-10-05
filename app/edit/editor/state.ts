@@ -9,6 +9,7 @@ import { EditorState, Plugin } from "prosemirror-state";
 import type { EditorProps } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
+import { columnDrag } from "./columnDrag.ts";
 import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline } from "./commands.ts";
 
 /** Her editor's status text when an edit would remove a picture (`_editor/editor.js` refusePictureRemoval). */
@@ -48,6 +49,7 @@ export function editorPlugins(opts: EditorOptions = {}): Plugin[] {
     }),
     keymap(baseKeymap),
     pictureGuard(opts.onPictureRefused),
+    columnDrag(),
   ];
 }
 

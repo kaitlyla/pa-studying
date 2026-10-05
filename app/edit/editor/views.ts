@@ -5,7 +5,7 @@ import { createElement, type CSSProperties } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { DOMSerializer } from "prosemirror-model";
 import type { DOMOutputSpec, Mark, Node as PMNode } from "prosemirror-model";
-import type { EditorView, MarkViewConstructor, NodeView, NodeViewConstructor } from "prosemirror-view";
+import type { MarkViewConstructor, NodeView, NodeViewConstructor } from "prosemirror-view";
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import {
@@ -78,17 +78,18 @@ function reactLayer(host: HTMLElement, render: (root: Root) => void): () => void
   return () => queueMicrotask(() => root.unmount());
 }
 
-/** The four outer edges of a cell, so it takes the table's outer or inside default borders. */
-function cellEdges(view: EditorView, getPos: () => number | undefined): { top: boolean; right: boolean; bottom: boolean; left: boolean } {
-  const none = { top: false, right: false, bottom: false, left: false };
-  const pos = getPos();
-  if (pos === undefined) return none;
-  const $pos = view.state.doc.resolve(pos);
-  const table = $pos.node($pos.depth - 1);
-  if (table.type !== N.table) return none;
+/**
+ * A cell's style in its table: its own fill and borders, the table's default borders for its place
+ * (outer edges or inside, from the cell at `offset` within the table) and the table's cell margins.
+ */
+function tableCellStyle(cell: PMNode, table: PMNode | null, offset: number, basePt: number): CSSProperties {
+  const a = attrsOf(cell, "table_cell");
+  if (table?.type !== N.table) return cellStyle(a, basePt, null, { top: false, right: false, bottom: false, left: false });
+  const t = attrsOf(table, "table");
   const map = TableMap.get(table);
-  const rect = map.findCell(pos - $pos.start($pos.depth - 1));
-  return { top: rect.top === 0, left: rect.left === 0, bottom: rect.bottom === map.height, right: rect.right === map.width };
+  const rect = map.findCell(offset);
+  const edges = { top: rect.top === 0, left: rect.left === 0, bottom: rect.bottom === map.height, right: rect.right === map.width };
+  return cellStyle(a, basePt, t.borders, edges, t.cellMarginPt);
 }
 
 /**
@@ -166,20 +167,46 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
       return plain(d, d, node);
     },
     table: (node) => {
-      const a = attrsOf(node, "table");
-      const table = el("table", { tableLayout: "fixed", marginLeft: tableIndent(a.indentPt, basePt) }, "nt");
+      const table = el("table", null, "nt");
       const colgroup = el("colgroup");
-      for (const pct of tableColumns(a.grid)) colgroup.append(el("col", { width: `${pct}%` }));
       const body = el("tbody");
       table.append(colgroup, body);
-      // A cell's outer/inside borders depend on its place in the grid (cellEdges), and ProseMirror keeps
-      // the views of unchanged cells; when the grid's shape changes (a row added or deleted) the whole
-      // table is drawn again so every cell takes the edges of its new place.
+      const draw = (n: PMNode): void => {
+        const a = attrsOf(n, "table");
+        table.removeAttribute("style");
+        applyStyle(table, { tableLayout: "fixed", marginLeft: tableIndent(a.indentPt, basePt) });
+        colgroup.replaceChildren(...tableColumns(a.grid).map((pct) => el("col", { width: `${pct}%` })));
+      };
+      draw(node);
+      // A cell's outer/inside borders depend on its place in the grid, and ProseMirror keeps the views of
+      // unchanged cells; when the grid's shape changes (a row added or deleted) the whole table is drawn
+      // again so every cell takes the edges of its new place.
       const shape = gridShape(node);
+      let current = node;
       return {
         dom: table,
         contentDOM: body,
-        update: (next) => next.type === node.type && next.sameMarkup(node) && gridShape(next) === shape,
+        update: (next) => {
+          if (next.type !== current.type || gridShape(next) !== shape) return false;
+          if (!next.sameMarkup(current)) {
+            // The table's own attributes changed (column widths, cell margins). ProseMirror would move the
+            // unchanged cells' views into a new table view as they are, keeping the margins and borders
+            // they were drawn with, so the table redraws itself and its cells here.
+            draw(next);
+            const rows = body.children;
+            next.forEach((row, rowOffset, r) => {
+              const tds = rows[r]?.children;
+              row.forEach((cell, cellOffset, c) => {
+                const td = tds?.[c];
+                if (!(td instanceof HTMLTableCellElement)) return;
+                td.removeAttribute("style");
+                applyStyle(td, tableCellStyle(cell, next, rowOffset + 1 + cellOffset, basePt));
+              });
+            });
+          }
+          current = next;
+          return true;
+        },
       };
     },
     table_row: (node) => {
@@ -190,9 +217,9 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
       const a = attrsOf(node, "table_cell");
       const pos = getPos();
       const $pos = pos === undefined ? null : view.state.doc.resolve(pos);
-      const tableNode = $pos?.node($pos.depth - 1);
-      const t = tableNode?.type === N.table ? attrsOf(tableNode, "table") : null;
-      const td = el("td", cellStyle(a, basePt, t?.borders ?? null, cellEdges(view, getPos), t?.cellMarginPt)) as HTMLTableCellElement;
+      const tableNode = $pos ? $pos.node($pos.depth - 1) : null;
+      const offset = $pos && pos !== undefined ? pos - $pos.start($pos.depth - 1) : 0;
+      const td = el("td", tableCellStyle(node, tableNode, offset, basePt)) as HTMLTableCellElement;
       td.colSpan = a.colspan;
       td.rowSpan = a.rowspan;
       return plain(td, td, node);

@@ -135,7 +135,7 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
 
 // ---- toolbar ------------------------------------------------------------------------------------
 
-function Tool({ label, run, children, refk }: { label: string; run: () => void; children: ReactNode; refk?: string }): ReactNode {
+function Tool({ label, run, children, refk, disabled }: { label: string; run: () => void; children: ReactNode; refk?: string; disabled?: boolean }): ReactNode {
   return (
     <button
       type="button"
@@ -143,6 +143,7 @@ function Tool({ label, run, children, refk }: { label: string; run: () => void; 
       title={label}
       aria-label={label}
       data-ref={refk}
+      disabled={disabled}
       onMouseDown={(e) => {
         e.preventDefault();
         run();
@@ -220,6 +221,8 @@ function Toolbar(): ReactNode {
   const sel = a?.view.state.selection;
   const picture = sel instanceof NodeSelection && (sel.node.type.name === "image" || sel.node.type.name === "image_block");
   const inTable = a ? changeCellMargins("sides", 1)(a.view.state) : false;
+  const canNarrow = a ? changeColumnWidth(-1)(a.view.state) : false;
+  const canWiden = a ? changeColumnWidth(1)(a.view.state) : false;
   const sizeNow = a ? selectionSize(a.view.state, a.ctx) : null;
   return (
     <div className={phone ? "etb phone" : "etb"} data-ref="edit-toolbar">
@@ -272,8 +275,8 @@ function Toolbar(): ReactNode {
         {inTable && (
           <span className="tb-group" role="group" aria-label="Column width">
             <span className="tb-gl">Column</span>
-            <Tool label="Make this column narrower" run={plainCmd(changeColumnWidth(-1))} refk="tb-col-narrower">Narrower</Tool>
-            <Tool label="Make this column wider" run={plainCmd(changeColumnWidth(1))} refk="tb-col-wider">Wider</Tool>
+            <Tool label="Make this column narrower" run={plainCmd(changeColumnWidth(-1))} refk="tb-col-narrower" disabled={!canNarrow}>Narrower</Tool>
+            <Tool label="Make this column wider" run={plainCmd(changeColumnWidth(1))} refk="tb-col-wider" disabled={!canWiden}>Wider</Tool>
           </span>
         )}
         <span className="sep" />

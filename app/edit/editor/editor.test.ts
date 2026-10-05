@@ -9,13 +9,13 @@ import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
-  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveParagraph, removeHighlight, resizePicture, selectionSize,
+  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, removeHighlight, resizePicture, selectionSize,
   setHighlight, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
-import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
+import { cellPadding, MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
 
 const ctx = { basePt: 11, pageContentPt: 540 };
 const ASSET = `${"a".repeat(32)}.png`;
@@ -414,13 +414,22 @@ describe("column width", () => {
     expect(gridOf(state)).toEqual([100, 200 + COLUMN_STEP_PT, 300 - COLUMN_STEP_PT]);
   });
 
-  it("stops at the narrowest column, and at the screen's first-column minimum", () => {
+  it("stops at the narrowest column, and at the screen's first-column minimum, where it can no longer act", () => {
     let state = at(three([100, 200, 300]), "B");
-    for (let i = 0; i < 40; i++) state = run(state, changeColumnWidth(1));
+    while (changeColumnWidth(1)(state)) state = run(state, changeColumnWidth(1));
     expect(gridOf(state)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    // Narrower still acts there: only the way that is blocked is.
+    expect(changeColumnWidth(-1)(state)).toBe(true);
     state = at(state, "A");
-    for (let i = 0; i < 40; i++) state = run(state, changeColumnWidth(-1));
+    while (changeColumnWidth(-1)(state)) state = run(state, changeColumnWidth(-1));
     expect((gridOf(state) as number[])[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100, 6);
+    expect(changeColumnWidth(1)(state)).toBe(true);
+  });
+
+  it("cannot act in a cell spanning every column", () => {
+    const spanning = at(createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B")]), row(rid(2), [cell("W", { colspan: 2 })])], [100, 200]))), "W");
+    expect(changeColumnWidth(1)(spanning)).toBe(false);
+    expect(changeColumnWidth(-1)(spanning)).toBe(false);
   });
 
   it("starts from the widths the screen draws, so a narrow first column is saved as shown", () => {
@@ -453,6 +462,114 @@ describe("column width", () => {
     const one = at(createEditorState(docOf(table([row(rid(1), [cell("A")])], [300]))), "A");
     expect(changeColumnWidth(1)(one)).toBe(false);
   });
+
+  it("moving a border trades width between the two columns beside it, stopping at their limits", () => {
+    expect(moveColumnBorder([100, 200, 300], 1, 40)).toEqual([100, 240, 260]);
+    expect(moveColumnBorder([100, 200, 300], 0, -30.02)).toEqual([70, 230, 300]);
+    expect(moveColumnBorder([100, 200, 300], 1, 1000)).toEqual([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    expect(moveColumnBorder([100, 200, 300], 0, -1000)?.[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100, 6);
+    expect(moveColumnBorder([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT], 1, 5)).toBeNull();
+    expect(moveColumnBorder([100, 200, 300], 2, 5)).toBeNull();
+    expect(moveColumnBorder([100, 200, 300], -1, 5)).toBeNull();
+  });
+});
+
+describe("dragging a column border", () => {
+  const gridOf = (view: EditorView): unknown => view.state.doc.firstChild?.attrs.grid;
+  // A 600 px table of grid [100, 200, 300] pt: 1 px is 1 pt, columns A 0–100, B 100–300, C 300–600.
+  const mount = (grid = [100, 200, 300]): EditorView => {
+    const state = createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B"), cell("C")]), row(rid(2), [cell("D", { colspan: 3 })])], grid)));
+    const view = new EditorView(document.createElement("div"), { state, nodeViews: nodeViews(11), markViews: markViews(11) });
+    const box = (left: number, width: number): (() => DOMRect) => () =>
+      ({ left, right: left + width, top: 0, bottom: 40, width, height: 40, x: left, y: 0, toJSON: () => ({}) }) as DOMRect;
+    (view.dom.querySelector("table") as HTMLElement).getBoundingClientRect = box(0, 600);
+    const pct = tableColumns(grid);
+    let left = 0;
+    view.dom.querySelectorAll("tr")[0]?.querySelectorAll("td").forEach((td, i) => {
+      const w = ((pct[i] ?? 0) * 600) / 100;
+      td.getBoundingClientRect = box(left, w);
+      left += w;
+    });
+    (view.dom.querySelectorAll("tr")[1]?.querySelector("td") as HTMLElement).getBoundingClientRect = box(0, 600);
+    return view;
+  };
+  const td = (view: EditorView, i: number): HTMLElement => view.dom.querySelectorAll("td")[i] as HTMLElement;
+  const mouse = (target: EventTarget, type: string, clientX: number, buttons = 0): MouseEvent => {
+    const e = new MouseEvent(type, { bubbles: true, cancelable: true, clientX, button: 0, buttons });
+    target.dispatchEvent(e);
+    return e;
+  };
+
+  it("shows the resize pointer on a cell's inside border, not inside the cell or on the table's outer edge", () => {
+    const view = mount();
+    try {
+      mouse(td(view, 1), "mousemove", 298);
+      expect(view.dom.style.cursor).toBe("col-resize");
+      mouse(td(view, 1), "mousemove", 200);
+      expect(view.dom.style.cursor).toBe("");
+      mouse(td(view, 0), "mousemove", 2);
+      expect(view.dom.style.cursor).toBe("");
+      mouse(td(view, 3), "mousemove", 597);
+      expect(view.dom.style.cursor).toBe("");
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("drags B's right border 40 px: a guide line follows, and on release B is 40 pt wider and C 40 pt narrower", () => {
+    const view = mount();
+    try {
+      const down = mouse(td(view, 1), "mousedown", 299);
+      expect(down.defaultPrevented).toBe(true);
+      mouse(document, "mousemove", 339, 1);
+      const guide = document.querySelector(".col-drag-guide") as HTMLElement;
+      expect(parseFloat(guide.style.left)).toBeCloseTo(340, 6);
+      expect(gridOf(view)).toEqual([100, 200, 300]);
+      mouse(document, "mouseup", 339);
+      expect(gridOf(view)).toEqual([100, 240, 260]);
+      expect(document.querySelector(".col-drag-guide")).toBeNull();
+      expect([...view.dom.querySelectorAll("col")].map((c) => c.style.width)).toEqual(tableColumns([100, 240, 260]).map((p) => `${p}%`));
+      // One drag is one undo step.
+      undo(view.state, view.dispatch);
+      expect(gridOf(view)).toEqual([100, 200, 300]);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("drags a cell's left border, and a drag past a limit stops at it", () => {
+    const view = mount();
+    try {
+      mouse(td(view, 2), "mousedown", 301);
+      mouse(document, "mouseup", 1000);
+      expect(gridOf(view)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("Escape cancels the drag, and a border on a read-only editor does not drag", () => {
+    const view = mount();
+    try {
+      mouse(td(view, 1), "mousedown", 299);
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      expect(document.querySelector(".col-drag-guide")).toBeNull();
+      mouse(document, "mouseup", 339);
+      expect(gridOf(view)).toEqual([100, 200, 300]);
+      view.setProps({ editable: () => false });
+      mouse(td(view, 1), "mousemove", 298);
+      expect(view.dom.style.cursor).toBe("");
+      // Unclaimed, the mousedown reaches ProseMirror's own handler, which asks the document what is under
+      // the pointer: jsdom has no elementFromPoint, so it answers "nothing" here.
+      Object.defineProperty(document, "elementFromPoint", { configurable: true, value: () => null });
+      expect(mouse(td(view, 1), "mousedown", 299).defaultPrevented).toBe(false);
+      mouse(document, "mouseup", 339);
+      expect(gridOf(view)).toEqual([100, 200, 300]);
+    } finally {
+      Reflect.deleteProperty(document, "elementFromPoint");
+      view.destroy();
+    }
+  });
 });
 
 describe("cell text margins", () => {
@@ -478,6 +595,39 @@ describe("cell text margins", () => {
   it("do nothing outside a table", () => {
     const state = selectText(createEditorState(docOf(para([text("p")]))), 1, 1);
     expect(changeCellMargins("sides", 1)(state, () => { throw new Error("dispatched"); })).toBe(false);
+  });
+
+  it("redraw every cell's padding in the editor, keeping each cell's fill and borders", () => {
+    const OUTER = { style: "single", widthPt: 2, color: "FF0000" };
+    const INSIDE = { style: "single", widthPt: 1, color: "0000FF" };
+    const borders = { top: OUTER, right: OUTER, bottom: OUTER, left: OUTER, insideH: INSIDE, insideV: INSIDE };
+    const d = docOf({ type: "table", attrs: { grid: [100, 200], borders, cellMarginPt: MARGINS }, content: [
+      row(rid(1), [cell("A", { fill: "00FF00" }), cell("B")]), row(rid(2), [cell("C"), cell("D")]),
+    ] });
+    const host = document.createElement("div");
+    const view = new EditorView(host, { state: at(createEditorState(d), "A"), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
+    try {
+      const styles = (): string[] => [...host.querySelectorAll("td")].map((td) => td.getAttribute("style") ?? "");
+      const pads = (): string[] => [...host.querySelectorAll("td")].map((td) => td.style.padding);
+      const before = styles();
+      const padsBefore = pads();
+      expect(changeCellMargins("sides", 1)(view.state, view.dispatch)).toBe(true);
+      expect(changeCellMargins("topBottom", 1)(view.state, view.dispatch)).toBe(true);
+      // What the renderer draws for the new margins, read back through the DOM as the cells are.
+      const probe = document.createElement("td");
+      probe.style.padding = cellPadding({ top: 1, right: 6.5, bottom: 1, left: 6.5 }, 11);
+      expect(pads()).toEqual(Array(4).fill(probe.style.padding));
+      expect(pads()).not.toEqual(padsBefore);
+      // Only the padding changed: each cell keeps its fill and the borders of its place.
+      const withoutPadding = (s: string): string => s.replace(/padding:[^;]*;\s*/, "");
+      expect(styles().map(withoutPadding)).toEqual(before.map(withoutPadding));
+      // Undo draws the old margins again.
+      undo(view.state, view.dispatch);
+      undo(view.state, view.dispatch);
+      expect(styles()).toEqual(before);
+    } finally {
+      view.destroy();
+    }
   });
 });
 

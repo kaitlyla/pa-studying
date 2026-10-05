@@ -13,6 +13,7 @@
 .etb .tb { min-width: 32px; height: 32px; padding: 0 7px; border: 1px solid transparent; border-radius: 5px; background: none; font-size: 13px; color: #1f2430; }
 .etb .tb:hover { border-color: #d3d8e0; background: #eef0f4; }
 .etb .tb:focus-visible { outline: 2px solid #2b55a3; outline-offset: 1px; }
+.etb .tb:disabled { color: #a3a9b5; border-color: transparent; background: none; cursor: default; }
 .etb .sep { width: 1px; height: 22px; margin: 0 4px; background: #dde1e8; }
 .etb .tb-group { display: inline-flex; align-items: center; gap: 2px; padding: 0 4px; border-left: 1px solid #eceef2; }
 .etb .tb-gl { font-size: 12px; color: #5b6472; margin-right: 2px; white-space: nowrap; }
@@ -35,6 +36,7 @@
 .editing .ProseMirror:focus { outline: 2px solid #2b55a3; }
 .editing .ProseMirror-selectednode { outline: 3px solid #2b55a3; }
 .editing .stub { display: block; margin: 6px 0; }
+.col-drag-guide { position: fixed; z-index: 1000; width: 0; border-left: 1px dashed #2b55a3; pointer-events: none; }
 .edit-loading { color: #5b6472; }
 
 /* banners */

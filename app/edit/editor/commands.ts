@@ -468,11 +468,55 @@ export const MIN_COLUMN_PT = 18;
 const roundTwip = (x: number): number => Math.round(x * 20) / 20;
 
 /**
- * Column narrower (−1) / wider (+1) for the cursor's cell: its right border moves one step (its left
- * border when the cell ends the table), trading width with the column beside it, so the table keeps its
- * width. The widths start from the ones the screen draws (tableColumns, which widens a narrow first
+ * The grid after moving the border between column `border` and `border + 1` by `deltaPt` (positive =
+ * right), the two columns trading width so the table keeps its width; null when the border cannot move
+ * that way. The widths start from the ones the screen draws (tableColumns, which widens a narrow first
  * column), so the PDF matches the screen afterwards. No column goes under MIN_COLUMN_PT, nor the first
- * under the screen's first-column minimum; at a limit nothing changes.
+ * under the screen's first-column minimum: a move past a limit stops at it.
+ */
+export function moveColumnBorder(grid: readonly number[], border: number, deltaPt: number): number[] | null {
+  if (border < 0 || border + 1 >= grid.length) return null;
+  const sum = grid.reduce((x, y) => x + y, 0);
+  const widths = tableColumns(grid).map((pct) => roundTwip((pct * sum) / 100));
+  const floor = (i: number): number => (i === 0 ? Math.max(MIN_COLUMN_PT, (MIN_FIRST_COLUMN_PCT * sum) / 100) : MIN_COLUMN_PT);
+  const [grow, shrink] = deltaPt > 0 ? [border, border + 1] : [border + 1, border];
+  const step = roundTwip(Math.min(Math.abs(deltaPt), (widths[shrink] ?? 0) - floor(shrink)));
+  if (step <= 0) return null;
+  widths[grow] = roundTwip((widths[grow] ?? 0) + step);
+  widths[shrink] = roundTwip((widths[shrink] ?? 0) - step);
+  return widths;
+}
+
+/** A column border of a table: the one between grid columns `border` and `border + 1`. */
+export interface ColumnBorder {
+  table: PMNode;
+  /** Position of the table node. */
+  pos: number;
+  border: number;
+}
+
+/** The border on the `side` of the cell holding `$pos`; null at the table's outer edges or outside a table. */
+export function cellBorder($pos: ResolvedPos, side: "left" | "right"): ColumnBorder | null {
+  const at = tableAt($pos);
+  if (!at) return null;
+  const rect = at.map.findCell(at.cellRel);
+  const border = side === "right" ? rect.right - 1 : rect.left - 1;
+  const columns = (at.table.attrs.grid as number[]).length;
+  if (border < 0 || border + 1 >= Math.min(columns, at.map.width)) return null;
+  return { table: at.table, pos: at.pos, border };
+}
+
+/** The table at `pos` (a table node's position) with its grid replaced. */
+export function setTableGrid(state: EditorState, pos: number, grid: number[]): Transaction {
+  const table = state.doc.nodeAt(pos);
+  return state.tr.setNodeMarkup(pos, undefined, { ...table?.attrs, grid });
+}
+
+/**
+ * Column narrower (−1) / wider (+1) for the cursor's cell: its right border moves one step (its left
+ * border when the cell ends the table) — moveColumnBorder, the same move a drag of that border makes.
+ * False (the toolbar greys the button) when it cannot act: outside a table, in a one-column table, in a
+ * cell spanning every column, or with the column at its limit.
  */
 export function changeColumnWidth(dir: 1 | -1): Command {
   return (state, dispatch) => {
@@ -481,18 +525,11 @@ export function changeColumnWidth(dir: 1 | -1): Command {
     const grid = at.table.attrs.grid as number[];
     const rect = at.map.findCell(at.cellRel);
     const ends = rect.right >= at.map.width;
-    const col = ends ? rect.left : rect.right - 1;
-    const beside = ends ? rect.left - 1 : rect.right;
-    if (beside < 0 || Math.max(col, beside) >= grid.length) return false;
-    const sum = grid.reduce((x, y) => x + y, 0);
-    const widths = tableColumns(grid).map((pct) => roundTwip((pct * sum) / 100));
-    const floor = (i: number): number => (i === 0 ? Math.max(MIN_COLUMN_PT, (MIN_FIRST_COLUMN_PCT * sum) / 100) : MIN_COLUMN_PT);
-    const [grow, shrink] = dir > 0 ? [col, beside] : [beside, col];
-    const step = roundTwip(Math.min(COLUMN_STEP_PT, (widths[shrink] ?? 0) - floor(shrink)));
-    if (step <= 0) return true;
-    widths[grow] = roundTwip((widths[grow] ?? 0) + step);
-    widths[shrink] = roundTwip((widths[shrink] ?? 0) - step);
-    if (dispatch) dispatch(state.tr.setNodeMarkup(at.pos, undefined, { ...at.table.attrs, grid: widths }));
+    const border = ends ? rect.left - 1 : rect.right - 1;
+    if (border < 0 || border + 1 >= grid.length) return false;
+    const next = moveColumnBorder(grid, border, (ends ? -dir : dir) * COLUMN_STEP_PT);
+    if (!next) return false;
+    if (dispatch) dispatch(setTableGrid(state, at.pos, next));
     return true;
   };
 }

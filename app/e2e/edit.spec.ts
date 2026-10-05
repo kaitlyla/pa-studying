@@ -9,7 +9,7 @@ import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
 import { buildPageKey } from "../edit/pageKey.ts";
-import { COLUMN_STEP_PT } from "../edit/editor/commands.ts";
+import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/editor/commands.ts";
 import { tableColumns } from "../render/styles.ts";
 import { commitMessage, inboxItemDir, partName, serializeFile } from "../../lib/content/index.ts";
 import {
@@ -734,10 +734,15 @@ test.describe("toolbar limits", () => {
 
     // The topic row's second cell, as typeMarker uses (the first is the topic's name).
     const slot = ref(page, "edit-area").locator(".edit-slot").first();
-    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    const cell = slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1);
+    const cellWidth = (): Promise<number> => cell.evaluate((td) => td.getBoundingClientRect().width);
+    const widthBefore = await cellWidth();
+    await cell.locator("p").first().click({ position: { x: 1, y: 2 } });
     await expect(ref(page, "tb-col-wider")).toBeVisible();
     await clickN(ref(page, "tb-col-wider"), 3);
     await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    // On screen before saving, the column is wider.
+    expect(await cellWidth()).toBeGreaterThan(widthBefore + 10);
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
 
@@ -755,6 +760,121 @@ test.describe("toolbar limits", () => {
     const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
     expect(widths).toHaveLength(saved.length);
     tableColumns(saved).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+  });
+
+  test("Column Wider greys out once the column beside it is at its narrowest, while Narrower still works", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const slot = ref(page, "edit-area").locator(".edit-slot").first();
+    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    const wider = ref(page, "tb-col-wider");
+    await expect(wider).toBeEnabled();
+    for (let i = 0; i < 300 && (await wider.isEnabled()); i++) await wider.click();
+    await expect(wider).toBeDisabled();
+    await expect(ref(page, "tb-col-narrower")).toBeEnabled();
+    await ref(page, "tb-col-narrower").click();
+    await expect(wider).toBeEnabled();
+  });
+
+  test("dragging a column border resizes the two columns beside it, and the save keeps the widths and the page shows them", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const tableWith = (json: unknown): Rec => {
+      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
+      return nodeAt(json, tablePath);
+    };
+    const before = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))).grid as number[];
+    expect(before.length).toBeGreaterThan(1);
+    const sum = before.reduce((a, b) => a + b, 0);
+
+    // The border between the topic's name cell and the next one.
+    const editTable = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt").first();
+    const nameCell = editTable.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").first();
+    await nameCell.scrollIntoViewIfNeeded();
+    const box = need(await nameCell.boundingBox(), "the name cell's box");
+    const tableWidth = need(await editTable.boundingBox(), "the table's box").width;
+    const y = box.y + box.height / 2;
+    await page.mouse.move(box.x + box.width - 1, y);
+    await expect(nameCell).toHaveCSS("cursor", "col-resize");
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width + 29, y, { steps: 3 });
+    await page.mouse.move(box.x + box.width + 59, y, { steps: 3 });
+    await expect(page.locator(".col-drag-guide")).toBeVisible();
+    await page.mouse.up();
+    await expect(page.locator(".col-drag-guide")).toHaveCount(0);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    // On screen before saving, the name column is about 60 px wider.
+    expect((need(await nameCell.boundingBox(), "the name cell's box").width) - box.width).toBeGreaterThan(50);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const saved = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))).grid as number[];
+    // The border moved 60 px of the table's drawn width: the name column grew that much, the next shrank as much.
+    const expected = need(moveColumnBorder(before, 0, (60 * sum) / tableWidth), "a border move");
+    expect(saved).toHaveLength(before.length);
+    expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
+    saved.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
+
+    // The page, now read, draws the saved widths.
+    const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
+    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
+    expect(widths).toHaveLength(saved.length);
+    tableColumns(saved).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+  });
+
+  test("Cell margins Sides + and Top/bottom + pad every cell on screen while editing, and the save keeps them and the page shows them", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    // The topic row's second cell (the first is the topic's name), in a table as the page draws it.
+    const topicCell = (table: Locator): Locator => table.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1);
+    const padding = (td: Locator): Promise<{ top: number; left: number }> =>
+      td.evaluate((e) => ({ top: parseFloat(getComputedStyle(e).paddingTop), left: parseFloat(getComputedStyle(e).paddingLeft) }));
+    const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
+    const readBefore = await padding(topicCell(shownTable));
+    await signIn(page);
+    await startEditing(page);
+    const tableWith = (json: unknown): Rec => {
+      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
+      return nodeAt(json, tablePath);
+    };
+    type Margins = { top: number; right: number; bottom: number; left: number };
+    const before = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))).cellMarginPt as Margins;
+
+    const editTable = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt").first();
+    const cell = topicCell(editTable);
+    const nameCell = editTable.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").first();
+    const editBefore = await padding(cell);
+    const nameBefore = await padding(nameCell);
+    await cell.locator("p").first().click({ position: { x: 1, y: 2 } });
+    await expect(ref(page, "tb-cell-sides-more")).toBeVisible();
+    await clickN(ref(page, "tb-cell-sides-more"), 3);
+    await clickN(ref(page, "tb-cell-tb-more"), 3);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    // On screen before saving: 3 pt more on each side of every cell of the table, not only the cursor's.
+    const editAfter = await padding(cell);
+    expect(editAfter.left - editBefore.left).toBeGreaterThan(2);
+    expect(editAfter.top - editBefore.top).toBeGreaterThan(2);
+    const nameAfter = await padding(nameCell);
+    expect(nameAfter.left).toBeGreaterThan(nameBefore.left);
+    expect(nameAfter.top).toBeGreaterThan(nameBefore.top);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const saved = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))).cellMarginPt as Margins;
+    // Three clicks of one step each, kept to half points as the command keeps them.
+    const plus3 = (v: number): number => [1, 2, 3].reduce((x) => roundHalf(x + CELL_MARGIN_STEP_PT), v);
+    expect(saved).toEqual({ top: plus3(before.top), right: plus3(before.right), bottom: plus3(before.bottom), left: plus3(before.left) });
+    // The page, now read, draws the wider margins too.
+    const readAfter = await padding(topicCell(shownTable));
+    expect(readAfter.left).toBeGreaterThan(readBefore.left);
+    expect(readAfter.top).toBeGreaterThan(readBefore.top);
   });
 
   test("Delete row asks before each delete and is refused, with no dialog, on a one-row table", async ({ page, context, baseURL }) => {
