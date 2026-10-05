@@ -1,9 +1,173 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "peripheral-nerve-disease",
+   "title": "Peripheral nerve disease"
+  },
+  {
+   "id": "stroke",
+   "title": "Stroke"
+  },
+  {
+   "id": "trauma",
+   "title": "Trauma"
+  },
+  {
+   "id": "headache",
+   "title": "Headache"
+  },
+  {
+   "id": "increased-intracranial-pressure",
+   "title": "Increased intracranial pressure"
+  },
+  {
+   "id": "degenerative-neuromuscular-disease",
+   "title": "Degenerative/Neuromuscular disease"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "vascular-disorders",
+   "title": "Vascular disorders"
+  },
+  {
+   "id": "congenital-genetic-disorders",
+   "title": "Congenital/Genetic disorders"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders"
+  },
+  {
+   "id": "hypotension",
+   "title": "Hypotension"
+  },
+  {
+   "id": "other",
+   "title": "Neurology — other"
+  }
+ ],
+ "members": {
+  "r_EFESYWDGV4": "peripheral-nerve-disease",
+  "r_EKF9MZE80M": "stroke",
+  "r_AT31CZ7CG8": "stroke",
+  "r_YDE5RX628Q": "stroke",
+  "r_FKDSZF806W": "trauma",
+  "r_E3VE6RF76Z": "trauma",
+  "r_303VGC3N8B": "stroke",
+  "r_CCFVB2JRTK": "stroke",
+  "r_8A60EXSBDT": "stroke",
+  "r_EY43EX9S1Y": "headache",
+  "r_B232JASJEJ": "headache",
+  "r_KYWV34GJMT": "peripheral-nerve-disease",
+  "r_CQ97ZETQ91": "headache",
+  "r_VH97E9VE9N": "headache",
+  "r_TQEFB6GHX0": "increased-intracranial-pressure",
+  "r_10N9J5YVKF": "other",
+  "r_K0MS0NBGST": "other",
+  "r_CV1W6SH4Y7": "trauma",
+  "r_3BC3073XCS": "degenerative-neuromuscular-disease",
+  "r_4NSP056Z6A": "infectious-disorders",
+  "r_YZ0M1NY8HD": "vascular-disorders",
+  "r_H6X86PRWZW": "degenerative-neuromuscular-disease",
+  "r_TRSRQJD7TP": "degenerative-neuromuscular-disease",
+  "r_M88WKDWZRP": "degenerative-neuromuscular-disease",
+  "r_7HM9QJ67C9": "degenerative-neuromuscular-disease",
+  "r_DC1FCHMBP4": "degenerative-neuromuscular-disease",
+  "r_71KE48P6GX": "peripheral-nerve-disease",
+  "r_PQ00JV00XD": "congenital-genetic-disorders",
+  "r_DPJNN8H69G": "infectious-disorders",
+  "r_4ECGCR0Z2N": "infectious-disorders",
+  "r_8Y3WE1NHVQ": "infectious-disorders",
+  "r_C862VNM11P": "infectious-disorders",
+  "r_0ZESTR0YY4": "infectious-disorders",
+  "r_K5B7VQH50Q": "degenerative-neuromuscular-disease",
+  "r_J4K7HM6QMK": "degenerative-neuromuscular-disease",
+  "r_GBP64C6B58": "degenerative-neuromuscular-disease",
+  "r_VJHCYF6KWC": "seizure-disorders",
+  "r_04EE8RD7NR": "hypotension",
+  "b_NQJFB4AX09": "peripheral-nerve-disease",
+  "b_FVE2S11MTK": "peripheral-nerve-disease",
+  "b_FK1PNJRQV7": "stroke",
+  "b_7VT6TD9RRP": "stroke",
+  "b_GFP2B4E320": "stroke",
+  "b_P947TEFN03": "increased-intracranial-pressure",
+  "b_3VHZB0QKMA": "increased-intracranial-pressure",
+  "b_TFVDCNKY83": "other",
+  "b_HNZATS0FQY": "other",
+  "b_TAKY0S0FJP": "degenerative-neuromuscular-disease",
+  "b_MQF1G2V7CM": "vascular-disorders",
+  "b_3S4BC80VAD": "degenerative-neuromuscular-disease",
+  "b_MJ8Z4EF3B9": "degenerative-neuromuscular-disease",
+  "b_9QJSKVFXJ9": "neoplasms",
+  "b_PVK1ZZYXAZ": "infectious-disorders",
+  "b_ER33XHJGTM": "degenerative-neuromuscular-disease",
+  "b_A0H2RSQDZ1": "degenerative-neuromuscular-disease",
+  "b_2RJ7YY8D5J": "degenerative-neuromuscular-disease",
+  "b_SPCS0HVC8Q": "peripheral-nerve-disease",
+  "b_A6449E2P8S": "seizure-disorders",
+  "b_4JG7MW78PR": "seizure-disorders",
+  "b_V6GFQ2E7X9": "hypotension"
+ },
+ "listed": {
+  "b_9QJSKVFXJ9": "Intracranial Tumors",
+  "b_SPCS0HVC8Q": "Peripheral Neuropathies"
+ },
+ "drugTables": [
+  {
+   "block": "b_R4VRXHGRTZ",
+   "pharmSection": "migraine",
+   "conditionRows": []
+  },
+  {
+   "block": "b_SCJHKB9T5H",
+   "pharmSection": "parkinson-disease",
+   "conditionRows": []
+  },
+  {
+   "block": "b_QCA7BKP89H",
+   "pharmSection": "seizure-disorders",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "migraine",
+   "title": "Migraine",
+   "tables": [
+    "b_R4VRXHGRTZ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "parkinson-disease",
+   "title": "Parkinson disease",
+   "tables": [
+    "b_SCJHKB9T5H"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders",
+   "tables": [
+    "b_QCA7BKP89H"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

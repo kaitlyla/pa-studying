@@ -1,11 +1,162 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "hepatic-disorders",
+   "title": "Hepatic disorders"
+  },
+  {
+   "id": "pancreatitis",
+   "title": "Pancreatitis"
+  },
+  {
+   "id": "intestinal-colorectal-disorders",
+   "title": "Intestinal/Colorectal disorders"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "esophageal-disorders",
+   "title": "Esophageal disorders"
+  },
+  {
+   "id": "biliary-tract-disorders",
+   "title": "Biliary tract disorders"
+  },
+  {
+   "id": "gastric-disorders",
+   "title": "Gastric disorders"
+  }
+ ],
+ "members": {
+  "r_WG66AMESG0": "hepatic-disorders",
+  "r_CA3KPB91AJ": "hepatic-disorders",
+  "r_0P912WTJQE": "hepatic-disorders",
+  "r_HMBD2CDNHW": "hepatic-disorders",
+  "r_17N066Z4YN": "hepatic-disorders",
+  "r_0EMKYPZGS1": "hepatic-disorders",
+  "r_H9Q4KYHNH8": "hepatic-disorders",
+  "r_E0ADXZ53YJ": "hepatic-disorders",
+  "r_65KZRNQET5": "hepatic-disorders",
+  "r_6HH3PZDYDZ": "hepatic-disorders",
+  "r_GB5Q90EWQQ": "pancreatitis",
+  "r_VK40AASQ40": "pancreatitis",
+  "r_M5Q2JPHMKD": "intestinal-colorectal-disorders",
+  "r_MXQFP1M693": "intestinal-colorectal-disorders",
+  "r_GDEDCFBJYP": "neoplasms",
+  "r_6GMB3AG4G3": "neoplasms",
+  "r_KJGZYRQCV6": "esophageal-disorders",
+  "r_WAV01JBYPS": "neoplasms",
+  "r_HK2A0CCHXP": "intestinal-colorectal-disorders",
+  "r_2TTA0DG5KX": "biliary-tract-disorders",
+  "r_42WHHKS35D": "biliary-tract-disorders",
+  "r_CWCQWN3KBW": "biliary-tract-disorders",
+  "r_F0BQ0N1KS6": "biliary-tract-disorders",
+  "r_ZS95WKAHGM": "biliary-tract-disorders",
+  "r_EGY4NV86Z3": "hepatic-disorders",
+  "r_MMVXYYYV44": "intestinal-colorectal-disorders",
+  "r_H9EW61RA6F": "intestinal-colorectal-disorders",
+  "r_0Y279MSGAR": "intestinal-colorectal-disorders",
+  "r_ESYYKPDSDR": "intestinal-colorectal-disorders",
+  "r_R9X0JBX37N": "esophageal-disorders",
+  "r_E2HH2J8AVV": "esophageal-disorders",
+  "r_9PM4MFG8WQ": "esophageal-disorders",
+  "r_7END67W8XX": "esophageal-disorders",
+  "r_9A5EX03NKY": "esophageal-disorders",
+  "r_FYYYHP7TND": "gastric-disorders",
+  "r_5FDDCG6ASR": "intestinal-colorectal-disorders",
+  "r_62JQ4PRDCD": "esophageal-disorders",
+  "r_TK240MABPQ": "intestinal-colorectal-disorders",
+  "r_R4T7P6CAPM": "neoplasms",
+  "r_GZ7Q5HS5BR": "intestinal-colorectal-disorders",
+  "r_ZS023WXGT7": "intestinal-colorectal-disorders",
+  "r_EVX3DQ7AWZ": "esophageal-disorders",
+  "r_CBDYREAQPB": "gastric-disorders",
+  "b_8M6SHAXBZF": "hepatic-disorders",
+  "b_2N0XFXR8BX": "hepatic-disorders",
+  "b_D28DTENWM8": "hepatic-disorders",
+  "b_K0S1EHPAZC": "pancreatitis",
+  "b_GKP3WMY0A8": "intestinal-colorectal-disorders",
+  "b_8CA524NVTP": "neoplasms",
+  "b_DK684J9XG6": "esophageal-disorders",
+  "b_M436E1RSTG": "neoplasms",
+  "b_FZ835AR9Z4": "intestinal-colorectal-disorders",
+  "b_2BN83Y2BCH": "biliary-tract-disorders",
+  "b_VKT68F4CJ4": "intestinal-colorectal-disorders",
+  "b_VBGABG6G1A": "intestinal-colorectal-disorders",
+  "b_7AM17KAJ90": "intestinal-colorectal-disorders",
+  "b_7QD70PG21P": "intestinal-colorectal-disorders",
+  "b_PNR7ZBJQE9": "esophageal-disorders",
+  "b_X6JX9KCZKS": "gastric-disorders",
+  "b_3M7KWMQA00": "intestinal-colorectal-disorders",
+  "b_MYSKBEDQGZ": "intestinal-colorectal-disorders",
+  "b_T99AZD593W": "esophageal-disorders",
+  "b_ME0XAKY881": "intestinal-colorectal-disorders",
+  "b_KCVZ7T73M4": "neoplasms",
+  "b_MG2K19B0P4": "intestinal-colorectal-disorders",
+  "b_76TNW7T0SS": "intestinal-colorectal-disorders",
+  "b_FHPY1RSF9C": "esophageal-disorders",
+  "b_6MSX60HF2P": "gastric-disorders",
+  "b_G3NK6J6F8B": "gastric-disorders"
+ },
+ "listed": {
+  "b_VKT68F4CJ4": "Inflammatory Bowel Disease (IBD)"
+ },
+ "drugTables": [
+  {
+   "block": "b_JANEGY82T5",
+   "pharmSection": "inflammatory-bowel-disease",
+   "conditionRows": []
+  },
+  {
+   "block": "b_ERK9S5KPKQ",
+   "pharmSection": "gastroenteritis",
+   "conditionRows": []
+  },
+  {
+   "block": "b_EA96NFEAHB",
+   "pharmSection": "peptic-ulcer-disease-and-gerd",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "inflammatory-bowel-disease",
+   "title": "Inflammatory bowel disease",
+   "tables": [
+    "b_JANEGY82T5"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "gastroenteritis",
+   "title": "Gastroenteritis",
+   "tables": [
+    "b_ERK9S5KPKQ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "peptic-ulcer-disease-and-gerd",
+   "title": "Peptic ulcer disease and GERD",
+   "tables": [
+    "b_EA96NFEAHB"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83"
- ]
+ ],
+ "titled": {
+  "r_5FDDCG6ASR": 0
+ }
 }

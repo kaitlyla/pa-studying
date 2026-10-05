@@ -1,9 +1,130 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
- "pharmFiles": []
+ "sections": [
+  {
+   "id": "acid-base-disturbances",
+   "title": "Acid-base disturbances"
+  },
+  {
+   "id": "renal-disease",
+   "title": "Renal disease"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "renal-artery-stenosis",
+   "title": "Renal artery stenosis"
+  },
+  {
+   "id": "obstructive-disorders",
+   "title": "Obstructive disorders"
+  },
+  {
+   "id": "other",
+   "title": "Urology/Renal — other"
+  }
+ ],
+ "members": {
+  "r_08ZQ3EACNQ": "acid-base-disturbances",
+  "r_55ZHP09EPP": "acid-base-disturbances",
+  "r_5QAQ4CT7MA": "acid-base-disturbances",
+  "r_PVMB1E1DSB": "acid-base-disturbances",
+  "r_D6B9RQYJMK": "renal-disease",
+  "r_T399SWS0GX": "renal-disease",
+  "r_K8KM58M23Y": "renal-disease",
+  "r_HGXX79X315": "renal-disease",
+  "r_HHMG9EGQAJ": "renal-disease",
+  "r_J0GAD1CHEB": "renal-disease",
+  "r_XTMJH45ER7": "renal-disease",
+  "r_CYZXE8DAXQ": "neoplasms",
+  "r_8ZCXY08GJE": "renal-disease",
+  "r_JYPMRPA2RM": "neoplasms",
+  "r_MA4P5M3Q4Z": "infectious-disorders",
+  "r_RK1X5QVGHN": "other",
+  "r_RT2FDZ2C6M": "other",
+  "r_S1P0Y6JWV4": "other",
+  "r_N03D6GHZCS": "other",
+  "r_9B23N7KAPS": "renal-disease",
+  "r_TX5EH4MQXJ": "neoplasms",
+  "r_ZB9K2R8D81": "renal-artery-stenosis",
+  "r_ARCPH6BAMP": "obstructive-disorders",
+  "r_E2KKXJ70Y2": "other",
+  "r_TVMHT2EEEZ": "other",
+  "r_KFF5FH5YJP": "renal-disease",
+  "r_FW6SKR9PJT": "neoplasms",
+  "r_K0SZQX639G": "infectious-disorders",
+  "r_VHPBBYRQHP": "infectious-disorders",
+  "r_NNES4HFA26": "infectious-disorders",
+  "b_47BPP7RW7W": "acid-base-disturbances",
+  "b_XCSGGRG2ND": "acid-base-disturbances",
+  "b_854NGJ0WVZ": "acid-base-disturbances",
+  "b_4FMJSWNFCT": "renal-disease",
+  "b_QR3KRVSX8R": "renal-disease",
+  "b_HSYRC6ERWG": "renal-disease",
+  "b_156KA6N4A5": "renal-disease",
+  "b_85GTDP8WH5": "neoplasms",
+  "b_45PQMG6CQ1": "neoplasms",
+  "b_66HA1SCNJP": "renal-disease",
+  "b_WBVNW64EGS": "neoplasms",
+  "b_J2BXM1YQ3E": "other",
+  "b_E43HSWFZN0": "other",
+  "b_KB78X350M6": "renal-disease",
+  "b_FZ6NB12391": "renal-artery-stenosis",
+  "b_26VKS0SKC3": "obstructive-disorders",
+  "b_J040YA2K8V": "obstructive-disorders",
+  "b_B1WV23TC7Z": "other",
+  "b_9NRWSP50H8": "renal-disease",
+  "b_2B6JARQJ2X": "infectious-disorders",
+  "b_R3PN7R8ABK": "infectious-disorders"
+ },
+ "listed": {
+  "b_XCSGGRG2ND": "Acid/Base Disorders"
+ },
+ "drugTables": [
+  {
+   "block": "b_ARQ11S7YCK",
+   "pharmSection": "benign-prostatic-hyperplasia",
+   "conditionRows": []
+  },
+  {
+   "block": "b_4BM69FJNJJ",
+   "pharmSection": "iv-fluids",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "benign-prostatic-hyperplasia",
+   "title": "Benign prostatic hyperplasia",
+   "tables": [
+    "b_ARQ11S7YCK"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "iv-fluids",
+   "title": "IV fluids",
+   "tables": [
+    "b_4BM69FJNJJ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
+ "pharmFiles": [],
+ "titled": {
+  "r_08ZQ3EACNQ": 0,
+  "r_55ZHP09EPP": 0,
+  "r_5QAQ4CT7MA": 0,
+  "r_PVMB1E1DSB": 0
+ }
 }

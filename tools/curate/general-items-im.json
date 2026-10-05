@@ -1,0 +1,168 @@
+{
+  "v": 1,
+  "guide": "im",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto, workup/choose; keys = signed EORS im general (SD_GEN_ALL: labs, ekg, imaging, anatomy, procedures, guidelines, screenings, workup); PAEA Internal Medicine 2026 topic list (scratch/im/im-2026.pdf); Leader S10 ruling: selection recorded here, general.json written in S12",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Lab interpretation is needed for most IM-list conditions (anemias, coagulation disorders, acid-base and electrolyte disturbances, AKI/CKD, diabetes, thyroid/adrenal disorders, hepatitis, HIV…), far over the ≥3 bar; her guide has lab-heavy content (Hepatitis B serology table, Acid/Base Disorders, SODIUM/POTASSIUM/CALCIUM tables).",
+      "items": [
+        { "item": "CBC with indices (MCV, RDW), reticulocyte count and peripheral smear", "covers": "Anemias; Thalassemias; Sickle cell disease; G6PD deficiency; Leukemias; Polycythemia (her guide: HEME tables, CBC reference image)" },
+        { "item": "Iron studies, B12 and folate (methylmalonic acid, homocysteine)", "covers": "Anemias (microcytic, macrocytic, anemia of chronic disease)" },
+        { "item": "Hemoglobin electrophoresis", "covers": "Thalassemias; Sickle cell disease (her guide: electrophoresis and hemoglobin-type images)" },
+        { "item": "Coagulation studies: PT/INR, aPTT, fibrinogen, D-dimer, platelet count; HIT antibodies", "covers": "Coagulation disorders (DIC, ITP, TTP, von Willebrand disease, hemophilia); Deep vein thrombosis; Pulmonary embolism" },
+        { "item": "Basic/comprehensive metabolic panel: sodium, potassium, calcium, phosphate, magnesium, BUN/creatinine, glucose", "covers": "Electrolyte disturbances; Disorders of calcium and phosphorous; Acute kidney injury; Chronic kidney disease; Diabetes mellitus" },
+        { "item": "Arterial blood gas and acid-base interpretation (anion gap, expected compensation)", "covers": "Acid-base disturbances; Acute respiratory failure; Diabetic ketoacidosis; Chronic obstructive pulmonary disease (her guide: Acid/Base Disorders note and table)" },
+        { "item": "Urinalysis with microscopy, urine culture; urine protein/albumin-to-creatinine ratio; FENa", "covers": "Cystitis; Pyelonephritis; Nephritic and nephrotic syndrome; Acute kidney injury; Uro/Nephrolithiasis; Diabetic nephropathy" },
+        { "item": "Hemoglobin A1c, fasting glucose, OGTT; serum ketones", "covers": "Diabetes mellitus; Diabetic ketoacidosis; Hyperosmolar hyperglycemic syndrome" },
+        { "item": "Lipid panel", "covers": "Lipid disorders; Coronary artery disease; Diabetes mellitus" },
+        { "item": "TSH, free T4, T3; thyroid antibodies; PTH", "covers": "Hyper/Hypothyroidism; Thyroiditis; Thyroid storm; Myxedema coma; Hyper/Hypoparathyroidism" },
+        { "item": "Adrenal and pituitary testing: cortisol (dexamethasone suppression, ACTH stimulation), aldosterone/renin ratio, plasma metanephrines, IGF-1, prolactin, water deprivation test", "covers": "Adrenal insufficiency; Hypercortisolism; Hyperaldosteronism; Pheochromocytoma; Acromegaly; Diabetes insipidus; SIADH" },
+        { "item": "Liver panel (AST/ALT, alkaline phosphatase, bilirubin, albumin), lipase", "covers": "Hepatitis; Cirrhosis; Cholecystitis; Cholangitis; Pancreatitis" },
+        { "item": "Hepatitis serologies (HBsAg, anti-HBs, anti-HBc, HBeAg; HAV, HCV)", "covers": "Hepatitis (her guide: Hepatitis B Serology table)" },
+        { "item": "Cardiac troponin and BNP/NT-proBNP", "covers": "Acute coronary syndrome; Heart failure; Myocarditis" },
+        { "item": "Inflammatory markers and autoantibodies: ESR/CRP, ANA, anti-dsDNA, RF, anti-CCP, ANCA, complement, CK", "covers": "Systemic lupus erythematosus; Rheumatoid arthritis; Vasculitides; Polymyalgia rheumatica; Polymyositis; Sjögren syndrome" },
+        { "item": "Synovial fluid analysis (cell count, crystals, Gram stain/culture)", "covers": "Gout/Pseudogout; Septic arthritis; Rheumatoid arthritis" },
+        { "item": "Blood cultures, lactate, procalcitonin", "covers": "Sepsis; Septic shock; Bacteremia; Infective endocarditis; Neutropenic fever" },
+        { "item": "CSF analysis (cell count, glucose, protein, Gram stain/culture, PCR)", "covers": "Meningitis; Encephalitis; Guillain-Barré syndrome; Multiple sclerosis" },
+        { "item": "HIV testing (4th-generation Ag/Ab), CD4 count and viral load", "covers": "Human immunodeficiency virus/AIDS; Opportunistic infections" },
+        { "item": "STI testing: gonorrhea/chlamydia NAAT, syphilis (RPR/VDRL, treponemal), wet mount", "covers": "Sexually transmitted infections" },
+        { "item": "Monospot and EBV serology; stool studies (culture, ova and parasites, C. difficile)", "covers": "Viral infections (EBV); Acute infectious gastroenteritis; Parasitic infections" },
+        { "item": "Tumor and myeloma markers: serum/urine protein electrophoresis, free light chains, PSA, CEA, AFP", "covers": "Multiple myeloma; Neoplasms (prostate, colorectal, hepatocellular)" }
+      ]
+    },
+    "ekg": {
+      "prominent": true,
+      "howto": null,
+      "why": "Cardiovascular is 20% of the IM list and her IM guide has a full arrhythmia block (sinus, AV blocks, AFIB/AFL, AVNRT/AVRT/WPW, PAC/PVC, VT, torsades, VFIB, BBB); EKG findings are needed for ≥3 IM-list conditions.",
+      "items": [
+        { "item": "Rate, rhythm, axis and intervals (systematic interpretation)", "covers": "Arrhythmias/Conduction disorders" },
+        { "item": "Sinus tachycardia/bradycardia and sinus node dysfunction", "covers": "Arrhythmias/Conduction disorders (her guide: Sinus Tachycardia, Sinus Bradycardia, SND rows)" },
+        { "item": "AV blocks (first, second Mobitz I/II, third degree)", "covers": "Heart blocks (her guide: AV Blocks row)" },
+        { "item": "Bundle branch and fascicular blocks", "covers": "Heart blocks (her guide: BBB & Fascicular Block row)" },
+        { "item": "Atrial fibrillation and flutter; MAT and wandering atrial pacemaker", "covers": "Atrial arrhythmias (her guide: AFIB, AFL, WAP & MAT rows)" },
+        { "item": "SVT: AVNRT, AVRT and the WPW pattern (delta wave)", "covers": "Junctional/atrial arrhythmias (her guide: AVNRT, AVRT, WPW rows)" },
+        { "item": "Premature atrial and ventricular contractions", "covers": "Premature beats (her guide: PAC, PVC rows)" },
+        { "item": "Ventricular tachycardia, torsades de pointes, ventricular fibrillation", "covers": "Ventricular arrhythmias (her guide: VT, Torsades, VFIB rows)" },
+        { "item": "ST elevation/depression, T-wave inversion, Q waves and infarct localization", "covers": "Acute coronary syndrome; Stable angina; Vasospastic angina" },
+        { "item": "Diffuse ST elevation with PR depression; low voltage and electrical alternans", "covers": "Pericarditis; Pericardial effusion" },
+        { "item": "Left ventricular hypertrophy criteria and right heart strain", "covers": "Hypertensive disorders; Hypertrophic cardiomyopathy; Cor pulmonale; Pulmonary embolism; Pulmonary hypertension" },
+        { "item": "Electrolyte and drug effects: peaked T waves, U waves, QT prolongation, digoxin effect", "covers": "Electrolyte disturbances (hyper/hypokalemia, hypo/hypercalcemia); Arrhythmias (drug-induced torsades)" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging diagnoses many IM-list conditions (pneumonia, pleural effusion, pneumothorax, PE, pulmonary nodule, heart failure, stroke, nephrolithiasis, cholecystitis…), well over the ≥3 bar.",
+      "items": [
+        { "item": "Chest x-ray", "covers": "Pneumonias; Heart failure; Pleural effusion; Pneumothorax; Chronic obstructive pulmonary disease; Sarcoidosis; Tuberculosis" },
+        { "item": "CT chest and CT pulmonary angiography; low-dose CT", "covers": "Pulmonary embolism; Pulmonary nodule; Neoplasms (lung); Interstitial lung disease; Idiopathic pulmonary fibrosis; Bronchiectasis" },
+        { "item": "Echocardiography (transthoracic/transesophageal)", "covers": "Heart failure; Cardiomyopathy; Valvular disorders; Infective endocarditis; Pericardial effusion; Pulmonary hypertension" },
+        { "item": "Cardiac stress testing and coronary angiography", "covers": "Coronary artery disease; Stable angina; Acute coronary syndrome" },
+        { "item": "Non-contrast head CT; MRI brain; CT/MR angiography", "covers": "Stroke; Transient ischemic attack; Intracranial hemorrhage; Neoplasms (brain); Multiple sclerosis" },
+        { "item": "Abdominal ultrasound and RUQ ultrasound; HIDA scan", "covers": "Cholelithiasis; Cholecystitis; Cirrhosis; Hydronephrosis; Cystic kidney disease" },
+        { "item": "CT abdomen/pelvis (with and without contrast)", "covers": "Pancreatitis; Diverticular disease; Appendicitis; Uro/Nephrolithiasis; Ischemic bowel disease; Neoplasms (renal, colorectal)" },
+        { "item": "Endoscopy and colonoscopy findings", "covers": "Peptic ulcer disease; Esophagitis; Gastrointestinal bleeding; Inflammatory bowel disease; Colorectal neoplasms; Celiac disease" },
+        { "item": "Venous duplex and arterial Doppler ultrasound; ankle-brachial index", "covers": "Deep vein thrombosis; Peripheral artery disease; Venous insufficiency" },
+        { "item": "Thyroid ultrasound and radioactive iodine uptake scan", "covers": "Hyper/Hypothyroidism; Thyroiditis; Neoplasms (thyroid)" },
+        { "item": "Plain films and DEXA scan", "covers": "Osteoarthritis; Osteoporosis; Gout/Pseudogout; Rheumatoid arthritis; Pagets disease of the bone; Ankylosing spondylitis" },
+        { "item": "Renal artery imaging (duplex, CTA/MRA)", "covers": "Renal artery stenosis; Secondary hypertension" }
+      ]
+    },
+    "anatomy": {
+      "prominent": false,
+      "howto": "anatomy",
+      "why": "Few IM-list conditions turn on regional anatomy; neuro localization and the cardiac/endocrine structures her guide pictures (adrenal zones image) apply, so the topic exists but is not prominent.",
+      "items": [
+        { "item": "Cerebral vascular territories and stroke localization", "covers": "Stroke; Transient ischemic attack; Intracranial hemorrhage" },
+        { "item": "Spinal cord tracts, dermatomes and peripheral nerve distributions", "covers": "Neuropathy; Guillain-Barré syndrome; Spinal cord injury; Neuralgia/Neuritis" },
+        { "item": "Adrenal cortex zones and medulla with their hormones", "covers": "Adrenal disorders (her guide: adrenal histology image)" },
+        { "item": "Cardiac conduction system and auscultation points", "covers": "Arrhythmias/Conduction disorders; Valvular disorders" },
+        { "item": "Nephron segments and the sites of diuretic action", "covers": "Electrolyte disturbances; Acid-base disturbances; Renal disease" },
+        { "item": "Hepatobiliary and portal venous anatomy", "covers": "Biliary tract disorders; Cirrhosis; Portal hypertension; Esophageal varices" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "Bedside diagnostic procedures decide ≥3 IM-list conditions (meningitis, pleural effusion/empyema, cirrhosis/ascites, gout/septic arthritis).",
+      "items": [
+        { "item": "Lumbar puncture", "covers": "Meningitis; Encephalitis; Guillain-Barré syndrome; Subarachnoid hemorrhage" },
+        { "item": "Thoracentesis (Light's criteria)", "covers": "Pleural effusion; Empyema" },
+        { "item": "Paracentesis (SAAG, SBP)", "covers": "Cirrhosis; Portal hypertension" },
+        { "item": "Arthrocentesis", "covers": "Gout/Pseudogout; Septic arthritis" },
+        { "item": "Pulmonary function testing and spirometry", "covers": "Asthma; Chronic obstructive pulmonary disease; Interstitial lung disease (her guide: PFT and lung-volume images)" },
+        { "item": "Bone marrow aspiration and biopsy", "covers": "Leukemias; Multiple myeloma; Anemias" },
+        { "item": "Cardioversion and transcutaneous pacing", "covers": "Arrhythmias/Conduction disorders" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "IM-list chronic disease management follows society guidelines for ≥3 conditions (heart failure, hypertension, lipids, diabetes, COPD, asthma, AF anticoagulation).",
+      "items": [
+        { "item": "ACC/AHA heart failure guideline", "covers": "Heart failure" },
+        { "item": "ACC/AHA hypertension guideline", "covers": "Hypertensive disorders" },
+        { "item": "ACC/AHA cholesterol guideline (ASCVD risk)", "covers": "Lipid disorders; Coronary artery disease" },
+        { "item": "ADA Standards of Care in Diabetes", "covers": "Diabetes mellitus; Diabetic ketoacidosis; Hyperosmolar hyperglycemic syndrome" },
+        { "item": "GOLD COPD report", "covers": "Chronic obstructive pulmonary disease" },
+        { "item": "GINA asthma strategy", "covers": "Asthma" },
+        { "item": "AF anticoagulation (CHA2DS2-VASc) and ACC/AHA chronic coronary disease guidance", "covers": "Atrial fibrillation; Stable angina" },
+        { "item": "ACLS bradycardia and tachycardia algorithms", "covers": "Arrhythmias/Conduction disorders; Shock" },
+        { "item": "KDIGO CKD staging", "covers": "Chronic kidney disease; Acute kidney injury" },
+        { "item": "Surviving Sepsis Campaign", "covers": "Sepsis; Septic shock" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Adult preventive screening applies to many IM-list conditions (colorectal and lung neoplasms, diabetes, lipid disorders, hypertension, osteoporosis, hepatitis C, HIV, AAA), well over the ≥3 bar.",
+      "items": [
+        { "item": "Colorectal cancer screening", "covers": "Neoplasms (GI malignant)" },
+        { "item": "Lung cancer screening (low-dose CT)", "covers": "Neoplasms (pulmonary malignant); Pulmonary nodule" },
+        { "item": "Prediabetes and type 2 diabetes screening", "covers": "Diabetes mellitus" },
+        { "item": "Hypertension screening", "covers": "Hypertensive disorders" },
+        { "item": "Statin use for primary prevention (lipid screening)", "covers": "Lipid disorders; Coronary artery disease" },
+        { "item": "Osteoporosis screening", "covers": "Osteoporosis" },
+        { "item": "Abdominal aortic aneurysm screening", "covers": "Aortic aneurysm/dissection" },
+        { "item": "Hepatitis B and hepatitis C screening", "covers": "Hepatitis; Cirrhosis" },
+        { "item": "HIV and syphilis screening", "covers": "Human immunodeficiency virus/AIDS; Sexually transmitted infections" },
+        { "item": "Prostate cancer screening (shared decision-making)", "covers": "Neoplasms (prostate)" },
+        { "item": "Latent tuberculosis screening", "covers": "Tuberculosis" }
+      ]
+    },
+    "workup": {
+      "prominent": true,
+      "howto": null,
+      "why": "Presentation list below (design general/workup/choose).",
+      "items": []
+    }
+  },
+  "workup": [
+    { "id": "abdominal-pain", "title": "Abdominal pain", "conds": "Pancreatitis, Cholecystitis, Cholangitis, Peptic ulcer disease, Diverticular disease, Ischemic bowel disease, Appendicitis" },
+    { "id": "ams", "title": "Altered mental status (AMS)", "conds": "Delirium, Dementia, Electrolyte disturbances, Hypoglycemia, Encephalitis, Meningitis, Stroke, Sepsis" },
+    { "id": "back-pain", "title": "Back pain", "conds": "Multiple myeloma, Pyelonephritis, Uro/Nephrolithiasis, Aortic aneurysm/dissection, Ankylosing spondylitis, Spinal stenosis" },
+    { "id": "chest-pain", "title": "Chest pain", "conds": "Acute coronary syndrome, Stable angina, Pericarditis, Aortic aneurysm/dissection, Pulmonary embolism, Pneumothorax, Gastroesophageal reflux disease" },
+    { "id": "cough", "title": "Cough", "conds": "Acute bronchitis, Pneumonias, Asthma, Chronic obstructive pulmonary disease, Gastroesophageal reflux disease, Tuberculosis, Neoplasms (lung)" },
+    { "id": "diarrhea", "title": "Diarrhea", "conds": "Acute infectious gastroenteritis, Inflammatory bowel disease, Irritable bowel syndrome, Celiac disease, Parasitic infections, Hyperthyroidism" },
+    { "id": "dizziness", "title": "Dizziness / vertigo", "conds": "Orthostatic hypotension, Arrhythmias, Stroke, Anemias" },
+    { "id": "dysuria", "title": "Dysuria / urinary symptoms", "conds": "Cystitis, Pyelonephritis, Prostatitis, Sexually transmitted infections, Benign prostatic hyperplasia" },
+    { "id": "edema", "title": "Edema", "conds": "Heart failure, Cirrhosis, Nephrotic syndrome, Deep vein thrombosis, Venous insufficiency, Hypothyroidism" },
+    { "id": "elevated-bp", "title": "Elevated blood pressure", "conds": "Primary hypertension, Secondary hypertension, Renal artery stenosis, Hyperaldosteronism, Pheochromocytoma, Severe asymptomatic hypertension" },
+    { "id": "anemia-fatigue", "title": "Fatigue / anemia", "conds": "Anemias, Hyper/Hypothyroidism, Adrenal insufficiency, Chronic kidney disease, Leukemias, Depressive disorders" },
+    { "id": "fever", "title": "Fever / fever of unknown origin", "conds": "Fever of unknown origin, Neutropenic fever, Sepsis, Infective endocarditis, Tuberculosis, Lymphomas, Vasculitides" },
+    { "id": "gi-bleeding", "title": "GI bleeding", "conds": "Gastrointestinal bleeding, Peptic ulcer disease, Esophageal varices, Mallory-Weiss tear, Diverticular disease, Neoplasms (GI malignant)" },
+    { "id": "headache", "title": "Headache", "conds": "Primary headache (migraine, tension, cluster), Increased intracranial pressure, Meningitis, Intracranial hemorrhage, Giant cell arteritis" },
+    { "id": "hematuria", "title": "Hematuria", "conds": "Uro/Nephrolithiasis, Neoplasms (bladder, renal), Nephritic syndrome, Cystitis, Cystic kidney disease" },
+    { "id": "jaundice", "title": "Jaundice / abnormal liver tests", "conds": "Hepatitis, Cirrhosis, Cholangitis, Cholelithiasis, MASH/MAFLD, Hemolytic anemia" },
+    { "id": "joint-pain", "title": "Joint pain / swelling", "conds": "Gout/Pseudogout, Septic arthritis, Rheumatoid arthritis, Osteoarthritis, Systemic lupus erythematosus, Reactive arthritis, Psoriatic arthritis" },
+    { "id": "lymphadenopathy", "title": "Lymphadenopathy", "conds": "Lymphomas, Leukemias, Viral infections (EBV, HIV), Tuberculosis, Sarcoidosis" },
+    { "id": "palpitations", "title": "Palpitations", "conds": "Atrial fibrillation/flutter, SVT, Premature beats, Hyperthyroidism, Pheochromocytoma, Anemias" },
+    { "id": "polyuria", "title": "Polyuria / polydipsia", "conds": "Diabetes mellitus, Diabetes insipidus, Hypercalcemia, Hyperosmolar hyperglycemic syndrome" },
+    { "id": "dyspnea", "title": "Shortness of breath", "conds": "Heart failure, Asthma, Chronic obstructive pulmonary disease, Pneumonias, Pulmonary embolism, Pleural effusion, Anemias" },
+    { "id": "syncope", "title": "Syncope", "conds": "Vasovagal hypotension, Orthostatic hypotension, Arrhythmias, Aortic stenosis, Hypertrophic cardiomyopathy, Pulmonary embolism" },
+    { "id": "weight-loss", "title": "Unintentional weight loss", "conds": "Neoplasms, Hyperthyroidism, Diabetes mellitus, Human immunodeficiency virus/AIDS, Tuberculosis, Inflammatory bowel disease, Adrenal insufficiency" },
+    { "id": "weakness", "title": "Weakness / focal neurologic deficit", "conds": "Stroke, Transient ischemic attack, Guillain-Barré syndrome, Myasthenia gravis, Multiple sclerosis, Electrolyte disturbances" }
+  ]
+}

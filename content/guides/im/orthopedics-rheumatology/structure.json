@@ -1,9 +1,85 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "rheumatologic-disorders",
+   "title": "Rheumatologic disorders"
+  }
+ ],
+ "members": {
+  "r_RPTWHFSBQ7": "rheumatologic-disorders",
+  "r_AW5YGDFG3T": "rheumatologic-disorders",
+  "r_RVJP0GNH87": "rheumatologic-disorders",
+  "r_W6GWK4MN9H": "rheumatologic-disorders",
+  "r_799ZVTT9FD": "rheumatologic-disorders",
+  "r_YKYFA0D2TV": "rheumatologic-disorders",
+  "r_6MS4S84QA1": "rheumatologic-disorders",
+  "r_9E0A5PSNJY": "rheumatologic-disorders",
+  "r_X7DXXKEW20": "rheumatologic-disorders",
+  "r_5BNPEN59K1": "rheumatologic-disorders",
+  "r_VR1EB4KJED": "rheumatologic-disorders",
+  "b_SF3N5R0EKZ": "rheumatologic-disorders",
+  "b_EA83J1C850": "rheumatologic-disorders",
+  "b_DESEG9A9JZ": "rheumatologic-disorders",
+  "b_NFH0ZK3G9V": "rheumatologic-disorders",
+  "b_KZRHFFJTT6": "rheumatologic-disorders",
+  "b_MZPACRSTRX": "rheumatologic-disorders",
+  "b_M4PD4VEAN4": "rheumatologic-disorders",
+  "b_1SY2RSPWES": "rheumatologic-disorders",
+  "b_BYCGK1T2NS": "rheumatologic-disorders",
+  "b_TTPWD7KD1H": "rheumatologic-disorders",
+  "b_EHNGZB0EKY": "rheumatologic-disorders",
+  "b_R5HK0N2A83": "rheumatologic-disorders"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_KZSYWK8E87",
+   "pharmSection": "gout",
+   "conditionRows": []
+  },
+  {
+   "block": "b_W46WF4Y9TP",
+   "pharmSection": "rheumatoid-arthritis",
+   "conditionRows": []
+  },
+  {
+   "block": "b_AT5M9PVF89",
+   "pharmSection": "sjogren-syndrome",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "gout",
+   "title": "Gout",
+   "tables": [
+    "b_KZSYWK8E87"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "rheumatoid-arthritis",
+   "title": "Rheumatoid arthritis",
+   "tables": [
+    "b_W46WF4Y9TP"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "sjogren-syndrome",
+   "title": "Sjogren syndrome",
+   "tables": [
+    "b_AT5M9PVF89"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

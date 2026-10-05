@@ -1,12 +1,167 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "bronchiectasis",
+   "title": "Bronchiectasis"
+  },
+  {
+   "id": "asthma",
+   "title": "Asthma"
+  },
+  {
+   "id": "chronic-obstructive-pulmonary-disease",
+   "title": "Chronic obstructive pulmonary disease"
+  },
+  {
+   "id": "sleep-apnea",
+   "title": "Sleep apnea"
+  },
+  {
+   "id": "pulmonary-circulation",
+   "title": "Pulmonary circulation"
+  },
+  {
+   "id": "idiopathic-pulmonary-fibrosis",
+   "title": "Idiopathic pulmonary fibrosis"
+  },
+  {
+   "id": "interstitial-lung-disease",
+   "title": "Interstitial lung disease"
+  },
+  {
+   "id": "sarcoidosis",
+   "title": "Sarcoidosis"
+  },
+  {
+   "id": "pulmonary-nodule",
+   "title": "Pulmonary nodule"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "pleural-effusion",
+   "title": "Pleural effusion"
+  },
+  {
+   "id": "pneumothorax",
+   "title": "Pneumothorax"
+  },
+  {
+   "id": "other",
+   "title": "Pulmonology — other"
+  }
+ ],
+ "members": {
+  "r_MXCGCBK2DB": "infectious-disorders",
+  "r_FS5JQNP886": "bronchiectasis",
+  "r_C9HQATPC8H": "asthma",
+  "r_5DABS9Q15R": "chronic-obstructive-pulmonary-disease",
+  "r_VSY7Y4TWSQ": "chronic-obstructive-pulmonary-disease",
+  "r_A7NXZ0MN9R": "sleep-apnea",
+  "r_FENV8NDT48": "pulmonary-circulation",
+  "r_S1Q9879PVN": "pulmonary-circulation",
+  "r_GZ8WB9K407": "idiopathic-pulmonary-fibrosis",
+  "r_CPWZDM8HF3": "interstitial-lung-disease",
+  "r_6PQB8CZGJH": "interstitial-lung-disease",
+  "r_QXJQ1C734B": "interstitial-lung-disease",
+  "r_G9JY9KXHTS": "interstitial-lung-disease",
+  "r_HZ2PF94M0A": "sarcoidosis",
+  "r_JD35GYB6RC": "infectious-disorders",
+  "r_BAWFF1DDKW": "infectious-disorders",
+  "r_SBJ19NCN1S": "pulmonary-nodule",
+  "r_93GMYN40A7": "neoplasms",
+  "r_JTDSDCEAEM": "neoplasms",
+  "r_K94R3631YC": "infectious-disorders",
+  "r_J7JSYNX3EN": "pleural-effusion",
+  "r_QSYY45Y5EY": "pulmonary-circulation",
+  "r_P0N580Y452": "infectious-disorders",
+  "r_DWJW091TCJ": "pneumothorax",
+  "b_52VGYAFG2A": "other",
+  "b_D4MV5R112E": "infectious-disorders",
+  "b_XQH0Y4NAE6": "bronchiectasis",
+  "b_1J9JAK37M6": "asthma",
+  "b_J1QHBQARC1": "asthma",
+  "b_3TBDZJXVQ8": "asthma",
+  "b_4BWEFPDNFP": "asthma",
+  "b_V9R3FNZ3FF": "asthma",
+  "b_QXZ8WSN9ED": "asthma",
+  "b_5J56AH0N1G": "chronic-obstructive-pulmonary-disease",
+  "b_5KNMDZRXQ6": "sleep-apnea",
+  "b_6QSKTE2P91": "interstitial-lung-disease",
+  "b_YKSSHDR1GM": "idiopathic-pulmonary-fibrosis",
+  "b_7KKZYY9DR8": "interstitial-lung-disease",
+  "b_T8RKGFJVDD": "sarcoidosis",
+  "b_KNTASS8160": "infectious-disorders",
+  "b_QKKC8SASP5": "neoplasms",
+  "b_VHR79MWX1F": "neoplasms",
+  "b_HJH1JTJ41T": "infectious-disorders",
+  "b_FHXTE257JD": "pleural-effusion",
+  "b_4YHEP8YZY0": "pulmonary-circulation",
+  "b_RZFEA2EDAK": "infectious-disorders",
+  "b_H8S975WYCA": "infectious-disorders",
+  "b_DPWGWZR56M": "pneumothorax"
+ },
+ "listed": {
+  "b_J1QHBQARC1": "Management Basics"
+ },
+ "drugTables": [
+  {
+   "block": "b_XWCN258CS0",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_531EJQNDKD",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_8QSWMB40QT",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_WP6VJSG37J",
+   "pharmSection": "tuberculosis",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "asthma",
+   "title": "Asthma",
+   "tables": [
+    "b_XWCN258CS0",
+    "b_531EJQNDKD",
+    "b_8QSWMB40QT"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "tuberculosis",
+   "title": "Tuberculosis",
+   "tables": [
+    "b_WP6VJSG37J"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_S1B2JMQ6J1"
- ]
+ ],
+ "titled": {
+  "r_VSY7Y4TWSQ": 1
+ }
 }

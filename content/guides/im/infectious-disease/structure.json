@@ -1,10 +1,113 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "bacterial-infections",
+   "title": "Bacterial infections"
+  },
+  {
+   "id": "fungal-infections",
+   "title": "Fungal infections"
+  },
+  {
+   "id": "sexually-transmitted-infections",
+   "title": "Sexually transmitted infections"
+  },
+  {
+   "id": "viral-infections",
+   "title": "Viral infections"
+  },
+  {
+   "id": "vector-borne-infections",
+   "title": "Vector-borne infections"
+  },
+  {
+   "id": "parasitic-infections",
+   "title": "Parasitic infections"
+  },
+  {
+   "id": "opportunistic-infections",
+   "title": "Opportunistic infections"
+  }
+ ],
+ "members": {
+  "r_PMSMSW4PCH": "bacterial-infections",
+  "r_FTN02CVJPV": "fungal-infections",
+  "r_ERY5KEWBJE": "fungal-infections",
+  "r_RA4CFA1969": "fungal-infections",
+  "r_7F29GMR0X4": "fungal-infections",
+  "r_GNAB7QMXTA": "fungal-infections",
+  "r_51VW72JXT9": "sexually-transmitted-infections",
+  "r_9AYAK8E0VB": "sexually-transmitted-infections",
+  "r_D0DN2CS9B5": "sexually-transmitted-infections",
+  "r_9DXVB2DW35": "fungal-infections",
+  "r_PHTTZQ61B3": "viral-infections",
+  "r_XR3K8M9H0C": "bacterial-infections",
+  "r_T2P4W4T80W": "viral-infections",
+  "r_XGV3TPDHXC": "viral-infections",
+  "r_YMM5MWBF2J": "fungal-infections",
+  "r_AX3SX3XPJV": "viral-infections",
+  "r_44PJTZ61TP": "viral-infections",
+  "r_Q0FRS20QCF": "vector-borne-infections",
+  "r_1NZNDXFJNA": "vector-borne-infections",
+  "r_BHE7NAVVWK": "bacterial-infections",
+  "r_6T8670RRK9": "parasitic-infections",
+  "r_43X1R547NB": "parasitic-infections",
+  "r_G9C2BP8A3Z": "parasitic-infections",
+  "r_PN0KV14PST": "parasitic-infections",
+  "r_8HF1125E7S": "parasitic-infections",
+  "r_PVQ0NS5PVS": "viral-infections",
+  "r_0RJE7BPP4H": "bacterial-infections",
+  "r_FJQ2373BQ1": "bacterial-infections",
+  "r_MMS37E110D": "bacterial-infections",
+  "r_CMEQPWMB2M": "sexually-transmitted-infections",
+  "r_JJ8Z8MHG1D": "bacterial-infections",
+  "r_V8QQ52WCBA": "parasitic-infections",
+  "r_V37XFR36H5": "viral-infections",
+  "r_KX5JWPY6RG": "opportunistic-infections",
+  "b_9D59WY863B": "bacterial-infections",
+  "b_62V9KA2XH3": "bacterial-infections",
+  "b_Q6R3D48WWF": "fungal-infections",
+  "b_P045GKYVCK": "sexually-transmitted-infections",
+  "b_RNH86QTMFT": "fungal-infections",
+  "b_R19ZTX4BND": "bacterial-infections",
+  "b_GXYHS45J5B": "viral-infections",
+  "b_YPDC2FBH5S": "viral-infections",
+  "b_ZGZVK80JC3": "fungal-infections",
+  "b_1EJZYYPJHA": "viral-infections",
+  "b_ZYQND4AHF1": "viral-infections",
+  "b_7WTC81PBA8": "viral-infections",
+  "b_G4K0TGQTWC": "vector-borne-infections",
+  "b_TN5RET33RP": "bacterial-infections",
+  "b_XC4NMT391M": "parasitic-infections",
+  "b_XD9G6413P6": "viral-infections",
+  "b_3K4G4ZC73P": "bacterial-infections",
+  "b_HC610T5WRX": "sexually-transmitted-infections",
+  "b_XJ3H8NENF6": "bacterial-infections",
+  "b_0QKM5YD4CZ": "parasitic-infections",
+  "b_NST51CQ6XN": "viral-infections",
+  "b_WSXSCPNJ7T": "opportunistic-infections"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_RAY2V28621",
+   "pharmSection": "hiv",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "hiv",
+   "title": "HIV",
+   "tables": [
+    "b_RAY2V28621"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_7PB1T887H9",

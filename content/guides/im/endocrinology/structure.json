@@ -1,10 +1,127 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "pituitary-disorders",
+   "title": "Pituitary disorders"
+  },
+  {
+   "id": "adrenal-disorders",
+   "title": "Adrenal disorders"
+  },
+  {
+   "id": "diabetes-mellitus",
+   "title": "Diabetes mellitus"
+  },
+  {
+   "id": "electrolyte-disturbances",
+   "title": "Electrolyte disturbances"
+  },
+  {
+   "id": "disorders-of-calcium-and-phosphorous",
+   "title": "Disorders of calcium and phosphorous"
+  },
+  {
+   "id": "thyroid-parathyroid-disorders",
+   "title": "Thyroid/Parathyroid disorders"
+  },
+  {
+   "id": "pagets-disease-of-the-bone",
+   "title": "Pagets disease of the bone"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "other",
+   "title": "Endocrinology — other"
+  }
+ ],
+ "members": {
+  "r_6WRY1G5387": "other",
+  "r_AFWE43EF4P": "pituitary-disorders",
+  "r_5MP5R9XT61": "pituitary-disorders",
+  "r_MATGM70SDK": "adrenal-disorders",
+  "r_Y3G29VXHJ8": "adrenal-disorders",
+  "r_99FHTVT8VB": "adrenal-disorders",
+  "r_F08WS7NPDE": "adrenal-disorders",
+  "r_PDZVJ59M8Y": "diabetes-mellitus",
+  "r_BYKV7M49GY": "diabetes-mellitus",
+  "r_3G3AER3GD0": "electrolyte-disturbances",
+  "r_JTFBJCDPRM": "electrolyte-disturbances",
+  "r_M0MHJ6F3H3": "electrolyte-disturbances",
+  "r_3K9JD9ASKX": "electrolyte-disturbances",
+  "r_9VPEPN9AZD": "disorders-of-calcium-and-phosphorous",
+  "r_D292A2A2W3": "disorders-of-calcium-and-phosphorous",
+  "r_NTCCV170Y4": "thyroid-parathyroid-disorders",
+  "r_Z8BGG4PM16": "thyroid-parathyroid-disorders",
+  "r_01MZRVHT3K": "thyroid-parathyroid-disorders",
+  "r_YGVSRXPC2G": "thyroid-parathyroid-disorders",
+  "r_AAD9K95ZSD": "thyroid-parathyroid-disorders",
+  "r_J8K3QJ0ZGB": "thyroid-parathyroid-disorders",
+  "r_XKKGNK9PXS": "thyroid-parathyroid-disorders",
+  "r_4P12PCS6V8": "thyroid-parathyroid-disorders",
+  "r_CY156P920W": "thyroid-parathyroid-disorders",
+  "r_H3ASG94Y3Q": "pagets-disease-of-the-bone",
+  "r_11W0ADNSRQ": "adrenal-disorders",
+  "r_PJD7PYBZJ1": "pituitary-disorders",
+  "r_00K91YEJMK": "neoplasms",
+  "b_J80096QE57": "other",
+  "b_QC57TTSSQ7": "other",
+  "b_TT58HA05WT": "other",
+  "b_JE2D06WM64": "pituitary-disorders",
+  "b_Y7VY206V21": "adrenal-disorders",
+  "b_PZYSH3B2C6": "adrenal-disorders",
+  "b_X6EF2B17DF": "adrenal-disorders",
+  "b_VN8HJQQZE4": "adrenal-disorders",
+  "b_BJQ60H9A5M": "diabetes-mellitus",
+  "b_D9B3VGJHYK": "diabetes-mellitus",
+  "b_313YJ0BXXK": "electrolyte-disturbances",
+  "b_N4MJ4GZVTE": "disorders-of-calcium-and-phosphorous",
+  "b_Y16M4SAA34": "thyroid-parathyroid-disorders",
+  "b_GQRZY7RQ19": "thyroid-parathyroid-disorders",
+  "b_SEJ8RHBW66": "thyroid-parathyroid-disorders",
+  "b_7RPA8TXYQ5": "pagets-disease-of-the-bone",
+  "b_P1ZQG1QDJX": "adrenal-disorders",
+  "b_SM33YJNA7Z": "pituitary-disorders",
+  "b_7NXM0X42E3": "neoplasms"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_09Q9N0MQ82",
+   "pharmSection": "weight-loss-medications",
+   "conditionRows": []
+  },
+  {
+   "block": "b_7MPQTH6NQ4",
+   "pharmSection": "anti-hyperglycemic-agents",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "weight-loss-medications",
+   "title": "Weight loss medications",
+   "tables": [
+    "b_09Q9N0MQ82"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "anti-hyperglycemic-agents",
+   "title": "Anti-hyperglycemic agents",
+   "tables": [
+    "b_7MPQTH6NQ4"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_H8NRK0SA3W"
  ]
