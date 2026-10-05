@@ -189,8 +189,14 @@ export interface CardsFile {
    * for, where it files them under one use ("Antiarrhythmics:", "BPH"); its notes show only there and
    * in meds panels of conditions mapped to them (`UsesFile.conditions`). Display only. A card without
    * it is written for any use.
+   * `classWords`: her words for the wider drug class the card belongs to ("diuretics", "inotropes"),
+   * shared by every card of that class. They match only a condition's treatment text, naming all those
+   * cards at once; unlike `aliases` they never match her drug-table rows, where "K-Sparing Diuretics"
+   * names one card, not every diuretic.
    */
-  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string; for?: string[] }[];
+  cards: {
+    id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string; for?: string[]; classWords?: string[];
+  }[];
 }
 
 /**

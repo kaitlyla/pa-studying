@@ -689,6 +689,70 @@ describe("pharm (40 §40.4–§40.5)", () => {
     expect(panel(R(912))).toEqual([[C(8), [R(920)]]]);
   });
 
+  describe("her word for a drug class in the treatment text names every card of that class", () => {
+    // EM Cardiovascular as imported: Myocarditis "TX: diuretics, vasodilators (e.g., nitrates) ... inotropes";
+    // her HF table lists each diuretic class, and dobutamine and milrinone together as positive inotropes.
+    const loop = { id: C(1), file: "cardio", aliases: ["Loop Diuretics", "furosemide"], home: {}, classWords: ["diuretics", "diuretic"] };
+    const kSparing = { id: C(2), file: "cardio", aliases: ["Potassium Sparing Diuretics", "spironolactone"], home: {}, classWords: ["diuretics", "diuretic"] };
+    const dobutamine = { id: C(3), file: "cardio", aliases: ["dobutamine"], home: {}, classWords: ["inotropes", "inotropic support"] };
+    const milrinone = { id: C(4), file: "cardio", aliases: ["milrinone"], home: {}, classWords: ["inotropes", "inotropic support"] };
+    const cards = new CardMatcher([loop, kSparing, dobutamine, milrinone]);
+    const drugs = table(B(92), 2, [
+      [R(921), "content", "K-Sparing Diuretics: Spironolactone, eplerenone", "MOA"],
+      [R(922), "content", "Loop Diuretics: furosemide, bumetanide", "MOA"],
+      [R(923), "content", "Positive Inotropes in ADHF: Dobutamine, milrinone", "MOA"],
+    ]);
+    const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "heart-failure", conditionRows: [] }] });
+    const panelFor = (management: string) => {
+      const conditions = table(B(91), 2, [[R(910), "heading", "CARDIO", "Management"], [R(911), "content", "Myocarditis", management]]);
+      const t = deriveTopics([conditions, drugs], st);
+      const topic = t.topics.find((x) => x.id === R(911));
+      if (!topic) throw new Error("no topic");
+      return medsPanel({ guide: "em", system: "cardiovascular", structure: st, topics: t }, [B(91), B(92)], topic, cards, (c) => c, new Set()).map((m) => [m.card, m.rows]);
+    };
+
+    it("each card of the class shows with its own rows", () => {
+      expect(panelFor("supportive: diuretics, inotropes")).toEqual([[C(2), [R(921)]], [C(1), [R(922)]], [C(3), [R(923)]], [C(4), [R(923)]]]);
+      expect(panelFor("diuretics")).toEqual([[C(2), [R(921)]], [C(1), [R(922)]]]);
+    });
+
+    it("a class word never files a drug row under another card of the class", () => {
+      // "K-Sparing Diuretics" names the potassium-sparing card only, not every card whose class word is "diuretics".
+      const row = tableOf(drugs)?.rows.find((r) => r.id === R(921));
+      if (!row) throw new Error("no row");
+      expect(rowCards(cards, deriveTopics([drugs], st), row, "heart-failure")).toEqual([C(2)]);
+    });
+
+    it("a class word inside a card's own name names only that card", () => {
+      // FM Hypertension: "thiazide diuretic"; Hyponatremia: "fluid restriction +/- loop diuretics".
+      expect(panelFor("fluid restriction +/- loop diuretics")).toEqual([[C(1), [R(922)]]]);
+    });
+
+    it("a class word under her negative sign, or in an item that says to avoid it, names nothing", () => {
+      expect(panelFor("avoid vasodilators/⊖inotropes")).toEqual([]);
+      expect(panelFor("( − ) inotropes")).toEqual([]);
+      expect(panelFor("use Negative  inotropes")).toEqual([]);
+      expect(panelFor("▪︎AVOID nitrates, diuretics, ACEI/ARBs")).toEqual([]);
+      expect(panelFor("hold diuretics")).toEqual([]);
+      expect(panelFor("diuretics CI in anuria")).toEqual([[C(2), [R(921)]], [C(1), [R(922)]]]);
+    });
+
+    it("an avoid ends with its item: a new line, a bullet or a semicolon", () => {
+      const both = [[C(2), [R(921)]], [C(1), [R(922)]], [C(3), [R(923)]], [C(4), [R(923)]]];
+      expect(panelFor("isotonic fluids (AVOID a large amount!)\nInotropic support; diuretics")).toEqual(both);
+      expect(panelFor("not transplant candidates ▪︎inotropic support • diuretics")).toEqual(both);
+      expect(panelFor("not transplant candidates, inotropic support")).toEqual([]);
+    });
+  });
+
+  it("class words match only her text, whole-word", () => {
+    const m = new CardMatcher([{ id: C(3), file: "f", aliases: ["dobutamine"], home: {}, classWords: ["inotropes", "inotropic support"] }]);
+    expect(m.namedByClassWords("▪︎inotropes, respiratory support")).toEqual(new Set([C(3)]));
+    expect(m.namedByClassWords("ionotropes")).toEqual(new Set());
+    expect(m.matching("Positive Inotropes in ADHF")).toEqual([]);
+    expect(new CardMatcher([{ id: C(3), file: "f", aliases: [], home: {} }]).namedByClassWords("inotropes")).toEqual(new Set());
+  });
+
   describe("a drug row's cards: its class, plus the agents in its drug-name columns from the class's med list", () => {
     const drugs = table(B(92), 4, [
       [R(920), "heading", "PHARM", "Drugs", "", "MOA"],

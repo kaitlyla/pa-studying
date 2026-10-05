@@ -411,6 +411,12 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...cards.cards[0], home: { xx: "a" } }] })).toMatch(/one of/);
   });
 
+  it("accepts a card's class words and refuses an empty one", () => {
+    const card = { id: C1, file: "cardio-med-list-1-1", aliases: ["Loop Diuretics"], home: {} };
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, classWords: ["diuretics", "diuretic"] }] })).toBe("ok");
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, classWords: [""] }] })).toMatch(/classWords\[0\]/);
+  });
+
   describe("a card shown inside another card's class (in)", () => {
     const [C2, C3] = [id("c", 2), id("c", 3)];
     const card = (cid: string, inId?: string) => ({ id: cid, file: "cardio-med-list-1-1", aliases: [], home: {}, ...(inId ? { in: inId } : {}) });

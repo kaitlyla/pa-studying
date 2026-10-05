@@ -253,6 +253,8 @@ interface DraftCard {
   in?: string;
   /** The pharm sections its notes are written for; omitted, an existing card keeps its own. */
   for?: string[];
+  /** Her words for its wider drug class; omitted, an existing card keeps its own. */
+  classWords?: string[];
 }
 interface DraftPart {
   id?: string;
@@ -285,7 +287,11 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
     const had = c.cards.cards.find((x) => x.id === id);
     const within = d.in ?? had?.in;
     const use = d.for ?? had?.for;
-    return { id, file: fileSlug, aliases: d.aliases, home: d.home, ...(within === undefined ? {} : { in: within }), ...(use === undefined ? {} : { for: use }) };
+    const words = d.classWords ?? had?.classWords;
+    return {
+      id, file: fileSlug, aliases: d.aliases, home: d.home,
+      ...(within === undefined ? {} : { in: within }), ...(use === undefined ? {} : { for: use }), ...(words === undefined ? {} : { classWords: words }),
+    };
   });
   const cardIds = new Set(cards.map((x) => x.id));
   const parts: PharmPart[] = (draft.parts as DraftPart[]).map((d) => {

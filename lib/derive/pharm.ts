@@ -9,19 +9,43 @@ export type Card = CardsFile["cards"][number];
 
 const matcherCache = new Map<string, (text: string) => boolean>();
 
+/** The whole-word, case-insensitive alternation of the phrases on NFC text, or null for none. */
+function phraseSource(phrases: readonly string[], prefix = ""): string | null {
+  const alts = phrases.map((p) => p.normalize("NFC")).filter((p) => p.trim() !== "").map(escapeRegExp);
+  // Longest first, so a phrase inside a longer one ("loop diuretic" in "loop diuretics") never wins its place.
+  alts.sort((a, b) => b.length - a.length);
+  return alts.length > 0 ? `(?<![\\p{L}\\p{N}])${prefix}(?:${alts.join("|")})(?![\\p{L}\\p{N}])` : null;
+}
+
 /** A whole-word, case-insensitive matcher for any of the phrases, on NFC text (40 §40.4). */
 export function phraseMatcher(phrases: readonly string[]): (text: string) => boolean {
-  const alts = phrases.map((p) => p.normalize("NFC")).filter((p) => p.trim() !== "").map(escapeRegExp);
-  const key = alts.join("|");
+  const source = phraseSource(phrases);
+  const key = source ?? "";
   const cached = matcherCache.get(key);
   if (cached) return cached;
   let test: (text: string) => boolean = () => false;
-  if (alts.length > 0) {
-    const re = new RegExp(`(?<![\\p{L}\\p{N}])(?:${key})(?![\\p{L}\\p{N}])`, "iu");
+  if (source !== null) {
+    const re = new RegExp(source, "iu");
     test = (text) => re.test(text.normalize("NFC"));
   }
   matcherCache.set(key, test);
   return test;
+}
+
+/** Her negative sign before a class word ("⊖inotropes", "(-) inotropes", "negative inotropes"): the opposite class. */
+const NEGATIVE_SIGN = String.raw`(?<!(?:⊖|\(\s*[-−]\s*\)|negative)\s*)`;
+
+/** Her words that make the rest of an item drugs to avoid ("avoid vasodilators", "AVOID nitrates, diuretics"). */
+const AVOID = /(?<![\p{L}\p{N}])(?:avoid|no|not|contraindicated|hold|CI)(?![\p{L}\p{N}])/iu;
+
+/** Where an item of her notes ends: a new line, a bullet or numbered point, or a semicolon. */
+const ITEM_END = /[\n;▪•»➀-➓]/gu;
+
+/** Whether the item of `text` holding position `at` says to avoid what follows, before `at`. */
+function avoidedAt(text: string, at: number): boolean {
+  let start = 0;
+  for (const m of text.slice(0, at).matchAll(ITEM_END)) start = m.index + 1;
+  return AVOID.test(text.slice(start, at));
 }
 
 /**
@@ -35,12 +59,19 @@ export class CardMatcher {
   readonly cards: readonly Card[];
   private readonly members: Map<string, Card[]>;
   private readonly tests: ((text: string) => boolean)[];
+  /** Per class card, its group's class words under no negative sign (global), or null. */
+  private readonly classWords: (RegExp | null)[];
+  /** Every card's aliases (global), or null. */
+  private readonly aliases: RegExp | null;
 
   constructor(cards: readonly Card[]) {
     this.all = cards;
     this.cards = cards.filter((c) => c.in === undefined);
     this.members = new Map(this.cards.map((c) => [c.id, [c, ...cards.filter((m) => m.in === c.id)]]));
     this.tests = this.cards.map((c) => phraseMatcher(this.membersOf(c.id).flatMap((m) => m.aliases)));
+    const global = (source: string | null): RegExp | null => (source === null ? null : new RegExp(source, "giu"));
+    this.classWords = this.cards.map((c) => global(phraseSource(this.membersOf(c.id).flatMap((m) => m.classWords ?? []), NEGATIVE_SIGN)));
+    this.aliases = global(phraseSource(cards.flatMap((c) => c.aliases)));
   }
 
   /** Ids of the class cards with an alias in `text`, in `cards.json` order. */
@@ -67,6 +98,24 @@ export class CardMatcher {
   cardIn(classId: string, text: string): boolean {
     const i = this.cards.findIndex((c) => c.id === classId);
     return i >= 0 && (this.tests[i]?.(text) ?? false);
+  }
+
+  /**
+   * Ids of the class cards that her words for a drug class (`classWords`) name in a condition's
+   * treatment text: "diuretics" names her loop, thiazide and potassium-sparing cards at once. A class
+   * word inside a card's own name ("loop diuretics") names only that card, through its alias; one under
+   * her negative sign ("⊖inotropes"), or after "avoid", "no", "not", "contraindicated", "hold" or "CI"
+   * in the same item ("AVOID nitrates, diuretics"), names nothing.
+   */
+  namedByClassWords(text: string): Set<string> {
+    const nfc = text.normalize("NFC");
+    const masked = this.aliases ? nfc.replace(this.aliases, (m) => " ".repeat(m.length)) : nfc;
+    const named = new Set<string>();
+    this.cards.forEach((c, i) => {
+      const re = this.classWords[i];
+      if (re && [...masked.matchAll(re)].some((m) => !avoidedAt(masked, m.index))) named.add(c.id);
+    });
+    return named;
   }
 
   /**
@@ -291,7 +340,7 @@ export function treatmentText(t: SystemTopics, topic: Topic): string {
 
 /**
  * The meds panel under a condition topic (40 §40.5): the system's drug rows whose first cell, or an
- * alias of a card matching the row's drug names, occurs in the topic's treatment text, grouped under the matching
+ * alias or class word of a card matching the row's drug names, occurs in the topic's treatment text, grouped under the matching
  * cards her treatment text names (every matching card when only the row's own name occurs). A drug
  * table's place in her guide says nothing about which conditions it treats — her groups never close,
  * so a table can follow conditions it has nothing to do with — and condition rows are never offered.
@@ -314,6 +363,7 @@ export function medsPanel(
   const picked: { row: Row; section: string; cards: string[] }[] = [];
   const seen = new Set<string>();
   const text = treatmentText(s.topics, topic);
+  const byClassWord = matcher.namedByClassWords(text);
   for (const block of drugBlocks) {
     const section = sectionOf(block);
     for (const r of rowsOf(block)) {
@@ -322,7 +372,7 @@ export function medsPanel(
       // A row naming several classes ("NSAIDs: Naproxen Indomethacin") files only under the cards
       // her text names: "NSAIDs" in her text means the NSAIDs card, not the naproxen sub-class card.
       const cards = rowCards(matcher, s.topics, r, section);
-      const named = cards.filter((c) => matcher.cardIn(c, text));
+      const named = cards.filter((c) => matcher.cardIn(c, text) || byClassWord.has(c));
       if (named.length === 0 && !phraseMatcher([first])(text)) continue;
       seen.add(r.id);
       picked.push({ row: r, section, cards: named.length > 0 ? named : cards });
