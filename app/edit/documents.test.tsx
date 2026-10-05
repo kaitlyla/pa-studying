@@ -6,7 +6,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 import { act, type ReactNode } from "react";
 import { inboxUploadPath, parseTrailers, serializeFile, type AsIsFile, type OtherFile, type UploadFile, type WordDocFile } from "../../lib/content/index.ts";
 import { BUILD_PATH, docPath, OTHER_PATH, type DocJson, type OtherJson } from "../../lib/derive/published.ts";
-import { D } from "../../tools/build/test-fixture.ts";
+import { D, doc, para, S } from "../../tools/build/test-fixture.ts";
 import { loadData } from "../data/load.ts";
 import type { FakeRequest } from "../e2e/fake-github.ts";
 import { setOwner } from "../shell/owner.tsx";
@@ -16,14 +16,14 @@ import {
   ADDED, AddDocument, DocActions, FAILED_NOTE, PendingDocPage, PROCESSING_NOTE, RemovedDocs, RENAMED, REMOVE_BODY, REMOVED, REPLACED, RESTORED,
   UploadProblem,
 } from "./DocActions.tsx";
-import { removeDoc, renameDoc, restoreDoc } from "./docs.ts";
+import { removeDoc, renameDoc, restoreDoc, storedBytes } from "./docs.ts";
 import { retry } from "./github.ts";
 import { memoryStore } from "./idb.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import { SAVE_OFFLINE } from "./session.ts";
 import {
   CHOOSE_FILE, checkUpload, defaultName, fileProblem, inboxOriginal, MAX_FILE_BYTES, NAME_BLANK, PROCESS_WORKFLOW, resetUploadsForTests, retryUpload,
-  SITE_FULL, SITE_LIMIT_BYTES, spaceProblem, startUpload, storedBytes, TOO_BIG, TYPE_REFUSED, uploadExt, uploadsInProgress,
+  SITE_FULL, SITE_LIMIT_BYTES, spaceProblem, startUpload, TOO_BIG, TYPE_REFUSED, uploadExt, uploadsInProgress,
 } from "./upload.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 
@@ -196,11 +196,18 @@ describe("removeDoc and restoreDoc", () => {
   });
 
   it("removing her own review deck's document also deletes the deck's slide blocks; restoring brings them back", async () => {
+    // The fixture's deck document is removed, so it holds no slide blocks (Remove deleted them); show it
+    // again with its one slide, as a shown own deck is stored.
     const path = `content/files/${D(4)}/file.json`;
-    w.fake.commitFiles({ [path]: serializeFile(path, { ...record<AsIsFile>(path), removed: null }) }, { message: "Shown again" });
     const blocks = "content/slides/psy/blocks/";
+    const slidePath = `${blocks}${S(40)}.json`;
+    const slide = { v: 1, id: S(40), kind: "slide", doc: doc({ type: "heading_line", content: [{ type: "text", text: "Lithium" }] }, para("Narrow therapeutic index")), meta: {} };
+    w.fake.commitFiles({
+      [path]: serializeFile(path, { ...record<AsIsFile>(path), removed: null }),
+      [slidePath]: serializeFile(slidePath, slide),
+    }, { message: "Shown again" });
     const slides = under(blocks);
-    expect(slides.size).toBeGreaterThan(0);
+    expect([...slides.keys()]).toEqual([slidePath]);
 
     await removeDoc({ git: w.git, author: AUTHOR, docId: D(4) });
     expect(under(blocks).size).toBe(0);
