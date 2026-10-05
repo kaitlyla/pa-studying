@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " ACG Guideline, Acute Pancreatitis, March 2024."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Acute pancreatitis: current guideline",
+  "relevantTo": "Pancreatitis",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "American College of Gastroenterology Guidelines: Management of Acute Pancreatitis",
+    "org": "American College of Gastroenterology (ACG)",
+    "year": "2024",
+    "url": "https://gi.org/guidelines/",
+    "type": "guideline",
+    "track": {
+     "series": "acg-acute-pancreatitis",
+     "label": "ACG acute pancreatitis guideline",
+     "org": "American College of Gastroenterology (ACG)",
+     "edition": 2024,
+     "method": "page",
+     "url": "https://gi.org/guidelines/",
+     "pattern": "Pancreatitis: Acute - Guideline[\\s\\S]{0,400}?[A-Z][a-z]+ (\\d{4})"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_TB3B0Y4EJ6"
+}

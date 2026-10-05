@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " American Society of Hematology 2019 guidelines: prevention of venous thromboembolism in surgical hospitalized patients."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "VTE prophylaxis in surgical patients: current guideline",
+  "relevantTo": "Perioperative risk assessment and complications",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "American Society of Hematology 2019 guidelines for management of venous thromboembolism: prevention of venous thromboembolism in surgical hospitalized patients",
+    "org": "American Society of Hematology (ASH)",
+    "year": "2019",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31794602/",
+    "type": "guideline",
+    "track": {
+     "series": "ash-vte-surgical",
+     "label": "ASH VTE prevention in surgical patients guideline",
+     "org": "American Society of Hematology (ASH)",
+     "edition": 2019,
+     "method": "pubmed",
+     "term": "American Society of Hematology[ti] AND venous thromboembolism[ti] AND surgical[ti]",
+     "title": "^American Society of Hematology (\\d{4}) guidelines"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_Q42CN19BT6"
+}

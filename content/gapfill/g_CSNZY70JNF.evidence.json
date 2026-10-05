@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Urinalysis to confirm true hematuria (red urine without RBCs suggests myoglobin, hemoglobin, porphyria, drugs or foods); confirm on a second specimen.",
+   "source": 0,
+   "quote": "Before testing proceeds, true hematuria should be distinguished from red urine by urinalysis. In women with vaginal bleeding, the specimen should be obtained by straight catheterization to avoid contamination by a nonurinary source of blood. Red urine without red blood cells (RBCs) suggests myoglobinuria or hemoglobinuria, porphyria , or ingestion of certain medications or foods. Generally, the presence of hematuria should be confirmed by testing a second specimen.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Urine culture is usually sent, since cystitis can show mostly RBCs.",
+   "source": 0,
+   "quote": "because urinalysis shows predominantly RBCs in some patients with cystitis , urine culture is usually done.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Gross hematuria or unexplained systemic symptoms: ultrasound or CT of the abdomen and pelvis.",
+   "source": 0,
+   "quote": "Patients with gross hematuria or unexplained systemic symptoms require ultrasonography or CT of the abdomen and pelvis.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Glomerular signs (casts, protein, dysmorphic RBCs): BUN, creatinine, electrolytes and urine protein/creatinine ratio.",
+   "source": 0,
+   "quote": "If urine or clinical findings suggest a glomerular disorder, renal function is evaluated by measuring blood urea nitrogen, serum creatinine, and electrolytes; doing a urinalysis; and periodically determining the urine protein/creatinine ratio.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Men ≥ 50: discuss PSA testing through shared decision making.",
+   "source": 0,
+   "quote": "Men ≥ 50 require discussion of testing for prostate-specific antigen through shared decision making",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Microhematuria, intermediate risk: cystoscopy and renal ultrasound.",
+   "source": 0,
+   "quote": "Such patients should have evaluation with cystoscopy and renal ultrasound.",
+   "locator": "Evaluation, Testing (AUA/SUFU 2025 risk categories)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Microhematuria, high risk (men older than 60, more than 25 RBC/hpf, more than 30 pack-years): cystoscopy and upper tract CT or MRI.",
+   "source": 0,
+   "quote": "High risk (if any criteria met): men older than 60 years; more than 25 rbc/hpf; smoking history greater than 30 pack- years; other risk factors for GU malignancy. Such patients should have evaluation with cystoscopy and upper tract CT or MRI.",
+   "locator": "Evaluation, Testing (AUA/SUFU 2025 risk categories)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "surg-s12 verifier session (Detective task 01a109d4-8a7d-7460-b4ad-0a5d601b6b8e, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote covered only the red-urine-vs-hematuria sentence; cause list and second-specimen clause not in quote",
+    "resolution": "quote extended to the whole paragraph; re-checked by shay-49353 at 2026-10-05T02:28Z: claim now says only what its quote says"
+   }
+  ]
+ },
+ "block": "g_CSNZY70JNF"
+}

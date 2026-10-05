@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " 2026 AHA/ACC/ACS/ASNC/HRS/SCA/SCCT/SCMR/SVM Guideline for Perioperative Cardiovascular Management for Noncardiac Surgery."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Perioperative cardiovascular evaluation: current guideline",
+  "relevantTo": "Perioperative cardiovascular risk assessment and complications",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2026 AHA/ACC/ACS/ASNC/HRS/SCA/SCCT/SCMR/SVM Guideline for Perioperative Cardiovascular Management for Noncardiac Surgery",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2026",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42813718/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-periop",
+     "label": "ACC/AHA perioperative cardiovascular guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2026,
+     "method": "pubmed",
+     "term": "perioperative[ti] AND noncardiac[ti] AND guideline[ti] AND AHA[ti]",
+     "title": "^(\\d{4}) AHA/ACC.*Guideline for Perioperative Cardiovascular Management"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_FFRGDSQYSG"
+}

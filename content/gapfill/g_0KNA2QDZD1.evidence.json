@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Think through the six Ws: wound infection, water (UTI), wind (atelectasis, pneumonia), walking (DVT), wonder drugs, widgets (devices, drains).",
+   "source": 0,
+   "quote": "Common causes of fever during the days or weeks after surgery include the so-called \"six Ws\": W ound infections W ater (eg, UTIs) W ind (eg, atelectasis, pneumonia) W alking (eg, DVTs) W onder drugs (eg, drug-induced fever) W idgets (eg, implantable devices, drains)",
+   "locator": "Postoperative Care, Fever",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Possible sepsis: urine and blood cultures, chest x-ray, electrolytes, glucose, BUN, creatinine, lactate and liver enzymes.",
+   "source": 1,
+   "quote": "Patients with red flag findings suggesting sepsis require cultures (urine and blood), chest radiograph, and evaluation for metabolic abnormalities with measurement of serum electrolytes, glucose, blood urea nitrogen, creatinine, lactate, and liver enzymes.",
+   "locator": "Fever, Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Wound with signs of infection: exploration and drainage of any abscess.",
+   "source": 0,
+   "quote": "If they occur, wound exploration and drainage of abscesses, systemic antibiotics, or both may be required.",
+   "locator": "Postoperative Care, wound care",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pleural effusion ≥ 10 mm that is new or of uncertain cause: thoracentesis.",
+   "source": 2,
+   "quote": "Thoracentesis should be performed in almost all patients who have pleural fluid that is ≥ 10 mm in thickness on CT, ultrasound, or lateral decubitus radiograph and that is new or of uncertain etiology.",
+   "locator": "Pleural Effusion, Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ultrasound guidance for every thoracentesis.",
+   "source": 2,
+   "quote": "Thoracentesis should be performed using ultrasonographic guidance in all cases, to improve procedural success and reduce complications",
+   "locator": "Pleural Effusion, Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Purulent fluid strongly suggests empyema.",
+   "source": 2,
+   "quote": "Identify purulent effusions strongly suggestive of empyema",
+   "locator": "Pleural Effusion, Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pleural fluid: total protein, glucose, LDH, cell count with differential and Gram stain; pH and cultures when indicated.",
+   "source": 2,
+   "quote": "Fluid should always be sent for total protein, glucose, lactate dehydrogenase (LDH), cell count and cell differential, and Gram stain. Other tests such as pleural fluid pH, aerobic and anaerobic bacterial cultures, cytology, tuberculosis fluid markers [ adenosine deaminase or interferon-gamma], amylase, mycobacterial and fungal stains and cultures, triglycerides, and cholesterol are used in appropriate clinical settings.",
+   "locator": "Pleural Effusion, Diagnosis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "surg-s12 verifier session (Detective task 01a109d4-8a7d-7460-b4ad-0a5d601b6b8e, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 3,
+    "issue": "quote did not support 'ultrasound-guided' or the empyema clause",
+    "resolution": "text trimmed to thoracentesis; ultrasound guidance and purulent-fluid/empyema split out as claims 4 and 5 with their own quotes from the same page; re-checked by shay-49353 at 2026-10-05T02:28Z: claim now says only what its quote says"
+   },
+   {
+    "claim": 6,
+    "issue": "(was claim 4) quote ended mid-sentence",
+    "resolution": "quote extended to \"…are used in appropriate clinical settings\"; re-checked by shay-49353 at 2026-10-05T02:28Z: claim now says only what its quote says"
+   }
+  ]
+ },
+ "block": "g_0KNA2QDZD1"
+}

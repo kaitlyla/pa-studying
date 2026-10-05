@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "author": "emil-85664",
+ "claims": [
+  {
+   "text": "Lactate: > 2 mmol/L means tissue hypoperfusion.",
+   "source": 0,
+   "quote": "Lactate: > 2 mmol/L (18 mg/dL) indicates tissue hypoperfusion",
+   "locator": "Evaluation, Initial evaluation and diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Initial labs: metabolic panel, liver tests, CBC, coagulation tests (PT/INR, PTT, fibrinogen) and arterial blood gas.",
+   "source": 0,
+   "quote": "Metabolic panel: BUN, creatine are tested to evaluate for kidney hypoperfusion and injury; electrolytes to detect metabolic abnormalities and aid in fluid resuscitation Liver tests (AST, ALT, bilirubin): to evaluate for hepatic hypoperfusion and injury Complete blood count (CBC): to evaluate for blood loss or infection as the source of shock Coagulation tests (PT/INR, PTT, fibrinogen): to detect disseminated intravascular coagulation (DIC) Arterial blood gas (pH, base deficit, PaCO 2 , PaO 2 ): to assess acid-base status and oxygenation",
+   "locator": "Evaluation, Initial evaluation and diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Echocardiogram and chest x-ray; bedside ultrasound to judge cardiac filling, function and volume status.",
+   "source": 0,
+   "quote": "An echocardiogram is performed to assess cardiac output, and chest radiograph is typically performed. Additional imaging studies are chosen based upon the patient's condition and suspected etiologies of shock. Rapid point-of-care ultrasound to assess adequacy of cardiac filling and function and assess volume status is often used and can be repeated frequently to evaluate progression of clinical course",
+   "locator": "Evaluation, Initial evaluation and diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected hemorrhage (ruptured AAA, GI bleed, ectopic): pregnancy test in reproductive-age women and abdominal and pelvic CT, or bedside ultrasound if unstable.",
+   "source": 0,
+   "quote": "Additional evaluation typically includes: urine and serum pregnancy tests (for reproductive-age women) and pelvic and abdominal CT or other imaging depending on the location of known or suspected injury (if the patient is unstable, point-of-care ultrasound can be helpful).",
+   "locator": "Evaluation, Identifying etiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected sepsis: CBC, urinalysis and urine culture, blood cultures, cultures of the suspected source, chest x-ray.",
+   "source": 0,
+   "quote": "Further evaluation includes: CBC, urinalysis and urine culture, blood cultures, cultures of any wound or body fluid that is the suspected source of systemic infection, chest radiograph, and sometimes abdominal or pelvic ultrasound or CT.",
+   "locator": "Evaluation, Identifying etiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected cardiac cause: cardiac biomarkers, ECG, chest x-ray and CT.",
+   "source": 0,
+   "quote": "In addition to the general initial evaluation, testing typically includes: cardiac biomarker measurement, electrocardiography (ECG), chest radiograph, and CT scan.",
+   "locator": "Evaluation, Identifying etiology",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "surg-s12 verifier session (Detective task 01a109d4-8a7d-7460-b4ad-0a5d601b6b8e, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "quote covered only the coagulation tests item",
+    "resolution": "quote extended to the full initial-labs list (exact substring, no elision); re-checked by shay-49353 at 2026-10-05T02:28Z: claim now says only what its quote says"
+   },
+   {
+    "claim": 2,
+    "issue": "quote covered echo and chest radiograph only, not point-of-care ultrasound",
+    "resolution": "quote extended through the point-of-care ultrasound sentence; re-checked by shay-49353 at 2026-10-05T02:28Z: claim now says only what its quote says"
+   }
+  ]
+ },
+ "block": "g_PSQX8M2QW1"
+}
