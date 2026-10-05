@@ -1,0 +1,119 @@
+{
+  "v": 1,
+  "guide": "ob",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto and general/workup/choose; keys = signed EORS ob general (labs, imaging, anatomy, procedures, guidelines, screenings, workup — no EKG); PAEA Gynecological, Sexual, and Reproductive Health End of Rotation Exam Topic List, effective July 2026 (scratch/gsr.txt); Leader S10 ruling (selection recorded here, general.json written in S12). The mockup lists no ob presentations, so the workup list follows general/workup/choose: usual presentations of list conditions, plus presentations her guide has notes on.",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Labs are needed for ≥3 listed conditions (Prenatal management, Ectopic pregnancy, Gestational diabetes, Rh incompatibility, every condition under Infections, Amenorrhea, PCOS).",
+      "items": [
+        { "item": "Quantitative β-hCG and serial β-hCG", "covers": "Ectopic pregnancy; Abortion; Gestational trophoblastic disease; Amenorrhea (her guide: Diagnosis of Pregnancy)" },
+        { "item": "Prenatal panel: CBC, blood type and Rh/antibody screen, rubella, HBsAg, HIV, syphilis, urine culture", "covers": "Prenatal management; Rh incompatibility (her guide: Rh Incompatibility)" },
+        { "item": "Glucose challenge and glucose tolerance tests", "covers": "Gestational diabetes" },
+        { "item": "Preeclampsia labs: urine protein/creatinine, platelets, creatinine, LFTs, LDH (HELLP)", "covers": "Hypertensive disorders of pregnancy; Eclampsia/HELLP; Pregnancy-induced hypertension" },
+        { "item": "Aneuploidy screening: first-trimester screen, quad screen, cell-free DNA", "covers": "Prenatal management (her guide: 1st TM screen and quad screen rows)" },
+        { "item": "Kleihauer-Betke test", "covers": "Rh incompatibility; Placenta abruption" },
+        { "item": "Amenorrhea workup: hCG, TSH, prolactin, FSH/LH, testosterone/DHEA-S", "covers": "Amenorrhea; Polycystic ovary syndrome; Menopause" },
+        { "item": "Vaginal discharge: wet mount, KOH/whiff test, pH; NAAT for gonorrhea, chlamydia and trichomonas", "covers": "Bacterial vaginosis; Candida; Trichomoniasis; Gonorrhea; Chlamydia; Cervicitis; PID" },
+        { "item": "Syphilis (RPR/VDRL, treponemal tests) and HSV PCR", "covers": "Syphilis; HSV; Chancroid (exclusion)" },
+        { "item": "Tumor markers: CA-125, AFP, β-hCG, inhibin", "covers": "Ovarian neoplasm; Gestational trophoblastic disease" },
+        { "item": "Urinalysis and urine culture in pregnancy", "covers": "Prenatal management (asymptomatic bacteriuria); her guide: Cystitis and Acute Pyelonephritis in pregnancy" },
+        { "item": "Group B strep culture at 36–37 weeks", "covers": "Prenatal management; Chorioamnionitis (her guide)" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging is needed for ≥3 listed conditions (Ectopic pregnancy, Placenta attachment disorders, Ovarian cysts/torsion, Leiomyoma, Breast neoplasm); her guide has her own ultrasound notes (Transvaginal U/S structures during the 1st TM, Endometrial Stripe).",
+      "items": [
+        { "item": "Transvaginal ultrasound in early pregnancy (gestational sac, yolk sac, fetal pole) and the discriminatory zone", "covers": "Ectopic pregnancy; Abortion; Prenatal management (her guide: Transvaginal U/S structures during the 1st TM)" },
+        { "item": "Obstetric ultrasound: dating, nuchal translucency, anatomy scan, placental location", "covers": "Prenatal management; Placenta attachment disorders; Multiple gestations (her guide: Prenatal Diagnosis/Care — nuchal translucency)" },
+        { "item": "Molar pregnancy 'snowstorm' pattern", "covers": "Gestational trophoblastic disease" },
+        { "item": "Pelvic ultrasound with Doppler", "covers": "Ovarian torsion; Ovarian cysts; Leiomyoma; Ovarian neoplasm" },
+        { "item": "Endometrial stripe thickness in postmenopausal bleeding", "covers": "Endometrial neoplasm; AUB (her guide: Endometrial Stripe)" },
+        { "item": "Mammography and breast ultrasound", "covers": "Breast neoplasm; Fibrocystic breast disease; Breast abscess" },
+        { "item": "Nonstress test and biophysical profile", "covers": "Fetal distress; Post-term pregnancy" }
+      ]
+    },
+    "anatomy": {
+      "prominent": true,
+      "howto": null,
+      "why": "Anatomy is needed for ≥3 listed conditions: Mechanisms of delivery, Pelvic organ prolapse, Perineal laceration/episiotomy care, Ovarian torsion; her guide has pelvic-type and C-section incision pictures.",
+      "items": [
+        { "item": "Female pelvic organs and their supports", "covers": "Pelvic organ prolapse; Urinary incontinence; Ovarian torsion" },
+        { "item": "Pelvis types (gynecoid, android, anthropoid, platypelloid)", "covers": "Labor dystocias; Mechanisms of delivery (her guide: pelvic types images)" },
+        { "item": "Fetal lie, presentation and station; cardinal movements", "covers": "Normal labor and delivery; Breech presentation (her guide: Fundal Height/Fetal Station/Fetal Lie, Normal Labor & Delivery)" },
+        { "item": "Perineal anatomy and laceration degrees", "covers": "Perineal laceration/episiotomy care" },
+        { "item": "Uterine incisions for cesarean delivery", "covers": "Mechanisms of delivery (her guide: Low Transverse, Low Vertical, Classical, Inverted T or J)" },
+        { "item": "Breast anatomy and lymphatic drainage", "covers": "Breast neoplasm; Mastitis; Breast abscess" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "Procedures are needed for ≥3 listed conditions: Cervical dysplasia, Surgical contraception, Mechanisms of delivery, Perineal laceration/episiotomy care, Abortion.",
+      "items": [
+        { "item": "Pap smear and HPV co-testing; colposcopy, LEEP and cone biopsy", "covers": "Cervical dysplasia; Cervical neoplasm; HPV" },
+        { "item": "Endometrial biopsy", "covers": "AUB; Endometrial neoplasm" },
+        { "item": "IUD and contraceptive implant placement", "covers": "Hormonal contraception; Non-hormonal contraception; Emergency contraception" },
+        { "item": "Tubal ligation and vasectomy", "covers": "Surgical contraception" },
+        { "item": "Normal vaginal delivery, operative vaginal delivery and cesarean delivery", "covers": "Normal labor and delivery; Mechanisms of delivery; Breech presentation" },
+        { "item": "Episiotomy and perineal laceration repair", "covers": "Perineal laceration/episiotomy care" },
+        { "item": "Dilation and curettage/evacuation", "covers": "Abortion; Gestational trophoblastic disease" },
+        { "item": "Bartholin gland I&D, Word catheter and marsupialization", "covers": "Bartholin gland cyst" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "Guidelines apply to ≥3 listed conditions (cervical screening, contraception eligibility, hypertensive disorders of pregnancy, STI treatment).",
+      "items": [
+        { "item": "ASCCP risk-based management of abnormal cervical screening", "covers": "Cervical dysplasia; Cervical neoplasm" },
+        { "item": "CDC US Medical Eligibility Criteria for Contraceptive Use", "covers": "Hormonal contraception; Emergency contraception (her guide: CONTRACEPTIVE METHODS, HORMONAL CONTRACEPTIVES)" },
+        { "item": "CDC STI Treatment Guidelines", "covers": "Gonorrhea; Chlamydia; Syphilis; PID; Trichomoniasis; HSV" },
+        { "item": "ACOG hypertensive disorders of pregnancy and low-dose aspirin", "covers": "Hypertensive disorders of pregnancy; Eclampsia/HELLP" },
+        { "item": "Postpartum hemorrhage management", "covers": "Postpartum hemorrhage" },
+        { "item": "Maternal cardiac arrest (ACLS)", "covers": "Amniotic fluid embolism; Eclampsia (magnesium toxicity)" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Screening applies to ≥3 listed conditions (Cervical neoplasm, Breast neoplasm, Gestational diabetes, Chlamydia/Gonorrhea, Postpartum depression, Violence and abuse).",
+      "items": [
+        { "item": "USPSTF A and B recommendations", "covers": "Every screening-eligible condition on the list" },
+        { "item": "Cervical cancer screening", "covers": "Cervical dysplasia; Cervical neoplasm" },
+        { "item": "Breast cancer screening and BRCA risk assessment", "covers": "Breast neoplasm; Ovarian neoplasm" },
+        { "item": "Chlamydia, gonorrhea, syphilis, HIV and hepatitis B screening", "covers": "Infections; Prenatal management" },
+        { "item": "Gestational diabetes screening", "covers": "Gestational diabetes" },
+        { "item": "Perinatal depression screening (EPDS, PHQ-9)", "covers": "Postpartum depression; Postpartum anxiety" },
+        { "item": "Intimate partner violence screening", "covers": "Violence and abuse (her guide: Spouse or Partner Neglect/Violence)" },
+        { "item": "Osteoporosis screening", "covers": "Menopause" },
+        { "item": "Adolescent HEADSS assessment", "covers": "Human sexuality; Hormonal contraception; Infections" }
+      ]
+    }
+  },
+  "workup": [
+    { "id": "abnormal-pap", "title": "Abnormal Pap smear", "conds": "Cervical dysplasia, HPV, Cervical neoplasm" },
+    { "id": "aub", "title": "Abnormal uterine bleeding", "conds": "AUB, Leiomyoma, Endometrial neoplasm, Polycystic ovary syndrome" },
+    { "id": "pelvic-pain", "title": "Acute pelvic pain", "conds": "Ectopic pregnancy, Ovarian torsion, Ovarian cysts, PID" },
+    { "id": "amenorrhea", "title": "Amenorrhea", "conds": "Pregnancy, Polycystic ovary syndrome, Amenorrhea, Menopause" },
+    { "id": "breast-mass", "title": "Breast mass", "conds": "Breast neoplasm, Fibrocystic breast disease, Breast adenoma, Breast abscess" },
+    { "id": "breast-pain-postpartum", "title": "Breast pain while breastfeeding", "conds": "Mastitis, Breast abscess" },
+    { "id": "preterm-contractions", "title": "Contractions before 37 weeks", "conds": "Preterm labor, Cervical insufficiency" },
+    { "id": "elevated-bp-pregnancy", "title": "Elevated blood pressure in pregnancy", "conds": "Hypertensive disorders of pregnancy, Eclampsia/HELLP, Pregnancy-induced hypertension" },
+    { "id": "postpartum-fever", "title": "Fever after delivery", "conds": "Endometritis, Mastitis, Chorioamnionitis" },
+    { "id": "vulvar-lesion", "title": "Genital ulcer or vulvar lesion", "conds": "HSV, Syphilis, Chancroid, Lichen sclerosis, Vaginal/Vulvar neoplasm" },
+    { "id": "postpartum-bleeding", "title": "Heavy bleeding after delivery", "conds": "Postpartum hemorrhage" },
+    { "id": "hot-flashes", "title": "Hot flashes", "conds": "Menopause, Perimenopause" },
+    { "id": "infertility", "title": "Inability to conceive", "conds": "Infertility, Polycystic ovary syndrome, Endometriosis, PID" },
+    { "id": "leaking-fluid", "title": "Leakage of fluid in pregnancy", "conds": "Prelabor rupture of membranes, Preterm labor" },
+    { "id": "low-mood-postpartum", "title": "Low mood after delivery", "conds": "Postpartum depression, Postpartum anxiety, Postpartum psychosis" },
+    { "id": "nausea-pregnancy", "title": "Nausea and vomiting in pregnancy", "conds": "Hyperemesis gravidarum, Gestational trophoblastic disease, Multiple gestations" },
+    { "id": "dysmenorrhea", "title": "Painful periods", "conds": "Dysmenorrhea, Endometriosis, Leiomyoma" },
+    { "id": "pelvic-pressure", "title": "Pelvic pressure / urinary leakage", "conds": "Pelvic organ prolapse, Urinary incontinence" },
+    { "id": "vaginal-bleeding-pregnancy", "title": "Vaginal bleeding in pregnancy", "conds": "Abortion, Ectopic pregnancy, Placenta attachment disorders, Placenta abruption" },
+    { "id": "vaginal-discharge", "title": "Vaginal discharge", "conds": "Bacterial vaginosis, Candida, Trichomoniasis, Cervicitis" }
+  ]
+}
