@@ -411,6 +411,28 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...cards.cards[0], home: { xx: "a" } }] })).toMatch(/one of/);
   });
 
+  describe("a card shown inside another card's class (in)", () => {
+    const [C2, C3] = [id("c", 2), id("c", 3)];
+    const card = (cid: string, inId?: string) => ({ id: cid, file: "cardio-med-list-1-1", aliases: [], home: {}, ...(inId ? { in: inId } : {}) });
+    const v = (...cs: unknown[]) => verdict("content/pharm/cards.json", { v: 1, cards: cs });
+
+    it("accepts members naming a class card", () => {
+      expect(v(card(C1), card(C2, C1), card(C3, C1))).toBe("ok");
+    });
+
+    it.each([
+      ["an unknown card", [card(C1), card(C2, C3)]],
+      ["itself", [card(C1, C1)]],
+      ["a card that is itself in another", [card(C1), card(C2, C1), card(C3, C2)]],
+    ])("refuses in naming %s", (_name, cs) => {
+      expect(v(...cs)).toMatch(/\.in: expected another card that is itself in no card/);
+    });
+
+    it("refuses an in that is not a card id", () => {
+      expect(v(card(C1), { ...card(C2), in: "x" })).not.toBe("ok");
+    });
+  });
+
   it("validates trims.json", () => {
     const path = "content/pharm/trims.json";
     const r = id("r", 1);

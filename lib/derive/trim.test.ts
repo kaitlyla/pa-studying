@@ -71,6 +71,53 @@ describe("hiddenLines", () => {
   });
 });
 
+describe("hiddenLines: a line the card already showed word for word", () => {
+  const N2 = "b_NNNNNNNNN2";
+  const ind = (s: string): number => (s.startsWith("      ") ? 81 : s.startsWith("    ") ? 54 : s.startsWith("  ") ? 27 : 0);
+  /** A card stacking two of her files' notes on one class: block N, then block N2; nothing judged. */
+  const card = (first: string[], second: string[]): TrimSource => ({
+    blocks: [],
+    rows: {},
+    notesBlocks: {
+      [N]: block(N, "prose", doc(...first.map((s) => para(s.trim(), { indLeft: ind(s) })))),
+      [N2]: block(N2, "prose", doc(...second.map((s) => para(s.trim(), { indLeft: ind(s) })))),
+    },
+    trims: {},
+  });
+  const hidden = (s: TrimSource): [number[], number[]] => {
+    const h = hiddenLines(s, [N, N2], new Set());
+    return [[...(h.get(N) ?? [])].sort((a, b) => a - b), [...(h.get(N2) ?? [])].sort((a, b) => a - b)];
+  };
+
+  it("leaves out the later copy under the same headings, and a heading whose lines all repeat, keeping the first", () => {
+    // Each file titles the class its own way; the title is no heading of the lines under it.
+    const s = card(
+      ["Calcium Channel Blockers", "  Adverse Effects: Dizzy, HA", "  Contraindications:", "    BB: sensitive to depressant effect", "    CHF"],
+      ["Calcium Channel Blockers (CCBs)", "  MOA: bind L-type channel", "  Adverse Effects: Dizzy, HA", "  Contraindications:", "    BB: sensitive to depressant effect", "    CHF"],
+    );
+    expect(hidden(s)).toEqual([[], [2, 3, 4, 5]]);
+  });
+
+  it("keeps a repeated heading while a line under it is new", () => {
+    const s = card(["CCB", "  Monitoring:", "    EKG"], ["CCBs", "  Monitoring:", "    EKG", "    Liver function"]);
+    expect(hidden(s)).toEqual([[], [2]]);
+  });
+
+  it("keeps the same text under a different heading", () => {
+    // "Mod lipid solubility" of carteolol is not that of carvedilol; "CHF" as a use is not a contraindication.
+    const s = card(
+      ["Beta-blockers", "  Carvedilol", "    Mod lipid solubility", "  Contraindications:", "    CHF"],
+      ["Β-blockers", "  Carteolol", "    Mod lipid solubility", "  Clinical Use:", "    CHF"],
+    );
+    expect(hidden(s)).toEqual([[], []]);
+  });
+
+  it("leaves out a repeat within one file's notes too", () => {
+    const s = card(["Nitrates", "  Adverse: headache", "  Adverse: headache"], ["Organic nitrates"]);
+    expect(hidden(s)).toEqual([[2], []]);
+  });
+});
+
 describe("tableRows and withoutLines", () => {
   it("lists the rows of the given tables", () => {
     expect([...tableRows(source(NOTES, []), [T])].sort()).toEqual([BB, CCB, HEAD].sort());

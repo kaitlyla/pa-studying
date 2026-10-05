@@ -253,14 +253,18 @@ export interface PubPharmSection {
 
 export interface PubCard {
   title: string;
-  /** Pharm file name (label shown on the card). */
+  /** The class card's own pharm file name. */
   file: string;
-  /** The pharm file's base size; its blocks' `size` marks are relative to it. */
+  /** That file's base size. */
   basePt: number;
-  /** Notes blocks (keys of `notesBlocks`), in file order. */
+  /** Notes blocks (keys of `notesBlocks`), in part order. */
   blocks: string[];
-  /** The card's pharm-notes parts in order, each with its blocks; a search unit's `at` names a part id. */
-  parts: { id: string; blocks: string[] }[];
+  /**
+   * The card's pharm-notes parts in order — its own, then those of the cards shown inside it — each
+   * with its blocks, its file name (labeled on the card) and that file's base size, to which its
+   * blocks' `size` marks are relative; a search unit's `at` names a part id.
+   */
+  parts: { id: string; blocks: string[]; file: string; basePt: number }[];
 }
 
 /**

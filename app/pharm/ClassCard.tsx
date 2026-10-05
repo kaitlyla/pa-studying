@@ -1,6 +1,6 @@
 // A collapsible drug-class card (pharm/by-class) and what goes inside one: rows from her guide and
 // her pharm notes on the class (with the pharm-notes readability aids, pharm/notes-fidelity).
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { PubBlock, SystemJson } from "../../lib/derive/published.ts";
 import { withoutLines } from "../../lib/derive/trim.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
@@ -37,34 +37,46 @@ export interface NotesPart {
   /** The part id (search lands on it); null when the card itself carries it. */
   id: string | null;
   blocks: readonly string[];
+  /** The part's pharm file name and base size, when not the card's own. */
+  file?: string;
+  basePt?: number;
 }
 
 /**
- * Her pharm notes for a card or part: the file label, then each part's blocks, without the lines in
- * `hidden` (block id → paragraph indexes her guide table, shown with the card, already says).
+ * Her pharm notes for a card or part: each run of parts from one of her files under that file's
+ * label, without the lines in `hidden` (block id → paragraph indexes left out: lines her guide table,
+ * shown with the card, already says, and lines the card already showed word for word).
  */
 export function CardNotes({ system, file, basePt, parts, hidden }: {
   system: SystemJson; file: string; basePt: number; parts: readonly NotesPart[]; hidden?: ReadonlyMap<string, ReadonlySet<number>>;
 }): ReactNode {
   return (
     <div className="phn">
-      <div className="ph-file">
-        <span className="own-only">From your pharm notes · </span>
-        {file}
-      </div>
-      {parts.map((p, i) => (
-        <div key={p.id ?? i} className="ph-part" data-anchor={p.id ?? undefined}>
-          {p.blocks.map((id) => {
-            const b = system.notesBlocks[id];
-            if (!b) return null;
-            return (
-              <div key={id} className="notes ph-course">
-                <RichDoc doc={withoutLines(b.doc, hidden?.get(id))} basePt={basePt} pharmNotes />
+      {parts.map((p, i) => {
+        const from = p.file ?? file;
+        const label = i === 0 || from !== (parts[i - 1]?.file ?? file);
+        return (
+          <Fragment key={p.id ?? i}>
+            {label && (
+              <div className="ph-file">
+                <span className="own-only">From your pharm notes · </span>
+                {from}
               </div>
-            );
-          })}
-        </div>
-      ))}
+            )}
+            <div className="ph-part" data-anchor={p.id ?? undefined}>
+              {p.blocks.map((id) => {
+                const b = system.notesBlocks[id];
+                if (!b) return null;
+                return (
+                  <div key={id} className="notes ph-course">
+                    <RichDoc doc={withoutLines(b.doc, hidden?.get(id))} basePt={p.basePt ?? basePt} pharmNotes />
+                  </div>
+                );
+              })}
+            </div>
+          </Fragment>
+        );
+      })}
     </div>
   );
 }

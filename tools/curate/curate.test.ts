@@ -256,6 +256,17 @@ describe("pharm-parts", () => {
     await refused(["pharm-parts", "cardio-med-list", await draft("c", { parts: [unnamed, ccb, nitrates, beta], cards: cards3 })], new RegExp(`${P(1)}.*pharm part`), files);
   });
 
+  it("records a card's `in`, and keeps it when a later draft of the file omits it", async () => {
+    const before = await read<CardsFile>("content/pharm/cards.json");
+    const bb = must(before.cards.find((c) => c.id !== C(1) && c.id !== C(2)), "beta card").id;
+    const parts = [overview, ccb, nitrates, { ...beta, card: bb }];
+    const cards = (nitratesIn: object) => [cards3[0], { ...cards3[1], ...nitratesIn }, { ...cards3[2], id: bb }];
+    await run(root, ["pharm-parts", "cardio-med-list", await draft("in1", { parts, cards: cards({ in: C(1) }) })]);
+    await run(root, ["pharm-parts", "cardio-med-list", await draft("in2", { parts, cards: cards({}) })]);
+    const after = await read<CardsFile>("content/pharm/cards.json");
+    expect(after.cards.map((c) => [c.id, c.in])).toEqual([[C(1), undefined], [C(2), C(1)], [bb, undefined]]);
+  });
+
   it("refuses an unknown pharm notes file", async () => {
     await refused(["pharm-parts", "nope", await draft("a", { parts: [], cards: [] })], /no pharm notes file nope/, files);
   });

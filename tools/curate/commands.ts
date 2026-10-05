@@ -249,6 +249,8 @@ interface DraftCard {
   key?: string;
   aliases: string[];
   home: Partial<Record<GuideId, string>>;
+  /** The class card it shows inside; omitted, an existing card keeps its own. */
+  in?: string;
 }
 interface DraftPart {
   id?: string;
@@ -278,7 +280,8 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
       if (keys.has(d.key)) throw new CurateError(`pharm-parts: card key "${d.key}" used twice`);
       keys.set(d.key, id);
     }
-    return { id, file: fileSlug, aliases: d.aliases, home: d.home };
+    const within = d.in ?? c.cards.cards.find((x) => x.id === id)?.in;
+    return { id, file: fileSlug, aliases: d.aliases, home: d.home, ...(within === undefined ? {} : { in: within }) };
   });
   const cardIds = new Set(cards.map((x) => x.id));
   const parts: PharmPart[] = (draft.parts as DraftPart[]).map((d) => {

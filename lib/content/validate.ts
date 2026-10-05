@@ -349,9 +349,15 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
 export const validateCards: Validator = (v, ctx) => {
   shapeOf<CardsFile>({
     v: v1,
-    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, {})),
+    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c") })),
   }, {})(v, "", ctx);
-  uniqueArr(str)((v as CardsFile).cards.map((c) => c.id), ".cards[].id", ctx);
+  const cards = (v as CardsFile).cards;
+  uniqueArr(str)(cards.map((c) => c.id), ".cards[].id", ctx);
+  cards.forEach((c, i) => {
+    if (c.in === undefined) return;
+    const target = cards.find((x) => x.id === c.in);
+    if (!target || target === c || target.in !== undefined) bad(ctx, `.cards[${i}].in`, "another card that is itself in no card", c.in);
+  });
 };
 
 export const validateTrims: Validator = (v, ctx) => {

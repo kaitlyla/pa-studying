@@ -182,7 +182,11 @@ export interface StructureFile {
 
 export interface CardsFile {
   v: 1;
-  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>> }[];
+  /**
+   * `in`: the class card this card's notes show inside (display only), where another of her files
+   * covers the same class; such a card is never shown as a card of its own.
+   */
+  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string }[];
 }
 
 /**

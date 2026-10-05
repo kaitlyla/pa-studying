@@ -166,8 +166,9 @@ export function publish(c: Content): PublishResult {
   // ---- pharm cards --------------------------------------------------------------------------------
   const matcher = new CardMatcher(c.cards.cards);
   const placements: Placements = placeCards(systems.map((s) => s.pharm), matcher, new Set(c.pharm.map((p) => p.file.id)));
+  /** The parts of a class card's whole group: its own, then those of each card shown inside it. */
   const cardParts = (card: string): { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }[] =>
-    [...parts.values()].filter((p) => p.part.role === "card" && p.part.card === card);
+    matcher.membersOf(card).flatMap((m) => [...parts.values()].filter((p) => p.part.role === "card" && p.part.card === m.id));
   const cardTitle = (card: string): string => cardParts(card)[0]?.part.title ?? c.cards.cards.find((x) => x.id === card)?.aliases[0] ?? card;
 
   // ---- existence and flags -------------------------------------------------------------------------
@@ -261,6 +262,7 @@ export function publish(c: Content): PublishResult {
     const route = view(h.s, pharmView(h.s.data.file.id, h.section, id));
     const place = { route, loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) };
     hosts[id] = place;
+    if (id.startsWith("c_")) for (const m of matcher.membersOf(id)) hosts[m.id] = place;
     const ps = id.startsWith("c_") ? cardParts(id) : [parts.get(id)].filter((x) => x !== undefined);
     for (const p of ps) {
       if (id.startsWith("c_")) hosts[p.part.id] = place;
@@ -568,7 +570,7 @@ export function publish(c: Content): PublishResult {
       const blocks = ps.flatMap((p) => p.part.blocks);
       cards[card] = {
         title: cardTitle(card), file: file?.file.fileName ?? "", basePt: file?.file.basePt ?? 0, blocks,
-        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks })),
+        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks, file: p.file.file.fileName, basePt: p.file.file.basePt })),
       };
       for (const id of blocks) {
         const b = pharmBlocks.get(id);

@@ -24,24 +24,48 @@ export function phraseMatcher(phrases: readonly string[]): (text: string) => boo
   return test;
 }
 
-/** Matches texts against the cards' aliases. */
+/**
+ * Matches texts against the class cards. A class card stands for its whole group: itself and the
+ * cards shown inside it (`in`), whose aliases, files and homes count as its own.
+ */
 export class CardMatcher {
+  /** Every card of `cards.json`, members included. */
+  readonly all: readonly Card[];
+  /** The class cards (in no other card), in `cards.json` order. */
   readonly cards: readonly Card[];
+  private readonly members: Map<string, Card[]>;
   private readonly tests: ((text: string) => boolean)[];
 
   constructor(cards: readonly Card[]) {
-    this.cards = cards;
-    this.tests = cards.map((c) => phraseMatcher(c.aliases));
+    this.all = cards;
+    this.cards = cards.filter((c) => c.in === undefined);
+    this.members = new Map(this.cards.map((c) => [c.id, [c, ...cards.filter((m) => m.in === c.id)]]));
+    this.tests = this.cards.map((c) => phraseMatcher(this.membersOf(c.id).flatMap((m) => m.aliases)));
   }
 
-  /** Ids of the cards with an alias in `text`, in `cards.json` order. */
+  /** Ids of the class cards with an alias in `text`, in `cards.json` order. */
   matching(text: string): string[] {
     return this.cards.filter((_, i) => this.tests[i]?.(text)).map((c) => c.id);
   }
 
-  /** True when any alias of the card occurs in `text`. */
-  cardIn(cardId: string, text: string): boolean {
-    const i = this.cards.findIndex((c) => c.id === cardId);
+  /** The class card first, then the cards shown inside it in `cards.json` order. */
+  membersOf(classId: string): Card[] {
+    return this.members.get(classId) ?? [];
+  }
+
+  /** The class card a card shows as: its `in`, else itself. */
+  classOf(cardId: string): string {
+    return this.all.find((c) => c.id === cardId)?.in ?? cardId;
+  }
+
+  /** The pharm files the class card's group comes from. */
+  filesOf(classId: string): Set<string> {
+    return new Set(this.membersOf(classId).map((m) => m.file));
+  }
+
+  /** True when any alias of the class card's group occurs in `text`. */
+  cardIn(classId: string, text: string): boolean {
+    const i = this.cards.findIndex((c) => c.id === classId);
     return i >= 0 && (this.tests[i]?.(text) ?? false);
   }
 }
@@ -71,6 +95,42 @@ function contentRows(table: Table, conditionRows: readonly string[]): Row[] {
   return table.rows.filter((r) => r.kind === "content" && !cond.has(r.id));
 }
 
+/** A heading-row column label that names her drug-name column ("Drugs", "RX", "PHARM"). */
+const DRUG_COLUMN = /^(?:drugs?|rx|pharm)$/i;
+
+/**
+ * The cells under the drug row's heading-row drug-name columns, where her tables list the agents
+ * ("CCBs ‖ DHP: Amlodipine … ‖ Non-DHP: Verapamil …"). A column whose label reads empty belongs to
+ * the labeled column to its left, since a heading cell spanning several columns reads empty in the
+ * ones it covers.
+ */
+function drugColumnText(t: SystemTopics, row: Row): string {
+  const heading = t.rows.get(row.id)?.heading;
+  const columns = heading ? (t.headings.get(heading)?.columns ?? []) : [];
+  const parts: string[] = [];
+  let drug = false;
+  columns.forEach((label, i) => {
+    if (collapse(label) !== "") drug = DRUG_COLUMN.test(collapse(label));
+    if (drug) parts.push(row.cells[i + 1] ?? "");
+  });
+  return parts.join("\n");
+}
+
+/**
+ * The cards a drug row lists: the cards matching its first cell (the class she names), plus the
+ * cards matching the agents in its drug-name columns that come from the same med list as one of
+ * those. Her med lists keep a class together with its sub-classes, so a card from another med list
+ * that shares an agent covers that drug's other use (prazosin in her BPH list on her ⍺1-blocker
+ * row), not this row's class. When the first cell matches no card, every card its agents match counts.
+ */
+export function rowCards(matcher: CardMatcher, t: SystemTopics, row: Row): string[] {
+  const named = matcher.matching(firstCell(row));
+  const files = new Set(named.flatMap((c) => [...matcher.filesOf(c)]));
+  const sameFile = (c: string): boolean => [...matcher.filesOf(c)].some((f) => files.has(f));
+  const listed = matcher.matching(drugColumnText(t, row)).filter((c) => !named.includes(c) && (named.length === 0 || sameFile(c)));
+  return matcher.cards.map((c) => c.id).filter((c) => named.includes(c) || listed.includes(c));
+}
+
 /**
  * Card order on every pharm section, with every card placed at least once (40 §40.4). `systems`
  * is in site order. Fails when a card names an unknown file or home, or is placed nowhere.
@@ -85,10 +145,11 @@ export function placeCards(systems: readonly PharmSystem[], matcher: CardMatcher
         const drug = s.structure.drugTables.find((d) => d.block === tableId);
         if (!table || !drug) continue;
         for (const row of contentRows(table, drug.conditionRows)) {
-          for (const c of matcher.matching(firstCell(row))) if (!tableCards.includes(c)) tableCards.push(c);
+          for (const c of rowCards(matcher, s.topics, row)) if (!tableCards.includes(c)) tableCards.push(c);
         }
       }
-      placements.set(sectionKey(s.guide, s.system, ps.id), { tableCards, also: ps.also.filter((c) => !tableCards.includes(c)) });
+      const also = [...new Set(ps.also.map((c) => matcher.classOf(c)))];
+      placements.set(sectionKey(s.guide, s.system, ps.id), { tableCards, also: also.filter((c) => !tableCards.includes(c)) });
     }
   }
   const placedIn = (card: string, guide: string | null): boolean => {
@@ -97,14 +158,19 @@ export function placeCards(systems: readonly PharmSystem[], matcher: CardMatcher
     }
     return false;
   };
-  for (const card of matcher.cards) {
+  for (const card of matcher.all) {
     if (!pharmFiles.has(card.file)) throw new BuildError(card.id, `card names pharm file "${card.file}", which does not exist`);
-    for (const [guide, system] of Object.entries(card.home)) {
-      const home = systems.find((s) => s.guide === guide && s.system === system);
-      if (!home) throw new BuildError(card.id, `card home names system "${guide}/${system}", which does not exist`);
-      if (placedIn(card.id, guide)) continue;
-      const first = home.structure.pharmSections[0];
-      if (first) placements.get(sectionKey(guide, system, first.id))?.also.push(card.id);
+  }
+  // A class card's group has a home in each system any of its cards names.
+  for (const card of matcher.cards) {
+    for (const m of matcher.membersOf(card.id)) {
+      for (const [guide, system] of Object.entries(m.home)) {
+        const home = systems.find((s) => s.guide === guide && s.system === system);
+        if (!home) throw new BuildError(m.id, `card home names system "${guide}/${system}", which does not exist`);
+        if (placedIn(card.id, guide)) continue;
+        const first = home.structure.pharmSections[0];
+        if (first) placements.get(sectionKey(guide, system, first.id))?.also.push(card.id);
+      }
     }
     if (!placedIn(card.id, null)) throw new BuildError(card.id, "pharm card appears in no pharm section of any guide");
   }
@@ -189,7 +255,7 @@ export function treatmentText(t: SystemTopics, topic: Topic): string {
 
 /**
  * The meds panel under a condition topic (40 §40.5): the system's drug rows whose first cell, or an
- * alias of a card matching it, occurs in the topic's treatment text, grouped under the matching
+ * alias of a card matching the row's drug names, occurs in the topic's treatment text, grouped under the matching
  * cards her treatment text names (every matching card when only the row's own name occurs). A drug
  * table's place in her guide says nothing about which conditions it treats — her groups never close,
  * so a table can follow conditions it has nothing to do with — and condition rows are never offered.
@@ -210,7 +276,7 @@ export function medsPanel(s: PharmSystem, blockOrder: readonly string[], topic: 
       if (collapse(first) === "" || seen.has(r.id)) continue;
       // A row naming several classes ("NSAIDs: Naproxen Indomethacin") files only under the cards
       // her text names: "NSAIDs" in her text means the NSAIDs card, not the naproxen sub-class card.
-      const cards = matcher.matching(first);
+      const cards = rowCards(matcher, s.topics, r);
       const named = cards.filter((c) => matcher.cardIn(c, text));
       if (named.length === 0 && !phraseMatcher([first])(text)) continue;
       seen.add(r.id);

@@ -178,8 +178,8 @@ export function cardioSystem(): SystemJson {
       files: { files: [{ id: "d_AAAAAAAAF1", name: "Pharm files doc", kind: "pdf", route: "#/file/d_AAAAAAAAF1" }], removed: [], pending: [] },
     },
     cards: {
-      c_AAAAAAAAC1: { title: "CARDTITLE Nitrates", file: "cardio med list", basePt: 11, blocks: ["b_AAAAAAAAN1"], parts: [{ id: "p_AAAAAAAAN1", blocks: ["b_AAAAAAAAN1"] }] },
-      c_AAAAAAAAC2: { title: "CARDTITLE Also", file: "cardio med list", basePt: 11, blocks: ["b_AAAAAAAAN2"], parts: [{ id: "p_AAAAAAAAN2", blocks: ["b_AAAAAAAAN2"] }] },
+      c_AAAAAAAAC1: { title: "CARDTITLE Nitrates", file: "cardio med list", basePt: 11, blocks: ["b_AAAAAAAAN1"], parts: [{ id: "p_AAAAAAAAN1", blocks: ["b_AAAAAAAAN1"], file: "cardio med list", basePt: 11 }] },
+      c_AAAAAAAAC2: { title: "CARDTITLE Also", file: "cardio med list", basePt: 11, blocks: ["b_AAAAAAAAN2"], parts: [{ id: "p_AAAAAAAAN2", blocks: ["b_AAAAAAAAN2"], file: "cardio med list", basePt: 11 }] },
     },
     parts: {
       p_AAAAAAAAOV: { title: "Overview PARTTITLE", role: "overview", file: "cardio med list", basePt: 11, blocks: ["b_AAAAAAAAOV"] },

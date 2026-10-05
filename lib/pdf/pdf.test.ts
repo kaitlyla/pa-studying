@@ -91,6 +91,22 @@ describe("scope content", () => {
     expect(section()).toEqual([...D1, "Overview notes", "Also class notes", "Learning objectives notes"]);
   });
 
+  it("prints a class card's notes from each file at that file's size, leaving out a line the card already printed", () => {
+    const sys = cardioSystem();
+    sys.notesBlocks.b_AAAAAAAAN1 = block("b_AAAAAAAAN1", "prose", doc(para("Nitrates"), para("Adverse: headache", { indLeft: 27 })));
+    sys.notesBlocks.b_AAAAAAAAN3 = block("b_AAAAAAAAN3", "prose", doc(para("Organic nitrates"), para("Adverse: headache", { indLeft: 27 }), para("Tolerance", { indLeft: 27 })));
+    const c1 = sys.cards.c_AAAAAAAAC1;
+    if (!c1) throw new Error("no card C1");
+    c1.blocks = ["b_AAAAAAAAN1", "b_AAAAAAAAN3"];
+    c1.parts = [...c1.parts, { id: "p_AAAAAAAAN3", blocks: ["b_AAAAAAAAN3"], file: "Cardio II Med List", basePt: 9 }];
+    const def = buildDocDefinition({ kind: "pharmSection", id: "antianginals" }, { nav, system: sys }, fontmap);
+    expect(lines(def.content)).toEqual([...D1, "Overview notes", "Nitrates", "Adverse: headache", "Organic nitrates", "Tolerance", "Also class notes", "Learning objectives notes"]);
+    const all = inlines(def.content);
+    expect(all.find((i) => i.text === "Adverse: headache")?.fontSize).toBe(11);
+    expect(all.find((i) => i.text === "Organic nitrates")?.fontSize).toBe(9);
+    expect(all.find((i) => i.text === "Tolerance")?.fontSize).toBe(9);
+  });
+
   it("uses the Word page's own page setup", () => {
     const def = buildDocDefinition({ kind: "doc" }, { doc: wordDoc() }, fontmap);
     expect(def.pageSize).toEqual({ width: 612, height: 792 });

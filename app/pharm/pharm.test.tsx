@@ -541,6 +541,30 @@ describe("pharm pages", () => {
     expect(visibleText(card)).toContain("MOA: block L-type channels");
   });
 
+  it("a class card stacks her notes from each file under that file's name", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const ccb = need(mod.cards[C(1)], "CCB card");
+    const other = need(mod.cards[C(2)], "Nitrates card");
+    const own = need(ccb.parts[0], "CCB part");
+    const II = "Cardio II Med List";
+    // Two parts from her other file follow the card's own: one label for the run of them.
+    ccb.parts = [own, { id: "p_ii_one", blocks: other.blocks, file: II, basePt: 9 }, { id: "p_ii_two", blocks: other.blocks, file: II, basePt: 9 }];
+    ccb.blocks = [...own.blocks, ...other.blocks];
+    const served = new Map(files);
+    served.set(CV, mod);
+    server.restore();
+    server = serveData(served);
+
+    const pg = pharmPage(await renderSection(SEC_HASH));
+    await click(cardBtn(pg, C(1)));
+    const card = cardEl(pg, C(1));
+    expect([...card.querySelectorAll(".ph-file")].map((f) => visibleText(f))).toEqual(["cardio med list", II]);
+    expect([...card.querySelectorAll<HTMLElement>(".ph-part")].map((p) => p.dataset.anchor)).toEqual([own.id, "p_ii_one", "p_ii_two"]);
+    const text = visibleText(card);
+    expect(text.indexOf("MOA: block L-type channels")).toBeLessThan(text.indexOf(II));
+    expect(text.indexOf(II)).toBeLessThan(text.indexOf("MOA: venodilation"));
+  });
+
   it("a section with learning objectives and a card without notes renders both", async () => {
     const cv = systemJson(CV);
     const mod = structuredClone(cv);

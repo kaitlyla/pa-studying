@@ -38,10 +38,34 @@ export function tableRows(system: Pick<SystemJson, "rows">, tables: readonly str
 const indentOf = (n: PMNode): number => (typeof n.attrs?.indLeft === "number" ? n.attrs.indLeft : 0);
 
 /**
- * Paragraph indexes to leave out of each of the card's notes blocks, where the card is shown with the
- * rows in `shown`. A covered line goes when one of its rows is shown and reads as judged, and a
- * label when it heads at least one line; either stays while any line under it (more indented, up to
- * the next line that is not) stays, so nothing is left hanging under the wrong heading.
+ * Each line's place in its block: the texts of the lines it sits under (each less indented line
+ * before it, up to the last that is not), then its own text; null for a line without text or that is
+ * not a paragraph. The block's first line — the part's title, which names the class differently in
+ * each of her files — counts for no line under it.
+ */
+function lineKeys(nodes: readonly PMNode[]): (string | null)[] {
+  const path: { indent: number; text: string }[] = [];
+  return nodes.map((n, i) => {
+    if (n.type !== "paragraph") {
+      path.length = 0;
+      return null;
+    }
+    const text = trimLineText(n);
+    if (text === "") return null;
+    while (path.length > 0 && (path[path.length - 1] as { indent: number }).indent >= indentOf(n)) path.pop();
+    const key = [...path.map((p) => p.text), text].join("\n");
+    path.push({ indent: indentOf(n), text: i === 0 ? "" : text });
+    return key;
+  });
+}
+
+/**
+ * Paragraph indexes to leave out of each of the card's notes blocks (in card order), where the card
+ * is shown with the rows in `shown`. A covered line goes when one of its rows is shown and reads as
+ * judged; a label when it heads at least one line; and a line the card already showed word for word
+ * under the same lines — her files on one class repeat each other. Each stays while any line under it
+ * (more indented, up to the next line that is not) stays, so nothing is left hanging under the
+ * wrong heading.
  */
 export function hiddenLines(system: TrimSource, blocks: readonly string[], shown: ReadonlySet<string>): Map<string, Set<number>> {
   const out = new Map<string, Set<number>>();
@@ -51,18 +75,23 @@ export function hiddenLines(system: TrimSource, blocks: readonly string[], shown
     const doc = block === undefined ? undefined : blockDocs.get(block);
     return shown.has(id) && doc !== undefined && rowTexts(doc).get(id) === text;
   };
+  const seen = new Set<string>();
   for (const id of blocks) {
-    const judged = system.trims[id];
     const nodes = (system.notesBlocks[id]?.doc.content as PMNode[] | undefined) ?? [];
-    if (!judged || nodes.length === 0) continue;
-    const byText = new Map<string, PubTrimLine>(judged.map((l) => [l.text, l]));
+    const byText = new Map<string, PubTrimLine>((system.trims[id] ?? []).map((l) => [l.text, l]));
+    const repeated = lineKeys(nodes).map((k) => {
+      if (k === null) return false;
+      const again = seen.has(k);
+      seen.add(k);
+      return again;
+    });
     const hidden = new Set<number>();
     for (let i = nodes.length - 1; i >= 0; i--) {
       const n = nodes[i] as PMNode;
       if (n.type !== "paragraph") continue;
       const line = byText.get(trimLineText(n));
-      if (!line) continue;
-      if (!line.label && !line.rows.some((r) => rowReads(r.id, r.text))) continue;
+      const covered = line !== undefined && (line.label || line.rows.some((r) => rowReads(r.id, r.text)));
+      if (!covered && !repeated[i]) continue;
       let under = 0;
       let allHidden = true;
       for (let j = i + 1; j < nodes.length; j++) {
@@ -72,7 +101,7 @@ export function hiddenLines(system: TrimSource, blocks: readonly string[], shown
         under++;
         if (!hidden.has(j)) allHidden = false;
       }
-      if (allHidden && (!line.label || under > 0)) hidden.add(i);
+      if (allHidden && (repeated[i] || !line?.label || under > 0)) hidden.add(i);
     }
     if (hidden.size > 0) out.set(id, hidden);
   }

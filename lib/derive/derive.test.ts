@@ -15,7 +15,7 @@ import { B, C, D, G, GONE, P, R, S, tableDoc, U, writeFixture } from "../../tool
 import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
-import { CardMatcher, medsPanel, phraseMatcher, stubLabel, topicText } from "./pharm.ts";
+import { type Card, CardMatcher, medsPanel, phraseMatcher, rowCards, stubLabel, topicText } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
@@ -660,6 +660,76 @@ describe("pharm (40 §40.4–§40.5)", () => {
     };
     expect(panel(R(911))).toEqual([[C(7), [R(920)]]]);
     expect(panel(R(912))).toEqual([[C(8), [R(920)]]]);
+  });
+
+  describe("a drug row's cards: its class, plus the agents in its drug-name columns from the class's med list", () => {
+    const drugs = table(B(92), 4, [
+      [R(920), "heading", "PHARM", "Drugs", "", "MOA"],
+      // The agents sit under the column the "Drugs" heading spans; the MOA column names digoxin only in passing.
+      [R(921), "content", "CCBs", "DHP:", "Amlodipine, nifedipine", "unlike digoxin"],
+      [R(922), "content", "Tocolytics", "nifedipine", "", ""],
+    ]);
+    const cards = (over: Partial<Card>[] = []) =>
+      new CardMatcher([
+        { id: C(1), file: "cardio", aliases: ["CCBs"], home: {} },
+        { id: C(2), file: "cardio", aliases: ["amlodipine", "nifedipine"], home: {}, ...over[0] },
+        // Her OB list's tocolytic card: nifedipine for another use.
+        { id: C(3), file: "ob", aliases: ["nifedipine"], home: {} },
+        { id: C(4), file: "cardio", aliases: ["digoxin"], home: {} },
+      ]);
+    const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "x", conditionRows: [] }] });
+    const t = deriveTopics([drugs], st);
+    const row = (id: string) => {
+      const r = tableOf(drugs)?.rows.find((x) => x.id === id);
+      if (!r) throw new Error(`no row ${id}`);
+      return r;
+    };
+
+    it("adds a same-list card its drug columns name, not another list's card nor a card named in another column", () => {
+      expect(rowCards(cards(), t, row(R(921)))).toEqual([C(1), C(2)]);
+    });
+
+    it("takes every card its agents name when the first cell names no card", () => {
+      expect(rowCards(cards(), t, row(R(922)))).toEqual([C(2), C(3)]);
+    });
+
+    it("reads a card shown inside a class card as that class card", () => {
+      expect(rowCards(cards([{ in: C(1) }]), t, row(R(921)))).toEqual([C(1)]);
+      expect(rowCards(cards([{ in: C(1) }]), t, row(R(922)))).toEqual([C(1), C(3)]);
+    });
+  });
+
+  it("a class card stands for its group: members' aliases match it, members list after it, its files are theirs", () => {
+    const m = new CardMatcher([
+      { id: C(5), file: "b", aliases: ["DHP"], home: {}, in: C(6) },
+      { id: C(6), file: "a", aliases: ["CCB"], home: {} },
+      { id: C(7), file: "c", aliases: ["Class IV"], home: {}, in: C(6) },
+    ]);
+    expect(m.cards.map((c) => c.id)).toEqual([C(6)]);
+    expect(m.all.map((c) => c.id)).toEqual([C(5), C(6), C(7)]);
+    expect(m.matching("Class IV agents")).toEqual([C(6)]);
+    expect(m.cardIn(C(6), "start a DHP")).toBe(true);
+    expect(m.membersOf(C(6)).map((c) => c.id)).toEqual([C(6), C(5), C(7)]);
+    expect([m.classOf(C(5)), m.classOf(C(6))]).toEqual([C(6), C(6)]);
+    expect(m.filesOf(C(6))).toEqual(new Set(["a", "b", "c"]));
+  });
+
+  it("a card shown inside another publishes as one card: its notes stack after the class card's, wherever either was placed", () => {
+    const c = mutated((x) => {
+      const nitrates = x.cards.cards.find((k) => k.id === C(2));
+      if (nitrates) nitrates.in = C(1);
+    });
+    const pub = publish(c);
+    const fm = pub.files.get("g/fm/s/cardiovascular.json") as SystemJson;
+    expect(fm.pharm?.sections[0]?.cards).toEqual([C(1), C(3)]);
+    expect(fm.cards[C(2)]).toBeUndefined();
+    expect(fm.cards[C(1)]?.parts).toEqual([
+      { id: P(2), blocks: [B(71)], file: "cardio med list", basePt: 11 },
+      { id: P(3), blocks: [B(72)], file: "cardio med list", basePt: 11 },
+    ]);
+    const hosts = pub.files.get("hosts.json") as HostsJson;
+    expect(hosts[C(2)]?.route).toBe(hosts[C(1)]?.route);
+    expect(hosts[B(72)]?.route).toBe(hosts[C(1)]?.route);
   });
 
   it("card order follows table rows, then `also`; a card unplaced in a home guide is appended to that home system's first pharm section", () => {

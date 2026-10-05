@@ -103,7 +103,7 @@ function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: n
     if (!card) throw new Error(`PDF: card ${c} is missing from ${system.guide}/${system.id}`);
     const hidden = hiddenLines(system, card.blocks, shown);
     if (allLinesHidden(system, card.blocks, hidden)) continue;
-    out.push(...notes(card.blocks, card.basePt, hidden));
+    for (const p of card.parts) out.push(...notes(p.blocks, p.basePt, hidden));
   }
   out.push(...part(ps.lo));
   return out;
