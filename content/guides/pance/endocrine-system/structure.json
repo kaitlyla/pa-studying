@@ -1,10 +1,99 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "adrenal-disorders",
+   "title": "Adrenal disorders"
+  },
+  {
+   "id": "diabetes-mellitus",
+   "title": "Diabetes mellitus"
+  },
+  {
+   "id": "hypogonadism",
+   "title": "Hypogonadism"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "pituitary-disorders",
+   "title": "Pituitary disorders"
+  },
+  {
+   "id": "parathyroid-disorders",
+   "title": "Parathyroid disorders"
+  },
+  {
+   "id": "thyroid-disorders",
+   "title": "Thyroid disorders"
+  }
+ ],
+ "members": {
+  "b_RFCZ55FEKP": "adrenal-disorders",
+  "r_50S0FKPE1Y": "adrenal-disorders",
+  "r_QA26H0V81D": "adrenal-disorders",
+  "b_VPSY7W2SMA": "adrenal-disorders",
+  "r_8AZ036PQWT": "adrenal-disorders",
+  "b_G4PYJ0F5X7": "adrenal-disorders",
+  "r_8Z9CA3Q095": "diabetes-mellitus",
+  "r_ZY0GDWXWA0": "diabetes-mellitus",
+  "r_KV4V8H1D72": "diabetes-mellitus",
+  "r_GYN3Y1MRWX": "diabetes-mellitus",
+  "b_4RCHM1PWVT": "diabetes-mellitus",
+  "b_TKD5P4DHN8": "hypogonadism",
+  "r_R29VQFVN88": "hypogonadism",
+  "r_H37JBH8631": "hypogonadism",
+  "r_5735YPKR5Z": "hypogonadism",
+  "b_BHK90J8AXT": "neoplasms",
+  "r_RT337WJAHF": "neoplasms",
+  "r_4QE0EGW6HC": "adrenal-disorders",
+  "b_23705M8133": "adrenal-disorders",
+  "r_RY6E0Z22PA": "pituitary-disorders",
+  "b_H08G1EAMRW": "parathyroid-disorders",
+  "r_3V66KC8DYT": "parathyroid-disorders",
+  "r_J2H585SWM8": "parathyroid-disorders",
+  "b_EAAZWAMGB5": "pituitary-disorders",
+  "r_MW9DMT11VB": "pituitary-disorders",
+  "r_Z26KXEVR5E": "pituitary-disorders",
+  "b_AH1H0HBFG5": "pituitary-disorders",
+  "r_D1N56NTXEZ": "pituitary-disorders",
+  "r_9DEJFSF7CZ": "pituitary-disorders",
+  "b_G1R5J85XXP": "thyroid-disorders",
+  "r_Y8936WF0ZG": "thyroid-disorders",
+  "r_EDH6X1B29A": "thyroid-disorders",
+  "r_3RYA7B6C3D": "thyroid-disorders",
+  "r_RQKVXTQKW4": "thyroid-disorders",
+  "r_JX924A1CQJ": "thyroid-disorders",
+  "b_66KSGYFW1B": "thyroid-disorders",
+  "r_D0137C3XN4": "thyroid-disorders",
+  "r_RM3X09CM48": "thyroid-disorders"
+ },
+ "listed": {
+  "b_RFCZ55FEKP": "Endocrine System (7%)",
+  "b_TKD5P4DHN8": "HYPOGONADISM",
+  "b_BHK90J8AXT": "NEOPLASMS"
+ },
+ "drugTables": [
+  {
+   "block": "b_9K3622DNXQ",
+   "pharmSection": "anti-hyperglycemic-agents",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "anti-hyperglycemic-agents",
+   "title": "Anti-hyperglycemic agents",
+   "tables": [
+    "b_9K3622DNXQ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_H8NRK0SA3W"
  ]

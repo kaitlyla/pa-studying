@@ -1,10 +1,123 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "bacterial-diseases",
+   "title": "Bacterial diseases"
+  },
+  {
+   "id": "fungal-diseases",
+   "title": "Fungal diseases"
+  },
+  {
+   "id": "mycobacterial-diseases",
+   "title": "Mycobacterial diseases"
+  },
+  {
+   "id": "parasitic-diseases",
+   "title": "Parasitic diseases"
+  },
+  {
+   "id": "perinatal-transmission-of-disorders",
+   "title": "Perinatal transmission of disorders"
+  },
+  {
+   "id": "sepsis-systemic-inflammatory-response-syndrome",
+   "title": "Sepsis/systemic inflammatory response syndrome"
+  },
+  {
+   "id": "spirochetal-diseases",
+   "title": "Spirochetal diseases"
+  },
+  {
+   "id": "viral-diseases",
+   "title": "Viral diseases"
+  }
+ ],
+ "members": {
+  "b_28BCQ9PYH9": "bacterial-diseases",
+  "r_8031RFSW5X": "bacterial-diseases",
+  "r_64AGYYJ4TF": "bacterial-diseases",
+  "b_YN141NMAA3": "bacterial-diseases",
+  "r_CT54C172RX": "bacterial-diseases",
+  "b_NHXP34EKP6": "bacterial-diseases",
+  "r_4RNDEQ8BEG": "bacterial-diseases",
+  "b_XA0D2XSZJA": "bacterial-diseases",
+  "r_RQ1ESJZPHT": "bacterial-diseases",
+  "b_8K0H1S1DRD": "bacterial-diseases",
+  "r_PFNM3FZS43": "bacterial-diseases",
+  "b_BY7SYS0VDF": "fungal-diseases",
+  "r_4X35NV8Y30": "fungal-diseases",
+  "r_9VZ0NMGJZA": "fungal-diseases",
+  "r_XY56A90TBQ": "fungal-diseases",
+  "r_E119XCDSF9": "fungal-diseases",
+  "r_WGKHND2Z12": "fungal-diseases",
+  "b_S5EVD1JQ8B": "fungal-diseases",
+  "r_9ASW3BPHDR": "fungal-diseases",
+  "b_BZT8J9T9K2": "fungal-diseases",
+  "r_MCYBG347VH": "fungal-diseases",
+  "b_ZQSMKQ1F66": "mycobacterial-diseases",
+  "r_ZN5T1SWJ7K": "mycobacterial-diseases",
+  "b_CT3FCXFPR1": "parasitic-diseases",
+  "r_41290G03GP": "parasitic-diseases",
+  "r_29YMT285FG": "parasitic-diseases",
+  "r_DZ6VX83T13": "parasitic-diseases",
+  "r_G0N8NYT385": "parasitic-diseases",
+  "r_AWQ2X7QR65": "parasitic-diseases",
+  "b_MCFA0TRZB5": "parasitic-diseases",
+  "r_N09A9B40J0": "parasitic-diseases",
+  "b_SCERFZSW6W": "perinatal-transmission-of-disorders",
+  "r_S7BPRF2Z51": "perinatal-transmission-of-disorders",
+  "b_913WS3H4Z2": "perinatal-transmission-of-disorders",
+  "r_TGREG96KFX": "perinatal-transmission-of-disorders",
+  "r_93JZK9Y16G": "perinatal-transmission-of-disorders",
+  "r_HWV7FZ9RVS": "perinatal-transmission-of-disorders",
+  "r_MV53N0TFEX": "perinatal-transmission-of-disorders",
+  "r_CKB6QQCF12": "perinatal-transmission-of-disorders",
+  "b_NJ55D1EWAC": "sepsis-systemic-inflammatory-response-syndrome",
+  "r_4TNFND6PC0": "sepsis-systemic-inflammatory-response-syndrome",
+  "b_09CQCD791D": "spirochetal-diseases",
+  "r_KJ3KRE86CQ": "spirochetal-diseases",
+  "b_4R4RBQYZCT": "viral-diseases",
+  "r_KWCX72A47J": "viral-diseases",
+  "b_GKX27FJ84R": "viral-diseases",
+  "r_43NGEW0YVT": "viral-diseases",
+  "b_NDQC8FPJRJ": "viral-diseases",
+  "r_ENHQK4NYR4": "viral-diseases",
+  "b_SPHPMPTJ8M": "viral-diseases",
+  "r_MCT1XYFD0Y": "viral-diseases",
+  "b_6SNKSFFNVD": "viral-diseases",
+  "b_947BCEESTQ": "viral-diseases",
+  "r_63JZ0PV4RJ": "viral-diseases",
+  "b_ZX8ZKD3KBE": "viral-diseases",
+  "r_52BSDWS2BS": "viral-diseases",
+  "r_9VVWZVNHHQ": "viral-diseases",
+  "r_3XM75DN2KF": "viral-diseases",
+  "r_NF5H1NAJY5": "viral-diseases",
+  "b_CWEHP3C35C": "viral-diseases"
+ },
+ "listed": {
+  "b_28BCQ9PYH9": "Infectious Disease (6%)"
+ },
+ "drugTables": [
+  {
+   "block": "b_22AEKH27WV",
+   "pharmSection": "hiv-aids",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "hiv-aids",
+   "title": "HIV/AIDS",
+   "tables": [
+    "b_22AEKH27WV"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_7PB1T887H9",

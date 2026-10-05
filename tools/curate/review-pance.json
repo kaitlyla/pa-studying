@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "guide": "pance",
+  "rule": "plan 90 §90.2.7",
+  "reviewer": "one-shot Detective (task 01a109a9-a7f3-7e83-91c1-2c29caca67b8), spawned by the Leader shay-49353; did not author the drafts",
+  "curator": "milo-43830 (drafts: cardiovascular, pulmonary, gastrointestinal-system-nutrition, msk-rheumatology, neurologic-system, eent); resumed by implementer-01a10979-8cd9-7140-8b57-5d304e92a84f (juno-97547), who drafted the other 7",
+  "recheck": "Findings 1–20 re-checked by the Leader (shay-49353, 2026-10-05T01:57Z): OK — changed spec lines match each correction and the blank-block indexes map to the named ids. Also approved: empty pharm sections renal-and-genitourinary \"Renal and genitourinary\" and hematologic \"Hematologic\" (Leader seq 4660).",
+  "items": [
+    {
+      "item": 1,
+      "verdict": "FINDING",
+      "text": "**FINDING — gastrointestinal-system-nutrition, r_18WTAWQ4SF (\"G6PD Deficiency\", b_VHHGDGFJVR).** Placed in `metabolic-disorders`. G6PD deficiency is listed verbatim under Hematologic System › Hereditary disorders. Rule: ruling 2060 (2) / §90.2.1. Correction: new section `hereditary-disorders | Hereditary disorders` (name verbatim from the blueprint, Hematologic p.9) holding this row; NCCPA's GI \"Metabolic disorders\" lists only PKU and Rickets, so PKU (r_TX56H785XZ) stays.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 2,
+      "verdict": "FINDING",
+      "text": "**FINDING — gastrointestinal-system-nutrition, r_4HRXZF23WP (\"Paget Disease of Bone (PDB) Osteitis Deformans\").** Placed in `metabolic-disorders`. Paget disease of bone is listed verbatim under Musculoskeletal System › Neoplasms. Correction: move to the draft's existing `neoplasms` section (the name is the verbatim MSK category).",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 3,
+      "verdict": "FINDING",
+      "text": "**FINDING — eent, r_B4FCW159W0 (\"Oral Herpes Simples\").** Placed in `oropharyngeal-disorders`. Herpes simplex is not on the EENT oropharyngeal list; it is listed verbatim under ID › Viral diseases (\"Herpes simplex virus infections\") and Dermatologic › Infectious diseases › Viral (\"Herpes simplex\"). Correction: `viral-diseases` section (name verbatim, ID p.10) holding this row.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 4,
+      "verdict": "FINDING",
+      "text": "**FINDING — eent, r_KM3QPMQ786 (\"Epstein-Barr Virus Mononucleosis HHV4\").** Same rule: \"Epstein-Barr virus infections\" is verbatim under ID › Viral diseases; the EENT oropharyngeal list does not name it. Correction: `viral-diseases`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 5,
+      "verdict": "FINDING",
+      "text": "**FINDING — psychiatry-behavioral-medicine, r_90CBYVCP51 (\"Refeeding Syndrome\", b_HBV56N6A4Q).** Placed in `feeding-and-eating-disorders`. Refeeding syndrome is listed verbatim under GI/Nutrition › Nutrition (blueprint p.7). Correction: `nutrition` section holding this row.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 6,
+      "verdict": "FINDING",
+      "text": "**FINDING — psychiatry-behavioral-medicine, r_1JJGVR7B57 (\"Restless Leg Syndrome (RLS) *no longer in DSM-V\", b_KQSWYFNSCQ).** Placed in `sleep-wake-disorders`. Restless legs syndrome is listed verbatim under Neurologic System › Movement disorders (her own row notes it left DSM-5). Correction: `movement-disorders` section.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 7,
+      "verdict": "FINDING",
+      "text": "**FINDING — dermatologic-system, r_X0DGHATKM7 (\"Angioedema\").** `member … other-dermatologic-disorders`. Angioedema is listed verbatim only under EENT › Oropharyngeal disorders (brief's own rationale). Ruling 2060 (2) puts it in \"Oropharyngeal disorders\". **Both positions, per §90.2.7:** the ruling governs on its face; the curator's position is that her notes group it with Urticaria (same mast-cell/histamine family) and the EENT item is the oropharyngeal presentation. If the curator disputes, this goes to the Leader — it should not be written either way without that ruling.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 8,
+      "verdict": "FINDING",
+      "text": "**FINDING — dermatologic-system, r_S8G74B56W3 (\"Mumps\", her EXANTHEMS table b_ER4HJNCDX0).** Placed in `infectious-diseases` with the group. Mumps is verbatim under ID › Viral diseases and not on the derm Viral item list. Correction: `viral-diseases` (HFMD stays — verbatim derm item; herpangina fits no list and rides with the group as a real fit).",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 9,
+      "verdict": "FINDING",
+      "text": "**FINDING — eent, b_MYNKHV7TSA (block 22, blank).** `at 22 eye-disorders` puts the blank in eye-disorders; it follows Hyphema (trauma). Correction: `member b_MYNKHV7TSA trauma-of-the-eyes-ears-nose-and-throat`, and move the switch past the blank (`at 23 eye-disorders`).",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 10,
+      "verdict": "FINDING",
+      "text": "**FINDING — pulmonary, b_E9JJKKBVDJ (block 34, blank).** `at 34 obstructive-pulmonary-diseases`; the blank follows Hyaline Membrane Disease (member override → hyaline-membrane-disease). Correction: `member b_E9JJKKBVDJ hyaline-membrane-disease` + `at 35 obstructive-pulmonary-diseases`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 11,
+      "verdict": "FINDING",
+      "text": "**FINDING — endocrine-system, b_G4PYJ0F5X7 (block 4, blank).** `at 4 diabetes-mellitus`; the blank follows Cushing's Syndrome (adrenal). Correction: `member b_G4PYJ0F5X7 adrenal-disorders` + `at 5 diabetes-mellitus`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 12,
+      "verdict": "FINDING",
+      "text": "**FINDING — endocrine-system, b_23705M8133 (block 12, blank).** `at 12 pituitary-disorders`; the blank follows Pheochromocytoma (member → adrenal-disorders). Correction: `member b_23705M8133 adrenal-disorders` + `at 13 pituitary-disorders`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 13,
+      "verdict": "FINDING",
+      "text": "**FINDING — renal-system-gu-system, b_A2JS4Q22P9 (block 6, blank).** `at 6 other`; the blank follows Acute Glomerulonephritis (AKI section). Correction: `member b_A2JS4Q22P9 acute-kidney-injury-and-acute-renal-failure` + `at 7 other`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 14,
+      "verdict": "FINDING",
+      "text": "**FINDING — renal-system-gu-system, b_EP2FEJBVMR (block 12, blank).** `at 12 fluid-imbalances`; the blank follows the Respiratory Alkalosis pair (acid-base-disorders). Correction: `member b_EP2FEJBVMR acid-base-disorders` + `at 13 fluid-imbalances`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 15,
+      "verdict": "FINDING",
+      "text": "**FINDING — renal-system-gu-system, b_WV3Z0R7WJ8 (block 16, blank).** `at 16 electrolyte-disorders`; the blank follows Volume Overload (fluid-imbalances). Correction: `member b_WV3Z0R7WJ8 fluid-imbalances` + `at 17 electrolyte-disorders`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 16,
+      "verdict": "FINDING",
+      "text": "**FINDING — reproductive-system, b_DENC5NVEGG (block 50, blank).** `at 50 menopause`; the blank follows Infertility. Correction: `member b_DENC5NVEGG infertility` + `at 51 menopause`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 17,
+      "verdict": "FINDING",
+      "text": "**FINDING — reproductive-system, b_5XY995R9WA (block 76, blank).** `at 76 spirochetal-diseases`; the blank follows HPV Condyloma Acuminatum (viral-diseases). Correction: `member b_5XY995R9WA viral-diseases` + `at 77 spirochetal-diseases`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 18,
+      "verdict": "FINDING",
+      "text": "**FINDING — reproductive-system, b_EWD4PTEDB6 (block 78, blank).** `at 78 pelvic-inflammatory-disease`; the blank follows Syphilis (spirochetal-diseases). Correction: `member b_EWD4PTEDB6 spirochetal-diseases` + `at 79 pelvic-inflammatory-disease`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 19,
+      "verdict": "FINDING",
+      "text": "**FINDING — neurologic-system, r_1AKSRJACY3 (b_07WQGTGRP5, meningitis table: \"| | About | Clinical Manifestations | Diagnostics | Management\").** Left as content, so it becomes a continuation row inside the \"Overview\" topic and its column-heading text shows as Overview's content. The design definition (\"cells hold only a label and/or column headings\") makes it a heading row; the curator set the identical rows to heading in every other system (e.g. pulmonary r_V108HT4JDA, renal r_FGJ8QE1551). Correction: `H r_1AKSRJACY3`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": 20,
+      "verdict": "FINDING",
+      "text": "**FINDING — neurologic-system, r_HB6M9R11CR (b_F538DGMHTQ, dementia table, same \"| | About | Clinical Manifestations | Diagnostics | Management\" shape).** Same defect, same correction: `H r_HB6M9R11CR`.",
+      "status": "closed",
+      "resolution": "Correction applied exactly as given (block-index form for the blank-block member overrides); Leader re-check OK."
+    },
+    {
+      "item": "cardiovascular (milo-43830)",
+      "verdict": "OK",
+      "text": "**cardiovascular (milo-43830) — OK.** 12 sections, all verbatim on blueprint p.2, order of first appearance, no `other` needed; every topic's category verified (incl. HYPOTENSION sub-heading → next topic Cardiogenic Shock per §90.2.3, Orthostatic/Vasovagal → Hypotension). 4 splits (2@18, 22@28, 44@22, 62@2) correct; block 56 (blank paras + TRAUMATIC heading, no images) correctly unsplit/unlisted. 48 heading rows verified incl. overrides r_AVESESM4M5, r_A7N38PVAM6, and the four repeated \"| | USE | |\" rows. 6 drug tables match the mockup's 6 pharm sections; titles match; no conditionRows (correct); no condition-row table missed. Listed blocks start with their title lines (point (a) ✓). pharmFiles preserved (pharm review)."
+    },
+    {
+      "item": "pulmonary",
+      "verdict": "OK except findings",
+      "text": "**pulmonary — OK except finding 10.** 11 sections verbatim (p.14); CF member→obstructive; PFTs split/listed correctly and starts at its title line; Management Basics one-column table: r_9D7GNXNFQ4 `C` override right and listed; T13/T17 covered-column heading overrides right. AECOPD: r_3YMZFNWME2 `H` correct; the planned `titled` from cell 1 (\"Acute Exacerbation of COPD (AECOPD)\" → r_H24KQNCCNM) qualifies under the 22:01Z ruling — held for the titled SHA, apply after structure (write order splits → rows → structure → titled). Drug tables TB RX + PHARM/BIOLOGICS/COMBO INHALERS correct; titles \"Tuberculosis\" / \"Obstructive pulmonary diseases\" correct; pharmFiles pharm review + inhaler combos ✓."
+    },
+    {
+      "item": "gastrointestinal-system-nutrition",
+      "verdict": "OK except findings",
+      "text": "**gastrointestinal-system-nutrition — OK except findings 1–2.** 15 sections verbatim (p.7); system-heading block listed correctly (starts with its title line, content follows); FOOD ALLERGIES sub-heading → next topic Celiac, Lactose/Nut Allergies → Nutrition ✓; colonic polyps/polyposis → Neoplasms (benign) ✓. Both titled pairs verified: r_4Q958YNE0W [INFECTIOUS DIARRHEA] → r_R0J1HA99RR and r_8AZ6NQYPXX [Hereditary Polyposis Syndromes] → r_J52GMKJC7X, cell 0 each, notes below ✓. Split 66@22 correct. 4 drug tables correct; titles Constipation / Inflammatory bowel disease / Obesity / Diarrhea per §90.2.5 ✓; 48 heading rows verified. pharmFiles pharm review ✓."
+    },
+    {
+      "item": "eent",
+      "verdict": "OK except findings",
+      "text": "**eent — OK except findings 3, 4, 9.** 6 sections verbatim (pp.5–6); Corneal Abrasion, External Ear Trauma/Hematoma, Barotrauma → Trauma (verbatim) ✓; split 44@28 correct; no drug tables (correct); pharmFiles pharm review ✓; 30 heading rows verified incl. r_0B3S8XKANN."
+    },
+    {
+      "item": "neurologic-system",
+      "verdict": "OK except findings",
+      "text": "**neurologic-system — OK except findings 19–20.** 11 NCCPA sections + \"Neurologic System — other\" last, holding her pediatric section (vaccines/G&D — nothing matches a Neuro category, correct); split 16@71 and 38@1/17/37 correct with all three peds parts listed from their own title lines; one drug table (antiepileptics) → \"Seizure disorders\" ✓; pharmFiles none ✓; 19 heading rows otherwise verified."
+    },
+    {
+      "item": "endocrine-system",
+      "verdict": "OK except findings",
+      "text": "**endocrine-system — OK except findings 11–12.** 7 sections verbatim (p.4); Pheochromocytoma member→adrenal (verbatim) ✓; hypogonadism vertical-table overrides (C r_R29VQFVN88 r_H37JBH8631 / H r_WF6YTX1RYG) correct — the note-titled topics are what §40.2 yields and `titled` is rightly not set on \"About\"/\"Clinical Features\" labels; pharm table + title \"Anti-hyperglycemic agents\" ✓; pharmFiles insulin dosing ✓; 15 heading rows verified."
+    },
+    {
+      "item": "infectious-disease",
+      "verdict": "OK",
+      "text": "**infectious-disease — OK.** 8 sections verbatim (p.10), all topics verified (incl. TORCH group → Perinatal, MAC → Mycobacterial); all sub-headings unlisted (no own notes; TORCH block's first line >80 chars); drug table → \"HIV/AIDS\" ✓ (label PHARM names no therapy area); pharmFiles pharm review + Abx flow charts + Antibiotic Flower Charts ✓; 22 heading rows verified."
+    },
+    {
+      "item": "psychiatry-behavioral-medicine",
+      "verdict": "OK except findings",
+      "text": "**psychiatry-behavioral-medicine — OK except findings 5–6.** 16 sections, all verbatim on p.13; Prolonged Grief → Trauma- and stressor-related (bereavement verbatim, pre-blessed) ✓; Serotonin Syndrome condition row → depressive-disorders and `drug 15 … r_D2AMC5TP4W` ✓ (operator ruling); both titled pairs verified (r_PYJWYJ4BG8 [Serotonin Syndrome] → r_D2AMC5TP4W; r_WF74RJ5CEA [NMS] → r_QDC21V8FCM, cell 0); 7 pharm sections with correct titles mirroring the psy guide (Anxiety disorders, Bipolar disorder, Depression ×2 tables, ADHD, Antipsychotics ×2, Insomnia, Hypersomnolence and narcolepsy) ✓; neurodevelopmental block's leading blanks (mixed blank+heading) consistent with the mixed-block treatment everywhere; pharmFiles pharm review + psych drug groupings + antidepressants ✓; 44 heading rows verified incl. r_Q7XJQ5M7ZH, r_PXCH8WMXV7, r_TZ9Z68J9ZT."
+    },
+    {
+      "item": "msk-rheumatology",
+      "verdict": "OK",
+      "text": "**msk-rheumatology — OK.** 9 sections + \"— other\" (Bursitis fits no category) verbatim (p.11); no splits needed (the OTTAWA block is pictures + heading + blank paras only — verified in block JSON — so no title line with notes, correctly unlisted); gout and osteoporosis drug tables + titles ✓; pharmFiles none ✓; 50 heading rows verified incl. mid-table ULNAR/RADIAL FOREARM and ACUTE/CHRONIC labels."
+    },
+    {
+      "item": "renal-system-gu-system",
+      "verdict": "OK except findings",
+      "text": "**renal-system-gu-system — OK except findings 13–15.** 15 NCCPA sections (renal p.15 + GU p.8) + \"— other\" for Nephrotic Syndrome (pre-blessed) ✓; Renal Artery Stenosis member→renovascular ✓; all 4 acid-base titled pairs verified (labels name the conditions in cell 0, notes rows below; FLUIDS correctly excluded per 22:01Z); crystalloid label rows heading ✓; pharmFiles none ✓; no drug tables ✓."
+    },
+    {
+      "item": "dermatologic-system",
+      "verdict": "OK except findings",
+      "text": "**dermatologic-system — OK except findings 7–8.** 13 sections verbatim (p.3); split 20@2 correct (verrucae picture stays infectious, KERATOTIC DISORDERS part starts at its title line and is listed); INFECTIOUS DISEASE (FUNGAL) listed (own notes) vs the other three unlisted ✓; Urticaria → Other dermatologic disorders ✓ (verbatim); no drug tables; pharmFiles none ✓; 28 heading rows verified."
+    },
+    {
+      "item": "hematologic-system",
+      "verdict": "OK",
+      "text": "**hematologic-system — OK.** 7 sections verbatim (p.9); both splits (20@27, 28@68) correct with LEUKOPENIA, HEMOGLOBINOPATHIES and IMMUNOLOGIC DISORDERS (TRANSFUSION REACTIONS) each starting at their own title lines and listed; antiphospholipid → Autoimmune (pre-blessed) ✓; ITP/TTP/HIT → Coagulation (thrombocytopenias verbatim) ✓; G6PD here → Hereditary ✓; no drug tables; pharmFiles none ✓; 19 heading rows verified."
+    },
+    {
+      "item": "reproductive-system",
+      "verdict": "OK except findings",
+      "text": "**reproductive-system — OK except findings 16–18.** NCCPA p.16 categories + the pre-blessed cross-routes (STIs → Bacterial/Parasitic/Viral/Spirochetal diseases; IPV & Sexual Assault → Abuse and neglect; Trauma in Pregnancy → its own verbatim category) all verbatim ✓; splits 2@21 and 48@16 correct; 53 heading rows verified incl. r_MEB5VXMAA5 and the HORMONAL/NONHORMONAL pair; no drug tables; pharmFiles none ✓."
+    }
+  ],
+  "report": "# PANCE §90.2.7 independent review — verdicts\n\nReviewed all 13 drafts (spec/`<system>.txt`, drafts/`<system>`.report.md, drafts/`<system>`.structure.dry.json) against the block JSON/dumps, plan 90 §90.2.1–§90.2.6, plan 20 §20.7, plan 40 §40.2, curation-brief, the NCCPA PANCE blueprint text (scratch/recheck/PANCE-Blueprint.txt, Jan 2025), PHARM_FILES.pance, and plan 30 §30.2. Leader ruling seq 2060 was read verbatim from milo-43830's session log to settle the two sub-rulings it cites. Read-only: nothing written, nothing run, no subagents. All 13 dry runs report `publish: OK`.\n\n## FINDINGS (20)\n\n**Cross-system categories (Leader ruling 2060 (2), §90.2.1)** — \"A topic whose condition is listed verbatim under a different organ system … goes to that category.\"\n\n1. **FINDING — gastrointestinal-system-nutrition, r_18WTAWQ4SF (\"G6PD Deficiency\", b_VHHGDGFJVR).** Placed in `metabolic-disorders`. G6PD deficiency is listed verbatim under Hematologic System › Hereditary disorders. Rule: ruling 2060 (2) / §90.2.1. Correction: new section `hereditary-disorders | Hereditary disorders` (name verbatim from the blueprint, Hematologic p.9) holding this row; NCCPA's GI \"Metabolic disorders\" lists only PKU and Rickets, so PKU (r_TX56H785XZ) stays.\n2. **FINDING — gastrointestinal-system-nutrition, r_4HRXZF23WP (\"Paget Disease of Bone (PDB) Osteitis Deformans\").** Placed in `metabolic-disorders`. Paget disease of bone is listed verbatim under Musculoskeletal System › Neoplasms. Correction: move to the draft's existing `neoplasms` section (the name is the verbatim MSK category).\n3. **FINDING — eent, r_B4FCW159W0 (\"Oral Herpes Simples\").** Placed in `oropharyngeal-disorders`. Herpes simplex is not on the EENT oropharyngeal list; it is listed verbatim under ID › Viral diseases (\"Herpes simplex virus infections\") and Dermatologic › Infectious diseases › Viral (\"Herpes simplex\"). Correction: `viral-diseases` section (name verbatim, ID p.10) holding this row.\n4. **FINDING — eent, r_KM3QPMQ786 (\"Epstein-Barr Virus Mononucleosis HHV4\").** Same rule: \"Epstein-Barr virus infections\" is verbatim under ID › Viral diseases; the EENT oropharyngeal list does not name it. Correction: `viral-diseases`.\n5. **FINDING — psychiatry-behavioral-medicine, r_90CBYVCP51 (\"Refeeding Syndrome\", b_HBV56N6A4Q).** Placed in `feeding-and-eating-disorders`. Refeeding syndrome is listed verbatim under GI/Nutrition › Nutrition (blueprint p.7). Correction: `nutrition` section holding this row.\n6. **FINDING — psychiatry-behavioral-medicine, r_1JJGVR7B57 (\"Restless Leg Syndrome (RLS) *no longer in DSM-V\", b_KQSWYFNSCQ).** Placed in `sleep-wake-disorders`. Restless legs syndrome is listed verbatim under Neurologic System › Movement disorders (her own row notes it left DSM-5). Correction: `movement-disorders` section.\n7. **FINDING — dermatologic-system, r_X0DGHATKM7 (\"Angioedema\").** `member … other-dermatologic-disorders`. Angioedema is listed verbatim only under EENT › Oropharyngeal disorders (brief's own rationale). Ruling 2060 (2) puts it in \"Oropharyngeal disorders\". **Both positions, per §90.2.7:** the ruling governs on its face; the curator's position is that her notes group it with Urticaria (same mast-cell/histamine family) and the EENT item is the oropharyngeal presentation. If the curator disputes, this goes to the Leader — it should not be written either way without that ruling.\n8. **FINDING — dermatologic-system, r_S8G74B56W3 (\"Mumps\", her EXANTHEMS table b_ER4HJNCDX0).** Placed in `infectious-diseases` with the group. Mumps is verbatim under ID › Viral diseases and not on the derm Viral item list. Correction: `viral-diseases` (HFMD stays — verbatim derm item; herpangina fits no list and rides with the group as a real fit).\n\n**Blank-spacing blocks (Leader ruling 2060 (1), §90.2.3)** — a blank block takes the section of the item just before it. In each case the `at` switch was placed on the blank block instead of after it.\n\n9. **FINDING — eent, b_MYNKHV7TSA (block 22, blank).** `at 22 eye-disorders` puts the blank in eye-disorders; it follows Hyphema (trauma). Correction: `member b_MYNKHV7TSA trauma-of-the-eyes-ears-nose-and-throat`, and move the switch past the blank (`at 23 eye-disorders`).\n10. **FINDING — pulmonary, b_E9JJKKBVDJ (block 34, blank).** `at 34 obstructive-pulmonary-diseases`; the blank follows Hyaline Membrane Disease (member override → hyaline-membrane-disease). Correction: `member b_E9JJKKBVDJ hyaline-membrane-disease` + `at 35 obstructive-pulmonary-diseases`.\n11. **FINDING — endocrine-system, b_G4PYJ0F5X7 (block 4, blank).** `at 4 diabetes-mellitus`; the blank follows Cushing's Syndrome (adrenal). Correction: `member b_G4PYJ0F5X7 adrenal-disorders` + `at 5 diabetes-mellitus`.\n12. **FINDING — endocrine-system, b_23705M8133 (block 12, blank).** `at 12 pituitary-disorders`; the blank follows Pheochromocytoma (member → adrenal-disorders). Correction: `member b_23705M8133 adrenal-disorders` + `at 13 pituitary-disorders`.\n13. **FINDING — renal-system-gu-system, b_A2JS4Q22P9 (block 6, blank).** `at 6 other`; the blank follows Acute Glomerulonephritis (AKI section). Correction: `member b_A2JS4Q22P9 acute-kidney-injury-and-acute-renal-failure` + `at 7 other`.\n14. **FINDING — renal-system-gu-system, b_EP2FEJBVMR (block 12, blank).** `at 12 fluid-imbalances`; the blank follows the Respiratory Alkalosis pair (acid-base-disorders). Correction: `member b_EP2FEJBVMR acid-base-disorders` + `at 13 fluid-imbalances`.\n15. **FINDING — renal-system-gu-system, b_WV3Z0R7WJ8 (block 16, blank).** `at 16 electrolyte-disorders`; the blank follows Volume Overload (fluid-imbalances). Correction: `member b_WV3Z0R7WJ8 fluid-imbalances` + `at 17 electrolyte-disorders`.\n16. **FINDING — reproductive-system, b_DENC5NVEGG (block 50, blank).** `at 50 menopause`; the blank follows Infertility. Correction: `member b_DENC5NVEGG infertility` + `at 51 menopause`.\n17. **FINDING — reproductive-system, b_5XY995R9WA (block 76, blank).** `at 76 spirochetal-diseases`; the blank follows HPV Condyloma Acuminatum (viral-diseases). Correction: `member b_5XY995R9WA viral-diseases` + `at 77 spirochetal-diseases`.\n18. **FINDING — reproductive-system, b_EWD4PTEDB6 (block 78, blank).** `at 78 pelvic-inflammatory-disease`; the blank follows Syphilis (spirochetal-diseases). Correction: `member b_EWD4PTEDB6 spirochetal-diseases` + `at 79 pelvic-inflammatory-disease`.\n\n**Row kinds (§90.2.2)**\n\n19. **FINDING — neurologic-system, r_1AKSRJACY3 (b_07WQGTGRP5, meningitis table: \"| | About | Clinical Manifestations | Diagnostics | Management\").** Left as content, so it becomes a continuation row inside the \"Overview\" topic and its column-heading text shows as Overview's content. The design definition (\"cells hold only a label and/or column headings\") makes it a heading row; the curator set the identical rows to heading in every other system (e.g. pulmonary r_V108HT4JDA, renal r_FGJ8QE1551). Correction: `H r_1AKSRJACY3`.\n20. **FINDING — neurologic-system, r_HB6M9R11CR (b_F538DGMHTQ, dementia table, same \"| | About | Clinical Manifestations | Diagnostics | Management\" shape).** Same defect, same correction: `H r_HB6M9R11CR`.\n\n## OK items\n\n**cardiovascular (milo-43830) — OK.** 12 sections, all verbatim on blueprint p.2, order of first appearance, no `other` needed; every topic's category verified (incl. HYPOTENSION sub-heading → next topic Cardiogenic Shock per §90.2.3, Orthostatic/Vasovagal → Hypotension). 4 splits (2@18, 22@28, 44@22, 62@2) correct; block 56 (blank paras + TRAUMATIC heading, no images) correctly unsplit/unlisted. 48 heading rows verified incl. overrides r_AVESESM4M5, r_A7N38PVAM6, and the four repeated \"| | USE | |\" rows. 6 drug tables match the mockup's 6 pharm sections; titles match; no conditionRows (correct); no condition-row table missed. Listed blocks start with their title lines (point (a) ✓). pharmFiles preserved (pharm review).\n\n**pulmonary — OK except finding 10.** 11 sections verbatim (p.14); CF member→obstructive; PFTs split/listed correctly and starts at its title line; Management Basics one-column table: r_9D7GNXNFQ4 `C` override right and listed; T13/T17 covered-column heading overrides right. AECOPD: r_3YMZFNWME2 `H` correct; the planned `titled` from cell 1 (\"Acute Exacerbation of COPD (AECOPD)\" → r_H24KQNCCNM) qualifies under the 22:01Z ruling — held for the titled SHA, apply after structure (write order splits → rows → structure → titled). Drug tables TB RX + PHARM/BIOLOGICS/COMBO INHALERS correct; titles \"Tuberculosis\" / \"Obstructive pulmonary diseases\" correct; pharmFiles pharm review + inhaler combos ✓.\n\n**gastrointestinal-system-nutrition — OK except findings 1–2.** 15 sections verbatim (p.7); system-heading block listed correctly (starts with its title line, content follows); FOOD ALLERGIES sub-heading → next topic Celiac, Lactose/Nut Allergies → Nutrition ✓; colonic polyps/polyposis → Neoplasms (benign) ✓. Both titled pairs verified: r_4Q958YNE0W [INFECTIOUS DIARRHEA] → r_R0J1HA99RR and r_8AZ6NQYPXX [Hereditary Polyposis Syndromes] → r_J52GMKJC7X, cell 0 each, notes below ✓. Split 66@22 correct. 4 drug tables correct; titles Constipation / Inflammatory bowel disease / Obesity / Diarrhea per §90.2.5 ✓; 48 heading rows verified. pharmFiles pharm review ✓.\n\n**eent — OK except findings 3, 4, 9.** 6 sections verbatim (pp.5–6); Corneal Abrasion, External Ear Trauma/Hematoma, Barotrauma → Trauma (verbatim) ✓; split 44@28 correct; no drug tables (correct); pharmFiles pharm review ✓; 30 heading rows verified incl. r_0B3S8XKANN.\n\n**neurologic-system — OK except findings 19–20.** 11 NCCPA sections + \"Neurologic System — other\" last, holding her pediatric section (vaccines/G&D — nothing matches a Neuro category, correct); split 16@71 and 38@1/17/37 correct with all three peds parts listed from their own title lines; one drug table (antiepileptics) → \"Seizure disorders\" ✓; pharmFiles none ✓; 19 heading rows otherwise verified.\n\n**endocrine-system — OK except findings 11–12.** 7 sections verbatim (p.4); Pheochromocytoma member→adrenal (verbatim) ✓; hypogonadism vertical-table overrides (C r_R29VQFVN88 r_H37JBH8631 / H r_WF6YTX1RYG) correct — the note-titled topics are what §40.2 yields and `titled` is rightly not set on \"About\"/\"Clinical Features\" labels; pharm table + title \"Anti-hyperglycemic agents\" ✓; pharmFiles insulin dosing ✓; 15 heading rows verified.\n\n**infectious-disease — OK.** 8 sections verbatim (p.10), all topics verified (incl. TORCH group → Perinatal, MAC → Mycobacterial); all sub-headings unlisted (no own notes; TORCH block's first line >80 chars); drug table → \"HIV/AIDS\" ✓ (label PHARM names no therapy area); pharmFiles pharm review + Abx flow charts + Antibiotic Flower Charts ✓; 22 heading rows verified.\n\n**psychiatry-behavioral-medicine — OK except findings 5–6.** 16 sections, all verbatim on p.13; Prolonged Grief → Trauma- and stressor-related (bereavement verbatim, pre-blessed) ✓; Serotonin Syndrome condition row → depressive-disorders and `drug 15 … r_D2AMC5TP4W` ✓ (operator ruling); both titled pairs verified (r_PYJWYJ4BG8 [Serotonin Syndrome] → r_D2AMC5TP4W; r_WF74RJ5CEA [NMS] → r_QDC21V8FCM, cell 0); 7 pharm sections with correct titles mirroring the psy guide (Anxiety disorders, Bipolar disorder, Depression ×2 tables, ADHD, Antipsychotics ×2, Insomnia, Hypersomnolence and narcolepsy) ✓; neurodevelopmental block's leading blanks (mixed blank+heading) consistent with the mixed-block treatment everywhere; pharmFiles pharm review + psych drug groupings + antidepressants ✓; 44 heading rows verified incl. r_Q7XJQ5M7ZH, r_PXCH8WMXV7, r_TZ9Z68J9ZT.\n\n**msk-rheumatology — OK.** 9 sections + \"— other\" (Bursitis fits no category) verbatim (p.11); no splits needed (the OTTAWA block is pictures + heading + blank paras only — verified in block JSON — so no title line with notes, correctly unlisted); gout and osteoporosis drug tables + titles ✓; pharmFiles none ✓; 50 heading rows verified incl. mid-table ULNAR/RADIAL FOREARM and ACUTE/CHRONIC labels.\n\n**renal-system-gu-system — OK except findings 13–15.** 15 NCCPA sections (renal p.15 + GU p.8) + \"— other\" for Nephrotic Syndrome (pre-blessed) ✓; Renal Artery Stenosis member→renovascular ✓; all 4 acid-base titled pairs verified (labels name the conditions in cell 0, notes rows below; FLUIDS correctly excluded per 22:01Z); crystalloid label rows heading ✓; pharmFiles none ✓; no drug tables ✓.\n\n**dermatologic-system — OK except findings 7–8.** 13 sections verbatim (p.3); split 20@2 correct (verrucae picture stays infectious, KERATOTIC DISORDERS part starts at its title line and is listed); INFECTIOUS DISEASE (FUNGAL) listed (own notes) vs the other three unlisted ✓; Urticaria → Other dermatologic disorders ✓ (verbatim); no drug tables; pharmFiles none ✓; 28 heading rows verified.\n\n**hematologic-system — OK.** 7 sections verbatim (p.9); both splits (20@27, 28@68) correct with LEUKOPENIA, HEMOGLOBINOPATHIES and IMMUNOLOGIC DISORDERS (TRANSFUSION REACTIONS) each starting at their own title lines and listed; antiphospholipid → Autoimmune (pre-blessed) ✓; ITP/TTP/HIT → Coagulation (thrombocytopenias verbatim) ✓; G6PD here → Hereditary ✓; no drug tables; pharmFiles none ✓; 19 heading rows verified.\n\n**reproductive-system — OK except findings 16–18.** NCCPA p.16 categories + the pre-blessed cross-routes (STIs → Bacterial/Parasitic/Viral/Spirochetal diseases; IPV & Sexual Assault → Abuse and neglect; Trauma in Pregnancy → its own verbatim category) all verbatim ✓; splits 2@21 and 48@16 correct; 53 heading rows verified incl. r_MEB5VXMAA5 and the HORMONAL/NONHORMONAL pair; no drug tables; pharmFiles none ✓.\n\n**Global checks — OK.** No general.json/general items for pance: correct (plan 20 §20.2 \"(not for pance)\"; signed `window.PANCE.general` = []). pharmFiles in every draft byte-identical to the importer's and match plan 30 §30.2 + PHARM_FILES.pance. No one-column tables violate point (b). All 8 titled pairs satisfy point (c). Every section title appears verbatim on the Jan-2025 NCCPA blueprint. Listed blocks all actually start with their title lines (point (a)) — the misordered cases (OTTAWA, Angioedema-region blocks) are correctly *un*listed.\n\n**Correction pattern for findings 9–18:** keep the section switch but move it past the blank (`at <next block/topic>`), and give the blank block itself a `member` override to the preceding item's section — matching how the GI curator applied ruling 2060 (1) correctly (`at 57 diarrhea`, blank 56 → hernias).\n\n**Scope/limitations.** I reviewed the drafts' recorded decisions and the derivation the dry runs show; I did not run tools/curate or publish (read-only). Findings 1–8 apply the transposed PANCE wording of ruling 2060 (2) as recorded in the review brief; the derm angioedema item (finding 7) is the one where the curator's stated position conflicts with the ruling, so it needs the Leader's ruling before writing if disputed. The pulmonary `titled` pair and the 8 reviewed pairs are applied after `structure` per the standing write order; the drafts correctly do not carry them yet.\n\nSession: one-shot Detective §90.2.7 reviewer dispatched by leader-01a1031f — I cannot read my own session handle from inside the session; the Leader's dispatch record carries it for the `reviewed-by` field in tools/curate/review-pance.json.\n"
+}

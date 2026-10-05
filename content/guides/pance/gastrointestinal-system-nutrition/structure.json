@@ -1,11 +1,293 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "biliary-disorders",
+   "title": "Biliary disorders"
+  },
+  {
+   "id": "colorectal-disorders",
+   "title": "Colorectal disorders"
+  },
+  {
+   "id": "esophageal-disorders",
+   "title": "Esophageal disorders"
+  },
+  {
+   "id": "small-intestine-disorders",
+   "title": "Small intestine disorders"
+  },
+  {
+   "id": "nutrition",
+   "title": "Nutrition"
+  },
+  {
+   "id": "gastrointestinal-bleeding",
+   "title": "Gastrointestinal bleeding"
+  },
+  {
+   "id": "gastric-disorders",
+   "title": "Gastric disorders"
+  },
+  {
+   "id": "obesity",
+   "title": "Obesity"
+  },
+  {
+   "id": "hepatic-disorders",
+   "title": "Hepatic disorders"
+  },
+  {
+   "id": "hernias",
+   "title": "Hernias"
+  },
+  {
+   "id": "diarrhea",
+   "title": "Diarrhea"
+  },
+  {
+   "id": "ingestion-of-toxic-substances-or-foreign-bodies",
+   "title": "Ingestion of toxic substances or foreign bodies"
+  },
+  {
+   "id": "metabolic-disorders",
+   "title": "Metabolic disorders"
+  },
+  {
+   "id": "hereditary-disorders",
+   "title": "Hereditary disorders"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "pancreatic-disorders",
+   "title": "Pancreatic disorders"
+  }
+ ],
+ "members": {
+  "b_Z8MNQERBH0": "biliary-disorders",
+  "r_HD28BZYKH4": "biliary-disorders",
+  "r_C0SCBFY6EB": "biliary-disorders",
+  "r_9HC78Q9G3C": "biliary-disorders",
+  "r_0W5ZN8VGAT": "biliary-disorders",
+  "b_Z99H05BBRC": "colorectal-disorders",
+  "r_QXZD3ZPCTH": "colorectal-disorders",
+  "r_ZNJ821RMNB": "colorectal-disorders",
+  "b_ZWMC2FNFVR": "colorectal-disorders",
+  "r_5NFCMRN4XN": "colorectal-disorders",
+  "b_E5X2P981SR": "colorectal-disorders",
+  "r_S9N34WCJS6": "colorectal-disorders",
+  "b_M24N208MXS": "colorectal-disorders",
+  "b_MX3E32HKG1": "colorectal-disorders",
+  "r_R81X2N7NZ0": "colorectal-disorders",
+  "r_50CG4ZJ0DP": "colorectal-disorders",
+  "b_TXGYAXB3HW": "colorectal-disorders",
+  "r_WKA97KSH8R": "colorectal-disorders",
+  "b_NDX3RJBMQR": "colorectal-disorders",
+  "r_M4AJWSWEYQ": "colorectal-disorders",
+  "b_NZ1TB7Z6V6": "colorectal-disorders",
+  "r_DR0ZQXA6DT": "colorectal-disorders",
+  "r_DBG3FW6QS5": "colorectal-disorders",
+  "b_Z7CAGJSTBB": "colorectal-disorders",
+  "b_R1TQ21SQV3": "colorectal-disorders",
+  "r_96XS7MNKVY": "colorectal-disorders",
+  "b_TJYENKS022": "colorectal-disorders",
+  "r_D6C2W9GQ5G": "colorectal-disorders",
+  "b_PTRVVFEER7": "colorectal-disorders",
+  "r_3DHPFJJ19T": "colorectal-disorders",
+  "b_4MH8DTGMY4": "colorectal-disorders",
+  "r_G1M33QM9B3": "colorectal-disorders",
+  "b_X3XQW61FVX": "esophageal-disorders",
+  "r_AEDK28TJHJ": "esophageal-disorders",
+  "r_TQ1YMF0RJA": "esophageal-disorders",
+  "r_JX578ZZBF7": "esophageal-disorders",
+  "r_ZJ0P3NRZ0D": "esophageal-disorders",
+  "r_MCP38250SM": "esophageal-disorders",
+  "b_TXRSFZT26G": "esophageal-disorders",
+  "r_ZMFWHNBX1A": "esophageal-disorders",
+  "b_7J901G07JP": "esophageal-disorders",
+  "r_EBMQB52M72": "esophageal-disorders",
+  "r_SCM69M1PQ6": "esophageal-disorders",
+  "b_4BXFMF2KGE": "esophageal-disorders",
+  "r_4TZAQPR1J8": "esophageal-disorders",
+  "r_0PSWS3Z7EV": "esophageal-disorders",
+  "b_4Q19CMHDF0": "small-intestine-disorders",
+  "r_XNS1T1BC24": "small-intestine-disorders",
+  "r_Q2YNXGSE52": "nutrition",
+  "r_G1MW86FR2C": "nutrition",
+  "b_QNDF5YTJCN": "gastrointestinal-bleeding",
+  "r_T363GAM5WT": "gastrointestinal-bleeding",
+  "b_N8N7SNE52K": "gastric-disorders",
+  "r_BNG2EJSJ4X": "gastric-disorders",
+  "r_DSHVD3V4C5": "gastric-disorders",
+  "r_AAY3YHMW8D": "gastric-disorders",
+  "b_19HPEH4EB7": "obesity",
+  "r_QN92XYP9BT": "obesity",
+  "b_3VYE4ZH0QG": "obesity",
+  "b_JV58KPP0Z7": "hepatic-disorders",
+  "r_2N5GZV94YC": "hepatic-disorders",
+  "r_ACQVMG7GHF": "hepatic-disorders",
+  "r_X4MCH5JTFB": "hepatic-disorders",
+  "r_WGFWYBM0G7": "hepatic-disorders",
+  "r_Q5X5QA60KD": "hepatic-disorders",
+  "b_WGDBT0CXSW": "hepatic-disorders",
+  "r_RW9PK3J6B2": "hepatic-disorders",
+  "b_BJGG1AHG5C": "hepatic-disorders",
+  "r_MD9N44HKP1": "hepatic-disorders",
+  "b_4KBRVKB119": "hepatic-disorders",
+  "r_FWHVBEH72R": "hepatic-disorders",
+  "b_4SVYF434VZ": "hernias",
+  "r_BK8GN78RBV": "hernias",
+  "r_QYFFZBNHVD": "hernias",
+  "r_JPPF7A7069": "hernias",
+  "r_TBYDAWBWGA": "hernias",
+  "r_ZXDBYD5PE3": "hernias",
+  "b_VQQP5RCTVW": "hernias",
+  "r_R0J1HA99RR": "diarrhea",
+  "b_A92E52A5Q5": "diarrhea",
+  "r_1RF4EKT6AN": "diarrhea",
+  "r_TQSHMF80PM": "diarrhea",
+  "r_V8GMNPXN8K": "diarrhea",
+  "r_6R3825Y45F": "diarrhea",
+  "r_3G440P97QP": "diarrhea",
+  "r_7FK6YFQ8H9": "diarrhea",
+  "r_X1YHEZSPE0": "diarrhea",
+  "r_Y2AEJYDP3M": "diarrhea",
+  "r_8NY02VDFQA": "diarrhea",
+  "r_DNW8KY27S1": "diarrhea",
+  "r_TVW9QMH39G": "diarrhea",
+  "r_JN6XQP44XH": "diarrhea",
+  "r_6XDTTPHSC7": "diarrhea",
+  "r_NXDVTJ5891": "diarrhea",
+  "r_TMDGXT7HK6": "diarrhea",
+  "r_RM3S2GSTW2": "diarrhea",
+  "r_T7V2VSXYK7": "diarrhea",
+  "b_2JHNN9K2A5": "diarrhea",
+  "b_4R4X90020F": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_V5ASZTRSFJ": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_0XK8R1JN4J": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_TCFEBCFS78": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_RWEFAHT6KS": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_5AQCJBB3W1": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_2NMT8NVDV8": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "b_360M6YV6EC": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_08XWY28E3M": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_CK58JCGHNZ": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "r_T2TAAXSE38": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "b_WV4NBCE37S": "ingestion-of-toxic-substances-or-foreign-bodies",
+  "b_HREDB6WFT3": "metabolic-disorders",
+  "r_18WTAWQ4SF": "hereditary-disorders",
+  "r_4HRXZF23WP": "neoplasms",
+  "r_TX56H785XZ": "metabolic-disorders",
+  "b_892DDRPTN1": "neoplasms",
+  "r_KRVQE1Z493": "neoplasms",
+  "r_Y40QQ8ZRJ1": "neoplasms",
+  "b_N70RMZHEDK": "neoplasms",
+  "r_7WZYBKD26Z": "neoplasms",
+  "r_56HTJKQ4AA": "neoplasms",
+  "b_B6XKRE0XDA": "neoplasms",
+  "r_QG4HVTA376": "neoplasms",
+  "b_G8DF9GWF6B": "neoplasms",
+  "r_J52GMKJC7X": "neoplasms",
+  "b_ATC96PNCJF": "neoplasms",
+  "r_TXTN8ACT6C": "neoplasms",
+  "b_3NDWTY86KC": "nutrition",
+  "r_14XR3TEE21": "nutrition",
+  "r_W183YYDA9K": "nutrition",
+  "r_YK7APQM55K": "nutrition",
+  "r_9VQVD3JQQK": "nutrition",
+  "b_JSCA3KBWV8": "nutrition",
+  "r_271PFFCQ9E": "nutrition",
+  "r_JW8NZER0PN": "nutrition",
+  "r_GVN8C0JBJA": "nutrition",
+  "r_QFJXN1G7MN": "nutrition",
+  "r_DX89KK3XWF": "nutrition",
+  "r_T7EVZXBWD2": "nutrition",
+  "r_YYACNW7G0C": "nutrition",
+  "r_SFQ820G1DM": "nutrition",
+  "r_ZVG1VQ45KS": "nutrition",
+  "b_SMCE82J94R": "pancreatic-disorders",
+  "r_MJHQWFPMK9": "pancreatic-disorders",
+  "r_WGN6T0H73D": "pancreatic-disorders",
+  "b_ZZQSJRVTFB": "small-intestine-disorders",
+  "r_FFC6CP6Z28": "small-intestine-disorders",
+  "b_Y5V1H5Y5ZM": "small-intestine-disorders",
+  "r_82YQ50YKXF": "small-intestine-disorders"
+ },
+ "listed": {
+  "b_Z8MNQERBH0": "Gastrointestinal System/Nutrition (9%)"
+ },
+ "drugTables": [
+  {
+   "block": "b_XC2RNFE1ZF",
+   "pharmSection": "constipation",
+   "conditionRows": []
+  },
+  {
+   "block": "b_2H6K91FQB2",
+   "pharmSection": "inflammatory-bowel-disease",
+   "conditionRows": []
+  },
+  {
+   "block": "b_QZ20WXTYNV",
+   "pharmSection": "obesity",
+   "conditionRows": []
+  },
+  {
+   "block": "b_7EHC5MBJEF",
+   "pharmSection": "diarrhea",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "constipation",
+   "title": "Constipation",
+   "tables": [
+    "b_XC2RNFE1ZF"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "inflammatory-bowel-disease",
+   "title": "Inflammatory bowel disease",
+   "tables": [
+    "b_2H6K91FQB2"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "obesity",
+   "title": "Obesity",
+   "tables": [
+    "b_QZ20WXTYNV"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "diarrhea",
+   "title": "Diarrhea",
+   "tables": [
+    "b_7EHC5MBJEF"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83"
- ]
+ ],
+ "titled": {
+  "r_R0J1HA99RR": 0,
+  "r_J52GMKJC7X": 0
+ }
 }

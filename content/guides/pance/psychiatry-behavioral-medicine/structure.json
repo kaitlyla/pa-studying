@@ -1,13 +1,340 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders"
+  },
+  {
+   "id": "bipolar-and-related-disorders",
+   "title": "Bipolar and related disorders"
+  },
+  {
+   "id": "depressive-disorders",
+   "title": "Depressive disorders"
+  },
+  {
+   "id": "trauma-and-stressor-related-disorders",
+   "title": "Trauma- and stressor-related disorders"
+  },
+  {
+   "id": "disruptive-impulse-control-and-conduct-disorders",
+   "title": "Disruptive, impulse-control, and conduct disorders"
+  },
+  {
+   "id": "dissociative-disorders",
+   "title": "Dissociative disorders"
+  },
+  {
+   "id": "human-sexuality-and-gender-dysphoria",
+   "title": "Human sexuality and gender dysphoria"
+  },
+  {
+   "id": "feeding-and-eating-disorders",
+   "title": "Feeding and eating disorders"
+  },
+  {
+   "id": "nutrition",
+   "title": "Nutrition"
+  },
+  {
+   "id": "obsessive-compulsive-and-related-disorders",
+   "title": "Obsessive-compulsive and related disorders"
+  },
+  {
+   "id": "neurodevelopmental-disorders",
+   "title": "Neurodevelopmental disorders"
+  },
+  {
+   "id": "personality-disorders",
+   "title": "Personality disorders"
+  },
+  {
+   "id": "schizophrenia-spectrum-and-other-psychotic-disorders",
+   "title": "Schizophrenia spectrum and other psychotic disorders"
+  },
+  {
+   "id": "sleep-wake-disorders",
+   "title": "Sleep-wake disorders"
+  },
+  {
+   "id": "movement-disorders",
+   "title": "Movement disorders"
+  },
+  {
+   "id": "abuse-and-neglect",
+   "title": "Abuse and neglect"
+  },
+  {
+   "id": "somatic-symptom-and-related-disorders",
+   "title": "Somatic symptom and related disorders"
+  },
+  {
+   "id": "substance-related-and-addictive-disorders",
+   "title": "Substance-related and addictive disorders"
+  }
+ ],
+ "members": {
+  "b_87MQXHAQF2": "anxiety-disorders",
+  "r_T4K29Q6ZJS": "anxiety-disorders",
+  "r_D91QGEMDD0": "anxiety-disorders",
+  "r_WZSD6DZ0FD": "anxiety-disorders",
+  "r_XXX7AHV6YN": "anxiety-disorders",
+  "r_PTSE8Z38AM": "anxiety-disorders",
+  "r_Y74PBWW09E": "anxiety-disorders",
+  "r_CKWG37GCE4": "anxiety-disorders",
+  "b_201DMWAQGF": "anxiety-disorders",
+  "b_WD5CB4RXPB": "bipolar-and-related-disorders",
+  "r_WKSHNQRM5G": "bipolar-and-related-disorders",
+  "r_8GDFAYA424": "bipolar-and-related-disorders",
+  "b_QXS5T1G3HP": "bipolar-and-related-disorders",
+  "b_XK7N1ZK9KA": "depressive-disorders",
+  "r_1FVG8DKNS0": "depressive-disorders",
+  "b_E8R9X2PFV3": "depressive-disorders",
+  "r_9CYHHVH8ZT": "depressive-disorders",
+  "r_T3PZA2Y2K7": "depressive-disorders",
+  "r_11Y9SC7YP1": "depressive-disorders",
+  "r_YFVT3KV8C2": "trauma-and-stressor-related-disorders",
+  "b_2NPD8GWXVY": "depressive-disorders",
+  "b_141D1R9AJ5": "depressive-disorders",
+  "r_D2AMC5TP4W": "depressive-disorders",
+  "b_FR2JQ6H5PR": "disruptive-impulse-control-and-conduct-disorders",
+  "r_0JFF4V9ZS1": "disruptive-impulse-control-and-conduct-disorders",
+  "r_GSRX9J5Z1M": "disruptive-impulse-control-and-conduct-disorders",
+  "r_65HRGWKNWF": "disruptive-impulse-control-and-conduct-disorders",
+  "r_SGEVS8HFJR": "disruptive-impulse-control-and-conduct-disorders",
+  "r_DYCVGE0DVG": "disruptive-impulse-control-and-conduct-disorders",
+  "b_9V09Q5XJYZ": "dissociative-disorders",
+  "r_6DWHE4BF3H": "dissociative-disorders",
+  "r_XY08BK5JYF": "dissociative-disorders",
+  "r_6XAACFS1QD": "dissociative-disorders",
+  "b_CDW88RGFS9": "human-sexuality-and-gender-dysphoria",
+  "r_SG0GPXHJW3": "human-sexuality-and-gender-dysphoria",
+  "b_H2A31C5X79": "human-sexuality-and-gender-dysphoria",
+  "r_14S88D6JMK": "human-sexuality-and-gender-dysphoria",
+  "b_46AVMZSB7E": "feeding-and-eating-disorders",
+  "r_6Z67A4SQQH": "feeding-and-eating-disorders",
+  "b_Z7JK6416FC": "feeding-and-eating-disorders",
+  "r_W1ASK65B0J": "feeding-and-eating-disorders",
+  "r_90CBYVCP51": "nutrition",
+  "b_VAW4ZR0TWR": "feeding-and-eating-disorders",
+  "r_AVJWSA5T6E": "feeding-and-eating-disorders",
+  "r_E1V1BK4ZBJ": "feeding-and-eating-disorders",
+  "r_N6RS0SNSEY": "feeding-and-eating-disorders",
+  "r_6PNA12H3YW": "feeding-and-eating-disorders",
+  "b_0AQSHX3R8N": "obsessive-compulsive-and-related-disorders",
+  "r_PVY0SN2BQ3": "obsessive-compulsive-and-related-disorders",
+  "r_SHR8AQH6CN": "obsessive-compulsive-and-related-disorders",
+  "r_J2K95QCHGP": "obsessive-compulsive-and-related-disorders",
+  "r_K4T4N8VB59": "obsessive-compulsive-and-related-disorders",
+  "r_46NFYCMZCG": "obsessive-compulsive-and-related-disorders",
+  "b_2MVBDBVE1B": "neurodevelopmental-disorders",
+  "r_B3RV7V813Y": "neurodevelopmental-disorders",
+  "b_CE9207X0NC": "neurodevelopmental-disorders",
+  "b_29H4XMWC2S": "neurodevelopmental-disorders",
+  "r_9PEF3S2N9R": "neurodevelopmental-disorders",
+  "b_KNSFP4FPXG": "personality-disorders",
+  "r_W3MYS9QCGW": "personality-disorders",
+  "r_QJCF1BCHTT": "personality-disorders",
+  "r_RMN41PHJ7S": "personality-disorders",
+  "b_MTBH4RJ6RM": "personality-disorders",
+  "r_871V99A7V2": "personality-disorders",
+  "r_9D6NEGWQZ3": "personality-disorders",
+  "r_ME11TH3HS6": "personality-disorders",
+  "r_EBC4SNZ3ME": "personality-disorders",
+  "b_DJSZA378HW": "personality-disorders",
+  "r_S7HR1SY04F": "personality-disorders",
+  "r_XPN5HPR6GT": "personality-disorders",
+  "r_MAF9S2F4X6": "personality-disorders",
+  "b_DKS2AJTM73": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_6JK8NDEZD4": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_2QGHG2T86S": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_1HYBDAVT0G": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_BN7BG7AN9J": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_HTYFCFJ336": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_XGKXPAPBY4": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_9SHE6A8T91": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_A2CCZM5GPG": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_4ENH40PRNH": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_GDX1584ZR7": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_RM6F6XCTSV": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_KYHS0MYS00": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_QDC21V8FCM": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_29AQ7WNZ1Y": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_DN5J9ZVSEG": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_6XCP6ZCMVB": "sleep-wake-disorders",
+  "r_1WNNN0XFXV": "sleep-wake-disorders",
+  "b_CGGXEH3A2Q": "sleep-wake-disorders",
+  "b_E8PTADNHJH": "sleep-wake-disorders",
+  "r_Z0KX0BT39R": "sleep-wake-disorders",
+  "r_QF3NGE22CV": "sleep-wake-disorders",
+  "b_9P76QQW9MZ": "sleep-wake-disorders",
+  "b_DVNW6MA4Q7": "sleep-wake-disorders",
+  "r_1JJGVR7B57": "movement-disorders",
+  "r_K9QQEGQ52S": "sleep-wake-disorders",
+  "r_XPD17SGY56": "sleep-wake-disorders",
+  "r_F8CFRSYRGE": "sleep-wake-disorders",
+  "b_24CWTTV12A": "abuse-and-neglect",
+  "r_JC6KS1K4XE": "abuse-and-neglect",
+  "r_9N8BYACFVH": "abuse-and-neglect",
+  "b_BBZJAEVPNH": "somatic-symptom-and-related-disorders",
+  "r_PQ4GQGQH52": "somatic-symptom-and-related-disorders",
+  "r_KS55D5N07A": "somatic-symptom-and-related-disorders",
+  "r_K5ZHR6KNTA": "somatic-symptom-and-related-disorders",
+  "r_73NVKGC9QP": "somatic-symptom-and-related-disorders",
+  "r_YG2ZAH5HRY": "somatic-symptom-and-related-disorders",
+  "b_22PHP5N06R": "substance-related-and-addictive-disorders",
+  "r_H3EMS38KTG": "substance-related-and-addictive-disorders",
+  "b_KM532NQB1H": "substance-related-and-addictive-disorders",
+  "r_5M1JGTBQ3C": "substance-related-and-addictive-disorders",
+  "r_07R3J3GZDJ": "substance-related-and-addictive-disorders",
+  "r_TGS2YB5TE3": "substance-related-and-addictive-disorders",
+  "r_H338YBE1WF": "substance-related-and-addictive-disorders",
+  "r_88NKJT5RP0": "substance-related-and-addictive-disorders",
+  "b_G46HJB00ZN": "substance-related-and-addictive-disorders",
+  "r_PQBQQMBR7D": "substance-related-and-addictive-disorders",
+  "r_CD5EZY8QS7": "substance-related-and-addictive-disorders",
+  "r_PA2WT7ZVAB": "substance-related-and-addictive-disorders",
+  "b_GGZ1N35PZF": "trauma-and-stressor-related-disorders",
+  "r_04Z3EHHEQC": "trauma-and-stressor-related-disorders",
+  "r_86H6SK9WMB": "trauma-and-stressor-related-disorders",
+  "r_2SR8H3K6Z8": "trauma-and-stressor-related-disorders",
+  "b_ZFW44MCKGB": "trauma-and-stressor-related-disorders"
+ },
+ "listed": {
+  "b_87MQXHAQF2": "Psychiatry/Behavioral Medicine (6%)",
+  "b_KNSFP4FPXG": "PERSONALITY DISORDERS"
+ },
+ "drugTables": [
+  {
+   "block": "b_FHCJ4NMWJG",
+   "pharmSection": "anxiety-disorders",
+   "conditionRows": []
+  },
+  {
+   "block": "b_417VMA9X9Z",
+   "pharmSection": "bipolar-disorder",
+   "conditionRows": []
+  },
+  {
+   "block": "b_04APJ1EAKN",
+   "pharmSection": "depression",
+   "conditionRows": []
+  },
+  {
+   "block": "b_K176CP7EEG",
+   "pharmSection": "depression",
+   "conditionRows": [
+    "r_D2AMC5TP4W"
+   ]
+  },
+  {
+   "block": "b_49EAHCZ2C7",
+   "pharmSection": "attention-deficit-hyperactivity-disorder",
+   "conditionRows": []
+  },
+  {
+   "block": "b_6TJ03MQYZP",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  },
+  {
+   "block": "b_7SNMFQ13J9",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  },
+  {
+   "block": "b_J6WKJ0C402",
+   "pharmSection": "insomnia",
+   "conditionRows": []
+  },
+  {
+   "block": "b_JBA0S0V9Y4",
+   "pharmSection": "hypersomnolence-and-narcolepsy",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders",
+   "tables": [
+    "b_FHCJ4NMWJG"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "bipolar-disorder",
+   "title": "Bipolar disorder",
+   "tables": [
+    "b_417VMA9X9Z"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "depression",
+   "title": "Depression",
+   "tables": [
+    "b_04APJ1EAKN",
+    "b_K176CP7EEG"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "attention-deficit-hyperactivity-disorder",
+   "title": "Attention-deficit/hyperactivity disorder",
+   "tables": [
+    "b_49EAHCZ2C7"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "antipsychotics",
+   "title": "Antipsychotics",
+   "tables": [
+    "b_6TJ03MQYZP",
+    "b_7SNMFQ13J9"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "insomnia",
+   "title": "Insomnia",
+   "tables": [
+    "b_J6WKJ0C402"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "hypersomnolence-and-narcolepsy",
+   "title": "Hypersomnolence and narcolepsy",
+   "tables": [
+    "b_JBA0S0V9Y4"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_YRZTTQKKKT",
   "d_T4RDNVC8X1"
- ]
+ ],
+ "titled": {
+  "r_D2AMC5TP4W": 0,
+  "r_QDC21V8FCM": 0
+ }
 }
