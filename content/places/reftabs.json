@@ -4,24 +4,19 @@
   "subs": [
    {
     "id": "cbc",
-    "title": "CBC",
+    "title": "CBC & differential",
+    "notes": [
+     {
+      "block": "b_JFXCXF16G8"
+     },
+     {
+      "block": "b_600K6GJXGZ"
+     },
+     {
+      "block": "b_YJY2PZKQR0"
+     }
+    ],
     "links": [
-     {
-      "target": "b_600K6GJXGZ",
-      "covers": "CBC and differential: normal ranges and what highs and lows mean"
-     },
-     {
-      "target": "b_YJY2PZKQR0",
-      "covers": "CBC patterns and their key differentials"
-     },
-     {
-      "target": "b_AD2QPW8EJ8",
-      "covers": "Reticulocytes, haptoglobin, iron studies, LDH and Coombs test"
-     },
-     {
-      "target": "b_4XJS0Z8R1Z",
-      "covers": "Blood products: what a unit of pRBCs or platelets raises"
-     },
      {
       "target": "r_TYX1XSSRX7",
       "covers": "Iron deficiency anemia: CBC (microcytic, ↑RDW, ↓reticulocytes), iron studies, ferritin"
@@ -43,20 +38,12 @@
       "covers": "Infectious mononucleosis: heterophile (Monospot), smear lymphocytosis, LFTs"
      },
      {
-      "target": "r_2V1MAEEFAP",
-      "covers": "DIC: fibrinogen, D-dimer, PT/PTT, platelets"
-     },
-     {
       "target": "r_1WJ7GCQT20",
       "covers": "B12 deficiency: CBC with peripheral smear"
      },
      {
       "target": "r_H6B6RADXYC",
       "covers": "Aplastic anemia: CBC with smear, reticulocytes, marrow biopsy"
-     },
-     {
-      "target": "b_431QX2TN86",
-      "covers": "Transfusion: 1 unit PRBCs raises Hgb by 1 g/dL"
      },
      {
       "target": "r_0M3P7P5M87",
@@ -171,10 +158,6 @@
       "covers": "ITP: platelet count"
      },
      {
-      "target": "r_RBV4PJ56TY",
-      "covers": "DIC: coags, smear"
-     },
-     {
       "target": "r_M7KKF1AH3Q",
       "covers": "HUS: schistocytes, creatinine, hemolysis labs"
      },
@@ -199,20 +182,8 @@
       "covers": "Preoperative testing indications: Hgb, platelets, BMP, glucose/A1c, LFTs, coags, EKG"
      },
      {
-      "target": "r_2506PAMH0K",
-      "covers": "Renal risk: PT/aPTT/platelets, iron studies, transfusion threshold Hgb <8"
-     },
-     {
       "target": "r_EN0F8J3RSP",
       "covers": "Ascending cholangitis: liver panel, leukocytosis"
-     },
-     {
-      "target": "r_4R5436ZMC4",
-      "covers": "Upper GI bleeding: Hgb/Hct, transfusion"
-     },
-     {
-      "target": "r_KNVFNY0MXX",
-      "covers": "Lower GI bleeding: Hgb/Hct, transfusion"
      },
      {
       "target": "r_HVQP3E39TS",
@@ -300,22 +271,23 @@
      }
     ],
     "gaps": [
+     "g_BSYJ2EH3EY",
      "g_E6JYGWBM6Z",
      "g_S1RTCD4G0N"
     ]
    },
    {
     "id": "bmp-cmp",
-    "title": "BMP / CMP",
+    "title": "BMP / CMP & liver tests",
+    "notes": [
+     {
+      "block": "b_JJBGDW7FJZ"
+     },
+     {
+      "block": "b_AF9NSY548Z"
+     }
+    ],
     "links": [
-     {
-      "target": "b_JJBGDW7FJZ",
-      "covers": "What a BMP and a CMP include"
-     },
-     {
-      "target": "b_AF9NSY548Z",
-      "covers": "BMP/CMP: normal ranges and what highs and lows mean"
-     },
      {
       "target": "r_G02D86Y37J",
       "covers": "Diabetes type 1: diagnostic glucose/OGTT/HbA1C criteria, autoantibodies"
@@ -429,14 +401,6 @@
       "covers": "Gestational diabetes: 1-hr glucose challenge at 24-28 wks, 3-hr OGTT"
      },
      {
-      "target": "r_GHS4P48BC7",
-      "covers": "Preeclampsia with severe features: platelets, SCr, ALT/AST thresholds"
-     },
-     {
-      "target": "r_M7KKF1AH3Q",
-      "covers": "HUS: schistocytes, creatinine, hemolysis labs"
-     },
-     {
       "target": "r_NJZ52RV96B",
       "covers": "Type 1 DM: glucose, ketones, DKA"
      },
@@ -471,10 +435,6 @@
      {
       "target": "r_SJ2VFB8WDA",
       "covers": "Anorexia nervosa: lab and other findings"
-     },
-     {
-      "target": "r_YCV1GXXVV9",
-      "covers": "Preoperative testing indications: Hgb, platelets, BMP, glucose/A1c, LFTs, coags, EKG"
      },
      {
       "target": "r_47TCND5JBX",
@@ -559,20 +519,6 @@
      {
       "target": "r_Z26KXEVR5E",
       "covers": "Electrolytes and chemistry"
-     }
-    ],
-    "gaps": [
-     "g_RB0YZH3SJD",
-     "g_EHV6MCFXG5"
-    ]
-   },
-   {
-    "id": "lfts",
-    "title": "LFTs",
-    "links": [
-     {
-      "target": "b_AF9NSY548Z",
-      "covers": "ALT/AST, ALP, bilirubin and albumin: normal ranges and causes"
      },
      {
       "target": "r_6VK7977YE4",
@@ -599,28 +545,12 @@
       "covers": "Cirrhosis: PT/INR, ferritin"
      },
      {
-      "target": "r_GHS4P48BC7",
-      "covers": "Preeclampsia with severe features: platelets, SCr, ALT/AST thresholds"
-     },
-     {
-      "target": "r_MGF7VZ1FQK",
-      "covers": "Alcohol: GGT, AST:ALT >2, LDH, CDT, MCV"
-     },
-     {
-      "target": "r_YCV1GXXVV9",
-      "covers": "Preoperative testing indications: Hgb, platelets, BMP, glucose/A1c, LFTs, coags, EKG"
-     },
-     {
       "target": "r_A63894Q26F",
       "covers": "Acute cholecystitis: leukocytosis, LFTs"
      },
      {
       "target": "r_PFBXG7K6YS",
       "covers": "Choledocholithiasis: liver panel"
-     },
-     {
-      "target": "r_EN0F8J3RSP",
-      "covers": "Ascending cholangitis: liver panel, leukocytosis"
      },
      {
       "target": "r_JP7VCJSXA1",
@@ -651,31 +581,70 @@
       "covers": "Liver tests"
      },
      {
-      "target": "r_H3EMS38KTG",
-      "covers": "Liver tests"
-     },
-     {
       "target": "r_2N5GZV94YC",
       "covers": "Liver tests"
      }
     ],
     "gaps": [
+     "g_C0Y3551RRJ",
+     "g_708JCV5GSM",
+     "g_RB0YZH3SJD",
+     "g_EHV6MCFXG5",
      "g_H5771H4V1G",
      "g_E11A3Y2JJF"
     ]
    },
    {
-    "id": "abg",
-    "title": "ABG",
+    "id": "coags",
+    "title": "Coagulation",
+    "notes": [
+     {
+      "block": "b_RHRNH2XR89"
+     },
+     {
+      "block": "b_ZD4KJACBD6"
+     }
+    ],
     "links": [
      {
-      "target": "b_4ZRZRP3VKA",
-      "covers": "ABG and lactate: acid-base interpretation steps"
+      "target": "r_2V1MAEEFAP",
+      "covers": "DIC: fibrinogen, D-dimer, PT/PTT, platelets"
      },
      {
-      "target": "b_3Y307SDHNP",
-      "covers": "ABG and lactate: normal ranges and what changes mean"
+      "target": "r_RBV4PJ56TY",
+      "covers": "DIC: coags, smear"
+     }
+    ],
+    "gaps": [
+     "g_H2BA6ZC6R2"
+    ]
+   },
+   {
+    "id": "cardiac",
+    "title": "Cardiac biomarkers",
+    "notes": [
+     {
+      "block": "b_30MFZWRNA8"
      },
+     {
+      "block": "b_DPNKVKMPQD"
+     }
+    ],
+    "links": [],
+    "gaps": []
+   },
+   {
+    "id": "abg",
+    "title": "ABG & lactate",
+    "notes": [
+     {
+      "block": "b_4ZRZRP3VKA"
+     },
+     {
+      "block": "b_3Y307SDHNP"
+     }
+    ],
+    "links": [
      {
       "target": "r_TYWN5N1GJC",
       "covers": "Pulmonary embolism: CBC/CMP, ABG, D-dimer"
@@ -689,16 +658,8 @@
       "covers": "High anion gap (MUKPILES) vs non-gap metabolic acidosis"
      },
      {
-      "target": "r_QGKX4SVDDS",
-      "covers": "DKA: glucose, pH, anion gap, bicarbonate, urine/serum ketones"
-     },
-     {
       "target": "b_M1SBGV20T3",
       "covers": "Nonketotic hyperglycemia (HHS) vs DKA: no ketones, normal pH and anion gap"
-     },
-     {
-      "target": "r_3P1VZQW8MN",
-      "covers": "HHS: glucose >600, plasma osmolality >320, pH >7.3"
      },
      {
       "target": "r_0WHGKK44T4",
@@ -719,10 +680,6 @@
      {
       "target": "r_GV0WDHCFDQ",
       "covers": "Septic shock: lactate"
-     },
-     {
-      "target": "r_DY0DCCR246",
-      "covers": "Pyloric stenosis: hypokalemic hypochloremic metabolic alkalosis"
      },
      {
       "target": "b_7F7A4SKSZW",
@@ -757,10 +714,6 @@
       "covers": "Blood gas and acid-base"
      },
      {
-      "target": "r_ZY0GDWXWA0",
-      "covers": "Blood gas and acid-base"
-     },
-     {
       "target": "r_MMWAEVBW9H",
       "covers": "Blood gas and acid-base"
      },
@@ -774,105 +727,22 @@
      }
     ],
     "gaps": [
-     "g_RB0YZH3SJD",
+     "g_QM1A86V54D",
      "g_PSQX8M2QW1"
     ]
    },
    {
-    "id": "hepatitis-serology",
-    "title": "Hepatitis serology",
-    "links": [
+    "id": "other-labs",
+    "title": "Other key labs (thyroid, iron, inflammatory markers, UA, lipids…)",
+    "notes": [
      {
-      "target": "r_9TMG56635S",
-      "covers": "Hepatitis B serologies"
+      "block": "b_5WZD1BFSZ0"
      },
      {
-      "target": "r_Y3A7GFRKT9",
-      "covers": "Hepatitis C testing"
-     },
-     {
-      "target": "r_WG66AMESG0",
-      "covers": "Hepatitis A"
-     },
-     {
-      "target": "r_CA3KPB91AJ",
-      "covers": "Hepatitis B serology (HBsAg, anti-HBs, anti-HBc)"
-     },
-     {
-      "target": "r_0P912WTJQE",
-      "covers": "Hepatitis C"
-     },
-     {
-      "target": "r_S7SZV77NG0",
-      "covers": "HAV serology"
-     },
-     {
-      "target": "r_KXXX1CPV74",
-      "covers": "HBV serology"
-     },
-     {
-      "target": "r_6862AHA678",
-      "covers": "HCV serology"
-     },
-     {
-      "target": "r_Q97CYDM5EQ",
-      "covers": "HDV serology"
-     },
-     {
-      "target": "r_XFNFNJYXSD",
-      "covers": "HEV serology"
-     },
-     {
-      "target": "r_ZPHQND8DMP",
-      "covers": "HAV serology"
-     },
-     {
-      "target": "r_QA3X7KXDJ0",
-      "covers": "HBV serology"
-     },
-     {
-      "target": "r_9JKFHJ1B58",
-      "covers": "HCV serology"
-     },
-     {
-      "target": "r_2GKBWZMVSA",
-      "covers": "HDV serology"
-     },
-     {
-      "target": "r_6MS9XFD5NY",
-      "covers": "HEV serology"
-     },
-     {
-      "target": "r_2N5GZV94YC",
-      "covers": "Hepatitis serology"
-     },
-     {
-      "target": "r_ACQVMG7GHF",
-      "covers": "Hepatitis serology"
-     },
-     {
-      "target": "r_X4MCH5JTFB",
-      "covers": "Hepatitis serology"
-     },
-     {
-      "target": "r_WGFWYBM0G7",
-      "covers": "Hepatitis serology"
-     },
-     {
-      "target": "r_Q5X5QA60KD",
-      "covers": "Hepatitis serology"
+      "block": "b_AD2QPW8EJ8"
      }
     ],
-    "gaps": []
-   },
-   {
-    "id": "thyroid",
-    "title": "Thyroid",
     "links": [
-     {
-      "target": "b_AD2QPW8EJ8",
-      "covers": "TSH and free T4/T3: normal ranges and patterns"
-     },
      {
       "target": "r_FPB305KKQ1",
       "covers": "Hypothyroidism: TFTs (↓FT4/FT3, ↑TSH), anti-TPO/anti-TG antibodies"
@@ -959,17 +829,99 @@
      }
     ],
     "gaps": [
+     "g_3GQZ055Z4S",
      "g_WHMRS5TE5W"
+    ]
+   },
+   {
+    "id": "hepatitis-serology",
+    "title": "Hepatitis serology",
+    "links": [
+     {
+      "target": "r_9TMG56635S",
+      "covers": "Hepatitis B serologies"
+     },
+     {
+      "target": "r_Y3A7GFRKT9",
+      "covers": "Hepatitis C testing"
+     },
+     {
+      "target": "r_WG66AMESG0",
+      "covers": "Hepatitis A"
+     },
+     {
+      "target": "r_CA3KPB91AJ",
+      "covers": "Hepatitis B serology (HBsAg, anti-HBs, anti-HBc)"
+     },
+     {
+      "target": "r_0P912WTJQE",
+      "covers": "Hepatitis C"
+     },
+     {
+      "target": "r_S7SZV77NG0",
+      "covers": "HAV serology"
+     },
+     {
+      "target": "r_KXXX1CPV74",
+      "covers": "HBV serology"
+     },
+     {
+      "target": "r_6862AHA678",
+      "covers": "HCV serology"
+     },
+     {
+      "target": "r_Q97CYDM5EQ",
+      "covers": "HDV serology"
+     },
+     {
+      "target": "r_XFNFNJYXSD",
+      "covers": "HEV serology"
+     },
+     {
+      "target": "r_ZPHQND8DMP",
+      "covers": "HAV serology"
+     },
+     {
+      "target": "r_QA3X7KXDJ0",
+      "covers": "HBV serology"
+     },
+     {
+      "target": "r_9JKFHJ1B58",
+      "covers": "HCV serology"
+     },
+     {
+      "target": "r_2GKBWZMVSA",
+      "covers": "HDV serology"
+     },
+     {
+      "target": "r_6MS9XFD5NY",
+      "covers": "HEV serology"
+     },
+     {
+      "target": "r_ACQVMG7GHF",
+      "covers": "Hepatitis serology"
+     },
+     {
+      "target": "r_X4MCH5JTFB",
+      "covers": "Hepatitis serology"
+     },
+     {
+      "target": "r_WGFWYBM0G7",
+      "covers": "Hepatitis serology"
+     },
+     {
+      "target": "r_Q5X5QA60KD",
+      "covers": "Hepatitis serology"
+     }
+    ],
+    "gaps": [
+     "g_GZB2W91432"
     ]
    },
    {
     "id": "drug-levels-monitoring",
     "title": "Drug levels & monitoring",
     "links": [
-     {
-      "target": "b_ZD4KJACBD6",
-      "covers": "PT/INR (warfarin monitoring, therapeutic INR) and aPTT (heparin)"
-     },
      {
       "target": "b_16RMTB9Y49",
       "covers": "Warfarin: INR monitoring and therapeutic range"
@@ -1102,20 +1054,12 @@
       "covers": "Urine culture: positive counts, when to send one"
      },
      {
-      "target": "b_AD2QPW8EJ8",
-      "covers": "Procalcitonin and CRP/ESR"
-     },
-     {
       "target": "r_KFYVNRX7AY",
       "covers": "Pyelonephritis: UA (WBC casts), CBC, urine culture"
      },
      {
       "target": "r_FFQ4DHH7MJ",
       "covers": "Strep pharyngitis: rapid strep and throat culture"
-     },
-     {
-      "target": "r_N9BQJ5DVDN",
-      "covers": "Infectious mononucleosis: heterophile (Monospot), smear lymphocytosis, LFTs"
      },
      {
       "target": "r_N53A50BWVV",
@@ -1274,10 +1218,6 @@
       "covers": "Bacterial meningitis: CSF"
      },
      {
-      "target": "r_X72JTVTVTQ",
-      "covers": "Febrile neutropenia: CBC, cultures, UA"
-     },
-     {
       "target": "r_46N2CGDE1B",
       "covers": "Acute cystitis: UA, urine culture"
      },
@@ -1354,10 +1294,6 @@
       "covers": "Microbiology testing"
      },
      {
-      "target": "r_KM3QPMQ786",
-      "covers": "Microbiology testing"
-     },
-     {
       "target": "r_XC29N9MZMX",
       "covers": "Microbiology testing"
      },
@@ -1370,7 +1306,6 @@
      "g_2ZZDS3G4D4",
      "g_E27VANXBPM",
      "g_7MYZH8ZXR1",
-     "g_7H3C2VKXRF",
      "g_M2WSDPDWWV",
      "g_ZR6AMR8STK"
     ]
@@ -1412,56 +1347,12 @@
       "covers": "Cystitis: UA (pyuria, nitrites, leukocyte esterase)"
      },
      {
-      "target": "r_KFYVNRX7AY",
-      "covers": "Pyelonephritis: UA (WBC casts), CBC, urine culture"
-     },
-     {
-      "target": "r_3W96XYBE15",
-      "covers": "Diabetes insipidus: serum and urine osmolality, fluid deprivation test"
-     },
-     {
-      "target": "r_NYSDYPGSCQ",
-      "covers": "Prerenal AKI: BUN/Cr ratio, FENa, urine Na and osmolality"
-     },
-     {
-      "target": "r_GTNA4H94EA",
-      "covers": "ATN: BUN/Cr ratio, FENa, urine osmolality, muddy brown casts"
-     },
-     {
-      "target": "r_DN0SPFBXP9",
-      "covers": "Epididymitis: UA, NAAT for gonorrhea and chlamydia"
-     },
-     {
-      "target": "r_T399SWS0GX",
-      "covers": "Prerenal AKI: FENa"
-     },
-     {
-      "target": "r_HGXX79X315",
-      "covers": "Acute tubular necrosis: FENa"
-     },
-     {
-      "target": "r_K8KM58M23Y",
-      "covers": "Postrenal AKI: FENa"
-     },
-     {
-      "target": "r_VHPBBYRQHP",
-      "covers": "Acute cystitis"
-     },
-     {
-      "target": "r_NNES4HFA26",
-      "covers": "Acute pyelonephritis"
-     },
-     {
       "target": "r_J0GAD1CHEB",
       "covers": "Acute glomerulonephritis"
      },
      {
       "target": "r_XTMJH45ER7",
       "covers": "Nephrotic syndrome"
-     },
-     {
-      "target": "r_5MP5R9XT61",
-      "covers": "Diabetes insipidus"
      },
      {
       "target": "r_P1HWMMFZDC",
@@ -1476,36 +1367,12 @@
       "covers": "Cystitis in pregnancy: UA"
      },
      {
-      "target": "r_DFFPS85MB1",
-      "covers": "Pyelonephritis in pregnancy: diagnosis"
-     },
-     {
-      "target": "r_57AYQDYJ8S",
-      "covers": "Glomerulonephritis: BUN/creatinine, UA, ASO"
-     },
-     {
-      "target": "r_8RT9E13T1Y",
-      "covers": "Cystitis: UA, urine culture"
-     },
-     {
-      "target": "r_BFJTE3GSG0",
-      "covers": "Pyelonephritis: UA, culture"
-     },
-     {
       "target": "r_75GAW05XE6",
       "covers": "VUR: UA, creatinine"
      },
      {
       "target": "r_5MJZT5B3ZX",
       "covers": "Nephrotic syndrome: proteinuria, albumin, lipids"
-     },
-     {
-      "target": "r_46N2CGDE1B",
-      "covers": "Acute cystitis: UA, urine culture"
-     },
-     {
-      "target": "r_1DEPZ626FN",
-      "covers": "Acute pyelonephritis: UA, urine culture"
      },
      {
       "target": "r_J1VC9HDYZK",
@@ -1520,23 +1387,11 @@
       "covers": "Urinalysis"
      },
      {
-      "target": "r_6DSGH2GA2Q",
-      "covers": "Urinalysis"
-     },
-     {
       "target": "r_QVRAKH4F8E",
       "covers": "Urinalysis"
      },
      {
       "target": "r_97BNWW7BSM",
-      "covers": "Urinalysis"
-     },
-     {
-      "target": "r_9P2RQQKX3N",
-      "covers": "Urinalysis"
-     },
-     {
-      "target": "r_76TEQZJYMK",
       "covers": "Urinalysis"
      },
      {
@@ -1559,6 +1414,65 @@
     "gaps": [
      "g_7H3C2VKXRF",
      "g_NP97E7CA7Y"
+    ]
+   },
+   {
+    "id": "iv-fluids",
+    "title": "IV fluids",
+    "notes": [
+     {
+      "block": "b_9H306FF456"
+     },
+     {
+      "block": "b_Z46DF8GABQ"
+     },
+     {
+      "block": "b_YJDAKSNNR6"
+     }
+    ],
+    "links": [],
+    "gaps": []
+   },
+   {
+    "id": "transfusion",
+    "title": "Transfusion & blood products",
+    "notes": [
+     {
+      "block": "b_ZNBMAP5DTH"
+     },
+     {
+      "block": "b_4XJS0Z8R1Z"
+     },
+     {
+      "block": "b_G436TMAVH3"
+     },
+     {
+      "block": "b_ACW7HNPM88"
+     },
+     {
+      "block": "b_3CR8JZRHZ1"
+     }
+    ],
+    "links": [
+     {
+      "target": "b_431QX2TN86",
+      "covers": "Transfusion: 1 unit PRBCs raises Hgb by 1 g/dL"
+     },
+     {
+      "target": "r_2506PAMH0K",
+      "covers": "Renal risk: PT/aPTT/platelets, iron studies, transfusion threshold Hgb <8"
+     },
+     {
+      "target": "r_4R5436ZMC4",
+      "covers": "Upper GI bleeding: Hgb/Hct, transfusion"
+     },
+     {
+      "target": "r_KNVFNY0MXX",
+      "covers": "Lower GI bleeding: Hgb/Hct, transfusion"
+     }
+    ],
+    "gaps": [
+     "g_E9PYJASNS0"
     ]
    }
   ],
