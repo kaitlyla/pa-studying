@@ -1,6 +1,6 @@
 {
  "v": 1,
- "id": "s_RHPBVRDKA6",
+ "id": "s_0266R13Q2M",
  "kind": "slide",
  "doc": {
   "type": "doc",
@@ -10,7 +10,96 @@
     "content": [
      {
       "type": "text",
-      "text": "Ulcerative Colitis (UC)"
+      "text": "Antiphospholipid Syndrome (APS)"
+     }
+    ]
+   },
+   {
+    "type": "slide_card",
+    "content": [
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Key facts"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "autoimmune disorder"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "arterial/venous thromboembolic events"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "recurrent pregnancy loss"
+       }
+      ]
      }
     ]
    },
@@ -55,7 +144,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Montreal Classification of Extent of UC:"
+        "text": "HALLMARK: thrombotic events (venous > arterial)"
        }
       ]
      },
@@ -76,7 +165,7 @@
       "content": [
        {
         "type": "text",
-        "text": "E1: ulcerative proctitis ⇢ limited to the rectum"
+        "text": "– MC venous site: lower extremity DVT"
        }
       ]
      },
@@ -97,7 +186,7 @@
       "content": [
        {
         "type": "text",
-        "text": "E2: left-sided UC ⇢ limited to colon distal to splenic fixture"
+        "text": "superficial vein thrombosis, PE"
        }
       ]
      },
@@ -118,7 +207,7 @@
       "content": [
        {
         "type": "text",
-        "text": "E3: extensive UC ⇢ extends proximal to splenic fixture"
+        "text": "– MC arterial site: cerebral (i.e., stroke or TIA)"
        }
       ]
      }
@@ -165,7 +254,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Sigmoidoscopy: mucosa – edema, friability, mucopus, erosions; UNIFORM inflammation"
+        "text": "LABS: CBC, CMP, UA"
        }
       ]
      },
@@ -186,7 +275,7 @@
       "content": [
        {
         "type": "text",
-        "text": "*NO COLONOSCOPY W/ FULMINANT DZ (r/o perforation)"
+        "text": "Antiphospholipid Antibody Testing:"
        }
       ]
      },
@@ -207,7 +296,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Abdominal radiograph, CT: pts w/ severe colitis to look for significant colonic dilation"
+        "text": "anticardiolipin antibodies (aCL), IgG/IgM (ELISA)"
        }
       ]
      },
@@ -228,7 +317,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Barium studies: “stovepipe sign,” loss of haustral markings"
+        "text": "*false⊕ RPR"
        }
       ]
      }
@@ -275,7 +364,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Mild/Moderate UC:"
+        "text": "Acute thrombosis:"
        }
       ]
      },
@@ -296,7 +385,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Maintenance TX:"
+        "text": "anticoagulate w/ Warfarin (INR 2-3)"
        }
       ]
      },
@@ -317,7 +406,7 @@
       "content": [
        {
         "type": "text",
-        "text": "continue w/ same agent that induced remission except for steroids"
+        "text": "*preferred vs DOACs"
        }
       ]
      }
@@ -327,72 +416,85 @@
  },
  "meta": {
   "summarizes": [
-   "r_MDP9JXFWDD"
+   "r_CGFYW6GTR1"
   ],
   "evidence": [
    {
-    "item": "Montreal Classification of Extent of UC:",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Montreal Classification of Extent of UC:"
+    "item": "autoimmune disorder",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•autoimmune disorder"
    },
    {
-    "item": "E1: ulcerative proctitis ⇢ limited to the rectum",
-    "row": "r_MDP9JXFWDD",
-    "quote": "▪︎E1: ulcerative proctitis ⇢ limited to the rectum"
+    "item": "arterial/venous thromboembolic events",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•arterial/venous thromboembolic events"
    },
    {
-    "item": "E2: left-sided UC ⇢ limited to colon distal to splenic fixture",
-    "row": "r_MDP9JXFWDD",
-    "quote": "▪︎E2: left-sided UC ⇢ limited to colon distal to splenic fixture"
+    "item": "recurrent pregnancy loss",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•recurrent pregnancy loss"
    },
    {
-    "item": "E3: extensive UC ⇢ extends proximal to splenic fixture",
-    "row": "r_MDP9JXFWDD",
-    "quote": "▪︎E3: extensive UC ⇢ extends proximal to splenic fixture"
+    "item": "HALLMARK: thrombotic events (venous > arterial)",
+    "row": "r_CGFYW6GTR1",
+    "quote": "HALLMARK: thrombotic events (venous > arterial)"
    },
    {
-    "item": "Sigmoidoscopy: mucosa – edema, friability, mucopus, erosions; UNIFORM inflammation",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Sigmoidoscopy: mucosa – edema, friability, mucopus, erosions; UNIFORM inflammation"
+    "item": "– MC venous site: lower extremity DVT",
+    "row": "r_CGFYW6GTR1",
+    "quote": "– MC venous site: lower extremity DVT"
    },
    {
-    "item": "*NO COLONOSCOPY W/ FULMINANT DZ (r/o perforation)",
-    "row": "r_MDP9JXFWDD",
-    "quote": "*NO COLONOSCOPY W/ FULMINANT DZ (r/o perforation)"
+    "item": "superficial vein thrombosis, PE",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•superficial vein thrombosis, PE"
    },
    {
-    "item": "Abdominal radiograph, CT: pts w/ severe colitis to look for significant colonic dilation",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Abdominal radiograph, CT: pts w/ severe colitis to look for significant colonic dilation"
+    "item": "– MC arterial site: cerebral (i.e., stroke or TIA)",
+    "row": "r_CGFYW6GTR1",
+    "quote": "– MC arterial site: cerebral (i.e., stroke or TIA)"
    },
    {
-    "item": "Barium studies: “stovepipe sign,” loss of haustral markings",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Barium studies: “stovepipe sign,” loss of haustral markings"
+    "item": "LABS: CBC, CMP, UA",
+    "row": "r_CGFYW6GTR1",
+    "quote": "LABS: CBC, CMP, UA"
    },
    {
-    "item": "Mild/Moderate UC:",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Mild/Moderate UC:"
+    "item": "Antiphospholipid Antibody Testing:",
+    "row": "r_CGFYW6GTR1",
+    "quote": "Antiphospholipid Antibody Testing:"
    },
    {
-    "item": "Maintenance TX:",
-    "row": "r_MDP9JXFWDD",
-    "quote": "Maintenance TX:"
+    "item": "anticardiolipin antibodies (aCL), IgG/IgM (ELISA)",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•anticardiolipin antibodies (aCL), IgG/IgM (ELISA)"
    },
    {
-    "item": "continue w/ same agent that induced remission except for steroids",
-    "row": "r_MDP9JXFWDD",
-    "quote": "▪︎continue w/ same agent that induced remission except for steroids"
+    "item": "*false⊕ RPR",
+    "row": "r_CGFYW6GTR1",
+    "quote": "*false⊕ RPR"
+   },
+   {
+    "item": "Acute thrombosis:",
+    "row": "r_CGFYW6GTR1",
+    "quote": "Acute thrombosis:"
+   },
+   {
+    "item": "anticoagulate w/ Warfarin (INR 2-3)",
+    "row": "r_CGFYW6GTR1",
+    "quote": "•anticoagulate w/ Warfarin (INR 2-3)"
+   },
+   {
+    "item": "*preferred vs DOACs",
+    "row": "r_CGFYW6GTR1",
+    "quote": "*preferred vs DOACs"
    }
   ],
   "verification": {
-   "verifier": "shay-49353 (Leader re-check, 03:59Z)",
+   "verifier": "detective task 01a10a19-faca-7e50-99cc-ae270df48b9e (im S13)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": [
-    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed."
-   ]
+   "notes": []
   }
  }
 }

@@ -322,6 +322,27 @@
       "content": [
        {
         "type": "text",
+        "text": "CBC"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "creatinine"
        }
       ]
@@ -365,27 +386,6 @@
        {
         "type": "text",
         "text": "protein:Cr"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "NST or BPP"
        }
       ]
      }
@@ -557,6 +557,11 @@
     "quote": "•Damage of endothelial cells potentiates the release of inflammatory cytokines"
    },
    {
+    "item": "CBC",
+    "row": "r_P1HWMMFZDC",
+    "quote": "•CBC"
+   },
+   {
     "item": "creatinine",
     "row": "r_P1HWMMFZDC",
     "quote": "•creatinine"
@@ -570,11 +575,6 @@
     "item": "protein:Cr",
     "row": "r_P1HWMMFZDC",
     "quote": "•protein:Cr"
-   },
-   {
-    "item": "NST or BPP",
-    "row": "r_P1HWMMFZDC",
-    "quote": "•NST or BPP"
    },
    {
     "item": "MILD: anti-HTN meds NOT recommended",
@@ -598,11 +598,11 @@
    }
   ],
   "verification": {
-   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
+   "verifier": "shay-49353 (Leader re-check, 03:59Z)",
    "at": "2026-10-05",
    "result": "pass",
    "notes": [
-    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed."
    ]
   }
  }

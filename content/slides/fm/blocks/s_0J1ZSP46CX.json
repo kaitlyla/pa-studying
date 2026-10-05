@@ -215,6 +215,69 @@
         "text": "Type"
        }
       ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Threatened"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Inevitable"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Incomplete"
+       }
+      ]
      }
     ]
    },
@@ -259,6 +322,48 @@
       "content": [
        {
         "type": "text",
+        "text": "U/S"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "CBC"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "blood type & Rh screen"
        }
       ]
@@ -281,48 +386,6 @@
        {
         "type": "text",
         "text": "serial beta-hCG titers"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "progesterone levels"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "*all women who are Rh⊖ should also receive anti-D Rh immunoglobulin at this time for all abortions"
        }
       ]
      }
@@ -482,6 +545,31 @@
     "quote": "Congenital abnormalities in mother"
    },
    {
+    "item": "Threatened",
+    "row": "r_NC20QGBST2",
+    "quote": "Threatened"
+   },
+   {
+    "item": "Inevitable",
+    "row": "r_VWJVMM07B6",
+    "quote": "Inevitable"
+   },
+   {
+    "item": "Incomplete",
+    "row": "r_55A36PMCX8",
+    "quote": "Incomplete"
+   },
+   {
+    "item": "U/S",
+    "row": "r_NC20QGBST2",
+    "quote": "•U/S"
+   },
+   {
+    "item": "CBC",
+    "row": "r_NC20QGBST2",
+    "quote": "•CBC"
+   },
+   {
     "item": "blood type & Rh screen",
     "row": "r_NC20QGBST2",
     "quote": "•blood type & Rh screen"
@@ -490,16 +578,6 @@
     "item": "serial beta-hCG titers",
     "row": "r_NC20QGBST2",
     "quote": "•serial beta-hCG titers"
-   },
-   {
-    "item": "progesterone levels",
-    "row": "r_NC20QGBST2",
-    "quote": "•progesterone levels"
-   },
-   {
-    "item": "*all women who are Rh⊖ should also receive anti-D Rh immunoglobulin at this time for all abortions",
-    "row": "r_NC20QGBST2",
-    "quote": "*all women who are Rh⊖ should also receive anti-D Rh immunoglobulin at this time for all abortions"
    },
    {
     "item": "supportive observation at home, bed rest, & close follow up to see if sxs either resolve or progress to abortion",
@@ -523,11 +601,11 @@
    }
   ],
   "verification": {
-   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
+   "verifier": "shay-49353 (Leader re-check, 03:59Z)",
    "at": "2026-10-05",
    "result": "pass",
    "notes": [
-    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed."
    ]
   }
  }

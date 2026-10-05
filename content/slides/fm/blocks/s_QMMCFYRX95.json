@@ -186,7 +186,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Silent (asymptomatic) incidental discovery"
+        "text": "DKA"
        }
       ]
      },
@@ -207,7 +207,7 @@
       "content": [
        {
         "type": "text",
-        "text": "perineal candidiasis – common in young children/girls"
+        "text": "Silent (asymptomatic) incidental discovery"
        }
       ]
      }
@@ -466,14 +466,14 @@
     "quote": "•Classic new onset: polydipsia, polyuria, & weight loss + hyperglycemia & ketonemia (or kentonuria)"
    },
    {
+    "item": "DKA",
+    "row": "r_G02D86Y37J",
+    "quote": "•DKA"
+   },
+   {
     "item": "Silent (asymptomatic) incidental discovery",
     "row": "r_G02D86Y37J",
     "quote": "•Silent (asymptomatic) incidental discovery"
-   },
-   {
-    "item": "perineal candidiasis – common in young children/girls",
-    "row": "r_G02D86Y37J",
-    "quote": "•perineal candidiasis – common in young children/girls"
    },
    {
     "item": "Criteria: one of the following",
@@ -517,10 +517,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:59Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed."
+   ]
   }
  }
 }
