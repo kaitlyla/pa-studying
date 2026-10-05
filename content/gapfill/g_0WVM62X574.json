@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " 2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "High blood pressure: current guideline",
+  "relevantTo": "Hypertensive disorders",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults",
+    "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+    "year": "2025",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40815242/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-hypertension",
+     "label": "ACC/AHA high blood pressure guideline",
+     "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+     "edition": 2025,
+     "method": "pubmed",
+     "term": "high[ti] AND blood[ti] AND pressure[ti] AND guideline[ti] AND adults[ti] AND (Circulation[ta] OR Hypertension[ta] OR \"J Am Coll Cardiol\"[ta])",
+     "title": "^(\\d{4}) (?:AHA/ACC|ACC/AHA)[^:]*Guideline for the Prevention, Detection, Evaluation,? and Management of High Blood Pressure in Adults"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_0WVM62X574"
+}

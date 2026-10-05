@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Sepsis and septic shock: current guideline",
+  "relevantTo": "Sepsis; Septic shock",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026",
+    "org": "Society of Critical Care Medicine / European Society of Intensive Care Medicine (Surviving Sepsis Campaign)",
+    "year": "2026",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41869847/",
+    "type": "guideline",
+    "track": {
+     "series": "ssc-adults",
+     "label": "Surviving Sepsis Campaign adult guidelines",
+     "org": "Society of Critical Care Medicine / European Society of Intensive Care Medicine (Surviving Sepsis Campaign)",
+     "edition": 2026,
+     "method": "pubmed",
+     "term": "surviving[ti] AND sepsis[ti] AND campaign[ti] AND guidelines[ti] AND septic[ti] AND shock[ti] AND (\"Crit Care Med\"[ta] OR \"Intensive Care Med\"[ta])",
+     "title": "^Surviving Sepsis Campaign: [Ii]nternational [Gg]uidelines for [Mm]anagement of [Ss]epsis and [Ss]eptic [Ss]hock (\\d{4})"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_V5CYSQP7A1"
+}

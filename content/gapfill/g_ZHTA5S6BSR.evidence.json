@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "author": "juno-97547",
+ "claims": [
+  {
+   "text": "Sudden, ongoing attack: pulse oximetry and fingerstick glucose; pregnancy test in female patients; most clinicians also get an ECG.",
+   "source": 0,
+   "quote": "Patients with a sudden, ongoing attack should have pulse oximetry and fingerstick glucose test. Female patients should have a pregnancy test. Most clinicians also do electrocardiography (ECG).",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Gadolinium-enhanced MRI for acute symptoms with headache, neurologic abnormalities or other signs of a central cause.",
+   "source": 0,
+   "quote": "generally gadolinium-enhanced magnetic resonance imaging (MRI) is indicated for patients with acute symptoms who have headache, neurologic abnormalities, or any other findings suggestive of a central nervous system etiology.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Chronic central vestibular symptoms: gadolinium-enhanced MRI for stroke, multiple sclerosis or other CNS lesions.",
+   "source": 0,
+   "quote": "Patients with chronic symptoms of central vestibular pathology should have gadolinium-enhanced MRI to look for evidence of stroke, multiple sclerosis, or other central nervous system lesions.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Audiometry and electronystagmography when bedside hearing or vestibular tests are abnormal or equivocal.",
+   "source": 0,
+   "quote": "Patients for whom results of bedside tests of hearing and vestibular function are abnormal or equivocal should undergo formal testing with audiometry and electronystagmography.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cardiac testing: ECG, Holter monitoring, echocardiography and exercise stress testing.",
+   "source": 0,
+   "quote": "ECG, Holter monitoring for heart rhythm abnormalities, echocardiography, and exercise stress testing may be done to evaluate heart function.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Labs rarely help, except syphilis serology for chronic vertigo with bilateral hearing loss.",
+   "source": 0,
+   "quote": "Laboratory tests are rarely helpful, except for patients with chronic vertigo and bilateral hearing loss, for whom syphilis serology is indicated.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "im-s12 verifier session (Detective task 01a109fd-461f-7e10-84a9-39d6849fcf0b, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "earlier extraction added a space at inline-link boundaries (eg \"( 2 )\" for the page's \"(2)\")",
+    "resolution": "quote re-extracted with tag-aware text and re-matched to the saved live copy; whitespace only (shay-49353 ruling 2026-10-05T03:16Z)"
+   }
+  ]
+ },
+ "block": "g_ZHTA5S6BSR"
+}

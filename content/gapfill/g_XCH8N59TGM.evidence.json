@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "author": "juno-97547",
+ "claims": [
+  {
+   "text": "Urinalysis to confirm true hematuria (red urine without RBCs suggests myoglobin, hemoglobin, porphyria, drugs or foods); confirm on a second specimen.",
+   "source": 0,
+   "quote": "Before testing proceeds, true hematuria should be distinguished from red urine by urinalysis. In women with vaginal bleeding, the specimen should be obtained by straight catheterization to avoid contamination by a nonurinary source of blood. Red urine without red blood cells (RBCs) suggests myoglobinuria or hemoglobinuria, porphyria, or ingestion of certain medications or foods. Generally, the presence of hematuria should be confirmed by testing a second specimen.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Urine culture is usually sent, since cystitis can show mostly RBCs.",
+   "source": 0,
+   "quote": "because urinalysis shows predominantly RBCs in some patients with cystitis, urine culture is usually done.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Gross hematuria or unexplained systemic symptoms: ultrasound or CT of the abdomen and pelvis.",
+   "source": 0,
+   "quote": "Patients with gross hematuria or unexplained systemic symptoms require ultrasonography or CT of the abdomen and pelvis.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspected glomerular disorder: BUN, creatinine, electrolytes, urinalysis and periodic urine protein/creatinine ratio.",
+   "source": 0,
+   "quote": "If urine or clinical findings suggest a glomerular disorder, renal function is evaluated by measuring blood urea nitrogen, serum creatinine, and electrolytes; doing a urinalysis; and periodically determining the urine protein/creatinine ratio.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Men ≥ 50: discuss PSA testing through shared decision making.",
+   "source": 0,
+   "quote": "Men ≥ 50 require discussion of testing for prostate-specific antigen through shared decision making",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Microhematuria, intermediate risk: cystoscopy and renal ultrasound.",
+   "source": 0,
+   "quote": "Intermediate risk (if any criteria met): women older than 60 years, men 40 to 59 years; 11 to 25 rbc/hpf; smoking history 10 to 30 pack-years; other risk factors for GU malignancy. Such patients should have evaluation with cystoscopy and renal ultrasound.",
+   "locator": "Evaluation, Testing (AUA/SUFU 2025 risk categories)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Microhematuria, high risk (men older than 60, more than 25 RBC/hpf, more than 30 pack-years): cystoscopy and upper tract CT or MRI.",
+   "source": 0,
+   "quote": "High risk (if any criteria met): men older than 60 years; more than 25 rbc/hpf; smoking history greater than 30 pack- years; other risk factors for GU malignancy. Such patients should have evaluation with cystoscopy and upper tract CT or MRI.",
+   "locator": "Evaluation, Testing (AUA/SUFU 2025 risk categories)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "im-s12 verifier session (Detective task 01a109fd-461f-7e10-84a9-39d6849fcf0b, dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 3,
+    "issue": "(b) casts, protein, dysmorphic RBCs not in quote",
+    "resolution": "claim trimmed to its quote (the sentence listing them is not adjacent); re-checked by shay-49353 at 2026-10-05T03:16Z: claim now says only what its quote says"
+   },
+   {
+    "claim": 5,
+    "issue": "(b) \"intermediate risk\" designation is in the preceding sentence",
+    "resolution": "quote extended to include \"Intermediate risk (if any criteria met): …\"; re-checked by shay-49353 at 2026-10-05T03:16Z: claim now says only what its quote says"
+   },
+   {
+    "claim": 0,
+    "issue": "earlier extraction added a space at inline-link boundaries (eg \"( 2 )\" for the page's \"(2)\")",
+    "resolution": "quote re-extracted with tag-aware text and re-matched to the saved live copy; whitespace only (shay-49353 ruling 2026-10-05T03:16Z)"
+   },
+   {
+    "claim": 1,
+    "issue": "earlier extraction added a space at inline-link boundaries (eg \"( 2 )\" for the page's \"(2)\")",
+    "resolution": "quote re-extracted with tag-aware text and re-matched to the saved live copy; whitespace only (shay-49353 ruling 2026-10-05T03:16Z)"
+   }
+  ]
+ },
+ "block": "g_XCH8N59TGM"
+}

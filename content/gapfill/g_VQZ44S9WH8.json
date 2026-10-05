@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Chronic kidney disease: current guideline",
+  "relevantTo": "Chronic kidney disease; Acute kidney injury",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+    "org": "Kidney Disease: Improving Global Outcomes (KDIGO)",
+    "year": "2024",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38490803/",
+    "type": "guideline",
+    "track": {
+     "series": "kdigo-ckd",
+     "label": "KDIGO chronic kidney disease evaluation and management guideline",
+     "org": "Kidney Disease: Improving Global Outcomes (KDIGO)",
+     "edition": 2024,
+     "method": "pubmed",
+     "term": "KDIGO[ti] AND chronic[ti] AND kidney[ti] AND disease[ti] AND evaluation[ti] AND management[ti] AND guideline[ti] AND \"Kidney Int\"[ta]",
+     "title": "^KDIGO (\\d{4}) Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_VQZ44S9WH8"
+}

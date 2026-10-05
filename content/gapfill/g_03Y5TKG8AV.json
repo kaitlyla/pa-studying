@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Current guideline:"
+     },
+     {
+      "type": "text",
+      "text": " 2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Cholesterol and dyslipidemia: current guideline",
+  "relevantTo": "Lipid disorders; Coronary artery disease",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2026",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-dyslipidemia",
+     "label": "ACC/AHA dyslipidemia (blood cholesterol) guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2026,
+     "method": "pubmed",
+     "term": "guideline[ti] AND management[ti] AND (dyslipidemia[ti] OR cholesterol[ti]) AND AACVPR[ti]",
+     "title": "^(\\d{4}) (?:ACC/AHA|AHA/ACC)/AACVPR/[A-Za-z/]* ?Guideline on the Management of (?:Dyslipidemia|Blood Cholesterol)"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_03Y5TKG8AV"
+}

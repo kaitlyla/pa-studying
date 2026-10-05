@@ -1,5 +1,957 @@
 {
  "v": 1,
- "topics": [],
- "workup": []
+ "topics": [
+  {
+   "key": "labs",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_0M3P7P5M87",
+     "covers": "Iron deficiency anemia: ferritin, TIBC"
+    },
+    {
+     "target": "r_WZ5Y4FABGB",
+     "covers": "Anemia of chronic disease: ferritin"
+    },
+    {
+     "target": "r_843DH4N92K",
+     "covers": "Beta thalassemia"
+    },
+    {
+     "target": "r_XRBFK3K9JS",
+     "covers": "Alpha thalassemia: hemoglobin electrophoresis"
+    },
+    {
+     "target": "r_Z1XGH5VQ9S",
+     "covers": "B12 deficiency"
+    },
+    {
+     "target": "r_WX8DZHPCKF",
+     "covers": "Folate deficiency"
+    },
+    {
+     "target": "r_TZF1PHA99Z",
+     "covers": "Sickle cell anemia: hemoglobin electrophoresis"
+    },
+    {
+     "target": "r_961F6N65Z2",
+     "covers": "G6PD deficiency"
+    },
+    {
+     "target": "r_EAYHQ1HNVC",
+     "covers": "DIC: PT/INR, PTT, D-dimer"
+    },
+    {
+     "target": "r_6QKFBG60VW",
+     "covers": "TTP"
+    },
+    {
+     "target": "r_4BS0T8HN1T",
+     "covers": "ITP"
+    },
+    {
+     "target": "r_BK8B64X8A7",
+     "covers": "Von Willebrand disease: PTT"
+    },
+    {
+     "target": "r_C6BR0BRJ5A",
+     "covers": "Hemophilia: PTT"
+    },
+    {
+     "target": "r_J89659ZMDM",
+     "covers": "Heparin-induced thrombocytopenia"
+    },
+    {
+     "target": "r_DK56WF35TK",
+     "covers": "DVT: D-dimer"
+    },
+    {
+     "target": "r_QSYY45Y5EY",
+     "covers": "Pulmonary embolism: D-dimer"
+    },
+    {
+     "target": "r_3G3AER3GD0",
+     "covers": "Hyponatremia: serum osmolality"
+    },
+    {
+     "target": "r_JTFBJCDPRM",
+     "covers": "Hypernatremia"
+    },
+    {
+     "target": "r_M0MHJ6F3H3",
+     "covers": "Hypokalemia"
+    },
+    {
+     "target": "r_3K9JD9ASKX",
+     "covers": "Hyperkalemia"
+    },
+    {
+     "target": "r_9VPEPN9AZD",
+     "covers": "Hypocalcemia: calcium, PTH"
+    },
+    {
+     "target": "r_D292A2A2W3",
+     "covers": "Hypercalcemia: calcium, PTH"
+    },
+    {
+     "target": "r_T399SWS0GX",
+     "covers": "Prerenal AKI: FENa"
+    },
+    {
+     "target": "r_HGXX79X315",
+     "covers": "Acute tubular necrosis: FENa"
+    },
+    {
+     "target": "r_K8KM58M23Y",
+     "covers": "Postrenal AKI: FENa"
+    },
+    {
+     "target": "b_XCSGGRG2ND",
+     "covers": "Acid/base disorders"
+    },
+    {
+     "target": "r_08ZQ3EACNQ",
+     "covers": "High-anion-gap and non-gap metabolic acidosis"
+    },
+    {
+     "target": "r_VHPBBYRQHP",
+     "covers": "Acute cystitis"
+    },
+    {
+     "target": "r_NNES4HFA26",
+     "covers": "Acute pyelonephritis"
+    },
+    {
+     "target": "r_J0GAD1CHEB",
+     "covers": "Acute glomerulonephritis"
+    },
+    {
+     "target": "r_XTMJH45ER7",
+     "covers": "Nephrotic syndrome"
+    },
+    {
+     "target": "r_ARCPH6BAMP",
+     "covers": "Nephrolithiasis: stone types"
+    },
+    {
+     "target": "r_PDZVJ59M8Y",
+     "covers": "Type 1 diabetes: A1c, ketones"
+    },
+    {
+     "target": "r_BYKV7M49GY",
+     "covers": "Type 2 diabetes: A1c"
+    },
+    {
+     "target": "b_BJQ60H9A5M",
+     "covers": "Glucose monitoring and glycemic targets"
+    },
+    {
+     "target": "r_Y3YKAPGFFZ",
+     "covers": "Hyperlipidemia: lipid panel"
+    },
+    {
+     "target": "r_NTCCV170Y4",
+     "covers": "Hyperthyroidism: TSH"
+    },
+    {
+     "target": "r_Z8BGG4PM16",
+     "covers": "Hypothyroidism: TSH"
+    },
+    {
+     "target": "r_4P12PCS6V8",
+     "covers": "Hyperparathyroidism: PTH"
+    },
+    {
+     "target": "r_CY156P920W",
+     "covers": "Hypoparathyroidism: PTH"
+    },
+    {
+     "target": "r_Y3G29VXHJ8",
+     "covers": "Chronic adrenal insufficiency: 8am ACTH, cortisol, renin"
+    },
+    {
+     "target": "r_F08WS7NPDE",
+     "covers": "Cushing syndrome: dexamethasone suppression"
+    },
+    {
+     "target": "r_MATGM70SDK",
+     "covers": "Primary hyperaldosteronism: aldosterone/renin"
+    },
+    {
+     "target": "r_11W0ADNSRQ",
+     "covers": "Pheochromocytoma: metanephrines"
+    },
+    {
+     "target": "r_AFWE43EF4P",
+     "covers": "Acromegaly: IGF-1"
+    },
+    {
+     "target": "r_PJD7PYBZJ1",
+     "covers": "Pituitary adenoma: prolactin"
+    },
+    {
+     "target": "r_5MP5R9XT61",
+     "covers": "Diabetes insipidus"
+    },
+    {
+     "target": "r_GB5Q90EWQQ",
+     "covers": "Acute pancreatitis: lipase"
+    },
+    {
+     "target": "r_42WHHKS35D",
+     "covers": "Acute cholecystitis"
+    },
+    {
+     "target": "r_F0BQ0N1KS6",
+     "covers": "Acute ascending cholangitis"
+    },
+    {
+     "target": "r_EGY4NV86Z3",
+     "covers": "Cirrhosis: PT/INR, ferritin"
+    },
+    {
+     "target": "r_WG66AMESG0",
+     "covers": "Hepatitis A"
+    },
+    {
+     "target": "r_CA3KPB91AJ",
+     "covers": "Hepatitis B serology (HBsAg, anti-HBs, anti-HBc)"
+    },
+    {
+     "target": "r_0P912WTJQE",
+     "covers": "Hepatitis C"
+    },
+    {
+     "target": "r_CKS1X97YQE",
+     "covers": "Acute coronary syndrome: troponin"
+    },
+    {
+     "target": "r_1CBKBEYDSE",
+     "covers": "Heart failure: BNP"
+    },
+    {
+     "target": "r_86NNH0FW5F",
+     "covers": "Rheumatoid arthritis"
+    },
+    {
+     "target": "r_A4TMVYHZVJ",
+     "covers": "Systemic lupus erythematosus"
+    },
+    {
+     "target": "r_BT9C8GPRHT",
+     "covers": "SLE: ANA, anti-dsDNA, anti-Smith"
+    },
+    {
+     "target": "r_799ZVTT9FD",
+     "covers": "Polymyalgia rheumatica: ESR/CRP"
+    },
+    {
+     "target": "r_YKYFA0D2TV",
+     "covers": "Polymyositis: ESR/CRP"
+    },
+    {
+     "target": "r_SGVEH1XJ1W",
+     "covers": "Sjögren syndrome"
+    },
+    {
+     "target": "r_AW5YGDFG3T",
+     "covers": "Gout: synovial fluid"
+    },
+    {
+     "target": "r_RVJP0GNH87",
+     "covers": "Pseudogout: synovial fluid"
+    },
+    {
+     "target": "r_J85QT9JY96",
+     "covers": "Infective endocarditis: blood cultures"
+    },
+    {
+     "target": "r_GV0WDHCFDQ",
+     "covers": "Septic shock: lactate"
+    },
+    {
+     "target": "r_JD35GYB6RC",
+     "covers": "Pneumonia: blood cultures, procalcitonin"
+    },
+    {
+     "target": "r_DPJNN8H69G",
+     "covers": "Meningitis: CSF"
+    },
+    {
+     "target": "r_8Y3WE1NHVQ",
+     "covers": "Bacterial meningitis: CSF"
+    },
+    {
+     "target": "r_4ECGCR0Z2N",
+     "covers": "Viral meningitis: CSF"
+    },
+    {
+     "target": "r_4NSP056Z6A",
+     "covers": "Encephalitis"
+    },
+    {
+     "target": "r_71KE48P6GX",
+     "covers": "Guillain-Barré syndrome: CSF"
+    },
+    {
+     "target": "r_AX3SX3XPJV",
+     "covers": "HIV: CD4 count, viral load"
+    },
+    {
+     "target": "r_51VW72JXT9",
+     "covers": "Gonorrhea"
+    },
+    {
+     "target": "r_9AYAK8E0VB",
+     "covers": "Chlamydia"
+    },
+    {
+     "target": "r_CMEQPWMB2M",
+     "covers": "Syphilis: RPR/VDRL"
+    },
+    {
+     "target": "r_T2P4W4T80W",
+     "covers": "EBV: monospot (heterophile antibody)"
+    },
+    {
+     "target": "r_5FDDCG6ASR",
+     "covers": "Infectious gastroenteritis"
+    },
+    {
+     "target": "r_Y11251PVQK",
+     "covers": "Multiple myeloma: protein electrophoresis"
+    },
+    {
+     "target": "r_FW6SKR9PJT",
+     "covers": "Prostate cancer: PSA"
+    },
+    {
+     "target": "r_R4T7P6CAPM",
+     "covers": "Hepatocellular carcinoma: AFP"
+    }
+   ],
+   "files": [
+    "d_5K8ARJRYFN",
+    "d_W5CH6PSWEG",
+    "d_6CC54CR960",
+    "d_9T1BK0WDG3",
+    "d_77CRGHXNDK",
+    "d_ET2PJXFNTB",
+    "d_W0DJ0C3768",
+    "d_37E1NN0SQA"
+   ],
+   "gaps": []
+  },
+  {
+   "key": "ekg",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_V0Y9NGVCCM",
+     "covers": "Sinus tachycardia"
+    },
+    {
+     "target": "r_X9MSBMNZQ2",
+     "covers": "Sinus bradycardia"
+    },
+    {
+     "target": "r_SXD71JYJKX",
+     "covers": "Sinus node dysfunction"
+    },
+    {
+     "target": "r_JQXECZ2EPX",
+     "covers": "AV blocks"
+    },
+    {
+     "target": "r_8BN64AKRCC",
+     "covers": "Bundle branch and fascicular blocks"
+    },
+    {
+     "target": "r_6SMMZN6XEC",
+     "covers": "Atrial fibrillation"
+    },
+    {
+     "target": "r_WRGZM3S99C",
+     "covers": "Atrial flutter"
+    },
+    {
+     "target": "r_H6MF7VW8AN",
+     "covers": "Wandering atrial pacemaker and MAT"
+    },
+    {
+     "target": "r_66YP104YZD",
+     "covers": "AVNRT"
+    },
+    {
+     "target": "r_J0FADKCMB1",
+     "covers": "AVRT"
+    },
+    {
+     "target": "r_HD8WRD6WGZ",
+     "covers": "WPW pattern"
+    },
+    {
+     "target": "r_Q715NRJ5Q0",
+     "covers": "Premature atrial contractions"
+    },
+    {
+     "target": "r_T1736P65EE",
+     "covers": "Premature ventricular contractions"
+    },
+    {
+     "target": "r_SED8BS4CNQ",
+     "covers": "Ventricular tachycardia"
+    },
+    {
+     "target": "r_ES1YTP2C1X",
+     "covers": "Torsades de pointes"
+    },
+    {
+     "target": "r_N7Z8M7G6VJ",
+     "covers": "Ventricular fibrillation"
+    },
+    {
+     "target": "r_CKS1X97YQE",
+     "covers": "Acute coronary syndrome"
+    },
+    {
+     "target": "r_58BTAK4Z2B",
+     "covers": "Pericarditis"
+    },
+    {
+     "target": "r_BJSSXNERWP",
+     "covers": "Pericardial effusion"
+    },
+    {
+     "target": "r_162PSKYMW2",
+     "covers": "Hypertension"
+    },
+    {
+     "target": "r_1R3XED7NJW",
+     "covers": "Hypertrophic cardiomyopathy"
+    },
+    {
+     "target": "r_S1Q9879PVN",
+     "covers": "Cor pulmonale"
+    },
+    {
+     "target": "r_QSYY45Y5EY",
+     "covers": "Pulmonary embolism"
+    },
+    {
+     "target": "r_M0MHJ6F3H3",
+     "covers": "Hypokalemia"
+    },
+    {
+     "target": "r_3K9JD9ASKX",
+     "covers": "Hyperkalemia"
+    },
+    {
+     "target": "r_9VPEPN9AZD",
+     "covers": "Hypocalcemia"
+    },
+    {
+     "target": "r_D292A2A2W3",
+     "covers": "Hypercalcemia"
+    },
+    {
+     "target": "r_MSTCD1SHYR",
+     "covers": "Digoxin"
+    }
+   ],
+   "files": [
+    "d_TJXEABW6N3"
+   ],
+   "gaps": []
+  },
+  {
+   "key": "imaging",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_JD35GYB6RC",
+     "covers": "Pneumonia: chest x-ray"
+    },
+    {
+     "target": "r_1CBKBEYDSE",
+     "covers": "Heart failure: chest x-ray (pulmonary edema)"
+    },
+    {
+     "target": "r_5DABS9Q15R",
+     "covers": "COPD: chest x-ray"
+    },
+    {
+     "target": "r_HZ2PF94M0A",
+     "covers": "Sarcoidosis: chest x-ray"
+    },
+    {
+     "target": "r_P0N580Y452",
+     "covers": "Tuberculosis: chest x-ray"
+    },
+    {
+     "target": "r_QSYY45Y5EY",
+     "covers": "Pulmonary embolism: CT"
+    },
+    {
+     "target": "r_SBJ19NCN1S",
+     "covers": "Solitary pulmonary nodule: CT"
+    },
+    {
+     "target": "r_GZ8WB9K407",
+     "covers": "Idiopathic pulmonary fibrosis"
+    },
+    {
+     "target": "r_FS5JQNP886",
+     "covers": "Bronchiectasis: CT"
+    },
+    {
+     "target": "r_1R3XED7NJW",
+     "covers": "Hypertrophic cardiomyopathy: echocardiography"
+    },
+    {
+     "target": "r_J85QT9JY96",
+     "covers": "Infective endocarditis: echocardiography"
+    },
+    {
+     "target": "r_BJSSXNERWP",
+     "covers": "Pericardial effusion: echocardiography"
+    },
+    {
+     "target": "r_7SFW49V064",
+     "covers": "Stable angina: stress testing"
+    },
+    {
+     "target": "r_CKS1X97YQE",
+     "covers": "Acute coronary syndrome: coronary angiography"
+    },
+    {
+     "target": "r_YDE5RX628Q",
+     "covers": "Ischemic stroke"
+    },
+    {
+     "target": "r_EKF9MZE80M",
+     "covers": "TIA: imaging"
+    },
+    {
+     "target": "r_2TTA0DG5KX",
+     "covers": "Cholelithiasis: RUQ ultrasound"
+    },
+    {
+     "target": "r_42WHHKS35D",
+     "covers": "Acute cholecystitis: RUQ ultrasound, HIDA"
+    },
+    {
+     "target": "r_9B23N7KAPS",
+     "covers": "Hydronephrosis: ultrasound"
+    },
+    {
+     "target": "r_GB5Q90EWQQ",
+     "covers": "Acute pancreatitis: CT"
+    },
+    {
+     "target": "r_ESYYKPDSDR",
+     "covers": "Diverticulitis: CT"
+    },
+    {
+     "target": "r_MMVXYYYV44",
+     "covers": "Ulcerative colitis: colonoscopy"
+    },
+    {
+     "target": "r_H9EW61RA6F",
+     "covers": "Crohn disease: endoscopy"
+    },
+    {
+     "target": "r_R9X0JBX37N",
+     "covers": "Esophagitis: endoscopy"
+    },
+    {
+     "target": "r_GDEDCFBJYP",
+     "covers": "Colorectal cancer: colonoscopy"
+    },
+    {
+     "target": "r_DK56WF35TK",
+     "covers": "DVT: D-dimer, compression U/S with Doppler"
+    },
+    {
+     "target": "r_GNK8C31QTW",
+     "covers": "Peripheral arterial disease: ABI"
+    },
+    {
+     "target": "r_NTCCV170Y4",
+     "covers": "Hyperthyroidism: radioactive iodine uptake"
+    },
+    {
+     "target": "r_AAD9K95ZSD",
+     "covers": "de Quervain thyroiditis: radioactive iodine uptake"
+    },
+    {
+     "target": "r_AW5YGDFG3T",
+     "covers": "Gout: x-ray"
+    },
+    {
+     "target": "r_RVJP0GNH87",
+     "covers": "Pseudogout: x-ray"
+    },
+    {
+     "target": "r_Y11251PVQK",
+     "covers": "Multiple myeloma: x-ray"
+    },
+    {
+     "target": "r_ZB9K2R8D81",
+     "covers": "Renal artery stenosis: duplex"
+    }
+   ],
+   "files": [
+    "d_JDA68C1JKZ"
+   ],
+   "gaps": []
+  },
+  {
+   "key": "anatomy",
+   "howto": "anatomy",
+   "links": [
+    {
+     "target": "r_YDE5RX628Q",
+     "covers": "Ischemic strokes"
+    },
+    {
+     "target": "r_AT31CZ7CG8",
+     "covers": "Lacunar infarcts"
+    },
+    {
+     "target": "r_MATGM70SDK",
+     "covers": "Primary hyperaldosteronism: zona glomerulosa"
+    },
+    {
+     "target": "r_SXD71JYJKX",
+     "covers": "Sinus node dysfunction: SA node"
+    },
+    {
+     "target": "r_JQXECZ2EPX",
+     "covers": "AV blocks: block in or below the AV node"
+    },
+    {
+     "target": "r_W4SE3MX2FX",
+     "covers": "Loop diuretics: loop of Henle"
+    },
+    {
+     "target": "r_JA3H96GYG6",
+     "covers": "Loop diuretics: site of action"
+    },
+    {
+     "target": "r_EGY4NV86Z3",
+     "covers": "Cirrhosis"
+    }
+   ],
+   "files": [],
+   "gaps": [
+    "g_0W0SEWBAEE",
+    "g_CKB6MJ8F9C",
+    "g_W3P16E27BE"
+   ]
+  },
+  {
+   "key": "procedures",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_8Y3WE1NHVQ",
+     "covers": "Bacterial meningitis: lumbar puncture"
+    },
+    {
+     "target": "r_4NSP056Z6A",
+     "covers": "Encephalitis: lumbar puncture"
+    },
+    {
+     "target": "r_CCFVB2JRTK",
+     "covers": "Subarachnoid hemorrhage: lumbar puncture"
+    },
+    {
+     "target": "r_J7JSYNX3EN",
+     "covers": "Pleural effusion: Light's criteria"
+    },
+    {
+     "target": "r_EGY4NV86Z3",
+     "covers": "Cirrhosis: paracentesis"
+    },
+    {
+     "target": "r_AW5YGDFG3T",
+     "covers": "Gout: synovial fluid"
+    },
+    {
+     "target": "r_RVJP0GNH87",
+     "covers": "Pseudogout: synovial fluid"
+    },
+    {
+     "target": "r_C9HQATPC8H",
+     "covers": "Asthma: spirometry"
+    },
+    {
+     "target": "r_5DABS9Q15R",
+     "covers": "COPD: spirometry"
+    },
+    {
+     "target": "r_GZ8WB9K407",
+     "covers": "Idiopathic pulmonary fibrosis: PFTs"
+    },
+    {
+     "target": "r_9J6E2A9K67",
+     "covers": "Myelodysplastic syndrome: bone marrow"
+    },
+    {
+     "target": "r_Y11251PVQK",
+     "covers": "Multiple myeloma: bone marrow"
+    },
+    {
+     "target": "r_Y86QEZG2NA",
+     "covers": "Acute leukemias: bone marrow"
+    },
+    {
+     "target": "r_B6RS36ACGD",
+     "covers": "CML: bone marrow"
+    },
+    {
+     "target": "r_6SMMZN6XEC",
+     "covers": "Atrial fibrillation: cardioversion"
+    },
+    {
+     "target": "r_WRGZM3S99C",
+     "covers": "Atrial flutter: cardioversion"
+    },
+    {
+     "target": "r_SED8BS4CNQ",
+     "covers": "Ventricular tachycardia: cardioversion"
+    },
+    {
+     "target": "r_JQXECZ2EPX",
+     "covers": "AV blocks: pacing"
+    },
+    {
+     "target": "r_X9MSBMNZQ2",
+     "covers": "Sinus bradycardia: pacing"
+    }
+   ],
+   "files": [],
+   "gaps": []
+  },
+  {
+   "key": "guidelines",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_1CBKBEYDSE",
+     "covers": "Heart failure: ACCF/AHA stages"
+    },
+    {
+     "target": "r_6SMMZN6XEC",
+     "covers": "Atrial fibrillation: CHA2DS2-VASc"
+    },
+    {
+     "target": "r_5DABS9Q15R",
+     "covers": "COPD"
+    },
+    {
+     "target": "r_615ZSG8K42",
+     "covers": "Asthma: initiating treatment"
+    },
+    {
+     "target": "b_BJQ60H9A5M",
+     "covers": "Glycemic targets"
+    },
+    {
+     "target": "r_GV0WDHCFDQ",
+     "covers": "Septic shock"
+    }
+   ],
+   "files": [
+    "d_7WX9CZ2ATD",
+    "d_K2HQWKWZ66",
+    "d_NE0SGWWQ2A"
+   ],
+   "gaps": [
+    "g_HBJ9YTWP9R",
+    "g_0WVM62X574",
+    "g_03Y5TKG8AV",
+    "g_5P4K93NTWG",
+    "g_WA6BPBJ44M",
+    "g_3DVAR1JCSD",
+    "g_C3RWG4XXVG",
+    "g_VQZ44S9WH8",
+    "g_V5CYSQP7A1"
+   ]
+  },
+  {
+   "key": "screenings",
+   "howto": null,
+   "links": [
+    {
+     "target": "r_GDEDCFBJYP",
+     "covers": "Colorectal cancer screening"
+    },
+    {
+     "target": "r_SBJ19NCN1S",
+     "covers": "Solitary pulmonary nodule"
+    },
+    {
+     "target": "r_FW6SKR9PJT",
+     "covers": "Prostate cancer screening"
+    },
+    {
+     "target": "r_P0N580Y452",
+     "covers": "Tuberculosis"
+    }
+   ],
+   "files": [
+    "d_20G6CYE64N",
+    "d_FXJMG7FXF7"
+   ],
+   "gaps": []
+  }
+ ],
+ "workup": [
+  {
+   "id": "abdominal-pain",
+   "title": "Abdominal pain",
+   "conds": "Pancreatitis, Cholecystitis, Cholangitis, Peptic ulcer disease, Diverticular disease, Ischemic bowel disease, Appendicitis",
+   "gap": "g_278493DJ68"
+  },
+  {
+   "id": "ams",
+   "title": "Altered mental status (AMS)",
+   "conds": "Delirium, Dementia, Electrolyte disturbances, Hypoglycemia, Encephalitis, Meningitis, Stroke, Sepsis",
+   "gap": "g_K3KRRK6D4S"
+  },
+  {
+   "id": "back-pain",
+   "title": "Back pain",
+   "conds": "Multiple myeloma, Pyelonephritis, Uro/Nephrolithiasis, Aortic aneurysm/dissection, Ankylosing spondylitis, Spinal stenosis",
+   "gap": "g_1YGB7G51V6"
+  },
+  {
+   "id": "chest-pain",
+   "title": "Chest pain",
+   "conds": "Acute coronary syndrome, Stable angina, Pericarditis, Aortic aneurysm/dissection, Pulmonary embolism, Pneumothorax, Gastroesophageal reflux disease",
+   "gap": "g_J352G7FT39"
+  },
+  {
+   "id": "cough",
+   "title": "Cough",
+   "conds": "Acute bronchitis, Pneumonias, Asthma, Chronic obstructive pulmonary disease, Gastroesophageal reflux disease, Tuberculosis, Neoplasms (lung)",
+   "gap": "g_C0F380FM6M"
+  },
+  {
+   "id": "diarrhea",
+   "title": "Diarrhea",
+   "conds": "Acute infectious gastroenteritis, Inflammatory bowel disease, Irritable bowel syndrome, Celiac disease, Parasitic infections, Hyperthyroidism",
+   "gap": "g_8GVCV6J07H"
+  },
+  {
+   "id": "dizziness",
+   "title": "Dizziness / vertigo",
+   "conds": "Orthostatic hypotension, Arrhythmias, Stroke, Anemias",
+   "gap": "g_ZHTA5S6BSR"
+  },
+  {
+   "id": "dysuria",
+   "title": "Dysuria / urinary symptoms",
+   "conds": "Cystitis, Pyelonephritis, Prostatitis, Sexually transmitted infections, Benign prostatic hyperplasia",
+   "gap": "g_Z1HM9RGEKM"
+  },
+  {
+   "id": "edema",
+   "title": "Edema",
+   "conds": "Heart failure, Cirrhosis, Nephrotic syndrome, Deep vein thrombosis, Venous insufficiency, Hypothyroidism",
+   "gap": "g_YJX7199E50"
+  },
+  {
+   "id": "elevated-bp",
+   "title": "Elevated blood pressure",
+   "conds": "Primary hypertension, Secondary hypertension, Renal artery stenosis, Hyperaldosteronism, Pheochromocytoma, Severe asymptomatic hypertension",
+   "gap": "g_X3GD6NMC34"
+  },
+  {
+   "id": "anemia-fatigue",
+   "title": "Fatigue / anemia",
+   "conds": "Anemias, Hyper/Hypothyroidism, Adrenal insufficiency, Chronic kidney disease, Leukemias, Depressive disorders",
+   "gap": "g_E6JYGWBM6Z"
+  },
+  {
+   "id": "fever",
+   "title": "Fever / fever of unknown origin",
+   "conds": "Fever of unknown origin, Neutropenic fever, Sepsis, Infective endocarditis, Tuberculosis, Lymphomas, Vasculitides",
+   "gap": "g_M49C7HHPMH"
+  },
+  {
+   "id": "gi-bleeding",
+   "title": "GI bleeding",
+   "conds": "Gastrointestinal bleeding, Peptic ulcer disease, Esophageal varices, Mallory-Weiss tear, Diverticular disease, Neoplasms (GI malignant)",
+   "gap": "g_219KY3HJHW"
+  },
+  {
+   "id": "headache",
+   "title": "Headache",
+   "conds": "Primary headache (migraine, tension, cluster), Increased intracranial pressure, Meningitis, Intracranial hemorrhage, Giant cell arteritis",
+   "gap": "g_D559MHD8VJ"
+  },
+  {
+   "id": "hematuria",
+   "title": "Hematuria",
+   "conds": "Uro/Nephrolithiasis, Neoplasms (bladder, renal), Nephritic syndrome, Cystitis, Cystic kidney disease",
+   "gap": "g_XCH8N59TGM"
+  },
+  {
+   "id": "jaundice",
+   "title": "Jaundice / abnormal liver tests",
+   "conds": "Hepatitis, Cirrhosis, Cholangitis, Cholelithiasis, MASH/MAFLD, Hemolytic anemia",
+   "gap": "g_H5771H4V1G"
+  },
+  {
+   "id": "joint-pain",
+   "title": "Joint pain / swelling",
+   "conds": "Gout/Pseudogout, Septic arthritis, Rheumatoid arthritis, Osteoarthritis, Systemic lupus erythematosus, Reactive arthritis, Psoriatic arthritis",
+   "gap": "g_K08CRV1ZKK"
+  },
+  {
+   "id": "lymphadenopathy",
+   "title": "Lymphadenopathy",
+   "conds": "Lymphomas, Leukemias, Viral infections (EBV, HIV), Tuberculosis, Sarcoidosis",
+   "gap": "g_ZHCK5KH4YQ"
+  },
+  {
+   "id": "palpitations",
+   "title": "Palpitations",
+   "conds": "Atrial fibrillation/flutter, SVT, Premature beats, Hyperthyroidism, Pheochromocytoma, Anemias",
+   "gap": "g_CPRDY503B5"
+  },
+  {
+   "id": "polyuria",
+   "title": "Polyuria / polydipsia",
+   "conds": "Diabetes mellitus, Diabetes insipidus, Hypercalcemia, Hyperosmolar hyperglycemic syndrome",
+   "gap": "g_MX5AQEPJV5"
+  },
+  {
+   "id": "dyspnea",
+   "title": "Shortness of breath",
+   "conds": "Heart failure, Asthma, Chronic obstructive pulmonary disease, Pneumonias, Pulmonary embolism, Pleural effusion, Anemias",
+   "gap": "g_Q08797MFZJ"
+  },
+  {
+   "id": "syncope",
+   "title": "Syncope",
+   "conds": "Vasovagal hypotension, Orthostatic hypotension, Arrhythmias, Aortic stenosis, Hypertrophic cardiomyopathy, Pulmonary embolism",
+   "gap": "g_AM7TMGAGBA"
+  },
+  {
+   "id": "weight-loss",
+   "title": "Unintentional weight loss",
+   "conds": "Neoplasms, Hyperthyroidism, Diabetes mellitus, Human immunodeficiency virus/AIDS, Tuberculosis, Inflammatory bowel disease, Adrenal insufficiency",
+   "gap": "g_F5ZW5819HG"
+  },
+  {
+   "id": "weakness",
+   "title": "Weakness / focal neurologic deficit",
+   "conds": "Stroke, Transient ischemic attack, Guillain-Barré syndrome, Myasthenia gravis, Multiple sclerosis, Electrolyte disturbances",
+   "gap": "g_KXKH333BG3"
+  }
+ ]
 }

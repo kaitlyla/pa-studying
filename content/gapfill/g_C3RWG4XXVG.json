@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Atrial fibrillation (including stroke-risk anticoagulation):"
+     },
+     {
+      "type": "text",
+      "text": " 2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Chronic coronary disease:"
+     },
+     {
+      "type": "text",
+      "text": " 2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Atrial fibrillation and chronic coronary disease: current guidelines",
+  "relevantTo": "Atrial fibrillation; Stable angina",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2023",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38033089/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-af",
+     "label": "ACC/AHA atrial fibrillation guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2023,
+     "method": "pubmed",
+     "term": "atrial[ti] AND fibrillation[ti] AND guideline[ti] AND management[ti] AND (Circulation[ta] OR \"J Am Coll Cardiol\"[ta])",
+     "title": "^(\\d{4}) (?:ACC/AHA|AHA/ACC)[^:]*Guideline for the (?:Diagnosis and )?Management of (?:Patients With )?Atrial Fibrillation"
+    }
+   },
+   {
+    "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+    "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+    "year": "2023",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/",
+    "type": "guideline",
+    "track": {
+     "series": "aha-acc-ccd",
+     "label": "AHA/ACC chronic coronary disease guideline",
+     "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+     "edition": 2023,
+     "method": "pubmed",
+     "term": "chronic[ti] AND coronary[ti] AND disease[ti] AND guideline[ti] AND (Circulation[ta] OR \"J Am Coll Cardiol\"[ta])",
+     "title": "^(\\d{4}) (?:AHA/ACC|ACC/AHA)[^:]*Guideline for the Management of Patients With Chronic Coronary Disease"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_C3RWG4XXVG"
+}
