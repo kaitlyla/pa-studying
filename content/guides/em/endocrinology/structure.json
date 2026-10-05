@@ -1,10 +1,80 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "adrenal-disorders",
+   "title": "Adrenal disorders"
+  },
+  {
+   "id": "pituitary-disorders",
+   "title": "Pituitary disorders"
+  },
+  {
+   "id": "diabetes-mellitus",
+   "title": "Diabetes mellitus"
+  },
+  {
+   "id": "thyroid-and-parathyroid-disorders",
+   "title": "Thyroid and parathyroid disorders"
+  },
+  {
+   "id": "hyperosmolar-hyperglycemic-syndrome",
+   "title": "Hyperosmolar hyperglycemic syndrome"
+  }
+ ],
+ "members": {
+  "r_TJTDSJM9T2": "adrenal-disorders",
+  "r_5NSV66DQBK": "adrenal-disorders",
+  "r_3W96XYBE15": "pituitary-disorders",
+  "r_QGKX4SVDDS": "diabetes-mellitus",
+  "r_3P1VZQW8MN": "diabetes-mellitus",
+  "r_3F77K9X7KM": "thyroid-and-parathyroid-disorders",
+  "r_P9E5GCPSBK": "thyroid-and-parathyroid-disorders",
+  "r_8S41XC9G6F": "thyroid-and-parathyroid-disorders",
+  "r_21VA3HCPA1": "thyroid-and-parathyroid-disorders",
+  "r_RR9XGY7AQ9": "thyroid-and-parathyroid-disorders",
+  "r_8TCSXEQHKM": "thyroid-and-parathyroid-disorders",
+  "r_CC8RQGMKDY": "thyroid-and-parathyroid-disorders",
+  "r_E77P3SQYN0": "thyroid-and-parathyroid-disorders",
+  "r_ECG9HWA8X3": "thyroid-and-parathyroid-disorders",
+  "r_8GQKCN02QW": "adrenal-disorders",
+  "r_EKPHW1F16Q": "pituitary-disorders",
+  "b_KD9CZ541PE": "adrenal-disorders",
+  "b_BF872GDVJB": "adrenal-disorders",
+  "b_1KZ0SR65VG": "pituitary-disorders",
+  "b_PWGP1TAG2N": "diabetes-mellitus",
+  "b_S03YNMVATH": "diabetes-mellitus",
+  "b_ERE5D339T5": "thyroid-and-parathyroid-disorders",
+  "b_M1SBGV20T3": "hyperosmolar-hyperglycemic-syndrome",
+  "b_4REQDV2XKH": "thyroid-and-parathyroid-disorders",
+  "b_RAHW8Q48FD": "adrenal-disorders",
+  "b_RYJE9S01HX": "adrenal-disorders",
+  "b_MBX8ZYJ37Q": "pituitary-disorders"
+ },
+ "listed": {
+  "b_M1SBGV20T3": "NONKETOTIC HYPERGLYCEMIA",
+  "b_4REQDV2XKH": "PALPITATIONS",
+  "b_RAHW8Q48FD": "TREMORS"
+ },
+ "drugTables": [
+  {
+   "block": "b_S2VY68E46K",
+   "pharmSection": "anti-hyperglycemic-agents",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "anti-hyperglycemic-agents",
+   "title": "Anti-hyperglycemic agents",
+   "tables": [
+    "b_S2VY68E46K"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_H8NRK0SA3W"
  ]

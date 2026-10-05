@@ -1,13 +1,187 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders"
+  },
+  {
+   "id": "bipolar-and-related-disorders",
+   "title": "Bipolar and related disorders"
+  },
+  {
+   "id": "depressive-disorders",
+   "title": "Depressive disorders"
+  },
+  {
+   "id": "trauma-stress-related-disorders",
+   "title": "Trauma/Stress-related disorders"
+  },
+  {
+   "id": "schizophrenia-spectrum-and-other-psychotic-disorders",
+   "title": "Schizophrenia spectrum and other psychotic disorders"
+  },
+  {
+   "id": "substance-related-disorders",
+   "title": "Substance-related disorders"
+  },
+  {
+   "id": "suicidal-ideation",
+   "title": "Suicidal ideation"
+  },
+  {
+   "id": "toxidromes",
+   "title": "Toxidromes"
+  },
+  {
+   "id": "other",
+   "title": "Psychiatry/Behavioral Medicine — other"
+  }
+ ],
+ "members": {
+  "r_YFMSB9VC3X": "anxiety-disorders",
+  "r_49V3CGQ7EV": "anxiety-disorders",
+  "r_G4D2172DKE": "anxiety-disorders",
+  "r_YVS54Z2RD7": "anxiety-disorders",
+  "r_PBXVJCN8GE": "anxiety-disorders",
+  "r_0PZSYCET8V": "anxiety-disorders",
+  "r_DG94KKWGM0": "anxiety-disorders",
+  "r_P7JX67GVHX": "bipolar-and-related-disorders",
+  "r_VC0Y5G49S6": "bipolar-and-related-disorders",
+  "r_KRT344E5H8": "depressive-disorders",
+  "r_4J7K62NJMB": "depressive-disorders",
+  "r_DAX05ZVKGW": "depressive-disorders",
+  "r_YX87ZMTQDW": "depressive-disorders",
+  "r_30DX9B5575": "trauma-stress-related-disorders",
+  "r_D5D8WN2XQE": "trauma-stress-related-disorders",
+  "r_8VWE7V6MAV": "other",
+  "r_PM4XCJ5GQN": "other",
+  "r_BYQ6GBBNFE": "trauma-stress-related-disorders",
+  "r_RTE28W2TGS": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_3FZKAC08FP": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_2NZSNFB8N6": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_N6WF29T1XQ": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_NSZWJ8SXYJ": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_PHGX16G45Q": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_1HFFF5H793": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_EZ02SPYZBM": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_NKN2S783H8": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_WZFEAQJXGE": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "r_RE47SM5RAV": "substance-related-disorders",
+  "r_EKG09XMJ7B": "substance-related-disorders",
+  "r_RN1Q60DJ5W": "substance-related-disorders",
+  "r_CQHP01MQTJ": "substance-related-disorders",
+  "r_5RD97SPGD4": "substance-related-disorders",
+  "r_RXBB6RPRPF": "substance-related-disorders",
+  "r_4PAR6BAMSC": "substance-related-disorders",
+  "r_K1HJQ8MNEW": "substance-related-disorders",
+  "r_TG767CYTQ4": "substance-related-disorders",
+  "r_623V6EW0GV": "other",
+  "r_DWH1ARNRS7": "other",
+  "r_AN9AYYB1GJ": "suicidal-ideation",
+  "b_E6385WCY12": "anxiety-disorders",
+  "b_Q6BQPJC762": "anxiety-disorders",
+  "b_KV0BDF7861": "anxiety-disorders",
+  "b_8KRDAC41B1": "bipolar-and-related-disorders",
+  "b_N94G4XHBJ6": "bipolar-and-related-disorders",
+  "b_5VRFNNAW5Y": "depressive-disorders",
+  "b_MXH605N261": "depressive-disorders",
+  "b_W0C1E7YJ7R": "trauma-stress-related-disorders",
+  "b_XT6K7GYKPR": "trauma-stress-related-disorders",
+  "b_XSQH28M62S": "other",
+  "b_0FYZGMA4QQ": "other",
+  "b_49KSDAKS1B": "trauma-stress-related-disorders",
+  "b_EM6T1GKXDK": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_100W07KHEZ": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_T6ZT0CM00C": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_0PC62MFR8H": "schizophrenia-spectrum-and-other-psychotic-disorders",
+  "b_J5RPZ7PNFZ": "substance-related-disorders",
+  "b_ED26F9748A": "substance-related-disorders",
+  "b_6JJ77RW48H": "substance-related-disorders",
+  "b_RENET3KYHZ": "substance-related-disorders",
+  "b_9ECCKSQ2Y6": "other",
+  "b_WQ13QPE8G4": "toxidromes"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_P4JW4QRZES",
+   "pharmSection": "anxiety-disorders",
+   "conditionRows": []
+  },
+  {
+   "block": "b_7QN3FSWGK1",
+   "pharmSection": "bipolar-disorder",
+   "conditionRows": []
+  },
+  {
+   "block": "b_BA201NY4G5",
+   "pharmSection": "depression",
+   "conditionRows": [
+    "r_D5D8WN2XQE"
+   ]
+  },
+  {
+   "block": "b_MH02GTWJN1",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  },
+  {
+   "block": "b_GX12XTJCXQ",
+   "pharmSection": "antipsychotics",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders",
+   "tables": [
+    "b_P4JW4QRZES"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "bipolar-disorder",
+   "title": "Bipolar disorder",
+   "tables": [
+    "b_7QN3FSWGK1"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "depression",
+   "title": "Depression",
+   "tables": [
+    "b_BA201NY4G5"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "antipsychotics",
+   "title": "Antipsychotics",
+   "tables": [
+    "b_MH02GTWJN1",
+    "b_GX12XTJCXQ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_YRZTTQKKKT",
   "d_T4RDNVC8X1"
- ]
+ ],
+ "titled": {
+  "r_D5D8WN2XQE": 0,
+  "r_WZFEAQJXGE": 0
+ }
 }

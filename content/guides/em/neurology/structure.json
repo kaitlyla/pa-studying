@@ -1,9 +1,153 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "cranial-nerve-palsies",
+   "title": "Cranial nerve palsies"
+  },
+  {
+   "id": "trauma",
+   "title": "Trauma"
+  },
+  {
+   "id": "encephalitis",
+   "title": "Encephalitis"
+  },
+  {
+   "id": "subarachnoid-hemorrhage-cerebral-aneurysm",
+   "title": "Subarachnoid hemorrhage/Cerebral aneurysm"
+  },
+  {
+   "id": "peripheral-nerve-disease",
+   "title": "Peripheral nerve disease"
+  },
+  {
+   "id": "headache",
+   "title": "Headache"
+  },
+  {
+   "id": "increased-intracranial-pressure",
+   "title": "Increased intracranial pressure"
+  },
+  {
+   "id": "cerebellar-dysfunction",
+   "title": "Cerebellar dysfunction"
+  },
+  {
+   "id": "degenerative-neuromuscular-disease",
+   "title": "Degenerative/Neuromuscular disease"
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders"
+  },
+  {
+   "id": "stroke",
+   "title": "Stroke"
+  },
+  {
+   "id": "ear-disorders",
+   "title": "Ear disorders"
+  },
+  {
+   "id": "other",
+   "title": "Neurology — other"
+  }
+ ],
+ "members": {
+  "r_T9V574TW5J": "cranial-nerve-palsies",
+  "r_C4N0AHET4C": "trauma",
+  "r_W9FV2N1HGR": "encephalitis",
+  "r_4R2PM8YR5G": "trauma",
+  "r_9B7DKWTTEZ": "trauma",
+  "r_E65WP49MG0": "trauma",
+  "r_4TBF75YTH7": "subarachnoid-hemorrhage-cerebral-aneurysm",
+  "r_FDB8VFXE2V": "peripheral-nerve-disease",
+  "r_6MRWABF8C8": "headache",
+  "r_VSE5MS4HK5": "headache",
+  "r_FFC8NMEBVV": "peripheral-nerve-disease",
+  "r_E4MB8YXZP0": "headache",
+  "r_P67NW4TZJE": "headache",
+  "r_1V7531GTJS": "increased-intracranial-pressure",
+  "r_S1S7XG4Q5B": "degenerative-neuromuscular-disease",
+  "r_KMEVWQYXWT": "degenerative-neuromuscular-disease",
+  "r_RE5H5QMH03": "degenerative-neuromuscular-disease",
+  "r_C2QDE9YA56": "degenerative-neuromuscular-disease",
+  "r_HHC2DWAF56": "degenerative-neuromuscular-disease",
+  "r_NRZGG2MY06": "degenerative-neuromuscular-disease",
+  "r_4C9EAATYM9": "other",
+  "r_XAD6BRN0Q6": "other",
+  "r_1Q3VWH3HYE": "other",
+  "r_HX9J4KCYZY": "other",
+  "r_NFAYGR9WGP": "other",
+  "r_8FXNVV61Z5": "seizure-disorders",
+  "r_MK3DWVAD1T": "trauma",
+  "r_7TMZZZS29E": "trauma",
+  "r_JPXNCGQKHN": "trauma",
+  "r_47QNFYQSBZ": "degenerative-neuromuscular-disease",
+  "r_0CB2GY6C6V": "stroke",
+  "r_B5WGQS4GJ4": "stroke",
+  "r_QPGDCHZEQY": "stroke",
+  "r_C37G95RWQP": "ear-disorders",
+  "r_40B9ZAHVZT": "ear-disorders",
+  "r_0VHKCZSMAR": "ear-disorders",
+  "r_NCYMP4MF4V": "degenerative-neuromuscular-disease",
+  "b_AEW055JMMQ": "cranial-nerve-palsies",
+  "b_EEFF757RCJ": "cranial-nerve-palsies",
+  "b_Y0YB3R8TG2": "trauma",
+  "b_ANRABKS3DQ": "encephalitis",
+  "b_PV0GQV50P1": "subarachnoid-hemorrhage-cerebral-aneurysm",
+  "b_AK7C4XYS1H": "peripheral-nerve-disease",
+  "b_V8J4XSBMJ3": "increased-intracranial-pressure",
+  "b_GPSN10WK99": "cerebellar-dysfunction",
+  "b_ERS5V7R842": "degenerative-neuromuscular-disease",
+  "b_46K8A8F1R3": "degenerative-neuromuscular-disease",
+  "b_4FEP68P33D": "other",
+  "b_XB4CA83H95": "seizure-disorders",
+  "b_RTKN9AQZEP": "trauma",
+  "b_QN4C65WGNZ": "trauma",
+  "b_4GWD5TN56Q": "degenerative-neuromuscular-disease",
+  "b_CSY51V6A78": "stroke",
+  "b_B7JZA2486S": "ear-disorders",
+  "b_D94B994TCH": "degenerative-neuromuscular-disease"
+ },
+ "listed": {
+  "b_GPSN10WK99": "Loss of Coordination/Ataxia",
+  "b_RTKN9AQZEP": "Spinal Cord Injury"
+ },
+ "drugTables": [
+  {
+   "block": "b_7ZFVQBG1RP",
+   "pharmSection": "migraine",
+   "conditionRows": []
+  },
+  {
+   "block": "b_YTY6GAQZDV",
+   "pharmSection": "seizure-disorders",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "migraine",
+   "title": "Migraine",
+   "tables": [
+    "b_7ZFVQBG1RP"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders",
+   "tables": [
+    "b_YTY6GAQZDV"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

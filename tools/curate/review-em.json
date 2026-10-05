@@ -1,0 +1,66 @@
+{
+  "v": 1,
+  "guide": "em",
+  "rule": "plan 90 §90.2.7",
+  "reviewer": "detective (task 01a1099b-ffd3-7702-b678-a3e0244f62a6), spawned by the Leader shay-49353; did not author the drafts",
+  "curator": "quin-16337 (row kinds, drug tables); rosa-90237 (implementer-01a10979-af34-7453-8c3e-efedd1ce823a): sections, splits, listed, pharm sections, general items/files",
+  "recheck": "All 6 findings judged valid by the Leader (shay-49353, 2026-10-05T01:23Z); corrections re-checked by the Leader (shay-49353, 2026-10-05T01:27Z): OK on all 6 — Nausea/vomiting qualifies as a titled presentation note; the 32 workup items are A–Z",
+  "findings": [
+    {
+      "item": 1,
+      "file": "draft/pulmonary.structure.json + pulmonary.commands.txt",
+      "id": "r_328EX1CN8N (block b_YBQKMYAX02)",
+      "finding": "Marked `heading` (commands: `rows b_YBQKMYAX02 r_328EX1CN8N=heading`). On a one-column table the rule-(b) test fires vacuously on every row, but §90.2.2 requires every rule-marked row to be re-read against the design definition \"cells hold only a label and/or column headings\" — this row holds her Management Basics content notes (Initiating TX / Monitoring / step therapy / Exacerbation TX / IV magnesium…), not a label or column headings. **Correction:** `rows b_YBQKMYAX02 r_328EX1CN8N=content` (keep `r_8WBCEPF0B3=heading`; it is the bold title line). I scanned all 12 systems for the same pattern — this is the only occurrence.",
+      "rule": "§90.2.2",
+      "fix": "kinds.json content override r_328EX1CN8N; the pulmonary rows command is now `rows b_YBQKMYAX02 r_8WBCEPF0B3=heading` only."
+    },
+    {
+      "item": 2,
+      "file": "draft/cardiovascular.structure.json",
+      "id": "listed.b_GNV1G6M8SX \"VALVULAR DISORDERS\"",
+      "finding": "§90.2.3 lists a block \"exactly when it **starts with** a title line\". This block starts with 15 blank paragraphs plus an anchored image (paragraphs 0–15); the bold title line is paragraph 16. Family Medicine's identical case was handled by splitting so the listed part starts at the title (`b_R28SDN26QT~1` in scratch/fm). **Correction:** `split b_GNV1G6M8SX 16` (verified: index 16 is \"VALVULAR DISORDERS\", bold); list `b_GNV1G6M8SX~1` \"VALVULAR DISORDERS\" → valvular-disorders; put `b_GNV1G6M8SX` (the image part) in `blocksBy` → valvular-disorders, not listed. (Alternative: drop the listing — but the split keeps FM/em consistent.)",
+      "rule": "§90.2.3",
+      "fix": "spec/cardiovascular.json: split b_GNV1G6M8SX at 16; b_GNV1G6M8SX and b_GNV1G6M8SX~1 → valvular-disorders; only b_GNV1G6M8SX~1 listed \"VALVULAR DISORDERS\"."
+    },
+    {
+      "item": 3,
+      "file": "general-items-em.json",
+      "id": "workup — \"Shortness of breath (acute)\"",
+      "finding": "It sits between \"Dyspnea on exertion\" and \"Edema\". Rule: plan 20 §20.8 — \"`workup` items are alphabetical by `title`\". The other 26 items are in order. **Correction:** move it between \"Seizure\" and \"Suicidal ideation\".",
+      "rule": "plan 20 §20.8",
+      "fix": "Moved between \"Seizure\" and \"Sore throat\" (\"Sore throat\" < \"Suicidal ideation\" A–Z, so the list now reads Seizure, Shortness of breath (acute), Sore throat, Suicidal ideation)."
+    },
+    {
+      "item": 4,
+      "file": "general-items-em.json",
+      "id": "workup — selection",
+      "finding": "Rule: plan 90 §90.3.1 — \"usual presentations of conditions on that EOR's PAEA 2026 list, plus presentations her guide has notes on as presentations\" (operator: \"do common ones on the EOR\"). The list includes her titled presentation notes for Dyspnea on exertion, Edema, Palpitations, Hemoptysis, Hematuria/flank pain (HEMATURIA + SUPRAPUBIC/FLANK PAIN) and Eye pain/vision loss — but omits the same class of titled presentation notes: **Ear pain** (b_3VHT2TQNSA~1), **Nasal congestion** (b_C7Q846EDFA), **Tremors** (b_RAHW8Q48FD), **Loss of coordination/ataxia** (b_GPSN10WK99); candidate also **Nausea/Vomiting** (her GI symptom table, r_5YC655FHJ5). All are usual presentations of EM-list conditions (otitis externa/media, rhinosinusitis; cerebellar dysfunction). **Correction:** add them as items with their `conds`, or record a Leader ruling for the exclusion (the workupNotes currently acknowledges the class but silently drops these).",
+      "rule": "plan 90 §90.3.1",
+      "fix": "Added Ear pain, Loss of coordination / ataxia, Nasal congestion, Nausea / vomiting, Tremors (A–Z placed; 32 items). Nausea/vomiting included: r_5YC655FHJ5 is a label row 'Nausea/Vomiting' over her DDx + anti-emetics notes, the same titled presentation-note class. workupNotes updated."
+    },
+    {
+      "item": 5,
+      "file": "general-items-em.json",
+      "id": "screenings — \"prominent\": false",
+      "finding": "Rule: §90.3.1 — a subject is prominent when needed for ≥ 3 conditions on that EOR's PAEA list. Its items cover Suicidal ideation, Child/Elder neglect or violence, Substance-related disorders, HIV/AIDS and STIs — 5 EM-list conditions. **Correction:** `\"prominent\": true` (`howto` stays null either way, so this is the only change).",
+      "rule": "plan 90 §90.3.1",
+      "fix": "screenings prominent: true; its `why` reworded to state the 5 conditions."
+    },
+    {
+      "item": 6,
+      "file": "general-files-em.json",
+      "id": "missing placement d_37E1NN0SQA in labs",
+      "finding": "Rule: §90.3.1 — every Other/reference-tab document of 30 §30.2 is placed in the EOR's general topic of the same subject (Labs tab → labs) when relevant. It is relevant to em: Heinz bodies (G6PD — Anemias), hypersegmented neutrophils (B12/folate — Anemias), Auer rods and smudge cells (Leukemias), schistocytes (TTP/HUS/DIC — Coagulation disorders) — all on the EM list; FM and IM both place it in labs for the same reason. **Correction:** add `{ guide:\"em\", key:\"labs\", doc:\"d_37E1NN0SQA\", reason:… }` after Urinalysis & Culture 2026 – Summary (30 §30.2 table order), keeping labs order intact.",
+      "rule": "plan 90 §90.3.1; plan 30 §30.2",
+      "fix": "Added d_37E1NN0SQA to em labs directly after d_W0DJ0C3768."
+    }
+  ],
+  "ok": [
+    "Scope of what I checked: all 12 `draft/<sys>.structure.json` (+ specs, reports, commands.txt), `kinds.json`, `general-items-em.json`, `general-files-em.json` against plan 90 §90.2.1–§90.2.7 and §90.3.1, plan 20 §20.6–§20.8, plan 30 §30.2, the curation brief and agent rulings (Orchestrator 20:58Z / 21:02Z / 22:01Z, Leader seq 598), the PAEA EM 2026 topic list (`em-2026.txt`), and the guide source `content/guides/em/`. I re-derived every system's topics/blocks with the project's own `lib/derive` derivation (rule kinds applied in memory, read-only) — every topic and block is placed; the reports carry no ERRORS. All split paragraph indexes were verified against the blocks. Write targets (guide, content) untouched; only temporary read-dumps in scratch, now deleted.",
+    "**kinds.json** — OK. All 8 `titled` entries match the 21:02Z/22:01Z rulings (cell 0 everywhere except pulmonary r_X3DMHZGC37 cell 1, which itself names the condition; no `titled` on FLUIDS). Heading overrides all fit the design definition (label + column headings: r_M4ZD8FCYYC, r_3QQZC090HZ, r_HTEYPX5SJ0, r_RQ5MCC614A, r_6Q5W6YAMKC, r_FMHCJY98Q2, r_BCS02BTW9M, r_16F23KGE3C, r_SHGHXZPW6V, r_DP87A91EVZ, r_6T18DGR2PV, r_ZTCE4N7905, r_9KPFR0QWV8, r_XWN8SFBK3Q, r_7FNHBS46Y3, r_8SBXBNH0DN, r_ADSH08DT56, r_0N9WD0F7B9, r_X3DMHZGC37, r_G8TF9TZS2W, r_YS5JKNHVYD, r_ZBTS8TATTB, r_9QRNQ2C3KC, r_NPZQ216PBJ, r_Y12HD1CA93, r_GYEW98BCWJ, r_Q54JY11YJ1). Nit only: r_6RZ8BAERMD (empty first row of the shock table) is already heading under rule (a) — the override is redundant, the spec note's \"beyond the rule\" phrasing is inaccurate; no effect on output.",
+    "**Cardiovascular, Dermatology, Endocrinology, ENT/Ophthalmology, GI/Nutritional, Hematology, Neurology, OBGYN, Orthopedics/Rheumatology, Psychiatry/Behavioral Medicine, Urology/Renal** — OK apart from finding 2 (cardio). Checked specifically: every section title appears verbatim on the EM 2026 list (including the cross-system \"Parasitic infections\" and \"Encephalitis\" — top-level Infectious Diseases categories — and \"Ear disorders\" for the VERTIGO table per seq 598); section order = first appearance (build-verified); every topic's section checked against the list (e.g. Cardiogenic/circulatory/distributive shock rows → Shock; Hypertensive Crises → Hypertensive disorders; Dacryoadenitis → Oropharyngeal where the list prints it; SJS & TEN, bullous pemphigoid, pilonidal → Diseases of hair, nails, or skin; Delirium/Dementia → Degenerative/Neuromuscular; AKI family → Renal disease; PID → Cervical; Reactive arthritis, gout/CPPD → Rheumatologic; vertebral fractures → Traumatic; Serotonin Syndrome condition row → Trauma/Stress-related per §90.2.3 nearest-topic; NMS/EPS rows → Schizophrenia spectrum; Cushing's Syndrome → Pituitary (Cushing disease)); next-topic placements of differential notes (DOE/Edema→Heart failure, Orthopnea/Palpitations→Hypertensive, TREMORS→Adrenal, PALPITATIONS→Thyroid, Hemoptysis→Infectious, Ataxia→Cerebellar, SCI→Trauma, HEMATURIA→other, SUPRAPUBIC/FLANK PAIN→Infectious, Acid/Base→Acid-base) all correct; blank/image-block placements correct (PRBC note→Anemias after the seq-598 split; hematopoiesis chart→other — image block, not blank spacing; PRENATAL CARE→Pregnancy; nephrotic/nephritic chart→Renal disease; spinal-cord image→Trauma); bare sub-headings (ARRHYTHMIAS, FRACTURES/DISLOCATIONS, SOFT TISSUE INJURIES, ELECTROLYTES) not listed; no invented \"— other\" contents (EBV/mono, meningitis family, Multiple Myeloma, Priapism/Urinary Incontinence, the nine ortho others, GI symptom tables, Huntington/Parkinson/intimate-partner rows — none on the EM list); all 6 splits at verified paragraph indexes; drug tables and condition rows correct; §90.2.5 pharm titles match her labels and FM/IM precedent (\"Antiplatelets, anticoagulants & fibrinolytics\", \"Anti-hyperglycemic agents\", \"Migraine\"/\"Seizure disorders\", \"Antipsychotics\", \"Gout\", \"Asthma\"/\"Tuberculosis\", \"Fluids\" matches her FLUIDS label); `pharmFiles` exactly per plan 30 §30.2 (pharm review → CV/PULM/EENT/GI/PSY; insulin dosing → Endo; psych drug groupings + antidepressants → Psych).",
+    "**general-items-em.json (other than findings 3–5)** — OK. Keys are the signed `SD_GEN_ALL` eight in order; prominence true for labs/ekg/imaging/anatomy/procedures/guidelines/workup (≥3 conditions / own sections, e.g. ARRHYTHMIAS for ekg); every item carries `covers` naming EM-list conditions or her guide spot; workup = 27 presentations as briefed; conds are EM-list conditions.",
+    "**general-files-em.json (other than finding 6)** — OK. Fixed placements first and in order (screenings: USPSTF guidelines → A and B Recommendations; guidelines: ACLS algorithms → ACLS Study Guide, then HF tx); the rest follow 30 §30.2 table order (labs: ABG Worksheet, ABG Workshop, Clinical Lab & Transfusion, Urinalysis & Culture, Bacterial Pathogens, EBV serology, UA 2026 Summary); every placement has a recorded reason; Vaccines/Legal/PA professional/Vitamins/Physical exam/Note templates documents are correctly not placed; PANCE Receptor Pharmacology and the antibiotic charts correctly stay out (no ID system in em).",
+    "Unresolved judgment calls I accept but note for the record: em \"Fluids\" vs IM's \"IV fluids\" title for the FLUIDS table (em matches her label; not a finding), and \"Balanitis → Infectious disorders\" (fit is real but loose; §90.2.7's unsettled-disagreement path applies if the curator disagrees)."
+  ]
+}

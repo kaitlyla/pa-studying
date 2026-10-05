@@ -1,0 +1,172 @@
+{
+  "v": 1,
+  "guide": "em",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto, workup/choose; keys = signed EORS em general (SD_GEN_ALL: labs, ekg, imaging, anatomy, procedures, guidelines, screenings, workup); PAEA Emergency Medicine 2026 topic list (scratch/em/em-2026.pdf); Leader S10 ruling: selection recorded here, general.json written in S12",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Needed for many EM-list conditions (ACS, DKA/HHS, acid-base and electrolyte disturbances, AKI, sepsis, GI bleeding, toxidromes, pancreatitis…), well over the ≥3 bar; her guide has lab-heavy sections (Acid/Base Disorders, ELECTROLYTES, IV fluids).",
+      "items": [
+        { "item": "Arterial/venous blood gas and acid-base interpretation (anion gap, expected compensation)", "covers": "Acid-base disturbances; Acute respiratory failure; Hypercapnia; Diabetic ketoacidosis; Toxidromes (salicylates) (her guide: Acid/Base Disorders note, acid-base table)" },
+        { "item": "Basic/comprehensive metabolic panel: sodium, potassium, calcium, magnesium, phosphate, BUN/creatinine, glucose", "covers": "Electrolyte disturbances; Acute kidney injury; Rhabdomyolysis; Diabetic ketoacidosis; Hyperosmolar hyperglycemic syndrome (her guide: ELECTROLYTES tables, AKI table)" },
+        { "item": "Serum osmolality and osmolar gap", "covers": "Hyperosmolar hyperglycemic syndrome; Toxidromes/Substances (toxic alcohols); Syndrome of inappropriate antidiuretic hormone secretion; Diabetes insipidus" },
+        { "item": "Cardiac troponin", "covers": "Acute coronary syndrome; Myocarditis; Pulmonary embolism (her guide: Orthopnea note DX)" },
+        { "item": "BNP/NT-proBNP", "covers": "Heart failure (her guide: Orthopnea note DX)" },
+        { "item": "D-dimer", "covers": "Pulmonary embolism; Deep vein thrombosis; Aortic dissection" },
+        { "item": "CBC with differential and peripheral smear", "covers": "Anemias; Gastrointestinal bleeding; Sepsis; Leukemias; Thrombotic thrombocytopenic purpura; Immune thrombocytopenic purpura (her guide: DOE note — anemia worked up with CBC)" },
+        { "item": "Coagulation studies: PT/INR, aPTT, fibrinogen, D-dimer in DIC", "covers": "Disseminated intravascular coagulation; Gastrointestinal bleeding; Cirrhosis; anticoagulant reversal" },
+        { "item": "Type and screen/crossmatch; transfusion response", "covers": "Hemorrhagic shock; Gastrointestinal bleeding (her guide: Hematology note — 1 unit PRBCs raises Hgb by 1 g/dL)" },
+        { "item": "Lipase", "covers": "Acute pancreatitis" },
+        { "item": "Liver panel (AST/ALT, bilirubin, alkaline phosphatase), ammonia", "covers": "Acute hepatitis; Cirrhosis; Biliary tract disorders; Acetaminophen poisoning" },
+        { "item": "Lactate", "covers": "Sepsis; Shock; Ischemic bowel disease" },
+        { "item": "Blood cultures", "covers": "Sepsis; Bacteremia; Infective endocarditis" },
+        { "item": "Urinalysis, urine culture and urine pregnancy test (hCG)", "covers": "Cystitis; Pyelonephritis; Uro/Nephrolithiasis; Ectopic pregnancy; Bleeding in pregnancy (her guide: HEMATURIA note DX)" },
+        { "item": "Quantitative serum hCG", "covers": "Ectopic pregnancy; Abortion" },
+        { "item": "Creatine kinase", "covers": "Rhabdomyolysis; Compartment syndrome" },
+        { "item": "Toxicology: acetaminophen and salicylate levels, urine drug screen, ethanol level", "covers": "Toxidromes; Acetaminophen poisoning; Substance-related disorders; Altered mental status (her guide: Palpitations note — urine tox)" },
+        { "item": "Carboxyhemoglobin", "covers": "Carbon monoxide poisoning; Inhalation injury" },
+        { "item": "Serum ketones (beta-hydroxybutyrate)", "covers": "Diabetic ketoacidosis; Hyperosmolar hyperglycemic syndrome (her guide: NONKETOTIC HYPERGLYCEMIA note)" },
+        { "item": "TSH and free T4", "covers": "Thyroid storm; Hyper/Hypothyroidism (her guide: Palpitations notes — TSH)" },
+        { "item": "Cortisol (random/ACTH stimulation)", "covers": "Acute adrenal insufficiency" },
+        { "item": "CSF analysis (cell count, glucose, protein, Gram stain/culture)", "covers": "Subarachnoid hemorrhage/Cerebral aneurysm; Encephalitis; Guillain-Barré syndrome (her guide: meningitis table)" },
+        { "item": "Gonorrhea/chlamydia NAAT, wet mount, KOH, HIV and syphilis testing", "covers": "Pelvic inflammatory disease; Cervicitis; Urethritis; Vaginitis; Epididymitis; Sexually transmitted infections" },
+        { "item": "Rh type and antibody screen in pregnancy bleeding", "covers": "Bleeding in pregnancy; Ectopic pregnancy; Abortion" }
+      ]
+    },
+    "ekg": {
+      "prominent": true,
+      "howto": null,
+      "why": "Her EM guide has its own ARRHYTHMIAS section (design general/topics/prominent names EM), and EKG is needed for many EM-list conditions.",
+      "items": [
+        { "item": "Rate, rhythm, axis and intervals (full interpretation)", "covers": "Arrhythmias/Conduction disorders (her guide: ARRHYTHMIAS tables)" },
+        { "item": "ST elevation/depression patterns and STEMI equivalents", "covers": "Acute coronary syndrome; Vasospastic angina (Prinzmetal angina)" },
+        { "item": "AV blocks and bundle branch blocks", "covers": "Heart blocks (her guide: AV Blocks, BBB & Fascicular Block rows)" },
+        { "item": "Atrial fibrillation/flutter, SVT (AVNRT, AVRT/WPW)", "covers": "Arrhythmias/Conduction disorders — Atrial, Junctional (her guide: SVTs tables)" },
+        { "item": "Ventricular tachycardia, torsades, ventricular fibrillation; premature beats", "covers": "Arrhythmias/Conduction disorders — Ventricular, Premature beats (her guide: Ventricles, Extrasystoles tables)" },
+        { "item": "Diffuse ST elevation/PR depression; low voltage and electrical alternans", "covers": "Pericarditis; Pericardial effusion; Cardiac tamponade" },
+        { "item": "Right heart strain (S1Q3T3, sinus tachycardia)", "covers": "Pulmonary embolism" },
+        { "item": "Electrolyte changes: peaked T waves, U waves, QT changes", "covers": "Electrolyte disturbances (hyper/hypokalemia, hypo/hypercalcemia)" },
+        { "item": "QT prolongation and QRS widening from drugs", "covers": "Toxidromes; Substances (TCA, antipsychotics) (her guide: Torsades row)" },
+        { "item": "Brugada, HCM and WPW patterns in syncope", "covers": "Hypotension; Neurogenic syncope; Cardiomyopathy — Hypertrophic (her guide: Syncope row)" },
+        { "item": "Hypothermia (Osborn waves)", "covers": "Cold exposure injury" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging diagnoses many EM-list conditions (fractures, stroke, PE, appendicitis, AAA, pneumothorax…) — far over the ≥3 bar.",
+      "items": [
+        { "item": "Chest x-ray", "covers": "Pneumothorax; Pneumonias; Pleural effusion; Pulmonary edema; Foreign body aspiration; Blunt and penetrating chest trauma" },
+        { "item": "Plain films and the Ottawa ankle/knee rules", "covers": "Fractures/Dislocations (her guide: OTTAWA ANKLE/FOOT RULES, Weber classification)" },
+        { "item": "Non-contrast head CT", "covers": "Stroke — Hemorrhagic; Subarachnoid hemorrhage; Head trauma/TBI; Intracranial hemorrhage" },
+        { "item": "CT angiography: chest (PE, dissection), head/neck (stroke)", "covers": "Pulmonary embolism; Aortic aneurysm/dissection; Stroke — Ischemic" },
+        { "item": "CT abdomen/pelvis", "covers": "Acute appendicitis; Diverticular disease; Obstruction; Ischemic bowel disease; Uro/Nephrolithiasis; Blunt and penetrating abdominal trauma" },
+        { "item": "FAST and bedside ultrasound (incl. aorta, gallbladder, cardiac)", "covers": "Blunt and penetrating abdominal trauma; Aortic aneurysm; Acute cholecystitis; Pericardial effusion/Cardiac tamponade" },
+        { "item": "Pelvic/transvaginal ultrasound", "covers": "Ectopic pregnancy; Ovarian torsion; Tubo-ovarian abscess; Bleeding in pregnancy" },
+        { "item": "Scrotal Doppler ultrasound", "covers": "Testicular torsion; Epididymitis" },
+        { "item": "Venous duplex ultrasound", "covers": "Deep vein thrombosis" },
+        { "item": "MRI spine and brain", "covers": "Cauda equina syndrome; Spinal epidural abscess/hemorrhage; Spinal cord injury; Stroke" },
+        { "item": "Soft-tissue neck x-ray (thumbprint/steeple sign) and CT neck", "covers": "Epiglottitis; Laryngotracheobronchitis (croup); Peritonsillar/Retropharyngeal abscess" },
+        { "item": "Abdominal x-ray (free air, obstruction)", "covers": "Bowel perforation; Obstruction; Toxic megacolon; Foreign body" }
+      ]
+    },
+    "anatomy": {
+      "prominent": true,
+      "howto": null,
+      "why": "Her Orthopedics/Rheumatology section (fractures by bone, soft tissue injuries, nerve entrapments) and EM-list trauma conditions need regional anatomy for ≥3 conditions.",
+      "items": [
+        { "item": "Upper extremity bones, joints and neurovascular structures (shoulder, elbow, forearm, wrist, hand)", "covers": "Fractures/Dislocations; Carpal tunnel syndrome (her guide: SHOULDER…METACARPALS fracture tables, Ulnar/Median Nerve table)" },
+        { "item": "Lower extremity bones and ligaments (hip, knee, ankle, foot)", "covers": "Fractures/Dislocations; Ligamentous tears; Meniscal injuries; Sprains/Strains (her guide: HIP, KNEE, ANKLE, FOOT tables)" },
+        { "item": "Compartments of the leg and forearm", "covers": "Compartment syndrome" },
+        { "item": "Spine and spinal cord tracts", "covers": "Spinal cord injury; Cauda equina syndrome; Disc disease (her guide: SCI table and cord-syndrome image)" },
+        { "item": "Cardiac auscultation points", "covers": "Valvular disorders (her guide: VALVULAR DISORDERS note image)" },
+        { "item": "Facial bones and orbit", "covers": "Blowout fracture; Nasal trauma" },
+        { "item": "Dermatomes and peripheral nerve distributions", "covers": "Radiculopathy; Neuropathy; Herpes zoster" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "EM-list conditions are treated with ED procedures for well over 3 conditions (wounds, abscesses, fractures, pneumothorax, epistaxis).",
+      "items": [
+        { "item": "Laceration repair and suturing; wound care and tetanus prophylaxis", "covers": "Abrasions/Lacerations; Bites/Stings; Clostridium tetani" },
+        { "item": "Incision and drainage", "covers": "Abscess; Pilonidal disease; Dental abscess; Peritonsillar abscess; Breast abscess (her guide: Dental Abscess note — I&D)" },
+        { "item": "Splinting and reduction of fractures/dislocations", "covers": "Fractures/Dislocations (her guide: fracture tables)" },
+        { "item": "Needle decompression and chest tube", "covers": "Pneumothorax; Blunt and penetrating chest trauma" },
+        { "item": "Airway management (bag-mask, intubation)", "covers": "Acute respiratory failure; Airway obstruction; Anaphylaxis" },
+        { "item": "Lumbar puncture", "covers": "Subarachnoid hemorrhage; Encephalitis" },
+        { "item": "Anterior nasal packing", "covers": "Epistaxis" },
+        { "item": "Cardioversion/defibrillation and transcutaneous pacing", "covers": "Arrhythmias/Conduction disorders — Atrial, Ventricular; Heart blocks" },
+        { "item": "Pericardiocentesis", "covers": "Cardiac tamponade" },
+        { "item": "Foreign body removal (ear, nose, eye, skin)", "covers": "Foreign body (ear, nose, ocular, cutaneous)" },
+        { "item": "Burn care and fluid resuscitation (Parkland)", "covers": "Burns (her guide: Burns table; IV fluids table)" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "ACLS is fixed in em guidelines (§90.3.1); guideline-driven ED care applies to many EM-list conditions.",
+      "items": [
+        { "item": "ACLS: cardiac arrest, bradycardia and tachycardia algorithms", "covers": "Arrhythmias/Conduction disorders; Shock" },
+        { "item": "ACC/AHA chest pain and ACS guidelines", "covers": "Acute coronary syndrome" },
+        { "item": "AHA/ASA acute ischemic stroke guideline (thrombolysis window)", "covers": "Stroke — Ischemic; Transient ischemic attack" },
+        { "item": "Surviving Sepsis Campaign", "covers": "Sepsis; Shock — Distributive" },
+        { "item": "GINA asthma and GOLD COPD exacerbation management", "covers": "Asthma exacerbation; Chronic obstructive pulmonary disease exacerbation" },
+        { "item": "ACC/AHA heart failure guideline", "covers": "Heart failure (her guide: Heart Failure table, PRIMARY HF THERAPIES)" },
+        { "item": "ACC/AHA hypertension guideline (hypertensive emergency/urgency)", "covers": "Hypertensive emergencies; Severe asymptomatic hypertension (her guide: Hypertensive Crises row)" },
+        { "item": "Clinical decision rules: Wells/PERC, Canadian CT head, NEXUS, Ottawa", "covers": "Pulmonary embolism; Head trauma/TBI; Spinal cord injury; Fractures/Dislocations (her guide: Ottawa rules)" },
+        { "item": "ADA hyperglycemic crises (DKA/HHS) consensus", "covers": "Diabetic ketoacidosis; Hyperosmolar hyperglycemic syndrome" },
+        { "item": "CDC STI treatment guidelines", "covers": "Pelvic inflammatory disease; Urethritis; Cervicitis; Sexually transmitted infections" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Prominent: the items cover 5 EM-list conditions (Suicidal ideation, Child/Elder neglect or violence, Substance-related disorders, HIV/AIDS, STIs), over the ≥3 threshold (§90.3.1). Her EM guide has no screening section. No top tab holds screenings, so howto stays null.",
+      "items": [
+        { "item": "Suicide risk screening", "covers": "Suicidal ideation (her guide: Suicide row)" },
+        { "item": "Intimate partner violence screening", "covers": "Child/Elder neglect or violence (her guide: Intimate Partner Abuse row)" },
+        { "item": "Unhealthy alcohol and drug use screening", "covers": "Substance-related disorders (her guide: SM V criteria note, Alcohol row)" },
+        { "item": "HIV screening", "covers": "Human immunodeficiency virus/Acquired immunodeficiency syndrome; Sexually transmitted infections" },
+        { "item": "Elder and child abuse screening", "covers": "Child/Elder neglect or violence" }
+      ]
+    },
+    "workup": { "prominent": true, "howto": null, "why": "Presentation list below (design general/workup/choose).", "items": [] }
+  },
+  "workup": [
+    { "id": "abdominal-pain", "title": "Abdominal pain", "conds": "Acute appendicitis, Acute cholecystitis, Acute pancreatitis, Bowel perforation, Obstruction, Ischemic bowel disease, Ectopic pregnancy, Aortic aneurysm" },
+    { "id": "ams", "title": "Altered mental status (AMS)", "conds": "Delirium, Hypoglycemia, Toxidromes, Stroke, Encephalitis, Sepsis, Electrolyte disturbances" },
+    { "id": "back-pain", "title": "Back pain", "conds": "Cauda equina syndrome, Disc disease, Spinal epidural abscess, Aortic aneurysm/dissection, Uro/Nephrolithiasis, Pyelonephritis" },
+    { "id": "chest-pain", "title": "Chest pain", "conds": "Acute coronary syndrome, Aortic dissection, Pulmonary embolism, Pneumothorax, Pericarditis, Boerhaave syndrome" },
+    { "id": "dizziness-vertigo", "title": "Dizziness / vertigo", "conds": "Vertigo, Stroke, Cerebellar dysfunction, Arrhythmias/Conduction disorders" },
+    { "id": "doe", "title": "Dyspnea on exertion", "conds": "Heart failure, Coronary artery disease, Chronic obstructive pulmonary disease exacerbation, Anemias" },
+    { "id": "ear-pain", "title": "Ear pain", "conds": "Otitis externa, Otitis media, Mastoiditis, Barotrauma, Tympanic membrane perforation, Foreign body" },
+    { "id": "edema", "title": "Edema", "conds": "Heart failure, Deep vein thrombosis, Cirrhosis, Chronic kidney disease" },
+    { "id": "eye-pain-vision-loss", "title": "Eye pain / vision loss", "conds": "Glaucoma (acute angle closure), Retinal detachment, Retinal vascular occlusion, Optic neuritis, Corneal abrasion/ulcer, Globe rupture" },
+    { "id": "fever", "title": "Fever", "conds": "Sepsis, Bacteremia, Pneumonias, Pyelonephritis, Encephalitis, Fever without a source" },
+    { "id": "gi-bleeding", "title": "GI bleeding", "conds": "Gastrointestinal bleeding, Peptic ulcer disease, Esophageal varices, Mallory-Weiss tear, Diverticular disease" },
+    { "id": "headache", "title": "Headache", "conds": "Subarachnoid hemorrhage, Migraine, Cluster, Tension, Increased intracranial pressure, Encephalitis" },
+    { "id": "hematuria-flank-pain", "title": "Hematuria / flank pain", "conds": "Uro/Nephrolithiasis, Pyelonephritis, Blunt and penetrating pelvic trauma, Renal disease" },
+    { "id": "hemoptysis", "title": "Hemoptysis", "conds": "Acute bronchitis, Neoplasms — Malignant, Tuberculosis, Bronchiectasis, Pulmonary embolism" },
+    { "id": "joint-pain", "title": "Joint pain / swelling", "conds": "Septic arthritis, Gout/Pseudogout, Fractures/Dislocations, Reactive arthritis" },
+    { "id": "ataxia", "title": "Loss of coordination / ataxia", "conds": "Cerebellar dysfunction, Stroke, Vertigo, Degenerative/Neuromuscular disease, Substances" },
+    { "id": "nasal-congestion", "title": "Nasal congestion", "conds": "Acute/Chronic rhinosinusitis" },
+    { "id": "nausea-vomiting", "title": "Nausea / vomiting", "conds": "Acute infectious gastroenteritis (viral, bacterial), Peptic ulcer disease, Obstruction (small bowel, large bowel, volvulus), Acute pancreatitis, Acute cholecystitis, Diabetic ketoacidosis" },
+    { "id": "overdose", "title": "Overdose / poisoning", "conds": "Toxidromes, Acetaminophen poisoning, Substances, Carbon monoxide poisoning" },
+    { "id": "palpitations", "title": "Palpitations", "conds": "Arrhythmias/Conduction disorders, Hyper/Hypothyroidism, Hypoglycemia, Substances" },
+    { "id": "rash", "title": "Rash", "conds": "Toxic epidermal necrolysis, Erythema multiforme, Urticaria, Drug eruptions, Viral exanthems, Vector-borne illnesses, Cellulitis" },
+    { "id": "red-eye", "title": "Red eye", "conds": "Conjunctivitis, Keratitis, Glaucoma (acute angle closure), Uveitis, Scleritis" },
+    { "id": "seizure", "title": "Seizure", "conds": "Epilepsy, Status epilepticus, Hypoglycemia, Electrolyte disturbances, Head trauma, Substances" },
+    { "id": "dyspnea", "title": "Shortness of breath (acute)", "conds": "Asthma exacerbation, COPD exacerbation, Heart failure, Pulmonary embolism, Pneumothorax, Pneumonias, Anaphylaxis" },
+    { "id": "sore-throat", "title": "Sore throat", "conds": "Pharyngitis, Peritonsillar abscess/Retropharyngeal abscess, Epiglottitis, Angioedema" },
+    { "id": "si", "title": "Suicidal ideation", "conds": "Suicidal ideation, Depressive disorders, Bipolar and related disorders, Substance-related disorders" },
+    { "id": "syncope", "title": "Syncope", "conds": "Vasovagal hypotension, Orthostatic hypotension, Arrhythmias/Conduction disorders, Aortic stenosis, Pulmonary embolism, Neurogenic syncope" },
+    { "id": "testicular-pain", "title": "Testicular / scrotal pain", "conds": "Testicular torsion, Epididymitis, Orchitis, Hernias (incarcerated/strangulated)" },
+    { "id": "trauma", "title": "Trauma (multisystem)", "conds": "Blunt and penetrating chest/abdominal/pelvic trauma, Head trauma/TBI, Spinal cord injury, Hemorrhagic shock" },
+    { "id": "tremors", "title": "Tremors", "conds": "Hypoglycemia, Thyroid storm, Substances, Toxidromes, Degenerative/Neuromuscular disease" },
+    { "id": "vaginal-bleeding-pregnancy", "title": "Vaginal bleeding in pregnancy", "conds": "Ectopic pregnancy, Abortion, Abruptio placentae, Placenta previa" },
+    { "id": "weakness-focal-deficit", "title": "Weakness / focal neurologic deficit", "conds": "Stroke, Transient ischemic attack, Guillain-Barré syndrome, Spinal cord injury, Hypoglycemia" }
+  ],
+  "workupNotes": "Alphabetical by title in the published list. Presentations her EM guide has notes on as presentations: Dyspnea on exertion, Edema, Palpitations (cardio; endocrinology), Hemoptysis, Hematuria/flank pain (HEMATURIA, SUPRAPUBIC/FLANK PAIN), Eye pain/vision loss (VISION LOSS), Ear pain (Ear Pain), Nasal congestion (NASAL CONGESTION), Tremors (TREMORS), Loss of coordination/ataxia (Loss of Coordination/Ataxia), Nausea/vomiting (her GI symptom table titled 'Nausea/Vomiting', DDx and anti-emetics), plus Orthopnea folded into Shortness of breath. The rest are usual presentations of EM-list conditions."
+}

@@ -1,12 +1,148 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "acute-respiratory-distress-syndrome",
+   "title": "Acute respiratory distress syndrome"
+  },
+  {
+   "id": "asthma-exacerbation",
+   "title": "Asthma exacerbation"
+  },
+  {
+   "id": "foreign-body-aspiration",
+   "title": "Foreign body aspiration"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "bronchiectasis",
+   "title": "Bronchiectasis"
+  },
+  {
+   "id": "pneumothorax",
+   "title": "Pneumothorax"
+  },
+  {
+   "id": "pulmonary-circulation",
+   "title": "Pulmonary circulation"
+  },
+  {
+   "id": "pleural-effusion",
+   "title": "Pleural effusion"
+  },
+  {
+   "id": "chronic-obstructive-pulmonary-disease-exacerbation",
+   "title": "Chronic obstructive pulmonary disease exacerbation"
+  }
+ ],
+ "members": {
+  "r_WRM0G6EVHM": "infectious-disorders",
+  "r_ZD5XCRK3ZB": "infectious-disorders",
+  "r_3ACX83MP9F": "acute-respiratory-distress-syndrome",
+  "r_WXTXP7WTRG": "infectious-disorders",
+  "r_K39Q9QRCT6": "asthma-exacerbation",
+  "r_PV9ZA7K3QN": "infectious-disorders",
+  "r_XPQC0MT8ZJ": "foreign-body-aspiration",
+  "r_GAPZ7RWNTB": "infectious-disorders",
+  "r_PBJSNYDG5K": "neoplasms",
+  "r_T598ZV39BW": "infectious-disorders",
+  "r_GBSS3SSMH5": "infectious-disorders",
+  "r_9YP2ZMD8AB": "bronchiectasis",
+  "r_9SFVZDA5RH": "infectious-disorders",
+  "r_48DJCQ5DV2": "infectious-disorders",
+  "r_4WMKCRBZ1R": "pneumothorax",
+  "r_0WHGKK44T4": "pulmonary-circulation",
+  "r_ZD30TFZQEZ": "pleural-effusion",
+  "r_N0D0PK4A86": "infectious-disorders",
+  "r_DTR443XYG0": "chronic-obstructive-pulmonary-disease-exacerbation",
+  "r_6P35S0G0ES": "chronic-obstructive-pulmonary-disease-exacerbation",
+  "b_JC9E4VB3XZ": "infectious-disorders",
+  "b_92PEKRG6CB": "infectious-disorders",
+  "b_4H61QZTE70": "acute-respiratory-distress-syndrome",
+  "b_NTMP18JZPD": "infectious-disorders",
+  "b_9N1A2S5FPG": "asthma-exacerbation",
+  "b_YBQKMYAX02": "asthma-exacerbation",
+  "b_8TFCMQP8HP": "asthma-exacerbation",
+  "b_T48TXP83NE": "asthma-exacerbation",
+  "b_6AS7EWKBA4": "asthma-exacerbation",
+  "b_0K7M00594A": "asthma-exacerbation",
+  "b_9776V6W0FM": "infectious-disorders",
+  "b_8ATG0QGXVQ": "infectious-disorders",
+  "b_JGMYBFNN5D": "infectious-disorders",
+  "b_QRHQDC0GBG": "neoplasms",
+  "b_ATGRXM7YPF": "infectious-disorders",
+  "b_TYF5XQD0M8": "infectious-disorders",
+  "b_QV15CK4H8Y": "bronchiectasis",
+  "b_5FH8NZ13PY": "infectious-disorders",
+  "b_A0ZYNWY1XC": "pneumothorax",
+  "b_1QYA36T966": "pulmonary-circulation",
+  "b_FC5EFG5RBF": "pleural-effusion",
+  "b_WPTXRFGZNJ": "infectious-disorders",
+  "b_2JZ6MAGH00": "infectious-disorders",
+  "b_KZ649C2RZE": "chronic-obstructive-pulmonary-disease-exacerbation"
+ },
+ "listed": {
+  "b_8ATG0QGXVQ": "Hemoptysis",
+  "b_YBQKMYAX02": "Management Basics"
+ },
+ "drugTables": [
+  {
+   "block": "b_NE4TYW9JQH",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_YDFD7PQEPY",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_HF5K7ADEXH",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_V3DFCZVWAK",
+   "pharmSection": "tuberculosis",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "asthma",
+   "title": "Asthma",
+   "tables": [
+    "b_NE4TYW9JQH",
+    "b_YDFD7PQEPY",
+    "b_HF5K7ADEXH"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "tuberculosis",
+   "title": "Tuberculosis",
+   "tables": [
+    "b_V3DFCZVWAK"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_S1B2JMQ6J1"
- ]
+ ],
+ "titled": {
+  "r_6P35S0G0ES": 1
+ }
 }

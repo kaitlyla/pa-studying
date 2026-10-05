@@ -1,9 +1,116 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
- "pharmFiles": []
+ "sections": [
+  {
+   "id": "acid-base-disturbances",
+   "title": "Acid-base disturbances"
+  },
+  {
+   "id": "renal-disease",
+   "title": "Renal disease"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "electrolyte-disturbances",
+   "title": "Electrolyte disturbances"
+  },
+  {
+   "id": "obstructive-disorders",
+   "title": "Obstructive disorders"
+  },
+  {
+   "id": "testicular-torsion",
+   "title": "Testicular torsion"
+  },
+  {
+   "id": "other",
+   "title": "Urology/Renal — other"
+  }
+ ],
+ "members": {
+  "r_YYTRB0FBPN": "acid-base-disturbances",
+  "r_4YMFX2542W": "acid-base-disturbances",
+  "r_D23509FJW5": "acid-base-disturbances",
+  "r_53Y6HCV62Y": "acid-base-disturbances",
+  "r_KW8642THQ8": "renal-disease",
+  "r_NYSDYPGSCQ": "renal-disease",
+  "r_4W46QBXWHK": "renal-disease",
+  "r_GTNA4H94EA": "renal-disease",
+  "r_Q684TVJA6E": "renal-disease",
+  "r_A19ETSCMNJ": "renal-disease",
+  "r_WAF66PG3F3": "other",
+  "r_QFD8TJT0NF": "infectious-disorders",
+  "r_1Y6F0C0MNA": "infectious-disorders",
+  "r_DN0SPFBXP9": "infectious-disorders",
+  "r_NYK295E8R8": "infectious-disorders",
+  "r_GSF13CN1AZ": "infectious-disorders",
+  "r_J7JXA9Z0RS": "electrolyte-disturbances",
+  "r_QMPWQ6JBNN": "electrolyte-disturbances",
+  "r_V9Y1E3D7Q3": "electrolyte-disturbances",
+  "r_2KPQX42G3R": "electrolyte-disturbances",
+  "r_33D3PX16F4": "electrolyte-disturbances",
+  "r_2HQHNDSR2Q": "electrolyte-disturbances",
+  "r_W9KHAR2CV6": "electrolyte-disturbances",
+  "r_Y39YS94AXP": "electrolyte-disturbances",
+  "r_V1WNET15YK": "electrolyte-disturbances",
+  "r_MR60NJ25JD": "electrolyte-disturbances",
+  "r_W41RC1H8BZ": "electrolyte-disturbances",
+  "r_4PCW01KSX3": "electrolyte-disturbances",
+  "r_XWP5F567KZ": "other",
+  "r_NRDH752SVD": "obstructive-disorders",
+  "r_ACAM44T5WJ": "infectious-disorders",
+  "r_3JPE99EENG": "infectious-disorders",
+  "r_4YKRTEXFNK": "testicular-torsion",
+  "b_GB000CZCCX": "acid-base-disturbances",
+  "b_432VBS684S": "acid-base-disturbances",
+  "b_AQAVGGK8ZK": "acid-base-disturbances",
+  "b_1DZ14N45EC": "renal-disease",
+  "b_196PWYF1E1": "renal-disease",
+  "b_QDXKQ8SAMX": "renal-disease",
+  "b_53CKDFTBGT": "other",
+  "b_M431XH8XN9": "infectious-disorders",
+  "b_831XN8VWB5": "infectious-disorders",
+  "b_H3JWM2BTB9": "infectious-disorders",
+  "b_3S0DAFENFW": "electrolyte-disturbances",
+  "b_7JN2E1KN9B": "electrolyte-disturbances",
+  "b_A5DMCNQP4M": "electrolyte-disturbances",
+  "b_MBFGD1A4F9": "other",
+  "b_ZZKGZYQ98K": "other",
+  "b_GQ6P8A52TA": "infectious-disorders",
+  "b_T4BR73CAD3": "testicular-torsion"
+ },
+ "listed": {
+  "b_432VBS684S": "Acid/Base Disorders",
+  "b_MBFGD1A4F9": "HEMATURIA",
+  "b_GQ6P8A52TA": "SUPRAPUBIC/FLANK PAIN:"
+ },
+ "drugTables": [
+  {
+   "block": "b_2QQNHH71HV",
+   "pharmSection": "fluids",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "fluids",
+   "title": "Fluids",
+   "tables": [
+    "b_2QQNHH71HV"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
+ "pharmFiles": [],
+ "titled": {
+  "r_YYTRB0FBPN": 0,
+  "r_4YMFX2542W": 0,
+  "r_D23509FJW5": 0,
+  "r_53Y6HCV62Y": 0
+ }
 }
