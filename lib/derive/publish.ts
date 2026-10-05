@@ -600,12 +600,22 @@ export function publish(c: Content): PublishResult {
     }
     usedBlocks(Object.values(notesBlocks));
 
+    // Judged lines of this page's cards, with the covering rows that are on this page.
+    const trims: SystemJson["trims"] = {};
+    const cardBlocks = new Set(Object.values(cards).flatMap((x) => x.blocks));
+    for (const l of c.trims.lines) {
+      if (!cardBlocks.has(l.block)) continue;
+      const rows = l.rows.filter((r) => t.rows.has(r)).map((r) => ({ id: r, text: c.trims.rows[r] ?? "" }));
+      if (!l.label && rows.length === 0) continue;
+      (trims[l.block] ??= []).push({ text: l.text, label: l.label, rows });
+    }
+
     const pageIds = [...blockOrder, ...t.rows.keys()];
     const out: SystemJson = {
       guide: gid, id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
       blocks: s.data.blocks.map(pub),
       ...publishedRows(t),
-      topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, notes: notesFor(pageIds),
+      topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, trims, notes: notesFor(pageIds),
     };
     files.set(systemPath(gid, sys), out);
 

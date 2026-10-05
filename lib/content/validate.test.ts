@@ -411,6 +411,19 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...cards.cards[0], home: { xx: "a" } }] })).toMatch(/one of/);
   });
 
+  it("validates trims.json", () => {
+    const path = "content/pharm/trims.json";
+    const r = id("r", 1);
+    const covered = { block: b1, text: "Brady, hypotension", label: false, rows: [r] };
+    const label = { block: b1, text: "Adverse Effects:", label: true, rows: [] };
+    const trims = { v: 1, rows: { [r]: "Beta Blockers | ADRs: ↓ HR/BP" }, lines: [covered, label] };
+    expect(verdict(path, trims)).toBe("ok");
+    expect(verdict(path, { ...trims, lines: [{ ...covered, rows: [] }] })).toMatch(/no rows exactly when the line is a label/);
+    expect(verdict(path, { ...trims, lines: [{ ...label, rows: [r] }] })).toMatch(/no rows exactly when the line is a label/);
+    expect(verdict(path, { ...trims, lines: [{ ...covered, rows: [id("r", 2)] }] })).toMatch(/rows recorded in \.rows/);
+    expect(verdict(path, { ...trims, lines: [covered, covered] })).toMatch(/one judgment per block line/);
+  });
+
   const R1 = id("r", 1);
   const structure = {
     v: 1,

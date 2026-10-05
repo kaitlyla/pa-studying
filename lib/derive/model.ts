@@ -1,8 +1,8 @@
 // The loaded content tree the derivations read (tools/build fills it through lib/content).
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GapFile,
-  GeneralFile, GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, VocabFile,
-  WordDocFile,
+  GeneralFile, GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, TrimsFile,
+  VocabFile, WordDocFile,
 } from "../content/types.ts";
 
 export interface SystemData {
@@ -47,6 +47,7 @@ export interface Content {
   /** EOR guides in picker order, then PANCE. */
   guides: GuideData[];
   cards: CardsFile;
+  trims: TrimsFile;
   pharm: PharmData[];
   docs: Map<string, DocData>;
   gaps: Map<string, GapData>;

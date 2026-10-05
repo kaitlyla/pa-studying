@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { newId, slug } from "../../lib/content/index.ts";
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, FlagsFile, GeneralFile, GuideFile,
-  GuideId, PharmFile, SystemFile, WordDocFile,
+  GuideId, PharmFile, SystemFile, TrimsFile, WordDocFile,
 } from "../../lib/content/index.ts";
 import { writeAsset, writeContent, writeStoredFile } from "../../lib/content/fs.ts";
 import { convertDocx, segmentGuide, toBlocks } from "../../lib/docx/index.ts";
@@ -113,6 +113,7 @@ class Importer {
     await this.write("content/places/reftabs.json", buildRefTabs(placed));
     await this.write("content/places/other.json", buildOther(placed));
     await this.write("content/pharm/cards.json", { v: 1, cards: [] } satisfies CardsFile);
+    await this.write("content/pharm/trims.json", { v: 1, rows: {}, lines: [] } satisfies TrimsFile);
     await this.write("content/updates/flags.json", { v: 1, flags: [] } satisfies FlagsFile);
     await this.write("content/updates/concepts.json", { v: 1, concepts: [] } satisfies ConceptsFile);
     await this.write("content/updates/checks.json", { v: 1, lastRun: null, nextRun: null, sources: [], seen: {}, seenUrl: {} } satisfies ChecksFile);

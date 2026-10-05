@@ -2,6 +2,7 @@
 // her pharm notes on the class (with the pharm-notes readability aids, pharm/notes-fidelity).
 import type { ReactNode } from "react";
 import type { PubBlock, SystemJson } from "../../lib/derive/published.ts";
+import { withoutLines } from "../../lib/derive/trim.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { Voice } from "../shell/owner.tsx";
@@ -38,8 +39,13 @@ export interface NotesPart {
   blocks: readonly string[];
 }
 
-/** Her pharm notes for a card or part: the file label, then each part's blocks. */
-export function CardNotes({ system, file, basePt, parts }: { system: SystemJson; file: string; basePt: number; parts: readonly NotesPart[] }): ReactNode {
+/**
+ * Her pharm notes for a card or part: the file label, then each part's blocks, without the lines in
+ * `hidden` (block id → paragraph indexes her guide table, shown with the card, already says).
+ */
+export function CardNotes({ system, file, basePt, parts, hidden }: {
+  system: SystemJson; file: string; basePt: number; parts: readonly NotesPart[]; hidden?: ReadonlyMap<string, ReadonlySet<number>>;
+}): ReactNode {
   return (
     <div className="phn">
       <div className="ph-file">
@@ -53,7 +59,7 @@ export function CardNotes({ system, file, basePt, parts }: { system: SystemJson;
             if (!b) return null;
             return (
               <div key={id} className="notes ph-course">
-                <RichDoc doc={b.doc} basePt={basePt} pharmNotes />
+                <RichDoc doc={withoutLines(b.doc, hidden?.get(id))} basePt={basePt} pharmNotes />
               </div>
             );
           })}

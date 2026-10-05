@@ -3,6 +3,7 @@
 // drug tables in full, then her pharm notes by drug class as collapsible cards, then pharm files.
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { PubPharmSection, SiteJson, SystemJson } from "../../lib/derive/published.ts";
+import { allLinesHidden, hiddenLines, tableRows } from "../../lib/derive/trim.ts";
 import { FileChips } from "../files/FileChip.tsx";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Txt } from "../render/Text.tsx";
@@ -63,6 +64,7 @@ function SectionBody({ guide, system, sec, focus }: { guide: string; system: Sys
     return k ? { [k]: true } : {};
   });
   const byBlock = useMemo(() => rowsByBlock(system), [system]);
+  const shownRows = useMemo(() => tableRows(system, sec.tables), [system, sec.tables]);
   const blocks = new Map(system.blocks.map((b) => [b.id, b]));
 
   useEffect(() => {
@@ -79,6 +81,8 @@ function SectionBody({ guide, system, sec, focus }: { guide: string; system: Sys
   const card = (id: string, also: boolean): ReactNode => {
     const c = system.cards[id];
     if (!c) return null;
+    // The card leaves out what the tables above already say.
+    const hidden = hiddenLines(system, c.blocks, shownRows);
     return (
       <ClassCard
         key={id}
@@ -88,8 +92,8 @@ function SectionBody({ guide, system, sec, focus }: { guide: string; system: Sys
         open={!!open[id]}
         onToggle={() => toggle(id)}
       >
-        {c.blocks.length > 0 ? (
-          <CardNotes system={system} file={c.file} basePt={c.basePt} parts={c.parts} />
+        {c.blocks.length > 0 && !allLinesHidden(system, c.blocks, hidden) ? (
+          <CardNotes system={system} file={c.file} basePt={c.basePt} parts={c.parts} hidden={hidden} />
         ) : (
           <p className="phn-none">
             <Voice owner="Your pharm notes have" visitor="The pharm notes have" /> nothing more on this one. The row in the table above is all of it.

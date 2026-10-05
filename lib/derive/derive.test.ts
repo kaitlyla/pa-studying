@@ -677,6 +677,30 @@ describe("pharm (40 §40.4–§40.5)", () => {
     expect((publish(c).files.get("g/pance/s/cardiovascular.json") as SystemJson).pharm?.sections[0]?.cards).toEqual([C(3), C(2)]);
   });
 
+  it("a page carries its cards' judged lines with only the covering rows on that page", () => {
+    const c = mutated((x) => {
+      x.trims = {
+        v: 1,
+        rows: { [R(500)]: "Metoprolol | beta-1", [R(1)]: "elsewhere" },
+        lines: [
+          { block: B(73), text: "MOA: beta-1 blockade", label: false, rows: [R(500), R(1)] },
+          { block: B(73), text: "Beta Blockers", label: true, rows: [] },
+          // Covered only by a row of another page: dropped here.
+          { block: B(73), text: "Other line", label: false, rows: [R(1)] },
+          // Not a card block of this page.
+          { block: B(70), text: "Antianginal overview", label: false, rows: [R(500)] },
+        ],
+      };
+    });
+    const pance = publish(c).files.get("g/pance/s/cardiovascular.json") as SystemJson;
+    expect(pance.trims).toEqual({
+      [B(73)]: [
+        { text: "MOA: beta-1 blockade", label: false, rows: [{ id: R(500), text: "Metoprolol | beta-1" }] },
+        { text: "Beta Blockers", label: true, rows: [] },
+      ],
+    });
+  });
+
   it("a card placed nowhere fails the build naming it; so does a card naming a missing pharm file", () => {
     const nowhere = mutated((x) => x.cards.cards.push({ id: C(4), file: "cardio-med-list", aliases: ["warfarin"], home: {} }));
     expect(buildError(() => publish(nowhere)).id).toBe(C(4));

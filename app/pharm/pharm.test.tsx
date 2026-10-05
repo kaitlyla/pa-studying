@@ -1,5 +1,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import type { PubPharmSection, SystemJson } from "../../lib/derive/published.ts";
+import { readRows, type PMNode } from "../../lib/derive/text.ts";
+import { trimRowText } from "../../lib/derive/trim.ts";
 import { fileHash, guideViewHash } from "../shell/route.ts";
 import {
   asOwner,
@@ -492,6 +494,51 @@ describe("pharm pages", () => {
     await until(() => b.container.querySelector(".notfound h1"), "not-found page");
     expect(b.container.querySelector(".notfound h1")?.textContent).toBe("This page isn't on the site");
     expect(b.container.querySelector(".pharm-page")).toBeNull();
+  });
+
+  it("a card leaves out the notes lines its shown table rows already say, until either side is edited", async () => {
+    const cv = systemJson(CV);
+    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1))), "topic with the CCB card");
+    const med = need(topic.meds.find((m) => m.card === C(1)), "CCB med");
+    const rowId = need(med.rows[0], "CCB row");
+    const block = need(cv.blocks.find((b) => b.id === cv.rows[rowId]?.block), "CCB row's table");
+    const table = need((block.doc.content as PMNode[]).find((n) => n.type === "table"), "table node");
+    const rowText = trimRowText(need(readRows(table.content ?? []).find((r) => r.id === rowId), "CCB row read"));
+    const notes = need(cv.cards[C(1)], "CCB card").blocks;
+    const serve = (rowTextJudged: string): void => {
+      const mod = structuredClone(cv);
+      mod.trims = Object.fromEntries(notes.map((b) => [b, [{ text: "MOA: block L-type channels", label: false, rows: [{ id: rowId, text: rowTextJudged }] }]]));
+      const served = new Map(files);
+      served.set(CV, mod);
+      server.restore();
+      server = serveData(served);
+    };
+    const openMed = async (): Promise<HTMLElement> => {
+      const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+      app = a;
+      const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+      await click(cardBtn(panel, `meds-${med.target}`));
+      return cardEl(panel, `meds-${med.target}`);
+    };
+
+    serve(rowText);
+    let card = await openMed();
+    expect(card.querySelector(`.ph-rowblk [data-anchor="${rowId}"]`)).not.toBeNull();
+    expect(visibleText(card)).not.toContain("MOA: block L-type channels");
+    expect(card.querySelector(".phn")).toBeNull();
+    // The section page shows the same card with its table, so the line goes there too.
+    app?.unmount();
+    const pg = pharmPage(await renderSection(SEC_HASH));
+    await click(cardBtn(pg, C(1)));
+    expect(visibleText(need(cardEl(pg, C(1)).querySelector(".phn-none"), "no-notes line"))).toBe(
+      "The pharm notes have nothing more on this one. The row in the table above is all of it.",
+    );
+    app?.unmount();
+
+    // A row that no longer reads as judged no longer says the line.
+    serve(`${rowText} edited`);
+    card = await openMed();
+    expect(visibleText(card)).toContain("MOA: block L-type channels");
   });
 
   it("a section with learning objectives and a card without notes renders both", async () => {

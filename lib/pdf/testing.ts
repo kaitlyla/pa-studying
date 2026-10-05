@@ -191,6 +191,7 @@ export function cardioSystem(): SystemJson {
       b_AAAAAAAAOV: block("b_AAAAAAAAOV", "prose", doc(para("Overview notes"))),
       b_AAAAAAAALO: block("b_AAAAAAAALO", "prose", doc(para("Learning objectives notes"))),
     },
+    trims: {},
     notes: { [R.a]: [{ id: "u_AAAAAAAAU1", guideline: "UPDATENOTE guideline", org: "USPSTF", published: "2024-04", quote: "UPDATEQUOTE", grade: "B", url: "https://example.org", flagged: "2026-10-01" }] },
   };
 }
@@ -212,6 +213,7 @@ export function pulmSystem(): SystemJson {
     cards: {},
     parts: {},
     notesBlocks: {},
+    trims: {},
     notes: {},
   };
 }

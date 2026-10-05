@@ -179,6 +179,7 @@ export async function writeFixture(root: string): Promise<void> {
       { id: C(3), file: "cardio-med-list", aliases: ["metoprolol", "beta-blocker", "propranolol (non-selective)"], home: { fm: "cardiovascular" } },
     ],
   });
+  await w("pharm/trims.json", { v: 1, rows: {}, lines: [] });
 
   // ---- documents
   const pdf = (did: string, name: string, extra: Record<string, unknown> = {}) => ({

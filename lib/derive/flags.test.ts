@@ -25,6 +25,7 @@ function content(flags: Flag[], sourceKeys: string[]): Content {
     vocab: { v: 1, entries: [] },
     guides: [],
     cards: { v: 1, cards: [] },
+    trims: { v: 1, rows: {}, lines: [] },
     pharm: [],
     docs: new Map([[DOC, { kind: "file", file, text: null }]]),
     gaps: new Map(),

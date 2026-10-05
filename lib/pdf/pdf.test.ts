@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { schema } from "../schema.ts";
 import { buildDocDefinition, imageRequests, pdfFileName, scopeTitle, wholeGuideAsset, wholeGuideUrl, type PdfInput, type PdfScope } from "./index.ts";
 import { FontSplitter } from "./fonts.ts";
-import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, wordDoc } from "./testing.ts";
+import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, R, wordDoc } from "./testing.ts";
 
 const nav = fmNav();
 const system = cardioSystem();
@@ -77,6 +77,18 @@ describe("scope content", () => {
     const all = inlines(def.content);
     expect(all.find((i) => i.text === "Nitrates notes")?.fontSize).toBe(11);
     expect(all.find((i) => i.text === "ANTIANGINAL")?.fontSize).toBe(10);
+  });
+
+  it("leaves out of a card the lines the section's table already says, as the page does", () => {
+    const sys = cardioSystem();
+    sys.notesBlocks.b_AAAAAAAAN1 = block("b_AAAAAAAAN1", "prose", doc(para("Nitrates"), para("Use: angina", { indLeft: 27 }), para("Headache", { indLeft: 27 })));
+    const said = { text: "Use: angina", label: false, rows: [{ id: R.d1, text: "Nitrates | angina" }] };
+    sys.trims = { b_AAAAAAAAN1: [{ text: "Nitrates", label: true, rows: [] }, said] };
+    const section = (): string[] => lines(buildDocDefinition({ kind: "pharmSection", id: "antianginals" }, { nav, system: sys }, fontmap).content);
+    expect(section()).toEqual([...D1, "Overview notes", "Nitrates", "Headache", "Also class notes", "Learning objectives notes"]);
+    // Once every line is said, the card's notes are left out entirely.
+    sys.trims = { b_AAAAAAAAN1: [{ text: "Nitrates", label: true, rows: [] }, said, { ...said, text: "Headache" }] };
+    expect(section()).toEqual([...D1, "Overview notes", "Also class notes", "Learning objectives notes"]);
   });
 
   it("uses the Word page's own page setup", () => {

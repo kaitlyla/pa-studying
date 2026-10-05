@@ -185,6 +185,23 @@ export interface CardsFile {
   cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>> }[];
 }
 
+/**
+ * Pharm-notes lines her guide table already states, judged line by line. Display only: her notes
+ * are never edited. A judgment applies only while the line and its covering row still read exactly
+ * as they did when judged, so an edit to either shows the line again.
+ */
+export interface TrimsFile {
+  v: 1;
+  /** Guide-table row id → the row's text (`trimRowText`) when lines were judged against it. */
+  rows: Record<string, string>;
+  /**
+   * `block`: the notes block; `text`: the line's collapsed text. A covered line names the rows that
+   * each fully state it (`label: false`, `rows` non-empty). A label line (a class, drug or category
+   * name) names none, and hides only when every line under it is hidden.
+   */
+  lines: { block: string; text: string; label: boolean; rows: string[] }[];
+}
+
 // 20.8
 export interface Link {
   target: string;

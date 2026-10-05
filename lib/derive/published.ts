@@ -263,6 +263,16 @@ export interface PubCard {
   parts: { id: string; blocks: string[] }[];
 }
 
+/**
+ * A pharm-notes line judged already said by her guide table (content/pharm/trims.json), with the
+ * rows of this page that say it and their text when judged; a label carries no rows.
+ */
+export interface PubTrimLine {
+  text: string;
+  label: boolean;
+  rows: { id: string; text: string }[];
+}
+
 export interface PubPart {
   title: string;
   role: "overview" | "lo";
@@ -295,6 +305,8 @@ export interface SystemJson {
   parts: Record<string, PubPart>;
   /** Pharm-notes blocks referenced by `cards` and `parts`. */
   notesBlocks: Record<string, PubBlock>;
+  /** Cards' notes block id → its lines her guide table says on this page (lib/derive/trim.ts). */
+  trims: Record<string, PubTrimLine[]>;
   notes: Notes;
 }
 

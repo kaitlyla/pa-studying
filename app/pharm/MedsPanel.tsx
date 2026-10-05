@@ -3,6 +3,7 @@
 // section. View-only: it sits outside the topic's edit region.
 import { useState, type ReactNode } from "react";
 import type { PubTopic, SystemJson } from "../../lib/derive/published.ts";
+import { allLinesHidden, hiddenLines } from "../../lib/derive/trim.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
 import { guideViewHash } from "../shell/route.ts";
@@ -19,10 +20,14 @@ export function MedsPanel({ guide, system, topic, basePt }: { guide: string; sys
       {topic.meds.map((m) => {
         const card = m.card ? system.cards[m.card] : undefined;
         const key = m.target;
+        // The card leaves out what its guide rows above already say.
+        const hidden = card ? hiddenLines(system, card.blocks, new Set(m.rows)) : new Map<string, Set<number>>();
         return (
           <ClassCard key={key} anchor={`meds-${key}`} title={m.title} open={!!open[key]} onToggle={() => setOpen((o) => ({ ...o, [key]: !o[key] }))}>
             {m.rows.length > 0 && <GuideRows system={system} rows={m.rows} basePt={basePt} />}
-            {card && card.blocks.length > 0 && <CardNotes system={system} file={card.file} basePt={card.basePt} parts={card.parts} />}
+            {card && card.blocks.length > 0 && !allLinesHidden(system, card.blocks, hidden) && (
+              <CardNotes system={system} file={card.file} basePt={card.basePt} parts={card.parts} hidden={hidden} />
+            )}
             <Link to={guideViewHash(guide, { kind: "pharm", system: system.id, section: m.section, target: m.target })} className="linkbtn phc-more">
               Open in {system.title} pharm ›
             </Link>

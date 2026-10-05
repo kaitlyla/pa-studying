@@ -5,7 +5,7 @@
 import { Node } from "prosemirror-model";
 import { schema } from "../schema.ts";
 import {
-  arr, bad, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
+  arr, bad, bool, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
   num, one, oneOf, re, record, shapeOf, str, uniqueArr,
 } from "./check.ts";
 import type { Checker, Ctx } from "./check.ts";
@@ -16,7 +16,7 @@ import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
   RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
-  UploadFile, VocabFile, WordDocFile,
+  TrimsFile, UploadFile, VocabFile, WordDocFile,
 } from "./types.ts";
 
 /** Every file validator: the record, the file context, and the identity its path fixes (if any). */
@@ -352,6 +352,23 @@ export const validateCards: Validator = (v, ctx) => {
     cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, {})),
   }, {})(v, "", ctx);
   uniqueArr(str)((v as CardsFile).cards.map((c) => c.id), ".cards[].id", ctx);
+};
+
+export const validateTrims: Validator = (v, ctx) => {
+  shapeOf<TrimsFile>({
+    v: v1,
+    rows: record(id("r"), str),
+    lines: arr(shapeOf<TrimsFile["lines"][number]>({ block: id("b"), text: nonEmpty, label: bool, rows: arr(id("r")) }, {})),
+  }, {})(v, "", ctx);
+  const t = v as TrimsFile;
+  const seen = new Set<string>();
+  t.lines.forEach((l, i) => {
+    if (l.label !== (l.rows.length === 0)) bad(ctx, `.lines[${i}].rows`, "no rows exactly when the line is a label", l.rows);
+    for (const r of l.rows) if (!Object.hasOwn(t.rows, r)) bad(ctx, `.lines[${i}].rows`, "rows recorded in .rows", r);
+    const key = `${l.block}\n${l.text}`;
+    if (seen.has(key)) bad(ctx, `.lines[${i}]`, "one judgment per block line", l.text);
+    seen.add(key);
+  });
 };
 
 export const validateStructure: Validator = (v, ctx) => {

@@ -4,7 +4,7 @@ import {
 } from "../../lib/content/fs.ts";
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GeneralFile,
-  GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, VocabFile, WordDocFile,
+  GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, TrimsFile, VocabFile, WordDocFile,
 } from "../../lib/content/types.ts";
 import { TOPIC_BELOW_RE, topicBelowDir, topicBelowPath } from "../../lib/content/files.ts";
 import type { Content, DeckData, DocData, GapData, GuideData, PharmData } from "../../lib/derive/model.ts";
@@ -57,7 +57,8 @@ async function loadDocs(root: TreeRoot): Promise<Map<string, DocData>> {
 async function loadPharm(root: TreeRoot): Promise<PharmData[]> {
   const out: PharmData[] = [];
   for (const name of await listDir(root, "content/pharm")) {
-    if (name === "cards.json") continue;
+    // cards.json and trims.json sit beside the pharm file folders.
+    if (name.endsWith(".json")) continue;
     const file = await readContent<PharmFile>(root, `content/pharm/${name}/pharmfile.json`);
     out.push({ file, blocks: await readBlocks(root, `content/pharm/${name}/blocks`, file.blocks) });
   }
@@ -89,10 +90,11 @@ export async function loadContent(root: TreeRoot): Promise<Content> {
   const site = await readContent<SiteFile>(root, "content/site.json");
   const ids = [...site.eors, PANCE];
   const docs = await loadDocs(root);
-  const [vocab, guides, cards, pharm, gaps, decks, reftabs, other, flags, concepts, checks] = await Promise.all([
+  const [vocab, guides, cards, trims, pharm, gaps, decks, reftabs, other, flags, concepts, checks] = await Promise.all([
     readContent<VocabFile>(root, "content/vocab/abbreviations.json"),
     Promise.all(ids.map((g) => loadGuide(root, g, g !== PANCE))),
     readContent<CardsFile>(root, "content/pharm/cards.json"),
+    readContent<TrimsFile>(root, "content/pharm/trims.json"),
     loadPharm(root),
     loadGaps(root),
     loadDecks(root, ids, docs),
@@ -102,5 +104,5 @@ export async function loadContent(root: TreeRoot): Promise<Content> {
     readContent<ConceptsFile>(root, "content/updates/concepts.json"),
     readContent<ChecksFile>(root, "content/updates/checks.json"),
   ]);
-  return { site, vocab, guides, cards, pharm, docs, gaps, decks, reftabs, other, flags, concepts, checks };
+  return { site, vocab, guides, cards, trims, pharm, docs, gaps, decks, reftabs, other, flags, concepts, checks };
 }

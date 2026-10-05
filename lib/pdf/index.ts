@@ -4,6 +4,7 @@
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import type { FontMapJson, PubBlock, SystemJson } from "../derive/published.ts";
 import { belowUnder } from "../derive/topics.ts";
+import { allLinesHidden, hiddenLines, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
 import { placeCells } from "../wordFormat.ts";
@@ -79,11 +80,11 @@ function rowsByBlock(system: SystemJson, rowIds: readonly string[]): { block: st
 function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: number): Part[] {
   const ps = system.pharm?.sections.find((s) => s.id === sectionId);
   if (!ps) throw new Error(`PDF: pharm section ${sectionId} is not in ${system.guide}/${system.id}`);
-  const notes = (ids: readonly string[], basePt: number): Part[] =>
+  const notes = (ids: readonly string[], basePt: number, hidden?: ReadonlyMap<string, ReadonlySet<number>>): Part[] =>
     ids.map((id) => {
       const b = system.notesBlocks[id];
       if (!b) throw new Error(`PDF: pharm notes block ${id} is missing from ${system.guide}/${system.id}`);
-      return { doc: b.doc, basePt };
+      return { doc: withoutLines(b.doc, hidden?.get(id)), basePt };
     });
   const part = (id: string | null): Part[] => {
     if (id === null) return [];
@@ -95,10 +96,14 @@ function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: n
   // Her drug tables in full, then Overview, the class cards (table cards then "also"), then the LO block.
   for (const t of ps.tables) out.push({ doc: blockOf(system, t).doc, basePt: guideBasePt });
   out.push(...part(ps.overview));
+  // Each card leaves out what the tables above already say, as on the page.
+  const shown = tableRows(system, ps.tables);
   for (const c of ps.cards) {
     const card = system.cards[c];
     if (!card) throw new Error(`PDF: card ${c} is missing from ${system.guide}/${system.id}`);
-    out.push(...notes(card.blocks, card.basePt));
+    const hidden = hiddenLines(system, card.blocks, shown);
+    if (allLinesHidden(system, card.blocks, hidden)) continue;
+    out.push(...notes(card.blocks, card.basePt, hidden));
   }
   out.push(...part(ps.lo));
   return out;
