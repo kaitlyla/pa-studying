@@ -36,7 +36,7 @@ export const OTHER_TITLES: Readonly<Record<(typeof OTHER_SECTION_IDS)[number], s
   pa: "PA professional",
   vitamins: "Vitamins",
   pe: "Physical exam",
-  notes: "Note templates & documentation",
+  notes: "Documentation",
 };
 
 /** Each reference tab, keyed by its id, lists the documents placed on it in inventory order. */

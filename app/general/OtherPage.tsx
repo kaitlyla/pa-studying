@@ -1,5 +1,5 @@
 // The Other tab (UI other-tab): a grid of sections; each section page has its lead gap block, its
-// links and files, and (Screenings, Legal, Physical exam) its gaps. Guidelines also points to Updated guidelines.
+// links and files, and (Screenings, Legal, Physical exam, Documentation) its gaps. Guidelines also points to Updated guidelines.
 import { Suspense, type ReactNode } from "react";
 import { OTHER_PATH, UPDATES_PATH, type OtherJson, type UpdatesJson } from "../../lib/derive/published.ts";
 import { otherHash, UPDATES_ROUTE } from "../../lib/derive/routes.ts";

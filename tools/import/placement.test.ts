@@ -109,8 +109,8 @@ describe("pre-curation files", () => {
     const o = buildOther(docs);
     expect(o.sections.map((s) => s.id)).toEqual(["emergency", "vaccines", "guidelines", "screenings", "legal", "pa", "vitamins", "pe", "notes"]);
     expect(o.sections.find((s) => s.id === "screenings")).toEqual({ id: "screenings", title: "Screenings", lead: null, files: [d(2)], links: [], gaps: [] });
-    expect(o.sections.find((s) => s.id === "notes")).toEqual({ id: "notes", title: "Note templates & documentation", lead: null, files: [d(5)], links: [] });
-    expect(o.sections.filter((s) => "gaps" in s).map((s) => s.id)).toEqual(["screenings", "legal", "pe"]);
+    expect(o.sections.find((s) => s.id === "notes")).toEqual({ id: "notes", title: "Documentation", lead: null, files: [d(5)], links: [], gaps: [] });
+    expect(o.sections.filter((s) => "gaps" in s).map((s) => s.id)).toEqual(["screenings", "legal", "pe", "notes"]);
     expect(() => validateFile("content/places/other.json", o)).not.toThrow();
   });
 
