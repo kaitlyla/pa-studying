@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like With LBBB: ST elevation concordant with the QRS, or > 5 mm ST elevation in at least two precordial leads, strongly suggests MI.",
+   "source": 2,
+   "quote": "ECG diagnosis of MI is more difficult when a left bundle branch block configuration is present because it resembles STEMI changes. ST-segment elevation concordant with the QRS complex strongly suggests MI as does > 5-mm ST-segment elevation in at least 2 precordial leads.",
+   "locator": "Diagnosis of Acute MI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Original Sgarbossa: concordant ST elevation ≥ 1 mm (5 points); concordant ST depression ≥ 1 mm in V1–V3 (3); discordant ST elevation ≥ 5 mm (2); a score ≥ 3 is specific for MI",
+   "source": 0,
+   "quote": "Sgarbossa Criteria (for MI in LBBB or paced rhythm): Concordant ST elevation ≥ 1 mm: 5 points Concordant ST depression ≥ 1 mm in V1–V3: 3 points Discordant ST elevation ≥ 5 mm: 2 points Score ≥ 3 is specific for MI.",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Specific but not sensitive (36%); a score ≥ 3 has a reported 90% specificity",
+   "source": 1,
+   "quote": "These criteria are specific, but not sensitive (36%) for myocardial infarction. A total score of ≥ 3 is reported to have a specificity of 90% for diagnosing myocardial infarction.",
+   "locator": "Original Sgarbossa Criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Smith-modified: concordant ST elevation ≥ 1 mm in ≥ 1 lead; concordant ST depression ≥ 1 mm in ≥ 1 of V1–V3; discordant ST elevation ≥ 25% of the preceding S-wave depth (in a lead with ≥ 1 mm elevation)",
+   "source": 1,
+   "quote": "Concordant ST elevation ≥ 1 mm in ≥ 1 lead Concordant ST depression ≥ 1 mm in ≥ 1 lead of V1-V3 Proportionally excessive discordant STE in ≥ 1 lead anywhere with ≥ 1 mm STE, as defined by ≥ 25% of the depth of the preceding S-wave",
+   "locator": "Smith-Modified Sgarbossa Criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "The modified Smith-Sgarbossa swaps the last rule for an ST-elevation-to-S-wave ratio ≤ −0.25 and is more sensitive",
+   "source": 0,
+   "quote": "The modified Smith-Sgarbossa replaces the last criterion with a ratio of ST elevation to S-wave depth ≤ −0.25 and is more sensitive.",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "The 5 mm cutoff was arbitrary — LBBB with large voltages commonly exceeds it without ischemia",
+   "source": 1,
+   "quote": "The use of a 5 mm cutoff for excessive discordance was arbitrary and non-specific — for example, patients with LBBB and large voltages will commonly have ST deviations > 5 mm in the absence of ischaemia.",
+   "locator": "Smith-Modified Sgarbossa Criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Why it's hard: abnormal depolarization brings abnormal repolarization — ST and T deviations (“appropriate discordance”) that need not mean ischemia",
+   "source": 1,
+   "quote": "Abnormal depolarisation should be followed by abnormal repolarisation, manifesting as ST-segment and T-wave deviations that do not necessarily indicate acute ischaemia (“appropriate discordance”)",
+   "locator": "Background",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "RV pacing also gives an LBBB pattern; the rules apply but are less specific",
+   "source": 1,
+   "quote": "During right ventricular pacing the ECG also shows left bundle brach block and the above rules also apply for the diagnosis of myocardial infarction during pacing, however they are less specific.",
+   "locator": "Original Sgarbossa Criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspect STEMI with suggestive symptoms and new (or not known to be old) LBBB — but new LBBB alone is not a STEMI equivalent",
+   "source": 2,
+   "quote": "Although STEMI must be suspected in any patient with suggestive symptoms and new-onset (or not known to be old) left bundle branch block, a new left bundle branch block is not considered a STEMI equivalent in isolation",
+   "locator": "Diagnosis of Acute MI",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "quote did not mention LBBB",
+    "resolution": "quote extended to start at the preceding LBBB sentence; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_80NABDFKSK"
+}

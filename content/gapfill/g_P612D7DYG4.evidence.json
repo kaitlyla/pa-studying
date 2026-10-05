@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like QRS complexes 120 ms or wider.",
+   "source": 0,
+   "quote": "Wide (≥ 120 ms): Bundle branch block, ventricular rhythm, hyperkalemia, sodium channel blocker toxicity, pre-excitation",
+   "locator": "7. Intervals and Segments, QRS Duration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) QRS: ≥ 120 ms (> 120 ms is needed to call bundle branch block or a ventricular rhythm)",
+   "source": 1,
+   "quote": "A QRS duration > 120 ms is required for the diagnosis of bundle branch block or ventricular rhythm",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P waves: a supraventricular rhythm conducted with aberrancy usually shows atrial activity before the QRS (P, flutter or fibrillatory waves)",
+   "source": 1,
+   "quote": "In general, aberrant conduction of sinus rhythm and atrial rhythms (tachycardia, flutter, fibrillation) can usually be identified by the presence of preceding atrial activity (P waves, flutter waves, fibrillatory waves).",
+   "locator": "Ventricular vs supraventricular rhythms",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P waves: none before the QRS in ventricular rhythms — and in aberrant junctional beats, which can look identical",
+   "source": 1,
+   "quote": "However, aberrantly conducted junctional (AV nodal) complexes may appear identical to ventricular complexes as both produce broad QRS without any preceding atrial activity.",
+   "locator": "Ventricular vs supraventricular rhythms",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: ventricular origin (below the His bundle), or a supraventricular rhythm conducted with an intraventricular conduction defect or WPW pre-excitation",
+   "source": 2,
+   "quote": "A wide QRS complex (≥ 0.12 seconds) indicates a ventricular origin (below the His bundle bifurcation), or a supraventricular rhythm conducted with an intraventricular conduction defect or with ventricular preexcitation in the Wolff-Parkinson-White syndrome.",
+   "locator": "Diagnosis, ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Diagnoses: bundle branch block, ventricular rhythm, hyperkalemia, sodium channel blocker toxicity, pre-excitation",
+   "source": 0,
+   "quote": "Wide (≥ 120 ms): Bundle branch block, ventricular rhythm, hyperkalemia, sodium channel blocker toxicity, pre-excitation",
+   "locator": "7. Intervals and Segments, QRS Duration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Also ventricular pacing, hypothermia and rate-related aberrancy",
+   "source": 1,
+   "quote": "Ventricular pacing Hypothermia Intermittent aberrancy (e.g. rate-related aberrancy)",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Tell the causes apart by pattern RBBB: RSR' in V1, deep slurred S waves in the lateral leads",
+   "source": 1,
+   "quote": "Right bundle branch block produces an RSR’ pattern in V1 and deep slurred S waves in the lateral leads.",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "LBBB: dominant S in V1; broad, notched R waves and no Q waves laterally",
+   "source": 1,
+   "quote": "Left bundle branch block produces a dominant S wave in V1 with broad, notched R waves and absent Q waves in the lateral leads.",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hyperkalemia: peaked T waves among other changes",
+   "source": 1,
+   "quote": "Hyperkalaemia is associated with a range of abnormalities including peaked T waves",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Tricyclic poisoning: sinus tachycardia and a tall R' wave in aVR",
+   "source": 1,
+   "quote": "Tricyclic poisoning is associated with sinus tachycardia and tall R’ wave in aVR",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "WPW: short PR and delta waves",
+   "source": 1,
+   "quote": "Wolff-Parkinson White syndrome is characterised by a short PR interval and delta waves",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Ventricular pacing: usually visible pacing spikes",
+   "source": 1,
+   "quote": "Ventricular pacing will usually have visible pacing spikes",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Hypothermia: bradycardia, long QT, Osborn waves, shivering artifact",
+   "source": 1,
+   "quote": "Hypothermia is associated with bradycardia, long QT, Osborn waves and shivering artefact",
+   "locator": "Broad QRS Complex Morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Key trap A wide-complex tachycardia is VT until proven otherwise",
+   "source": 0,
+   "quote": "Assuming a wide-complex tachycardia is SVT with aberrancy — it's VT until proven otherwise",
+   "locator": "15. Quick Reference Summary, The Most Common Traps",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 15,
+    "issue": "\"Otherwise those of the cause; treatment is directed at the cause\" was unsupported (arrhythmia-treatment quote; nothing supports symptoms).",
+    "resolution": "Claim removed; preceding label renamed to Key trap."
+   }
+  ]
+ },
+ "block": "g_P612D7DYG4"
+}

@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like A PR interval under 120 ms.",
+   "source": 0,
+   "quote": "Short (< 120 ms): WPW, LGL, junctional rhythm",
+   "locator": "7. Intervals and Segments, PR Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Rhythm in junctional rhythm: regular, narrow-complex, arising from the AV node",
+   "source": 1,
+   "quote": "Junctional rhythms are narrow complex, regular rhythms arising from the AV node.",
+   "locator": "AV nodal (junctional) rhythm",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "PR interval: < 120 ms",
+   "source": 0,
+   "quote": "Short (< 120 ms): WPW, LGL, junctional rhythm",
+   "locator": "7. Intervals and Segments, PR Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P waves in LGL: normal",
+   "source": 1,
+   "quote": "The features of Lown-Ganong-Levine syndrome LGL syndrome are a very short PR interval with normal P waves and QRS complexes and absent delta waves.",
+   "locator": "Lown-Ganong-Levine syndrome",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P waves in junctional rhythm: absent or abnormal (e.g., inverted, retrograde)",
+   "source": 1,
+   "quote": "P waves are either absent or abnormal (e.g. inverted) with a short PR interval (=retrograde P waves).",
+   "locator": "AV nodal (junctional) rhythm",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QRS in WPW: delta wave (slurred, slow rise of the first part of the QRS) and QRS > 110 ms",
+   "source": 2,
+   "quote": "PR interval < 120ms Delta wave: slurring slow rise of initial portion of the QRS QRS prolongation > 110ms",
+   "locator": "ECG features of WPW in sinus rhythm",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QRS in LGL: normal, with no delta wave",
+   "source": 1,
+   "quote": "The features of Lown-Ganong-Levine syndrome LGL syndrome are a very short PR interval with normal P waves and QRS complexes and absent delta waves.",
+   "locator": "Lown-Ganong-Levine syndrome",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ST and T in WPW: discordant — opposite in direction to the main QRS deflection",
+   "source": 2,
+   "quote": "Discordant ST-segment and T-wave changes (i.e. in the opposite direction to the major component of the QRS complex)",
+   "locator": "ECG features of WPW in sinus rhythm",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Diagnoses: pre-excitation syndromes (WPW, LGL) or AV nodal (junctional) rhythm",
+   "source": 1,
+   "quote": "A short PR interval is seen with: Preexcitation syndromes AV nodal (junctional) rhythm.",
+   "locator": "Short PR interval (<120ms)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Mechanism (pre-excitation): an accessory pathway conducts faster than normal, giving the short PR, and also forms a re-entry circuit for tachyarrhythmias",
+   "source": 1,
+   "quote": "The accessory pathway conducts impulses faster than normal, producing a short PR interval. The accessory pathway also acts as an anatomical re-entry circuit, making patients susceptible to re-entry tachyarrhythmias.",
+   "locator": "Pre-excitation syndromes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "LGL's existence is disputed; the term should not be used without paroxysmal tachycardia",
+   "source": 2,
+   "quote": "The term should not be used in the absence of paroxysmal tachycardia. Existence is disputed.",
+   "locator": "Lown-Ganong-Levine (LGL) Syndrome",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Pre-excitation: episodes of paroxysmal SVT, specifically AV re-entry tachycardia (AVRT)",
+   "source": 1,
+   "quote": "Patients present with episodes of paroxsymal supraventricular tachycardia (SVT), specifically atrioventricular re-entry tachycardia (AVRT)",
+   "locator": "Pre-excitation syndromes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "WPW carries a small risk of sudden cardiac death",
+   "source": 2,
+   "quote": "Associated with a small risk of sudden cardiac death",
+   "locator": "Overview of Wolff-Parkinson-White (WPW) Syndrome",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment WPW: acutely, treat the presenting arrhythmia; long term, antiarrhythmics or ablation of the accessory pathway (details under Arrhythmias › WPW)",
+   "source": 3,
+   "quote": "Acute: treatment of the presenting arrhythmia Long-term: chronic antiarrhythmic therapy for arrhythmia prevention or ablation of the accessory AV connection",
+   "locator": "Treatment of WPW Syndrome",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "\"Rate and rhythm: usually sinus rhythm\" generalized from one example strip; junctional rhythm is not sinus.",
+    "resolution": "Replaced with \"Rhythm in junctional rhythm: regular, narrow-complex, arising from the AV node\" (l-pr). Re-checked PASS by otto-31762 at 2026-10-05."
+   },
+   {
+    "claim": 3,
+    "issue": "\"normal in WPW and LGL\": quote covers LGL only.",
+    "resolution": "Reworded to \"P waves in LGL: normal\". Re-checked PASS by otto-31762 at 2026-10-05."
+   }
+  ]
+ },
+ "block": "g_Z0K4BH9VK0"
+}

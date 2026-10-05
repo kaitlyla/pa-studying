@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like Small q, tall R in I and aVL; small r, deep S in II, III and aVF.",
+   "source": 1,
+   "quote": "rS complexes in leads II, III, aVF, with small R waves and deep S waves qR complexes in leads I, aVL, with small Q waves and tall R waves",
+   "locator": "Typical ECG of LAFB",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Axis: left axis deviation (−45° to −90°)",
+   "source": 0,
+   "quote": "Left axis deviation (−45° to −90°)",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "I and aVL: small Q (qR complexes)",
+   "source": 0,
+   "quote": "Small Q in I and aVL, small R in II, III, aVF",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "II, III, aVF: small R, deep S (rS complexes)",
+   "source": 0,
+   "quote": "Small Q in I and aVL, small R in II, III, aVF",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QRS: < 120 ms",
+   "source": 0,
+   "quote": "QRS < 120 ms Left Posterior Fascicular Block",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "R-wave peak time in aVL: > 45 ms",
+   "source": 1,
+   "quote": "Prolonged R wave peak time in aVL > 45ms",
+   "locator": "ECG criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: impulses reach the LV via the posterior fascicle, which inserts into the inferoseptal wall",
+   "source": 1,
+   "quote": "In LAFB, impulses are conducted to the left ventricle (LV) via the posterior fascicle, which inserts into the inferoseptal wall of the LV along its endocardial surface",
+   "locator": "Electrophysiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Spread: the main wave of depolarization is slightly delayed and spreads upward and leftward — tall R waves in left-sided leads, deep S waves inferiorly",
+   "source": 1,
+   "quote": "The major wave of depolarisation is slightly delayed and spreads upwards and leftwards, producing tall R waves in left-sided leads and deep S waves in inferior leads",
+   "locator": "Electrophysiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "The same heart disorders as LBBB; isolated LAFB is fairly common and does not on its own raise cardiac risk",
+   "source": 2,
+   "quote": "The associations between hemiblocks and a structural heart disorder are the same as for LBBB. Isolated left posterior hemiblock is rare. Isolated left anterior hemiblock is more common and does not appear to be independently associated with an increased risk of future cardiac events or mortality.",
+   "locator": "Fascicular block",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms and treatment Usually no symptoms; no specific treatment is indicated",
+   "source": 2,
+   "quote": "There are usually no symptoms, but presence of either suggests a heart disorder. Diagnosis is by electrocardiography. No specific treatment is indicated.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "Quote has no LAD and no \"QRS not wide\".",
+    "resolution": "Those parts dropped (covered by claims 1 and 4). Re-checked PASS by otto-31762 at 2026-10-05."
+   },
+   {
+    "claim": 6,
+    "issue": "\"LV activated only through the posterior fascicle\" not in quote.",
+    "resolution": "Split: claim 6 quotes LITFL \"impulses are conducted to the left ventricle (LV) via the posterior fascicle\"; claim 7 keeps the spread quote. Re-checked PASS by otto-31762 at 2026-10-05."
+   }
+  ]
+ },
+ "block": "g_N8473W4JSE"
+}

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like A pacing spike with no depolarization after it.",
+   "source": 0,
+   "quote": "Failure to capture: Spike without following depolarization (lead dislodgement, battery depletion, electrolytes)",
+   "locator": "13. Pacemakers, Troubleshooting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Pacing spike: present, but no depolarization follows it",
+   "source": 0,
+   "quote": "Failure to capture: Spike without following depolarization (lead dislodgement, battery depletion, electrolytes)",
+   "locator": "13. Pacemakers, Troubleshooting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Example: a ventricular paced rhythm with intermittent failure to capture; atrial sensing appears intact (a ventricular pacing spike follows each P wave)",
+   "source": 1,
+   "quote": "This ECG shows a ventricular paced rhythm with intermittent failure to capture: Atrial sensing appears to be intact — ventricular pacing spikes follow each P wave",
+   "locator": "Example 1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "When it can't be seen: if the native rate is above the pacemaker threshold, no pacing is expected, so capture failure cannot be recognized on the ECG",
+   "source": 1,
+   "quote": "NB. If the patient's native heart rate is above the pacemaker threshold, no pacemaker activity is expected and therefore output failure and capture failure cannot be recognised on the ECG.",
+   "locator": "Problems with Pacing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: the paced stimulus does not depolarize the myocardium",
+   "source": 1,
+   "quote": "Failure to capture occurs when paced stimulus does not result in myocardial depolarisation",
+   "locator": "Problems with Pacing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lead dislodgement, battery depletion, electrolytes",
+   "source": 0,
+   "quote": "Failure to capture: Spike without following depolarization (lead dislodgement, battery depletion, electrolytes)",
+   "locator": "13. Pacemakers, Troubleshooting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Also electrode displacement, wire fracture, electrolyte disturbance, MI or exit block",
+   "source": 1,
+   "quote": "Multiple causes including electrode displacement, wire fracture, electrolyte disturbance, MI or exit block",
+   "locator": "Problems with Pacing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Often non-specific symptoms; the ECG changes can be subtle or absent",
+   "source": 1,
+   "quote": "Diagnosis of pacemaker malfunction is challenging and often associated with non-specific clinical symptoms while ECG changes can be subtle or absent",
+   "locator": "Pacemaker Malfunction Overview",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment Suspected malfunction needs cardiology review for pacemaker interrogation and testing",
+   "source": 1,
+   "quote": "If pacemaker malfunction is suspected cardiology review is required to facilitate pacemaker interrogation and testing",
+   "locator": "ECG in Pacemaker Malfunction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "For a dislodged lead, a chest x-ray will usually help confirm the diagnosis",
+   "source": 1,
+   "quote": "A chest x-ray will usually help to confirm the diagnosis",
+   "locator": "Lead displacement dysrhythmia",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "rafa-06742",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "dropped \"appears to be\" (the source says atrial sensing appears to be intact)",
+    "resolution": "now \"atrial sensing appears intact\"; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_71MVD1AMWY"
+}

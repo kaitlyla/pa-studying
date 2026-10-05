@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like In V1–V3: horizontal ST depression, tall broad R waves, upright T waves, and a dominant R wave in V2.",
+   "source": 1,
+   "quote": "Posterior MI is suggested by the following changes in V1-3: Horizontal ST depression Tall, broad R waves (> 30ms) Upright T waves Dominant R wave (R/S ratio > 1) in V2",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) R waves: tall and broad (> 30 ms); dominant R in V2 (R/S > 1)",
+   "source": 1,
+   "quote": "Tall, broad R waves (> 30ms) Upright T waves Dominant R wave (R/S ratio > 1) in V2",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ST and T in V1–V3: horizontal ST depression with upright T waves",
+   "source": 1,
+   "quote": "Posterior MI is suggested by the following changes in V1-3: Horizontal ST depression Tall, broad R waves (> 30ms) Upright T waves",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "With ischemic symptoms, horizontal ST depression in V1–V3 should raise suspicion of posterior MI",
+   "source": 1,
+   "quote": "In patients presenting with ischaemic symptoms, horizontal ST depression in the anteroseptal leads (V1-3) should raise the suspicion of posterior MI.",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Confirm: ST elevation and Q waves in the posterior leads V7–V9",
+   "source": 1,
+   "quote": "Posterior infarction is confirmed by the presence of ST elevation and Q waves in the posterior leads (V7-9).",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Why: the anterior leads record posterior activity from the front, so the injury pattern inverts — ST elevation becomes ST depression, Q waves become R waves, terminal T inversion becomes an upright T",
+   "source": 1,
+   "quote": "Because posterior electrical activity is recorded from the anterior side of the heart, the typical injury pattern of ST elevation and Q waves becomes inverted: ST elevation becomes ST depression Q waves become R waves Terminal T-wave inversion becomes an upright T wave",
+   "locator": "Explanation of the ECG changes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lead placement: V7 left posterior axillary line, V8 tip of the left scapula, V9 left paraspinal region — all level with V6",
+   "source": 1,
+   "quote": "V7 – Left posterior axillary line, in the same horizontal plane as V6 V8 – Tip of the left scapula, in the same horizontal plane as V6 V9 – Left paraspinal region, in the same horizontal plane as V6",
+   "locator": "Posterior leads",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Artery: RCA or LCx",
+   "source": 0,
+   "quote": "Posterior V7–V9 (reciprocal ST depression in V1–V3 with tall R) V1–V3 RCA or LCx",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Accompanies 15–20% of STEMIs, usually with inferior or lateral infarction; isolated posterior MI (5–10%) is often missed because there is no ST elevation",
+   "source": 1,
+   "quote": "Posterior myocardial infarction (MI) accompanies 15-20% of STEMIs, usually occurring in the context of inferior or lateral infarction. Isolated posterior MI is less common (5-10% of infarcts), and the lack of ST elevation means that the diagnosis is often missed.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Posterior extension means a much larger infarct, with more risk of LV dysfunction and death",
+   "source": 1,
+   "quote": "Posterior extension of an inferior or lateral infarct implies a much larger area of myocardial damage, with an increased risk of left ventricular dysfunction and death.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "claim dropped \"terminal\"",
+    "resolution": "now \"terminal T inversion becomes an upright T\"; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_ECD0605Z9E"
+}

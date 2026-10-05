@@ -1,0 +1,52 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like Q waves ≥ 40 ms wide, or more than 25% of the R-wave height in that lead.",
+   "source": 0,
+   "quote": "Pathologic Q waves: ≥ 40 ms wide OR > 25% of R-wave height in that lead.",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Exceptions: a Q in aVR and an isolated small Q in V1 can be normal",
+   "source": 0,
+   "quote": "Exception: Q in aVR and isolated small Q in V1 can be normal.",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Posterior MI: developing pathological R waves are the “Q wave equivalent”",
+   "source": 1,
+   "quote": "The progressive development of pathological R waves in posterior infarction (the “Q wave equivalent”) mirrors the development of Q waves in anteroseptal STEMI.",
+   "locator": "Explanation of the ECG changes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Suggest a completed (old or evolving) infarction",
+   "source": 0,
+   "quote": "Suggest completed (old or evolving) infarction.",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "quote says \"can be normal\"; claim stated it flatly",
+    "resolution": "now \"… can be normal\"; re-checked pass"
+   },
+   {
+    "claim": 3,
+    "issue": "claim dropped \"suggest\"",
+    "resolution": "now \"Suggest a completed (old or evolving) infarction\"; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_ZEK67S15BE"
+}

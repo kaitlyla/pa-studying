@@ -1,0 +1,96 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like ST elevation with later Q waves in the precordial leads (V1–6), ± the high lateral leads, often preceded by hyperacute T waves.",
+   "source": 1,
+   "quote": "ST segment elevation with subsequent Q wave formation in precordial leads (V1-6) +/- high lateral leads. These changes are often preceded by hyperacute T waves",
+   "locator": "ECG Features of Anterior STEMI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) ST elevation: V1–V4; reciprocal ST depression in II, III, aVF; likely artery LAD (anteroseptal, V1–V2: proximal LAD)",
+   "source": 0,
+   "quote": "Location ST Elevation Reciprocal ST Depression Likely Artery Anterior V1–V4 II, III, aVF LAD Anteroseptal V1–V2 — LAD (proximal)",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Reciprocal change: mainly III and aVF; its size follows the ST elevation in I and aVL, so it may be minimal or absent when the high lateral leads aren't involved",
+   "source": 1,
+   "quote": "Reciprocal ST depression in inferior leads (mainly III and aVF) NB: The magnitude of reciprocal change in inferior leads is determined by the magnitude of ST elevation in I and aVL (as these leads are electrically opposite III and aVF), and hence may be minimal or absent in anterior STEMIs that do not involve high lateral leads.",
+   "locator": "ECG Features of Anterior STEMI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Named by maximal ST elevation: septal V1–2; anterior V2–5; anteroseptal V1–4; anterolateral V3–6 + I, aVL; extensive anterior V1–6 + I, aVL",
+   "source": 1,
+   "quote": "The different infarct patterns are named according to the leads with maximal ST elevation: Septal = V1-2 Anterior = V2-5 Anteroseptal = V1-4 Anterolateral = V3-6, I + aVL Extensive anterior / anterolateral = V1-6, I + aVL",
+   "locator": "Patterns of Anterior Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ECG pattern and actual infarct location often correlate poorly",
+   "source": 1,
+   "quote": "there is often a poor correlation between ECG features and precise infarct location as determined by imaging or autopsy",
+   "locator": "Patterns of Anterior Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Wraparound LAD: ST elevation in the precordial and inferior leads at once",
+   "source": 1,
+   "quote": "Anterior-inferior STEMI due to occlusion of a “wraparound” LAD. This presents with simultaneous ST elevation in the precordial and inferior leads",
+   "locator": "Clinical Pearls",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Artery: usually LAD occlusion",
+   "source": 1,
+   "quote": "Anterior STEMI usually results from occlusion of the left anterior descending artery (LAD).",
+   "locator": "Clinical Relevance of Anterior Myocardial Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Proximal LAD or left main occlusion has a much worse prognosis — a larger territory and worse hemodynamics",
+   "source": 1,
+   "quote": "Proximal LAD / LMCA occlusion has a significantly worse prognosis due to larger infarct territory size and more severe haemodynamic disturbance",
+   "locator": "Prediction of the Site of LAD Occlusion",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Significance The poorest prognosis of all infarct locations, from the larger area of myocardium",
+   "source": 1,
+   "quote": "Anterior myocardial infarction carries the poorest prognosis of all infarct locations, due to the larger area of myocardium infarct size.",
+   "locator": "Clinical Relevance of Anterior Myocardial Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "One study, anterior vs inferior MI: in-hospital mortality 11.9 vs 2.8%, total mortality 27 vs 11%, heart failure 41 vs 15%",
+   "source": 1,
+   "quote": "A study comparing outcomes from anterior and inferior infarctions (STEMI + NSTEMI) found that compared with inferior MI, patients with anterior MI had higher incidences of: In-hospital mortality (11.9 vs 2.8%) Total mortality (27 vs 11%) Heart failure (41 vs 15%)",
+   "locator": "Clinical Relevance of Anterior Myocardial Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment As for STEMI: emergency PCI is preferred when it can be done in time (door-to-balloon < 90 minutes, < 120 with transfer) by an experienced operator",
+   "source": 2,
+   "quote": "For patients with STEMI, emergency PCI is the preferred treatment of ST-segment elevation myocardial infarction when available in a timely fashion (door to balloon-inflation time < 90 minutes, or < 120 minutes if hospital-to-hospital transfer is involved) by an experienced operator",
+   "locator": "Reperfusion therapy",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 10,
+    "issue": "claim dropped the quote's condition (timely, experienced operator)",
+    "resolution": "claim now says PCI is preferred when it can be done in time by an experienced operator; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_YCV6X39BBM"
+}

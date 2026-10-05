@@ -1,0 +1,54 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like QRS negative in both lead I and aVF.",
+   "source": 0,
+   "quote": "Negative Negative Extreme axis (\"Northwest\")",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Axis: between −90° and 180°",
+   "source": 1,
+   "quote": "Extreme Axis Deviation = QRS axis between -90° and 180° (AKA “Northwest Axis”)",
+   "locator": "Left Axis Deviation LAD",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lead I: negative",
+   "source": 0,
+   "quote": "Negative Negative Extreme axis (\"Northwest\")",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "aVF: negative",
+   "source": 0,
+   "quote": "Negative Negative Extreme axis (\"Northwest\")",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Ventricular rhythm, severe RVH, hyperkalemia",
+   "source": 0,
+   "quote": "Extreme axis: Ventricular rhythm, severe RVH, hyperkalemia",
+   "locator": "6. Axis Determination, Common Causes",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 5,
+    "issue": "\"Treatment is directed at the cause\" quoted Merck Treatment of Arrhythmias, which does not cover axis deviation.",
+    "resolution": "Claim and its Symptoms and treatment label removed from the block."
+   }
+  ]
+ },
+ "block": "g_2XEDG0STE8"
+}

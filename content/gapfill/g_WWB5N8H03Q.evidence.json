@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like Widespread ST elevation in a usually benign pattern, common in young, healthy patients under 50.",
+   "source": 1,
+   "quote": "Benign early repolarisation (BER) is a usually benign ECG pattern producing widespread ST segment elevation that is commonly seen in young, healthy patients < 50 years of age.",
+   "locator": "Benign Early Repolarisation (introduction)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) J point and ST: notched or slurred J point with concave ST elevation",
+   "source": 0,
+   "quote": "Notched or slurred J point with concave ST elevation",
+   "locator": "12. Important \"Can't-Miss\" Patterns, Early Repolarization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Where: most common in the precordial leads",
+   "source": 0,
+   "quote": "Most common in precordial leads",
+   "locator": "12. Important \"Can't-Miss\" Patterns, Early Repolarization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ST elevation: widespread and concave, most prominent in the mid-to-left precordial leads (V2–5)",
+   "source": 1,
+   "quote": "Widespread concave ST elevation, most prominent in the mid-to-left precordial leads (V2-5)",
+   "locator": "ECG Features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "J point notch: the “fish hook” pattern, often best seen in V4",
+   "source": 1,
+   "quote": "One characteristic feature of BER is the presence of a notched or irregular J point: the so-called “fish hook” pattern. This is often best seen in lead V4.",
+   "locator": "J-point morphology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "T waves: prominent, slightly asymmetrical, concordant with the QRS",
+   "source": 1,
+   "quote": "Prominent, slightly asymmetrical T waves that are concordant with the QRS complex",
+   "locator": "ECG Features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "V6 ratio: ST elevation : T wave height < 0.25",
+   "source": 1,
+   "quote": "ST elevation : T wave height ratio in V6 < 0.25",
+   "locator": "ECG Features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Reciprocal changes: none suggesting occlusion MI",
+   "source": 1,
+   "quote": "No reciprocal ST depression to suggest Occlusion MI",
+   "locator": "ECG Features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Rate effect: the ST elevation may fluctuate with autonomic tone, diminishing with increased sympathetic tone, exercise or tachycardia and increasing as the heart rate slows",
+   "source": 1,
+   "quote": "The degree of ST elevation may fluctuate in response to changes in autonomic tone, diminishing with increased sympathetic tone / exercise / tachycardia or increasing when the heart rate slows",
+   "locator": "Temporal Stability of BER",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Usually in young, healthy patients",
+   "source": 0,
+   "quote": "Usually in young, healthy patients",
+   "locator": "12. Important \"Can't-Miss\" Patterns, Early Repolarization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Mechanism: poorly understood; generally thought to be a normal variant, though the global BER pattern has recently been linked to future idiopathic VF",
+   "source": 1,
+   "quote": "The physiological basis of BER is poorly understood. It is generally thought to be a normal variant that is not indicative of underlying cardiac disease, but recently a link has been made between the global BER pattern and future risk of idiopathic ventricular fibrillation (VF)",
+   "locator": "Clinical Relevance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Significance A diagnosis of exclusion",
+   "source": 0,
+   "quote": "Diagnosis of exclusion",
+   "locator": "12. Important \"Can't-Miss\" Patterns, Early Repolarization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Its widespread ST elevation may mimic pericarditis or acute MI",
+   "source": 1,
+   "quote": "Widespread ST elevation in BER may mimic pericarditis or acute MI",
+   "locator": "Clinical Relevance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Up to 10–15% of ED chest-pain patients have BER on their ECG",
+   "source": 1,
+   "quote": "Up to 10-15% of ED patients presenting with chest pain will have BER on their ECG",
+   "locator": "Clinical Relevance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Avoid diagnosing BER over age 50, especially with risk factors for ischemic heart disease",
+   "source": 1,
+   "quote": "Avoid diagnosing BER in patients over the age of 50, especially those with risk factors for ischaemic heart disease.",
+   "locator": "Clinical Relevance",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 8,
+    "issue": "dropped \"may fluctuate\" and \"increased\" (sympathetic tone)",
+    "resolution": "now \"may fluctuate with autonomic tone, diminishing with increased sympathetic tone …\"; re-checked pass"
+   },
+   {
+    "claim": 14,
+    "issue": "\"there, ST elevation is more likely ischemia\" was not in the quote",
+    "resolution": "clause removed; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_WWB5N8H03Q"
+}

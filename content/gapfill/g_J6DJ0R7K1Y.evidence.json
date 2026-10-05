@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like A broad, bifid P wave in lead II (P mitrale) and an enlarged terminal negative portion of the P wave in V1.",
+   "source": 1,
+   "quote": "LAE produces a broad, bifid P wave in lead II (P mitrale) and enlarges the terminal negative portion of the P wave in V1.",
+   "locator": "ECG Criteria for Left Atrial Enlargement",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) P wave in lead II: > 120 ms, notched (“P mitrale”)",
+   "source": 0,
+   "quote": "Lead II: P wave > 120 ms, notched (\"P mitrale\")",
+   "locator": "9. Chamber Enlargement and Hypertrophy, Left Atrial Enlargement (LAE)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Notch: bifid P wave with > 40 ms between the two peaks",
+   "source": 1,
+   "quote": "Bifid P wave with > 40 ms between the two peaks",
+   "locator": "In lead II",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P wave in V1: terminal negative deflection ≥ 1 mm deep and ≥ 40 ms wide",
+   "source": 0,
+   "quote": "V1: terminal negative deflection ≥ 1 mm deep and ≥ 40 ms wide",
+   "locator": "9. Chamber Enlargement and Hypertrophy, Left Atrial Enlargement (LAE)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: pressure or volume overload of the left atrium",
+   "source": 1,
+   "quote": "Left atrial enlargement (LAE) is due to pressure or volume overload of the left atrium.",
+   "locator": "Left Atrial Enlargement",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "In isolation: classically mitral stenosis; with LVH: systemic hypertension, aortic stenosis, mitral incompetence, hypertrophic cardiomyopathy",
+   "source": 1,
+   "quote": "In isolation: Classically seen with mitral stenosis In association with left ventricular hypertrophy: Systemic hypertension Aortic stenosis Mitral incompetence Hypertrophic cardiomyopathy",
+   "locator": "Causes of left atrial hypertrophy",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Significance LAE is often a precursor to atrial fibrillation",
+   "source": 1,
+   "quote": "LAE is often a precursor to atrial fibrillation.",
+   "locator": "Left Atrial Enlargement",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Your EKG notes call the lead II P wave abnormal at > 120 ms.",
+   "source": 0,
+   "quote": "Lead II: P wave > 120 ms, notched (\"P mitrale\")",
+   "locator": "9. Chamber Enlargement and Hypertrophy, Left Atrial Enlargement (LAE)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "LITFL uses a total P wave duration > 110 ms in lead II.",
+   "source": 1,
+   "quote": "Total P wave duration > 110 ms",
+   "locator": "In lead II",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 8,
+    "issue": "claim dropped the quote's \"in lead II\" scope",
+    "resolution": "now \"LITFL uses a total P wave duration > 110 ms in lead II.\"; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_J6DJ0R7K1Y"
+}

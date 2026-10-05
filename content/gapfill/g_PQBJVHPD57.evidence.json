@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like Small r, deep S in I and aVL; small q, tall R in II, III and aVF.",
+   "source": 1,
+   "quote": "rS complexes in leads I and aVL, with small R waves and deep S waves qR complexes in leads II, III and aVF, with small Q waves and tall R waves",
+   "locator": "Typical ECG of LPFB",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Axis: right axis deviation (+90° to +180°)",
+   "source": 0,
+   "quote": "Right axis deviation (+90° to +180°)",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "I and aVL: small R, deep S (rS complexes)",
+   "source": 0,
+   "quote": "Small R in I and aVL, small Q in II, III, aVF",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "II, III, aVF: small Q (qR complexes)",
+   "source": 0,
+   "quote": "Small R in I and aVL, small Q in II, III, aVF",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QRS: < 120 ms",
+   "source": 0,
+   "quote": "small Q in II, III, aVF QRS < 120 ms Much rarer",
+   "locator": "8. Conduction Abnormalities, Fascicular Blocks (Hemiblocks)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "R-wave peak time in aVF: > 45 ms",
+   "source": 1,
+   "quote": "R-wave peak time: Time from onset of the QRS to the peak of the R wave in aVF > 45 ms",
+   "locator": "Example ECG",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: impulses reach the LV only via the anterior fascicle",
+   "source": 1,
+   "quote": "Impulses are conducted to the left ventricle only via the anterior fascicle",
+   "locator": "Sequence of conduction in LPFB (figure)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Spread: the main wave of depolarization then spreads along the free LV wall downward and rightward — tall R waves inferiorly, deep S waves laterally",
+   "source": 1,
+   "quote": "The major wave of depolarisation then spreads along the free LV wall in a downward and rightward direction, producing tall R waves in inferior leads and deep S waves in the lateral leads.",
+   "locator": "Electrophysiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Much rarer than LAFB — the broad posterior fascicle resists damage; it usually occurs with RBBB as a bifascicular block",
+   "source": 1,
+   "quote": "LPFB is much less common than LAFB, as the broad bundle of fibres that comprise the left posterior fascicle are relatively resistant to damage when compared with the slim single tract that makes up the left anterior fascicle. It is extremely rare to see LPFB in isolation. It usually occurs along with RBBB in the context of a bifascicular block.",
+   "locator": "Handy Tips",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Diagnose only after excluding other causes of right axis deviation — acute PE, tricyclic overdose, lateral STEMI, RVH",
+   "source": 1,
+   "quote": "Do not be tempted to diagnose LPFB until you have ruled out more significant causes of right axis deviation: Example: acute pulmonary embolus; tricyclic overdose; lateral STEMI; and right ventricular hypertrophy.",
+   "locator": "Handy Tips",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms and treatment Usually no symptoms; no specific treatment is indicated",
+   "source": 2,
+   "quote": "There are usually no symptoms, but presence of either suggests a heart disorder. Diagnosis is by electrocardiography. No specific treatment is indicated.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "Quote has no RAD and no \"QRS not wide\".",
+    "resolution": "Those parts dropped (covered by claims 1 and 4). Re-checked PASS by otto-31762 at 2026-10-05."
+   },
+   {
+    "claim": 6,
+    "issue": "\"only through the anterior fascicle\" and \"late\" not in quote.",
+    "resolution": "Split: claim 6 quotes LITFL figure caption \"Impulses are conducted to the left ventricle only via the anterior fascicle\"; claim 7 keeps the spread quote. Re-checked PASS by otto-31762 at 2026-10-05."
+   }
+  ]
+ },
+ "block": "g_PQBJVHPD57"
+}

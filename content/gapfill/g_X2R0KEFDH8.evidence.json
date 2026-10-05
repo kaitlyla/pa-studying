@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like A paced tachycardia whose maximum rate is limited by the pacemaker programming.",
+   "source": 0,
+   "quote": "Results in a paced tachycardia with the maximum rate limited by the pacemaker programming",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Rate: paced tachycardia, capped at the programmed maximum rate",
+   "source": 0,
+   "quote": "Results in a paced tachycardia with the maximum rate limited by the pacemaker programming",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "P waves: retrograde P waves, which may be buried in the QRS complexes or T waves",
+   "source": 0,
+   "quote": "Pacemaker-mediated tachycardia (with retrograde P waves buried in the QRS complexes /T waves).",
+   "locator": "Example 2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Differential for a rapid ventricular-paced rhythm with no preceding atrial activity: pacemaker-mediated tachycardia, sensor-induced tachycardia, or potentially normal with an appropriate physiological stimulus (e.g., exercise)",
+   "source": 0,
+   "quote": "There is a rapid ventricular-paced rhythm (120 bpm) with no evidence of preceding atrial activity (except for the first complex). The differential diagnosis of this rhythm would include: Pacemaker-mediated tachycardia (with retrograde P waves buried in the QRS complexes /T waves). Sensor-induced tachycardia. Could potentially be normal in the presence of an appropriate physiological stimulus (e.g. exercise).",
+   "locator": "Example 2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: a re-entry tachycardia — the pacemaker forms the antegrade pathway and retrograde conduction runs through the AV node",
+   "source": 0,
+   "quote": "PMT is a re-entry tachycardia in which the pacemaker forms the antegrade pathway with retrograde conduction occurring via the AV node",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Retrograde P waves are sensed as native atrial activity and trigger ventricular pacing; each paced beat conducts back again, forming a continuous cycle",
+   "source": 0,
+   "quote": "Caused by retrograde p waves being sensed as native atrial activity with subsequent ventricular pacing The paced ventricular complex results in further retrograde conduction with retrograde p wave generation thus forming a continuous cycle",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Also called endless-loop tachycardia",
+   "source": 0,
+   "quote": "Also known as endless-loop tachycardia or pacemaker circus movement tachycardia.",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms May cause rate-related ischemia when ischemic heart disease is present",
+   "source": 0,
+   "quote": "May result in rate related ischaemia in the presences of IHD",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment Terminate it by slowing AV conduction (e.g., adenosine) or by activating magnet mode",
+   "source": 0,
+   "quote": "Can be terminated by slowing AV conduction e.g. adenosine or activation of magnet mode",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Newer pacemakers have programmed algorithms designed to terminate PMT",
+   "source": 0,
+   "quote": "Newer pacemakers contain programmed algorithms designed to terminate PMT",
+   "locator": "Pacemaker-mediated tachycardia (PMT)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "rafa-06742",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 3,
+    "issue": "the rhythm \"this rhythm\" refers to was outside the quote, and the claim dropped \"could potentially\"",
+    "resolution": "quote now starts at \"There is a rapid ventricular-paced rhythm (120 bpm) with no evidence of preceding atrial activity…\"; claim scoped to that rhythm and says \"potentially normal\"; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_X2R0KEFDH8"
+}

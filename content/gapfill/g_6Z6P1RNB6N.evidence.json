@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like ST elevation in II, III and aVF, with reciprocal ST depression in aVL and Q waves developing in II, III and aVF.",
+   "source": 1,
+   "quote": "ST elevation in leads II, III, aVF Hyperacute T waves may precede these changes Reciprocal ST depression in aVL Progressive development of Q waves in II, III, aVF",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) ST elevation: II, III, aVF; reciprocal depression in I, aVL; likely RCA (or LCx)",
+   "source": 0,
+   "quote": "Inferior II, III, aVF I, aVL RCA (or LCx)",
+   "locator": "10. Ischemia and Infarction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Early sign: hyperacute T waves may come first",
+   "source": 1,
+   "quote": "Hyperacute T waves may precede these changes",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "aVL: the only lead truly reciprocal to the inferior wall — a sensitive marker of inferior infarction",
+   "source": 1,
+   "quote": "aVL is the only lead truly reciprocal to the inferior wall, as it is the only lead facing the superior part of the ventricle. It is thus a sensitive marker for inferior infarction",
+   "locator": "Don’t neglect aVL",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "RCA vs LCx: ST elevation III > II, reciprocal depression in I, or signs of RV infarction suggest RCA; II = III, no reciprocal change in I, or lateral ST elevation suggest LCx",
+   "source": 1,
+   "quote": "RCA occlusion is suggested by: ST elevation in lead III > lead II Presence of reciprocal ST depression in lead I Signs of right ventricular infarction: STE in V1 and V4R Circumflex occlusion is suggested by: ST elevation in lead II = lead III Absence of reciprocal ST depression in lead I Signs of lateral infarction: ST elevation in the lateral leads I and aVL or V5-6",
+   "locator": "Which Artery is the Culprit?",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Rhythm: up to 20% develop second- or third-degree AV block",
+   "source": 1,
+   "quote": "Up to 20% of patients with inferior STEMI will develop either second- or third-degree AV block.",
+   "locator": "Bradycardia and AV Block in inferior STEMI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Artery: dominant RCA in 80%, dominant LCx in 18%, occasionally a wraparound LAD",
+   "source": 1,
+   "quote": "Dominant right coronary artery (RCA) in 80% of cases Dominant left circumflex artery (LCx) in 18% Occasionally, a “type III” or “wraparound” left anterior descending artery (LAD)",
+   "locator": "Which Artery is the Culprit?",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "AV block mechanism: AV-node ischemia (its artery comes from the RCA 80% of the time) or the Bezold-Jarisch reflex (increased vagal tone)",
+   "source": 1,
+   "quote": "Ischaemia of the AV node due to impaired blood flow via the AV nodal artery. This artery arises from the RCA 80% of the time, hence its involvement in inferior STEMI due to RCA occlusion. Bezold-Jarisch reflex = increased vagal tone secondary to ischaemia.",
+   "locator": "Bradycardia and AV Block in inferior STEMI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Worse prognosis with: RV infarction (40%; may become severely hypotensive with nitrates), bradycardia from second- or third-degree AV block (20%), posterior extension",
+   "source": 1,
+   "quote": "Associated features, all of which confer a worse prognosis, include: Concomitant right ventricular infarction (40% of patients); these patients may develop severe hypotension in response to nitrates Significant bradycardia due to second or third-degree AV block (20%) Posterior infarction due to extension of infarct area",
+   "locator": "ECG diagnostic criteria",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Nausea and vomiting may occur, especially with inferior MI",
+   "source": 2,
+   "quote": "Nausea and vomiting may occur, especially with inferior MI.",
+   "locator": "Symptoms and Signs of Acute MI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment As for STEMI: emergency PCI is preferred when it can be done in time (door-to-balloon < 90 minutes, < 120 with transfer) by an experienced operator",
+   "source": 2,
+   "quote": "For patients with STEMI, emergency PCI is the preferred treatment of ST-segment elevation myocardial infarction when available in a timely fashion (door to balloon-inflation time < 90 minutes, or < 120 minutes if hospital-to-hospital transfer is involved) by an experienced operator",
+   "locator": "Reperfusion therapy",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Bradyarrhythmias and AV block here are usually transient (hours to days), respond well to atropine and don't need permanent pacing",
+   "source": 1,
+   "quote": "Bradyarrhythmias and AV block in the context of inferior STEMI are usually transient (lasting hours to days), respond well to atropine and do not require permanent pacing.",
+   "locator": "Bradycardia and AV Block in inferior STEMI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "With hypotension: get right-sided leads; if RV infarction is confirmed, avoid nitrates and diuretics",
+   "source": 3,
+   "quote": "With hypotension after myocardial infarction or inferior STEMI, do ECG with right-sided leads to diagnose right ventricular infarction, and, if confirmed, avoid nitrates and diuretics.",
+   "locator": "Pearls & Pitfalls",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 10,
+    "issue": "claim dropped the quote's condition (timely, experienced operator)",
+    "resolution": "claim now says PCI is preferred when it can be done in time by an experienced operator; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_6Z6P1RNB6N"
+}

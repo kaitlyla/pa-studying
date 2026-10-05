@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "P wave — atrial depolarization Normal duration < 0.12 sec (< 3 small boxes); amplitude < 2.5 mm",
+   "source": 0,
+   "quote": "Normal duration: < 0.12 sec (< 3 small boxes) Normal amplitude: < 2.5 mm",
+   "locator": "2. Waveform Components, P Wave",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Best seen in lead II (rhythm) and V1 (shape); upright in I, II, aVF and inverted in aVR in sinus rhythm",
+   "source": 0,
+   "quote": "Best seen in: Lead II (for rhythm) and V1 (for morphology) Upright in I, II, aVF; inverted in aVR (in sinus rhythm)",
+   "locator": "2. Waveform Components, P Wave",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "PR interval — atrial depolarization plus AV node delay Start of P to start of QRS; normal 0.12–0.20 sec (3–5 small boxes)",
+   "source": 0,
+   "quote": "From start of P to start of QRS — atrial depolarization plus AV node delay. Normal: 0.12–0.20 sec (3–5 small boxes)",
+   "locator": "2. Waveform Components, PR Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Short → pre-excitation (e.g., WPW); long → first-degree AV block",
+   "source": 0,
+   "quote": "Short → pre-excitation (e.g., WPW) Long → first-degree AV block",
+   "locator": "2. Waveform Components, PR Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QRS complex — ventricular depolarization Normal < 0.12 sec (< 3 small boxes); narrow = supraventricular; wide suggests ventricular origin or aberrant conduction",
+   "source": 0,
+   "quote": "Normal duration: < 0.12 sec (< 3 small boxes); narrow complexes are supraventricular in origin, wide complexes suggest ventricular origin or aberrant conduction.",
+   "locator": "2. Waveform Components, QRS Complex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Q = first negative deflection; R = first positive deflection; S = negative deflection after the R",
+   "source": 0,
+   "quote": "Q wave: first negative deflection R wave: first positive deflection S wave: negative deflection following R",
+   "locator": "2. Waveform Components, QRS Complex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "R-wave progression: R > S by V3–V4",
+   "source": 0,
+   "quote": "R-wave progression R > S by V3–V4",
+   "locator": "15. Quick Reference Summary",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ST segment J point (end of QRS) to start of T; should be isoelectric. Elevation or depression → ischemia, injury, pericarditis, early repolarization or LV strain",
+   "source": 0,
+   "quote": "End of QRS (J point) to start of T wave. Should be isoelectric. Elevation or depression can indicate ischemia, injury, pericarditis, early repolarization, or LV strain.",
+   "locator": "2. Waveform Components, ST Segment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "T wave — ventricular repolarization Upright in I, II, V3–V6; inverted in aVR; variable in III, aVL, V1–V2",
+   "source": 0,
+   "quote": "Usually upright in I, II, V3–V6 Inverted in aVR Variable in III, aVL, V1–V2",
+   "locator": "2. Waveform Components, T Wave",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Tall, peaked → hyperkalemia or hyperacute ischemia; inverted → ischemia, strain, CNS events",
+   "source": 0,
+   "quote": "Tall, peaked T waves → hyperkalemia or hyperacute ischemia Inverted T waves → ischemia, strain, CNS events",
+   "locator": "2. Waveform Components, T Wave",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "QT interval — total ventricular depolarization plus repolarization Start of QRS to end of T; correct for rate with Bazett: QTc = QT / √RR",
+   "source": 0,
+   "quote": "From start of QRS to end of T. Reflects total ventricular depolarization plus repolarization. Must be corrected for rate (QTc) using Bazett's formula: QTc = QT / √ RR.",
+   "locator": "2. Waveform Components, QT Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Normal QTc < 440 ms (men), < 460 ms (women); > 500 ms = significant torsades risk",
+   "source": 0,
+   "quote": "Normal QTc: < 440 ms (men), < 460 ms (women) Prolonged QTc > 500 ms: significant risk of torsades de pointes",
+   "locator": "2. Waveform Components, QT Interval",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Measure in lead II or V5, where the T wave is most distinct",
+   "source": 0,
+   "quote": "Measure in lead II or V5, ideally where T waves are most distinct",
+   "locator": "7. Intervals and Segments, QT / QTc",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "U wave Small deflection after the T; prominent U waves → hypokalemia, bradycardia or drug effect",
+   "source": 0,
+   "quote": "Small deflection after T. Prominent U waves suggest hypokalemia, bradycardia, or drug effect.",
+   "locator": "2. Waveform Components, U Wave",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 4,
+    "issue": "Nit: \"wide = ventricular\" stronger than her notes (\"suggest\").",
+    "resolution": "Reworded to \"wide suggests ventricular origin\". Revised; re-checked PASS by otto-31762 at 2026-10-05."
+   }
+  ]
+ },
+ "block": "g_CTT52GJ2CN"
+}

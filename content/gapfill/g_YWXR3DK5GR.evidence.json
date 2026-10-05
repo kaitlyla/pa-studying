@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like QRS positive (dominant R) in lead I and negative (dominant S) in II, III and aVF.",
+   "source": 1,
+   "quote": "QRS is POSITIVE (dominant R wave) in Lead I QRS is NEGATIVE (dominant S wave) in leads II, III and aVF",
+   "locator": "How to recognise left axis deviation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Axis: more negative than −30° (−30° to −90°)",
+   "source": 2,
+   "quote": "An axis of −30° to −90° is considered left axis deviation",
+   "locator": "Frontal Plane QRS Axis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lead I: positive",
+   "source": 0,
+   "quote": "Positive Negative Possible Left Axis Deviation (check II)",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "aVF: negative",
+   "source": 0,
+   "quote": "Positive Negative Possible Left Axis Deviation (check II)",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Lead II: negative (if II is still positive, the axis is normal)",
+   "source": 0,
+   "quote": "If Lead I is positive and aVF is negative, look at Lead II: if II is also positive, the axis is still normal; if II is negative, it's LAD.",
+   "locator": "6. Axis Determination, Quick Method",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Left anterior fascicular block, LBBB, LVH, inferior MI, ventricular ectopy, paced rhythm, WPW",
+   "source": 1,
+   "quote": "Left anterior fascicular block Left bundle branch block Left ventricular hypertrophy Inferior MI Ventricular ectopy Paced rhythm Wolff-Parkinson White syndrome",
+   "locator": "Causes of LAD",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Left anterior fascicular block typically gives an axis around −60°",
+   "source": 2,
+   "quote": "occurs in left anterior fascicular block (−60°) and inferior myocardial infarction",
+   "locator": "Frontal Plane QRS Axis",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "otto-31762",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 7,
+    "issue": "\"Treatment is directed at the cause\" quoted Merck Treatment of Arrhythmias, which does not cover axis deviation.",
+    "resolution": "Claim and its Symptoms and treatment label removed from the block."
+   }
+  ]
+ },
+ "block": "g_YWXR3DK5GR"
+}

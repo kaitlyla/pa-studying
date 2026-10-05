@@ -2865,49 +2865,7 @@
    {
     "id": "how-to-interpret",
     "title": "How to interpret an EKG",
-    "links": [],
-    "gaps": []
-   },
-   {
-    "id": "rate-rhythm",
-    "title": "Rate & rhythm",
     "links": [
-     {
-      "target": "r_V0Y9NGVCCM",
-      "covers": "Sinus tachycardia"
-     },
-     {
-      "target": "r_X9MSBMNZQ2",
-      "covers": "Sinus bradycardia"
-     },
-     {
-      "target": "r_SYJQ3TXYDG",
-      "covers": "Sinus arrhythmia"
-     },
-     {
-      "target": "r_KMF5FVQHV6",
-      "covers": "Sinus arrhythmia"
-     },
-     {
-      "target": "r_3TC7EFK5MB",
-      "covers": "Sinus arrhythmia"
-     },
-     {
-      "target": "r_GQ9K3Y1PM3",
-      "covers": "Sinus node dysfunction (sick sinus syndrome)"
-     },
-     {
-      "target": "r_KHC8B6DVPE",
-      "covers": "Sinus node dysfunction (sick sinus syndrome)"
-     },
-     {
-      "target": "r_SXD71JYJKX",
-      "covers": "Sinus node dysfunction (sick sinus syndrome)"
-     },
-     {
-      "target": "r_GGNH1H5ZR7",
-      "covers": "Sinus node dysfunction (sick sinus syndrome)"
-     },
      {
       "target": "r_ZQKXZ9XTDM",
       "covers": "Syncope: EKG findings to look for (WPW, BBB, long or short QT, Brugada)"
@@ -2925,11 +2883,127 @@
       "covers": "Syncope: EKG findings to look for (WPW, BBB, long or short QT, Brugada)"
      }
     ],
-    "gaps": []
+    "gaps": [
+     "g_4QVGX9BK6C",
+     "g_KGWCGRNR9R",
+     "g_KX0N4YV88F",
+     "g_MZCVQ35JV4",
+     "g_VCEBF9F7YS",
+     "g_21TGCJD5K6",
+     "g_CTT52GJ2CN",
+     "g_YGVN492G7W",
+     "g_Q6YVQ0WNT6"
+    ]
+   },
+   {
+    "id": "rate-rhythm",
+    "title": "Rate & rhythm",
+    "links": [
+     {
+      "target": "r_V0Y9NGVCCM",
+      "covers": "Sinus tachycardia",
+      "gap": "g_B574FG04DG"
+     },
+     {
+      "target": "r_X9MSBMNZQ2",
+      "covers": "Sinus bradycardia",
+      "gap": "g_NZX6XCQ06Q"
+     },
+     {
+      "target": "r_SYJQ3TXYDG",
+      "covers": "Sinus arrhythmia",
+      "gap": "g_4D04PZWBTH"
+     },
+     {
+      "target": "r_KMF5FVQHV6",
+      "covers": "Sinus arrhythmia",
+      "gap": "g_4D04PZWBTH"
+     },
+     {
+      "target": "r_3TC7EFK5MB",
+      "covers": "Sinus arrhythmia",
+      "gap": "g_4D04PZWBTH"
+     },
+     {
+      "target": "r_GQ9K3Y1PM3",
+      "covers": "Sinus node dysfunction (sick sinus syndrome)",
+      "gap": "g_G5S09XJWV2"
+     },
+     {
+      "target": "r_KHC8B6DVPE",
+      "covers": "Sinus node dysfunction (sick sinus syndrome)",
+      "gap": "g_G5S09XJWV2"
+     },
+     {
+      "target": "r_SXD71JYJKX",
+      "covers": "Sinus node dysfunction (sick sinus syndrome)",
+      "gap": "g_G5S09XJWV2"
+     },
+     {
+      "target": "r_GGNH1H5ZR7",
+      "covers": "Sinus node dysfunction (sick sinus syndrome)",
+      "gap": "g_G5S09XJWV2"
+     }
+    ],
+    "gaps": [
+     "g_9V5NMHECKV",
+     "g_NZX6XCQ06Q",
+     "g_B574FG04DG",
+     "g_8PSBHVST9P",
+     "g_4D04PZWBTH",
+     "g_G5S09XJWV2"
+    ]
    },
    {
     "id": "axis",
     "title": "Axis",
+    "links": [
+     {
+      "target": "r_R5RY5Z8WJM",
+      "covers": "Pulmonary hypertension: RAD, RBBB, P pulmonale",
+      "gap": "g_NVNWG96RYK"
+     }
+    ],
+    "gaps": [
+     "g_YWXR3DK5GR",
+     "g_NVNWG96RYK",
+     "g_2XEDG0STE8"
+    ]
+   },
+   {
+    "id": "intervals",
+    "title": "Intervals",
+    "links": [
+     {
+      "target": "r_1MY8CNWPFB",
+      "covers": "WPW: short PR, delta wave",
+      "gap": "g_Z0K4BH9VK0"
+     },
+     {
+      "target": "r_ZC5NKNC4YQ",
+      "covers": "WPW: short PR, delta wave",
+      "gap": "g_Z0K4BH9VK0"
+     },
+     {
+      "target": "r_HD8WRD6WGZ",
+      "covers": "WPW: short PR, delta wave",
+      "gap": "g_Z0K4BH9VK0"
+     },
+     {
+      "target": "r_QVBFW3B257",
+      "covers": "WPW: short PR, delta wave",
+      "gap": "g_Z0K4BH9VK0"
+     }
+    ],
+    "gaps": [
+     "g_Z0K4BH9VK0",
+     "g_P612D7DYG4",
+     "g_RDS535KFPX"
+    ]
+   },
+   {
+    "id": "blocks",
+    "title": "Blocks",
     "links": [
      {
       "target": "r_HGGDBYFKBC",
@@ -2948,109 +3022,15 @@
       "covers": "Bundle branch and fascicular blocks: axis deviation"
      },
      {
-      "target": "r_R5RY5Z8WJM",
-      "covers": "Pulmonary hypertension: RAD, RBBB, P pulmonale"
-     }
-    ],
-    "gaps": [
-     "g_KJFBJMHA6B",
-     "g_HBEBN7KPE3"
-    ]
-   },
-   {
-    "id": "intervals",
-    "title": "Intervals",
-    "links": [
-     {
-      "target": "r_1MY8CNWPFB",
-      "covers": "WPW: short PR, delta wave"
-     },
-     {
-      "target": "r_ZC5NKNC4YQ",
-      "covers": "WPW: short PR, delta wave"
-     },
-     {
-      "target": "r_HD8WRD6WGZ",
-      "covers": "WPW: short PR, delta wave"
-     },
-     {
-      "target": "r_QVBFW3B257",
-      "covers": "WPW: short PR, delta wave"
-     },
-     {
       "target": "r_2R4XGBD50Z",
-      "covers": "Acute rheumatic fever: prolonged PR"
+      "covers": "Acute rheumatic fever: prolonged PR",
+      "gap": "g_RETCX2GGMP"
      },
      {
       "target": "r_4RNDEQ8BEG",
-      "covers": "Acute rheumatic fever: prolonged PR"
+      "covers": "Acute rheumatic fever: prolonged PR",
+      "gap": "g_RETCX2GGMP"
      },
-     {
-      "target": "r_2HQHNDSR2Q",
-      "covers": "Hyperkalemia: EKG changes"
-     },
-     {
-      "target": "r_3K9JD9ASKX",
-      "covers": "Hyperkalemia: EKG changes"
-     },
-     {
-      "target": "r_WZ65GX607E",
-      "covers": "Hyperkalemia: EKG changes"
-     },
-     {
-      "target": "r_N2STB5GYDA",
-      "covers": "Hyperkalemia: EKG changes"
-     },
-     {
-      "target": "r_Y39YS94AXP",
-      "covers": "Hypercalcemia: shortened QT"
-     },
-     {
-      "target": "r_D292A2A2W3",
-      "covers": "Hypercalcemia: shortened QT"
-     },
-     {
-      "target": "r_Y2Z2XTXCYG",
-      "covers": "Hypercalcemia: shortened QT"
-     },
-     {
-      "target": "r_3YTV11HMZW",
-      "covers": "Hypercalcemia: shortened QT"
-     },
-     {
-      "target": "r_HB40RP9QYE",
-      "covers": "Hypercalcemia: shortened QT"
-     },
-     {
-      "target": "r_V1WNET15YK",
-      "covers": "Hypomagnesemia: wide QRS, prolonged PR"
-     },
-     {
-      "target": "r_V4QSY2XYYB",
-      "covers": "Hypomagnesemia: wide QRS, prolonged PR"
-     },
-     {
-      "target": "r_MR60NJ25JD",
-      "covers": "Hypermagnesemia: wide QRS, prolonged PR and QT"
-     },
-     {
-      "target": "r_QX095XEEDX",
-      "covers": "Hypermagnesemia: wide QRS, prolonged PR and QT"
-     },
-     {
-      "target": "r_TP1FDRBPXE",
-      "covers": "Magnesium toxicity: prolonged PR, wide QRS"
-     }
-    ],
-    "gaps": [
-     "g_07A1KT0539",
-     "g_6KASWFM1YZ"
-    ]
-   },
-   {
-    "id": "blocks",
-    "title": "Blocks",
-    "links": [
      {
       "target": "r_JX7KVPYCFS",
       "covers": "AV blocks: first- through third-degree"
@@ -3068,24 +3048,9 @@
       "covers": "AV blocks: first- through third-degree"
      },
      {
-      "target": "r_HGGDBYFKBC",
-      "covers": "Bundle branch and fascicular blocks"
-     },
-     {
-      "target": "r_X5DG864V3B",
-      "covers": "Bundle branch and fascicular blocks"
-     },
-     {
-      "target": "r_8BN64AKRCC",
-      "covers": "Bundle branch and fascicular blocks"
-     },
-     {
-      "target": "r_96H939J174",
-      "covers": "Bundle branch and fascicular blocks"
-     },
-     {
       "target": "r_HM8R05WW8C",
-      "covers": "ASD: incomplete RBBB"
+      "covers": "ASD: incomplete RBBB",
+      "gap": "g_QNMJ6MYFDV"
      },
      {
       "target": "r_A3CGNBEJN3",
@@ -3096,7 +3061,17 @@
       "covers": "Lyme disease: heart block"
      }
     ],
-    "gaps": []
+    "gaps": [
+     "g_RETCX2GGMP",
+     "g_EQE7PAYEC5",
+     "g_NGBKA5PEG5",
+     "g_HKSVZ1CK6M",
+     "g_QNMJ6MYFDV",
+     "g_5Y3YDVN21P",
+     "g_N8473W4JSE",
+     "g_PQBJVHPD57",
+     "g_W6VQ9E8K35"
+    ]
    },
    {
     "id": "arrhythmias",
@@ -3104,183 +3079,220 @@
     "links": [
      {
       "target": "r_2WYW6E351D",
-      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves"
+      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves",
+      "gap": "g_P36685KPP0"
      },
      {
       "target": "r_REVY01ZAD4",
-      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves"
+      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves",
+      "gap": "g_P36685KPP0"
      },
      {
       "target": "r_6SMMZN6XEC",
-      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves"
+      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves",
+      "gap": "g_P36685KPP0"
      },
      {
       "target": "r_7D4S1K3ZCP",
-      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves"
+      "covers": "Atrial fibrillation: irregularly irregular, no discrete P waves",
+      "gap": "g_P36685KPP0"
      },
      {
       "target": "r_FTS2QAQ42D",
-      "covers": "Atrial flutter: sawtooth flutter waves"
+      "covers": "Atrial flutter: sawtooth flutter waves",
+      "gap": "g_CB7CEEXNMR"
      },
      {
       "target": "r_40KWZBZE8Z",
-      "covers": "Atrial flutter: sawtooth flutter waves"
+      "covers": "Atrial flutter: sawtooth flutter waves",
+      "gap": "g_CB7CEEXNMR"
      },
      {
       "target": "r_WRGZM3S99C",
-      "covers": "Atrial flutter: sawtooth flutter waves"
+      "covers": "Atrial flutter: sawtooth flutter waves",
+      "gap": "g_CB7CEEXNMR"
      },
      {
       "target": "r_J9HXS89VFE",
-      "covers": "Atrial flutter: sawtooth flutter waves"
+      "covers": "Atrial flutter: sawtooth flutter waves",
+      "gap": "g_CB7CEEXNMR"
      },
      {
       "target": "r_5GANC555X2",
-      "covers": "Premature atrial contractions"
+      "covers": "Premature atrial contractions",
+      "gap": "g_TG8V43PQXC"
      },
      {
       "target": "r_6KJB88NBWY",
-      "covers": "Premature atrial contractions"
+      "covers": "Premature atrial contractions",
+      "gap": "g_TG8V43PQXC"
      },
      {
       "target": "r_Q715NRJ5Q0",
-      "covers": "Premature atrial contractions"
+      "covers": "Premature atrial contractions",
+      "gap": "g_TG8V43PQXC"
      },
      {
       "target": "r_0P8ZRQANT1",
-      "covers": "Premature atrial contractions"
+      "covers": "Premature atrial contractions",
+      "gap": "g_TG8V43PQXC"
      },
      {
       "target": "r_RK3A67SRRD",
-      "covers": "Premature ventricular contractions"
+      "covers": "Premature ventricular contractions",
+      "gap": "g_4VGJX030ET"
      },
      {
       "target": "r_0FW9EJMRGR",
-      "covers": "Premature ventricular contractions"
+      "covers": "Premature ventricular contractions",
+      "gap": "g_4VGJX030ET"
      },
      {
       "target": "r_T1736P65EE",
-      "covers": "Premature ventricular contractions"
+      "covers": "Premature ventricular contractions",
+      "gap": "g_4VGJX030ET"
      },
      {
       "target": "r_CKAN68X9HS",
-      "covers": "Premature ventricular contractions"
+      "covers": "Premature ventricular contractions",
+      "gap": "g_4VGJX030ET"
      },
      {
       "target": "r_PMGRZSY7AY",
-      "covers": "AVNRT: P wave buried in the QRS"
+      "covers": "AVNRT: P wave buried in the QRS",
+      "gap": "g_S96GBNPH8T"
      },
      {
       "target": "r_A089SVVR9H",
-      "covers": "AVNRT: P wave buried in the QRS"
+      "covers": "AVNRT: P wave buried in the QRS",
+      "gap": "g_S96GBNPH8T"
      },
      {
       "target": "r_66YP104YZD",
-      "covers": "AVNRT: P wave buried in the QRS"
+      "covers": "AVNRT: P wave buried in the QRS",
+      "gap": "g_S96GBNPH8T"
      },
      {
       "target": "r_GZ5DVEEGKA",
-      "covers": "AVNRT: P wave buried in the QRS"
+      "covers": "AVNRT: P wave buried in the QRS",
+      "gap": "g_S96GBNPH8T"
      },
      {
       "target": "r_WY20ZGPBDF",
-      "covers": "AVRT"
+      "covers": "AVRT",
+      "gap": "g_39KWQFX4X1"
      },
      {
       "target": "r_H23QG8YF95",
-      "covers": "AVRT"
+      "covers": "AVRT",
+      "gap": "g_39KWQFX4X1"
      },
      {
       "target": "r_J0FADKCMB1",
-      "covers": "AVRT"
+      "covers": "AVRT",
+      "gap": "g_39KWQFX4X1"
      },
      {
       "target": "r_577F1STBAE",
-      "covers": "AVRT"
-     },
-     {
-      "target": "r_1MY8CNWPFB",
-      "covers": "Wolff-Parkinson-White"
-     },
-     {
-      "target": "r_ZC5NKNC4YQ",
-      "covers": "Wolff-Parkinson-White"
-     },
-     {
-      "target": "r_HD8WRD6WGZ",
-      "covers": "Wolff-Parkinson-White"
-     },
-     {
-      "target": "r_QVBFW3B257",
-      "covers": "Wolff-Parkinson-White"
+      "covers": "AVRT",
+      "gap": "g_39KWQFX4X1"
      },
      {
       "target": "r_6E8JSWR83A",
-      "covers": "Wandering atrial pacemaker and MAT"
+      "covers": "Wandering atrial pacemaker and MAT",
+      "gap": "g_C0Y6EANR9P"
      },
      {
       "target": "r_4TRCCH44T9",
-      "covers": "Wandering atrial pacemaker and MAT"
+      "covers": "Wandering atrial pacemaker and MAT",
+      "gap": "g_C0Y6EANR9P"
      },
      {
       "target": "r_H6MF7VW8AN",
-      "covers": "Wandering atrial pacemaker and MAT"
+      "covers": "Wandering atrial pacemaker and MAT",
+      "gap": "g_C0Y6EANR9P"
      },
      {
       "target": "r_P10QEFDBGB",
-      "covers": "Wandering atrial pacemaker and MAT"
+      "covers": "Wandering atrial pacemaker and MAT",
+      "gap": "g_C0Y6EANR9P"
      },
      {
       "target": "r_1EBDB0BTMM",
-      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome"
+      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome",
+      "gap": "g_4T7EYEQF07"
      },
      {
       "target": "r_RD41VEQ3HF",
-      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome"
+      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome",
+      "gap": "g_4T7EYEQF07"
      },
      {
       "target": "r_SED8BS4CNQ",
-      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome"
+      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome",
+      "gap": "g_4T7EYEQF07"
      },
      {
       "target": "r_W200RGSVD8",
-      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome"
+      "covers": "Ventricular tachycardia, polymorphic VT, Brugada syndrome",
+      "gap": "g_4T7EYEQF07"
      },
      {
       "target": "r_90MQMM6CTA",
-      "covers": "Torsades de pointes"
+      "covers": "Torsades de pointes",
+      "gap": "g_Q3Z18F3FXX"
      },
      {
       "target": "r_CVFKV9VN5D",
-      "covers": "Torsades de pointes"
+      "covers": "Torsades de pointes",
+      "gap": "g_Q3Z18F3FXX"
      },
      {
       "target": "r_ES1YTP2C1X",
-      "covers": "Torsades de pointes"
+      "covers": "Torsades de pointes",
+      "gap": "g_Q3Z18F3FXX"
      },
      {
       "target": "r_WR49B8KX9V",
-      "covers": "Torsades de pointes"
+      "covers": "Torsades de pointes",
+      "gap": "g_Q3Z18F3FXX"
      },
      {
       "target": "r_729JW02J9B",
-      "covers": "Ventricular fibrillation"
+      "covers": "Ventricular fibrillation",
+      "gap": "g_NZD14DGQJT"
      },
      {
       "target": "r_S839HT69T9",
-      "covers": "Ventricular fibrillation"
+      "covers": "Ventricular fibrillation",
+      "gap": "g_NZD14DGQJT"
      },
      {
       "target": "r_N7Z8M7G6VJ",
-      "covers": "Ventricular fibrillation"
+      "covers": "Ventricular fibrillation",
+      "gap": "g_NZD14DGQJT"
      },
      {
       "target": "r_AXAVEHPP01",
-      "covers": "Ventricular fibrillation"
+      "covers": "Ventricular fibrillation",
+      "gap": "g_NZD14DGQJT"
      }
     ],
     "gaps": [
-     "g_DSVDMSZEJ1"
+     "g_TG8V43PQXC",
+     "g_P36685KPP0",
+     "g_CB7CEEXNMR",
+     "g_C0Y6EANR9P",
+     "g_M29T5F08N3",
+     "g_S96GBNPH8T",
+     "g_39KWQFX4X1",
+     "g_WJWXAWFSJM",
+     "g_4VGJX030ET",
+     "g_4T7EYEQF07",
+     "g_Q3Z18F3FXX",
+     "g_NZD14DGQJT",
+     "g_XA2QX9Q05K",
+     "g_6G72XGP6K8"
     ]
    },
    {
@@ -3289,23 +3301,28 @@
     "links": [
      {
       "target": "r_6GFW8EGVRW",
-      "covers": "Stable angina: ischemic EKG findings"
+      "covers": "Stable angina: ischemic EKG findings",
+      "gap": "g_NDCXMAPTTN"
      },
      {
       "target": "r_HV4FFBDGR9",
-      "covers": "Stable angina: ischemic EKG findings"
+      "covers": "Stable angina: ischemic EKG findings",
+      "gap": "g_NDCXMAPTTN"
      },
      {
       "target": "r_7SFW49V064",
-      "covers": "Stable angina: ischemic EKG findings"
+      "covers": "Stable angina: ischemic EKG findings",
+      "gap": "g_NDCXMAPTTN"
      },
      {
       "target": "r_9BPZEZ3WYS",
-      "covers": "Stable angina: ischemic EKG findings"
+      "covers": "Stable angina: ischemic EKG findings",
+      "gap": "g_NDCXMAPTTN"
      },
      {
       "target": "r_FCEVNMZECP",
-      "covers": "Stable angina: ischemic EKG findings"
+      "covers": "Stable angina: ischemic EKG findings",
+      "gap": "g_NDCXMAPTTN"
      },
      {
       "target": "r_Z7ZXW5S41Q",
@@ -3329,48 +3346,43 @@
      },
      {
       "target": "r_GRBBHWN94N",
-      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG"
+      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG",
+      "gap": "g_5FN2JP7J1Z"
      },
      {
       "target": "r_D2B85HSBZN",
-      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG"
+      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG",
+      "gap": "g_5FN2JP7J1Z"
      },
      {
       "target": "r_CKS1X97YQE",
-      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG"
+      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG",
+      "gap": "g_5FN2JP7J1Z"
      },
      {
       "target": "r_KP86J4FT3K",
-      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG"
+      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG",
+      "gap": "g_5FN2JP7J1Z"
      },
      {
       "target": "r_6NH3YYNJHT",
-      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG"
-     },
-     {
-      "target": "r_7HPFTJBC7N",
-      "covers": "Pericarditis: diffuse ST elevation, PR depression"
-     },
-     {
-      "target": "r_RKYS2K0N1N",
-      "covers": "Pericarditis: diffuse ST elevation, PR depression"
-     },
-     {
-      "target": "r_58BTAK4Z2B",
-      "covers": "Pericarditis: diffuse ST elevation, PR depression"
-     },
-     {
-      "target": "r_PJ7VWS4HE1",
-      "covers": "Pericarditis: diffuse ST elevation, PR depression"
-     },
-     {
-      "target": "r_HQJ8JJR0QH",
-      "covers": "Pericarditis: diffuse ST elevation, PR depression"
+      "covers": "Acute coronary syndrome: STEMI and UA/NSTEMI EKG",
+      "gap": "g_5FN2JP7J1Z"
      }
     ],
     "gaps": [
-     "g_SYAC0557DC",
-     "g_WYD76VB43V"
+     "g_5FN2JP7J1Z",
+     "g_YCV6X39BBM",
+     "g_6Z6P1RNB6N",
+     "g_ECD0605Z9E",
+     "g_NDCXMAPTTN",
+     "g_ZEK67S15BE",
+     "g_4ZPP05GJDM",
+     "g_80NABDFKSK",
+     "g_W3FARF52MN",
+     "g_50SH0GHYFC",
+     "g_PZ0XJ1PJ5R",
+     "g_ZT3NTX4YH8"
     ]
    },
    {
@@ -3378,396 +3390,602 @@
     "title": "QTc prolongation",
     "links": [
      {
-      "target": "r_90MQMM6CTA",
-      "covers": "Torsades de pointes: QT prolongation"
-     },
-     {
-      "target": "r_CVFKV9VN5D",
-      "covers": "Torsades de pointes: QT prolongation"
-     },
-     {
-      "target": "r_ES1YTP2C1X",
-      "covers": "Torsades de pointes: QT prolongation"
-     },
-     {
-      "target": "r_WR49B8KX9V",
-      "covers": "Torsades de pointes: QT prolongation"
-     },
-     {
-      "target": "r_33D3PX16F4",
-      "covers": "Hypokalemia: prolonged QT, U waves"
-     },
-     {
-      "target": "r_M0MHJ6F3H3",
-      "covers": "Hypokalemia: prolonged QT, U waves"
-     },
-     {
-      "target": "r_47TCND5JBX",
-      "covers": "Hypokalemia: prolonged QT, U waves"
-     },
-     {
-      "target": "r_V3EZAM4YBD",
-      "covers": "Hypokalemia: prolonged QT, U waves"
-     },
-     {
-      "target": "r_W9KHAR2CV6",
-      "covers": "Hypocalcemia: prolonged QT"
-     },
-     {
-      "target": "r_9VPEPN9AZD",
-      "covers": "Hypocalcemia: prolonged QT"
-     },
-     {
-      "target": "r_6ZX0XADWM0",
-      "covers": "Hypocalcemia: prolonged QT"
-     },
-     {
-      "target": "r_DFT4HD27CD",
-      "covers": "Hypocalcemia: prolonged QT"
-     },
-     {
-      "target": "r_21VA3HCPA1",
-      "covers": "Hypoparathyroidism: prolonged QT"
-     },
-     {
-      "target": "r_CY156P920W",
-      "covers": "Hypoparathyroidism: prolonged QT"
-     },
-     {
-      "target": "r_J2H585SWM8",
-      "covers": "Hypoparathyroidism: prolonged QT"
-     },
-     {
       "target": "r_4PCW01KSX3",
-      "covers": "Hyperphosphatemia: QT prolongation"
+      "covers": "Hyperphosphatemia: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_ZJRSVJ3F6T",
-      "covers": "Hyperphosphatemia: QT prolongation"
+      "covers": "Hyperphosphatemia: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_TJH6Q5C6HZ",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_3VDG5KV3BA",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_EXGY53VZK0",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_1K4JKVYFQC",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_TZMQPZ5CAQ",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_34RNFJ9S63",
-      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation"
-     },
-     {
-      "target": "r_FTS2QAQ42D",
-      "covers": "Ibutilide: torsades risk from QT prolongation"
-     },
-     {
-      "target": "r_40KWZBZE8Z",
-      "covers": "Ibutilide: torsades risk from QT prolongation"
-     },
-     {
-      "target": "r_WRGZM3S99C",
-      "covers": "Ibutilide: torsades risk from QT prolongation"
-     },
-     {
-      "target": "r_J9HXS89VFE",
-      "covers": "Ibutilide: torsades risk from QT prolongation"
+      "covers": "Class I and III antiarrhythmics, amiodarone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_X1VYWNSA32",
-      "covers": "Ranolazine: prolongs QT"
+      "covers": "Ranolazine: prolongs QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_YMXN5MP5T9",
-      "covers": "Ranolazine: prolongs QT"
+      "covers": "Ranolazine: prolongs QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_NTTB885KFF",
-      "covers": "Ranolazine: prolongs QT"
+      "covers": "Ranolazine: prolongs QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_0MVZDGMAXA",
-      "covers": "Ranolazine: prolongs QT"
+      "covers": "Ranolazine: prolongs QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_MV44W5DRRX",
-      "covers": "Ranolazine: prolongs QT"
+      "covers": "Ranolazine: prolongs QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_JQEYDQE2QV",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_ZDZYSYB75N",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_S6PKR3669V",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_30158SH6GM",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_5X256Z1J8H",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_9NRFT7HCZN",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_YK8791M6A5",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_NC4NJMVGP7",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_9AN34S8K3D",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_YZ0KET1Q4A",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_VB4NCRHNN8",
-      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation"
+      "covers": "Antiemetics (ondansetron, dopamine blockers): QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_CQT4GD68PW",
-      "covers": "Famotidine: can prolong QT"
+      "covers": "Famotidine: can prolong QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_8EG49FJ590",
-      "covers": "Famotidine: can prolong QT"
+      "covers": "Famotidine: can prolong QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_SAJFGEQC7E",
-      "covers": "Famotidine: can prolong QT"
+      "covers": "Famotidine: can prolong QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_9RY9RFPES6",
-      "covers": "Famotidine: can prolong QT"
+      "covers": "Famotidine: can prolong QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_PP4T3PDBV6",
-      "covers": "SSRIs: citalopram/escitalopram QT prolongation"
+      "covers": "SSRIs: citalopram/escitalopram QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_PWCZGK595P",
-      "covers": "SSRIs: citalopram/escitalopram QT prolongation"
+      "covers": "SSRIs: citalopram/escitalopram QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_QQQJMT0HG6",
-      "covers": "SSRIs: citalopram/escitalopram QT prolongation"
+      "covers": "SSRIs: citalopram/escitalopram QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_H55V9WYGWZ",
-      "covers": "SSRIs: citalopram/escitalopram QT prolongation"
-     },
-     {
-      "target": "r_GETDAXY6MN",
-      "covers": "TCAs: QT prolongation"
-     },
-     {
-      "target": "r_QQEDCSNK8N",
-      "covers": "TCAs: QT prolongation"
-     },
-     {
-      "target": "r_YKY9B6T6PZ",
-      "covers": "TCAs: QT prolongation"
-     },
-     {
-      "target": "r_78AM2K8QPR",
-      "covers": "TCAs: QT prolongation"
+      "covers": "SSRIs: citalopram/escitalopram QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_TTSZXN46X7",
-      "covers": "First-generation antipsychotics: QT prolongation and torsades"
+      "covers": "First-generation antipsychotics: QT prolongation and torsades",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_ZP1RQCAPYP",
-      "covers": "First-generation antipsychotics: QT prolongation and torsades"
+      "covers": "First-generation antipsychotics: QT prolongation and torsades",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_BTXQ3VTA4K",
-      "covers": "First-generation antipsychotics: QT prolongation and torsades"
+      "covers": "First-generation antipsychotics: QT prolongation and torsades",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_R36N57D1FH",
-      "covers": "First-generation antipsychotics: QT prolongation and torsades"
+      "covers": "First-generation antipsychotics: QT prolongation and torsades",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_FZ9QC55164",
-      "covers": "Haloperidol: IV route, higher QT and torsades risk"
+      "covers": "Haloperidol: IV route, higher QT and torsades risk",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_1K4E8HGMHR",
-      "covers": "Haloperidol: IV route, higher QT and torsades risk"
+      "covers": "Haloperidol: IV route, higher QT and torsades risk",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_R6KC039WMH",
-      "covers": "Haloperidol: IV route, higher QT and torsades risk"
+      "covers": "Haloperidol: IV route, higher QT and torsades risk",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_4G5R6EJGJ3",
-      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence"
+      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_DQCRR0V8AP",
-      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence"
+      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_8S6T62CJ31",
-      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence"
+      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_W4NHK2K9Y5",
-      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence"
+      "covers": "Thioridazine/chlorpromazine: highest QT and torsades incidence",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_HJR09YWTHB",
-      "covers": "Second-generation antipsychotics: prolonged QT"
+      "covers": "Second-generation antipsychotics: prolonged QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_61DDZ688HY",
-      "covers": "Second-generation antipsychotics: prolonged QT"
+      "covers": "Second-generation antipsychotics: prolonged QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_X24CZPNRR7",
-      "covers": "Second-generation antipsychotics: prolonged QT"
+      "covers": "Second-generation antipsychotics: prolonged QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_DCPJA2X6KB",
-      "covers": "Second-generation antipsychotics: prolonged QT"
+      "covers": "Second-generation antipsychotics: prolonged QT",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_MA8N1YH8PW",
-      "covers": "Aripiprazole: most QT-neutral antipsychotic"
+      "covers": "Aripiprazole: most QT-neutral antipsychotic",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_6DBAP7HDF8",
-      "covers": "Aripiprazole: most QT-neutral antipsychotic"
+      "covers": "Aripiprazole: most QT-neutral antipsychotic",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_EWS4XZFCS6",
-      "covers": "Aripiprazole: most QT-neutral antipsychotic"
+      "covers": "Aripiprazole: most QT-neutral antipsychotic",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_R2611FQH3C",
-      "covers": "Aripiprazole: most QT-neutral antipsychotic"
+      "covers": "Aripiprazole: most QT-neutral antipsychotic",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_E71XDX3P4C",
-      "covers": "Clozapine: QT prolongation"
+      "covers": "Clozapine: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_AKFA4VVBXV",
-      "covers": "Clozapine: QT prolongation"
+      "covers": "Clozapine: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_B2PXYX9NYM",
-      "covers": "Clozapine: QT prolongation"
+      "covers": "Clozapine: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_SZRMHMFRE6",
-      "covers": "Olanzapine: mild QT prolongation"
+      "covers": "Olanzapine: mild QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_297777KE77",
-      "covers": "Olanzapine: mild QT prolongation"
+      "covers": "Olanzapine: mild QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_EA1Y488WXM",
-      "covers": "Olanzapine: mild QT prolongation"
+      "covers": "Olanzapine: mild QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_FS270VDBSK",
-      "covers": "Quetiapine: dose-related QT prolongation"
+      "covers": "Quetiapine: dose-related QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_91Z5VA81MA",
-      "covers": "Quetiapine: dose-related QT prolongation"
+      "covers": "Quetiapine: dose-related QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_G1KP2BFM4A",
-      "covers": "Quetiapine: dose-related QT prolongation"
+      "covers": "Quetiapine: dose-related QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_V6DH72Y76P",
-      "covers": "Risperidone: QT prolongation"
+      "covers": "Risperidone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_K8DHD7N9FM",
-      "covers": "Risperidone: QT prolongation"
+      "covers": "Risperidone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_10MTJZP438",
-      "covers": "Risperidone: QT prolongation"
+      "covers": "Risperidone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_1W8RED6D8E",
-      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms"
+      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_CDG2Z55E9W",
-      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms"
+      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_S8WBKZHSTC",
-      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms"
+      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_MTX6RV7X59",
-      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms"
+      "covers": "Ziprasidone: highest QT risk; stop if QT >500 ms",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_HXAGVM9BMZ",
-      "covers": "Methadone: QT prolongation"
+      "covers": "Methadone: QT prolongation",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_WSJWAM8ZQJ",
-      "covers": "Pitolisant: QT prolongation warning"
+      "covers": "Pitolisant: QT prolongation warning",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_R557HK3RJA",
-      "covers": "Pitolisant: QT prolongation warning"
+      "covers": "Pitolisant: QT prolongation warning",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_AQ1MB7K325",
-      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)"
+      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_D35HJ896F3",
-      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)"
+      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_SJ2VFB8WDA",
-      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)"
+      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)",
+      "gap": "g_4D29SQ817M"
      },
      {
       "target": "r_W1ASK65B0J",
-      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)"
+      "covers": "Anorexia nervosa: arrhythmias (QT prolongation)",
+      "gap": "g_4D29SQ817M"
      }
     ],
     "gaps": [
-     "g_HBEBN7KPE3"
+     "g_4D29SQ817M",
+     "g_T7X5GTMGMK"
+    ]
+   },
+   {
+    "id": "chamber",
+    "title": "Chamber enlargement",
+    "links": [],
+    "gaps": [
+     "g_J6DJ0R7K1Y",
+     "g_0F56GA061W",
+     "g_RXM35PWEMZ",
+     "g_HSZ6JTSXR6"
+    ]
+   },
+   {
+    "id": "electrolytes-drugs",
+    "title": "Electrolytes & drugs",
+    "links": [
+     {
+      "target": "r_2HQHNDSR2Q",
+      "covers": "Hyperkalemia: EKG changes",
+      "gap": "g_40TR3E91CZ"
+     },
+     {
+      "target": "r_3K9JD9ASKX",
+      "covers": "Hyperkalemia: EKG changes",
+      "gap": "g_40TR3E91CZ"
+     },
+     {
+      "target": "r_WZ65GX607E",
+      "covers": "Hyperkalemia: EKG changes",
+      "gap": "g_40TR3E91CZ"
+     },
+     {
+      "target": "r_N2STB5GYDA",
+      "covers": "Hyperkalemia: EKG changes",
+      "gap": "g_40TR3E91CZ"
+     },
+     {
+      "target": "r_Y39YS94AXP",
+      "covers": "Hypercalcemia: shortened QT",
+      "gap": "g_R6B9GAPAZ2"
+     },
+     {
+      "target": "r_D292A2A2W3",
+      "covers": "Hypercalcemia: shortened QT",
+      "gap": "g_R6B9GAPAZ2"
+     },
+     {
+      "target": "r_Y2Z2XTXCYG",
+      "covers": "Hypercalcemia: shortened QT",
+      "gap": "g_R6B9GAPAZ2"
+     },
+     {
+      "target": "r_3YTV11HMZW",
+      "covers": "Hypercalcemia: shortened QT",
+      "gap": "g_R6B9GAPAZ2"
+     },
+     {
+      "target": "r_HB40RP9QYE",
+      "covers": "Hypercalcemia: shortened QT",
+      "gap": "g_R6B9GAPAZ2"
+     },
+     {
+      "target": "r_V1WNET15YK",
+      "covers": "Hypomagnesemia: wide QRS, prolonged PR",
+      "gap": "g_BDP2Y3VEW4"
+     },
+     {
+      "target": "r_V4QSY2XYYB",
+      "covers": "Hypomagnesemia: wide QRS, prolonged PR",
+      "gap": "g_BDP2Y3VEW4"
+     },
+     {
+      "target": "r_MR60NJ25JD",
+      "covers": "Hypermagnesemia: wide QRS, prolonged PR and QT",
+      "gap": "g_NDN88ART21"
+     },
+     {
+      "target": "r_QX095XEEDX",
+      "covers": "Hypermagnesemia: wide QRS, prolonged PR and QT",
+      "gap": "g_NDN88ART21"
+     },
+     {
+      "target": "r_TP1FDRBPXE",
+      "covers": "Magnesium toxicity: prolonged PR, wide QRS",
+      "gap": "g_NDN88ART21"
+     },
+     {
+      "target": "r_33D3PX16F4",
+      "covers": "Hypokalemia: prolonged QT, U waves",
+      "gap": "g_DCCDHXD1VC"
+     },
+     {
+      "target": "r_M0MHJ6F3H3",
+      "covers": "Hypokalemia: prolonged QT, U waves",
+      "gap": "g_DCCDHXD1VC"
+     },
+     {
+      "target": "r_47TCND5JBX",
+      "covers": "Hypokalemia: prolonged QT, U waves",
+      "gap": "g_DCCDHXD1VC"
+     },
+     {
+      "target": "r_V3EZAM4YBD",
+      "covers": "Hypokalemia: prolonged QT, U waves",
+      "gap": "g_DCCDHXD1VC"
+     },
+     {
+      "target": "r_W9KHAR2CV6",
+      "covers": "Hypocalcemia: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_9VPEPN9AZD",
+      "covers": "Hypocalcemia: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_6ZX0XADWM0",
+      "covers": "Hypocalcemia: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_DFT4HD27CD",
+      "covers": "Hypocalcemia: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_21VA3HCPA1",
+      "covers": "Hypoparathyroidism: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_CY156P920W",
+      "covers": "Hypoparathyroidism: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_J2H585SWM8",
+      "covers": "Hypoparathyroidism: prolonged QT",
+      "gap": "g_8SPZFG6H78"
+     },
+     {
+      "target": "r_GETDAXY6MN",
+      "covers": "TCAs: QT prolongation",
+      "gap": "g_H1EZV0BJVR"
+     },
+     {
+      "target": "r_QQEDCSNK8N",
+      "covers": "TCAs: QT prolongation",
+      "gap": "g_H1EZV0BJVR"
+     },
+     {
+      "target": "r_YKY9B6T6PZ",
+      "covers": "TCAs: QT prolongation",
+      "gap": "g_H1EZV0BJVR"
+     },
+     {
+      "target": "r_78AM2K8QPR",
+      "covers": "TCAs: QT prolongation",
+      "gap": "g_H1EZV0BJVR"
+     }
+    ],
+    "gaps": [
+     "g_40TR3E91CZ",
+     "g_DCCDHXD1VC",
+     "g_R6B9GAPAZ2",
+     "g_8SPZFG6H78",
+     "g_BDP2Y3VEW4",
+     "g_NDN88ART21",
+     "g_PRE4TDS8YY",
+     "g_H1EZV0BJVR"
+    ]
+   },
+   {
+    "id": "cant-miss",
+    "title": "Other can't-miss patterns",
+    "links": [
+     {
+      "target": "r_7HPFTJBC7N",
+      "covers": "Pericarditis: diffuse ST elevation, PR depression",
+      "gap": "g_NS5A8BQQX0"
+     },
+     {
+      "target": "r_RKYS2K0N1N",
+      "covers": "Pericarditis: diffuse ST elevation, PR depression",
+      "gap": "g_NS5A8BQQX0"
+     },
+     {
+      "target": "r_58BTAK4Z2B",
+      "covers": "Pericarditis: diffuse ST elevation, PR depression",
+      "gap": "g_NS5A8BQQX0"
+     },
+     {
+      "target": "r_PJ7VWS4HE1",
+      "covers": "Pericarditis: diffuse ST elevation, PR depression",
+      "gap": "g_NS5A8BQQX0"
+     },
+     {
+      "target": "r_HQJ8JJR0QH",
+      "covers": "Pericarditis: diffuse ST elevation, PR depression",
+      "gap": "g_NS5A8BQQX0"
+     }
+    ],
+    "gaps": [
+     "g_NS5A8BQQX0",
+     "g_WDVJ6ENVM0",
+     "g_RS2KXKFB4J",
+     "g_4PKFJG6MB0",
+     "g_WWB5N8H03Q",
+     "g_FGKZA2B1AS"
+    ]
+   },
+   {
+    "id": "pacemakers",
+    "title": "Pacemakers",
+    "links": [],
+    "gaps": [
+     "g_KT11DCBCYP",
+     "g_71MVD1AMWY",
+     "g_7F23ERTCA8",
+     "g_G23MG7EK4Y",
+     "g_X2R0KEFDH8"
     ]
    }
   ],

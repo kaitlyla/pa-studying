@@ -1,0 +1,75 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the strip looks like The pacer fires despite native beats.",
+   "source": 0,
+   "quote": "Failure to sense (undersensing): Pacer fires despite native beats",
+   "locator": "13. Pacemakers, Troubleshooting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Pacing spikes: fire despite native beats",
+   "source": 0,
+   "quote": "Failure to sense (undersensing): Pacer fires despite native beats",
+   "locator": "13. Pacemakers, Troubleshooting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Spikes within QRS complexes: suggest undersensing; otherwise the ECG findings may be minimal",
+   "source": 1,
+   "quote": "ECG findings may be minimal, although presence of pacing spikes within QRS complexes is suggestive of undersensing",
+   "locator": "Problems with Sensing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Result: asynchronous pacing",
+   "source": 1,
+   "quote": "Results in asynchronous pacing",
+   "locator": "Problems with Sensing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes (mechanism and diagnoses) Mechanism: the pacemaker fails to sense native cardiac activity",
+   "source": 1,
+   "quote": "Undersensing occurs when the pacemaker fails to sense native cardiac activity",
+   "locator": "Problems with Sensing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Increased stimulation threshold at the electrode site (exit block), poor lead contact, new bundle branch block, or programming problems",
+   "source": 1,
+   "quote": "Causes include increased stimulation threshold at electrode site (exit block), poor lead contact, new bundle branch block, or programming problems",
+   "locator": "Problems with Sensing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Often non-specific symptoms; the ECG changes can be subtle or absent",
+   "source": 1,
+   "quote": "Diagnosis of pacemaker malfunction is challenging and often associated with non-specific clinical symptoms while ECG changes can be subtle or absent",
+   "locator": "Pacemaker Malfunction Overview",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment Suspected malfunction needs cardiology review for pacemaker interrogation and testing",
+   "source": 1,
+   "quote": "If pacemaker malfunction is suspected cardiology review is required to facilitate pacemaker interrogation and testing",
+   "locator": "ECG in Pacemaker Malfunction",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "rafa-06742",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 8,
+    "issue": "the Significance claim (VT risk with asynchronous ventricular pacing) quoted l-pace's magnet-mode section; no source ties that risk to undersensing",
+    "resolution": "claim and its label removed; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_7F23ERTCA8"
+}
