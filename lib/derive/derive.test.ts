@@ -579,6 +579,14 @@ describe("pharm (40 §40.4–§40.5)", () => {
     expect(beta[0]).toMatchObject({ route: `#/eor/fm/pharm/cardiovascular/antianginals/${C(3)}`, loc: "EOR › Family Medicine › Cardiovascular pharm", at: P(4) });
   });
 
+  it("an Overview part and its blocks are hosted on a route that opens the Overview card", () => {
+    const hosts = file<HostsJson>("hosts.json");
+    const route = `#/eor/fm/pharm/cardiovascular/antianginals/${P(1)}`;
+    expect(hosts[P(1)]?.route).toBe(route);
+    expect(hosts[B(70)]?.route).toBe(route);
+    expect(out.units.find((u) => u.title === "Overview")?.route).toBe(route);
+  });
+
   it("a system has a Pharm section only with drug tables, placed cards or pharmFiles (D3)", () => {
     const fm = file<NavJson>("g/fm/nav.json").systems;
     expect(fm.map((s) => s.pharm)).toEqual([{ sections: [{ id: "antianginals", title: "Antianginals" }] }, null, { sections: [] }]);

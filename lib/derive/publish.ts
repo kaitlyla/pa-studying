@@ -257,7 +257,8 @@ export function publish(c: Content): PublishResult {
     }
   }
   for (const [id, h] of pharmHome) {
-    const route = view(h.s, pharmView(h.s.data.file.id, h.section, id.startsWith("c_") ? id : null));
+    // The target opens the card (or Overview/LO card) holding the id; a collapsed card shows nothing.
+    const route = view(h.s, pharmView(h.s.data.file.id, h.section, id));
     const place = { route, loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) };
     hosts[id] = place;
     const ps = id.startsWith("c_") ? cardParts(id) : [parts.get(id)].filter((x) => x !== undefined);

@@ -1,6 +1,6 @@
 // The site frame (site-shell): header with tabs and search, sidebar (laptop: panel or 40px rail;
 // phone: drawer), the page, the footer, and the overlays. Routes per 10 §10.4.
-import { Component, Suspense, useEffect, useRef, useState, type ErrorInfo, type KeyboardEvent, type ReactNode } from "react";
+import { Component, Suspense, useEffect, useLayoutEffect, useRef, useState, type ErrorInfo, type KeyboardEvent, type ReactNode } from "react";
 import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import type { RefTabId } from "../../lib/derive/routes.ts";
 import { NotFoundError, useData } from "../data/load.ts";
@@ -296,7 +296,9 @@ export function App(): ReactNode {
   const mainRef = useRef<HTMLElement>(null);
   const routeKey = route.path;
 
-  useEffect(() => {
+  // A layout effect, so the reset runs before the new page's own effects scroll to their target;
+  // a passive effect here runs after its children's and would undo that scroll.
+  useLayoutEffect(() => {
     mainRef.current?.scrollTo?.({ top: 0 });
   }, [routeKey]);
 

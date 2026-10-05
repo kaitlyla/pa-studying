@@ -59,6 +59,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # tools/verify/rendered.test.ts drives Chromium.
+      - run: npx playwright install --with-deps chromium
       # Covers lib/, tools/, app/ and worker/ (vite.config.ts test projects); the threshold is set in vitest config.
       - run: npm run test:coverage
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

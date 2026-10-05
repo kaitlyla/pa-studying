@@ -23,7 +23,10 @@ let files: Map<string, unknown>;
 let server: DataServer;
 let app: Mounted | null = null;
 const scrolled: Element[] = [];
+/** Every scroll in call order: scrollIntoView's element, or the scroller a scrollTo moved. */
+const scrollOrder: Element[] = [];
 const originalScroll = Element.prototype.scrollIntoView;
+const originalScrollTo = Element.prototype.scrollTo;
 
 beforeAll(async () => {
   files = await publishedFixture();
@@ -34,8 +37,13 @@ beforeEach(() => {
   server = serveData(files);
   asOwner(false);
   scrolled.length = 0;
+  scrollOrder.length = 0;
   Element.prototype.scrollIntoView = function (this: Element) {
     scrolled.push(this);
+    scrollOrder.push(this);
+  };
+  Element.prototype.scrollTo = function (this: Element) {
+    scrollOrder.push(this);
   };
 });
 
@@ -45,6 +53,7 @@ afterEach(() => {
   server.restore();
   asOwner(false);
   Element.prototype.scrollIntoView = originalScroll;
+  Element.prototype.scrollTo = originalScrollTo;
 });
 
 function isSystemJson(v: unknown): v is SystemJson {
@@ -388,6 +397,8 @@ describe("pharm pages", () => {
     expect(cardBtn(pg, C(1)).getAttribute("aria-expanded")).toBe("true");
     for (const k of keysOf(antianginals(cv)).filter((k) => k !== C(1))) expect(cardBtn(pg, k).getAttribute("aria-expanded")).toBe("false");
     await until(() => scrolled.includes(cardEl(pg, C(1))), "scroll to the card");
+    // The new route's reset of the page scroller must not land after the scroll to the card.
+    expect(scrollOrder.at(-1)).toBe(cardEl(pg, C(1)));
   });
 
   it("meds panel card for a card-less drug row shows just the row and links to the row", async () => {

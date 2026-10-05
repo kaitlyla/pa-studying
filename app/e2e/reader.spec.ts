@@ -744,7 +744,7 @@ test.describe("pharm", () => {
       const sys = systemOf(g, s.id);
       for (const t of sys.topics) {
         const m = t.meds.find((x) => x.card !== null && x.target === x.card);
-        if (t.condition && m && m.card && listed.has(t.id)) {
+        if (m && m.card && listed.has(t.id)) {
           pick = { g, sys, topic: t.id, title: m.title, card: m.card, section: m.section };
           break;
         }

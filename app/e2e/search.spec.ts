@@ -138,7 +138,7 @@ test.describe("results", () => {
     const upd = firstUnit((u) => u.label === "update", "update flag");
     await box(page).fill(distinctiveQuery(upd));
     const r = await reveal(page, upd);
-    await expect(r.getByText("Updated guideline")).toBeVisible();
+    await expect(r.locator(".srch-chip.upd")).toHaveText("Updated guideline");
   });
 
   test("tab chips count results per tab, filter to one tab, and are disabled for tabs with none", async ({ page }) => {
@@ -211,7 +211,9 @@ test.describe("what is and is not found", () => {
   });
 
   test("text of her other course notes is not found", async ({ page }) => {
+    // Her source files live only on her machine, never in the repo, so CI has no course notes to read.
     const dir = join(ROOT, "Clin Med_Examples");
+    test.skip(!existsSync(dir), "her course notes are not in this checkout");
     const file = readdirSync(dir).find((f) => f.endsWith(".docx")) as string;
     const xml = strFromU8(unzipSync(readFileSync(join(dir, file)))["word/document.xml"] as Uint8Array);
     const paragraphs = xml.split("</w:p>").map((p) => [...p.matchAll(/<w:t[^>]*>([^<]*)<\/w:t>/g)].map((m) => m[1]).join(""));
