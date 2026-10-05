@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "rosa-90237",
+ "claims": [
+  {
+   "text": "Two screening tests: high-risk HPV testing and the Pap test (cervical cytology).",
+   "source": 0,
+   "quote": "Two types of screening tests for cervical abnormalities are used: Testing for high-risk HPV genotypes Pap test (cervical cytology)",
+   "locator": "Screening for Cervical Cancer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "ASCUS on a Pap alone: reflex HPV testing is the preferred follow-up.",
+   "source": 0,
+   "quote": "For patients screened with a Pap test alone, if the cytology result is ASCUS (atypical squamous cells of undetermined significance), which is an inconclusive finding, HPV testing is the preferred method of follow-up evaluation; this approach is called reflex HPV testing.",
+   "locator": "Screening for Cervical Cancer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "HPV negative: repeat screening in 3 years; if HPV positive, colposcopy.",
+   "source": 0,
+   "quote": "If HPV testing is negative, screening tests should be repeated in 3 years. If HPV testing is positive, colposcopy should be done.",
+   "locator": "Screening for Cervical Cancer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Cervical bleeding or a visible lesion: cervical biopsy when the lesion or an abnormal Pap result calls for it.",
+   "source": 1,
+   "quote": "Cervical biopsy is performed if the cervix is the source of the bleeding, and there is a cervical lesion or abnormal Papanicolaou (Pap) test result that indicates biopsy.",
+   "locator": "Evaluation, Testing",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "Detective task 01a109dc-f9e6-7272-9f40-6d2a98595aac (dispatched by shay-49353)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "Doc paragraph carried a literal '**HPV positive:**' that the claim text lacked.",
+    "resolution": "Revised to 'HPV negative: repeat screening in 3 years; if HPV positive, colposcopy.' (lead-in bold only); re-checked OK by shay-49353 at 2026-10-05T02:36Z."
+   }
+  ]
+ },
+ "block": "g_2SWVQ0BJJW"
+}
