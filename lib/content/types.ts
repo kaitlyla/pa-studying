@@ -235,6 +235,8 @@ export interface RefTabsFile {
 }
 
 export const OTHER_SECTION_IDS = ["emergency", "vaccines", "guidelines", "screenings", "legal", "pa", "vitamins", "pe", "notes"] as const;
+/** The Other sections whose record has a `gaps` list (content not from her notes); no other section has one. */
+export const OTHER_GAP_SECTIONS: readonly (typeof OTHER_SECTION_IDS)[number][] = ["screenings", "legal", "pe"];
 
 export interface OtherFile {
   v: 1;

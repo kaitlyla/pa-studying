@@ -1,12 +1,14 @@
 // The File page (`#/file/<d_id>`, 40 §40.3, UI file-viewer). The location line and Back come from
 // `from`; without it, from the document's first placement. Display by kind: Word → its blocks,
 // PDF → every page inline, image → full width (click opens the viewer), slides → one page at a time.
+// A Word page downloads as a PDF of the page (70 §70.2 "doc" scope).
 import { Component, useState, type ReactNode } from "react";
 import { docPath, HOSTS_PATH, type DocJson, type HostsJson } from "../../lib/derive/published.ts";
 import { fileLocation } from "../../lib/derive/routes.ts";
 import { DATA_BASE, NotFoundError, useData } from "../data/load.ts";
 import { UpdateNotes } from "../render/labels.tsx";
 import { useSite } from "../reader/data.ts";
+import { runDownload } from "../reader/PdfMenu.tsx";
 import { NotesBlock } from "../reader/blocks.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { DocActions, EditControls, EditRegion, PendingDocPage, ReplaceFailedNote, UploadProblem } from "../shell/mounts.tsx";
@@ -100,6 +102,12 @@ function FileView({ id, from }: { id: string; from: string | null }): ReactNode 
               </button>
             )}
             {word && <EditControls pageKey={pageKey} title={doc.name} />}
+            {word && (
+              <button type="button" className="btn" onClick={() => void runDownload({ kind: "doc" }, { doc })}>
+                <Icon n="dl" size={14} />
+                Download PDF
+              </button>
+            )}
             <DocActions doc={doc} from={from} />
             {doc.original && (
               <a className="btn" href={fileUrl(doc.original)} download>

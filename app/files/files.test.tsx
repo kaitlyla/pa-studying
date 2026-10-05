@@ -23,6 +23,15 @@ import { closeImageViewer, ImageViewer, openImageViewer } from "./imageViewer.ts
 import { PdfStatus } from "./pdf.tsx";
 import { SlideNav, slideKeys } from "./SlideNav.tsx";
 
+const pdf = vi.hoisted(() => ({
+  downloadPdf: vi.fn<(scope: unknown, input: unknown) => Promise<string>>(),
+}));
+
+vi.mock("../pdf/download.ts", async (actual) => ({
+  ...(await actual<typeof import("../pdf/download.ts")>()),
+  downloadPdf: pdf.downloadPdf,
+}));
+
 let files: Map<string, unknown>;
 let server: DataServer;
 let app: Mounted | null = null;
@@ -179,6 +188,27 @@ describe("File page", () => {
     expect(need(body.querySelector(`[data-anchor="${R(601)}"]`), "T3 row").textContent).toContain("T3");
     expect(page.querySelector("a[download]")).toBeNull();
     expect(page.querySelector(".imgv")).toBeNull();
+  });
+
+  it("downloads a Word document as a PDF of the page, with the Preparing… and Downloaded toasts", async () => {
+    let resolve: (name: string) => void = () => {};
+    pdf.downloadPdf.mockReset().mockImplementation(() => new Promise<string>((r) => (resolve = r)));
+    const { a, page } = await openFile(`#/file/${D(5)}`);
+    await click(byText(page, "button", "Download PDF"));
+    const doc = files.get(`docs/${D(5)}.json`);
+    expect(pdf.downloadPdf).toHaveBeenCalledWith({ kind: "doc" }, { doc });
+    const toast = (): string => a.container.querySelector(".toast span")?.textContent ?? "";
+    expect(toast()).toBe("Preparing…");
+    resolve("Thyroid notes.pdf");
+    await flush();
+    expect(toast()).toBe("Downloaded Thyroid notes.pdf");
+  });
+
+  it("offers Download PDF only on Word documents", async () => {
+    expect(published(`docs/${D(2)}.json`, isDocJson).kind).toBe("image");
+    const { page } = await openFile(`#/file/${D(2)}`);
+    expect(need(page.querySelector("h1"), "title").textContent).toBe("Renal chart");
+    expect(byText(page, "button", "Download PDF")).toBeNull();
   });
 
   it("shows a removed document as not on the site to a visitor", async () => {

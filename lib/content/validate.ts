@@ -11,7 +11,7 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
@@ -451,7 +451,7 @@ export const validateOther: Validator = (v, ctx) => {
   const ids = sections.map((s) => s.id);
   if (ids.join() !== OTHER_SECTION_IDS.join()) bad(ctx, ".sections", `the 9 sections in order ${OTHER_SECTION_IDS.join(", ")}`, ids);
   sections.forEach((s, i) => {
-    if (Object.hasOwn(s, "gaps") && s.id !== "legal" && s.id !== "screenings") bad(ctx, `.sections[${i}].gaps`, "no gaps key outside legal and screenings");
+    if (Object.hasOwn(s, "gaps") && !OTHER_GAP_SECTIONS.some((g) => g === s.id)) bad(ctx, `.sections[${i}].gaps`, `no gaps key outside ${OTHER_GAP_SECTIONS.join(", ")}`);
     if (s.lead !== null && s.id !== "vaccines") bad(ctx, `.sections[${i}].lead`, "null outside vaccines", s.lead);
   });
 };

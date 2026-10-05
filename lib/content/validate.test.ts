@@ -500,14 +500,14 @@ describe("places (20 §20.8)", () => {
     .map((sid) => ({ id: sid, title: sid, lead: null as string | null, files: [] as string[], links: [] as unknown[] }));
   const other = (f: (s: (typeof otherSections)[number]) => Record<string, unknown> = (s) => s) => ({ v: 1, sections: otherSections.map(f) });
 
-  it("accepts gaps on legal and screenings and a lead on vaccines", () => {
+  it("accepts gaps on screenings, legal and physical exam and a lead on vaccines", () => {
     expect(verdict("content/places/other.json", other((s) => (
-      s.id === "legal" || s.id === "screenings" ? { ...s, gaps: [G1] } : s.id === "vaccines" ? { ...s, lead: G2 } : s
+      s.id === "legal" || s.id === "screenings" || s.id === "pe" ? { ...s, gaps: [G1] } : s.id === "vaccines" ? { ...s, lead: G2 } : s
     )))).toBe("ok");
   });
 
   it("refuses a gaps key on any other section", () => {
-    expect(verdict("content/places/other.json", other((s) => (s.id === "vaccines" ? { ...s, gaps: [] } : s)))).toMatch(/no gaps key outside legal and screenings/);
+    expect(verdict("content/places/other.json", other((s) => (s.id === "vaccines" ? { ...s, gaps: [] } : s)))).toMatch(/no gaps key outside screenings, legal, pe/);
   });
 
   it("refuses a lead outside vaccines, and sections out of the signed order", () => {

@@ -105,12 +105,12 @@ describe("pre-curation files", () => {
     for (const { id, placement } of perTab) expect(r[placement.reftabs].files, placement.reftabs).toEqual([id]);
   });
 
-  it("other.json has the 9 sections in order, gaps only on legal and screenings, no lead", () => {
+  it("other.json has the 9 sections in order, gaps only on screenings, legal and physical exam, no lead", () => {
     const o = buildOther(docs);
     expect(o.sections.map((s) => s.id)).toEqual(["emergency", "vaccines", "guidelines", "screenings", "legal", "pa", "vitamins", "pe", "notes"]);
     expect(o.sections.find((s) => s.id === "screenings")).toEqual({ id: "screenings", title: "Screenings", lead: null, files: [d(2)], links: [], gaps: [] });
     expect(o.sections.find((s) => s.id === "notes")).toEqual({ id: "notes", title: "Note templates & documentation", lead: null, files: [d(5)], links: [] });
-    expect(o.sections.filter((s) => "gaps" in s).map((s) => s.id)).toEqual(["screenings", "legal"]);
+    expect(o.sections.filter((s) => "gaps" in s).map((s) => s.id)).toEqual(["screenings", "legal", "pe"]);
     expect(() => validateFile("content/places/other.json", o)).not.toThrow();
   });
 

@@ -331,7 +331,7 @@ describe("general and places", () => {
     await refused(["places", await draft("r", { reftabs })], new RegExp(`${B(999)} names nothing`), files);
     section("emergency").files = [];
     section("emergency").gaps = [];
-    await refused(["places", await draft("s", { other })], /no gaps key outside legal and screenings/, files);
+    await refused(["places", await draft("s", { other })], /no gaps key outside screenings, legal, pe/, files);
     await refused(["places", await draft("t", {})], /needs reftabs and\/or other/, files);
   });
 });

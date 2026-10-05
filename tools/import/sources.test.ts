@@ -20,7 +20,7 @@ describe("the committed inventory (30 §30.2)", () => {
     const sources = await loadSources(REPO);
     const count = (k: Source["kind"]) => sources.filter((s) => s.kind === k).length;
     expect(count("guide")).toBe(8);
-    expect(count("word")).toBe(19);
+    expect(count("word")).toBe(24);
     expect(count("pdf") + count("image") + count("slides")).toBe(18);
     expect(count("pharm")).toBe(10);
     expect(count("deck")).toBe(1);
@@ -30,8 +30,16 @@ describe("the committed inventory (30 §30.2)", () => {
 
   it("lists none of the files the design leaves out", async () => {
     const paths = (await loadSources(REPO)).filter((s) => s.kind !== "duplicate").map((s) => s.path);
-    const excluded = /EOR\.pdf$|SG\.pdf$|USPSTF guidelines\.pdf|ABG .*\.pdf$|FIRST AID|PSA \(update\)|OSCE|Genetics|Myocarditis|Geriatrics|Untitled document|Oral presentation|\/Info\.docx|accommadations|Syllabus|\.bak$|Psych Behavioural Health table|Clin Med_Examples|Patho_Examples|Theory_Examples|Physical Exam_Examples/;
+    const excluded = /EOR\.pdf$|SG\.pdf$|USPSTF guidelines\.pdf|ABG .*\.pdf$|FIRST AID|PSA \(update\)|OSCE|Genetics|Myocarditis|Geriatrics|Untitled document|Oral presentation|\/Info\.docx|accommadations|Syllabus|\.bak$|Psych Behavioural Health table|Clin Med_Examples|Patho_Examples|Theory_Examples/;
     expect(paths.filter((p) => excluded.test(p))).toEqual([]);
+    // Her physical-exam notes are the one course-note folder on the site (Other › Physical exam).
+    expect(paths.filter((p) => p.startsWith("Physical Exam_Examples/")).sort()).toEqual([
+      "Physical Exam_Examples/Cardiac -Theory.docx",
+      "Physical Exam_Examples/GI_ Skills.docx",
+      "Physical Exam_Examples/MSK_Physical_Exam_.docx",
+      "Physical Exam_Examples/Neuro Lab Checklist Summer 2026 (1).docx",
+      "Physical Exam_Examples/Pulm_ Physcial Exam .docx",
+    ]);
     expect(paths.filter((p) => p.startsWith("docx to fix/"))).toEqual(["docx to fix/--Anesthetics and Procedural Sedation Med List and LOs (2).docx"]);
   });
 

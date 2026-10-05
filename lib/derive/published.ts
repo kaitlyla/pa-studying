@@ -356,7 +356,7 @@ export interface OtherJson {
     lead: PubGap | null;
     links: PubLink[];
     files: DocList;
-    /** Present only on sections whose stored record has `gaps` (Legal, Screenings). */
+    /** Present only on sections whose stored record has `gaps` (OTHER_GAP_SECTIONS). */
     gaps?: PubGap[];
   }[];
 }

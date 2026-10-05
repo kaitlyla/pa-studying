@@ -17,6 +17,7 @@ import type {
   SystemJson,
   WorkupJson,
 } from "../../lib/derive/published.ts";
+import { pdfFileName } from "../../lib/pdf/index.ts";
 import { fileHash, guideBase, guideViewHash, isRefTab, otherHash, parseHash, pharmLoc, refHash, TAB_LABELS } from "../../lib/derive/routes.ts";
 
 const ROOT = fileURLToPath(new URL("../..", import.meta.url));
@@ -602,10 +603,10 @@ test.describe("general topics, workup and Other", () => {
     await expect.poll(() => hashOf(page)).toBe(listHash);
   });
 
-  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Legal and Screenings, plus the Vaccines lead", async ({ page }) => {
+  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal and Physical exam, plus the Vaccines lead", async ({ page }) => {
     const other = read<OtherJson>("other.json");
     expect(other.sections).toHaveLength(9);
-    expect(other.sections.filter((s) => s.gaps !== undefined).map((s) => s.title).sort()).toEqual(["Legal", "Screenings"]);
+    expect(other.sections.filter((s) => s.gaps !== undefined).map((s) => s.id)).toEqual(["screenings", "legal", "pe"]);
     const leads = other.sections.filter((s) => s.lead !== null);
     expect(leads.map((s) => s.title)).toHaveLength(1);
     expect(leads[0]?.title).toMatch(/vaccine/i);
@@ -880,5 +881,29 @@ test.describe("PDF", () => {
     const out = testInfo.outputPath("original.pdf");
     await download.saveAs(out);
     expect(readFileSync(out).equals(readFileSync(join(DATA, doc.original)))).toBe(true);
+  });
+
+  test("file viewer: a Word page's Download PDF shows Preparing…, then downloads a PDF of the page named after it", async ({ page }, testInfo) => {
+    test.setTimeout(180_000);
+    // Her physical-exam notes are Word pages; the smallest keeps the browser build short.
+    const pe = read<OtherJson>("other.json").sections.find((s) => s.id === "pe");
+    const words = (pe?.files.files ?? []).filter((f) => f.kind === "word");
+    const sized = words.map((f) => ({ id: f.id, bytes: statSync(join(DATA, "docs", `${f.id}.json`)).size })).sort((a, b) => a.bytes - b.bytes);
+    const doc = docs.find((d) => d.id === sized[0]?.id);
+    if (!doc) throw new Error("the published Physical exam section has no Word page");
+    await open(page, fileHash(doc.id, null));
+    await expect(h1(page)).toHaveText(doc.name);
+    const downloading = page.waitForEvent("download", { timeout: 150_000 });
+    await main(page).getByRole("button", { name: "Download PDF" }).click();
+    const toast = page.locator(".toast-region");
+    await expect(toast).toContainText("Preparing…");
+    const download = await downloading;
+    expect(download.suggestedFilename()).toBe(pdfFileName({ kind: "doc" }, { doc }));
+    const out = testInfo.outputPath("word-page.pdf");
+    await download.saveAs(out);
+    const bytes = readFileSync(out);
+    expect(bytes.subarray(0, 4).toString("latin1")).toBe("%PDF");
+    expect(bytes.toString("latin1")).toMatch(/\/Type\s*\/Page[^s]/);
+    await expect(toast).toContainText(`Downloaded ${download.suggestedFilename()}`);
   });
 });

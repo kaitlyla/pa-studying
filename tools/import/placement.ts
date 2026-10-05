@@ -1,7 +1,7 @@
 // Where each imported document is listed (30 §30.2 placements, 20 §20.7–§20.8), and the
 // pre-curation curation files the build reads (30 §30.14).
 import type { OtherFile, RefTab, RefTabsFile, StructureFile } from "../../lib/content/index.ts";
-import { OTHER_SECTION_IDS } from "../../lib/content/index.ts";
+import { OTHER_GAP_SECTIONS, OTHER_SECTION_IDS } from "../../lib/content/index.ts";
 import { REF_TABS } from "../../lib/derive/routes.ts";
 import type { RefTabId } from "../../lib/derive/routes.ts";
 import type { Category, Placement } from "./sources.ts";
@@ -49,7 +49,7 @@ export function buildRefTabs(docs: readonly PlacedDoc[]): RefTabsFile {
   return { v: 1, ...tabs };
 }
 
-/** `gaps: []` only on legal and screenings; `lead: null` everywhere (30 §30.14, 20 §20.8). */
+/** `gaps: []` only on the OTHER_GAP_SECTIONS; `lead: null` everywhere (30 §30.14, 20 §20.8). */
 export function buildOther(docs: readonly PlacedDoc[]): OtherFile {
   return {
     v: 1,
@@ -59,7 +59,7 @@ export function buildOther(docs: readonly PlacedDoc[]): OtherFile {
       lead: null,
       files: docs.filter((d) => d.placement !== null && "other" in d.placement && d.placement.other === id).map((d) => d.id),
       links: [],
-      ...(id === "legal" || id === "screenings" ? { gaps: [] } : {}),
+      ...(OTHER_GAP_SECTIONS.includes(id) ? { gaps: [] } : {}),
     })),
   };
 }
