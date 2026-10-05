@@ -101,6 +101,15 @@ async function saveRows(key: string, change: (doc: DocJSON) => DocJSON, trailers
   return land(filesOf(buildSave(unit, new Map([[part.slot.id, change(part.slot.doc)]]), TODAY)), `Edit: ${key}`, trailers, date);
 }
 
+/** Save `change` of table `block`'s rows on page `key` as the editor does: Changed is the build's own list. */
+async function saveTable(key: string, block: string, change: (doc: DocJSON) => DocJSON, date: string): Promise<{ sha: string; changed: string[] }> {
+  const unit = await unitAt(key);
+  const part = unit.parts.find((p): p is Extract<Part, { kind: "rows" }> => p.kind === "rows" && p.block.id === block);
+  if (!part) throw new Error(`no rows of ${block} on ${key}`);
+  const build = buildSave(unit, new Map([[part.slot.id, change(part.slot.doc)]]), TODAY);
+  return { sha: land(filesOf(build), `Edit: ${key}`, edit(key, build.changed), date), changed: build.changed };
+}
+
 // ---- prose blocks -------------------------------------------------------------------------------
 
 /** A prose block file with one paragraph per text, shaped like the fixture's B11. */
@@ -326,9 +335,9 @@ describe("pageVersions", () => {
   const ids = [R(101), R(102)];
   let n = 0;
   const c = (date: string, trailers: Trailers | null): CommitInfo => ({
-    sha: `sha${String(n++)}`, date, message: trailers ? commitMessage("Subject", trailers) : "Import",
+    sha: `sha${String(n++)}`, date, message: trailers ? commitMessage("Subject", trailers) : "Import", parents: [],
   });
-  const opts = { fromWord: true, device: MY_DEVICE, complete: true };
+  const opts = { fromWord: true, device: MY_DEVICE, complete: true, idsBefore: new Map<string, readonly string[]>() };
 
   it("labels each kind of version; the newest is Current", () => {
     const commits = [
@@ -387,9 +396,81 @@ describe("pageVersions", () => {
     expect(versions.map((v) => [v.sha, v.label, v.original])).toEqual([[second.sha, "Your edit", false], [first.sha, ORIGINAL_FROM_WORD, true]]);
   });
 
+  it("a commit naming only ids the page had at its parent is a version; one naming ids it never had is not", () => {
+    const deleted = c("2026-10-03T00:00:00Z", edit("k", [R(105)]));
+    const elsewhere = c("2026-10-04T00:00:00Z", edit("k", [R(106)]));
+    const idsBefore = new Map<string, readonly string[]>([[deleted.sha, [...ids, R(105)]], [elsewhere.sha, ids]]);
+    const versions = pageVersions([elsewhere, deleted], ids, { ...opts, idsBefore });
+    expect(versions.map((v) => [v.sha, v.current])).toEqual([[deleted.sha, true]]);
+  });
+
   it("an incomplete history settles no Original", () => {
     const versions = pageVersions([c("2026-10-01T00:00:00Z", { kind: "import" }), c("2026-10-02T00:00:00Z", edit("k", [R(101)]))], ids, { ...opts, complete: false });
     expect(versions.map((v) => [v.label, v.original])).toEqual([["Your edit", false]]);
+  });
+});
+
+// A commit is a version of a page when its Changed list names the page's ids at head or at the commit's
+// parent (Orchestrator ruling 2026-10-04 20:57Z, amending 50 §50.6).
+describe("versions of saves that delete rows", () => {
+  const A = `topic:fm:${R(101)}`;
+  const SYSTEM = "system:fm:cardiovascular";
+
+  /** Current is the page as it stands at main's head. */
+  function expectCurrentIsHead(v: Version | undefined): void {
+    expect(v?.current).toBe(true);
+    for (const path of [blockPath(10), CV_STRUCTURE]) expect(w.fake.readFile(path, v?.sha)).toBe(w.fake.readFile(path));
+  }
+
+  it("a delete-only save from the topic page is a version of it, and Current", async () => {
+    const e1 = await saveTable(A, B(10), (d) => setCell(d, R(101), 1, "irregular"), "2026-10-02T09:00:00Z");
+    const e2 = await saveTable(A, B(10), (d) => dropRows(d, R(102)), "2026-10-03T09:00:00Z");
+    expect(e2.changed).toEqual([R(102)]);
+
+    const { history, versions } = await versionsOf(A);
+    expect(history.unit.ids).not.toContain(R(102));
+    expect(versions.map((v) => v.sha)).toEqual([e2.sha, e1.sha]);
+    expectCurrentIsHead(versions[0]);
+  });
+
+  it("a delete-only save from the system page is a version of the system page and of the topic page that lost the row", async () => {
+    const e1 = await saveTable(A, B(10), (d) => setCell(d, R(101), 1, "irregular"), "2026-10-02T09:00:00Z");
+    const e2 = await saveTable(SYSTEM, B(10), (d) => dropRows(d, R(102)), "2026-10-03T09:00:00Z");
+    expect(e2.changed).toEqual([R(102)]);
+
+    const topic = await versionsOf(A);
+    expect(topic.versions.map((v) => v.sha)).toEqual([e2.sha, e1.sha]);
+    expectCurrentIsHead(topic.versions[0]);
+
+    const system = await versionsOf(SYSTEM);
+    expect(system.versions.map((v) => v.sha)).toEqual([e2.sha, e1.sha]);
+    expectCurrentIsHead(system.versions[0]);
+  });
+
+  it("after a row is added and then deleted, Current is the delete", async () => {
+    const e1 = await saveTable(A, B(10), (d) => addRow(setCell(d, R(101), 1, "irregular"), R(102), R(105), ["", "AF follow-up", ""]), "2026-10-02T09:00:00Z");
+    expect(e1.changed).toEqual(expect.arrayContaining([R(101), R(105)]));
+    const e2 = await saveTable(A, B(10), (d) => dropRows(d, R(105)), "2026-10-03T09:00:00Z");
+    expect(e2.changed).toEqual([R(105)]);
+
+    const { versions } = await versionsOf(A);
+    expect(versions.map((v) => v.sha)).toEqual([e2.sha, e1.sha]);
+    expectCurrentIsHead(versions[0]);
+    // Edit 1 still holds the added row, so it is not the page at head.
+    expect(rowIds(read<BlockFile>(blockPath(10), e1.sha).doc)).toContain(R(105));
+  });
+
+  it("reads the page at a version's parent with the head's blob reads shared, each blob once", async () => {
+    const e1 = await saveTable(A, B(10), (d) => setCell(d, R(101), 1, "irregular"), "2026-10-02T09:00:00Z");
+    await saveTable(A, B(10), (d) => dropRows(d, R(102)), "2026-10-03T09:00:00Z");
+
+    const from = w.fake.requests.length;
+    await versionsOf(A);
+    const paths = w.fake.requests.slice(from).filter((r) => r.method === "GET").map((r) => new URL(r.url).pathname);
+    expect(paths.some((p) => p.endsWith(`/git/trees/${e1.sha}`))).toBe(true);
+    const blobs = paths.filter((p) => p.includes("/git/blobs/"));
+    expect(blobs.length).toBeGreaterThan(0);
+    expect(new Set(blobs).size).toBe(blobs.length);
   });
 });
 

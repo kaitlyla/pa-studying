@@ -7,8 +7,8 @@ import { commitChanges, type CommitOutcome } from "./commit.ts";
 import { deviceId, versionTime } from "./format.ts";
 import { pool, type CommitInfo, type Git, type Identity, type TreeChange } from "./github.ts";
 import { parsePageKey } from "./pageKey.ts";
-import { Snapshot } from "./snapshot.ts";
-import { buildRestore, loadUnit, type EditUnit } from "./units.ts";
+import { Snapshot, type BlobTexts } from "./snapshot.ts";
+import { UnitError, buildRestore, loadUnit, type EditUnit } from "./units.ts";
 
 /** Commits that are versions of a page when their Changed list names one of its ids. */
 const VERSION_KINDS: ReadonlySet<CommitKind> = new Set(["edit", "restore", "doc-replace", "doc-restore"]);
@@ -45,23 +45,31 @@ function versionLabel(t: Trailers, device: string): string {
   }
 }
 
+const isVersionKind = (t: Trailers | null): t is Trailers => t !== null && VERSION_KINDS.has(t.kind);
+const namesAny = (t: Trailers, ids: ReadonlySet<string>): boolean => (t.changed ?? []).some((id) => ids.has(id));
+
 /**
  * The versions of a page among the commits of its file set (any order, each once), newest first.
  * A version is an edit, restore, doc-replace or doc-restore commit whose Changed list names one of
- * `ids`. The Original is the newest import, curation, authoring or inbox commit older than every
- * version, else the oldest version; it is only settled once the history is `complete` (every commit
- * of the file set read), since an older page of commits could hold an older version.
+ * the page's `ids` at main's head, or one of its ids at that commit's parent (`idsBefore`, by commit
+ * sha), so a save that only deleted rows of the page is one of its versions (Orchestrator ruling
+ * 2026-10-04 20:57Z, amending 50 §50.6). The Original is the newest import, curation, authoring or
+ * inbox commit older than every version, else the oldest version; it is only settled once the history
+ * is `complete` (every commit of the file set read), since an older page of commits could hold an
+ * older version.
  */
 export function pageVersions(
-  commits: Iterable<CommitInfo>, ids: readonly string[], opts: { fromWord: boolean; device: string; complete: boolean },
+  commits: Iterable<CommitInfo>, ids: readonly string[],
+  opts: { fromWord: boolean; device: string; complete: boolean; idsBefore: ReadonlyMap<string, readonly string[]> },
 ): Version[] {
   const want = new Set(ids);
   // Stable: commits with the same time keep the order GitHub listed them in (newest first).
   const all = [...commits]
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
     .map((c) => ({ c, t: parseTrailers(c.message) }));
-  const isVersion = (t: Trailers | null): t is Trailers => t !== null && VERSION_KINDS.has(t.kind) && (t.changed ?? []).some((id) => want.has(id));
-  const versions = all.filter((x) => isVersion(x.t));
+  const isVersion = (c: CommitInfo, t: Trailers | null): t is Trailers =>
+    isVersionKind(t) && (namesAny(t, want) || namesAny(t, new Set(opts.idsBefore.get(c.sha) ?? [])));
+  const versions = all.filter((x) => isVersion(x.c, x.t));
   const oldest = versions.at(-1);
   const original = opts.complete
     ? (all.slice(oldest ? all.indexOf(oldest) + 1 : 0).find((x) => x.t !== null && ORIGIN_KINDS.has(x.t.kind)) ?? oldest)
@@ -83,20 +91,28 @@ export class VersionHistory {
   /** The page at main's head: its file set and ids. */
   readonly unit: EditUnit;
   private readonly device: string;
+  /** Blob reads shared by the page's snapshots at head and at earlier commits. */
+  private readonly texts: BlobTexts;
   private readonly commits = new Map<string, CommitInfo>();
+  /** Commit sha → the page's ids at its parent, for version-kind commits naming none of its ids at head. */
+  private readonly idsBefore = new Map<string, readonly string[]>();
+  /** Commit sha → the page's ids at that commit. */
+  private readonly idsAtCommit = new Map<string, Promise<readonly string[]>>();
   private readonly pages = new Map<string, number>();
   /** Paths whose last page was full, so a later page may hold more. */
   private readonly unread = new Set<string>();
 
-  constructor(git: Git, unit: EditUnit, device: string) {
+  constructor(git: Git, unit: EditUnit, device: string, texts: BlobTexts = new Map()) {
     this.git = git;
     this.unit = unit;
     this.device = device;
+    this.texts = texts;
   }
 
   /** The page's history at main's head, first page of each path read. */
   static async open(git: Git, key: string): Promise<VersionHistory> {
-    const history = new VersionHistory(git, await loadUnit(key, await Snapshot.at(git)), deviceId());
+    const texts: BlobTexts = new Map();
+    const history = new VersionHistory(git, await loadUnit(key, await Snapshot.at(git, undefined, texts)), deviceId(), texts);
     await history.read(historyPaths(history.unit));
     return history;
   }
@@ -119,10 +135,50 @@ export class VersionHistory {
       else this.unread.delete(path);
       for (const c of list) if (!this.commits.has(c.sha)) this.commits.set(c.sha, c);
     });
+    await this.readIdsBefore();
+  }
+
+  /**
+   * The page's ids at the parent of each version-kind commit read so far whose Changed list names none
+   * of its ids at head: only such a commit can be a version through ids it has since lost.
+   */
+  private async readIdsBefore(): Promise<void> {
+    const head = new Set(this.unit.ids);
+    const pending = [...this.commits.values()].filter((c) => {
+      if (this.idsBefore.has(c.sha)) return false;
+      const t = parseTrailers(c.message);
+      return isVersionKind(t) && !namesAny(t, head);
+    });
+    await pool(pending, 6, async (c) => {
+      const parent = c.parents[0];
+      this.idsBefore.set(c.sha, parent === undefined ? [] : await this.idsAt(parent));
+    });
+  }
+
+  private idsAt(commit: string): Promise<readonly string[]> {
+    let ids = this.idsAtCommit.get(commit);
+    if (!ids) {
+      ids = this.loadIds(commit);
+      this.idsAtCommit.set(commit, ids);
+      ids.catch(() => this.idsAtCommit.delete(commit));
+    }
+    return ids;
+  }
+
+  /** The page's ids at `commit`; none when the page was not there then. */
+  private async loadIds(commit: string): Promise<readonly string[]> {
+    try {
+      return (await loadUnit(this.unit.key, await Snapshot.at(this.git, commit, this.texts))).ids;
+    } catch (e) {
+      if (e instanceof UnitError) return [];
+      throw e;
+    }
   }
 
   versions(): Version[] {
-    return pageVersions(this.commits.values(), this.unit.ids, { fromWord: this.unit.fromWord, device: this.device, complete: this.complete });
+    return pageVersions(this.commits.values(), this.unit.ids, {
+      fromWord: this.unit.fromWord, device: this.device, complete: this.complete, idsBefore: this.idsBefore,
+    });
   }
 }
 

@@ -3,23 +3,27 @@
 import { parseFile } from "../../lib/content/index.ts";
 import { pool, type Git } from "./github.ts";
 
+/** Blob sha → its text. Blobs are content-addressed, so snapshots of different commits can share one. */
+export type BlobTexts = Map<string, Promise<string>>;
+
 export class Snapshot {
-  private readonly texts = new Map<string, Promise<string>>();
+  private readonly texts: BlobTexts;
   readonly git: Git;
   readonly commit: string;
   /** Blob path → sha. */
   readonly files: ReadonlyMap<string, string>;
 
-  private constructor(git: Git, commit: string, files: ReadonlyMap<string, string>) {
+  private constructor(git: Git, commit: string, files: ReadonlyMap<string, string>, texts: BlobTexts) {
     this.git = git;
     this.commit = commit;
     this.files = files;
+    this.texts = texts;
   }
 
-  /** The tree of `commit` (or of `main`'s head when omitted). */
-  static async at(git: Git, commit?: string): Promise<Snapshot> {
+  /** The tree of `commit` (or of `main`'s head when omitted); `texts` shares blob reads with other snapshots. */
+  static async at(git: Git, commit?: string, texts: BlobTexts = new Map()): Promise<Snapshot> {
     const sha = commit ?? (await git.ref());
-    return new Snapshot(git, sha, await git.files(sha));
+    return new Snapshot(git, sha, await git.files(sha), texts);
   }
 
   has(path: string): boolean {
@@ -32,13 +36,13 @@ export class Snapshot {
   }
 
   text(path: string): Promise<string> {
-    let p = this.texts.get(path);
+    const sha = this.files.get(path);
+    if (sha === undefined) return Promise.reject(new Error(`${path} is not in ${this.commit}`));
+    let p = this.texts.get(sha);
     if (!p) {
-      const sha = this.files.get(path);
-      if (sha === undefined) return Promise.reject(new Error(`${path} is not in ${this.commit}`));
       p = this.git.blobText(sha);
-      this.texts.set(path, p);
-      p.catch(() => this.texts.delete(path));
+      this.texts.set(sha, p);
+      p.catch(() => this.texts.delete(sha));
     }
     return p;
   }

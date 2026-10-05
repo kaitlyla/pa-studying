@@ -80,6 +80,7 @@ export interface CommitInfo {
   message: string;
   /** Author date (ISO). */
   date: string;
+  parents: string[];
 }
 
 export interface Identity {
@@ -209,8 +210,10 @@ export class Git {
     const q = new URLSearchParams({ sha: "main", path, per_page: String(opts.perPage ?? 100) });
     if (opts.page !== undefined && opts.page > 1) q.set("page", String(opts.page));
     const res = await ghCall(`${this.base}/commits?${q.toString()}`);
-    const body = await expectJson<{ sha: string; commit: { message: string; author: { date: string } } }[]>(res, [200], `commits ${path}`);
-    return body.map((c) => ({ sha: c.sha, message: c.commit.message, date: c.commit.author.date }));
+    const body = await expectJson<{ sha: string; commit: { message: string; author: { date: string } }; parents: { sha: string }[] }[]>(
+      res, [200], `commits ${path}`,
+    );
+    return body.map((c) => ({ sha: c.sha, message: c.commit.message, date: c.commit.author.date, parents: c.parents.map((p) => p.sha) }));
   }
 
   /** `GET /compare/<base>...<head>` → its status (identical, ahead, behind, diverged). */
