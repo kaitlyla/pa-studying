@@ -1,9 +1,146 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "degenerative",
+   "title": "Degenerative/Neuromuscular disease"
+  },
+  {
+   "id": "cranial-nerve-palsies",
+   "title": "Cranial nerve palsies"
+  },
+  {
+   "id": "cva-stroke",
+   "title": "Cerebral vascular accident/Stroke"
+  },
+  {
+   "id": "trauma",
+   "title": "Trauma"
+  },
+  {
+   "id": "subarachnoid",
+   "title": "Subarachnoid hemorrhage/Cerebral aneurysm"
+  },
+  {
+   "id": "headache",
+   "title": "Headache"
+  },
+  {
+   "id": "peripheral-nerve-disease",
+   "title": "Peripheral nerve disease"
+  },
+  {
+   "id": "increased-icp",
+   "title": "Increased intracranial pressure"
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders"
+  },
+  {
+   "id": "other",
+   "title": "Neurology — other"
+  }
+ ],
+ "members": {
+  "r_6TMAT106PF": "degenerative",
+  "r_6KN7SP8X6D": "cranial-nerve-palsies",
+  "r_PY876DWCJW": "other",
+  "r_Y6B6VVE3JK": "other",
+  "r_GYBKDVQKDN": "other",
+  "r_KWDAXABE99": "other",
+  "r_CNSZKMCE71": "other",
+  "r_6RN8QPNBBD": "degenerative",
+  "r_EBRYQN9D3Z": "degenerative",
+  "r_SSD4QHDG50": "degenerative",
+  "r_CPVH8P3PE6": "degenerative",
+  "r_DQSJ2VJ601": "degenerative",
+  "r_NEXFNC4K6K": "cva-stroke",
+  "r_WT8GSB828S": "cva-stroke",
+  "r_1HKY2S4VNZ": "cva-stroke",
+  "r_CVAPYSDXMB": "trauma",
+  "r_F0CYGBW1T8": "trauma",
+  "r_9HZ1TYY47B": "cva-stroke",
+  "r_QY3PAHC6G0": "subarachnoid",
+  "r_JK8AQ4GZMG": "trauma",
+  "r_2KVWRGR9R1": "degenerative",
+  "r_NBX6HPCYD4": "degenerative",
+  "r_N85YKTH2HK": "headache",
+  "r_EGWX6GPSVA": "headache",
+  "r_R5KBD5HKAS": "peripheral-nerve-disease",
+  "r_65Y1W3MD9R": "headache",
+  "r_85FZ1DPWW2": "headache",
+  "r_BY3SQPF668": "increased-icp",
+  "r_GGTF55T8K9": "seizure-disorders",
+  "r_E4TRTQZ5KN": "other",
+  "r_2S5GV0ZDE9": "other",
+  "r_Q9JCMACNRY": "other",
+  "b_Q5QNNT93SX": "degenerative",
+  "b_6WAB54DNRF": "degenerative",
+  "b_SZBD9WVSR9": "cranial-nerve-palsies",
+  "b_83RSDNV51S": "other",
+  "b_E86X453628": "degenerative",
+  "b_8MP3B406M8": "cva-stroke",
+  "b_9XR8Y62M7Y": "subarachnoid",
+  "b_MW1Y8J6YD2": "trauma",
+  "b_AC4H0XKSYH": "degenerative",
+  "b_BNRA0B7AC8": "degenerative",
+  "b_VNQHQMTPY3": "degenerative",
+  "b_M75RV24WQD": "increased-icp",
+  "b_GAF2PJWA0E": "increased-icp",
+  "b_EV7PTY51P1": "seizure-disorders",
+  "b_EDD3JZP5BH": "seizure-disorders",
+  "b_BFEMG8FDRX": "other"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_CZ09STMYHR",
+   "pharmSection": "parkinson-disease",
+   "conditionRows": []
+  },
+  {
+   "block": "b_D7E9FWPSF7",
+   "pharmSection": "migraine",
+   "conditionRows": []
+  },
+  {
+   "block": "b_0QVDKW11W4",
+   "pharmSection": "seizure-disorders",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "parkinson-disease",
+   "title": "Parkinson disease",
+   "tables": [
+    "b_CZ09STMYHR"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "migraine",
+   "title": "Migraine",
+   "tables": [
+    "b_D7E9FWPSF7"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "seizure-disorders",
+   "title": "Seizure disorders",
+   "tables": [
+    "b_0QVDKW11W4"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

@@ -1,9 +1,164 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "traumatic-conditions",
+   "title": "Traumatic conditions"
+  },
+  {
+   "id": "spine-disorders",
+   "title": "Spine disorders"
+  },
+  {
+   "id": "inflammatory-conditions",
+   "title": "Inflammatory conditions"
+  },
+  {
+   "id": "rheumatologic-disorders",
+   "title": "Rheumatologic disorders"
+  },
+  {
+   "id": "plantar-fasciitis",
+   "title": "Plantar fasciitis"
+  },
+  {
+   "id": "ganglion-cysts",
+   "title": "Ganglion cysts"
+  },
+  {
+   "id": "osteoporosis",
+   "title": "Osteoporosis"
+  },
+  {
+   "id": "osteoarthritis",
+   "title": "Osteoarthritis"
+  },
+  {
+   "id": "other",
+   "title": "Orthopedics/Rheumatology — other"
+  }
+ ],
+ "members": {
+  "r_Q02HSXA34W": "traumatic-conditions",
+  "r_W5AVTBZJ6K": "traumatic-conditions",
+  "r_VBQ7RN0TMN": "spine-disorders",
+  "r_XVM7N5FDJX": "spine-disorders",
+  "r_1RFTREFZ0P": "spine-disorders",
+  "r_5JJZVJZT21": "traumatic-conditions",
+  "r_5NNXSBB0WQ": "spine-disorders",
+  "r_9NVXD52CYJ": "spine-disorders",
+  "r_JZ70W4A059": "spine-disorders",
+  "r_S33FPBBNXP": "spine-disorders",
+  "r_F12NF5QZKJ": "spine-disorders",
+  "r_JXFKWNNPW0": "inflammatory-conditions",
+  "r_Y3VMJP8ZCJ": "inflammatory-conditions",
+  "r_V1EYF06XNK": "inflammatory-conditions",
+  "r_M4K5R7KBVA": "inflammatory-conditions",
+  "r_DZT9MBQN2R": "inflammatory-conditions",
+  "r_5KKAF6WGWJ": "inflammatory-conditions",
+  "r_G3SVQPZQ7J": "inflammatory-conditions",
+  "r_VGB45XG2CE": "rheumatologic-disorders",
+  "r_S1Q0MZMYQQ": "traumatic-conditions",
+  "r_CMCEJWWXCT": "traumatic-conditions",
+  "r_SZ51F4WDF1": "traumatic-conditions",
+  "r_EMDF1RYYDM": "traumatic-conditions",
+  "r_MBAVXG0SFK": "traumatic-conditions",
+  "r_683XY8B598": "traumatic-conditions",
+  "r_WAK8V4C6TQ": "other",
+  "r_62K681AECZ": "plantar-fasciitis",
+  "r_W0F1F0JD9X": "other",
+  "r_01JM4MA0H0": "other",
+  "r_ANNATPSH9E": "traumatic-conditions",
+  "r_ZP5Q452G8H": "other",
+  "r_J14XVQKXZW": "other",
+  "r_FT6DHYNERZ": "other",
+  "r_PWSHMYGMPN": "other",
+  "r_GX1SQF9RJE": "ganglion-cysts",
+  "r_MYTK7WVAQZ": "traumatic-conditions",
+  "r_QVPHQ0W5ZB": "other",
+  "r_EN66E21MW6": "traumatic-conditions",
+  "r_EE3BZ5FQJP": "traumatic-conditions",
+  "r_H48NKETDP4": "rheumatologic-disorders",
+  "r_W2C1J0G1YY": "rheumatologic-disorders",
+  "r_S3DDT88ZYR": "osteoporosis",
+  "r_95KEHJMJ5D": "osteoarthritis",
+  "r_AWT15SK06T": "rheumatologic-disorders",
+  "r_AHGH6TDT8T": "rheumatologic-disorders",
+  "r_7ZNT09GNC9": "rheumatologic-disorders",
+  "b_MMZ715V7BD": "traumatic-conditions",
+  "b_29ZSCKNYHX": "traumatic-conditions",
+  "b_J5GD723ZPJ": "spine-disorders",
+  "b_1BR0X3QDAP": "spine-disorders",
+  "b_8PE8R6FYST": "spine-disorders",
+  "b_2AG5PZNYGK": "spine-disorders",
+  "b_D14RCEKESJ": "inflammatory-conditions",
+  "b_8H6Q5CD6G9": "inflammatory-conditions",
+  "b_VEPB9N4VZ9": "inflammatory-conditions",
+  "b_24YJBCANMS": "rheumatologic-disorders",
+  "b_09P06VQ1W5": "traumatic-conditions",
+  "b_ME9WQYC6SA": "other",
+  "b_TJY072GT0X": "other",
+  "b_SY6QWEDYV0": "other",
+  "b_3VSQ27Y53Y": "other",
+  "b_PC0EWFY6EZ": "ganglion-cysts",
+  "b_7CQMKFH1HY": "traumatic-conditions",
+  "b_59GTEAQYF9": "rheumatologic-disorders",
+  "b_B40H6C8A5H": "rheumatologic-disorders",
+  "b_B6PGZGCSJB": "osteoporosis",
+  "b_RYG6BHRGDN": "osteoporosis",
+  "b_CQENYRJCYF": "rheumatologic-disorders",
+  "b_EDAGXW2Y72": "rheumatologic-disorders",
+  "b_NNK5XHSQNC": "rheumatologic-disorders"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_49CGPMJYZ1",
+   "pharmSection": "gout",
+   "conditionRows": []
+  },
+  {
+   "block": "b_32PMKWAA2Q",
+   "pharmSection": "osteoporosis",
+   "conditionRows": []
+  },
+  {
+   "block": "b_RQT48JKHZS",
+   "pharmSection": "dmards",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "gout",
+   "title": "Gout",
+   "tables": [
+    "b_49CGPMJYZ1"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "osteoporosis",
+   "title": "Osteoporosis",
+   "tables": [
+    "b_32PMKWAA2Q"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "dmards",
+   "title": "Non-biologic & biologic DMARDs",
+   "tables": [
+    "b_RQT48JKHZS"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "guide": "fm",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto and general/workup/choose; keys = signed EORS fm general (labs, ekg, imaging, anatomy, procedures, guidelines, screenings, workup); PAEA Family Medicine EOR Topic List 2026 (scratch/fm/paea_tree.txt); workup = the mockup's 17 fm presentations verbatim (operator ruling 2026-10-04 03:19Z keeps PE under chest pain and hypertensive emergency under elevated blood pressure); Leader S10 ruling (selection recorded here, general.json written in S12)",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Labs are needed for ≥3 listed conditions in nearly every system (diabetes mellitus, thyroid disorders, lipid disorders, anemias, hepatitis, kidney disease, infectious disorders).",
+      "items": [
+        { "item": "CBC with differential and peripheral smear", "covers": "Hematologic: Anemias, Leukemia/lymphoma; Infectious disorders (leukocytosis); her guide: Hematology system" },
+        { "item": "Iron studies, B12 and folate, reticulocyte count", "covers": "Anemias (iron deficiency, B12/folate deficiency, anemia of chronic disease)" },
+        { "item": "BMP/CMP: electrolytes, BUN/creatinine, eGFR", "covers": "Chronic kidney disease; Acute kidney injury; Fluid and electrolyte disorders; Hypertensive disorders (baseline); Diabetes mellitus" },
+        { "item": "Hemoglobin A1c and fasting glucose", "covers": "Diabetes mellitus; Metabolic syndrome; Obesity" },
+        { "item": "Lipid panel", "covers": "Lipid disorders; Coronary artery disease risk; Metabolic syndrome" },
+        { "item": "TSH and free T4", "covers": "Thyroid/Parathyroid disorders (hypothyroidism, hyperthyroidism); Atrial fibrillation; Depressive disorders (secondary causes)" },
+        { "item": "Calcium, PTH and 25-OH vitamin D", "covers": "Thyroid/Parathyroid disorders; Vitamin D deficiency; Osteopenia/Osteoporosis" },
+        { "item": "Liver panel and hepatitis serologies", "covers": "Hepatic disorders (hepatitis, cirrhosis, NAFLD); Biliary tract disorders" },
+        { "item": "Lipase", "covers": "Pancreatitis" },
+        { "item": "Urinalysis and urine culture; urine albumin-to-creatinine ratio", "covers": "Renal/Genitourinary infectious disorders (cystitis, pyelonephritis); Nephrolithiasis; Diabetes mellitus (nephropathy screening)" },
+        { "item": "Troponin and BNP", "covers": "Coronary artery disease (acute coronary syndrome); Heart failure" },
+        { "item": "D-dimer", "covers": "Venous thromboembolism (deep vein thrombosis, pulmonary embolism)" },
+        { "item": "PT/INR and aPTT", "covers": "Anticoagulation monitoring (atrial fibrillation, VTE); Hepatic disorders (cirrhosis)" },
+        { "item": "Rapid strep, monospot and EBV serology", "covers": "Oropharyngeal disorders (pharyngitis); Infectious mononucleosis" },
+        { "item": "STI testing: NAAT for gonorrhea/chlamydia, HIV, syphilis (RPR/treponemal)", "covers": "Gynecologic infectious disorders; Renal/Genitourinary infectious disorders (urethritis, epididymitis); HIV" },
+        { "item": "ESR, CRP, RF, anti-CCP, ANA and uric acid", "covers": "Rheumatologic disorders (rheumatoid arthritis, SLE, polymyalgia rheumatica); Gout" },
+        { "item": "hCG", "covers": "Pregnancy; Abdominal pain and abnormal uterine bleeding workup" },
+        { "item": "PSA", "covers": "Renal/Genitourinary neoplasms (prostate cancer); Benign prostatic hyperplasia" }
+      ]
+    },
+    "ekg": {
+      "prominent": true,
+      "howto": null,
+      "why": "EKG is needed for ≥3 listed conditions: Arrhythmias/Conduction disorders, Coronary artery disease, Cardiomyopathy, Pericarditis, Valvular disorders; her guide's Cardiovascular system has its own arrhythmia notes.",
+      "items": [
+        { "item": "Rate, rhythm, axis and intervals", "covers": "Arrhythmias/Conduction disorders (atrial fibrillation, atrial flutter, AV blocks, bundle branch blocks)" },
+        { "item": "Supraventricular and ventricular tachycardias", "covers": "Arrhythmias/Conduction disorders (PSVT, ventricular tachycardia, ventricular fibrillation)" },
+        { "item": "Ischemia and infarction patterns (ST elevation/depression, T-wave inversion, Q waves)", "covers": "Coronary artery disease (acute coronary syndrome, stable angina)" },
+        { "item": "Diffuse ST elevation and PR depression", "covers": "Traumatic, infectious, and inflammatory disorders (pericarditis)" },
+        { "item": "Chamber enlargement and LVH", "covers": "Hypertensive disorders; Cardiomyopathy; Valvular disorders" },
+        { "item": "Hyperkalemia and hypokalemia changes", "covers": "Chronic kidney disease; Fluid and electrolyte disorders" },
+        { "item": "QT prolongation and drug effects", "covers": "Arrhythmias/Conduction disorders; Psychiatric medications (antipsychotics, TCAs)" },
+        { "item": "S1Q3T3 and sinus tachycardia in pulmonary embolism", "covers": "Venous thromboembolism (pulmonary embolism)" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging is needed for ≥3 listed conditions (pneumonia, pulmonary nodule, cholecystitis, fractures and spine disorders, DVT, nephrolithiasis, stroke).",
+      "items": [
+        { "item": "Chest X-ray", "covers": "Pulmonary infectious disorders (pneumonia); Heart failure; Pleural effusion; Pneumothorax; Foreign body aspiration" },
+        { "item": "Chest CT and low-dose CT", "covers": "Pulmonary nodule; Neoplasms (lung cancer screening); Interstitial lung disease" },
+        { "item": "CT pulmonary angiography; compression ultrasound of the leg", "covers": "Venous thromboembolism (pulmonary embolism, deep vein thrombosis)" },
+        { "item": "Echocardiogram", "covers": "Heart failure; Cardiomyopathy; Valvular disorders" },
+        { "item": "Right upper quadrant ultrasound", "covers": "Biliary tract disorders (cholelithiasis, cholecystitis)" },
+        { "item": "CT abdomen/pelvis", "covers": "Intestinal/Colorectal disorders (appendicitis, diverticulitis); Pancreatitis; Nephrolithiasis" },
+        { "item": "Plain films of the extremities and spine; Ottawa ankle and knee rules", "covers": "Traumatic conditions (fractures, sprains); Spine disorders; Osteoarthritis" },
+        { "item": "MRI of the spine and joints", "covers": "Spine disorders (disc herniation, cauda equina); Traumatic conditions (ligament and meniscus tears)" },
+        { "item": "DEXA scan", "covers": "Osteopenia/Osteoporosis" },
+        { "item": "Non-contrast head CT and MRI brain", "covers": "Cerebral vascular accident/Stroke; Headache red flags; Increased intracranial pressure" },
+        { "item": "Mammography and pelvic/transvaginal ultrasound", "covers": "Breast disorders; Ovarian cyst; Uterine disorders (fibroids); Pregnancy" },
+        { "item": "Thyroid ultrasound", "covers": "Thyroid/Parathyroid disorders (thyroid nodules); Endocrine neoplasms" }
+      ]
+    },
+    "anatomy": {
+      "prominent": true,
+      "howto": null,
+      "why": "Anatomy is needed for ≥3 listed conditions: Rheumatologic/Musculoskeletal traumatic conditions and spine disorders, Peripheral nerve disease (carpal tunnel), Ear and Eye disorders.",
+      "items": [
+        { "item": "Shoulder: rotator cuff muscles and impingement", "covers": "Rheumatologic/Musculoskeletal traumatic and inflammatory conditions (rotator cuff injury, impingement)" },
+        { "item": "Knee ligaments and menisci", "covers": "Traumatic conditions (ACL/MCL/meniscus injuries)" },
+        { "item": "Ankle ligaments", "covers": "Traumatic conditions (ankle sprain)" },
+        { "item": "Wrist and hand: carpal tunnel, median nerve, scaphoid", "covers": "Peripheral nerve disease (carpal tunnel syndrome); Traumatic conditions (scaphoid fracture); Ganglion cysts" },
+        { "item": "Lumbar spine dermatomes and nerve roots", "covers": "Spine disorders (low back pain, disc herniation, cauda equina syndrome, spinal stenosis)" },
+        { "item": "Ear anatomy: external, middle and inner ear", "covers": "Ear disorders (otitis externa, otitis media, cerumen impaction, BPPV)" },
+        { "item": "Eye anatomy and visual pathway", "covers": "Eye disorders (conjunctivitis, glaucoma, retinal detachment); Cranial nerve palsies" },
+        { "item": "Cranial nerves", "covers": "Cranial nerve palsies (Bell palsy); Cerebral vascular accident/Stroke" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "Office procedures are needed for ≥3 listed conditions: Wounds (lacerations), skin abscess, cerumen impaction, skin lesions, joint conditions.",
+      "items": [
+        { "item": "Laceration repair: suturing, staples, adhesive; tetanus prophylaxis", "covers": "Wounds (lacerations, bites)" },
+        { "item": "Incision and drainage", "covers": "Dermatologic infectious disorders (abscess); Breast disorders (abscess)" },
+        { "item": "Cerumen removal and ear irrigation", "covers": "Ear disorders (cerumen impaction)" },
+        { "item": "Skin biopsy (shave, punch, excisional) and cryotherapy", "covers": "Dermatologic neoplasms (melanoma, basal and squamous cell carcinoma); Skin lesions (actinic keratosis, warts)" },
+        { "item": "Joint aspiration and corticosteroid injection", "covers": "Gout; Osteoarthritis; Inflammatory conditions (bursitis)" },
+        { "item": "Splinting of common fractures and sprains", "covers": "Traumatic conditions" },
+        { "item": "Pap smear and pelvic exam", "covers": "Cervical disorders (cervical cancer screening); Vaginal/Vulvar disorders" },
+        { "item": "Foreign body removal (ear, nose, eye, skin)", "covers": "Ear disorders; Nose/Sinus disorders; Eye disorders (corneal foreign body)" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "Guidelines apply to ≥3 listed conditions; her guide cites GOLD, GINA, ADA, heart failure and hypertension guidelines.",
+      "items": [
+        { "item": "ACC/AHA hypertension guideline (BP categories, treatment thresholds)", "covers": "Hypertensive disorders" },
+        { "item": "ACC/AHA cholesterol guideline and ASCVD risk", "covers": "Lipid disorders; Coronary artery disease" },
+        { "item": "ACC/AHA heart failure guideline (GDMT)", "covers": "Heart failure; her guide: HF tx" },
+        { "item": "ADA Standards of Care", "covers": "Diabetes mellitus" },
+        { "item": "GOLD report", "covers": "Chronic obstructive pulmonary disease" },
+        { "item": "GINA report (stepwise therapy)", "covers": "Asthma; her guide: asthma stepwise table" },
+        { "item": "CHA2DS2-VASc anticoagulation guidance", "covers": "Arrhythmias/Conduction disorders (atrial fibrillation)" },
+        { "item": "ACLS algorithms", "covers": "Arrhythmias/Conduction disorders; Coronary artery disease; Urgent care presentations" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Screening applies to ≥3 listed conditions (breast, cervical, colorectal and lung neoplasms, diabetes, hypertension, lipid disorders, osteoporosis, depression, abdominal aortic aneurysm, HIV/hepatitis).",
+      "items": [
+        { "item": "USPSTF A and B recommendations", "covers": "Every screening-eligible condition on the FM list" },
+        { "item": "Breast, cervical, colorectal and lung cancer screening", "covers": "Breast disorders; Cervical disorders; Intestinal/Colorectal neoplasms; Pulmonary neoplasms" },
+        { "item": "Abdominal aortic aneurysm screening", "covers": "Vascular disorders (abdominal aortic aneurysm)" },
+        { "item": "Diabetes, hypertension and statin-use screening", "covers": "Diabetes mellitus; Hypertensive disorders; Lipid disorders" },
+        { "item": "Osteoporosis screening", "covers": "Osteopenia/Osteoporosis" },
+        { "item": "Depression, anxiety and unhealthy substance use screening (PHQ-9, GAD-7, AUDIT-C)", "covers": "Depressive disorders; Anxiety disorders; Substance-related disorders" },
+        { "item": "Intimate partner violence and elder abuse screening", "covers": "Intimate partner violence; Child/Elder neglect or violence" },
+        { "item": "HIV, hepatitis B and C, and STI screening", "covers": "HIV; Hepatic disorders (hepatitis); Gynecologic infectious disorders" },
+        { "item": "Adolescent HEADSS assessment", "covers": "Depressive disorders; Substance-related disorders (adolescents)" },
+        { "item": "Immunization schedules", "covers": "Infectious disorders (vaccine-preventable diseases)" }
+      ]
+    }
+  },
+  "workup": [
+    { "id": "abd-pain", "title": "Abdominal pain", "conds": "Appendicitis, Cholecystitis, Peptic ulcer disease, Diverticulitis" },
+    { "id": "chest-pain", "title": "Chest pain", "conds": "Coronary artery disease, Pericarditis, Pulmonary embolism, GERD" },
+    { "id": "cough", "title": "Cough", "conds": "Acute bronchitis, Pneumonia, Asthma, GERD" },
+    { "id": "dysuria", "title": "Dysuria", "conds": "Cystitis, Pyelonephritis, Urethritis" },
+    { "id": "htn-new", "title": "Elevated blood pressure", "conds": "Hypertension, Hypertensive crises" },
+    { "id": "fatigue", "title": "Fatigue", "conds": "Anemia, Hypothyroidism, Diabetes mellitus, Major depressive disorder" },
+    { "id": "fever", "title": "Fever", "conds": "Influenza, Pneumonia, Urinary tract infection" },
+    { "id": "headache", "title": "Headache", "conds": "Migraine, Tension headache, Cluster headache" },
+    { "id": "joint-pain", "title": "Joint pain", "conds": "Osteoarthritis, Gout, Rheumatoid arthritis" },
+    { "id": "edema", "title": "Leg swelling / edema", "conds": "Heart failure, Deep vein thrombosis, Venous insufficiency" },
+    { "id": "back-pain", "title": "Low back pain", "conds": "Low back strain, Lumbar disc herniation, Spinal stenosis" },
+    { "id": "palpitations", "title": "Palpitations", "conds": "Atrial fibrillation, PSVT, Hyperthyroidism, Panic disorder" },
+    { "id": "rash", "title": "Rash", "conds": "Contact dermatitis, Atopic dermatitis, Cellulitis" },
+    { "id": "sob", "title": "Shortness of breath", "conds": "Heart failure, Asthma, COPD, Pneumonia" },
+    { "id": "sore-throat", "title": "Sore throat", "conds": "Pharyngitis, Infectious mononucleosis, Peritonsillar abscess" },
+    { "id": "syncope", "title": "Syncope / dizziness", "conds": "Arrhythmias, Aortic stenosis, Orthostatic hypotension, BPPV" },
+    { "id": "weight-loss", "title": "Unintentional weight loss", "conds": "Hyperthyroidism, Diabetes mellitus, Malignancy, Major depressive disorder" }
+  ]
+}

@@ -1,10 +1,92 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "metabolic-syndrome",
+   "title": "Metabolic syndrome"
+  },
+  {
+   "id": "adrenal-disorders",
+   "title": "Adrenal disorders"
+  },
+  {
+   "id": "thyroid-parathyroid",
+   "title": "Thyroid/Parathyroid disorders"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "diabetes-mellitus",
+   "title": "Diabetes mellitus"
+  }
+ ],
+ "members": {
+  "r_KQZKAY7KTT": "metabolic-syndrome",
+  "r_JTV98RD1Y6": "adrenal-disorders",
+  "r_DZ65TE5YMN": "adrenal-disorders",
+  "r_CRQJW1WFG7": "adrenal-disorders",
+  "r_CAXVPGAVA3": "adrenal-disorders",
+  "r_7PQ08VGSBM": "thyroid-parathyroid",
+  "r_FPB305KKQ1": "thyroid-parathyroid",
+  "r_FRF9AC4DVJ": "thyroid-parathyroid",
+  "r_C2KRDCP4EK": "thyroid-parathyroid",
+  "r_JZ955TCYCS": "thyroid-parathyroid",
+  "r_83BJN4CBEM": "thyroid-parathyroid",
+  "r_EBW7TCXHD0": "thyroid-parathyroid",
+  "r_TR3HM9QVS2": "neoplasms",
+  "r_PT1XKMEY8T": "neoplasms",
+  "r_G02D86Y37J": "diabetes-mellitus",
+  "r_88CDKBQ5BV": "diabetes-mellitus",
+  "b_7C5K9CQW3X": "metabolic-syndrome",
+  "b_N76AY087CN": "metabolic-syndrome",
+  "b_7727VT4RZM": "adrenal-disorders",
+  "b_4GYZVEWSD3": "adrenal-disorders",
+  "b_KN4KKV8R7K": "adrenal-disorders",
+  "b_7K1YFVDAET": "adrenal-disorders",
+  "b_CHKZ3C0688": "thyroid-parathyroid",
+  "b_MAYX87D6MF": "thyroid-parathyroid",
+  "b_W4R7EJDCEN": "neoplasms",
+  "b_JDKNEPRWYY": "neoplasms",
+  "b_49NAV33JFP": "diabetes-mellitus",
+  "b_EHDW6QAAVT": "diabetes-mellitus"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_GD72CE5C0C",
+   "pharmSection": "weight-loss-medications",
+   "conditionRows": []
+  },
+  {
+   "block": "b_KAAVK9EK4Q",
+   "pharmSection": "anti-hyperglycemic-agents",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "weight-loss-medications",
+   "title": "Weight loss medications",
+   "tables": [
+    "b_GD72CE5C0C"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "anti-hyperglycemic-agents",
+   "title": "Anti-hyperglycemic agents",
+   "tables": [
+    "b_KAAVK9EK4Q"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_H8NRK0SA3W"
  ]

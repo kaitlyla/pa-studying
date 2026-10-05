@@ -1,10 +1,56 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "viral-infections",
+   "title": "Viral infections"
+  },
+  {
+   "id": "vector-borne-infections",
+   "title": "Vector-borne infections"
+  },
+  {
+   "id": "bacterial-infections",
+   "title": "Bacterial infections"
+  }
+ ],
+ "members": {
+  "r_DEGS33B2EJ": "viral-infections",
+  "r_NW0ND60NW2": "viral-infections",
+  "r_AFQFKZQ08G": "vector-borne-infections",
+  "r_S5R2FS26G2": "vector-borne-infections",
+  "r_N9BQJ5DVDN": "viral-infections",
+  "r_VY75VDJGXW": "bacterial-infections",
+  "r_VK62GT0EG6": "bacterial-infections",
+  "r_XH0P2Z87YA": "bacterial-infections",
+  "b_9439TF834M": "viral-infections",
+  "b_6E651NSWDR": "viral-infections",
+  "b_H2RRT5FDHS": "viral-infections",
+  "b_RQASPTKXQ0": "viral-infections",
+  "b_X067ZF2V01": "vector-borne-infections",
+  "b_J40H4M4VWS": "viral-infections",
+  "b_KYRK8G333Y": "bacterial-infections"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_QEYERFQ7AC",
+   "pharmSection": "hiv",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "hiv",
+   "title": "HIV",
+   "tables": [
+    "b_QEYERFQ7AC"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_7PB1T887H9",

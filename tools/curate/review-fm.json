@@ -1,0 +1,45 @@
+{
+  "v": 1,
+  "guide": "fm",
+  "rule": "plan 90 §90.2.7",
+  "reviewer": "nash-73488 (detective, task 01a1098e-a122-7c22-8203-cd3aea6f1591), spawned by the Leader shay-49353; did not author the drafts",
+  "curator": "otis-07742 (drafts); resumed by rosa-90237 (implementer-01a10979-af34-7453-8c3e-efedd1ce823a)",
+  "recheck": "Findings 1-3 checked valid by the Leader (shay-49353, 2026-10-05T01:04Z) against plan 90 §90.3.1 lines 108-109; corrected general-files entries re-checked by the Leader (shay-49353, 2026-10-05T01:06Z): OK — screenings no longer places the vaccine doc, USPSTF pair first; labs and guidelines in §30.2 order; workup sorted A-Z by title (Leader finding, plan 20 §20.8 line 216) re-checked by the Leader (shay-49353, 2026-10-05T01:12Z): OK",
+  "findings": [
+    {
+      "item": 1,
+      "file": "general-files-fm.json",
+      "id": "screenings d_Y3WR84415Y",
+      "finding": "Vaccine document placed in an EOR general topic. Line 19 places `d_Y3WR84415Y` (\"Vaccine schedule (Other › Vaccine schedules)\") under fm `screenings` with reason \"her immunization notes\". Verified `content/docs/d_Y3WR84415Y/doc.json`: `name: \"Vaccine notes\", source: \"vaccine_notes.docx\"` — plan 30 §30.2 places it `other vaccines`. §90.3.1 (plan 90 line 108): \"Documents of the other Other sections (**Vaccines**, Legal, PA professional, Vitamins, Physical exam, Note templates) have no general-topic subject and are **not placed**.\" Remove the placement. (The `screenings` item \"Immunization schedules\" in `general-items-fm.json` is a separate question — item selection, not a file placement — and stands.)",
+      "rule": "§90.3.1",
+      "fix": "Placement removed."
+    },
+    {
+      "item": 2,
+      "file": "general-files-fm.json",
+      "id": "labs",
+      "finding": "File order does not follow §30.2 table order. §90.3.1: \"Within a topic, fixed placements come first, then the others in 30 §30.2 table order.\" §30.2 row order for these docs is ABG Worksheet – Cases (row 26), ABG Workshop Workbook (27), Clinical Lab & Transfusion Reference (28), Urinalysis & Culture (29), then Bacterial Pathogens (50), EBV serology (51), Urinalysis & Culture 2026 – Summary (52), PANCE Histology (53). The draft lists Bacterial Pathogens and EBV serology **first** — it follows the mockup's `REF_TABS` labs order (bact, ebv, abgCases, …), which governs the reference tabs, not the EOR general topic. Reorder to the §30.2 sequence (if the two sessions read the rule differently, this goes to the Leader with both positions).",
+      "rule": "§90.3.1",
+      "fix": "Reordered to the §30.2 sequence."
+    },
+    {
+      "item": 3,
+      "file": "general-files-fm.json",
+      "id": "guidelines",
+      "finding": "File order does not follow §30.2 table order. §30.2 row order: ACLS Study Guide (31), ACLS algorithms (56), HF tx (57). The draft lists HF tx first, then ACLS algorithms, then ACLS Study Guide. (The fixed \"ACLS algorithms then ACLS Study Guide\" pair is §90.3.1's em placement; for fm both ACLS docs are ordinary subject placements, so table order governs.) Same note as finding 2 if the reading is disputed.",
+      "rule": "§90.3.1",
+      "fix": "Reordered: ACLS Study Guide, ACLS algorithms, HF tx."
+    }
+  ],
+  "ok": [
+    "**Sections (§90.2.1), all 14 systems:** every section title appears verbatim on the FM 2026 PAEA tree; `other` last; order = first appearance (verified against the dumps' block order, e.g. GI intestinal→biliary→hepatic→neoplasms→esophageal→gastric→GI-bleed→parasitic→pancreatitis). Cross-system categories used per the rulings: GI \"Parasitic infections\" (pinworm/tapeworm/hookworm/roundworm/schistosomiasis); Urgent Care topics to Dermatologic \"Allergic reactions\", Pulmonary \"Foreign body aspiration\", GI \"Toxidromes\", rest to \"Urgent Care — other\" (Acute Abdomen, AEIOU TIPS block — ruled loose fits). FM CV follows the signed spine exactly (MD_SECTIONS map incl. Heart Sounds → other, Atrial Myxoma → other, Syncope → Hypotension); pharm = the spine's six, incl. \"Antiplatelets, anticoagulants & fibrinolytics\".",
+    "**VERTIGO (Leader's check):** b_WQHHDWND7D label row r_000K49FKRM \"VERTIGO | Peripheral | | Central |\" → heading; rows r_E4TRTQZ5KN/r_2S5GV0ZDE9/r_Q9JCMACNRY start topics under §40.2, no `titled` — correct. No FM Neurologic category names vertigo (CVA/Stroke, Cranial nerve palsies, Degenerative/Neuromuscular, Fetal alcohol, Gait dysfunction, Headache); \"vertigo\" is not verbatim anywhere on the FM list (only BPPV under EENOT Ear disorders, and these rows compare peripheral vs central vertigo generally, not BPPV) → \"Neurology — other\" is correct. Meningitis rows likewise (not verbatim on the FM list) → other.",
+    "**Titled pairs (all 4 qualify — label names the condition, row below holds its notes, cell picks the naming cell):** pulmonary r_64DQJN3AA1 (\"PULM | Acute Exacerbation of COPD (AECOPD)\", cell 1) → r_T9R87MBNNP; GI r_N20550ZC6T (\"Gastroenteritis\", cell 0) → r_D0GW0261GT; psych DEPRESSION PHARM r_K7R51F2RA1 (\"Serotonin Syndrome\") → r_D2R5C8RRMX; psych r_HQRNDPFYKZ (\"Neuroleptic Malignant Synd.\") → r_T348Q2DRMQ. Serotonin Syndrome condition row correctly takes the nearest prior topic's section (Prolonged Grief Disorder → Trauma/Stress; verified block order: DEPRESSION PHARM [17] directly follows the PGD table [15]).",
+    "**Row kinds:** all 20 curator corrections across systems hold \"only a label and/or column headings\" (e.g. r_SNDE4PXYPV \"Blocks\", r_XCZV2WA8ZA Metabolic Syndrome label row, r_HY4GZESXQE \"Nose/Sinus\", r_MM3YDJ0SCS, r_2N117CFHDW, r_2KA0JJN9VW, r_6PK89CP989, r_64DQJN3AA1, psych's r_Q2GS2XVNKB/r_ZV8WNMMXAG/r_YS3EM7JSPH, neuro's r_AHPNRJHJWB/r_V62FA20K4M); commands files carry exactly the corrected marks; pulmonary's one-column-table row r_SSS0JY8G98 correctly stays content.",
+    "**Split:** cardiovascular b_R28SDN26QT at [40,48,67,71] — dump confirms VALVULAR DISORDERS (notes of its own → listed), Heart Sounds: → other, Murmurs and Murmur Accentuation Maneuvers → valvular, per the spine.",
+    "**Placements:** blank-only prose blocks follow the preceding item (urgent-care b_TFY2NRS3X9/b_G13QJBP02J → toxidromes, verified positions); system title lines → first topic's section, unlisted, per the spine's treatment; image/prose blocks b_NAE62386NX/b_CT40CK623H/b_EWJYQHQTB5 → Asthma (b_EWJYQHQTB5 \"Management Basics\" is bold → correctly listed), b_49NAV33JFP → Diabetes mellitus (no title line, not listed), b_7727VT4RZM → adrenal, b_TV6V8BZ5AK → Eating disorders, b_8YAVNAQYKN → Substance (not bold → not listed), b_67NDW2AZ40 → Renal disease, b_A948S7RQC4/b_FSAP66PF7P → allergic/toxidromes, b_MN6CASV4N1 → ILD, b_1TST7H95DH → Hematology — other, b_9C6NP9TK9R → Pregnancy, b_VGX7CWRZ3E → Intestinal/Colorectal (bold IBD title → listed).",
+    "**Drug tables & pharm sections:** 7/4/3/0/2/3/3/1/6/1/0/0 tables per system, no condition rows except psych's r_D2R5C8RRMX; titles per §90.2.5 (label-named therapy areas in sentence case; \"PHARM\"/\"DRUG\"/\"ACUTE\"/\"Maintenance Therapy\"/\"Class\" → condition their drugs treat; combined labels → \"Anti-diarrheals & antiemetics\", \"Non-biologic & biologic DMARDs\", \"FGAPs & SGAPs\", \"Antiplatelets, anticoagulants & fibrinolytics\").",
+    "**General items (§90.3.1):** keys = the 8 signed fm keys; all 7 topics prominent with `howto: null` (≥3 listed conditions each); items name FM-list conditions or her guide. Workup = the mockup's 17 fm presentations verbatim (ids, titles, `conds` identical to `site-data.js` `fm: [`), PE under chest pain and hypertensive emergency under elevated BP preserved. Fixed \"USPSTF guidelines\" then \"A and B Recommendations | USPSTF\" first/second in screenings ✓.",
+    "No open items on any system's structure drafts; the three findings above are the only disagreements."
+  ]
+}

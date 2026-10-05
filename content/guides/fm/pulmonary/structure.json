@@ -1,12 +1,144 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "asthma",
+   "title": "Asthma"
+  },
+  {
+   "id": "copd",
+   "title": "Chronic obstructive pulmonary disease"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "pleural-effusion",
+   "title": "Pleural effusion"
+  },
+  {
+   "id": "pulmonary-nodule",
+   "title": "Pulmonary nodule"
+  },
+  {
+   "id": "neoplasms",
+   "title": "Neoplasms"
+  },
+  {
+   "id": "pneumothorax",
+   "title": "Pneumothorax"
+  },
+  {
+   "id": "sleep-apnea",
+   "title": "Sleep apnea"
+  },
+  {
+   "id": "interstitial-lung-disease",
+   "title": "Interstitial lung disease"
+  },
+  {
+   "id": "other",
+   "title": "Pulmonary — other"
+  }
+ ],
+ "members": {
+  "r_Q8SVR4ASHJ": "asthma",
+  "r_JC5J9CB5PT": "copd",
+  "r_T9R87MBNNP": "copd",
+  "r_B563X5QCPQ": "infectious-disorders",
+  "r_CZTCCR1WRK": "other",
+  "r_G4E21PJ93J": "pleural-effusion",
+  "r_AD42T61HYZ": "pulmonary-nodule",
+  "r_DHFM4WWC9P": "neoplasms",
+  "r_1V2BTDQCXY": "infectious-disorders",
+  "r_9SWCJEXGV3": "infectious-disorders",
+  "r_J5C8BRAX2N": "pneumothorax",
+  "r_14J7M6BGEX": "infectious-disorders",
+  "r_TYWN5N1GJC": "other",
+  "r_7P8H05689V": "sleep-apnea",
+  "r_C2AKJA6PAN": "interstitial-lung-disease",
+  "r_91Z05SPSR7": "interstitial-lung-disease",
+  "r_QJC8NJ2ABX": "interstitial-lung-disease",
+  "r_5E0N99TQKZ": "interstitial-lung-disease",
+  "r_J4JEG56WCA": "interstitial-lung-disease",
+  "r_5AZMKBF43V": "interstitial-lung-disease",
+  "b_PP5P63DWBF": "asthma",
+  "b_NAE62386NX": "asthma",
+  "b_EWJYQHQTB5": "asthma",
+  "b_EXS4SVPT3W": "asthma",
+  "b_CT40CK623H": "asthma",
+  "b_669KQ1GSF9": "asthma",
+  "b_GTTCSS69CB": "asthma",
+  "b_NYFR5P37QK": "copd",
+  "b_CAW2YGKGKG": "infectious-disorders",
+  "b_2ECXBTK42V": "other",
+  "b_36H5WMYWH0": "pleural-effusion",
+  "b_SKSD6BG6BQ": "neoplasms",
+  "b_SHAC6H79XE": "infectious-disorders",
+  "b_N4DD276TCX": "pneumothorax",
+  "b_2NVEFTTD3K": "infectious-disorders",
+  "b_KGDRTW6RVY": "infectious-disorders",
+  "b_5P5R1TWJY0": "other",
+  "b_MN6CASV4N1": "interstitial-lung-disease",
+  "b_K4PFZ26H63": "interstitial-lung-disease",
+  "b_3KE3CKJYEW": "interstitial-lung-disease",
+  "b_GP1AEJNYKG": "interstitial-lung-disease"
+ },
+ "listed": {
+  "b_EWJYQHQTB5": "Management Basics"
+ },
+ "drugTables": [
+  {
+   "block": "b_N8QQTH65HZ",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_X6YG6PQBRV",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_1RNREV9M7H",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_8MP0YM657A",
+   "pharmSection": "tuberculosis",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "asthma",
+   "title": "Asthma",
+   "tables": [
+    "b_N8QQTH65HZ",
+    "b_X6YG6PQBRV",
+    "b_1RNREV9M7H"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "tuberculosis",
+   "title": "Tuberculosis",
+   "tables": [
+    "b_8MP0YM657A"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_S1B2JMQ6J1"
- ]
+ ],
+ "titled": {
+  "r_T9R87MBNNP": 1
+ }
 }

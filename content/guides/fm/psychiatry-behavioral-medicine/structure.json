@@ -1,13 +1,215 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "eating-disorders",
+   "title": "Eating disorders"
+  },
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders"
+  },
+  {
+   "id": "bipolar",
+   "title": "Bipolar and related disorders"
+  },
+  {
+   "id": "depressive-disorders",
+   "title": "Depressive disorders"
+  },
+  {
+   "id": "trauma-stress",
+   "title": "Trauma/Stress-related disorders"
+  },
+  {
+   "id": "ipv",
+   "title": "Intimate partner violence"
+  },
+  {
+   "id": "child-elder",
+   "title": "Child/Elder neglect or violence"
+  },
+  {
+   "id": "sleep-wake",
+   "title": "Sleep-wake disorders"
+  },
+  {
+   "id": "substance",
+   "title": "Substance-related disorders"
+  },
+  {
+   "id": "schizophrenia",
+   "title": "Schizophrenia spectrum and other psychotic disorders"
+  },
+  {
+   "id": "other",
+   "title": "Psychiatry/Behavioral Medicine — other"
+  }
+ ],
+ "members": {
+  "r_AQ1MB7K325": "eating-disorders",
+  "r_XDBVNTPE02": "eating-disorders",
+  "r_VN7S1FN9AM": "anxiety-disorders",
+  "r_HBD4FDD97B": "anxiety-disorders",
+  "r_3131WQZRRZ": "anxiety-disorders",
+  "r_749EH6VKRA": "anxiety-disorders",
+  "r_2W0Y9M6RNP": "anxiety-disorders",
+  "r_6PM4BB4149": "anxiety-disorders",
+  "r_S2S50SGCBT": "anxiety-disorders",
+  "r_81FDVC2MRG": "bipolar",
+  "r_2MGD55KEEF": "bipolar",
+  "r_WDS45MJ11K": "depressive-disorders",
+  "r_6AQNJ2AYK9": "depressive-disorders",
+  "r_FN38MD3G55": "depressive-disorders",
+  "r_9S19A8RRD8": "depressive-disorders",
+  "r_PASAS75ENA": "trauma-stress",
+  "r_D2R5C8RRMX": "trauma-stress",
+  "r_GHYTQPDD9Z": "trauma-stress",
+  "r_N2GVZPGWWE": "trauma-stress",
+  "r_0E9RP7FCWR": "trauma-stress",
+  "r_8TBFV2EJD9": "ipv",
+  "r_PJZ8YF6XE2": "child-elder",
+  "r_WQ46PM71D7": "child-elder",
+  "r_N84CX0SW14": "other",
+  "r_87GZWFSG4Y": "sleep-wake",
+  "r_F2K52QQZX8": "substance",
+  "r_HQ467PFMRJ": "substance",
+  "r_6GNB54Y60M": "substance",
+  "r_DGY2ATHB29": "substance",
+  "r_DTRD1GE717": "substance",
+  "r_7HY7BCMQ7T": "substance",
+  "r_QV769VGVYK": "substance",
+  "r_46MPG02CDE": "substance",
+  "r_DHY6A3VD2C": "substance",
+  "r_0T91V1WEHH": "schizophrenia",
+  "r_4MARB8TGBK": "schizophrenia",
+  "r_5BKH285CN7": "schizophrenia",
+  "r_9SQZDM5GVB": "schizophrenia",
+  "r_TKH09SCGQ2": "schizophrenia",
+  "r_ZSEBEQBYFC": "schizophrenia",
+  "r_CWXJ1BM715": "schizophrenia",
+  "r_2ZTD3SMA91": "schizophrenia",
+  "r_ESSFA5E42B": "schizophrenia",
+  "r_T348Q2DRMQ": "schizophrenia",
+  "b_ZKF49H430A": "eating-disorders",
+  "b_TV6V8BZ5AK": "eating-disorders",
+  "b_BG5RJCJ7BF": "anxiety-disorders",
+  "b_RDHJH3K66H": "anxiety-disorders",
+  "b_K7ZS9JM4F5": "bipolar",
+  "b_136667KWPG": "bipolar",
+  "b_3SBRDZTJND": "depressive-disorders",
+  "b_SZEHYCYVQC": "depressive-disorders",
+  "b_XGVT5G1XCK": "trauma-stress",
+  "b_7Z78FDT6G3": "trauma-stress",
+  "b_RDFFVQBCA7": "trauma-stress",
+  "b_RK401ZBKNF": "child-elder",
+  "b_Q9HB0NQVDN": "other",
+  "b_13TV34VZRB": "sleep-wake",
+  "b_8YAVNAQYKN": "substance",
+  "b_74RG8QGF67": "substance",
+  "b_YH4KCHBY2G": "substance",
+  "b_NWDP4YA7G4": "substance",
+  "b_B181J65YS5": "schizophrenia",
+  "b_1D1P1D6N7M": "schizophrenia",
+  "b_SMP4VZN7EE": "schizophrenia",
+  "b_3D9QQ6NJ94": "schizophrenia",
+  "b_PNG1BEFS8F": "schizophrenia"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_TKBAAE2Y1G",
+   "pharmSection": "anxiety-disorders",
+   "conditionRows": []
+  },
+  {
+   "block": "b_PREHS52PWK",
+   "pharmSection": "bipolar-disorder",
+   "conditionRows": []
+  },
+  {
+   "block": "b_NFV40YVN39",
+   "pharmSection": "depression",
+   "conditionRows": [
+    "r_D2R5C8RRMX"
+   ]
+  },
+  {
+   "block": "b_QMP6B9ASCW",
+   "pharmSection": "insomnia",
+   "conditionRows": []
+  },
+  {
+   "block": "b_R5ZDFEEXXF",
+   "pharmSection": "fgaps-sgaps",
+   "conditionRows": []
+  },
+  {
+   "block": "b_V7R58S7X9S",
+   "pharmSection": "fgaps-sgaps",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "anxiety-disorders",
+   "title": "Anxiety disorders",
+   "tables": [
+    "b_TKBAAE2Y1G"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "bipolar-disorder",
+   "title": "Bipolar disorder",
+   "tables": [
+    "b_PREHS52PWK"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "depression",
+   "title": "Depression",
+   "tables": [
+    "b_NFV40YVN39"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "insomnia",
+   "title": "Insomnia",
+   "tables": [
+    "b_QMP6B9ASCW"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "fgaps-sgaps",
+   "title": "FGAPs & SGAPs",
+   "tables": [
+    "b_R5ZDFEEXXF",
+    "b_V7R58S7X9S"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_YRZTTQKKKT",
   "d_T4RDNVC8X1"
- ]
+ ],
+ "titled": {
+  "r_D2R5C8RRMX": 0,
+  "r_T348Q2DRMQ": 0
+ }
 }
