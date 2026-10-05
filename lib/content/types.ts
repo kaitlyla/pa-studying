@@ -185,8 +185,31 @@ export interface CardsFile {
   /**
    * `in`: the class card this card's notes show inside (display only), where another of her files
    * covers the same class; such a card is never shown as a card of its own.
+   * `for`: the pharm sections (ids, as in every guide's structure) her file wrote this card's notes
+   * for, where it files them under one use ("Antiarrhythmics:", "BPH"); its notes show only there and
+   * in meds panels of conditions mapped to them (`UsesFile.conditions`). Display only. A card without
+   * it is written for any use.
    */
-  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string }[];
+  cards: { id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string; for?: string[] }[];
+}
+
+/**
+ * Pharm-notes lines written for one use inside notes that are otherwise about the whole class,
+ * judged line by line ("Clin Use: Stable angina - Variant angina" in her angina notes on CCBs).
+ * Display only: her notes are never edited. A line shows only on the pharm sections in `for` and in
+ * meds panels of conditions mapped to them, and only while it still reads exactly as judged.
+ */
+export interface UsesFile {
+  v: 1;
+  /** `block`: the notes block; `text`: the line's collapsed text; `for`: pharm section ids. */
+  lines: { block: string; text: string; for: string[] }[];
+  /**
+   * Which of a system's pharm sections are relevant to each of its condition sections (`section`
+   * null: a system without sections): the pharm sections whose drugs treat its conditions. A
+   * condition's meds panel shows only rows from tables in those sections, and only their notes.
+   * Every condition section of every system with drug tables has exactly one entry; `for` may be empty.
+   */
+  conditions: { guide: GuideId; system: string; section: string | null; for: string[] }[];
 }
 
 /**

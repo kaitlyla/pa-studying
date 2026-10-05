@@ -236,6 +236,7 @@ describe("runImport", () => {
     expect(other.sections.filter((s) => s.id !== "emergency").flatMap((s) => s.files)).toEqual([]);
     expect(await readContent(root, "content/pharm/cards.json")).toEqual({ v: 1, cards: [] });
     expect(await readContent(root, "content/pharm/trims.json")).toEqual({ v: 1, rows: {}, lines: [] });
+    expect(await readContent(root, "content/pharm/uses.json")).toEqual({ v: 1, lines: [], conditions: [] });
     expect(await readContent(root, "content/updates/flags.json")).toEqual({ v: 1, flags: [] });
     expect(await readContent(root, "content/updates/concepts.json")).toEqual({ v: 1, concepts: [] });
     expect(await readContent(root, "content/updates/checks.json")).toEqual({ v: 1, lastRun: null, nextRun: null, sources: [], seen: {}, seenUrl: {} });

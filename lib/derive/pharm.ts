@@ -1,5 +1,5 @@
 // Pharm cards, alias matching, pharm sections, drug-table stubs and meds panels (plan 40 §40.4–§40.5).
-import type { CardsFile, StructureFile } from "../content/types.ts";
+import type { CardsFile, StructureFile, UsesFile } from "../content/types.ts";
 import { escapeRegExp } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import { collapse, firstCell, type Row, type Table } from "./text.ts";
@@ -68,6 +68,14 @@ export class CardMatcher {
     const i = this.cards.findIndex((c) => c.id === classId);
     return i >= 0 && (this.tests[i]?.(text) ?? false);
   }
+
+  /**
+   * Whether any of the class card's group was written for the pharm section: a card without `for`
+   * is written for any use, so a group shows wherever one of its cards may.
+   */
+  relevantIn(classId: string, section: string): boolean {
+    return this.membersOf(classId).some((m) => m.for === undefined || m.for.includes(section));
+  }
 }
 
 /** One system of one guide, as the pharm derivations need it. */
@@ -89,6 +97,38 @@ export interface PlacedSection {
 export type Placements = Map<string, PlacedSection>;
 
 export const sectionKey = (guide: string, system: string, section: string): string => `${guide}/${system}/${section}`;
+
+/** A topic's condition section as a key of `SystemJson.panelSections` ("" in a system without sections). */
+export const conditionKey = (section: string | null): string => section ?? "";
+
+/**
+ * The pharm sections relevant to each condition section (content/pharm/uses.json `conditions`), by
+ * `sectionKey(guide, system, conditionKey(section))`. Every condition section of every system with drug
+ * tables has exactly one entry, naming only that system's pharm sections, so no panel is left to chance.
+ */
+export function conditionUses(conditions: UsesFile["conditions"], systems: readonly PharmSystem[]): Map<string, ReadonlySet<string>> {
+  const out = new Map<string, ReadonlySet<string>>();
+  const where = "content/pharm/uses.json";
+  const keysOf = (s: PharmSystem): (string | null)[] => (s.structure.sections.length > 0 ? s.structure.sections.map((x) => x.id) : [null]);
+  for (const c of conditions) {
+    const s = systems.find((x) => x.guide === c.guide && x.system === c.system);
+    const at = `${c.guide}/${c.system}/${c.section ?? "(no sections)"}`;
+    if (!s || s.structure.drugTables.length === 0) throw new BuildError(where, `condition entry ${at} names no system with drug tables`);
+    if (!keysOf(s).includes(c.section)) throw new BuildError(where, `condition entry ${at} names no condition section of that system`);
+    const own = new Set(s.structure.pharmSections.map((ps) => ps.id));
+    for (const id of c.for) if (!own.has(id)) throw new BuildError(where, `condition entry ${at} names pharm section "${id}", which that system lacks`);
+    out.set(sectionKey(c.guide, c.system, conditionKey(c.section)), new Set(c.for));
+  }
+  for (const s of systems) {
+    if (s.structure.drugTables.length === 0) continue;
+    for (const section of keysOf(s)) {
+      if (!out.has(sectionKey(s.guide, s.system, conditionKey(section)))) {
+        throw new BuildError(where, `condition section ${s.guide}/${s.system}/${section ?? "(no sections)"} has no entry`);
+      }
+    }
+  }
+  return out;
+}
 
 function contentRows(table: Table, conditionRows: readonly string[]): Row[] {
   const cond = new Set(conditionRows);
@@ -122,12 +162,15 @@ function drugColumnText(t: SystemTopics, row: Row): string {
  * those. Her med lists keep a class together with its sub-classes, so a card from another med list
  * that shares an agent covers that drug's other use (prazosin in her BPH list on her ⍺1-blocker
  * row), not this row's class. When the first cell matches no card, every card its agents match counts.
+ * A card written only for other pharm sections than the row's (`section`) never counts: her
+ * anesthesia notes on local anesthetics do not belong to her "Class Ib: Lidocaine" row.
  */
-export function rowCards(matcher: CardMatcher, t: SystemTopics, row: Row): string[] {
-  const named = matcher.matching(firstCell(row));
+export function rowCards(matcher: CardMatcher, t: SystemTopics, row: Row, section: string): string[] {
+  const relevant = (c: string): boolean => matcher.relevantIn(c, section);
+  const named = matcher.matching(firstCell(row)).filter(relevant);
   const files = new Set(named.flatMap((c) => [...matcher.filesOf(c)]));
   const sameFile = (c: string): boolean => [...matcher.filesOf(c)].some((f) => files.has(f));
-  const listed = matcher.matching(drugColumnText(t, row)).filter((c) => !named.includes(c) && (named.length === 0 || sameFile(c)));
+  const listed = matcher.matching(drugColumnText(t, row)).filter((c) => relevant(c) && !named.includes(c) && (named.length === 0 || sameFile(c)));
   return matcher.cards.map((c) => c.id).filter((c) => named.includes(c) || listed.includes(c));
 }
 
@@ -145,7 +188,7 @@ export function placeCards(systems: readonly PharmSystem[], matcher: CardMatcher
         const drug = s.structure.drugTables.find((d) => d.block === tableId);
         if (!table || !drug) continue;
         for (const row of contentRows(table, drug.conditionRows)) {
-          for (const c of rowCards(matcher, s.topics, row)) if (!tableCards.includes(c)) tableCards.push(c);
+          for (const c of rowCards(matcher, s.topics, row, ps.id)) if (!tableCards.includes(c)) tableCards.push(c);
         }
       }
       const also = [...new Set(ps.also.map((c) => matcher.classOf(c)))];
@@ -158,17 +201,20 @@ export function placeCards(systems: readonly PharmSystem[], matcher: CardMatcher
     }
     return false;
   };
+  const sectionIds = new Set(systems.flatMap((s) => s.structure.pharmSections.map((ps) => ps.id)));
   for (const card of matcher.all) {
     if (!pharmFiles.has(card.file)) throw new BuildError(card.id, `card names pharm file "${card.file}", which does not exist`);
+    for (const id of card.for ?? []) if (!sectionIds.has(id)) throw new BuildError(card.id, `card is for pharm section "${id}", which no guide has`);
   }
-  // A class card's group has a home in each system any of its cards names.
+  // A class card's group has a home in each system any of its cards names: the first pharm section
+  // there that the group was written for.
   for (const card of matcher.cards) {
     for (const m of matcher.membersOf(card.id)) {
       for (const [guide, system] of Object.entries(m.home)) {
         const home = systems.find((s) => s.guide === guide && s.system === system);
         if (!home) throw new BuildError(m.id, `card home names system "${guide}/${system}", which does not exist`);
         if (placedIn(card.id, guide)) continue;
-        const first = home.structure.pharmSections[0];
+        const first = home.structure.pharmSections.find((ps) => matcher.relevantIn(card.id, ps.id));
         if (first) placements.get(sectionKey(guide, system, first.id))?.also.push(card.id);
       }
     }
@@ -180,16 +226,6 @@ export function placeCards(systems: readonly PharmSystem[], matcher: CardMatcher
 /** Cards of a pharm section page in order: table cards, then `also`. */
 export function sectionCards(p: PlacedSection | undefined): string[] {
   return p ? [...p.tableCards, ...p.also.filter((c) => !p.tableCards.includes(c))] : [];
-}
-
-/** A card's first placement in site order (`systems` and their sections are in site order). */
-export function searchHome(card: string, systems: readonly PharmSystem[], placements: Placements): { guide: string; system: string; section: string } | null {
-  for (const s of systems) {
-    for (const ps of s.structure.pharmSections) {
-      if (sectionCards(placements.get(sectionKey(s.guide, s.system, ps.id))).includes(card)) return { guide: s.guide, system: s.system, section: ps.id };
-    }
-  }
-  return null;
 }
 
 /** Whether the system has a Pharm section (40 §40.5, ruling D3). */
@@ -259,47 +295,57 @@ export function treatmentText(t: SystemTopics, topic: Topic): string {
  * cards her treatment text names (every matching card when only the row's own name occurs). A drug
  * table's place in her guide says nothing about which conditions it treats — her groups never close,
  * so a table can follow conditions it has nothing to do with — and condition rows are never offered.
+ * Each card keeps only its rows from tables of `relevant`, the pharm sections whose drugs treat the
+ * topic's condition section (`panelSections`): her hypertension panel shows her Hypertension table's
+ * beta-blocker row, not her antiarrhythmics table's. A card with no row in a relevant table keeps all
+ * its rows, since her treatment text names it and most conditions have no pharm section of their
+ * own (ACE inhibitors on acute coronary syndrome live only in her hypertension and heart failure tables).
  */
-export function medsPanel(s: PharmSystem, blockOrder: readonly string[], topic: Topic, matcher: CardMatcher, cardTitle: (card: string) => string): MedsCard[] {
+export function medsPanel(
+  s: PharmSystem, blockOrder: readonly string[], topic: Topic, matcher: CardMatcher, cardTitle: (card: string) => string, relevant: ReadonlySet<string>,
+): MedsCard[] {
+  const sectionOf = (block: string): string => s.structure.drugTables.find((d) => d.block === block)?.pharmSection ?? "";
   const drugBlocks = blockOrder.filter((b) => s.structure.drugTables.some((d) => d.block === b));
   const rowsOf = (block: string): Row[] => {
     const table = s.topics.tables.get(block);
     const drug = s.structure.drugTables.find((d) => d.block === block);
     return table && drug ? contentRows(table, drug.conditionRows) : [];
   };
-  const picked: { row: Row; cards: string[] }[] = [];
+  const picked: { row: Row; section: string; cards: string[] }[] = [];
   const seen = new Set<string>();
   const text = treatmentText(s.topics, topic);
   for (const block of drugBlocks) {
+    const section = sectionOf(block);
     for (const r of rowsOf(block)) {
       const first = firstCell(r);
       if (collapse(first) === "" || seen.has(r.id)) continue;
       // A row naming several classes ("NSAIDs: Naproxen Indomethacin") files only under the cards
       // her text names: "NSAIDs" in her text means the NSAIDs card, not the naproxen sub-class card.
-      const cards = rowCards(matcher, s.topics, r);
+      const cards = rowCards(matcher, s.topics, r, section);
       const named = cards.filter((c) => matcher.cardIn(c, text));
       if (named.length === 0 && !phraseMatcher([first])(text)) continue;
       seen.add(r.id);
-      picked.push({ row: r, cards: named.length > 0 ? named : cards });
+      picked.push({ row: r, section, cards: named.length > 0 ? named : cards });
     }
   }
 
-  const groups: { card: string | null; title: string; rows: Row[] }[] = [];
-  for (const { row: r, cards } of picked) {
-    if (cards.length === 0) {
-      groups.push({ card: null, title: collapse(firstCell(r)), rows: [r] });
+  type Picked = (typeof picked)[number];
+  const groups: { card: string | null; title: string; rows: Picked[] }[] = [];
+  for (const p of picked) {
+    if (p.cards.length === 0) {
+      groups.push({ card: null, title: collapse(firstCell(p.row)), rows: [p] });
       continue;
     }
-    for (const c of cards) {
+    for (const c of p.cards) {
       const g = groups.find((x) => x.card === c);
-      if (g) g.rows.push(r);
-      else groups.push({ card: c, title: cardTitle(c), rows: [r] });
+      if (g) g.rows.push(p);
+      else groups.push({ card: c, title: cardTitle(c), rows: [p] });
     }
   }
   return groups.map((g) => {
-    const firstRow = g.rows[0] as Row;
-    const block = s.topics.rows.get(firstRow.id)?.block ?? "";
-    const section = s.structure.drugTables.find((d) => d.block === block)?.pharmSection ?? "";
-    return { card: g.card, title: g.title, rows: withHeadings(s.topics, g.rows.map((r) => r.id)), section, target: g.card ?? firstRow.id };
+    const inRelevant = g.rows.filter((p) => relevant.has(p.section));
+    const kept = inRelevant.length > 0 ? inRelevant : g.rows;
+    const first = kept[0] as Picked;
+    return { card: g.card, title: g.title, rows: withHeadings(s.topics, kept.map((p) => p.row.id)), section: first.section, target: g.card ?? first.row.id };
   });
 }

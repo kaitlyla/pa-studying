@@ -8,7 +8,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { removeContent, writeContent } from "../content/fs.ts";
 import { topicBelowPath } from "../content/files.ts";
 import { systemRowOrder } from "../content/splice.ts";
-import type { BlockFile, StructureFile } from "../content/types.ts";
+import type { BlockFile, StructureFile, UsesFile } from "../content/types.ts";
 import { schema } from "../schema.ts";
 import { loadContent } from "../../tools/build/load.ts";
 import { B, C, D, G, GONE, P, R, S, tableDoc, U, writeFixture } from "../../tools/build/test-fixture.ts";
@@ -591,8 +591,35 @@ describe("pharm (40 §40.4–§40.5)", () => {
     const tremor = t.topics.find((x) => x.id === R(910));
     if (!tremor) throw new Error("no topic");
     // No heading row labels a treatment column, so all of the topic's text is searched.
-    const panel = medsPanel(s, [B(92), B(91)], tremor, new CardMatcher([]), (c) => c);
+    const panel = medsPanel(s, [B(92), B(91)], tremor, new CardMatcher([]), (c) => c, new Set(["x"]));
     expect(panel).toEqual([{ card: null, title: "Beta-blocker (non-selective)", rows: [R(920)], section: "x", target: R(920) }]);
+  });
+
+  it("a meds panel card keeps only its rows from pharm sections that treat the condition's section, if it has any", () => {
+    // FM Cardiovascular: her BB rows sit in the Hypertension and the Antiarrhythmics tables; a hypertension panel shows the first only.
+    const blocks = [
+      table(B(91), 2, [[R(910), "content", "Hypertension", "beta blockers"]]),
+      table(B(92), 2, [[R(920), "content", "Beta blockers", "metoprolol"]]),
+      table(B(93), 2, [[R(930), "content", "Beta blockers", "class II"]]),
+    ];
+    const st = structureOf({
+      drugTables: [
+        { block: B(92), pharmSection: "hypertension", conditionRows: [] },
+        { block: B(93), pharmSection: "antiarrhythmics", conditionRows: [] },
+      ],
+    });
+    const t = deriveTopics(blocks, st);
+    const s = { guide: "fm", system: "cardiovascular", structure: st, topics: t };
+    const htn = t.topics.find((x) => x.id === R(910));
+    if (!htn) throw new Error("no topic");
+    const cards = new CardMatcher([{ id: C(1), file: "f", aliases: ["beta blockers"], home: {} }]);
+    const rows = (relevant: string[]) => medsPanel(s, [B(91), B(92), B(93)], htn, cards, (c) => c, new Set(relevant)).map((m) => [m.card, m.rows]);
+    expect(rows(["hypertension"])).toEqual([[C(1), [R(920)]]]);
+    expect(rows(["hypertension", "antiarrhythmics"])).toEqual([[C(1), [R(920), R(930)]]]);
+    expect(rows(["antiarrhythmics"])).toEqual([[C(1), [R(930)]]]);
+    // A card her text names with no row in a treating section keeps all its rows rather than vanishing.
+    expect(rows([])).toEqual([[C(1), [R(920), R(930)]]]);
+    expect(rows(["heart-failure"])).toEqual([[C(1), [R(920), R(930)]]]);
   });
 
   describe("a meds panel offers only drugs named in the condition's treatment column", () => {
@@ -607,7 +634,7 @@ describe("pharm (40 §40.4–§40.5)", () => {
       const t = deriveTopics([conditions, drugs], st);
       const topic = t.topics.find((x) => x.id === id);
       if (!topic) throw new Error(`no topic ${id}`);
-      return medsPanel({ guide: "em", system: "cardiovascular", structure: st, topics: t }, [B(91), B(92)], topic, new CardMatcher([]), (c) => c).map((m) => m.title);
+      return medsPanel({ guide: "em", system: "cardiovascular", structure: st, topics: t }, [B(91), B(92)], topic, new CardMatcher([]), (c) => c, new Set(["antiarrhythmics"])).map((m) => m.title);
     };
     const cardio = table(B(91), 3, [
       [R(910), "heading", "CARDIO", "Etiology", "Management"],
@@ -656,7 +683,7 @@ describe("pharm (40 §40.4–§40.5)", () => {
     const panel = (id: string) => {
       const topic = t.topics.find((x) => x.id === id);
       if (!topic) throw new Error(`no topic ${id}`);
-      return medsPanel(s, [B(91), B(92)], topic, cards, (c) => c).map((m) => [m.card, m.rows]);
+      return medsPanel(s, [B(91), B(92)], topic, cards, (c) => c, new Set(["gout"])).map((m) => [m.card, m.rows]);
     };
     expect(panel(R(911))).toEqual([[C(7), [R(920)]]]);
     expect(panel(R(912))).toEqual([[C(8), [R(920)]]]);
@@ -686,16 +713,23 @@ describe("pharm (40 §40.4–§40.5)", () => {
     };
 
     it("adds a same-list card its drug columns name, not another list's card nor a card named in another column", () => {
-      expect(rowCards(cards(), t, row(R(921)))).toEqual([C(1), C(2)]);
+      expect(rowCards(cards(), t, row(R(921)), "x")).toEqual([C(1), C(2)]);
     });
 
     it("takes every card its agents name when the first cell names no card", () => {
-      expect(rowCards(cards(), t, row(R(922)))).toEqual([C(2), C(3)]);
+      expect(rowCards(cards(), t, row(R(922)), "x")).toEqual([C(2), C(3)]);
     });
 
     it("reads a card shown inside a class card as that class card", () => {
-      expect(rowCards(cards([{ in: C(1) }]), t, row(R(921)))).toEqual([C(1)]);
-      expect(rowCards(cards([{ in: C(1) }]), t, row(R(922)))).toEqual([C(1), C(3)]);
+      expect(rowCards(cards([{ in: C(1) }]), t, row(R(921)), "x")).toEqual([C(1)]);
+      expect(rowCards(cards([{ in: C(1) }]), t, row(R(922)), "x")).toEqual([C(1), C(3)]);
+    });
+
+    it("leaves out a card written only for other pharm sections, and a group only when all of it is", () => {
+      expect(rowCards(cards([{ for: ["y"] }]), t, row(R(921)), "x")).toEqual([C(1)]);
+      expect(rowCards(cards([{ for: ["x", "y"] }]), t, row(R(921)), "x")).toEqual([C(1), C(2)]);
+      // A member written for another section still lets its class card in: the class card is for any use.
+      expect(rowCards(cards([{ in: C(1), for: ["y"] }]), t, row(R(921)), "x")).toEqual([C(1)]);
     });
   });
 
@@ -730,6 +764,69 @@ describe("pharm (40 §40.4–§40.5)", () => {
     const hosts = pub.files.get("hosts.json") as HostsJson;
     expect(hosts[C(2)]?.route).toBe(hosts[C(1)]?.route);
     expect(hosts[B(72)]?.route).toBe(hosts[C(1)]?.route);
+  });
+
+  describe("a card written for one use (`for`)", () => {
+    /** Nitrates (C2) shown inside the beta-blocker card (C3), its notes written for PANCE's Beta blockers section. */
+    const forBeta = (use: string[]) =>
+      mutated((x) => {
+        const nitrates = x.cards.cards.find((k) => k.id === C(2));
+        if (nitrates) Object.assign(nitrates, { in: C(3), for: use });
+      });
+
+    it("publishes the part's `for`, and hosts the part where it shows: the class card at its first section using that use", () => {
+      const pub = publish(forBeta(["beta-blockers"]));
+      const fm = pub.files.get("g/fm/s/cardiovascular.json") as SystemJson;
+      expect(fm.cards[C(3)]?.parts.map((p) => [p.id, p.for])).toEqual([[P(4), undefined], [P(3), ["beta-blockers"]]]);
+      const hosts = pub.files.get("hosts.json") as HostsJson;
+      // The card's own home stays its first placement (FM Antianginals); the part's is PANCE Beta blockers.
+      expect(hosts[C(3)]?.route).toBe(`#/eor/fm/pharm/cardiovascular/antianginals/${C(3)}`);
+      expect([hosts[P(3)]?.route, hosts[B(72)]?.route, hosts[C(2)]?.route]).toEqual(Array(3).fill(`#/pance/pharm/cardiovascular/beta-blockers/${C(3)}`));
+      expect(hosts[P(4)]?.route).toBe(hosts[C(3)]?.route);
+      const unit = pub.units.find((u) => u.at === P(3));
+      expect(unit).toMatchObject({ route: `#/pance/pharm/cardiovascular/beta-blockers/${C(3)}` });
+    });
+
+    it("fails the build naming the card for a section no guide has, and the part whose card is placed in none of its sections", () => {
+      expect(buildError(() => publish(forBeta(["no-such-section"]))).id).toBe(C(2));
+      const c = mutated((x) => {
+        const nitrates = x.cards.cards.find((k) => k.id === C(2));
+        // C1 (CCB) is placed only in FM Antianginals, never in PANCE Beta blockers.
+        if (nitrates) Object.assign(nitrates, { in: C(1), for: ["beta-blockers"] });
+      });
+      expect(buildError(() => publish(c)).id).toBe(P(3));
+    });
+  });
+
+  describe("condition sections and the pharm sections that treat them (uses.json conditions)", () => {
+    it("publishes each system's map, sections without an entry key being the empty key", () => {
+      expect(page("fm", "cardiovascular").panelSections).toEqual({ cad: ["antianginals"], other: ["antianginals"] });
+      expect(page("pance", "cardiovascular").panelSections).toEqual({ "": ["beta-blockers"] });
+      expect(page("fm", "renal").panelSections).toEqual({});
+    });
+
+    it.each([
+      ["a missing condition section", (u: UsesFile) => u.conditions.splice(1, 1), /fm\/cardiovascular\/other has no entry/],
+      ["an unknown condition section", (u: UsesFile) => u.conditions.push({ guide: "fm", system: "cardiovascular", section: "nope", for: [] }), /names no condition section/],
+      ["a pharm section the system lacks", (u: UsesFile) => { u.conditions[0] = { ...(u.conditions[0] as UsesFile["conditions"][number]), for: ["beta-blockers"] }; }, /names pharm section "beta-blockers"/],
+      ["a system without drug tables", (u: UsesFile) => u.conditions.push({ guide: "fm", system: "renal", section: null, for: [] }), /names no system with drug tables/],
+    ])("fails the build on %s", (_name, change, message) => {
+      const err = buildError(() => publish(mutated((x) => { change(x.uses); })));
+      expect(err.id).toBe("content/pharm/uses.json");
+      expect(err.message).toMatch(message);
+    });
+  });
+
+  it("a page carries the line uses of the card notes it shows", () => {
+    const c = mutated((x) => {
+      x.uses.lines = [
+        { block: B(73), text: "MOA: beta-1 blockade", for: ["beta-blockers"] },
+        // Not a card block: an Overview part's.
+        { block: B(70), text: "Antianginal overview", for: ["antianginals"] },
+      ];
+    });
+    const pance = publish(c).files.get("g/pance/s/cardiovascular.json") as SystemJson;
+    expect(pance.uses).toEqual({ [B(73)]: [{ text: "MOA: beta-1 blockade", for: ["beta-blockers"] }] });
   });
 
   it("card order follows table rows, then `also`; a card unplaced in a home guide is appended to that home system's first pharm section", () => {

@@ -262,9 +262,20 @@ export interface PubCard {
   /**
    * The card's pharm-notes parts in order — its own, then those of the cards shown inside it — each
    * with its blocks, its file name (labeled on the card) and that file's base size, to which its
-   * blocks' `size` marks are relative; a search unit's `at` names a part id.
+   * blocks' `size` marks are relative; a search unit's `at` names a part id. A part with `for` was
+   * written for those pharm sections' use only (its card's `for` in content/pharm/cards.json) and
+   * shows only where one of them is relevant (lib/derive/trim.ts `shownParts`).
    */
-  parts: { id: string; blocks: string[]; file: string; basePt: number }[];
+  parts: { id: string; blocks: string[]; file: string; basePt: number; for?: string[] }[];
+}
+
+/**
+ * A pharm-notes line judged written for one use (content/pharm/uses.json): it shows only where one
+ * of the pharm sections in `for` is relevant.
+ */
+export interface PubUseLine {
+  text: string;
+  for: string[];
 }
 
 /**
@@ -303,6 +314,12 @@ export interface SystemJson {
   sections: { id: string; title: string; items: PubSectionItem[] }[];
   /** The system's Pharm section, or null when it has none. */
   pharm: { sections: PubPharmSection[]; files: DocList } | null;
+  /**
+   * Condition section id ("" when the system has no sections; lib/derive/pharm.ts `conditionKey`) →
+   * the pharm sections relevant to its conditions (content/pharm/uses.json): its topics' meds panels
+   * show only rows of those sections' tables, and only notes written for them. {} without drug tables.
+   */
+  panelSections: Record<string, string[]>;
   /** Class cards used on this system's pages (pharm sections and meds panels). */
   cards: Record<string, PubCard>;
   /** Overview / learning-objectives parts used by the pharm sections. */
@@ -311,6 +328,8 @@ export interface SystemJson {
   notesBlocks: Record<string, PubBlock>;
   /** Cards' notes block id → its lines her guide table says on this page (lib/derive/trim.ts). */
   trims: Record<string, PubTrimLine[]>;
+  /** Cards' notes block id → its lines written for one use only (lib/derive/trim.ts). */
+  uses: Record<string, PubUseLine[]>;
   notes: Notes;
 }
 

@@ -8,7 +8,7 @@ import {
   normalizeDoc, validateAsIsFile, validateBlock, validateCards, validateChecks, validateConcepts, validateDeck,
   validateEvidence, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateOther,
   validatePharmFile, validateRefTabs, validateSite, validateSlide, validateStructure, validateSystem, validateTrims,
-  validateUpload, validateVocab, validateWordDoc,
+  validateUpload, validateUses, validateVocab, validateWordDoc,
 } from "./validate.ts";
 import type { Validator } from "./validate.ts";
 
@@ -76,6 +76,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe(`content/guides/${GUIDE}/${SLUG}/structure\\.json`), validateStructure],
   [pathRe("content/pharm/cards\\.json"), validateCards],
   [pathRe("content/pharm/trims\\.json"), validateTrims],
+  [pathRe("content/pharm/uses\\.json"), validateUses],
   [pathRe(`content/pharm/${named(SLUG)}/pharmfile\\.json`), validatePharmFile],
   [WORD_DOC_RE, validateWordDoc],
   [AS_IS_FILE_RE, validateAsIsFile],

@@ -548,7 +548,7 @@ describe("pharm pages", () => {
     const own = need(ccb.parts[0], "CCB part");
     const II = "Cardio II Med List";
     // Two parts from her other file follow the card's own: one label for the run of them.
-    ccb.parts = [own, { id: "p_ii_one", blocks: other.blocks, file: II, basePt: 9 }, { id: "p_ii_two", blocks: other.blocks, file: II, basePt: 9 }];
+    ccb.parts = [own, { id: "p_ii_one", blocks: other.blocks, file: II, basePt: 9 }, { id: "p_ii_two", blocks: [], file: II, basePt: 9 }];
     ccb.blocks = [...own.blocks, ...other.blocks];
     const served = new Map(files);
     served.set(CV, mod);
@@ -565,6 +565,56 @@ describe("pharm pages", () => {
     expect(text.indexOf(II)).toBeLessThan(text.indexOf("MOA: venodilation"));
   });
 
+  it("a card shows only the notes written for a use relevant where it shows, on the section page and the meds panel", async () => {
+    const cv = systemJson(CV);
+    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1))), "topic with the CCB card");
+    const med = need(topic.meds.find((m) => m.card === C(1)), "CCB med");
+    const serve = (panelUses: string[]): void => {
+      const mod = structuredClone(cv);
+      const ccb = need(mod.cards[C(1)], "CCB card");
+      const own = need(ccb.parts[0], "CCB part");
+      const other = need(mod.cards[C(2)], "Nitrates card");
+      // Her other file's notes on the class, written for Antiarrhythmics; one of the card's own lines too.
+      ccb.parts = [own, { id: "p_rhythm", blocks: other.blocks, file: "Cardio II Med List", basePt: 9, for: ["antiarrhythmics"] }];
+      ccb.blocks = [...own.blocks, ...other.blocks];
+      mod.uses = { [need(own.blocks[0], "CCB block")]: [{ text: "MOA: block L-type channels", for: ["antiarrhythmics"] }] };
+      mod.panelSections = { ...mod.panelSections, [need(topic.section, "topic section")]: panelUses };
+      const served = new Map(files);
+      served.set(CV, mod);
+      server.restore();
+      server = serveData(served);
+    };
+    const openMed = async (): Promise<string> => {
+      const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+      app = a;
+      const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+      await click(cardBtn(panel, `meds-${med.target}`));
+      const text = visibleText(cardEl(panel, `meds-${med.target}`));
+      app.unmount();
+      app = null;
+      return text;
+    };
+
+    serve(["antianginals"]);
+    const pg = pharmPage(await renderSection(SEC_HASH));
+    await click(cardBtn(pg, C(1)));
+    const page = visibleText(cardEl(pg, C(1)));
+    expect(page).not.toContain("MOA: venodilation");
+    expect(page).not.toContain("Cardio II Med List");
+    expect(page).not.toContain("MOA: block L-type channels");
+    app?.unmount();
+    app = null;
+    const panel = await openMed();
+    expect(panel).not.toContain("MOA: venodilation");
+    expect(panel).not.toContain("MOA: block L-type channels");
+
+    // Where her condition's section is treated by Antiarrhythmics too, the panel shows them.
+    serve(["antianginals", "antiarrhythmics"]);
+    const both = await openMed();
+    expect(both).toContain("MOA: venodilation");
+    expect(both).toContain("MOA: block L-type channels");
+  });
+
   it("a section with learning objectives and a card without notes renders both", async () => {
     const cv = systemJson(CV);
     const mod = structuredClone(cv);
@@ -574,7 +624,9 @@ describe("pharm pages", () => {
     sec.lo = LO;
     mod.parts[LO] = { title: "Learning objectives", role: "lo", file: overview.file, basePt: overview.basePt, blocks: overview.blocks };
     const bare = need(sec.cards[sec.cards.length - 1], "last card");
-    need(mod.cards[bare], "bare card").blocks = [];
+    const bareCard = need(mod.cards[bare], "bare card");
+    bareCard.blocks = [];
+    bareCard.parts = bareCard.parts.map((p) => ({ ...p, blocks: [] }));
     const served = new Map(files);
     served.set(CV, mod);
     server.restore();

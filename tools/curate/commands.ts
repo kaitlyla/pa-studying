@@ -251,6 +251,8 @@ interface DraftCard {
   home: Partial<Record<GuideId, string>>;
   /** The class card it shows inside; omitted, an existing card keeps its own. */
   in?: string;
+  /** The pharm sections its notes are written for; omitted, an existing card keeps its own. */
+  for?: string[];
 }
 interface DraftPart {
   id?: string;
@@ -280,8 +282,10 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
       if (keys.has(d.key)) throw new CurateError(`pharm-parts: card key "${d.key}" used twice`);
       keys.set(d.key, id);
     }
-    const within = d.in ?? c.cards.cards.find((x) => x.id === id)?.in;
-    return { id, file: fileSlug, aliases: d.aliases, home: d.home, ...(within === undefined ? {} : { in: within }) };
+    const had = c.cards.cards.find((x) => x.id === id);
+    const within = d.in ?? had?.in;
+    const use = d.for ?? had?.for;
+    return { id, file: fileSlug, aliases: d.aliases, home: d.home, ...(within === undefined ? {} : { in: within }), ...(use === undefined ? {} : { for: use }) };
   });
   const cardIds = new Set(cards.map((x) => x.id));
   const parts: PharmPart[] = (draft.parts as DraftPart[]).map((d) => {

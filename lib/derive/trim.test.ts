@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { block, doc, para, row, table } from "../pdf/testing.ts";
 import type { PubTrimLine } from "./published.ts";
-import { allLinesHidden, hiddenLines, tableRows, withoutLines, type TrimSource } from "./trim.ts";
+import { allLinesHidden, hiddenLines, panelUses, shownParts, tableRows, withoutLines, type TrimSource } from "./trim.ts";
 
 const T = "b_TTTTTTTTT1";
 const N = "b_NNNNNNNNN1";
@@ -23,8 +23,12 @@ function source(notes: string[][], trims: PubTrimLine[], bbCells = ["Beta Blocke
     },
     notesBlocks: { [N]: block(N, "prose", doc(...notes.map(([s]) => para((s ?? "").trim(), { indLeft: ind(s ?? "") })))) },
     trims: { [N]: trims },
+    uses: {},
   };
 }
+
+/** Where no line is written for one use, the pharm sections relevant do not matter. */
+const ANY = new Set<string>();
 
 const covered = (text: string, rowText = BB_ROW): PubTrimLine => ({ text, label: false, rows: [{ id: BB, text: rowText }] });
 const label = (text: string): PubTrimLine => ({ text, label: true, rows: [] });
@@ -32,7 +36,7 @@ const label = (text: string): PubTrimLine => ({ text, label: true, rows: [] });
 const NOTES = [["Beta-blockers"], ["  Adverse Effects:"], ["    Brady, hypotension"], ["    Sex dysfunction: impotence, ED, ↓ libido"], ["  Monitoring:"], ["    EKG"]];
 const JUDGED = [label("Beta-blockers"), label("Adverse Effects:"), covered("Brady, hypotension"), covered("Sex dysfunction: impotence, ED, ↓ libido"), label("Monitoring:")];
 
-const hide = (s: TrimSource, shown: Iterable<string>): number[] => [...(hiddenLines(s, [N], new Set(shown)).get(N) ?? [])].sort((a, b) => a - b);
+const hide = (s: TrimSource, shown: Iterable<string>, at: ReadonlySet<string> = ANY): number[] => [...(hiddenLines(s, [N], new Set(shown), at).get(N) ?? [])].sort((a, b) => a - b);
 
 describe("hiddenLines", () => {
   it("leaves out covered lines and a label whose lines are all left out, keeping a label with a line left", () => {
@@ -43,7 +47,7 @@ describe("hiddenLines", () => {
   it("leaves out a heading once every line under it is left out", () => {
     const s = source(NOTES.slice(0, 4), JUDGED);
     expect(hide(s, [BB])).toEqual([0, 1, 2, 3]);
-    expect(allLinesHidden(s, [N], hiddenLines(s, [N], new Set([BB])))).toBe(true);
+    expect(allLinesHidden(s, [N], hiddenLines(s, [N], new Set([BB]), ANY))).toBe(true);
   });
 
   it("shows every line when the covering row is not shown with the card", () => {
@@ -83,9 +87,10 @@ describe("hiddenLines: a line the card already showed word for word", () => {
       [N2]: block(N2, "prose", doc(...second.map((s) => para(s.trim(), { indLeft: ind(s) })))),
     },
     trims: {},
+    uses: {},
   });
-  const hidden = (s: TrimSource): [number[], number[]] => {
-    const h = hiddenLines(s, [N, N2], new Set());
+  const hidden = (s: TrimSource, at: ReadonlySet<string> = ANY): [number[], number[]] => {
+    const h = hiddenLines(s, [N, N2], new Set(), at);
     return [[...(h.get(N) ?? [])].sort((a, b) => a - b), [...(h.get(N2) ?? [])].sort((a, b) => a - b)];
   };
 
@@ -115,6 +120,69 @@ describe("hiddenLines: a line the card already showed word for word", () => {
   it("leaves out a repeat within one file's notes too", () => {
     const s = card(["Nitrates", "  Adverse: headache", "  Adverse: headache"], ["Organic nitrates"]);
     expect(hidden(s)).toEqual([[2], []]);
+  });
+
+  it("does not count a line left out as written for another use, so a later general copy still shows", () => {
+    const s = card(["Beta-blockers", "  Clin Use:", "    Effort induced angina", "  Pt Ed: TAPER"], ["Β-blockers", "  Pt Ed: TAPER"]);
+    s.uses[N] = [{ text: "Pt Ed: TAPER", for: ["antianginals"] }];
+    // On Hypertension her angina-only line goes, and the other file's same line is no repeat of it.
+    expect(hidden(s, new Set(["hypertension"]))).toEqual([[3], []]);
+    // On Antianginals the angina line shows, so the other file's copy is the repeat.
+    expect(hidden(s, new Set(["antianginals"]))).toEqual([[], [1]]);
+  });
+});
+
+describe("hiddenLines: a line written for one use", () => {
+  const notes = [["Beta-blockers"], ["  Clin Use:"], ["    Effort induced angina"], ["    Stable angina w nitrates"], ["  Adverse Effects:"], ["    Fatigue"]];
+  const forAngina = (texts: string[], trims: PubTrimLine[] = []): TrimSource => {
+    const s = source(notes, trims);
+    s.uses[N] = texts.map((text) => ({ text, for: ["antianginals"] }));
+    return s;
+  };
+
+  it("leaves out lines written for another use, and a judged label whose lines all go", () => {
+    expect(hide(forAngina(["Effort induced angina", "Stable angina w nitrates"], [label("Clin Use:")]), [], new Set(["hypertension"]))).toEqual([1, 2, 3]);
+  });
+
+  it("keeps an unjudged heading over them, unless it is itself recorded for that use", () => {
+    expect(hide(forAngina(["Effort induced angina", "Stable angina w nitrates"]), [], new Set(["hypertension"]))).toEqual([2, 3]);
+    expect(hide(forAngina(["Clin Use:", "Effort induced angina", "Stable angina w nitrates"]), [], new Set(["hypertension"]))).toEqual([1, 2, 3]);
+  });
+
+  it("shows them where one of their uses is relevant", () => {
+    const s = forAngina(["Effort induced angina", "Stable angina w nitrates"]);
+    expect(hide(s, [], new Set(["antianginals"]))).toEqual([]);
+    expect(hide(s, [], new Set(["hypertension", "antianginals"]))).toEqual([]);
+  });
+
+  it("keeps a heading while a line under it is general", () => {
+    expect(hide(forAngina(["Effort induced angina"]), [], new Set(["hypertension"]))).toEqual([2]);
+  });
+
+  it("keeps a line written for another use while a general line sits under it", () => {
+    // Her "Clin Use:" heading recorded for angina still heads the general lines left under it.
+    expect(hide(forAngina(["Clin Use:", "Effort induced angina"]), [], new Set(["hypertension"]))).toEqual([2]);
+  });
+
+  it("stops applying once she edits the line", () => {
+    expect(hide(forAngina(["Effort induced angina (edited before)"]), [], new Set(["hypertension"]))).toEqual([]);
+  });
+});
+
+describe("shownParts and panelUses", () => {
+  const p = (id: string, use?: string[]): { id: string; for?: string[] } => (use ? { id, for: use } : { id });
+
+  it("keeps parts written for any use, and those written for a relevant section, in card order", () => {
+    const card = { parts: [p("general"), p("angina", ["antianginals"]), p("rhythm", ["antiarrhythmics"]), p("both", ["antianginals", "antiarrhythmics"])] };
+    expect(shownParts(card, new Set(["antiarrhythmics"])).map((x) => x.id)).toEqual(["general", "rhythm", "both"]);
+    expect(shownParts(card, new Set()).map((x) => x.id)).toEqual(["general"]);
+  });
+
+  it("reads a topic's condition section, and the systems without sections under the empty key", () => {
+    const system = { panelSections: { "coronary-artery-disease": ["antianginals", "antiplatelets"], "": ["beta-blockers"] } };
+    expect([...panelUses(system, { section: "coronary-artery-disease" })]).toEqual(["antianginals", "antiplatelets"]);
+    expect([...panelUses(system, { section: null })]).toEqual(["beta-blockers"]);
+    expect([...panelUses(system, { section: "unmapped" })]).toEqual([]);
   });
 });
 

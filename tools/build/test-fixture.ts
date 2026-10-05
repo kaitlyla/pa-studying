@@ -180,6 +180,14 @@ export async function writeFixture(root: string): Promise<void> {
     ],
   });
   await w("pharm/trims.json", { v: 1, rows: {}, lines: [] });
+  await w("pharm/uses.json", {
+    v: 1, lines: [],
+    conditions: [
+      { guide: "fm", system: "cardiovascular", section: "cad", for: ["antianginals"] },
+      { guide: "fm", system: "cardiovascular", section: "other", for: ["antianginals"] },
+      { guide: "pance", system: "cardiovascular", section: null, for: ["beta-blockers"] },
+    ],
+  });
 
   // ---- documents
   const pdf = (did: string, name: string, extra: Record<string, unknown> = {}) => ({

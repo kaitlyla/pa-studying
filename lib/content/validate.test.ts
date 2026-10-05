@@ -431,6 +431,36 @@ describe("pharm (20 §20.6, §20.7)", () => {
     it("refuses an in that is not a card id", () => {
       expect(v(card(C1), { ...card(C2), in: "x" })).not.toBe("ok");
     });
+
+    it("accepts a card's `for`: pharm sections, at least one, none twice", () => {
+      expect(v(card(C1), { ...card(C2, C1), for: ["antiarrhythmics"] })).toBe("ok");
+      expect(v({ ...card(C1), for: [] })).toMatch(/\.cards\[0\]\.for: expected at least one pharm section/);
+      expect(v({ ...card(C1), for: ["antianginals", "antianginals"] })).toMatch(/\.cards\[0\]\.for/);
+      expect(v({ ...card(C1), for: ["Not A Slug"] })).not.toBe("ok");
+    });
+  });
+
+  describe("uses.json", () => {
+    const path = "content/pharm/uses.json";
+    const line = { block: b1, text: "Effort induced angina", for: ["antianginals"] };
+    const cond = { guide: "fm", system: "cardiovascular", section: "coronary-artery-disease", for: ["antianginals", "hyperlipidemia"] };
+    const uses = { v: 1, lines: [line], conditions: [cond, { guide: "psy", system: "anxiety-disorders", section: null, for: [] }] };
+
+    it("accepts line uses and condition sections, a system without sections under null, and a section no pharm section treats", () => {
+      expect(verdict(path, uses)).toBe("ok");
+      expect(verdict(path, { v: 1, lines: [], conditions: [] })).toBe("ok");
+    });
+
+    it("refuses a line judged twice, or written for no section", () => {
+      expect(verdict(path, { ...uses, lines: [line, line] })).toMatch(/one judgment per block line/);
+      expect(verdict(path, { ...uses, lines: [{ ...line, for: [] }] })).toMatch(/\.lines\[0\]\.for: expected at least one pharm section/);
+    });
+
+    it("refuses a condition section listed twice or naming a pharm section twice", () => {
+      expect(verdict(path, { ...uses, conditions: [cond, cond] })).toMatch(/one entry per condition section/);
+      expect(verdict(path, { ...uses, conditions: [{ ...cond, for: ["antianginals", "antianginals"] }] })).toMatch(/\.conditions\[0\]\.for/);
+      expect(verdict(path, { ...uses, conditions: [{ ...cond, guide: "xx" }] })).not.toBe("ok");
+    });
   });
 
   it("validates trims.json", () => {

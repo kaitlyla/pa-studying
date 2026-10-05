@@ -2,7 +2,7 @@
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GapFile,
   GeneralFile, GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, TrimsFile,
-  VocabFile, WordDocFile,
+  UsesFile, VocabFile, WordDocFile,
 } from "../content/types.ts";
 
 export interface SystemData {
@@ -48,6 +48,7 @@ export interface Content {
   guides: GuideData[];
   cards: CardsFile;
   trims: TrimsFile;
+  uses: UsesFile;
   pharm: PharmData[];
   docs: Map<string, DocData>;
   gaps: Map<string, GapData>;

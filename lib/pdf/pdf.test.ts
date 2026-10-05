@@ -107,6 +107,21 @@ describe("scope content", () => {
     expect(all.find((i) => i.text === "Tolerance")?.fontSize).toBe(9);
   });
 
+  it("prints only the notes written for the section's use, as the page does", () => {
+    const sys = cardioSystem();
+    sys.notesBlocks.b_AAAAAAAAN1 = block("b_AAAAAAAAN1", "prose", doc(para("Nitrates"), para("Effort induced angina", { indLeft: 27 }), para("Headache", { indLeft: 27 })));
+    sys.notesBlocks.b_AAAAAAAAN3 = block("b_AAAAAAAAN3", "prose", doc(para("Class IV"), para("AV nodal block", { indLeft: 27 })));
+    const c1 = sys.cards.c_AAAAAAAAC1;
+    if (!c1) throw new Error("no card C1");
+    c1.blocks = ["b_AAAAAAAAN1", "b_AAAAAAAAN3"];
+    c1.parts = [...c1.parts, { id: "p_AAAAAAAAN3", blocks: ["b_AAAAAAAAN3"], file: "Cardio II Med List", basePt: 9, for: ["hf"] }];
+    sys.uses = { b_AAAAAAAAN1: [{ text: "Effort induced angina", for: ["antianginals"] }] };
+    const section = (id: string): string[] => lines(buildDocDefinition({ kind: "pharmSection", id }, { nav, system: sys }, fontmap).content);
+    expect(section("antianginals")).toEqual([...D1, "Overview notes", "Nitrates", "Effort induced angina", "Headache", "Also class notes", "Learning objectives notes"]);
+    // Heart failure: the part written for it shows; the angina line does not.
+    expect(section("hf")).toEqual(["HF PHARM", "Use", "Loop diuretics", "edema", "Nitrates", "Headache", "Class IV", "AV nodal block"]);
+  });
+
   it("uses the Word page's own page setup", () => {
     const def = buildDocDefinition({ kind: "doc" }, { doc: wordDoc() }, fontmap);
     expect(def.pageSize).toEqual({ width: 612, height: 792 });

@@ -16,7 +16,7 @@ import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart,
   RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
-  TrimsFile, UploadFile, VocabFile, WordDocFile,
+  TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
 
 /** Every file validator: the record, the file context, and the identity its path fixes (if any). */
@@ -349,14 +349,44 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
 export const validateCards: Validator = (v, ctx) => {
   shapeOf<CardsFile>({
     v: v1,
-    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c") })),
+    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c"), for: arr(slugC) })),
   }, {})(v, "", ctx);
   const cards = (v as CardsFile).cards;
   uniqueArr(str)(cards.map((c) => c.id), ".cards[].id", ctx);
   cards.forEach((c, i) => {
+    if (c.for !== undefined) sectionList(c.for, `.cards[${i}].for`, ctx);
     if (c.in === undefined) return;
     const target = cards.find((x) => x.id === c.in);
     if (!target || target === c || target.in !== undefined) bad(ctx, `.cards[${i}].in`, "another card that is itself in no card", c.in);
+  });
+};
+
+/** A `for` list: at least one pharm section, none twice. */
+function sectionList(list: readonly string[], path: string, ctx: Ctx): void {
+  if (list.length === 0) bad(ctx, path, "at least one pharm section", list);
+  uniqueArr(str)(list, path, ctx);
+}
+
+export const validateUses: Validator = (v, ctx) => {
+  shapeOf<UsesFile>({
+    v: v1,
+    lines: arr(shapeOf<UsesFile["lines"][number]>({ block: id("b"), text: nonEmpty, for: arr(slugC) }, {})),
+    conditions: arr(shapeOf<UsesFile["conditions"][number]>({ guide: guideC, system: slugC, section: nullable(slugC), for: arr(slugC) }, {})),
+  }, {})(v, "", ctx);
+  const u = v as UsesFile;
+  const seen = new Set<string>();
+  u.lines.forEach((l, i) => {
+    sectionList(l.for, `.lines[${i}].for`, ctx);
+    const key = `${l.block}\n${l.text}`;
+    if (seen.has(key)) bad(ctx, `.lines[${i}]`, "one judgment per block line", l.text);
+    seen.add(key);
+  });
+  const sections = new Set<string>();
+  u.conditions.forEach((c, i) => {
+    uniqueArr(str)(c.for, `.conditions[${i}].for`, ctx);
+    const key = `${c.guide}/${c.system}/${c.section}`;
+    if (sections.has(key)) bad(ctx, `.conditions[${i}]`, "one entry per condition section", key);
+    sections.add(key);
   });
 };
 

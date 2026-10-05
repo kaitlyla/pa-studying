@@ -6,7 +6,7 @@ import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
 import {
-  CardMatcher, hasPharm, medsPanel, placeCards, searchHome, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
+  CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard,
@@ -166,9 +166,10 @@ export function publish(c: Content): PublishResult {
   // ---- pharm cards --------------------------------------------------------------------------------
   const matcher = new CardMatcher(c.cards.cards);
   const placements: Placements = placeCards(systems.map((s) => s.pharm), matcher, new Set(c.pharm.map((p) => p.file.id)));
-  /** The parts of a class card's whole group: its own, then those of each card shown inside it. */
-  const cardParts = (card: string): { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }[] =>
-    matcher.membersOf(card).flatMap((m) => [...parts.values()].filter((p) => p.part.role === "card" && p.part.card === m.id));
+  const panels = conditionUses(c.uses.conditions, systems.map((s) => s.pharm));
+  /** The parts of a class card's whole group: its own, then those of each card shown inside it, each with its card's `for`. */
+  const cardParts = (card: string): { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number]; for: string[] | undefined }[] =>
+    matcher.membersOf(card).flatMap((m) => [...parts.values()].filter((p) => p.part.role === "card" && p.part.card === m.id).map((p) => ({ ...p, for: m.for })));
   const cardTitle = (card: string): string => cardParts(card)[0]?.part.title ?? c.cards.cards.find((x) => x.id === card)?.aliases[0] ?? card;
 
   // ---- existence and flags -------------------------------------------------------------------------
@@ -247,26 +248,42 @@ export function publish(c: Content): PublishResult {
       }
     }
   }
-  /** First pharm section (site order) using each card and each overview/LO part. */
+  /** Every pharm section (site order) using each card, and the first using each overview/LO part. */
+  const cardPlaces = new Map<string, { s: Sys; section: string }[]>();
   const pharmHome = new Map<string, { s: Sys; section: string }>();
   for (const s of systems) {
     for (const ps of s.data.structure.pharmSections) {
       for (const card of sectionCards(placements.get(sectionKey(g0(s), s.data.file.id, ps.id)))) {
-        if (!pharmHome.has(card)) pharmHome.set(card, { s, section: ps.id });
+        cardPlaces.set(card, [...(cardPlaces.get(card) ?? []), { s, section: ps.id }]);
       }
       for (const p of [ps.overview, ps.lo]) if (p !== null && !pharmHome.has(p)) pharmHome.set(p, { s, section: ps.id });
     }
   }
-  for (const [id, h] of pharmHome) {
+  /** A card part's home: the first section using its card where the part shows (its card's `for`). */
+  const partHome = new Map<string, { s: Sys; section: string }>();
+  for (const [card, places] of cardPlaces) {
+    for (const p of cardParts(card)) {
+      const home = places.find((h) => p.for === undefined || p.for.includes(h.section));
+      if (!home) throw new BuildError(p.part.id, `card part is for pharm sections ${p.for?.join(", ")}, where its card "${card}" is never placed`);
+      partHome.set(p.part.id, home);
+    }
+  }
+  const place = (h: { s: Sys; section: string }, id: string): Place =>
     // The target opens the card (or Overview/LO card) holding the id; a collapsed card shows nothing.
-    const route = view(h.s, pharmView(h.s.data.file.id, h.section, id));
-    const place = { route, loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) };
-    hosts[id] = place;
-    if (id.startsWith("c_")) for (const m of matcher.membersOf(id)) hosts[m.id] = place;
-    const ps = id.startsWith("c_") ? cardParts(id) : [parts.get(id)].filter((x) => x !== undefined);
-    for (const p of ps) {
-      if (id.startsWith("c_")) hosts[p.part.id] = place;
-      for (const b of p.part.blocks) hosts[b] = place;
+    ({ route: view(h.s, pharmView(h.s.data.file.id, h.section, id)), loc: pharmLoc(ix, g0(h.s), h.s.data.file.id) });
+  for (const [id, h] of pharmHome) {
+    hosts[id] = place(h, id);
+    for (const b of parts.get(id)?.part.blocks ?? []) hosts[b] = hosts[id];
+  }
+  for (const [card, places] of cardPlaces) {
+    hosts[card] = place(places[0] as { s: Sys; section: string }, card);
+    for (const m of matcher.membersOf(card)) if (m.id !== card) hosts[m.id] = hosts[card];
+    for (const p of cardParts(card)) {
+      // The class card opens at the part's home, which differs from the card's when the part is for another use.
+      const at = place(partHome.get(p.part.id) as { s: Sys; section: string }, card);
+      hosts[p.part.id] = at;
+      if (p.part.card !== card) hosts[p.part.card as string] = at;
+      for (const b of p.part.blocks) hosts[b] = at;
     }
   }
 
@@ -546,7 +563,12 @@ export function publish(c: Content): PublishResult {
     const blockOrder = s.data.blocks.map((b) => b.id);
     usedBlocks(s.data.blocks);
 
-    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle), s.data.below);
+    const panelSections: SystemJson["panelSections"] = {};
+    for (const section of st.drugTables.length > 0 ? (st.sections.length > 0 ? st.sections.map((x) => x.id) : [null]) : []) {
+      panelSections[conditionKey(section)] = [...(panels.get(sectionKey(gid, sys, conditionKey(section))) ?? [])];
+    }
+    const relevantTo = (topic: { section: string | null }): ReadonlySet<string> => new Set(panelSections[conditionKey(topic.section)] ?? []);
+    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic)), s.data.below);
     usedBlocks(topics.flatMap((x) => (x.below ? [x.below] : [])));
 
     // section pages
@@ -570,7 +592,7 @@ export function publish(c: Content): PublishResult {
       const blocks = ps.flatMap((p) => p.part.blocks);
       cards[card] = {
         title: cardTitle(card), file: file?.file.fileName ?? "", basePt: file?.file.basePt ?? 0, blocks,
-        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks, file: p.file.file.fileName, basePt: p.file.file.basePt })),
+        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks, file: p.file.file.fileName, basePt: p.file.file.basePt, ...(p.for ? { for: p.for } : {}) })),
       };
       for (const id of blocks) {
         const b = pharmBlocks.get(id);
@@ -611,13 +633,15 @@ export function publish(c: Content): PublishResult {
       if (!l.label && rows.length === 0) continue;
       (trims[l.block] ??= []).push({ text: l.text, label: l.label, rows });
     }
+    const uses: SystemJson["uses"] = {};
+    for (const l of c.uses.lines) if (cardBlocks.has(l.block)) (uses[l.block] ??= []).push({ text: l.text, for: l.for });
 
     const pageIds = [...blockOrder, ...t.rows.keys()];
     const out: SystemJson = {
       guide: gid, id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
       blocks: s.data.blocks.map(pub),
       ...publishedRows(t),
-      topics, stubs, sections, pharm, cards, parts: partsOut, notesBlocks, trims, notes: notesFor(pageIds),
+      topics, stubs, sections, pharm, panelSections, cards, parts: partsOut, notesBlocks, trims, uses, notes: notesFor(pageIds),
     };
     files.set(systemPath(gid, sys), out);
 
@@ -667,11 +691,13 @@ export function publish(c: Content): PublishResult {
           at: p, label: "notes", text: searchText(partText(part.part.blocks)),
         });
       }
+      // Each card part is one unit, at its home: the first section using its card where it shows.
       for (const card of sectionCards(placements.get(sectionKey(gid, sys, ps.id)))) {
-        if (!here(card) || searchHome(card, systems.map((x) => x.pharm), placements)?.section !== ps.id) continue;
         for (const p of cardParts(card)) {
+          const h = partHome.get(p.part.id);
+          if (h?.s !== s || h.section !== ps.id) continue;
           units.push({
-            tab, title: collapse(p.part.title), loc: pharmLoc(ix, gid, sys), route: hosts[card]?.route ?? "",
+            tab, title: collapse(p.part.title), loc: pharmLoc(ix, gid, sys), route: hosts[p.part.id]?.route ?? "",
             at: p.part.id, label: "notes", text: searchText(partText(p.part.blocks)),
           });
         }

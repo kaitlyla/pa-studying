@@ -192,6 +192,8 @@ export function cardioSystem(): SystemJson {
       b_AAAAAAAALO: block("b_AAAAAAAALO", "prose", doc(para("Learning objectives notes"))),
     },
     trims: {},
+    panelSections: { cad: ["antianginals"], inf: [] },
+    uses: {},
     notes: { [R.a]: [{ id: "u_AAAAAAAAU1", guideline: "UPDATENOTE guideline", org: "USPSTF", published: "2024-04", quote: "UPDATEQUOTE", grade: "B", url: "https://example.org", flagged: "2026-10-01" }] },
   };
 }
@@ -214,6 +216,8 @@ export function pulmSystem(): SystemJson {
     parts: {},
     notesBlocks: {},
     trims: {},
+    panelSections: {},
+    uses: {},
     notes: {},
   };
 }
