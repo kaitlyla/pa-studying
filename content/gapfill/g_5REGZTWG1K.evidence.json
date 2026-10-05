@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "author": "zeke-82556",
+ "claims": [
+  {
+   "text": "Lower lung border (5-7-9): the diaphragm sits at ICS 5 in the midclavicular line, ICS 7 in the midaxillary line and ICS 9 in the midscapular line; below that level is liver.",
+   "source": 0,
+   "quote": "Lung Lobes: use diaphragm, 5-7-9 - midclav ICS 5, midaxillary ICS 7, midscapular ICS 9 -> below=liver",
+   "locator": "Anatomy section, Lung Lobes line",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Right upper lobe: the apex rises 2–4 cm above the clavicle; the horizontal fissure runs at about the 4th rib.",
+   "source": 0,
+   "quote": "RUL : Apex 2-4cm above clavicle, Horizontal fissure ~4th rib",
+   "locator": "Anatomy section, Lung Lobes (RUL)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Oblique fissures: the left upper lobe's oblique fissure is more vertical; the right lower lobe's oblique fissure goes up to the axilla.",
+   "source": 0,
+   "quote": "LUL: Oblique fissure=more vertical RLL: Oblique fissure goes up to axilla",
+   "locator": "Anatomy section, Lung Lobes (LUL, RLL)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Posterior landmarks: the lower lung border is at about T10 when expanded; the oblique fissures are at about T3 or ICS 6.",
+   "source": 0,
+   "quote": "Posterior: Lower border ~T10 when expanded - Oblique fissures ~T3 or ICS6",
+   "locator": "Anatomy section, Lung Lobes (Posterior)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Fluid: fluid usually settles into the fissures.",
+   "source": 0,
+   "quote": "Fluid usually settle into fissures",
+   "locator": "Anatomy section, Lung Lobes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Tracheal bifurcation: the trachea bifurcates at about ICS 2, T4.",
+   "source": 0,
+   "quote": "Trachea (biforcate ~ICS2, T4)",
+   "locator": "Anatomy section, Interior: Airway line",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Right main bronchus: straighter and less angled, so aspiration (pneumonia or foreign body) is most common on the right.",
+   "source": 0,
+   "quote": "Rt bronchi =straighter, ↓ angulated -> aspirations (pneumonia or FB) =MC on Rt",
+   "locator": "Anatomy section, Airway",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Rib nerves: nerves run along the inferior edge of each rib, so chest tubes and devices go over the superior edge of the rib.",
+   "source": 0,
+   "quote": "n. along ribs = I. ran -> SO -> chest tube/devices need to go Sup rib",
+   "locator": "Anatomy section, first line",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "zoe-21216 (Detective task 01a10a49-ca73-75b3-a787-8a353aaee775, dispatched by shay-49353; check time 2026-10-05T04:30Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "the quote ties \"more vertical\" to the LUL oblique fissure and \"up to axilla\" to the RLL oblique fissure; the claim generalized both to all oblique fissures",
+    "resolution": "claim now attributes each property to its lobe; re-checked OK by shay-49353 at 2026-10-05T04:35Z"
+   },
+   {
+    "claim": 5,
+    "issue": "the quote \"carina ~ICS 2, T4\" (intubation CXR line) does not state tracheal bifurcation",
+    "resolution": "re-cited the Anatomy Airway line \"Trachea (biforcate ~ICS2, T4)\" and relabeled the claim \"Tracheal bifurcation\"; re-checked OK by shay-49353 at 2026-10-05T04:35Z"
+   }
+  ]
+ },
+ "block": "g_5REGZTWG1K"
+}

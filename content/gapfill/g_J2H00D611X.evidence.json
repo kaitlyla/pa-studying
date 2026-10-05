@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "author": "zeke-82556",
+ "claims": [
+  {
+   "text": "RUQ: liver, head of the pancreas, gallbladder, duodenum, pylorus and hepatic flexure of the colon.",
+   "source": 0,
+   "quote": "RUQ: - Liver - pancreas (head) - gallbladder - duodenum - pylorus - hepatic flexure of colon",
+   "locator": "Anatomy section, Quadrants (RUQ)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "LUQ: left lobe of the liver, spleen, stomach, body and tail of the pancreas and splenic flexure of the colon.",
+   "source": 0,
+   "quote": "LUQ: - Lt lobe of liver - spleen - stomach - body & tail pancreas - splenic flexure of colon",
+   "locator": "Anatomy section, Quadrants (LUQ)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "LLQ: descending and sigmoid colon, left ureter, and left spermatic cord or ovary or salpinx (fallopian tube); an enlarged bladder or uterus may be found here.",
+   "source": 0,
+   "quote": "LLQ: - descending colon - sigmoid colon - enlrg=bladder or uterus - Lt ureter Lt spermatic cord or ovary or salpinx / fallopian tube",
+   "locator": "Anatomy section, Quadrants (LLQ)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "RLQ: cecum, appendix, ascending colon, terminal ileum, right ureter, and right spermatic cord or ovary or salpinx (fallopian tube); an enlarged bladder or uterus may be found here.",
+   "source": 0,
+   "quote": "RLQ: - Cecum - appendix - ascending colon - terminal ileum - enlrg=bladder or uterus Rt ureter - Rt spermatic cord or ovary or salpinx / fallopian tube",
+   "locator": "Anatomy section, Quadrants (RLQ)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Bruit sites (rule of 2): listen with the bell over the aorta and the renal, iliac and femoral arteries; renal arteries are 2 in above and 2 in lateral to the umbilicus, iliac arteries 2 in below and 2 in lateral.",
+   "source": 0,
+   "quote": "Bruits: bell abd aorta - renal arteries - iliac arteries - femoral arteries rule of 2: - renal arteries: 2in above umbilicus, 2in lat - iliac arteries: 2in below umbilicus, 2in lat",
+   "locator": "Auscultate section, Bruits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Abdominal aorta: felt above the umbilicus in the epigastrium; 2.5 cm is normal, and enlargement to 3 cm or more suggests AAA.",
+   "source": 0,
+   "quote": "Aorta: above umbilicus in epigastrium area *AAA Sx: enlrg aorta +3cm - 2.5cm =norm",
+   "locator": "Palpation section, Aorta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "McBurney's point: one-third of the way from the ASIS to the umbilicus; tenderness there is McBurney's sign.",
+   "source": 0,
+   "quote": "McBurney’s Sign: tender, 1/3 distance: ASIS -umbilicus",
+   "locator": "Special tests section, McBurney's Sign",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "zoe-21216 (Detective task 01a10a49-ca73-75b3-a787-8a353aaee775, dispatched by shay-49353; check time 2026-10-05T04:30Z)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "her \"or ovary or salpinx / fallopian tube\" alternatives were rewritten as \"ovary and fallopian tube\"",
+    "resolution": "claim now reads \"spermatic cord or ovary or salpinx (fallopian tube)\"; re-checked OK by shay-49353 at 2026-10-05T04:35Z"
+   },
+   {
+    "claim": 3,
+    "issue": "same \"or ovary or salpinx / fallopian tube\" change in the RLQ claim",
+    "resolution": "claim now reads \"spermatic cord or ovary or salpinx (fallopian tube)\"; re-checked OK by shay-49353 at 2026-10-05T04:35Z"
+   },
+   {
+    "claim": 5,
+    "issue": "passed with a note: \"+3cm\" reads 3 cm or more, while \"past 3 cm\" reads more than 3 cm",
+    "resolution": "claim now reads \"enlargement to 3 cm or more\"; re-checked OK by shay-49353 at 2026-10-05T04:35Z"
+   }
+  ]
+ },
+ "block": "g_J2H00D611X"
+}
