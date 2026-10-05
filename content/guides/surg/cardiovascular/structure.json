@@ -1,10 +1,114 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "aortic-aneurysm",
+   "title": "Aortic aneurysm"
+  },
+  {
+   "id": "aortic-dissection",
+   "title": "Aortic dissection"
+  },
+  {
+   "id": "chronic-arterial-insufficiency",
+   "title": "Chronic arterial insufficiency"
+  },
+  {
+   "id": "acute-arterial-occlusion",
+   "title": "Acute arterial occlusion"
+  },
+  {
+   "id": "varicose-veins",
+   "title": "Varicose veins"
+  },
+  {
+   "id": "chronic-venous-insufficiency",
+   "title": "Chronic venous insufficiency"
+  },
+  {
+   "id": "coronary-artery-disease",
+   "title": "Coronary artery disease"
+  },
+  {
+   "id": "valvular-heart-disease",
+   "title": "Valvular heart disease"
+  },
+  {
+   "id": "other",
+   "title": "Cardiovascular — other"
+  }
+ ],
+ "members": {
+  "b_7QP7JWRADC": "aortic-aneurysm",
+  "r_5T22ZS0BZF": "aortic-aneurysm",
+  "r_52GTESPPDM": "aortic-dissection",
+  "b_AQ7XP0S8JE": "aortic-dissection",
+  "r_CZJ6YDGPZR": "chronic-arterial-insufficiency",
+  "r_F6ZJNX2Y8Z": "acute-arterial-occlusion",
+  "b_3FTTKQ6SBH": "acute-arterial-occlusion",
+  "r_FTRVX7T3BJ": "varicose-veins",
+  "r_F1715AA3N9": "chronic-venous-insufficiency",
+  "b_FJT57MWQNY": "chronic-venous-insufficiency",
+  "r_9BPZEZ3WYS": "coronary-artery-disease",
+  "b_TTQFH7084K": "coronary-artery-disease",
+  "r_X9F8SSFQPT": "coronary-artery-disease",
+  "b_Z6QPB1HCWE": "coronary-artery-disease",
+  "b_ZVF63Y2063": "coronary-artery-disease",
+  "r_KP86J4FT3K": "coronary-artery-disease",
+  "b_179ECW5NV7": "coronary-artery-disease",
+  "b_FBTP4Y0ZJS": "other",
+  "r_9GZBHSYA95": "other",
+  "r_JQRX6CKZPQ": "other",
+  "r_6ZWZ2TB5F7": "other",
+  "r_72HKAJ4429": "other",
+  "b_ZPYAYSPXCC": "other",
+  "r_PJ7VWS4HE1": "other",
+  "r_620ZB6PX6X": "other",
+  "r_J823C1C5XH": "other",
+  "r_38P3AV25BA": "other",
+  "b_Q3MNRYSHV2": "other",
+  "r_4YSQ23D24J": "valvular-heart-disease",
+  "r_6V8Z0HKHTR": "valvular-heart-disease",
+  "r_V7F76MWWJC": "valvular-heart-disease",
+  "r_5372BGWC5B": "valvular-heart-disease"
+ },
+ "listed": {
+  "b_FBTP4Y0ZJS": "Dyspnea on Exertion"
+ },
+ "drugTables": [
+  {
+   "block": "b_QJXZT2NQWQ",
+   "pharmSection": "antianginals",
+   "conditionRows": []
+  },
+  {
+   "block": "b_4MFH5W3YKD",
+   "pharmSection": "antithrombotics",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "antianginals",
+   "title": "Antianginals",
+   "tables": [
+    "b_QJXZT2NQWQ"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  },
+  {
+   "id": "antithrombotics",
+   "title": "Antiplatelets, anticoagulants & fibrinolytics",
+   "tables": [
+    "b_4MFH5W3YKD"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83"
  ]

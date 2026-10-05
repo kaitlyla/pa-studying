@@ -1,25 +1,10 @@
 {
  "v": 1,
- "id": "b_EH0QD44504",
+ "id": "b_QQFNMH8DFV",
  "kind": "prose",
  "doc": {
   "type": "doc",
   "content": [
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    }
-   },
    {
     "type": "paragraph",
     "attrs": {
@@ -42,7 +27,7 @@
         "type": "bold"
        }
       ],
-      "text": "Palpitations"
+      "text": "Tremors"
      },
      {
       "type": "text",
@@ -70,13 +55,19 @@
       "marks": [
        {
         "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
        }
       ],
-      "text": "DDX:"
+      "text": "RESTING"
      },
      {
       "type": "text",
-      "text": " anxiety, electrolyte abnormalities (hypokalemia, hypomagnesemia), exercise, hyperthyroidism, ischemic heart disease, ingestion of stimulant drugs (cocaine, amphetamines, caffeine), medications (digoxin, beta-blockers, hydralazine, diuretics, minoxidil), pheochromocytoma, hypoglycemia in DM1, mitral valve prolapse, AFIB, WPW, sick sinus syndrome"
+      "text": ": Parkinson’s, Wilson’s"
      }
     ]
    },
@@ -100,13 +91,19 @@
       "marks": [
        {
         "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
        }
       ],
-      "text": "DX"
+      "text": "POSTURAL and ACTION (Terminal):"
      },
      {
       "type": "text",
-      "text": ": Structural heart disease (CAD, cardiomyopathy, valve disease)"
+      "text": " physiologic tremor, stress, fatigue, anxiety, emotion"
      }
     ]
    },
@@ -127,7 +124,7 @@
     "content": [
      {
       "type": "text",
-      "text": "•ECG, echo, exercise stress test"
+      "text": "•Endocrine: hypoglycemia, thyrotoxicosis, pheochromocytoma, adrenocorticosteroids"
      }
     ]
    },
@@ -148,7 +145,7 @@
     "content": [
      {
       "type": "text",
-      "text": "•Labs: CMP, CBC, TSH, urine toxicology"
+      "text": "•Drugs/toxins: b-agonists, dopamine agonists, amphetamines, lithium, TCAs, neuroleptics, theophylline, caffeine,"
      }
     ]
    },
@@ -169,7 +166,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Tx based on diagnosis"
+      "text": "•valproic acid, alcohol withdrawal, mercury, lead, arsenic, others"
      }
     ]
    },
@@ -186,7 +183,106 @@
      "shade": null,
      "borders": null,
      "marker": null
-    }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "•Charcot-marie tooth syndrome"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "•Cerebellar tumor"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Kinetic (intention) tremor:"
+     },
+     {
+      "type": "text",
+      "text": " disease of cerebellar outflow, MS, trauma, tumor, vascular dz, Wilson’s, drugs, toxins"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Misc. rhythmical movement disorders:"
+     },
+     {
+      "type": "text",
+      "text": " psychogenic tremor, orthostatic tremor, rhythmical movements in dystonia, asterixis, clonus, nystagmus"
+     }
+    ]
    }
   ]
  },

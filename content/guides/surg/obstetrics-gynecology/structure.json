@@ -1,8 +1,37 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
+ "sections": [
+  {
+   "id": "breast-abscess",
+   "title": "Breast abscess"
+  },
+  {
+   "id": "benign-breast-disease",
+   "title": "Benign breast disease"
+  },
+  {
+   "id": "carcinoma-of-the-female-breast",
+   "title": "Carcinoma of the female breast"
+  },
+  {
+   "id": "other",
+   "title": "Obstetrics/Gynecology — other"
+  }
+ ],
+ "members": {
+  "b_CE141P1543": "breast-abscess",
+  "r_1S5AHTXKQH": "breast-abscess",
+  "r_D8BGM0S3SE": "benign-breast-disease",
+  "r_XX88052VJD": "benign-breast-disease",
+  "b_NVG6464S32": "carcinoma-of-the-female-breast",
+  "b_B7SG1KK7M2": "other",
+  "r_K0AJFXE7BZ": "carcinoma-of-the-female-breast",
+  "b_VXYQCSRRZF": "carcinoma-of-the-female-breast"
+ },
+ "listed": {
+  "b_NVG6464S32": "Adenopathy",
+  "b_B7SG1KK7M2": "Skin Changes"
+ },
  "drugTables": [],
  "pharmSections": [],
  "pharmFiles": []

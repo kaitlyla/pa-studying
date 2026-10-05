@@ -1,0 +1,64 @@
+{
+  "v": 1,
+  "guide": "surg",
+  "rule": "plan 90 §90.2.7",
+  "reviewer": "lena-08226 (detective, task 01a10982-f8ff-7d21-bc74-c0c07ce31689), spawned by the Leader shay-49353; did not author the drafts",
+  "curator": "nell-62415 (drafts); resumed by implementer-01a1097a-20eb-78c2-84a2-3424bd859279 (emil-85664)",
+  "recheck": "Finding 1 fix re-checked by the Leader (shay-49353, 2026-10-05T00:56Z): OK — the @18 part takes \"other\", the same section as the Tremors part before it, and is listed \"ESSENTIAL:\".",
+  "items": [
+    {
+      "item": "splits",
+      "file": "draft-endocrinology.json",
+      "id": "b_EH0QD44504@18",
+      "finding": "'ESSENTIAL:' (node 18) is its own paragraph, marks {BUC} (bold+underline+caps — stronger than the block's 'Tremors' title at node 8, which is {B} alone), ≤80 chars, and is followed by content (node 19 'HX/PE: postural tremor of hands, head, voice; family hx…' through node 22 Tx). It meets §90.2.3's title-line definition ('entirely bold, underlined or upper-case and is followed by content'), and the text under it is a self-contained note on essential tremor (mirrored by her own 'Essential Familial Tremor' topic in b_T1MC2Z58E6). By the rule the block holds a second titled note, so it should be split: `split b_EH0QD44504 18`, second part assigned other (same section), listed 'ESSENTIAL:'. The other three held lines are genuinely in-note labels (verified below) — this is the one where the label reading and the rule's own definition diverge. If the curator keeps the label reading, this is an unsettled item for the Leader (§90.2.7).",
+      "rule": "90 §90.2.3",
+      "verdict": "FINDING",
+      "resolution": "Fixed: `split b_EH0QD44504 18` → b_PHQ9BYFK8J (written before the @8 split, which gave b_QQFNMH8DFV); b_PHQ9BYFK8J assigned \"other\" and listed \"ESSENTIAL:\". Re-checked OK by the Leader (see recheck)."
+    },
+    {
+      "item": "sections",
+      "verdict": "OK",
+      "text": "**Sections (§90.2.1)** — OK. Every section title appears verbatim on `surg2023.txt`, sentence case as printed (GI 13 + Intestinal ischemia; CV 8; Endocrine 5; Dermatologic 4; Neuro 2 + periop + Carotid artery stenosis; Renal/GU 2 + periop + Renal vascular disease; Pulmonary 3; OB 3 from BREAST SURGERY). Cross-system entries match ruling 1's examples. OB topics route per ruling 2 (Breast Abscess, Fibroadenoma and Fibrocystic Disease → Benign breast disease, BREAST CANCER → Carcinoma of the female breast; Skin Changes → other — pregnancy changes fit no category). First-appearance order correct in all 8 sectioned drafts; `other` last everywhere; \"— other\" titles match her system headings. All \"other\" placements verified against the list (e.g. PUD, achalasia, PSC, hepatitis, cirrhosis, cardiomyopathies, pericarditis, stroke/TIA, pneumonia, mesothelioma, sarcoidosis, PE, UTIs, CKD/dialysis, torsion-absent): none is a 2023 entry. Judgment calls verified against the text: PONV row (`r_T32PTB87RN` \"Postoperative N/V (PONV) – complication…\") → periop GI; POUR-led Urinary Retention (`r_6XQ2P7MZAK` About cell \"Common complication of both spinal & epidural anesthesia…\") → periop renal/GU; Mesothelioma/Pneumonia/Sarcoidosis/PE → other. NEXT fallbacks (Fatigue→Parathyroid, Palpitations→Pituitary via DI, DOE→other, Hemoptysis→Pleural effusion, Edema→Nephrolithiasis) follow §90.2.3. Picture blocks with anchored images are non-blank and correctly assigned (hernia-types, jaundice, SCI pictures → other); true blank blocks follow the preceding item. Preop and Hematology flat per ruling 3 (note, no action: \"Compartment syndrome\" in her Preop notes is a 2023 CARDIOVASCULAR diagnoses entry — the ruling governs; Hematology also has zero matches under ruling 2)."
+    },
+    {
+      "item": "row kinds",
+      "verdict": "OK",
+      "text": "**Row kinds (§90.2.2, 40 §40.2)** — OK. All 133 rule-marked heading rows kept, none dropped; the 9 manual corrections all verified as rows whose cells hold only a label and/or column headings: the 4 fluids CAPS rows (PLASMA / ISOTONIC/HYPOTONIC/HYPERTONIC CRYSTALLOIDS), r_J4DEMAFR3K, r_NJ3H36SWFW, r_KKMHKP5ZMQ, r_RP5CH22BV3 (all \"^\"-covered with column-heading cells only), and r_VXQBHQBDPA (label + About/Diagnostics/Management — correct; note it is outside the two stated manual-read triggers, and keeping it content would produce two duplicate \"Adrenal Carcinoma\" topics). The CAPS content rows correctly stay content (HAV/HBV/HCV/HDV/HEV, SJS & TEN, BREAST CANCER)."
+    },
+    {
+      "item": "splits / listed",
+      "verdict": "OK except item 1",
+      "text": "**Splits / listed (§90.2.3)** — OK except the finding above. All four split indices verified 0-based and correct: b_EH0QD44504@8 \"Tremors\", b_NEFVCAVHCH@13 \"Redness/Erythema\", b_6VPSYT1M09@1 (perioperative vision-loss notes → periop neuro — real fit), b_NVG6464S32@6 \"Skin Changes\". All `listed` titles are her first lines verbatim; \"Motor &/or Sensory Loss\" correctly not listed (no notes of its own). The three other non-splits verified as labels inside notes: \"•HX: DOE\" (field line parallel to •PE/•DX in the Valvular note), \"•ESR\" (a Laboratory-testing list item), \"DDX:\" (list label in the Rash note). The 5 held `titled` pairs all qualify (GI Gastroenteritis; preop Metabolic Acidosis, Metabolic Alkalosis, Respiratory Acidosis, Respiratory Alkalosis — cell 0 each; label row names the condition, notes row below holds its notes)."
+    },
+    {
+      "item": "drug tables / condition rows",
+      "verdict": "OK",
+      "text": "**Drug tables / condition rows (§90.2.4)** — OK. All 6 drug tables captured (4 GI + 2 CV); every content row is a drug or class; `conditionRows` correctly empty; no missed PHARM/drug table in the guide (the preop IV-fluids table is a clinical reference, not drugs)."
+    },
+    {
+      "item": "pharm section titles",
+      "verdict": "OK",
+      "text": "**Pharm section titles (§90.2.5)** — OK. \"Antianginals\" (label ANTIANGINAL); \"Antiplatelets, anticoagulants & fibrinolytics\" (multi-label table, the FM spine name); GI's four PHARM/Maintenance-Therapy tables titled by the conditions their drugs treat (Constipation, Gastroenteritis, Inflammatory bowel disease, Peptic ulcer disease). Preop's \"Anesthetics and procedural sedation\" per §90.2.6 with empty tables, `also` left to the pharm-cards owner. `pharmFiles` match the §30.2 importer table exactly (pharm review → GI/CV/Pulmonary; inhaler combos → Pulmonary; insulin dosing → Endocrinology); files-only systems (endocrinology, pulmonary) correctly need no `pharmSections` entry — verified in the build (`lib/derive/pharm.ts` `hasPharm`, `publish.ts`) that the files-only pharm surface renders from `pharmFiles` alone."
+    },
+    {
+      "item": "general items / prominence",
+      "verdict": "OK",
+      "text": "**General items / prominence (§90.3.1)** — OK. All 7 signed topic keys recorded; prominence and `howto` correct (labs/ekg/imaging/procedures/guidelines/screenings prominent → howto null; anatomy not prominent → \"anatomy\"); every item names its list conditions or her guide spot, and I verified the ties (PSA→BPH/urologic neoplasms, sestamibi→parathyroid, scrotal Doppler→testicular torsion, noncontrast head CT→epidural hematoma/SAH/alteration in consciousness, etc.)."
+    },
+    {
+      "item": "file placements",
+      "verdict": "OK",
+      "text": "**File placements (§90.3.1)** — OK. All 13 doc ids exist and match their names; fixed USPSTF pair in screenings in order; ACLS algorithms + ACLS Study Guide placed in guidelines with the list's ACLS procedures entry as reason (permitted additional placement); labs order matches the established reftabs labs order (Bacterial Pathogens first). Omissions correct: EBV serology, HF tx and HEADSS peds assessment are not relevant to surg's list by howdecided."
+    },
+    {
+      "item": "workup",
+      "verdict": "OK",
+      "text": "**Workup (§90.3.1)** — OK. 33 presentations, alphabetical by title (verified). Each is a usual presentation of a 2023-list condition or her guide has presentation notes on it — checked every item, including the guide-note-backed ones (Fatigue, Palpitations, Tremors, DOE, Edema, Hemoptysis, Change in Speech, Discharge, Adenopathy, Rash, Nausea/Vomiting, Constipation, Dyspepsia, Jaundice)."
+    },
+    {
+      "item": "scope",
+      "verdict": "note",
+      "text": "Scope: reading-only review of the 10 draft JSONs + drafts.ts + rows-surg.json + general files against the dumped store and the 2023 list; the OB blocks were checked via the dump (pre-ec5401a, ids per the brief) cross-checked against the post-split `topics-surg.txt`."
+    }
+  ]
+}

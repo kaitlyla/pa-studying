@@ -1,8 +1,43 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
+ "sections": [
+  {
+   "id": "lung-malignancy",
+   "title": "Lung malignancy"
+  },
+  {
+   "id": "pneumothorax",
+   "title": "Pneumothorax"
+  },
+  {
+   "id": "pleural-effusion",
+   "title": "Pleural effusion"
+  },
+  {
+   "id": "other",
+   "title": "Pulmonary — other"
+  }
+ ],
+ "members": {
+  "b_Z0HGJ2MPBG": "lung-malignancy",
+  "r_ECT8KR46QV": "lung-malignancy",
+  "b_FCWWMKKC61": "lung-malignancy",
+  "r_24KPBA2X3G": "other",
+  "b_TT2865Y3W3": "other",
+  "r_YM3VXXF7DG": "other",
+  "b_TYJKYP756P": "other",
+  "r_VRZP1N2FZ5": "pneumothorax",
+  "b_3W6QH85A9P": "pleural-effusion",
+  "r_GFGGJQJ6M4": "pleural-effusion",
+  "b_ZBM7Q10VAZ": "pleural-effusion",
+  "r_N5S98XG79W": "other",
+  "b_NRE9TWB3DR": "other",
+  "r_JN1MTD1E4J": "other",
+  "b_0FQPGX0HCW": "other"
+ },
+ "listed": {
+  "b_3W6QH85A9P": "Hemoptysis"
+ },
  "drugTables": [],
  "pharmSections": [],
  "pharmFiles": [

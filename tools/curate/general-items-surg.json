@@ -1,0 +1,159 @@
+{
+  "v": 1,
+  "guide": "surg",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto and general/workup/choose; keys = signed EORS surg general (labs, ekg, imaging, anatomy, procedures, guidelines, screenings, workup); PAEA Surgery EOR Topic List 2023 (current Surgery list; no 2026 list exists — agent decision); Leader S10 ruling (selection recorded here, general.json written in S12)",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Labs are needed for ≥3 listed conditions (pancreatitis, biliary disease, GI bleeding, endocrine disorders, perioperative risk assessment in every system); her guide's Preoperative/Postoperative Care system has its own acid/base and fluids notes.",
+      "items": [
+        { "item": "Preoperative labs: CBC, BMP, coagulation studies (PT/INR, aPTT), type and screen", "covers": "Perioperative risk assessment and complications (every system on the list); her guide: Preoperative/Postoperative Care" },
+        { "item": "Electrolytes and arterial blood gas for acid/base disorders", "covers": "Perioperative risk assessment and complications; Bowel obstruction (vomiting); her guide: Acid/Base Disorders and fluids table (Preoperative/Postoperative Care)" },
+        { "item": "Lipase and amylase", "covers": "Pancreatitis (her guide: Acute/Chronic Pancreatitis rows)" },
+        { "item": "Liver panel: bilirubin, alkaline phosphatase, AST/ALT, GGT", "covers": "Cholecystitis/cholelithiasis — choledocholithiasis, cholangitis (her guide: Gallbladder table); Malignancy of the gastrointestinal tract (pancreatic, HCC)" },
+        { "item": "CBC with leukocytosis and left shift", "covers": "Appendicitis; Diverticulitis; Cholecystitis/cholelithiasis; Peritonitis" },
+        { "item": "Lactate", "covers": "Intestinal ischemia; Bowel obstruction (strangulation); Shock" },
+        { "item": "Serial hemoglobin/hematocrit and transfusion thresholds", "covers": "Gastrointestinal bleeding; Transfusion (Trauma/acute care procedures)" },
+        { "item": "Tumor markers: CEA, CA 19-9, AFP", "covers": "Malignancy of the gastrointestinal tract (colorectal, pancreatic, hepatocellular)" },
+        { "item": "TSH and free T4; calcitonin", "covers": "Thyroid disorders; Endocrine neoplasms (medullary thyroid carcinoma)" },
+        { "item": "Calcium and PTH", "covers": "Parathyroid disorders" },
+        { "item": "Cortisol/ACTH, aldosterone/renin, plasma or urine metanephrines", "covers": "Adrenal disorders; Endocrine neoplasms (pheochromocytoma, adrenal carcinoma — her guide: Adrenal table)" },
+        { "item": "Urinalysis (hematuria, crystals) and urine culture", "covers": "Nephrolithiasis; Urologic/renal neoplasms; Perioperative renal/genitourinary risk assessment and complications" },
+        { "item": "PSA", "covers": "Urologic/renal neoplasms (prostate cancer); Benign prostatic hyperplasia" },
+        { "item": "Troponin", "covers": "Perioperative cardiovascular risk assessment and complications; Coronary artery disease" },
+        { "item": "Hepatitis serologies", "covers": "Her guide: Hepatitis table (GI/Nutritional)" }
+      ]
+    },
+    "ekg": {
+      "prominent": true,
+      "howto": null,
+      "why": "EKG is needed for ≥3 listed conditions: Coronary artery disease, Aortic dissection (excluding MI), Valvular heart disease, Perioperative cardiovascular risk assessment and complications.",
+      "items": [
+        { "item": "Preoperative EKG and cardiac risk assessment", "covers": "Perioperative cardiovascular risk assessment and complications" },
+        { "item": "Ischemia and infarction patterns", "covers": "Coronary artery disease; Perioperative cardiovascular risk assessment and complications" },
+        { "item": "Normal EKG or nonspecific changes in aortic dissection; inferior MI pattern when the dissection involves the right coronary", "covers": "Aortic dissection" },
+        { "item": "Chamber enlargement and LVH", "covers": "Valvular heart disease" },
+        { "item": "Hyperkalemia and hypokalemia changes", "covers": "Perioperative renal/genitourinary risk assessment and complications; her guide: fluids and electrolytes notes (Preoperative/Postoperative Care)" },
+        { "item": "Postoperative atrial fibrillation", "covers": "Perioperative cardiovascular risk assessment and complications" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging is needed for ≥3 listed conditions (appendicitis, cholecystitis, bowel obstruction, aortic aneurysm/dissection, pneumothorax, breast and lung malignancy, nephrolithiasis).",
+      "items": [
+        { "item": "Right upper quadrant ultrasound; HIDA scan", "covers": "Cholecystitis/cholelithiasis (her guide: Gallbladder table — U/S initial test of choice)" },
+        { "item": "CT abdomen/pelvis with contrast", "covers": "Appendicitis; Diverticulitis; Bowel obstruction; Pancreatitis; Malignancy of the gastrointestinal tract" },
+        { "item": "Abdominal X-ray (obstruction series, free air)", "covers": "Bowel obstruction; Ileus; Toxic megacolon; Peritonitis" },
+        { "item": "CT angiography", "covers": "Aortic dissection; Aortic aneurysm; Intestinal ischemia; Acute arterial occlusion" },
+        { "item": "Abdominal aortic ultrasound", "covers": "Aortic aneurysm" },
+        { "item": "Duplex ultrasound and ankle-brachial index", "covers": "Chronic arterial insufficiency; Chronic venous insufficiency; Varicose veins; Carotid artery stenosis" },
+        { "item": "Chest X-ray and chest CT", "covers": "Pneumothorax; Pleural effusion; Hemothorax; Empyema; Lung malignancy; Pulmonary nodule" },
+        { "item": "Mammography and breast ultrasound", "covers": "Carcinoma of the female breast; Benign breast disease; Breast abscess (her guide: Breast Abscess, Fibroadenoma, Fibrocystic Disease and BREAST CANCER rows)" },
+        { "item": "Noncontrast CT kidney/ureter/bladder; renal ultrasound", "covers": "Nephrolithiasis; Urologic/renal neoplasms" },
+        { "item": "Scrotal Doppler ultrasound", "covers": "Testicular torsion" },
+        { "item": "Thyroid ultrasound; sestamibi scan", "covers": "Thyroid disorders; Endocrine neoplasms; Parathyroid disorders" },
+        { "item": "Noncontrast head CT", "covers": "Epidural hematoma; Subarachnoid hemorrhage; Alteration in consciousness" }
+      ]
+    },
+    "anatomy": {
+      "prominent": false,
+      "howto": "anatomy",
+      "why": "Only specific structures are needed; her guide has anatomy pictures within systems (hernia types, adrenal gland zones, incomplete spinal cord syndromes) but no anatomy section.",
+      "items": [
+        { "item": "Abdominal wall and hernia anatomy (inguinal canal, Hesselbach's triangle)", "covers": "Her guide: hernia-types picture and Hernias rows (GI/Nutritional); Hiatal hernia" },
+        { "item": "Biliary tree", "covers": "Cholecystitis/cholelithiasis" },
+        { "item": "Adrenal gland zones and hormones", "covers": "Adrenal disorders (her guide: Adrenal Gland note)" },
+        { "item": "Spinal cord tracts and incomplete cord syndromes", "covers": "Her guide: incomplete spinal cord syndrome pictures (Neurology)" },
+        { "item": "Carpal tunnel and median nerve", "covers": "Carpal tunnel syndrome" },
+        { "item": "Breast and axillary lymph node anatomy", "covers": "Carcinoma of the female breast (her guide: Adenopathy note)" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "The Surgery list names procedures in every system; no top tab carries a procedures how-to, so howto is null.",
+      "items": [
+        { "item": "Nasogastric tubes and abdominal drains", "covers": "Gastrointestinal procedures (Bowel obstruction; Ileus)" },
+        { "item": "Endoscopy, colonoscopy and ERCP", "covers": "Gastrointestinal procedures (Gastrointestinal bleeding; Cholecystitis/cholelithiasis — her guide: choledocholithiasis ERCP)" },
+        { "item": "Ileostomy; percutaneous endoscopic gastrostomy tube; parenteral nutrition", "covers": "Gastrointestinal procedures (Inflammatory bowel disease; Malignancy of the gastrointestinal tract)" },
+        { "item": "Central line, arteriovenous fistula and port placement; vascular access", "covers": "Cardiovascular procedures" },
+        { "item": "Advanced cardiac life support", "covers": "Cardiovascular procedures" },
+        { "item": "Chest tube and thoracentesis", "covers": "Pulmonary/thoracic surgery procedures (Pneumothorax; Pleural effusion; Hemothorax; Empyema — her guide: Pneumothorax and Pleural Effusion rows)" },
+        { "item": "Breast biopsy", "covers": "Breast surgery procedures (Carcinoma of the female breast)" },
+        { "item": "Suturing, skin graft and flap, skin biopsy, incision and drainage, aspiration of seroma/hematoma", "covers": "Dermatologic procedures (Burns; Cellulitis; Dermatologic neoplasms; Epidermal inclusion cyst)" },
+        { "item": "Urinary catheterization, lithotripsy and vasectomy", "covers": "Renal/genitourinary procedures (Nephrolithiasis; Benign prostatic hyperplasia)" },
+        { "item": "Transfusion", "covers": "Trauma/acute care procedures (Shock; Gastrointestinal bleeding)" },
+        { "item": "Lumbar puncture", "covers": "Neurologic/neurosurgery procedures (Subarachnoid hemorrhage)" },
+        { "item": "Endotracheal intubation, IV line placement, local and regional anesthesia", "covers": "Pain medicine/anesthesia procedures" },
+        { "item": "Fine needle biopsy", "covers": "Endocrine procedures (Thyroid disorders; Endocrine neoplasms)" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "Guidelines apply to ≥3 listed conditions; no top tab carries a guidelines how-to, so howto is null.",
+      "items": [
+        { "item": "Perioperative cardiovascular evaluation and management for noncardiac surgery (ACC/AHA)", "covers": "Perioperative cardiovascular risk assessment and complications" },
+        { "item": "ACLS algorithms (AHA)", "covers": "Advanced cardiac life support (Cardiovascular procedures)" },
+        { "item": "Venous thromboembolism prophylaxis in surgical patients (ACCP)", "covers": "Perioperative risk assessment and complications" },
+        { "item": "Surgical site infection prevention (CDC)", "covers": "Perioperative dermatologic risk assessment and complications" },
+        { "item": "Acute cholecystitis and cholangitis (Tokyo Guidelines)", "covers": "Cholecystitis/cholelithiasis" },
+        { "item": "Acute pancreatitis management (ACG)", "covers": "Pancreatitis" },
+        { "item": "Thyroid nodules and differentiated thyroid cancer (ATA)", "covers": "Thyroid disorders; Endocrine neoplasms" },
+        { "item": "Burn resuscitation (ABA)", "covers": "Burns" },
+        { "item": "Pressure injury staging (NPIAP)", "covers": "Pressure ulcer" },
+        { "item": "Surgical management of kidney stones (AUA)", "covers": "Nephrolithiasis" },
+        { "item": "Abdominal aortic aneurysm care (SVS)", "covers": "Aortic aneurysm" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Screening applies to ≥3 listed conditions; no top tab carries a screenings how-to, so howto is null.",
+      "items": [
+        { "item": "Colorectal cancer screening, adults 45–75 — USPSTF A/B", "covers": "Malignancy of the gastrointestinal tract" },
+        { "item": "Breast cancer screening (biennial mammography, women 40–74) — USPSTF B", "covers": "Carcinoma of the female breast (her guide: BREAST CANCER row — mammogram screening)" },
+        { "item": "Abdominal aortic aneurysm screening, men 65–75 who have ever smoked — USPSTF B", "covers": "Aortic aneurysm" },
+        { "item": "Lung cancer screening (low-dose CT, adults 50–80 with a 20 pack-year history) — USPSTF B", "covers": "Lung malignancy" },
+        { "item": "Obesity screening and behavioral interventions — USPSTF B", "covers": "Obesity" }
+      ]
+    }
+  },
+  "workup": [
+    { "id": "abdominal-pain", "title": "Abdominal pain", "conds": "Appendicitis, Bowel obstruction, Cholecystitis/cholelithiasis, Diverticulitis, Pancreatitis, Intestinal ischemia, Peritonitis, Acute abdomen (her guide: Abdominal Pain table)" },
+    { "id": "ams", "title": "Altered mental status", "conds": "Alteration in consciousness, Epidural hematoma, Subarachnoid hemorrhage, Shock" },
+    { "id": "anorexia", "title": "Anorexia", "conds": "Appendicitis, Malignancy of the gastrointestinal tract (her guide: Anorexia row)" },
+    { "id": "breast-mass", "title": "Breast mass", "conds": "Benign breast disease, Carcinoma of the female breast, Carcinoma of the male breast, Phyllodes tumor, Fat necrosis" },
+    { "id": "breast-pain", "title": "Breast pain and redness", "conds": "Mastitis, Breast abscess" },
+    { "id": "change-in-speech", "title": "Change in speech", "conds": "Carotid artery stenosis, Subarachnoid hemorrhage (her guide: Change in Speech note)" },
+    { "id": "chest-pain", "title": "Chest pain", "conds": "Aortic dissection, Coronary artery disease, Pneumothorax" },
+    { "id": "constipation", "title": "Constipation", "conds": "Bowel obstruction, Malignancy of the gastrointestinal tract (her guide: Constipation row)" },
+    { "id": "discharge", "title": "Discharge", "conds": "Cellulitis, Hidradenitis suppurativa, Epidermal inclusion cyst (her guide: Discharge note)" },
+    { "id": "dyspepsia", "title": "Dyspepsia", "conds": "Hiatal hernia, Malignancy of the gastrointestinal tract (her guide: Dyspepsia row)" },
+    { "id": "dysphagia", "title": "Dysphagia", "conds": "Hiatal hernia, Malignancy of the gastrointestinal tract" },
+    { "id": "dyspnea", "title": "Dyspnea on exertion", "conds": "Coronary artery disease, Valvular heart disease, Pleural effusion (her guide: Dyspnea on Exertion note)" },
+    { "id": "edema", "title": "Edema", "conds": "Chronic venous insufficiency, Varicose veins (her guide: Edema note)" },
+    { "id": "fatigue", "title": "Fatigue", "conds": "Thyroid disorders, Adrenal disorders (her guide: Fatigue note)" },
+    { "id": "flank-pain", "title": "Flank pain", "conds": "Nephrolithiasis, Urologic/renal neoplasms" },
+    { "id": "gi-bleeding", "title": "Hematemesis, melena or hematochezia", "conds": "Gastrointestinal bleeding, Malignancy of the gastrointestinal tract, Diverticulitis" },
+    { "id": "hematuria", "title": "Hematuria", "conds": "Urologic/renal neoplasms, Nephrolithiasis" },
+    { "id": "hemoptysis", "title": "Hemoptysis", "conds": "Lung malignancy (her guide: Hemoptysis note)" },
+    { "id": "jaundice", "title": "Jaundice", "conds": "Cholecystitis/cholelithiasis, Malignancy of the gastrointestinal tract (her guide: Jaundice row)" },
+    { "id": "leg-pain", "title": "Leg pain and claudication", "conds": "Chronic arterial insufficiency, Acute arterial occlusion, Compartment syndrome" },
+    { "id": "lymphadenopathy", "title": "Lymphadenopathy", "conds": "Carcinoma of the female breast (her guide: Adenopathy note)" },
+    { "id": "motor-sensory-loss", "title": "Motor and/or sensory loss", "conds": "Epidural hematoma, Carpal tunnel syndrome, Neurologic neoplasms (her guide: Motor &/or Sensory Loss notes)" },
+    { "id": "nausea-vomiting", "title": "Nausea and vomiting", "conds": "Bowel obstruction, Pancreatitis, Perioperative gastrointestinal risk assessment and complications (her guide: Nausea/Vomiting row)" },
+    { "id": "neck-mass", "title": "Neck mass or thyroid nodule", "conds": "Thyroid disorders, Endocrine neoplasms, Parathyroid disorders" },
+    { "id": "palpitations", "title": "Palpitations", "conds": "Thyroid disorders, Endocrine neoplasms (her guide: Palpitations note)" },
+    { "id": "postop-fever", "title": "Postoperative fever", "conds": "Perioperative risk assessment and complications, Empyema" },
+    { "id": "rash", "title": "Rash and redness", "conds": "Cellulitis, Burns (her guide: Rash and Redness/Erythema notes)" },
+    { "id": "rectal-pain", "title": "Rectal pain", "conds": "Anal disorders" },
+    { "id": "scrotal-pain", "title": "Scrotal pain", "conds": "Testicular torsion" },
+    { "id": "shock", "title": "Shock and hypotension", "conds": "Shock, Gastrointestinal bleeding, Aortic aneurysm" },
+    { "id": "skin-lesion", "title": "Skin lesion", "conds": "Dermatologic neoplasms, Lipoma, Epidermal inclusion cyst" },
+    { "id": "tremors", "title": "Tremors", "conds": "Thyroid disorders (her guide: Tremors note)" },
+    { "id": "urinary-retention", "title": "Urinary retention", "conds": "Benign prostatic hyperplasia, Urethral stricture, Perioperative renal/genitourinary risk assessment and complications (her guide: Urinary Retention row)" }
+  ]
+}
