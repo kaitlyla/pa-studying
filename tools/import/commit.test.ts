@@ -256,6 +256,12 @@ describe("spawnRunner", () => {
     await expect(git("git", ["no-such-subcommand"])).rejects.toThrow(/git no-such-subcommand exited 1/);
     await expect(git("pa-no-such-program-xyz", [])).rejects.toThrow();
   });
+
+  it("a program that exits without reading its input rejects with its exit, not a stray EPIPE", async () => {
+    // More input than a pipe buffers, so the write is still pending when the program has gone.
+    const input = new Uint8Array(8 * 1024 * 1024);
+    await expect(git(process.execPath, ["-e", "process.exit(3)"], { input })).rejects.toThrow(/exited 3/);
+  });
 });
 
 describe("ghPath", () => {

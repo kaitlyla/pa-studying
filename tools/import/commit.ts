@@ -24,6 +24,11 @@ export const spawnRunner = (cwd: string): Runner => (cmd, args, opts = {}) =>
     child.stdout.on("data", (b: Buffer) => out.push(b));
     child.stderr.on("data", (b: Buffer) => err.push(b));
     child.on("error", reject);
+    // A program that exits without reading all its input closes the pipe (EPIPE; EOF on Windows);
+    // its exit code, reported on close, is the outcome. Any other write failure rejects.
+    child.stdin.on("error", (e: NodeJS.ErrnoException) => {
+      if (e.code !== "EPIPE" && e.code !== "EOF") reject(e);
+    });
     child.on("close", (code) => {
       if (code === 0) resolve(Buffer.concat(out).toString("utf8"));
       else reject(new Error(`${cmd} ${args.join(" ")} exited ${code}: ${Buffer.concat(err).toString("utf8").trim()}`));
