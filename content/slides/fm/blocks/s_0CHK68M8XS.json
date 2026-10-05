@@ -55,6 +55,27 @@
       "content": [
        {
         "type": "text",
+        "text": "Collection of blood inside the anterior chamber of the eye (the space between the cornea and the iris); blood may cover most or all of iris/pupil, blocking vision partially or completely; usually painful."
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "MCC: trauma"
        }
       ]
@@ -273,6 +294,11 @@
   ],
   "evidence": [
    {
+    "item": "Collection of blood inside the anterior chamber of the eye (the space between the cornea and the iris); blood may cover most or all of iris/pupil, blocking vision partially or completely; usually painful.",
+    "row": "r_84RZBVABYR",
+    "quote": "Collection of blood inside the anterior chamber of the eye (the space between the cornea and the iris); blood may cover most or all of iris/pupil, blocking vision partially or completely; usually painful."
+   },
+   {
     "item": "MCC: trauma",
     "row": "r_84RZBVABYR",
     "quote": "▪︎MCC: trauma"
@@ -309,10 +335,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

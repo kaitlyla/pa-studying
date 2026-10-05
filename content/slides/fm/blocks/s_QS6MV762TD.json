@@ -144,6 +144,27 @@
       "content": [
        {
         "type": "text",
+        "text": "intense fear/anxiety of 2+ SITUATIONS d/t concerns of difficulty escaping, obtaining help in case of panic, or other embarrassing sxs (e.g., falling/incontinence in elderly)"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "outside home alone"
        }
       ]
@@ -166,27 +187,6 @@
        {
         "type": "text",
         "text": "open spaces (e.g., bridges)"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "enclosed spaces (e.g., stores)"
        }
       ]
      }
@@ -262,6 +262,11 @@
     "quote": "•often develops w/ panic disorder"
    },
    {
+    "item": "intense fear/anxiety of 2+ SITUATIONS d/t concerns of difficulty escaping, obtaining help in case of panic, or other embarrassing sxs (e.g., falling/incontinence in elderly)",
+    "row": "r_749EH6VKRA",
+    "quote": "•intense fear/anxiety of 2+ SITUATIONS d/t concerns of difficulty escaping, obtaining help in case of panic, or other embarrassing sxs (e.g., falling/incontinence in elderly)"
+   },
+   {
     "item": "outside home alone",
     "row": "r_749EH6VKRA",
     "quote": "•outside home alone"
@@ -272,21 +277,18 @@
     "quote": "•open spaces (e.g., bridges)"
    },
    {
-    "item": "enclosed spaces (e.g., stores)",
-    "row": "r_749EH6VKRA",
-    "quote": "•enclosed spaces (e.g., stores)"
-   },
-   {
     "item": "CBT + SSRIs",
     "row": "r_749EH6VKRA",
     "quote": "•CBT + SSRIs"
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

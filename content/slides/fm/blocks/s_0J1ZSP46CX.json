@@ -215,69 +215,6 @@
         "text": "Type"
        }
       ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "Threatened"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "Inevitable"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "Incomplete"
-       }
-      ]
      }
     ]
    },
@@ -545,21 +482,6 @@
     "quote": "Congenital abnormalities in mother"
    },
    {
-    "item": "Threatened",
-    "row": "r_NC20QGBST2",
-    "quote": "Threatened"
-   },
-   {
-    "item": "Inevitable",
-    "row": "r_VWJVMM07B6",
-    "quote": "Inevitable"
-   },
-   {
-    "item": "Incomplete",
-    "row": "r_55A36PMCX8",
-    "quote": "Incomplete"
-   },
-   {
     "item": "blood type & Rh screen",
     "row": "r_NC20QGBST2",
     "quote": "•blood type & Rh screen"
@@ -601,10 +523,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

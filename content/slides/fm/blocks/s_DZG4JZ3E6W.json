@@ -144,6 +144,27 @@
       "content": [
        {
         "type": "text",
+        "text": "1-2wks later → general exanthem: smaller, very pruritic 1cm round or oval salmon-colored papules w/ white circular (collarette) scaling in a Christmas tree pattern (oriented along skin cleavage lines)"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "confined to trunk & proximal extremities (face, palms, soles usually spared)"
        }
       ]
@@ -330,6 +351,11 @@
     "quote": "Herald patch: solitary salmon-colored macule on the trunk, 2-6mm"
    },
    {
+    "item": "1-2wks later → general exanthem: smaller, very pruritic 1cm round or oval salmon-colored papules w/ white circular (collarette) scaling in a Christmas tree pattern (oriented along skin cleavage lines)",
+    "row": "r_0F9J2E6HZ0",
+    "quote": "1-2wks later → general exanthem: smaller, very pruritic 1cm round or oval salmon-colored papules w/ white circular (collarette) scaling in a Christmas tree pattern (oriented along skin cleavage lines)"
+   },
+   {
     "item": "confined to trunk & proximal extremities (face, palms, soles usually spared)",
     "row": "r_0F9J2E6HZ0",
     "quote": "•confined to trunk & proximal extremities (face, palms, soles usually spared)"
@@ -361,10 +387,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

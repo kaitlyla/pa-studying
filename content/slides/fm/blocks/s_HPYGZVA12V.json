@@ -254,6 +254,48 @@
       "content": [
        {
         "type": "text",
+        "text": "DX: presumptive diagnosis made in any sexually active woman presenting w/ pelvic or lower abdominal pain + have evidence of cervical motion, uterine, or adnexal tenderness on exam"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "*this is sufficient for tx d/t serious sequelae if tx delayed/not given"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "Other supportive findings:"
        }
       ]
@@ -276,48 +318,6 @@
        {
         "type": "text",
         "text": "temp >101oF (>38.3oC)"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "abnormal cervical or vaginal mucopurulent discharge or cervical friability"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "presence of abundant numbers of WBCs on saline microscopy of vaginal secretions (>15-20 WBCs/high power field or more WBCs than epithelial cells)"
        }
       ]
      }
@@ -497,6 +497,16 @@
     "quote": "•fever"
    },
    {
+    "item": "DX: presumptive diagnosis made in any sexually active woman presenting w/ pelvic or lower abdominal pain + have evidence of cervical motion, uterine, or adnexal tenderness on exam",
+    "row": "r_V77NQ7YR34",
+    "quote": "DX: presumptive diagnosis made in any sexually active woman presenting w/ pelvic or lower abdominal pain + have evidence of cervical motion, uterine, or adnexal tenderness on exam"
+   },
+   {
+    "item": "*this is sufficient for tx d/t serious sequelae if tx delayed/not given",
+    "row": "r_V77NQ7YR34",
+    "quote": "*this is sufficient for tx d/t serious sequelae if tx delayed/not given"
+   },
+   {
     "item": "Other supportive findings:",
     "row": "r_V77NQ7YR34",
     "quote": "Other supportive findings:"
@@ -505,16 +515,6 @@
     "item": "temp >101oF (>38.3oC)",
     "row": "r_V77NQ7YR34",
     "quote": "•temp >101oF (>38.3oC)"
-   },
-   {
-    "item": "abnormal cervical or vaginal mucopurulent discharge or cervical friability",
-    "row": "r_V77NQ7YR34",
-    "quote": "•abnormal cervical or vaginal mucopurulent discharge or cervical friability"
-   },
-   {
-    "item": "presence of abundant numbers of WBCs on saline microscopy of vaginal secretions (>15-20 WBCs/high power field or more WBCs than epithelial cells)",
-    "row": "r_V77NQ7YR34",
-    "quote": "•presence of abundant numbers of WBCs on saline microscopy of vaginal secretions (>15-20 WBCs/high power field or more WBCs than epithelial cells)"
    },
    {
     "item": "Inpatient:",
@@ -543,11 +543,11 @@
    }
   ],
   "verification": {
-   "verifier": "shay-49353 (Leader re-check)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
    "notes": [
-    "Verifier failed \"*this is sufficient…\" (no antecedent) and the inpatient regimen cut on \"PLUS\" (round 1); generator fixed (line rules 6 and 7); Leader re-check passed."
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
    ]
   }
  }

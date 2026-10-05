@@ -207,7 +207,7 @@
       "content": [
        {
         "type": "text",
-        "text": "lesions in different stages of development, PRURITIC!!!"
+        "text": "starts as macules, rapidly become papules, then vesicles; can develop pustular component followed by formation of crusted papules; crusts fall off within 1-2wks; leave temporary area of hypopigmentation"
        }
       ]
      }
@@ -471,9 +471,9 @@
     "quote": "Rash: *appears in successive crops over several days"
    },
    {
-    "item": "lesions in different stages of development, PRURITIC!!!",
+    "item": "starts as macules, rapidly become papules, then vesicles; can develop pustular component followed by formation of crusted papules; crusts fall off within 1-2wks; leave temporary area of hypopigmentation",
     "row": "r_2D3Y8K3ZHS",
-    "quote": "•lesions in different stages of development, PRURITIC!!!"
+    "quote": "•starts as macules, rapidly become papules, then vesicles; can develop pustular component followed by formation of crusted papules; crusts fall off within 1-2wks; leave temporary area of hypopigmentation"
    },
    {
     "item": "PCR: viral DNA; confirmatory",
@@ -517,10 +517,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

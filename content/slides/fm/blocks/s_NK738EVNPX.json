@@ -165,49 +165,28 @@
       "content": [
        {
         "type": "text",
+        "text": "abdominal pain radiating to the back; may be relieved w/ sitting up & leaning forward; tumors in body or tail produce sxs later than in the head so usually more advanced at diagnosis – new onset DM, depression"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "pruritis (due to increased bile salts in the skin), anorexia, acholic stools, dark urine (due to common bile duct obstruction)"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "PE:"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "trousseau’s malignancy sign = migratory phlebitis associated w/ malignancy; nonspecific"
        }
       ]
      }
@@ -440,19 +419,14 @@
     "quote": "•painless jaundice classic (common bile duct obstruction); weight loss"
    },
    {
+    "item": "abdominal pain radiating to the back; may be relieved w/ sitting up & leaning forward; tumors in body or tail produce sxs later than in the head so usually more advanced at diagnosis – new onset DM, depression",
+    "row": "r_30KR5VZQ38",
+    "quote": "•abdominal pain radiating to the back; may be relieved w/ sitting up & leaning forward; tumors in body or tail produce sxs later than in the head so usually more advanced at diagnosis – new onset DM, depression"
+   },
+   {
     "item": "pruritis (due to increased bile salts in the skin), anorexia, acholic stools, dark urine (due to common bile duct obstruction)",
     "row": "r_30KR5VZQ38",
     "quote": "•pruritis (due to increased bile salts in the skin), anorexia, acholic stools, dark urine (due to common bile duct obstruction)"
-   },
-   {
-    "item": "PE:",
-    "row": "r_30KR5VZQ38",
-    "quote": "PE:"
-   },
-   {
-    "item": "trousseau’s malignancy sign = migratory phlebitis associated w/ malignancy; nonspecific",
-    "row": "r_30KR5VZQ38",
-    "quote": "•trousseau’s malignancy sign = migratory phlebitis associated w/ malignancy; nonspecific"
    },
    {
     "item": "CT scan: initial test of choice",
@@ -491,10 +465,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

@@ -144,6 +144,27 @@
       "content": [
        {
         "type": "text",
+        "text": "S/SXS: pain over anterior aspect of the knee worsened w/ running/walking uphill or when moving after prolonged sitting/standing; tenderness on applying pressure to the inferior border of the patella"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "⊕Bassett sign ⇢ TTP w/ knee fully extended, non-tender w/ knee in flexion"
        }
       ]
@@ -262,6 +283,11 @@
     "quote": "▪︎common in adolescents"
    },
    {
+    "item": "S/SXS: pain over anterior aspect of the knee worsened w/ running/walking uphill or when moving after prolonged sitting/standing; tenderness on applying pressure to the inferior border of the patella",
+    "row": "r_M4K5R7KBVA",
+    "quote": "S/SXS: pain over anterior aspect of the knee worsened w/ running/walking uphill or when moving after prolonged sitting/standing; tenderness on applying pressure to the inferior border of the patella"
+   },
+   {
     "item": "⊕Bassett sign ⇢ TTP w/ knee fully extended, non-tender w/ knee in flexion",
     "row": "r_M4K5R7KBVA",
     "quote": "▪︎⊕Bassett sign ⇢ TTP w/ knee fully extended, non-tender w/ knee in flexion"
@@ -283,10 +309,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

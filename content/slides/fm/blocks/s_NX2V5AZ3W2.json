@@ -97,7 +97,7 @@
       "content": [
        {
         "type": "text",
-        "text": "the high levels of insulin cause sodium reabsorption, leading to HTN"
+        "text": "free fatty acids are released, which causes an increase in triglyceride & glucose production as well as reduction in insulin sensitivity, leading to insulin resistance & hyperinsulinemia"
        }
       ]
      }
@@ -278,9 +278,9 @@
     "quote": "PATHO: insulin resistance is the key component"
    },
    {
-    "item": "the high levels of insulin cause sodium reabsorption, leading to HTN",
+    "item": "free fatty acids are released, which causes an increase in triglyceride & glucose production as well as reduction in insulin sensitivity, leading to insulin resistance & hyperinsulinemia",
     "row": "r_KQZKAY7KTT",
-    "quote": "•the high levels of insulin cause sodium reabsorption, leading to HTN"
+    "quote": "•free fatty acids are released, which causes an increase in triglyceride & glucose production as well as reduction in insulin sensitivity, leading to insulin resistance & hyperinsulinemia"
    },
    {
     "item": "At least 3/5:",
@@ -309,10 +309,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

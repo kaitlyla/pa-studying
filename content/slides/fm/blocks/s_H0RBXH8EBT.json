@@ -123,6 +123,27 @@
       "content": [
        {
         "type": "text",
+        "text": "Recurrent episodes of sudden, episodic peripheral vertigo (lasting ≤60sec) & provoked w/ specific head movements (e.g., rolling over in bed, lying down, getting up from bed, looking up)"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "N/V, not associated w/ hearing loss, tinnitus, or ataxia"
        }
       ]
@@ -262,6 +283,11 @@
     "quote": "MC cause of peripheral vertigo"
    },
    {
+    "item": "Recurrent episodes of sudden, episodic peripheral vertigo (lasting ≤60sec) & provoked w/ specific head movements (e.g., rolling over in bed, lying down, getting up from bed, looking up)",
+    "row": "r_NE2QTZ194Y",
+    "quote": "Recurrent episodes of sudden, episodic peripheral vertigo (lasting ≤60sec) & provoked w/ specific head movements (e.g., rolling over in bed, lying down, getting up from bed, looking up)"
+   },
+   {
     "item": "N/V, not associated w/ hearing loss, tinnitus, or ataxia",
     "row": "r_NE2QTZ194Y",
     "quote": "•N/V, not associated w/ hearing loss, tinnitus, or ataxia"
@@ -283,10 +309,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

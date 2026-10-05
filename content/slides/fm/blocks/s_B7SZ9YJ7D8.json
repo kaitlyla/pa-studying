@@ -144,6 +144,27 @@
       "content": [
        {
         "type": "text",
+        "text": "consistent failure to speak in select social situations where speaking is expected (e.g., school) despite speaking in other situations lasting ≥1MO (not limited to first month of school)"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "NOT attributable to language difficulty or communication disorder"
        }
       ]
@@ -262,6 +283,11 @@
     "quote": "•majority of pts suffer from anxiety (social)"
    },
    {
+    "item": "consistent failure to speak in select social situations where speaking is expected (e.g., school) despite speaking in other situations lasting ≥1MO (not limited to first month of school)",
+    "row": "r_6PM4BB4149",
+    "quote": "•consistent failure to speak in select social situations where speaking is expected (e.g., school) despite speaking in other situations lasting ≥1MO (not limited to first month of school)"
+   },
+   {
     "item": "NOT attributable to language difficulty or communication disorder",
     "row": "r_6PM4BB4149",
     "quote": "•NOT attributable to language difficulty or communication disorder"
@@ -283,10 +309,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

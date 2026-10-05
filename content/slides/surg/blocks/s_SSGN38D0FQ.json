@@ -55,49 +55,28 @@
       "content": [
        {
         "type": "text",
+        "text": "PATHO: exotoxins (shiga-like & shiga toxins) damages vascular endothelium, activating platelets → microthrombosis of small vessels → consumptive thrombocytopenia & hemolytic anemia"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
         "text": "ADAMTS13 normal"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "Incidence:"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "predominantly seen in children w/ diarrhea prodrome: Enterohem. E coli O157:H7 (80%), Shigella, Salmonella"
        }
       ]
      }
@@ -441,19 +420,14 @@
   ],
   "evidence": [
    {
+    "item": "PATHO: exotoxins (shiga-like & shiga toxins) damages vascular endothelium, activating platelets → microthrombosis of small vessels → consumptive thrombocytopenia & hemolytic anemia",
+    "row": "r_PPPD52NTTB",
+    "quote": "PATHO: exotoxins (shiga-like & shiga toxins) damages vascular endothelium, activating platelets → microthrombosis of small vessels → consumptive thrombocytopenia & hemolytic anemia"
+   },
+   {
     "item": "ADAMTS13 normal",
     "row": "r_PPPD52NTTB",
     "quote": "•ADAMTS13 normal"
-   },
-   {
-    "item": "Incidence:",
-    "row": "r_PPPD52NTTB",
-    "quote": "Incidence:"
-   },
-   {
-    "item": "predominantly seen in children w/ diarrhea prodrome: Enterohem. E coli O157:H7 (80%), Shigella, Salmonella",
-    "row": "r_PPPD52NTTB",
-    "quote": "•predominantly seen in children w/ diarrhea prodrome: Enterohem. E coli O157:H7 (80%), Shigella, Salmonella"
    },
    {
     "item": "renal failure/uremia (predominant symptom)",
@@ -517,10 +491,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109dc-9c70-7103-9bba-b0f86405cb14 (surg S13 round 2)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }

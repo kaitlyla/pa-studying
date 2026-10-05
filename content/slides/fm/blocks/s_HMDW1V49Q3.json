@@ -144,7 +144,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Mood between outbursts is persistently irritable or angry & observable by others"
+        "text": "Recurrent temper outbursts manifested verbally (e.g., verbal rages) &/or behaviorally (e.g., physical aggression) that are out of proportion to situation/provocation & inconsistent w/ developmental level"
        }
       ]
      },
@@ -165,7 +165,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Symptoms began BEFORE AGE 10 (not diagnosed before 6yo or after 18yo)"
+        "text": "Mood between outbursts is persistently irritable or angry & observable by others"
        }
       ]
      }
@@ -262,14 +262,14 @@
     "quote": "Occurs ≥3X/WK for ≥12MO + NO PERIOD ≥3MO W/O SXS, PRESENT IN 2+ SETTINGS"
    },
    {
+    "item": "Recurrent temper outbursts manifested verbally (e.g., verbal rages) &/or behaviorally (e.g., physical aggression) that are out of proportion to situation/provocation & inconsistent w/ developmental level",
+    "row": "r_FN38MD3G55",
+    "quote": "•Recurrent temper outbursts manifested verbally (e.g., verbal rages) &/or behaviorally (e.g., physical aggression) that are out of proportion to situation/provocation & inconsistent w/ developmental level"
+   },
+   {
     "item": "Mood between outbursts is persistently irritable or angry & observable by others",
     "row": "r_FN38MD3G55",
     "quote": "•Mood between outbursts is persistently irritable or angry & observable by others"
-   },
-   {
-    "item": "Symptoms began BEFORE AGE 10 (not diagnosed before 6yo or after 18yo)",
-    "row": "r_FN38MD3G55",
-    "quote": "•Symptoms began BEFORE AGE 10 (not diagnosed before 6yo or after 18yo)"
    },
    {
     "item": "psychotherapy (parent management training) first line",
@@ -283,10 +283,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
+   "verifier": "shay-49353 (Leader re-check, 03:00Z)",
    "at": "2026-10-05",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "Changed by line rules 9 and 10 after the ob verdict; Leader re-check passed."
+   ]
   }
  }
 }
