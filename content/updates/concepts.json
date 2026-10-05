@@ -1,4 +1,719 @@
 {
  "v": 1,
- "concepts": []
+ "concepts": [
+  {
+   "id": "copd-management",
+   "title": "COPD: GOLD groups and initial therapy",
+   "sourceKeys": {
+    "gold": [
+     "COPD: GOLD groups A, B and E (C and D merged into E)",
+     "COPD group E: LABA+LAMA as initial therapy",
+     "COPD: LABA+ICS not encouraged",
+     "COPD: LABA+LAMA+ICS preferred over LABA+ICS when an ICS is indicated"
+    ]
+   },
+   "targets": [
+    "r_DTR443XYG0",
+    "r_JC5J9CB5PT",
+    "r_5DABS9Q15R",
+    "r_MMWAEVBW9H",
+    "b_QSPYSCDTKC"
+   ]
+  },
+  {
+   "id": "asthma-reliever",
+   "title": "Asthma: reliever therapy",
+   "sourceKeys": {
+    "gina": [
+     "Asthma: no SABA-only treatment",
+     "Asthma: as-needed ICS-formoterol reliever (Track 1) preferred"
+    ]
+   },
+   "targets": [
+    "r_K39Q9QRCT6",
+    "r_Q8SVR4ASHJ",
+    "r_C9HQATPC8H",
+    "r_WSBMAAQ02F",
+    "r_V973RS5FTB",
+    "r_PW3CND13DT",
+    "r_75H28QEZ3R",
+    "r_3TZBZY3Z65",
+    "r_G14DEFBADQ",
+    "r_NXGKPK63JH",
+    "b_QSPYSCDTKC",
+    "g_X83DCPD3BY"
+   ]
+  },
+  {
+   "id": "type-2-diabetes-treatment",
+   "title": "Type 2 diabetes: glucose-lowering therapy",
+   "sourceKeys": {
+    "ada": [
+     "Type 2 diabetes: initial combination therapy",
+     "Type 2 diabetes with established or high risk of ASCVD: GLP-1 RA and/or SGLT2 inhibitor irrespective of A1C",
+     "Type 2 diabetes with heart failure: SGLT2 inhibitor irrespective of A1C",
+     "Type 2 diabetes with CKD: SGLT2 inhibitor or GLP-1 RA irrespective of A1C"
+    ]
+   },
+   "targets": [
+    "r_3P1VZQW8MN",
+    "r_88CDKBQ5BV",
+    "r_BYKV7M49GY",
+    "r_KV4V8H1D72",
+    "r_3AP4055V1K",
+    "r_A13VP2GDXP",
+    "r_6RYC7FTXXX",
+    "r_ZV1YPMMC5J",
+    "r_7T8TM77WJG",
+    "r_5WC7NWS3HY",
+    "r_57WVHQJKDG",
+    "r_XEJV02QY58",
+    "r_AN6F5HT2J4",
+    "r_DA1XTPXM7R",
+    "r_APBYDBXX8W",
+    "r_NYQDG8HEKZ",
+    "b_RR1AMY0NZB",
+    "b_HF293EC4TR",
+    "g_5P4K93NTWG"
+   ]
+  },
+  {
+   "id": "heart-failure-management",
+   "title": "Heart failure: stages and GDMT",
+   "sourceKeys": {
+    "hf": [
+     "HFrEF: SGLT2 inhibitor as a fourth GDMT class",
+     "HFmrEF: SGLT2 inhibitor",
+     "HFpEF: SGLT2 inhibitor, MRA and ARNi",
+     "HF stages: stage A 'at risk for HF', stage B 'pre-HF'"
+    ]
+   },
+   "targets": [
+    "r_SD0186969Y",
+    "r_N063KS4CHX",
+    "r_DEKN38VZQ2",
+    "r_T5F2754F4D",
+    "r_5S2XE2X23W",
+    "r_N7PX1V36PQ",
+    "r_ZXKE7K5TVM",
+    "r_4Y4EH802G4",
+    "b_HG099BV7SB",
+    "b_6ZTZ3YYXVQ",
+    "b_3VJGT2R0K3",
+    "b_HF293EC4TR",
+    "g_HBJ9YTWP9R"
+   ]
+  },
+  {
+   "id": "cardioversion-af-flutter",
+   "title": "Synchronized cardioversion: atrial fibrillation and flutter",
+   "sourceKeys": {
+    "cpr": [
+     "ACLS: cardioversion energy for atrial fibrillation",
+     "ACLS: cardioversion energy for atrial flutter"
+    ]
+   },
+   "targets": [
+    "r_2WYW6E351D",
+    "r_REVY01ZAD4",
+    "r_6SMMZN6XEC",
+    "r_7D4S1K3ZCP",
+    "r_FTS2QAQ42D",
+    "r_40KWZBZE8Z",
+    "r_WRGZM3S99C",
+    "r_J9HXS89VFE",
+    "b_E691J5JVHJ",
+    "g_C3RWG4XXVG"
+   ]
+  },
+  {
+   "id": "post-cardiac-arrest-care",
+   "title": "Post-cardiac arrest care",
+   "sourceKeys": {
+    "cpr": [
+     "Post-cardiac arrest care: temperature control range",
+     "Post-cardiac arrest care: temperature control duration",
+     "Post-cardiac arrest care: oxygen saturation target"
+    ]
+   },
+   "targets": [
+    "b_E691J5JVHJ"
+   ]
+  },
+  {
+   "id": "bls-rescue-breathing",
+   "title": "BLS: rescue breathing",
+   "sourceKeys": {
+    "cpr": [
+     "BLS: rescue breathing rate for respiratory arrest"
+    ]
+   },
+   "targets": [
+    "b_E691J5JVHJ"
+   ]
+  },
+  {
+   "id": "anxiety-screening-adults",
+   "title": "Anxiety screening: adults",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/anxiety-adults-screening#1"
+    ]
+   },
+   "targets": [
+    "r_YFMSB9VC3X",
+    "r_VN7S1FN9AM",
+    "r_T4K29Q6ZJS",
+    "r_2BKG6QXT8C"
+   ]
+  },
+  {
+   "id": "anxiety-screening-children",
+   "title": "Anxiety screening: children and adolescents",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/screening-anxiety-children-adolescents#1"
+    ]
+   },
+   "targets": [
+    "r_EVXR2RC23G",
+    "r_FJ7CHMCSBX",
+    "r_ARZEGZ1ZEG",
+    "g_YG9HW3RYJE"
+   ]
+  },
+  {
+   "id": "preeclampsia-aspirin",
+   "title": "Low-dose aspirin to prevent preeclampsia",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/low-dose-aspirin-use-for-the-prevention-of-morbidity-and-mortality-from-preeclampsia-preventive-medication#1"
+    ]
+   },
+   "targets": [
+    "r_4J6KXBP3TF",
+    "r_GHS4P48BC7",
+    "r_38W0Z7SHEY",
+    "g_6ZJ5XNZW8Z"
+   ]
+  },
+  {
+   "id": "hypertensive-disorders-of-pregnancy",
+   "title": "Hypertensive disorders of pregnancy: screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/hypertensive-disorders-pregnancy-screening#1"
+    ]
+   },
+   "targets": [
+    "r_4J6KXBP3TF",
+    "r_GHS4P48BC7",
+    "r_38W0Z7SHEY",
+    "r_6TKSA2ZEX5",
+    "r_MQF5X60JND",
+    "r_TP1FDRBPXE",
+    "g_6ZJ5XNZW8Z",
+    "g_NP97E7CA7Y",
+    "r_B9E83XMJF3",
+    "r_5Z8AW5X4SS"
+   ]
+  },
+  {
+   "id": "breast-cancer-screening",
+   "title": "Breast cancer screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/breast-cancer-screening#1"
+    ]
+   },
+   "targets": [
+    "r_3QRBAQRAVC",
+    "r_N32J4E2QDD",
+    "r_PCV2RF9E3D",
+    "r_K0AJFXE7BZ",
+    "b_0ERRDYTHJ3",
+    "g_VCK9FET9A0"
+   ]
+  },
+  {
+   "id": "chlamydia-gonorrhea-screening",
+   "title": "Chlamydia and gonorrhea screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/chlamydia-and-gonorrhea-screening#1",
+     "/uspstf/recommendation/chlamydia-and-gonorrhea-screening#2"
+    ]
+   },
+   "targets": [
+    "r_GNFEE2TFD7",
+    "r_PAMV0HYXWV",
+    "r_200RVCT50S",
+    "r_N53A50BWVV",
+    "r_51VW72JXT9",
+    "r_9AYAK8E0VB",
+    "r_48H5B4Q05Y",
+    "r_S5ZV0G98B1",
+    "r_H74ETGVF9R",
+    "r_4TMJHFBKRD",
+    "b_6ED8HC5SGV",
+    "g_HQH7N9ZHX3",
+    "g_CGMV0QF2EA",
+    "g_X2HDPHFGYH"
+   ]
+  },
+  {
+   "id": "colorectal-cancer-screening",
+   "title": "Colorectal cancer screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/colorectal-cancer-screening#1",
+     "/uspstf/recommendation/colorectal-cancer-screening#2",
+     "/uspstf/recommendation/colorectal-cancer-screening#3"
+    ]
+   },
+   "targets": [
+    "r_1GM2SEAS29",
+    "r_RBG9DEMZKD",
+    "r_TXTN8ACT6C",
+    "r_70K7RGPXAR",
+    "b_0ERRDYTHJ3"
+   ]
+  },
+  {
+   "id": "depression-screening-adults",
+   "title": "Depression and suicide risk screening: adults",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/screening-depression-suicide-risk-adults#1"
+    ]
+   },
+   "targets": [
+    "r_KRT344E5H8",
+    "r_WDS45MJ11K",
+    "r_1FVG8DKNS0",
+    "r_VJ4MVEMP7N",
+    "b_KNEJD1ZJ9N",
+    "g_3YT599FK69",
+    "g_K771EGPVXD",
+    "g_SVEE0WANWK",
+    "r_FM88M383HV",
+    "r_EYAEC2PQHG",
+    "g_Y18XJHHTC4"
+   ]
+  },
+  {
+   "id": "depression-screening-adolescents",
+   "title": "Depression and suicide risk screening: adolescents",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/screening-depression-suicide-risk-children-adolescents#1"
+    ]
+   },
+   "targets": [
+    "r_E0GQGGYKB7",
+    "g_3W07ZGDVG2",
+    "r_YT2BT89VKB"
+   ]
+  },
+  {
+   "id": "neural-tube-defects-folic-acid",
+   "title": "Folic acid to prevent neural tube defects",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/folic-acid-for-the-prevention-of-neural-tube-defects-preventive-medication#1"
+    ]
+   },
+   "targets": [
+    "r_EYFQJ1BH2N"
+   ]
+  },
+  {
+   "id": "gestational-diabetes-screening",
+   "title": "Gestational diabetes screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/gestational-diabetes-screening#1"
+    ]
+   },
+   "targets": [
+    "r_D08HAV79NB",
+    "r_EA5G02E8RK"
+   ]
+  },
+  {
+   "id": "child-high-bmi",
+   "title": "High BMI in children and adolescents",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/obesity-in-children-and-adolescents-screening#1"
+    ]
+   },
+   "targets": [
+    "r_4540XWD970",
+    "g_YD9JTH0RQ4",
+    "g_1V857N1MGW"
+   ]
+  },
+  {
+   "id": "hypertension-screening-adults",
+   "title": "Hypertension screening: adults",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/hypertension-in-adults-screening#1"
+    ]
+   },
+   "targets": [
+    "r_FGYBQQNJ8P",
+    "r_9FB6T9YP1E",
+    "r_162PSKYMW2",
+    "r_PZH1G56JW0",
+    "b_R4MBWZS4QN",
+    "g_245N3YBGFE",
+    "g_0WVM62X574"
+   ]
+  },
+  {
+   "id": "intimate-partner-violence-screening",
+   "title": "Intimate partner violence screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/intimate-partner-violence-and-abuse-of-elderly-and-vulnerable-adults-screening#1"
+    ]
+   },
+   "targets": [
+    "r_623V6EW0GV",
+    "r_8TBFV2EJD9",
+    "r_BDJYJZWCDR",
+    "b_KNEJD1ZJ9N",
+    "r_Z3GK2MJPQ7",
+    "r_HX9Q1MX979"
+   ]
+  },
+  {
+   "id": "latent-tb-screening",
+   "title": "Latent tuberculosis infection screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/latent-tuberculosis-infection-screening#1"
+    ]
+   },
+   "targets": [
+    "r_N0D0PK4A86",
+    "r_14J7M6BGEX",
+    "r_P0N580Y452",
+    "r_9KRAVW7JTE"
+   ]
+  },
+  {
+   "id": "lung-cancer-screening",
+   "title": "Lung cancer screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/lung-cancer-screening#1"
+    ]
+   },
+   "targets": [
+    "r_PBJSNYDG5K",
+    "r_DHFM4WWC9P",
+    "r_93GMYN40A7",
+    "r_6R26BHEPKH",
+    "r_ECT8KR46QV",
+    "b_0ERRDYTHJ3",
+    "r_FYH21BAWVB",
+    "r_PZ2PBMDQ09"
+   ]
+  },
+  {
+   "id": "osteoporosis-screening",
+   "title": "Osteoporosis screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/osteoporosis-screening#1",
+     "/uspstf/recommendation/osteoporosis-screening#2"
+    ]
+   },
+   "targets": [
+    "r_S3DDT88ZYR",
+    "r_T1NKDWAGZV",
+    "b_837G1G67B0",
+    "b_BZP08CQGBM"
+   ]
+  },
+  {
+   "id": "prediabetes-type-2-diabetes-screening",
+   "title": "Prediabetes and type 2 diabetes screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/screening-for-prediabetes-and-type-2-diabetes#1"
+    ]
+   },
+   "targets": [
+    "r_3P1VZQW8MN",
+    "r_88CDKBQ5BV",
+    "r_BYKV7M49GY",
+    "r_KV4V8H1D72",
+    "b_837G1G67B0"
+   ]
+  },
+  {
+   "id": "hiv-prep",
+   "title": "HIV preexposure prophylaxis",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/prevention-of-human-immunodeficiency-virus-hiv-infection-pre-exposure-prophylaxis#1"
+    ]
+   },
+   "targets": [
+    "r_DEGS33B2EJ",
+    "r_AX3SX3XPJV",
+    "r_MCT1XYFD0Y",
+    "b_3MSJ99MSDG"
+   ]
+  },
+  {
+   "id": "statin-primary-prevention",
+   "title": "Statins for primary prevention of cardiovascular disease",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/statin-use-in-adults-preventive-medication#1",
+     "/uspstf/recommendation/statin-use-in-adults-preventive-medication#2"
+    ]
+   },
+   "targets": [
+    "r_YXE2MN1A5J",
+    "r_Y3YKAPGFFZ",
+    "r_8E1SSHFMJ7",
+    "b_R4MBWZS4QN",
+    "b_HH5TV67Q24",
+    "g_03Y5TKG8AV",
+    "g_6PES2K4892",
+    "r_Y0BA6PS5DJ",
+    "r_ECQQZYPRMC",
+    "r_KDDYF01FH5",
+    "r_C3D00TVMY9",
+    "r_X2WAVX2AMA"
+   ]
+  },
+  {
+   "id": "syphilis-screening-pregnancy",
+   "title": "Syphilis screening in pregnancy",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/syphilis-infection-in-pregnancy-screening#1"
+    ]
+   },
+   "targets": [
+    "r_18Z35EP45X",
+    "r_93JZK9Y16G",
+    "r_CF0BAVQ927",
+    "g_HQH7N9ZHX3"
+   ]
+  },
+  {
+   "id": "syphilis-screening-nonpregnant",
+   "title": "Syphilis screening: nonpregnant adolescents and adults",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/syphilis-infection-nonpregnant-adults-adolescents-screening#1"
+    ]
+   },
+   "targets": [
+    "r_DDJJCG7SES",
+    "r_RABPZD28QG",
+    "r_V6RV6XTZ3F",
+    "b_6ED8HC5SGV"
+   ]
+  },
+  {
+   "id": "tobacco-cessation",
+   "title": "Tobacco smoking cessation",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/tobacco-use-in-adults-and-pregnant-women-counseling-and-interventions#1",
+     "/uspstf/recommendation/tobacco-use-in-adults-and-pregnant-women-counseling-and-interventions#2"
+    ]
+   },
+   "targets": [
+    "r_K1HJQ8MNEW",
+    "r_46MPG02CDE",
+    "r_CD5EZY8QS7",
+    "r_YMNXQJ3TA1",
+    "b_KNEJD1ZJ9N",
+    "b_YM7HCCM4N3",
+    "b_25C17077AG"
+   ]
+  },
+  {
+   "id": "prostate-cancer-screening",
+   "title": "Prostate cancer screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/prostate-cancer-screening#1"
+    ]
+   },
+   "targets": [
+    "r_FW6SKR9PJT",
+    "r_PH08YD3VC2",
+    "b_0ERRDYTHJ3",
+    "g_7GV1NZVVSB",
+    "g_GEZVJHXM70"
+   ]
+  },
+  {
+   "id": "cervical-cancer-screening",
+   "title": "Cervical cancer screening",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/cervical-cancer-screening#2",
+     "/uspstf/recommendation/cervical-cancer-screening#3"
+    ]
+   },
+   "targets": [
+    "r_GZ8W5HPJX1",
+    "r_494GWYXNWR",
+    "r_NFSP1MWQQK",
+    "b_0ERRDYTHJ3",
+    "g_2SWVQ0BJJW"
+   ]
+  },
+  {
+   "id": "aspirin-cvd-prevention",
+   "title": "Aspirin for primary prevention of cardiovascular disease",
+   "sourceKeys": {
+    "uspstf": [
+     "/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication#1",
+     "/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication#2"
+    ]
+   },
+   "targets": [
+    "b_590XW5A42T",
+    "b_TPM8V6DQAY"
+   ]
+  },
+  {
+   "id": "pneumococcal-vaccination-adults",
+   "title": "Pneumococcal vaccination: adults",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: pneumococcal vaccination at age 50 and older"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH",
+    "b_Z0A70QCYEA",
+    "b_JDT4FPWTXV",
+    "b_1P335V0QJA"
+   ]
+  },
+  {
+   "id": "rsv-vaccination-adults",
+   "title": "RSV vaccination: older adults",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: RSV vaccination at age 75 and older",
+     "Adult immunization: RSV vaccination at age 60-74 with increased risk"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH",
+    "b_Z0A70QCYEA"
+   ]
+  },
+  {
+   "id": "influenza-vaccination-older-adults",
+   "title": "Influenza vaccination: adults 65 and older",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: preferred influenza vaccines at age 65 and older"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH"
+   ]
+  },
+  {
+   "id": "covid-19-vaccination-adults",
+   "title": "COVID-19 vaccination: adults",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: COVID-19 vaccine doses"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH"
+   ]
+  },
+  {
+   "id": "hepatitis-b-vaccination-adults",
+   "title": "Hepatitis B vaccination: adults",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: universal hepatitis B vaccination through age 59"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH"
+   ]
+  },
+  {
+   "id": "zoster-vaccination",
+   "title": "Zoster (shingles) vaccination",
+   "sourceKeys": {
+    "cdc": [
+     "Adult immunization: recombinant zoster vaccine for immunocompromised adults aged 19 and older"
+    ]
+   },
+   "targets": [
+    "b_TZPJ07KHGH",
+    "b_Z0A70QCYEA"
+   ]
+  },
+  {
+   "id": "menb-vaccination-adolescents",
+   "title": "Meningococcal B vaccination: adolescents",
+   "sourceKeys": {
+    "cdc": [
+     "Adolescent immunization: MenB schedule for healthy persons aged 16-23"
+    ]
+   },
+   "targets": [
+    "b_7YRVXP5CNY",
+    "b_Z0A70QCYEA"
+   ]
+  },
+  {
+   "id": "rsv-prevention-infants",
+   "title": "RSV prevention in infants: maternal vaccine and nirsevimab",
+   "sourceKeys": {
+    "cdc": [
+     "Infant immunization: RSV monoclonal antibody timing for infants born October-March",
+     "Maternal immunization: RSV vaccine not repeated in later pregnancies"
+    ]
+   },
+   "targets": [
+    "b_TE0HGY793Z",
+    "b_JDT4FPWTXV",
+    "r_WXTXP7WTRG",
+    "r_WRM0G6EVHM",
+    "r_P0GZ3CGBD2",
+    "r_P0HRD0W2YF",
+    "r_3WMV3M1GEH",
+    "r_WMGEW54XSR"
+   ]
+  },
+  {
+   "id": "pneumococcal-vaccination-children",
+   "title": "Pneumococcal conjugate vaccination: children",
+   "sourceKeys": {
+    "cdc": [
+     "Childhood immunization: PCV15 or PCV20 for children aged 2-23 months"
+    ]
+   },
+   "targets": [
+    "b_TE0HGY793Z",
+    "b_Z0A70QCYEA",
+    "b_1P335V0QJA"
+   ]
+  }
+ ]
 }
