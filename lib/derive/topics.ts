@@ -95,8 +95,9 @@ export function fitTitled(blocks: readonly BlockFile[], structure: StructureFile
   const { unfit } = derive(blocks, structure, false);
   if (unfit.size === 0) return structure;
   const titled = Object.fromEntries(Object.entries(structure.titled).filter(([id]) => !unfit.has(id)));
-  const out = { ...structure, titled };
-  if (Object.keys(titled).length === 0) delete out.titled;
+  if (Object.keys(titled).length > 0) return { ...structure, titled };
+  const out: StructureFile = { ...structure };
+  delete out.titled;
   return out;
 }
 
