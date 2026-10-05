@@ -205,6 +205,11 @@ export function patchPublished(
 
 let store: KvStore<OverlayEntry> = kvStore<OverlayEntry>("pa-overlay");
 const entries = new Map<string, OverlayEntry>();
+/**
+ * Files not yet committed that this tab shows anyway: an added document's entry while its upload
+ * runs (50 §50.7 Add). Never stored, so a closed tab shows nothing of an upload that never reached main.
+ */
+const unsaved = new Map<string, unknown>();
 let git: Git | null = null;
 let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -218,7 +223,7 @@ export function overlayEntries(): ReadonlyMap<string, OverlayEntry> {
   return entries;
 }
 
-const filesOf = (): Map<string, unknown> => new Map([...entries].map(([p, e]) => [p, e.json]));
+const filesOf = (): Map<string, unknown> => new Map([...[...entries].map(([p, e]): [string, unknown] => [p, e.json]), ...unsaved]);
 
 async function structureFor(path: string): Promise<StructureFile | null> {
   const m = SYSTEM_PATH_RE.exec(path)?.groups;
@@ -253,7 +258,7 @@ async function navSources(guide: string, files: Files): Promise<Map<string, Syst
 }
 
 async function overlay(path: string, json: unknown): Promise<unknown> {
-  if (entries.size === 0) return json;
+  if (entries.size === 0 && unsaved.size === 0) return json;
   const files = filesOf();
   const guide = NAV_PATH_RE.exec(path)?.groups?.guide;
   return patchPublished(path, json, files, await structureFor(path), guide === undefined ? undefined : await navSources(guide, files));
@@ -312,6 +317,7 @@ export async function startOverlay(repoGit: Git): Promise<void> {
 export function stopOverlay(): void {
   git = null;
   entries.clear();
+  unsaved.clear();
   if (timer !== null) clearInterval(timer);
   timer = null;
   setDataOverlay(null);
@@ -331,4 +337,16 @@ export async function recordSaved(files: ReadonlyMap<string, unknown>, commit: s
   } catch (e) {
     console.warn("Couldn’t keep the saved files on this device", e);
   }
+}
+
+/** Shows files that are not committed yet, in this tab only, over the saved ones. */
+export function showUnsaved(files: ReadonlyMap<string, unknown>): void {
+  for (const [path, json] of files) unsaved.set(path, json);
+  setDataOverlay(overlay);
+}
+
+/** Stops showing those files (they were committed and recorded, or the upload is gone). */
+export function dropUnsaved(paths: Iterable<string>): void {
+  for (const path of paths) unsaved.delete(path);
+  setDataOverlay(overlay);
 }

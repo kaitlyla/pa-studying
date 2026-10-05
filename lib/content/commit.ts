@@ -2,9 +2,13 @@
 import { ANY_ID_RE, ID_BODY, ID_RE } from "./ids.ts";
 import { ISO_UTC_RE } from "./check.ts";
 
+/**
+ * `doc-marker` changes only a document's `replacing`/`replaceFailed` marker; it is neither a version
+ * nor an Original (Orchestrator ruling 2026-10-05 00:55Z, amending 50 §50.4 and §50.6).
+ */
 export const COMMIT_KINDS = [
   "import", "curation", "authoring", "edit", "restore", "doc-add", "doc-rename", "doc-replace",
-  "doc-remove", "doc-restore", "inbox", "guidelines",
+  "doc-remove", "doc-restore", "doc-marker", "inbox", "guidelines",
 ] as const;
 export type CommitKind = (typeof COMMIT_KINDS)[number];
 

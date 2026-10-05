@@ -404,6 +404,30 @@ describe("pageVersions", () => {
     expect(versions.map((v) => [v.sha, v.current])).toEqual([[deleted.sha, true]]);
   });
 
+  // A doc-marker commit (a replace's `replacing`, Dismiss) is not a version and not an Original
+  // (Orchestrator ruling 2026-10-05 00:55Z, amending 50 §50.4 and §50.6).
+  it("a doc-marker commit naming the page's document is neither a version nor the Original", () => {
+    const docIds = [D(5), ...ids];
+    const origin = c("2026-10-01T00:00:00Z", { kind: "import" });
+    const replacing = c("2026-10-02T00:00:00Z", { kind: "doc-marker", changed: [D(5)] });
+    const replaced = c("2026-10-03T00:00:00Z", { kind: "doc-replace", changed: [D(5)], file: "new.pdf" });
+    const dismissed = c("2026-10-04T00:00:00Z", { kind: "doc-marker", changed: [D(5)] });
+    const versions = pageVersions([dismissed, replaced, replacing, origin], docIds, { ...opts, fromWord: false });
+    expect(versions.map((v) => [v.sha, v.label, v.current, v.original])).toEqual([
+      [replaced.sha, "Replaced with “new.pdf”", true, false],
+      [origin.sha, ORIGINAL_PUBLISHED, false, true],
+    ]);
+    expect(versions.filter((v) => v.label.startsWith("Replaced with"))).toHaveLength(1);
+  });
+
+  it("a doc-marker commit alone never becomes the Original, with or without an origin commit", () => {
+    const docIds = [D(5), ...ids];
+    const origin = c("2026-10-01T00:00:00Z", { kind: "import" });
+    const marker = c("2026-10-02T00:00:00Z", { kind: "doc-marker", changed: [D(5)] });
+    expect(pageVersions([marker, origin], docIds, opts).map((v) => [v.sha, v.current, v.original])).toEqual([[origin.sha, true, true]]);
+    expect(pageVersions([marker], docIds, opts)).toEqual([]);
+  });
+
   it("an incomplete history settles no Original", () => {
     const versions = pageVersions([c("2026-10-01T00:00:00Z", { kind: "import" }), c("2026-10-02T00:00:00Z", edit("k", [R(101)]))], ids, { ...opts, complete: false });
     expect(versions.map((v) => [v.label, v.original])).toEqual([["Your edit", false]]);

@@ -704,11 +704,12 @@ export function publish(c: Content): PublishResult {
   // ---- documents ---------------------------------------------------------------------------------
   for (const [id, d] of c.docs) {
     if (!visible(d)) continue;
-    const failed = d.file.replaceFailed ? { replaceFailed: d.file.replaceFailed } : {};
+    const homeRoute = docHome.get(id)?.from;
+    const extra = { ...(homeRoute ? { home: homeRoute } : {}), ...(d.file.replaceFailed ? { replaceFailed: d.file.replaceFailed } : {}) };
     if (d.kind === "word") {
       usedBlocks(d.blocks);
       const out: DocJson = {
-        id, name: d.file.name, kind: "word", basePt: d.file.basePt, page: d.file.page, blocks: d.blocks.map(pub), notes: notesFor([id, ...d.blocks.map((b) => b.id)]), ...failed,
+        id, name: d.file.name, kind: "word", basePt: d.file.basePt, page: d.file.page, blocks: d.blocks.map(pub), notes: notesFor([id, ...d.blocks.map((b) => b.id)]), ...extra,
       };
       files.set(docPath(id), out);
     } else {
@@ -717,7 +718,7 @@ export function publish(c: Content): PublishResult {
       for (const name of names) stored.push({ doc: id, name });
       const out: DocJson = {
         id, name: f.name, kind: f.kind, original: `files/${id}/${f.original}`, view: f.view === null ? null : `files/${id}/${f.view}`,
-        pages: f.pages ?? null, notes: notesFor([id]), ...failed,
+        pages: f.pages ?? null, notes: notesFor([id]), ...extra,
       };
       files.set(docPath(id), out);
     }

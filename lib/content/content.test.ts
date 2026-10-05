@@ -260,7 +260,7 @@ describe("commit trailers (50 §50.4)", () => {
 
   it("requires every doc-* commit to list its document's d_ id in Changed", () => {
     const d = `d_${"0".repeat(10)}`;
-    for (const kind of ["doc-add", "doc-rename", "doc-remove", "doc-restore"] as const) {
+    for (const kind of ["doc-add", "doc-rename", "doc-remove", "doc-restore", "doc-marker"] as const) {
       expect(() => commitMessage("Doc", { kind, changed: [b(1)] })).toThrow(/needs the document's d_ id/);
       expect(commitMessage("Doc", { kind, changed: [d] })).toContain(`\nPa-Studying-Changed: ${d}`);
     }

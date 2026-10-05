@@ -80,7 +80,7 @@ describe("ReplaceFailedNote", () => {
     expect(note(root)).toBeNull();
   });
 
-  it("Dismiss commits the record without the marker as an owner edit, overlays it, and hides the note", async () => {
+  it("Dismiss commits the record without the marker as a doc-marker commit, overlays it, and hides the note", async () => {
     const before = markFailed(PDF);
     asOwner(true);
     const root = await render(<ReplaceFailedNote doc={published(D(1))} />);
@@ -92,7 +92,8 @@ describe("ReplaceFailedNote", () => {
     const { replaceFailed, ...rest } = record<AsIsFile>(PDF, before);
     expect(replaceFailed).toEqual(MARKER);
     expect(record<AsIsFile>(PDF)).toEqual(rest);
-    expect(parseTrailers(w.fake.commit(head)?.message ?? "")).toEqual({ kind: "edit", page: `doc:${D(1)}`, changed: [D(1)], device: "0123456789" });
+    // Not a version and not an Original (Orchestrator ruling 2026-10-05 00:55Z; restore.test.ts pageVersions).
+    expect(parseTrailers(w.fake.commit(head)?.message ?? "")).toEqual({ kind: "doc-marker", changed: [D(1)] });
     expect(overlayEntries().get(PDF)).toEqual({ commit: head, json: rest });
   });
 

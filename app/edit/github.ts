@@ -67,6 +67,8 @@ export interface TreeEntry {
   mode: string;
   type: "blob" | "tree" | "commit";
   sha: string;
+  /** Blobs only: bytes. */
+  size?: number;
 }
 
 /** A tree change for POST /git/trees: new text content, an existing blob, or a deletion (`sha: null`). */
@@ -127,13 +129,25 @@ export class Git {
     return (await expectJson<{ tree: { sha: string } }>(res, [200], `commit ${commit}`)).tree.sha;
   }
 
-  /** Every blob of a commit's tree, by path (`GET /git/trees/<sha>?recursive=1`). */
-  async files(commit: string): Promise<Map<string, string>> {
+  /** Every entry of a commit's tree (`GET /git/trees/<sha>?recursive=1`). */
+  private async tree(commit: string): Promise<TreeEntry[]> {
     const res = await ghCall(`${this.base}/git/trees/${commit}?recursive=1`);
     const body = await expectJson<{ truncated: boolean; tree: TreeEntry[] }>(res, [200], `tree ${commit}`);
     if (body.truncated) throw new ApiError(200, `tree ${commit}: truncated`);
+    return body.tree;
+  }
+
+  /** Every blob of a commit's tree, by path → sha. */
+  async files(commit: string): Promise<Map<string, string>> {
     const out = new Map<string, string>();
-    for (const e of body.tree) if (e.type === "blob") out.set(e.path, e.sha);
+    for (const e of await this.tree(commit)) if (e.type === "blob") out.set(e.path, e.sha);
+    return out;
+  }
+
+  /** Every blob of a commit's tree, by path → bytes. */
+  async sizes(commit: string): Promise<Map<string, number>> {
+    const out = new Map<string, number>();
+    for (const e of await this.tree(commit)) if (e.type === "blob") out.set(e.path, e.size ?? 0);
     return out;
   }
 

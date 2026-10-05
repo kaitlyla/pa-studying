@@ -116,6 +116,10 @@ export interface FileText {
 /** File types that can be added (50 §50.7), as stored in `upload.json` `ext`. */
 export const UPLOAD_EXTS = ["doc", "docx", "pdf", "png", "jpg", "jpeg", "ppt", "pptx"] as const;
 export type UploadExt = (typeof UPLOAD_EXTS)[number];
+/** The kind of document each added file type becomes (50 §50.9 Processing job, step 2). */
+export const UPLOAD_KIND: Readonly<Record<UploadExt, FileKind>> = {
+  doc: "word", docx: "word", pdf: "pdf", png: "image", jpg: "image", jpeg: "image", ppt: "slides", pptx: "slides",
+};
 
 export interface UploadFile {
   v: 1;

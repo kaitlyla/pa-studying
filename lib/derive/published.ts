@@ -358,6 +358,8 @@ export interface DocJson {
   pages?: number | null;
   /** Notes placed at this document id or its blocks. */
   notes: Notes;
+  /** The route of its first placement (40 §40.3), where the app returns after Remove; absent when it is listed nowhere. */
+  home?: string;
   /** Her last replacement of this document couldn't be processed (shown to the owner only). */
   replaceFailed?: ReplaceFailed;
 }

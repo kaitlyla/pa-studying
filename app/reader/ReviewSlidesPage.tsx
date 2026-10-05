@@ -13,7 +13,7 @@ import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
 import { DocActions, EditControls, EditRegion, openVersions } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
-import { guideViewHash, navigate } from "../shell/route.ts";
+import { guideBase, guideViewHash, navigate } from "../shell/route.ts";
 import { guideCrumbs, guideName, useSite } from "./data.ts";
 import { buildPageKey } from "../edit/pageKey.ts";
 
@@ -77,7 +77,7 @@ function OwnDeck({ guide, deck, n }: { guide: string; deck: SlidesJson; n: numbe
                 Download original
               </a>
             )}
-            <DocActions doc={doc} />
+            <DocActions doc={doc} from={guideBase(guide)} />
             <button type="button" className="btn own-only" onClick={() => void openVersions(buildPageKey("doc", doc.id), title)} data-ref="deck-versions">
               Versions
             </button>

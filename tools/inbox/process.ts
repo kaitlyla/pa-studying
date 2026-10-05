@@ -10,8 +10,8 @@ import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { commitMessage, newId } from "../../lib/content/index.ts";
-import type { AsIsFile, BlockFile, DeckFile, FileKind, Trailers, UploadExt, UploadFile, WordDocFile } from "../../lib/content/index.ts";
+import { commitMessage, newId, UPLOAD_KIND } from "../../lib/content/index.ts";
+import type { AsIsFile, BlockFile, DeckFile, Trailers, UploadExt, UploadFile, WordDocFile } from "../../lib/content/index.ts";
 import { listDir, readContentIfExists, removeContent, writeAsset, writeContent, writeStoredFile } from "../../lib/content/fs.ts";
 import { convertDocx, toBlocks } from "../../lib/docx/index.ts";
 import { pdfText } from "../import/pdf.ts";
@@ -34,10 +34,6 @@ export interface Processed {
   ok: boolean;
   message: string;
 }
-
-const KIND_OF: Record<UploadExt, FileKind> = {
-  doc: "word", docx: "word", pdf: "pdf", png: "image", jpg: "image", jpeg: "image", ppt: "slides", pptx: "slides",
-};
 
 function sofficePath(): string {
   const win = "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
@@ -100,7 +96,7 @@ async function deckOf(root: string, id: string): Promise<{ path: string; deck: D
 async function convertInto(stage: string, root: string, upload: UploadFile, bytes: Uint8Array, name: string, removed: AsIsFile["removed"], deps: ProcessDeps): Promise<string[]> {
   const id = upload.id;
   const ext = upload.ext;
-  const kind = KIND_OF[ext];
+  const kind = UPLOAD_KIND[ext];
   if (kind === "word") {
     const docx = ext === "doc" ? await deps.soffice(bytes, "doc", "docx") : bytes;
     const conv = await convertDocx(docx, { storeAsset: (b, e) => writeAsset(stage, b, e) });

@@ -21,7 +21,7 @@ import {
   type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
-import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
+import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { tableOf } from "./text.ts";
 import { checkMembers, deriveTopics, fitTitled, publishedRows, publishedSections, sectionItems, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
@@ -669,6 +669,35 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect((res.files.get(docPath(D(1))) as DocJson).replaceFailed).toEqual(marker);
     expect((res.files.get(docPath(D(5))) as DocJson).replaceFailed).toEqual(marker);
     expect(file<DocJson>(docPath(D(1)))).not.toHaveProperty("replaceFailed");
+  });
+
+  // `home` is the route the app returns to after Remove (Leader approval, 2026-10-05).
+  it("gives each placed document its first placement in site order as `home`, matching its hosts location", () => {
+    const hosts = file<HostsJson>(HOSTS_PATH);
+    const site = file<SiteJson>(SITE_PATH);
+    const cases: [string, string][] = [
+      // FM cardiovascular pharm, before Other › Guidelines
+      [D(1), guideViewHash("fm", { kind: "pharm", system: "cardiovascular", section: null, target: null })],
+      // FM general labs, before the Labs tab
+      [D(5), guideViewHash("fm", { kind: "general", key: "labs" })],
+      // the PANCE sidebar's end
+      [D(3), guideBase("pance")],
+    ];
+    for (const [id, first] of cases) {
+      const home = file<DocJson>(docPath(id)).home;
+      expect(home, id).toBe(first);
+      expect(fileLocation(site.index, home ?? null), id).toBe(hosts[id]?.loc);
+    }
+    // Their later placements are not `home`.
+    expect(file<DocJson>(docPath(D(1))).home).not.toBe(otherHash("guidelines"));
+    expect(file<DocJson>(docPath(D(5))).home).not.toBe(refHash("labs"));
+  });
+
+  it("gives a document listed nowhere no `home`", () => {
+    const c = mutated((x) => {
+      delete guide(x, "pance").file.sidebarEnd;
+    });
+    expect(publish(c).files.get(docPath(D(3)))).not.toHaveProperty("home");
   });
 
   it("addDoc lists a removed document as removed (whatever its state), a processing or failed upload as pending, else as a file", () => {
