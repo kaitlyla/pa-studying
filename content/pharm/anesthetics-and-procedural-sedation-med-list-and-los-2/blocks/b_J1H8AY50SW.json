@@ -1,6 +1,6 @@
 {
  "v": 1,
- "id": "b_1BNWS9YR8F",
+ "id": "b_J1H8AY50SW",
  "kind": "prose",
  "doc": {
   "type": "doc",
@@ -17,35 +17,6 @@
       "rule": "auto",
       "value": 1
      },
-     "align": "center",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Pharmacotherapeutics III — Med List and LOs: Anesthetics & Procedural Sedation"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
      "align": "left",
      "shade": null,
      "borders": null,
@@ -59,147 +30,7 @@
         "type": "bold"
        }
       ],
-      "text": "gen Anesthesia — Principles"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "goal: reversible LOC + analgesia + amnesia + immobility for surgery"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "balanced anesthesia → multiple agents combined: IV + inhaled + adjuncts"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "(benzos, opioids, musc relaxants, antiemetics, acid suppressers)"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Stages of gen anesthesia"
+      "text": "Local Anesthetics"
      }
     ]
    },
@@ -239,7 +70,7 @@
         }
        }
       ],
-      "text": "Induction: "
+      "text": "MOA: "
      },
      {
       "type": "text",
@@ -251,44 +82,7 @@
         }
        }
       ],
-      "text": "onset of admin → effective surgical anesthesia"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "IV agent w quick onset ("
+      "text": "block "
      },
      {
       "type": "text",
@@ -306,7 +100,7 @@
         }
        }
       ],
-      "text": "propofol"
+      "text": "Na⁺ channels"
      },
      {
       "type": "text",
@@ -318,127 +112,7 @@
         }
        }
       ],
-      "text": ") ± inhaled/IV adjuncts (IV skeletal musc relaxants, inhaled agents) to reach desired depth"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "Maintenance: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "sustained surgical anesthesia → "
-     },
-     {
-      "type": "text",
-      "text": "cont"
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": " careful monitoring of depth (often inhaled agent)"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "Recovery: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "d/c admin → regain consciousness + protective physiologic reflexes"
+      "text": " → prevent transient ↑Na⁺ permeability needed for AP → prevent AP propagation → cannot transmit sensation to brain → abolish sensation (+ motor at higher conc)"
      }
     ]
    },
@@ -475,7 +149,250 @@
         }
        }
       ],
-      "text": "monitor for full recovery: spont resp, acceptable BP & HR"
+      "text": "nonpolar lipophilic form crosses neuronal membrane → switches to polar hydrophilic (cationic) form in cytoplasm → cationic form binds cytoplasmic side of Na channel → prolongs "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "inactivated state"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " → AP cannot propagate → loss of sensory input"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Structure: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "lipophilic group — (amide OR ester linkage) — carbon chain — hydrophilic group"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Onset & duration ← "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "tissue pH (↓ during infection → ↓efficacy), drug pKa, "
+     },
+     {
+      "type": "text",
+      "text": "n."
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " morphology, concentration, lipid solubility, time drug stays in "
+     },
+     {
+      "type": "text",
+      "text": "n."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Epinephrine added → "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "↓dose needed + prolong duration"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 40.5,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "historically avoided in end-artery tissues (fingers, toes, ears, nose, penis); current evidence supports selective use in healthy pts, caution if compromised circulation"
      }
     ]
    },
@@ -504,11 +421,7 @@
         "type": "bold"
        }
       ],
-      "text": "Depth of anesthesia"
-     },
-     {
-      "type": "text",
-      "text": " = degree CNS is depressed"
+      "text": "Ester vs Amide"
      }
     ]
    },
@@ -530,14 +443,7 @@
      "marker": {
       "text": "–",
       "font": null,
-      "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       }
-      ],
+      "marks": [],
       "tabPt": 10.5
      }
     },
@@ -546,10 +452,7 @@
       "type": "text",
       "marks": [
        {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
+        "type": "bold"
        },
        {
         "type": "color",
@@ -558,41 +461,11 @@
         }
        }
       ],
-      "text": "continuum → "
+      "text": "Metabolism: "
      },
      {
       "type": "text",
       "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       },
-       {
-        "type": "shade",
-        "attrs": {
-         "hex": "D9EAD3"
-        }
-       }
-      ],
-      "text": "surgical anesthesia (goal)"
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
        {
         "type": "color",
         "attrs": {
@@ -600,17 +473,192 @@
         }
        }
       ],
-      "text": " → "
+      "text": "esters → plasma esterases → PABA   –   amides → liver"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Allergic reaction: "
      },
      {
       "type": "text",
       "marks": [
        {
-        "type": "size",
+        "type": "color",
         "attrs": {
-         "pt": 7.5
+         "hex": "000000"
         }
+       }
+      ],
+      "text": "esters possible (PABA metabolite)   –   amides very rare"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
        },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Systemic toxicity: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "esters less likely   –   amides more likely"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "pKa: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "esters > physiologic (8.5–8.9)   –   amides ~ physiologic (7.6–8.1)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
        {
         "type": "color",
         "attrs": {
@@ -624,7 +672,51 @@
         }
        }
       ],
-      "text": "medullary paralysis & death (overdose)"
+      "text": "Methemoglobinemia"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": ": risk w benzocaine (ester) + prilocaine (amide) → metabolite oxidizes Hb Fe²⁺→Fe³⁺; tx methylene blue"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Ester-Type"
      }
     ]
    },
@@ -661,7 +753,445 @@
         }
        }
       ],
-      "text": "classic staging: I analgesia → II excitement/delirium → III surgical anesthesia → IV medullary paralysis/death"
+      "text": "Cocaine*   –   Benzocaine (Americaine)*   –   Chloroprocaine (Nesacaine)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Procaine (Novocaine)   –   Tetracaine (Pontocaine)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "cocaine: unique → local anesthetic + vasoconstriction (topical ENT/nasal use)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Amide-Type"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Lidocaine (Xylocaine)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "D9EAD3"
+        }
+       }
+      ],
+      "text": "MOST versatile local anesthetic"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "; rapid onset, intermediate duration"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Bupivacaine (Marcaine)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "long duration; "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "F4CCCC"
+        }
+       }
+      ],
+      "text": "GREATER cardiotoxicity risk"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Ropivacaine (Naropin)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "long duration; similar efficacy to bupivacaine w "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "D9EAD3"
+        }
+       }
+      ],
+      "text": "less cardiotoxicity"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " → "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "D9EAD3"
+        }
+       }
+      ],
+      "text": "frequently preferred for epidural + peripheral "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "D9EAD3"
+        }
+       }
+      ],
+      "text": "n."
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "D9EAD3"
+        }
+       }
+      ],
+      "text": " blocks"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Mepivacaine (Carbocaine)   –   Etidocaine (Duranest)*   –   Prilocaine (Citanest)*"
      }
     ]
    },
@@ -690,11 +1220,7 @@
         "type": "bold"
        }
       ],
-      "text": "Patient factors in agent selection"
-     },
-     {
-      "type": "text",
-      "text": " (organ-system status)"
+      "text": "Administration techniques"
      }
     ]
    },
@@ -734,7 +1260,7 @@
         }
        }
       ],
-      "text": "CV: "
+      "text": "Topical: "
      },
      {
       "type": "text",
@@ -746,36 +1272,11 @@
         }
        }
       ],
-      "text": "anesthetics suppress CV function (variable degree)"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
+      "text": "anesthetize skin/mucous membranes/cornea "
      },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
      {
       "type": "text",
-      "text": "↓BP  "
+      "text": "b4"
      },
      {
       "type": "text",
@@ -787,23 +1288,7 @@
         }
        }
       ],
-      "text": "episodes → ischemic tissue injury → "
-     },
-     {
-      "type": "text",
-      "text": "poss "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "need vasoactive agents"
+      "text": " surgery; tx pruritus (poison ivy, insect bites, eczema); relieve oral/nasal/laryngeal/rectal pain"
      }
     ]
    },
@@ -843,7 +1328,7 @@
         }
        }
       ],
-      "text": "Resp: "
+      "text": "Infiltration: "
      },
      {
       "type": "text",
@@ -855,81 +1340,7 @@
         }
        }
       ],
-      "text": "inhaled agents depress resp + bronchodilate"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "IV agents & opioids depress resp"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "caution in asthma, COPD, preexisting pulm dz"
+      "text": "MOST common route; intradermal/subcut/submucosal; minor surgery; ± epi to ↓dose & prolong"
      }
     ]
    },
@@ -969,7 +1380,7 @@
         }
        }
       ],
-      "text": "Liver/kidney: "
+      "text": "Iontophoresis: "
      },
      {
       "type": "text",
@@ -981,30 +1392,14 @@
         }
        }
       ],
-      "text": "assess "
-     },
-     {
-      "type": "text",
-      "text": "b4 "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "use → govern clearance & dist"
+      "text": "small electric current forces anesthetic into tissue; no injection; mainly dentistry"
      }
     ]
    },
    {
     "type": "paragraph",
     "attrs": {
-     "indLeft": 40.5,
+     "indLeft": 18,
      "indRight": 0,
      "indFirst": -10.5,
      "spaceBefore": 0,
@@ -1028,13 +1423,53 @@
       "type": "text",
       "marks": [
        {
+        "type": "bold"
+       }
+      ],
+      "text": "n."
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
         "type": "color",
         "attrs": {
          "hex": "000000"
         }
        }
       ],
-      "text": "some agents release substances affecting liver/kidney"
+      "text": " block: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "block conductivity of sensory "
+     },
+     {
+      "type": "text",
+      "text": "n."
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "s from an area"
      }
     ]
    },
@@ -1074,7 +1509,7 @@
         }
        }
       ],
-      "text": "CNS: "
+      "text": "Field block: "
      },
      {
       "type": "text",
@@ -1086,7 +1521,7 @@
         }
        }
       ],
-      "text": "consider preexisting neuro conditions"
+      "text": "series of injections → wall of anesthesia encircling operative field"
      }
     ]
    },
@@ -1126,7 +1561,7 @@
         }
        }
       ],
-      "text": "Preg: "
+      "text": "Spinal (intrathecal): "
      },
      {
       "type": "text",
@@ -1138,7 +1573,7 @@
         }
        }
       ],
-      "text": "consider fetal effects"
+      "text": "block somatosensory + motor fibers for lower-limb/pelvic surgery; injected into subarachnoid/intrathecal space below cord termination"
      }
     ]
    },
@@ -1178,7 +1613,7 @@
         }
        }
       ],
-      "text": "Concomitant drugs: "
+      "text": "Epidural: "
      },
      {
       "type": "text",
@@ -1190,11 +1625,7 @@
         }
        }
       ],
-      "text": "adj (anxiolytics, acid suppressers, analgesics, antiemetics) + chronic meds → p"
-     },
-     {
-      "type": "text",
-      "text": "oss DI"
+      "text": "inject into lumbar or caudal epidural (extradural) space; often labor & delivery"
      }
     ]
    },
@@ -1223,7 +1654,7 @@
         "type": "bold"
        }
       ],
-      "text": "——————————————————————————————————————"
+      "text": "———————————————————————————————————————"
      }
     ]
    }

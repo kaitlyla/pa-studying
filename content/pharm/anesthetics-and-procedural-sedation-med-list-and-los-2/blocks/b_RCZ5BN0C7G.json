@@ -1,6 +1,6 @@
 {
  "v": 1,
- "id": "b_1BNWS9YR8F",
+ "id": "b_RCZ5BN0C7G",
  "kind": "prose",
  "doc": {
   "type": "doc",
@@ -17,35 +17,6 @@
       "rule": "auto",
       "value": 1
      },
-     "align": "center",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Pharmacotherapeutics III — Med List and LOs: Anesthetics & Procedural Sedation"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
      "align": "left",
      "shade": null,
      "borders": null,
@@ -59,7 +30,7 @@
         "type": "bold"
        }
       ],
-      "text": "gen Anesthesia — Principles"
+      "text": "Neuromuscular Blocking Agents (Paralytics)"
      }
     ]
    },
@@ -88,41 +59,8 @@
     "content": [
      {
       "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "goal: reversible LOC + analgesia + amnesia + immobility for surgery"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
+      "text": "prod"
      },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
      {
       "type": "text",
       "marks": [
@@ -133,73 +71,34 @@
         }
        }
       ],
-      "text": "balanced anesthesia → multiple agents combined: IV + inhaled + adjuncts"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
+      "text": " complete musc relaxation/paralysis; "
      },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "(benzos, opioids, musc relaxants, antiemetics, acid suppressers)"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    },
-    "content": [
      {
       "type": "text",
       "marks": [
        {
         "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
        }
       ],
-      "text": "Stages of gen anesthesia"
+      "text": "immobility WITHOUT affecting mental status"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " (no sedation/analgesia)"
      }
     ]
    },
@@ -239,7 +138,7 @@
         }
        }
       ],
-      "text": "Induction: "
+      "text": "Clin Use: "
      },
      {
       "type": "text",
@@ -251,7 +150,7 @@
         }
        }
       ],
-      "text": "onset of admin → effective surgical anesthesia"
+      "text": "surgical procedures; adjunct to anesthetics; facilitate tracheal intubation"
      }
     ]
    },
@@ -288,7 +187,284 @@
         }
        }
       ],
-      "text": "IV agent w quick onset ("
+      "text": "RSI onset: succinylcholine fastest (~45–60 sec)   –   rocuronium rapid at intubating dose   –   vecuronium slow (~2.5–3 min)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Admin/Monitoring: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "F4CCCC"
+        }
+       }
+      ],
+      "text": "EXTREMELY DANGEROUS"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " → "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       },
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "F4CCCC"
+        }
+       }
+      ],
+      "text": "complete resp failure w.o ventilator support"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 40.5,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "IV only (succinylcholine can be IM in select situations); must be given by experienced clinician in specialized setting; ensure adequate respiration via assisted/controlled ventilation"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 40.5,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Monitor: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "HR, BP, mechanical ventilator status, ABGs, peripheral "
+     },
+     {
+      "type": "text",
+      "text": "n."
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " stimulation, serum electrolytes"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Nondepolarizing (competitive)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "MOA: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "competitive "
      },
      {
       "type": "text",
@@ -306,7 +482,7 @@
         }
        }
       ],
-      "text": "propofol"
+      "text": "antagonists of ACh at nicotinic receptors"
      },
      {
       "type": "text",
@@ -318,7 +494,7 @@
         }
        }
       ],
-      "text": ") ± inhaled/IV adjuncts (IV skeletal musc relaxants, inhaled agents) to reach desired depth"
+      "text": " in skeletal musc → musc relaxation"
      }
     ]
    },
@@ -358,7 +534,7 @@
         }
        }
       ],
-      "text": "Maintenance: "
+      "text": "Reversal: "
      },
      {
       "type": "text",
@@ -370,205 +546,11 @@
         }
        }
       ],
-      "text": "sustained surgical anesthesia → "
-     },
-     {
-      "type": "text",
-      "text": "cont"
+      "text": "competitive block reversible → AChE inhibitors ("
      },
      {
       "type": "text",
       "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": " careful monitoring of depth (often inhaled agent)"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "Recovery: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "d/c admin → regain consciousness + protective physiologic reflexes"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "monitor for full recovery: spont resp, acceptable BP & HR"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 0,
-     "indRight": 0,
-     "indFirst": 0,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": null
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Depth of anesthesia"
-     },
-     {
-      "type": "text",
-      "text": " = degree CNS is depressed"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       }
-      ],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "continuum → "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
        {
         "type": "color",
         "attrs": {
@@ -582,17 +564,11 @@
         }
        }
       ],
-      "text": "surgical anesthesia (goal)"
+      "text": "neostigmine"
      },
      {
       "type": "text",
       "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
        {
         "type": "color",
         "attrs": {
@@ -600,17 +576,11 @@
         }
        }
       ],
-      "text": " → "
+      "text": ") ↑ACh to outcompete; "
      },
      {
       "type": "text",
       "marks": [
-       {
-        "type": "size",
-        "attrs": {
-         "pt": 7.5
-        }
-       },
        {
         "type": "color",
         "attrs": {
@@ -620,11 +590,23 @@
        {
         "type": "shade",
         "attrs": {
-         "hex": "F4CCCC"
+         "hex": "D9EAD3"
         }
        }
       ],
-      "text": "medullary paralysis & death (overdose)"
+      "text": "sugammadex"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " encapsulates rocuronium/vecuronium (aminosteroids)"
      }
     ]
    },
@@ -661,7 +643,76 @@
         }
        }
       ],
-      "text": "classic staging: I analgesia → II excitement/delirium → III surgical anesthesia → IV medullary paralysis/death"
+      "text": "Atracurium   –   Cisatracurium (Nimbex)   –   Pancuronium (Pavulon)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -10.5,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 10.5
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "Rocuronium (Zemuron)   –   Vecuronium"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       }
+      ],
+      "text": "Depolarizing"
      }
     ]
    },
@@ -688,13 +739,19 @@
       "marks": [
        {
         "type": "bold"
+       },
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
        }
       ],
-      "text": "Patient factors in agent selection"
+      "text": "Succinylcholine (Anectine, Quelicin)"
      },
      {
       "type": "text",
-      "text": " (organ-system status)"
+      "text": " — only depolarizing NMBA available"
      }
     ]
    },
@@ -734,7 +791,7 @@
         }
        }
       ],
-      "text": "CV: "
+      "text": "MOA: "
      },
      {
       "type": "text",
@@ -746,14 +803,44 @@
         }
        }
       ],
-      "text": "anesthetics suppress CV function (variable degree)"
+      "text": "binds "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "underline",
+        "attrs": {
+         "style": "single"
+        }
+       },
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": "nicotinic receptors"
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "color",
+        "attrs": {
+         "hex": "000000"
+        }
+       }
+      ],
+      "text": " skeletal musc → persistent depolarization of motor end plate → transient fasciculations → sustained paralysis"
      }
     ]
    },
    {
     "type": "paragraph",
     "attrs": {
-     "indLeft": 40.5,
+     "indLeft": 18,
      "indRight": 0,
      "indFirst": -10.5,
      "spaceBefore": 0,
@@ -775,10 +862,6 @@
     "content": [
      {
       "type": "text",
-      "text": "↓BP  "
-     },
-     {
-      "type": "text",
       "marks": [
        {
         "type": "color",
@@ -787,23 +870,7 @@
         }
        }
       ],
-      "text": "episodes → ischemic tissue injury → "
-     },
-     {
-      "type": "text",
-      "text": "poss "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "need vasoactive agents"
+      "text": "SHORTER duration than most NMBAs → best chance for resumption of spontaneous breathing if intubation difficulty"
      }
     ]
    },
@@ -843,7 +910,7 @@
         }
        }
       ],
-      "text": "Resp: "
+      "text": "Adverse: "
      },
      {
       "type": "text",
@@ -853,123 +920,15 @@
         "attrs": {
          "hex": "000000"
         }
-       }
-      ],
-      "text": "inhaled agents depress resp + bronchodilate"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "IV agents & opioids depress resp"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "caution in asthma, COPD, preexisting pulm dz"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
        },
        {
-        "type": "color",
+        "type": "shade",
         "attrs": {
-         "hex": "000000"
+         "hex": "F4CCCC"
         }
        }
       ],
-      "text": "Liver/kidney: "
+      "text": "hyperkalemia (→ cardiac arrest)"
      },
      {
       "type": "text",
@@ -981,11 +940,7 @@
         }
        }
       ],
-      "text": "assess "
-     },
-     {
-      "type": "text",
-      "text": "b4 "
+      "text": "; post-op myalgias; "
      },
      {
       "type": "text",
@@ -995,206 +950,15 @@
         "attrs": {
          "hex": "000000"
         }
-       }
-      ],
-      "text": "use → govern clearance & dist"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 40.5,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "some agents release substances affecting liver/kidney"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
        },
        {
-        "type": "color",
+        "type": "shade",
         "attrs": {
-         "hex": "000000"
+         "hex": "F4CCCC"
         }
        }
       ],
-      "text": "CNS: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "consider preexisting neuro conditions"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "Preg: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "consider fetal effects"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -10.5,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": {
-      "rule": "auto",
-      "value": 1
-     },
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "–",
-      "font": null,
-      "marks": [],
-      "tabPt": 10.5
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "Concomitant drugs: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "color",
-        "attrs": {
-         "hex": "000000"
-        }
-       }
-      ],
-      "text": "adj (anxiolytics, acid suppressers, analgesics, antiemetics) + chronic meds → p"
-     },
-     {
-      "type": "text",
-      "text": "oss DI"
+      "text": "MALIGNANT HYPERTHERMIA"
      }
     ]
    },
