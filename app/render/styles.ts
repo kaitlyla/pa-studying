@@ -153,6 +153,16 @@ export interface CellEdges {
   left: boolean;
 }
 
+/**
+ * A table's left offset on screen. Word measures a table's indent from the text margin, and her tables
+ * reach left into the page margin (a negative indent); the screen has no page margin beside the reading
+ * column, and the table's horizontal scroll box clips anything left of its edge, so a negative indent
+ * starts the table at the column's edge.
+ */
+export function tableIndent(indentPt: number, basePt: number): string {
+  return em(Math.max(0, indentPt), basePt);
+}
+
 /** Word's default table cell margins (pt): what the screen's reading padding of a cell stands for. */
 export const WORD_CELL_MARGINS: CellMargins = { top: 0, right: 5.4, bottom: 0, left: 5.4 };
 /** The screen's reading padding of a cell with Word's default margins (px). */

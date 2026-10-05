@@ -214,6 +214,20 @@ describe("tables", () => {
     expect(tableColumns([7])).toEqual([100]);
   });
 
+  it("starts a table that reaches into Word's page margin at the column's edge, and keeps a positive indent", async () => {
+    const c = await render(
+      <RichDoc
+        basePt={11}
+        doc={docOf(
+          tableNode([50, 50], [row("r1", [cell("A"), cell("B")])], { indentPt: -27.25 }),
+          tableNode([50, 50], [row("r2", [cell("C"), cell("D")])], { indentPt: 22 }),
+        )}
+      />,
+    );
+    const tables = [...c.querySelectorAll<HTMLTableElement>("table.nt")];
+    expect(tables.map((t) => t.style.marginLeft)).toEqual(["0em", "2em"]);
+  });
+
   it("draws spans, fills and vertical alignment, with the 11% floor on the colgroup", async () => {
     const c = await render(
       <RichDoc

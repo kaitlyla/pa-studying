@@ -342,6 +342,18 @@ test.describe("phone and laptop layouts", () => {
     await expect(main(page).locator(".layout-tog")).toHaveCount(0);
     await expect(page.getByRole("search").getByRole("textbox", { name: "Search all notes" })).toBeVisible();
   });
+
+  test("at laptop width no table on FM Cardiovascular starts left of its scroll box (her tables reach into Word's page margin)", async ({ page }) => {
+    const s = navOf("fm").systems.find((x) => x.id === "cardiovascular");
+    if (!s) throw new Error("FM has no cardiovascular system");
+    await open(page, guideViewHash("fm", { kind: "system", system: s.id }));
+    await expect(h1(page)).toContainText(s.title);
+    const tables = main(page).locator(".ntw > table.nt");
+    await expect(tables.first()).toBeVisible();
+    const offsets = await tables.evaluateAll((ts) => ts.map((t) => t.getBoundingClientRect().left - (t.parentElement as HTMLElement).getBoundingClientRect().left));
+    expect(offsets.length).toBeGreaterThan(0);
+    expect(offsets.filter((d) => d < 0)).toEqual([]);
+  });
 });
 
 test.describe("keyboard and screen reader", () => {

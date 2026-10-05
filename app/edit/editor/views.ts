@@ -10,7 +10,7 @@ import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import {
   anchoredOffset, assetUrl, cellStyle, Drawing, em, imageStyle, markerStyle, paragraphStyle, ruleStyle, runStyle,
-  tableColumns, textboxStyle, underlineStyle,
+  tableColumns, tableIndent, textboxStyle, underlineStyle,
 } from "../../render/index.ts";
 import type { ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
 import { N } from "./types.ts";
@@ -167,7 +167,7 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
     },
     table: (node) => {
       const a = attrsOf(node, "table");
-      const table = el("table", { tableLayout: "fixed", marginLeft: em(a.indentPt, basePt) }, "nt");
+      const table = el("table", { tableLayout: "fixed", marginLeft: tableIndent(a.indentPt, basePt) }, "nt");
       const colgroup = el("colgroup");
       for (const pct of tableColumns(a.grid)) colgroup.append(el("col", { width: `${pct}%` }));
       const body = el("tbody");

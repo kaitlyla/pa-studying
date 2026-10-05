@@ -18,6 +18,7 @@ import {
   ruleStyle,
   runStyle,
   tableColumns,
+  tableIndent,
   textboxStyle,
   underlineStyle,
 } from "./styles.ts";
@@ -246,7 +247,7 @@ function GridTable({ node, rows }: { node: PMNode & NodeJSON<"table">; rows: Dra
   const last = rows.length - 1;
   return (
     <div className="ntw">
-      <table className="nt" style={{ marginLeft: em(a.indentPt, basePt) }}>
+      <table className="nt" style={{ marginLeft: tableIndent(a.indentPt, basePt) }}>
         <colgroup>
           {cols.map((w, i) => (
             <col key={i} style={{ width: `${Math.round(w * 100) / 100}%` }} />

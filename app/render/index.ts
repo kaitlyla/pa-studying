@@ -10,6 +10,7 @@ export {
   runStyle,
   underlineStyle,
   tableColumns,
+  tableIndent,
   cellStyle,
   imageStyle,
   imageTransform,

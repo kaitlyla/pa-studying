@@ -635,4 +635,12 @@ describe("node views", () => {
     expect(host.querySelector("hr")).not.toBeNull();
     view.destroy();
   });
+
+  it("starts a table that reaches into Word's page margin at the column's edge, as the renderer does", () => {
+    const host = document.createElement("div");
+    const d = docOf({ type: "table", attrs: { grid: [100, 200], indentPt: -27.25, borders: NONE, cellMarginPt: MARGINS }, content: [row(rid(1), [cell("A"), cell("B")])] });
+    const view = new EditorView(host, { state: createEditorState(d), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
+    expect((host.querySelector("table") as HTMLElement).style.marginLeft).toBe("0em");
+    view.destroy();
+  });
 });
