@@ -1,0 +1,408 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Probes"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Curvilinear"
+     },
+     {
+      "type": "text",
+      "text": " (low-frequency, deep abdominal): FAST, biliary, AAA, renal"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Phased array"
+     },
+     {
+      "type": "text",
+      "text": " (small footprint): cardiac/subxiphoid"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Linear"
+     },
+     {
+      "type": "text",
+      "text": " (high-frequency, superficial): vascular, soft tissue, lung pleura, DVT"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Echogenicity: what the shades mean"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Anechoic (black)"
+     },
+     {
+      "type": "text",
+      "text": " = simple fluid (cyst, urine, bile, blood acutely)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Hypoechoic (dark gray)"
+     },
+     {
+      "type": "text",
+      "text": " = complex fluid, abscess, solid hypoechoic mass"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Hyperechoic (bright)"
+     },
+     {
+      "type": "text",
+      "text": " = fat, calcification, gas — stones cast a posterior acoustic shadow"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Orientation"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Probe indicator → patient's right (transverse) or head (longitudinal); cephalad = top of the screen"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "DVT ultrasound"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "The cornerstone is compressibility; "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "a non-compressible vein = thrombus"
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Ultrasound: probes, echogenicity and orientation",
+  "relevantTo": "Reading imaging",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "PANCE Imaging Findings - Summary Chart (Misc_ Need to Know/PANCE Imaging Findings - Summary Chart.pdf)",
+    "org": "Course notes",
+    "year": "",
+    "url": null,
+    "type": "course",
+    "track": null
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_DHKQW1GZ8E"
+}

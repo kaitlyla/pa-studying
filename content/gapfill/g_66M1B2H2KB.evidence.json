@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the image looks like Figure of 3 sign / rib notching → coarctation of the aorta",
+   "source": 0,
+   "quote": "Figure of 3 sign / rib notching Coarctation of the aorta",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Buzzword: figure of 3 / rib notching on CXR → coarctation of the aorta",
+   "source": 0,
+   "quote": "Figure of 3 / rib notching CXR Coarctation of the aorta",
+   "locator": "Cross-Modality 'Buzzword' Sign Reference",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Bones / soft tissue: rib fractures, lytic lesions, rib notching, subQ air",
+   "source": 0,
+   "quote": "B - Bones / soft tissue: rib fractures, lytic lesions, rib notching, subQ air, breast shadows.",
+   "locator": "Chest X-Ray (CXR), Reading Approach (RIPE technical adequacy → ABCDE-FGHI)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Chest x-ray: a “3” sign in the upper left mediastinal shadow; heart size is normal unless heart failure supervenes",
+   "source": 1,
+   "quote": "Chest x-ray shows coarctation as a “3” sign in the upper left mediastinal shadow. Heart size is normal unless heart failure supervenes.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Dilated intercostal collateral arteries may erode the 3rd to 8th ribs, causing rib notching, seldom seen before age 5 years",
+   "source": 1,
+   "quote": "Dilated intercostal collateral arteries may erode the 3rd to 8th ribs, causing rib notching, but this radiographic sign is seldom seen before age 5 years.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes A localized narrowing of the lumen, typically in the proximal thoracic aorta just beyond the left subclavian artery, next to the opening of the ductus arteriosus",
+   "source": 1,
+   "quote": "Coarctation of the aorta is a localized narrowing of the lumen, typically in the proximal thoracic aorta just beyond the left subclavian artery and adjacent to the opening of the ductus arteriosus.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "May occur alone or with other anomalies: bicuspid aortic valve, VSD, aortic stenosis, PDA, mitral valve disorders, intracerebral aneurysms",
+   "source": 1,
+   "quote": "Coarctation may occur alone or with various other congenital anomalies (eg, bicuspid aortic valve, ventricular septal defect, aortic stenosis, patent ductus arteriosus, mitral valve disorders, intracerebral aneurysms).",
+   "locator": "Pathophysiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Occurs in 10 to 20% of patients with Turner syndrome",
+   "source": 1,
+   "quote": "It occurs in 10 to 20% of patients with Turner syndrome.",
+   "locator": "Epidemiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Severe: can present in the neonatal period with acidosis, renal insufficiency and shock; mild: may not be apparent until an adolescent or adult is evaluated for hypertension or diminished femoral pulses",
+   "source": 1,
+   "quote": "Severe coarctation can manifest in the neonatal period with acidosis, renal insufficiency, and shock, but mild coarctation may not be apparent until an adolescent or adult is evaluated for hypertension or diminished femoral pulses.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Typically an upper-to-lower extremity blood pressure gradient and pulse amplitude differential, and a grade 2 to 3/6 ejection systolic murmur, sometimes loudest in the left interscapular area",
+   "source": 1,
+   "quote": "There is typically a blood pressure gradient between upper and lower extremities, an easily distinguished amplitude differential between the upper and lower extremity pulses, and a grade 2 to 3/6 ejection systolic murmur, sometimes most prominent in the left interscapular area.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "As children age, subtle symptoms may appear (headache, chest pain, fatigue, leg claudication with activity); upper-extremity hypertension is often present",
+   "source": 1,
+   "quote": "Subtle symptoms (eg, headache, chest pain, fatigue, and leg claudication during physical activities) may be present as children age. Upper-extremity hypertension is often present, but heart failure rarely develops after the neonatal period.",
+   "locator": "Symptoms and Signs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment and next step Her chart: surgical or balloon repair",
+   "source": 0,
+   "quote": "Surgical or balloon repair",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptomatic neonates: prostaglandin E1 to reopen the constricted ductus arteriosus",
+   "source": 1,
+   "quote": "For symptomatic neonates, infuse prostaglandin E1 to reopen the constricted ductus arteriosus.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Correct surgically or by balloon angioplasty with or without stent placement",
+   "source": 1,
+   "quote": "Correct coarctation surgically or using balloon angioplasty with or without stent placement.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 7,
+    "issue": "dropped 'can manifest' and the scope 'an adolescent or adult'",
+    "resolution": "restored both; re-checked pass"
+   },
+   {
+    "claim": 8,
+    "issue": "dropped 'typically'",
+    "resolution": "restored 'Typically'; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_66M1B2H2KB"
+}

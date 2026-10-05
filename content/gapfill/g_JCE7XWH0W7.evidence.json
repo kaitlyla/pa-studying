@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the image looks like Steeple sign (subglottic narrowing on AP) → croup (parainfluenza)",
+   "source": 0,
+   "quote": "Steeple sign (subglottic narrowing on AP) Croup (parainfluenza)",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Buzzword: steeple sign on AP soft tissue neck → croup",
+   "source": 0,
+   "quote": "Steeple sign AP soft tissue neck Croup",
+   "locator": "Cross-Modality 'Buzzword' Sign Reference",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Airway: trachea midline",
+   "source": 0,
+   "quote": "A - Airway: trachea midline; carina; ETT tip ~4 cm above carina.",
+   "locator": "Chest X-Ray (CXR), Reading Approach (RIPE technical adequacy → ABCDE-FGHI)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Diagnosis is usually clinical, but an AP radiograph of the neck and chest showing classic subepiglottic narrowing (steeple sign) supports it",
+   "source": 1,
+   "quote": "Diagnosis is usually clinical, but an anteroposterior radiograph of the neck and chest showing classic subepiglottic narrowing (steeple sign) supports the diagnosis.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes Acute viral respiratory infection of infants 6 to 36 months, typically parainfluenza viruses (mainly type 1)",
+   "source": 1,
+   "quote": "Croup is an acute, viral, respiratory tract infection affecting infants age 6 to 36 months and is typically caused by parainfluenza viruses (mainly type 1).",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Barking, often spasmodic cough and sometimes inspiratory stridor (from subglottic edema); often worse at night",
+   "source": 1,
+   "quote": "A barking, often spasmodic cough and sometimes inspiratory stridor (caused by subglottic edema) are the most prominent symptoms; symptoms are often worse at night.",
+   "locator": "Key Points",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment and next step Her chart: humidified air, dexamethasone, racemic epi if stridor at rest",
+   "source": 0,
+   "quote": "Humidified air, dexamethasone, racemic epi if stridor at rest",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Mild: cool humidified air and often a single dose of a long-acting glucocorticoid (eg, dexamethasone); moderate to severe: humidified oxygen, racemic epinephrine and glucocorticoids",
+   "source": 1,
+   "quote": "For mild disease, cool humidified air and often a single dose of a long-acting glucocorticoid (eg, dexamethasone) For moderate to severe disease, humidified oxygen, racemic epinephrine, and glucocorticoids",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Dexamethasone: high-dose 0.6 mg/kg IM or orally once (maximum 16 mg) may be given even in mild outpatient disease; glucocorticoids can rapidly reduce symptoms within 2 hours and can help prevent hospitalization and shorten stays in moderate to severe croup",
+   "source": 1,
+   "quote": "Long-acting glucocorticoids such as high-dose dexamethasone 0.6 mg/kg IM or orally once (maximum dose 16 mg) may also be given to children with mild disease in the outpatient setting (3). Glucocorticoids can rapidly reduce symptoms within 2 hours and can help prevent hospitalization and reduce the length of hospital stays in children with moderate to severe croup.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Mild croup usually lasts 3 to 4 days; most children with mild croup (no stridor at rest or respiratory distress) can be cared for at home with hydration and antipyretics",
+   "source": 1,
+   "quote": "Mild croup usually lasts 3 to 4 days, resolves spontaneously, and typically requires only limited supportive home care (1). Most children with mild croup (ie, no stridor at rest or signs of respiratory distress) may be cared for at home with hydration and antipyretics.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 7,
+    "issue": "the quote stopped at 'within 2 hours', so placed after the mild-outpatient dose the 2-hour effect read as established in mild croup",
+    "resolution": "quote extended to the end of the sentence; claim now scopes hospitalization/stay benefit to moderate to severe croup; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_JCE7XWH0W7"
+}

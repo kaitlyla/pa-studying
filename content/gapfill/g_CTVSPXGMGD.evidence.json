@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "author": "hank-59816",
+ "claims": [
+  {
+   "text": "What the image looks like Snowman / figure of 8 → supracardiac TAPVR",
+   "source": 0,
+   "quote": "Snowman / figure of 8 Supracardiac TAPVR",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Buzzword: snowman / figure of 8 on CXR → supracardiac TAPVR",
+   "source": 0,
+   "quote": "Snowman / figure of 8 CXR Supracardiac TAPVR",
+   "locator": "Cross-Modality 'Buzzword' Sign Reference",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Aspects (abnormal in red) Cardiac: CT ratio <50% on PA (<60% on AP); contour",
+   "source": 0,
+   "quote": "C - Cardiac: CT ratio <50% on PA (<60% on AP); contour; valves; pacemaker leads.",
+   "locator": "Chest X-Ray (CXR), Reading Approach (RIPE technical adequacy → ABCDE-FGHI)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Supracardiac TAPVR: the anomalous venous pathway creates a second round shadow above the heart, often likened to a snowman",
+   "source": 1,
+   "quote": "In supracardiac total anomalous pulmonary venous return, the anomalous venous pathway creates a second round shadow above the heart, often likened to the appearance of a snowman.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "With pulmonary venous obstruction: small heart and severe diffuse pulmonary edema; otherwise cardiomegaly with increased pulmonary vascular markings",
+   "source": 1,
+   "quote": "Chest x-ray shows a small heart and severe diffuse pulmonary edema when there is pulmonary venous obstruction; otherwise, there is cardiomegaly with increased pulmonary vascular markings.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Causes The pulmonary veins drain to a confluence behind the left atrium but do not connect to it; all pulmonary venous return enters the systemic venous circulation, and systemic flow depends on an adequate atrial communication (PFO or ASD)",
+   "source": 1,
+   "quote": "In total anomalous pulmonary venous return, the pulmonary veins drain to a confluence adjacent to the posterior wall of the left atrium but do not connect to the left atrium. Instead, the entire pulmonary venous return enters the systemic venous circulation through one or more persistent embryologic connections. Filling of the left heart structures and systemic blood flow is dependent on having an adequate atrial communication (stretched patent foramen ovale or actual atrial septal defect).",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "The infradiaphragmatic type is invariably severely obstructed (dramatic pulmonary edema and cyanosis unresponsive to oxygen soon after birth); the other 2 types typically are not obstructed",
+   "source": 1,
+   "quote": "The infradiaphragmatic drainage type is invariably severely obstructed, leading to dramatic pulmonary edema and cyanosis unresponsive to supplemental oxygen that manifest shortly after birth. The other 2 types do not typically involve obstruction and lead to mild to moderate signs of heart failure and mild cyanosis in the first month of life.",
+   "locator": "Pathophysiology",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Symptoms Obstructed: respiratory distress, pulmonary edema and marked cyanosis; exam usually shows a parasternal lift and a single, loud S2 with no significant murmur",
+   "source": 1,
+   "quote": "Neonates with obstructed pulmonary venous return present with respiratory distress, pulmonary edema, and marked cyanosis. Physical examination usually shows a parasternal lift and a single, loud second heart sound (S2), with no significant murmur.",
+   "locator": "Symptoms and Signs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Unobstructed: mild heart failure symptoms may be present; some infants with supracardiac or cardiac types are asymptomatic",
+   "source": 1,
+   "quote": "If pulmonary venous return is not obstructed, mild symptoms of heart failure may be present. Some infants with unobstructed supracardiac or cardiac total anomalous pulmonary venous return may be asymptomatic.",
+   "locator": "Symptoms and Signs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Treatment and next step Her chart: emergent surgical repair",
+   "source": 0,
+   "quote": "Emergent surgical repair",
+   "locator": "Chest X-Ray (CXR), Pediatric / Congenital CXR Signs table",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Obstructed TAPVR needs emergent surgical repair; in older infants, treat heart failure, then repair once stabilized",
+   "source": 1,
+   "quote": "Neonates with total anomalous pulmonary venous return with obstruction require emergent surgical repair. In older infants, heart failure should be treated, followed by surgical repair as soon as the infant is stabilized.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Repair: a wide anastomosis between the pulmonary venous confluence and the posterior wall of the left atrium, with ligation of the vein decompressing the confluence",
+   "source": 1,
+   "quote": "Surgical repair consists of creating a wide anastomosis between the pulmonary venous confluence and the posterior wall of the left atrium. Ligation of the vein decompressing the confluence into the systemic venous circulation is important to prevent a postoperative left-to-right shunt.",
+   "locator": "Treatment",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "ivy-96031",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 6,
+    "issue": "dropped 'usually' from the exam findings",
+    "resolution": "now 'exam usually shows'; re-checked pass"
+   }
+  ]
+ },
+ "block": "g_CTVSPXGMGD"
+}

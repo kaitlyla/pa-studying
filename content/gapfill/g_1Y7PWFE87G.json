@@ -1,0 +1,909 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "What the image looks like"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "Preserved EF ≥50%, elevated E/e', LA enlargement, LVH"
+     },
+     {
+      "type": "text",
+      "text": " → HFpEF"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Aspects (abnormal in red)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Systolic function (LVEF):"
+     },
+     {
+      "type": "text",
+      "text": " HFrEF ≤40% / HFmrEF 41-49% / HFpEF ≥50%"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Diastolic function:"
+     },
+     {
+      "type": "text",
+      "text": " E/A ratio, "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "E/e' (> 14 elevated)"
+     },
+     {
+      "type": "text",
+      "text": ", TR jet for PASP"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Chamber sizes:"
+     },
+     {
+      "type": "text",
+      "text": " LV (LVEDD, LVESD), RV (> 1:1 with LV = dilated), "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "LA"
+     },
+     {
+      "type": "text",
+      "text": ", RA"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Wall thickness:"
+     },
+     {
+      "type": "text",
+      "text": " septum, posterior wall ("
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "> 11 mm = LVH"
+     },
+     {
+      "type": "text",
+      "text": ")"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Doppler of mitral inflow combined with tissue Doppler imaging of the mitral annulus can help identify and quantify LV diastolic dysfunction and LV filling pressures"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "In HFpEF "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "LV filling is impaired"
+     },
+     {
+      "type": "text",
+      "text": ": increased LV end-diastolic pressure at rest or during exertion, usually a normal LV end-diastolic volume, and normal global contractility and LVEF (≥ 50%)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Causes"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Diastolic dysfunction usually results from "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "impaired ventricular relaxation, increased ventricular stiffness"
+     },
+     {
+      "type": "text",
+      "text": ", valvular disease or constrictive pericarditis; acute myocardial ischemia is also a cause"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Particularly common among older adults (resistance to filling increases with age); predominates in hypertrophic cardiomyopathy, other disorders with "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "ventricular hypertrophy (eg, hypertension, significant aortic stenosis)"
+     },
+     {
+      "type": "text",
+      "text": " and amyloid infiltration of the myocardium"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Approximately 50% of patients with heart failure have HFpEF, more with age and diabetes; data suggest comorbidities (eg, obesity, hypertension, diabetes, chronic kidney disease) lead to systemic inflammation, endothelial and cardiac microvascular dysfunction and, ultimately, molecular changes that cause increased myocardial fibrosis and ventricular stiffening"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Symptoms"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Elevated left atrial pressures can cause "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "pulmonary hypertension and pulmonary congestion"
+     },
+     {
+      "type": "text",
+      "text": "; in some patients marked restriction to LV filling can cause low cardiac output and systemic symptoms"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "LV failure: the most common symptoms are "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "dyspnea and fatigue"
+     },
+     {
+      "type": "text",
+      "text": "; dyspnea may be exertional or occur at rest, depending on severity"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "S3 and S4 and an accentuated P2 can also occur in HFpEF"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Pulmonary findings: early inspiratory basilar "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "crackles"
+     },
+     {
+      "type": "text",
+      "text": " that do not clear with coughing; with a pleural effusion, dullness to percussion and diminished breath sounds at the base(s)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 6,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Treatment and next step"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Her chart:"
+     },
+     {
+      "type": "text",
+      "text": " "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "diuresis, treat HTN, SGLT2i"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Recommended for HFpEF: "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       },
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FF0000"
+        }
+       }
+      ],
+      "text": "an SGLT2 inhibitor for all patients"
+     },
+     {
+      "type": "text",
+      "text": ", diuretics for congestion and symptoms, and mineralocorticoid antagonists and angiotensin-renin system inhibition for select patient groups; treat hypertension, atherosclerotic disease and atrial fibrillation"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "SGLT2 inhibitors (eg, dapagliflozin, empagliflozin) have shown significant survival benefit in heart failure regardless of ejection fraction"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Formal exercise through cardiac rehabilitation is likely helpful in chronic HFpEF"
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Preserved EF with elevated E/e', LA enlargement and LVH: HFpEF",
+  "relevantTo": "Heart failure with preserved EF (diastolic heart failure)",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "PANCE Imaging Findings - Summary Chart (Misc_ Need to Know/PANCE Imaging Findings - Summary Chart.pdf)",
+    "org": "Course notes",
+    "year": "",
+    "url": null,
+    "type": "course",
+    "track": null
+   },
+   {
+    "name": "Overview of Heart Failure",
+    "org": "Merck Manual Professional Version",
+    "year": "Reviewed Oct 2025",
+    "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/overview-of-heart-failure",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "Chronic Heart Failure",
+    "org": "Merck Manual Professional Version",
+    "year": "Reviewed Oct 2025",
+    "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/chronic-heart-failure",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "Acute Heart Failure",
+    "org": "Merck Manual Professional Version",
+    "year": "Reviewed Oct 2025",
+    "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/heart-failure-hf",
+    "type": "reference",
+    "track": null
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_1Y7PWFE87G"
+}
