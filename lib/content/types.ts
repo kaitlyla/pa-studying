@@ -145,6 +145,13 @@ export interface StructureFile {
    */
   members: Record<string, string>;
   listed: Record<string, string>;
+  /**
+   * Content row id → the index of the cell of the heading row directly above it whose text titles
+   * the topic the row starts (0 = the label). Opt-in per row; that cell must be non-empty
+   * (Orchestrator rulings 2026-10-04 21:02Z and 22:01Z, amending 40 §40.2). deriveTopics checks
+   * the rows; fitTitled drops entries an edit has broken.
+   */
+  titled?: Record<string, number>;
   drugTables: { block: string; pharmSection: string; conditionRows: string[] }[];
   pharmSections: {
     id: string;

@@ -421,6 +421,11 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { ...structure, sections: [], members: { [R3]: R1 } })).toBe("ok");
   });
 
+  it("accepts titled rows naming a heading cell (rulings 21:02Z/22:01Z), and the field's absence", () => {
+    expect(verdict(sPath, { ...structure, titled: { [R1]: 0, [id("r", 3)]: 1 } })).toBe("ok");
+    expect(verdict(sPath, { ...structure, titled: {} })).toBe("ok");
+  });
+
   it.each([
     ["other not last", { sections: [...structure.sections].reverse() }, /"other" last/],
     ["section members without sections", { sections: [] }, /a topic id \(sections is \[\]\)/],
@@ -432,6 +437,11 @@ describe("pharm (20 §20.6, §20.7)", () => {
     ["a drug table listed twice", { drugTables: [structure.drugTables[0], structure.drugTables[0]] }, /no duplicate/],
     ["duplicate section ids", { sections: [structure.sections[0], structure.sections[0]] }, /no duplicate/],
     ["duplicate pharm section ids", { pharmSections: [structure.pharmSections[0], structure.pharmSections[0]] }, /no duplicate/],
+    ["a titled block", { titled: { [b1]: 0 } }, /\.titled\{b_.*a r_ id/],
+    ["a negative titled cell", { titled: { [R1]: -1 } }, /\.titled\.r_.*a non-negative integer/],
+    ["a fractional titled cell", { titled: { [R1]: 1.5 } }, /a non-negative integer/],
+    ["a titled cell given as text", { titled: { [R1]: "1" } }, /a non-negative integer/],
+    ["titled as a list", { titled: [R1] }, /\.titled.*an object/],
   ])("refuses %s", (_name, over, message) => {
     expect(verdict(sPath, { ...structure, ...over })).toMatch(message);
   });

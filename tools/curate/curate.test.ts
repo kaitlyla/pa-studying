@@ -11,7 +11,8 @@ import type {
   RefTabsFile, SlideMeta, StructureFile, SystemFile,
 } from "../../lib/content/types.ts";
 import { publish } from "../../lib/derive/publish.ts";
-import { B, C, D, doc, G, P, para, R, S, U, writeFixture } from "../build/test-fixture.ts";
+import { deriveTopics } from "../../lib/derive/topics.ts";
+import { B, C, D, doc, G, P, para, R, S, tableDoc, U, writeFixture } from "../build/test-fixture.ts";
 import { loadContent } from "../build/load.ts";
 import { run, USAGE } from "./index.ts";
 import { commitChanges } from "./tree.ts";
@@ -115,6 +116,73 @@ describe("rows", () => {
     await refused(["rows", B(10), `${R(201)}=heading`], /is not a row of/, [`${CV}/blocks/${B(10)}.json`]);
     await refused(["rows", B(10), `${R(101)}=title`], /is not <rowId>=heading\|content/, [`${CV}/blocks/${B(10)}.json`]);
     await refused(["rows", B(11), `${R(101)}=heading`], /not a table block/, [`${CV}/blocks/${B(11)}.json`]);
+  });
+});
+
+// Orchestrator rulings 2026-10-04 21:02Z and 22:01Z: `titled` names the heading cell that titles a row's topic.
+describe("titled", () => {
+  const ST = `${CV}/structure.json`;
+  const B10 = `${CV}/blocks/${B(10)}.json`;
+  const B13 = `${CV}/blocks/${B(13)}.json`;
+  /** Topic titles of FM Cardiovascular as the build derives them from what is on disk. */
+  async function titles(): Promise<Map<string, string>> {
+    const c = await loadContent(root);
+    expect(() => publish(c)).not.toThrow();
+    const sys = must(must(c.guides.find((g) => g.file.id === "fm"), "fm").systems.find((s) => s.file.id === "cardiovascular"), "cardiovascular");
+    return new Map(deriveTopics(sys.blocks, sys.structure).topics.map((t) => [t.id, t.title]));
+  }
+  const kinds = async (path: string) => {
+    const block = await read<BlockFile>(path);
+    return (block.doc.content[0] as { content: { attrs: { id: string; kind: string } }[] }).content.map((r) => [r.attrs.id, r.attrs.kind]);
+  };
+
+  it("under a heading row, titles the row's topic with the label (cell 0 by default) and leaves the table as it is", async () => {
+    const before = await text(B10);
+    const lines = await run(root, ["titled", B(10), R(101)]);
+    expect((await read<StructureFile>(ST)).titled).toEqual({ [R(101)]: 0 });
+    expect(await text(B10)).toBe(before);
+    expect(lines).toContain(`${R(101)}: titled by cell 0 of ${R(100)}`);
+    expect((await titles()).get(R(101))).toBe("ARRHYTHMIAS");
+  });
+
+  it("the em shape: makes the row above a heading row, titles from the named cell, and gives the row the section it showed under", async () => {
+    // Like em pulmonary b_0XAMGVVY65: "PULM | Acute Exacerbation of COPD (AECOPD)" stored as a content row over an empty-first-cell row.
+    await writeContent(root, B13, { v: 1, id: B(13), kind: "table", doc: tableDoc(2, [
+      [R(130), "content", "", "angina continues here"],
+      [R(131), "content", "CARDIO", "Heart failure"],
+      [R(132), "content", "", "HFrEF; loop diuretics"],
+    ]), meta: {} });
+    expect((await titles()).get(R(131))).toBe("CARDIO");
+
+    const lines = await run(root, ["titled", B(13), `${R(132)}=1`]);
+    expect(await kinds(B13)).toEqual([[R(130), "content"], [R(131), "heading"], [R(132), "content"]]);
+    const st = await read<StructureFile>(ST);
+    expect(st.titled).toEqual({ [R(132)]: 1 });
+    expect(st.members[R(132)]).toBe("other");
+    expect(st.members).not.toHaveProperty(R(131));
+    expect(lines).toEqual(expect.arrayContaining([`${R(131)} is now a heading row`, `${R(132)}: titled by cell 1 of ${R(131)}`]));
+    const t = await titles();
+    expect(t.get(R(132))).toBe("Heart failure");
+    expect(t.has(R(131))).toBe(false);
+  });
+
+  it("=off removes the entry, and the field with the last one", async () => {
+    await run(root, ["titled", B(10), R(101)]);
+    const lines = await run(root, ["titled", B(10), `${R(101)}=off`]);
+    expect(await read<StructureFile>(ST)).not.toHaveProperty("titled");
+    expect(lines).toContain(`${R(101)}: titled removed`);
+    expect((await titles()).get(R(101))).toBe("Atrial fibrillation (AF)");
+  });
+
+  it("refuses an empty or missing heading cell, the first row, rows of another table, malformed entries and non-guide tables", async () => {
+    const files = [ST, B10, B13];
+    // R130 above R131 has an empty first cell: as a heading row its label is empty.
+    await refused(["titled", B(13), R(131)], /cell 0 of heading row .* empty or missing/, files);
+    await refused(["titled", B(10), `${R(101)}=7`], /cell 7 of heading row .* empty or missing/, files);
+    await refused(["titled", B(10), R(100)], /first row of/, files);
+    await refused(["titled", B(10), R(201)], /is not a row of/, files);
+    await refused(["titled", B(10), `${R(101)}=x`], /is not <rowId>\[=<cell>\|=off\]/, files);
+    await refused(["titled", B(11), R(101)], /not a table block of a guide system/, files);
   });
 });
 

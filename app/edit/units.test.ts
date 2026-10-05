@@ -1,7 +1,7 @@
 // Edit units and the save builder (plan 50 §50.2, §50.4) against the synthetic content tree in the
 // GitHub fake: what each page key edits, and exactly which files a save writes.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import type { DocJSON, GapFile, StructureFile, BlockFile } from "../../lib/content/index.ts";
+import { serializeFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
 import type { SystemJson } from "../../lib/derive/published.ts";
 import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
 import { B, D, G, R, S } from "../../tools/build/test-fixture.ts";
@@ -372,6 +372,112 @@ describe("building a save", () => {
     const build = buildSave(unit, new Map([[block.slot.id, edited]]), TODAY);
     expect(build.changes.map((c) => c.path)).toEqual([`content/docs/${D(5)}/blocks/${B(60)}.json`]);
     expect(build.changed).toEqual([B(60), D(5)]);
+  });
+});
+
+// Orchestrator rulings 2026-10-04 21:02Z and 22:01Z: a save never leaves a `titled` entry the build
+// would refuse — an edit that breaks the row's heading drops the entry, and the row is titled by
+// 40 §40.2 again; an edit that keeps it keeps the entry.
+describe("a save and titled rows", () => {
+  /** Commits structure.json with `titled` (R101 under heading R100 "ARRHYTHMIAS | Presentation | Treatment"). */
+  async function withTitled(titled: Record<string, number>): Promise<void> {
+    const unit = await unitAt("system:fm:cardiovascular");
+    const structure = { ...only(unit, "rows").sys.structure, titled };
+    w.fake.commitFiles({ [CV_STRUCTURE]: serializeFile(CV_STRUCTURE, structure) });
+  }
+
+  /** Saves `edit` of B10's rows from the system page; returns the saved structure (null when unchanged) and the derivation the build would make. */
+  async function save(edit: (doc: DocJSON) => DocJSON, key = "system:fm:cardiovascular") {
+    const unit = await unitAt(key);
+    const part = only(unit, "rows");
+    const build = buildSave(unit, new Map([[part.slot.id, edit(part.slot.doc)]]), TODAY);
+    const changed = changeOf(build, CV_STRUCTURE);
+    const structure = changed === undefined ? part.sys.structure : json<StructureFile>(changed);
+    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+    const blocks = part.sys.blocks.map((b) => (b.id === saved.id ? saved : b));
+    const topics = deriveTopics(blocks, structure);
+    checkMembers("cardiovascular", topics, structure);
+    return { written: changed !== undefined, structure, title: (id: string) => topics.topics.find((t) => t.id === id)?.title };
+  }
+
+  /** The heading row R100 with its cells replaced by `cells`. */
+  function headingCells(doc: DocJSON, cells: Node[]): DocJSON {
+    const out = clone(doc);
+    const row = rowsOfDoc(out).find((r) => r.attrs?.id === R(100));
+    if (!row) throw new Error("no heading row");
+    row.content = cells;
+    return out;
+  }
+
+  it("an edit that keeps the heading keeps the entry, and the title follows the edited cell", async () => {
+    await withTitled({ [R(101)]: 0 });
+    const kept = await save((d) => setCell(d, R(102), 1, "more AF text, revised"));
+    expect(kept.written).toBe(false);
+    expect(kept.title(R(101))).toBe("ARRHYTHMIAS");
+    const renamed = await save((d) => setCell(d, R(100), 0, "TACHYARRHYTHMIAS"));
+    expect(renamed.structure.titled).toEqual({ [R(101)]: 0 });
+    expect(renamed.title(R(101))).toBe("TACHYARRHYTHMIAS");
+  });
+
+  it("deleting the titled row drops its entry", async () => {
+    await withTitled({ [R(101)]: 0 });
+    const r = await save((d) => dropRow(d, R(101)));
+    expect(r.written).toBe(true);
+    expect(r.structure).not.toHaveProperty("titled");
+  });
+
+  it("deleting the heading row above drops the entry; the row is titled by its own first cell again", async () => {
+    await withTitled({ [R(101)]: 0 });
+    const r = await save((d) => dropRow(d, R(100)));
+    expect(r.structure).not.toHaveProperty("titled");
+    expect(r.title(R(101))).toBe("Atrial fibrillation (AF)");
+  });
+
+  it("a row inserted between the heading and the titled row drops the entry", async () => {
+    await withTitled({ [R(101)]: 0 });
+    const r = await save((d) => addRow(d, R(100), R(105), ["", "inserted", ""]));
+    expect(r.structure).not.toHaveProperty("titled");
+    expect(r.title(R(101))).toBe("Atrial fibrillation (AF)");
+  });
+
+  it("a row added above the titled row on its own topic page is recorded under it, and the entry stays", async () => {
+    await withTitled({ [R(101)]: 0 });
+    const r = await save((d) => addRow(d, R(100), R(105), ["", "before AF", ""]), `topic:fm:${R(101)}`);
+    expect(r.structure.members[R(105)]).toBe(R(101));
+    expect(r.structure.titled).toEqual({ [R(101)]: 0 });
+    expect(r.title(R(101))).toBe("ARRHYTHMIAS");
+  });
+
+  it("emptying the named heading cell drops the entry", async () => {
+    await withTitled({ [R(101)]: 2 });
+    const r = await save((d) => setCell(d, R(100), 2, ""));
+    expect(r.structure).not.toHaveProperty("titled");
+    expect(r.title(R(101))).toBe("Atrial fibrillation (AF)");
+  });
+
+  it("merging the named cell into the one before it drops the entry; a cell the merge leaves keeps its entry", async () => {
+    await withTitled({ [R(101)]: 1 });
+    const merged = { type: "table_cell", attrs: { colspan: 2, rowspan: 1 }, content: [{ type: "paragraph", content: [{ type: "text", text: "ARRHYTHMIAS" }] }] };
+    const r = await save((d) => headingCells(d, [merged, cell("Treatment")]));
+    expect(r.structure).not.toHaveProperty("titled");
+
+    await withTitled({ [R(101)]: 2 });
+    const k = await save((d) => headingCells(d, [merged, cell("Treatment")]));
+    expect(k.structure.titled).toEqual({ [R(101)]: 2 });
+    expect(k.title(R(101))).toBe("Treatment");
+  });
+
+  it("removing the column the entry names drops the entry", async () => {
+    await withTitled({ [R(101)]: 2 });
+    const r = await save((d) => {
+      const out = clone(d);
+      const table = out.content[0] as Node;
+      table.attrs = { ...table.attrs, grid: [100, 100] };
+      for (const row of table.content ?? []) row.content = (row.content ?? []).slice(0, 2);
+      return out;
+    });
+    expect(r.structure).not.toHaveProperty("titled");
+    expect(r.title(R(101))).toBe("Atrial fibrillation (AF)");
   });
 });
 

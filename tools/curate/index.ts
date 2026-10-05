@@ -31,6 +31,7 @@ interface Command {
 const COMMANDS: readonly Command[] = [
   { name: "split", usage: "<blockId> <paragraphIndex>", arity: 2, run: (c, at) => cmd.split(c, at(0), Number(at(1))) },
   { name: "rows", usage: "<tableBlockId> <rowId>=heading|content …", arity: 2, more: true, run: (c, at, args) => cmd.rows(c, at(0), args.slice(1)) },
+  { name: "titled", usage: "<tableBlockId> <rowId>[=<cell>|=off] …", arity: 2, more: true, run: (c, at, args) => cmd.titled(c, at(0), args.slice(1)) },
   { name: "structure", usage: "<guide> <system> <file.json>", arity: 3, run: async (c, at) => cmd.structure(c, at(0), at(1), await readDraft(at(2))) },
   { name: "pharm-parts", usage: "<file-slug> <file.json>", arity: 2, run: async (c, at) => cmd.pharmParts(c, at(0), await readDraft(at(1))) },
   { name: "cards", usage: "<file.json>", arity: 1, run: async (c, at) => cmd.cards(c, await readDraft(at(0))) },

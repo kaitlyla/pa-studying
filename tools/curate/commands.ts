@@ -9,6 +9,7 @@ import type {
 } from "../../lib/content/types.ts";
 import type { Content } from "../../lib/derive/model.ts";
 import { collapse, nodeText, type PMNode } from "../../lib/derive/text.ts";
+import { deriveTopics, rowSection } from "../../lib/derive/topics.ts";
 import { CurateError, type Change } from "./tree.ts";
 
 export interface Planned {
@@ -26,8 +27,8 @@ interface Owner {
   list: { blocks: string[] } | { preamble: string[] };
   dir: string;
   block: BlockFile;
-  /** Set for a block of a guide system. */
-  structure?: { path: string; value: StructureFile };
+  /** Set for a block of a guide system; `blocks` are the system's. */
+  structure?: { path: string; value: StructureFile; blocks: BlockFile[] };
   /** Set for a block of a pharm notes file. */
   pharm?: PharmFile;
 }
@@ -41,7 +42,7 @@ function findBlock(c: Content, blockId: string): Owner {
       const b = s.blocks.find((x) => x.id === blockId);
       if (b) {
         const sb = `${base}/${s.file.id}`;
-        return { listPath: `${sb}/system.json`, list: s.file, dir: `${sb}/blocks`, block: b, structure: { path: `${sb}/structure.json`, value: s.structure } };
+        return { listPath: `${sb}/system.json`, list: s.file, dir: `${sb}/blocks`, block: b, structure: { path: `${sb}/structure.json`, value: s.structure, blocks: s.blocks } };
       }
     }
   }
@@ -174,6 +175,62 @@ export function rows(c: Content, blockId: string, assignments: readonly string[]
     row.attrs.kind = m.kind;
   }
   return { changes: [{ path: `${owner.dir}/${blockId}.json`, value: block }], notes: [`${assignments.length} row kind(s) set in ${blockId}`] };
+}
+
+// ---- titled --------------------------------------------------------------------------------
+
+/**
+ * `titled <tableBlockId> <rowId>[=<cell>|=off] …`: the topic the row starts takes its title from
+ * cell `cell` (default 0, the label) of the row directly above it (Orchestrator rulings 2026-10-04
+ * 21:02Z and 22:01Z). That row becomes a heading row if it is not one, and drops its own `members`
+ * entry; a titled row with no `members` entry takes the section it was shown under. `=off` removes
+ * the row's entry. The build refuses an entry whose heading cell is empty.
+ */
+export function titled(c: Content, blockId: string, assignments: readonly string[]): Planned {
+  const owner = findBlock(c, blockId);
+  const st = owner.structure;
+  if (owner.block.kind !== "table" || !st) throw new CurateError(`${blockId}: not a table block of a guide system`);
+  if (assignments.length === 0) throw new CurateError("titled: give at least one <rowId>[=<cell>|=off]");
+  const block = clone(owner.block);
+  const rows = tableNode(block)?.content ?? [];
+  const before = deriveTopics(st.blocks, st.value);
+  const members = { ...st.value.members };
+  const entries = { ...st.value.titled };
+  const notes: string[] = [];
+  let kinds = false;
+  for (const a of assignments) {
+    const m = /^(?<row>r_[0-9A-Z]{10})(?:=(?<cell>\d+|off))?$/.exec(a)?.groups;
+    if (m?.row === undefined) throw new CurateError(`titled: "${a}" is not <rowId>[=<cell>|=off]`);
+    const rowId = m.row;
+    const at = rows.findIndex((r) => r.attrs?.id === rowId);
+    if (at === -1) throw new CurateError(`titled: ${rowId} is not a row of ${blockId}`);
+    if (m.cell === "off") {
+      delete entries[rowId];
+      notes.push(`${rowId}: titled removed`);
+      continue;
+    }
+    const above = rows[at - 1]?.attrs;
+    if (!above) throw new CurateError(`titled: ${rowId} is the first row of ${blockId}; no row above it can title it`);
+    const aboveId = String(above.id);
+    if (above.kind !== "heading") {
+      above.kind = "heading";
+      kinds = true;
+      delete members[aboveId];
+      notes.push(`${aboveId} is now a heading row`);
+    }
+    const cell = Number(m.cell ?? 0);
+    entries[rowId] = cell;
+    if (st.value.sections.length > 0 && members[rowId] === undefined) {
+      const section = rowSection(before, st.value, rowId);
+      if (section !== null) members[rowId] = section;
+    }
+    notes.push(`${rowId}: titled by cell ${cell} of ${aboveId}`);
+  }
+  const structure: StructureFile = { ...st.value, members, titled: entries };
+  if (Object.keys(entries).length === 0) delete structure.titled;
+  const changes: Change[] = [{ path: st.path, value: structure }];
+  if (kinds) changes.push({ path: `${owner.dir}/${blockId}.json`, value: block });
+  return { changes, notes };
 }
 
 // ---- structure -----------------------------------------------------------------------------

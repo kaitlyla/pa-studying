@@ -23,7 +23,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, parseHash, REF_TABS } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { checkMembers, deriveTopics, publishedRows, publishedSections, sectionItems, type Topic } from "./topics.ts";
+import { checkMembers, deriveTopics, fitTitled, publishedRows, publishedSections, sectionItems, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
@@ -257,6 +257,93 @@ describe("topics (40 §40.2)", () => {
       const e = buildError(() => deriveTopics(blocks, structureOf({ members: { [X]: F } })));
       expect(e.id).toBe(X);
       expect(e.message).toMatch(/not a later topic or untitled row of the same table/);
+    });
+  });
+
+  // Orchestrator rulings 2026-10-04 21:02Z and 22:01Z (amending §40.2): a content row listed in
+  // `titled` starts a topic titled with the named cell of the heading row directly above it.
+  describe("titled rows (rulings 21:02Z, 22:01Z)", () => {
+    // psy b_GDBK71BB64: the label row "Serotonin Syndrome" names the condition; the row below holds its notes.
+    const [SS, SSN] = ["r_0YBBFWYXDA", "r_CEEX5DZ1WB"];
+    const serotonin = (kind: "heading" | "content") => table("b_GDBK71BB64", 5, [
+      [SS, kind, "Serotonin Syndrome", "", "", "", ""],
+      [SSN, "content", "Rapid onset, 2+ serotonin agents or dosage changes", "S/SXS: mental status changes", "", "TX: BDZs, IVF, cooling", ""],
+    ]);
+    // em pulmonary b_0XAMGVVY65: "PULM | Acute Exacerbation of COPD (AECOPD) | | " over a row with an empty first cell.
+    const [COPD, AE, AEN] = ["r_DTR443XYG0", "r_X3DMHZGC37", "r_6P35S0G0ES"];
+    const pulm = () => table("b_0XAMGVVY65", 4, [
+      [COPD, "content", "COPD", "persistent respiratory symptoms", "spirometry", "Group A"],
+      [AE, "heading", "PULM", "Acute Exacerbation of COPD (AECOPD)", "", ""],
+      [AEN, "content", "", "acute worsening of respiratory symptoms", "Initial Evaluation: vitals", "SABA +/- SAMA"],
+    ]);
+    const titles = (blocks: BlockFile[], st: StructureFile) => deriveTopics(blocks, st).topics.map((x) => [x.id, x.title, x.rows]);
+
+    it("label row then notes row, titled from cell 0: the notes row's topic takes the label, not its notes text", () => {
+      expect(titles([serotonin("heading")], structureOf())).toEqual([[SSN, "Rapid onset, 2+ serotonin agents or dosage changes", [SSN]]]);
+      expect(titles([serotonin("heading")], structureOf({ titled: { [SSN]: 0 } }))).toEqual([[SSN, "Serotonin Syndrome", [SSN]]]);
+    });
+
+    it("the em case: a heading row titled from cell 1 over an empty-first-cell row", () => {
+      expect(titles([pulm()], structureOf())).toEqual([[COPD, "COPD", [COPD]], [AEN, "PULM", [AEN]]]);
+      const t = deriveTopics([pulm()], structureOf({ titled: { [AEN]: 1 } }));
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[COPD, "COPD", [COPD]], [AEN, "Acute Exacerbation of COPD (AECOPD)", [AEN]]]);
+      expect(t.rows.get(AEN)).toMatchObject({ heading: AE, topic: AEN });
+    });
+
+    it("the cell's text is taken with whitespace collapsed, as labels are", () => {
+      const b = table(B(95), 2, [[R(950), "heading", "  Acute\n  kidney   injury ", "x"], [R(951), "content", "notes", "more"]]);
+      expect(titles([b], structureOf({ titled: { [R(951)]: 0 } }))).toEqual([[R(951), "Acute kidney injury", [R(951)]]]);
+    });
+
+    it("rows recorded under the titled row between it and the heading keep the heading directly above it", () => {
+      const b = table(B(95), 2, [[R(950), "heading", "Gout", "Tx"], [R(952), "content", "", "added above"], [R(951), "content", "notes", "colchicine"]]);
+      expect(titles([b], structureOf({ members: { [R(952)]: R(951) }, titled: { [R(951)]: 0 } }))).toEqual([[R(951), "Gout", [R(952), R(951)]]]);
+    });
+
+    it.each([
+      ["with a content row, not a heading row, above it", () => [serotonin("content")], { [SSN]: 0 }, SSN, /no heading row is directly above it/],
+      ["whose named heading cell is empty", () => [pulm()], { [AEN]: 2 }, AEN, new RegExp(`cell 2 of heading row ${AE}, which is empty or missing`)],
+      ["whose named cell is past the table's columns", () => [pulm()], { [AEN]: 9 }, AEN, /cell 9 .* empty or missing/],
+      ["that is not directly below the heading row", () => [pulm()], { [COPD]: 0 }, COPD, /no heading row is directly above it/],
+      ["that is itself a heading row", () => [pulm()], { [AE]: 0 }, AE, /not a content row of a topic table/],
+      ["that is no row of the system", () => [pulm()], { [R(999)]: 0 }, R(999), /not a content row of a topic table/],
+    ])("fails the build for a titled row %s", (_name, blocks, entries, id, message) => {
+      const e = buildError(() => deriveTopics(blocks(), structureOf({ titled: entries })));
+      expect(e.id).toBe(id);
+      expect(e.message).toMatch(message);
+    });
+
+    it("fails the build for a titled drug row of a drug table", () => {
+      const drug = table(B(96), 2, [[R(960), "heading", "BETA BLOCKERS", "MOA"], [R(961), "content", "Metoprolol", "β1"]]);
+      const st = structureOf({ drugTables: [{ block: B(96), pharmSection: "x", conditionRows: [] }], titled: { [R(961)]: 0 } });
+      expect(buildError(() => deriveTopics([drug], st)).id).toBe(R(961));
+    });
+
+    it("fitTitled keeps the structure itself when every entry fits", () => {
+      const st = structureOf({ titled: { [AEN]: 1 } });
+      expect(fitTitled([pulm()], st)).toBe(st);
+      const none = structureOf();
+      expect(fitTitled([pulm()], none)).toBe(none);
+    });
+
+    it("fitTitled drops only the entries that no longer fit, and the field when none is left", () => {
+      const both = [pulm(), serotonin("heading")];
+      const st = structureOf({ titled: { [AEN]: 1, [SSN]: 0 } });
+      expect(fitTitled(both, st)).toBe(st);
+      // The serotonin label row is a content row again: that entry no longer fits.
+      const kept = fitTitled([pulm(), serotonin("content")], st);
+      expect(kept.titled).toEqual({ [AEN]: 1 });
+      expect(() => deriveTopics([pulm(), serotonin("content")], kept)).not.toThrow();
+      const gone = fitTitled([serotonin("content")], structureOf({ titled: { [SSN]: 0, [AEN]: 1 } }));
+      expect(gone).not.toHaveProperty("titled");
+      expect(titles([serotonin("content")], gone)).toEqual([[SS, "Serotonin Syndrome", [SS]], [SSN, "Rapid onset, 2+ serotonin agents or dosage changes", [SSN]]]);
+    });
+
+    it("fitTitled ignores a recorded row the build would refuse, leaving that to the build's own check", () => {
+      const b = table(B(95), 2, [[R(950), "heading", "Gout", "Tx"], [R(951), "content", "notes", "colchicine"], [R(952), "content", "", "stray"]]);
+      const st = structureOf({ members: { [R(952)]: R(951) }, titled: { [R(951)]: 0 } });
+      expect(fitTitled([b], st)).toBe(st);
+      expect(buildError(() => deriveTopics([b], st)).id).toBe(R(952));
     });
   });
 

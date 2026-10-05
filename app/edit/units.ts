@@ -6,7 +6,7 @@ import {
   type PageSetup, type PharmFile, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
-import { checkMembers, deriveTopics, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, fitTitled, sectionItems, withHeadings } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -444,23 +444,29 @@ function checkSystems(systems: Iterable<{ sys: SystemCtx; structure: StructureFi
   }
 }
 
-/** `structure` with the `members`, `listed` and `conditionRows` entries `ids` had in `old`. */
+/**
+ * `structure` with the `members`, `listed`, `titled` and `conditionRows` entries `ids` had in `old`.
+ * A restored `titled` entry whose heading is not back is dropped by fitTitled before the checks.
+ */
 function withOldEntries(structure: StructureFile, old: StructureFile, ids: readonly string[]): StructureFile {
   if (ids.length === 0) return structure;
   const members = { ...structure.members };
   const listed = { ...structure.listed };
+  const titled = { ...structure.titled };
   for (const id of ids) {
     const m = old.members[id];
     if (m !== undefined) members[id] = m;
     const l = old.listed[id];
     if (l !== undefined) listed[id] = l;
+    const t = old.titled?.[id];
+    if (t !== undefined) titled[id] = t;
   }
   const drugTables = structure.drugTables.map((d) => {
     const before = old.drugTables.find((o) => o.block === d.block)?.conditionRows ?? [];
     const back = ids.filter((id) => before.includes(id) && !d.conditionRows.includes(id));
     return back.length > 0 ? { ...d, conditionRows: [...d.conditionRows, ...back] } : d;
   });
-  return { ...structure, members, listed, drugTables };
+  return { ...structure, members, listed, drugTables, ...(Object.keys(titled).length > 0 ? { titled } : {}) };
 }
 
 /** Today's local date as ISO `YYYY-MM-DD`. */
@@ -543,6 +549,8 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
           }), before, deriveTopics(part.sys.blocks, before), spliced.deleted);
         }
       }
+      // An edit that breaks a `titled` row's heading drops the entry (Orchestrator ruling 2026-10-04 22:01Z).
+      s.structure = fitTitled(s.blocks, s.structure);
       if (unit.topic !== null && spliced.deleted.includes(unit.topic)) lostTopic = { part, blocks: s.blocks, structure: s.structure };
       continue;
     }
@@ -650,7 +658,9 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
     const dir = sysPath.replace(/system\.json$/, "");
     const sys = await now<SystemFile>(sysPath);
     const blocks = await Promise.all(sys.blocks.map((b) => now<BlockFile>(`${dir}blocks/${b}.json`)));
-    const structure = await now<StructureFile>(`${dir}structure.json`);
+    const stored = await now<StructureFile>(`${dir}structure.json`);
+    const structure = fitTitled(blocks, stored);
+    if (structure !== stored) files.set(`${dir}structure.json`, structure);
     checkMembers(sys.id, deriveTopics(blocks, structure), structure);
   }
 

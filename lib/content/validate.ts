@@ -364,7 +364,7 @@ export const validateStructure: Validator = (v, ctx) => {
       id: slugC, title: nonEmpty, tables: uniqueArr(id("b")), overview: nullable(id("p")), lo: nullable(id("p")), also: uniqueArr(id("c")),
     }, {})),
     pharmFiles: uniqueArr(id("d")),
-  }, {})(v, "", ctx);
+  }, { titled: record(id("r"), int) })(v, "", ctx);
   const s = v as StructureFile;
   const sectionIds = s.sections.map((x) => x.id);
   uniqueArr(str)(sectionIds, ".sections[].id", ctx);
