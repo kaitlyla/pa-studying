@@ -1,9 +1,120 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
+ "sections": [
+  {
+   "id": "acne-vulgaris",
+   "title": "Acne vulgaris"
+  },
+  {
+   "id": "diseases-of-hair-nails-or-skin",
+   "title": "Diseases of hair, nails, or skin"
+  },
+  {
+   "id": "wounds",
+   "title": "Wounds"
+  },
+  {
+   "id": "allergic-reactions",
+   "title": "Allergic reactions"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "skin-infestations",
+   "title": "Skin infestations"
+  },
+  {
+   "id": "skin-lesions",
+   "title": "Skin lesions"
+  }
+ ],
+ "members": {
+  "b_HKCAKGYY29": "acne-vulgaris",
+  "r_Z34HQAV0SN": "acne-vulgaris",
+  "b_EGWJ3YHVZT": "acne-vulgaris",
+  "b_2QDNMY0HYE": "acne-vulgaris",
+  "r_SS1DAFBV9D": "diseases-of-hair-nails-or-skin",
+  "b_SP965N40G4": "diseases-of-hair-nails-or-skin",
+  "r_GJJNKRTD0K": "diseases-of-hair-nails-or-skin",
+  "r_AB3MJV04R9": "diseases-of-hair-nails-or-skin",
+  "r_S22PYTN44Y": "diseases-of-hair-nails-or-skin",
+  "r_56ZNVM23ZV": "diseases-of-hair-nails-or-skin",
+  "r_TR6X7QTY99": "diseases-of-hair-nails-or-skin",
+  "b_VJA76KYG94": "diseases-of-hair-nails-or-skin",
+  "r_XK3P4DRW2Y": "wounds",
+  "b_38EJN7TGXX": "wounds",
+  "r_Z01DCN020N": "diseases-of-hair-nails-or-skin",
+  "r_157BMV26VJ": "diseases-of-hair-nails-or-skin",
+  "b_VYJGF4V7P9": "diseases-of-hair-nails-or-skin",
+  "r_SESSN84XFA": "allergic-reactions",
+  "r_GA9MQ6K89A": "allergic-reactions",
+  "r_HB4YRSP7EX": "allergic-reactions",
+  "r_9PB3N51EMG": "allergic-reactions",
+  "r_WPE7VC2DR2": "allergic-reactions",
+  "b_GN24M6WWAB": "allergic-reactions",
+  "r_8ACH6B61DB": "infectious-disorders",
+  "r_MQSZ9KP35R": "infectious-disorders",
+  "r_J0HHBXEKM7": "infectious-disorders",
+  "r_PVNBC7F28Q": "infectious-disorders",
+  "r_JVX9EFK8MQ": "infectious-disorders",
+  "b_MZJ01ED0AZ": "infectious-disorders",
+  "r_XEFE1VGCAC": "infectious-disorders",
+  "r_579Y6BRA4C": "infectious-disorders",
+  "r_MG35NPAKAD": "infectious-disorders",
+  "r_JY0AGM2GXE": "infectious-disorders",
+  "b_A6XXGMS1JF": "infectious-disorders",
+  "r_9GSPH32BHH": "infectious-disorders",
+  "b_7KR9NCR8MS": "infectious-disorders",
+  "r_QJQ69E5QAV": "skin-infestations",
+  "r_X9YSR4S2RC": "skin-infestations",
+  "r_GW1V1R3EH8": "skin-infestations",
+  "r_TNF3K9VK7H": "skin-infestations",
+  "b_85KV9ENSWY": "skin-infestations",
+  "r_VGGFAGJ3QJ": "diseases-of-hair-nails-or-skin",
+  "b_Q22JNRP7XQ": "diseases-of-hair-nails-or-skin",
+  "r_NCDM07GN04": "diseases-of-hair-nails-or-skin",
+  "b_57RJ7P404E": "diseases-of-hair-nails-or-skin",
+  "r_BJA3QCGYCD": "infectious-disorders",
+  "b_2GA845AFTF": "infectious-disorders",
+  "r_2CS8EA5Y64": "infectious-disorders",
+  "r_EF17YV30YS": "infectious-disorders",
+  "r_2BWBQS6KN7": "infectious-disorders",
+  "r_68959HDCM0": "infectious-disorders",
+  "r_NX7TWNYJHX": "infectious-disorders",
+  "r_H4NV5ECSKD": "infectious-disorders",
+  "r_HEQKZM7TVE": "diseases-of-hair-nails-or-skin",
+  "b_XGHXG77BPR": "diseases-of-hair-nails-or-skin",
+  "r_RBR60Q9FBC": "infectious-disorders",
+  "b_QMYP6B3ZY3": "infectious-disorders",
+  "r_V6BTB81Z1K": "diseases-of-hair-nails-or-skin",
+  "b_FH3T7JWJAR": "diseases-of-hair-nails-or-skin",
+  "r_T0FP5M4D29": "diseases-of-hair-nails-or-skin",
+  "r_9DM3Q60NQ5": "diseases-of-hair-nails-or-skin",
+  "r_P3M7JJ8G0K": "skin-lesions",
+  "r_43QNE461BS": "diseases-of-hair-nails-or-skin",
+  "b_K1QN0DX2B7": "diseases-of-hair-nails-or-skin"
+ },
  "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "drugTables": [
+  {
+   "block": "b_VWHTRM46QK",
+   "pharmSection": "acne",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "acne",
+   "title": "Acne",
+   "tables": [
+    "b_VWHTRM46QK"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": []
 }

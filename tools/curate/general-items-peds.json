@@ -1,0 +1,155 @@
+{
+  "v": 1,
+  "guide": "peds",
+  "rule": "plan 90 §90.3.1 with design general/topics/relevant, howdecided, prominent, howto and general/workup/choose; keys = signed EORS peds general (SD_GEN_ALL: labs, ekg, imaging, anatomy, procedures, guidelines, screenings, workup); PAEA Pediatrics EOR Topic List 2026 (scratch/peds-topics-2026.txt); Leader S10 ruling (selection recorded here, general.json written in S12)",
+  "topics": {
+    "labs": {
+      "prominent": true,
+      "howto": null,
+      "why": "Labs are needed for ≥3 listed conditions (anemias, coagulation disorders, lead poisoning, diabetes/DKA, renal disease, infections); her Hematology system is largely lab-defined.",
+      "items": [
+        { "item": "CBC with indices (MCV), reticulocyte count and peripheral smear", "covers": "Anemias (microcytic, macrocytic, normocytic, hemolytic); Thalassemias; Sickle cell disease; Leukemias (her guide: Hematology anemia rows)" },
+        { "item": "Iron studies (ferritin, TIBC) and lead level", "covers": "Anemias (iron deficiency); Lead poisoning (her guide: Iron Deficiency and Lead Poisoning rows)" },
+        { "item": "Hemoglobin electrophoresis", "covers": "Thalassemias; Sickle cell disease" },
+        { "item": "B12 and folate", "covers": "Anemias (macrocytic) (her guide: B12 and Folate Deficiency rows)" },
+        { "item": "Platelet count, PT/INR, aPTT, von Willebrand panel, factor levels", "covers": "Coagulation disorders; Immune thrombocytopenic purpura (her guide: Bleeding Disorders)" },
+        { "item": "Hemolysis labs and creatinine (LDH, haptoglobin, bilirubin, smear schistocytes)", "covers": "Hemolytic uremic syndrome; Anemias (hemolytic)" },
+        { "item": "Glucose, HbA1c, serum ketones, anion gap and venous blood gas", "covers": "Diabetes mellitus; Diabetic ketoacidosis; Hypoglycemia" },
+        { "item": "Electrolytes, BUN/creatinine", "covers": "Dehydration (her guide: Dehydration note); Pyloric stenosis (hypochloremic metabolic alkalosis); Renal disease" },
+        { "item": "Urinalysis and urine culture", "covers": "Cystitis; Vesicourethral reflux; Renal disease — glomerulonephritis, nephrotic syndrome" },
+        { "item": "TSH and free T4; newborn screen", "covers": "Thyroid and parathyroid disorders; Inborn errors of metabolism (PKU, galactosemia); Newborn assessment" },
+        { "item": "Calcium, phosphate, PTH and vitamin D", "covers": "Thyroid and parathyroid disorders; Vitamin/Nutritional deficiencies (her guide: Hypercalcemia and Vitamin D rows)" },
+        { "item": "Bilirubin (total/direct)", "covers": "Neonatal hyperbilirubinemia; Biliary/Duodenal atresia; Hepatitis" },
+        { "item": "Hepatitis serologies", "covers": "Hepatitis (her guide: HAV–HEV rows)" },
+        { "item": "Rapid strep antigen/throat culture and ASO", "covers": "Pharyngitis; Group A streptococcus; Acute rheumatic fever" },
+        { "item": "Monospot and EBV serology", "covers": "Epstein-Barr virus" },
+        { "item": "CSF analysis", "covers": "Meningitis (her guide: Viral and Bacterial Meningitis rows)" },
+        { "item": "Sweat chloride test", "covers": "Cystic fibrosis" },
+        { "item": "Inflammatory markers (ESR, CRP) and CBC in Kawasaki disease", "covers": "Kawasaki disease" },
+        { "item": "Febrile infant workup: CBC, blood culture, UA/urine culture, CSF", "covers": "Fever in the infant; Fever without a source; Sepsis" }
+      ]
+    },
+    "ekg": {
+      "prominent": false,
+      "howto": "ekg",
+      "why": "Only specific findings are needed (congenital heart disease, Kawasaki, syncope, rheumatic carditis); her peds guide has no arrhythmia section.",
+      "items": [
+        { "item": "Chamber hypertrophy and axis deviation in congenital heart disease", "covers": "Congenital heart disease — Tetralogy of Fallot (RVH), VSD, ASD, Coarctation of the aorta (her guide: ASD, PDA, Coarctation, ToF, VSD rows)" },
+        { "item": "Prolonged PR interval", "covers": "Acute rheumatic fever / Acute rheumatic carditis (Jones minor criterion; her guide: Acute Rheumatic Fever row)" },
+        { "item": "QTc, pre-excitation (WPW) and HCM changes in syncope", "covers": "Syncope, neurogenic (her guide: Syncope row); Hypertrophic cardiomyopathy (her guide)" },
+        { "item": "Arrhythmia and ischemic changes in Kawasaki disease", "covers": "Kawasaki disease" },
+        { "item": "Hyperkalemia and hypokalemia changes", "covers": "Diabetic ketoacidosis; Renal disease" }
+      ]
+    },
+    "imaging": {
+      "prominent": true,
+      "howto": null,
+      "why": "Imaging is needed for ≥3 listed conditions (pyloric stenosis, intussusception, appendicitis, croup/epiglottitis, foreign body, DDH, SCFE, pneumonia, VUR).",
+      "items": [
+        { "item": "Abdominal ultrasound: pyloric stenosis, intussusception (target sign), appendicitis", "covers": "Pyloric stenosis; Intussusception; Appendicitis" },
+        { "item": "Contrast enema and upper GI series", "covers": "Hirschsprung disease; Volvulus; Intussusception (air/contrast enema)" },
+        { "item": "Abdominal X-ray (double bubble, obstruction)", "covers": "Biliary/Duodenal atresia; Volvulus; Foreign body ingestion" },
+        { "item": "Neck X-ray: steeple sign, thumb sign, retropharyngeal widening", "covers": "Laryngotracheobronchitis (croup); Epiglottitis; Peritonsillar abscess/Retropharyngeal abscess" },
+        { "item": "Chest X-ray: pneumonia, foreign body aspiration (air trapping), RDS ground glass", "covers": "Pneumonias; Foreign body aspiration; Respiratory distress syndrome in the newborn; Cystic fibrosis" },
+        { "item": "Hip ultrasound (under 4–6 months) and pelvic X-ray (frog-leg)", "covers": "Developmental dysplasia of the hip; Slipped capital femoral epiphysis; Avascular necrosis (Legg-Calvé-Perthes)" },
+        { "item": "Voiding cystourethrogram and renal ultrasound", "covers": "Vesicourethral reflux; Cystitis (febrile UTI); Neoplasms (Wilms tumor)" },
+        { "item": "Scrotal Doppler ultrasound", "covers": "Testicular torsion; Hydrocele; Testicular mass" },
+        { "item": "Echocardiography", "covers": "Congenital heart disease; Kawasaki disease (coronary aneurysms); Valvular disorders" },
+        { "item": "Head CT/MRI", "covers": "Traumatic brain injury; Neoplasms of the central nervous system; Chiari malformation" },
+        { "item": "Scoliosis X-ray (Cobb angle)", "covers": "Scoliosis" },
+        { "item": "Bone imaging of sarcomas (sunburst, onion-skin)", "covers": "Neoplasia of the musculoskeletal system (her guide: Osteosarcoma, Ewing Sarcoma rows)" }
+      ]
+    },
+    "anatomy": {
+      "prominent": false,
+      "howto": "anatomy",
+      "why": "Only specific structures are needed; her peds guide has no anatomy section.",
+      "items": [
+        { "item": "Tibial tuberosity and patellar tendon insertion", "covers": "Osgood-Schlatter disease" },
+        { "item": "Radial head and annular ligament", "covers": "Radial head subluxation" },
+        { "item": "Proximal femoral physis and femoral head blood supply", "covers": "Slipped capital femoral epiphysis; Avascular necrosis" },
+        { "item": "Sternocleidomastoid", "covers": "Torticollis" },
+        { "item": "Middle ear and eustachian tube in children", "covers": "Otitis media; Dysfunction of eustachian tube" },
+        { "item": "Brachial plexus", "covers": "Birth trauma (brachial plexus injury)" }
+      ]
+    },
+    "procedures": {
+      "prominent": true,
+      "howto": null,
+      "why": "At least three listed conditions need procedures (lumbar puncture for Meningitis and Fever in the infant; reduction for Radial head subluxation and Paraphimosis; foreign-body removal; enema for Intussusception), so prominent (review F6). No top tab carries a procedures how-to, so howto is null.",
+      "items": [
+        { "item": "Lumbar puncture in infants and children", "covers": "Meningitis; Fever in the infant" },
+        { "item": "Nursemaid's elbow reduction (hyperpronation or supination–flexion)", "covers": "Radial head subluxation (her guide: Nursemaid's Elbow row)" },
+        { "item": "Ear and nasal foreign body removal; cerumen removal", "covers": "Foreign body; Cerumen impaction (her guide: Nasal Foreign Body, Foreign Body in Ear rows)" },
+        { "item": "Abrasion and laceration repair", "covers": "Wounds — Abrasions/Lacerations" },
+        { "item": "Manual reduction of paraphimosis", "covers": "Paraphimosis (her guide: Paraphimosis EMERGENCY row)" },
+        { "item": "Air/contrast enema reduction", "covers": "Intussusception" }
+      ]
+    },
+    "guidelines": {
+      "prominent": true,
+      "howto": null,
+      "why": "Guidelines apply to ≥3 listed conditions; no top tab carries a guidelines how-to, so howto is null.",
+      "items": [
+        { "item": "Immunization schedule (her own vaccine notes; Other › Vaccine schedules)", "covers": "Immunization guidelines (her guide: Immunization Guidelines note)" },
+        { "item": "Acute otitis media (AAP)", "covers": "Otitis media" },
+        { "item": "Bronchiolitis (AAP)", "covers": "Acute bronchiolitis" },
+        { "item": "Febrile infants 8–60 days (AAP)", "covers": "Fever in the infant" },
+        { "item": "Neonatal hyperbilirubinemia (AAP)", "covers": "Neonatal hyperbilirubinemia" },
+        { "item": "Urinary tract infection in febrile infants and children (AAP)", "covers": "Cystitis; Vesicourethral reflux" },
+        { "item": "ADHD (AAP)", "covers": "Attention-deficit/hyperactivity disorder" },
+        { "item": "Asthma (NAEPP/GINA)", "covers": "Asthma (her guide: Asthma rows and Management Basics)" },
+        { "item": "Kawasaki disease (AHA)", "covers": "Kawasaki disease" },
+        { "item": "Childhood obesity evaluation and treatment (AAP)", "covers": "Obesity" },
+        { "item": "Pediatric hypertension (AAP)", "covers": "Primary hypertension; Secondary hypertension" },
+        { "item": "Digital media use (AAP)", "covers": "Digital/Technology guidelines" },
+        { "item": "Safe infant sleep (AAP)", "covers": "Sudden unexplained infant death" }
+      ]
+    },
+    "screenings": {
+      "prominent": true,
+      "howto": null,
+      "why": "Screening applies to ≥3 listed conditions; no top tab carries a screenings how-to, so howto is null.",
+      "items": [
+        { "item": "Developmental and autism screening (well-child visits)", "covers": "Developmental milestones; Autism spectrum disorder (her guide: Neurology/Developmental age rows)" },
+        { "item": "Depression screening, adolescents 12–18 — USPSTF B", "covers": "Depressive disorders; Suicidality" },
+        { "item": "Anxiety screening, children 8–18 — USPSTF B", "covers": "Anxiety disorders" },
+        { "item": "Obesity screening and behavioral interventions, children ≥6 — USPSTF B", "covers": "Obesity" },
+        { "item": "Vision screening, children 3–5 — USPSTF B", "covers": "Strabismus; Vision abnormalities" },
+        { "item": "Hearing screening (newborn and periodic)", "covers": "Hearing disorders (her guide: Hearing Impairment note)" },
+        { "item": "Lead and anemia screening", "covers": "Lead poisoning; Anemias" },
+        { "item": "Lipid screening", "covers": "Lipid disorders" },
+        { "item": "Newborn screening (metabolic, hearing, critical congenital heart disease)", "covers": "Inborn errors of metabolism; Congenital heart disease; Newborn assessment" },
+        { "item": "Sexually transmitted infection screening in sexually active adolescents — USPSTF B", "covers": "Sexually transmitted infections" }
+      ]
+    }
+  },
+  "workup": [
+    { "id": "abdominal-pain", "title": "Abdominal pain", "conds": "Appendicitis, Intussusception, Volvulus, Functional constipation, Acute gastroenteritis, Inflammatory bowel disease" },
+    { "id": "ams", "title": "Altered mental status", "conds": "Meningitis, Diabetic ketoacidosis, Ingestion of harmful substances, Traumatic brain injury, Hypoglycemia" },
+    { "id": "bleeding-bruising", "title": "Bruising and bleeding", "conds": "Coagulation disorders, Immune thrombocytopenic purpura, Leukemias, Child abuse and neglect (her guide: Bleeding Disorders note)" },
+    { "id": "constipation", "title": "Constipation", "conds": "Functional constipation, Hirschsprung disease, Fecal impaction/encopresis" },
+    { "id": "cough", "title": "Cough", "conds": "Asthma, Acute bronchiolitis, Pneumonias, Pertussis, Cystic fibrosis, Foreign body aspiration" },
+    { "id": "dehydration", "title": "Dehydration", "conds": "Acute gastroenteritis, Pyloric stenosis, Diabetic ketoacidosis (her guide: Dehydration note)" },
+    { "id": "diarrhea", "title": "Diarrhea", "conds": "Acute gastroenteritis, Foodborne illness, Celiac disease, Inflammatory bowel disease" },
+    { "id": "ear-pain", "title": "Ear pain", "conds": "Otitis media, Otitis externa, Mastoiditis, Foreign body" },
+    { "id": "failure-to-thrive", "title": "Failure to thrive", "conds": "Failure to thrive, Cystic fibrosis, Celiac disease, Congenital heart disease" },
+    { "id": "fever-rash", "title": "Fever and rash", "conds": "Viral exanthems (Measles, Rubella, Roseola, Erythema infectiosum, Varicella, Hand, foot, and mouth disease), Kawasaki disease, Scarlet fever (her guide: exanthem rows)" },
+    { "id": "fever-infant", "title": "Fever in the infant", "conds": "Fever in the infant, Sepsis, Meningitis, Cystitis" },
+    { "id": "headache", "title": "Headache", "conds": "Headache (migraine, tension, idiopathic intracranial hypertension), Meningitis, Neoplasms of the central nervous system" },
+    { "id": "hearing-loss", "title": "Hearing loss", "conds": "Hearing disorders, Otitis media, Cerumen impaction (her guide: Hearing Impairment note)" },
+    { "id": "hearing-heart-murmur", "title": "Heart murmur", "conds": "Congenital heart disease, Valvular disorders" },
+    { "id": "jaundice", "title": "Jaundice in the newborn", "conds": "Neonatal hyperbilirubinemia, Biliary/Duodenal atresia, Hepatitis" },
+    { "id": "limp", "title": "Limp", "conds": "Developmental dysplasia of the hip, Slipped capital femoral epiphysis, Avascular necrosis, Juvenile idiopathic arthritis, Fractures/Dislocations" },
+    { "id": "pallor-fatigue", "title": "Pallor and fatigue", "conds": "Anemias, Lead poisoning, Leukemias" },
+    { "id": "red-eye", "title": "Red eye", "conds": "Conjunctivitis, Orbital/Periorbital cellulitis" },
+    { "id": "scrotal-pain", "title": "Scrotal pain or swelling", "conds": "Testicular torsion, Hydrocele, Orchitis, Testicular mass" },
+    { "id": "seizure", "title": "Seizure", "conds": "Febrile seizure, Seizure disorders, Meningitis" },
+    { "id": "short-stature", "title": "Short stature", "conds": "Growth hormone deficiency, Turner syndrome, Physical growth parameters (her guide: Short Stature row)" },
+    { "id": "sore-throat", "title": "Sore throat", "conds": "Pharyngitis, Peritonsillar abscess/Retropharyngeal abscess, Epiglottitis, Epstein-Barr virus" },
+    { "id": "stridor", "title": "Stridor", "conds": "Laryngotracheobronchitis (croup), Epiglottitis, Foreign body aspiration" },
+    { "id": "syncope", "title": "Syncope", "conds": "Syncope, neurogenic (her guide: Syncope row)" },
+    { "id": "vomiting", "title": "Vomiting", "conds": "Pyloric stenosis, Acute gastroenteritis, Intussusception, Volvulus, Gastroesophageal reflux disease" },
+    { "id": "wheezing", "title": "Wheezing", "conds": "Asthma, Acute bronchiolitis, Foreign body aspiration" }
+  ]
+}

@@ -1,10 +1,101 @@
 {
  "v": 1,
- "sections": [],
- "members": {},
- "listed": {},
- "drugTables": [],
- "pharmSections": [],
+ "sections": [
+  {
+   "id": "asthma",
+   "title": "Asthma"
+  },
+  {
+   "id": "infectious-disorders",
+   "title": "Infectious disorders"
+  },
+  {
+   "id": "cystic-fibrosis",
+   "title": "Cystic fibrosis"
+  },
+  {
+   "id": "foreign-body-aspiration",
+   "title": "Foreign body aspiration"
+  },
+  {
+   "id": "ear-disorders",
+   "title": "Ear disorders"
+  },
+  {
+   "id": "respiratory-distress-syndrome-in-the-newborn",
+   "title": "Respiratory distress syndrome in the newborn"
+  },
+  {
+   "id": "other",
+   "title": "Pulmonology — other"
+  }
+ ],
+ "members": {
+  "b_CMQQQRM790": "asthma",
+  "r_V973RS5FTB": "asthma",
+  "b_SMA6DJJBV5": "asthma",
+  "b_1TF7A22J9T": "asthma",
+  "b_AS9NA3YZVE": "asthma",
+  "b_P749VZXBCY": "asthma",
+  "b_CEX4CVQ4CD": "asthma",
+  "b_AF9D18GTSM": "asthma",
+  "r_WMGEW54XSR": "infectious-disorders",
+  "b_EYVY8J54NG": "infectious-disorders",
+  "r_5WNW5BKMBP": "other",
+  "b_JEBEBVC093": "other",
+  "r_TS7NMFRPQ7": "infectious-disorders",
+  "b_6JQ4BPXES5": "infectious-disorders",
+  "r_2A5E40YHXK": "cystic-fibrosis",
+  "b_03WNQ9R9EK": "cystic-fibrosis",
+  "r_9QVZ00PES8": "foreign-body-aspiration",
+  "b_QRPM311NHZ": "foreign-body-aspiration",
+  "r_FVNVVF02VX": "other",
+  "r_30100HD5CE": "ear-disorders",
+  "r_BVJDJM4RWD": "other",
+  "b_6H1CE5MW9M": "other",
+  "r_X2AFBV7T1P": "respiratory-distress-syndrome-in-the-newborn",
+  "b_4N0QKXKAQ2": "respiratory-distress-syndrome-in-the-newborn",
+  "r_3AMJ0C1ZYJ": "infectious-disorders",
+  "b_YDZKSPCN0W": "infectious-disorders",
+  "r_5GYD6JG8ZP": "infectious-disorders",
+  "b_BANN685S1R": "infectious-disorders",
+  "r_3WMV3M1GEH": "infectious-disorders",
+  "b_FPZ6660RAW": "infectious-disorders"
+ },
+ "listed": {
+  "b_1TF7A22J9T": "Management Basics"
+ },
+ "drugTables": [
+  {
+   "block": "b_811P26YJE9",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_SZ5H6NZGA6",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  },
+  {
+   "block": "b_NKZMNDE7VR",
+   "pharmSection": "asthma",
+   "conditionRows": []
+  }
+ ],
+ "pharmSections": [
+  {
+   "id": "asthma",
+   "title": "Asthma",
+   "tables": [
+    "b_811P26YJE9",
+    "b_SZ5H6NZGA6",
+    "b_NKZMNDE7VR"
+   ],
+   "overview": null,
+   "lo": null,
+   "also": []
+  }
+ ],
  "pharmFiles": [
   "d_HRKJM4AB83",
   "d_S1B2JMQ6J1"
