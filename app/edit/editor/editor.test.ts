@@ -7,6 +7,7 @@ import { redo, undo } from "prosemirror-history";
 import { EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
+import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
   docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, removeHighlight, resizePicture, selectionSize,
@@ -414,7 +415,7 @@ describe("column width", () => {
     expect(gridOf(state)).toEqual([100, 200 + COLUMN_STEP_PT, 300 - COLUMN_STEP_PT]);
   });
 
-  it("stops at the narrowest column, and at the screen's first-column minimum, where it can no longer act", () => {
+  it("stops at the narrowest column, the first one included, where it can no longer act", () => {
     let state = at(three([100, 200, 300]), "B");
     while (changeColumnWidth(1)(state)) state = run(state, changeColumnWidth(1));
     expect(gridOf(state)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
@@ -422,8 +423,20 @@ describe("column width", () => {
     expect(changeColumnWidth(-1)(state)).toBe(true);
     state = at(state, "A");
     while (changeColumnWidth(-1)(state)) state = run(state, changeColumnWidth(-1));
-    expect((gridOf(state) as number[])[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100, 6);
+    expect((gridOf(state) as number[])[0]).toBe(MIN_COLUMN_PT);
     expect(changeColumnWidth(1)(state)).toBe(true);
+  });
+
+  it("narrows a first column drawn at the screen's minimum below it, and the screen then draws it as set", () => {
+    // 30 of 600 pt is 5%: from her Word file, so the screen draws it at MIN_FIRST_COLUMN_PCT.
+    const before = three([30, 270, 300]);
+    expect(tableColumns(before.doc.firstChild?.attrs as TableAttrs)[0]).toBe(MIN_FIRST_COLUMN_PCT);
+    const state = run(at(before, "A"), changeColumnWidth(-1));
+    const t = state.doc.firstChild?.attrs as TableAttrs;
+    expect(t.ownWidths).toBe(true);
+    expect(t.grid[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100 - COLUMN_STEP_PT, 6);
+    expect(tableColumns(t)[0]).toBeCloseTo((100 * (t.grid[0] ?? 0)) / 600, 6);
+    expect(tableColumns(t)[0]).toBeLessThan(MIN_FIRST_COLUMN_PCT);
   });
 
   it("cannot act in a cell spanning every column", () => {
@@ -434,14 +447,14 @@ describe("column width", () => {
 
   it("starts from the widths the screen draws, so a narrow first column is saved as shown", () => {
     const grid = [30, 270, 300];
-    const shown = tableColumns(grid).map((p) => (p * 600) / 100);
+    const shown = tableColumns({ grid }).map((p) => (p * 600) / 100);
     const state = run(at(three(grid), "B"), changeColumnWidth(1));
     const saved = gridOf(state) as number[];
     expect(saved[0]).toBeCloseTo(shown[0] ?? 0, 1);
     expect(saved[1]).toBeCloseTo((shown[1] ?? 0) + COLUMN_STEP_PT, 1);
     expect(saved[2]).toBeCloseTo((shown[2] ?? 0) - COLUMN_STEP_PT, 1);
     // What the screen then draws is what was saved.
-    expect(tableColumns(saved)[0]).toBeCloseTo(100 * (saved[0] ?? 0) / 600, 1);
+    expect(tableColumns(state.doc.firstChild?.attrs as TableAttrs)[0]).toBeCloseTo(100 * (saved[0] ?? 0) / 600, 1);
   });
 
   it("redraws the editor's columns from the new grid", () => {
@@ -449,7 +462,7 @@ describe("column width", () => {
     try {
       expect(changeColumnWidth(1)(view.state, view.dispatch)).toBe(true);
       const cols = [...view.dom.querySelectorAll("col")].map((c) => c.style.width);
-      expect(cols).toEqual(tableColumns(gridOf(view.state) as number[]).map((p) => `${p}%`));
+      expect(cols).toEqual(tableColumns(view.state.doc.firstChild?.attrs as TableAttrs).map((p) => `${p}%`));
       expect(cols[1]).not.toBe(`${100 * 200 / 600}%`);
     } finally {
       view.destroy();
@@ -464,13 +477,17 @@ describe("column width", () => {
   });
 
   it("moving a border trades width between the two columns beside it, stopping at their limits", () => {
-    expect(moveColumnBorder([100, 200, 300], 1, 40)).toEqual([100, 240, 260]);
-    expect(moveColumnBorder([100, 200, 300], 0, -30.02)).toEqual([70, 230, 300]);
-    expect(moveColumnBorder([100, 200, 300], 1, 1000)).toEqual([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
-    expect(moveColumnBorder([100, 200, 300], 0, -1000)?.[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100, 6);
-    expect(moveColumnBorder([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT], 1, 5)).toBeNull();
-    expect(moveColumnBorder([100, 200, 300], 2, 5)).toBeNull();
-    expect(moveColumnBorder([100, 200, 300], -1, 5)).toBeNull();
+    const g = (grid: number[]): { grid: number[] } => ({ grid });
+    expect(moveColumnBorder(g([100, 200, 300]), 1, 40)).toEqual([100, 240, 260]);
+    expect(moveColumnBorder(g([100, 200, 300]), 0, -30.02)).toEqual([70, 230, 300]);
+    expect(moveColumnBorder(g([100, 200, 300]), 1, 1000)).toEqual([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    expect(moveColumnBorder(g([100, 200, 300]), 0, -1000)).toEqual([MIN_COLUMN_PT, 300 - MIN_COLUMN_PT, 300]);
+    expect(moveColumnBorder(g([100, 500 - MIN_COLUMN_PT, MIN_COLUMN_PT]), 1, 5)).toBeNull();
+    expect(moveColumnBorder(g([100, 200, 300]), 2, 5)).toBeNull();
+    expect(moveColumnBorder(g([100, 200, 300]), -1, 5)).toBeNull();
+    // Her Word widths start from the screen's (a 5% first column drawn at the minimum); her own, as set.
+    expect(moveColumnBorder(g([30, 270, 300]), 0, -10)?.[0]).toBeCloseTo((600 * MIN_FIRST_COLUMN_PCT) / 100 - 10, 6);
+    expect(moveColumnBorder({ grid: [30, 270, 300], ownWidths: true }, 0, -10)).toEqual([20, 280, 300]);
   });
 });
 
@@ -483,7 +500,7 @@ describe("dragging a column border", () => {
     const box = (left: number, width: number): (() => DOMRect) => () =>
       ({ left, right: left + width, top: 0, bottom: 40, width, height: 40, x: left, y: 0, toJSON: () => ({}) }) as DOMRect;
     (view.dom.querySelector("table") as HTMLElement).getBoundingClientRect = box(0, 600);
-    const pct = tableColumns(grid);
+    const pct = tableColumns({ grid });
     let left = 0;
     view.dom.querySelectorAll("tr")[0]?.querySelectorAll("td").forEach((td, i) => {
       const w = ((pct[i] ?? 0) * 600) / 100;
@@ -528,7 +545,8 @@ describe("dragging a column border", () => {
       mouse(document, "mouseup", 339);
       expect(gridOf(view)).toEqual([100, 240, 260]);
       expect(document.querySelector(".col-drag-guide")).toBeNull();
-      expect([...view.dom.querySelectorAll("col")].map((c) => c.style.width)).toEqual(tableColumns([100, 240, 260]).map((p) => `${p}%`));
+      expect(view.state.doc.firstChild?.attrs.ownWidths).toBe(true);
+      expect([...view.dom.querySelectorAll("col")].map((c) => c.style.width)).toEqual(tableColumns({ grid: [100, 240, 260], ownWidths: true }).map((p) => `${p}%`));
       // One drag is one undo step.
       undo(view.state, view.dispatch);
       expect(gridOf(view)).toEqual([100, 200, 300]);
@@ -543,6 +561,24 @@ describe("dragging a column border", () => {
       mouse(td(view, 2), "mousedown", 301);
       mouse(document, "mouseup", 1000);
       expect(gridOf(view)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("drags the first column's border left past the screen's first-column minimum, and the columns are redrawn as set", () => {
+    // 30 of 600 pt (5%) is drawn at MIN_FIRST_COLUMN_PCT: A spans 0–66 px.
+    const view = mount([30, 270, 300]);
+    try {
+      mouse(td(view, 0), "mousedown", 65);
+      mouse(document, "mousemove", 35, 1);
+      expect(parseFloat((document.querySelector(".col-drag-guide") as HTMLElement).style.left)).toBeCloseTo(36, 1);
+      mouse(document, "mouseup", 35);
+      const t = view.state.doc.firstChild?.attrs as TableAttrs;
+      expect(t.ownWidths).toBe(true);
+      expect(t.grid[0]).toBeCloseTo(36, 1);
+      expect(t.grid.reduce((a, b) => a + b, 0)).toBeCloseTo(600, 1);
+      expect(view.dom.querySelector("col")?.style.width).toBe(`${(100 * (t.grid[0] ?? 0)) / 600}%`);
     } finally {
       view.destroy();
     }

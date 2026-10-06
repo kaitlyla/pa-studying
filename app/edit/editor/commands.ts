@@ -6,7 +6,8 @@ import type { EditorState, Transaction } from "prosemirror-state";
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import { newId } from "../../../lib/content/index.ts";
-import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
+import type { TableAttrs } from "../../../lib/schemaTypes.ts";
+import { tableColumns } from "../../render/styles.ts";
 import { M, N as nodes } from "./types.ts";
 
 /** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
@@ -468,19 +469,19 @@ export const MIN_COLUMN_PT = 18;
 const roundTwip = (x: number): number => Math.round(x * 20) / 20;
 
 /**
- * The grid after moving the border between column `border` and `border + 1` by `deltaPt` (positive =
- * right), the two columns trading width so the table keeps its width; null when the border cannot move
- * that way. The widths start from the ones the screen draws (tableColumns, which widens a narrow first
- * column), so the PDF matches the screen afterwards. No column goes under MIN_COLUMN_PT, nor the first
- * under the screen's first-column minimum: a move past a limit stops at it.
+ * The grid after moving the border between column `border` and `border + 1` of `table` by `deltaPt`
+ * (positive = right), the two columns trading width so the table keeps its width; null when the border
+ * cannot move that way. The widths start from the ones the screen draws (tableColumns), and the result
+ * is hers (setTableGrid marks it ownWidths), drawn as stored on the screen and in the PDF alike. No
+ * column goes under MIN_COLUMN_PT, the first one included: a move past it stops at it.
  */
-export function moveColumnBorder(grid: readonly number[], border: number, deltaPt: number): number[] | null {
+export function moveColumnBorder(table: Pick<TableAttrs, "grid" | "ownWidths">, border: number, deltaPt: number): number[] | null {
+  const grid = table.grid;
   if (border < 0 || border + 1 >= grid.length) return null;
   const sum = grid.reduce((x, y) => x + y, 0);
-  const widths = tableColumns(grid).map((pct) => roundTwip((pct * sum) / 100));
-  const floor = (i: number): number => (i === 0 ? Math.max(MIN_COLUMN_PT, (MIN_FIRST_COLUMN_PCT * sum) / 100) : MIN_COLUMN_PT);
+  const widths = tableColumns(table).map((pct) => roundTwip((pct * sum) / 100));
   const [grow, shrink] = deltaPt > 0 ? [border, border + 1] : [border + 1, border];
-  const step = roundTwip(Math.min(Math.abs(deltaPt), (widths[shrink] ?? 0) - floor(shrink)));
+  const step = roundTwip(Math.min(Math.abs(deltaPt), (widths[shrink] ?? 0) - MIN_COLUMN_PT));
   if (step <= 0) return null;
   widths[grow] = roundTwip((widths[grow] ?? 0) + step);
   widths[shrink] = roundTwip((widths[shrink] ?? 0) - step);
@@ -506,10 +507,10 @@ export function cellBorder($pos: ResolvedPos, side: "left" | "right"): ColumnBor
   return { table: at.table, pos: at.pos, border };
 }
 
-/** The table at `pos` (a table node's position) with its grid replaced. */
+/** The table at `pos` (a table node's position) with its grid replaced by widths she set (ownWidths). */
 export function setTableGrid(state: EditorState, pos: number, grid: number[]): Transaction {
   const table = state.doc.nodeAt(pos);
-  return state.tr.setNodeMarkup(pos, undefined, { ...table?.attrs, grid });
+  return state.tr.setNodeMarkup(pos, undefined, { ...table?.attrs, grid, ownWidths: true });
 }
 
 /**
@@ -522,12 +523,12 @@ export function changeColumnWidth(dir: 1 | -1): Command {
   return (state, dispatch) => {
     const at = tableAt(state.selection.$from);
     if (!at) return false;
-    const grid = at.table.attrs.grid as number[];
+    const t = at.table.attrs as TableAttrs;
     const rect = at.map.findCell(at.cellRel);
     const ends = rect.right >= at.map.width;
     const border = ends ? rect.left - 1 : rect.right - 1;
-    if (border < 0 || border + 1 >= grid.length) return false;
-    const next = moveColumnBorder(grid, border, (ends ? -dir : dir) * COLUMN_STEP_PT);
+    if (border < 0 || border + 1 >= t.grid.length) return false;
+    const next = moveColumnBorder(t, border, (ends ? -dir : dir) * COLUMN_STEP_PT);
     if (!next) return false;
     if (dispatch) dispatch(setTableGrid(state, at.pos, next));
     return true;

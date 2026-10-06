@@ -3,7 +3,7 @@
 // ContentError on the first violation. Nothing is ever repaired. Record shapes are keyed to the
 // interfaces in types.ts through `shapeOf`, so a field added to a type must be validated too.
 import { Node } from "prosemirror-model";
-import { ASSET_RE, schema } from "../schema.ts";
+import { ASSET_RE, schema, storedJSON } from "../schema.ts";
 import {
   arr, bad, bool, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
   num, one, oneOf, re, record, shapeOf, str, uniqueArr,
@@ -43,12 +43,12 @@ const whole = (c: Checker): Validator => (v, ctx) => c(v, "", ctx);
 
 /**
  * Parse a stored doc with the schema and run `Node.check()`; also require that the stored JSON is
- * exactly what the schema serializes back, so every stored doc round-trips with no change.
+ * exactly its stored form (storedJSON), so every stored doc round-trips with no change.
  */
 export function checkDoc(doc: unknown, at: string, ctx: Ctx): Node {
   const node = parseDoc(doc, at, ctx.file);
   if (node.type.name !== "doc") bad(ctx, at, "a doc node");
-  if (JSON.stringify(node.toJSON()) !== JSON.stringify(doc)) {
+  if (JSON.stringify(storedJSON(node)) !== JSON.stringify(doc)) {
     throw new ContentError(ctx.file, `${at}: rich text does not round-trip through the schema unchanged`);
   }
   return node;
@@ -94,12 +94,12 @@ function parseDoc(doc: unknown, at: string, file: string): Node {
 }
 
 /**
- * Parse and check the doc at field `at`, returning the schema's own serialization (attribute
- * defaults filled in, schema key order).
+ * Parse and check the doc at field `at`, returning its stored form (storedJSON: attribute defaults
+ * filled in, schema key order).
  */
 export function normalizeDoc(doc: unknown, at: string, file: string): unknown {
   checkKnownKeys(doc, at, file);
-  return parseDoc(doc, at, file).toJSON();
+  return storedJSON(parseDoc(doc, at, file));
 }
 
 function checkDocShape(node: Node, kind: BlockKind | "gapdoc", at: string, ctx: Ctx): void {

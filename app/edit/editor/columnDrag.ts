@@ -3,6 +3,7 @@
 // the same move as Column narrower / wider), so the widths save and show on the site and in the PDFs.
 import { Plugin } from "prosemirror-state";
 import type { EditorView } from "prosemirror-view";
+import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import { tableColumns } from "../../render/styles.ts";
 import { cellBorder, moveColumnBorder, setTableGrid } from "./commands.ts";
 import type { ColumnBorder } from "./commands.ts";
@@ -28,9 +29,9 @@ export function borderAt(view: EditorView, event: MouseEvent): ColumnBorder | nu
   return cellBorder(view.state.doc.resolve(pos), side);
 }
 
-/** The x (viewport px) of `border` in a table drawn `box` wide with these grid widths. */
-function borderX(grid: readonly number[], border: number, box: DOMRect): number {
-  const pct = tableColumns(grid).slice(0, border + 1).reduce((a, b) => a + b, 0);
+/** The x (viewport px) of `border` in a table drawn `box` wide with these widths. */
+function borderX(table: Pick<TableAttrs, "grid" | "ownWidths">, border: number, box: DOMRect): number {
+  const pct = tableColumns(table).slice(0, border + 1).reduce((a, b) => a + b, 0);
   return box.left + (pct * box.width) / 100;
 }
 
@@ -38,8 +39,8 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   const tableDom = view.nodeDOM(grab.pos);
   if (!(tableDom instanceof HTMLElement)) return;
   const doc = view.dom.ownerDocument;
-  const grid = grab.table.attrs.grid as number[];
-  const sum = grid.reduce((a, b) => a + b, 0);
+  const table = grab.table.attrs as TableAttrs;
+  const sum = table.grid.reduce((a, b) => a + b, 0);
   const startX = event.clientX;
   let next: number[] | null = null;
 
@@ -48,7 +49,7 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   const place = (): void => {
     const box = tableDom.getBoundingClientRect();
     Object.assign(guide.style, {
-      left: `${borderX(next ?? grid, grab.border, box)}px`, top: `${box.top}px`, height: `${box.height}px`,
+      left: `${borderX(next ? { grid: next, ownWidths: true } : table, grab.border, box)}px`, top: `${box.top}px`, height: `${box.height}px`,
     });
   };
   place();
@@ -57,7 +58,7 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   const move = (e: MouseEvent): void => {
     const width = tableDom.getBoundingClientRect().width;
     if (width <= 0) return;
-    next = moveColumnBorder(grid, grab.border, ((e.clientX - startX) * sum) / width);
+    next = moveColumnBorder(table, grab.border, ((e.clientX - startX) * sum) / width);
     place();
   };
   const stop = (): void => {

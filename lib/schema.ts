@@ -1,7 +1,7 @@
 // The one ProseMirror schema (plan 20 §20.13). Every stored doc is validated against it by
 // lib/content; the importer, build, renderer, PDF builder and editor all import this object.
 import { Schema } from "prosemirror-model";
-import type { NodeSpec, MarkSpec, AttributeSpec } from "prosemirror-model";
+import type { NodeSpec, MarkSpec, AttributeSpec, Node as PMNode } from "prosemirror-model";
 import { idRegExp } from "./content/ids.ts";
 import { DASH_STYLES, isDashStyle } from "./drawing.ts";
 import type { MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
@@ -162,7 +162,7 @@ const nodes: Record<string, NodeSpec> = {
     tableRole: "table",
     isolating: true,
     attrs: {
-      grid: a(grid), indentPt: a(num, 0), borders: a(tableBorders), cellMarginPt: a(margins),
+      grid: a(grid), ownWidths: a(bool, false), indentPt: a(num, 0), borders: a(tableBorders), cellMarginPt: a(margins),
     } satisfies Specs<NodeAttrs["table"]>,
   },
   table_row: {
@@ -213,3 +213,22 @@ const marks: Record<string, MarkSpec> = {
 };
 
 export const schema: Schema = new Schema({ nodes, marks });
+
+type StoredJSON = { type: string; attrs?: Record<string, unknown>; content?: StoredJSON[] };
+
+/**
+ * A node as stored: the schema's own serialization (Node.toJSON: every attribute, schema key order),
+ * except that a table's `ownWidths` is written only when true. Tables stored before the attribute
+ * existed carry none, and every past version in the history must still read as canonical.
+ */
+export function storedJSON(node: PMNode): unknown {
+  // toJSON hands out the node's own attrs object, so a changed one is copied, never edited in place.
+  const stored = (n: StoredJSON): StoredJSON => {
+    let out = n;
+    if (n.type === "table" && n.attrs?.ownWidths === false) {
+      out = { ...n, attrs: Object.fromEntries(Object.entries(n.attrs).filter(([k]) => k !== "ownWidths")) };
+    }
+    return out.content ? { ...out, content: out.content.map(stored) } : out;
+  };
+  return stored(node.toJSON() as StoredJSON);
+}

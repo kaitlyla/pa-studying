@@ -203,16 +203,25 @@ describe("marks", () => {
 });
 
 describe("tables", () => {
-  it("raises a first column under 11% to 11% and scales the others proportionally", () => {
-    const cols = tableColumns([5, 45, 50]);
+  it("raises a first column under 11% to 11% and scales the others proportionally, unless she set the widths", () => {
+    const cols = tableColumns({ grid: [5, 45, 50] });
     expect(cols[0]).toBe(11);
     expect(cols[1]).toBeCloseTo((45 * 89) / 95, 10);
     expect(cols[2]).toBeCloseTo((50 * 89) / 95, 10);
     expect(cols.reduce((a, b) => a + b, 0)).toBeCloseTo(100, 10);
-    expect(tableColumns([20, 80])).toEqual([20, 80]);
-    expect(tableColumns([0, 0])).toEqual([50, 50]);
-    expect(tableColumns([])).toEqual([]);
-    expect(tableColumns([7])).toEqual([100]);
+    expect(tableColumns({ grid: [5, 45, 50], ownWidths: false })[0]).toBe(11);
+    expect(tableColumns({ grid: [5, 45, 50], ownWidths: true })).toEqual([5, 45, 50]);
+    expect(tableColumns({ grid: [20, 80] })).toEqual([20, 80]);
+    expect(tableColumns({ grid: [0, 0] })).toEqual([50, 50]);
+    expect(tableColumns({ grid: [] })).toEqual([]);
+    expect(tableColumns({ grid: [7] })).toEqual([100]);
+  });
+
+  it("draws the widths she set as stored, with no first-column floor", async () => {
+    const c = await render(
+      <RichDoc basePt={11} doc={docOf(tableNode([5, 45, 50], [row("r1", [cell("A"), cell("B"), cell("C")])], { ownWidths: true }))} />,
+    );
+    expect([...c.querySelectorAll<HTMLElement>("col")].map((col) => col.style.width)).toEqual(["5%", "45%", "50%"]);
   });
 
   it("starts a table that reaches into Word's page margin at the column's edge, and keeps a positive indent", async () => {

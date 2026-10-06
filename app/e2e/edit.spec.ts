@@ -10,7 +10,8 @@ import { fileURLToPath } from "node:url";
 import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
 import { buildPageKey } from "../edit/pageKey.ts";
 import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/editor/commands.ts";
-import { tableColumns } from "../render/styles.ts";
+import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
+import type { TableAttrs } from "../../lib/schemaTypes.ts";
 import { commitMessage, inboxItemDir, partName, serializeFile } from "../../lib/content/index.ts";
 import {
   BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
@@ -728,9 +729,10 @@ test.describe("toolbar limits", () => {
       const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
       return nodeAt(json, tablePath);
     };
-    const before = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))).grid as number[];
+    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const before = beforeTable.grid;
     const sum = before.reduce((a, b) => a + b, 0);
-    const shown = tableColumns(before).map((p) => (p * sum) / 100);
+    const shown = tableColumns(beforeTable).map((p) => (p * sum) / 100);
 
     // The topic row's second cell, as typeMarker uses (the first is the topic's name).
     const slot = ref(page, "edit-area").locator(".edit-slot").first();
@@ -746,7 +748,9 @@ test.describe("toolbar limits", () => {
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
 
-    const saved = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))).grid as number[];
+    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
+    const saved = savedTable.grid;
+    expect(savedTable.ownWidths).toBe(true);
     expect(saved).toHaveLength(before.length);
     expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
     expect((saved[1] ?? 0) - (shown[1] ?? 0)).toBeCloseTo(3 * COLUMN_STEP_PT, 1);
@@ -759,7 +763,7 @@ test.describe("toolbar limits", () => {
     const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
     const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
     expect(widths).toHaveLength(saved.length);
-    tableColumns(saved).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+    tableColumns(savedTable).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
   });
 
   test("Column Wider greys out once the column beside it is at its narrowest, while Narrower still works", async ({ page, context, baseURL }) => {
@@ -789,7 +793,8 @@ test.describe("toolbar limits", () => {
       const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
       return nodeAt(json, tablePath);
     };
-    const before = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))).grid as number[];
+    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const before = beforeTable.grid;
     expect(before.length).toBeGreaterThan(1);
     const sum = before.reduce((a, b) => a + b, 0);
 
@@ -814,9 +819,11 @@ test.describe("toolbar limits", () => {
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const saved = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))).grid as number[];
+    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
+    const saved = savedTable.grid;
+    expect(savedTable.ownWidths).toBe(true);
     // The border moved 60 px of the table's drawn width: the name column grew that much, the next shrank as much.
-    const expected = need(moveColumnBorder(before, 0, (60 * sum) / tableWidth), "a border move");
+    const expected = need(moveColumnBorder(beforeTable, 0, (60 * sum) / tableWidth), "a border move");
     expect(saved).toHaveLength(before.length);
     expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
     saved.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
@@ -825,7 +832,57 @@ test.describe("toolbar limits", () => {
     const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
     const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
     expect(widths).toHaveLength(saved.length);
-    tableColumns(saved).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+    tableColumns(savedTable).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+  });
+
+  test("dragging the first column's border left narrows a name column drawn at the screen's minimum, and the save keeps her width and the page shows it", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const tableWith = (json: unknown): Rec => {
+      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
+      return nodeAt(json, tablePath);
+    };
+    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const sum = beforeTable.grid.reduce((a, b) => a + b, 0);
+    // Her Word width is narrower than the minimum, so the name column is drawn at it.
+    expect(beforeTable.ownWidths).toBeUndefined();
+    expect(tableColumns(beforeTable)[0]).toBe(MIN_FIRST_COLUMN_PCT);
+
+    const editTable = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt").first();
+    const nameCell = editTable.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").first();
+    await nameCell.scrollIntoViewIfNeeded();
+    const box = need(await nameCell.boundingBox(), "the name cell's box");
+    const tableWidth = need(await editTable.boundingBox(), "the table's box").width;
+    const y = box.y + box.height / 2;
+    await page.mouse.move(box.x + box.width - 1, y);
+    await expect(nameCell).toHaveCSS("cursor", "col-resize");
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width - 21, y, { steps: 3 });
+    await page.mouse.move(box.x + box.width - 41, y, { steps: 3 });
+    await page.mouse.up();
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    // On screen before saving, the name column is about 40 px narrower.
+    expect(box.width - need(await nameCell.boundingBox(), "the name cell's box").width).toBeGreaterThan(30);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
+    expect(savedTable.ownWidths).toBe(true);
+    const expected = need(moveColumnBorder(beforeTable, 0, (-40 * sum) / tableWidth), "a border move");
+    expect(savedTable.grid).toHaveLength(beforeTable.grid.length);
+    expect(savedTable.grid.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
+    savedTable.grid.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
+    const firstPct = (100 * (savedTable.grid[0] ?? 0)) / sum;
+    expect(firstPct).toBeLessThan(MIN_FIRST_COLUMN_PCT - 2);
+
+    // The page, now read, draws her width: under the minimum, exactly as stored.
+    const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
+    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
+    expect(widths).toHaveLength(savedTable.grid.length);
+    savedTable.grid.forEach((w, i) => expect(widths[i]).toBeCloseTo((100 * w) / sum, 1));
   });
 
   test("Cell margins Sides + and Top/bottom + pad every cell on screen while editing, and the save keeps them and the page shows them", async ({ page, context, baseURL }) => {

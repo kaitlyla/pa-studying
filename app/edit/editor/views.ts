@@ -175,7 +175,7 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
         const a = attrsOf(n, "table");
         table.removeAttribute("style");
         applyStyle(table, { tableLayout: "fixed", marginLeft: tableIndent(a.indentPt, basePt) });
-        colgroup.replaceChildren(...tableColumns(a.grid).map((pct) => el("col", { width: `${pct}%` })));
+        colgroup.replaceChildren(...tableColumns(a).map((pct) => el("col", { width: `${pct}%` })));
       };
       draw(node);
       // A cell's outer/inside borders depend on its place in the grid, and ProseMirror keeps the views of

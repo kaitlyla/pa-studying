@@ -5,7 +5,7 @@
 // renders as L / basePt em, so her proportions hold on every screen.
 import type { CSSProperties } from "react";
 import { FONT_FAMILIES } from "../../lib/fonts.ts";
-import type { Border, CellBorders, CellMargins, ImageAttrs, MarkJSON, ParagraphAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
+import type { Border, CellBorders, CellMargins, ImageAttrs, MarkJSON, ParagraphAttrs, TableAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
 import { borderVisible, cellSide, TAB_STOP_PT, TEXTBOX_INSET_X_PT, TEXTBOX_INSET_Y_PT, underlineKind, type UnderlineKind } from "../../lib/wordFormat.ts";
 
 export type { Border, MarkJSON, ParagraphAttrs, TableBorders } from "../../lib/schemaTypes.ts";
@@ -122,20 +122,25 @@ export function runStyle(marks: readonly MarkJSON[], basePt: number): CSSPropert
   return any ? s : null;
 }
 
-/** The narrowest the screen draws a table's first (name) column, in % of the table (guide-reader/table-spacing). */
+/**
+ * The narrowest the screen draws a table's first (name) column, in % of the table, for widths that
+ * came from her Word files (guide-reader/table-spacing; widths she set in the editor are drawn as set).
+ */
 export const MIN_FIRST_COLUMN_PCT = 11;
 
 /**
- * Column widths as percentages of the grid sum. A first column under MIN_FIRST_COLUMN_PCT is set to
- * it and the others are scaled down proportionally.
+ * Column widths as percentages of the grid sum, as the screen and the editor draw them. Unless she
+ * set the widths herself (`ownWidths`), a first column under MIN_FIRST_COLUMN_PCT is set to it and the
+ * others are scaled down proportionally.
  */
-export function tableColumns(grid: readonly number[]): number[] {
+export function tableColumns(table: Pick<TableAttrs, "grid" | "ownWidths">): number[] {
+  const grid = table.grid;
   const sum = grid.reduce((a, b) => a + b, 0);
   if (grid.length === 0) return [];
   if (sum <= 0) return grid.map(() => 100 / grid.length);
   const pct = grid.map((g) => (100 * g) / sum);
   const first = pct[0] ?? 0;
-  if (grid.length > 1 && first < MIN_FIRST_COLUMN_PCT) {
+  if (table.ownWidths !== true && grid.length > 1 && first < MIN_FIRST_COLUMN_PCT) {
     const rest = 100 - first;
     const others = 100 - MIN_FIRST_COLUMN_PCT;
     return pct.map((p, i) => (i === 0 ? MIN_FIRST_COLUMN_PCT : rest > 0 ? (p * others) / rest : others / (grid.length - 1)));

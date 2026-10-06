@@ -241,7 +241,7 @@ function Cell({ placed, rowspan, edges, borders, margins }: CellProps): ReactNod
 function GridTable({ node, rows }: { node: PMNode & NodeJSON<"table">; rows: DrawRow[] }): ReactNode {
   const { basePt } = useContext(RenderCtx);
   const a = node.attrs;
-  const cols = tableColumns(a.grid);
+  const cols = tableColumns(a);
   const borders = a.borders;
   const columns = Math.max(cols.length, ...rows.flatMap((r) => r.cells.map((c) => c.cell.col + c.cell.colspan)));
   const last = rows.length - 1;

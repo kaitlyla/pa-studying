@@ -2,7 +2,7 @@
 // onto nodes and marks, and returns the top-level elements the importer turns into blocks (§30.8).
 import type { Shape } from "../drawing.ts";
 import { isPreset } from "../drawing.ts";
-import { isAllowedHref, schema } from "../schema.ts";
+import { isAllowedHref, schema, storedJSON } from "../schema.ts";
 import { newId } from "../content/ids.ts";
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import type { Theme } from "./drawingml.ts";
@@ -951,11 +951,11 @@ function stripBaseSize(node: J, basePt: number): void {
   for (const c of node.content ?? []) stripBaseSize(c, basePt);
 }
 
-/** Canonical JSON: validated against the schema, marks in schema order, adjacent equal text merged. */
+/** Canonical JSON: validated against the schema, its stored form (storedJSON), marks in schema order, adjacent equal text merged. */
 function canonical(node: J): J {
   const n = schema.nodeFromJSON(node);
   n.check();
-  return n.toJSON() as J;
+  return storedJSON(n) as J;
 }
 
 function noteState(settings: Element | null, kind: "footnotePr" | "endnotePr", sectPr: Element | null, dflt: string): NoteState {

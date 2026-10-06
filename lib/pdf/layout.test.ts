@@ -138,6 +138,15 @@ describe("tables", () => {
     expect(t.widths[1]).toBeCloseTo(200 - 10.8 - 0.5 - 0.5, 10);
   });
 
+  it("draws a name column she set under the screen's first-column minimum at her width", () => {
+    // 30 of 400 pt is 7.5%: the screen's 11% minimum applies only to Word widths; the PDF draws her grid either way.
+    for (const attrs of [{}, { ownWidths: true }]) {
+      const t = tableOf(first(build(doc(table([30, 370], [row("r_AAAAAAAAA1", "content", ["a", "b"])], attrs)), "table")));
+      expect(t.widths[0]).toBeCloseTo(30 - 10.8 - 0.5, 10);
+      expect(t.widths[1]).toBeCloseTo(370 - 10.8 - 0.5 - 0.5, 10);
+    }
+  });
+
   it("scales every column by one factor when the grid is wider than the page", () => {
     const grid = [100, 400, 400];
     const c = first(build(doc(table(grid, [row("r_AAAAAAAAA1", "content", ["a", "b", "c"])])), "table"));

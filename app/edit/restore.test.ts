@@ -228,16 +228,23 @@ describe("restore: one topic after a sibling edit", () => {
     const widened = await saveTable(A, B(10), (d) => {
       const out = clone(d);
       const t = out.content[0] as Node;
-      t.attrs = { ...t.attrs, grid: oldGrid.map((g, i) => (i === 0 ? g - 9 : i === 1 ? g + 9 : g)) };
+      t.attrs = { ...t.attrs, grid: oldGrid.map((g, i) => (i === 0 ? g - 9 : i === 1 ? g + 9 : g)), ownWidths: true };
       return out;
     }, "2026-10-03T09:00:00Z");
     expect(widened.changed).toContain(R(101));
+    // Her widths are marked hers; the version before them, saved with no such mark, still opens.
+    expect((read<BlockFile>(blockPath(10)).doc.content[0] as Node).attrs?.ownWidths).toBe(true);
+    expect(w.fake.readFile(blockPath(10), v)).not.toContain("ownWidths");
+    const before = only(await unitAt(A, v), "rows");
+    expect(((before.slot.doc.content[0] as Node).attrs)?.grid).toEqual(oldGrid);
 
     const { versions } = await versionsOf(A);
     expect(versions.map((x) => x.sha)).toEqual([widened.sha, v]);
     const result = await restoreVersion({ git: w.git, author: AUTHOR, key: A, title: "Atrial fibrillation", version: versions[1] as Version });
     expect(result.kind).toBe("saved");
+    // The widths and the mark come back together: the restored table is drawn from her Word widths again.
     expect((read<BlockFile>(blockPath(10)).doc.content[0] as Node).attrs?.grid).toEqual(oldGrid);
+    expect((read<BlockFile>(blockPath(10)).doc.content[0] as Node).attrs?.ownWidths).toBeUndefined();
     expect(w.fake.readFile(blockPath(10))).toBe(w.fake.readFile(blockPath(10), v));
   });
 });

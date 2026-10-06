@@ -78,7 +78,11 @@ export type RuleAttrs = { color: string; widthPt: number };
 export type TextboxAttrs = { widthPt: number; fill: string | null; border: Border | null; inline: boolean };
 export type DrawingAttrs = { widthPt: number; heightPt: number; shapes: DrawingShape[] };
 export type DrawingTextAttrs = { x: number; y: number; w: number; h: number; fill: string | null; border: Border | null };
-export type TableAttrs = { grid: number[]; indentPt: number; borders: TableBorders; cellMarginPt: CellMargins };
+/**
+ * `ownWidths`: true once she has set the column widths in the editor, so they are drawn exactly as
+ * stored. Stored only when true (absent means false; see storedJSON in lib/schema.ts).
+ */
+export type TableAttrs = { grid: number[]; ownWidths?: boolean; indentPt: number; borders: TableBorders; cellMarginPt: CellMargins };
 export type TableRowAttrs = {
   id: string;
   kind: "heading" | "content";

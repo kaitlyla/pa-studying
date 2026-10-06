@@ -317,4 +317,38 @@ describe("serialization (20: stable formatting)", () => {
     expect(() => parseFile(path, "{")).toThrow(/not JSON/);
     expect(parseFile(path, text)).toEqual(JSON.parse(text));
   });
+
+  describe("a table's ownWidths, stored only when true", () => {
+    const tablePath = `content/guides/fm/cardiovascular/blocks/${b(2)}.json`;
+    const tableBlock = (extra: Record<string, unknown>) => ({
+      v: 1, id: b(2), kind: "table", meta: {},
+      doc: { type: "doc", content: [{
+        type: "table",
+        attrs: { grid: [30, 570], ...extra, borders: { top: null, right: null, bottom: null, left: null, insideH: null, insideV: null }, cellMarginPt: { top: 0, right: 5.4, bottom: 0, left: 5.4 } },
+        content: [{ type: "table_row", attrs: { id: r(1) }, content: [{ type: "table_cell", content: [{ type: "paragraph" }] }, { type: "table_cell", content: [{ type: "paragraph" }] }] }],
+      }] },
+    });
+    const attrsIn = (text: string): Record<string, unknown> =>
+      (parseFile<{ doc: { content: { attrs: Record<string, unknown> }[] } }>(tablePath, text).doc.content[0] as { attrs: Record<string, unknown> }).attrs;
+
+    it("reads a table saved before the attribute existed, and writes it back unchanged", () => {
+      const text = serializeFile(tablePath, tableBlock({}));
+      expect(text).not.toContain("ownWidths");
+      expect(attrsIn(text).ownWidths).toBeUndefined();
+      expect(serializeFile(tablePath, parseFile(tablePath, text))).toBe(text);
+    });
+
+    it("stores true after the grid and reads it back", () => {
+      const text = serializeFile(tablePath, tableBlock({ ownWidths: true }));
+      expect(text).toMatch(/\],\n +"ownWidths": true,\n +"indentPt": 0,/);
+      expect(attrsIn(text).ownWidths).toBe(true);
+      expect(serializeFile(tablePath, parseFile(tablePath, text))).toBe(text);
+    });
+
+    it("drops false on write, and refuses a stored false as not canonical", () => {
+      expect(serializeFile(tablePath, tableBlock({ ownWidths: false }))).toBe(serializeFile(tablePath, tableBlock({})));
+      const stored = serializeFile(tablePath, tableBlock({ ownWidths: true })).replace(`"ownWidths": true`, `"ownWidths": false`);
+      expect(() => parseFile(tablePath, stored)).toThrow(/does not round-trip/);
+    });
+  });
 });
