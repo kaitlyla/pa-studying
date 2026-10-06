@@ -16,6 +16,8 @@ import { PlaceNote } from "./PlaceNotes.tsx";
 import { NoteLinks } from "./ThreeParts.tsx";
 
 export const OPEN_FILE = "Open file";
+/** An empty sub heading's part: her document for it is still to come. */
+export const COMING_SOON = "Coming soon.";
 export const ORIGINAL_PDF = "Original PDF:";
 
 function DocContent({ id }: { id: string }): ReactNode {
@@ -75,6 +77,12 @@ export function OutlineItems({ items, from }: { items: readonly OutlineItem[]; f
   return groups.map((g, i) => (Array.isArray(g) ? <NoteLinks key={i} links={g} /> : <Item key={i} item={g} from={from} />));
 }
 
+/** A part's items; a sub heading with none shows that its document is still to come. */
+export function PartItems({ part, from }: { part: OutlinePart; from: string }): ReactNode {
+  if (part.sub && part.items.length === 0) return <p className="osoon">{COMING_SOON}</p>;
+  return <OutlineItems items={part.items} from={from} />;
+}
+
 export function OutlinePartView({ part, from }: { part: OutlinePart; from: string }): ReactNode {
   const H = part.sub ? "h3" : "h2";
   return (
@@ -82,7 +90,7 @@ export function OutlinePartView({ part, from }: { part: OutlinePart; from: strin
       <H className="opart-h" data-anchor={part.id} id={`part-${part.id}`}>
         <Txt text={part.title} />
       </H>
-      <OutlineItems items={part.items} from={from} />
+      <PartItems part={part} from={from} />
     </div>
   );
 }

@@ -166,6 +166,13 @@ describe("fonts", () => {
     expect(new FontSplitter(fm).split(`${small} Keppra`)).toEqual([{ text: `${String.fromCodePoint(0x2014)} Keppra`, family: "Carlito" }]);
   });
 
+  it("draws U+1806, a dash list marker in her notes that no vendored font has, as a hyphen in Carlito", () => {
+    const marker = String.fromCodePoint(0x1806);
+    const fm = fontmapFor([`${marker} Ovarian cyst`]);
+    expect(fm.draw).toEqual({ [String(0x1806)]: "-" });
+    expect(new FontSplitter(fm).split(`${marker} Ovarian cyst`)).toEqual([{ text: "- Ovarian cyst", family: "Carlito" }]);
+  });
+
   it("strips variation selectors from PDF text only, leaving the stored text intact", () => {
     const s = cardioSystem();
     const def = buildDocDefinition({ kind: "system" }, { nav, system: s }, fontmap);

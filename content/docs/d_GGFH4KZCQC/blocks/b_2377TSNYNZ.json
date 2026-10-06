@@ -1,0 +1,2049 @@
+{
+ "v": 1,
+ "id": "b_2377TSNYNZ",
+ "kind": "table",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "table",
+    "attrs": {
+     "grid": [
+      48.75,
+      36,
+      33,
+      52.5,
+      36.75,
+      84,
+      66
+     ],
+     "indentPt": 0,
+     "borders": {
+      "top": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      },
+      "right": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      },
+      "bottom": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      },
+      "left": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      },
+      "insideH": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      },
+      "insideV": {
+       "style": "single",
+       "widthPt": 1,
+       "color": "000000"
+      }
+     },
+     "cellMarginPt": {
+      "top": 5,
+      "right": 5,
+      "bottom": 5,
+      "left": 5
+     }
+    },
+    "content": [
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_HES2EQJNKW",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Type of tone"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Intensity "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Pitch "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Duration"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Quality"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Patho Ex"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Ex location"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_0M25CPC2S0",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Flat"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Soft"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "High"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Short"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Very Dull"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Lrg pleural effusion"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Thigh"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_RS0V4ER9SQ",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Dull"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Medium"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Medium"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Medium"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Dull Thud"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Lobar Pneumonia, consolidation or collapse "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Liver"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_5BSF1E39JW",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Resonant "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Loud"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Low"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Long"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Hollow"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Simple Chronic Bronchitis"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Healthy Lung"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_0E8298YPZ0",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Hyperresonant "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Very Loud"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Very Low"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Longer"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Booming"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "COPD, Pneumothorax"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Usually none"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_8PRHYVC60R",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Typanitic "
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Loud"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "High"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Medium-Longer"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Drum-like"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Lrg Pneumothorax"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": null,
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "Gastric air bubble"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {}
+}

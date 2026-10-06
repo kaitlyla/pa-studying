@@ -20,25 +20,35 @@ describe("the committed inventory (30 §30.2)", () => {
     const sources = await loadSources(REPO);
     const count = (k: Source["kind"]) => sources.filter((s) => s.kind === k).length;
     expect(count("guide")).toBe(8);
-    expect(count("word")).toBe(25);
+    expect(count("word")).toBe(32);
     expect(count("pdf") + count("image") + count("slides")).toBe(18);
     expect(count("pharm")).toBe(10);
     expect(count("deck")).toBe(1);
     expect(count("vocab")).toBe(1);
-    expect(count("duplicate")).toBe(1);
+    expect(count("duplicate")).toBe(2);
   });
 
   it("lists none of the files the design leaves out", async () => {
     const paths = (await loadSources(REPO)).filter((s) => s.kind !== "duplicate").map((s) => s.path);
-    const excluded = /EOR\.pdf$|SG\.pdf$|USPSTF guidelines\.pdf|ABG .*\.pdf$|FIRST AID|PSA \(update\)|OSCE|Genetics|Myocarditis|Geriatrics|Untitled document|Oral presentation|\/Info\.docx|accommadations|Syllabus|\.bak$|Psych Behavioural Health table|Clin Med_Examples|Patho_Examples|Theory_Examples/;
+    const excluded = /EOR\.pdf$|SG\.pdf$|USPSTF guidelines\.pdf|ABG .*\.pdf$|FIRST AID|PSA \(update\)|OSCE|Genetics|Myocarditis|Geriatrics|Untitled document|Oral presentation|\/Info\.docx|accommadations|Syllabus|\.bak$|Psych Behavioural Health table|Clin Med_Examples|Patho_Examples/;
     expect(paths.filter((p) => excluded.test(p))).toEqual([]);
-    // Her physical-exam notes are the one course-note folder on the site (Other › Physical exam).
+    // Her physical-exam notes and exam theory are the course-note folders on the site (Other › Physical exam).
     expect(paths.filter((p) => p.startsWith("Physical Exam_Examples/")).sort()).toEqual([
       "Physical Exam_Examples/Cardiac -Theory.docx",
       "Physical Exam_Examples/GI_ Skills.docx",
       "Physical Exam_Examples/MSK_Physical_Exam_.docx",
       "Physical Exam_Examples/Neuro Lab Checklist Summer 2026 (1).docx",
       "Physical Exam_Examples/Pulm_ Physcial Exam .docx",
+      "Physical Exam_Examples/Vitals- Physical & Cultural Competence.docx",
+    ]);
+    // Her Cardiac theory copy there is a proven duplicate of the Physical Exam_Examples one.
+    expect(paths.filter((p) => p.startsWith("Theory_Examples/")).sort()).toEqual([
+      "Theory_Examples/Abdominal Skills_ Theory .docx",
+      "Theory_Examples/MSK Theory.docx",
+      "Theory_Examples/Pt Theory_ DRE, GU, Sex.docx",
+      "Theory_Examples/Pt Theory_ female, geriatric, foley (1).docx",
+      "Theory_Examples/Pt_Assessment_Neuro_Theory_UPDATED_v4 (1).docx",
+      "Theory_Examples/Pulmonary Theory.docx",
     ]);
     // Her Master ACLS guide: she pointed to it for Emergency care's ACLS algorithms (2026-10-05).
     expect(paths.filter((p) => p.startsWith("docx to fix/"))).toEqual([

@@ -623,6 +623,30 @@ describe("Other tab", () => {
       await until(() => byText(a.container, "h1", "This page isn't on the site"), "not-on-site page");
       expect(a.container.querySelector(".other-page")).toBeNull();
     });
+
+    it("shows 'Coming soon.' for a sub heading with nothing under it, and not for a top heading whose items are in its sub parts", async () => {
+      const fx = await publishFixture((content) => {
+        const pe = content.other.sections.find((s) => s.id === "pe");
+        if (!pe) throw new Error("no pe section");
+        Object.assign(pe, { files: [D(5)], gaps: [], notes: [{ heading: "GI" }, { heading: "Exam", sub: true }, { doc: D(5) }, { heading: "Lab checklist", sub: true }] });
+      });
+      server.restore();
+      server = serveData(fx.published);
+      const a = await renderApp("#/other/pe/gi");
+      app = a;
+      await until(() => a.container.querySelector(`.other-page .odoc[data-anchor="${D(5)}"]`), "exam doc");
+      expect(a.container.querySelector(".other-page h1")?.textContent).toBe("GI");
+      const parts = [...a.container.querySelectorAll(".other-page .opart")];
+      expect(parts.map((p) => [p.querySelector(".opart-h")?.textContent, p.querySelector(".osoon")?.textContent ?? null])).toEqual([
+        ["Exam", null],
+        ["Lab checklist", "Coming soon."],
+      ]);
+      expect(a.container.querySelectorAll(".other-page .osoon")).toHaveLength(1);
+
+      await go("#/other/pe/gi-lab-checklist");
+      await until(() => byText(a.container, ".other-page h1", "Lab checklist"), "lab checklist part");
+      expect(a.container.querySelector(".other-page .osoon")?.textContent).toBe("Coming soon.");
+    });
   });
 
   it("shows an original item as one small link to its File page, not the file itself and not as a leftover chip", async () => {

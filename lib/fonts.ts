@@ -38,13 +38,20 @@ export interface FontCoverage {
   /** Decimal code point → index into FONTS of the first font with its glyph (LAST_RESORT_INDEX when none has it). */
   map: Record<string, number>;
   /**
-   * Decimal code point → the text drawn in its place: for a code point no font has, its compatibility
-   * form (NFKC) when every character of that form is covered — U+FE58 SMALL EM DASH draws as U+2014.
+   * Decimal code point → the text drawn in its place: for a code point no font has, its drawn form
+   * (DRAW_FORMS, else its compatibility form, NFKC) when every character of that form is covered —
+   * U+FE58 SMALL EM DASH draws as U+2014, U+1806 MONGOLIAN TODO SOFT HYPHEN as "-".
    */
   draw: Record<string, string>;
   /** Code points neither a font nor a compatibility form covers, ascending. */
   uncovered: number[];
 }
+
+/**
+ * Drawn forms for code points with no compatibility form of their own: U+1806 is a dash list marker
+ * in her notes, drawn as a hyphen.
+ */
+const DRAW_FORMS: Readonly<Record<number, string>> = { 0x1806: "-" };
 
 /** The font map (70 §70.4) of `codePoints`, given which FONTS index has a glyph for which code point. */
 export function fontCoverage(codePoints: Iterable<number>, has: (font: number, cp: number) => boolean): FontCoverage {
@@ -58,7 +65,7 @@ export function fontCoverage(codePoints: Iterable<number>, has: (font: number, c
       continue;
     }
     const ch = String.fromCodePoint(cp);
-    const form = ch.normalize("NFKC");
+    const form = DRAW_FORMS[cp] ?? ch.normalize("NFKC");
     const parts = [...form].map((c) => c.codePointAt(0) ?? 0);
     if (form !== ch && parts.every((p) => !glyphless(p) && first(p) >= 0)) {
       out.draw[String(cp)] = form;

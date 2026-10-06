@@ -17,7 +17,7 @@ import { PageHead } from "../shell/Page.tsx";
 import { useRoute } from "../shell/route.ts";
 import { ThreeParts } from "./ThreeParts.tsx";
 import { buildPageKey } from "../edit/pageKey.ts";
-import { Leftovers, OutlineItems, OutlinePartView } from "./OtherOutline.tsx";
+import { Leftovers, OutlineItems, OutlinePartView, PartItems } from "./OtherOutline.tsx";
 import { splitOutline, type Outline, type OutlinePart } from "./outline.ts";
 
 export const GUIDELINES = "guidelines";
@@ -111,7 +111,7 @@ export function OtherPage({ section: id, part = null }: { section: string | null
       )}
       <EditRegion pageKey={pageKey} title={s.title}>
         {shown ? (
-          shown.map((p, i) => (i === 0 ? <OutlineItems key={p.id} items={p.items} from={from} /> : <OutlinePartView key={p.id} part={p} from={from} />))
+          shown.map((p, i) => (i === 0 ? <PartItems key={p.id} part={p} from={from} /> : <OutlinePartView key={p.id} part={p} from={from} />))
         ) : s.notes.length > 0 ? (
           <>
             {s.lead && <GapBlock gap={s.lead} />}

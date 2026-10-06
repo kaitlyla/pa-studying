@@ -474,7 +474,8 @@ export interface FontMapJson {
   map: Record<string, number>;
   /**
    * Decimal code point → the text a PDF draws in its place: a code point no vendored font has whose
-   * compatibility form (NFKC) they do — U+FE58 SMALL EM DASH draws as U+2014. Stored text keeps the original.
+   * drawn form they do (lib/fonts.ts fontCoverage) — U+FE58 SMALL EM DASH draws as U+2014, U+1806 as
+   * "-". Stored text keeps the original.
    */
   draw: Record<string, string>;
 }

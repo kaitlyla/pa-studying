@@ -16,6 +16,12 @@ describe("fontCoverage", () => {
     expect(fontCoverage([0xfe58], has)).toEqual({ map: { [0x2014]: 0 }, draw: { [0xfe58]: "—" }, uncovered: [] });
   });
 
+  it("draws U+1806, a dash list marker with no compatibility form, as a hyphen when the hyphen is covered", () => {
+    const withHyphen = (font: number, c: number): boolean => has(font, c) || (font === 0 && c === cp("-"));
+    expect(fontCoverage([0x1806], withHyphen)).toEqual({ map: { [cp("-")]: 0 }, draw: { [0x1806]: "-" }, uncovered: [] });
+    expect(fontCoverage([0x1806], has)).toEqual({ map: { [0x1806]: LAST_RESORT_INDEX }, draw: {}, uncovered: [0x1806] });
+  });
+
   it("reports a code point with no covered font or compatibility form as uncovered, mapped to the last-resort font", () => {
     expect(fontCoverage([cp("★"), 0xff48], has)).toEqual({ map: { [cp("★")]: LAST_RESORT_INDEX, [0xff48]: LAST_RESORT_INDEX }, draw: {}, uncovered: [cp("★"), 0xff48] });
   });
