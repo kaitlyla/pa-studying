@@ -9,10 +9,10 @@
     "type": "table",
     "attrs": {
      "grid": [
-      54.6,
-      404.4,
-      184.5,
-      130.5
+      85.15,
+      378.8,
+      185.1,
+      124.95
      ],
      "indentPt": -27.25,
      "borders": {
@@ -49,9 +49,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 2.15,
+      "right": 1,
       "bottom": 0,
-      "left": 2.15
+      "left": 1
      }
     },
     "content": [
@@ -96,6 +96,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Nose/Sinus"
@@ -135,6 +141,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "About"
@@ -174,6 +186,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Diagnostics"
@@ -213,6 +231,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Management"
@@ -264,6 +288,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Rhinosinusitis "
