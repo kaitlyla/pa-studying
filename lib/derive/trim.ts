@@ -1,6 +1,7 @@
 // Which pharm-notes lines a card leaves out where her guide table, shown beside it, already says
 // them (content/pharm/trims.json). Shared by the pages and the PDFs, and run on the published page
 // data, so an edit to a line or a row — saved, or still in the editor overlay — shows the line again.
+import { tableNode } from "../content/tables.ts";
 import type { DocJSON } from "../content/types.ts";
 import type { PubTrimLine, SystemJson } from "./published.ts";
 import { collapse, nodeText, readRows, type PMNode, type Row } from "./text.ts";
@@ -20,7 +21,7 @@ const rowTextCache = new WeakMap<object, Map<string, string>>();
 function rowTexts(doc: DocJSON): Map<string, string> {
   let m = rowTextCache.get(doc);
   if (!m) {
-    const table = (doc.content as PMNode[] | undefined)?.find((n) => n.type === "table");
+    const table = tableNode({ id: "", doc }) as PMNode | null;
     m = new Map(readRows(table?.content ?? []).map((r) => [r.id, trimRowText(r)]));
     rowTextCache.set(doc, m);
   }
