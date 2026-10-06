@@ -492,7 +492,7 @@ test.describe("image viewer", () => {
     throw new Error(`no ${tab} page shows an image in an open section`);
   }
 
-  test("Imaging: images show as thumbnails at most 320 px wide that open full size by click or keyboard, on a laptop and a phone", async ({ page }) => {
+  test("Imaging: images show as thumbnails at most 240 px wide that open full size by click or keyboard, on a laptop and a phone", async ({ page }) => {
     const { sub, gap } = refFigure("imaging");
     await open(page, refHash("imaging", sub));
     const thumb = main(page).locator(`[data-anchor="${gap}"] .gap-figs.thumbs button.imgbtn`).first();
@@ -502,7 +502,7 @@ test.describe("image viewer", () => {
     await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
     const w = await img.evaluate((el) => el.getBoundingClientRect().width);
     expect(w).toBeGreaterThan(0);
-    expect(w).toBeLessThanOrEqual(320);
+    expect(w).toBeLessThanOrEqual(240);
 
     await thumb.click();
     const dlg = page.getByRole("dialog", { name: "Image, full size" });
