@@ -673,7 +673,7 @@
               "type": "italic"
              }
             ],
-            "text": "q3y"
+            "text": "q5y"
            },
            {
             "type": "text",
@@ -2236,7 +2236,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Women, 50-74yo"
+            "text": "Women, 40-74yo"
            }
           ]
          }
@@ -2316,7 +2316,7 @@
               "type": "italic"
              }
             ],
-            "text": "aged 50-74yo"
+            "text": "aged 40-74yo"
            },
            {
             "type": "text",
@@ -3010,7 +3010,7 @@
      {
       "type": "table_row",
       "attrs": {
-       "id": "r_ZNBMX94X55",
+       "id": "r_2P2M6KE5WD",
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
@@ -3045,7 +3045,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Lung Cancer"
+            "text": "Breast Cancer Risk-Reducing Medications"
            }
           ]
          }
@@ -3115,7 +3115,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Current/past smokers, 50-80yo"
+            "text": "Women ≥35yo at ↑ risk for breast cancer"
            }
           ]
          }
@@ -3128,6 +3128,184 @@
          "rowspan": 1,
          "colwidth": null,
          "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•USPSTF recommends offering to prescribe risk-reducing meds (e.g., tamoxifen, raloxifene, aromatase inhibitors) to women at ↑ risk for breast cancer & low risk for adverse med effects"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F2F2F2",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_ZNBMX94X55",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "D9D9D9",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Lung Cancer"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "D9D9D9",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "B"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "center",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Current/past smokers, 50-80yo"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
@@ -3309,6 +3487,10 @@
              }
             ],
             "text": "limits life expectancy "
+           },
+           {
+            "type": "text",
+            "text": "or ability/willingness to have curative lung surgery"
            }
           ]
          },
@@ -3384,7 +3566,7 @@
          "colspan": 2,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "F2F2F2",
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
@@ -3460,7 +3642,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "D9D9D9",
+         "fill": "F2F2F2",
          "vAlign": "top",
          "borders": null
         },
@@ -3494,7 +3676,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "D9D9D9",
+         "fill": "F2F2F2",
          "vAlign": "top",
          "borders": null
         },
@@ -3564,7 +3746,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "D9D9D9",
+         "fill": "F2F2F2",
          "vAlign": "top",
          "borders": null
         },
@@ -3662,7 +3844,7 @@
          "colspan": 2,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "D9D9D9",
+         "fill": "F2F2F2",
          "vAlign": "top",
          "borders": null
         },
@@ -3736,7 +3918,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "F2F2F2",
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
@@ -3770,7 +3952,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "F2F2F2",
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
@@ -3840,7 +4022,7 @@
          "colspan": 1,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "F2F2F2",
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
@@ -3976,7 +4158,7 @@
          "colspan": 2,
          "rowspan": 1,
          "colwidth": null,
-         "fill": "F2F2F2",
+         "fill": "D9D9D9",
          "vAlign": "top",
          "borders": null
         },
