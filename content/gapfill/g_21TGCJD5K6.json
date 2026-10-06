@@ -78,7 +78,7 @@
         "type": "bold"
        }
       ],
-      "text": "I positive, aVF positive:"
+      "text": "I (+), aVF (+):"
      },
      {
       "type": "text",
@@ -113,7 +113,7 @@
         "type": "bold"
        }
       ],
-      "text": "I positive, aVF negative:"
+      "text": "I (+), aVF (-):"
      },
      {
       "type": "text",
@@ -124,7 +124,7 @@
    {
     "type": "paragraph",
     "attrs": {
-     "indLeft": 18,
+     "indLeft": 72,
      "indRight": 0,
      "indFirst": -18,
      "spaceBefore": 0,
@@ -143,16 +143,45 @@
     "content": [
      {
       "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "I negative, aVF positive:"
+      "text": " II  = (+) -> the axis is normal"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 72,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "II = (-) -> the axis is"
      },
      {
       "type": "text",
-      "text": " right axis deviation"
+      "marks": [
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FFFF00"
+        }
+       }
+      ],
+      "text": " LAD"
      }
     ]
    },
@@ -183,11 +212,23 @@
         "type": "bold"
        }
       ],
-      "text": "I negative, aVF negative:"
+      "text": "I (-), aVF (+):"
      },
      {
       "type": "text",
-      "text": " extreme axis (“northwest”)"
+      "marks": [
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FFFF00"
+        }
+       }
+      ],
+      "text": " right "
+     },
+     {
+      "type": "text",
+      "text": "axis deviation"
      }
     ]
    },
@@ -218,11 +259,27 @@
         "type": "bold"
        }
       ],
-      "text": "Lead I positive and aVF negative?"
+      "text": "I (-), aVF (-):"
      },
      {
       "type": "text",
-      "text": " If II is also positive the axis is still normal; if II is negative it is LAD"
+      "text": " "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "highlight",
+        "attrs": {
+         "hex": "FFFF00"
+        }
+       }
+      ],
+      "text": "extreme axis "
+     },
+     {
+      "type": "text",
+      "text": "(“northwest)"
      }
     ]
    }
@@ -243,7 +300,9 @@
     "track": null
    }
   ],
-  "ownerEdits": []
+  "ownerEdits": [
+   "2026-10-06"
+  ]
  },
  "id": "g_21TGCJD5K6"
 }
