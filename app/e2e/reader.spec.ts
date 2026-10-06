@@ -782,6 +782,33 @@ test.describe("pharm", () => {
     await expect(target).toBeInViewport();
   });
 
+  test("meds panel: a part of her pharm notes attached to the topic opens to its own cell beside its own name, with no pharm link", async ({ page }) => {
+    // Her vestibular table pairs name and management columns; Ramsay-Hunt's part shows its name column.
+    let pick: { g: string; topic: string; part: string; title: string } | null = null;
+    for (const { g, s } of allSystems) {
+      const sys = systemOf(g, s.id);
+      for (const t of sys.topics) {
+        const m = t.meds.find((x) => x.part !== undefined && sys.parts[x.part]?.label !== undefined);
+        if (m?.part !== undefined) {
+          pick = { g, topic: t.id, part: m.part, title: m.title };
+          break;
+        }
+      }
+      if (pick) break;
+    }
+    if (!pick) throw new Error("no topic with an attached pharm part cut beside a label column");
+    const { g, topic, part, title } = pick;
+    await open(page, topicHash(g, [topic]));
+    const mc = main(page).locator(`.meds section.phc[data-anchor="meds-${part}"]`);
+    await expect(mc.locator(".phc-t")).toHaveText(title);
+    await mc.locator(".phc-h button").click();
+    const notes = mc.locator(`.ph-part[data-anchor="${part}"]`);
+    await expect(notes).toContainText("Ramsay-Hunt Syndrome");
+    await expect(notes).toContainText("Acyclovir");
+    await expect(notes).not.toContainText("Acute Labyrinthitis");
+    await expect(mc.locator("a.phc-more")).toHaveCount(0);
+  });
+
   test("a file opened from a pharm page shows '<EOR> › <System> pharm' and Back returns there", async ({ page }) => {
     let pick: { g: string; sys: SystemJson } | null = null;
     for (const { g, s } of allSystems) {

@@ -6,15 +6,15 @@ import { placeCells, type PlacedCell } from "../wordFormat.ts";
 import { collapse, nodeText, type PMNode } from "./text.ts";
 
 /**
- * The table of `doc` cut to its first column and grid column `column` (≥ 1), from its second row on,
- * titled with the text of column `column`'s first-row cell. Cells are taken from the table grid, so
- * merged cells land where the renderers draw them: a cell covering both kept columns is kept once
- * across the two, and a row span keeps the rows it covers among those kept. Null when `doc` is not
- * a single table or has no such column.
+ * The table of `doc` cut to grid column `label` (the first, by default) and grid column `column`
+ * (right of `label`), from its second row on, titled with the text of column `column`'s first-row
+ * cell. Cells are taken from the table grid, so merged cells land where the renderers draw them: a
+ * cell covering both kept columns is kept once across the two, and a row span keeps the rows it
+ * covers among those kept. Null when `doc` is not a single table or has no such columns.
  */
-export function columnView(doc: DocJSON, column: number): { title: string; doc: DocJSON } | null {
+export function columnView(doc: DocJSON, column: number, label = 0): { title: string; doc: DocJSON } | null {
   const table = tableNode({ id: "", doc }) as PMNode | null;
-  if (!table || !Number.isInteger(column) || column < 1) return null;
+  if (!table || !Number.isInteger(column) || !Number.isInteger(label) || label < 0 || column <= label) return null;
   const rows = table.content ?? [];
   const { cells, columns } = placeCells(rows);
   if (column >= columns) return null;
@@ -28,13 +28,13 @@ export function columnView(doc: DocJSON, column: number): { title: string; doc: 
     const r = i + 1;
     const content: PMNode[] = [];
     const seen = new Set<PlacedCell<PMNode>>();
-    for (const col of [0, column]) {
+    for (const col of [label, column]) {
       const p = at(r, col);
       // A cell starting on an earlier kept row was already put there, spanning down over this one.
       if (!p || seen.has(p) || (p.row < r && r > 1)) continue;
       seen.add(p);
       const first = Math.max(p.row, 1);
-      const both = p.col === 0 && p.col + p.colspan > column;
+      const both = p.col <= label && p.col + p.colspan > column;
       content.push({ ...p.node, attrs: { ...p.node.attrs, colspan: both ? 2 : 1, rowspan: p.row + p.rowspan - first, colwidth: null } });
     }
     return { ...row, content };
@@ -42,27 +42,30 @@ export function columnView(doc: DocJSON, column: number): { title: string; doc: 
 
   const grid = Array.isArray(table.attrs?.grid) ? (table.attrs.grid as number[]) : [];
   const total = grid.reduce((a, b) => a + b, 0);
-  const label = grid[0] ?? 0;
+  const width = grid[label] ?? 0;
   return {
     title,
-    doc: { type: "doc", content: [{ ...table, attrs: { ...table.attrs, grid: [label, total - label] }, content: kept }] },
+    doc: { type: "doc", content: [{ ...table, attrs: { ...table.attrs, grid: [width, total - width] }, content: kept }] },
   };
 }
 
 /**
- * A stored block's doc as a note (a place note, a pharm part) shows it: whole; cut to one column,
- * titled with that column's first-row text (columnView); or cut to some rows (rowsView). Null when
- * the cut does not apply to `doc`.
+ * A stored block's doc as a note (a place note, a pharm part) shows it: whole; cut to some rows
+ * (rowsView); cut to one column, titled with that column's first-row text (columnView); or both,
+ * the rows and then that column of them, titled with the column's text in the first kept row. Null
+ * when the cut does not apply to `doc`.
  */
 export function noteView(
-  doc: DocJSON, cut: { column?: number | null; rows?: readonly string[] | null }, opts: RowsOptions,
+  doc: DocJSON, cut: { column?: number | null; label?: number | null; rows?: readonly string[] | null }, opts: RowsOptions,
 ): { title: string | null; doc: DocJSON } | null {
+  let view = doc;
   if (cut.rows !== undefined && cut.rows !== null) {
-    const view = rowsView(doc, cut.rows, opts);
-    return view ? { title: null, doc: view } : null;
+    const rows = rowsView(doc, cut.rows, opts);
+    if (!rows) return null;
+    view = rows;
   }
-  if (cut.column !== undefined && cut.column !== null) return columnView(doc, cut.column);
-  return { title: null, doc };
+  if (cut.column !== undefined && cut.column !== null) return columnView(view, cut.column, cut.label ?? 0);
+  return { title: null, doc: view };
 }
 
 export interface RowsOptions {

@@ -476,6 +476,41 @@ describe("pharm pages", () => {
     expect(otherGuide.querySelector("a.phc-more")).toBeNull();
   });
 
+  it("meds panel shows a part of her pharm notes attached to the topic: its cut of her table, from its file, with no link", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const TBL = "b_pagetable02";
+    mod.notesBlocks[TBL] = {
+      id: TBL, kind: "table",
+      doc: schema.nodeFromJSON(tableDoc(3, [
+        [R(920), "heading", "SPECIFIC DISEASE TX", "Hemophilia A", "Acute ITP"],
+        [R(921), "content", "Tx", "Factor VIII", "IVIG, steroids"],
+        [R(922), "heading", "", "Chronic ITP", "HIT"],
+      ])).toJSON() as SystemJson["notesBlocks"][string]["doc"],
+    };
+    mod.parts.p_itp = { title: "Acute ITP", role: "topic", file: "pharm review", basePt: 11, blocks: [TBL], rows: [R(920), R(921)], column: 2 };
+    const topic = need(mod.topics.find((t) => t.id === R(131)), "Heart failure topic");
+    topic.meds = [{ card: null, part: "p_itp", title: "Acute ITP", rows: [], section: null, system: null, target: "p_itp" }];
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 1");
+    expect([...panel.querySelectorAll(".phc-t")].map((t) => t.textContent)).toEqual(["Acute ITP"]);
+    expect(cardBtn(panel, "meds-p_itp").getAttribute("aria-expanded")).toBe("false");
+
+    await click(cardBtn(panel, "meds-p_itp"));
+    const card = cardEl(panel, "meds-p_itp");
+    const part = need(card.querySelector<HTMLElement>('.ph-part[data-anchor="p_itp"]'), "her part");
+    expect(visibleText(need(part.querySelector(".pn-col"), "column title"))).toBe("Acute ITP");
+    expect(visibleText(part)).toContain("IVIG, steroids");
+    for (const other of ["Factor VIII", "Hemophilia A", "Chronic ITP"]) expect(visibleText(part)).not.toContain(other);
+    expect(visibleText(card)).toContain("pharm review");
+    expect(card.querySelector(".ph-rowblk")).toBeNull();
+    expect(card.querySelector("a.phc-more")).toBeNull();
+  });
+
   it("a topic without meds shows no meds panel", async () => {
     const cv = systemJson(CV);
     const topic = need(cv.topics.find((t) => t.meds.length === 0 && t.id === R(131)), "Heart failure topic without meds");

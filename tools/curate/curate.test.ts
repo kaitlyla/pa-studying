@@ -241,6 +241,18 @@ describe("a pharm notes file made from her Word page (pharm-doc)", () => {
     expect(pf.page).toBe(D(5));
   });
 
+  it("pharm-parts writes a topic part's guide topics and its cut, rows and one column beside its label column", async () => {
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    const parts = [
+      { role: "overview", title: "Overview", card: null, blocks: [B(60)] },
+      { role: "card", title: "Free T4", card: "t4", blocks: [B(61)], rows: [R(600)] },
+      { role: "topic", title: "T3: level", card: null, blocks: [B(61)], rows: [R(601)], column: 1, label: 0, topics: [R(101)] },
+    ];
+    await run(root, ["pharm-parts", "thyroid-notes", await draft("topic", { parts, cards: [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" } }] })]);
+    const topic = must((await read<PharmFile>(THY)).parts[2], "topic part");
+    expect(topic).toEqual({ id: expect.stringMatching(/^p_/), role: "topic", title: "T3: level", card: null, blocks: [B(61)], column: 1, label: 0, rows: [R(601)], topics: [R(101)] });
+  });
+
   it("a split of the page's block stays on the page, and in the pharm part showing it", async () => {
     await writeContent(root, `${DOC5}/blocks/${B(60)}.json`, { v: 1, id: B(60), kind: "prose", doc: doc(para("TSH first"), para("then free T4")), meta: {} });
     await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
@@ -307,16 +319,16 @@ describe("pharm-parts", () => {
     await refused(["pharm-parts", "cardio-med-list", await draft("c", { parts: [unnamed, ccb, nitrates, beta], cards: cards3 })], new RegExp(`${P(1)}.*pharm part`), files);
   });
 
-  it("records a card's `in`, `for` and `classWords`, and keeps them when a later draft of the file omits them", async () => {
+  it("records a card's `in`, `for`, `classWords` and `diseases`, and keeps them when a later draft of the file omits them", async () => {
     const before = await read<CardsFile>("content/pharm/cards.json");
     const bb = must(before.cards.find((c) => c.id !== C(1) && c.id !== C(2)), "beta card").id;
     const parts = [overview, ccb, nitrates, { ...beta, card: bb }];
     const cards = (nitratesIn: object) => [cards3[0], { ...cards3[1], ...nitratesIn }, { ...cards3[2], id: bb }];
-    await run(root, ["pharm-parts", "cardio-med-list", await draft("in1", { parts, cards: cards({ in: C(1), for: ["antianginals"], classWords: ["vasodilators"] }) })]);
+    await run(root, ["pharm-parts", "cardio-med-list", await draft("in1", { parts, cards: cards({ in: C(1), for: ["antianginals"], classWords: ["vasodilators"], diseases: ["angina"] }) })]);
     await run(root, ["pharm-parts", "cardio-med-list", await draft("in2", { parts, cards: cards({}) })]);
     const after = await read<CardsFile>("content/pharm/cards.json");
-    expect(after.cards.map((c) => [c.id, c.in, c.for, c.classWords])).toEqual([
-      [C(1), undefined, undefined, undefined], [C(2), C(1), ["antianginals"], ["vasodilators"]], [bb, undefined, undefined, undefined],
+    expect(after.cards.map((c) => [c.id, c.in, c.for, c.classWords, c.diseases])).toEqual([
+      [C(1), undefined, undefined, undefined, undefined], [C(2), C(1), ["antianginals"], ["vasodilators"], ["angina"]], [bb, undefined, undefined, undefined, undefined],
     ]);
   });
 

@@ -265,6 +265,8 @@ interface DraftCard {
   for?: string[];
   /** Her words for its wider drug class; omitted, an existing card keeps its own. */
   classWords?: string[];
+  /** The conditions its notes are written for; omitted, an existing card keeps its own. */
+  diseases?: string[];
 }
 interface DraftPart {
   id?: string;
@@ -273,9 +275,12 @@ interface DraftPart {
   /** A card id, or the `key` of a draft card that has no id yet. */
   card: string | null;
   blocks: string[];
-  /** With one table block: the part shows only that column, or those rows (content PharmPart). */
+  /** With one table block: the part shows only that column, or those rows, or (a topic part) both (content PharmPart). */
   column?: number;
+  label?: number;
   rows?: string[];
+  /** A topic part's guide topic ids. */
+  topics?: string[];
 }
 
 /**
@@ -301,9 +306,11 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
     const within = d.in ?? had?.in;
     const use = d.for ?? had?.for;
     const words = d.classWords ?? had?.classWords;
+    const diseases = d.diseases ?? had?.diseases;
     return {
       id, file: fileSlug, aliases: d.aliases, home: d.home,
       ...(within === undefined ? {} : { in: within }), ...(use === undefined ? {} : { for: use }), ...(words === undefined ? {} : { classWords: words }),
+      ...(diseases === undefined ? {} : { diseases }),
     };
   });
   const cardIds = new Set(cards.map((x) => x.id));
@@ -317,7 +324,11 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
       const b = pf.blocks.find((x) => x.id === d.blocks[0]);
       requireIds(d.rows, new Set((b ? tableNode(b)?.content ?? [] : []).map((r) => String(r.attrs?.id))), `pharm-parts part "${d.title}" rows`);
     }
-    return { id, role: d.role, title: d.title, card, blocks: d.blocks, ...(d.column === undefined ? {} : { column: d.column }), ...(d.rows === undefined ? {} : { rows: d.rows }) };
+    return {
+      id, role: d.role, title: d.title, card, blocks: d.blocks,
+      ...(d.column === undefined ? {} : { column: d.column }), ...(d.label === undefined ? {} : { label: d.label }),
+      ...(d.rows === undefined ? {} : { rows: d.rows }), ...(d.topics === undefined ? {} : { topics: d.topics }),
+    };
   });
   for (const card of cardIds) {
     if (!parts.some((p) => p.card === card)) throw new CurateError(`pharm-parts: card ${card} has no part`);

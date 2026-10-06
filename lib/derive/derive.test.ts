@@ -1402,6 +1402,44 @@ describe("pharm (40 §40.4–§40.5)", () => {
       }));
       expect(gone.dropped).toContainEqual({ file: where, id: B(82) });
     });
+
+    describe("a topic part, shown on the meds panels of the guide topics it names", () => {
+      /** Her apixaban row's MOA cell becomes a topic part on Stable angina (R101); the card part keeps heparin. */
+      const attach = (topics: string[], cut: { rows: string[]; column: number } = { rows: [R(814), R(812)], column: 2 }) => withReview((pf) => {
+        Object.assign(pf.file.parts[2] as object, { rows: [R(814), R(813)] });
+        pf.file.parts.push({ id: P(83), role: "topic", title: "Apixaban: MOA", card: null, blocks: [B(81)], ...cut, label: 1, topics });
+      });
+
+      it("follows the cards on each named topic's panel, with its part, cut and blocks in the system's notes", () => {
+        const fm = publish(attach([R(101)])).files.get("g/fm/s/cardiovascular.json") as SystemJson;
+        const panel = fm.topics.find((t) => t.id === R(101))?.meds ?? [];
+        expect(panel.at(-1)).toEqual({ card: null, part: P(83), title: "Apixaban: MOA", rows: [], section: null, system: null, target: P(83) });
+        expect(panel.slice(0, -1).every((m) => m.part === undefined && m.card !== null)).toBe(true);
+        expect(fm.parts[P(83)]).toEqual({ title: "Apixaban: MOA", role: "topic", file: "pharm review", basePt: 11, blocks: [B(81)], rows: [R(814), R(812)], column: 2, label: 1 });
+        expect(Object.keys(fm.notesBlocks)).toContain(B(81));
+        // Only the topics it names show it.
+        expect(fm.topics.filter((t) => t.meds.some((m) => m.part === P(83))).map((t) => t.id)).toEqual([R(101)]);
+      });
+
+      it("fails the build on a topic no guide has", () => {
+        const err = buildError(() => publish(attach([R(101), GONE])));
+        expect([err.id, err.message]).toEqual([P(83), `${P(83)}: pharm part is attached to topic ${GONE}, which no guide has`]);
+      });
+
+      it("is left off the panel once its rows have all gone from her table, or its column no longer fits", () => {
+        const where = "content/pharm/pharm-review/pharmfile.json";
+        for (const [cut, gone] of [
+          [{ rows: [R(818), R(819)], column: 2 }, R(818)],
+          [{ rows: [R(814), R(812)], column: 9 }, P(83)],
+        ] as const) {
+          const out = publish(attach([R(101)], { rows: [...cut.rows], column: cut.column }));
+          const fm = out.files.get("g/fm/s/cardiovascular.json") as SystemJson;
+          expect(fm.topics.find((t) => t.id === R(101))?.meds.some((m) => m.part === P(83))).toBe(false);
+          expect(fm.parts[P(83)]).toBeUndefined();
+          expect(out.dropped).toContainEqual({ file: where, id: gone });
+        }
+      });
+    });
   });
 });
 

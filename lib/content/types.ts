@@ -135,14 +135,28 @@ export interface UploadFile {
 // 20.6
 /**
  * A part of a pharm notes file: its blocks, whole; or, with `column` or `rows`, its one table block
- * cut as a place note cuts it (BlockNote), so several parts can share one stored table.
+ * cut as a place note cuts it (BlockNote), so several parts can share one stored table. A `topic`
+ * part may give both, `rows` and then `column` of those rows (PartCut), for a table holding several
+ * conditions side by side.
  */
-export interface PharmPart extends Omit<BlockNote, "block"> {
+export interface PharmPart extends PartCut {
   id: string;
-  role: "overview" | "lo" | "card";
+  /** `topic`: shown on the meds panels of the guide topics in `topics`, on no class card. */
+  role: "overview" | "lo" | "card" | "topic";
   title: string;
   card: string | null;
   blocks: string[];
+  /** A `topic` part's guide topics (each a topic's id, as SystemJson `topics[].id`); only on a `topic` part. */
+  topics?: string[];
+}
+
+/**
+ * A cut of one table block: some rows, and/or one grid column of them. A column cut shows grid column
+ * `label` (the first column when omitted) beside `column`, for a table that pairs a name column with
+ * each notes column.
+ */
+export interface PartCut extends Omit<BlockNote, "block"> {
+  label?: number;
 }
 
 export interface PharmFile {

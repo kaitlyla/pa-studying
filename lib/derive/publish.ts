@@ -12,7 +12,7 @@ import {
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
-  PubFlag, PubGap, PubLink, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
+  PubFlag, PubGap, PubLink, PubMedsPart, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
 import { pubFigures } from "./published.ts";
@@ -259,6 +259,8 @@ export function publish(c: Content): PublishResult {
   const cuts = new Map<string, PartCut>();
   /** Row parts whose rows have all gone from her table: they show nothing, as a part whose block went. */
   const emptied = new Set<string>();
+  /** Column parts whose column no longer fits her table: they show nothing. */
+  const columnGone = new Set<string>();
   for (const pf of c.pharm) {
     const where = `content/pharm/${pf.file.id}/pharmfile.json`;
     for (const p of pf.file.parts) {
@@ -266,19 +268,29 @@ export function publish(c: Content): PublishResult {
       const b = pharmBlocks.get(p.blocks[0] as string);
       if (!b) continue;
       if (b.kind !== "table" || !tableNode(b)) throw new BuildError(p.id, `${where} part ${p.id} cuts ${b.id}, which is not a table`);
+      const column = p.column === undefined ? {} : { column: p.column, ...(p.label === undefined ? {} : { label: p.label }) };
+      if (p.column !== undefined && !columnView(b.doc, p.column, p.label)) {
+        dropped.push({ file: where, id: p.id });
+        columnGone.add(p.id);
+      }
       if (p.rows !== undefined) {
         const inTable = tableRowIds(b);
         for (const r of p.rows) if (!inTable.includes(r)) dropped.push({ file: where, id: r });
         const rows = p.rows.filter((r) => inTable.includes(r));
         if (rows.length === 0) emptied.add(p.id);
-        else cuts.set(p.id, { rows });
+        else cuts.set(p.id, { rows, ...column });
         continue;
       }
-      const column = p.column as number;
-      if (!columnView(b.doc, column)) dropped.push({ file: where, id: p.id });
-      cuts.set(p.id, { column });
+      cuts.set(p.id, column);
     }
   }
+  /** Guide topic id → the `topic` parts attached to it (content PharmPart `topics`), in file order. */
+  const topicParts = new Map<string, { part: Content["pharm"][number]["file"]["parts"][number]; file: Content["pharm"][number] }[]>();
+  for (const pf of c.pharm) {
+    for (const p of pf.file.parts) for (const t of p.topics ?? []) topicParts.set(t, [...(topicParts.get(t) ?? []), { part: p, file: pf }]);
+  }
+  /** Topic ids published so far: a topic part naming none of them names a topic no guide has. */
+  const publishedTopicIds = new Set<string>();
   /** A part as published: its blocks still stored, and its cut. */
   const pubPartOf = (part: Content["pharm"][number]["file"]["parts"][number]): { blocks: string[] } & PartCut =>
     ({ blocks: emptied.has(part.id) ? [] : part.blocks.filter((b) => pharmBlocks.has(b)), ...cuts.get(part.id) });
@@ -744,6 +756,10 @@ export function publish(c: Content): PublishResult {
     };
     files.set(navPath(gid), nav);
   }
+  for (const [topic, list] of topicParts) {
+    const first = list[0];
+    if (first && !publishedTopicIds.has(topic)) throw new BuildError(first.part.id, `pharm part is attached to topic ${topic}, which no guide has`);
+  }
 
   function systemPages(s: Sys): NavJson["systems"][number] {
     const gid = s.guide.file.id as GuideId;
@@ -762,7 +778,13 @@ export function publish(c: Content): PublishResult {
     const relevantTo = (topic: { section: string | null }): ReadonlySet<string> => new Set(panelSections[conditionKey(topic.section)] ?? []);
     const home = (card: string): ReturnType<typeof panelHome> =>
       panelHome((cardPlaces.get(card) ?? []).map((p) => ({ guide: g0(p.s), system: p.s.data.file.id, section: p.section })), gid, sys);
-    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home), s.data.below);
+    // Her pharm-notes parts attached to a topic follow the cards its notes name; a part with nothing left to show is left off.
+    const attached = (topic: { id: string }): PubMedsPart[] =>
+      (topicParts.get(topic.id) ?? [])
+        .filter(({ part }) => !columnGone.has(part.id) && pubPartOf(part).blocks.length > 0)
+        .map(({ part }) => ({ card: null, part: part.id, title: part.title, rows: [], section: null, system: null, target: part.id }));
+    const topics: PubTopic[] = publishedTopics(t, (topic) => [...medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home), ...attached(topic)], s.data.below);
+    for (const topic of topics) publishedTopicIds.add(topic.id);
     usedBlocks(topics.flatMap((x) => (x.below ? [x.below] : [])));
 
     // section pages
@@ -800,7 +822,22 @@ export function publish(c: Content): PublishResult {
         if (block) notesBlocks[b] = pub(block);
       }
     };
-    for (const topic of topics) for (const m of topic.meds) if (m.card) useCard(m.card);
+    const useTopicPart = (id: string): void => {
+      const p = parts.get(id);
+      if (!p || partsOut[id]) return;
+      const out: PubPart = { title: p.part.title, role: "topic", file: p.file.file.fileName, basePt: p.file.file.basePt, ...pubPartOf(p.part) };
+      partsOut[id] = out;
+      for (const b of out.blocks) {
+        const block = pharmBlocks.get(b);
+        if (block) notesBlocks[b] = pub(block);
+      }
+    };
+    for (const topic of topics) {
+      for (const m of topic.meds) {
+        if (m.part !== undefined) useTopicPart(m.part);
+        else if (m.card) useCard(m.card);
+      }
+    }
     let pharm: SystemJson["pharm"] = null;
     if (hasPharm(s.pharm, placements)) {
       const pharmSections: PubPharmSection[] = st.pharmSections.map((ps) => {

@@ -460,6 +460,37 @@ describe("pharm (20 §20.6, §20.7)", () => {
     ])("refuses %s", (_name, parts, message) => {
       expect(verdict(path, pf(parts))).toMatch(message);
     });
+
+    describe("topic parts (shown on the meds panels of named guide topics)", () => {
+      const [h, T1] = [id("r", 10), id("r", 20)];
+      const topicPart = (n: number, cut: { rows?: string[]; column?: number; label?: number }, topics: unknown = [T1]) =>
+        ({ ...part(n, "topic", [b2]), ...cut, topics });
+      const around = (...cuts: unknown[]) => pf([part(1, "overview", [b1]), ...cuts, part(9, "lo", [b3])]);
+
+      it("accepts a topic part whole, by rows sharing a card's heading row, or by rows and one column of them", () => {
+        expect(verdict(path, pf([part(1, "overview", [b1]), { ...part(2, "topic", [b2, b3]), topics: [T1] }]))).toBe("ok");
+        expect(verdict(path, around(rowsPart(2, C1, [h, r1]), topicPart(3, { rows: [h, r2] })))).toBe("ok");
+        expect(verdict(path, around(topicPart(2, { rows: [h, r1], column: 1 }), topicPart(3, { rows: [h, r1], column: 2 }), topicPart(4, { rows: [h, r2], column: 3, label: 2 })))).toBe("ok");
+        // A card part showing the whole heading row shares it with a topic part cutting a column of it.
+        expect(verdict(path, around(rowsPart(2, C1, [h, r1]), topicPart(3, { rows: [h, r2], column: 1 })))).toBe("ok");
+      });
+
+      it.each([
+        ["topics on a card part", [{ ...rowsPart(2, C1, [r1]), topics: [T1] }], /\.parts\[1\]\.topics: expected topics exactly when role is topic/],
+        ["a topic part without topics", [{ ...part(2, "topic", [b2]), rows: [r1] }], /\.parts\[1\]\.topics: expected topics exactly when role is topic/],
+        ["a topic part with no topic", [topicPart(2, { rows: [r1] }, [])], /\.parts\[1\]\.topics: expected at least one topic id/],
+        ["a topic id that is not a row id", [topicPart(2, { rows: [r1] }, ["Myasthenia"])], /\.parts\[1\]\.topics\[0\]: expected an? r_/],
+        ["a topic part with a card", [{ ...topicPart(2, { rows: [r1] }), card: C1 }], /\.parts\[1\]\.card: expected a card id exactly when role is card/],
+        ["a label on a card part", [{ ...colPart(2, C1, 2), label: 1 }], /\.parts\[1\]\.label: expected a column left of `column`, only on a topic part/],
+        ["a label on a topic part with no column", [topicPart(2, { rows: [r1], label: 0 })], /\.parts\[1\]\.label: expected a column left of `column`/],
+        ["a label not left of the column", [topicPart(2, { rows: [r1], column: 2, label: 2 })], /\.parts\[1\]\.label: expected a column left of `column`/],
+        ["two topic parts showing the same column of the same rows", [topicPart(2, { rows: [h, r1], column: 1 }), topicPart(3, { rows: [h, r1], column: 1 })], /\.parts\[1\]: expected rows of the part's own besides those shared/],
+        ["a whole row part covering a topic part's cell", [rowsPart(2, C1, [h, r1]), topicPart(3, { rows: [h, r1], column: 1 })], /\.parts\[1\]: expected rows of the part's own besides those shared/],
+        ["a topic part's column after a column run", [colPart(2, C1, 1), topicPart(3, { rows: [r1], column: 2 })], /\.parts\[2\]: expected column like the parts before it/],
+      ])("refuses %s", (_name, cuts, message) => {
+        expect(verdict(path, around(...cuts))).toMatch(message);
+      });
+    });
   });
 
   it("validates cards.json", () => {

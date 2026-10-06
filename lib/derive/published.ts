@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { BlockNote, DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -215,8 +215,11 @@ export interface PubRow {
   topic: string | null;
 }
 
-export interface PubMedsCard {
+export type PubMedsCard = PubMedsClass | PubMedsPart;
+
+export interface PubMedsClass {
   card: string | null;
+  part?: undefined;
   title: string;
   /** Row ids, each run preceded once by its heading row id; [] for a card with no row in the system. */
   rows: string[];
@@ -229,6 +232,21 @@ export interface PubMedsCard {
   /** The guide's system holding `section`; null when it is another guide's, so the card shows without a link. */
   system: string | null;
   /** Scroll target: the card id, or the row id for a card-less row. */
+  target: string;
+}
+
+/**
+ * A `topic` part of her pharm notes attached to the topic (content PharmPart `topics`), after the
+ * cards: SystemJson `parts[part]`, in no pharm section, so with no link.
+ */
+export interface PubMedsPart {
+  card: null;
+  part: string;
+  title: string;
+  rows: [];
+  section: null;
+  system: null;
+  /** Scroll target: the part id. */
   target: string;
 }
 
@@ -286,8 +304,8 @@ export interface PubCard {
   parts: ({ id: string; blocks: string[]; file: string; basePt: number; for?: string[] } & PartCut)[];
 }
 
-/** A pharm part's cut of its one table block (content PharmPart `column` / `rows`). */
-export type PartCut = Omit<BlockNote, "block">;
+/** A pharm part's cut of its one table block (content PharmPart `rows` / `column` / `label`). */
+export type { PartCut };
 
 /**
  * A pharm-notes line judged written for one use (content/pharm/uses.json): it shows only where one
@@ -310,7 +328,7 @@ export interface PubTrimLine {
 
 export interface PubPart extends PartCut {
   title: string;
-  role: "overview" | "lo";
+  role: "overview" | "lo" | "topic";
   file: string;
   basePt: number;
   blocks: string[];

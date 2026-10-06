@@ -79,6 +79,25 @@ describe("columnView: one column of a table, under its first-row text", () => {
     expect(shape(columnView(doc, 1)?.doc as DocJSON)).toEqual([["a", "Vitamin", "x1"], ["b", "Toxicity", "None"]]);
   });
 
+  it("shows grid column `label` beside the chosen column instead of the first, giving it its own width", () => {
+    // Pairs of name and notes columns: label 2 names the condition whose notes are column 3.
+    const pairs = tableOf([50, 80, 60, 90], [
+      ["h", "Disease", "Tx", "Disease", "Tx"],
+      ["a", "Labyrinthitis", "Steroids", "Ramsay-Hunt", "Valacyclovir"],
+      ["b", { text: "All: rest", colspan: 4 }],
+    ]);
+    const view = columnView(pairs, 3, 2);
+    expect(view?.title).toBe("Tx");
+    expect(shape(view?.doc as DocJSON)).toEqual([["a", "Ramsay-Hunt", "Valacyclovir"], ["b", "All: rest|c2"]]);
+    expect(((view?.doc as DocJSON).content[0] as PMNode).attrs?.grid).toEqual([60, 220]);
+  });
+
+  it("is null for a label column not left of the chosen one", () => {
+    expect(columnView(vitamins, 2, 2)).toBeNull();
+    expect(columnView(vitamins, 1, 2)).toBeNull();
+    expect(columnView(vitamins, 2, -1)).toBeNull();
+  });
+
   it("is null for a doc that is not one table, or a column the table does not have", () => {
     expect(columnView(vitamins, 0)).toBeNull();
     expect(columnView(vitamins, 4)).toBeNull();
@@ -155,6 +174,21 @@ describe("noteView: a stored block's doc as a note shows it whole, cut to rows, 
     expect(noteView(vitamins, { rows: ["r2"] }, head)).toEqual({ title: null, doc: rowsView(vitamins, ["r2"]) });
     expect(noteView(vitamins, { rows: ["r2"] }, { firstRow: false })).toEqual({ title: null, doc: rowsView(vitamins, ["r2"], { firstRow: false }) });
     expect(noteView(vitamins, { column: 3 }, head)).toEqual(columnView(vitamins, 3));
+  });
+
+  it("cuts the rows and then that column of them for both, titled by the column's text in the first kept row", () => {
+    const specific = tableOf([60, 100, 100], [
+      ["h1", "", "Hemophilia A", "Hemophilia B"],
+      ["a", "Tx", "Factor VIII", "Factor IX"],
+      ["h2", "", "Acute ITP", "Chronic ITP"],
+      ["b", "Tx", "Steroids, IVIG", "Splenectomy"],
+    ]);
+    const view = noteView(specific, { rows: ["h2", "b"], column: 2 }, { firstRow: false });
+    expect(view?.title).toBe("Chronic ITP");
+    expect(shape(view?.doc as DocJSON)).toEqual([["b", "Tx", "Splenectomy"]]);
+    expect(shape(noteView(specific, { rows: ["h2", "b"], column: 2, label: 1 }, { firstRow: false })?.doc as DocJSON)).toEqual([["b", "Steroids, IVIG", "Splenectomy"]]);
+    expect(noteView(specific, { rows: ["h2", "b"], column: 2, label: 2 }, { firstRow: false })).toBeNull();
+    expect(noteView(specific, { rows: ["zz"], column: 2 }, { firstRow: false })).toBeNull();
   });
 
   it("is null when the cut does not apply to the doc", () => {
