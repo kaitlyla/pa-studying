@@ -352,9 +352,15 @@ export function places(c: Content, draft: { reftabs?: RefTabsFile; other?: Other
   const targets = targetIds(c);
   const docs = new Set(c.docs.keys());
   const gaps = new Set(c.gaps.keys());
-  const wordBlocks = new Set([...c.docs.values()].flatMap((d) => (d.kind === "word" && d.file.removed === null ? d.blocks.map((b) => b.id) : [])));
-  const checkNotes = (notes: readonly (PlaceNote | OtherNote)[] | undefined, where: string): void =>
+  const blockRows = new Map([...c.docs.values()].flatMap((d) => (
+    d.kind === "word" && d.file.removed === null ? d.blocks.map((b) => [b.id, (tableNode(b)?.content ?? []).map((r) => String(r.attrs?.id))] as const) : []
+  )));
+  const wordBlocks = new Set(blockRows.keys());
+  const checkNotes = (notes: readonly (PlaceNote | OtherNote)[] | undefined, where: string): void => {
     requireIds((notes ?? []).flatMap((n) => ("block" in n ? [n.block] : [])), wordBlocks, `${where} notes`);
+    // A note's rows are rows of its own block.
+    for (const n of notes ?? []) if ("block" in n && n.rows) requireIds(n.rows, new Set(blockRows.get(n.block)), `${where} notes ${n.block} rows`);
+  };
   const changes: Change[] = [];
   if (draft.reftabs !== undefined) {
     for (const tab of ["labs", "imaging", "ekg", "anatomy"] as const) {

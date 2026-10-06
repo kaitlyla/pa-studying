@@ -31,7 +31,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Legal status:"
+      "text": "Legal status:"
      },
      {
       "type": "text",
@@ -66,7 +66,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Admitting diagnosis:"
+      "text": "Admitting diagnosis:"
      },
      {
       "type": "text",
@@ -101,7 +101,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Reasons for admission:"
+      "text": "Reasons for admission:"
      },
      {
       "type": "text",
@@ -136,7 +136,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Social history:"
+      "text": "Social history:"
      },
      {
       "type": "text",
@@ -171,7 +171,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Neuro exam:"
+      "text": "Neuro exam:"
      },
      {
       "type": "text",
@@ -206,11 +206,11 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (psychiatric hospital admission) — Psychiatric evaluation:"
+      "text": "Psychiatric evaluation:"
      },
      {
       "type": "text",
-      "text": " completed within 60 hours of admission, with a medical history, mental status, onset of illness and circumstances leading to admission, attitudes and behavior, estimates of intellectual functioning, memory and orientation, and an inventory of the patient's assets written descriptively, not interpretively."
+      "text": " a medical history, a record of mental status, the onset of illness and circumstances leading to admission, attitudes and behavior, estimates of intellectual functioning, memory and orientation, and an inventory of the patient's assets written descriptively, not interpretively."
      }
     ]
    },
@@ -241,124 +241,19 @@
         "type": "bold"
        }
       ],
-      "text": "Progress (treatment plan and progress notes) — Treatment plan:"
+      "text": "Mental status exam:"
      },
      {
       "type": "text",
-      "text": " an individual comprehensive plan based on the patient's strengths and disabilities, with a substantiated diagnosis, short-term and long-range goals, the specific treatment modalities, each team member's responsibilities, and documentation that justifies the diagnosis and treatment."
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Progress (treatment plan and progress notes) — Progress notes:"
-     },
-     {
-      "type": "text",
-      "text": " at least weekly for the first 2 months and at least monthly after that, with recommendations for treatment-plan revisions and a precise assessment of progress against the plan."
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Consult — Billing a consult (Medicare):"
-     },
-     {
-      "type": "text",
-      "text": " Medicare doesn't pay the CPT consultation codes (inpatient 99252-99255, office/outpatient 99242-99245); report the correct E/M visit code for the consult instead."
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "D/C (discharge summary) — Discharge summary:"
-     },
-     {
-      "type": "text",
-      "text": " a recap of the hospitalization, recommendations from appropriate services on follow-up or aftercare, and a brief summary of the patient's condition at discharge."
+      "text": " speech (rate, volume, articulation, coherence, spontaneity); thought processes (rate, content, abstract reasoning, computation); associations; abnormal or psychotic thoughts (hallucinations, delusions, preoccupation with violence, homicidal or suicidal ideation, obsessions); judgment and insight; orientation; recent and remote memory; attention and concentration; language; fund of knowledge; mood and affect."
      }
     ]
    }
   ]
  },
  "meta": {
-  "title": "Documentation by EOR — Psychiatry",
-  "relevantTo": "Psychiatry EOR: admission intake and psychiatric evaluation, treatment plan and progress, consult and discharge",
+  "title": "Psychiatry — H&P (psychiatric evaluation)",
+  "relevantTo": "Psychiatry EOR: admission and psychiatric evaluation",
   "written": "2026-10",
   "differs": null,
   "sources": [
@@ -371,10 +266,10 @@
     "track": null
    },
    {
-    "name": "Evaluation and Management Services Guide (MLN006764)",
-    "org": "Centers for Medicare & Medicaid Services, Medicare Learning Network",
-    "year": "2026",
-    "url": "https://www.cms.gov/outreach-and-education/medicare-learning-network-mln/mlnproducts/downloads/eval-mgmt-serv-guide-icn006764.pdf",
+    "name": "1997 Documentation Guidelines for Evaluation and Management Services",
+    "org": "Centers for Medicare & Medicaid Services (CMS)",
+    "year": "1997",
+    "url": "https://www.cms.gov/outreach-and-education/medicare-learning-network-mln/mlnedwebguide/downloads/97docguidelines.pdf",
     "type": "reference",
     "track": null
    }

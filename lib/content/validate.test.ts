@@ -624,10 +624,22 @@ describe("places (20 §20.8)", () => {
     const reftabs = (notes: unknown) => verdict("content/places/reftabs.json", { v: 1, labs: withNotes(notes), imaging: empty, ekg: empty, anatomy: empty });
     expect(reftabs([{ heading: "Fat-soluble" }, { block: id("b", 1) }, { block: id("b", 1), column: 3 }])).toBe("ok");
     for (const bad of [[{ heading: "" }], [{ block: G1 }], [{ block: id("b", 1), column: 0 }], [{ block: id("b", 1), column: 1.5 }], [{ heading: "x", block: id("b", 1) }], [{}]]) {
-      expect(reftabs(bad), JSON.stringify(bad)).toMatch(/notes\[0\]: expected a note: \{ heading \} or \{ block, column\? \}/);
+      expect(reftabs(bad), JSON.stringify(bad)).toMatch(/notes\[0\]: expected a note: \{ heading \} or \{ block, column\? \| rows\? \}/);
     }
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: id("b", 1), column: 2 }] } : s)))).toBe("ok");
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: D1 }] } : s)))).toMatch(/notes\[0\]/);
+  });
+
+  it("validates a block note's rows: one or more distinct row ids, and never together with a column", () => {
+    const vit = (notes: unknown) => verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes } : s)));
+    const B = id("b", 1);
+    expect(vit([{ block: B, rows: [id("r", 1)] }, { block: B, rows: [id("r", 2), id("r", 1)] }])).toBe("ok");
+    for (const bad of [{ block: B, rows: [] }, { block: B, rows: [id("r", 1), id("r", 1)] }, { block: B, rows: [id("b", 2)] }, { block: B, rows: id("r", 1) }, { block: B, column: 1, rows: [id("r", 1)] }]) {
+      expect(vit([bad]), JSON.stringify(bad)).toMatch(/notes\[0\]: expected an outline item/);
+    }
+    const empty = { subs: [], files: [] };
+    const labs = { subs: [{ id: "cbc", title: "CBC", notes: [{ block: B, rows: [id("r", 1)] }], links: [], gaps: [] }], files: [] };
+    expect(verdict("content/places/reftabs.json", { v: 1, labs, imaging: empty, ekg: empty, anatomy: empty })).toBe("ok");
   });
 
   describe("an Other section's outline", () => {

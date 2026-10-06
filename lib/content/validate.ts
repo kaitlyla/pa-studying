@@ -13,7 +13,7 @@ import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts
 import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
-  AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
+  AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
@@ -479,10 +479,20 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
 const columnC: Checker = (v, at, ctx) => {
   if (!Number.isInteger(v) || (v as number) < 1) bad(ctx, at, "a column number (1 or more)", v);
 };
+const rowsC: Checker = (v, at, ctx) => {
+  uniqueArr(id("r"))(v, at, ctx);
+  if ((v as unknown[]).length === 0) bad(ctx, at, "at least one row id", v);
+};
+/** A Word block, whole, cut to one column, or cut to some rows — not both. */
+const blockNote: Checker = (v, at, ctx) => {
+  shapeOf<BlockNote>({ block: id("b") }, { column: columnC, rows: rowsC })(v, at, ctx);
+  const n = v as BlockNote;
+  if (n.column !== undefined && n.rows !== undefined) bad(ctx, at, "column or rows, not both", v);
+};
 const placeNote = either(
-  "a note: { heading } or { block, column? }",
+  "a note: { heading } or { block, column? | rows? }",
   shapeOf<Extract<PlaceNote, { heading: string }>>({ heading: nonEmpty }, {}),
-  shapeOf<Extract<PlaceNote, { block: string }>>({ block: id("b") }, { column: columnC }),
+  blockNote,
 );
 const placeNotes = arr(placeNote);
 
@@ -516,9 +526,9 @@ const subFlag: Checker = (v, at, ctx) => {
   if (v !== true) bad(ctx, at, "true", v);
 };
 const otherNote = either(
-  "an outline item: { heading, sub? }, { block, column? }, { doc }, { original }, { gap } or { link }",
+  "an outline item: { heading, sub? }, { block, column? | rows? }, { doc }, { original }, { gap } or { link }",
   shapeOf<Extract<OtherNote, { heading: string }>>({ heading: nonEmpty }, { sub: subFlag }),
-  shapeOf<Extract<OtherNote, { block: string }>>({ block: id("b") }, { column: columnC }),
+  blockNote,
   shapeOf<Extract<OtherNote, { doc: string }>>({ doc: id("d") }, {}),
   shapeOf<Extract<OtherNote, { original: string }>>({ original: id("d") }, {}),
   shapeOf<Extract<OtherNote, { gap: string }>>({ gap: id("g") }, {}),

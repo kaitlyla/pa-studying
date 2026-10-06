@@ -31,7 +31,7 @@
         "type": "bold"
        }
       ],
-      "text": "Annual (well-child visit) — Behind schedule:"
+      "text": "Well-child visit — Behind schedule:"
      },
      {
       "type": "text",
@@ -66,7 +66,7 @@
         "type": "bold"
        }
       ],
-      "text": "Annual (well-child visit) — Exam:"
+      "text": "Well-child visit — Exam:"
      },
      {
       "type": "text",
@@ -101,7 +101,7 @@
         "type": "bold"
        }
       ],
-      "text": "Annual (well-child visit) — Adolescents:"
+      "text": "Well-child visit — Adolescents:"
      },
      {
       "type": "text",
@@ -136,7 +136,7 @@
         "type": "bold"
        }
       ],
-      "text": "Annual (well-child visit) — Substance use:"
+      "text": "Well-child visit — Substance use:"
      },
      {
       "type": "text",
@@ -171,7 +171,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (prenatal and newborn visits) — Prenatal visit:"
+      "text": "Prenatal and newborn visits — Prenatal visit:"
      },
      {
       "type": "text",
@@ -206,7 +206,7 @@
         "type": "bold"
        }
       ],
-      "text": "Intake (prenatal and newborn visits) — Newborn follow-up:"
+      "text": "Prenatal and newborn visits — Newborn follow-up:"
      },
      {
       "type": "text",
@@ -241,54 +241,19 @@
         "type": "bold"
        }
       ],
-      "text": "H&P (sick visit) — Independent historian:"
+      "text": "Prenatal and newborn visits — Newborn history:"
      },
      {
       "type": "text",
-      "text": " someone (eg, a parent or guardian) who gives a history in addition to the patient's, because the patient can't give a complete or reliable one (eg, developmental stage) or a confirmatory history is needed. Translation services don't count."
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Progress — Progress:"
-     },
-     {
-      "type": "text",
-      "text": " document the patient's progress, response to and changes in treatment, and any revision of the diagnosis."
+      "text": " the HPI can include the mother's pregnancy and the infant's status at birth; social history focuses on family structure, and family history on congenital anomalies and hereditary disorders."
      }
     ]
    }
   ]
  },
  "meta": {
-  "title": "Documentation by EOR — Pediatrics",
-  "relevantTo": "Pediatrics EOR: well-child (annual), prenatal and newborn visits, sick-visit H&P and progress",
+  "title": "Pediatrics — H&P (well-child, newborn)",
+  "relevantTo": "Pediatrics EOR: well-child, prenatal and newborn visits",
   "written": "2026-10",
   "differs": null,
   "sources": [
@@ -301,18 +266,10 @@
     "track": null
    },
    {
-    "name": "CPT Evaluation and Management (E/M) Services Guidelines",
-    "org": "American Medical Association (AMA)",
-    "year": "2023",
-    "url": "https://www.ama-assn.org/system/files/2023-e-m-descriptors-guidelines.pdf",
-    "type": "reference",
-    "track": null
-   },
-   {
-    "name": "Evaluation and Management Services Guide (MLN006764)",
-    "org": "Centers for Medicare & Medicaid Services, Medicare Learning Network",
-    "year": "2026",
-    "url": "https://www.cms.gov/outreach-and-education/medicare-learning-network-mln/mlnproducts/downloads/eval-mgmt-serv-guide-icn006764.pdf",
+    "name": "1997 Documentation Guidelines for Evaluation and Management Services",
+    "org": "Centers for Medicare & Medicaid Services (CMS)",
+    "year": "1997",
+    "url": "https://www.cms.gov/outreach-and-education/medicare-learning-network-mln/mlnedwebguide/downloads/97docguidelines.pdf",
     "type": "reference",
     "track": null
    }

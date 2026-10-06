@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { DocJSON } from "../content/types.ts";
-import { columnView } from "./columns.ts";
+import { columnView, rowsView } from "./columns.ts";
 import { nodeText, type PMNode } from "./text.ts";
 
 type Cell = string | { text: string; colspan?: number; rowspan?: number };
@@ -85,5 +85,50 @@ describe("columnView: one column of a table, under its first-row text", () => {
     expect(columnView(vitamins, 1.5)).toBeNull();
     expect(columnView({ type: "doc", content: [{ type: "paragraph" }] }, 1)).toBeNull();
     expect(columnView({ type: "doc", content: [...vitamins.content, { type: "paragraph" }] }, 1)).toBeNull();
+  });
+});
+
+describe("rowsView: a table's header row and the chosen rows", () => {
+  const screens = tableOf([60, 100], [
+    ["h", "Screening", "Who"],
+    ["t", "Tobacco", "Adults"],
+    ["d", "Depression", "12 and older"],
+    ["u", "Drug use", "18 and older"],
+  ]);
+
+  it("keeps the first row and the listed rows in table order, whatever order they are listed in", () => {
+    expect(shape(rowsView(screens, ["u", "t"]) as DocJSON)).toEqual([["h", "Screening", "Who"], ["t", "Tobacco", "Adults"], ["u", "Drug use", "18 and older"]]);
+  });
+
+  it("keeps the table's attributes, grid and row attributes unchanged", () => {
+    const table = (rowsView(screens, ["d"]) as DocJSON).content[0] as PMNode;
+    expect(table.attrs).toEqual({ grid: [60, 100], cellMarginPt: 0 });
+    expect((table.content ?? [])[1]?.attrs).toEqual({ id: "d", kind: "content" });
+    expect((table.content ?? [])[1]?.content?.[0]?.attrs).toEqual({ colspan: 1, rowspan: 1, colwidth: [60], fill: null });
+  });
+
+  it("lists the header once when it is also listed, and only the header for no matching rows", () => {
+    expect(shape(rowsView(screens, ["h", "d"]) as DocJSON)).toEqual([["h", "Screening", "Who"], ["d", "Depression", "12 and older"]]);
+    expect(shape(rowsView(screens, ["zz"]) as DocJSON)).toEqual([["h", "Screening", "Who"]]);
+  });
+
+  it("places merged cells on the grid: a span is cut to the kept rows it covers, and starts on the first kept one", () => {
+    const doc = tableOf([60, 100, 100], [
+      ["h", "Topic", "Grade", "Who"],
+      ["a", { text: "Cancer", rowspan: 3 }, "A", "Cervical"],
+      ["b", "B", "Breast"],
+      ["c", "B", "Lung"],
+      ["n", { text: "Note: grades as of 2026", colspan: 3 }],
+    ]);
+    // The label spans a, b, c; with b and c kept it starts on b, spanning two rows.
+    expect(shape(rowsView(doc, ["b", "c"]) as DocJSON)).toEqual([["h", "Topic", "Grade", "Who"], ["b", "Cancer|r2", "B", "Breast"], ["c", "B", "Lung"]]);
+    // With a and c kept, the label covers both (b is left out) and stays on a.
+    expect(shape(rowsView(doc, ["c", "a"]) as DocJSON)).toEqual([["h", "Topic", "Grade", "Who"], ["a", "Cancer|r2", "A", "Cervical"], ["c", "B", "Lung"]]);
+    expect(shape(rowsView(doc, ["n"]) as DocJSON)).toEqual([["h", "Topic", "Grade", "Who"], ["n", "Note: grades as of 2026|c3"]]);
+  });
+
+  it("is null for a doc that is not one table", () => {
+    expect(rowsView({ type: "doc", content: [{ type: "paragraph" }] }, ["t"])).toBeNull();
+    expect(rowsView({ type: "doc", content: [...screens.content, { type: "paragraph" }] }, ["t"])).toBeNull();
   });
 });

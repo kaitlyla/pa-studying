@@ -358,6 +358,13 @@ describe("general and places", () => {
     // A guide block is a block, but not one of her Word pages'.
     cbc.notes = [{ block: B(10) }];
     await refused(["places", await draft("n2", { reftabs })], new RegExp(`${B(10)} names nothing`), files);
+
+    // A note's rows must be rows of its own block: a row of another table names nothing there.
+    cbc.notes = [{ block: B(61), rows: [R(601)] }];
+    await run(root, ["places", await draft("n3", { reftabs })]);
+    expect((await read<RefTabsFile>("content/places/reftabs.json")).labs.subs[0]?.notes).toEqual([{ block: B(61), rows: [R(601)] }]);
+    cbc.notes = [{ block: B(61), rows: [R(601), R(140)] }];
+    await refused(["places", await draft("n4", { reftabs })], new RegExp(`${B(61)} rows: ${R(140)} names nothing`), files);
   });
 });
 

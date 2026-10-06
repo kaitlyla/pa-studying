@@ -1,164 +1,24 @@
 {
  "v": 1,
- "author": "ivan-80801",
+ "author": "leah-45003",
  "claims": [
   {
-   "text": "Intake (new patient) — New vs established: a new patient has had no professional services from you, or from another physician of the same specialty in the same group practice, within the previous 3 years.",
+   "text": "Medical history (Medicare's minimum list): past medical and surgical history (illnesses, hospital stays, operations, allergies, injuries, treatments); current medications and supplements, including calcium and vitamins; family history, including diseases that may be hereditary or raise the patient's risk.",
    "source": 0,
-   "quote": "New Patient: A person who didn't receive any professional services from the physician, NPP, or another physician of the same specialty who belongs to the same group practice within the previous 3 years.",
-   "locator": "New & Established Patients",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Intake (new patient) — Medical history (Medicare's minimum list): past medical and surgical history (illnesses, hospital stays, operations, allergies, injuries, treatments); current medications and supplements, including calcium and vitamins; family history, including diseases that may be hereditary or raise the patient's risk.",
-   "source": 1,
    "quote": "Medical history is defined to include, at a minimum, the following: (1) Past medical and surgical history, including experiences with illnesses, hospital stays, operations, allergies, injuries, and treatments. (2) Current medications and supplements, including calcium and vitamins. (3) Family history, including a review of medical events in the beneficiary's family, including diseases that may be hereditary or place the individual at risk.",
    "locator": "§ 410.16(a), definition of medical history",
    "accessed": "2026-10-05"
   },
   {
-   "text": "Intake (new patient) — Social history (Medicare's minimum list): alcohol, tobacco and illicit drug use; diet; physical activities.",
-   "source": 1,
+   "text": "Social history (Medicare's minimum list): alcohol, tobacco and illicit drug use; diet; physical activities.",
+   "source": 0,
    "quote": "Social history is defined to include, at a minimum, the following: (1) History of alcohol, tobacco, and illicit drug use. (2) Diet. (3) Physical activities.",
    "locator": "§ 410.16(a), definition of social history",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Progress / follow-up — Progress: document the patient's progress, response to and changes in treatment, and any revision of the diagnosis.",
-   "source": 0,
-   "quote": "You should document the patient's progress, response to and changes in treatment, and revision of diagnosis",
-   "locator": "Documentation Guidelines for E/M Services",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Progress / follow-up — Problem addressed: a problem counts as addressed only when you evaluate or treat it at the visit (including considering tests or treatment that end up not chosen, after weighing risk and benefit or by patient choice). Noting that another clinician manages it, without your own assessment or care coordination, does not count.",
-   "source": 4,
-   "quote": "A problem is addressed or managed when it is evaluated or treated at the encounter by the physician or other qualified health care professional reporting the service. This includes consideration of further testing or treatment that may not be elected by virtue of risk/benefit analysis or patient/parent/guardian/surrogate choice. Notation in the patient's medical record that another professional is managing the problem without additional assessment or care coordination documented does not qualify as being addressed or managed by the physician or other qualified health care professional reporting the service.",
-   "locator": "Number and Complexity of Problems Addressed, definitions",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Annual (routine physical) — Medicare and routine physicals: Medicare excludes routine physical checkups (exams for a purpose other than treating or diagnosing a specific illness, symptom, complaint or injury), except listed screenings, the initial preventive physical exam and the annual wellness visit.",
-   "source": 2,
-   "quote": "(a) Routine physical checkups such as: (1) Examinations performed for a purpose other than treatment or diagnosis of a specific illness, symptoms, complaint, or injury, except for screening mammography, colorectal cancer screening tests, screening pelvic exams, prostate cancer screening tests, glaucoma screening exams, ultrasound screening for abdominal aortic aneurysms (AAA), cardiovascular disease screening tests, diabetes screening tests, a screening electrocardiogram, initial preventive physical examinations that meet the criteria specified in paragraphs (k)(6) through (k)(15) of this section, additional preventive services that meet the criteria in § 410.64 of this chapter, or annual wellness visits providing personalized prevention plan services.",
-   "locator": "§ 411.15(a)(1)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — IPPE timing: the initial preventive physical examination must be within 1 year after the start of the patient's first Medicare Part B coverage.",
-   "source": 1,
-   "quote": "Eligible beneficiary means, for the purposes of this section, an individual who receives his or her initial preventive examination not more than 1 year after the effective date of his or her first Medicare Part B coverage period.",
-   "locator": "§ 410.16(a), eligible beneficiary",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — IPPE contents: review of medical and social history (focus on modifiable risk factors); depression risk review with a screening tool; functional ability and level of safety; exam with height, weight, BMI, blood pressure and a visual acuity screen.",
-   "source": 1,
-   "quote": "(1) Review of the beneficiary's medical and social history with attention to modifiable risk factors for disease, as those terms are defined in this section. (2) Review of the beneficiary's potential (risk factors) for depression, including current or past experiences with depression or other mood disorders, based on the use of an appropriate screening instrument for persons without a current diagnosis of depression, which the physician or other qualified nonphysician practitioner may select from various available standardized screening tests designed for this purpose and recognized by national professional medical organizations. (3) Review of the beneficiary's functional ability, and level of safety as those terms are defined in this section, as described in paragraph (4) of this definition, based on the use of appropriate screening questions or a screening questionnaire, which the physician or other qualified nonphysician practitioner may select from various available screening questions or standardized questionnaires designed for this purpose and recognized by national professional medical organizations. (4) An examination to include measurement of the beneficiary's height, weight, body mass index, blood pressure, a visual acuity screen, and other factors as deemed appropriate, based on the beneficiary's medical and social history, and current clinical standards.",
-   "locator": "§ 410.16(a), initial preventive physical examination (1)–(4)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — IPPE contents, continued: end-of-life planning if the patient agrees; review of current opioid prescriptions; screening for substance use disorders; education, counseling and referral, including a brief written plan (eg, a checklist) for the screening and preventive services Medicare covers.",
-   "source": 1,
-   "quote": "(5) End-of-life planning as that term is defined in this section upon agreement with the individual. (6) A review of any current opioid prescriptions as defined in this section. (7) Screening for potential substance use disorders to include a review of the individual's potential risk factors for substance use disorder and referral for treatment as appropriate. (8) Education, counseling, and referral, as deemed appropriate by the physician or qualified nonphysician practitioner, based on the results of the review and evaluation services described in this section. (9) Education, counseling, and referral, including a brief written plan such as a checklist provided to the individual for obtaining an electrocardiogram, as appropriate, and the appropriate screening and other preventive services that are covered as separate Medicare Part B benefits",
-   "locator": "§ 410.16(a), initial preventive physical examination (5)–(9)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — Functional ability and safety (minimum): hearing impairment; activities of daily living; falls risk; home safety.",
-   "source": 1,
-   "quote": "Review of the beneficiary's functional ability and level of safety must include, at a minimum, a review of the following areas: (1) Hearing impairment. (2) Activities of daily living. (3) Falls risk. (4) Home safety",
-   "locator": "§ 410.16(a), functional ability and level of safety",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — AWV eligibility: past the first 12 months of Part B, with no IPPE or AWV in the past 12 months.",
-   "source": 3,
-   "quote": "Eligible beneficiary means an individual who is no longer within 12 months after the effective date of his or her first Medicare Part B coverage period and who has not received either an initial preventive physical examination or an annual wellness visit providing a personalized prevention plan within the past 12 months.",
-   "locator": "§ 410.15(a), eligible beneficiary",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — First AWV: review the health risk assessment; establish the medical and family history and a list of the patient's current providers and suppliers; measure height, weight, BMI (or waist circumference) and blood pressure; detect any cognitive impairment.",
-   "source": 3,
-   "quote": "(i) Review (and administration if needed) of a health risk assessment (as defined in this section). (ii) Establishment of an individual's medical and family history. (iii) Establishment of a list of current providers and suppliers that are regularly involved in providing medical care to the individual. (iv) Measurement of an individual's height, weight, body-mass index (or waist circumference, if appropriate), blood pressure, and other routine measurements as deemed appropriate, based on the beneficiary's medical and family history. (v) Detection of any cognitive impairment that the individual may have, as that term is defined in this section.",
-   "locator": "§ 410.15(a), first annual wellness visit (i)–(v)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — First AWV, continued: review depression risk (with a screening instrument) and functional ability and level of safety; set up a written screening schedule (eg, a checklist for the next 5 to 10 years) based on USPSTF and ACIP recommendations, plus a list of risk factors and conditions with interventions recommended or underway.",
-   "source": 3,
-   "quote": "(vi) Review of the individual's potential (risk factors) for depression, including current or past experiences with depression or other mood disorders, based on the use of an appropriate screening instrument for persons without a current diagnosis of depression, which the health professional may select from various available standardized screening tests designed for this purpose and recognized by national medical professional organizations. (vii) Review of the individual's functional ability and level of safety, based on direct observation or the use of appropriate screening questions or a screening questionnaire, which the health professional as defined in this section may select from various available screening questions or standardized questionnaires designed for this purpose and recognized by national professional medical organizations. (viii) Establishment of the following: (A) A written screening schedule for the individual such as a checklist for the next 5 to 10 years, as appropriate, based on recommendations of the United States Preventive Services Task Force and the Advisory Committee on Immunization Practices, and the individual's health risk assessment (as that term is defined in this section), health status, screening history, and age-appropriate preventive services covered by Medicare. (B) A list of risk factors and conditions for which primary, secondary or tertiary interventions are recommended or are underway for the individual",
-   "locator": "§ 410.15(a), first annual wellness visit (vi)–(viii)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — First AWV, continued: personalized health advice and referrals; advance care planning at the patient's discretion; review of current opioid prescriptions; screening for substance use disorders.",
-   "source": 3,
-   "quote": "(ix) Furnishing of personalized health advice to the individual and a referral, as appropriate, to health education or preventive counseling services or programs aimed at reducing identified risk factors and improving self management, or community-based lifestyle interventions to reduce health risks and promote self-management and wellness, including weight loss, physical activity, smoking cessation, fall prevention, and nutrition. (x) At the discretion of the beneficiary, furnish advance care planning services to include discussion about future care decisions that may need to be made, how the beneficiary can let others know about care preferences, and explanation of advance directives which may involve the completion of standard forms. (xi) Furnishing of a review of any current opioid prescriptions as that term is defined in this section. (xii) Screening for potential substance use disorders including a review of the individual's potential risk factors for substance use disorder and referral for treatment as appropriate.",
-   "locator": "§ 410.15(a), first annual wellness visit (ix)–(xii)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — Health risk assessment: self-reported, takes no more than 20 minutes, and at minimum covers demographics, self-assessed health status, psychosocial risks, behavioral risks, ADLs and IADLs.",
-   "source": 3,
-   "quote": "Health risk assessment means, for the purposes of this section, an evaluation tool that meets the following criteria: (i) Collects self-reported information about the beneficiary. (ii) Can be administered independently by the beneficiary or administered by a health professional prior to or as part of the AWV encounter. (iii) Is appropriately tailored to and takes into account the communication needs of underserved populations, persons with limited English proficiency, and persons with health literacy needs. (iv) Takes no more than 20 minutes to complete. (v) Addresses, at a minimum, the following topics: (A) Demographic data, including but not limited to age, gender, race, and ethnicity. (B) Self assessment of health status, frailty, and physical functioning. (C) Psychosocial risks, including but not limited to, depression/life satisfaction, stress, anger, loneliness/social isolation, pain, and fatigue. (D) Behavioral risks, including but not limited to, tobacco use, physical activity, nutrition and oral health, alcohol consumption, sexual health, motor vehicle safety (seat belt use), and home safety. (E) Activities of daily living (ADLs), including but not limited to, dressing, feeding, toileting, grooming, physical ambulation (including balance/risk of falls), and bathing. (F) Instrumental activities of daily living (IADLs), including but not limited to, shopping, food preparation, using the telephone, housekeeping, laundry, mode of transportation, responsibility for own medications, and ability to handle finances.",
-   "locator": "§ 410.15(a), health risk assessment",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Medicare wellness (IPPE and AWV) — Subsequent AWV: update the health risk assessment, medical and family history and provider list; measure weight (or waist circumference) and blood pressure; detect cognitive impairment; update the screening schedule and risk-factor list.",
-   "source": 3,
-   "quote": "(i) Review (and administration, if needed) of an updated health risk assessment (as defined in this section). (ii) An update of the individual's medical and family history. (iii) An update of the list of current providers and suppliers that are regularly involved in providing medical care to the individual as that list was developed for the first annual wellness visit providing personalized prevention plan services or the previous subsequent annual wellness visit providing personalized prevention plan services. (iv) Measurement of an individual's weight (or waist circumference), blood pressure and other routine measurements as deemed appropriate, based on the individual's medical and family history. (v) Detection of any cognitive impairment that the individual may have, as that term is defined in this section. (vi) An update to the following: (A) The written screening schedule for the individual as that schedule is defined in paragraph (a) of this section for the first annual wellness visit providing personalized prevention plan services. (B) The list of risk factors and conditions for which primary, secondary or tertiary interventions are recommended or are underway for the individual as that list was developed at the first annual wellness visit",
-   "locator": "§ 410.15(a), subsequent annual wellness visit (i)–(vi)",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — Stable chronic illness: expected to last at least one year or until death. \"Stable\" is judged against the patient's own treatment goals: a patient not at goal is not stable, even if the condition hasn't changed and there's no short-term threat to life or function.",
-   "source": 4,
-   "quote": "Stable, chronic illness: A problem with an expected duration of at least one year or until the death of the patient. For the purpose of defining chronicity, conditions are treated as chronic whether or not stage or severity changes (eg, uncontrolled diabetes and controlled diabetes are a single chronic condition). \"Stable\" for the purposes of categorizing MDM is defined by the specific treatment goals for an individual patient. A patient who is not at his or her treatment goal is not stable, even if the condition has not changed and there is no short-term threat to life or function.",
-   "locator": "Number and Complexity of Problems Addressed, definitions",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — Exacerbation or progression: a chronic illness that is acutely worsening, poorly controlled or progressing, needing added supportive care or attention to treatment side effects.",
-   "source": 4,
-   "quote": "Chronic illness with exacerbation, progression, or side effects of treatment: A chronic illness that is acutely worsening, poorly controlled, or progressing with an intent to control progression and requiring additional supportive care or requiring attention to treatment for side effects.",
-   "locator": "Number and Complexity of Problems Addressed, definitions",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — CCM eligibility: 2 or more chronic conditions expected to last at least 12 months or until death, or that place the patient at significant risk of death, acute exacerbation or decompensation, or functional decline.",
-   "source": 5,
-   "quote": "Eligible CCM patients have multiple (2 or more) chronic conditions expected to last at least 12 months or until the patient's death or that place them at significant risk of death, acute exacerbation or decompensation, or functional decline.",
-   "locator": "Patient Eligibility",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — CCM initiating visit: required for new patients or patients not seen within the previous 1 year: a comprehensive face-to-face E/M visit, AWV or IPPE. If CCM isn't discussed at that visit, it doesn't count as the initiating visit.",
-   "source": 5,
-   "quote": "Before CCM services can start, we require an initiating visit for new patients or patients who you haven't seen within the previous 1 year. Conduct the initiating visit during a comprehensive face-to-face evaluation and management (E/M) visit, annual wellness visit (AWV), or initial preventive physical exam (IPPE). If you don't discuss CCM during an E/M visit, AWV, or IPPE, it can't count as the initiating visit.",
-   "locator": "Initiating Visit",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — CCM consent (document it): get written or verbal consent before billing. Record that you told the patient about CCM's availability, possible cost sharing, that only 1 practitioner can bill CCM in a calendar month, and their right to stop at any time, and whether they accepted or declined.",
-   "source": 5,
-   "quote": "Get the patient's written or verbal consent for CCM services before you bill for them. This helps make sure patients are engaged and aware of their cost-sharing responsibilities and helps prevent duplicate practitioner billing. Inform the patient of these items and document in their medical record: The availability of CCM services Their possible cost-sharing responsibilities That only 1 practitioner can provide and bill CCM services during a calendar month Their right to stop CCM services at any time (effective at the end of the calendar month) That you explained the required information and whether the patient accepted or declined services",
-   "locator": "Patient Consent",
-   "accessed": "2026-10-05"
-  },
-  {
-   "text": "Chronic care visit — CCM care plan: a patient-centered electronic comprehensive care plan based on physical, mental, cognitive, psychosocial, functional and environmental assessment and an inventory of resources and supports. It may include a problem list, expected outcome and prognosis, measurable treatment goals, symptom management, planned interventions, medical management, caregiver assessment, coordination with outside resources and practitioners, and periodic review.",
-   "source": 5,
-   "quote": "Create, revise, and monitor (per code descriptors) a patient-centered, electronic comprehensive care plan based on a physical, mental, cognitive, psychosocial, functional, and environmental assessment and an inventory of resources and supports. A comprehensive care plan focusing on managing chronic conditions may include: Problem list Expected outcome and prognosis Measurable treatment goals Revision and monitoring (per code descriptors), when necessary Cognitive and functional assessment Symptom management Planned interventions Medical management Environmental evaluation Caregiver assessment Interaction and coordination with outside resources and practitioners Periodic review",
-   "locator": "Comprehensive Care Plan",
    "accessed": "2026-10-05"
   }
  ],
  "verification": {
-  "verifier": "fia-94619",
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
   "at": "2026-10-05",
   "result": "pass",
   "notes": []

@@ -377,9 +377,10 @@ export interface PubRefLink extends PubLink {
 
 /**
  * One of her notes on a place page (content PlaceNote): a heading, or a block of one of her Word pages
- * with that page's base size; `column` (or null): show only the table's first column and that one.
+ * with that page's base size; `column` (or null): show only the table's first column and that one;
+ * `rows` (or null): show only the table's first row and those of its rows (lib/derive/columns.ts).
  */
-export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null };
+export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null; rows: string[] | null };
 
 /** A reference-tab page (content RefSub); `group` and `intro` are null when the sub has none. */
 export interface PubRefSub {

@@ -427,7 +427,7 @@ describe("reference tab", () => {
     serveWith({
       [REF]: {
         ...record(files.get(REF), REF),
-        subs: [{ ...sub, notes: [{ heading: "Thyroid labs" }, { block: thyroidBlock(0), basePt: 11, column: null }, { block: thyroidBlock(1), basePt: 11, column: 1 }] }],
+        subs: [{ ...sub, notes: [{ heading: "Thyroid labs" }, { block: thyroidBlock(0), basePt: 11, column: null, rows: null }, { block: thyroidBlock(1), basePt: 11, column: 1, rows: null }] }],
       },
     });
     const a = await renderApp("#/labs/cbc");
@@ -713,6 +713,27 @@ describe("Other tab", () => {
       expect(column.querySelector("h3.pn-col")?.textContent).toBe("high");
       expect(column.textContent).toContain("T3");
       expect(column.textContent).not.toContain("Free T4");
+    });
+
+    it("shows a block's listed rows under its first row, and none of the table's other rows", async () => {
+      const fx = await publishFixture((content) => {
+        const pe = content.other.sections.find((s) => s.id === "pe");
+        if (!pe) throw new Error("no pe section");
+        Object.assign(pe, { files: [D(5)], gaps: [], notes: [{ heading: "Cardiac" }, { block: B(61), rows: [R(600)] }, { heading: "Pulmonary" }, { block: B(61), rows: [R(601)] }] });
+      });
+      server.restore();
+      server = serveData(fx.published);
+      const a = await renderApp("#/other/pe/cardiac");
+      app = a;
+      const cardiac = await until(() => a.container.querySelector(`.other-page [data-anchor="${R(600)}"]`), "cardiac rows");
+      expect(cardiac.textContent).toContain("Free T4");
+      expect(a.container.querySelector(`.other-page [data-anchor="${R(601)}"]`)).toBeNull();
+      expect(a.container.querySelector(".other-page")?.textContent).not.toContain("T3");
+
+      await go("#/other/pe/pulmonary");
+      await until(() => byText(a.container, ".other-page h1", "Pulmonary"), "pulmonary part");
+      const rows = await until(() => (a.container.querySelector(`.other-page [data-anchor="${R(601)}"]`) ? a.container.querySelectorAll(".other-page tr") : null), "pulmonary rows");
+      expect([...rows].map((r) => r.getAttribute("data-anchor"))).toEqual([R(600), R(601)]);
     });
 
     it("has no page for a part the outline does not have", async () => {

@@ -1,7 +1,8 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
 import { citeKey, slug } from "../content/ids.ts";
-import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
+import { tableNode } from "../content/tables.ts";
+import { GENERAL_KEYS, type BlockFile, type BlockNote, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
@@ -52,6 +53,20 @@ const pharmView = (system: string, section: string | null = null, target: string
   ({ kind: "pharm", system, section, target });
 
 const pub = (b: BlockFile): PubBlock => ({ id: b.id, kind: b.kind, doc: b.doc });
+
+/** The row ids of a table block, in order; none for a prose block. */
+function tableRowIds(b: BlockFile): string[] {
+  const table = b.kind === "table" ? tableNode(b) : null;
+  return table ? (table.content ?? []).map((r) => String(r.attrs?.id)) : [];
+}
+
+/** The rows of a table block a place note shows: all, all but the first for one column, or the first and its listed rows. */
+function shownRows(n: BlockNote, b: BlockFile): string[] {
+  const all = tableRowIds(b);
+  const { rows } = n;
+  if (rows) return all.filter((r, i) => i === 0 || rows.includes(r));
+  return n.column === undefined ? all : all.slice(1);
+}
 
 /**
  * The outline part each item of an Other section's outline belongs to: a heading's own part slug
@@ -379,10 +394,18 @@ export function publish(c: Content): PublishResult {
       return d?.kind === "word" && visible(d) ? d.blocks.map((b) => ({ note: { block: b.id }, part })) : [];
     });
   };
-  // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page.
+  // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page;
+  // a table row opens on the first place showing it, which for a note showing some rows can be a later one.
   const noteHome = new Map<string, { place: Place; tab: string; title: string }>();
+  const rowHome = new Map<string, { place: Place; tab: string; title: string; block: string }>();
   const placeNotes = (notes: readonly PlaceNote[] | undefined, place: Place, tab: string, title: string): void => {
-    for (const n of notes ?? []) if ("block" in n && wordBlocks.has(n.block) && !noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
+    for (const n of notes ?? []) {
+      if (!("block" in n)) continue;
+      const w = wordBlocks.get(n.block);
+      if (!w) continue;
+      if (!noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
+      for (const r of shownRows(n, w.block)) if (!rowHome.has(r)) rowHome.set(r, { place, tab, title, block: n.block });
+    }
   };
   for (const tab of REF_TABS) for (const sub of c.reftabs[tab].subs) placeNotes(sub.notes, { route: refHash(tab, sub.id), loc: refLoc(tab, sub) }, tab, sub.title);
   // An Other outline's block opens on its part's page.
@@ -390,6 +413,8 @@ export function publish(c: Content): PublishResult {
     for (const { note, part } of otherShown(sec)) placeNotes([note], { route: otherHash(sec.id, part), loc: otherLoc(ix, sec.id) }, "other", sec.title);
   }
   for (const [id, home] of noteHome) hosts[id] = home.place;
+  // A row is hosted by its block unless it first shows on another page.
+  for (const [id, home] of rowHome) if (home.place.route !== noteHome.get(home.block)?.place.route) hosts[id] = home.place;
   for (const g of c.guides) {
     const deck = c.decks.get(g.file.id);
     if (!deck || !deckShown(deck)) continue;
@@ -456,11 +481,16 @@ export function publish(c: Content): PublishResult {
     ].join("\n");
     units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label: "gap", text: searchText(text) });
   };
-  /** Search units of one of her Word-page blocks: one per table row, else one for the block. */
-  const wordBlockUnits = (base: Omit<SearchUnit, "ord" | "title" | "at" | "text">, title: string, b: BlockFile): void => {
-    const table = (b.doc.content as PMNode[]).find((n) => n.type === "table");
-    if (b.kind === "table" && table) {
-      for (const r of table.content ?? []) units.push({ ...base, title, at: String(r.attrs?.id), text: searchText(nodeText(r)) });
+  type UnitBase = Omit<SearchUnit, "ord" | "title" | "at" | "text">;
+  /** Search units of one of her Word-page blocks: one per table row (`rowAt`: a row found elsewhere), else one for the block. */
+  const wordBlockUnits = (base: UnitBase, title: string, b: BlockFile, rowAt?: (row: string) => { base: UnitBase; title: string } | undefined): void => {
+    const table = b.kind === "table" ? (tableNode(b) as PMNode | null) : null;
+    if (table) {
+      for (const r of table.content ?? []) {
+        const at = String(r.attrs?.id);
+        const here = rowAt?.(at) ?? { base, title };
+        units.push({ ...here.base, title: here.title, at, text: searchText(nodeText(r)) });
+      }
     } else units.push({ ...base, title, at: b.id, text: searchText(docText(b.doc)) });
   };
   const docUnits = new Set<string>();
@@ -486,8 +516,15 @@ export function publish(c: Content): PublishResult {
         continue;
       }
       const w = wordBlocks.get(n.block);
-      if (!w) dropped.push({ file, id: n.block });
-      else out.push({ block: pub(w.block), basePt: w.basePt, column: n.column ?? null });
+      if (!w) {
+        dropped.push({ file, id: n.block });
+        continue;
+      }
+      // A listed row no longer in the table (deleted on an edit) is dropped; the rest still show.
+      const inTable = tableRowIds(w.block);
+      for (const r of n.rows ?? []) if (!inTable.includes(r)) dropped.push({ file, id: r });
+      const rows = n.rows?.filter((r) => inTable.includes(r)) ?? null;
+      out.push({ block: pub(w.block), basePt: w.basePt, column: n.column ?? null, rows });
     }
     return out;
   };
@@ -497,7 +534,14 @@ export function publish(c: Content): PublishResult {
     const w = wordBlocks.get(id);
     if (!home || !w || noteUnits.has(id)) return;
     noteUnits.add(id);
-    wordBlockUnits({ tab: home.tab, loc: home.place.loc, route: home.place.route, label: "notes" }, home.title, w.block);
+    const at = (h: { place: Place; tab: string; title: string }): { base: UnitBase; title: string } =>
+      ({ base: { tab: h.tab, loc: h.place.loc, route: h.place.route, label: "notes" }, title: h.title });
+    const own = at(home);
+    // A row shown first on another page (a note showing some rows) is found there.
+    wordBlockUnits(own.base, own.title, w.block, (row) => {
+      const h = rowHome.get(row);
+      return h ? at(h) : undefined;
+    });
   };
   const noteUnitsOf = (ns: readonly PlaceNote[] | undefined): void => {
     for (const n of ns ?? []) if ("block" in n) noteUnit(n.block);

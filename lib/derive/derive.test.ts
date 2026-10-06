@@ -1330,8 +1330,8 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
     expect(t61?.id).toBe(B(61));
     expect(ref.subs[0]?.notes).toEqual([
       { heading: "Thyroid" },
-      { block: t61, basePt: 11, column: null },
-      { block: t61, basePt: 11, column: 1 },
+      { block: t61, basePt: 11, column: null, rows: null },
+      { block: t61, basePt: 11, column: 1, rows: null },
     ]);
     const other = res.files.get(OTHER_PATH) as OtherJson;
     expect(other.sections.find((s) => s.id === "vitamins")?.notes.map((n) => ("block" in n ? n.block.id : n))).toEqual([B(60)]);
@@ -1366,6 +1366,35 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
     const sub = (res.files.get(refPath("labs")) as RefTabJson).subs[0];
     expect([sub?.group, sub?.intro, sub?.gaps.slice(0, 1).map((g) => g.id)]).toEqual(["Blood", [G(1)], [G(1)]]);
     expect((res.files.get(HOSTS_PATH) as HostsJson)[B(61)]).toEqual({ route: CBC, loc: "Labs › Blood › CBC" });
+  });
+
+  describe("a note showing some rows of a table", () => {
+    /** The Thyroid table's header row on Labs › CBC, and its content row R(601) (with a row no longer in it) on Other › Vitamins. */
+    const split = (): Content => mutated((x) => {
+      (x.reftabs.labs.subs[0] as (typeof x.reftabs.labs.subs)[number]).notes = [{ block: B(61), rows: [R(600)] }];
+      (x.other.sections.find((s) => s.id === "vitamins") as (typeof x.other.sections)[number]).notes = [{ block: B(61), rows: [R(699), R(601)] }];
+    });
+
+    it("publishes its rows, dropping a listed row the table no longer has", () => {
+      const res = publish(split());
+      const vit = (res.files.get(OTHER_PATH) as OtherJson).sections.find((s) => s.id === "vitamins")?.notes[0];
+      expect(vit && "block" in vit ? [vit.block.id, vit.column, vit.rows] : vit).toEqual([B(61), null, [R(601)]]);
+      expect(res.dropped).toContainEqual({ file: "content/places/other.json", id: R(699) });
+    });
+
+    it("hosts and finds a row on the first page showing it, the block and its other rows where the block first shows", () => {
+      const c = split();
+      const res = publish(c);
+      const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+      expect(hosts[B(61)]?.route).toBe(CBC);
+      expect(hosts[R(601)]).toEqual({ route: VITAMINS, loc: "Other › Vitamins" });
+      // A row hosted with its block gets no entry of its own.
+      expect(hosts[R(600)]).toBeUndefined();
+      expect(res.units.filter((u) => u.at === R(600) || u.at === R(601)).map((u) => [u.at, u.route, u.title, u.tab])).toEqual([
+        [R(600), CBC, "CBC", "labs"], [R(601), VITAMINS, "Vitamins", "other"],
+      ]);
+      expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+    });
   });
 
   it("drops a note whose block is on no shown Word page, and hosts nothing for it", () => {

@@ -262,9 +262,12 @@ export interface RefLink extends Link {
  * Her own notes shown on a place page (a reference-tab topic or an Other section), above its gap
  * blocks, in order. `heading`: a heading for finding one's way, not part of her notes. `block`: a
  * block of one of her Word pages, as stored; with `column` n (≥ 1), a table block shows only its
- * first column and column n, from its second row on, under column n's first-row text.
+ * first column and column n, from its second row on, under column n's first-row text; with `rows`
+ * (its row ids, not with `column`), a table block shows only its first row and those rows, in table
+ * order. The same row may be shown by several notes.
  */
-export type PlaceNote = { heading: string } | { block: string; column?: number };
+export type PlaceNote = { heading: string } | BlockNote;
+export type BlockNote = { block: string; column?: number; rows?: string[] };
 
 /**
  * One page of a reference tab. `group`: the heading it is listed under in the tab's sidebar and
@@ -309,7 +312,7 @@ export const OTHER_GAP_SECTIONS: readonly (typeof OTHER_SECTION_IDS)[number][] =
  */
 export type OtherNote =
   | { heading: string; sub?: true }
-  | { block: string; column?: number }
+  | BlockNote
   | { doc: string }
   | { original: string }
   | { gap: string }
