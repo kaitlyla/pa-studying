@@ -266,8 +266,24 @@ export interface RefLink extends Link {
  */
 export type PlaceNote = { heading: string } | { block: string; column?: number };
 
+/**
+ * One page of a reference tab. `group`: the heading it is listed under in the tab's sidebar and
+ * landing page (e.g. an imaging modality); the subs of one group are consecutive. `intro`: ids of
+ * this sub's gap blocks shown open first (e.g. how to read the study); when present, every other
+ * gap block shows as a closed collapsible under its title, in `gaps` order (`[]`: all collapsible).
+ */
+export interface RefSub {
+  id: string;
+  title: string;
+  group?: string;
+  intro?: string[];
+  notes?: PlaceNote[];
+  links: RefLink[];
+  gaps: string[];
+}
+
 export interface RefTab {
-  subs: { id: string; title: string; notes?: PlaceNote[]; links: RefLink[]; gaps: string[] }[];
+  subs: RefSub[];
   files: string[];
 }
 

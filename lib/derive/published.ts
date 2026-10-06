@@ -381,10 +381,21 @@ export interface PubRefLink extends PubLink {
  */
 export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null };
 
+/** A reference-tab page (content RefSub); `group` and `intro` are null when the sub has none. */
+export interface PubRefSub {
+  id: string;
+  title: string;
+  group: string | null;
+  intro: string[] | null;
+  notes: PubNote[];
+  links: PubRefLink[];
+  gaps: PubGap[];
+}
+
 export interface RefTabJson {
   tab: string;
   label: string;
-  subs: { id: string; title: string; notes: PubNote[]; links: PubRefLink[]; gaps: PubGap[] }[];
+  subs: PubRefSub[];
   files: DocList;
 }
 

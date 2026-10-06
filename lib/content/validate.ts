@@ -15,7 +15,7 @@ import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTI
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
-  RefLink, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
+  RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
 
@@ -489,13 +489,27 @@ const placeNotes = arr(placeNote);
 const refLink = shapeOf<RefLink>({ target: id("r", "b"), covers: str }, { gap: id("g") });
 /** A link's `gap` names one of its own sub's gap blocks: the section it is shown under. */
 const refSub: Checker = (v, at, ctx) => {
-  shapeOf<RefTab["subs"][number]>({ id: slugC, title: nonEmpty, links: arr(refLink), gaps: uniqueArr(id("g")) }, { notes: placeNotes })(v, at, ctx);
-  const sub = v as RefTab["subs"][number];
+  shapeOf<RefSub>({ id: slugC, title: nonEmpty, links: arr(refLink), gaps: uniqueArr(id("g")) }, { group: nonEmpty, intro: uniqueArr(id("g")), notes: placeNotes })(v, at, ctx);
+  const sub = v as RefSub;
   sub.links.forEach((l, i) => {
     if (l.gap !== undefined && !sub.gaps.includes(l.gap)) bad(ctx, `${at}.links[${i}].gap`, "one of this sub's gaps", l.gap);
   });
+  sub.intro?.forEach((g, i) => {
+    if (!sub.gaps.includes(g)) bad(ctx, `${at}.intro[${i}]`, "one of this sub's gaps", g);
+  });
 };
-const refTab = shapeOf<RefTab>({ subs: arr(refSub), files: uniqueArr(id("d")) }, {});
+/** The subs of one `group` are consecutive, so each group is listed under one heading. */
+const refTab: Checker = (v, at, ctx) => {
+  shapeOf<RefTab>({ subs: arr(refSub), files: uniqueArr(id("d")) }, {})(v, at, ctx);
+  const ended = new Set<string>();
+  (v as RefTab).subs.reduce<string | undefined>((prev, sub, i) => {
+    if (sub.group !== prev) {
+      if (prev !== undefined) ended.add(prev);
+      if (sub.group !== undefined && ended.has(sub.group)) bad(ctx, `${at}.subs[${i}].group`, "a group's subs next to each other", sub.group);
+    }
+    return sub.group;
+  }, undefined);
+};
 export const validateRefTabs: Validator = whole(shapeOf<RefTabsFile>({ v: v1, labs: refTab, imaging: refTab, ekg: refTab, anatomy: refTab }, {}));
 
 const subFlag: Checker = (v, at, ctx) => {

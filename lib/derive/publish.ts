@@ -344,7 +344,7 @@ export function publish(c: Content): PublishResult {
     if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, guideViewHash(gid, { kind: "slides", n: 1 }), tabOf(g));
   }
   for (const tab of REF_TABS) {
-    for (const sub of c.reftabs[tab].subs) for (const gap of sub.gaps) placeGap(gap, { route: refHash(tab, sub.id), loc: refLoc(tab, sub.title) }, tab);
+    for (const sub of c.reftabs[tab].subs) for (const gap of sub.gaps) placeGap(gap, { route: refHash(tab, sub.id), loc: refLoc(tab, sub) }, tab);
     for (const d of c.reftabs[tab].files) placeDoc(d, refHash(tab), tab);
   }
   for (const sec of c.other.sections) {
@@ -384,7 +384,7 @@ export function publish(c: Content): PublishResult {
   const placeNotes = (notes: readonly PlaceNote[] | undefined, place: Place, tab: string, title: string): void => {
     for (const n of notes ?? []) if ("block" in n && wordBlocks.has(n.block) && !noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
   };
-  for (const tab of REF_TABS) for (const sub of c.reftabs[tab].subs) placeNotes(sub.notes, { route: refHash(tab, sub.id), loc: refLoc(tab, sub.title) }, tab, sub.title);
+  for (const tab of REF_TABS) for (const sub of c.reftabs[tab].subs) placeNotes(sub.notes, { route: refHash(tab, sub.id), loc: refLoc(tab, sub) }, tab, sub.title);
   // An Other outline's block opens on its part's page.
   for (const sec of c.other.sections) {
     for (const { note, part } of otherShown(sec)) placeNotes([note], { route: otherHash(sec.id, part), loc: otherLoc(ix, sec.id) }, "other", sec.title);
@@ -813,7 +813,7 @@ export function publish(c: Content): PublishResult {
     const out: RefTabJson = {
       tab, label: TAB_LABELS[tab],
       subs: rt.subs.map((sub) => ({
-        id: sub.id, title: sub.title, notes: placeNoteList("content/places/reftabs.json", sub.notes), links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap),
+        id: sub.id, title: sub.title, group: sub.group ?? null, intro: sub.intro ?? null, notes: placeNoteList("content/places/reftabs.json", sub.notes), links: links("content/places/reftabs.json", sub.links), gaps: sub.gaps.map(gap),
       })),
       files: docList(rt.files),
     };

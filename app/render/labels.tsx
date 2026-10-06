@@ -116,17 +116,22 @@ export function GapFigures({ figures }: { figures: readonly PubFigure[] }): Reac
   );
 }
 
-/** A gap-filled block (general-topic/gap-block). */
-export function GapBlock({ gap }: { gap: PubGap }): ReactNode {
+/**
+ * A gap-filled block (general-topic/gap-block). `titled` false: no title heading, for a block
+ * whose title is already shown just above it (a collapsible's summary).
+ */
+export function GapBlock({ gap, titled = true }: { gap: PubGap; titled?: boolean }): ReactNode {
   const edited = latest(gap.ownerEdits);
   return (
     <section className="gap" aria-label={gap.title} data-anchor={gap.id}>
       <UpdateNotes notes={gap.notes} />
       <div className="gap-h">
         <GapChip />
-        <h3>
-          <Txt text={gap.title} />
-        </h3>
+        {titled && (
+          <h3>
+            <Txt text={gap.title} />
+          </h3>
+        )}
         {edited && <span className="gap-edited own-only">Edited by you · {formatDate(edited)}</span>}
       </div>
       <div className="gap-meta">

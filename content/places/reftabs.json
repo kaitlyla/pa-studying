@@ -1490,22 +1490,10 @@
  "imaging": {
   "subs": [
    {
-    "id": "how-to-read",
-    "title": "How to read imaging",
-    "links": [],
-    "gaps": [
-     "g_39XB9EG1Z3",
-     "g_3XY19Q6KE8",
-     "g_6PFMTFQ7HR",
-     "g_DHKQW1GZ8E",
-     "g_4TWM5DCYPX",
-     "g_ZDZ8H24MWC",
-     "g_VMF2PZNT8M"
-    ]
-   },
-   {
-    "id": "when-to-order",
-    "title": "When to order imaging",
+    "id": "choosing",
+    "group": "Choosing a study",
+    "title": "Choosing a study",
+    "intro": [],
     "links": [],
     "gaps": [
      "g_70ZW6HZ6VJ",
@@ -1522,12 +1510,17 @@
      "g_AQTGZPNGMX",
      "g_Q6P6728M0X",
      "g_18245GVXJM",
-     "g_0XEV1X1WSY"
+     "g_0XEV1X1WSY",
+     "g_VMF2PZNT8M"
     ]
    },
    {
-    "id": "cxr-infections",
-    "title": "Chest X-ray: infections",
+    "id": "xray-chest",
+    "group": "X-ray",
+    "title": "Chest",
+    "intro": [
+     "g_39XB9EG1Z3"
+    ],
     "links": [
      {
       "target": "r_JD35GYB6RC",
@@ -1553,21 +1546,7 @@
       "target": "r_CRGBSMJ1J8",
       "covers": "Chest x-ray",
       "gap": "g_HYQG2RF9T9"
-     }
-    ],
-    "gaps": [
-     "g_3VEVXE8TX8",
-     "g_41WZG2TZ3D",
-     "g_HYQG2RF9T9",
-     "g_0BPHW13DHQ",
-     "g_SVFQE4XE7V",
-     "g_2AVY76ZB83"
-    ]
-   },
-   {
-    "id": "cxr-pleural",
-    "title": "Chest X-ray: pleura and collapse",
-    "links": [
+     },
      {
       "target": "r_W0WAE1GS23",
       "covers": "Pneumothorax: CXR pleural line, deep sulcus sign",
@@ -1592,19 +1571,7 @@
       "target": "r_FWH8PB7QN5",
       "covers": "Chest x-ray",
       "gap": "g_B5Z0X4ZWH5"
-     }
-    ],
-    "gaps": [
-     "g_CEGRQQW6JA",
-     "g_16GVC8RR14",
-     "g_9Q98QBB4RM",
-     "g_B5Z0X4ZWH5"
-    ]
-   },
-   {
-    "id": "cxr-cardiac",
-    "title": "Chest X-ray: heart, edema and masses",
-    "links": [
+     },
      {
       "target": "r_J0S27GGMVN",
       "covers": "Heart failure: CXR, echocardiogram",
@@ -1669,19 +1636,7 @@
       "target": "r_6R26BHEPKH",
       "covers": "CT",
       "gap": "g_BX77NFQXV1"
-     }
-    ],
-    "gaps": [
-     "g_NVV9K264MF",
-     "g_FRVDKYXVKD",
-     "g_BX77NFQXV1",
-     "g_J8HSY9G97X"
-    ]
-   },
-   {
-    "id": "cxr-chronic",
-    "title": "Chest X-ray: chronic lung disease",
-    "links": [
+     },
      {
       "target": "r_5DABS9Q15R",
       "covers": "COPD: chest x-ray",
@@ -1701,20 +1656,7 @@
       "target": "r_MMWAEVBW9H",
       "covers": "Chest x-ray",
       "gap": "g_AT54ANGBN5"
-     }
-    ],
-    "gaps": [
-     "g_NN5EE0X5DV",
-     "g_AT54ANGBN5",
-     "g_WC6DJ4Z71C",
-     "g_4RZ5PDDJZ0",
-     "g_YESWZGDP3J"
-    ]
-   },
-   {
-    "id": "cxr-pediatric",
-    "title": "Chest X-ray: pediatric and congenital",
-    "links": [
+     },
      {
       "target": "r_9QVZ00PES8",
       "covers": "Foreign body aspiration: expiratory CXR"
@@ -1756,8 +1698,26 @@
      }
     ],
     "gaps": [
-     "g_JCE7XWH0W7",
-     "g_WVDSXSGT9Z",
+     "g_39XB9EG1Z3",
+     "g_3VEVXE8TX8",
+     "g_41WZG2TZ3D",
+     "g_HYQG2RF9T9",
+     "g_0BPHW13DHQ",
+     "g_SVFQE4XE7V",
+     "g_2AVY76ZB83",
+     "g_CEGRQQW6JA",
+     "g_16GVC8RR14",
+     "g_9Q98QBB4RM",
+     "g_B5Z0X4ZWH5",
+     "g_NVV9K264MF",
+     "g_FRVDKYXVKD",
+     "g_BX77NFQXV1",
+     "g_J8HSY9G97X",
+     "g_NN5EE0X5DV",
+     "g_AT54ANGBN5",
+     "g_WC6DJ4Z71C",
+     "g_4RZ5PDDJZ0",
+     "g_YESWZGDP3J",
      "g_SYGKKVSVVC",
      "g_NV7ZE8JBA1",
      "g_CTVSPXGMGD",
@@ -1766,8 +1726,31 @@
     ]
    },
    {
-    "id": "abdominal-x-ray",
-    "title": "Abdominal X-ray (KUB)",
+    "id": "xray-neck",
+    "group": "X-ray",
+    "title": "Neck",
+    "intro": [
+     "g_35P7X3BFEZ"
+    ],
+    "links": [
+     {
+      "target": "r_YPYE60TERZ",
+      "covers": "Retropharyngeal abscess: lateral neck X-ray, CT"
+     }
+    ],
+    "gaps": [
+     "g_35P7X3BFEZ",
+     "g_JCE7XWH0W7",
+     "g_WVDSXSGT9Z"
+    ]
+   },
+   {
+    "id": "xray-abdomen",
+    "group": "X-ray",
+    "title": "Abdomen (KUB)",
+    "intro": [
+     "g_3XY19Q6KE8"
+    ],
     "links": [
      {
       "target": "r_5M9DPF14C9",
@@ -1811,6 +1794,7 @@
      }
     ],
     "gaps": [
+     "g_3XY19Q6KE8",
      "g_DF5HFC7RTG",
      "g_QXDTQ052CM",
      "g_CBFNX5R99S",
@@ -1826,8 +1810,39 @@
     ]
    },
    {
-    "id": "head-ct",
-    "title": "Head CT",
+    "id": "xray-bone",
+    "group": "X-ray",
+    "title": "Bone & joint",
+    "intro": [
+     "g_GNFQREJ4S8"
+    ],
+    "links": [
+     {
+      "target": "r_3V66KC8DYT",
+      "covers": "Ultrasound",
+      "gap": "g_EQVS1Q8KBP"
+     }
+    ],
+    "gaps": [
+     "g_GNFQREJ4S8",
+     "g_172SDT7TNF",
+     "g_DASZ681E9X",
+     "g_WCAE5PTFQT",
+     "g_EQVS1Q8KBP",
+     "g_WVA5PMK2H2",
+     "g_ZWTH3T92F6",
+     "g_NSJXBBYVVP",
+     "g_TBP98SWMPA",
+     "g_NGHMMPNRP3"
+    ]
+   },
+   {
+    "id": "ct-head",
+    "group": "CT",
+    "title": "Head & neck",
+    "intro": [
+     "g_6PFMTFQ7HR"
+    ],
     "links": [
      {
       "target": "r_NEXFNC4K6K",
@@ -1873,10 +1888,6 @@
      {
       "target": "r_EKF9MZE80M",
       "covers": "TIA: imaging"
-     },
-     {
-      "target": "r_YPYE60TERZ",
-      "covers": "Retropharyngeal abscess: lateral neck X-ray, CT"
      },
      {
       "target": "r_KCNKWPV3HZ",
@@ -2001,6 +2012,7 @@
      }
     ],
     "gaps": [
+     "g_6PFMTFQ7HR",
      "g_XBAZKJR797",
      "g_3CP4NS7WY5",
      "g_8CT1VMWQ7D",
@@ -2012,8 +2024,12 @@
     ]
    },
    {
-    "id": "chest-ct",
-    "title": "Chest CT",
+    "id": "ct-chest",
+    "group": "CT",
+    "title": "Chest",
+    "intro": [
+     "g_09YSWYNTSC"
+    ],
     "links": [
      {
       "target": "r_TYWN5N1GJC",
@@ -2065,6 +2081,7 @@
      }
     ],
     "gaps": [
+     "g_09YSWYNTSC",
      "g_Z2XQYQAWWX",
      "g_WQNXT32CBV",
      "g_JR3RBJX6PM",
@@ -2075,8 +2092,12 @@
     ]
    },
    {
-    "id": "abdominal-ct",
-    "title": "Abdomen and pelvis CT",
+    "id": "ct-abdomen",
+    "group": "CT",
+    "title": "Abdomen & pelvis",
+    "intro": [
+     "g_5SP92A5375"
+    ],
     "links": [
      {
       "target": "r_16B61APQCQ",
@@ -2146,11 +2167,6 @@
       "gap": "g_QM2EEEBRZH"
      },
      {
-      "target": "r_DBG3FW6QS5",
-      "covers": "CT",
-      "gap": "g_PJ6F5NMFB1"
-     },
-     {
       "target": "r_D6C2W9GQ5G",
       "covers": "CT",
       "gap": "g_EGR7JCEJ0H"
@@ -2206,7 +2222,156 @@
       "target": "r_P81XE504P4",
       "covers": "Appendicitis: US first in children",
       "gap": "g_HDAM3KWJYF"
+     }
+    ],
+    "gaps": [
+     "g_5SP92A5375",
+     "g_HDAM3KWJYF",
+     "g_QM2EEEBRZH",
+     "g_VG0869EBYM",
+     "g_EGR7JCEJ0H",
+     "g_2ET22BSJHP",
+     "g_WKNHYT3WXJ",
+     "g_C0H2GY4TA2"
+    ]
+   },
+   {
+    "id": "mri-brain-spine",
+    "group": "MRI",
+    "title": "Brain & spine",
+    "intro": [
+     "g_0EJ085CDGB"
+    ],
+    "links": [
+     {
+      "target": "r_3GC4PGPD27",
+      "covers": "Herniated disk: MRI for red flags"
      },
+     {
+      "target": "r_5720KFY8KN",
+      "covers": "Cauda equina: MRI without contrast",
+      "gap": "g_4NFZKQ6SQR"
+     },
+     {
+      "target": "r_CQGEHWC1QN",
+      "covers": "Medulloblastoma: MRI"
+     },
+     {
+      "target": "r_CZ6GQ2TG2G",
+      "covers": "Alzheimer disease: MRI diffuse cortical atrophy"
+     },
+     {
+      "target": "r_CRJ2455DWM",
+      "covers": "Vascular dementia: MRI white matter lesions, infarcts"
+     },
+     {
+      "target": "r_T012MZQH76",
+      "covers": "Frontotemporal dementia"
+     },
+     {
+      "target": "r_FKS8BHE5A9",
+      "covers": "MRI",
+      "gap": "g_B8N41Z9DHA"
+     },
+     {
+      "target": "r_0ZWM7KYCHG",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_MRQBWFE6DM",
+      "covers": "MRI",
+      "gap": "g_4NFZKQ6SQR"
+     },
+     {
+      "target": "r_YQZEVVNBG4",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_3MKQACHECZ",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_9DEJFSF7CZ",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_9GWYTKN13V",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_AHSVM4338H",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_RFED86ASJH",
+      "covers": "MRI"
+     },
+     {
+      "target": "r_MW9DMT11VB",
+      "covers": "MRI"
+     }
+    ],
+    "gaps": [
+     "g_0EJ085CDGB",
+     "g_B8N41Z9DHA",
+     "g_QA0ADTERDS",
+     "g_4NFZKQ6SQR"
+    ]
+   },
+   {
+    "id": "mri-bone",
+    "group": "MRI",
+    "title": "Bone, joint & pelvis",
+    "intro": [
+     "g_W1BVY6J206"
+    ],
+    "links": [
+     {
+      "target": "r_W7J5GTQ36V",
+      "covers": "Legg-Calvé-Perthes: X-ray, MRI",
+      "gap": "g_JYBH29CZ53"
+     },
+     {
+      "target": "r_B4TA6ND6DE",
+      "covers": "MRI",
+      "gap": "g_5FZT2DAD96"
+     },
+     {
+      "target": "r_15RXPF4J8J",
+      "covers": "MRI",
+      "gap": "g_JYBH29CZ53"
+     },
+     {
+      "target": "r_ZNJ821RMNB",
+      "covers": "MRI"
+     }
+    ],
+    "gaps": [
+     "g_W1BVY6J206",
+     "g_JYBH29CZ53",
+     "g_5FZT2DAD96"
+    ]
+   },
+   {
+    "id": "us-basics",
+    "group": "Ultrasound",
+    "title": "Basics",
+    "intro": [
+     "g_DHKQW1GZ8E"
+    ],
+    "links": [],
+    "gaps": [
+     "g_DHKQW1GZ8E"
+    ]
+   },
+   {
+    "id": "us-abdomen",
+    "group": "Ultrasound",
+    "title": "Abdomen & kidney",
+    "intro": [
+     "g_PENYFF7A2Z"
+    ],
+    "links": [
      {
       "target": "r_PFBXG7K6YS",
       "covers": "Choledocholithiasis: imaging",
@@ -2216,54 +2381,11 @@
       "target": "r_9HC78Q9G3C",
       "covers": "Ultrasound",
       "gap": "g_M816BM1RJY"
-     }
-    ],
-    "gaps": [
-     "g_HDAM3KWJYF",
-     "g_QM2EEEBRZH",
-     "g_VG0869EBYM",
-     "g_EGR7JCEJ0H",
-     "g_2ET22BSJHP",
-     "g_M816BM1RJY",
-     "g_WKNHYT3WXJ",
-     "g_PJ6F5NMFB1",
-     "g_C0H2GY4TA2",
-     "g_0CB2C72AXR",
-     "g_VNQ4PYF8WC"
-    ]
-   },
-   {
-    "id": "ultrasound",
-    "title": "Ultrasound",
-    "links": [
+     },
      {
       "target": "r_C0SCBFY6EB",
       "covers": "CT",
       "gap": "g_TSR38J8VBA"
-     },
-     {
-      "target": "r_P8FJDF58SB",
-      "covers": "Deep vein thrombosis: compression/duplex ultrasound",
-      "gap": "g_43ZBKWSM9Z"
-     },
-     {
-      "target": "r_PT1XKMEY8T",
-      "covers": "Thyroid nodule: thyroid ultrasound",
-      "gap": "g_5FC3XRFP0N"
-     },
-     {
-      "target": "r_9SQ0ABJXKJ",
-      "covers": "Abnormal uterine bleeding: transvaginal ultrasound first-line"
-     },
-     {
-      "target": "r_6VS7TQK9N0",
-      "covers": "Ectopic pregnancy: transvaginal ultrasound",
-      "gap": "g_8VW6Z0NY3C"
-     },
-     {
-      "target": "r_HVCYKNYB1T",
-      "covers": "DVT: compression ultrasound",
-      "gap": "g_43ZBKWSM9Z"
      },
      {
       "target": "r_2TTA0DG5KX",
@@ -2281,6 +2403,112 @@
       "gap": "g_K83VNZB55H"
      },
      {
+      "target": "r_DY0DCCR246",
+      "covers": "Pyloric stenosis: abdominal US, upper GI string sign"
+     },
+     {
+      "target": "r_JTMKW1CPQJ",
+      "covers": "Intussusception: US target sign, air/contrast enema",
+      "gap": "g_HGQJ7N5ET1"
+     },
+     {
+      "target": "r_8RT9E13T1Y",
+      "covers": "Febrile UTI: renal/bladder US"
+     },
+     {
+      "target": "r_A63894Q26F",
+      "covers": "Acute cholecystitis: RUQ ultrasound, HIDA",
+      "gap": "g_TSR38J8VBA"
+     },
+     {
+      "target": "r_HD28BZYKH4",
+      "covers": "Ultrasound",
+      "gap": "g_TSR38J8VBA"
+     },
+     {
+      "target": "r_0W5ZN8VGAT",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_AAY3YHMW8D",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_RW9PK3J6B2",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_MD9N44HKP1",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_BK8GN78RBV",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_QYFFZBNHVD",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_82YQ50YKXF",
+      "covers": "Ultrasound",
+      "gap": "g_HGQJ7N5ET1"
+     },
+     {
+      "target": "r_HF5KFEWVH8",
+      "covers": "Ultrasound",
+      "gap": "g_K83VNZB55H"
+     },
+     {
+      "target": "r_97BNWW7BSM",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_4X2CAX5B3A",
+      "covers": "Ultrasound",
+      "gap": "g_K83VNZB55H"
+     },
+     {
+      "target": "r_2HYNSKQZW2",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_5PRT95RT8X",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_WTFYAEZ9HX",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_PENYFF7A2Z",
+     "g_TSR38J8VBA",
+     "g_5AS8WMB0RB",
+     "g_HGQJ7N5ET1",
+     "g_K83VNZB55H",
+     "g_M816BM1RJY"
+    ]
+   },
+   {
+    "id": "us-vessels",
+    "group": "Ultrasound",
+    "title": "Vessels",
+    "intro": [
+     "g_ECQDZA5FQ2"
+    ],
+    "links": [
+     {
+      "target": "r_P8FJDF58SB",
+      "covers": "Deep vein thrombosis: compression/duplex ultrasound",
+      "gap": "g_43ZBKWSM9Z"
+     },
+     {
+      "target": "r_HVCYKNYB1T",
+      "covers": "DVT: compression ultrasound",
+      "gap": "g_43ZBKWSM9Z"
+     },
+     {
       "target": "r_DK56WF35TK",
       "covers": "DVT: D-dimer, compression U/S with Doppler",
       "gap": "g_43ZBKWSM9Z"
@@ -2288,6 +2516,266 @@
      {
       "target": "r_ZB9K2R8D81",
       "covers": "Renal artery stenosis: duplex"
+     },
+     {
+      "target": "r_QKW30GTS8Z",
+      "covers": "Carotid disease: duplex",
+      "gap": "g_DSWKW517KJ"
+     },
+     {
+      "target": "r_C584YZWVNA",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_1RKG8SKXEG",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_M9TT6HSSN3",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_D113N52AT9",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_6MT8QPMWTA",
+      "covers": "Ultrasound",
+      "gap": "g_43ZBKWSM9Z"
+     },
+     {
+      "target": "r_NHWEDS880Z",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_ECQDZA5FQ2",
+     "g_43ZBKWSM9Z",
+     "g_DSWKW517KJ"
+    ]
+   },
+   {
+    "id": "us-thyroid",
+    "group": "Ultrasound",
+    "title": "Thyroid, head & neck",
+    "intro": [
+     "g_Z0VVERBRGP"
+    ],
+    "links": [
+     {
+      "target": "r_PT1XKMEY8T",
+      "covers": "Thyroid nodule: thyroid ultrasound",
+      "gap": "g_5FC3XRFP0N"
+     },
+     {
+      "target": "r_GXNR710XD8",
+      "covers": "Thyroid nodule: thyroid ultrasound",
+      "gap": "g_5FC3XRFP0N"
+     },
+     {
+      "target": "r_HWPGRNEM40",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_SV7KYHDWX6",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_RT337WJAHF",
+      "covers": "Ultrasound",
+      "gap": "g_5FC3XRFP0N"
+     },
+     {
+      "target": "r_Y8936WF0ZG",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_EDH6X1B29A",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_RQKVXTQKW4",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_JX924A1CQJ",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_RM3X09CM48",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_Z0VVERBRGP",
+     "g_5FC3XRFP0N"
+    ]
+   },
+   {
+    "id": "us-soft-tissue",
+    "group": "Ultrasound",
+    "title": "Skin, soft tissue & joints",
+    "intro": [
+     "g_FJ4D7MACAY"
+    ],
+    "links": [
+     {
+      "target": "r_6JAAXKQRDD",
+      "covers": "DDH: US under 4 months, AP X-ray after"
+     },
+     {
+      "target": "r_F7WQ90MS5X",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_711HF4D0W1",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_KWM56ES431",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_E0D7X3CT8E",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_PTAKSSQ4BE",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_FJ4D7MACAY",
+     "g_5EMEB965T9",
+     "g_2B6498AW31"
+    ]
+   },
+   {
+    "id": "us-breast",
+    "group": "Ultrasound",
+    "title": "Breast",
+    "intro": [
+     "g_4E389V5MHV"
+    ],
+    "links": [
+     {
+      "target": "r_4C5ES84V2Z",
+      "covers": "Breast fibroadenoma: imaging"
+     },
+     {
+      "target": "r_86KZW9H4XD",
+      "covers": "Fibrocystic disease: imaging"
+     },
+     {
+      "target": "r_W46F34YKW4",
+      "covers": "Breast abscess: imaging"
+     },
+     {
+      "target": "r_D8BGM0S3SE",
+      "covers": "Fibroadenoma: ultrasound"
+     },
+     {
+      "target": "r_XX88052VJD",
+      "covers": "Fibrocystic disease: imaging"
+     },
+     {
+      "target": "r_1S5AHTXKQH",
+      "covers": "Breast abscess: ultrasound"
+     },
+     {
+      "target": "r_KBMWD3KQ3A",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_DAPGM496QD",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_EYA7XPDEDD",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_09QTPCP3VN",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_4E389V5MHV"
+    ]
+   },
+   {
+    "id": "us-scrotum",
+    "group": "Ultrasound",
+    "title": "Scrotum & prostate",
+    "intro": [
+     "g_M0KFRVHGKZ"
+    ],
+    "links": [
+     {
+      "target": "r_2A1803ZGQF",
+      "covers": "Testicular torsion: Doppler US"
+     },
+     {
+      "target": "r_QCVNRSM0WE",
+      "covers": "Hydrocele: testicular US"
+     },
+     {
+      "target": "r_XVTQB2TFB5",
+      "covers": "Cryptorchidism: scrotal US, MRI"
+     },
+     {
+      "target": "r_6SP3B4XT5V",
+      "covers": "Epididymitis: scrotal ultrasound"
+     },
+     {
+      "target": "r_QCA3R2T51E",
+      "covers": "Testicular cancer: scrotal ultrasound"
+     },
+     {
+      "target": "r_PH08YD3VC2",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_8R89RSA1BC",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_QFRCV7F207",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_BYDTS5TFH0",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_05DJ26CS90",
+      "covers": "Ultrasound"
+     },
+     {
+      "target": "r_2RCV8GEPFW",
+      "covers": "Ultrasound"
+     }
+    ],
+    "gaps": [
+     "g_M0KFRVHGKZ"
+    ]
+   },
+   {
+    "id": "us-pregnancy",
+    "group": "Ultrasound",
+    "title": "Pregnancy & pelvis",
+    "intro": [
+     "g_JJDDGMVY9R"
+    ],
+    "links": [
+     {
+      "target": "r_9SQ0ABJXKJ",
+      "covers": "Abnormal uterine bleeding: transvaginal ultrasound first-line"
+     },
+     {
+      "target": "r_6VS7TQK9N0",
+      "covers": "Ectopic pregnancy: transvaginal ultrasound",
+      "gap": "g_8VW6Z0NY3C"
      },
      {
       "target": "b_6DR5BMH698",
@@ -2338,170 +2826,6 @@
       "covers": "Endometrial cancer: transvaginal U/S (stripe >4mm)"
      },
      {
-      "target": "r_4C5ES84V2Z",
-      "covers": "Breast fibroadenoma: imaging"
-     },
-     {
-      "target": "r_86KZW9H4XD",
-      "covers": "Fibrocystic disease: imaging"
-     },
-     {
-      "target": "r_W46F34YKW4",
-      "covers": "Breast abscess: imaging"
-     },
-     {
-      "target": "r_DY0DCCR246",
-      "covers": "Pyloric stenosis: abdominal US, upper GI string sign"
-     },
-     {
-      "target": "r_JTMKW1CPQJ",
-      "covers": "Intussusception: US target sign, air/contrast enema",
-      "gap": "g_HGQJ7N5ET1"
-     },
-     {
-      "target": "r_6JAAXKQRDD",
-      "covers": "DDH: US under 4 months, AP X-ray after"
-     },
-     {
-      "target": "r_8RT9E13T1Y",
-      "covers": "Febrile UTI: renal/bladder US"
-     },
-     {
-      "target": "r_2A1803ZGQF",
-      "covers": "Testicular torsion: Doppler US"
-     },
-     {
-      "target": "r_QCVNRSM0WE",
-      "covers": "Hydrocele: testicular US"
-     },
-     {
-      "target": "r_XVTQB2TFB5",
-      "covers": "Cryptorchidism: scrotal US, MRI"
-     },
-     {
-      "target": "r_A63894Q26F",
-      "covers": "Acute cholecystitis: RUQ ultrasound, HIDA",
-      "gap": "g_TSR38J8VBA"
-     },
-     {
-      "target": "r_QKW30GTS8Z",
-      "covers": "Carotid disease: duplex",
-      "gap": "g_DSWKW517KJ"
-     },
-     {
-      "target": "r_D8BGM0S3SE",
-      "covers": "Fibroadenoma: ultrasound"
-     },
-     {
-      "target": "r_XX88052VJD",
-      "covers": "Fibrocystic disease: imaging"
-     },
-     {
-      "target": "r_1S5AHTXKQH",
-      "covers": "Breast abscess: ultrasound"
-     },
-     {
-      "target": "r_6SP3B4XT5V",
-      "covers": "Epididymitis: scrotal ultrasound"
-     },
-     {
-      "target": "r_QCA3R2T51E",
-      "covers": "Testicular cancer: scrotal ultrasound"
-     },
-     {
-      "target": "r_GXNR710XD8",
-      "covers": "Thyroid nodule: thyroid ultrasound",
-      "gap": "g_5FC3XRFP0N"
-     },
-     {
-      "target": "r_C584YZWVNA",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_1RKG8SKXEG",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_M9TT6HSSN3",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_D113N52AT9",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_6MT8QPMWTA",
-      "covers": "Ultrasound",
-      "gap": "g_43ZBKWSM9Z"
-     },
-     {
-      "target": "r_HWPGRNEM40",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_SV7KYHDWX6",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_RT337WJAHF",
-      "covers": "Ultrasound",
-      "gap": "g_5FC3XRFP0N"
-     },
-     {
-      "target": "r_Y8936WF0ZG",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_EDH6X1B29A",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_RQKVXTQKW4",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_JX924A1CQJ",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_RM3X09CM48",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_HD28BZYKH4",
-      "covers": "Ultrasound",
-      "gap": "g_TSR38J8VBA"
-     },
-     {
-      "target": "r_0W5ZN8VGAT",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_AAY3YHMW8D",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_RW9PK3J6B2",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_MD9N44HKP1",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_BK8GN78RBV",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_QYFFZBNHVD",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_82YQ50YKXF",
-      "covers": "Ultrasound",
-      "gap": "g_HGQJ7N5ET1"
-     },
-     {
       "target": "r_S7BPRF2Z51",
       "covers": "Ultrasound"
      },
@@ -2514,93 +2838,7 @@
       "covers": "Ultrasound"
      },
      {
-      "target": "r_F7WQ90MS5X",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_711HF4D0W1",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_KWM56ES431",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_E0D7X3CT8E",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_PTAKSSQ4BE",
-      "covers": "Ultrasound"
-     },
-     {
       "target": "r_9F907RZZBR",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_HF5KFEWVH8",
-      "covers": "Ultrasound",
-      "gap": "g_K83VNZB55H"
-     },
-     {
-      "target": "r_97BNWW7BSM",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_4X2CAX5B3A",
-      "covers": "Ultrasound",
-      "gap": "g_K83VNZB55H"
-     },
-     {
-      "target": "r_2HYNSKQZW2",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_PH08YD3VC2",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_8R89RSA1BC",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_5PRT95RT8X",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_WTFYAEZ9HX",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_QFRCV7F207",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_NHWEDS880Z",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_BYDTS5TFH0",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_05DJ26CS90",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_2RCV8GEPFW",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_KBMWD3KQ3A",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_DAPGM496QD",
-      "covers": "Ultrasound"
-     },
-     {
-      "target": "r_EYA7XPDEDD",
       "covers": "Ultrasound"
      },
      {
@@ -2690,10 +2928,6 @@
       "covers": "Ultrasound"
      },
      {
-      "target": "r_09QTPCP3VN",
-      "covers": "Ultrasound"
-     },
-     {
       "target": "r_ND77GYC3DC",
       "covers": "Ultrasound"
      },
@@ -2732,15 +2966,7 @@
      }
     ],
     "gaps": [
-     "g_TSR38J8VBA",
-     "g_5AS8WMB0RB",
-     "g_HGQJ7N5ET1",
-     "g_K83VNZB55H",
-     "g_43ZBKWSM9Z",
-     "g_DSWKW517KJ",
-     "g_5FC3XRFP0N",
-     "g_5EMEB965T9",
-     "g_2B6498AW31",
+     "g_JJDDGMVY9R",
      "g_7ZCNKZ2JTJ",
      "g_8VW6Z0NY3C",
      "g_3WDMBK6788"
@@ -2748,16 +2974,25 @@
    },
    {
     "id": "fast",
+    "group": "FAST",
     "title": "FAST",
+    "intro": [
+     "g_4TWM5DCYPX"
+    ],
     "links": [],
     "gaps": [
+     "g_4TWM5DCYPX",
      "g_K4JYH73SA7",
      "g_Z6Q6YT2Y9S"
     ]
    },
    {
-    "id": "echocardiogram",
+    "id": "echo",
+    "group": "Echo",
     "title": "Echocardiogram",
+    "intro": [
+     "g_ZDZ8H24MWC"
+    ],
     "links": [
      {
       "target": "r_1FXDMPGP1G",
@@ -2867,6 +3102,7 @@
      }
     ],
     "gaps": [
+     "g_ZDZ8H24MWC",
      "g_M643TK46QD",
      "g_5GJKE2N38C",
      "g_C1BBKD3CE4",
@@ -2881,117 +3117,63 @@
     ]
    },
    {
-    "id": "mri",
-    "title": "MRI",
+    "id": "fluoro-barium",
+    "group": "Fluoroscopy",
+    "title": "Barium studies",
+    "intro": [
+     "g_WFGTNN795W"
+    ],
     "links": [
      {
-      "target": "r_3GC4PGPD27",
-      "covers": "Herniated disk: MRI for red flags"
-     },
-     {
-      "target": "r_5720KFY8KN",
-      "covers": "Cauda equina: MRI without contrast",
-      "gap": "g_4NFZKQ6SQR"
-     },
-     {
-      "target": "r_W7J5GTQ36V",
-      "covers": "Legg-Calvé-Perthes: X-ray, MRI",
-      "gap": "g_JYBH29CZ53"
-     },
-     {
-      "target": "r_CQGEHWC1QN",
-      "covers": "Medulloblastoma: MRI"
-     },
-     {
-      "target": "r_CZ6GQ2TG2G",
-      "covers": "Alzheimer disease: MRI diffuse cortical atrophy"
-     },
-     {
-      "target": "r_CRJ2455DWM",
-      "covers": "Vascular dementia: MRI white matter lesions, infarcts"
-     },
-     {
-      "target": "r_T012MZQH76",
-      "covers": "Frontotemporal dementia"
-     },
-     {
-      "target": "r_FKS8BHE5A9",
-      "covers": "MRI",
-      "gap": "g_B8N41Z9DHA"
-     },
-     {
-      "target": "r_0ZWM7KYCHG",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_MRQBWFE6DM",
-      "covers": "MRI",
-      "gap": "g_4NFZKQ6SQR"
-     },
-     {
-      "target": "r_YQZEVVNBG4",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_B4TA6ND6DE",
-      "covers": "MRI",
-      "gap": "g_5FZT2DAD96"
-     },
-     {
-      "target": "r_3MKQACHECZ",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_9DEJFSF7CZ",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_15RXPF4J8J",
-      "covers": "MRI",
-      "gap": "g_JYBH29CZ53"
-     },
-     {
-      "target": "r_9GWYTKN13V",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_AHSVM4338H",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_RFED86ASJH",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_ZNJ821RMNB",
-      "covers": "MRI"
-     },
-     {
-      "target": "r_MW9DMT11VB",
-      "covers": "MRI"
+      "target": "r_DBG3FW6QS5",
+      "covers": "CT",
+      "gap": "g_PJ6F5NMFB1"
      }
     ],
     "gaps": [
-     "g_B8N41Z9DHA",
-     "g_QA0ADTERDS",
-     "g_4NFZKQ6SQR",
-     "g_JYBH29CZ53",
-     "g_5FZT2DAD96"
-    ]
-   },
-   {
-    "id": "barium",
-    "title": "Barium studies",
-    "links": [],
-    "gaps": [
+     "g_WFGTNN795W",
      "g_VQ05RHGG09",
      "g_51DZ7QSE8B",
-     "g_KY01Z12YPT"
+     "g_KY01Z12YPT",
+     "g_PJ6F5NMFB1",
+     "g_0CB2C72AXR",
+     "g_VNQ4PYF8WC"
     ]
    },
    {
-    "id": "other-modalities",
-    "title": "Mammography, bone scan and DEXA",
+    "id": "nuc-bone",
+    "group": "Nuclear medicine",
+    "title": "Bone scan",
+    "intro": [
+     "g_RTHCJ2XP1K"
+    ],
+    "links": [],
+    "gaps": [
+     "g_RTHCJ2XP1K",
+     "g_YVVJBPA15Y",
+     "g_XSTRS3Y4TG"
+    ]
+   },
+   {
+    "id": "nuc-brain",
+    "group": "Nuclear medicine",
+    "title": "Brain perfusion",
+    "intro": [
+     "g_7SYD5NJ9VB"
+    ],
+    "links": [],
+    "gaps": [
+     "g_7SYD5NJ9VB",
+     "g_CFS4Z3YTY3"
+    ]
+   },
+   {
+    "id": "mammo",
+    "group": "Mammography",
+    "title": "Mammography",
+    "intro": [
+     "g_RDDBTGSPQP"
+    ],
     "links": [
      {
       "target": "r_N32J4E2QDD",
@@ -3005,33 +3187,21 @@
      }
     ],
     "gaps": [
-     "g_MYDPYX7SRQ",
-     "g_YVVJBPA15Y",
-     "g_XSTRS3Y4TG",
-     "g_CFS4Z3YTY3",
-     "g_Y7C8JSKQ3B"
+     "g_RDDBTGSPQP",
+     "g_MYDPYX7SRQ"
     ]
    },
    {
-    "id": "bone-x-ray",
-    "title": "Bone and joint X-ray",
-    "links": [
-     {
-      "target": "r_3V66KC8DYT",
-      "covers": "Ultrasound",
-      "gap": "g_EQVS1Q8KBP"
-     }
+    "id": "dexa",
+    "group": "DEXA",
+    "title": "DEXA",
+    "intro": [
+     "g_DVCA897YHE"
     ],
+    "links": [],
     "gaps": [
-     "g_172SDT7TNF",
-     "g_DASZ681E9X",
-     "g_WCAE5PTFQT",
-     "g_EQVS1Q8KBP",
-     "g_WVA5PMK2H2",
-     "g_ZWTH3T92F6",
-     "g_NSJXBBYVVP",
-     "g_TBP98SWMPA",
-     "g_NGHMMPNRP3"
+     "g_DVCA897YHE",
+     "g_Y7C8JSKQ3B"
     ]
    }
   ],

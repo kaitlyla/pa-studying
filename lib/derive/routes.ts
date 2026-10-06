@@ -257,9 +257,10 @@ export function slidesLoc(ix: SiteIndex, guide: string): string {
   return `${guideLoc(ix, guide)} › Review slides`;
 }
 
-/** "<Tab>" or "<Tab> › <Sub-tab>". */
-export function refLoc(tab: RefTabId, subTitle: string | null = null): string {
-  return subTitle ? `${TAB_LABELS[tab]} › ${subTitle}` : TAB_LABELS[tab];
+/** "<Tab>", "<Tab> › <Sub-tab>" or, for a sub in a group, "<Tab> › <Group> › <Sub-tab>". */
+export function refLoc(tab: RefTabId, sub: { title: string; group?: string | null } | null = null): string {
+  if (sub === null) return TAB_LABELS[tab];
+  return sub.group ? `${TAB_LABELS[tab]} › ${sub.group} › ${sub.title}` : `${TAB_LABELS[tab]} › ${sub.title}`;
 }
 
 /** "Other › <Section>". */

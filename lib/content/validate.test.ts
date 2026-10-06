@@ -605,6 +605,19 @@ describe("places (20 §20.8)", () => {
     expect(verdict("content/places/reftabs.json", { v: 1, labs: withLink(D1), imaging: empty, ekg: empty, anatomy: empty })).toMatch(/a g_ id/);
   });
 
+  it("validates a reftab sub's group and intro: intro ids are its own gaps, a group's subs are consecutive", () => {
+    const G2 = id("g", 2);
+    const sub = (sid: string, extra: Record<string, unknown>) => ({ id: sid, title: sid, links: [], gaps: [G1, G2], ...extra });
+    const empty = { subs: [], files: [] };
+    const imaging = (...subs: unknown[]) => verdict("content/places/reftabs.json", { v: 1, labs: empty, imaging: { subs, files: [] }, ekg: empty, anatomy: empty });
+    expect(imaging(sub("pick", { intro: [] }), sub("chest", { group: "X-ray", intro: [G1] }), sub("abd", { group: "X-ray" }), sub("head", { group: "CT", intro: [G2, G1] }))).toBe("ok");
+    expect(imaging(sub("chest", { intro: [id("g", 3)] }))).toMatch(/subs\[0\]\.intro\[0\]: expected one of this sub's gaps/);
+    expect(imaging(sub("chest", { intro: [G1, G1] }))).toMatch(/intro/);
+    expect(imaging(sub("chest", { group: "" }))).toMatch(/group/);
+    expect(imaging(sub("chest", { group: "X-ray" }), sub("head", { group: "CT" }), sub("abd", { group: "X-ray" }))).toMatch(/subs\[2\]\.group: expected a group's subs next to each other/);
+    expect(imaging(sub("chest", { group: "X-ray" }), sub("pick", {}), sub("abd", { group: "X-ray" }))).toMatch(/subs\[2\]\.group/);
+  });
+
   it("validates a place's notes: headings, and her Word-page blocks with an optional column of 1 or more", () => {
     const withNotes = (notes: unknown) => ({ subs: [{ id: "cbc", title: "CBC", notes, links: [], gaps: [] }], files: [] });
     const empty = { subs: [], files: [] };

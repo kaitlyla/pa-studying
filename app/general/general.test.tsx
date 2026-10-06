@@ -379,7 +379,7 @@ describe("reference tab", () => {
       [REF]: {
         ...record(files.get(REF), REF),
         subs: [{
-          id: "cbc", title: "CBC", notes: [], gaps: [g1, g2, g3],
+          id: "cbc", title: "CBC", group: null, intro: null, notes: [], gaps: [g1, g2, g3],
           links: [
             { ...first, covers: "Atrial flutter", gap: G(902) },
             { ...first, target: R(902), title: "Flutter (IM)", covers: "Atrial flutter", gap: G(902), flagged: true },
@@ -447,7 +447,7 @@ describe("reference tab", () => {
   });
 
   it("tells the owner a topic with no gaps is covered, without naming a guide", async () => {
-    serveWith({ [REF]: { ...record(files.get(REF), REF), subs: [{ id: "cbc", title: "CBC", notes: [], links: [], gaps: [] }] } });
+    serveWith({ [REF]: { ...record(files.get(REF), REF), subs: [{ id: "cbc", title: "CBC", group: null, intro: null, notes: [], links: [], gaps: [] }] } });
     const a = await renderApp("#/labs/cbc");
     app = a;
     const covered = await until(() => a.container.querySelector(".ref-page .covered"), "covered note");
@@ -455,6 +455,104 @@ describe("reference tab", () => {
     expect(shown(covered)).toBe(false);
     asOwner(true);
     expect(shown(covered)).toBe(true);
+  });
+
+  it("lists grouped topics under their group's heading on the landing page and in the sidebar, and names the group in the crumbs", async () => {
+    const cbc = record(cbcSub(), "cbc");
+    serveWith({
+      [REF]: {
+        ...record(files.get(REF), REF),
+        subs: [
+          { ...cbc, group: "Blood" },
+          { ...cbc, id: "bmp", title: "BMP", group: "Blood" },
+          { ...cbc, id: "urine", title: "Urinalysis", group: null },
+        ],
+      },
+    });
+    const a = await renderApp("#/labs");
+    app = a;
+    const grp = await until(() => a.container.querySelector(".ref-page .ref-grp"), "grouped landing");
+    expect(grp.querySelector("h2")?.textContent).toBe("Blood");
+    expect([...grp.querySelectorAll(".lnk li a")].map((x) => x.textContent)).toEqual(["CBC", "BMP"]);
+    expect([...a.container.querySelectorAll(".ref-page .lnk li a")].map((x) => x.textContent)).toEqual(["CBC", "BMP", "Urinalysis"]);
+    const side = await until(() => a.container.querySelector(".side-in"), "ref sidebar");
+    const heading = side.querySelector(".side-grp");
+    expect(heading?.textContent).toBe("Blood");
+    const bmp = byText(side, "a", "BMP");
+    if (!heading || !bmp) throw new Error("no group heading or BMP entry");
+    expect(before(heading, bmp)).toBe(true);
+    expect(side.querySelectorAll(".side-grp")).toHaveLength(1);
+
+    await click(bmp);
+    await until(() => byText(a.container, ".ref-page h1", "BMP"), "BMP page");
+    expect([...a.container.querySelectorAll(".ref-page .crumbs .crumb")].map((c) => c.lastElementChild?.textContent)).toEqual(["Labs", "Blood", "BMP"]);
+  });
+
+  describe("a topic with intro sections", () => {
+    /** CBC with three sections; the first is its intro, the other two are findings (the third has a link). */
+    function serveFindings(): void {
+      const sub = record(cbcSub(), "cbc");
+      if (!("gaps" in sub) || !Array.isArray(sub.gaps) || !("links" in sub) || !Array.isArray(sub.links)) throw new Error("cbc has no gaps or links");
+      const g1 = record(sub.gaps[0], "gap");
+      const first = { ...record(sub.links[0], "cbc link"), flagged: false };
+      serveWith({
+        [REF]: {
+          ...record(files.get(REF), REF),
+          subs: [{
+            id: "cbc", title: "CBC", group: "Blood", intro: [G(1)], notes: [],
+            gaps: [{ ...g1, id: G(902), title: "Second section" }, g1, { ...g1, id: G(903), title: "Third section" }],
+            links: [{ ...first, covers: "Atrial flutter", gap: G(903) }],
+          }],
+        },
+      });
+    }
+
+    it("shows the intro open first, then each other section closed under its title, with its links inside", async () => {
+      serveFindings();
+      const a = await renderApp("#/labs/cbc");
+      app = a;
+      const page = await until(() => a.container.querySelector(".ref-page .sec-index") && a.container.querySelector(".ref-page"), "CBC page");
+      const secs = [...page.querySelectorAll(".ref-sec")];
+      expect(secs.map((s) => s.querySelector("section.gap")?.getAttribute("data-anchor"))).toEqual([G(1), G(902), G(903)]);
+      expect(at(secs, 0).tagName).toBe("DIV");
+      expect(at(secs, 0).querySelector("h3")?.textContent).toBe("TSH in AF");
+      const finds = [...page.querySelectorAll<HTMLDetailsElement>("details.ref-find")];
+      expect(finds.map((d) => [d.querySelector("summary")?.textContent, d.open])).toEqual([["Second section", false], ["Third section", false]]);
+      expect(finds.map((d) => d.querySelector("section.gap h3"))).toEqual([null, null]);
+      expect(at(finds, 1).querySelector(".sec-links .lg-c")?.textContent).toBe("Atrial flutter");
+      expect([...page.querySelectorAll(".sec-index button")].map((b) => b.textContent)).toEqual(["TSH in AF", "Second section", "Third section"]);
+    });
+
+    it("opens a closed section when the section index jumps to it, and scrolls to it", async () => {
+      serveFindings();
+      const scrolled: Element[] = [];
+      const saved = Element.prototype.scrollIntoView;
+      Element.prototype.scrollIntoView = function (this: Element) { scrolled.push(this); };
+      try {
+        const a = await renderApp("#/labs/cbc");
+        app = a;
+        const page = await until(() => a.container.querySelector(".ref-page .sec-index") && a.container.querySelector(".ref-page"), "CBC page");
+        await click(byText(page, ".sec-index button", "Third section"));
+        const third = page.querySelector<HTMLDetailsElement>(`details.ref-find:has(section[data-anchor="${G(903)}"])`);
+        expect(third?.open).toBe(true);
+        expect(page.querySelector<HTMLDetailsElement>(`details.ref-find:has(section[data-anchor="${G(902)}"])`)?.open).toBe(false);
+        expect(scrolled.some((e) => e.getAttribute("data-anchor") === G(903))).toBe(true);
+      } finally {
+        Element.prototype.scrollIntoView = saved;
+      }
+    });
+
+    it("opens the section a link lands on", async () => {
+      serveFindings();
+      const a = await renderApp(`#/labs/cbc?at=${G(902)}`);
+      app = a;
+      const page = await until(() => a.container.querySelector(".ref-page .sec-index") && a.container.querySelector(".ref-page"), "CBC page");
+      const finds = [...page.querySelectorAll<HTMLDetailsElement>("details.ref-find")];
+      expect(finds.map((d) => d.open)).toEqual([true, false]);
+      await go(`#/labs/cbc?at=${G(903)}`);
+      await until(() => at(finds, 1).open, "third section opened");
+      expect(at(finds, 0).open).toBe(true);
+    });
   });
 });
 

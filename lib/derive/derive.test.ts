@@ -19,7 +19,7 @@ import { type Card, CardMatcher, medsPanel, phraseMatcher, rowCards, stubLabel, 
 import { publish, type PublishResult } from "./publish.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
-  type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
+  type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type RefTabJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
@@ -1353,6 +1353,19 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
     expect(res.units.filter((u) => u.route === VITAMINS).map((u) => [u.at, u.title, u.tab])).toEqual([[B(60), "Vitamins", "other"]]);
     expect(res.units.filter((u) => u.route === `#/file/${D(5)}`)).toEqual([]);
     expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+  });
+
+  it("publishes a sub's group and intro (null when it has none) and puts the group in its location", () => {
+    expect((out.files.get(refPath("labs")) as RefTabJson).subs.every((s) => s.group === null && s.intro === null)).toBe(true);
+    const res = publish(mutated((x) => {
+      const cbc = x.reftabs.labs.subs[0] as (typeof x.reftabs.labs.subs)[number];
+      cbc.notes = [{ block: B(61) }];
+      cbc.group = "Blood";
+      cbc.intro = cbc.gaps.slice(0, 1);
+    }));
+    const sub = (res.files.get(refPath("labs")) as RefTabJson).subs[0];
+    expect([sub?.group, sub?.intro, sub?.gaps.slice(0, 1).map((g) => g.id)]).toEqual(["Blood", [G(1)], [G(1)]]);
+    expect((res.files.get(HOSTS_PATH) as HostsJson)[B(61)]).toEqual({ route: CBC, loc: "Labs › Blood › CBC" });
   });
 
   it("drops a note whose block is on no shown Word page, and hosts nothing for it", () => {

@@ -1,7 +1,8 @@
 // Reference tabs (Labs, Imaging, EKG, Anatomy; UI reference-tab): a landing page with the tab's topics
 // and files, and a page per topic: its sections (gap blocks), each with where her notes have it, then
 // the remaining links. The sidebar lists topics, then files.
-import type { ReactNode } from "react";
+import { Fragment, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { refPath, type PubRefLink, type RefTabJson } from "../../lib/derive/published.ts";
 import { TAB_LABELS, type RefTabId } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
@@ -29,17 +30,26 @@ export function RefSidebar({ tab, onNavigate }: { tab: RefTabId; onNavigate: () 
         <div className="gname">{ref.label}</div>
       </div>
       <div className="side-sec">Topics</div>
-      <ul className="gen">
-        {ref.subs.map((s) => (
-          <li key={s.id}>
-            <div className="ent-row">
-              <Link to={refHash(tab, s.id)} className={`ent${sub === s.id ? " open" : ""}`} aria-current={sub === s.id ? "page" : undefined} onClick={onNavigate}>
-                <Txt text={s.title} />
-              </Link>
+      {subRuns(ref.subs).map((run) => (
+        <Fragment key={run.subs[0]?.id}>
+          {run.group !== null && (
+            <div className="side-grp">
+              <Txt text={run.group} />
             </div>
-          </li>
-        ))}
-      </ul>
+          )}
+          <ul className="gen">
+            {run.subs.map((s) => (
+              <li key={s.id}>
+                <div className="ent-row">
+                  <Link to={refHash(tab, s.id)} className={`ent${sub === s.id ? " open" : ""}`} aria-current={sub === s.id ? "page" : undefined} onClick={onNavigate}>
+                    <Txt text={s.title} />
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      ))}
       {ref.files.files.length > 0 && (
         <>
           <div className="side-sec">
@@ -72,17 +82,31 @@ export function RefTabPage({ tab, sub: subId }: { tab: RefTabId; sub: string | n
         <p className="lead">
           Across every rotation and PANCE.<span className="own-only"> Each topic lists your notes first, then your files, then anything added to fill gaps.</span>
         </p>
-        <ul className="lnk">
-          {ref.subs.map((s) => (
-            <li key={s.id}>
-              <Link to={refHash(tab, s.id)}>
-                <span className="lt">
-                  <Txt text={s.title} />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {subRuns(ref.subs).map((run) => {
+          const list = (
+            <ul className="lnk">
+              {run.subs.map((s) => (
+                <li key={s.id}>
+                  <Link to={refHash(tab, s.id)}>
+                    <span className="lt">
+                      <Txt text={s.title} />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          );
+          return run.group === null ? (
+            <Fragment key={run.subs[0]?.id}>{list}</Fragment>
+          ) : (
+            <div key={run.subs[0]?.id} className="gsec ref-grp">
+              <h2>
+                <Txt text={run.group} />
+              </h2>
+              {list}
+            </div>
+          );
+        })}
         <div className="gsec">
           <h2>
             <Voice owner="Your files" visitor="Files" />
@@ -97,7 +121,7 @@ export function RefTabPage({ tab, sub: subId }: { tab: RefTabId; sub: string | n
   const pageKey = buildPageKey("ref", tab, sub.id);
   return (
     <div className="ref-page">
-      <PageHead crumbs={[{ label, to: refHash(tab) }, { label: sub.title }]} title={<Txt text={sub.title} />} actions={<EditControls pageKey={pageKey} title={sub.title} />} />
+      <PageHead crumbs={[{ label, to: refHash(tab) }, ...(sub.group === null ? [] : [{ label: sub.group }]), { label: sub.title }]} title={<Txt text={sub.title} />} actions={<EditControls pageKey={pageKey} title={sub.title} />} />
       <EditRegion pageKey={pageKey} title={sub.title}>
         <RefSubBody sub={sub} />
       </EditRegion>
@@ -152,9 +176,21 @@ function LinkGroups({ links }: { links: readonly PubRefLink[] }): ReactNode {
   );
 }
 
-/** Jumps within the page to one of its sections. */
-function SectionIndex({ gaps }: { gaps: RefSub["gaps"] }): ReactNode {
+/** Runs of consecutive subs sharing a `group` (null: no group), in order. */
+function subRuns(subs: readonly RefSub[]): { group: string | null; subs: RefSub[] }[] {
+  const runs: { group: string | null; subs: RefSub[] }[] = [];
+  for (const s of subs) {
+    const last = runs.at(-1);
+    if (last && last.group === s.group) last.subs.push(s);
+    else runs.push({ group: s.group, subs: [s] });
+  }
+  return runs;
+}
+
+/** Jumps within the page to one of its sections, first opening it (`reveal`) when it is collapsed. */
+function SectionIndex({ gaps, reveal }: { gaps: RefSub["gaps"]; reveal?: (id: string) => void }): ReactNode {
   const jump = (id: string): void => {
+    if (reveal) flushSync(() => reveal(id));
     document.querySelector(`[data-anchor="${CSS.escape(id)}"]`)?.scrollIntoView({ block: "start" });
   };
   return (
@@ -168,32 +204,69 @@ function SectionIndex({ gaps }: { gaps: RefSub["gaps"] }): ReactNode {
   );
 }
 
+/** Where her notes have one section (the links whose `gap` names it). */
+function SectionLinks({ links }: { links: readonly PubRefLink[] }): ReactNode {
+  if (links.length === 0) return null;
+  return (
+    <div className="sec-links">
+      <span className="sl-h">
+        <Voice owner="In your notes" visitor="In the notes" />
+      </span>
+      <LinkGroups links={links} />
+    </div>
+  );
+}
+
 /**
  * A reference-tab topic's body: her own notes shown here, then its sections (the gap blocks, in order),
  * each followed by a compact list of where her notes have it (links whose `gap` names it), then the
- * links that belong to no section.
+ * links that belong to no section. A sub with `intro` shows its intro sections first, open, then every
+ * other section as a closed collapsible under its title; a section opens when the route's `at` lands
+ * on it or the section index jumps to it.
  */
 export function RefSubBody({ sub }: { sub: RefSub }): ReactNode {
+  const at = useRoute().query.at;
+  const [opened, setOpened] = useState<ReadonlySet<string>>(() => new Set(at === null ? [] : [at]));
+  const [landedAt, setLandedAt] = useState(at);
+  if (at !== landedAt) {
+    setLandedAt(at);
+    if (at !== null && !opened.has(at)) setOpened(new Set([...opened, at]));
+  }
+  const setOpen = (id: string, open: boolean): void => {
+    setOpened((prev) => {
+      if (prev.has(id) === open) return prev;
+      const next = new Set(prev);
+      if (open) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  };
   const sectionIds = new Set(sub.gaps.map((g) => g.id));
   const rest = sub.links.filter((l) => l.gap === undefined || !sectionIds.has(l.gap));
+  const intro = sub.intro === null ? null : new Set(sub.intro);
+  const shown = intro === null ? sub.gaps : [...sub.gaps.filter((g) => intro.has(g.id)), ...sub.gaps.filter((g) => !intro.has(g.id))];
   return (
     <>
       <PlaceNotes notes={sub.notes} />
-      {sub.gaps.length > 2 && <SectionIndex gaps={sub.gaps} />}
-      {sub.gaps.map((g) => {
+      {sub.gaps.length > 2 && <SectionIndex gaps={shown} reveal={intro === null ? undefined : (id) => setOpen(id, true)} />}
+      {shown.map((g) => {
         const own = sub.links.filter((l) => l.gap === g.id);
+        if (intro === null || intro.has(g.id)) {
+          return (
+            <div key={g.id} className="ref-sec">
+              <GapBlock gap={g} />
+              <SectionLinks links={own} />
+            </div>
+          );
+        }
         return (
-          <div key={g.id} className="ref-sec">
-            <GapBlock gap={g} />
-            {own.length > 0 && (
-              <div className="sec-links">
-                <span className="sl-h">
-                  <Voice owner="In your notes" visitor="In the notes" />
-                </span>
-                <LinkGroups links={own} />
-              </div>
-            )}
-          </div>
+          <details key={g.id} className="ref-sec ref-find" open={opened.has(g.id)} onToggle={(e) => setOpen(g.id, e.currentTarget.open)}>
+            <summary>
+              <Txt text={g.title} />
+            </summary>
+            <GapBlock gap={g} titled={false} />
+            <SectionLinks links={own} />
+          </details>
         );
       })}
       {sub.gaps.length === 0 && <div className="covered own-only">Your notes and files cover this. Nothing was added.</div>}
