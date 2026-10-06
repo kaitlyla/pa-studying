@@ -24,7 +24,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { belowUnder, checkMembers, deriveTopics, fitTitled, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, type Topic } from "./topics.ts";
+import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
@@ -350,31 +350,141 @@ describe("topics (40 §40.2)", () => {
       expect(buildError(() => deriveTopics([drug], st)).id).toBe(R(961));
     });
 
-    it("fitTitled keeps the structure itself when every entry fits", () => {
+    it("fitTopicRows keeps the structure itself when every entry fits", () => {
       const st = structureOf({ titled: { [AEN]: 1 } });
-      expect(fitTitled([pulm()], st)).toBe(st);
+      expect(fitTopicRows([pulm()], st)).toBe(st);
       const none = structureOf();
-      expect(fitTitled([pulm()], none)).toBe(none);
+      expect(fitTopicRows([pulm()], none)).toBe(none);
     });
 
-    it("fitTitled drops only the entries that no longer fit, and the field when none is left", () => {
+    it("fitTopicRows drops only the entries that no longer fit, and the field when none is left", () => {
       const both = [pulm(), serotonin("heading")];
       const st = structureOf({ titled: { [AEN]: 1, [SSN]: 0 } });
-      expect(fitTitled(both, st)).toBe(st);
+      expect(fitTopicRows(both, st)).toBe(st);
       // The serotonin label row is a content row again: that entry no longer fits.
-      const kept = fitTitled([pulm(), serotonin("content")], st);
+      const kept = fitTopicRows([pulm(), serotonin("content")], st);
       expect(kept.titled).toEqual({ [AEN]: 1 });
       expect(() => deriveTopics([pulm(), serotonin("content")], kept)).not.toThrow();
-      const gone = fitTitled([serotonin("content")], structureOf({ titled: { [SSN]: 0, [AEN]: 1 } }));
+      const gone = fitTopicRows([serotonin("content")], structureOf({ titled: { [SSN]: 0, [AEN]: 1 } }));
       expect(gone).not.toHaveProperty("titled");
       expect(titles([serotonin("content")], gone)).toEqual([[SS, "Serotonin Syndrome", [SS]], [SSN, "Rapid onset, 2+ serotonin agents or dosage changes", [SSN]]]);
     });
 
-    it("fitTitled ignores a recorded row the build would refuse, leaving that to the build's own check", () => {
+    it("fitTopicRows ignores a recorded row the build would refuse, leaving that to the build's own check", () => {
       const b = table(B(95), 2, [[R(950), "heading", "Gout", "Tx"], [R(951), "content", "notes", "colchicine"], [R(952), "content", "", "stray"]]);
       const st = structureOf({ members: { [R(952)]: R(951) }, titled: { [R(951)]: 0 } });
-      expect(fitTitled([b], st)).toBe(st);
+      expect(fitTopicRows([b], st)).toBe(st);
       expect(buildError(() => deriveTopics([b], st)).id).toBe(R(952));
+    });
+
+    // Ruling 2026-10-06: a `titled` value may be the title itself, used verbatim.
+    describe("titled by a title given as text", () => {
+      // pance reproductive b_74Z623HCPB: "OB | NONHORMONAL" over a "Contraceptive Methods" row.
+      const [NH, NHR, HH, HR] = [R(970), R(971), R(972), R(973)];
+      const contraception = () => table(B(97), 2, [
+        [NH, "heading", "OB", "NONHORMONAL"], [NHR, "content", "Contraceptive Methods", "Behavioral methods"],
+        [HH, "heading", "", "HORMONAL"], [HR, "content", "Contraceptive Methods", "Progesterone"],
+      ]);
+
+      it("the row's topic takes that title, whatever the heading row above it says", () => {
+        const st = structureOf({ titled: { [NHR]: "Contraceptive Methods – Nonhormonal", [HR]: "Contraceptive Methods – Hormonal" } });
+        expect(titles([contraception()], st)).toEqual([
+          [NHR, "Contraceptive Methods – Nonhormonal", [NHR]], [HR, "Contraceptive Methods – Hormonal", [HR]],
+        ]);
+      });
+
+      it("needs no heading row above the row", () => {
+        expect(titles([serotonin("content")], structureOf({ titled: { [SSN]: "Serotonin syndrome notes" } }))).toEqual([
+          [SS, "Serotonin Syndrome", [SS]], [SSN, "Serotonin syndrome notes", [SSN]],
+        ]);
+      });
+
+      it("fails the build for a row that is no content row of a topic table, and fitTopicRows drops it", () => {
+        const st = structureOf({ titled: { [NH]: "Contraception", [HR]: "Contraceptive Methods – Hormonal" } });
+        const e = buildError(() => deriveTopics([contraception()], st));
+        expect(e.id).toBe(NH);
+        expect(e.message).toMatch(/not a content row of a topic table/);
+        expect(fitTopicRows([contraception()], st).titled).toEqual({ [HR]: "Contraceptive Methods – Hormonal" });
+      });
+    });
+  });
+
+  // Agent decision (Orchestrator 2026-10-06), amending §40.2: an empty-first-cell row under a heading
+  // label equal to the title of the topic it would otherwise continue continues that topic.
+  describe("a heading label repeating the topic a row would continue", () => {
+    // fm GI: her Cirrhosis row, a blank paragraph, then "Cirrhosis | Complications of Portal HTN" over rows with an empty first cell.
+    const [GH, CIR, CH, C1, C2] = [R(980), R(981), R(982), R(983), R(984)];
+    const blocks = (label: string) => [
+      table(B(98), 2, [[GH, "heading", "GI", "About"], [CIR, "content", "Cirrhosis", "chronic liver injury"]]),
+      { v: 1, id: B(99), kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} } as unknown as BlockFile,
+      table(B(100), 2, [[CH, "heading", label, "Complications of Portal HTN"], [C1, "content", "", "Esophageal varices"], [C2, "content", "", "Ascites"]]),
+    ];
+
+    it("rows of the next table continue the topic their label names again", () => {
+      const t = deriveTopics(blocks("Cirrhosis"), structureOf());
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[CIR, "Cirrhosis", [CIR, C1, C2]]]);
+      expect(t.rows.get(C1)).toMatchObject({ heading: CH, topic: CIR });
+      // Her heading row still shows above the rows it heads on the topic's page.
+      expect(withHeadings(t, [CIR, C1, C2])).toEqual([GH, CIR, CH, C1, C2]);
+    });
+
+    it("a row of the same table continues the topic its label names again", () => {
+      const b = table(B(98), 2, [[GH, "heading", "Gout", "Tx"], [CIR, "content", "Gout", "notes"], [CH, "heading", "Gout", "Flares"], [C1, "content", "", "colchicine"]]);
+      expect(deriveTopics([b], structureOf()).topics.map((x) => [x.id, x.title, x.rows])).toEqual([[CIR, "Gout", [CIR, C1]]]);
+    });
+
+    it("a different label still starts its own topic, and a titled row keeps its own", () => {
+      expect(deriveTopics(blocks("Ascites"), structureOf()).topics.map((x) => [x.id, x.title])).toEqual([[CIR, "Cirrhosis"], [C1, "Ascites"]]);
+      expect(deriveTopics(blocks("Cirrhosis"), structureOf({ titled: { [C1]: 1 } })).topics.map((x) => [x.id, x.title, x.rows])).toEqual([
+        [CIR, "Cirrhosis", [CIR]], [C1, "Complications of Portal HTN", [C1, C2]],
+      ]);
+    });
+  });
+
+  // Ruling 2026-10-06 (her "Show it once"): an `unlisted` row starts no topic and shows in place only.
+  describe("unlisted rows", () => {
+    // fm dermatology b_M5GE8RVXWN: her second copy of Pityriasis (Tinea) Versicolor ends the Papulosquamous table.
+    const [PH, PR, PV, PV2, NX, NX2] = [R(985), R(986), R(987), R(988), R(989), R(990)];
+    const blocks = () => [
+      table(B(101), 2, [[PH, "heading", "Papulosquamous", "About"], [PR, "content", "Pityriasis Rosea", "herald patch"], [PV, "content", "Pityriasis (Tinea) Versicolor", "Malassezia"], [PV2, "content", "", "KOH prep"]]),
+      table(B(102), 2, [[NX, "content", "", "continued"], [NX2, "content", "Seborrheic Keratosis", "stuck-on"]]),
+    ];
+    const sections = { sections: [{ id: "s1", title: "S1" }], members: { [PR]: "s1", [PV]: "s1", [NX2]: "s1" } };
+
+    it("the row and the rows that would continue it are shown in place only, not joining the topic above", () => {
+      const st = structureOf({ ...sections, unlisted: [PV] });
+      const t = deriveTopics(blocks(), st);
+      expect(t.topics.map((x) => [x.id, x.title, x.rows])).toEqual([[PR, "Pityriasis Rosea", [PR]], [NX2, "Seborrheic Keratosis", [NX2]]]);
+      expect(t.untitled).toEqual([PV, PV2, NX]);
+      expect(t.rows.get(PV)?.topic).toBeNull();
+      // Not a sidebar entry, but still on its section page with its table's heading row.
+      expect(navEntries(t, st, [B(101), B(102)]).sections[0]?.entries.map((e) => e.id)).toEqual([PR, NX2]);
+      expect(sectionItems(t, st, [B(101), B(102)], "s1")).toEqual([{ block: B(101), rows: [PH, PR, PV] }, { block: B(102), rows: [NX2] }]);
+    });
+
+    it.each([
+      ["that would continue a topic", { unlisted: [PV2] }, PV2, /unlisted, but it starts no topic/],
+      ["that is a heading row", { unlisted: [PH] }, PH, /not a content row of a topic table/],
+      ["that is no row of the system", { unlisted: [R(999)] }, R(999), /not a content row of a topic table/],
+    ])("fails the build for an unlisted row %s", (_name, over, id, message) => {
+      const e = buildError(() => deriveTopics(blocks(), structureOf(over)));
+      expect(e.id).toBe(id);
+      expect(e.message).toMatch(message);
+    });
+
+    it("fails the build for an unlisted condition row of a drug table", () => {
+      const drug = table(B(96), 2, [[R(960), "heading", "BETA BLOCKERS", "MOA"], [R(961), "content", "Hypertension", "β1"]]);
+      const st = structureOf({ drugTables: [{ block: B(96), pharmSection: "x", conditionRows: [R(961)] }], unlisted: [R(961)] });
+      expect(buildError(() => deriveTopics([drug], st)).message).toMatch(/unlisted, but it is a row of a drug table/);
+    });
+
+    it("fitTopicRows drops the entries whose row no longer fits, and the field when none is left", () => {
+      const st = structureOf({ unlisted: [PV] });
+      expect(fitTopicRows(blocks(), st)).toBe(st);
+      // She deleted the row: the entry goes.
+      const without = [table(B(101), 2, [[PH, "heading", "Papulosquamous", "About"], [PR, "content", "Pityriasis Rosea", "herald patch"]])];
+      expect(fitTopicRows(without, st)).not.toHaveProperty("unlisted");
+      expect(fitTopicRows(blocks(), structureOf({ unlisted: [PV, PV2] })).unlisted).toEqual([PV]);
     });
   });
 

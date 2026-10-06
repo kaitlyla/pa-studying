@@ -73,9 +73,11 @@ export interface SystemTopics {
 }
 
 /**
- * Topics of one system's blocks in order (40 §40.2). Throws a BuildError for a `titled` entry that
- * does not fit: its row must be a topic-forming content row directly below a heading row (rows
- * recorded under it in between aside), and the named cell of that heading row must be non-empty.
+ * Topics of one system's blocks in order (40 §40.2). Throws a BuildError for a `titled` or
+ * `unlisted` entry that does not fit. A `titled` row must be a content row of a topic table; one
+ * titled by a heading cell must sit directly below a heading row (rows recorded under it in between
+ * aside) whose named cell is non-empty. An `unlisted` row must be a content row of a non-drug table
+ * that would start a topic.
  */
 export function deriveTopics(blocks: readonly BlockFile[], structure: StructureFile): SystemTopics {
   const { topics, unfit } = derive(blocks, structure, true);
@@ -84,26 +86,30 @@ export function deriveTopics(blocks: readonly BlockFile[], structure: StructureF
 }
 
 /**
- * `structure` without the `titled` entries that no longer fit its blocks (deriveTopics' rule): the
- * editor's save applies this after splicing, so an edit that deletes the titled row or the heading
- * row above it, puts a row between them, or empties, merges or removes the named cell drops the
- * entry, and the row is titled by 40 §40.2 again (Orchestrator ruling 2026-10-04 22:01Z). Returns
+ * `structure` without the `titled` and `unlisted` entries that no longer fit its blocks
+ * (deriveTopics' rule): the editor's save applies this after splicing, so an edit that deletes the
+ * row, or breaks the heading row a titled row takes its title from, drops the entry, and the row is
+ * titled by 40 §40.2 again (Orchestrator rulings 2026-10-04 22:01Z and 2026-10-06). Returns
  * `structure` itself when every entry fits.
  */
-export function fitTitled(blocks: readonly BlockFile[], structure: StructureFile): StructureFile {
-  if (structure.titled === undefined) return structure;
+export function fitTopicRows(blocks: readonly BlockFile[], structure: StructureFile): StructureFile {
+  if (structure.titled === undefined && structure.unlisted === undefined) return structure;
   const { unfit } = derive(blocks, structure, false);
   if (unfit.size === 0) return structure;
-  const titled = Object.fromEntries(Object.entries(structure.titled).filter(([id]) => !unfit.has(id)));
-  if (Object.keys(titled).length > 0) return { ...structure, titled };
   const out: StructureFile = { ...structure };
-  delete out.titled;
+  const titled = Object.entries(structure.titled ?? {}).filter(([id]) => !unfit.has(id));
+  if (titled.length > 0) out.titled = Object.fromEntries(titled);
+  else delete out.titled;
+  const unlisted = (structure.unlisted ?? []).filter((id) => !unfit.has(id));
+  if (unlisted.length > 0) out.unlisted = unlisted;
+  else delete out.unlisted;
   return out;
 }
 
-/** deriveTopics' derivation; `strict` also enforces recorded rows' targets. Unfit `titled` entries are skipped and reported. */
+/** deriveTopics' derivation; `strict` also enforces recorded rows' targets. Unfit `titled` and `unlisted` entries are skipped and reported. */
 function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: boolean): { topics: SystemTopics; unfit: Map<string, string> } {
   const titled = structure.titled ?? {};
+  const unlisted = new Set(structure.unlisted ?? []);
   const unfit = new Map<string, string>();
   const reached = new Set<string>();
   const drugTables = new Map(structure.drugTables.map((d) => [d.block, new Set(d.conditionRows)]));
@@ -111,6 +117,8 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
   const byId = new Map<string, Topic>();
   /** The last topic of the preceding non-drug topic tables. */
   let carry: Topic | null = null;
+  /** Since the last topic started, an `unlisted` row came: rows that would continue a topic stay untitled. */
+  let afterUnlisted = false;
 
   for (const block of blocks) {
     const stored = tableOf(block);
@@ -159,24 +167,43 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
       const above = headingAbove === null ? undefined : out.headings.get(headingAbove);
       let title = text !== "" ? text : collapse(above?.label ?? "");
       const at = titled[row.id];
-      if (at !== undefined) {
+      if (typeof at === "string") {
+        reached.add(row.id);
+        title = at;
+      } else if (at !== undefined) {
         reached.add(row.id);
         const cell = above === undefined ? "" : collapse((at === 0 ? above.label : above.columns[at - 1]) ?? "");
         if (cell !== "") title = cell;
         else unfit.set(row.id, above === undefined ? "titled, but no heading row is directly above it" : `titled by cell ${at} of heading row ${headingAbove}, which is empty or missing`);
       }
       headingAbove = null;
-      let topic: Topic | null;
-      if (title !== "") topic = start(row.id, title);
-      else if (last) topic = last;
-      else if (!conditions && carry) topic = carry;
-      else topic = null;
+      let continued: Topic | null;
+      if (afterUnlisted) continued = null;
+      else if (last) continued = last;
+      else if (!conditions && carry) continued = carry;
+      else continued = null;
+      // A heading label repeating the title of the topic the row would otherwise continue names that
+      // topic again, so the row continues it (agent decision, Orchestrator 2026-10-06, amending 40 §40.2).
+      if (text === "" && at === undefined && continued !== null && title === continued.title) title = "";
       const joining = attached.get(row.id) ?? [];
       attached.delete(row.id);
+      if (unlisted.has(row.id)) {
+        reached.add(row.id);
+        if (title !== "" && !conditions) {
+          out.untitled.push(...joining, row.id);
+          afterUnlisted = true;
+          continue;
+        }
+        unfit.set(row.id, conditions ? "unlisted, but it is a row of a drug table" : "unlisted, but it starts no topic");
+      }
+      let topic: Topic | null;
+      if (title !== "") topic = start(row.id, title);
+      else topic = continued;
       if (topic === null) {
         out.untitled.push(...joining, row.id);
         continue;
       }
+      afterUnlisted = false;
       for (const id of joining) (out.rows.get(id) as RowInfo).topic = topic.id;
       if (topic.id === row.id) topic.rows.unshift(...joining);
       else topic.rows.push(...joining, row.id);
@@ -191,6 +218,9 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
 
   for (const id of Object.keys(titled)) {
     if (!reached.has(id)) unfit.set(id, "titled, but it is not a content row of a topic table that a heading row can title");
+  }
+  for (const id of unlisted) {
+    if (!reached.has(id)) unfit.set(id, "unlisted, but it is not a content row of a topic table");
   }
   for (const topic of out.topics) topic.section = structure.sections.length > 0 ? memberSection(out, structure, topic.id) : null;
   return { topics: out, unfit };

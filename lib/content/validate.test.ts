@@ -648,6 +648,15 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { ...structure, titled: {} })).toBe("ok");
   });
 
+  it("accepts a titled row given its title as text (ruling 2026-10-06)", () => {
+    expect(verdict(sPath, { ...structure, titled: { [R1]: "Contraceptive Methods – Hormonal", [id("r", 3)]: 1 } })).toBe("ok");
+  });
+
+  it("accepts unlisted rows (ruling 2026-10-06)", () => {
+    expect(verdict(sPath, { ...structure, unlisted: [R1, id("r", 3)] })).toBe("ok");
+    expect(verdict(sPath, { ...structure, unlisted: [] })).toBe("ok");
+  });
+
   it.each([
     ["other not last", { sections: [...structure.sections].reverse() }, /"other" last/],
     ["section members without sections", { sections: [] }, /a topic id \(sections is \[\]\)/],
@@ -660,10 +669,15 @@ describe("pharm (20 §20.6, §20.7)", () => {
     ["duplicate section ids", { sections: [structure.sections[0], structure.sections[0]] }, /no duplicate/],
     ["duplicate pharm section ids", { pharmSections: [structure.pharmSections[0], structure.pharmSections[0]] }, /no duplicate/],
     ["a titled block", { titled: { [b1]: 0 } }, /\.titled\{b_.*a r_ id/],
-    ["a negative titled cell", { titled: { [R1]: -1 } }, /\.titled\.r_.*a non-negative integer/],
-    ["a fractional titled cell", { titled: { [R1]: 1.5 } }, /a non-negative integer/],
-    ["a titled cell given as text", { titled: { [R1]: "1" } }, /a non-negative integer/],
+    ["a negative titled cell", { titled: { [R1]: -1 } }, /\.titled\.r_.*a heading cell index or a non-empty title/],
+    ["a fractional titled cell", { titled: { [R1]: 1.5 } }, /a heading cell index or a non-empty title/],
+    ["an empty titled title", { titled: { [R1]: "" } }, /a heading cell index or a non-empty title/],
+    ["a blank titled title", { titled: { [R1]: "  " } }, /a heading cell index or a non-empty title/],
     ["titled as a list", { titled: [R1] }, /\.titled.*an object/],
+    ["an unlisted block", { unlisted: [b1] }, /\.unlisted.*a r_ id/],
+    ["an unlisted row listed twice", { unlisted: [R1, R1] }, /no duplicate/],
+    ["unlisted as a record", { unlisted: { [R1]: true } }, /\.unlisted.*an array/],
+    ["a row both titled and unlisted", { titled: { [R1]: 0 }, unlisted: [R1] }, /\.unlisted.*rows that are not also titled/],
   ])("refuses %s", (_name, over, message) => {
     expect(verdict(sPath, { ...structure, ...over })).toMatch(message);
   });

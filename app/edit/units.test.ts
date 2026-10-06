@@ -741,6 +741,47 @@ describe("a save and titled rows", () => {
   });
 });
 
+// Ruling 2026-10-06: an `unlisted` row's entry lives as long as the row, and a restore brings it back with the row.
+describe("a save and unlisted rows", () => {
+  /** Commits structure.json with R131 "Heart failure" (B13) unlisted. */
+  async function withUnlisted(): Promise<void> {
+    const unit = await unitAt("system:fm:cardiovascular");
+    const structure = { ...only(unit, "rows").sys.structure, unlisted: [R(131)] };
+    w.fake.commitFiles({ [CV_STRUCTURE]: serializeFile(CV_STRUCTURE, structure) });
+  }
+  const b13 = (unit: EditUnit) => {
+    const part = unit.parts.find((p): p is Extract<Part, { kind: "rows" }> => p.kind === "rows" && p.block.id === B(13));
+    if (!part) throw new Error("no B13 rows part");
+    return part;
+  };
+  const saveB13 = async (edit: (doc: DocJSON) => DocJSON) => {
+    const unit = await unitAt("system:fm:cardiovascular");
+    const part = b13(unit);
+    return buildSave(unit, new Map([[part.slot.id, edit(part.slot.doc)]]), TODAY);
+  };
+
+  it("an edit that keeps the row keeps the entry, and the row stays out of the topics", async () => {
+    await withUnlisted();
+    const build = await saveB13((d) => setCell(d, R(131), 1, "HFrEF; loop diuretics; SGLT2i"));
+    expect(changeOf(build, CV_STRUCTURE)).toBeUndefined();
+    const unit = await unitAt("system:fm:cardiovascular");
+    const t = deriveTopics(b13(unit).sys.blocks, b13(unit).sys.structure);
+    expect(t.topics.map((x) => x.id)).not.toContain(R(131));
+    expect(t.untitled).toContain(R(131));
+  });
+
+  it("deleting the row drops its entry, and a restore of the version before brings both back", async () => {
+    await withUnlisted();
+    const version = await unitAt("system:fm:cardiovascular");
+    const build = await saveB13((d) => dropRow(d, R(131)));
+    const saved = json<StructureFile>(changeOf(build, CV_STRUCTURE));
+    expect(saved).not.toHaveProperty("unlisted");
+    w.fake.commitFiles(Object.fromEntries(build.changes.flatMap((c) => ("content" in c ? [[c.path, c.content]] : []))));
+    const restored = buildSave(await unitAt("system:fm:cardiovascular"), new Map(), TODAY, { restore: version });
+    expect(json<StructureFile>(changeOf(restored, CV_STRUCTURE)).unlisted).toEqual([R(131)]);
+  });
+});
+
 describe("snapshot", () => {
   it("reads each blob once, lists a directory sorted, and refuses a path the commit lacks", async () => {
     const snap = await Snapshot.at(w.git);

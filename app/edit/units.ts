@@ -7,7 +7,7 @@ import {
 } from "../../lib/content/index.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
-import { checkMembers, deriveTopics, fitTitled, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -557,14 +557,16 @@ function checkSystems(systems: Iterable<{ sys: SystemCtx; structure: StructureFi
 }
 
 /**
- * `structure` with the `members`, `listed`, `titled` and `conditionRows` entries `ids` had in `old`.
- * A restored `titled` entry whose heading is not back is dropped by fitTitled before the checks.
+ * `structure` with the `members`, `listed`, `titled`, `unlisted` and `conditionRows` entries `ids`
+ * had in `old`. A restored `titled` entry whose heading is not back is dropped by fitTopicRows
+ * before the checks.
  */
 function withOldEntries(structure: StructureFile, old: StructureFile, ids: readonly string[]): StructureFile {
   if (ids.length === 0) return structure;
   const members = { ...structure.members };
   const listed = { ...structure.listed };
   const titled = { ...structure.titled };
+  const unlisted = [...(structure.unlisted ?? [])];
   for (const id of ids) {
     const m = old.members[id];
     if (m !== undefined) members[id] = m;
@@ -572,13 +574,18 @@ function withOldEntries(structure: StructureFile, old: StructureFile, ids: reado
     if (l !== undefined) listed[id] = l;
     const t = old.titled?.[id];
     if (t !== undefined) titled[id] = t;
+    if (old.unlisted?.includes(id) && !unlisted.includes(id)) unlisted.push(id);
   }
   const drugTables = structure.drugTables.map((d) => {
     const before = old.drugTables.find((o) => o.block === d.block)?.conditionRows ?? [];
     const back = ids.filter((id) => before.includes(id) && !d.conditionRows.includes(id));
     return back.length > 0 ? { ...d, conditionRows: [...d.conditionRows, ...back] } : d;
   });
-  return { ...structure, members, listed, drugTables, ...(Object.keys(titled).length > 0 ? { titled } : {}) };
+  return {
+    ...structure, members, listed, drugTables,
+    ...(Object.keys(titled).length > 0 ? { titled } : {}),
+    ...(unlisted.length > 0 ? { unlisted } : {}),
+  };
 }
 
 /** Today's local date as ISO `YYYY-MM-DD`. */
@@ -672,8 +679,8 @@ export function buildSave(
           }), before, deriveTopics(part.sys.blocks, before), spliced.deleted);
         }
       }
-      // An edit that breaks a `titled` row's heading drops the entry (Orchestrator ruling 2026-10-04 22:01Z).
-      s.structure = fitTitled(s.blocks, s.structure);
+      // An edit that breaks a `titled` or `unlisted` row drops the entry (Orchestrator rulings 2026-10-04 22:01Z and 2026-10-06).
+      s.structure = fitTopicRows(s.blocks, s.structure);
       if (unit.topic !== null && spliced.deleted.includes(unit.topic)) lostTopic = { part, blocks: s.blocks, structure: s.structure };
       continue;
     }
@@ -825,7 +832,7 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
     const sys = await now<SystemFile>(path);
     const blocks = await Promise.all(sys.blocks.map((b) => now<BlockFile>(blockPath(ctx, b))));
     const stored = await now<StructureFile>(ctx.structurePath);
-    const structure = fitTitled(blocks, stored);
+    const structure = fitTopicRows(blocks, stored);
     if (structure !== stored) files.set(ctx.structurePath, structure);
     checkMembers(sys.id, deriveTopics(blocks, structure), structure);
   }

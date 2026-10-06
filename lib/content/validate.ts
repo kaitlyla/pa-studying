@@ -508,8 +508,11 @@ export const validateStructure: Validator = (v, ctx) => {
       id: slugC, title: nonEmpty, tables: uniqueArr(id("b")), overview: nullable(id("p")), lo: nullable(id("p")), also: uniqueArr(id("c")),
     }, {})),
     pharmFiles: uniqueArr(id("d")),
-  }, { titled: record(id("r"), int) })(v, "", ctx);
+  }, { titled: record(id("r"), either("a heading cell index or a non-empty title", int, nonEmpty)), unlisted: uniqueArr(id("r")) })(v, "", ctx);
   const s = v as StructureFile;
+  for (const r of s.unlisted ?? []) {
+    if (s.titled?.[r] !== undefined) bad(ctx, `.unlisted`, "rows that are not also titled", r);
+  }
   const sectionIds = s.sections.map((x) => x.id);
   uniqueArr(str)(sectionIds, ".sections[].id", ctx);
   const otherAt = sectionIds.indexOf("other");
