@@ -482,6 +482,65 @@ test.describe("image viewer", () => {
     await page.keyboard.press("Escape");
     await expect(dlg).toHaveCount(0);
   });
+
+  /** The first sub of a reference tab with an image in a section shown open (an intro section, or any when the sub has no intro). */
+  function refFigure(tab: string): { sub: string; gap: string } {
+    for (const s of read<RefTabJson>(`ref/${tab}.json`).subs) {
+      const g = s.gaps.find((x) => x.figures.length > 0 && (s.intro === null || s.intro.includes(x.id)));
+      if (g) return { sub: s.id, gap: g.id };
+    }
+    throw new Error(`no ${tab} page shows an image in an open section`);
+  }
+
+  test("Imaging: images show as thumbnails at most 320 px wide that open full size by click or keyboard, on a laptop and a phone", async ({ page }) => {
+    const { sub, gap } = refFigure("imaging");
+    await open(page, refHash("imaging", sub));
+    const thumb = main(page).locator(`[data-anchor="${gap}"] .gap-figs.thumbs button.imgbtn`).first();
+    await thumb.scrollIntoViewIfNeeded();
+    await expect(thumb).toHaveAccessibleName(/^Open full size: /);
+    const img = thumb.locator("img");
+    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+    const w = await img.evaluate((el) => el.getBoundingClientRect().width);
+    expect(w).toBeGreaterThan(0);
+    expect(w).toBeLessThanOrEqual(320);
+
+    await thumb.click();
+    const dlg = page.getByRole("dialog", { name: "Image, full size" });
+    await expect(dlg).toBeVisible();
+    await expect(dlg.locator(".lb-in img")).toHaveAttribute("src", (await img.getAttribute("src")) ?? "");
+    await page.keyboard.press("Escape");
+    await expect(dlg).toHaveCount(0);
+    await expect(thumb).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await expect(dlg).toBeVisible();
+    await dlg.getByRole("button", { name: /^Close/ }).click();
+    await expect(dlg).toHaveCount(0);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator(".site")).toHaveClass(/\bis-phone\b/);
+    await thumb.scrollIntoViewIfNeeded();
+    const box = await thumb.evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      return { left: r.left, right: r.right, vw: document.documentElement.clientWidth };
+    });
+    expect(box.left).toBeGreaterThanOrEqual(0);
+    expect(box.right).toBeLessThanOrEqual(box.vw);
+    await thumb.click();
+    await expect(dlg).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dlg).toHaveCount(0);
+  });
+
+  test("other reference tabs keep full-size images that link to the file", async ({ page }) => {
+    const { sub, gap } = refFigure("ekg");
+    await open(page, refHash("ekg", sub));
+    const figs = main(page).locator(`[data-anchor="${gap}"] .gap-figs`).first();
+    await expect(figs).toBeVisible();
+    await expect(figs).not.toHaveClass(/\bthumbs\b/);
+    await expect(figs.locator("button")).toHaveCount(0);
+    await expect(figs.locator("a > img").first()).toBeVisible();
+  });
 });
 
 test.describe("review slides", () => {

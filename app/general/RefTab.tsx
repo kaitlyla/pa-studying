@@ -123,7 +123,7 @@ export function RefTabPage({ tab, sub: subId }: { tab: RefTabId; sub: string | n
     <div className="ref-page">
       <PageHead crumbs={[{ label, to: refHash(tab) }, ...(sub.group === null ? [] : [{ label: sub.group }]), { label: sub.title }]} title={<Txt text={sub.title} />} actions={<EditControls pageKey={pageKey} title={sub.title} />} />
       <EditRegion pageKey={pageKey} title={sub.title}>
-        <RefSubBody sub={sub} />
+        <RefSubBody sub={sub} thumbnails={tab === "imaging"} />
       </EditRegion>
     </div>
   );
@@ -222,9 +222,10 @@ function SectionLinks({ links }: { links: readonly PubRefLink[] }): ReactNode {
  * each followed by a compact list of where her notes have it (links whose `gap` names it), then the
  * links that belong to no section. A sub with `intro` shows its intro sections first, open, then every
  * other section as a closed collapsible under its title; a section opens when the route's `at` lands
- * on it or the section index jumps to it.
+ * on it or the section index jumps to it. `thumbnails`: section images shown small, opening full size
+ * on click (the Imaging tab).
  */
-export function RefSubBody({ sub }: { sub: RefSub }): ReactNode {
+export function RefSubBody({ sub, thumbnails = false }: { sub: RefSub; thumbnails?: boolean }): ReactNode {
   const at = useRoute().query.at;
   const [opened, setOpened] = useState<ReadonlySet<string>>(() => new Set(at === null ? [] : [at]));
   const [landedAt, setLandedAt] = useState(at);
@@ -254,7 +255,7 @@ export function RefSubBody({ sub }: { sub: RefSub }): ReactNode {
         if (intro === null || intro.has(g.id)) {
           return (
             <div key={g.id} className="ref-sec">
-              <GapBlock gap={g} />
+              <GapBlock gap={g} thumbnails={thumbnails} />
               <SectionLinks links={own} />
             </div>
           );
@@ -264,7 +265,7 @@ export function RefSubBody({ sub }: { sub: RefSub }): ReactNode {
             <summary>
               <Txt text={g.title} />
             </summary>
-            <GapBlock gap={g} titled={false} />
+            <GapBlock gap={g} titled={false} thumbnails={thumbnails} />
             <SectionLinks links={own} />
           </details>
         );

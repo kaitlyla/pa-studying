@@ -3,6 +3,7 @@
 // CSS for visitors, so a page she saved still reads neutrally to visitors.
 import type { ReactNode } from "react";
 import type { FlagNote, PubFigure, PubGap } from "../../lib/derive/published.ts";
+import { openImageViewer } from "../files/imageViewer.tsx";
 import { formatDate, latest } from "../shell/format.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { assetUrl, RichDoc } from "./RichDoc.tsx";
@@ -71,19 +72,27 @@ export function UpdateNotes({ notes }: { notes: readonly FlagNote[] | undefined 
 /**
  * A gap block's example images, each opening full size, with its caption and its credit line: author,
  * license, a link to the source's file page and any change made. The same wording for everyone.
+ * `thumbnails`: shown small, side by side, each opening in the image viewer when clicked.
  */
-export function GapFigures({ figures }: { figures: readonly PubFigure[] }): ReactNode {
+export function GapFigures({ figures, thumbnails = false }: { figures: readonly PubFigure[]; thumbnails?: boolean }): ReactNode {
   if (figures.length === 0) return null;
   return (
-    <div className="gap-figs">
+    <div className={thumbnails ? "gap-figs thumbs" : "gap-figs"}>
       {figures.map((f) => {
         const url = assetUrl(f.asset);
         const c = f.credit;
+        const img = <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" />;
         return (
           <figure key={f.asset} className="gap-fig">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" />
-            </a>
+            {thumbnails ? (
+              <button type="button" className="imgbtn" aria-label={`Open full size: ${f.caption}`} onClick={() => openImageViewer(url)}>
+                {img}
+              </button>
+            ) : (
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {img}
+              </a>
+            )}
             <figcaption>
               <span className="fig-cap">
                 <Txt text={f.caption} />
@@ -118,9 +127,10 @@ export function GapFigures({ figures }: { figures: readonly PubFigure[] }): Reac
 
 /**
  * A gap-filled block (general-topic/gap-block). `titled` false: no title heading, for a block
- * whose title is already shown just above it (a collapsible's summary).
+ * whose title is already shown just above it (a collapsible's summary). `thumbnails`: its images
+ * shown small, opening full size on click (see GapFigures).
  */
-export function GapBlock({ gap, titled = true }: { gap: PubGap; titled?: boolean }): ReactNode {
+export function GapBlock({ gap, titled = true, thumbnails = false }: { gap: PubGap; titled?: boolean; thumbnails?: boolean }): ReactNode {
   const edited = latest(gap.ownerEdits);
   return (
     <section className="gap" aria-label={gap.title} data-anchor={gap.id}>
@@ -137,7 +147,7 @@ export function GapBlock({ gap, titled = true }: { gap: PubGap; titled?: boolean
       <div className="gap-meta">
         Relevant to: <b><Txt text={gap.relevantTo} /></b> · Written {formatDate(gap.written)}
       </div>
-      <GapFigures figures={gap.figures} />
+      <GapFigures figures={gap.figures} thumbnails={thumbnails} />
       <div className="notes gap-body">
         <RichDoc doc={gap.doc} basePt={GAP_BASE_PT} />
       </div>

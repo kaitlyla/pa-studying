@@ -10,6 +10,7 @@ import { resetSearchState } from "../search/store.ts";
 import { BASE, fakeSite, inProcessWorker } from "../search/testing.ts";
 import { navigate } from "../shell/route.ts";
 import { asOwner, installOwnerCss, mount, until, visibleText, type Mounted } from "../testing.tsx";
+import { closeImageViewer, ImageViewer } from "../files/imageViewer.tsx";
 import { GapBlock, ReviewSlidesBadge, UpdateNote } from "./labels.tsx";
 import { RichDoc } from "./RichDoc.tsx";
 import { anchoredOffset, borderCss, cellPadding, em, imageTransform, WORD_CELL_MARGINS, paragraphStyle, runStyle, tableColumns, underlineStyle } from "./styles.ts";
@@ -28,6 +29,11 @@ afterEach(() => {
 async function render(node: ReactNode): Promise<HTMLDivElement> {
   ui = await mount(node);
   return ui.container;
+}
+
+function need<T>(v: T | null | undefined, what: string): T {
+  if (v === null || v === undefined) throw new Error(`missing: ${what}`);
+  return v;
 }
 
 const NONE4 = { top: null, right: null, bottom: null, left: null };
@@ -526,6 +532,45 @@ describe("labels for content not from her notes", () => {
     // Public domain: the license is plain text and an unchanged file states no change.
     expect(figs[1]?.querySelector(".fig-credit")?.textContent).toBe("Image: US Gov · Public domain · Source ");
     expect([...(figs[1]?.querySelectorAll(".fig-credit a") ?? [])].map((a) => a.textContent?.trim())).toEqual(["Source"]);
+  });
+
+  it("gap block: by default each image is a link to the full-size file, not a viewer button", async () => {
+    const c = await render(<GapBlock gap={gap({ figures: [strip] })} />);
+    expect(c.querySelector(".gap-figs")?.classList.contains("thumbs")).toBe(false);
+    expect(c.querySelector(".gap-figs button")).toBeNull();
+    expect(c.querySelector(".gap-figs img")?.parentElement?.tagName).toBe("A");
+  });
+
+  it("gap block thumbnails: each image is a button that opens the full-size viewer and returns focus on Escape", async () => {
+    const c = await render(
+      <>
+        <GapBlock gap={gap({ figures: [strip] })} thumbnails />
+        <ImageViewer />
+      </>,
+    );
+    try {
+      expect(c.querySelector(".gap-figs")?.classList.contains("thumbs")).toBe(true);
+      expect(c.querySelector(".gap-figs a img")).toBeNull();
+      const btn = need(c.querySelector<HTMLButtonElement>(".gap-figs button.imgbtn"), "thumbnail button");
+      expect(btn.getAttribute("type")).toBe("button");
+      expect(btn.getAttribute("aria-label")).toBe("Open full size: Atrial fibrillation, lead II");
+      expect(btn.querySelector("img")?.getAttribute("src")).toBe(`${DATA_BASE}assets/${strip.asset}`);
+      // The credit line stays under the thumbnail.
+      expect(btn.closest("figure")?.querySelector(".fig-credit")?.textContent).toContain("Image: Jane Roe");
+      expect(c.querySelector('[role="dialog"]')).toBeNull();
+
+      act(() => btn.focus());
+      act(() => btn.click());
+      const dialog = need(c.querySelector<HTMLElement>('[role="dialog"]'), "viewer");
+      expect(dialog.querySelector(".lb-in img")?.getAttribute("src")).toBe(`${DATA_BASE}assets/${strip.asset}`);
+      act(() => {
+        dialog.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
+      });
+      expect(c.querySelector('[role="dialog"]')).toBeNull();
+      expect(document.activeElement).toBe(btn);
+    } finally {
+      act(() => closeImageViewer());
+    }
   });
 
   it("gap block: the credit line reads the same for visitors and the owner", async () => {
