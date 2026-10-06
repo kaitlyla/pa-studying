@@ -7,7 +7,7 @@ import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
 import {
-  CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
+  CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, panelHome, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard, PubNote,
@@ -707,7 +707,9 @@ export function publish(c: Content): PublishResult {
       panelSections[conditionKey(section)] = [...(panels.get(sectionKey(gid, sys, conditionKey(section))) ?? [])];
     }
     const relevantTo = (topic: { section: string | null }): ReadonlySet<string> => new Set(panelSections[conditionKey(topic.section)] ?? []);
-    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic)), s.data.below);
+    const home = (card: string): ReturnType<typeof panelHome> =>
+      panelHome((cardPlaces.get(card) ?? []).map((p) => ({ guide: g0(p.s), system: p.s.data.file.id, section: p.section })), gid, sys);
+    const topics: PubTopic[] = publishedTopics(t, (topic) => medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home), s.data.below);
     usedBlocks(topics.flatMap((x) => (x.below ? [x.below] : [])));
 
     // section pages

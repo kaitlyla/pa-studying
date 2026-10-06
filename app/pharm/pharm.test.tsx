@@ -438,6 +438,42 @@ describe("pharm pages", () => {
     expect(Object.values(expandedState(pg)).every((v) => v === "false")).toBe(true);
   });
 
+  it("meds panel card with no rows in the system shows its pharm-section notes; links only to a pharm system in this guide", async () => {
+    // A card her text names whose drug rows sit in another system's (or another guide's) pharm.
+    const cv = systemJson(CV);
+    const nitrates = need(cv.cards[C(2)], "Nitrates card in the system's cards");
+    expect(nitrates.title).toBe("Nitrates");
+    const patched = structuredClone(cv);
+    const topic = need(patched.topics.find((t) => t.id === R(131)), "Heart failure topic");
+    expect(topic.meds).toEqual([]);
+    topic.meds = [
+      { card: C(2), title: "Nitrates", rows: [], section: "antianginals", system: "pulmonary", target: C(2) },
+      { card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) },
+    ];
+    expect(need(cv.cards[C(3)], "Beta Blockers card in the system's cards").title).toBe("Beta Blockers");
+    server.restore();
+    server = serveData(new Map([...files, [CV, patched]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect([...panel.querySelectorAll(".phc-t")].map((t) => t.textContent)).toEqual(["Nitrates", "Beta Blockers"]);
+
+    await click(cardBtn(panel, `meds-${C(2)}`));
+    const sameGuide = cardEl(panel, `meds-${C(2)}`);
+    expect(sameGuide.querySelector(".ph-rowblk")).toBeNull();
+    expect(visibleText(sameGuide)).toContain("MOA: venodilation");
+    const link = need(sameGuide.querySelector<HTMLAnchorElement>("a.phc-more"), "pharm link");
+    expect(link.textContent).toBe("Open in Pulmonary pharm ›");
+    expect(link.getAttribute("href")).toBe(guideViewHash("fm", { kind: "pharm", system: "pulmonary", section: "antianginals", target: C(2) }));
+
+    await click(cardBtn(panel, `meds-${C(3)}`));
+    const otherGuide = cardEl(panel, `meds-${C(3)}`);
+    expect(otherGuide.querySelector(".ph-rowblk")).toBeNull();
+    expect(visibleText(otherGuide)).toContain("MOA: beta-1 blockade");
+    expect(otherGuide.querySelector("a.phc-more")).toBeNull();
+  });
+
   it("a topic without meds shows no meds panel", async () => {
     const cv = systemJson(CV);
     const topic = need(cv.topics.find((t) => t.meds.length === 0 && t.id === R(131)), "Heart failure topic without meds");

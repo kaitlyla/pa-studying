@@ -70,7 +70,7 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
       <EditRegion pageKey={pageKey} title={topic.title}>
         {block && <NotesBlock block={block} basePt={nav.basePt} rows={topic.rows} />}
       </EditRegion>
-      <MedsPanel guide={guide} system={system} topic={topic} basePt={nav.basePt} />
+      <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} />
       {/* Her own notes and pictures below the topic; while editing, they are in the editor above. */}
       {topic.below && !editing && <NotesBlock block={topic.below} basePt={nav.basePt} />}
     </section>

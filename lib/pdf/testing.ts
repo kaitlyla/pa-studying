@@ -152,7 +152,7 @@ export function cardioSystem(): SystemJson {
     },
     headings: { [R.h1]: { label: "CARDIO LABEL", columns: ["About", "Dx"] } },
     topics: [
-      { id: R.a, title: "Angina", section: "cad", condition: false, rows: [R.h1, R.a, R.a2], meds: [{ card: "c_AAAAAAAAC1", title: "MEDSPANEL Nitrates", rows: [R.dh, R.d1], section: "antianginals", target: "c_AAAAAAAAC1" }], below: null },
+      { id: R.a, title: "Angina", section: "cad", condition: false, rows: [R.h1, R.a, R.a2], meds: [{ card: "c_AAAAAAAAC1", title: "MEDSPANEL Nitrates", rows: [R.dh, R.d1], section: "antianginals", system: "cardiovascular", target: "c_AAAAAAAAC1" }], below: null },
       { id: R.b, title: "Myocarditis: viral/other", section: "inf", condition: false, rows: [R.h1, R.b], meds: [], below: null },
     ],
     stubs: {

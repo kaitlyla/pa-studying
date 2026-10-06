@@ -218,10 +218,16 @@ export interface PubRow {
 export interface PubMedsCard {
   card: string | null;
   title: string;
-  /** Row ids, each run preceded once by its heading row id. */
+  /** Row ids, each run preceded once by its heading row id; [] for a card with no row in the system. */
   rows: string[];
-  /** Pharm section holding the card's first row; the "Open in <System> pharm" link goes there. */
+  /**
+   * Pharm section holding the card's first row; the "Open in <System> pharm" link goes there. A card
+   * without rows takes the pharm section her pharm places it in (lib/derive/pharm.ts `panelHome`) and
+   * shows the notes written for it.
+   */
   section: string;
+  /** The guide's system holding `section`; null when it is another guide's, so the card shows without a link. */
+  system: string | null;
   /** Scroll target: the card id, or the row id for a card-less row. */
   target: string;
 }

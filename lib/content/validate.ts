@@ -359,7 +359,7 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
 export const validateCards: Validator = (v, ctx) => {
   shapeOf<CardsFile>({
     v: v1,
-    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c"), for: arr(slugC), classWords: arr(nonEmpty) })),
+    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c"), for: arr(slugC), classWords: arr(nonEmpty), diseases: arr(nonEmpty) })),
   }, {})(v, "", ctx);
   const cards = (v as CardsFile).cards;
   uniqueArr(str)(cards.map((c) => c.id), ".cards[].id", ctx);
