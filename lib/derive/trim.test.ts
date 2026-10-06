@@ -178,6 +178,25 @@ describe("shownParts and panelUses", () => {
     expect(shownParts(card, new Set()).map((x) => x.id)).toEqual(["general"]);
   });
 
+  it("keeps a part written for some conditions only on the panel of a condition its title names, whatever the section", () => {
+    const tourette = { id: "tourette", diseases: ["Tourette syndrome", "tic disorders"] };
+    const card = { parts: [p("general"), tourette] };
+    expect(shownParts(card, new Set(["antipsychotics"]), "Tic Disorders").map((x) => x.id)).toEqual(["general", "tourette"]);
+    expect(shownParts(card, new Set(["antipsychotics"]), "Morning Sickness & Hyperemesis Gravidarum").map((x) => x.id)).toEqual(["general"]);
+    // A pharm section page names no condition: a part written for no section shows on her file page only.
+    expect(shownParts(card, new Set(["antipsychotics"])).map((x) => x.id)).toEqual(["general"]);
+  });
+
+  it("keeps a part written for some conditions and a section in that section, and on those conditions' panels only", () => {
+    // Her IBD notes on the glucocorticoid card: her IBD section and Crohn's disease, not psoriasis.
+    const ibd = { id: "ibd", diseases: ["Crohn's disease", "ulcerative colitis"], for: ["ibd"] };
+    const card = { parts: [p("general"), ibd] };
+    expect(shownParts(card, new Set(["ibd"])).map((x) => x.id)).toEqual(["general", "ibd"]);
+    expect(shownParts(card, new Set(["dmards"])).map((x) => x.id)).toEqual(["general"]);
+    expect(shownParts(card, new Set(["ibd"]), "Crohn's disease").map((x) => x.id)).toEqual(["general", "ibd"]);
+    expect(shownParts(card, new Set(["ibd"]), "Psoriasis").map((x) => x.id)).toEqual(["general"]);
+  });
+
   it("reads a topic's condition section, and the systems without sections under the empty key", () => {
     const system = { panelSections: { "coronary-artery-disease": ["antianginals", "antiplatelets"], "": ["beta-blockers"] } };
     expect([...panelUses(system, { section: "coronary-artery-disease" })]).toEqual(["antianginals", "antiplatelets"]);

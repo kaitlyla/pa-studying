@@ -35,7 +35,7 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
         // A card with guide rows here shows the notes written for this condition's uses, less what
         // those rows already say; a card without rows here shows what its pharm section shows.
         const at = m.rows.length > 0 ? uses : new Set([m.section]);
-        const parts = card ? shownParts(card, at) : [];
+        const parts = card ? shownParts(card, at, topic.title) : [];
         const notes = parts.flatMap((p) => p.blocks);
         const hidden = hiddenLines(system, notes, new Set(m.rows), at);
         const linked = m.system === null ? undefined : systems.find((s) => s.id === m.system);

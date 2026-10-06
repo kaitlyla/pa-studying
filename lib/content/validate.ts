@@ -354,7 +354,7 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
     v: v1, id: slugC, fileName: nonEmpty, basePt: num, blocks: uniqueArr(id("b")),
     parts: arr(shapeOf<PharmPart>(
       { id: id("p"), role: oneOf("overview", "lo", "card", "topic"), title: str, card: nullable(id("c")), blocks: arr(id("b")) },
-      { column: labelC, columns: columnC, rows: rowsC, label: labelC, topics: topicsC },
+      { column: labelC, columns: columnC, rows: rowsC, label: labelC, topics: topicsC, diseases: diseasesC },
     )),
   }, { page: id("d") })(v, "", ctx);
   const p = v as PharmFile;
@@ -394,6 +394,7 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
     if ((part.role === "card") !== (part.card !== null)) bad(ctx, `${path}.card`, "a card id exactly when role is card", part.card);
     if (part.role === "overview" && i !== 0) bad(ctx, `${path}.role`, "overview only as the first part", part.role);
     if ((part.role === "topic") !== (part.topics !== undefined)) bad(ctx, `${path}.topics`, "topics exactly when role is topic", part.topics);
+    if (part.diseases !== undefined && part.role !== "card") bad(ctx, `${path}.diseases`, "diseases only on a card part", part.diseases);
     const { blocks } = part;
     const cut: Omit<BlockNote, "block"> = {
       ...(part.column === undefined ? {} : { column: part.column }), ...(part.rows === undefined ? {} : { rows: part.rows }),
@@ -439,12 +440,13 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
 export const validateCards: Validator = (v, ctx) => {
   shapeOf<CardsFile>({
     v: v1,
-    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c"), for: arr(slugC), classWords: arr(nonEmpty), diseases: arr(nonEmpty) })),
+    cards: arr(shapeOf<CardsFile["cards"][number]>({ id: id("c"), file: slugC, aliases: arr(nonEmpty), home: record(guideC, slugC) }, { in: id("c"), for: arr(slugC), classWords: arr(nonEmpty), diseases: arr(nonEmpty), notDiseases: diseasesC })),
   }, {})(v, "", ctx);
   const cards = (v as CardsFile).cards;
   uniqueArr(str)(cards.map((c) => c.id), ".cards[].id", ctx);
   cards.forEach((c, i) => {
     if (c.for !== undefined) sectionList(c.for, `.cards[${i}].for`, ctx);
+    if (c.notDiseases !== undefined && c.in !== undefined) bad(ctx, `.cards[${i}].notDiseases`, "notDiseases only on a class card", c.notDiseases);
     if (c.in === undefined) return;
     const target = cards.find((x) => x.id === c.in);
     if (!target || target === c || target.in !== undefined) bad(ctx, `.cards[${i}].in`, "another card that is itself in no card", c.in);
@@ -503,7 +505,7 @@ export const validateStructure: Validator = (v, ctx) => {
     sections: arr(shapeOf<StructureFile["sections"][number]>({ id: slugC, title: nonEmpty }, {})),
     members: record(id("r", "b"), str),
     listed: record(id("b"), str),
-    drugTables: arr(shapeOf<StructureFile["drugTables"][number]>({ block: id("b"), pharmSection: slugC, conditionRows: uniqueArr(id("r")) }, {})),
+    drugTables: arr(shapeOf<StructureFile["drugTables"][number]>({ block: id("b"), pharmSection: slugC, conditionRows: uniqueArr(id("r")) }, { onlyFor: uniqueArr(nonEmpty) })),
     pharmSections: arr(shapeOf<StructureFile["pharmSections"][number]>({
       id: slugC, title: nonEmpty, tables: uniqueArr(id("b")), overview: nullable(id("p")), lo: nullable(id("p")), also: uniqueArr(id("c")),
     }, {})),
@@ -577,6 +579,10 @@ const labelC: Checker = (v, at, ctx) => {
 const topicsC: Checker = (v, at, ctx) => {
   uniqueArr(id("r"))(v, at, ctx);
   if ((v as unknown[]).length === 0) bad(ctx, at, "at least one topic id", v);
+};
+const diseasesC: Checker = (v, at, ctx) => {
+  uniqueArr(nonEmpty)(v, at, ctx);
+  if ((v as unknown[]).length === 0) bad(ctx, at, "at least one condition", v);
 };
 /** A Word block, whole, cut to one column, or cut to some rows — not both. */
 const blockNote: Checker = (v, at, ctx) => {

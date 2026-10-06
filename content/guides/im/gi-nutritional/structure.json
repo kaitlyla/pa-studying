@@ -108,7 +108,15 @@
   {
    "block": "b_JANEGY82T5",
    "pharmSection": "inflammatory-bowel-disease",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "inflammatory bowel",
+    "IBD",
+    "Crohn",
+    "ulcerative colitis",
+    "UC",
+    "toxic megacolon"
+   ]
   },
   {
    "block": "b_ERK9S5KPKQ",
@@ -140,7 +148,15 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_B5WV8AJCNS",
+    "c_YBD74XV7V6",
+    "c_YN5JKKW1N1",
+    "c_YW4GDJBHAS",
+    "c_H0Q2MF2J7G",
+    "c_244067WQDW",
+    "c_0GMQ3W9M9V"
+   ]
   },
   {
    "id": "peptic-ulcer-disease-and-gerd",
@@ -150,7 +166,11 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_A95K2VEGGY",
+    "c_BCZGW0EXH1",
+    "c_4HXQA1FGPJ"
+   ]
   }
  ],
  "pharmFiles": [

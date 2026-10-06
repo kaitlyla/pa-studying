@@ -233,7 +233,8 @@ describe("a pharm notes file made from her Word page (pharm-doc)", () => {
       { role: "card", title: "Free T4", card: "t4", blocks: [B(61)], rows: [R(600)] },
       { role: "card", title: "T3", card: "t3", blocks: [B(61)], rows: [R(601)] },
     ];
-    const cards = [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" } }, { key: "t3", aliases: ["liothyronine"], home: { fm: "cardiovascular" } }];
+    // A card goes only into a pharm section it is `for`; the fixture's one FM cardiovascular section is antianginals.
+    const cards = [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" }, for: ["antianginals"] }, { key: "t3", aliases: ["liothyronine"], home: { fm: "cardiovascular" }, for: ["antianginals"] }];
     await refused(["pharm-parts", "thyroid-notes", await draft("bad", { parts: [parts[0], parts[1], { ...parts[2], rows: [R(699)] }], cards })], new RegExp(`rows: ${R(699)} names nothing`), [THY, "content/pharm/cards.json"]);
     await run(root, ["pharm-parts", "thyroid-notes", await draft("ok", { parts, cards })]);
     const pf = await read<PharmFile>(THY);
@@ -248,7 +249,7 @@ describe("a pharm notes file made from her Word page (pharm-doc)", () => {
       { role: "card", title: "Free T4", card: "t4", blocks: [B(61)], rows: [R(600)] },
       { role: "topic", title: "T3: level", card: null, blocks: [B(61)], rows: [R(601)], column: 1, label: 0, topics: [R(101)] },
     ];
-    await run(root, ["pharm-parts", "thyroid-notes", await draft("topic", { parts, cards: [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" } }] })]);
+    await run(root, ["pharm-parts", "thyroid-notes", await draft("topic", { parts, cards: [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" }, for: ["antianginals"] }] })]);
     const topic = must((await read<PharmFile>(THY)).parts[2], "topic part");
     expect(topic).toEqual({ id: expect.stringMatching(/^p_/), role: "topic", title: "T3: level", card: null, blocks: [B(61)], column: 1, label: 0, rows: [R(601)], topics: [R(101)] });
   });
@@ -271,6 +272,9 @@ describe("pharm-parts", () => {
   const cardsBefore = [C(1), C(2)];
 
   it("writes the parts, assigns missing part and card ids, and replaces the file's cards", async () => {
+    // C(3) is dropped below, so no section may still list it.
+    const st = await read<StructureFile>(`${CV}/structure.json`);
+    await writeContent(root, `${CV}/structure.json`, { ...st, pharmSections: st.pharmSections.map((ps) => ({ ...ps, also: ps.also.filter((c) => c !== C(3)) })) });
     const lines = await run(root, ["pharm-parts", "cardio-med-list", await draft("pp", {
       parts: [
         { id: P(1), role: "overview", title: "Overview", card: null, blocks: [B(70)] },

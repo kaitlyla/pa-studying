@@ -115,7 +115,13 @@
   {
    "block": "b_XWCN258CS0",
    "pharmSection": "asthma",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "asthma",
+    "COPD",
+    "chronic bronchitis",
+    "emphysema"
+   ]
   },
   {
    "block": "b_531EJQNDKD",

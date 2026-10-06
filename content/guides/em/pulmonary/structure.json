@@ -96,7 +96,13 @@
   {
    "block": "b_NE4TYW9JQH",
    "pharmSection": "asthma",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "asthma",
+    "COPD",
+    "chronic bronchitis",
+    "emphysema"
+   ]
   },
   {
    "block": "b_YDFD7PQEPY",

@@ -228,7 +228,15 @@
   {
    "block": "b_2H6K91FQB2",
    "pharmSection": "inflammatory-bowel-disease",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "inflammatory bowel",
+    "IBD",
+    "Crohn",
+    "ulcerative colitis",
+    "UC",
+    "toxic megacolon"
+   ]
   },
   {
    "block": "b_QZ20WXTYNV",
@@ -250,7 +258,17 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_JWRB3N0P7B",
+    "c_TTK5AMRH1P",
+    "c_Q6606VX35Y",
+    "c_BKNMRCR0MV",
+    "c_CS6DSN0ZKW",
+    "c_3SW8QFFWRX",
+    "c_CQCXBM3WDG",
+    "c_C3GDGXE7JJ",
+    "c_2J98S2JZV7"
+   ]
   },
   {
    "id": "inflammatory-bowel-disease",
@@ -260,7 +278,9 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_KSRP94XSBR"
+   ]
   },
   {
    "id": "obesity",
@@ -270,7 +290,9 @@
    ],
    "overview": "p_CV4HVBVNQT",
    "lo": "p_ZXVS7GTA0A",
-   "also": []
+   "also": [
+    "c_VVXS1T6NBW"
+   ]
   },
   {
    "id": "diarrhea",
@@ -281,6 +303,41 @@
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
    "also": []
+  },
+  {
+   "id": "antiemetics",
+   "title": "Antiemetics",
+   "tables": [],
+   "overview": "p_5JFX0114DR",
+   "lo": "p_82SD6G4XHP",
+   "also": [
+    "c_Z3W9VNTMAH",
+    "c_B5WV8AJCNS",
+    "c_FHJ5EZAEK6",
+    "c_M1Y90NS53A",
+    "c_YBD74XV7V6",
+    "c_YN5JKKW1N1",
+    "c_HG6XQ00GBZ",
+    "c_YW4GDJBHAS",
+    "c_H0Q2MF2J7G",
+    "c_0GMQ3W9M9V"
+   ]
+  },
+  {
+   "id": "peptic-ulcer-disease-and-gerd",
+   "title": "Peptic ulcer disease and GERD",
+   "tables": [],
+   "overview": "p_5JFX0114DR",
+   "lo": "p_82SD6G4XHP",
+   "also": [
+    "c_63QY6YSHKS",
+    "c_F324EPRYCJ",
+    "c_A95K2VEGGY",
+    "c_FJWES39ZXG",
+    "c_ZV3PYTWDRT",
+    "c_BCZGW0EXH1",
+    "c_4HXQA1FGPJ"
+   ]
   }
  ],
  "pharmFiles": [

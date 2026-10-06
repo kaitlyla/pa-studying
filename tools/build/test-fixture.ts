@@ -113,7 +113,7 @@ export async function writeFixture(root: string): Promise<void> {
     members: { [R(101)]: "other", [R(104)]: "cad", [R(123)]: "cad", [R(131)]: "other", [B(11)]: "other", [B(14)]: "other" },
     listed: { [B(11)]: "Murmurs" },
     drugTables: [{ block: B(12), pharmSection: "antianginals", conditionRows: [R(123)] }],
-    pharmSections: [{ id: "antianginals", title: "Antianginals", tables: [B(12)], overview: P(1), lo: null, also: [] }],
+    pharmSections: [{ id: "antianginals", title: "Antianginals", tables: [B(12)], overview: P(1), lo: null, also: [C(3)] }],
     pharmFiles: [D(1)],
   });
   const pu = "guides/fm/pulmonary";
@@ -293,6 +293,9 @@ export async function writePharmReviewPage(root: string): Promise<void> {
   });
   const renal = await readContent<StructureFile>(root, "content/guides/fm/renal/structure.json");
   await w("guides/fm/renal/structure.json", { ...renal, pharmFiles: [...renal.pharmFiles, PHARM_PAGE] });
+  const cv = await readContent<StructureFile>(root, "content/guides/fm/cardiovascular/structure.json");
+  const pharmSections = cv.pharmSections.map((ps, i) => (i === 0 ? { ...ps, also: [...ps.also, C(80), C(81)] } : ps));
+  await w("guides/fm/cardiovascular/structure.json", { ...cv, pharmSections });
   const cards = await readContent<CardsFile>(root, "content/pharm/cards.json");
   await w("pharm/cards.json", {
     ...cards,

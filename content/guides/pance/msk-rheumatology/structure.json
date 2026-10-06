@@ -196,7 +196,10 @@
   {
    "block": "b_RT5GEPF13S",
    "pharmSection": "gout",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "gout"
+   ]
   },
   {
    "block": "b_28GM1Y6AJ2",
@@ -223,7 +226,38 @@
    ],
    "overview": "p_CV4HVBVNQT",
    "lo": "p_ZXVS7GTA0A",
-   "also": []
+   "also": [
+    "c_R3Y6H2M29E",
+    "c_EFV6VFVTGS"
+   ]
+  },
+  {
+   "id": "rheumatoid-arthritis-and-osteoarthritis",
+   "title": "Rheumatoid arthritis and osteoarthritis",
+   "tables": [],
+   "overview": "p_HWYYECJ1A3",
+   "lo": "p_KNZ9TMVXCV",
+   "also": [
+    "c_XRRCYBC81K",
+    "c_23WFHSHK36",
+    "c_HRBY711VB4",
+    "c_GPFV69C3P3",
+    "c_56W7ETRKRA",
+    "c_MQ9B46V6XZ",
+    "c_35QBPAGSVX",
+    "c_5QVPZZ6A5E",
+    "c_378N3E58TA"
+   ]
+  },
+  {
+   "id": "muscle-relaxants",
+   "title": "Muscle relaxants",
+   "tables": [],
+   "overview": "p_HWYYECJ1A3",
+   "lo": "p_KNZ9TMVXCV",
+   "also": [
+    "c_JTHANAED3Z"
+   ]
   }
  ],
  "pharmFiles": []

@@ -188,7 +188,15 @@
   {
    "block": "b_XNMQC4G7D7",
    "pharmSection": "inflammatory-bowel-disease",
-   "conditionRows": []
+   "conditionRows": [],
+   "onlyFor": [
+    "inflammatory bowel",
+    "IBD",
+    "Crohn",
+    "ulcerative colitis",
+    "UC",
+    "toxic megacolon"
+   ]
   },
   {
    "block": "b_035GWDE5KG",
@@ -206,8 +214,17 @@
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
    "also": [
+    "c_JB56RPMPJM",
+    "c_JWRB3N0P7B",
+    "c_TTK5AMRH1P",
+    "c_Q6606VX35Y",
+    "c_73WE1VVQ09",
     "c_BKNMRCR0MV",
-    "c_CS6DSN0ZKW"
+    "c_CS6DSN0ZKW",
+    "c_3SW8QFFWRX",
+    "c_CQCXBM3WDG",
+    "c_C3GDGXE7JJ",
+    "c_2J98S2JZV7"
    ]
   },
   {
@@ -218,7 +235,15 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_B5WV8AJCNS",
+    "c_YBD74XV7V6",
+    "c_YN5JKKW1N1",
+    "c_YW4GDJBHAS",
+    "c_H0Q2MF2J7G",
+    "c_244067WQDW",
+    "c_0GMQ3W9M9V"
+   ]
   },
   {
    "id": "inflammatory-bowel-disease",
@@ -238,7 +263,11 @@
    ],
    "overview": "p_5JFX0114DR",
    "lo": "p_82SD6G4XHP",
-   "also": []
+   "also": [
+    "c_A95K2VEGGY",
+    "c_BCZGW0EXH1",
+    "c_4HXQA1FGPJ"
+   ]
   }
  ],
  "pharmFiles": [

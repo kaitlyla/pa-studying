@@ -571,7 +571,7 @@ describe("pharm pages", () => {
 
   it("a card leaves out the notes lines its shown table rows already say, until either side is edited", async () => {
     const cv = systemJson(CV);
-    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1))), "topic with the CCB card");
+    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1) && m.rows.length > 0)), "topic with the CCB card's rows");
     const med = need(topic.meds.find((m) => m.card === C(1)), "CCB med");
     const rowId = need(med.rows[0], "CCB row");
     const block = need(cv.blocks.find((b) => b.id === cv.rows[rowId]?.block), "CCB row's table");
@@ -682,7 +682,8 @@ describe("pharm pages", () => {
 
   it("a card shows only the notes written for a use relevant where it shows, on the section page and the meds panel", async () => {
     const cv = systemJson(CV);
-    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1))), "topic with the CCB card");
+    // A card with guide rows on the panel shows the notes for the condition's uses (a rowless one, its home's).
+    const topic = need(cv.topics.find((t) => t.meds.some((m) => m.card === C(1) && m.rows.length > 0)), "topic with the CCB card's rows");
     const med = need(topic.meds.find((m) => m.card === C(1)), "CCB med");
     const serve = (panelUses: string[]): void => {
       const mod = structuredClone(cv);

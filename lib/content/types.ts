@@ -149,6 +149,13 @@ export interface PharmPart extends PartCut {
   blocks: string[];
   /** A `topic` part's guide topics (each a topic's id, as SystemJson `topics[].id`); only on a `topic` part. */
   topics?: string[];
+  /**
+   * The conditions a `card` part is written for ("Tourette's Syndrome: Typical APs"), each matched as
+   * a whole phrase in any case: the part shows on the meds panels of conditions whose title names one,
+   * and in a pharm section only when its card is written for that section (CardsFile `for`); her
+   * file page shows it as always. Only on a `card` part.
+   */
+  diseases?: string[];
 }
 
 /**
@@ -204,7 +211,12 @@ export interface StructureFile {
    * ruling 2026-10-06). deriveTopics checks the rows; fitTopicRows drops entries an edit has broken.
    */
   unlisted?: string[];
-  drugTables: { block: string; pharmSection: string; conditionRows: string[] }[];
+  /**
+   * `onlyFor`: the conditions a table's rows are written only for (disease-specific dosing, a stage or
+   * maintenance scheme: her Gout and IBD tables), so a meds panel shows them only under a condition
+   * whose title names one, like a card's `diseases` (Orchestrator ruling 2026-10-06, an agent decision).
+   */
+  drugTables: { block: string; pharmSection: string; conditionRows: string[]; onlyFor?: string[] }[];
   pharmSections: {
     id: string;
     title: string;
@@ -234,9 +246,13 @@ export interface CardsFile {
    * would misstate the drugs elsewhere. In a meds panel without the card's drug-table rows, the card
    * shows only on a condition whose title, or the treatment item naming the card's drug, names one
    * of them (whole words, any case).
+   * `notDiseases`: conditions her treatment text names the card's drug for although her notes on the
+   * card do not cover that use ("topical NTG or nifedipine" on anal fissure is not her angina card).
+   * On a class card only; the group shows on no condition whose title names one of them.
    */
   cards: {
     id: string; file: string; aliases: string[]; home: Partial<Record<GuideId, string>>; in?: string; for?: string[]; classWords?: string[]; diseases?: string[];
+    notDiseases?: string[];
   }[];
 }
 

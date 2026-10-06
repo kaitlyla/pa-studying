@@ -495,6 +495,10 @@ describe("pharm (20 §20.6, §20.7)", () => {
         expect(verdict(path, around(rowsPart(2, C1, [h, r1]), topicPart(3, { rows: [h, r2], column: 1 })))).toBe("ok");
       });
 
+      it("accepts a card part written for some conditions (`diseases`)", () => {
+        expect(verdict(path, around({ ...rowsPart(2, C1, [r1]), diseases: ["Tourette syndrome", "tic disorder"] }))).toBe("ok");
+      });
+
       it.each([
         ["topics on a card part", [{ ...rowsPart(2, C1, [r1]), topics: [T1] }], /\.parts\[1\]\.topics: expected topics exactly when role is topic/],
         ["a topic part without topics", [{ ...part(2, "topic", [b2]), rows: [r1] }], /\.parts\[1\]\.topics: expected topics exactly when role is topic/],
@@ -507,6 +511,8 @@ describe("pharm (20 §20.6, §20.7)", () => {
         ["two topic parts showing the same column of the same rows", [topicPart(2, { rows: [h, r1], column: 1 }), topicPart(3, { rows: [h, r1], column: 1 })], /\.parts\[1\]: expected rows of the part's own besides those shared/],
         ["a whole row part covering a topic part's cell", [rowsPart(2, C1, [h, r1]), topicPart(3, { rows: [h, r1], column: 1 })], /\.parts\[1\]: expected rows of the part's own besides those shared/],
         ["a topic part's column after a column run", [colPart(2, C1, 1), topicPart(3, { rows: [r1], column: 2 })], /\.parts\[2\]: expected column like the parts before it/],
+        ["diseases on a part that is not a card part", [{ ...topicPart(2, { rows: [r1] }), diseases: ["Tourette syndrome"] }], /\.parts\[1\]\.diseases: expected diseases only on a card part/],
+        ["an empty disease on a card part", [{ ...rowsPart(2, C1, [r1]), diseases: [" "] }], /\.parts\[1\]\.diseases\[0\]/],
       ])("refuses %s", (_name, cuts, message) => {
         expect(verdict(path, around(...cuts))).toMatch(message);
       });
@@ -553,6 +559,14 @@ describe("pharm (20 §20.6, §20.7)", () => {
     const card = { id: C1, file: "neuro-med-list-1", aliases: ["DMTs"], home: {} };
     expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, diseases: ["multiple sclerosis"] }] })).toBe("ok");
     expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, diseases: ["multiple sclerosis", " "] }] })).toMatch(/diseases\[1\]/);
+  });
+
+  it("accepts a class card's notDiseases, refusing an empty one and one on a card shown inside another", () => {
+    const card = { id: C1, file: "cardio-med-list-1-1", aliases: ["Potassium Sparing Diuretics"], home: {} };
+    const member = { id: id("c", 2), file: "pharm-review", aliases: [], home: {}, in: C1 };
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, notDiseases: ["acne", "PCOS"] }, member] })).toBe("ok");
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [{ ...card, notDiseases: [""] }] })).toMatch(/notDiseases\[0\]/);
+    expect(verdict("content/pharm/cards.json", { v: 1, cards: [card, { ...member, notDiseases: ["acne"] }] })).toMatch(/\.cards\[1\]\.notDiseases: expected notDiseases only on a class card/);
   });
 
   describe("a card shown inside another card's class (in)", () => {
@@ -663,7 +677,14 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { ...structure, unlisted: [] })).toBe("ok");
   });
 
+  it("accepts a drug table written only for some conditions (`onlyFor`)", () => {
+    expect(verdict(sPath, { ...structure, drugTables: [{ ...structure.drugTables[0], onlyFor: ["gout"] }] })).toBe("ok");
+  });
+
   it.each([
+    ["an empty onlyFor condition", { drugTables: [{ ...structure.drugTables[0], onlyFor: [""] }] }, /onlyFor\[0\]/],
+    ["an onlyFor condition listed twice", { drugTables: [{ ...structure.drugTables[0], onlyFor: ["gout", "gout"] }] }, /onlyFor.*no duplicate/],
+    ["onlyFor given as text", { drugTables: [{ ...structure.drugTables[0], onlyFor: "gout" }] }, /onlyFor/],
     ["other not last", { sections: [...structure.sections].reverse() }, /"other" last/],
     ["section members without sections", { sections: [] }, /a topic id \(sections is \[\]\)/],
     ["a block recorded under a topic", { members: { ...structure.members, [b1]: R1 } }, /a topic id only on another row/],

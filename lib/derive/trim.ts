@@ -3,6 +3,7 @@
 // data, so an edit to a line or a row — saved, or still in the editor overlay — shows the line again.
 import { tableNode } from "../content/tables.ts";
 import type { DocJSON } from "../content/types.ts";
+import { phraseMatcher } from "./pharm.ts";
 import type { PubTrimLine, SystemJson } from "./published.ts";
 import { collapse, nodeText, readRows, type PMNode, type Row } from "./text.ts";
 
@@ -33,9 +34,21 @@ export type TrimSource = Pick<SystemJson, "blocks" | "rows" | "notesBlocks" | "t
 /** Whether notes written for the pharm sections `use` (none: any use) show where `at` is relevant. */
 const relevant = (use: readonly string[] | undefined, at: ReadonlySet<string>): boolean => use === undefined || use.some((s) => at.has(s));
 
-/** The card's parts that show where the pharm sections `at` are relevant: those written for any use or one of them. */
-export function shownParts<P extends { for?: string[] }>(card: { parts: readonly P[] }, at: ReadonlySet<string>): P[] {
-  return card.parts.filter((p) => relevant(p.for, at));
+/**
+ * The card's parts that show where the pharm sections `at` are relevant — those written for any use
+ * or one of them — on the meds panel of the condition titled `condition`, or (without one) in a pharm
+ * section. A part written for some conditions (`diseases`) shows on a meds panel only when its
+ * condition's title names one of them, and in a pharm section only when its card is written for that
+ * section (`for`): her Tourette's notes on the typical antipsychotics card show under Tic Disorders,
+ * not under schizophrenia or in her antipsychotics section; her IBD notes on glucocorticoids show in
+ * her IBD section and under Crohn's disease, not on psoriasis, where the card links to that section.
+ */
+export function shownParts<P extends { for?: string[]; diseases?: string[] }>(card: { parts: readonly P[] }, at: ReadonlySet<string>, condition?: string): P[] {
+  return card.parts.filter((p) => {
+    if (p.diseases === undefined) return relevant(p.for, at);
+    if (condition !== undefined) return phraseMatcher(p.diseases)(condition);
+    return p.for !== undefined && relevant(p.for, at);
+  });
 }
 
 /**

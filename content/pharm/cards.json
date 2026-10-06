@@ -15,6 +15,13 @@
     "desflurane",
     "sevoflurane"
    ],
+   "notDiseases": [
+    "condyloma",
+    "condylomata",
+    "genital warts",
+    "warts",
+    "verrucae"
+   ],
    "home": {}
   },
   {
@@ -79,6 +86,9 @@
     "neostigmine",
     "sugammadex"
    ],
+   "notDiseases": [
+    "myasthenia gravis"
+   ],
    "home": {}
   },
   {
@@ -87,7 +97,12 @@
    "aliases": [
     "dantrolene"
    ],
-   "home": {}
+   "home": {},
+   "diseases": [
+    "malignant hyperthermia",
+    "neuroleptic malignant",
+    "NMS"
+   ]
   },
   {
    "id": "c_GR4MR89TZ5",
@@ -99,13 +114,26 @@
    "id": "c_FHBEK18ECJ",
    "file": "antiplatelet-antithrombotics-fibrinolytics-med-list-los-3-12-26-1",
    "aliases": [
-    "Nonsteroidal Antiinflammatory Drug",
-    "NSAID",
-    "aspirin"
+    "aspirin",
+    "ASA 81mg",
+    "ASA 81 mg",
+    "aspirin 81mg",
+    "aspirin 81 mg",
+    "low-dose aspirin",
+    "low dose aspirin",
+    "baby aspirin"
    ],
    "home": {
     "pance": "cardiovascular"
-   }
+   },
+   "classWords": [
+    "ASA",
+    "DAPT"
+   ],
+   "notDiseases": [
+    "rheumatic fever",
+    "pericarditis"
+   ]
   },
   {
    "id": "c_GC3ARVE1M9",
@@ -336,12 +364,16 @@
     "trimipramine",
     "doxepin"
    ],
+   "notDiseases": [
+    "condyloma",
+    "condylomata",
+    "genital warts",
+    "warts",
+    "verrucae"
+   ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
-   },
-   "classWords": [
-    "antidepressants"
-   ]
+   }
   },
   {
    "id": "c_C1XJCQJP92",
@@ -385,6 +417,14 @@
     "pance": "psychiatry-behavioral-medicine"
    },
    "in": "c_J969V94V29",
+   "for": [
+    "anxiety-disorders"
+   ],
+   "diseases": [
+    "anxiety",
+    "anxiolytic",
+    "anxiolytics"
+   ],
    "classWords": [
     "BDZs"
    ]
@@ -410,26 +450,43 @@
    "file": "behavioral-health-med-list-and-los-6",
    "aliases": [
     "buspirone",
-    "hydroxyzine"
-   ],
-   "home": {
-    "pance": "psychiatry-behavioral-medicine"
-   }
-  },
-  {
-   "id": "c_8B58GGYA5W",
-   "file": "behavioral-health-med-list-and-los-6",
-   "aliases": [
+    "hydroxyzine",
     "prazosin",
     "clonidine",
     "propranolol",
     "atenolol",
     "gabapentin",
-    "pregabalin"
+    "pregabalin",
+    "β-blockers",
+    "beta blockers",
+    "beta-blockers",
+    "BBs"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
-   }
+   },
+   "diseases": [
+    "anxiety",
+    "anxiety disorder",
+    "anxiety disorders",
+    "GAD",
+    "generalized anxiety disorder",
+    "panic disorder",
+    "sedation",
+    "social anxiety",
+    "social phobia",
+    "phobia",
+    "phobias",
+    "performance anxiety",
+    "PTSD",
+    "post-traumatic stress disorder",
+    "posttraumatic stress disorder",
+    "nightmares"
+   ],
+   "notDiseases": [
+    "tremor",
+    "thyroiditis"
+   ]
   },
   {
    "id": "c_RAN6EC2RYF",
@@ -461,10 +518,7 @@
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
-   },
-   "classWords": [
-    "antidepressants"
-   ]
+   }
   },
   {
    "id": "c_41WBD0ATKS",
@@ -475,6 +529,7 @@
     "lithium",
     "lamotrigine",
     "divalproex",
+    "valproate",
     "carbamazepine",
     "oxcarbazepine",
     "topiramate",
@@ -483,6 +538,12 @@
     "lacosamide",
     "gabapentin",
     "pregabalin"
+   ],
+   "notDiseases": [
+    "alcohol",
+    "restless leg syndrome",
+    "restless legs syndrome",
+    "RLS"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -511,14 +572,15 @@
     "trifluoperazine",
     "thiothixene",
     "loxapine",
-    "pimozide",
-    "APs"
+    "pimozide"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
    },
    "classWords": [
-    "typical antipsychotics"
+    "APs",
+    "typical antipsychotics",
+    "Typical & atypical antipsychotics"
    ]
   },
   {
@@ -538,15 +600,18 @@
     "asenapine",
     "iloperidone",
     "lumateperone",
-    "APs"
+    "atypical APs",
+    "atypical AP"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
    },
    "classWords": [
+    "APs",
     "atypical antipsychotics",
     "atypical antipsychotic",
-    "second-generation antipsychotics"
+    "second-generation antipsychotics",
+    "Typical & atypical antipsychotics"
    ]
   },
   {
@@ -612,8 +677,17 @@
    "aliases": [
     "α2 adrenergic agonists",
     "α2 adrenergic agonist",
+    "⍺2-agonists",
+    "⍺2-agonist",
     "clonidine",
     "guanfacine"
+   ],
+   "notDiseases": [
+    "neuroleptic malignant",
+    "NMS",
+    "opioids",
+    "opioid use disorder",
+    "opioid withdrawal"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -627,6 +701,10 @@
     "triazolam",
     "temazepam",
     "quazepam"
+   ],
+   "notDiseases": [
+    "anxiety",
+    "panic"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -651,6 +729,8 @@
    "aliases": [
     "Melatonin agonist",
     "melatonin agonists",
+    "Melatonin Receptor Agonists",
+    "melatonin receptor agonist",
     "ramelteon",
     "tasimelteon"
    ],
@@ -681,6 +761,8 @@
    "file": "behavioral-health-med-list-and-los-6",
    "aliases": [
     "Orexin-r antagonists",
+    "ORAs",
+    "ORA",
     "suvorexant",
     "lemborexant",
     "daridorexant"
@@ -709,12 +791,19 @@
    "aliases": [
     "Antihistamines",
     "antihistamine",
+    "H1 blockers",
+    "H1 blocker",
     "diphenhydramine",
     "promethazine"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
-   }
+   },
+   "notDiseases": [
+    "ARFID",
+    "avoidant/restrictive food intake disorder",
+    "dystonia"
+   ]
   },
   {
    "id": "c_5G705Q4CVT",
@@ -754,6 +843,12 @@
     "NTG",
     "ISDN",
     "ISMN"
+   ],
+   "notDiseases": [
+    "anal fissure",
+    "anal fissures",
+    "hemorrhoids",
+    "hemorrhoid"
    ]
   },
   {
@@ -767,7 +862,13 @@
    ],
    "home": {
     "pance": "cardiovascular"
-   }
+   },
+   "notDiseases": [
+    "anal fissure",
+    "anal fissures",
+    "hemorrhoids",
+    "hemorrhoid"
+   ]
   },
   {
    "id": "c_4399D44A7Y",
@@ -791,7 +892,17 @@
    ],
    "home": {
     "pance": "cardiovascular"
-   }
+   },
+   "notDiseases": [
+    "akathisia",
+    "anxiety",
+    "social phobia",
+    "phobia",
+    "phobias",
+    "PTSD",
+    "post-traumatic stress disorder",
+    "posttraumatic stress disorder"
+   ]
   },
   {
    "id": "c_SFZ6GS9FA8",
@@ -937,7 +1048,13 @@
    ],
    "home": {
     "pance": "cardiovascular"
-   }
+   },
+   "notDiseases": [
+    "anal fissure",
+    "anal fissures",
+    "hemorrhoids",
+    "hemorrhoid"
+   ]
   },
   {
    "id": "c_8SGB8NX108",
@@ -1084,6 +1201,8 @@
    "aliases": [
     "Potassium Sparing Diuretics",
     "potassium sparing diuretic",
+    "potassium-sparing diuretics",
+    "potassium-sparing diuretic",
     "amiloride",
     "triamterene",
     "spironolactone",
@@ -1096,6 +1215,17 @@
     "diuretics",
     "diuretic",
     "aldosterone antagonists"
+   ],
+   "notDiseases": [
+    "acne",
+    "PCOS",
+    "polycystic ovary syndrome",
+    "hirsutism",
+    "alopecia",
+    "PMDD",
+    "PMS",
+    "premenstrual syndrome",
+    "premenstrual dysphoric disorder"
    ]
   },
   {
@@ -1264,7 +1394,6 @@
     "minoxidil",
     "sodium nitroprusside",
     "nitroprusside",
-    "isosorbide dinitrate",
     "fenoldopam"
    ],
    "home": {
@@ -1272,8 +1401,7 @@
    },
    "classWords": [
     "vasodilators",
-    "vasodilator",
-    "ISDN"
+    "vasodilator"
    ]
   },
   {
@@ -1284,7 +1412,8 @@
     "ARNI",
     "neprilysin inhibitor",
     "sacubitril",
-    "valsartan/sacubitril"
+    "valsartan/sacubitril",
+    "sacubitril/valsartan"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1402,7 +1531,10 @@
    ],
    "home": {
     "pance": "neurologic-system"
-   }
+   },
+   "notDiseases": [
+    "alcohol"
+   ]
   },
   {
    "id": "c_VJCD1X2M7N",
@@ -1430,6 +1562,9 @@
     "oxazepam",
     "BDZ"
    ],
+   "notDiseases": [
+    "insomnia"
+   ],
    "home": {
     "pance": "neurologic-system"
    },
@@ -1452,14 +1587,12 @@
    "file": "epilepsy-and-neurodegen-dz-med-list",
    "aliases": [
     "valproic acid",
-    "divalproex"
+    "divalproex",
+    "valproate"
    ],
    "home": {
     "pance": "neurologic-system"
-   },
-   "classWords": [
-    "valproate"
-   ]
+   }
   },
   {
    "id": "c_B970XX97B9",
@@ -1572,7 +1705,18 @@
    ],
    "home": {
     "pance": "neurologic-system"
-   }
+   },
+   "diseases": [
+    "Parkinson",
+    "Parkinson's",
+    "Parkinson disease",
+    "Parkinson's disease",
+    "parkinsonism",
+    "dyskinesia",
+    "dyskinesias",
+    "neuroleptic malignant",
+    "NMS"
+   ]
   },
   {
    "id": "c_R33DHA2WC9",
@@ -1580,10 +1724,17 @@
    "aliases": [
     "DA Receptor Agonists",
     "DA receptor agonist",
+    "bromocriptine",
     "pramipexole",
     "ropinirole",
     "rotigotine",
     "apomorphine"
+   ],
+   "notDiseases": [
+    "pituitary adenoma",
+    "prolactinoma",
+    "hyperprolactinemia",
+    "acromegaly"
    ],
    "home": {
     "pance": "neurologic-system"
@@ -1656,6 +1807,9 @@
     "pance": "renal-system-gu-system"
    },
    "in": "c_YJ5T99KJ04",
+   "for": [
+    "benign-prostatic-hyperplasia"
+   ],
    "classWords": [
     "alpha-blockers",
     "alpha blockers"
@@ -1753,7 +1907,10 @@
    ],
    "home": {
     "pance": "endocrine-system"
-   }
+   },
+   "notDiseases": [
+    "alopecia"
+   ]
   },
   {
    "id": "c_NJW9KXWDVH",
@@ -1763,7 +1920,18 @@
    ],
    "home": {
     "pance": "renal-system-gu-system"
-   }
+   },
+   "diseases": [
+    "erectile dysfunction",
+    "ED",
+    "sexual dysfunction",
+    "sexual dysfunctions",
+    "patent ductus arteriosus",
+    "PDA",
+    "ductus arteriosus",
+    "coarctation",
+    "congenital heart"
+   ]
   },
   {
    "id": "c_28Z3H593E5",
@@ -1775,6 +1943,15 @@
     "estradiol",
     "pseudoephedrine",
     "phenylephrine"
+   ],
+   "diseases": [
+    "stress incontinence",
+    "urinary incontinence",
+    "incontinence",
+    "atrophic vaginitis",
+    "vaginal atrophy",
+    "genitourinary syndrome of menopause",
+    "GSM"
    ],
    "home": {
     "pance": "renal-system-gu-system"
@@ -2080,7 +2257,9 @@
     "liraglutide",
     "semaglutide",
     "tirzepatide",
-    "GLP-1s"
+    "GLP-1s",
+    "GLP-1 receptor agonists",
+    "GLP-1 receptor agonist"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2126,15 +2305,21 @@
     "Salicylates",
     "salicylate",
     "aspirin",
-    "methyl salicylate",
-    "salicylic acid"
+    "methyl salicylate"
    ],
    "home": {
     "pance": "msk-rheumatology"
    },
    "classWords": [
-    "ASA",
-    "DAPT"
+    "ASA"
+   ],
+   "notDiseases": [
+    "stroke",
+    "strokes",
+    "infarct",
+    "infarcts",
+    "transient ischemic attack",
+    "TIA"
    ]
   },
   {
@@ -2401,6 +2586,12 @@
     "diphenhydramine",
     "ondansetron"
    ],
+   "diseases": [
+    "migraine",
+    "migraines",
+    "headache",
+    "headaches"
+   ],
    "home": {
     "pance": "neurologic-system"
    },
@@ -2479,6 +2670,10 @@
    "classWords": [
     "MTX",
     "HCQ"
+   ],
+   "notDiseases": [
+    "polymyositis",
+    "dermatomyositis"
    ]
   },
   {
@@ -2514,7 +2709,14 @@
    ],
    "home": {
     "pance": "msk-rheumatology"
-   }
+   },
+   "diseases": [
+    "rheumatoid arthritis",
+    "RA",
+    "juvenile idiopathic arthritis",
+    "juvenile rheumatoid arthritis",
+    "JIA"
+   ]
   },
   {
    "id": "c_GPFV69C3P3",
@@ -2629,12 +2831,28 @@
    "aliases": [
     "Butyrophenones",
     "butyrophenone",
-    "droperidol",
-    "haloperidol"
+    "droperidol"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    },
+   "for": [
+    "anti-diarrheals-antiemetics",
+    "antiemetics",
+    "gastroenteritis"
+   ],
+   "diseases": [
+    "nausea",
+    "vomiting",
+    "N/V",
+    "emesis",
+    "antiemetic",
+    "antiemetics",
+    "PONV",
+    "CINV",
+    "hyperemesis",
+    "gastroenteritis"
+   ],
    "classWords": [
     "antiemetics",
     "antiemetic"
@@ -2693,6 +2911,18 @@
    "aliases": [
     "scopolamine"
    ],
+   "diseases": [
+    "motion sickness",
+    "nausea",
+    "vomiting",
+    "N/V",
+    "PONV",
+    "emesis",
+    "antiemetic",
+    "antiemetics",
+    "gastroenteritis",
+    "hyperemesis"
+   ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    }
@@ -2724,7 +2954,24 @@
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
-   }
+   },
+   "for": [
+    "anti-diarrheals-antiemetics",
+    "antiemetics",
+    "gastroenteritis"
+   ],
+   "diseases": [
+    "nausea",
+    "vomiting",
+    "N/V",
+    "emesis",
+    "antiemetic",
+    "antiemetics",
+    "PONV",
+    "CINV",
+    "hyperemesis",
+    "gastroenteritis"
+   ]
   },
   {
    "id": "c_0GMQ3W9M9V",
@@ -2767,7 +3014,8 @@
    "classWords": [
     "H2 blockers",
     "H2 blocker",
-    "H2 receptor antagonists"
+    "H2 receptor antagonists",
+    "H2 antagonists"
    ]
   },
   {
@@ -2827,7 +3075,8 @@
     "gastric ulcer",
     "gastric ulcers",
     "duodenal ulcer",
-    "duodenal ulcers"
+    "duodenal ulcers",
+    "dyspepsia"
    ]
   },
   {
@@ -2870,16 +3119,30 @@
     "prednisone",
     "prednisolone",
     "budesonide",
-    "hydrocortisone"
+    "hydrocortisone",
+    "methylprednisolone",
+    "corticosteroids",
+    "corticosteroid"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    },
    "classWords": [
     "steroids",
-    "steroid",
-    "corticosteroids",
-    "corticosteroid"
+    "steroid"
+   ],
+   "notDiseases": [
+    "hemorrhoids",
+    "hemorrhoid",
+    "otitis externa",
+    "suppurative otitis media",
+    "hyphema",
+    "hordeolum",
+    "balanitis",
+    "seborrheic dermatitis",
+    "atopic dermatitis",
+    "rhinitis",
+    "rhinosinusitis"
    ]
   },
   {
@@ -2913,6 +3176,15 @@
    "for": [
     "inflammatory-bowel-disease"
    ],
+   "diseases": [
+    "inflammatory bowel disease",
+    "IBD",
+    "Crohn",
+    "Crohn's",
+    "Crohn disease",
+    "ulcerative colitis",
+    "UC"
+   ],
    "classWords": [
     "MTX"
    ]
@@ -2931,6 +3203,16 @@
    "classWords": [
     "azathioprine",
     "6-MP"
+   ],
+   "diseases": [
+    "IBD",
+    "inflammatory bowel disease",
+    "Crohn",
+    "Crohn's",
+    "Crohn disease",
+    "Crohn's disease",
+    "ulcerative colitis",
+    "UC"
    ]
   },
   {
@@ -2939,7 +3221,9 @@
    "aliases": [
     "Anti-integrin Therapy",
     "anti-integrin",
-    "natalizumab"
+    "anti-integrins",
+    "natalizumab",
+    "vedolizumab"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2949,9 +3233,11 @@
    "id": "c_JB56RPMPJM",
    "file": "gi-los-and-med-list-1",
    "aliases": [
-    "Laxatives",
-    "laxative",
     "bulk-forming"
+   ],
+   "classWords": [
+    "laxatives",
+    "laxative"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2966,6 +3252,10 @@
     "docusate sodium",
     "docusate"
    ],
+   "classWords": [
+    "laxatives",
+    "laxative"
+   ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    }
@@ -2976,6 +3266,10 @@
    "aliases": [
     "mineral oil"
    ],
+   "classWords": [
+    "laxatives",
+    "laxative"
+   ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    }
@@ -2985,6 +3279,10 @@
    "file": "gi-los-and-med-list-1",
    "aliases": [
     "sodium phosphate"
+   ],
+   "classWords": [
+    "laxatives",
+    "laxative"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -3001,6 +3299,10 @@
     "sorbitol",
     "glycerin"
    ],
+   "classWords": [
+    "laxatives",
+    "laxative"
+   ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
    }
@@ -3015,6 +3317,10 @@
     "lubiprostone",
     "linaclotide",
     "prucalopride"
+   ],
+   "classWords": [
+    "laxatives",
+    "laxative"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -3046,6 +3352,11 @@
    },
    "classWords": [
     "antidiarrheals"
+   ],
+   "notDiseases": [
+    "peptic ulcer",
+    "peptic ulcer disease",
+    "PUD"
    ]
   },
   {
@@ -3084,11 +3395,18 @@
    "id": "c_CS6DSN0ZKW",
    "file": "gi-los-and-med-list-1",
    "aliases": [
-    "benzocaine"
+    "benzocaine",
+    "lidocaine",
+    "topical anesthetics",
+    "topical anesthetic"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
-   }
+   },
+   "diseases": [
+    "hemorrhoids",
+    "hemorrhoid"
+   ]
   },
   {
    "id": "c_2J98S2JZV7",
@@ -3104,10 +3422,21 @@
   {
    "id": "c_BKNMRCR0MV",
    "file": "gi-los-and-med-list-1",
-   "aliases": [],
+   "aliases": [
+    "hydrocortisone",
+    "corticosteroids",
+    "corticosteroid"
+   ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
-   }
+   },
+   "classWords": [
+    "steroids"
+   ],
+   "diseases": [
+    "hemorrhoids",
+    "hemorrhoid"
+   ]
   },
   {
    "id": "c_VZ0Y2250BR",
@@ -3270,6 +3599,18 @@
    "id": "c_95V3MGEMZ7",
    "file": "pharm-review",
    "aliases": [],
+   "diseases": [
+    "motion sickness",
+    "nausea",
+    "vomiting",
+    "N/V",
+    "PONV",
+    "emesis",
+    "antiemetic",
+    "antiemetics",
+    "gastroenteritis",
+    "hyperemesis"
+   ],
    "home": {},
    "in": "c_HG6XQ00GBZ"
   },
@@ -3288,6 +3629,13 @@
     "asthma",
     "obstructive-pulmonary-diseases"
    ]
+  },
+  {
+   "id": "c_0G5NKWZQYT",
+   "file": "pharm-review",
+   "aliases": [],
+   "home": {},
+   "in": "c_VFE09ZVEV6"
   },
   {
    "id": "c_T9KMSRGSEZ",
@@ -3309,7 +3657,8 @@
    },
    "for": [
     "anti-diarrheals-antiemetics",
-    "diarrhea"
+    "diarrhea",
+    "gastroenteritis"
    ]
   },
   {
@@ -3941,6 +4290,14 @@
    },
    "for": [
     "tuberculosis"
+   ],
+   "diseases": [
+    "tuberculosis",
+    "TB",
+    "meningococcal",
+    "meningitis",
+    "N. meningitidis",
+    "Neisseria meningitidis"
    ]
   },
   {
@@ -4011,6 +4368,14 @@
    "in": "c_K9FJXKX868",
    "for": [
     "anxiety-disorders"
+   ],
+   "diseases": [
+    "anxiety",
+    "anxiety disorder",
+    "anxiety disorders",
+    "GAD",
+    "generalized anxiety disorder",
+    "panic disorder"
    ]
   },
   {
@@ -4143,6 +4508,16 @@
    "in": "c_TKRFBKYGNF",
    "for": [
     "inflammatory-bowel-disease"
+   ],
+   "diseases": [
+    "IBD",
+    "inflammatory bowel disease",
+    "Crohn",
+    "Crohn's",
+    "Crohn disease",
+    "Crohn's disease",
+    "ulcerative colitis",
+    "UC"
    ]
   },
   {
@@ -4153,6 +4528,15 @@
    "in": "c_21ATJFZ464",
    "for": [
     "inflammatory-bowel-disease"
+   ],
+   "diseases": [
+    "inflammatory bowel disease",
+    "IBD",
+    "Crohn",
+    "Crohn's",
+    "Crohn disease",
+    "ulcerative colitis",
+    "UC"
    ]
   },
   {
@@ -4200,7 +4584,8 @@
    "in": "c_64K0606W4M",
    "for": [
     "anti-diarrheals-antiemetics",
-    "diarrhea"
+    "diarrhea",
+    "gastroenteritis"
    ]
   },
   {
@@ -4214,7 +4599,8 @@
    },
    "for": [
     "anti-diarrheals-antiemetics",
-    "diarrhea"
+    "diarrhea",
+    "gastroenteritis"
    ]
   },
   {
@@ -4228,7 +4614,8 @@
    },
    "for": [
     "anti-diarrheals-antiemetics",
-    "diarrhea"
+    "diarrhea",
+    "gastroenteritis"
    ]
   },
   {
@@ -4259,7 +4646,8 @@
     "gastric ulcer",
     "gastric ulcers",
     "duodenal ulcer",
-    "duodenal ulcers"
+    "duodenal ulcers",
+    "dyspepsia"
    ]
   },
   {
@@ -4358,6 +4746,17 @@
    "in": "c_M1S9RRY385",
    "for": [
     "parkinson-disease"
+   ],
+   "diseases": [
+    "Parkinson",
+    "Parkinson's",
+    "Parkinson disease",
+    "Parkinson's disease",
+    "parkinsonism",
+    "dyskinesia",
+    "dyskinesias",
+    "neuroleptic malignant",
+    "NMS"
    ]
   },
   {
@@ -4478,6 +4877,13 @@
    "for": [
     "dmards",
     "rheumatoid-arthritis"
+   ],
+   "diseases": [
+    "rheumatoid arthritis",
+    "RA",
+    "juvenile idiopathic arthritis",
+    "juvenile rheumatoid arthritis",
+    "JIA"
    ]
   },
   {
@@ -4836,7 +5242,13 @@
    "file": "pharm-review",
    "aliases": [],
    "home": {},
-   "in": "c_K9FJXKX868"
+   "in": "c_K9FJXKX868",
+   "diseases": [
+    "PMS",
+    "PMDD",
+    "premenstrual syndrome",
+    "premenstrual dysphoric disorder"
+   ]
   },
   {
    "id": "c_B8FJYJVTCN",
@@ -4950,6 +5362,11 @@
    "for": [
     "hiv",
     "hiv-aids"
+   ],
+   "diseases": [
+    "HIV",
+    "AIDS",
+    "human immunodeficiency virus"
    ]
   },
   {

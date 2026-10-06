@@ -303,11 +303,13 @@ export interface PubCard {
    * with its blocks, its file name (labeled on the card) and that file's base size, to which its
    * blocks' `size` marks are relative; a search unit's `at` names a part id. A part with `for` was
    * written for those pharm sections' use only (its card's `for` in content/pharm/cards.json) and
-   * shows only where one of them is relevant (lib/derive/trim.ts `shownParts`). A part with `column`
-   * or `rows` shows its one table block cut as the content part says (lib/derive/columns.ts
+   * shows only where one of them is relevant (lib/derive/trim.ts `shownParts`); a part with `diseases`
+   * was written for those conditions (content PharmPart `diseases`) and shows on the meds panels of
+   * conditions whose title names one, and in pharm sections only where it also has `for`. A part with
+   * `column` or `rows` shows its one table block cut as the content part says (lib/derive/columns.ts
    * `noteView`); its `rows` are those still in the table.
    */
-  parts: ({ id: string; blocks: string[]; file: string; basePt: number; for?: string[] } & PartCut)[];
+  parts: ({ id: string; blocks: string[]; file: string; basePt: number; for?: string[]; diseases?: string[] } & PartCut)[];
 }
 
 /** A pharm part's cut of its one table block (content PharmPart `rows` / `column` / `label`). */
