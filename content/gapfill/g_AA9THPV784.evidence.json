@@ -1,0 +1,59 @@
+{
+ "v": 1,
+ "block": "g_AA9THPV784",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Default: in most states, under 18 means a parent or guardian must consent for most non-emergency care.",
+   "source": 0,
+   "quote": "In most states, children below the age of 18 years do not have the legal capacity to give medical consent. Therefore, for most nonemergency medical decisions affecting minors, medical care cannot proceed without a parent’s or guardian’s consent.",
+   "locator": "Minors",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Emancipated minors: consent for themselves; usually married, in the military, financially independent, or emancipated by a court.",
+   "source": 1,
+   "quote": "Emancipated minors are people below the age of majority (usually 18) who are also considered legally capable. The definition of this group varies by state but generally includes minors who are married, who are in the armed forces, who are financially independent, or who have obtained a court decree of emancipation.",
+   "locator": "Legal capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Mature minor: a minor who shows the maturity to give informed consent; recognized in many states.",
+   "source": 2,
+   "quote": "Mature minor: An adolescent younger than the age of majority who, even if living at home as a dependent, demonstrates the cognitive maturity to give informed consent. The capacity of an adolescent to consent for health care as a mature minor is influenced by the minor’s developmental maturity, previous experience with illness, the gravity of the current illness, and the risks of proposed therapy. The right of a mature minor to consent to medical care without previous parental or guardian consent has been recognized in many states.",
+   "locator": "Box 2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Minor-consent services: in most states minors can consent to STI care, birth control, substance use, and mental health treatment.",
+   "source": 0,
+   "quote": "Second, in most states, minors can consent to certain medical treatments (eg, treatment of sexually transmitted infections, prescriptions for birth control, treatment of drug and substance use, mental health treatment) without parental permission. Individual state law must be consulted.",
+   "locator": "Minors",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Parent refuses: only a court finding of neglect or abuse can override a parent's decision.",
+   "source": 0,
+   "quote": "The parent’s or guardian’s decision can be overridden only if a court determines that the decision constitutes neglect or abuse of the child.",
+   "locator": "Minors",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "the claim dropped the source's \"In most states\"",
+    "resolution": "claim reworded to the verifier's replacement text; the verifier passed that wording"
+   },
+   {
+    "claim": 2,
+    "issue": "the quote carried markdown asterisks that are not in the page text",
+    "resolution": "asterisks removed from the quote; it is now verbatim"
+   }
+  ]
+ }
+}

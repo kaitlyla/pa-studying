@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "block": "g_C91WNP8N0J",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Reportable everywhere: syphilis (including congenital), gonorrhea, chlamydia, chancroid, and HIV.",
+   "source": 0,
+   "quote": "Syphilis (including congenital syphilis), gonorrhea, chlamydia, chancroid, and HIV are reportable diseases in every state.",
+   "locator": "Reporting and Confidentiality",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Who reports: the provider, the lab, or both; ask the health department if unsure. Reports are kept confidential.",
+   "source": 0,
+   "quote": "Reporting can be provider based, laboratory based, or both. Clinicians who are unsure of state and local reporting requirements should seek advice from state or local health department STI programs. STI and HIV reports are kept confidential.",
+   "locator": "Reporting and Confidentiality",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "EPT: giving the patient prescriptions or medication for her partners without examining the partners.",
+   "source": 1,
+   "quote": "Expedited partner therapy enables the obstetrician–gynecologist or other provider to give prescriptions or medications to patients to take to their partners without first examining these partners.",
+   "locator": "Abstract",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Use for: gonorrhea and chlamydia when partners can't or won't seek care.",
+   "source": 1,
+   "quote": "The College supports the use of expedited partner therapy as a method of preventing gonorrhea and chlamydial reinfection when a patient's partners are unable or unwilling to seek medical care.",
+   "locator": "Conclusions and Recommendations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Not for: suspected child abuse, sexual assault, or when her safety is at risk; assess IPV risk first.",
+   "source": 1,
+   "quote": "Expedited partner therapy is recommended only after an obstetrician–gynecologist or other provider has assessed the risk of intimate partner violence associated with partner notification. It is not intended for use in cases of suspected child abuse, sexual assault, or any other situation in which the patient's safety from her abuser may be compromised.",
+   "locator": "Conclusions and Recommendations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Legal status: differs by jurisdiction; CDC keeps a state-by-state list.",
+   "source": 1,
+   "quote": "The Centers for Disease Control and Prevention (CDC) maintains a website www.cdc.gov/std/EPT/legal/default.htm with information about the legal status of expedited partner therapy in all 50 states and other jurisdictions.",
+   "locator": "Barriers to Routine Use",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Abstain: no sex until 7 days after both she and her partners finish treatment.",
+   "source": 1,
+   "quote": "Patients should be instructed to abstain from sexual intercourse for 7 days after they and their sexual partners have completed treatment.",
+   "locator": "Implementing Expedited Partner Therapy",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "cdc.gov returns 403 to scripted fetches, so the live page could not be fetched",
+    "resolution": "the verifier matched the quote in its own extraction of the saved copy of the page"
+   },
+   {
+    "claim": 1,
+    "issue": "cdc.gov returns 403 to scripted fetches, so the live page could not be fetched",
+    "resolution": "the verifier matched the quote in its own extraction of the saved copy of the page"
+   }
+  ]
+ }
+}

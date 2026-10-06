@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "block": "g_9H4XQ5JW0F",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Advance directive: a legal document that keeps the patient's say over care after they lose capacity.",
+   "source": 0,
+   "quote": "Advance directives are legal documents that extend a person's control over health care decisions in the event that the person becomes incapacitated.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Living will: states the patient's treatment preferences, usually for end-of-life care.",
+   "source": 0,
+   "quote": "A living will is a limited document that expresses a person’s preferences for their treatment and care, normally in connection with end-of-life health care decisions",
+   "locator": "Living wills",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Health care power of attorney: names an agent (proxy) to make decisions.",
+   "source": 0,
+   "quote": "Durable power of attorney for health care: Designates a surrogate decision maker typically referred to as a health care agent or proxy",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Takes effect: in most states, only once the patient has been found to lack capacity.",
+   "source": 0,
+   "quote": "in most states, the directive does not become effective until after incapacity to make health care decisions has been determined.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Charting: hospitals and long-term care must record whether the patient has an advance directive.",
+   "source": 0,
+   "quote": "United States federal law requires hospitals and long-term care settings to document in a prominent part of the patient's medical record whether the individual has an advance directive (1).",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "DNR: an order that CPR not be done in cardiac arrest.",
+   "source": 1,
+   "quote": "The do-not-resuscitate (DNR) order placed in a patient’s medical record by a clinician informs the medical staff that cardiopulmonary resuscitation (CPR) should not be done in the event of cardiac arrest.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "EMS: first responders are almost always required to start life support unless a valid DNR or POLST is shown to them.",
+   "source": 1,
+   "quote": "first responders are almost always required to initiate life support unless a valid DNR order or portable medical order (often called a POLST form) is in place and presented to them.",
+   "locator": "Introduction",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "POLST: portable medical orders that follow the patient across settings and cover CPR and overall goals of treatment.",
+   "source": 1,
+   "quote": "It results in a set of medical orders that is portable across all health care settings and addresses CPR, along with overall goals of treatment (eg, comfort care only, full curative treatments, or limited treatments in between) and usually other critical care decisions, such as the use of artificial nutrition and hydration.",
+   "locator": "Portable medical orders",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Organ donation: hospitals must notify the organ procurement organization (OPO) promptly of every imminent or actual death; the OPO decides suitability.",
+   "source": 2,
+   "quote": "under which it must notify, in a timely manner, the OPO or a third party designated by the OPO of individuals whose death is imminent or who have died in the hospital. The OPO determines medical suitability for organ donation",
+   "locator": "§ 482.45(a)(1)",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 6,
+    "issue": "the claim dropped the source's \"almost always required\"",
+    "resolution": "claim reworded to the verifier's replacement text; the verifier passed that wording"
+   }
+  ]
+ }
+}

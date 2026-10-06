@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "block": "g_DR4BR2DRM9",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Capacity: understand the benefits and harms, understand the alternatives, and make and communicate a decision.",
+   "source": 0,
+   "quote": "Clinical capacity to make health care decisions is the ability to understand the potential benefits and harms of the proposed health care, to understand possible alternatives, and to make and communicate a health care decision.",
+   "locator": "Clinical capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Decision-specific: capacity is judged for each decision; more complex decisions need more capacity.",
+   "source": 0,
+   "quote": "Clinical capacity is specific to a particular health care decision and thus is limited to that decision. The level of clinical capacity needed to make a health care decision depends on the complexity of that decision.",
+   "locator": "Clinical capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Competence: a legal status that clinicians can't determine.",
+   "source": 0,
+   "quote": "Legal capacity (also called competency) is a legal status; it cannot be determined by health care professionals.",
+   "locator": "Legal capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Incompetence: only a judge can declare it.",
+   "source": 0,
+   "quote": "People remain legally capable until a judge with appropriate jurisdiction declares them legally incapacitated with respect to some or all areas of functioning.",
+   "locator": "Legal capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Can return: capacity lost to intoxication, delirium, or severe depression may come back when the impairment resolves.",
+   "source": 0,
+   "quote": "Patients who lack capacity due to intoxication, delirium, coma, severe depression, agitation, or other impairment may regain capacity when their impairment resolves.",
+   "locator": "Clinical capacity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Default surrogates (no guardian or appointed agent): spouse or partner, then adult child, parent, sibling, other relative or close friend; varies by state.",
+   "source": 1,
+   "quote": "If patients have neither a court-appointed surrogate (guardian or conservator) nor a self-appointed surrogate (agent or proxy), then health care professionals usually rely on the next of kin or even a close friend as the default surrogate decision maker. Most states authorize default surrogate decision makers; however, the exact scope of authority and the priority of permissible surrogates vary by state. Their typical order of priority is a spouse or domestic partner, an adult child, a parent, a sibling, and then possibly other relatives or a close friend.",
+   "locator": "Surrogates",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Surrogate's duty: follow the patient's known wishes and act in the patient's best interests.",
+   "source": 1,
+   "quote": "All surrogates—whether appointed by the patient, by default pursuant to state law, or by the court—have an obligation to follow the expressed wishes of the patient and to act in the patient’s best interests, taking into account the patient’s personal values, goals of care, and wishes, to the extent known.",
+   "locator": "Surrogates",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 4,
+    "issue": "\"temporarily\" overstates the source, which says these patients \"may regain capacity when their impairment resolves\"",
+    "resolution": "claim reworded to the verifier's replacement text; the verifier passed that wording"
+   }
+  ]
+ }
+}

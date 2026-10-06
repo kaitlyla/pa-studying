@@ -1,0 +1,68 @@
+{
+ "v": 1,
+ "block": "g_EZ5CWG6AP9",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Child abuse: PAs are mandated reporters of suspected child abuse or neglect in every state.",
+   "source": 0,
+   "quote": "In the United States, physicians and other professionals in contact with children (eg, nurses, physician assistants, nurse practitioners, social workers, psychologists, teachers, day care workers, police) are mandated reporters who are required by law in every state to report incidents of suspected child abuse or neglect",
+   "locator": "Reporting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Suspicion is enough: report what you suspect; the authorities investigate.",
+   "source": 0,
+   "quote": "However, the mandatory reporting requirement of suspected abuse should engage appropriate authorities and/or social agencies to investigate; if their evaluation confirms abuse, appropriate legal and social interventions can be done.",
+   "locator": "Diagnosis",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Liability: reports made on reasonable cause and in good faith are immune from criminal and civil liability; failing to report can bring criminal and civil penalties.",
+   "source": 0,
+   "quote": "Any person who makes a report of abuse based on reasonable cause and in good faith is immune from criminal and/or civil liability. On the other hand, a mandated reporter who fails to make a report can be subject to criminal and civil penalties.",
+   "locator": "Reporting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Elder abuse: every state requires reporting abuse in institutions; most also require reporting abuse at home.",
+   "source": 1,
+   "quote": "All states in the United States require that suspected or confirmed abuse in an institution be reported, and most states require that abuse in the home also be reported.",
+   "locator": "Reporting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Where: usually Adult Protective Services; for abuse in a facility, the long-term care ombudsman.",
+   "source": 1,
+   "quote": "In most states in the United States, the agency designated to receive abuse reports is the state social service department (Adult Protective Services). In the remaining states, the designated agency is the state unit on aging. For abuse within an institution, the local long-term care ombudsman office should be contacted.",
+   "locator": "Reporting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Child trafficking: state child protective services must identify and assess reports of children known or suspected to be sex-trafficking victims.",
+   "source": 2,
+   "quote": "provisions and procedures requiring identification and assessment of all reports involving children known or suspected to be victims of sex trafficking",
+   "locator": "§ 5106a(b)(2)(B)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Adult trafficking: no federal law requires clinicians to report suspected trafficking of patients 18 and older.",
+   "source": 3,
+   "quote": "Federal law does not currently mandate reporting by health care providers of suspected human trafficking of patients 18 and over.",
+   "locator": "Federal row, sex/labor trafficking column",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "the claim dropped the source's \"based on reasonable cause\"",
+    "resolution": "claim reworded to the verifier's replacement text; the verifier passed that wording"
+   }
+  ]
+ }
+}

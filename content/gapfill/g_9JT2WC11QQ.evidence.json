@@ -1,0 +1,95 @@
+{
+ "v": 1,
+ "block": "g_9JT2WC11QQ",
+ "author": "ola-74440 (all-rounder-01a10e54-9d48-7291-be46-63f00f0ccbe8), Legal builder session",
+ "claims": [
+  {
+   "text": "Schedule I: no accepted medical use, high abuse potential (e.g., heroin, LSD).",
+   "source": 0,
+   "quote": "Schedule I drugs, substances, or chemicals are defined as drugs with no currently accepted medical use and a high potential for abuse. Some examples of Schedule I drugs are: heroin, lysergic acid diethylamide (LSD)",
+   "locator": "Schedule I",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Schedule II: high abuse potential with severe dependence (e.g., oxycodone, fentanyl, methadone, Adderall, Ritalin).",
+   "source": 0,
+   "quote": "Schedule II drugs, substances, or chemicals are defined as drugs with a high potential for abuse, with use potentially leading to severe psychological or physical dependence. These drugs are also considered dangerous. Some examples of Schedule II drugs are: combination products with less than 15 milligrams of hydrocodone per dosage unit (Vicodin), cocaine, methamphetamine, methadone, hydromorphone (Dilaudid), meperidine (Demerol), oxycodone (OxyContin), fentanyl, Dexedrine, Adderall, and Ritalin",
+   "locator": "Schedule II",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Schedule IV: low abuse potential (e.g., Xanax, Valium, Ativan, Ambien, tramadol).",
+   "source": 0,
+   "quote": "Schedule IV drugs, substances, or chemicals are defined as drugs with a low potential for abuse and low risk of dependence. Some examples of Schedule IV drugs are: Xanax, Soma, Darvon, Darvocet, Valium, Ativan, Talwin, Ambien, Tramadol",
+   "locator": "Schedule IV",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "iPLEDGE (isotretinoin): a REMS to prevent embryo-fetal toxicity; covers every isotretinoin product.",
+   "source": 1,
+   "quote": "The goal of the iPLEDGE REMS is to mitigate the risk of embryo-fetal toxicity. It is a “shared system” REMS, meaning that it includes all FDA-approved isotretinoin products.",
+   "locator": "iPLEDGE REMS for Isotretinoin Products",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Pregnancy tests: pre-treatment tests must be done in a medical setting before starting isotretinoin.",
+   "source": 1,
+   "quote": "Prescribers must continue to complete the pre-treatment pregnancy tests in a medical setting prior to starting isotretinoin treatment.",
+   "locator": "Pregnancy testing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Update (clozapine): the clozapine REMS was removed effective June 13, 2025, so notes that list a clozapine REMS are out of date.",
+   "source": 2,
+   "quote": "Food and Drug Administration (FDA) removed the risk evaluation and mitigation strategy (REMS) for clozapine (currently marketed as Clozaril, Versacloz, and generics), effective June 13, 2025.",
+   "locator": "Announcement",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Still monitor ANC: per the prescribing information.",
+   "source": 2,
+   "quote": "Therefore, prescribers should continue to monitor patients’ ANC according to the monitoring frequencies described in the prescribing information.",
+   "locator": "Announcement",
+   "accessed": "2026-10-05"
+  },
+  {
+   "text": "Adverse reactions: report to FDA MedWatch, open to clinicians, patients, and consumers.",
+   "source": 3,
+   "quote": "MedWatch, the FDA’s medical product safety reporting program for health professionals, patients and consumers.",
+   "locator": "Overview",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "verification": {
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-05",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "dea.gov returns 403 to scripted fetches, so the live page could not be fetched",
+    "resolution": "the verifier matched the quote in its own extraction of the saved copy of the page"
+   },
+   {
+    "claim": 1,
+    "issue": "dea.gov returns 403 to scripted fetches, so the live page could not be fetched",
+    "resolution": "the verifier matched the quote in its own extraction of the saved copy of the page"
+   },
+   {
+    "claim": 2,
+    "issue": "dea.gov returns 403 to scripted fetches, so the live page could not be fetched",
+    "resolution": "the verifier matched the quote in its own extraction of the saved copy of the page"
+   },
+   {
+    "claim": 5,
+    "issue": "the FDA source URL redirects (301) to a moved page",
+    "resolution": "source URL updated to the page's current address; the verifier checked the quotes against it"
+   },
+   {
+    "claim": 6,
+    "issue": "the FDA source URL redirects (301) to a moved page",
+    "resolution": "source URL updated to the page's current address; the verifier checked the quotes against it"
+   }
+  ]
+ }
+}

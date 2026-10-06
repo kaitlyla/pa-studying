@@ -603,7 +603,7 @@ test.describe("general topics, workup and Other", () => {
     await expect.poll(() => hashOf(page)).toBe(listHash);
   });
 
-  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal, PA professional, Physical exam and Documentation, plus the Vaccines lead", async ({ page }) => {
+  test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal, PA professional, Physical exam and Documentation, one box per placement (a block under several headings shows under each), plus the Vaccines lead", async ({ page }) => {
     const other = read<OtherJson>("other.json");
     expect(other.sections).toHaveLength(9);
     expect(other.sections.filter((s) => s.gaps !== undefined).map((s) => s.id)).toEqual(["screenings", "legal", "pa", "pe", "notes"]);
@@ -636,7 +636,10 @@ test.describe("general topics, workup and Other", () => {
     for (const s of other.sections) {
       await open(page, otherHash(s.id));
       await expect(h1(page)).toHaveText(s.title);
-      await expect(main(page).locator(".gap")).toHaveCount((s.gaps?.length ?? 0) + (s.lead ? 1 : 0));
+      // The outline's gap items (repeats included), then the section's gaps no item names, then the lead.
+      const placed = s.notes.flatMap((n) => ("gap" in n ? [n.gap.id] : []));
+      const leftover = (s.gaps ?? []).filter((g) => !placed.includes(g.id));
+      await expect(main(page).locator(".gap")).toHaveCount(placed.length + leftover.length + (s.lead ? 1 : 0));
       if (s.lead) {
         const lead = main(page).locator(".gap").first();
         await expect(lead).toHaveAttribute("aria-label", s.lead.title);
