@@ -53,7 +53,8 @@ function WordBody({ doc }: { doc: DocJson }): ReactNode {
   );
 }
 
-function FileBody({ doc }: { doc: DocJson }): ReactNode {
+/** A document's content by kind; also shown whole on Other section pages. */
+export function FileBody({ doc }: { doc: DocJson }): ReactNode {
   switch (doc.kind) {
     case "word":
       return <WordBody doc={doc} />;

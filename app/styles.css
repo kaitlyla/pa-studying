@@ -152,6 +152,12 @@ a { color: #2b55a3; }
 .wk-lead, .ph-lead { margin: 0 0 10px; color: #4a5263; }
 .wk-h { margin: 6px 0 0; font-size: 18px; }
 .wk-back { display: inline-block; margin-bottom: 6px; font-size: 13px; }
+.opart-h { margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #dde1e8; font-size: 18px; scroll-margin-top: 12px; }
+.opart.sub .opart-h { margin-top: 16px; border-bottom: 0; font-size: 15px; }
+.odoc { margin: 0 0 18px; scroll-margin-top: 12px; }
+.odoc-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 8px; }
+.odoc-h h3 { margin: 0; font-size: 15px; }
+.odoc-h a { font-size: 13px; }
 
 /* ---- her notes (40 §40.6): the root size stands for the document's base size ---- */
 .notes { font-family: var(--text-stack, "Carlito", sans-serif); font-size: 13px; line-height: 1.35; color: #000; overflow-wrap: break-word; }

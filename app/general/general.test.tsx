@@ -1,6 +1,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import {
   asOwner,
+  B,
   byText,
   click,
   D,
@@ -8,6 +9,7 @@ import {
   go,
   installOwnerCss,
   publishedFixture,
+  publishFixture,
   R,
   renderApp,
   serveData,
@@ -523,25 +525,104 @@ describe("Other tab", () => {
     expect(visibleText(at(a.container.querySelectorAll(".other-page .gsec h2"), 1))).toBe("Files 1");
   });
 
-  it("shows a section's own notes in part 1, without an empty notes-links heading", async () => {
-    const other = record(files.get("other.json"), "other.json");
-    if (!("sections" in other) || !Array.isArray(other.sections)) throw new Error("other.json has no sections");
-    serveWith({
-      "other.json": {
-        ...other,
-        sections: other.sections.map((s: unknown) => {
-          const sec = record(s, "section");
-          return "id" in sec && sec.id === "vitamins" ? { ...sec, notes: [{ heading: "Fat-soluble vitamins" }, { block: thyroidBlock(0), basePt: 11, column: null }] } : sec;
-        }),
-      },
+  describe("a section with an outline", () => {
+    // Physical exam's outline: a top heading with her Word doc whole and a sub heading holding one
+    // table column, then a top heading with a PDF and a gap block (two named items: sub-entries).
+    beforeEach(async () => {
+      const fx = await publishFixture((content) => {
+        const pe = content.other.sections.find((s) => s.id === "pe");
+        if (!pe) throw new Error("no pe section");
+        Object.assign(pe, {
+          files: [D(5), D(1)],
+          gaps: [G(1)],
+          notes: [
+            { heading: "Cardiac" },
+            { doc: D(5) },
+            { heading: "Murmurs", sub: true },
+            { block: B(61), column: 1 },
+            { heading: "Pulmonary" },
+            { doc: D(1) },
+            { gap: G(1) },
+          ],
+        });
+      });
+      server.restore();
+      server = serveData(fx.published);
     });
-    const a = await renderApp("#/other/vitamins");
-    app = a;
-    const notes = await until(() => a.container.querySelector(".other-page .place-notes"), "vitamins notes");
-    expect(notes.querySelector("h2.pn-h")?.textContent).toBe("Fat-soluble vitamins");
-    expect(notes.querySelector(".notes")?.textContent).toContain("TSH first");
-    expect(a.container.querySelectorAll(".other-page .gsec")).toHaveLength(0);
-    expect(visibleText(a.container)).not.toContain("In the notes 0");
+
+    it("shows every part on the section page: her doc whole with an Open file link, headings, the PDF and the gap block", async () => {
+      const a = await renderApp("#/other/pe");
+      app = a;
+      const page = await until(() => (a.container.querySelector(`.other-page .odoc[data-anchor="${D(5)}"] .notes`) ? a.container.querySelector(".other-page") : null), "pe outline");
+      expect([...page.querySelectorAll(".opart-h")].map((h) => [h.tagName, h.textContent, h.getAttribute("data-anchor")])).toEqual([
+        ["H2", "Cardiac", "cardiac"],
+        ["H3", "Murmurs", "cardiac-murmurs"],
+        ["H2", "Pulmonary", "pulmonary"],
+      ]);
+      const thyroid = page.querySelector(`.odoc[data-anchor="${D(5)}"]`);
+      expect(thyroid?.querySelector("h3")?.textContent).toBe("Thyroid notes");
+      expect(thyroid?.textContent).toContain("TSH first");
+      expect(byText(thyroid ?? page, "a", "Open file")?.getAttribute("href")).toBe(`#/file/${D(5)}?from=${encodeURIComponent("#/other/pe")}`);
+      expect(page.querySelector(`.odoc[data-anchor="${D(1)}"] h3`)?.textContent).toBe("ACLS algorithms");
+      expect(page.querySelector(`section.gap[data-anchor="${G(1)}"]`)).not.toBeNull();
+      // Every listed file and gap is in the outline: nothing is left over as chips.
+      expect(page.querySelector(".fchip")).toBeNull();
+      expect(page.querySelectorAll(".gsec")).toHaveLength(0);
+    });
+
+    it("lists the outline in the sidebar: sub headings and named items as sub-entries", async () => {
+      const a = await renderApp("#/other/pe");
+      app = a;
+      const side = await until(() => a.container.querySelector<HTMLElement>(".side-in"), "other sidebar");
+      // The current section is open to its top headings, each a group with its sub-entry count.
+      const groups = [...side.querySelectorAll(".grp-row .sys-name")].map((l) => [l.querySelector(".ent-t")?.textContent, l.querySelector(".grp-n")?.textContent, l.getAttribute("href")]);
+      expect(groups).toEqual([
+        ["Cardiac", "1", "#/other/pe/cardiac"],
+        ["Pulmonary", "2", "#/other/pe/pulmonary"],
+      ]);
+      expect(side.querySelector(".grp-ents")).toBeNull();
+      for (const name of ["Cardiac", "Pulmonary"]) {
+        const toggle = side.querySelector<HTMLElement>(`button[aria-label="Expand ${name}"]`);
+        if (!toggle) throw new Error(`no ${name} toggle`);
+        await click(toggle);
+      }
+      const gapTitle = side.querySelectorAll(".grp-ents a")[2]?.textContent ?? "";
+      expect(gapTitle).not.toBe("");
+      expect([...side.querySelectorAll(".grp-ents a")].map((l) => [l.textContent, l.getAttribute("href")])).toEqual([
+        ["Murmurs", "#/other/pe/cardiac-murmurs"],
+        ["ACLS algorithms", `#/other/pe/pulmonary?at=${D(1)}`],
+        [gapTitle, `#/other/pe/pulmonary?at=${G(1)}`],
+      ]);
+    });
+
+    it("opens a top heading's part with its sub parts only, and a sub heading's part alone", async () => {
+      const a = await renderApp("#/other/pe/cardiac");
+      app = a;
+      await until(() => a.container.querySelector(`.other-page .odoc[data-anchor="${D(5)}"] .notes`), "cardiac part");
+      expect(a.container.querySelector(".other-page h1")?.textContent).toBe("Cardiac");
+      expect([...a.container.querySelectorAll(".crumbs a")].map((c) => [c.textContent, c.getAttribute("href")])).toEqual([
+        ["Other", "#/other"],
+        ["Physical exam", "#/other/pe"],
+      ]);
+      expect([...a.container.querySelectorAll(".other-page .opart-h")].map((h) => h.textContent)).toEqual(["Murmurs"]);
+      expect(a.container.querySelector(`.other-page .odoc[data-anchor="${D(1)}"]`)).toBeNull();
+
+      await go("#/other/pe/cardiac-murmurs");
+      await until(() => byText(a.container, ".other-page h1", "Murmurs"), "murmurs part");
+      expect(a.container.querySelector(`.other-page .odoc[data-anchor="${D(5)}"]`)).toBeNull();
+      const column = await until(() => a.container.querySelector(`.other-page [data-anchor="${B(61)}-c1"]`), "column item");
+      // Column 1 alone: headed by its first-row text, then each later row's first cell and that column.
+      expect(column.querySelector("h3.pn-col")?.textContent).toBe("high");
+      expect(column.textContent).toContain("T3");
+      expect(column.textContent).not.toContain("Free T4");
+    });
+
+    it("has no page for a part the outline does not have", async () => {
+      const a = await renderApp("#/other/pe/nope");
+      app = a;
+      await until(() => byText(a.container, "h1", "This page isn't on the site"), "not-on-site page");
+      expect(a.container.querySelector(".other-page")).toBeNull();
+    });
   });
 
   it("lists no file chip for a section whose only file was removed", async () => {

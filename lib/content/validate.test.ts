@@ -616,6 +616,42 @@ describe("places (20 §20.8)", () => {
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: id("b", 1), column: 2 }] } : s)))).toBe("ok");
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: D1 }] } : s)))).toMatch(/notes\[0\]/);
   });
+
+  describe("an Other section's outline", () => {
+    const L1 = id("r", 1);
+    const pe = (notes: unknown[]) => verdict("content/places/other.json", other((s) => (
+      s.id === "pe" ? { ...s, files: [D1], gaps: [G1], links: [{ target: L1, covers: "Murmurs" }], notes } : s
+    )));
+
+    it("accepts top and sub headings with her blocks, docs, gaps and links from the section's own lists", () => {
+      expect(pe([
+        { block: id("b", 1) },
+        { heading: "Cardiac" },
+        { doc: D1 },
+        { heading: "Murmurs", sub: true },
+        { link: L1 },
+        { gap: G1 },
+      ])).toBe("ok");
+    });
+
+    it("accepts the same doc, gap or link once in each part", () => {
+      expect(pe([{ heading: "Psych EOR" }, { gap: G1 }, { link: L1 }, { heading: "Capacity", sub: true }, { gap: G1 }, { link: L1 }, { heading: "PANCE" }, { gap: G1 }, { doc: D1 }])).toBe("ok");
+    });
+
+    it.each([
+      ["a doc not in the section's files", [{ doc: id("d", 2) }], /notes\[0\]: expected an entry of this section's own list/],
+      ["a gap not in the section's gaps", [{ gap: G2 }], /notes\[0\]: expected an entry of this section's own list/],
+      ["a link that is not one of the section's targets", [{ link: id("b", 9) }], /notes\[0\]: expected an entry of this section's own list/],
+      ["the same gap twice in one part", [{ heading: "A" }, { gap: G1 }, { gap: G1 }], /notes\[2\]: expected each item once per part/],
+      ["the same doc twice across a heading-less intro", [{ doc: D1 }, { doc: D1 }], /notes\[1\]: expected each item once per part/],
+      ["a sub heading before any top heading", [{ heading: "Murmurs", sub: true }], /notes\[0\]: expected a sub heading after a top heading/],
+      ["sub: false", [{ heading: "A", sub: false }], /notes\[0\]: expected an outline item/],
+      ["a doc item with a column", [{ doc: D1, column: 1 }], /notes\[0\]: expected an outline item/],
+      ["a gap given as a doc id", [{ gap: D1 }], /notes\[0\]: expected an outline item/],
+    ])("refuses %s", (_name, notes, message) => {
+      expect(pe(notes)).toMatch(message);
+    });
+  });
 });
 
 describe("slides, vocabulary and updates (20 §20.10–§20.12)", () => {

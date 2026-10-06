@@ -283,9 +283,22 @@ export const OTHER_SECTION_IDS = ["emergency", "vaccines", "guidelines", "screen
 /** The Other sections whose record has a `gaps` list (content not from her notes); no other section has one. */
 export const OTHER_GAP_SECTIONS: readonly (typeof OTHER_SECTION_IDS)[number][] = ["screenings", "legal", "pa", "pe", "notes"];
 
+/**
+ * One item of an Other section's outline (its `notes`), in page order. `heading`: a sidebar entry
+ * that starts a part of the page (navigation, not her text); with `sub`, a second-level entry under
+ * the top heading before it. `block`: as in PlaceNote. `doc`: one of the section's `files`, shown
+ * whole. `gap`: one of the section's `gaps`. `link`: the `target` of one of the section's `links`.
+ */
+export type OtherNote =
+  | { heading: string; sub?: true }
+  | { block: string; column?: number }
+  | { doc: string }
+  | { gap: string }
+  | { link: string };
+
 export interface OtherFile {
   v: 1;
-  sections: { id: string; title: string; lead: string | null; notes?: PlaceNote[]; files: string[]; links: Link[]; gaps?: string[] }[];
+  sections: { id: string; title: string; lead: string | null; notes?: OtherNote[]; files: string[]; links: Link[]; gaps?: string[] }[];
 }
 
 // 20.9

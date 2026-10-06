@@ -5,7 +5,7 @@ import type { IdPrefix } from "../../lib/content/index.ts";
 import { tableNode } from "../../lib/content/tables.ts";
 import type {
   BlockFile, CardsFile, ConceptsFile, DeckFile, DocJSON, EvidenceFile, Flag, FlagsFile, GapFile, GeneralFile, GuideId, Link,
-  OtherFile, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
+  OtherFile, OtherNote, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
 } from "../../lib/content/types.ts";
 import type { Content } from "../../lib/derive/model.ts";
 import { collapse, nodeText, type PMNode } from "../../lib/derive/text.ts";
@@ -353,7 +353,7 @@ export function places(c: Content, draft: { reftabs?: RefTabsFile; other?: Other
   const docs = new Set(c.docs.keys());
   const gaps = new Set(c.gaps.keys());
   const wordBlocks = new Set([...c.docs.values()].flatMap((d) => (d.kind === "word" && d.file.removed === null ? d.blocks.map((b) => b.id) : [])));
-  const checkNotes = (notes: readonly PlaceNote[] | undefined, where: string): void =>
+  const checkNotes = (notes: readonly (PlaceNote | OtherNote)[] | undefined, where: string): void =>
     requireIds((notes ?? []).flatMap((n) => ("block" in n ? [n.block] : [])), wordBlocks, `${where} notes`);
   const changes: Change[] = [];
   if (draft.reftabs !== undefined) {

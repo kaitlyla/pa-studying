@@ -6,7 +6,7 @@ import type { PubNote } from "../../lib/derive/published.ts";
 import { NotesBlock } from "../reader/blocks.tsx";
 import { Txt } from "../render/Text.tsx";
 
-function PlaceNote({ note }: { note: PubNote }): ReactNode {
+export function PlaceNote({ note }: { note: PubNote }): ReactNode {
   if ("heading" in note) {
     return (
       <h2 className="pn-h">

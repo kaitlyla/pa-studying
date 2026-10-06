@@ -8,6 +8,7 @@ import { FilePage } from "../files/FilePage.tsx";
 import { ImageViewer } from "../files/imageViewer.tsx";
 import { GeneralPage } from "../general/GeneralPage.tsx";
 import { OtherPage } from "../general/OtherPage.tsx";
+import { OtherSidebar } from "../general/OtherSidebar.tsx";
 import { RefSidebar, RefTabPage } from "../general/RefTab.tsx";
 import { WorkupPage } from "../general/WorkupPage.tsx";
 import { PharmPage } from "../pharm/PharmPage.tsx";
@@ -61,19 +62,31 @@ export function tabOf(route: Route): string | null {
   }
 }
 
-type SidebarKind = { kind: "guide"; guide: string } | { kind: "ref"; tab: RefTabId } | null;
+type SidebarKind = { kind: "guide"; guide: string } | { kind: "ref"; tab: RefTabId } | { kind: "other" } | null;
 
 function sidebarOf(route: Route): SidebarKind {
   const r = contextRoute(route);
   if (r.kind === "guide") return { kind: "guide", guide: r.guide };
   if (r.kind === "ref") return { kind: "ref", tab: r.tab };
+  if (r.kind === "other" || r.kind === "updates") return { kind: "other" };
   return null;
+}
+
+function SidebarBody({ which, onNavigate }: { which: NonNullable<SidebarKind>; onNavigate: () => void }): ReactNode {
+  switch (which.kind) {
+    case "guide":
+      return <GuideSidebar guide={which.guide} onNavigate={onNavigate} />;
+    case "ref":
+      return <RefSidebar tab={which.tab} onNavigate={onNavigate} />;
+    case "other":
+      return <OtherSidebar onNavigate={onNavigate} />;
+  }
 }
 
 function SidebarContent({ which, onNavigate }: { which: NonNullable<SidebarKind>; onNavigate: () => void }): ReactNode {
   return (
     <Suspense fallback={<div className="loading">Loading…</div>}>
-      {which.kind === "guide" ? <GuideSidebar guide={which.guide} onNavigate={onNavigate} /> : <RefSidebar tab={which.tab} onNavigate={onNavigate} />}
+      <SidebarBody which={which} onNavigate={onNavigate} />
     </Suspense>
   );
 }
@@ -206,7 +219,7 @@ function PageFor({ route }: { route: Route }): ReactNode {
     case "ref":
       return <RefTabPage tab={route.tab} sub={route.sub} />;
     case "other":
-      return <OtherPage section={route.section} />;
+      return <OtherPage section={route.section} part={route.part} />;
     case "updates":
       return <UpdatesPage />;
     case "file":

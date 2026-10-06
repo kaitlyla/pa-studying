@@ -38,7 +38,8 @@ export type RoutePage =
   | { kind: "picker" }
   | { kind: "guide"; guide: string; view: GuideView }
   | { kind: "ref"; tab: RefTabId; sub: string | null }
-  | { kind: "other"; section: string | null }
+  /** `part`: one part of the section's outline (a heading's slug). */
+  | { kind: "other"; section: string | null; part: string | null }
   | { kind: "updates" }
   | { kind: "file"; doc: string }
   | { kind: "versions"; pageKey: string }
@@ -114,9 +115,9 @@ function parsePath(segs: string[]): RoutePage {
     return { kind: "ref", tab: top, sub: rest[0] ?? null };
   }
   if (top === "other") {
-    if (rest.length === 2 && rest[0] === "guidelines" && rest[1] === "updates") return { kind: "updates" };
-    if (rest.length > 1) return NOT_FOUND;
-    return { kind: "other", section: rest[0] ?? null };
+    if (rest.length === 2 && rest[0] === "guidelines" && rest[1] === UPDATES_PART) return { kind: "updates" };
+    if (rest.length > 2) return NOT_FOUND;
+    return { kind: "other", section: rest[0] ?? null, part: rest[1] ?? null };
   }
   if (top === "file") return rest.length === 1 && rest[0] ? { kind: "file", doc: rest[0] } : NOT_FOUND;
   if (top === "versions") return rest.length === 1 && rest[0] ? { kind: "versions", pageKey: rest[0] } : NOT_FOUND;
@@ -182,13 +183,17 @@ export function refHash(tab: RefTabId, sub: string | null = null): string {
   return sub ? `#/${tab}/${enc(sub)}` : `#/${tab}`;
 }
 
-/** `#/other` or `#/other/<section>`. */
-export function otherHash(section: string | null = null): string {
-  return section ? `#/other/${enc(section)}` : "#/other";
+/** `#/other`, `#/other/<section>` or `#/other/<section>/<part>` (a part of the section's outline). */
+export function otherHash(section: string | null = null, part: string | null = null): string {
+  if (!section) return "#/other";
+  return part ? `#/other/${enc(section)}/${enc(part)}` : `#/other/${enc(section)}`;
 }
 
+/** The second segment of the Updated guidelines route: no outline part of Guidelines may take it. */
+export const UPDATES_PART = "updates";
+
 /** The Updated guidelines list (Other › Guidelines). */
-export const UPDATES_ROUTE = "#/other/guidelines/updates";
+export const UPDATES_ROUTE = `#/other/guidelines/${UPDATES_PART}`;
 
 /** `#/file/<d_id>?from=<route>` — every link that opens a document from a list carries `from` (40 §40.3). */
 export function fileHash(doc: string, from: string | null): string {

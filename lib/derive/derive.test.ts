@@ -1334,7 +1334,7 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
       { block: t61, basePt: 11, column: 1 },
     ]);
     const other = res.files.get(OTHER_PATH) as OtherJson;
-    expect(other.sections.find((s) => s.id === "vitamins")?.notes.map((n) => ("block" in n ? n.block.id : n.heading))).toEqual([B(60)]);
+    expect(other.sections.find((s) => s.id === "vitamins")?.notes.map((n) => ("block" in n ? n.block.id : n))).toEqual([B(60)]);
     expect(other.sections.find((s) => s.id === "emergency")?.notes).toEqual([]);
     expect(file<OtherJson>(OTHER_PATH).sections.every((s) => s.notes.length === 0)).toBe(true);
   });
@@ -1366,5 +1366,106 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
     expect(res.dropped).toContainEqual({ file: "content/places/reftabs.json", id: B(60) });
     expect(res.dropped).toContainEqual({ file: "content/places/reftabs.json", id: GONE });
     expect((res.files.get(HOSTS_PATH) as HostsJson)[B(60)]).toBeUndefined();
+  });
+});
+
+describe("an Other section's outline (parts, docs, gaps and links)", () => {
+  type Sec = Content["other"]["sections"][number];
+  const section = (x: Content, id: string): Sec => {
+    const s = x.other.sections.find((v) => v.id === id);
+    if (!s) throw new Error(`no ${id} section`);
+    return s;
+  };
+  /** Physical exam with Thyroid notes (Word) and ACLS algorithms (PDF) under headings, a gap and a link. */
+  const withOutline = (more: (x: Content) => void = () => {}): Content => mutated((x) => {
+    Object.assign(section(x, "pe"), {
+      files: [D(5), D(1)],
+      gaps: [G(1)],
+      links: [{ target: R(101), covers: "AF" }],
+      notes: [
+        { heading: "Cardiac" },
+        { doc: D(5) },
+        { heading: "Exam", sub: true },
+        { gap: G(1) },
+        { heading: "Pulmonary" },
+        { heading: "Exam", sub: true },
+        { doc: D(1) },
+        { link: R(101) },
+        { heading: "Pulmonary" },
+      ],
+    });
+    more(x);
+  });
+  const notesOf = (res: ReturnType<typeof publish>, id: string): OtherJson["sections"][number]["notes"] =>
+    (res.files.get(OTHER_PATH) as OtherJson).sections.find((s) => s.id === id)?.notes ?? [];
+  /** Takes G(1) off the guide topic and the Labs sub that list it before Other, so its first home is Physical exam. */
+  const gapOnlyOnOther = (x: Content): void => {
+    for (const g of x.guides) for (const t of g.general?.topics ?? []) t.gaps = t.gaps.filter((id) => id !== G(1));
+    for (const s of x.reftabs.labs.subs) s.gaps = s.gaps.filter((id) => id !== G(1));
+  };
+
+  it("gives each heading a part id unique in its section, a sub heading's prefixed with its top heading's", () => {
+    const notes = notesOf(publish(withOutline()), "pe");
+    expect(notes.filter((n) => "heading" in n)).toEqual([
+      { heading: "Cardiac", sub: false, id: "cardiac" },
+      { heading: "Exam", sub: true, id: "cardiac-exam" },
+      { heading: "Pulmonary", sub: false, id: "pulmonary" },
+      { heading: "Exam", sub: true, id: "pulmonary-exam" },
+      { heading: "Pulmonary", sub: false, id: "pulmonary-2" },
+    ]);
+  });
+
+  it("never gives Guidelines a part named `updates`: that is the Updated guidelines route", () => {
+    const res = publish(withOutline((x) => {
+      Object.assign(section(x, "guidelines"), { notes: [{ heading: "Updates" }, { doc: D(1) }] });
+    }));
+    expect(notesOf(res, "guidelines")[0]).toEqual({ heading: "Updates", sub: false, id: "updates-2" });
+    expect(parseHash(otherHash("guidelines", "updates-2"))).toMatchObject({ kind: "other", section: "guidelines", part: "updates-2" });
+    expect(parseHash("#/other/guidelines/updates").kind).toBe("updates");
+    expect(parseHash("#/other/pe")).toMatchObject({ kind: "other", section: "pe", part: null });
+    expect(parseHash("#/other")).toMatchObject({ kind: "other", section: null, part: null });
+    expect(otherHash("pe", "cardiac-exam")).toBe("#/other/pe/cardiac-exam");
+    expect(otherHash("pe", null)).toBe("#/other/pe");
+  });
+
+  it("publishes doc items as the section's file entries, gap items as gap blocks and link items as its links", () => {
+    const res = publish(withOutline());
+    const pe = (res.files.get(OTHER_PATH) as OtherJson).sections.find((s) => s.id === "pe");
+    const items = notesOf(res, "pe").filter((n) => !("heading" in n));
+    expect(items).toEqual([
+      { doc: pe?.files.files.find((f) => f.id === D(5)) },
+      { gap: pe?.gaps?.[0] },
+      { doc: pe?.files.files.find((f) => f.id === D(1)) },
+      { link: pe?.links[0] },
+    ]);
+    expect(items.map((n) => ("doc" in n ? n.doc.id : "gap" in n ? n.gap.id : "link" in n ? n.link.target : null))).toEqual([D(5), G(1), D(1), R(101)]);
+  });
+
+  it("leaves a removed doc out of the outline; it stays in the section's files", () => {
+    const res = publish(withOutline((x) => {
+      const d5 = x.docs.get(D(5));
+      if (d5) d5.file.removed = { at: "2026-10-05T10:00:00Z", from: "b".repeat(40) };
+    }));
+    expect(notesOf(res, "pe").some((n) => "doc" in n && n.doc.id === D(5))).toBe(false);
+    expect((res.files.get(OTHER_PATH) as OtherJson).sections.find((s) => s.id === "pe")?.files.removed.map((f) => f.id)).toContain(D(5));
+  });
+
+  it("opens a doc item's Word blocks and a gap item on their part's page, and search lands there", () => {
+    const res = publish(withOutline(gapOnlyOnOther));
+    const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+    const cardiac = otherHash("pe", "cardiac");
+    expect(hosts[B(60)]).toEqual({ route: cardiac, loc: "Other › Physical exam" });
+    expect(hosts[B(61)]?.route).toBe(cardiac);
+    expect(hosts[G(1)]?.route).toBe(otherHash("pe", "cardiac-exam"));
+    expect(res.units.filter((u) => u.route === cardiac).map((u) => u.at)).toEqual([B(60), R(600), R(601)]);
+  });
+
+  it("hosts an item recurring in several parts on its first part", () => {
+    const res = publish(withOutline((x) => {
+      gapOnlyOnOther(x);
+      section(x, "pe").notes = [{ heading: "Psych EOR" }, { gap: G(1) }, { heading: "PANCE" }, { gap: G(1) }];
+    }));
+    expect((res.files.get(HOSTS_PATH) as HostsJson)[G(1)]?.route).toBe(otherHash("pe", "psych-eor"));
+    expect(notesOf(res, "pe").filter((n) => "gap" in n)).toHaveLength(2);
   });
 });

@@ -3,7 +3,7 @@
 import {
   gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
-  type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
+  type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
@@ -202,6 +202,18 @@ async function placeNoteParts(snap: Snapshot, notes: readonly PlaceNote[] | unde
   return parts;
 }
 
+/** An Other section outline's Word blocks in page order: its block items, and every block of each Word doc item. */
+async function otherOutlineNotes(snap: Snapshot, notes: readonly OtherNote[] | undefined): Promise<PlaceNote[]> {
+  const out: PlaceNote[] = [];
+  for (const n of notes ?? []) {
+    if ("block" in n) out.push(n);
+    if (!("doc" in n)) continue;
+    const word = await snap.jsonIfExists<WordDocFile>(`content/docs/${n.doc}/doc.json`);
+    if (word && word.removed === null) out.push(...word.blocks.map((block) => ({ block })));
+  }
+  return out;
+}
+
 /** All rows of a table that take part in resolution are its full content; one-column tables edit as blocks. */
 function wholeBlockPart(sys: SystemCtx, block: BlockFile, basePt: number, width: number, proseLike: boolean): Part {
   if (block.kind === "table" && !proseLike) return rowsPart(sys, block, tableOrThrow(block).content.map(rowId), basePt, width);
@@ -360,7 +372,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { section } = k;
       const other = await snap.json<OtherFile>("content/places/other.json");
       const s = other.sections.find((x) => x.id === section);
-      return unit([...(await gapParts(snap, [s?.lead])), ...(await placeNoteParts(snap, s?.notes)), ...(await gapParts(snap, s?.gaps ?? []))]);
+      const notes = await otherOutlineNotes(snap, s?.notes);
+      return unit([...(await gapParts(snap, [s?.lead])), ...(await placeNoteParts(snap, notes)), ...(await gapParts(snap, s?.gaps ?? []))]);
     }
     case "slide": {
       const { guide, slide: slideId } = k;

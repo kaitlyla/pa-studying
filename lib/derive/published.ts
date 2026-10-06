@@ -388,12 +388,25 @@ export interface RefTabJson {
   files: DocList;
 }
 
+/**
+ * An Other section's outline item as published (content OtherNote). A heading carries `id`, its part's
+ * slug, unique in the section: the anchor and route its sidebar entry opens. A doc carries its
+ * reference only; the page loads `docs/<d>.json` for its content.
+ */
+export type PubOtherNote =
+  | { heading: string; sub: boolean; id: string }
+  | Extract<PubNote, { block: PubBlock }>
+  | { doc: DocRef }
+  | { gap: PubGap }
+  | { link: PubLink };
+
 export interface OtherJson {
   sections: {
     id: string;
     title: string;
     lead: PubGap | null;
-    notes: PubNote[];
+    /** The outline; `links`, `files` and `gaps` stay the section's whole lists (those not in the outline show after it). */
+    notes: PubOtherNote[];
     links: PubLink[];
     files: DocList;
     /** Present only on sections whose stored record has `gaps` (OTHER_GAP_SECTIONS). */

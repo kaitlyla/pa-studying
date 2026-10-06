@@ -144,8 +144,8 @@ interface GroupRowProps {
   className: string;
 }
 
-/** A row with an expand arrow and a name that opens the group's page (and expands it). */
-function GroupRow({ label, plain, to, open, current, count, pct, pill, onToggle, onNavigate, className }: GroupRowProps): ReactNode {
+/** A row with an expand arrow and a name that opens the group's page (and expands it). Also the Other sidebar's rows. */
+export function GroupRow({ label, plain, to, open, current, count, pct, pill, onToggle, onNavigate, className }: GroupRowProps): ReactNode {
   return (
     <div className={className}>
       <button type="button" className="sys-tog" aria-expanded={open} aria-label={`${open ? "Collapse" : "Expand"} ${plain}`} onClick={() => onToggle(!open)}>

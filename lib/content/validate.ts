@@ -14,7 +14,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -498,12 +498,47 @@ const refSub: Checker = (v, at, ctx) => {
 const refTab = shapeOf<RefTab>({ subs: arr(refSub), files: uniqueArr(id("d")) }, {});
 export const validateRefTabs: Validator = whole(shapeOf<RefTabsFile>({ v: v1, labs: refTab, imaging: refTab, ekg: refTab, anatomy: refTab }, {}));
 
+const subFlag: Checker = (v, at, ctx) => {
+  if (v !== true) bad(ctx, at, "true", v);
+};
+const otherNote = either(
+  "an outline item: { heading, sub? }, { block, column? }, { doc }, { gap } or { link }",
+  shapeOf<Extract<OtherNote, { heading: string }>>({ heading: nonEmpty }, { sub: subFlag }),
+  shapeOf<Extract<OtherNote, { block: string }>>({ block: id("b") }, { column: columnC }),
+  shapeOf<Extract<OtherNote, { doc: string }>>({ doc: id("d") }, {}),
+  shapeOf<Extract<OtherNote, { gap: string }>>({ gap: id("g") }, {}),
+  shapeOf<Extract<OtherNote, { link: string }>>({ link: id("r", "b") }, {}),
+);
+
+/**
+ * An outline's doc, gap and link items each name an entry of the section's own list, at most once
+ * per page part (an entry may recur under several headings); a sub heading follows a top heading.
+ */
+function checkOutline(s: OtherFile["sections"][number], at: string, ctx: Ctx): void {
+  let seen = new Set<string>();
+  let top = false;
+  (s.notes ?? []).forEach((n, j) => {
+    const here = `${at}.notes[${j}]`;
+    if ("heading" in n) {
+      if (n.sub && !top) bad(ctx, here, "a sub heading after a top heading", n.heading);
+      if (!n.sub) top = true;
+      seen = new Set();
+      return;
+    }
+    if ("block" in n) return;
+    const [list, ref] = "doc" in n ? [s.files, n.doc] : "gap" in n ? [s.gaps ?? [], n.gap] : [s.links.map((l) => l.target), n.link];
+    if (!list.includes(ref)) bad(ctx, here, "an entry of this section's own list", ref);
+    if (seen.has(ref)) bad(ctx, here, "each item once per part", ref);
+    seen.add(ref);
+  });
+}
+
 export const validateOther: Validator = (v, ctx) => {
   shapeOf<OtherFile>({
     v: v1,
     sections: arr(shapeOf<OtherFile["sections"][number]>(
       { id: oneOf(...OTHER_SECTION_IDS), title: nonEmpty, lead: nullable(id("g")), files: uniqueArr(id("d")), links: arr(link) },
-      { notes: placeNotes, gaps: uniqueArr(id("g")) },
+      { notes: arr(otherNote), gaps: uniqueArr(id("g")) },
     )),
   }, {})(v, "", ctx);
   const sections = (v as OtherFile).sections;
@@ -512,6 +547,7 @@ export const validateOther: Validator = (v, ctx) => {
   sections.forEach((s, i) => {
     if (Object.hasOwn(s, "gaps") && !OTHER_GAP_SECTIONS.some((g) => g === s.id)) bad(ctx, `.sections[${i}].gaps`, `no gaps key outside ${OTHER_GAP_SECTIONS.join(", ")}`);
     if (s.lead !== null && s.id !== "vaccines") bad(ctx, `.sections[${i}].lead`, "null outside vaccines", s.lead);
+    checkOutline(s, `.sections[${i}]`, ctx);
   });
 };
 

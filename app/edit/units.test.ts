@@ -188,6 +188,21 @@ describe("loading a page key", () => {
     expect(build.changed).toEqual([B(61)]);
   });
 
+  it("other key with an outline: the blocks of its Word doc items in order (a PDF or removed doc adds none), then its gap blocks", async () => {
+    const OTHER = "content/places/other.json";
+    const other = json<{ sections: Record<string, unknown>[] }>(w.fake.readFile(OTHER));
+    other.sections = other.sections.map((s) => (s.id === "pe" ? { ...s, files: [D(1), D(5)], gaps: [G(1)], notes: [{ heading: "Cardiac" }, { doc: D(1) }, { doc: D(5) }, { gap: G(1) }] } : s));
+    w.fake.commitFiles({ [OTHER]: serializeFile(OTHER, other) });
+    const pe = await unitAt("other:pe");
+    expect(pe.parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind === "block" ? p.block.id : p.kind))).toEqual([B(60), B(61), G(1)]);
+    expect(only(pe, "block").owner).toEqual({ kind: "doc", path: `content/docs/${D(5)}/doc.json` });
+
+    const DOC = `content/docs/${D(5)}/doc.json`;
+    const doc = json<Record<string, unknown>>(w.fake.readFile(DOC));
+    w.fake.commitFiles({ [DOC]: serializeFile(DOC, { ...doc, removed: { at: "2026-10-05T10:00:00Z", from: "b".repeat(40) } }) });
+    expect((await unitAt("other:pe")).parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind))).toEqual([G(1)]);
+  });
+
   it("slide: the one slide", async () => {
     const unit = await unitAt(`slide:fm:${S(2)}`);
     expect(only(unit, "slide").path).toBe(`content/slides/fm/blocks/${S(2)}.json`);

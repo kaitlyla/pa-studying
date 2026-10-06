@@ -1,7 +1,7 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
-import { citeKey } from "../content/ids.ts";
-import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type PlaceNote, type RefLink } from "../content/types.ts";
+import { citeKey, slug } from "../content/ids.ts";
+import { GENERAL_KEYS, type BlockFile, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
@@ -10,13 +10,13 @@ import {
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard, PubNote,
-  PubFlag, PubGap, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
+  PubFlag, PubGap, PubLink, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
 import { pubFigures } from "./published.ts";
 import {
   fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, PANCE, pharmLoc, REF_TABS,
-  refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
+  refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
 import { checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
@@ -52,6 +52,30 @@ const pharmView = (system: string, section: string | null = null, target: string
   ({ kind: "pharm", system, section, target });
 
 const pub = (b: BlockFile): PubBlock => ({ id: b.id, kind: b.kind, doc: b.doc });
+
+/**
+ * The outline part each item of an Other section's outline belongs to: a heading's own part slug
+ * (unique in the section; a sub heading's is prefixed with its top heading's, so the same sub title
+ * under several top headings reads apart), the slug of the heading above any other item, null
+ * before the first heading.
+ */
+function outlineParts(sec: OtherFile["sections"][number]): (string | null)[] {
+  // Guidelines' `updates` segment is the Updated guidelines route.
+  const used = new Set<string>(sec.id === "guidelines" ? [UPDATES_PART] : []);
+  let cur: string | null = null;
+  let top: string | null = null;
+  return (sec.notes ?? []).map((n) => {
+    if (!("heading" in n)) return cur;
+    const own = slug(n.heading) || "part";
+    const base = n.sub && top !== null ? `${top}-${own}` : own;
+    let id = base;
+    for (let k = 2; used.has(id); k++) id = `${base}-${k}`;
+    used.add(id);
+    if (!n.sub) top = id;
+    cur = id;
+    return id;
+  });
+}
 
 /** True when the document is shown to visitors. */
 function visible(d: DocData): boolean {
@@ -325,6 +349,11 @@ export function publish(c: Content): PublishResult {
   }
   for (const sec of c.other.sections) {
     const place = { route: otherHash(sec.id), loc: otherLoc(ix, sec.id) };
+    // A gap block in the outline is placed on its part's page.
+    const parts = outlineParts(sec);
+    (sec.notes ?? []).forEach((n, i) => {
+      if ("gap" in n) placeGap(n.gap, { ...place, route: otherHash(sec.id, parts[i] ?? null) }, "other");
+    });
     if (sec.lead) placeGap(sec.lead, place, "other");
     for (const d of sec.files) placeDoc(d, place.route, "other");
     for (const gap of sec.gaps ?? []) placeGap(gap, place, "other");
@@ -340,13 +369,26 @@ export function publish(c: Content): PublishResult {
     if (doc.kind === "word") for (const b of doc.blocks) hosts[b.id] = place;
   }
   for (const [id, home] of gapHome) if (c.gaps.has(id)) hosts[id] = home.place;
+  /** The Word blocks an Other section's outline shows, each with its part: its block items, and every block of its visible Word doc items. */
+  const otherShown = (sec: OtherFile["sections"][number]): { note: PlaceNote; part: string | null }[] => {
+    const parts = outlineParts(sec);
+    return (sec.notes ?? []).flatMap((n, i) => {
+      const part = parts[i] ?? null;
+      if ("block" in n) return [{ note: n, part }];
+      const d = "doc" in n ? c.docs.get(n.doc) : undefined;
+      return d?.kind === "word" && visible(d) ? d.blocks.map((b) => ({ note: { block: b.id }, part })) : [];
+    });
+  };
   // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page.
   const noteHome = new Map<string, { place: Place; tab: string; title: string }>();
   const placeNotes = (notes: readonly PlaceNote[] | undefined, place: Place, tab: string, title: string): void => {
     for (const n of notes ?? []) if ("block" in n && wordBlocks.has(n.block) && !noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
   };
   for (const tab of REF_TABS) for (const sub of c.reftabs[tab].subs) placeNotes(sub.notes, { route: refHash(tab, sub.id), loc: refLoc(tab, sub.title) }, tab, sub.title);
-  for (const sec of c.other.sections) placeNotes(sec.notes, { route: otherHash(sec.id), loc: otherLoc(ix, sec.id) }, "other", sec.title);
+  // An Other outline's block opens on its part's page.
+  for (const sec of c.other.sections) {
+    for (const { note, part } of otherShown(sec)) placeNotes([note], { route: otherHash(sec.id, part), loc: otherLoc(ix, sec.id) }, "other", sec.title);
+  }
   for (const [id, home] of noteHome) hosts[id] = home.place;
   for (const g of c.guides) {
     const deck = c.decks.get(g.file.id);
@@ -782,17 +824,44 @@ export function publish(c: Content): PublishResult {
     }
     for (const d of rt.files) docUnit(d);
   }
+  /**
+   * An Other section's outline. Headings get part slugs unique in the section; a doc item whose
+   * document is not visible (removed, processing) is left out here and listed by `files` instead.
+   */
+  const otherNotes = (sec: OtherFile["sections"][number], secLinks: readonly PubLink[], docs: DocList): PubOtherNote[] => {
+    const parts = outlineParts(sec);
+    const out: PubOtherNote[] = [];
+    for (const [i, n] of (sec.notes ?? []).entries()) {
+      if ("heading" in n) {
+        out.push({ heading: n.heading, sub: n.sub === true, id: parts[i] ?? "" });
+      } else if ("block" in n) {
+        for (const p of placeNoteList("content/places/other.json", [n])) if ("block" in p) out.push(p);
+      } else if ("doc" in n) {
+        const d = docs.files.find((f) => f.id === n.doc);
+        if (d) out.push({ doc: d });
+      } else if ("gap" in n) {
+        out.push({ gap: gap(n.gap) });
+      } else {
+        const l = secLinks.find((x) => x.target === n.link);
+        if (l) out.push({ link: l });
+      }
+    }
+    return out;
+  };
   const other: OtherJson = {
-    sections: c.other.sections.map((sec) => ({
-      id: sec.id, title: sec.title, lead: sec.lead ? gap(sec.lead) : null, notes: placeNoteList("content/places/other.json", sec.notes),
-      links: links("content/places/other.json", sec.links), files: docList(sec.files),
-      ...(sec.gaps ? { gaps: sec.gaps.map(gap) } : {}),
-    })),
+    sections: c.other.sections.map((sec) => {
+      const secLinks = links("content/places/other.json", sec.links);
+      const docs = docList(sec.files);
+      return {
+        id: sec.id, title: sec.title, lead: sec.lead ? gap(sec.lead) : null, notes: otherNotes(sec, secLinks, docs), links: secLinks, files: docs,
+        ...(sec.gaps ? { gaps: sec.gaps.map(gap) } : {}),
+      };
+    }),
   };
   files.set(OTHER_PATH, other);
   for (const sec of c.other.sections) {
     if (sec.lead) gapUnit(sec.lead);
-    noteUnitsOf(sec.notes);
+    noteUnitsOf(otherShown(sec).map((s) => s.note));
     for (const d of sec.files) docUnit(d);
     for (const id of sec.gaps ?? []) gapUnit(id);
     if (sec.id === "guidelines") {
