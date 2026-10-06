@@ -1,6 +1,7 @@
 // Test-only: a small synthetic content tree written through lib/content (99 §99.1 unit fixtures),
 // shared by lib/derive and tools/build tests. Not used by the build itself.
-import { writeAsset, writeContent, writeStoredFile } from "../../lib/content/fs.ts";
+import { readContent, writeAsset, writeContent, writeStoredFile } from "../../lib/content/fs.ts";
+import type { CardsFile, StructureFile } from "../../lib/content/types.ts";
 
 export const id = (p: string, n: number): string => `${p}_${String(n).padStart(10, "0")}`;
 
@@ -256,4 +257,49 @@ export async function writeFixture(root: string): Promise<void> {
     ],
   });
   await w("updates/checks.json", { v: 1, lastRun: "2026-10-01", nextRun: "2026-11-01", sources: [], seen: {}, seenUrl: {} });
+}
+
+/** Her Word page made into pharm notes (`writePharmReviewPage`). */
+export const PHARM_PAGE = D(8);
+
+/**
+ * Adds to a tree written by `writeFixture`: her Word page "pharm review" (a prose block B80, then one
+ * table B81 of two class groups: heading row R810 "ANTICOAGULANTS", R811 Warfarin, then the group's own
+ * heading row R814 "OTHER AGENTS", R812 Apixaban, R813 Heparin), still listed in FM Renal's Pharm
+ * files; the pharm file made from it (`page`): LO part P80 (B80), and card parts P81 (C80, rows R810
+ * R811) and P82 (C81, rows R814 R812 R813) cutting the table, each listing its group's heading row
+ * first; and those cards, at home in FM Cardiovascular.
+ */
+export async function writePharmReviewPage(root: string): Promise<void> {
+  const w = (path: string, value: unknown) => writeContent(root, `content/${path}`, value);
+  await w(`docs/${PHARM_PAGE}/doc.json`, {
+    v: 1, id: PHARM_PAGE, name: "pharm review", kind: "word", source: "pharm review.docx", page, basePt: 11, blocks: [B(80), B(81)], removed: null,
+  });
+  await w(`docs/${PHARM_PAGE}/blocks/${B(80)}.json`, block(B(80), "prose", doc(para("Anticoagulation review"))));
+  await w(`docs/${PHARM_PAGE}/blocks/${B(81)}.json`, block(B(81), "table", tableDoc(3, [
+    [R(810), "heading", "ANTICOAGULANTS", "MOA", "Monitor"],
+    [R(811), "content", "Warfarin", "VKA", "INR"],
+    [R(814), "heading", "OTHER AGENTS", "MOA", "Monitor"],
+    [R(812), "content", "Apixaban", "Xa inhibitor", "none needed"],
+    [R(813), "content", "Heparin", "AT3", "aPTT"],
+  ])));
+  await w("pharm/pharm-review/pharmfile.json", {
+    v: 1, id: "pharm-review", fileName: "pharm review", basePt: 11, page: PHARM_PAGE, blocks: [B(80), B(81)],
+    parts: [
+      { id: P(80), role: "lo", title: "Anticoagulation", card: null, blocks: [B(80)] },
+      { id: P(81), role: "card", title: "Vitamin K antagonists", card: C(80), blocks: [B(81)], rows: [R(810), R(811)] },
+      { id: P(82), role: "card", title: "Other anticoagulants", card: C(81), blocks: [B(81)], rows: [R(814), R(812), R(813)] },
+    ],
+  });
+  const renal = await readContent<StructureFile>(root, "content/guides/fm/renal/structure.json");
+  await w("guides/fm/renal/structure.json", { ...renal, pharmFiles: [...renal.pharmFiles, PHARM_PAGE] });
+  const cards = await readContent<CardsFile>(root, "content/pharm/cards.json");
+  await w("pharm/cards.json", {
+    ...cards,
+    cards: [
+      ...cards.cards,
+      { id: C(80), file: "pharm-review", aliases: ["warfarin"], home: { fm: "cardiovascular" } },
+      { id: C(81), file: "pharm-review", aliases: ["apixaban"], home: { fm: "cardiovascular" } },
+    ],
+  });
 }

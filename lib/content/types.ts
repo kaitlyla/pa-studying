@@ -133,7 +133,11 @@ export interface UploadFile {
 }
 
 // 20.6
-export interface PharmPart {
+/**
+ * A part of a pharm notes file: its blocks, whole; or, with `column` or `rows`, its one table block
+ * cut as a place note cuts it (BlockNote), so several parts can share one stored table.
+ */
+export interface PharmPart extends Omit<BlockNote, "block"> {
   id: string;
   role: "overview" | "lo" | "card";
   title: string;
@@ -146,6 +150,13 @@ export interface PharmFile {
   id: string;
   fileName: string;
   basePt: number;
+  /**
+   * The `d_` id of her Word page, when the file's notes are that page: `blocks` are blocks of that
+   * page, stored once under it (content/docs/<page>/blocks), so an edit shows on the page and on
+   * every card. A block no longer on the page is dropped from the parts it was in. (Not `doc`: a
+   * top-level `doc` in a content file is rich text.)
+   */
+  page?: string;
   blocks: string[];
   parts: PharmPart[];
 }

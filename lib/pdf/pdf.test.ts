@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { schema } from "../schema.ts";
 import { buildDocDefinition, imageRequests, pdfFileName, scopeTitle, wholeGuideAsset, wholeGuideUrl, type PdfInput, type PdfScope } from "./index.ts";
 import { FontSplitter } from "./fonts.ts";
-import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, R, wordDoc } from "./testing.ts";
+import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, R, row, table, wordDoc } from "./testing.ts";
 
 const nav = fmNav();
 const system = cardioSystem();
@@ -120,6 +120,33 @@ describe("scope content", () => {
     expect(section("antianginals")).toEqual([...D1, "Overview notes", "Nitrates", "Effort induced angina", "Headache", "Also class notes", "Learning objectives notes"]);
     // Heart failure: the part written for it shows; the angina line does not.
     expect(section("hf")).toEqual(["HF PHARM", "Use", "Loop diuretics", "edema", "Nitrates", "Headache", "Class IV", "AV nodal block"]);
+  });
+
+  it("prints a part cutting her table as the page shows it: her heading row and its rows, or one column under its heading", () => {
+    const sys = cardioSystem();
+    sys.notesBlocks.b_AAAAAAAAT9 = block("b_AAAAAAAAT9", "table", doc(table([60, 100, 100], [
+      row("r_AAAAAAAAH9", "heading", ["ANTICOAGULANTS", "Warfarin", "Apixaban"]),
+      row("r_AAAAAAAAM9", "content", ["MOA", "VKA", "Xa inhibitor"]),
+      row("r_AAAAAAAAN9", "content", ["Monitor", "INR", "none needed"]),
+    ])));
+    const c1 = sys.cards.c_AAAAAAAAC1;
+    if (!c1) throw new Error("no card C1");
+    c1.blocks = ["b_AAAAAAAAT9"];
+    c1.parts = [
+      { id: "p_AAAAAAAAR9", blocks: ["b_AAAAAAAAT9"], file: "pharm review", basePt: 11, rows: ["r_AAAAAAAAH9", "r_AAAAAAAAN9"] },
+      { id: "p_AAAAAAAAB9", blocks: ["b_AAAAAAAAT9"], file: "pharm review", basePt: 11, rows: ["r_AAAAAAAAM9"] },
+      { id: "p_AAAAAAAAK9", blocks: ["b_AAAAAAAAT9"], file: "pharm review", basePt: 11, column: 2 },
+    ];
+    // Lines of her table named for another section: a table's lines are never hidden, so no part goes.
+    sys.uses = { b_AAAAAAAAT9: [{ text: "ANTICOAGULANTS", for: ["hf"] }, { text: "Monitor", for: ["hf"] }] };
+    const def = buildDocDefinition({ kind: "pharmSection", id: "antianginals" }, { nav, system: sys }, fontmap);
+    expect(lines(def.content)).toEqual([
+      ...D1, "Overview notes",
+      "ANTICOAGULANTS", "Warfarin", "Apixaban", "Monitor", "INR", "none needed",
+      "MOA", "VKA", "Xa inhibitor",
+      "Apixaban", "MOA", "Xa inhibitor", "Monitor", "none needed",
+      "Also class notes", "Learning objectives notes",
+    ]);
   });
 
   it("uses the Word page's own page setup", () => {

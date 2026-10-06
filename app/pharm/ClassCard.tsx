@@ -1,9 +1,11 @@
 // A collapsible drug-class card (pharm/by-class) and what goes inside one: rows from her guide and
 // her pharm notes on the class (with the pharm-notes readability aids, pharm/notes-fidelity).
 import { Fragment, type ReactNode } from "react";
-import type { PubBlock, SystemJson } from "../../lib/derive/published.ts";
+import { noteView } from "../../lib/derive/columns.ts";
+import type { PartCut, PubBlock, SystemJson } from "../../lib/derive/published.ts";
 import { withoutLines } from "../../lib/derive/trim.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
+import { Txt } from "../render/Text.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { Voice } from "../shell/owner.tsx";
 import { useStacked } from "../shell/Page.tsx";
@@ -33,7 +35,7 @@ export function ClassCard({ anchor, title, sub, open, onToggle, children }: Clas
   );
 }
 
-export interface NotesPart {
+export interface NotesPart extends PartCut {
   /** The part id (search lands on it); null when the card itself carries it. */
   id: string | null;
   blocks: readonly string[];
@@ -66,10 +68,16 @@ export function CardNotes({ system, file, basePt, parts, hidden }: {
             <div className="ph-part" data-anchor={p.id ?? undefined}>
               {p.blocks.map((id) => {
                 const b = system.notesBlocks[id];
-                if (!b) return null;
+                const view = b ? noteView(withoutLines(b.doc, hidden?.get(id)), p, { firstRow: false }) : null;
+                if (!view) return null;
                 return (
                   <div key={id} className="notes ph-course">
-                    <RichDoc doc={withoutLines(b.doc, hidden?.get(id))} basePt={p.basePt ?? basePt} pharmNotes />
+                    {view.title !== null && (
+                      <h4 className="pn-col">
+                        <Txt text={view.title} />
+                      </h4>
+                    )}
+                    <RichDoc doc={view.doc} basePt={p.basePt ?? basePt} pharmNotes />
                   </div>
                 );
               })}

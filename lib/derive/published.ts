@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
+import type { BlockNote, DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -279,10 +279,15 @@ export interface PubCard {
    * with its blocks, its file name (labeled on the card) and that file's base size, to which its
    * blocks' `size` marks are relative; a search unit's `at` names a part id. A part with `for` was
    * written for those pharm sections' use only (its card's `for` in content/pharm/cards.json) and
-   * shows only where one of them is relevant (lib/derive/trim.ts `shownParts`).
+   * shows only where one of them is relevant (lib/derive/trim.ts `shownParts`). A part with `column`
+   * or `rows` shows its one table block cut as the content part says (lib/derive/columns.ts
+   * `noteView`); its `rows` are those still in the table.
    */
-  parts: { id: string; blocks: string[]; file: string; basePt: number; for?: string[] }[];
+  parts: ({ id: string; blocks: string[]; file: string; basePt: number; for?: string[] } & PartCut)[];
 }
+
+/** A pharm part's cut of its one table block (content PharmPart `column` / `rows`). */
+export type PartCut = Omit<BlockNote, "block">;
 
 /**
  * A pharm-notes line judged written for one use (content/pharm/uses.json): it shows only where one
@@ -303,7 +308,7 @@ export interface PubTrimLine {
   rows: { id: string; text: string }[];
 }
 
-export interface PubPart {
+export interface PubPart extends PartCut {
   title: string;
   role: "overview" | "lo";
   file: string;

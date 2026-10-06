@@ -46,7 +46,8 @@ export function uncoveredText(content: Content, units: readonly SearchUnit[], ho
     for (const s of g.systems) blocks.push(...s.blocks);
   }
   for (const d of content.docs.values()) if (d.kind === "word") blocks.push(...d.blocks);
-  for (const p of content.pharm) blocks.push(...p.blocks);
+  // A pharm file made from a Word page shows that page's blocks, checked with the page.
+  for (const p of content.pharm) if (p.file.page === undefined) blocks.push(...p.blocks);
   for (const gap of content.gaps.values()) blocks.push(gap.block);
   for (const deck of content.decks.values()) blocks.push(...deck.slides);
 

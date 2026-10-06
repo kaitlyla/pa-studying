@@ -333,12 +333,15 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const seen = new Set<string>();
       const addPharmPart = async (pred: (p: PharmFile["parts"][number]) => boolean): Promise<void> => {
         for (const { dir, file } of files) {
+          // A file made from her Word page shows the page's own blocks: each saves to the page, so the
+          // edit shows there and on every card cutting it, and is edited whole (as place notes are).
+          const store = file.page === undefined ? dir : `content/docs/${file.page}`;
           for (const part of file.parts.filter(pred)) {
-            const fresh = part.blocks.filter((b) => !seen.has(b));
+            const fresh = part.blocks.filter((b) => !seen.has(b) && snap.has(blockFileIn(store, b)));
             fresh.forEach((b) => seen.add(b));
-            const blocks = await snap.many<BlockFile>(fresh.map((b) => blockFileIn(dir, b)));
-            const owner: BlockOwner = { kind: "pharm", path: `${dir}/pharmfile.json`, part: part.id };
-            blocks.forEach((b) => parts.push(blockPart(blockFileIn(dir, b.id), b, owner, file.basePt, width)));
+            const blocks = await snap.many<BlockFile>(fresh.map((b) => blockFileIn(store, b)));
+            const owner: BlockOwner = file.page === undefined ? { kind: "pharm", path: `${dir}/pharmfile.json`, part: part.id } : { kind: "doc", path: `${store}/doc.json` };
+            blocks.forEach((b) => parts.push(blockPart(blockFileIn(store, b.id), b, owner, file.basePt, width)));
           }
         }
       };

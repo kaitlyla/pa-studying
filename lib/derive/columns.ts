@@ -50,17 +50,44 @@ export function columnView(doc: DocJSON, column: number): { title: string; doc: 
 }
 
 /**
- * The table of `doc` cut to its first row and the rows whose ids are in `rows` (content PlaceNote
- * `rows`), in table order. Cells are taken from the table grid: a cell spanning rows is kept once, on
- * the first kept row it covers, spanning only the kept rows it covers, so a merged cell starting on a
- * left-out row still shows beside the kept rows under it. Null when `doc` is not a single table.
+ * A stored block's doc as a note (a place note, a pharm part) shows it: whole; cut to one column,
+ * titled with that column's first-row text (columnView); or cut to some rows (rowsView). Null when
+ * the cut does not apply to `doc`.
  */
-export function rowsView(doc: DocJSON, rows: readonly string[]): DocJSON | null {
+export function noteView(
+  doc: DocJSON, cut: { column?: number | null; rows?: readonly string[] | null }, opts: RowsOptions,
+): { title: string | null; doc: DocJSON } | null {
+  if (cut.rows !== undefined && cut.rows !== null) {
+    const view = rowsView(doc, cut.rows, opts);
+    return view ? { title: null, doc: view } : null;
+  }
+  if (cut.column !== undefined && cut.column !== null) return columnView(doc, cut.column);
+  return { title: null, doc };
+}
+
+export interface RowsOptions {
+  /**
+   * Keep the table's first row whether listed or not. A place note's rows sit under that heading
+   * row. A pharm card part keeps only the rows it lists: her pharm tables hold several class groups,
+   * each under its own heading row, which the part lists first.
+   */
+  firstRow: boolean;
+}
+
+/**
+ * The table of `doc` cut to the rows whose ids are in `rows` (content PlaceNote `rows`, a pharm part's
+ * `rows`), plus its first row when `firstRow`, in table order. Cells are taken from the table grid: a
+ * cell spanning rows is kept once, on the first kept row it covers, spanning only the kept rows it
+ * covers, so a merged cell starting on a left-out row still shows beside the kept rows under it. Null
+ * when `doc` is not a single table, or when no row is kept.
+ */
+export function rowsView(doc: DocJSON, rows: readonly string[], { firstRow }: RowsOptions = { firstRow: true }): DocJSON | null {
   const table = tableNode({ id: "", doc }) as PMNode | null;
   if (!table) return null;
   const all = table.content ?? [];
   const wanted = new Set(rows);
-  const keep = all.map((r, i) => i === 0 || wanted.has(String(r.attrs?.id)));
+  const keep = all.map((r, i) => (firstRow && i === 0) || wanted.has(String(r.attrs?.id)));
+  if (!keep.includes(true)) return null;
   const { cells } = placeCells(all);
   const keptIn = (from: number, to: number): number => keep.slice(from, to).filter(Boolean).length;
   const content = all.flatMap((row, r) => {

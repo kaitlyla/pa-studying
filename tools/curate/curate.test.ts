@@ -203,6 +203,57 @@ describe("structure", () => {
   });
 });
 
+describe("a pharm notes file made from her Word page (pharm-doc)", () => {
+  const THY = "content/pharm/thyroid-notes/pharmfile.json";
+  const DOC5 = `content/docs/${D(5)}`;
+
+  it("lists the page's blocks in one Overview part, named and sized as the page, storing no blocks of its own", async () => {
+    const lines = await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    const pf = await read<PharmFile>(THY);
+    const part = must(pf.parts[0], "overview part");
+    expect(pf).toEqual({ v: 1, id: "thyroid-notes", fileName: "Thyroid notes", basePt: 11, page: D(5), blocks: [B(60), B(61)], parts: [{ id: part.id, role: "overview", title: "", card: null, blocks: [B(60), B(61)] }] });
+    expect(part.id).toMatch(/^p_/);
+    expect(await readContentIfExists(root, `content/pharm/thyroid-notes/blocks/${B(60)}.json`)).toBeNull();
+    expect(lines).toContain(`thyroid-notes made from ${D(5)}; overview part ${part.id}`);
+  });
+
+  it("refuses a page that is not a Word page, a file name in use, and a second file for the same page", async () => {
+    const files = ["content/pharm/cards.json", `${PHARM}/pharmfile.json`];
+    await refused(["pharm-doc", D(1), "acls"], new RegExp(`${D(1)} is not a Word page on the site`), files);
+    await refused(["pharm-doc", D(5), "cardio-med-list"], /pharm notes file cardio-med-list already exists/, files);
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    await refused(["pharm-doc", D(5), "thyroid-2"], new RegExp(`${D(5)} already has pharm notes file thyroid-notes`), [...files, THY]);
+    expect(await readContentIfExists(root, "content/pharm/thyroid-2/pharmfile.json")).toBeNull();
+  });
+
+  it("pharm-parts cuts the page's table into cards by its rows, and refuses a row the table lacks", async () => {
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    const parts = [
+      { role: "overview", title: "Overview", card: null, blocks: [B(60)] },
+      { role: "card", title: "Free T4", card: "t4", blocks: [B(61)], rows: [R(600)] },
+      { role: "card", title: "T3", card: "t3", blocks: [B(61)], rows: [R(601)] },
+    ];
+    const cards = [{ key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" } }, { key: "t3", aliases: ["liothyronine"], home: { fm: "cardiovascular" } }];
+    await refused(["pharm-parts", "thyroid-notes", await draft("bad", { parts: [parts[0], parts[1], { ...parts[2], rows: [R(699)] }], cards })], new RegExp(`rows: ${R(699)} names nothing`), [THY, "content/pharm/cards.json"]);
+    await run(root, ["pharm-parts", "thyroid-notes", await draft("ok", { parts, cards })]);
+    const pf = await read<PharmFile>(THY);
+    expect(pf.parts.map((p) => [p.blocks, p.rows])).toEqual([[[B(60)], undefined], [[B(61)], [R(600)]], [[B(61)], [R(601)]]]);
+    expect(pf.page).toBe(D(5));
+  });
+
+  it("a split of the page's block stays on the page, and in the pharm part showing it", async () => {
+    await writeContent(root, `${DOC5}/blocks/${B(60)}.json`, { v: 1, id: B(60), kind: "prose", doc: doc(para("TSH first"), para("then free T4")), meta: {} });
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    await run(root, ["split", B(60), "1"]);
+    const page = await read<{ blocks: string[] }>(`${DOC5}/doc.json`);
+    const added = newId(page.blocks, [B(60), B(61)]);
+    expect(page.blocks).toEqual([B(60), added, B(61)]);
+    expect(await readContentIfExists(root, `${DOC5}/blocks/${added}.json`)).not.toBeNull();
+    const pf = await read<PharmFile>(THY);
+    expect([pf.blocks, pf.parts[0]?.blocks]).toEqual([[B(60), added, B(61)], [B(60), added, B(61)]]);
+  });
+});
+
 describe("pharm-parts", () => {
   const files = [`${PHARM}/pharmfile.json`, "content/pharm/cards.json"];
   const cardsBefore = [C(1), C(2)];

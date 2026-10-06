@@ -335,24 +335,75 @@ export const validateUpload: Validator = (v, ctx, expectId) => {
 
 // ---- pharm (20.6, 20.7) ---------------------------------------------------------------------
 
+/**
+ * Parts cover the file's blocks in order, each block once: whole, in one part; or cut (`column` or
+ * `rows`, one block per part) by a run of consecutive parts, each taking columns no other part of the
+ * run takes, or rows. A row part lists its group's heading rows first (a part shows only the rows it
+ * lists), so parts of one group share those: a row listed by more than one part of the run must come,
+ * in each part listing it, before every row that part alone lists, and each part lists a row of its own.
+ */
 export const validatePharmFile: Validator = (v, ctx, expectId) => {
   shapeOf<PharmFile>({
     v: v1, id: slugC, fileName: nonEmpty, basePt: num, blocks: uniqueArr(id("b")),
-    parts: arr(shapeOf<PharmPart>({ id: id("p"), role: oneOf("overview", "lo", "card"), title: str, card: nullable(id("c")), blocks: arr(id("b")) }, {})),
-  }, {})(v, "", ctx);
+    parts: arr(shapeOf<PharmPart>({ id: id("p"), role: oneOf("overview", "lo", "card"), title: str, card: nullable(id("c")), blocks: arr(id("b")) }, { column: columnC, rows: rowsC })),
+  }, { page: id("d") })(v, "", ctx);
   const p = v as PharmFile;
   expectField(ctx, "id", p.id, expectId);
   uniqueArr(str)(p.parts.map((x) => x.id), ".parts[].id", ctx);
   let at = 0;
+  type Run = { block: string; by: "column" | "rows"; cuts: { path: string; takes: string[] }[] };
+  /** The block being cut by the run of cut parts just before, and each part's columns or rows. */
+  let cutting: Run | null = null;
+  const endRun = (): void => {
+    const run: Run | null = cutting;
+    cutting = null;
+    if (run === null) return;
+    const count = new Map<string, number>();
+    for (const c of run.cuts) for (const t of c.takes) count.set(t, (count.get(t) ?? 0) + 1);
+    for (const c of run.cuts) {
+      const own = c.takes.findIndex((t) => count.get(t) === 1);
+      if (run.by === "rows" && own === -1) bad(ctx, c.path, `rows of the part's own besides those shared with other parts on ${run.block}`, c.takes);
+      c.takes.forEach((t, j) => {
+        if ((count.get(t) ?? 0) < 2) return;
+        if (run.by === "column") bad(ctx, c.path, `a column no other part on ${run.block} takes`, Number(t));
+        else if (own !== -1 && j > own) bad(ctx, c.path, `rows shared with another part on ${run.block} listed before the part's own rows`, t);
+      });
+    }
+  };
   p.parts.forEach((part, i) => {
-    if (part.blocks.length === 0) bad(ctx, `.parts[${i}].blocks`, "a non-empty slice");
-    if ((part.role === "card") !== (part.card !== null)) bad(ctx, `.parts[${i}].card`, "a card id exactly when role is card", part.card);
-    if (part.role === "overview" && i !== 0) bad(ctx, `.parts[${i}].role`, "overview only as the first part", part.role);
-    part.blocks.forEach((b, j) => {
-      if (p.blocks[at + j] !== b) bad(ctx, `.parts[${i}].blocks[${j}]`, `the next block of the file (${p.blocks[at + j]})`, b);
-    });
-    at += part.blocks.length;
+    const path = `.parts[${i}]`;
+    if (part.blocks.length === 0) bad(ctx, `${path}.blocks`, "a non-empty slice");
+    if ((part.role === "card") !== (part.card !== null)) bad(ctx, `${path}.card`, "a card id exactly when role is card", part.card);
+    if (part.role === "overview" && i !== 0) bad(ctx, `${path}.role`, "overview only as the first part", part.role);
+    const { blocks } = part;
+    const cut: Omit<BlockNote, "block"> = {
+      ...(part.column === undefined ? {} : { column: part.column }), ...(part.rows === undefined ? {} : { rows: part.rows }),
+    };
+    if (cut.column === undefined && cut.rows === undefined) {
+      endRun();
+      blocks.forEach((b, j) => {
+        if (p.blocks[at + j] !== b) bad(ctx, `${path}.blocks[${j}]`, `the next block of the file (${p.blocks[at + j]})`, b);
+      });
+      at += blocks.length;
+      return;
+    }
+    if (blocks.length !== 1) bad(ctx, `${path}.blocks`, "one block when the part has a column or rows", blocks);
+    const block = blocks[0] as string;
+    blockNote({ block, ...cut }, path, ctx);
+    const by = cut.column !== undefined ? "column" : "rows";
+    const takes = by === "column" ? [String(cut.column)] : (cut.rows as string[]);
+    const run: Run | null = cutting;
+    if (run !== null && run.block === block) {
+      if (run.by !== by) bad(ctx, path, `${run.by} like the parts before it on ${block}`, part);
+      else run.cuts.push({ path, takes });
+      return;
+    }
+    endRun();
+    if (p.blocks[at] !== block) bad(ctx, `${path}.blocks[0]`, `the next block of the file (${p.blocks[at]})`, block);
+    cutting = { block, by, cuts: [{ path, takes }] };
+    at += 1;
   });
+  endRun();
   if (at !== p.blocks.length) bad(ctx, ".parts", "parts covering every block exactly once", `${at} of ${p.blocks.length}`);
 };
 

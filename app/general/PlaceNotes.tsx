@@ -1,7 +1,7 @@
 // Her own notes on a place page (a reference-tab topic or an Other section; content PlaceNote): her
 // Word-page blocks in her notes style, with headings for finding one's way, above the page's gap blocks.
 import type { ReactNode } from "react";
-import { columnView, rowsView } from "../../lib/derive/columns.ts";
+import { noteView } from "../../lib/derive/columns.ts";
 import type { PubNote } from "../../lib/derive/published.ts";
 import { NotesBlock } from "../reader/blocks.tsx";
 import { Txt } from "../render/Text.tsx";
@@ -14,19 +14,16 @@ export function PlaceNote({ note }: { note: PubNote }): ReactNode {
       </h2>
     );
   }
-  if (note.rows !== null) {
-    const doc = rowsView(note.block.doc, note.rows);
-    return doc ? <NotesBlock block={{ ...note.block, doc }} basePt={note.basePt} /> : null;
-  }
-  if (note.column === null) return <NotesBlock block={note.block} basePt={note.basePt} />;
-  const view = columnView(note.block.doc, note.column);
+  const view = noteView(note.block.doc, note, { firstRow: true });
   if (!view) return null;
+  const block = <NotesBlock block={{ ...note.block, doc: view.doc }} basePt={note.basePt} />;
+  if (view.title === null) return block;
   return (
     <>
       <h3 className="pn-col">
         <Txt text={view.title} />
       </h3>
-      <NotesBlock block={{ ...note.block, doc: view.doc }} basePt={note.basePt} />
+      {block}
     </>
   );
 }

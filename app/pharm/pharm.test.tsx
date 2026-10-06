@@ -2,6 +2,8 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import type { PubPharmSection, SystemJson } from "../../lib/derive/published.ts";
 import { readRows, type PMNode } from "../../lib/derive/text.ts";
 import { trimRowText } from "../../lib/derive/trim.ts";
+import { schema } from "../../lib/schema.ts";
+import { tableDoc } from "../../tools/build/test-fixture.ts";
 import { fileHash, guideViewHash } from "../shell/route.ts";
 import {
   asOwner,
@@ -599,6 +601,48 @@ describe("pharm pages", () => {
     const text = visibleText(card);
     expect(text.indexOf("MOA: block L-type channels")).toBeLessThan(text.indexOf(II));
     expect(text.indexOf(II)).toBeLessThan(text.indexOf("MOA: venodilation"));
+  });
+
+  it("a card part cutting her table shows its heading row and its own rows, or one column under its heading", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const ccb = need(mod.cards[C(1)], "CCB card");
+    const own = need(ccb.parts[0], "CCB part");
+    const TBL = "b_pagetable01";
+    mod.notesBlocks[TBL] = {
+      id: TBL, kind: "table",
+      // As published: through the schema, attribute defaults made explicit.
+      doc: schema.nodeFromJSON(tableDoc(3, [
+        [R(910), "heading", "ANTICOAGULANTS", "Warfarin", "Apixaban"],
+        [R(911), "content", "MOA", "VKA", "Xa inhibitor"],
+        [R(912), "content", "Monitor", "INR", "none needed"],
+      ])).toJSON() as SystemJson["notesBlocks"][string]["doc"],
+    };
+    ccb.parts = [
+      { ...own, id: "p_rows", blocks: [TBL], rows: [R(910), R(912)] },
+      { ...own, id: "p_bare", blocks: [TBL], rows: [R(911)] },
+      { ...own, id: "p_col", blocks: [TBL], column: 2 },
+    ];
+    ccb.blocks = [TBL];
+    // Lines of her table named for another section: a table's lines are never hidden, so no part goes.
+    mod.uses = { ...mod.uses, [TBL]: [{ text: "ANTICOAGULANTS", for: ["hf"] }, { text: "Monitor", for: ["hf"] }] };
+    const served = new Map(files);
+    served.set(CV, mod);
+    server.restore();
+    server = serveData(served);
+
+    const pg = pharmPage(await renderSection(SEC_HASH));
+    await click(cardBtn(pg, C(1)));
+    const part = (anchor: string): HTMLElement => need(cardEl(pg, C(1)).querySelector<HTMLElement>(`.ph-part[data-anchor="${anchor}"]`), anchor);
+    const rowTexts = (el: HTMLElement): string[] => [...el.querySelectorAll("tr")].map((tr) => visibleText(tr));
+    expect(rowTexts(part("p_rows"))).toEqual([expect.stringContaining("ANTICOAGULANTS"), expect.stringContaining("none needed")]);
+    expect(visibleText(part("p_rows"))).not.toContain("Xa inhibitor");
+    // A part shows only the rows it lists: with no heading row listed, none shows.
+    expect(rowTexts(part("p_bare"))).toEqual([expect.stringContaining("Xa inhibitor")]);
+    expect(visibleText(part("p_bare"))).not.toContain("ANTICOAGULANTS");
+    expect(part("p_rows").querySelector(".pn-col")).toBeNull();
+    expect(visibleText(need(part("p_col").querySelector(".pn-col"), "column title"))).toBe("Apixaban");
+    expect(visibleText(part("p_col"))).toContain("Xa inhibitor");
+    expect(visibleText(part("p_col"))).not.toContain("VKA");
   });
 
   it("a card shows only the notes written for a use relevant where it shows, on the section page and the meds panel", async () => {

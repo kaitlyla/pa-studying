@@ -47,6 +47,8 @@ function findBlock(c: Content, blockId: string): Owner {
     }
   }
   for (const p of c.pharm) {
+    // A file made from her Word page lists the page's blocks; the page owns them (below).
+    if (p.file.page !== undefined) continue;
     const b = p.blocks.find((x) => x.id === blockId);
     if (b) return { listPath: `content/pharm/${p.file.id}/pharmfile.json`, list: p.file, dir: `content/pharm/${p.file.id}/blocks`, block: b, pharm: p.file };
   }
@@ -150,6 +152,14 @@ export function split(c: Content, blockId: string, index: number): Planned {
     { path: `${owner.dir}/${id}.json`, value: second },
     { path: owner.listPath, value: list },
   ];
+  // The second part stays in the part of a pharm file made from her page that shows the first.
+  for (const p of c.pharm) {
+    if (p.file.page === undefined || !p.file.blocks.includes(blockId)) continue;
+    changes.push({
+      path: `content/pharm/${p.file.id}/pharmfile.json`,
+      value: { ...p.file, blocks: insertAfter(p.file.blocks), parts: p.file.parts.map((x) => (x.blocks.includes(blockId) ? { ...x, blocks: insertAfter(x.blocks) } : x)) },
+    });
+  }
   const st = owner.structure;
   if (st && st.value.members[blockId] !== undefined) {
     changes.push({ path: st.path, value: { ...st.value, members: { ...st.value.members, [id]: st.value.members[blockId] } } });
@@ -263,6 +273,9 @@ interface DraftPart {
   /** A card id, or the `key` of a draft card that has no id yet. */
   card: string | null;
   blocks: string[];
+  /** With one table block: the part shows only that column, or those rows (content PharmPart). */
+  column?: number;
+  rows?: string[];
 }
 
 /**
@@ -299,7 +312,12 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
     if (d.id === undefined) notes.push(`part ${d.title} → ${id}`);
     const card = d.card === null ? null : (keys.get(d.card) ?? d.card);
     if (card !== null && !cardIds.has(card)) throw new CurateError(`pharm-parts: part "${d.title}" names card ${d.card}, which is not a card of this file`);
-    return { id, role: d.role, title: d.title, card, blocks: d.blocks };
+    // A part's rows are rows of its own block.
+    if (d.rows !== undefined) {
+      const b = pf.blocks.find((x) => x.id === d.blocks[0]);
+      requireIds(d.rows, new Set((b ? tableNode(b)?.content ?? [] : []).map((r) => String(r.attrs?.id))), `pharm-parts part "${d.title}" rows`);
+    }
+    return { id, role: d.role, title: d.title, card, blocks: d.blocks, ...(d.column === undefined ? {} : { column: d.column }), ...(d.rows === undefined ? {} : { rows: d.rows }) };
   });
   for (const card of cardIds) {
     if (!parts.some((p) => p.card === card)) throw new CurateError(`pharm-parts: card ${card} has no part`);
@@ -312,6 +330,26 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
     ],
     notes,
   };
+}
+
+/**
+ * `pharm-doc <docId> <file-slug>`: a pharm notes file made from her Word page `docId`, named and
+ * sized as the page. It stores no blocks of its own: its blocks are the page's, in one overview
+ * part, for pharm-parts to divide into cards.
+ */
+export function pharmDoc(c: Content, docId: string, fileSlug: string): Planned {
+  const d = c.docs.get(docId);
+  if (d?.kind !== "word" || d.file.removed !== null) throw new CurateError(`pharm-doc: ${docId} is not a Word page on the site`);
+  if (c.pharm.some((p) => p.file.id === fileSlug)) throw new CurateError(`pharm-doc: pharm notes file ${fileSlug} already exists`);
+  const other = c.pharm.find((p) => p.file.page === docId);
+  if (other) throw new CurateError(`pharm-doc: ${docId} already has pharm notes file ${other.file.id}`);
+  const part = minter(c)("p");
+  const blocks = d.blocks.map((b) => b.id);
+  const file: PharmFile = {
+    v: 1, id: fileSlug, fileName: d.file.name, basePt: d.file.basePt, page: docId, blocks,
+    parts: blocks.length > 0 ? [{ id: part, role: "overview", title: "", card: null, blocks: [...blocks] }] : [],
+  };
+  return { changes: [{ path: `content/pharm/${fileSlug}/pharmfile.json`, value: file }], notes: [`${fileSlug} made from ${docId}; overview part ${part}`] };
 }
 
 /** `cards <file.json>`: the whole `cards.json`. Each card's file must exist and hold a part for it. */

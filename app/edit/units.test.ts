@@ -4,7 +4,8 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { serializeFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
 import type { SystemJson } from "../../lib/derive/published.ts";
 import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
-import { B, D, G, R, S } from "../../tools/build/test-fixture.ts";
+import { B, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
+import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import { buildSave, loadUnit, localDate, UnitError, type EditUnit, type Part } from "./units.ts";
@@ -397,6 +398,32 @@ describe("building a save", () => {
     expect(structure.members[R(104)]).toBe("cad");
     expect(rowIds(json<BlockFile>(changeOf(build, blockPath(12))).doc)).not.toContain(R(123));
     expect(build.changed).toEqual([R(123)]);
+  });
+
+  describe("a pharm file made from her Word page", () => {
+    let pageFx: Fixture;
+    beforeAll(async () => {
+      pageFx = await publishFixture(undefined, writePharmReviewPage);
+    }, 60_000);
+    beforeEach(() => {
+      w.stop();
+      w = startWorld(pageFx);
+    });
+    const pageBlock = `content/docs/${PHARM_PAGE}/blocks/${B(81)}.json`;
+
+    it("edits her table on the Pharm section once, however many cards cut it, and saves it to her page", async () => {
+      const unit = await unitAt("pharm:fm:cardiovascular:antianginals");
+      const tables = unit.parts.filter((p): p is Extract<Part, { kind: "block" }> => p.kind === "block" && p.block.id === B(81));
+      expect(tables).toHaveLength(1);
+      const part = tables[0];
+      if (!part) throw new Error("no part shows her table");
+      expect([part.path, part.owner]).toEqual([pageBlock, { kind: "doc", path: `content/docs/${PHARM_PAGE}/doc.json` }]);
+      expect(unit.scope.files).toContain(pageBlock);
+
+      const build = buildSave(unit, new Map([[part.slot.id, setCell(part.slot.doc, R(811), 2, "INR 2-3")]]), TODAY);
+      expect(build.changes.map((c) => c.path)).toEqual([pageBlock]);
+      expect(cellText(rowsOfDoc(json<BlockFile>(changeOf(build, pageBlock)).doc)[1] as Node, 2)).toBe("INR 2-3");
+    });
   });
 
   it("an edited gap block is stamped with today's date in ownerEdits; an untouched one is not written", async () => {

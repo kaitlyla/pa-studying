@@ -54,13 +54,20 @@ async function loadDocs(root: TreeRoot): Promise<Map<string, DocData>> {
   return docs;
 }
 
-async function loadPharm(root: TreeRoot): Promise<PharmData[]> {
+async function loadPharm(root: TreeRoot, docs: ReadonlyMap<string, DocData>): Promise<PharmData[]> {
   const out: PharmData[] = [];
   for (const name of await listDir(root, "content/pharm")) {
     // cards.json, trims.json and uses.json sit beside the pharm file folders.
     if (name.endsWith(".json")) continue;
     const file = await readContent<PharmFile>(root, `content/pharm/${name}/pharmfile.json`);
-    out.push({ file, blocks: await readBlocks(root, `content/pharm/${name}/blocks`, file.blocks) });
+    if (file.page === undefined) {
+      out.push({ file, blocks: await readBlocks(root, `content/pharm/${name}/blocks`, file.blocks) });
+      continue;
+    }
+    // Her Word page's own blocks; publish checks the rest (pharmPages).
+    const d = docs.get(file.page);
+    const page = new Map((d?.kind === "word" ? d.blocks : []).map((b) => [b.id, b]));
+    out.push({ file, blocks: file.blocks.flatMap((id) => page.get(id) ?? []) });
   }
   return out;
 }
@@ -96,7 +103,7 @@ export async function loadContent(root: TreeRoot): Promise<Content> {
     readContent<CardsFile>(root, "content/pharm/cards.json"),
     readContent<TrimsFile>(root, "content/pharm/trims.json"),
     readContent<UsesFile>(root, "content/pharm/uses.json"),
-    loadPharm(root),
+    loadPharm(root, docs),
     loadGaps(root),
     loadDecks(root, ids, docs),
     readContent<RefTabsFile>(root, "content/places/reftabs.json"),

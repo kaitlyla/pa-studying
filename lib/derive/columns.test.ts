@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { DocJSON } from "../content/types.ts";
-import { columnView, rowsView } from "./columns.ts";
+import { columnView, noteView, rowsView } from "./columns.ts";
 import { nodeText, type PMNode } from "./text.ts";
 
 type Cell = string | { text: string; colspan?: number; rowspan?: number };
@@ -130,5 +130,35 @@ describe("rowsView: a table's header row and the chosen rows", () => {
   it("is null for a doc that is not one table", () => {
     expect(rowsView({ type: "doc", content: [{ type: "paragraph" }] }, ["t"])).toBeNull();
     expect(rowsView({ type: "doc", content: [...screens.content, { type: "paragraph" }] }, ["t"])).toBeNull();
+  });
+
+  it("without firstRow keeps only the listed rows, so a group under its own heading row leaves the table's first row out", () => {
+    const groups = tableOf([60, 100], [
+      ["h1", "1ST GEN", "MOA"],
+      ["a", "Diphenhydramine", "H1 antagonist"],
+      ["h2", "2ND GEN", "MOA"],
+      ["b", "Loratadine", "H1 antagonist, less sedating"],
+    ]);
+    expect(shape(rowsView(groups, ["h2", "b"], { firstRow: false }) as DocJSON)).toEqual([["h2", "2ND GEN", "MOA"], ["b", "Loratadine", "H1 antagonist, less sedating"]]);
+    expect(shape(rowsView(groups, ["h1", "a"], { firstRow: false }) as DocJSON)).toEqual([["h1", "1ST GEN", "MOA"], ["a", "Diphenhydramine", "H1 antagonist"]]);
+    expect(rowsView(groups, ["zz"], { firstRow: false })).toBeNull();
+  });
+});
+
+describe("noteView: a stored block's doc as a note shows it whole, cut to rows, or cut to one column", () => {
+  const head = { firstRow: true };
+  it("is the doc whole with no title when nothing cuts it", () => {
+    expect(noteView(vitamins, {}, head)).toEqual({ title: null, doc: vitamins });
+  });
+
+  it("is rowsView, untitled, for rows, keeping the first row as asked; columnView for a column", () => {
+    expect(noteView(vitamins, { rows: ["r2"] }, head)).toEqual({ title: null, doc: rowsView(vitamins, ["r2"]) });
+    expect(noteView(vitamins, { rows: ["r2"] }, { firstRow: false })).toEqual({ title: null, doc: rowsView(vitamins, ["r2"], { firstRow: false }) });
+    expect(noteView(vitamins, { column: 3 }, head)).toEqual(columnView(vitamins, 3));
+  });
+
+  it("is null when the cut does not apply to the doc", () => {
+    const prose: DocJSON = { type: "doc", content: [{ type: "paragraph" }] };
+    expect([noteView(prose, { rows: ["r1"] }, head), noteView(prose, { column: 1 }, head), noteView(vitamins, { column: 9 }, head)]).toEqual([null, null, null]);
   });
 });

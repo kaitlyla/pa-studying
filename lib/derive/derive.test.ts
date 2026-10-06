@@ -11,7 +11,7 @@ import { systemRowOrder } from "../content/splice.ts";
 import type { BlockFile, StructureFile, UsesFile } from "../content/types.ts";
 import { schema } from "../schema.ts";
 import { loadContent } from "../../tools/build/load.ts";
-import { B, C, D, G, GONE, P, R, S, tableDoc, U, writeFixture } from "../../tools/build/test-fixture.ts";
+import { B, C, D, G, GONE, P, PHARM_PAGE, R, S, tableDoc, U, writeFixture, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
 import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
@@ -1303,6 +1303,96 @@ describe("pharm (40 §40.4–§40.5)", () => {
     const pharm = page("fm", "cardiovascular").pharm;
     expect(pharm?.sections.map((s) => [s.id, s.treats])).toEqual([["antianginals", [R(101), R(104), R(123)]]]);
     expect(pharm?.files).toEqual({ files: [{ id: D(1), name: "ACLS algorithms", kind: "pdf", route: `#/file/${D(1)}` }], removed: [], pending: [] });
+  });
+
+  describe("a pharm file made from her Word page (`page`), with parts cutting her table", () => {
+    const PAGE = PHARM_PAGE;
+    const where = "content/pharm/pharm-review/pharmfile.json";
+    /** The fixture plus her page "pharm review", made into pharm notes (writePharmReviewPage). */
+    let pc: Content;
+    beforeAll(async () => {
+      const r = await mkdtemp(join(tmpdir(), "pa-derive-page-"));
+      try {
+        await writeFixture(r);
+        await writePharmReviewPage(r);
+        pc = await loadContent(r);
+      } finally {
+        await rm(r, { recursive: true, force: true });
+      }
+    });
+    const reviewFile = (c: Content) => {
+      const pf = c.pharm.find((p) => p.file.id === "pharm-review");
+      if (!pf) throw new Error("pharm-review");
+      return pf;
+    };
+    const withReview = (f: (pf: Content["pharm"][number], c: Content) => void): Content => {
+      const c = structuredClone(pc);
+      f(reviewFile(c), c);
+      return c;
+    };
+
+    it("loads its blocks from her page, where they are stored once", () => {
+      const pageDoc = pc.docs.get(PAGE);
+      expect(reviewFile(pc).blocks).toEqual(pageDoc?.kind === "word" ? pageDoc.blocks : null);
+    });
+
+    it("publishes each card part with its rows, her table once in the page's notes, and her page hosting her blocks", () => {
+      const pub = publish(pc);
+      const fm = pub.files.get("g/fm/s/cardiovascular.json") as SystemJson;
+      expect(fm.cards[C(80)]?.parts).toEqual([{ id: P(81), blocks: [B(81)], rows: [R(810), R(811)], file: "pharm review", basePt: 11 }]);
+      expect(fm.cards[C(81)]?.parts).toEqual([{ id: P(82), blocks: [B(81)], rows: [R(814), R(812), R(813)], file: "pharm review", basePt: 11 }]);
+      expect(Object.keys(fm.notesBlocks)).toContain(B(81));
+      const hosts = pub.files.get("hosts.json") as HostsJson;
+      expect(hosts[B(81)]?.route).toBe(`#/file/${PAGE}`);
+      expect(hosts[P(81)]?.route).toBe(`#/eor/fm/pharm/cardiovascular/antianginals/${C(80)}`);
+    });
+
+    it("hosts her blocks on the card showing them when her page is listed nowhere", () => {
+      const unlisted = withReview((_pf, c) => { system(c, "fm", "renal").structure.pharmFiles = [D(2)]; });
+      const hosts = publish(unlisted).files.get("hosts.json") as HostsJson;
+      expect(hosts[PAGE]).toBeUndefined();
+      expect(hosts[B(81)]?.route).toMatch(/^#\/eor\/fm\/pharm\/cardiovascular\/antianginals\//);
+    });
+
+    it("indexes a row part's search unit with only the rows it lists: its group's heading row and its own rows", () => {
+      const units = publish(pc).units;
+      const has = (at: string) => {
+        const text = units.find((u) => u.at === at)?.text ?? "";
+        return ["ANTICOAGULANTS", "Warfarin", "OTHER AGENTS", "Apixaban", "Heparin"].map((w) => text.includes(w));
+      };
+      expect(has(P(81))).toEqual([true, true, false, false, false]);
+      // The table's first row heads the other group, so this part leaves it out.
+      expect(has(P(82))).toEqual([false, false, true, true, true]);
+    });
+
+    it.each([
+      ["a second pharm file made from the same page", (pf: Content["pharm"][number], c: Content) => c.pharm.push({ ...structuredClone(pf), file: { ...structuredClone(pf.file), id: "pharm-review-2" } }), PAGE, /pharm files pharm-review and pharm-review-2 are both made from Word page/],
+      ["a page that is not a Word page", (pf: Content["pharm"][number]) => { pf.file.page = D(1); }, D(1), /is made from d_0000000001, which is not a Word page/],
+      ["a block another page owns", (pf: Content["pharm"][number]) => { pf.file.blocks.push(B(60)); }, B(60), /lists b_0000000060, which is not a block of d_0000000008/],
+      ["rows cut from a block that is not a table", (pf: Content["pharm"][number]) => { Object.assign(pf.file.parts[0] as object, { rows: [R(811)] }); }, P(80), /part p_0000000080 cuts b_0000000080, which is not a table/],
+    ])("fails the build on %s", (_name, change, id, message) => {
+      const err = buildError(() => publish(withReview(change)));
+      expect([err.id, err.message]).toEqual([id, expect.stringMatching(message)]);
+    });
+
+    it("drops a row, or a block, gone from her page, and shows the rest", () => {
+      const res = publish(withReview((pf) => {
+        Object.assign(pf.file.parts[1] as object, { rows: [R(810), R(811), GONE] });
+        pf.file.blocks.push(B(82));
+        (pf.file.parts[2] as { blocks: string[] }).blocks = [B(81)];
+      }));
+      expect(res.dropped).toContainEqual({ file: where, id: GONE });
+      expect((res.files.get("g/fm/s/cardiovascular.json") as SystemJson).cards[C(80)]?.parts[0]?.rows).toEqual([R(810), R(811)]);
+      // Every row of a part gone: the part shows nothing, as when its block went, and indexes nothing.
+      const emptied = publish(withReview((pf) => { Object.assign(pf.file.parts[2] as object, { rows: [GONE] }); }));
+      expect((emptied.files.get("g/fm/s/cardiovascular.json") as SystemJson).cards[C(81)]?.parts).toEqual([{ id: P(82), blocks: [], file: "pharm review", basePt: 11 }]);
+      expect(emptied.units.find((u) => u.at === P(82))?.text ?? "").toBe("");
+      const gone = publish(withReview((pf) => {
+        pf.file.blocks.splice(1, 0, B(82));
+        (pf.file.parts[0] as { blocks: string[] }).blocks = [B(80), B(82)];
+      }));
+      expect(gone.dropped).toContainEqual({ file: where, id: B(82) });
+    });
   });
 });
 

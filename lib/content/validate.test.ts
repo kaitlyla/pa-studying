@@ -423,6 +423,45 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(path, { ...pf([part(1, "lo", [b1, b2, b3])]), id: "cardio" })).toMatch(/\.id: expected cardio-med-list-1-1 \(from the file's path\)/);
   });
 
+  describe("parts that cut one block (rows or a column)", () => {
+    const [r1, r2, r3] = [id("r", 1), id("r", 2), id("r", 3)];
+    const C2 = id("c", 2);
+    const rowsPart = (n: number, card: string, rows: string[], block = b2) => ({ ...part(n, "card", [block], card), rows });
+    const colPart = (n: number, card: string, column: number, block = b2) => ({ ...part(n, "card", [block], card), column });
+
+    it("accepts a block cut by consecutive parts taking disjoint rows, or disjoint columns, between whole parts", () => {
+      expect(verdict(path, pf([part(1, "overview", [b1]), rowsPart(2, C1, [r1, r2]), rowsPart(3, C2, [r3]), part(4, "lo", [b3])]))).toBe("ok");
+      expect(verdict(path, pf([part(1, "overview", [b1]), colPart(2, C1, 1), colPart(3, C2, 2), part(4, "lo", [b3])]))).toBe("ok");
+    });
+
+    it("accepts row parts of one group sharing its heading rows, listed first in each", () => {
+      const [h0, h1] = [id("r", 10), id("r", 11)];
+      expect(verdict(path, pf([part(1, "overview", [b1]), rowsPart(2, C1, [h1, r1]), rowsPart(3, C2, [h1, r2, r3]), part(4, "lo", [b3])]))).toBe("ok");
+      expect(verdict(path, pf([part(1, "overview", [b1]), rowsPart(2, C1, [h0, h1, r1]), rowsPart(3, C2, [h0, h1, r2]), part(4, "lo", [b3])]))).toBe("ok");
+    });
+
+    it("accepts the page a doc-backed file is made from", () => {
+      expect(verdict(path, { ...pf([part(1, "overview", [b1, b2, b3])]), page: id("d", 1) })).toBe("ok");
+      expect(verdict(path, { ...pf([part(1, "overview", [b1, b2, b3])]), page: "pharm review" })).toMatch(/\.page: expected a d_ id/);
+    });
+
+    it.each([
+      ["overlapping rows", [part(1, "overview", [b1]), rowsPart(2, C1, [r1, r2]), rowsPart(3, C2, [r2]), part(4, "lo", [b3])], /\.parts\[1\]: expected rows shared with another part on b_\w+ listed before the part's own rows/],
+      ["a part listing only rows other parts list", [part(1, "overview", [b1]), rowsPart(2, C1, [r1, r2]), rowsPart(3, C2, [r1]), part(4, "lo", [b3])], /\.parts\[2\]: expected rows of the part's own besides those shared/],
+      ["a shared row after a part's own", [part(1, "overview", [b1]), rowsPart(2, C1, [r1, r3]), rowsPart(3, C2, [r3, r2]), part(4, "lo", [b3])], /\.parts\[1\]: expected rows shared with another part/],
+      ["the same column twice", [part(1, "overview", [b1]), colPart(2, C1, 1), colPart(3, C2, 1), part(4, "lo", [b3])], /\.parts\[1\]: expected a column no other part on b_\w+ takes/],
+      ["rows and a column on one block", [part(1, "overview", [b1]), rowsPart(2, C1, [r1]), colPart(3, C2, 2), part(4, "lo", [b3])], /\.parts\[2\]: expected rows like the parts before it/],
+      ["a cut part of two blocks", [part(1, "overview", [b1]), { ...rowsPart(2, C1, [r1]), blocks: [b2, b3] }], /\.parts\[1\]\.blocks: expected one block when the part has a column or rows/],
+      ["both rows and a column", [part(1, "overview", [b1]), { ...rowsPart(2, C1, [r1]), column: 1 }, part(3, "lo", [b3])], /\.parts\[1\]: expected column or rows, not both/],
+      ["no rows", [part(1, "overview", [b1]), rowsPart(2, C1, []), part(3, "lo", [b3])], /\.parts\[1\]\.rows: expected at least one row id/],
+      ["a column 0", [part(1, "overview", [b1]), colPart(2, C1, 0), part(3, "lo", [b3])], /\.parts\[1\]\.column: expected a column number/],
+      ["a cut of a block that is not next", [part(1, "overview", [b1]), rowsPart(2, C1, [r1], b3)], /\.parts\[1\]\.blocks\[0\]: expected the next block of the file/],
+      ["a cut block taken again whole", [part(1, "overview", [b1]), rowsPart(2, C1, [r1]), part(3, "lo", [b2, b3])], /\.parts\[2\]\.blocks\[0\]: expected the next block of the file/],
+    ])("refuses %s", (_name, parts, message) => {
+      expect(verdict(path, pf(parts))).toMatch(message);
+    });
+  });
+
   it("validates cards.json", () => {
     const cards = { v: 1, cards: [{ id: C1, file: "cardio-med-list-1-1", aliases: ["CCB", "amlodipine"], home: { fm: "cardiovascular", pance: "cardiovascular" } }] };
     expect(verdict("content/pharm/cards.json", cards)).toBe("ok");

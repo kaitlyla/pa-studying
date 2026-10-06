@@ -2,7 +2,8 @@
 // page has loaded to a pdfmake document definition, used unchanged by the browser (app/pdf) and by
 // the publish workflow (tools/pdf).
 import type { DocJSON, PageSetup } from "../content/types.ts";
-import type { FontMapJson, PubBlock, SystemJson } from "../derive/published.ts";
+import { noteView } from "../derive/columns.ts";
+import type { FontMapJson, PartCut, PubBlock, SystemJson } from "../derive/published.ts";
 import { belowUnder } from "../derive/topics.ts";
 import { allLinesHidden, hiddenLines, shownParts, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
@@ -80,17 +81,22 @@ function rowsByBlock(system: SystemJson, rowIds: readonly string[]): { block: st
 function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: number): Part[] {
   const ps = system.pharm?.sections.find((s) => s.id === sectionId);
   if (!ps) throw new Error(`PDF: pharm section ${sectionId} is not in ${system.guide}/${system.id}`);
-  const notes = (ids: readonly string[], basePt: number, hidden?: ReadonlyMap<string, ReadonlySet<number>>): Part[] =>
-    ids.map((id) => {
+  /** A part's notes blocks as the page shows them: cut as the part says (noteView), less the hidden lines. */
+  const notes = (p: { blocks: readonly string[]; basePt: number } & PartCut, hidden?: ReadonlyMap<string, ReadonlySet<number>>): Part[] =>
+    p.blocks.flatMap((id) => {
       const b = system.notesBlocks[id];
       if (!b) throw new Error(`PDF: pharm notes block ${id} is missing from ${system.guide}/${system.id}`);
-      return { doc: withoutLines(b.doc, hidden?.get(id)), basePt };
+      const view = noteView(withoutLines(b.doc, hidden?.get(id)), p, { firstRow: false });
+      if (!view) return [];
+      // A column cut is shown under its column's first-row text, as on the page.
+      const title: Part[] = view.title === null ? [] : [{ doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: view.title }] }] }, basePt: p.basePt }];
+      return [...title, { doc: view.doc, basePt: p.basePt }];
     });
   const part = (id: string | null): Part[] => {
     if (id === null) return [];
     const p = system.parts[id];
     if (!p) throw new Error(`PDF: pharm part ${id} is missing from ${system.guide}/${system.id}`);
-    return notes(p.blocks, p.basePt);
+    return notes(p);
   };
   const out: Part[] = [];
   // Her drug tables in full, then Overview, the class cards (table cards then "also"), then the LO block.
@@ -107,7 +113,7 @@ function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: n
     const blocks = parts.flatMap((p) => p.blocks);
     const hidden = hiddenLines(system, blocks, shown, at);
     if (allLinesHidden(system, blocks, hidden)) continue;
-    for (const p of parts) out.push(...notes(p.blocks, p.basePt, hidden));
+    for (const p of parts) out.push(...notes(p, hidden));
   }
   out.push(...part(ps.lo));
   return out;

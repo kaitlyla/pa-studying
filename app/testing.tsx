@@ -36,13 +36,15 @@ async function walk(dir: string, out: string[]): Promise<void> {
 }
 
 /**
- * Writes tools/build/test-fixture.ts to a temporary tree, loads it, lets `mutate` change the loaded
- * content, and publishes it with the real lib/derive publish. `files` is the tree as written.
+ * Writes tools/build/test-fixture.ts to a temporary tree (then `add`, more of the fixture's writers),
+ * loads it, lets `mutate` change the loaded content, and publishes it with the real lib/derive
+ * publish. `files` is the tree as written.
  */
-export async function publishFixture(mutate?: (content: Content) => void): Promise<PublishedFixture> {
+export async function publishFixture(mutate?: (content: Content) => void, add?: (root: string) => Promise<void>): Promise<PublishedFixture> {
   const root = await mkdtemp(join(tmpdir(), "pa-app-"));
   try {
     await writeFixture(root);
+    await add?.(root);
     const paths: string[] = [];
     await walk(join(root, "content"), paths);
     const files: Record<string, Uint8Array> = {};

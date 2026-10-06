@@ -4,13 +4,14 @@ import { citeKey, slug } from "../content/ids.ts";
 import { tableNode } from "../content/tables.ts";
 import { GENERAL_KEYS, type BlockFile, type BlockNote, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
+import { columnView, noteView } from "./columns.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, DocData, GuideData, SystemData } from "./model.ts";
 import {
   CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, panelHome, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
-  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, Place, PubBlock, PubCard, PubNote,
+  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
   PubFlag, PubGap, PubLink, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
@@ -233,6 +234,54 @@ export function publish(c: Content): PublishResult {
     const d = c.docs.get(id);
     return d === undefined || visible(d);
   };
+
+  // ---- pharm files on her Word pages, and parts that cut a table -------------------------------
+  // A page's blocks are hosted on her page when it is placed (the documents' hosts, below, come
+  // after the cards'), else on the card showing them.
+  const pharmPages = new Map<string, string>();
+  for (const pf of c.pharm) {
+    const d = pf.file.page;
+    if (d === undefined) continue;
+    const where = `content/pharm/${pf.file.id}/pharmfile.json`;
+    const other = pharmPages.get(d);
+    if (other !== undefined) throw new BuildError(d, `pharm files ${other} and ${pf.file.id} are both made from Word page ${d}`);
+    pharmPages.set(d, pf.file.id);
+    if (c.docs.get(d)?.kind !== "word") throw new BuildError(d, `${where} is made from ${d}, which is not a Word page`);
+    const own = new Set(pf.blocks.map((b) => b.id));
+    for (const id of pf.file.blocks) {
+      if (own.has(id)) continue;
+      if (exists(id)) throw new BuildError(id, `${where} lists ${id}, which is not a block of ${d}`);
+      // Deleted from her page (or the page removed): the parts show the rest.
+      dropped.push({ file: where, id });
+    }
+  }
+  /** Each cutting part's cut as published: its rows still in the table. */
+  const cuts = new Map<string, PartCut>();
+  /** Row parts whose rows have all gone from her table: they show nothing, as a part whose block went. */
+  const emptied = new Set<string>();
+  for (const pf of c.pharm) {
+    const where = `content/pharm/${pf.file.id}/pharmfile.json`;
+    for (const p of pf.file.parts) {
+      if (p.column === undefined && p.rows === undefined) continue;
+      const b = pharmBlocks.get(p.blocks[0] as string);
+      if (!b) continue;
+      if (b.kind !== "table" || !tableNode(b)) throw new BuildError(p.id, `${where} part ${p.id} cuts ${b.id}, which is not a table`);
+      if (p.rows !== undefined) {
+        const inTable = tableRowIds(b);
+        for (const r of p.rows) if (!inTable.includes(r)) dropped.push({ file: where, id: r });
+        const rows = p.rows.filter((r) => inTable.includes(r));
+        if (rows.length === 0) emptied.add(p.id);
+        else cuts.set(p.id, { rows });
+        continue;
+      }
+      const column = p.column as number;
+      if (!columnView(b.doc, column)) dropped.push({ file: where, id: p.id });
+      cuts.set(p.id, { column });
+    }
+  }
+  /** A part as published: its blocks still stored, and its cut. */
+  const pubPartOf = (part: Content["pharm"][number]["file"]["parts"][number]): { blocks: string[] } & PartCut =>
+    ({ blocks: emptied.has(part.id) ? [] : part.blocks.filter((b) => pharmBlocks.has(b)), ...cuts.get(part.id) });
 
   const placedFlags = new Map<string, Flag[]>();
   for (const concept of c.concepts.concepts) {
@@ -546,11 +595,15 @@ export function publish(c: Content): PublishResult {
   const noteUnitsOf = (ns: readonly PlaceNote[] | undefined): void => {
     for (const n of ns ?? []) if ("block" in n) noteUnit(n.block);
   };
-  /** Text of a pharm part's notes blocks. */
-  const partText = (blocks: readonly string[]): string => blocks.map((id) => {
-    const b = pharmBlocks.get(id);
-    return b ? docText(b.doc) : "";
-  }).join("\n");
+  /** Text of a pharm part's notes blocks as the part shows them: a cut part, only its cut. */
+  const partText = (part: Content["pharm"][number]["file"]["parts"][number]): string => {
+    const { blocks, ...cut } = pubPartOf(part);
+    return blocks.map((id) => {
+      const b = pharmBlocks.get(id);
+      const view = b ? noteView(b.doc, cut, { firstRow: false }) : null;
+      return view ? [view.title ?? "", docText(view.doc)].filter((t) => t !== "").join("\n") : "";
+    }).join("\n");
+  };
   const firstLine = (b: BlockFile): string => collapse(docText(b.doc).split("\n").find((l) => l.trim() !== "") ?? "");
   /** A link target's name, as search titles it. */
   const targetTitle = (id: string): string => {
@@ -730,11 +783,9 @@ export function publish(c: Content): PublishResult {
       if (cards[card]) return;
       const ps = cardParts(card);
       const file = c.pharm.find((p) => p.file.id === c.cards.cards.find((x) => x.id === card)?.file) ?? ps[0]?.file;
-      const blocks = ps.flatMap((p) => p.part.blocks);
-      cards[card] = {
-        title: cardTitle(card), file: file?.file.fileName ?? "", basePt: file?.file.basePt ?? 0, blocks,
-        parts: ps.map((p) => ({ id: p.part.id, blocks: p.part.blocks, file: p.file.file.fileName, basePt: p.file.file.basePt, ...(p.for ? { for: p.for } : {}) })),
-      };
+      const pubParts = ps.map((p) => ({ id: p.part.id, ...pubPartOf(p.part), file: p.file.file.fileName, basePt: p.file.file.basePt, ...(p.for ? { for: p.for } : {}) }));
+      const blocks = pubParts.flatMap((p) => p.blocks);
+      cards[card] = { title: cardTitle(card), file: file?.file.fileName ?? "", basePt: file?.file.basePt ?? 0, blocks, parts: pubParts };
       for (const id of blocks) {
         const b = pharmBlocks.get(id);
         if (b) notesBlocks[id] = pub(b);
@@ -743,7 +794,7 @@ export function publish(c: Content): PublishResult {
     const usePart = (id: string | null): void => {
       const p = id === null ? undefined : parts.get(id);
       if (!p || id === null || (p.part.role !== "overview" && p.part.role !== "lo")) return;
-      partsOut[id] = { title: p.part.title, role: p.part.role, file: p.file.file.fileName, basePt: p.file.file.basePt, blocks: p.part.blocks };
+      partsOut[id] = { title: p.part.title, role: p.part.role, file: p.file.file.fileName, basePt: p.file.file.basePt, ...pubPartOf(p.part) };
       for (const b of p.part.blocks) {
         const block = pharmBlocks.get(b);
         if (block) notesBlocks[b] = pub(block);
@@ -829,7 +880,7 @@ export function publish(c: Content): PublishResult {
         if (!part || p === null || !here(p)) continue;
         units.push({
           tab, title: part.part.role === "overview" ? "Overview" : "Learning objectives", loc: pharmLoc(ix, gid, sys), route: hosts[p]?.route ?? "",
-          at: p, label: "notes", text: searchText(partText(part.part.blocks)),
+          at: p, label: "notes", text: searchText(partText(part.part)),
         });
       }
       // Each card part is one unit, at its home: the first section using its card where it shows.
@@ -839,7 +890,7 @@ export function publish(c: Content): PublishResult {
           if (h?.s !== s || h.section !== ps.id) continue;
           units.push({
             tab, title: collapse(p.part.title), loc: pharmLoc(ix, gid, sys), route: hosts[p.part.id]?.route ?? "",
-            at: p.part.id, label: "notes", text: searchText(partText(p.part.blocks)),
+            at: p.part.id, label: "notes", text: searchText(partText(p.part)),
           });
         }
       }

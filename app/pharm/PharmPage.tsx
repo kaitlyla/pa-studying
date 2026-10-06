@@ -110,7 +110,7 @@ function SectionBody({ guide, system, sec, focus }: { guide: string; system: Sys
     if (!p) return null;
     return (
       <ClassCard key={id} anchor={id} title={title} open={!!open[id]} onToggle={() => toggle(id)}>
-        <CardNotes system={system} file={p.file} basePt={p.basePt} parts={[{ id: null, blocks: p.blocks }]} />
+        <CardNotes system={system} file={p.file} basePt={p.basePt} parts={[{ id: null, blocks: p.blocks, column: p.column, rows: p.rows }]} />
       </ClassCard>
     );
   };
