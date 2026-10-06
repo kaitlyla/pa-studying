@@ -1760,6 +1760,16 @@ test.describe("documents", () => {
     await expect(page.locator("main h1").first()).toHaveText(asIs.name);
     await ref(page, "doc-remove").click();
     const dialog = page.getByRole("dialog", { name: `Remove “${asIs.name}”?` });
+    // The 8 seconds run from the toast's appearance, before the page has its patched data, so time the check from then.
+    await page.evaluate((text) => {
+      const region = document.querySelector(".toast-region");
+      if (!region) throw new Error("no toast region");
+      new MutationObserver((_, observer) => {
+        if (!region.querySelector(".toast")?.textContent?.includes(text)) return;
+        (window as Window & { removedToastAt?: number }).removedToastAt = performance.now();
+        observer.disconnect();
+      }).observe(region, { childList: true, subtree: true, characterData: true });
+    }, `Removed “${asIs.name}”.`);
     await ref(dialog, "doc-remove-confirm").click();
     await expect.poll(() => new URL(page.url()).hash).toBe(placeHash());
     await expect(toast(page)).toContainText(`Removed “${asIs.name}”.`);
@@ -1770,7 +1780,10 @@ test.describe("documents", () => {
     await expect(page.locator(`main a[href^="#/file/${asIs.id}"]`)).toHaveCount(0);
 
     // The Undo stays for 8 seconds.
-    await page.waitForTimeout(7_000);
+    await page.waitForFunction(() => {
+      const at = (window as Window & { removedToastAt?: number }).removedToastAt;
+      return at !== undefined && performance.now() - at >= 7_000;
+    }, undefined, { timeout: 10_000 });
     await expect(toast(page).getByRole("button", { name: "Undo" })).toBeVisible();
     await toast(page).getByRole("button", { name: "Undo" }).click();
     await expect(toast(page)).toContainText(`Restored “${asIs.name}”.`);
