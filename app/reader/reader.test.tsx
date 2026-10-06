@@ -4,6 +4,7 @@
 import { act } from "react";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi, type Mock, type MockInstance } from "vitest";
 import type { DocJson, FlagNote, NavJson, SiteJson, SlidesJson, SystemJson } from "../../lib/derive/published.ts";
+import { BELOW_HEADING } from "../../lib/derive/topics.ts";
 import { DATA_BASE } from "../data/load.ts";
 import { wholeGuideUrl } from "../pdf/download.ts";
 import { parseHash, versionsHash } from "../shell/route.ts";
@@ -468,7 +469,7 @@ describe("topics page", () => {
     expect(c.querySelector(`section.tcard[data-topic="${R(101)}"]`)).not.toBeNull();
   });
 
-  it("a topic's below block shows after its meds panel, and on its section page under the table holding its last row", async () => {
+  it("a topic's below block shows after its meds panel under Additional info, and on its section page under the table holding its last row with no heading", async () => {
     const BELOW = B(900);
     const withBelow = structuredClone(cv);
     const murmurs = must(cv.blocks.find((b) => b.id === B(11)), "B11 prose");
@@ -485,7 +486,13 @@ describe("topics page", () => {
     const below = must(card.querySelector(`[data-anchor="${BELOW}"]`), "below block");
     expect(below.textContent).toContain("Systolic");
     const meds = must(card.querySelector(".meds"), "meds panel");
+    expect(card.querySelectorAll(".meds")).toHaveLength(1);
     expect(meds.compareDocumentPosition(below) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // Her heading sits over the block, after the meds panel.
+    const info = must(card.querySelector<HTMLElement>(`section[aria-label="${BELOW_HEADING}"]`), "Additional info section");
+    expect(info.querySelector("h3")?.textContent).toBe("Additional info");
+    expect(info.contains(below)).toBe(true);
+    expect(meds.compareDocumentPosition(info) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
     await go("#/eor/fm/sec/cardiovascular/cad");
     const page = await until(() => c.querySelector<HTMLElement>(".section-page"), "section page");
@@ -493,6 +500,18 @@ describe("topics page", () => {
     const tableOfLastRow = must(page.querySelector(`div.notes[data-anchor="${B(13)}"]`), "B13 table");
     expect(tableOfLastRow.nextElementSibling).toBe(shown);
     expect(page.querySelectorAll(`[data-anchor="${BELOW}"]`)).toHaveLength(1);
+    // Her answer: the heading is on the condition's page only.
+    expect(page.textContent).not.toContain(BELOW_HEADING);
+  });
+
+  it("a topic with nothing added below shows no Additional info heading", async () => {
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    const card = await until(() => c.querySelector<HTMLElement>(`section.tcard[data-topic="${stable().id}"]`), "Stable angina card");
+    expect(card.querySelectorAll(".meds")).toHaveLength(1);
+    expect(card.querySelector(`section[aria-label="${BELOW_HEADING}"]`)).toBeNull();
+    expect(card.textContent).not.toContain(BELOW_HEADING);
   });
 
   it("topics from two systems compare without a page PDF scope; a flat system's topic has no section crumb", async () => {

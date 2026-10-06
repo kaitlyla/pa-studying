@@ -9,7 +9,8 @@ import { setOwner } from "../shell/owner.tsx";
 import { hideToast, Toast } from "../shell/toast.tsx";
 import { asOwner, click, mount, until, type Mounted } from "../testing.tsx";
 import { askConfirm, UnsavedDialog } from "./dialogs.tsx";
-import { BELOW_LABEL, EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
+import { BELOW_HEADING } from "../../lib/derive/topics.ts";
+import { EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -174,11 +175,52 @@ describe("EditControls and EditRegion", () => {
     const editors = root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]');
     expect(editors).toHaveLength(2);
     expect(editors[0]?.closest(".below-edit")).toBeNull();
-    expect(editors[1]?.closest(`section.below-edit[aria-label="${BELOW_LABEL}"]`)).not.toBeNull();
+    expect(editors[1]?.closest(`section.below-edit[aria-label="${BELOW_HEADING}"]`)).not.toBeNull();
     expect(q(root, "edit-area")?.textContent).not.toContain("Opening for editing…");
     expect(published(root).closest("[hidden]")).not.toBeNull();
     expect(q(root, "edit-page")).toBeNull();
     expect(q(root, "edit-versions")).toBeNull();
+  });
+
+  it("kept content shows once after the body when read, and once between the rows and the Additional info editor while editing", async () => {
+    asOwner(true);
+    const root = await render(
+      <>
+        <EditControls pageKey={KEY} title="Atrial fibrillation" />
+        <EditRegion pageKey={KEY} kept={{ before: "below", node: <aside data-testid="meds">meds panel</aside> }}>
+          <p data-testid="published">published body</p>
+        </EditRegion>
+      </>,
+    );
+    const meds = (): HTMLElement[] => [...root.querySelectorAll<HTMLElement>('[data-testid="meds"]')];
+    expect(meds()).toHaveLength(1);
+    expect(published(root).compareDocumentPosition(meds()[0] as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(meds()[0]?.closest("[hidden]")).toBeNull();
+
+    // While the unit loads it stays in view, once.
+    act(() => {
+      q(root, "edit-page")?.click();
+    });
+    expect(q(root, "edit-area")?.textContent).toContain("Opening for editing…");
+    expect(meds()).toHaveLength(1);
+    expect(meds()[0]?.closest('[data-ref="edit-area"]')).not.toBeNull();
+
+    await until(() => root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]').length === 2, "both editors");
+    const [rows, below] = [...root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]')];
+    if (!rows || !below) throw new Error("no rows and below editors");
+    const area = below.closest(".below-edit");
+    if (!area) throw new Error("the below editor is outside its area");
+    expect(meds()).toHaveLength(1);
+    const shown = meds()[0] as HTMLElement;
+    expect(shown.closest("[hidden]")).toBeNull();
+    expect(rows.compareDocumentPosition(shown) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(shown.compareDocumentPosition(area) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(area.querySelector(".below-h")?.textContent).toBe("Additional info");
+
+    await click(q(root, "edit-done"));
+    await until(() => getEditStore().edit === null && q(root, "edit-area") === null, "edit mode to close");
+    expect(meds()).toHaveLength(1);
+    expect(meds()[0]?.closest("[hidden]")).toBeNull();
   });
 
   it("with no changes the toolbar says so and disables Save; Done closes edit mode", async () => {

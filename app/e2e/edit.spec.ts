@@ -155,10 +155,10 @@ interface TopicTarget {
   blockPath: string;
 }
 
-/** A published topic whose first row is in a block file on disk. */
-const topic: TopicTarget | null = inGuides((g, nav) => {
+/** The first published topic whose first row is in a block file on disk and that `fits`. */
+const findTopic = (fits: (g: string, system: string, id: string) => boolean = () => true): TopicTarget | null => inGuides((g, nav) => {
   for (const e of systemEntries(nav)) {
-    if (e.kind !== "topic") continue;
+    if (e.kind !== "topic" || !fits(g, e.system, e.id)) continue;
     const dir = join(CONTENT, "guides", g, e.system, "blocks");
     if (!existsSync(dir)) continue;
     for (const f of readdirSync(dir)) {
@@ -170,6 +170,11 @@ const topic: TopicTarget | null = inGuides((g, nav) => {
   }
   return undefined;
 });
+
+/** A published topic whose first row is in a block file on disk. */
+const topic = findTopic();
+/** Such a topic with a meds panel. */
+const medsTopic = findTopic((g, system, id) => (readData<SystemJson>(systemPath(g, system)).topics.find((t) => t.id === id)?.meds.length ?? 0) > 0);
 
 interface PictureTarget {
   g: string;
@@ -1082,13 +1087,28 @@ test.describe("pictures and highlight colors", () => {
   // A 1×1 PNG no guide holds.
   const PNG_BYTES = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
 
-  test("a picture added below the topic shows at once and is saved with its bytes and the below block", async ({ page, context, baseURL }) => {
-    const t = needTopic();
+  test("a picture added under Additional info, after the meds panel, shows at once and is saved with its bytes and the below block", async ({ page, context, baseURL }) => {
+    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
+    const card = page.locator(`section.tcard[data-topic="${t.id}"]`);
+    // Nothing added yet: no heading for anyone.
+    await expect(card.locator(".meds")).toHaveCount(1);
+    await expect(card.getByRole("region", { name: "Additional info" })).toHaveCount(0);
     await signIn(page);
     const area = await startEditing(page);
-    const below = area.getByRole("region", { name: "Below the meds — your notes and pictures" });
+    const below = area.getByRole("region", { name: "Additional info" });
+    // While editing, the meds panel stays in view once, between her rows and the Additional info area.
+    await expect(card.locator(".meds")).toHaveCount(1);
+    const meds = area.locator(".meds");
+    await expect(meds).toBeVisible();
+    const order = await meds.evaluate((m) => {
+      const after = (a: Node, b: Node): boolean => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+      const rows = document.querySelector('[data-ref="edit-area"] .ProseMirror');
+      const area = document.querySelector('[data-ref="edit-area"] .below-edit');
+      return { rowsFirst: !!rows && after(rows, m), areaAfter: !!area && after(m, area) };
+    });
+    expect(order).toEqual({ rowsFirst: true, areaAfter: true });
     await below.locator(".ProseMirror p").first().click();
     const chooser = page.waitForEvent("filechooser");
     await ref(page, "tb-pic-add").click();
@@ -1106,9 +1126,53 @@ test.describe("pictures and highlight colors", () => {
     const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
     expect(belowFiles).toHaveLength(1);
     expect(belowFiles[0]?.[1]).toContain(name);
-    // The saved picture shows on the page from this device before the site redeploys.
-    await expect(page.locator(`section.tcard img`).last()).toHaveJSProperty("naturalWidth", 1);
+    // The saved picture shows on the page from this device before the site redeploys, under Additional
+    // info after the meds panel.
+    const info = card.getByRole("region", { name: "Additional info" });
+    await expect(info.getByRole("heading", { name: "Additional info" })).toBeVisible();
+    await expect(info.locator("img")).toHaveJSProperty("naturalWidth", 1);
+    await expect(card.locator(".meds")).toHaveCount(1);
+    expect(await card.locator(".meds").evaluate((m, el) => (m.compareDocumentPosition(el as Node) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0, await info.elementHandle())).toBe(true);
   });
+
+  for (const how of ["pasted", "dropped"] as const) {
+    test(`a picture ${how} into Additional info is added as Add picture adds it and saved with its bytes`, async ({ page, context, baseURL }) => {
+      const t = needTopic();
+      const { fake } = await world(context, baseURL, { seed: true });
+      await openPage(page, t.hash);
+      await signIn(page);
+      const area = await startEditing(page);
+      const below = area.getByRole("region", { name: "Additional info" });
+      const editor = below.locator(".ProseMirror");
+      await editor.locator("p").first().click();
+      // A copied picture arrives as a file on the clipboard (or the drag), with no text.
+      await editor.evaluate((el, { b64, how }) => {
+        const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        const data = new DataTransfer();
+        data.items.add(new File([bytes], "image.png", { type: "image/png" }));
+        if (how === "pasted") {
+          el.dispatchEvent(new ClipboardEvent("paste", { clipboardData: data, bubbles: true, cancelable: true }));
+        } else {
+          const box = (el.querySelector("p") ?? el).getBoundingClientRect();
+          el.dispatchEvent(new DragEvent("drop", { dataTransfer: data, clientX: box.left + 2, clientY: box.top + box.height / 2, bubbles: true, cancelable: true }));
+        }
+      }, { b64: PNG_BYTES.toString("base64"), how });
+      const img = below.locator("img:not(.ProseMirror-separator)");
+      await expect(img).toHaveCount(1);
+      await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(1);
+
+      await ref(page, "edit-save").click();
+      await expect(ref(page, "save-success")).toBeVisible();
+      const name = `${createHash("sha256").update(PNG_BYTES).digest("hex").slice(0, 32)}.png`;
+      expect(Buffer.from(need(fake.readBytes(`content/assets/${name}`), "the saved picture"))).toEqual(PNG_BYTES);
+      // One upload path: the bytes went up once, as a base64 blob through the Git Data API.
+      expect(blobPosts(fake, PNG_BYTES.toString("base64").slice(0, 40))).toHaveLength(1);
+      const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
+      expect(belowFiles).toHaveLength(1);
+      expect(belowFiles[0]?.[1]).toContain(name);
+      await expect(page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img")).toHaveJSProperty("naturalWidth", 1);
+    });
+  }
 
   test("a highlight color from the picker is saved on the selected text", async ({ page, context, baseURL }) => {
     const t = needTopic();

@@ -229,6 +229,9 @@ export function publishedTopics(t: SystemTopics, meds: (topic: Topic) => PubMeds
   });
 }
 
+/** The heading over a topic's below block wherever it is read, and its area's label while editing (her wording). */
+export const BELOW_HEADING = "Additional info";
+
 /**
  * Where a topic's below block shows besides its own page (her choice: section and system pages and
  * their PDFs too): right under the table holding the topic's last row, wherever that row is shown.

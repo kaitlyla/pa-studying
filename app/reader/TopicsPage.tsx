@@ -1,5 +1,5 @@
 // Topic page (40 §40.3, guide-reader/compare): one or more topics stacked. Each shows its update
-// notes above its table, its heading row and rows, and its meds panel below.
+// notes above its table, its heading row and rows, its meds panel below, then her Additional info.
 import type { ReactNode } from "react";
 import type { NavJson, PubTopic, SystemJson } from "../../lib/derive/published.ts";
 import { MedsPanel } from "../pharm/MedsPanel.tsx";
@@ -10,7 +10,7 @@ import { Icon } from "../shell/Icon.tsx";
 import { EditControls, EditRegion, useIsEditing } from "../shell/mounts.tsx";
 import { PageHead, type Crumb } from "../shell/Page.tsx";
 import { guideViewHash, navigate } from "../shell/route.ts";
-import { notesAt, NotesBlock } from "./blocks.tsx";
+import { AdditionalInfo, notesAt, NotesBlock } from "./blocks.tsx";
 import { guideCrumbs, systemCrumb, topicHash, useNav, useSite, useSystem } from "./data.ts";
 import { PdfMenu } from "./PdfMenu.tsx";
 import { buildPageKey } from "../edit/pageKey.ts";
@@ -67,12 +67,16 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
         </span>
       </div>
       <UpdateNotes notes={notesAt(system.notes, block ? [block.id, ...topic.rows] : topic.rows)} />
-      <EditRegion pageKey={pageKey} title={topic.title}>
+      {/* The meds panel follows the rows, and stays above her below area while she edits it. */}
+      <EditRegion
+        pageKey={pageKey}
+        title={topic.title}
+        kept={{ before: "below", node: <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} /> }}
+      >
         {block && <NotesBlock block={block} basePt={nav.basePt} rows={topic.rows} />}
       </EditRegion>
-      <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} />
-      {/* Her own notes and pictures below the topic; while editing, they are in the editor above. */}
-      {topic.below && !editing && <NotesBlock block={topic.below} basePt={nav.basePt} />}
+      {/* Her own notes and pictures below the meds; while editing, they are in the editor above. */}
+      {topic.below && !editing && <AdditionalInfo block={topic.below} basePt={nav.basePt} />}
     </section>
   );
 }

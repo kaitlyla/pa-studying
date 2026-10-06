@@ -1,11 +1,12 @@
 // Edit mode on a page (plan 50 §50.2–§50.4; UI guide-reader/edit-mode, save-problems): the Edit and
 // Versions buttons, the region that swaps the page body for ProseMirror editors seeded from Git, the
 // toolbar, and the save banners.
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import type { DocJSON } from "../../lib/content/index.ts";
 import { pubFigures } from "../../lib/derive/published.ts";
+import { BELOW_HEADING } from "../../lib/derive/topics.ts";
 import { GapChip, GapFigures } from "../render/index.ts";
 import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
@@ -17,7 +18,7 @@ import {
   toggleUnderline, type Command, type DocContext,
 } from "./editor/commands.ts";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
-import { createEditorState, editorProps, PICTURE_REFUSED } from "./editor/state.ts";
+import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
@@ -64,7 +65,7 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
       nodeViews: nodeViews(slot.basePt),
       markViews: markViews(slot.basePt),
       clipboardSerializer: clipboardSerializer(slot.basePt),
-      ...editorProps,
+      ...pictureFileProps((v, files) => void addPictures(files, { view: v, ctx })),
       attributes: { "aria-label": "Editable notes", "data-slot": slot.id },
       dispatchTransaction(tr) {
         view.updateState(view.state.apply(tr));
@@ -113,9 +114,6 @@ function GapFrame({ part, slotView }: { part: Extract<Part, { kind: "gap" }>; sl
   );
 }
 
-/** The heading of a topic's below area while editing (it shows after the meds panel when read). */
-export const BELOW_LABEL = "Below the meds — your notes and pictures";
-
 /** One part of an edit unit: its slots shown by `slotView` (editors here; read-only in Versions' View). */
 export function PartView({ part, slotView = editorView }: { part: Part; slotView?: SlotView }): ReactNode {
   switch (part.kind) {
@@ -125,8 +123,8 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
       return <GapFrame part={part} slotView={slotView} />;
     case "below":
       return (
-        <section className="below-edit" aria-label={BELOW_LABEL}>
-          <div className="below-h">{BELOW_LABEL}</div>
+        <section className="below-edit" aria-label={BELOW_HEADING}>
+          <div className="below-h">{BELOW_HEADING}</div>
           {slotView(part.slot)}
         </section>
       );
@@ -176,6 +174,22 @@ function HighlightPicker({ run }: { run: (c: Command) => void }): ReactNode {
   );
 }
 
+/**
+ * Puts picture files in at the cursor of `at`, in order: the one path for Add picture and for pictures
+ * pasted or dropped. A file that can't be added stops there with her message.
+ */
+async function addPictures(files: readonly File[], at: Active): Promise<void> {
+  for (const file of files) {
+    const pic = await addPictureFile(file);
+    if (typeof pic === "string") {
+      showToast(pic);
+      return;
+    }
+    insertPicture(pic, at.ctx)(at.view.state, at.view.dispatch);
+  }
+  at.view.focus();
+}
+
 /** "Add picture": a file picker; the chosen picture goes in at the cursor of the editor she was in. */
 function AddPicture({ a }: { a: Active | null }): ReactNode {
   const input = useRef<HTMLInputElement>(null);
@@ -183,13 +197,7 @@ function AddPicture({ a }: { a: Active | null }): ReactNode {
   const picked = async (file: File | undefined): Promise<void> => {
     const at = target.current;
     if (!file || !at) return;
-    const pic = await addPictureFile(file);
-    if (typeof pic === "string") {
-      showToast(pic);
-      return;
-    }
-    insertPicture(pic, at.ctx)(at.view.state, at.view.dispatch);
-    at.view.focus();
+    await addPictures([file], at);
   };
   return (
     <>
@@ -345,12 +353,23 @@ export function PageBanner({ pageKey }: { pageKey?: string }): ReactNode {
 
 // ---- the region and its buttons -------------------------------------------------------------------
 
+/**
+ * Content that is not edited here but stays in view while editing (a topic's meds panel): shown after
+ * the region's `children` when read, and among the editors before the first part of kind `before`
+ * (after the last part when the unit has none), so it keeps its place in the page in both modes.
+ */
+export interface Kept {
+  before: Part["kind"];
+  node: ReactNode;
+}
+
 /** Wraps one editable page body. Not editing: the page as published. Editing: toolbar, banners, editors. */
-export function EditRegion({ pageKey, children }: { pageKey: string; title?: string; children?: ReactNode }): ReactNode {
+export function EditRegion({ pageKey, children, kept }: { pageKey: string; title?: string; children?: ReactNode; kept?: Kept }): ReactNode {
   const { edit } = useEdit();
   const { owner } = useOwner();
   const editing = owner && edit !== null && edit.key === pageKey;
   const open = edit !== null;
+  const keptAt = editing && edit.unit && kept ? edit.unit.parts.findIndex((p) => p.kind === kept.before) : -1;
   useEffect(() => {
     // A draft kept before the sign-in round trip reopens edit mode on its page (50 §50.3).
     if (owner && !open) void restoreDraft(pageKey);
@@ -364,11 +383,22 @@ export function EditRegion({ pageKey, children }: { pageKey: string; title?: str
           {edit.banner && <SaveBanner banner={edit.banner} />}
           {edit.error && <div className="banner err" role="alert"><span className="bt">{edit.error}</span></div>}
           {!edit.unit && !edit.error && <p className="edit-loading" role="status">Opening for editing…</p>}
-          {edit.unit && <div key={edit.generation}>{edit.unit.parts.map((p, i) => <PartView key={i} part={p} />)}</div>}
+          {edit.unit && (
+            <div key={edit.generation}>
+              {edit.unit.parts.map((p, i) => (
+                <Fragment key={i}>
+                  {i === keptAt && kept?.node}
+                  <PartView part={p} />
+                </Fragment>
+              ))}
+            </div>
+          )}
           {edit.unit && edit.unit.parts.length === 0 && <p className="edit-loading">This page has nothing to edit.</p>}
+          {keptAt === -1 && kept?.node}
         </div>
       )}
       <div hidden={editing}>{children}</div>
+      {!editing && kept?.node}
     </>
   );
 }

@@ -1,12 +1,12 @@
 // Editor state and props for one editable block (plan 50 §50.3): history, her keyboard shortcuts, the
-// picture guard, plain-text paste and no drag-and-drop.
+// picture guard, plain-text paste, and pictures pasted or dropped as files (no other drag-and-drop).
 import { baseKeymap, chainCommands } from "prosemirror-commands";
 import { history, isHistoryTransaction, redo, undo } from "prosemirror-history";
 import { keymap } from "prosemirror-keymap";
 import { Slice } from "prosemirror-model";
 import type { Node as PMNode } from "prosemirror-model";
-import { EditorState, Plugin } from "prosemirror-state";
-import type { EditorProps } from "prosemirror-view";
+import { EditorState, Plugin, TextSelection } from "prosemirror-state";
+import type { EditorProps, EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import { columnDrag } from "./columnDrag.ts";
@@ -67,9 +67,9 @@ export function htmlToText(html: string): string {
 }
 
 /**
- * Paste inserts plain text only (each line a paragraph with the caret paragraph's attributes); this is
- * the only paste path, so no formatting from the source survives. The one drop allowed is a picture
- * dragged to a new place in the same editor; every other drop is refused.
+ * Paste inserts plain text only (each line a paragraph with the caret paragraph's attributes), so no
+ * formatting from the source survives. The one drop allowed is a picture dragged to a new place in the
+ * same editor; every other drop is refused. (Picture files pasted or dropped: `pictureFileProps`.)
  */
 export const editorProps: EditorProps = {
   handlePaste: (view, event) => {
@@ -86,3 +86,36 @@ export const editorProps: EditorProps = {
   // `moved` is true only for a move-drag that started in this same editor (ProseMirror's own drag).
   handleDrop: (_view, _event, slice, moved) => !isPictureMove(slice, moved),
 };
+
+/**
+ * The files a paste brings: a copied picture comes as a file with no text (a browser's "Copy image"
+ * adds only an <img> as HTML). A paste with text pastes the text, as before.
+ */
+export function pastedFiles(data: DataTransfer | null): File[] {
+  if (!data || data.getData("text/plain") !== "") return [];
+  return [...data.files];
+}
+
+/**
+ * `editorProps` plus pictures: files pasted or dropped go to `onFiles` (her Add picture path) at the
+ * cursor, a drop first moving the cursor to where they were dropped. Everything else is as `editorProps`.
+ */
+export function pictureFileProps(onFiles: (view: EditorView, files: File[]) => void): EditorProps {
+  return {
+    ...editorProps,
+    handlePaste(view, event, slice) {
+      const files = pastedFiles(event.clipboardData);
+      if (files.length === 0) return editorProps.handlePaste?.call(this, view, event, slice) ?? false;
+      onFiles(view, files);
+      return true;
+    },
+    handleDrop(view, event, slice, moved) {
+      const files = [...(event.dataTransfer?.files ?? [])];
+      if (files.length === 0) return editorProps.handleDrop?.call(this, view, event, slice, moved) ?? false;
+      const at = view.posAtCoords({ left: event.clientX, top: event.clientY });
+      if (at) view.dispatch(view.state.tr.setSelection(TextSelection.near(view.state.doc.resolve(at.pos))));
+      onFiles(view, files);
+      return true;
+    },
+  };
+}

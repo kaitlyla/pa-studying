@@ -2,7 +2,7 @@
 // update-note placement by target id (40 §40.7).
 import type { ReactNode } from "react";
 import type { FlagNote, Notes, PubBlock, SystemJson } from "../../lib/derive/published.ts";
-import { belowUnder } from "../../lib/derive/topics.ts";
+import { BELOW_HEADING, belowUnder } from "../../lib/derive/topics.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Link } from "../shell/Link.tsx";
@@ -41,6 +41,16 @@ export function NotesBlock({ block, basePt, rows = null }: { block: PubBlock; ba
     <div className="notes" data-anchor={block.id}>
       <RichDoc doc={block.doc} basePt={basePt} rows={rows} stacked={stacked} />
     </div>
+  );
+}
+
+/** A topic's below block under its "Additional info" heading (shown only when she has added one). */
+export function AdditionalInfo({ block, basePt }: { block: PubBlock; basePt: number }): ReactNode {
+  return (
+    <section className="addl" aria-label={BELOW_HEADING}>
+      <h3 className="addl-h">{BELOW_HEADING}</h3>
+      <NotesBlock block={block} basePt={basePt} />
+    </section>
   );
 }
 
