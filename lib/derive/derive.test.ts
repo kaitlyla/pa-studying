@@ -24,7 +24,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { tableOf } from "./text.ts";
-import { belowUnder, checkMembers, deriveTopics, fitTitled, publishedRows, publishedSections, sectionItems, topicsBelow, type Topic } from "./topics.ts";
+import { belowUnder, checkMembers, deriveTopics, fitTitled, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
@@ -122,6 +122,36 @@ describe("topics (40 §40.2)", () => {
     const t = topics();
     expect(t.proseBlocks).toEqual([B(11), B(14)]);
     expect(t.rows.has(R(140))).toBe(false);
+  });
+
+  describe("a multi-column table the structure lists by name", () => {
+    const comparison = () => table(B(95), 3, [
+      [R(950), "heading", "State", "Pupils", "Tx"],
+      [R(951), "content", "Cocaine intox", "Mydriasis", "Benzos"],
+      [R(952), "content", "Opioid intox", "Miosis", "Naloxone"],
+    ]);
+    const after = () => table(B(96), 2, [[R(960), "content", "Alcohol", "notes"]]);
+    const sections = [{ id: "substance", title: "Substance-related disorders" }];
+
+    it("is one sidebar entry under its listed title, ahead of the section's topics, and forms no topics", () => {
+      const blocks = [comparison(), after()];
+      const st = structureOf({ sections, listed: { [B(95)]: "Intoxication/Withdraw Comparison" }, members: { [B(95)]: "substance", [R(960)]: "substance" } });
+      const t = deriveTopics(blocks, st);
+      expect(t.proseBlocks).toEqual([B(95)]);
+      expect(t.topics.map((x) => x.title)).toEqual(["Alcohol"]);
+      expect([R(950), R(951), R(952)].some((id) => t.rows.has(id))).toBe(false);
+      expect(navEntries(t, st, [B(95), B(96)]).sections[0]?.entries).toEqual([
+        { kind: "block", id: B(95), title: "Intoxication/Withdraw Comparison" },
+        { kind: "topic", id: R(960), title: "Alcohol" },
+      ]);
+      expect(sectionItems(t, st, [B(95), B(96)], "substance")).toEqual([{ block: B(95), rows: null }, { block: B(96), rows: [R(960)] }]);
+    });
+
+    it("unlisted, the same table still forms one topic per titled row", () => {
+      const t = deriveTopics([comparison()], structureOf());
+      expect(t.proseBlocks).toEqual([]);
+      expect(t.topics.map((x) => x.title)).toEqual(["Cocaine intox", "Opioid intox"]);
+    });
   });
 
   it("drug-table condition rows form topics; the other drug rows belong to no topic", () => {

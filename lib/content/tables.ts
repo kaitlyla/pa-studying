@@ -34,11 +34,13 @@ export function columnCount(table: TableNodeLike): number {
 /**
  * The rows of a block that take part in row resolution (40 §40.2), or null when it takes none:
  * a drug table's rows (its condition rows form topics whatever its column count), and the rows of
- * a non-drug table with more than one column. One-column non-drug tables behave as prose blocks.
+ * a non-drug table with more than one column. One-column non-drug tables, and any table the
+ * structure lists by name (`listed`), behave as prose blocks: a listed table is one sidebar entry
+ * shown whole under its listed title, not one topic per row.
  */
 export function resolutionRows(block: TableBlockLike, structure: StructureFile): RowNodeLike[] | null {
   const table = tableNode(block);
-  if (!table) return null;
+  if (!table || structure.listed[block.id] !== undefined) return null;
   const drug = structure.drugTables.some((d) => d.block === block.id);
   if (!drug && columnCount(table) < 2) return null;
   return table.content ?? [];

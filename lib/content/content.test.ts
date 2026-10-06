@@ -215,6 +215,12 @@ describe("structure.json members (ruling 2B)", () => {
     // The same table as a non-drug table behaves as a prose block and resolves no rows.
     expect(systemRowOrder([oneCol], { ...structure, drugTables: [] }, b(7))).toEqual([]);
   });
+
+  it("resolves no rows for a multi-column table the structure lists by name (it behaves as a prose block)", () => {
+    const wide = { id: b(4), doc: { content: [{ type: "table", attrs: { grid: [30, 30, 40] }, content: [{ attrs: { id: A } }, { attrs: { id: B } }] }] } };
+    expect(systemRowOrder([wide], structure, b(4))).toEqual([A, B]);
+    expect(systemRowOrder([wide], { ...structure, listed: { [b(4)]: "Comparison" } }, b(4))).toEqual([]);
+  });
 });
 
 describe("commit trailers (50 §50.4)", () => {
