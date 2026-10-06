@@ -1637,6 +1637,30 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(publish(base).assets.has(asset)).toBe(false);
   });
 
+  it("publishes a figure's shown width when set, and a box shown as her notes with asNotes and a notes search label", () => {
+    const asset = `${"e2".repeat(16)}.png`;
+    const figure = {
+      asset, width: 900, height: 300, caption: "Hexaxial", widthPt: 300,
+      credit: { author: "Jane Roe", license: "Public domain", licenseUrl: null, page: "https://commons.wikimedia.org/wiki/File:H.png", changes: null },
+      evidence: { quote: "Hexaxial", accessed: "2026-10-05" },
+    };
+    const c = mutated((x) => {
+      const g = x.gaps.get(G(1));
+      if (g) g.block.meta = { ...g.block.meta, figures: [figure], asNotes: true };
+    });
+    const res = publish(c);
+    const labs = res.files.get(refPath("labs")) as { subs: { gaps: { id: string; asNotes: boolean; figures: { widthPt?: number }[] }[] }[] };
+    const gaps = labs.subs[0]?.gaps ?? [];
+    expect(gaps.find((g) => g.id === G(1))?.figures[0]?.widthPt).toBe(300);
+    expect(gaps.find((g) => g.id === G(1))?.asNotes).toBe(true);
+    expect(res.units.find((u) => u.at === G(1))?.label).toBe("notes");
+    // Unswitched boxes keep the gap label and publish asNotes false.
+    const plain = publish(base);
+    const plainLabs = plain.files.get(refPath("labs")) as { subs: { gaps: { id: string; asNotes: boolean }[] }[] };
+    expect(plainLabs.subs[0]?.gaps.find((g) => g.id === G(1))?.asNotes).toBe(false);
+    expect(plain.units.find((u) => u.at === G(1))?.label).toBe("gap");
+  });
+
   it("fails naming a gap block without a passing evidence record, or whose text no longer matches its claims", () => {
     const fail = mutated((x) => {
       const ev = x.gaps.get(G(1))?.evidence;

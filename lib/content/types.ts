@@ -389,6 +389,11 @@ export interface GapFigure {
   /** Pixel size of the stored file. */
   width: number;
   height: number;
+  /**
+   * The width it is shown at, in pt, at most GAP_CONTENT_PT (its height keeps the file's ratio).
+   * Absent: its natural size, never wider than the column.
+   */
+  widthPt?: number;
   /** What the image shows; also its alternative text. */
   caption: string;
   credit: {
@@ -414,7 +419,15 @@ export interface GapMeta {
   sources: GapSource[];
   ownerEdits: string[];
   figures?: GapFigure[];
+  /**
+   * She chose to show this block as her own notes: no gap box, badge or "Relevant to" line, and its
+   * sources in small print. Absent: shown as a gap block.
+   */
+  asNotes?: true;
 }
+
+/** A gap block's content width in pt (US Letter with 1-inch margins): the widest a figure is shown. */
+export const GAP_CONTENT_PT = 468;
 
 export type GapFile = BlockFile<GapMeta> & { kind: "gap" };
 

@@ -499,6 +499,7 @@ describe("labels for content not from her notes", () => {
     ],
     ownerEdits: [],
     figures: [],
+    asNotes: false,
     notes: [],
     ...over,
   });
@@ -539,6 +540,30 @@ describe("labels for content not from her notes", () => {
     expect(c.querySelector(".gap-figs")?.classList.contains("thumbs")).toBe(false);
     expect(c.querySelector(".gap-figs button")).toBeNull();
     expect(c.querySelector(".gap-figs img")?.parentElement?.tagName).toBe("A");
+  });
+
+  it("gap block: an image with a set width shows at that width in em of the box's 11 pt text; one without has no width style", async () => {
+    const c = await render(<GapBlock gap={gap({ figures: [{ ...strip, widthPt: 300 }, { ...strip, asset: `${"cd".repeat(16)}.png` }] })} />);
+    const imgs = [...c.querySelectorAll<HTMLImageElement>(".gap-figs img")];
+    expect(imgs[0]?.style.width).toBe("27.2727em");
+    expect(imgs[1]?.style.width).toBe("");
+  });
+
+  it("gap block thumbnails: a set width does not change the thumbnail size", async () => {
+    const c = await render(<GapBlock gap={gap({ figures: [{ ...strip, widthPt: 300 }] })} thumbnails />);
+    expect(c.querySelector<HTMLImageElement>(".gap-figs img")?.style.width).toBe("");
+  });
+
+  it("gap block shown as her notes: no box class, badge or Relevant-to line, for anyone; sources and image credit kept", async () => {
+    const c = await render(<GapBlock gap={gap({ asNotes: true, figures: [strip] })} />);
+    asOwner(true);
+    const sec = need(c.querySelector("section"), "section");
+    expect(sec.className).toBe("gap as-notes");
+    expect(visibleText(c)).not.toContain("Not from your notes");
+    expect(sec.querySelector(".gap-meta")).toBeNull();
+    expect(sec.querySelectorAll(".gap-src ol li")).toHaveLength(2);
+    expect(sec.querySelector(".fig-credit")?.textContent).toContain("Image: Jane Roe");
+    expect(sec.querySelector("h3")?.textContent).toBe("TSH in AF");
   });
 
   it("gap block thumbnails: each image is a button that opens the full-size viewer and returns focus on Escape", async () => {

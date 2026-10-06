@@ -91,7 +91,7 @@ function patchDocList(list: DocList, ix: Index, append: readonly string[] = []):
 }
 
 function patchGap(g: PubGap, gap: GapFile): PubGap {
-  return { ...g, doc: gap.doc, differs: gap.meta.differs?.doc ?? null, ownerEdits: gap.meta.ownerEdits, figures: pubFigures(gap.meta) };
+  return { ...g, doc: gap.doc, differs: gap.meta.differs?.doc ?? null, ownerEdits: gap.meta.ownerEdits, figures: pubFigures(gap.meta), asNotes: gap.meta.asNotes === true };
 }
 
 /** Walks published JSON, replacing overlaid block docs, gap blocks, slides and document lists. */

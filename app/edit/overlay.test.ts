@@ -135,6 +135,16 @@ describe("patchPublished", () => {
     }
   });
 
+  it("a saved gap block switched to her notes shows as her notes; switched back, labeled again", () => {
+    const path = `content/gapfill/${G(1)}.json`;
+    const gap = fileJson<GapFile>(path);
+    const gapIn = (v: unknown): { asNotes: boolean } | undefined => (v as { subs: { gaps: { id: string; asNotes: boolean }[] }[] }).subs[0]?.gaps.find((g) => g.id === G(1));
+    const on = patchPublished("ref/labs.json", pub("ref/labs.json"), new Map([[path, { ...gap, meta: { ...gap.meta, asNotes: true } }]]));
+    expect(gapIn(on)?.asNotes).toBe(true);
+    const off = patchPublished("ref/labs.json", on, new Map([[path, gap]]));
+    expect(gapIn(off)?.asNotes).toBe(false);
+  });
+
   it("moves a removed document to Removed, and a new one in its section's file list to Pending", () => {
     const removed: AsIsFile = { ...fileJson<AsIsFile>(`content/files/${D(1)}/file.json`), removed: { at: "2026-10-04T05:00:00Z", from: "b".repeat(40) } };
     const other = fileJson<OtherFile>("content/places/other.json");

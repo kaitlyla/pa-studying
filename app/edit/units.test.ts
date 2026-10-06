@@ -466,6 +466,74 @@ describe("building a save", () => {
     expect(buildSave(unit, new Map([[gap.doc.id, clone(gap.doc.doc)]]), TODAY).changes).toEqual([]);
   });
 
+  describe("a gap block's differs note and look", () => {
+    const ASSET = `${"e3".repeat(16)}.png`;
+    const figure = {
+      asset: ASSET, width: 960, height: 721, caption: "Hexaxial",
+      credit: { author: "Jane Roe", license: "Public domain", licenseUrl: null, page: "https://commons.wikimedia.org/wiki/File:H.png", changes: null },
+      evidence: { quote: "Hexaxial", accessed: "2026-10-05" },
+    };
+    const para = (text: string): DocJSON => ({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] } as DocJSON);
+    const path = `content/gapfill/${G(1)}.json`;
+
+    /** The labs unit with its gap block given a differs note and a figure (in memory). */
+    async function gapUnit(meta: Partial<GapFile["meta"]> = {}): Promise<{ unit: EditUnit; part: Extract<Part, { kind: "gap" }> }> {
+      const unit = await unitAt("general:fm:labs");
+      const was = only(unit, "gap");
+      const differs = para("Your notes say 8 h.");
+      const gap: GapFile = { ...was.gap, meta: { ...was.gap.meta, differs: { doc: differs }, figures: [figure], ...meta } };
+      const part = { ...was, gap, differs: { ...was.doc, id: `${G(1)}:differs`, doc: differs } };
+      return { unit: { ...unit, parts: unit.parts.map((p) => (p === was ? part : p)) }, part };
+    }
+
+    it("an emptied differs note saves as null, not an empty paragraph", async () => {
+      const { unit, part } = await gapUnit();
+      const emptied = { type: "doc", content: [{ type: "paragraph" }] } as DocJSON;
+      const build = buildSave(unit, new Map([[`${G(1)}:differs`, emptied]]), TODAY);
+      const saved = json<GapFile>(changeOf(build, path));
+      expect(saved.meta.differs).toBeNull();
+      expect(saved.meta.ownerEdits).toEqual([...part.gap.meta.ownerEdits, TODAY]);
+      // A kept differs note is saved as edited.
+      const kept = json<GapFile>(changeOf(buildSave(unit, new Map([[`${G(1)}:differs`, para("Your notes say 6 h.")]]), TODAY), path));
+      expect(JSON.stringify(kept.meta.differs?.doc)).toContain('"text":"Your notes say 6 h."');
+    });
+
+    it("a changed look writes each figure's width and asNotes, stamped as an edit", async () => {
+      const { unit } = await gapUnit();
+      const looks = new Map([[G(1), { widths: { [ASSET]: 300 }, asNotes: true }]]);
+      const build = buildSave(unit, new Map(), TODAY, { looks });
+      const saved = json<GapFile>(changeOf(build, path));
+      expect(saved.meta.figures?.[0]?.widthPt).toBe(300);
+      expect(saved.meta.figures?.[0]?.caption).toBe("Hexaxial");
+      expect(saved.meta.asNotes).toBe(true);
+      expect(saved.meta.ownerEdits).toEqual([TODAY]);
+      expect(build.changed).toEqual([G(1)]);
+    });
+
+    it("a look back to natural size and labeled drops widthPt and asNotes from the file", async () => {
+      const { unit } = await gapUnit({ asNotes: true, figures: [{ ...figure, widthPt: 300 }] });
+      const build = buildSave(unit, new Map(), TODAY, { looks: new Map([[G(1), { widths: {}, asNotes: false }]]) });
+      const saved = json<GapFile>(changeOf(build, path));
+      expect(saved.meta.figures?.[0]).not.toHaveProperty("widthPt");
+      expect(saved.meta).not.toHaveProperty("asNotes");
+    });
+
+    it("an unchanged look writes nothing", async () => {
+      const { unit } = await gapUnit({ asNotes: true, figures: [{ ...figure, widthPt: 300 }] });
+      const build = buildSave(unit, new Map(), TODAY, { looks: new Map([[G(1), { widths: { [ASSET]: 300 }, asNotes: true }]]) });
+      expect(build.changes).toEqual([]);
+    });
+
+    it("a restore takes the version's look", async () => {
+      const { unit } = await gapUnit({ asNotes: true, figures: [{ ...figure, widthPt: 300 }] });
+      const { unit: version } = await gapUnit();
+      const build = buildSave(unit, new Map(), TODAY, { restore: version });
+      const saved = json<GapFile>(changeOf(build, path));
+      expect(saved.meta.figures?.[0]).not.toHaveProperty("widthPt");
+      expect(saved.meta).not.toHaveProperty("asNotes");
+    });
+  });
+
   it("an edited slide is stamped in ownerEdits", async () => {
     const unit = await unitAt(`slide:fm:${S(2)}`);
     const slide = only(unit, "slide");

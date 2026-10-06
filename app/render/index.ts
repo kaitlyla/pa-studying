@@ -21,4 +21,4 @@ export {
   TEXT_STACK,
 } from "./styles.ts";
 export { layoutTable, selectRows } from "./tableLayout.ts";
-export { GapBlock, GapChip, GapFigures, UpdChip, UpdateNote, UpdateNotes, ReviewSlidesBadge, GAP_BASE_PT } from "./labels.tsx";
+export { GapBlock, GapChip, GapFigures, gapClass, UpdChip, UpdateNote, UpdateNotes, ReviewSlidesBadge, GAP_BASE_PT, type FigurePicking } from "./labels.tsx";

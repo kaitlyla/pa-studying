@@ -101,7 +101,9 @@ export type PubFigure = Omit<GapFigure, "evidence">;
 
 /** A gap block's figures as published: everything but the evidence, which stays in content. */
 export function pubFigures(meta: GapMeta): PubFigure[] {
-  return (meta.figures ?? []).map((f) => ({ asset: f.asset, width: f.width, height: f.height, caption: f.caption, credit: f.credit }));
+  return (meta.figures ?? []).map((f) => ({
+    asset: f.asset, width: f.width, height: f.height, ...(f.widthPt !== undefined ? { widthPt: f.widthPt } : {}), caption: f.caption, credit: f.credit,
+  }));
 }
 
 /** A resolved gap block (40 §40.7). */
@@ -116,6 +118,8 @@ export interface PubGap {
   ownerEdits: string[];
   /** Example images, each with its credit (the stored figures without their evidence). */
   figures: PubFigure[];
+  /** She chose to show it as her own notes (GapMeta.asNotes): no gap box or labels, sources in small print. */
+  asNotes: boolean;
   /** Notes placed at this gap id (shown at the top of the gap block). */
   notes: FlagNote[];
 }

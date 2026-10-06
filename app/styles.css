@@ -211,9 +211,13 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .gap-diff { margin: 8px 0; padding: 6px 10px; border-left: 3px solid #5d6f96; background: #fff; font-size: 13px; }
 .gap-src { margin-top: 8px; padding-top: 6px; border-top: 1px dashed #b8c2d8; font-size: 12px; color: #3a4358; }
 .gap-src ol { margin: 4px 0 0; padding-left: 18px; }
+/* A gap block she shows as her own notes: no box, sources in small print. */
+.gap.as-notes { padding: 0; border: 0; border-radius: 0; background: none; }
+.gap.as-notes .gap-src { border-top-color: #dde1e8; font-size: 10.5px; color: #5a6272; }
 .gap-figs { margin: 8px 0 4px; }
 .gap-fig { margin: 0 0 8px; padding: 6px; border: 1px solid #c9d1e3; border-radius: 6px; background: #fff; }
 .gap-fig img { display: block; max-width: 100%; height: auto; }
+.gap-fig.picked { outline: 2px solid #2f6fdc; outline-offset: 1px; }
 .gap-fig figcaption { margin-top: 4px; font-size: 12px; color: #3a4358; }
 .fig-cap { display: block; font-weight: 600; }
 .fig-credit { display: block; color: #4a5263; overflow-wrap: anywhere; }

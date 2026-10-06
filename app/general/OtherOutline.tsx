@@ -13,7 +13,7 @@ import { Voice } from "../shell/owner.tsx";
 import { fileHash } from "../shell/route.ts";
 import { columnAnchor, leftovers, type OutlineItem, type OutlinePart } from "./outline.ts";
 import { PlaceNote } from "./PlaceNotes.tsx";
-import { NoteLinks } from "./ThreeParts.tsx";
+import { GapBoxes, NoteLinks } from "./ThreeParts.tsx";
 
 export const OPEN_FILE = "Open file";
 /** An empty sub heading's part: her document for it is still to come. */
@@ -119,14 +119,7 @@ export function Leftovers({ section }: { section: OtherJson["sections"][number] 
           <FileChips list={rest.files} />
         </div>
       )}
-      {rest.gaps && rest.gaps.length > 0 && (
-        <div className="gsec">
-          <h2 className="own-only">Not covered by your notes</h2>
-          {rest.gaps.map((g) => (
-            <GapBlock key={g.id} gap={g} />
-          ))}
-        </div>
-      )}
+      {rest.gaps && rest.gaps.length > 0 && <GapBoxes gaps={rest.gaps} />}
     </>
   );
 }

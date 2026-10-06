@@ -622,14 +622,25 @@ function pictureLimit($pos: ResolvedPos, ctx: DocContext): number {
   return w;
 }
 
-/** Picture − / +: width × 1/1.15 or × 1.15, clamped to [24, cell or page width]; height scaled alike. */
+/** The smallest width Picture − makes a picture, in pt. */
+const MIN_PICTURE_PT = 24;
+
+/**
+ * One Picture − / + step for a picture `widthPt` wide: × 1/1.15 or × 1.15, clamped to
+ * [24, `limitPt`] (the cell or page width; never below 24).
+ */
+export function steppedPictureWidth(widthPt: number, dir: 1 | -1, limitPt: number): number {
+  const max = Math.max(MIN_PICTURE_PT, limitPt);
+  return Math.min(max, Math.max(MIN_PICTURE_PT, widthPt * (dir > 0 ? 1.15 : 1 / 1.15)));
+}
+
+/** Picture − / +: one steppedPictureWidth step within the cell or page width; height scaled alike. */
 export function resizePicture(dir: 1 | -1, ctx: DocContext): Command {
   return (state, dispatch) => {
     const sel = selectedPicture(state);
     if (!sel) return false;
     const { widthPt, heightPt } = sel.node.attrs as { widthPt: number; heightPt: number };
-    const max = Math.max(24, pictureLimit(sel.$from, ctx));
-    const width = Math.min(max, Math.max(24, widthPt * (dir > 0 ? 1.15 : 1 / 1.15)));
+    const width = steppedPictureWidth(widthPt, dir, pictureLimit(sel.$from, ctx));
     const factor = width / widthPt;
     if (dispatch) {
       const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, widthPt: width, heightPt: heightPt * factor });
@@ -650,6 +661,11 @@ export interface NewPicture {
 /** CSS pixels per pt: a picture is first shown at its natural pixel size, as Word inserts one. */
 const PX_PER_PT = 4 / 3;
 
+/** The width in pt of a picture `widthPx` wide at its natural size, shrunk to fit `limitPt`. */
+export function naturalPictureWidth(widthPx: number, limitPt: number): number {
+  return Math.min(widthPx / PX_PER_PT, Math.max(MIN_PICTURE_PT, limitPt));
+}
+
 /**
  * Add picture: the picture goes in at the cursor (after the selected picture, so none is replaced),
  * at its natural size shrunk to fit the table cell or page there, and is then selected.
@@ -660,8 +676,7 @@ export function insertPicture(pic: NewPicture, ctx: DocContext): Command {
     const sel = state.selection;
     const at = sel instanceof NodeSelection ? sel.to : sel.from;
     const $at = state.doc.resolve(at);
-    const natural = pic.widthPx / PX_PER_PT;
-    const widthPt = Math.min(natural, Math.max(24, pictureLimit($at, ctx)));
+    const widthPt = naturalPictureWidth(pic.widthPx, pictureLimit($at, ctx));
     const node = nodes.image.create({ asset: pic.asset, widthPt, heightPt: (widthPt * pic.heightPx) / pic.widthPx });
     if (!dispatch) return true;
     // Collapsed first, so no selected text is replaced.

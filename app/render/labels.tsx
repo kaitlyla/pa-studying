@@ -7,6 +7,7 @@ import { openImageViewer } from "../files/imageViewer.tsx";
 import { formatDate, latest } from "../shell/format.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { assetUrl, RichDoc } from "./RichDoc.tsx";
+import { em } from "./styles.ts";
 import { Txt } from "./Text.tsx";
 
 /** Site-written content is authored at this base size. */
@@ -69,22 +70,36 @@ export function UpdateNotes({ notes }: { notes: readonly FlagNote[] | undefined 
   return notes.map((n) => <UpdateNote key={n.id} note={n} />);
 }
 
+/** Picking a figure in edit mode: `picked` is the selected figure's index, `onPick` selects one. */
+export interface FigurePicking {
+  picked: number | null;
+  onPick: (index: number) => void;
+}
+
 /**
  * A gap block's example images, each opening full size, with its caption and its credit line: author,
  * license, a link to the source's file page and any change made. The same wording for everyone.
+ * Each is shown at its `widthPt` when it has one, else at its natural size, never wider than the column.
  * `thumbnails`: shown small, side by side, each opening in the image viewer when clicked.
+ * `picking` (edit mode): clicking a figure selects it instead of opening it.
  */
-export function GapFigures({ figures, thumbnails = false }: { figures: readonly PubFigure[]; thumbnails?: boolean }): ReactNode {
+export function GapFigures({ figures, thumbnails = false, picking }: { figures: readonly PubFigure[]; thumbnails?: boolean; picking?: FigurePicking }): ReactNode {
   if (figures.length === 0) return null;
   return (
     <div className={thumbnails ? "gap-figs thumbs" : "gap-figs"}>
-      {figures.map((f) => {
+      {figures.map((f, i) => {
         const url = assetUrl(f.asset);
         const c = f.credit;
-        const img = <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" />;
+        const sized = !thumbnails && f.widthPt !== undefined ? { width: em(f.widthPt, GAP_BASE_PT) } : undefined;
+        const img = <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" style={sized} />;
+        const picked = picking?.picked === i;
         return (
-          <figure key={f.asset} className="gap-fig">
-            {thumbnails ? (
+          <figure key={f.asset} className={picked ? "gap-fig picked" : "gap-fig"}>
+            {picking ? (
+              <button type="button" className="imgbtn" aria-label={`Select picture: ${f.caption}`} aria-pressed={picked} onClick={() => picking.onPick(i)} data-ref="gap-fig-pick">
+                {img}
+              </button>
+            ) : thumbnails ? (
               <button type="button" className="imgbtn" aria-label={`Open full size: ${f.caption}`} onClick={() => openImageViewer(url)}>
                 {img}
               </button>
@@ -125,18 +140,22 @@ export function GapFigures({ figures, thumbnails = false }: { figures: readonly 
   );
 }
 
+/** The class of a gap block's box: the blue dashed gap box, or plain when she shows it as her notes. */
+export const gapClass = (asNotes: boolean): string => (asNotes ? "gap as-notes" : "gap");
+
 /**
  * A gap-filled block (general-topic/gap-block). `titled` false: no title heading, for a block
  * whose title is already shown just above it (a collapsible's summary). `thumbnails`: its images
- * shown small, opening full size on click (see GapFigures).
+ * shown small, opening full size on click (see GapFigures). One she shows as her own notes
+ * (`asNotes`) has no gap box, badge or "Relevant to" line, and its sources in small print.
  */
 export function GapBlock({ gap, titled = true, thumbnails = false }: { gap: PubGap; titled?: boolean; thumbnails?: boolean }): ReactNode {
   const edited = latest(gap.ownerEdits);
   return (
-    <section className="gap" aria-label={gap.title} data-anchor={gap.id}>
+    <section className={gapClass(gap.asNotes)} aria-label={gap.title} data-anchor={gap.id}>
       <UpdateNotes notes={gap.notes} />
       <div className="gap-h">
-        <GapChip />
+        {!gap.asNotes && <GapChip />}
         {titled && (
           <h3>
             <Txt text={gap.title} />
@@ -144,9 +163,11 @@ export function GapBlock({ gap, titled = true, thumbnails = false }: { gap: PubG
         )}
         {edited && <span className="gap-edited own-only">Edited by you · {formatDate(edited)}</span>}
       </div>
-      <div className="gap-meta">
-        Relevant to: <b><Txt text={gap.relevantTo} /></b> · Written {formatDate(gap.written)}
-      </div>
+      {!gap.asNotes && (
+        <div className="gap-meta">
+          Relevant to: <b><Txt text={gap.relevantTo} /></b> · Written {formatDate(gap.written)}
+        </div>
+      )}
       <GapFigures figures={gap.figures} thumbnails={thumbnails} />
       <div className="notes gap-body">
         <RichDoc doc={gap.doc} basePt={GAP_BASE_PT} />

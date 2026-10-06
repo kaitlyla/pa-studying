@@ -4,28 +4,28 @@
 import { Fragment, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import type { DocJSON } from "../../lib/content/index.ts";
+import { GAP_CONTENT_PT, type DocJSON, type GapFile } from "../../lib/content/index.ts";
 import { pubFigures } from "../../lib/derive/published.ts";
 import { BELOW_HEADING } from "../../lib/derive/topics.ts";
-import { GapChip, GapFigures } from "../render/index.ts";
+import { GapChip, GapFigures, gapClass, type FigurePicking } from "../render/index.ts";
 import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
-  moveParagraph, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, toggleBold, toggleItalic,
-  toggleUnderline, type Command, type DocContext,
+  moveParagraph, naturalPictureWidth, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, steppedPictureWidth,
+  toggleBold, toggleItalic, toggleUnderline, type Command, type DocContext,
 } from "./editor/commands.ts";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
-  copyWithToast, dismissBanner, done, LOAD_NEWER, loadNewer, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE, startEdit,
-  useEdit, viewChanged, type Banner,
+  copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
+  setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
-import type { Part, Slot } from "./units.ts";
+import { gapLook, type Part, type Slot } from "./units.ts";
 import { rememberVersionsOrigin } from "./versions.ts";
 import "./edit.css";
 
@@ -39,10 +39,41 @@ interface Active {
 }
 
 let active: Active | null = null;
+/**
+ * A gap block's figure she picked (edit mode): Picture − / + size it instead of a picture in an editor.
+ * Cleared when its box unmounts (the edit ends or its editors are replaced), so it never outlives the edit.
+ */
+interface PickedFigure {
+  gapId: string;
+  index: number;
+}
+let picked: PickedFigure | null = null;
 const activeListeners = new Set<() => void>();
 const touch = (): void => activeListeners.forEach((l) => l());
 
-function useActive(): Active | null {
+/** She picked a figure (null: she went back to an editor). */
+function pickFigure(p: PickedFigure | null): void {
+  picked = p;
+  touch();
+}
+
+/** The open edit's gap block with this id. */
+function openGap(id: string): GapFile | null {
+  const part = getEditStore().edit?.unit?.parts.find((p): p is Extract<Part, { kind: "gap" }> => p.kind === "gap" && p.gap.id === id);
+  return part?.gap ?? null;
+}
+
+/** Picture − / + on the picked figure: one steppedPictureWidth step, from its natural size when it has none. */
+function resizeFigure(p: PickedFigure, dir: 1 | -1): void {
+  const gap = openGap(p.gapId);
+  const f = gap?.meta.figures?.[p.index];
+  if (!gap || !f) return;
+  const look = currentLook(gap);
+  const now = look.widths[f.asset] ?? naturalPictureWidth(f.width, GAP_CONTENT_PT);
+  setGapLook(gap, { ...look, widths: { ...look.widths, [f.asset]: steppedPictureWidth(now, dir, GAP_CONTENT_PT) } });
+}
+
+function useActive(): { a: Active | null; figure: PickedFigure | null } {
   const [, setTick] = useState(0);
   useEffect(() => {
     const l = (): void => setTick((n) => n + 1);
@@ -51,7 +82,7 @@ function useActive(): Active | null {
       activeListeners.delete(l);
     };
   }, []);
-  return active;
+  return { a: active, figure: picked };
 }
 
 function SlotEditor({ slot }: { slot: Slot }): ReactNode {
@@ -71,11 +102,13 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
         view.updateState(view.state.apply(tr));
         if (tr.docChanged) viewChanged();
         active = { view, ctx };
+        picked = null;
         touch();
       },
       handleDOMEvents: {
         focus: () => {
           active = { view, ctx };
+          picked = null;
           touch();
           return false;
         },
@@ -95,13 +128,46 @@ type SlotView = (slot: Slot) => ReactNode;
 
 const editorView: SlotView = (slot) => <SlotEditor slot={slot} />;
 
-function GapFrame({ part, slotView }: { part: Extract<Part, { kind: "gap" }>; slotView: SlotView }): ReactNode {
-  const m = part.gap.meta;
+/** The switch on a gap block in edit mode: shown as her own notes (no gap box or labels) or as a gap block. */
+export const SHOW_AS_MY_NOTES = "Show as my notes";
+
+/**
+ * A gap block's editors in its box. `editing`: the open edit's (its look as she changed it, with the
+ * Show as my notes switch, and figures she can pick to resize); else as stored (Versions' View).
+ */
+function GapFrame({ part, slotView, editing }: { part: Extract<Part, { kind: "gap" }>; slotView: SlotView; editing: boolean }): ReactNode {
+  const { edit } = useEdit();
+  const { figure } = useActive();
+  const { gap } = part;
+  const m = gap.meta;
+  const look = (editing ? edit?.looks[gap.id] : undefined) ?? gapLook(gap);
+  const figures = pubFigures(m).map((f) => {
+    const shown = { ...f };
+    const w = look.widths[f.asset];
+    if (w === undefined) delete shown.widthPt;
+    else shown.widthPt = w;
+    return shown;
+  });
+  useEffect(() => () => {
+    if (picked?.gapId === gap.id) pickFigure(null);
+  }, [gap.id]);
+  const picking: FigurePicking | undefined = editing
+    ? { picked: figure?.gapId === gap.id ? figure.index : null, onPick: (index) => pickFigure({ gapId: gap.id, index }) }
+    : undefined;
   return (
-    <section className="gap" aria-label={m.title}>
-      <div className="gap-h"><GapChip /><h3>{m.title}</h3></div>
-      <div className="gap-meta">Relevant to: <b>{m.relevantTo}</b> · Written {m.written}</div>
-      <GapFigures figures={pubFigures(m)} />
+    <section className={gapClass(look.asNotes)} aria-label={m.title}>
+      <div className="gap-h">
+        {!look.asNotes && <GapChip />}
+        <h3>{m.title}</h3>
+        {editing && (
+          <label className="gap-asnotes">
+            <input type="checkbox" checked={look.asNotes} onChange={(e) => setGapLook(gap, { ...look, asNotes: e.currentTarget.checked })} data-ref="gap-asnotes" />
+            {SHOW_AS_MY_NOTES}
+          </label>
+        )}
+      </div>
+      {!look.asNotes && <div className="gap-meta">Relevant to: <b>{m.relevantTo}</b> · Written {m.written}</div>}
+      <GapFigures figures={figures} picking={picking} />
       {slotView(part.doc)}
       {part.differs && (
         <div className="gap-diff">
@@ -120,7 +186,8 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
     case "stub":
       return <div className="stub"><span className="stub-t">{part.label}</span> drug table — edited on its pharm section</div>;
     case "gap":
-      return <GapFrame part={part} slotView={slotView} />;
+      // The editors' own view is the open edit; any other (Versions' View) shows a version as stored.
+      return <GapFrame part={part} slotView={slotView} editing={slotView === editorView} />;
     case "below":
       return (
         <section className="below-edit" aria-label={BELOW_HEADING}>
@@ -220,7 +287,7 @@ function AddPicture({ a }: { a: Active | null }): ReactNode {
 
 function Toolbar(): ReactNode {
   const { edit } = useEdit();
-  const a = useActive();
+  const { a, figure } = useActive();
   const phone = useIsPhone();
   const cmd = (c: (ctx: DocContext) => Command) => (): void => {
     if (!a) return;
@@ -291,7 +358,14 @@ function Toolbar(): ReactNode {
         )}
         <span className="sep" />
         <AddPicture a={a} />
-        {picture && (
+        {figure ? (
+          <>
+            <span className="sep" />
+            <span className="tb-gl">Picture:</span>
+            <Tool label="Make picture smaller" run={() => resizeFigure(figure, -1)} refk="tb-pic-smaller">−</Tool>
+            <Tool label="Make picture bigger" run={() => resizeFigure(figure, 1)} refk="tb-pic-bigger">+</Tool>
+          </>
+        ) : picture && (
           <>
             <span className="sep" />
             <span className="tb-gl">Picture:</span>

@@ -1065,6 +1065,86 @@ test.describe("toolbar limits", () => {
   }
 });
 
+/** A reference sub-topic's gap block with a picture shown at full size (Imaging shows thumbnails), from the published data. */
+const figureGap = REF_TABS.filter((tab) => tab !== "imaging").flatMap((tab) => readData<RefTabJson>(refPath(tab)).subs.flatMap((s) => s.gaps.map((g) => ({ tab, sub: s.id, gap: g }))))
+  .find((x) => x.gap.figures.length > 0) ?? null;
+
+test.describe("a gap block's picture size and Show as my notes", () => {
+  const target = () => need(figureGap, "reference sub-topic gap block with a picture");
+  const gapFile = (fake: FakeGithub, id: string) => JSON.parse(need(changedFiles(fake).get(`content/gapfill/${id}.json`), `${id} in the save`)) as {
+    meta: { asNotes?: true; ownerEdits: string[]; figures: { widthPt?: number }[] };
+  };
+
+  test("picking the picture gives Picture − / +; two steps down save its width, smaller on the page", async ({ page, context, baseURL }) => {
+    const { tab, sub, gap } = target();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, refHash(tab, sub));
+    await signIn(page);
+    const area = await startEditing(page);
+    const box = area.getByRole("region", { name: gap.title, exact: true });
+    const img = box.locator(".gap-figs img").first();
+    const before = await img.evaluate((e) => e.getBoundingClientRect().width);
+    await expect(ref(page, "tb-pic-smaller")).toHaveCount(0);
+    await ref(box, "gap-fig-pick").first().click();
+    await clickN(ref(page, "tb-pic-smaller"), 2);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    expect(await img.evaluate((e) => e.getBoundingClientRect().width)).toBeLessThan(before);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const f = need(gap.figures[0], "figure");
+    const start = f.widthPt ?? Math.min(f.width * 0.75, 468);
+    const saved = gapFile(fake, gap.id);
+    expect(saved.meta.figures[0]?.widthPt).toBeCloseTo(start / 1.15 / 1.15, 6);
+    expect(saved.meta.ownerEdits).toHaveLength(gap.ownerEdits.length + 1);
+  });
+
+  test("after a save, the next edit has no picture picked, and a step starts from the saved width", async ({ page, context, baseURL }) => {
+    const { tab, sub, gap } = target();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, refHash(tab, sub));
+    await signIn(page);
+    let box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    await ref(box, "gap-fig-pick").first().click();
+    await ref(page, "tb-pic-smaller").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    await expect(ref(page, "tb-pic-smaller")).toHaveCount(0);
+    await expect(box.locator(".gap-fig.picked")).toHaveCount(0);
+    await ref(box, "gap-fig-pick").first().click();
+    await ref(page, "tb-pic-smaller").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const f = need(gap.figures[0], "figure");
+    const start = f.widthPt ?? Math.min(f.width * 0.75, 468);
+    expect(gapFile(fake, gap.id).meta.figures[0]?.widthPt).toBeCloseTo(start / 1.15 / 1.15, 6);
+  });
+
+  test("Show as my notes saves asNotes; the box then shows with no gap box or badge", async ({ page, context, baseURL }) => {
+    const { tab, sub, gap } = target();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, refHash(tab, sub));
+    await signIn(page);
+    const area = await startEditing(page);
+    const box = area.getByRole("region", { name: gap.title, exact: true });
+    await expect(box).not.toHaveClass(/as-notes/);
+    await ref(box, "gap-asnotes").check();
+    await expect(box).toHaveClass(/as-notes/);
+    await expect(box.locator(".gapc")).toHaveCount(0);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    expect(gapFile(fake, gap.id).meta.asNotes).toBe(true);
+    const shown = page.locator(`main section.gap[data-anchor="${gap.id}"]`);
+    await expect(shown).toHaveClass(/as-notes/);
+    await expect(shown.locator(".gapc")).toHaveCount(0);
+    await expect(shown.locator(".gap-src")).toBeVisible();
+  });
+});
+
 // ---- 5. conflict ----------------------------------------------------------------------------------------
 
 /** Commits a change to the topic's block from "another device" at `date`; returns the appended text. */

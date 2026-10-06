@@ -61,7 +61,7 @@ export function WorkupPage({ guide, item: itemId }: { guide: string; item: strin
                 <Txt text={x.title} />
               </span>
               {x.conds && <span className="ll">Can point to: {x.conds}</span>}
-              <GapChip />
+              {!x.gap.asNotes && <GapChip />}
             </Link>
           </li>
         ))}

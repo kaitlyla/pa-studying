@@ -10,8 +10,8 @@ import type { DocJSON } from "../../../lib/content/index.ts";
 import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
-  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, removeHighlight, resizePicture, selectionSize,
-  setHighlight, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
+  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, naturalPictureWidth, removeHighlight, resizePicture, selectionSize,
+  setHighlight, steppedPictureWidth, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
@@ -830,6 +830,21 @@ describe("picture size", () => {
     const s0 = createEditorState(docOf(para([img(500)])));
     const state = run(s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, 1))), resizePicture(1, ctx));
     expect((state.doc.firstChild?.firstChild as PMNode).attrs.widthPt).toBe(540);
+  });
+
+  it("one step (shared by doc pictures and a gap box's figures) is × 1.15 or ÷ 1.15 within [24, limit]", () => {
+    expect(steppedPictureWidth(200, 1, 468)).toBeCloseTo(230, 10);
+    expect(steppedPictureWidth(230, -1, 468)).toBeCloseTo(200, 10);
+    expect(steppedPictureWidth(450, 1, 468)).toBe(468);
+    expect(steppedPictureWidth(26, -1, 468)).toBe(24);
+    // A limit under 24 never forces a picture below 24.
+    expect(steppedPictureWidth(30, 1, 10)).toBe(24);
+  });
+
+  it("a picture's natural width is 96 px = 72 pt, shrunk to the limit", () => {
+    expect(naturalPictureWidth(96, 468)).toBe(72);
+    expect(naturalPictureWidth(960, 468)).toBe(468);
+    expect(naturalPictureWidth(960, 10)).toBe(24);
   });
 });
 

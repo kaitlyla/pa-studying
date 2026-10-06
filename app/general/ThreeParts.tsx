@@ -72,18 +72,35 @@ export function ThreeParts({ links, files, gaps, lead = null, coveredFor, howto,
         </div>
       )}
       {gaps && (
-        <div className="gsec">
-          <h2 className="own-only">Not covered by your notes</h2>
+        <GapBoxes gaps={gaps}>
           {gaps.length === 0 && !lead && (
             <div className="covered own-only">
               {coveredFor ? `Your notes and files cover this topic for ${coveredFor}.` : "Your notes and files cover this."} Nothing was added.
             </div>
           )}
-          {gaps.map((g) => (
-            <GapBlock key={g.id} gap={g} />
-          ))}
-        </div>
+        </GapBoxes>
       )}
     </>
+  );
+}
+
+/**
+ * Part (3)'s gap blocks. Those she shows as her own notes (`asNotes`) come first with no heading; the
+ * rest follow the owner-only "Not covered by your notes" heading, which is left out when every block
+ * is shown as her notes. `children` (the owner's "covered" note) sit under the heading.
+ */
+export function GapBoxes({ gaps, children }: { gaps: readonly PubGap[]; children?: ReactNode }): ReactNode {
+  const labeled = gaps.filter((g) => !g.asNotes);
+  return (
+    <div className="gsec">
+      {gaps.filter((g) => g.asNotes).map((g) => (
+        <GapBlock key={g.id} gap={g} />
+      ))}
+      {(labeled.length > 0 || gaps.length === 0) && <h2 className="own-only">Not covered by your notes</h2>}
+      {children}
+      {labeled.map((g) => (
+        <GapBlock key={g.id} gap={g} />
+      ))}
+    </div>
   );
 }

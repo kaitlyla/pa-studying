@@ -210,6 +210,33 @@ describe("general topic page", () => {
     expect(heads.map((h) => visibleText(h))).toEqual(["In your notes 1", "Your files 1", "Not covered by your notes"]);
   });
 
+  describe("a gap block she shows as her notes", () => {
+    const labsGap = (): object => {
+      const labs = record(files.get(LABS), LABS);
+      if (!("gaps" in labs) || !Array.isArray(labs.gaps)) throw new Error("labs has no gaps");
+      return record(labs.gaps[0], "gap");
+    };
+    const gapPart = async (): Promise<Element> => at((await openGeneralLabs()).container.querySelectorAll(".general-page .gsec"), 2);
+
+    it("sits above the 'Not covered by your notes' heading, which stays over the labeled blocks", async () => {
+      const g1 = labsGap();
+      serveWith({ [LABS]: { ...record(files.get(LABS), LABS), gaps: [g1, { ...g1, id: G(904), title: "My own box", asNotes: true }] } });
+      const part = await gapPart();
+      const mine = part.querySelector('section.gap[aria-label="My own box"]');
+      const head = part.querySelector("h2.own-only");
+      const labeled = part.querySelector('section.gap[aria-label="TSH in AF"]');
+      if (!mine || !head || !labeled) throw new Error("missing box or heading");
+      expect(before(mine, head) && before(head, labeled)).toBe(true);
+    });
+
+    it("leaves the heading out when every block is shown as her notes", async () => {
+      serveWith({ [LABS]: { ...record(files.get(LABS), LABS), gaps: [{ ...labsGap(), asNotes: true }] } });
+      const part = await gapPart();
+      expect(part.querySelector('section.gap[aria-label="TSH in AF"]')).not.toBeNull();
+      expect(part.querySelector("h2")).toBeNull();
+    });
+  });
+
   it("does not list a removed or still-processing file as a file chip", async () => {
     const a = await openGeneralLabs();
     const chips = [...a.container.querySelectorAll(".general-page .fchip")];
@@ -293,6 +320,18 @@ describe("initial workup", () => {
     await click(back);
     expect(location.hash).toBe("#/eor/fm/workup");
     await until(() => main.querySelector(".workup-page .lnk"), "workup list again");
+  });
+
+  it("a presentation whose box she shows as her notes has no 'Not from your notes' chip in the list, even for her", async () => {
+    const path = "g/fm/workup.json";
+    const data = record(files.get(path), path) as { items: { gap: object }[] };
+    serveWith({ [path]: { ...data, items: data.items.map((x) => ({ ...x, gap: { ...x.gap, asNotes: true } })) } });
+    asOwner(true);
+    const a = await renderApp("#/eor/fm/workup");
+    app = a;
+    const li = await until(() => byText(a.container, ".workup-page .lnk li", "Altered mental status"), "workup list");
+    expect(li.querySelector(".gapc")).toBeNull();
+    expect(visibleText(li)).not.toContain(NOT_FROM);
   });
 
   it("renders the workup list for the general/workup key too", async () => {

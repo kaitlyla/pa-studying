@@ -528,7 +528,7 @@ export function publish(c: Content): PublishResult {
     return {
       id, title: m.title, relevantTo: m.relevantTo, written: m.written, doc: g.block.doc, differs: m.differs?.doc ?? null,
       sources: m.sources.map((s) => ({ name: s.name, org: s.org, year: s.year, url: s.url })), ownerEdits: m.ownerEdits, figures,
-      notes: (placedFlags.get(id) ?? []).map(note),
+      asNotes: m.asNotes === true, notes: (placedFlags.get(id) ?? []).map(note),
     };
   };
   const gapUnits = new Set<string>();
@@ -541,7 +541,9 @@ export function publish(c: Content): PublishResult {
     const text = [
       docText(g.block.doc), m.relevantTo, m.differs ? docText(m.differs.doc) : "", ...m.sources.map((s) => s.name), ...(m.figures ?? []).map((f) => f.caption),
     ].join("\n");
-    units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label: "gap", text: searchText(text) });
+    // A block she shows as her own notes is labelled as her notes in search too.
+    const label = m.asNotes === true ? "notes" : "gap";
+    units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label, text: searchText(text) });
   };
   type UnitBase = Omit<SearchUnit, "ord" | "title" | "at" | "text">;
   /** Search units of one of her Word-page blocks: one per table row (`rowAt`: a row found elsewhere), else one for the block. */

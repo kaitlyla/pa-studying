@@ -2,7 +2,7 @@
 // conflicts, the unsaved-changes guard and the draft store. React components read it with useEdit().
 import { useSyncExternalStore } from "react";
 import type { EditorView } from "prosemirror-view";
-import { commitMessage, type DocJSON } from "../../lib/content/index.ts";
+import { commitMessage, type DocJSON, type GapFile } from "../../lib/content/index.ts";
 import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
 import { SignedOutError } from "../auth/session.ts";
 import { SAVING_AGAIN, waitForSignIn } from "../auth/auth.ts";
@@ -18,7 +18,7 @@ import { recordSaved } from "./overlay.ts";
 import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
-import { buildSave, loadUnit, slotDocs, UnitError, type EditUnit, type SaveBuild } from "./units.ts";
+import { buildSave, gapLook, loadUnit, sameLook, slotDocs, UnitError, type EditUnit, type GapLook, type SaveBuild } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
 
 /** Edit start failed for want of a connection (plan wording). */
@@ -63,6 +63,8 @@ export interface EditState {
   banner: Banner | null;
   /** Bumped whenever the editors must be rebuilt from `unit` (edit start, Load newer version). */
   generation: number;
+  /** Gap blocks whose look she changed (figure sizes, Show as my notes), by gap id: their new look. */
+  looks: Readonly<Record<string, GapLook>>;
 }
 
 /** Her answer to "You have unsaved changes". */
@@ -191,11 +193,29 @@ export function mountedEditor(slot: string): EditorView | undefined {
   return views.get(slot)?.view;
 }
 
+/** The open edit's changed gap looks (GapLook), by gap id. */
+const editedLooks = (): Map<string, GapLook> => new Map(Object.entries(store.edit?.looks ?? {}));
+
 function isDirty(): boolean {
   for (const { view, initial } of views.values()) {
     if (!view.state.doc.eq(schema.nodeFromJSON(initial))) return true;
   }
-  return unmountedDocs().length > 0;
+  return unmountedDocs().length > 0 || editedLooks().size > 0;
+}
+
+/** The look gap `gap` of the open edit shows now: as she changed it, else as stored. */
+export function currentLook(gap: GapFile): GapLook {
+  return store.edit?.looks[gap.id] ?? gapLook(gap);
+}
+
+/** She changed the look of gap `gap` (a figure's size, Show as my notes): record it and recompute dirty. */
+export function setGapLook(gap: GapFile, look: GapLook): void {
+  const edit = store.edit;
+  if (!edit) return;
+  const looks = { ...edit.looks, [gap.id]: look };
+  if (sameLook(look, gapLook(gap))) delete looks[gap.id];
+  set({ edit: { ...edit, looks } });
+  setEdit({ dirty: isDirty() });
 }
 
 /** An editor's document changed: recompute dirty. */
@@ -247,6 +267,8 @@ function slotIds(unit: EditUnit): Set<string> {
 /** A draft to reopen: its docs by slot id, edited against `commit`. */
 export interface DraftStart {
   docs: Map<string, DocJSON>;
+  /** Its changed gap looks, by gap id. */
+  looks?: Readonly<Record<string, GapLook>>;
   commit: string;
   /** It came from the draft store: delete it there once its docs are in the editors. */
   stored?: boolean;
@@ -262,20 +284,23 @@ export interface DraftStart {
 export async function startEdit(key: string, title: string, draft?: DraftStart): Promise<boolean> {
   if (store.edit) return false;
   resetEditState();
-  set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0 }, pageBanner: null });
+  set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0, looks: {} }, pageBanner: null });
   try {
     const unit = await load(key, draft?.commit);
     const now = getEditStore().edit;
     if (now?.key !== key) return false;
+    let looks: Record<string, GapLook> = {};
     if (draft) {
       const slots = slotIds(unit);
       const docs = new Map([...draft.docs].filter(([slot]) => slots.has(slot)));
       pendingDocs = docs.size > 0 ? docs : null;
+      const gaps = new Set(unit.parts.flatMap((p) => (p.kind === "gap" ? [p.gap.id] : [])));
+      looks = Object.fromEntries(Object.entries(draft.looks ?? {}).filter(([gap]) => gaps.has(gap)));
       // Set before the editors mount: mounted regions register (and apply the draft) as soon as the unit is in the store.
       pendingDraftKey = draft.stored === true ? key : null;
-      resumeAfterApply = pendingDocs !== null && draft.resumeSave === true;
+      resumeAfterApply = (pendingDocs !== null || Object.keys(looks).length > 0) && draft.resumeSave === true;
     }
-    setEdit({ unit, generation: now.generation + 1 });
+    setEdit({ unit, generation: now.generation + 1, looks, dirty: Object.keys(looks).length > 0 });
     // No doc of the draft fits the page any more: nothing to apply.
     if (draft && pendingDocs === null) draftApplied();
     return true;
@@ -352,7 +377,7 @@ export async function save(): Promise<boolean> {
   setEdit({ saving: true, banner: null });
   try {
     const docs = editedDocs();
-    const build = buildSave(unit, docs);
+    const build = buildSave(unit, docs, undefined, { looks: editedLooks() });
     if (build.changes.length === 0) {
       discardEdit();
       return true;
@@ -407,7 +432,8 @@ export const COPY_DONE = "Your changes were copied.";
 /** The browser refused the clipboard write (design copyfail). */
 export const COPY_FAILED = "Copy didn’t work. Select the text and copy it yourself.";
 
-const editsKey = (docs: Map<string, DocJSON>): string => JSON.stringify([...docs]);
+/** All of the open edit's changes (docs and gap looks), as one comparable key. */
+const editsKey = (): string => JSON.stringify([[...editedDocs()], [...editedLooks()]]);
 
 /**
  * "Copy my changes": the edited views' text (the same docs Save and drafts take), paragraphs and rows
@@ -423,7 +449,7 @@ export async function copyChanges(): Promise<boolean> {
     console.warn("Copy my changes: the clipboard refused", e);
     return false;
   }
-  copiedEdits = editsKey(edited);
+  copiedEdits = editsKey();
   return true;
 }
 
@@ -442,9 +468,9 @@ export async function copyWithToast(): Promise<boolean> {
 export async function loadNewer(): Promise<void> {
   const edit = store.edit;
   if (!edit?.unit || edit.saving || loadingNewer) return;
-  const edited = editedDocs();
-  let copied = edited.size > 0 && copiedEdits === editsKey(edited);
-  if (edited.size > 0 && !copied) {
+  const changed = isDirty();
+  let copied = changed && copiedEdits === editsKey();
+  if (changed && !copied) {
     const choice = await askUnsaved();
     if (choice === "stay") return;
     if (choice === "save") {
@@ -465,7 +491,7 @@ export async function loadNewer(): Promise<void> {
     if (now?.key !== edit.key) return;
     resetEditState();
     dropKeptDraft();
-    setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied } });
+    setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied }, looks: {} });
   } catch (e) {
     if (getEditStore().edit?.key === edit.key) setEdit({ error: openError(e) });
   } finally {
@@ -493,6 +519,8 @@ export function leavingFor(toHash: string): void {
 export interface Draft {
   title: string;
   docs: Record<string, DocJSON>;
+  /** Her changed gap looks, by gap id (absent when she changed none). */
+  looks?: Record<string, GapLook>;
   /** The commit the edit started from: the restored edit saves against it (conflicts stay conflicts). */
   commit: string;
   /** She had pressed Save and was signing in again when the page left: save once the draft is back. */
@@ -514,6 +542,7 @@ export async function saveDraft(resumeSave = false): Promise<void> {
   const edit = store.edit;
   if (!edit?.unit || !isDirty()) return;
   const draft: Draft = { title: edit.title, docs: Object.fromEntries(editedDocs()), commit: edit.unit.snapshot.commit };
+  if (Object.keys(edit.looks).length > 0) draft.looks = { ...edit.looks };
   if (resumeSave) draft.resumeSave = true;
   await drafts.put(edit.key, draft);
 }
@@ -566,7 +595,7 @@ function draftApplied(): void {
 export async function restoreDraft(key: string): Promise<boolean> {
   const d = await drafts.get(key);
   if (!d) return false;
-  return startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), commit: d.commit, stored: true, resumeSave: d.resumeSave === true });
+  return startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), looks: d.looks, commit: d.commit, stored: true, resumeSave: d.resumeSave === true });
 }
 
 /** `beforeunload` while an edit has unsaved changes shows the browser's prompt. */

@@ -344,6 +344,26 @@ describe("gap-fill (20 §20.9)", () => {
     expect(verdict(path, gap([], { figures: [fig({ alt: "x" })] }))).toMatch(/no such key/);
   });
 
+  it("accepts an image's shown width up to the box's text width, and refuses others", () => {
+    const fig = (widthPt: unknown) => ({
+      asset: `${"0f".repeat(16)}.jpg`, width: 1200, height: 400, caption: "Atrial fibrillation",
+      credit: { author: "Jane Roe", license: "Public domain", licenseUrl: null, page: "https://commons.wikimedia.org/wiki/File:AF.jpg", changes: null },
+      evidence: { quote: "ECG showing atrial fibrillation", accessed: "2026-10-05" },
+      widthPt,
+    });
+    expect(verdict(path, gap([], { figures: [fig(300)] }))).toBe("ok");
+    expect(verdict(path, gap([], { figures: [fig(468)] }))).toBe("ok");
+    for (const w of [0, -5, 468.5, "300", null]) {
+      expect(verdict(path, gap([], { figures: [fig(w)] })), String(w)).toMatch(/\.meta\.figures\[0\]\.widthPt: expected a width in pt above 0 and at most 468/);
+    }
+  });
+
+  it("accepts asNotes only as true (absent means the box stays labeled)", () => {
+    expect(verdict(path, gap([], { asNotes: true }))).toBe("ok");
+    expect(verdict(path, gap([], { asNotes: false }))).toMatch(/\.meta\.asNotes/);
+    expect(verdict(path, gap([], { asNotes: "yes" }))).toMatch(/\.meta\.asNotes/);
+  });
+
   it("names CDC/ACIP organizations", () => {
     expect(isCdcOrg("CDC")).toBe(true);
     expect(isCdcOrg("ACIP")).toBe(true);

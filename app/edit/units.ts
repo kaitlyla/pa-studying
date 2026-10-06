@@ -1,8 +1,8 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
-  type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
+  GAP_CONTENT_PT, gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
+  type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
@@ -170,8 +170,43 @@ async function belowParts(snap: Snapshot, sys: SystemCtx, t: SystemTopics, shown
   return topics.map((x, i) => belowPart(sys, x.id, blocks[i] as BlockFile, basePt, width));
 }
 
+/**
+ * How a gap block is shown apart from its text: the width (pt) each figure is shown at, by asset,
+ * for the figures that have one; and whether she shows it as her own notes.
+ */
+export interface GapLook {
+  widths: Readonly<Record<string, number>>;
+  asNotes: boolean;
+}
+
+/** A gap block's look as stored. */
+export function gapLook(gap: GapFile): GapLook {
+  const widths: Record<string, number> = {};
+  for (const f of gap.meta.figures ?? []) if (f.widthPt !== undefined) widths[f.asset] = f.widthPt;
+  return { widths, asNotes: gap.meta.asNotes === true };
+}
+
+export const sameLook = (a: GapLook, b: GapLook): boolean => JSON.stringify(a) === JSON.stringify(b);
+
+/** `meta` showing `look`: each figure's widthPt from it (absent when it has none), and asNotes. */
+function withLook(meta: GapMeta, look: GapLook): GapMeta {
+  const out: GapMeta = { ...meta };
+  if (meta.figures) {
+    out.figures = meta.figures.map((f) => {
+      const shown = { ...f };
+      const w = look.widths[f.asset];
+      if (w === undefined) delete shown.widthPt;
+      else shown.widthPt = w;
+      return shown;
+    });
+  }
+  if (look.asNotes) out.asNotes = true;
+  else delete out.asNotes;
+  return out;
+}
+
 function gapPart(gap: GapFile): Part {
-  const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT });
+  const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: GAP_CONTENT_PT });
   return {
     kind: "gap", path: gapFilePath(gap.id), gap, doc: slot(gap.id, gap.doc),
     differs: gap.meta.differs ? slot(`${gap.id}:differs`, gap.meta.differs.doc) : null,
@@ -564,9 +599,13 @@ function rowsOf(block: BlockFile): RowJSON[] {
  * serialized canonically and left out when its bytes are unchanged. `docs` maps slot id → edited doc;
  * a slot missing from it is unchanged. With `restore` (the unit at a chosen version, 50 §50.6) the
  * docs are the version's: rows are restored by id with their old structure.json entries, gaps get the
- * version's doc and differs.
+ * version's doc, differs and look. `looks` maps gap id → its edited look (GapLook); a gap missing
+ * from it keeps its look. A differs doc she emptied is removed (null).
  */
-export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, today = localDate(), restore?: EditUnit): SaveBuild {
+export function buildSave(
+  unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, today = localDate(),
+  { restore, looks = new Map() }: { restore?: EditUnit; looks?: ReadonlyMap<string, GapLook> } = {},
+): SaveBuild {
   const docs = restore ? slotDocs(restore) : edits;
   const oldRows = (id: string): RowsPart | undefined => restore?.parts.find((p): p is RowsPart => p.kind === "rows" && p.block.id === id);
   let lostTopic: { part: RowsPart; blocks: BlockFile[]; structure: StructureFile } | null = null;
@@ -650,7 +689,9 @@ export function buildSave(unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, t
       const old = restore?.parts.find((p): p is Extract<Part, { kind: "gap" }> => p.kind === "gap" && p.gap.id === part.gap.id);
       const doc = old ? old.gap.doc : (docs.get(part.doc.id) ?? part.gap.doc);
       const differs = old ? (old.gap.meta.differs?.doc ?? null) : part.differs ? (docs.get(part.differs.id) ?? part.differs.doc) : null;
-      const plain: GapFile = { ...part.gap, doc, meta: { ...part.gap.meta, differs: differs ? { doc: differs } : null } };
+      const look = old ? gapLook(old.gap) : (looks.get(part.gap.id) ?? gapLook(part.gap));
+      const meta: GapMeta = { ...part.gap.meta, differs: differs && !isBlankDoc(differs) ? { doc: differs } : null };
+      const plain: GapFile = { ...part.gap, doc, meta: sameLook(look, gapLook(part.gap)) ? meta : withLook(meta, look) };
       const edited = canonical(part.path, plain) !== canonical(part.path, part.gap);
       const gap: GapFile = edited ? { ...plain, meta: { ...plain.meta, ownerEdits: [...part.gap.meta.ownerEdits, today] } } : part.gap;
       if (edited) changed.add(part.gap.id);
@@ -739,7 +780,7 @@ type BlockPartT = Extract<Part, { kind: "block" }>;
  * page is written.
  */
 export async function buildRestore(unit: EditUnit, version: EditUnit, today = localDate()): Promise<SaveBuild> {
-  const build = buildSave(unit, new Map(), today, version);
+  const build = buildSave(unit, new Map(), today, { restore: version });
   const lost = version.parts.filter((p): p is BlockPartT | RowsPart => (p.kind === "block" || p.kind === "rows") && !unit.snapshot.has(p.path));
   if (lost.length === 0) return build;
 

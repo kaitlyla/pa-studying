@@ -11,7 +11,7 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, GAP_CONTENT_PT, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
@@ -195,13 +195,16 @@ const gapSource: Checker = (v, at, ctx) => {
 
 const posInt: Checker = (v, at, ctx) => { if (!Number.isInteger(v) || (v as number) < 1) bad(ctx, at, "a positive integer", v); };
 const httpsUrl = re(/^https:\/\/\S+$/, "an https URL");
+const figureWidthPt: Checker = (v, at, ctx) => {
+  if (typeof v !== "number" || !(v > 0 && v <= GAP_CONTENT_PT)) bad(ctx, at, `a width in pt above 0 and at most ${GAP_CONTENT_PT}`, v);
+};
 const gapFigure = shapeOf<GapFigure>({
   asset: re(ASSET_RE, "a stored asset name"), width: posInt, height: posInt, caption: nonEmpty,
   credit: shapeOf<GapFigure["credit"]>({
     author: nonEmpty, license: nonEmpty, licenseUrl: nullable(httpsUrl), page: httpsUrl, changes: nullable(nonEmpty),
   }, {}),
   evidence: shapeOf<GapFigure["evidence"]>({ quote: nonEmpty, accessed: isoDate }, {}),
-}, {});
+}, { widthPt: figureWidthPt });
 
 export const validateGap: Validator = (v, ctx, expectId) => {
   shapeOf<GapFile>({
@@ -210,7 +213,7 @@ export const validateGap: Validator = (v, ctx, expectId) => {
       title: nonEmpty, relevantTo: str, written: month,
       differs: nullable(shapeOf<NonNullable<GapMeta["differs"]>>({ doc: anyValue }, {})),
       sources: arr(gapSource), ownerEdits: arr(isoDate),
-    }, { figures: arr(gapFigure) }),
+    }, { figures: arr(gapFigure), asNotes: one(true) }),
   }, {})(v, "", ctx);
   const g = v as GapFile;
   expectField(ctx, "id", g.id, expectId);

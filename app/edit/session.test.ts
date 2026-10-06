@@ -3,8 +3,8 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { EditorView } from "prosemirror-view";
 import { createElement } from "react";
-import { parseTrailers, serializeFile, type BlockFile, type DocJSON } from "../../lib/content/index.ts";
-import { B, R } from "../../tools/build/test-fixture.ts";
+import { parseTrailers, serializeFile, type BlockFile, type DocJSON, type GapFile } from "../../lib/content/index.ts";
+import { B, G, R } from "../../tools/build/test-fixture.ts";
 import { DATA_BASE, loadData } from "../data/load.ts";
 import { systemPath, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
 import { currentHash, guideViewHash, navigate, setNavigationGuard } from "../shell/route.ts";
@@ -15,10 +15,11 @@ import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import { overlayEntries, setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, copyChanges, discardEdit, getEditStore, loadNewer, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
-  OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, startEdit,
+  confirmLeave, copyChanges, currentLook, discardEdit, getEditStore, loadNewer, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
+  OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, setGapLook, startEdit,
   viewChanged, type Draft,
 } from "./session.ts";
+import { gapLook } from "./units.ts";
 import { addPictureFile, pictureSize, setPictureStoreForTests, stopLocalPictures } from "./pictures.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import { docLines } from "./editor/commands.ts";
@@ -387,6 +388,48 @@ describe("drafts across the sign-in page load", () => {
   it("no draft: nothing opens", async () => {
     expect(await restoreDraft(KEY)).toBe(false);
     expect(getEditStore().edit).toBeNull();
+  });
+});
+
+describe("a gap box's look (a figure's size, Show as my notes)", () => {
+  const LABS = "general:fm:labs";
+  const GAP = `content/gapfill/${G(1)}.json`;
+  const gapOf = (): GapFile => {
+    const p = edit().unit?.parts.find((x) => x.kind === "gap");
+    if (!p || p.kind !== "gap") throw new Error("no gap part");
+    return p.gap;
+  };
+
+  it("a look change alone makes the edit dirty; changing it back makes it clean; Save writes it", async () => {
+    expect(await startEdit(LABS, "Labs")).toBe(true);
+    mountEditors();
+    const gap = gapOf();
+    setGapLook(gap, { widths: {}, asNotes: true });
+    expect(edit().dirty).toBe(true);
+    expect(currentLook(gap).asNotes).toBe(true);
+    setGapLook(gap, gapLook(gap));
+    expect(edit().dirty).toBe(false);
+    expect(currentLook(gap).asNotes).toBe(false);
+
+    setGapLook(gap, { widths: {}, asNotes: true });
+    expect(await save()).toBe(true);
+    expect((JSON.parse(w.fake.readFile(GAP) ?? "null") as GapFile).meta.asNotes).toBe(true);
+  });
+
+  it("a look change survives the sign-in page load in the draft", async () => {
+    expect(await startEdit(LABS, "Labs")).toBe(true);
+    mountEditors();
+    setGapLook(gapOf(), { widths: {}, asNotes: true });
+    await saveDraft();
+    destroyEditors();
+    discardEdit();
+
+    expect(await restoreDraft(LABS)).toBe(true);
+    mountEditors();
+    expect(currentLook(gapOf()).asNotes).toBe(true);
+    expect(edit().dirty).toBe(true);
+    expect(await save()).toBe(true);
+    expect((JSON.parse(w.fake.readFile(GAP) ?? "null") as GapFile).meta.asNotes).toBe(true);
   });
 });
 
