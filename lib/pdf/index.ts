@@ -2,13 +2,12 @@
 // page has loaded to a pdfmake document definition, used unchanged by the browser (app/pdf) and by
 // the publish workflow (tools/pdf).
 import type { DocJSON, PageSetup } from "../content/types.ts";
-import { noteView } from "../derive/columns.ts";
+import { keepTableRows, noteView } from "../derive/columns.ts";
 import type { FontMapJson, PartCut, PubBlock, SystemJson } from "../derive/published.ts";
 import { belowUnder } from "../derive/topics.ts";
 import { allLinesHidden, hiddenLines, shownParts, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
-import { placeCells } from "../wordFormat.ts";
 import { docContent, imagesOf, type RichEnv } from "./rich.ts";
 import type { DocDefinition, ImageVariant, PdfInput, PdfScope } from "./types.ts";
 
@@ -39,29 +38,10 @@ function blockOf(system: SystemJson, id: string): PubBlock {
   return b;
 }
 
-/** A table block reduced to the given rows, in table order, with row spans clipped to the rows kept. */
+/** A table block reduced to the given rows, cut as the screen draws them (keepTableRows). */
 export function keepRows(doc: DocJSON, keep: ReadonlySet<string>): DocJSON {
-  const content = (doc.content as PMNode[]).map((node) => {
-    if (node.type !== "table") return node;
-    const rows = node.content ?? [];
-    const { cells } = placeCells(rows);
-    const kept = rows.map((r) => keep.has(String(r.attrs?.id)));
-    const keptIn = (from: number, to: number): number => kept.slice(from, to).filter(Boolean).length;
-    const byRow: { col: number; cell: PMNode }[][] = rows.map(() => []);
-    for (const p of cells) {
-      const span = keptIn(p.row, p.row + p.rowspan);
-      if (span === 0) continue;
-      const first = kept.indexOf(true, p.row);
-      // A spanning cell whose own row is dropped leaves an empty cell, with its fill, in the rows kept.
-      const cell = first === p.row ? p.node : { type: "table_cell", attrs: { ...p.node.attrs, rowspan: 1 }, content: [{ type: "paragraph" }] };
-      (byRow[first] as { col: number; cell: PMNode }[]).push({ col: p.col, cell: { ...cell, attrs: { ...cell.attrs, rowspan: span } } });
-    }
-    const outRows = rows
-      .map((r, i) => ({ r, i }))
-      .filter(({ i }) => kept[i])
-      .map(({ r, i }) => ({ ...r, content: (byRow[i] ?? []).sort((a, b) => a.col - b.col).map((x) => x.cell) }));
-    return { ...node, content: outRows };
-  });
+  const content = (doc.content as PMNode[]).map((node) =>
+    node.type === "table" ? keepTableRows(node, (node.content ?? []).map((r) => keep.has(String(r.attrs?.id)))) : node);
   return { ...doc, content };
 }
 

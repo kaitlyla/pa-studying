@@ -207,12 +207,13 @@ describe("keepRows (topic and section tables)", () => {
     expect(() => schema.nodeFromJSON(out).check()).not.toThrow();
   });
 
-  it("leaves an empty cell, with the span's fill, where a spanning cell's own row is dropped", () => {
+  it("keeps a spanning cell's text, as the screen does, on the first kept row when its own row is dropped", () => {
     const out = keepRows(d, new Set(["r_AAAAAAAAA2", "r_AAAAAAAAA3"]));
     const [r2, r3] = rowsOf(out);
     expect(r2?.content.map((c) => [c.attrs.rowspan, c.attrs.fill ?? null])).toEqual([[2, "FFE699"], [1, null]]);
-    expect(lines(build(out, "table"))).toEqual(["a2", "a3"]);
+    expect(lines(build(out, "table"))).toEqual(["A", "a2", "a3"]);
     expect(r3?.content).toHaveLength(1);
+    expect(() => schema.nodeFromJSON(out).check()).not.toThrow();
   });
 });
 

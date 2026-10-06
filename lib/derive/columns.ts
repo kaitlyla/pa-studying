@@ -84,10 +84,20 @@ export interface RowsOptions {
 export function rowsView(doc: DocJSON, rows: readonly string[], { firstRow }: RowsOptions = { firstRow: true }): DocJSON | null {
   const table = tableNode({ id: "", doc }) as PMNode | null;
   if (!table) return null;
-  const all = table.content ?? [];
   const wanted = new Set(rows);
-  const keep = all.map((r, i) => (firstRow && i === 0) || wanted.has(String(r.attrs?.id)));
+  const keep = (table.content ?? []).map((r, i) => (firstRow && i === 0) || wanted.has(String(r.attrs?.id)));
   if (!keep.includes(true)) return null;
+  return { type: "doc", content: [keepTableRows(table, keep)] };
+}
+
+/**
+ * `table` with only the rows `keep` marks, in table order, cut on the table grid as the screen draws
+ * a row subset: a cell spanning rows is kept once, on the first kept row it covers, spanning only the
+ * kept rows it covers, so a merged cell starting on a left-out row keeps its text beside the kept
+ * rows under it.
+ */
+export function keepTableRows(table: PMNode, keep: readonly boolean[]): PMNode {
+  const all = table.content ?? [];
   const { cells } = placeCells(all);
   const keptIn = (from: number, to: number): number => keep.slice(from, to).filter(Boolean).length;
   const content = all.flatMap((row, r) => {
@@ -96,5 +106,5 @@ export function rowsView(doc: DocJSON, rows: readonly string[], { firstRow }: Ro
     const here = cells.filter((p) => p.row <= r && r < p.row + p.rowspan && keptIn(p.row, r) === 0).sort((a, b) => a.col - b.col);
     return [{ ...row, content: here.map((p) => ({ ...p.node, attrs: { ...p.node.attrs, rowspan: keptIn(r, p.row + p.rowspan) } })) }];
   });
-  return { type: "doc", content: [{ ...table, content }] };
+  return { ...table, content };
 }
