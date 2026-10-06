@@ -1326,6 +1326,76 @@ test("a pharm section opens every card for editing, and Done returns the cards t
   for (const k of rest) await expect(card(k)).not.toHaveClass(/(^| )open( |$)/);
 });
 
+test("an edit to a card's rows of her page table saves to her one stored table, and her page shows it", async ({ page, context, baseURL }) => {
+  // A card part that cuts rows from a table stored on one of her Word pages.
+  const target = need(
+    inGuides((g, n) => {
+      for (const s of n.systems) {
+        const sys = readData<SystemJson>(systemPath(g, s.id));
+        for (const sec of sys.pharm?.sections ?? []) {
+          for (const k of sec.cards) {
+            for (const part of sys.cards[k]?.parts ?? []) {
+              const block = part.blocks[0];
+              const row = part.rows?.[1];
+              const host = block === undefined ? undefined : docs.find((d) => d.blocks?.some((b) => b.id === block));
+              if (block !== undefined && row !== undefined && host) return { g, sys, sec, k, block, row, host };
+            }
+          }
+        }
+      }
+      return undefined;
+    }),
+    "pharm card part cutting rows from a table on her Word page",
+  );
+  const { g, sys, sec, k, block, row, host } = target;
+  // The paragraphs sitting directly in the cells of the part's own (non-heading) row.
+  const table = need(sys.notesBlocks[block]?.doc, `notes block ${block}`);
+  const rowPath = need(findPath(table, (n) => n.type === "table_row" && isRec(n.attrs) && n.attrs.id === row), `row ${row}`);
+  const cells = nodeAt(table, rowPath).content;
+  const rowTexts = (Array.isArray(cells) ? cells : [])
+    .flatMap((cell: unknown) => (isRec(cell) && Array.isArray(cell.content) ? cell.content : []))
+    .filter((n: unknown) => isRec(n) && n.type === "paragraph")
+    .map((n: unknown) => textOf(n).trim())
+    .filter((text) => text.length >= 8);
+
+  const { fake, seed } = await world(context, baseURL, { seed: true });
+  await openPage(page, guideViewHash(g, { kind: "pharm", system: sys.id, section: sec.id, target: null }));
+  await signIn(page);
+  const card = page.locator(`section.phc[data-anchor="${k}"]`);
+  await card.locator(".phc-h button").click();
+  for (const text of rowTexts) await expect(card).toContainText(text);
+
+  // The edit area also holds her guide's own drug table, which can repeat a cell's text: edit a paragraph
+  // of the row that appears in the edit area once (the saved file below proves which table it was).
+  const area = await startEditing(page);
+  const paragraph = (text: string): Locator => area.locator('.edit-slot [contenteditable="true"] p').filter({ hasText: text });
+  let cellText: string | null = null;
+  for (const text of rowTexts) {
+    if ((await paragraph(text).count()) === 1) {
+      cellText = text;
+      break;
+    }
+  }
+  if (cellText === null) throw new Error(`every paragraph of row ${row} also appears elsewhere in the edit area`);
+  const marker = newMarker();
+  await paragraph(cellText).click({ position: { x: 1, y: 2 } });
+  await page.keyboard.press("Home");
+  await page.keyboard.type(marker);
+  await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+  await ref(page, "edit-save").click();
+  await expect(ref(page, "save-success")).toBeVisible();
+
+  expect(fake.head()).not.toBe(seed);
+  const changed = changedFiles(fake);
+  expect([...changed.keys()].filter((path) => path.endsWith(".json"))).toEqual([`content/docs/${host.id}/blocks/${block}.json`]);
+  expect(changed.get(`content/docs/${host.id}/blocks/${block}.json`)).toContain(marker);
+  await expect(ref(page, "edit-area")).toHaveCount(0);
+  await expect(card).toContainText(`${marker}${cellText}`);
+
+  await openPage(page, fileHash(host.id, null));
+  await expect(page.locator("main")).toContainText(`${marker}${cellText}`);
+});
+
 // ---- 10–14. documents --------------------------------------------------------------------------------------
 
 const place = (): OtherJson["sections"][number] => need(other.sections[0], "Other section");

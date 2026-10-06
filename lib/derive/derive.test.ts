@@ -975,6 +975,15 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(m.named("Levodopa-carbidopa")).toEqual([C(21)]);
     });
 
+    it("a drug word right after an ordinal is a place, not the drug", () => {
+      // Pneumothorax: "anterior to midaxillary line in 5th ICS (nipple line)"; COPD: "ICS + LABA if eosinophils ≥300".
+      const ics = new CardMatcher([{ id: C(30), file: "f", aliases: ["ICS"], home: {} }]);
+      expect(ics.named("anterior to midaxillary line in 5th ICS (nipple line)")).toEqual([]);
+      expect(ics.named("superior rib margin in 2nd ICS, midclavicular line")).toEqual([]);
+      expect(ics.named("ICS + LABA if eosinophils ≥300")).toEqual([C(30)]);
+      expect(ics.named("add 2 ICS puffs")).toEqual([C(30)]);
+    });
+
     it("a drug word her text makes the problem names nothing", () => {
       for (const text of ["iron deficiency anemia", "serum salicylate level", "opiate OD", "Opioid-induced constipation", "Iron TX: chelation therapy"]) {
         expect(m.named(text), text).toEqual([]);

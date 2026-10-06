@@ -7,6 +7,12 @@ import { withHeadings, type SystemTopics, type Topic } from "./topics.ts";
 
 export type Card = CardsFile["cards"][number];
 
+/** The class card `classId` first, then the cards shown inside it (their `in`), in `cards.json` order; none if it is no card. */
+export function cardGroup(cards: readonly Card[], classId: string): Card[] {
+  const own = cards.find((c) => c.id === classId);
+  return own === undefined ? [] : [own, ...cards.filter((m) => m.in === classId)];
+}
+
 const matcherCache = new Map<string, (text: string) => boolean>();
 
 /** The whole-word, case-insensitive alternation of the phrases on NFC text, or null for none. */
@@ -191,6 +197,9 @@ function headsList(text: string, at: number, end: number): boolean {
  */
 const JOINED_BEFORE = /(?:(?<![\p{L}\p{N}])(?:non|low|high)|\p{N})-$/iu;
 
+/** An ordinal right before a drug word makes it a place, not a drug: "5th ICS" (intercostal space). */
+const ORDINAL_BEFORE = /(?<![\p{L}\p{N}])\p{N}+(?:st|nd|rd|th)[^\S\n]+$/iu;
+
 /**
  * Her words right after a drug word on its line, or hyphen-joined to it, that make it the problem or
  * another thing, not the treatment: "iron overload", "iron deficiency anemia", "Deferoxamine
@@ -201,9 +210,10 @@ const JOINED_BEFORE = /(?:(?<![\p{L}\p{N}])(?:non|low|high)|\p{N})-$/iu;
 const PROBLEM_AFTER =
   /^(?:[^\S\n]+|-)(?:overload|deficiency|deficient|toxicity|poisoning|overdose|OD|levels?|concentrations?|accumulates|accumulation|nomogram|induced|withdrawal|intoxication|chelation|INF|IFN|TX\s*:)(?![\p{L}\p{N}])/iu;
 
-/** Whether her drug word at `at`–`end` of `notes` is part of another word or names the problem (`JOINED_BEFORE`, `PROBLEM_AFTER`). */
+/** Whether her drug word at `at`–`end` of `notes` is part of another word, a place, or names the problem (`JOINED_BEFORE`, `ORDINAL_BEFORE`, `PROBLEM_AFTER`). */
 function notTreatment(notes: string, at: number, end: number): boolean {
-  return JOINED_BEFORE.test(notes.slice(Math.max(0, at - 8), at)) || PROBLEM_AFTER.test(notes.slice(end, end + 40));
+  const before = notes.slice(Math.max(0, at - 8), at);
+  return JOINED_BEFORE.test(before) || ORDINAL_BEFORE.test(before) || PROBLEM_AFTER.test(notes.slice(end, end + 40));
 }
 
 /** Drug words (global, under no negative sign): `phraseSource(phrases, NEGATIVE_SIGN)`, or null for none. */
@@ -309,7 +319,7 @@ export class CardMatcher {
   constructor(cards: readonly Card[]) {
     this.all = cards;
     this.cards = cards.filter((c) => c.in === undefined);
-    this.members = new Map(this.cards.map((c) => [c.id, [c, ...cards.filter((m) => m.in === c.id)]]));
+    this.members = new Map(this.cards.map((c) => [c.id, cardGroup(cards, c.id)]));
     this.tests = this.cards.map((c) => phraseMatcher(this.membersOf(c.id).flatMap((m) => m.aliases)));
     this.aliasWords = this.cards.map((c) => drugWords(this.membersOf(c.id).flatMap((m) => m.aliases)));
     this.classWords = this.cards.map((c) => drugWords(this.membersOf(c.id).flatMap((m) => m.classWords ?? [])));

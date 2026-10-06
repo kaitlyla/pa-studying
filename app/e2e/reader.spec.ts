@@ -754,14 +754,14 @@ test.describe("pharm", () => {
   });
 
   test("meds panel: 'Open in <System> pharm ›' opens the pharm section with that card open and scrolled into view", async ({ page }) => {
+    // The link goes to the system holding the card's pharm section, which may be another system's.
     let pick: { g: string; sys: SystemJson; topic: string; title: string; card: string; section: string } | null = null;
     for (const { g, s } of allSystems) {
       const listed = new Set([...s.entries, ...s.sections.flatMap((x) => x.entries)].map((e) => e.id));
-      const sys = systemOf(g, s.id);
-      for (const t of sys.topics) {
-        const m = t.meds.find((x) => x.card !== null && x.target === x.card);
-        if (m && m.card && listed.has(t.id)) {
-          pick = { g, sys, topic: t.id, title: m.title, card: m.card, section: m.section };
+      for (const t of systemOf(g, s.id).topics) {
+        const m = t.meds.find((x) => x.card !== null && x.target === x.card && x.system !== null);
+        if (m && m.card && m.system && listed.has(t.id)) {
+          pick = { g, sys: systemOf(g, m.system), topic: t.id, title: m.title, card: m.card, section: m.section };
           break;
         }
       }

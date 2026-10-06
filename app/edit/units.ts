@@ -2,10 +2,10 @@
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
   gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
-  type BlockFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
+  type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GeneralFile, type GuideFile, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
-import { stubLabel } from "../../lib/derive/pharm.ts";
+import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
 import { checkMembers, deriveTopics, fitTitled, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
@@ -350,7 +350,11 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const b = sys.blocks.find((x) => x.id === id);
         if (b) parts.push(rowsPart(sys, b, tableOrThrow(b).content.map(rowId), basePt, width));
       }
-      for (const card of cards) await addPharmPart((p) => p.role === "card" && p.card === card);
+      // A card shows its own parts, then those of the cards shown inside it (publish's card parts).
+      const { cards: allCards } = await snap.json<CardsFile>("content/pharm/cards.json");
+      for (const card of cards) {
+        for (const member of cardGroup(allCards, card)) await addPharmPart((p) => p.role === "card" && p.card === member.id);
+      }
       if (ps.lo) await addPharmPart((p) => p.id === ps.lo);
       return unit(parts, guideScope(parts, [sys.structurePath]));
     }

@@ -1,10 +1,11 @@
 // Edit units and the save builder (plan 50 §50.2, §50.4) against the synthetic content tree in the
 // GitHub fake: what each page key edits, and exactly which files a save writes.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { serializeFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
+import { readContent, writeContent } from "../../lib/content/fs.ts";
+import { serializeFile, type CardsFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
 import type { SystemJson } from "../../lib/derive/published.ts";
 import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
-import { B, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
+import { B, C, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
 import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
@@ -424,6 +425,28 @@ describe("building a save", () => {
       expect(build.changes.map((c) => c.path)).toEqual([pageBlock]);
       expect(cellText(rowsOfDoc(json<BlockFile>(changeOf(build, pageBlock)).doc)[1] as Node, 2)).toBe("INR 2-3");
     });
+
+    it("opens her table with the class card it is shown inside, after that card's own blocks", async () => {
+      // Her warfarin card shown inside the nitrates card (C(2), placed in antianginals): the section lists
+      // only C(2), whose card shows C(2)'s part and then hers.
+      const inFx = await publishFixture(undefined, async (root) => {
+        await writePharmReviewPage(root);
+        const cards = await readContent<CardsFile>(root, "content/pharm/cards.json");
+        await writeContent(root, "content/pharm/cards.json", { ...cards, cards: cards.cards.map((c) => (c.id === C(80) ? { ...c, in: C(2) } : c)) });
+      });
+      w.stop();
+      w = startWorld(inFx);
+      const sys = inFx.published.get("g/fm/s/cardiovascular.json") as SystemJson;
+      const section = sys.pharm?.sections.find((s) => s.id === "antianginals");
+      expect(section?.cards).toContain(C(2));
+      expect(section?.cards).not.toContain(C(80));
+
+      const unit = await unitAt("pharm:fm:cardiovascular:antianginals");
+      const blocks = unit.parts.flatMap((p) => (p.kind === "block" ? [p.block.id] : []));
+      expect(blocks.slice(blocks.indexOf(B(72)), blocks.indexOf(B(72)) + 2)).toEqual([B(72), B(81)]);
+      const part = unit.parts.find((p): p is Extract<Part, { kind: "block" }> => p.kind === "block" && p.block.id === B(81));
+      expect([part?.path, part?.owner]).toEqual([pageBlock, { kind: "doc", path: `content/docs/${PHARM_PAGE}/doc.json` }]);
+    }, 60_000);
   });
 
   it("an edited gap block is stamped with today's date in ownerEdits; an untouched one is not written", async () => {
