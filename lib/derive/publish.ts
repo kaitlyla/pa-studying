@@ -1,7 +1,7 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
 import { citeKey, slug } from "../content/ids.ts";
-import { tableNode } from "../content/tables.ts";
+import { listedHead, tableNode } from "../content/tables.ts";
 import { GENERAL_KEYS, type BlockFile, type BlockNote, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import { columnView, noteView } from "./columns.ts";
@@ -20,8 +20,8 @@ import {
   fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, PANCE, pharmLoc, REF_TABS,
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
-import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
-import { checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
+import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
+import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
@@ -343,8 +343,9 @@ export function publish(c: Content): PublishResult {
     for (const b of s.data.blocks) {
       const ps = pharmSectionOf(s, b.id);
       if (ps !== null) hosts[b.id] = { route: view(s, pharmView(sys, ps)), loc: pharmLoc(ix, g0(s), sys) };
-      else if (st.listed[b.id] !== undefined) hosts[b.id] = { route: view(s, { kind: "block", id: b.id }), loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
-      else if (s.topics.proseBlocks.includes(b.id) && st.members[b.id] !== undefined && st.sections.length > 0) {
+      else if (listedHead(st, b.id) !== null) {
+        hosts[b.id] = { route: view(s, { kind: "block", id: listedHead(st, b.id) as string }), loc: systemLoc(ix, g0(s), sys, secTitle(s, blockSection(st, b.id))) };
+      } else if (s.topics.proseBlocks.includes(b.id) && st.members[b.id] !== undefined && st.sections.length > 0) {
         hosts[b.id] = { route: secRoute(s, st.members[b.id] as string), loc: systemLoc(ix, g0(s), sys, secTitle(s, st.members[b.id] ?? null)) };
       } else hosts[b.id] = { route: sysRoute(s), loc: systemLoc(ix, g0(s), sys) };
     }
@@ -638,7 +639,10 @@ export function publish(c: Content): PublishResult {
     }
     const bs = blockSys.get(id);
     const block = bs?.data.blocks.find((b) => b.id === id) ?? preambleBlock.get(id)?.preamble.find((b) => b.id === id);
-    if (block) return bs?.data.structure.listed[id] ?? firstLine(block);
+    if (block) {
+      const st = bs?.data.structure;
+      return (st && st.listed[listedHead(st, id) ?? id]) ?? firstLine(block);
+    }
     const g = c.gaps.get(id);
     if (g) return collapse(g.block.meta.title);
     const d = c.docs.get(docBlocks.get(id) ?? id);
@@ -885,11 +889,20 @@ export function publish(c: Content): PublishResult {
     // search units: block/row order, then pharm units, then pharm files
     for (const b of s.data.blocks) {
       if (t.proseBlocks.includes(b.id)) {
-        const sec = st.sections.length > 0 ? (st.members[b.id] ?? null) : null;
-        units.push({
-          tab, title: st.listed[b.id] ?? firstLine(b), loc: systemLoc(ix, gid, sys, secTitle(s, sec)), route: hosts[b.id]?.route ?? sysRoute(s),
-          at: b.id, label: "notes", text: searchText(docText(b.doc)),
-        });
+        const sec = st.sections.length > 0 ? blockSection(st, b.id) : null;
+        const head = listedHead(st, b.id);
+        const title = st.listed[head ?? b.id] ?? firstLine(b);
+        const loc = systemLoc(ix, gid, sys, secTitle(s, sec));
+        const route = hosts[b.id]?.route ?? sysRoute(s);
+        if (head === null || head === b.id) {
+          units.push({ tab, title, loc, route, at: b.id, label: "notes", text: searchText(docText(b.doc)) });
+          continue;
+        }
+        // A table recorded into a listed run forms no topics, but each of its rows stays searchable
+        // by its own name (its first cell), landing on that row of the run's page.
+        const names = new Map((tableOf(b)?.rows ?? []).map((r) => [r.id, collapse(firstCell(r))]));
+        const base: UnitBase = { tab, loc, route, label: "notes" };
+        wordBlockUnits(base, title, b, (row) => ({ base, title: names.get(row) || title }));
         continue;
       }
       for (const r of t.tables.get(b.id)?.rows ?? []) {

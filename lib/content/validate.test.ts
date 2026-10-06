@@ -643,6 +643,12 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { ...structure, sections: [], members: { [R3]: R1 } })).toBe("ok");
   });
 
+  it("accepts a block recorded under a listed block (a run listed as one entry), with or without sections", () => {
+    const b3 = id("b", 3);
+    expect(verdict(sPath, { ...structure, members: { ...structure.members, [b3]: b1 } })).toBe("ok");
+    expect(verdict(sPath, { ...structure, sections: [], members: { [b3]: b1 } })).toBe("ok");
+  });
+
   it("accepts titled rows naming a heading cell (rulings 21:02Z/22:01Z), and the field's absence", () => {
     expect(verdict(sPath, { ...structure, titled: { [R1]: 0, [id("r", 3)]: 1 } })).toBe("ok");
     expect(verdict(sPath, { ...structure, titled: {} })).toBe("ok");
@@ -662,6 +668,9 @@ describe("pharm (20 §20.6, §20.7)", () => {
     ["section members without sections", { sections: [] }, /a topic id \(sections is \[\]\)/],
     ["a block recorded under a topic", { members: { ...structure.members, [b1]: R1 } }, /a topic id only on another row/],
     ["a row recorded under itself", { members: { [R1]: R1 } }, /a topic id only on another row/],
+    ["a row recorded under a listed block", { members: { ...structure.members, [R1]: b1 } }, /\.members\.r_\w+: expected a listed block id only on another, unlisted block/],
+    ["a block recorded under an unlisted block", { members: { ...structure.members, [id("b", 3)]: b2 } }, /\.members\.b_\w+: expected a listed block id only on another, unlisted block/],
+    ["a listed block recorded under another listed block", { listed: { [b1]: "Murmurs", [b2]: "Angina" }, members: { ...structure.members, [b2]: b1 } }, /\.members\.b_\w+: expected a listed block id only on another, unlisted block/],
     ["a member in an unknown section", { members: { [R1]: "valvular" } }, /section id of this system/],
     ["a member key that is not a row or block", { members: { [D1]: "other" } }, /a r_ or b_ id/],
     ["a drug table in an unknown pharm section", { drugTables: [{ block: b2, pharmSection: "diuretics", conditionRows: [] }] }, /pharm section id/],

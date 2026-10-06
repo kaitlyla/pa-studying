@@ -93,10 +93,10 @@ describe("splice (50 §50.4)", () => {
         drugTables: [], pharmSections: [], pharmFiles: [],
       };
 
-      it("memberTarget reads a row id as a recorded topic and anything else as a section", () => {
+      it("memberTarget reads a row id as a recorded topic, a block id as a listed block, and anything else as a section", () => {
         expect(memberTarget(F)).toEqual({ topic: F });
+        expect(memberTarget(b(1))).toEqual({ listed: b(1) });
         expect(memberTarget("s1")).toEqual({ section: "s1" });
-        expect(memberTarget(b(1))).toEqual({ section: b(1) });
       });
 
       it("records a row added directly above the topic's first row under that topic", () => {

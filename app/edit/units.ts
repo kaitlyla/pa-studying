@@ -1,7 +1,7 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_PT, gapFilePath, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
+  GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
@@ -351,9 +351,10 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { guide, block: blockId } = k;
       const sys = await loadSystem(snap, guide, await systemOf(guide, "block", blockId));
       const { basePt, width } = await guideFacts(snap, guide);
-      const block = sys.blocks.find((b) => b.id === blockId);
-      if (!block) throw new UnitError(`Block ${blockId} is no longer in ${sys.system}`);
-      return unit([sysBlockPart(sys, block, basePt, width)]);
+      if (!sys.blocks.some((b) => b.id === blockId)) throw new UnitError(`Block ${blockId} is no longer in ${sys.system}`);
+      // The listed block and, for an entry listing a run, the blocks recorded under it, in order.
+      const run = sys.blocks.filter((b) => b.id === blockId || listedHead(sys.structure, b.id) === blockId);
+      return unit(run.map((b) => sysBlockPart(sys, b, basePt, width)));
     }
     case "pharm": {
       const { guide, system, section } = k;

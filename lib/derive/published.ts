@@ -166,6 +166,8 @@ export interface NavEntry {
   /** Topic: its first row id (route `…/t/<id>`); block: the listed block id (route `…/b/<id>`). */
   id: string;
   title: string;
+  /** Block entry over a run of blocks (the listed block and those recorded under it): the run in order. Absent for one block. */
+  blocks?: string[];
 }
 
 export interface NavSystem {

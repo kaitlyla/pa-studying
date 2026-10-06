@@ -27,9 +27,14 @@ export function isId(prefix: IdPrefix, value: unknown): value is string {
   return typeof value === "string" && ID_RE[prefix].test(value);
 }
 
-/** What a structure.json `members` value names: a row id is a recorded topic, anything else a section id. */
-export function memberTarget(value: string): { topic: string } | { section: string } {
-  return isId("r", value) ? { topic: value } : { section: value };
+/**
+ * What a structure.json `members` value names: a row id is a recorded topic, a block id the listed
+ * block whose entry a block is shown under (a run of blocks listed as one entry), anything else a
+ * section id.
+ */
+export function memberTarget(value: string): { topic: string } | { listed: string } | { section: string } {
+  if (isId("r", value)) return { topic: value };
+  return isId("b", value) ? { listed: value } : { section: value };
 }
 
 /** `n` Crockford characters from crypto.getRandomValues (32 divides 256, so `byte & 31` is uniform). */

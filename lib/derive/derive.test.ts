@@ -154,6 +154,51 @@ describe("topics (40 §40.2)", () => {
     });
   });
 
+  describe("a run of blocks listed as one entry", () => {
+    const prose = (id: string, text: string): BlockFile =>
+      ({ v: 1, id, kind: "prose", doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] }, meta: {} }) as unknown as BlockFile;
+    const blank = (id: string): BlockFile => ({ v: 1, id, kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} }) as unknown as BlockFile;
+    const first = () => table(B(71), 3, [
+      [R(710), "heading", "1st TM SCREENING", "NT", "hCG"],
+      [R(711), "content", "Down's (21)", "up", "up"],
+      [R(712), "content", "Edward's (18)", "up", "down"],
+    ]);
+    const quad = () => table(B(73), 2, [[R(730), "heading", "QUAD SCREEN", "AFP"], [R(731), "content", "Turner's", "nml"]]);
+    const after = () => table(B(74), 2, [[R(740), "content", "Abortion", "notes"]]);
+    const sections = [{ id: "pregnancy", title: "Pregnancy" }];
+    const blocks = () => [prose(B(70), "Nuchal Translucency"), first(), blank(B(72)), quad(), after()];
+    const ids = [B(70), B(71), B(72), B(73), B(74)];
+    const st = () => structureOf({
+      sections, listed: { [B(70)]: "Trimester screening" },
+      members: { [B(70)]: "pregnancy", [B(71)]: B(70), [B(72)]: B(70), [B(73)]: B(70), [R(740)]: "pregnancy" },
+    });
+
+    it("is one sidebar entry listing the run, its tables form no topics, and its blocks show in the listed block's section", () => {
+      const t = deriveTopics(blocks(), st());
+      expect(t.proseBlocks).toEqual([B(70), B(71), B(72), B(73)]);
+      expect(t.topics.map((x) => x.title)).toEqual(["Abortion"]);
+      expect([R(710), R(711), R(712), R(730), R(731)].some((id) => t.rows.has(id))).toBe(false);
+      expect(navEntries(t, st(), ids).sections[0]?.entries).toEqual([
+        { kind: "block", id: B(70), title: "Trimester screening", blocks: [B(70), B(71), B(72), B(73)] },
+        { kind: "topic", id: R(740), title: "Abortion" },
+      ]);
+      expect(sectionItems(t, st(), ids, "pregnancy")).toEqual([
+        { block: B(70), rows: null }, { block: B(71), rows: null }, { block: B(72), rows: null }, { block: B(73), rows: null }, { block: B(74), rows: [R(740)] },
+      ]);
+      expect(() => checkMembers("obstetrics-gynecology", t, st())).not.toThrow();
+    });
+
+    it("refuses a block recorded under a listed block that is not the run directly above it", () => {
+      const gap = structureOf({
+        sections, listed: { [B(70)]: "Trimester screening" },
+        members: { [B(70)]: "pregnancy", [B(72)]: "pregnancy", [B(73)]: B(70), [R(740)]: "pregnancy" },
+      });
+      const err = buildError(() => deriveTopics([prose(B(70), "NT"), blank(B(72)), quad(), after()], gap));
+      expect(err.id).toBe(B(73));
+      expect(err.message).toMatch(/not the listed block of the run directly above it/);
+    });
+  });
+
   it("drug-table condition rows form topics; the other drug rows belong to no topic", () => {
     expect(topic(R(123))).toMatchObject({ title: "Prinzmetal angina", condition: true, block: B(12), section: "cad" });
     expect(topics().rows.get(R(121))).toMatchObject({ drug: true, topic: null });
@@ -696,6 +741,42 @@ describe("navigation and pages (40 §40.3)", () => {
     // D5 is listed on fm General › Labs and later on the Labs reference tab.
     expect(hosts[D(5)]).toEqual({ route: `#/file/${D(5)}`, loc: "EOR › Family Medicine › Labs" });
     expect(hosts[D(3)]?.loc).toBe("PANCE");
+  });
+
+  it("a run listed as one entry: its blocks are hosted on the listed block's page, and a recorded table's rows are searched by their own names to that page", () => {
+    const c = mutated((x) => {
+      const pu = system(x, "fm", "pulmonary");
+      const doc = schema.nodeFromJSON({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: "Nuchal Translucency" }] }] }).toJSON();
+      const head = { v: 1, id: B(21), kind: "prose", doc, meta: {} } as unknown as BlockFile;
+      const quad = table(B(22), 2, [[R(220), "heading", "QUAD SCREEN", "AFP"], [R(221), "content", "Trisomy 21", "low AFP"]]);
+      quad.doc = schema.nodeFromJSON(quad.doc).toJSON() as BlockFile["doc"];
+      pu.blocks.push(head, quad);
+      pu.file.blocks.push(B(21), B(22));
+      pu.structure.listed[B(21)] = "Trimester screening";
+      pu.structure.members[B(22)] = B(21);
+    });
+    const res = publish(c);
+    const route = guideViewHash("fm", { kind: "block", id: B(21) });
+    const nav = res.files.get(navPath("fm")) as NavJson;
+    expect(nav.systems.find((s) => s.id === "pulmonary")?.entries).toEqual([
+      { kind: "topic", id: R(201), title: "Asthma" },
+      { kind: "block", id: B(21), title: "Trimester screening", blocks: [B(21), B(22)] },
+    ]);
+    // A listed block with no run keeps its entry as it was, with no `blocks`.
+    const other = nav.systems.find((s) => s.id === "cardiovascular")?.sections.find((s) => s.id === "other");
+    expect(other?.entries.find((e) => e.id === B(11))).toEqual({ kind: "block", id: B(11), title: "Murmurs" });
+    const page = res.files.get(systemPath("fm", "pulmonary")) as SystemJson;
+    expect(page.topics.map((t) => t.title)).toEqual(["Asthma"]);
+    const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+    expect(hosts[B(21)]?.route).toBe(route);
+    expect(hosts[B(22)]?.route).toBe(route);
+    expect(res.units.find((u) => u.at === B(21))).toMatchObject({ title: "Trimester screening", route });
+    // The recorded table forms no topics, but each row stays a unit under its own name, at that row.
+    expect(res.units.some((u) => u.at === B(22))).toBe(false);
+    expect(res.units.filter((u) => u.at === R(220) || u.at === R(221)).map((u) => ({ title: u.title, route: u.route, at: u.at, text: u.text }))).toEqual([
+      { title: "QUAD SCREEN", route, at: R(220), text: "QUAD SCREEN AFP" },
+      { title: "Trisomy 21", route, at: R(221), text: "Trisomy 21 low AFP" },
+    ]);
   });
 });
 

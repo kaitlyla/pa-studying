@@ -518,11 +518,16 @@ export const validateStructure: Validator = (v, ctx) => {
   const otherAt = sectionIds.indexOf("other");
   if (otherAt !== -1 && otherAt !== sectionIds.length - 1) bad(ctx, ".sections", `"other" last`, sectionIds);
   // A value is a section id, or (rows only) the id of the topic the row is recorded under
-  // (Orchestrator ruling 2026-10-04 04:44Z); a system without sections has only the latter.
+  // (Orchestrator ruling 2026-10-04 04:44Z), or (blocks only) the listed block whose entry the block
+  // is shown under; a system without sections has only the latter two.
   for (const [k, value] of Object.entries(s.members)) {
     const target = memberTarget(value);
     if ("topic" in target) {
       if (!isId("r", k) || target.topic === k) bad(ctx, `.members.${k}`, "a topic id only on another row", value);
+    } else if ("listed" in target) {
+      if (!isId("b", k) || s.listed[k] !== undefined || s.listed[target.listed] === undefined) {
+        bad(ctx, `.members.${k}`, "a listed block id only on another, unlisted block", value);
+      }
     } else if (!sectionIds.includes(target.section)) {
       bad(ctx, `.members.${k}`, sectionIds.length === 0 ? "a topic id (sections is [])" : "a section id of this system or a topic id", value);
     }

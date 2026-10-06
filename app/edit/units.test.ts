@@ -3,7 +3,7 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { readContent, writeContent } from "../../lib/content/fs.ts";
 import { serializeFile, type CardsFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
-import type { SystemJson } from "../../lib/derive/published.ts";
+import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
 import { B, C, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
 import { publishFixture } from "../testing.tsx";
@@ -137,6 +137,23 @@ describe("loading a page key", () => {
     const unit = await unitAt(`listed:fm:${B(11)}`);
     expect(unit.parts.map((p) => p.kind)).toEqual(["block"]);
     expect(only(unit, "block").path).toBe(blockPath(11));
+  });
+
+  it("listed run: the listed block and every block recorded under it, in system order", async () => {
+    const nav = clone(fx.published.get("g/fm/nav.json") as NavJson);
+    const other = nav.systems.find((s) => s.id === "cardiovascular")?.sections.find((s) => s.id === "other");
+    other?.entries.push({ kind: "block", id: B(13), title: "Angina and mnemonic", blocks: [B(13), B(14)] });
+    w.stop();
+    w = startWorld(fx, new Map([...fx.published, ["g/fm/nav.json", nav]]));
+    const sys = only(await unitAt("system:fm:cardiovascular"), "rows").sys;
+    const structure: StructureFile = {
+      ...sys.structure,
+      listed: { ...sys.structure.listed, [B(13)]: "Angina and mnemonic" },
+      members: { ...sys.structure.members, [B(13)]: "other", [B(14)]: B(13) },
+    };
+    w.fake.commitFiles({ [CV_STRUCTURE]: serializeFile(CV_STRUCTURE, structure) });
+    const unit = await unitAt(`listed:fm:${B(13)}`);
+    expect(unit.parts.map((p) => (p.kind === "block" ? p.path : p.kind))).toEqual([blockPath(13), blockPath(14)]);
   });
 
   it("pharm: the overview, every row of the section's drug table, then its cards' blocks; structure.json is in scope", async () => {

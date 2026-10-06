@@ -556,6 +556,23 @@ describe("block page", () => {
     expect(body.textContent).toContain("Systolic");
   });
 
+  it("renders every block of an entry listing a run, in order, under the listed title", async () => {
+    const nav = structuredClone(fmNav);
+    const other = must(nav.systems.find((s) => s.id === "cardiovascular")?.sections.find((s) => s.id === "other"), "Cardiovascular — other");
+    const entry = must(other.entries.find((e) => e.id === B(11)), "Murmurs entry");
+    entry.blocks = [B(11), B(14)];
+    server.restore();
+    server = serveData(new Map([...files, ["g/fm/nav.json", nav]]));
+    const a = await renderApp(`#/eor/fm/b/${B(11)}`);
+    app = a;
+    const c = a.container;
+    const page = await until(() => c.querySelector<HTMLElement>(".block-page"), "block page");
+    expect(h1(c)).toBe("Murmurs");
+    const anchors = [...page.querySelectorAll<HTMLElement>("[data-anchor]")].map((e) => e.dataset.anchor).filter((id) => id === B(11) || id === B(14));
+    expect([...new Set(anchors)]).toEqual([B(11), B(14)]);
+    expect(must(page.querySelector(`[data-anchor="${B(14)}"]`), "run's second block").textContent).toContain("Mnemonic");
+  });
+
   it("an unknown block, or a topic opened as a block, isn't on the site", async () => {
     quietErrors();
     const a = await renderApp(`#/eor/fm/b/${B(99)}`);

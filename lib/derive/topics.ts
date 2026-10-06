@@ -1,7 +1,7 @@
 // Topics, heading rows and continuation rows (plan 40 §40.2), and section membership.
 import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
-import { resolutionRows } from "../content/tables.ts";
+import { listedHead, resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
 import type { NavEntry, NavSystem, PubBlock, PubMedsCard, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
@@ -33,14 +33,23 @@ function recordedTopic(structure: StructureFile, rowId: string): string | null {
   return target !== null && "topic" in target ? target.topic : null;
 }
 
-/** The section of an id's `members` entry: its section, or the section of the topic it is recorded under. */
+function sectionOf(value: string | undefined): string | null {
+  const target = value === undefined ? null : memberTarget(value);
+  return target !== null && "section" in target ? target.section : null;
+}
+
+/**
+ * The section a block (or untitled row) is shown under: its own `members` section, or for a block
+ * shown under a listed entry, the section of that entry's listed block.
+ */
+export function blockSection(structure: StructureFile, id: string): string | null {
+  return sectionOf(structure.members[listedHead(structure, id) ?? id]);
+}
+
+/** The section of an id's `members` entry: its section, or the section of the topic or listed block it is recorded under. */
 function memberSection(t: SystemTopics, structure: StructureFile, id: string): string | null {
-  const sectionOf = (v: string | undefined): string | null => {
-    const target = v === undefined ? null : memberTarget(v);
-    return target !== null && "section" in target ? target.section : null;
-  };
   const topic = recordedTopic(structure, id);
-  if (topic === null) return sectionOf(structure.members[id]);
+  if (topic === null) return blockSection(structure, id);
   return sectionOf(structure.members[t.rows.get(topic)?.topic ?? topic]);
 }
 
@@ -119,8 +128,16 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
   let carry: Topic | null = null;
   /** Since the last topic started, an `unlisted` row came: rows that would continue a topic stay untitled. */
   let afterUnlisted = false;
+  /** The listed entry the previous block is shown under. */
+  let prevHead: string | null = null;
 
   for (const block of blocks) {
+    const head = listedHead(structure, block.id);
+    // A run listed as one entry is its listed block and the blocks recorded under it, directly below it.
+    if (strict && head !== null && head !== block.id && head !== prevHead) {
+      throw new BuildError(block.id, `members records it under ${head}, which is not the listed block of the run directly above it`);
+    }
+    prevHead = head;
     const stored = tableOf(block);
     if (stored) out.tables.set(block.id, stored);
     const rows = resolutionRows(block, structure);
@@ -288,7 +305,7 @@ export function sectionItems(t: SystemTopics, structure: StructureFile, blockIds
   const items: PubSectionItem[] = [];
   for (const id of blockIds) {
     if (t.proseBlocks.includes(id)) {
-      if (structure.members[id] === section) items.push({ block: id, rows: null });
+      if (blockSection(structure, id) === section) items.push({ block: id, rows: null });
       continue;
     }
     const rows = (t.tables.get(id)?.rows ?? []).filter((r) => r.kind === "content" && rowSection(t, structure, r.id) === section).map((r) => r.id);
@@ -304,7 +321,8 @@ export function publishedSections(t: SystemTopics, structure: StructureFile, blo
 
 /**
  * A system's sidebar (NavJson `systems[]` sections and entries, 40 §40.3) in the order of `blockIds`:
- * each listed prose block, and each topic at its first row. A system without sections lists them flat.
+ * each listed block (with the blocks of its run, when it lists more than itself), and each topic at
+ * its first row. A system without sections lists them flat.
  * The build and the owner's post-save view both read this, so a save that changes a topic shows at once.
  */
 export function navEntries(t: SystemTopics, structure: StructureFile, blockIds: readonly string[]): Pick<NavSystem, "sections" | "entries"> {
@@ -312,7 +330,9 @@ export function navEntries(t: SystemTopics, structure: StructureFile, blockIds: 
   for (const id of blockIds) {
     if (t.proseBlocks.includes(id)) {
       const title = structure.listed[id];
-      if (title !== undefined) entries.push({ kind: "block", id, title, section: structure.members[id] ?? null });
+      if (title === undefined) continue;
+      const run = blockIds.filter((b) => listedHead(structure, b) === id);
+      entries.push({ kind: "block", id, title, ...(run.length > 1 ? { blocks: run } : {}), section: blockSection(structure, id) });
       continue;
     }
     for (const r of t.tables.get(id)?.rows ?? []) {
@@ -320,7 +340,7 @@ export function navEntries(t: SystemTopics, structure: StructureFile, blockIds: 
       if (topic) entries.push({ kind: "topic", id: topic.id, title: topic.title, section: topic.section });
     }
   }
-  const strip = ({ kind, id, title }: NavEntry): NavEntry => ({ kind, id, title });
+  const strip = ({ kind, id, title, blocks }: NavEntry): NavEntry => ({ kind, id, title, ...(blocks ? { blocks } : {}) });
   return {
     sections: structure.sections.map((sec) => ({ id: sec.id, title: sec.title, entries: entries.filter((e) => e.section === sec.id).map(strip) })),
     entries: structure.sections.length === 0 ? entries.map(strip) : [],
@@ -348,7 +368,8 @@ export function checkMembers(systemId: string, t: SystemTopics, structure: Struc
   if (structure.sections.length === 0) return;
   const sections = new Set(structure.sections.map((s) => s.id));
   for (const [id, section] of Object.entries(structure.members)) {
-    if ("topic" in memberTarget(section)) continue; // recorded under a topic; deriveTopics checks the topic row
+    // Recorded under a topic or a listed block; deriveTopics checks the target.
+    if (!("section" in memberTarget(section))) continue;
     if (!sections.has(section)) throw new BuildError(id, `members names section "${section}", which ${systemId} does not have`);
   }
   const need = (id: string, what: string): void => {

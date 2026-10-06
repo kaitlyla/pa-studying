@@ -15,7 +15,7 @@ export { checkTrackSeries, isCdcOrg } from "./validate.ts";
 export { addFlag } from "./flags.ts";
 export type { NewFlag } from "./flags.ts";
 export { spliceRows, systemRowOrder, updateStructure } from "./splice.ts";
-export { columnCount, resolutionRows, tableNode } from "./tables.ts";
+export { columnCount, listedHead, resolutionRows, tableNode } from "./tables.ts";
 export type { RowNodeLike, TableBlockLike, TableNodeLike } from "./tables.ts";
 export type { SpliceResult } from "./splice.ts";
 export { COMMIT_KINDS, commitMessage, parseTrailers } from "./commit.ts";
