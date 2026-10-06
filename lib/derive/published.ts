@@ -391,12 +391,14 @@ export interface RefTabJson {
 /**
  * An Other section's outline item as published (content OtherNote). A heading carries `id`, its part's
  * slug, unique in the section: the anchor and route its sidebar entry opens. A doc carries its
- * reference only; the page loads `docs/<d>.json` for its content.
+ * reference only; the page loads `docs/<d>.json` for its content. An original carries its reference
+ * for the small link to its File page.
  */
 export type PubOtherNote =
   | { heading: string; sub: boolean; id: string }
   | Extract<PubNote, { block: PubBlock }>
   | { doc: DocRef }
+  | { original: DocRef }
   | { gap: PubGap }
   | { link: PubLink };
 

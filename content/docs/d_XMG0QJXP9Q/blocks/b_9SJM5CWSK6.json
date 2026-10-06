@@ -1,0 +1,269 @@
+{
+ "v": 1,
+ "id": "b_9SJM5CWSK6",
+ "kind": "table",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "table",
+    "attrs": {
+     "grid": [
+      377.25
+     ],
+     "indentPt": 0,
+     "borders": {
+      "top": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "right": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "bottom": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "left": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideH": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      },
+      "insideV": {
+       "style": "single",
+       "widthPt": 0.5,
+       "color": "000000"
+      }
+     },
+     "cellMarginPt": {
+      "top": 0,
+      "right": 5.75,
+      "bottom": 0,
+      "left": 5.75
+     }
+    },
+    "content": [
+     {
+      "type": "table_row",
+      "attrs": {
+       "id": "r_FM7X17EWH1",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "FDECEA",
+         "vAlign": "top",
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "C0392B"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "C0392B"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "C0392B"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 2.5,
+           "color": "C0392B"
+          }
+         }
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C0392B"
+              }
+             }
+            ],
+            "text": "CRITICAL: Synchronization Mode"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "2C3E50"
+              }
+             }
+            ],
+            "text": "Synchronized cardioversion delivers shock on the R-wave peak (QRS) to avoid R-on-T phenomenon & VF induction."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "2C3E50"
+              }
+             }
+            ],
+            "text": "ALWAYS confirm sync markers on monitor QRS complexes before each shock."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "2C3E50"
+              }
+             }
+            ],
+            "text": "After each shock, the defibrillator poss default back to unsynchronized mode - re-select SYNC before each subsequent shock."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "auto",
+            "value": 1
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "2C3E50"
+              }
+             }
+            ],
+            "text": "If VF occurs after cardioversion attempt, IMMEDIATELY switch to unsynchronized defib mode."
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {}
+}

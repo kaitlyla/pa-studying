@@ -158,6 +158,7 @@ a { color: #2b55a3; }
 .odoc-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 8px; }
 .odoc-h h3 { margin: 0; font-size: 15px; }
 .odoc-h a { font-size: 13px; }
+.oorig { margin: 4px 0 14px; font-size: 13px; color: #555; scroll-margin-top: 12px; }
 
 /* ---- her notes (40 §40.6): the root size stands for the document's base size ---- */
 .notes { font-family: var(--text-stack, "Carlito", sans-serif); font-size: 13px; line-height: 1.35; color: #000; overflow-wrap: break-word; }

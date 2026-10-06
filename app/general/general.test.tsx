@@ -625,6 +625,23 @@ describe("Other tab", () => {
     });
   });
 
+  it("shows an original item as one small link to its File page, not the file itself and not as a leftover chip", async () => {
+    const fx = await publishFixture((content) => {
+      const pe = content.other.sections.find((s) => s.id === "pe");
+      if (!pe) throw new Error("no pe section");
+      Object.assign(pe, { files: [D(5), D(1)], gaps: [], notes: [{ heading: "Cardiac" }, { doc: D(5) }, { original: D(1) }] });
+    });
+    server.restore();
+    server = serveData(fx.published);
+    const a = await renderApp("#/other/pe/cardiac");
+    app = a;
+    const line = await until(() => a.container.querySelector<HTMLElement>(`.other-page .oorig[data-anchor="${D(1)}"]`), "original link");
+    expect(visibleText(line)).toBe("Original PDF: ACLS algorithms");
+    expect(line.querySelector("a")?.getAttribute("href")).toBe(`#/file/${D(1)}?from=${encodeURIComponent("#/other/pe/cardiac")}`);
+    expect(a.container.querySelector(`.other-page .odoc[data-anchor="${D(1)}"]`)).toBeNull();
+    expect(a.container.querySelector(".other-page .fchip")).toBeNull();
+  });
+
   it("lists no file chip for a section whose only file was removed", async () => {
     const a = await renderApp("#/other/notes");
     app = a;

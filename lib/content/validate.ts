@@ -502,10 +502,11 @@ const subFlag: Checker = (v, at, ctx) => {
   if (v !== true) bad(ctx, at, "true", v);
 };
 const otherNote = either(
-  "an outline item: { heading, sub? }, { block, column? }, { doc }, { gap } or { link }",
+  "an outline item: { heading, sub? }, { block, column? }, { doc }, { original }, { gap } or { link }",
   shapeOf<Extract<OtherNote, { heading: string }>>({ heading: nonEmpty }, { sub: subFlag }),
   shapeOf<Extract<OtherNote, { block: string }>>({ block: id("b") }, { column: columnC }),
   shapeOf<Extract<OtherNote, { doc: string }>>({ doc: id("d") }, {}),
+  shapeOf<Extract<OtherNote, { original: string }>>({ original: id("d") }, {}),
   shapeOf<Extract<OtherNote, { gap: string }>>({ gap: id("g") }, {}),
   shapeOf<Extract<OtherNote, { link: string }>>({ link: id("r", "b") }, {}),
 );
@@ -526,7 +527,7 @@ function checkOutline(s: OtherFile["sections"][number], at: string, ctx: Ctx): v
       return;
     }
     if ("block" in n) return;
-    const [list, ref] = "doc" in n ? [s.files, n.doc] : "gap" in n ? [s.gaps ?? [], n.gap] : [s.links.map((l) => l.target), n.link];
+    const [list, ref] = "doc" in n ? [s.files, n.doc] : "original" in n ? [s.files, n.original] : "gap" in n ? [s.gaps ?? [], n.gap] : [s.links.map((l) => l.target), n.link];
     if (!list.includes(ref)) bad(ctx, here, "an entry of this section's own list", ref);
     if (seen.has(ref)) bad(ctx, here, "each item once per part", ref);
     seen.add(ref);

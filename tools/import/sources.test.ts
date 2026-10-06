@@ -20,7 +20,7 @@ describe("the committed inventory (30 §30.2)", () => {
     const sources = await loadSources(REPO);
     const count = (k: Source["kind"]) => sources.filter((s) => s.kind === k).length;
     expect(count("guide")).toBe(8);
-    expect(count("word")).toBe(24);
+    expect(count("word")).toBe(25);
     expect(count("pdf") + count("image") + count("slides")).toBe(18);
     expect(count("pharm")).toBe(10);
     expect(count("deck")).toBe(1);
@@ -40,7 +40,11 @@ describe("the committed inventory (30 §30.2)", () => {
       "Physical Exam_Examples/Neuro Lab Checklist Summer 2026 (1).docx",
       "Physical Exam_Examples/Pulm_ Physcial Exam .docx",
     ]);
-    expect(paths.filter((p) => p.startsWith("docx to fix/"))).toEqual(["docx to fix/--Anesthetics and Procedural Sedation Med List and LOs (2).docx"]);
+    // Her Master ACLS guide: she pointed to it for Emergency care's ACLS algorithms (2026-10-05).
+    expect(paths.filter((p) => p.startsWith("docx to fix/"))).toEqual([
+      "docx to fix/--Master ACLS Study Guide 2025_corrected.docx",
+      "docx to fix/--Anesthetics and Procedural Sedation Med List and LOs (2).docx",
+    ]);
   });
 
   it("guides.json has every guide's systems, with the PANCE renal heading matched by its leading text", async () => {

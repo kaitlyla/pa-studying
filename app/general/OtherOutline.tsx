@@ -16,6 +16,7 @@ import { PlaceNote } from "./PlaceNotes.tsx";
 import { NoteLinks } from "./ThreeParts.tsx";
 
 export const OPEN_FILE = "Open file";
+export const ORIGINAL_PDF = "Original PDF:";
 
 function DocContent({ id }: { id: string }): ReactNode {
   const doc = useData<DocJson>(docPath(id));
@@ -46,6 +47,15 @@ function OtherDoc({ id, name, from }: { id: string; name: string; from: string }
 
 function Item({ item, from }: { item: Exclude<OutlineItem, { link: PubLink }>; from: string }): ReactNode {
   if ("doc" in item) return <OtherDoc id={item.doc.id} name={item.doc.name} from={from} />;
+  if ("original" in item) {
+    return (
+      <p className="oorig" data-anchor={item.original.id}>
+        {ORIGINAL_PDF} <Link to={fileHash(item.original.id, from)}>
+          <Txt text={item.original.name} />
+        </Link>
+      </p>
+    );
+  }
   if ("gap" in item) return <GapBlock gap={item.gap} />;
   if (item.column === null) return <PlaceNote note={item} />;
   return (

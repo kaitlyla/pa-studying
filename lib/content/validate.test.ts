@@ -634,12 +634,19 @@ describe("places (20 §20.8)", () => {
       ])).toBe("ok");
     });
 
+    it("accepts an original item naming one of the section's files", () => {
+      expect(pe([{ heading: "HEENT" }, { block: id("b", 1) }, { original: D1 }])).toBe("ok");
+    });
+
     it("accepts the same doc, gap or link once in each part", () => {
       expect(pe([{ heading: "Psych EOR" }, { gap: G1 }, { link: L1 }, { heading: "Capacity", sub: true }, { gap: G1 }, { link: L1 }, { heading: "PANCE" }, { gap: G1 }, { doc: D1 }])).toBe("ok");
     });
 
     it.each([
       ["a doc not in the section's files", [{ doc: id("d", 2) }], /notes\[0\]: expected an entry of this section's own list/],
+      ["an original not in the section's files", [{ original: id("d", 2) }], /notes\[0\]: expected an entry of this section's own list/],
+      ["the same original twice in one part", [{ heading: "A" }, { original: D1 }, { original: D1 }], /notes\[2\]: expected each item once per part/],
+      ["an original given as a block id", [{ original: id("b", 1) }], /notes\[0\]: expected an outline item/],
       ["a gap not in the section's gaps", [{ gap: G2 }], /notes\[0\]: expected an entry of this section's own list/],
       ["a link that is not one of the section's targets", [{ link: id("b", 9) }], /notes\[0\]: expected an entry of this section's own list/],
       ["the same gap twice in one part", [{ heading: "A" }, { gap: G1 }, { gap: G1 }], /notes\[2\]: expected each item once per part/],

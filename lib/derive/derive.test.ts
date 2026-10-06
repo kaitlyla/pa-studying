@@ -1441,6 +1441,22 @@ describe("an Other section's outline (parts, docs, gaps and links)", () => {
     expect(items.map((n) => ("doc" in n ? n.doc.id : "gap" in n ? n.gap.id : "link" in n ? n.link.target : null))).toEqual([D(5), G(1), D(1), R(101)]);
   });
 
+  it("publishes an original item as the section's file entry, and leaves it out when the file is removed", () => {
+    const withOriginal = (more: (x: Content) => void = () => {}): Content => withOutline((x) => {
+      const pe = section(x, "pe");
+      pe.notes = [...(pe.notes ?? []), { original: D(5) }];
+      more(x);
+    });
+    const res = publish(withOriginal());
+    const files = (res.files.get(OTHER_PATH) as OtherJson).sections.find((s) => s.id === "pe")?.files;
+    expect(notesOf(res, "pe").at(-1)).toEqual({ original: files?.files.find((f) => f.id === D(5)) });
+    const removed = publish(withOriginal((x) => {
+      const d5 = x.docs.get(D(5));
+      if (d5) d5.file.removed = { at: "2026-10-05T10:00:00Z", from: "b".repeat(40) };
+    }));
+    expect(notesOf(removed, "pe").some((n) => "original" in n)).toBe(false);
+  });
+
   it("leaves a removed doc out of the outline; it stays in the section's files", () => {
     const res = publish(withOutline((x) => {
       const d5 = x.docs.get(D(5));

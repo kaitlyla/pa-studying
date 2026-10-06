@@ -825,8 +825,8 @@ export function publish(c: Content): PublishResult {
     for (const d of rt.files) docUnit(d);
   }
   /**
-   * An Other section's outline. Headings get part slugs unique in the section; a doc item whose
-   * document is not visible (removed, processing) is left out here and listed by `files` instead.
+   * An Other section's outline. Headings get part slugs unique in the section; a doc or original
+   * item whose document is not visible (removed, processing) is left out here and listed by `files` instead.
    */
   const otherNotes = (sec: OtherFile["sections"][number], secLinks: readonly PubLink[], docs: DocList): PubOtherNote[] => {
     const parts = outlineParts(sec);
@@ -839,6 +839,9 @@ export function publish(c: Content): PublishResult {
       } else if ("doc" in n) {
         const d = docs.files.find((f) => f.id === n.doc);
         if (d) out.push({ doc: d });
+      } else if ("original" in n) {
+        const d = docs.files.find((f) => f.id === n.original);
+        if (d) out.push({ original: d });
       } else if ("gap" in n) {
         out.push({ gap: gap(n.gap) });
       } else {

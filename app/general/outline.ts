@@ -29,7 +29,7 @@ export function splitOutline(notes: readonly PubOtherNote[]): Outline {
   return out;
 }
 
-/** The anchor an item's sidebar entry lands on, with its title; null for items no entry names. */
+/** The anchor an item's sidebar entry lands on, with its title; null for items no entry names (blocks, links, originals). */
 export function itemEntry(item: OutlineItem): { id: string; title: string } | null {
   if ("doc" in item) return { id: item.doc.id, title: item.doc.name };
   if ("gap" in item) return { id: item.gap.id, title: item.gap.title };
@@ -89,7 +89,7 @@ type OtherSection = OtherJson["sections"][number];
 
 /** The section's links, files and gaps that its outline does not show: listed after the outline. */
 export function leftovers(s: OtherSection): { links: OtherSection["links"]; files: OtherSection["files"]; gaps: OtherSection["gaps"] } {
-  const shown = new Set(s.notes.flatMap((n) => ("doc" in n ? [n.doc.id] : "gap" in n ? [n.gap.id] : "link" in n ? [n.link.target] : [])));
+  const shown = new Set(s.notes.flatMap((n) => ("doc" in n ? [n.doc.id] : "original" in n ? [n.original.id] : "gap" in n ? [n.gap.id] : "link" in n ? [n.link.target] : [])));
   return {
     links: s.links.filter((l) => !shown.has(l.target)),
     files: { ...s.files, files: s.files.files.filter((f) => !shown.has(f.id)) },

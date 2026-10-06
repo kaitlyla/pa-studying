@@ -287,12 +287,15 @@ export const OTHER_GAP_SECTIONS: readonly (typeof OTHER_SECTION_IDS)[number][] =
  * One item of an Other section's outline (its `notes`), in page order. `heading`: a sidebar entry
  * that starts a part of the page (navigation, not her text); with `sub`, a second-level entry under
  * the top heading before it. `block`: as in PlaceNote. `doc`: one of the section's `files`, shown
- * whole. `gap`: one of the section's `gaps`. `link`: the `target` of one of the section's `links`.
+ * whole. `original`: one of the section's `files` shown only as a small link to its File page — the
+ * original of text shown on the page. `gap`: one of the section's `gaps`. `link`: the `target` of
+ * one of the section's `links`.
  */
 export type OtherNote =
   | { heading: string; sub?: true }
   | { block: string; column?: number }
   | { doc: string }
+  | { original: string }
   | { gap: string }
   | { link: string };
 
