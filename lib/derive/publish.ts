@@ -269,8 +269,11 @@ export function publish(c: Content): PublishResult {
       const b = pharmBlocks.get(p.blocks[0] as string);
       if (!b) continue;
       if (b.kind !== "table" || !tableNode(b)) throw new BuildError(p.id, `${where} part ${p.id} cuts ${b.id}, which is not a table`);
-      const column = p.column === undefined ? {} : { column: p.column, ...(p.label === undefined ? {} : { label: p.label }) };
-      if (p.column !== undefined && !columnView(b.doc, p.column, p.label)) {
+      const column = p.column === undefined
+        ? {}
+        : { column: p.column, ...(p.label === undefined ? {} : { label: p.label }), ...(p.columns === undefined ? {} : { columns: p.columns }) };
+      const fits = (at: number): boolean => (p.columns === undefined ? columnView(b.doc, at, p.label) : columnView(b.doc, at, null, p.columns)) !== null;
+      if (p.column !== undefined && !fits(p.column)) {
         dropped.push({ file: where, id: p.id });
         columnGone.add(p.id);
       }

@@ -1433,6 +1433,16 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(gone.dropped).toContainEqual({ file: where, id: B(82) });
     });
 
+    it("publishes a card part's column range (`columns`) with its cut, and shows nothing once the range no longer fits her table", () => {
+      const ranged = (column: number, columns: number) => withReview((pf) => { Object.assign(pf.file.parts[1] as object, { column, columns }); });
+      const fm = publish(ranged(0, 2)).files.get("g/fm/s/cardiovascular.json") as SystemJson;
+      expect(fm.cards[C(80)]?.parts).toEqual([{ id: P(81), blocks: [B(81)], rows: [R(810), R(811)], column: 0, columns: 2, file: "pharm review", basePt: 11 }]);
+      // Her table has 3 columns: columns 1–3 run past it.
+      const out = publish(ranged(1, 3));
+      expect(out.dropped).toContainEqual({ file: where, id: P(81) });
+      expect(out.units.find((u) => u.at === P(81))?.text ?? "").toBe("");
+    });
+
     describe("a topic part, shown on the meds panels of the guide topics it names", () => {
       /** Her apixaban row's MOA cell becomes a topic part on Stable angina (R101); the card part keeps heparin. */
       const attach = (topics: string[], cut: { rows: string[]; column: number } = { rows: [R(814), R(812)], column: 2 }) => withReview((pf) => {

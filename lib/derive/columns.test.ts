@@ -191,6 +191,44 @@ describe("noteView: a stored block's doc as a note shows it whole, cut to rows, 
     expect(noteView(specific, { rows: ["zz"], column: 2 }, { firstRow: false })).toBeNull();
   });
 
+  describe("with `columns`: those grid columns of the rows alone, no label column", () => {
+    // Classes side by side: a heading cell spans each class's columns, its list sits one cell per column.
+    const classes = tableOf([40, 60, 50, 50], [
+      ["band", { text: "ANTIDEPRESSANTS", colspan: 4 }],
+      ["h", { text: "SSRIs", colspan: 2 }, { text: "SNRIs", colspan: 2 }],
+      ["l", "Fluoxetine", "Citalopram", "Venlafaxine", "Duloxetine"],
+      ["n", { text: "*all: serotonin syndrome risk", colspan: 4 }],
+    ]);
+    const cut = (rows: string[], column: number, columns: number) => noteView(classes, { rows, column, columns }, { firstRow: false });
+
+    it("titles the class by its cell in the first listed row and keeps only its columns, from column 0 on", () => {
+      const ssri = cut(["h", "l"], 0, 2);
+      expect(ssri?.title).toBe("SSRIs");
+      expect(shape(ssri?.doc as DocJSON)).toEqual([["l", "Fluoxetine", "Citalopram"]]);
+      const snri = cut(["h", "l"], 2, 2);
+      expect(snri?.title).toBe("SNRIs");
+      expect(shape(snri?.doc as DocJSON)).toEqual([["l", "Venlafaxine", "Duloxetine"]]);
+    });
+
+    it("gives the kept columns the table's whole width in their proportions", () => {
+      expect(((cut(["h", "l"], 0, 2)?.doc as DocJSON).content[0] as PMNode).attrs?.grid).toEqual([80, 120]);
+      expect(((cut(["h", "l"], 2, 2)?.doc as DocJSON).content[0] as PMNode).attrs?.grid).toEqual([100, 100]);
+    });
+
+    it("shows one column alone, and a cell spanning past the range only across the kept columns", () => {
+      const one = cut(["h", "l", "n"], 3, 1);
+      expect(one?.title).toBe("SNRIs");
+      expect(shape(one?.doc as DocJSON)).toEqual([["l", "Duloxetine"], ["n", "*all: serotonin syndrome risk"]]);
+      expect(shape(cut(["h", "l", "n"], 0, 2)?.doc as DocJSON)).toEqual([["l", "Fluoxetine", "Citalopram"], ["n", "*all: serotonin syndrome risk|c2"]]);
+    });
+
+    it("is null for a range the table does not have", () => {
+      expect(cut(["h", "l"], 3, 2)).toBeNull();
+      expect(cut(["h", "l"], 0, 0)).toBeNull();
+      expect(columnView(classes, -1, null)).toBeNull();
+    });
+  });
+
   it("is null when the cut does not apply to the doc", () => {
     const prose: DocJSON = { type: "doc", content: [{ type: "paragraph" }] };
     expect([noteView(prose, { rows: ["r1"] }, head), noteView(prose, { column: 1 }, head), noteView(vitamins, { column: 9 }, head)]).toEqual([null, null, null]);

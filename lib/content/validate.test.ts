@@ -511,6 +511,29 @@ describe("pharm (20 §20.6, §20.7)", () => {
         expect(verdict(path, around(...cuts))).toMatch(message);
       });
     });
+
+    describe("card and lo parts cutting rows to a range of columns (classes set side by side)", () => {
+      const h = id("r", 10);
+      const rangePart = (n: number, card: string | null, rows: string[], column: number, columns: number) =>
+        ({ ...part(n, card === null ? "lo" : "card", [b2], card), rows, column, columns });
+      const around = (...cuts: unknown[]) => pf([part(1, "overview", [b1]), ...cuts, part(9, "lo", [b3])]);
+
+      it("accepts parts sharing a heading row and a list row in disjoint column ranges, from column 0, beside whole-row parts", () => {
+        expect(verdict(path, around(rangePart(2, C1, [h, r1], 0, 2), rangePart(3, C2, [h, r1], 2, 2)))).toBe("ok");
+        expect(verdict(path, around(rangePart(2, C1, [h, r1], 0, 1), rangePart(3, null, [h, r1], 1, 1), rowsPart(4, C2, [r2])))).toBe("ok");
+      });
+
+      it.each([
+        ["overlapping column ranges of the same rows", [rangePart(2, C1, [h, r1], 0, 2), rangePart(3, C2, [h, r1], 1, 2)], /\.parts\[1\]: expected rows of the part's own besides those shared/],
+        ["a range on a topic part", [{ ...rangePart(2, null, [h, r1], 0, 2), role: "topic", topics: [id("r", 20)] }], /\.parts\[1\]\.columns: expected a column count with `column` and `rows`, only on a card or lo part/],
+        ["a range without rows", [{ ...colPart(2, C1, 1), columns: 2 }], /\.parts\[1\]\.columns: expected a column count with `column` and `rows`/],
+        ["a range without a column", [{ ...rowsPart(2, C1, [r1]), columns: 2 }], /\.parts\[1\]\.columns: expected a column count with `column` and `rows`/],
+        ["a range of no columns", [rangePart(2, C1, [h, r1], 0, 0)], /\.parts\[1\]\.columns: expected a column number \(1 or more\)/],
+        ["a topic part's column 0", [{ ...part(2, "topic", [b2]), rows: [r1], column: 0, topics: [id("r", 20)] }], /\.parts\[1\]\.column: expected a column number \(1 or more\)/],
+      ])("refuses %s", (_name, cuts, message) => {
+        expect(verdict(path, around(...cuts))).toMatch(message);
+      });
+    });
   });
 
   it("validates cards.json", () => {

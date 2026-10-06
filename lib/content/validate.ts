@@ -345,28 +345,31 @@ export const validateUpload: Validator = (v, ctx, expectId) => {
  * lists), so parts of one group share those: a row listed by more than one part of the run must come,
  * in each part listing it, before every row that part alone lists, and each part lists a row of its own.
  * A `topic` part (shown on the meds panels of its `topics`, on no card) may also cut its rows to one
- * column, beside column `label`; it joins a run of row parts, and two parts share a row only where
- * they show the same column of it (or one shows the whole row).
+ * column, beside column `label`; a `card` or `lo` part may cut its rows to `columns` grid columns from
+ * `column` on (column 0 included). Either joins a run of row parts, and two parts share a row only
+ * where the columns they show of it overlap (or one shows the whole row).
  */
 export const validatePharmFile: Validator = (v, ctx, expectId) => {
   shapeOf<PharmFile>({
     v: v1, id: slugC, fileName: nonEmpty, basePt: num, blocks: uniqueArr(id("b")),
     parts: arr(shapeOf<PharmPart>(
       { id: id("p"), role: oneOf("overview", "lo", "card", "topic"), title: str, card: nullable(id("c")), blocks: arr(id("b")) },
-      { column: columnC, rows: rowsC, label: labelC, topics: topicsC },
+      { column: labelC, columns: columnC, rows: rowsC, label: labelC, topics: topicsC },
     )),
   }, { page: id("d") })(v, "", ctx);
   const p = v as PharmFile;
   expectField(ctx, "id", p.id, expectId);
   uniqueArr(str)(p.parts.map((x) => x.id), ".parts[].id", ctx);
   let at = 0;
-  type Cut = { path: string; rows: readonly string[] | null; column: number | null };
+  /** A part's cut: its rows, and the grid columns `column` … `column + width - 1` it shows of them. */
+  type Cut = { path: string; rows: readonly string[] | null; column: number | null; width: number };
   type Run = { block: string; by: "column" | "rows"; cuts: Cut[] };
   /** The block being cut by the run of cut parts just before, and each part's rows and column. */
   let cutting: Run | null = null;
-  /** Whether cuts `a` and `b` of a run both show row `r`: listed by both, in the same column or a whole row. */
+  /** Whether cuts `a` and `b` of a run both show row `r`: listed by both, in overlapping columns or a whole row. */
   const share = (a: Cut, b: Cut, r: string): boolean =>
-    a !== b && (b.rows?.includes(r) ?? false) && (a.column === null || b.column === null || a.column === b.column);
+    a !== b && (b.rows?.includes(r) ?? false)
+    && (a.column === null || b.column === null || (a.column < b.column + b.width && b.column < a.column + a.width));
   const endRun = (): void => {
     const run: Run | null = cutting;
     cutting = null;
@@ -398,6 +401,12 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
     if (part.label !== undefined && (part.role !== "topic" || cut.column === undefined || part.label >= cut.column)) {
       bad(ctx, `${path}.label`, "a column left of `column`, only on a topic part", part.label);
     }
+    const range = part.columns !== undefined;
+    if (range && ((part.role !== "card" && part.role !== "lo") || cut.column === undefined || cut.rows === undefined)) {
+      bad(ctx, `${path}.columns`, "a column count with `column` and `rows`, only on a card or lo part", part.columns);
+    }
+    // A topic part's column sits right of its label column (a place-note column is checked as one below).
+    if (part.role === "topic" && cut.column !== undefined && cut.column < 1) bad(ctx, `${path}.column`, "a column number (1 or more)", cut.column);
     if (cut.column === undefined && cut.rows === undefined) {
       endRun();
       blocks.forEach((b, j) => {
@@ -408,10 +417,10 @@ export const validatePharmFile: Validator = (v, ctx, expectId) => {
     }
     if (blocks.length !== 1) bad(ctx, `${path}.blocks`, "one block when the part has a column or rows", blocks);
     const block = blocks[0] as string;
-    // Only a topic part cuts its rows to a column; other parts cut as a place note does.
-    blockNote({ block, ...(part.role === "topic" && cut.rows !== undefined ? { rows: cut.rows } : cut) }, path, ctx);
+    // Only a topic part, or a part with `columns`, cuts its rows to columns; other parts cut as a place note does.
+    blockNote({ block, ...((part.role === "topic" || range) && cut.rows !== undefined ? { rows: cut.rows } : cut) }, path, ctx);
     const by = cut.rows !== undefined ? "rows" : "column";
-    const take: Cut = { path, rows: cut.rows ?? null, column: cut.column ?? null };
+    const take: Cut = { path, rows: cut.rows ?? null, column: cut.column ?? null, width: part.columns ?? 1 };
     const run: Run | null = cutting;
     if (run !== null && run.block === block) {
       if (run.by !== by) bad(ctx, path, `${run.by} like the parts before it on ${block}`, part);

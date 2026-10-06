@@ -275,8 +275,12 @@ interface DraftPart {
   /** A card id, or the `key` of a draft card that has no id yet. */
   card: string | null;
   blocks: string[];
-  /** With one table block: the part shows only that column, or those rows, or (a topic part) both (content PharmPart). */
+  /**
+   * With one table block: the part shows only that column, or those rows, or (a topic part) both; or
+   * (a card or lo part) those rows cut to `columns` grid columns from `column` on (content PharmPart).
+   */
   column?: number;
+  columns?: number;
   label?: number;
   rows?: string[];
   /** A topic part's guide topic ids. */
@@ -326,7 +330,8 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
     }
     return {
       id, role: d.role, title: d.title, card, blocks: d.blocks,
-      ...(d.column === undefined ? {} : { column: d.column }), ...(d.label === undefined ? {} : { label: d.label }),
+      ...(d.column === undefined ? {} : { column: d.column }), ...(d.columns === undefined ? {} : { columns: d.columns }),
+      ...(d.label === undefined ? {} : { label: d.label }),
       ...(d.rows === undefined ? {} : { rows: d.rows }), ...(d.topics === undefined ? {} : { topics: d.topics }),
     };
   });

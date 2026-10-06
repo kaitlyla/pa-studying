@@ -771,4 +771,33 @@ describe("pharm pages", () => {
     expect(cardBtn(pg, LO).getAttribute("aria-expanded")).toBe("true");
     for (const k of keysOf(sec).filter((k) => k !== LO)) expect(cardBtn(pg, k).getAttribute("aria-expanded")).toBe("false");
   });
+
+  it("a section's learning-objectives part cutting a range of her table's columns shows those columns alone", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const sec = antianginals(mod);
+    const overview = need(mod.parts[need(sec.overview, "overview")], "overview part");
+    const TBL = "b_pagetable02";
+    mod.notesBlocks[TBL] = {
+      id: TBL, kind: "table",
+      doc: schema.nodeFromJSON(tableDoc(4, [
+        [R(920), "heading", "SSRIs", "", "SNRIs", ""],
+        [R(921), "content", "Fluoxetine", "Sertraline", "Venlafaxine", "Duloxetine"],
+      ])).toJSON() as SystemJson["notesBlocks"][string]["doc"],
+    };
+    const LO = "p_lo_range";
+    sec.lo = LO;
+    mod.parts[LO] = { title: "Learning objectives", role: "lo", file: overview.file, basePt: overview.basePt, blocks: [TBL], rows: [R(920), R(921)], column: 0, columns: 2 };
+    const served = new Map(files);
+    served.set(CV, mod);
+    server.restore();
+    server = serveData(served);
+
+    const pg = pharmPage(await renderSection(SEC_HASH));
+    await click(cardBtn(pg, LO));
+    const card = cardEl(pg, LO);
+    expect(visibleText(need(card.querySelector(".pn-col"), "range title"))).toBe("SSRIs");
+    const text = visibleText(card);
+    for (const kept of ["Fluoxetine", "Sertraline"]) expect(text).toContain(kept);
+    for (const cut of ["SNRIs", "Venlafaxine", "Duloxetine"]) expect(text).not.toContain(cut);
+  });
 });
