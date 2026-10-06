@@ -937,12 +937,13 @@ test.describe("PDF", () => {
     const downloading = page.waitForEvent("download", { timeout: 270_000 });
     await page.getByRole("menu", { name: "Download PDF" }).getByRole("menuitem", { name: /^This system/ }).click();
     const download = await downloading;
+    // The toast hides after a few seconds, so check it before the slow file read below.
+    await expect(page.locator(".toast-region")).toContainText(`Downloaded ${download.suggestedFilename()}`);
     const out = testInfo.outputPath("largest-system.pdf");
     await download.saveAs(out);
     const bytes = readFileSync(out);
     expect(bytes.subarray(0, 4).toString("latin1")).toBe("%PDF");
     expect(bytes.toString("latin1")).toMatch(/\/Type\s*\/Page[^s]/);
-    await expect(page.locator(".toast-region")).toContainText(`Downloaded ${download.suggestedFilename()}`);
   });
 
   test("file viewer: every page of a PDF renders inline top to bottom, and Download original PDF downloads the stored file unchanged", async ({ page }, testInfo) => {
