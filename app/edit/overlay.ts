@@ -7,9 +7,10 @@ import {
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
-  BUILD_PATH, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson, type PubGap,
-  type SystemJson,
+  BUILD_PATH, docPath, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson,
+  type OtherJson, type PubGap, type RefTabJson, type SystemJson,
 } from "../../lib/derive/published.ts";
+import { shownItems, shownNotes } from "../../lib/derive/placeNotes.ts";
 import { PANCE } from "../../lib/derive/routes.ts";
 import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
 import { DATA_BASE, invalidateData, loadData, NotFoundError, setDataOverlay } from "../data/load.ts";
@@ -172,10 +173,12 @@ function patchNavDocs(nav: NavJson, ix: Index): NavJson {
 /**
  * One published data file (`path` under dist/data/) with the overlaid content files applied.
  * `structure` supplies a system's structure.json when a table of it is overlaid but the structure is not;
- * `systems` the overlaid systems' patched pages, by system id, for a guide's nav.json.
+ * `systems` the overlaid systems' patched pages, by system id, for a guide's nav.json; `hiddenBlocks` the
+ * blocks of Word pages the overlay removes, for place notes.
  */
 export function patchPublished(
   path: string, json: unknown, files: Files, structure?: StructureFile | null, systems?: ReadonlyMap<string, SystemNavSource>,
+  hiddenBlocks: ReadonlySet<string> = new Set(),
 ): unknown {
   if (files.size === 0) return json;
   const ix = indexFiles(files);
@@ -195,21 +198,23 @@ export function patchPublished(
     }
     if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix, below);
   }
+  // A place's notes and outline follow the build's rule for the patched documents (lib/derive/placeNotes.ts).
+  const blockShown = (id: string): boolean => !hiddenBlocks.has(id);
   if (path === OTHER_PATH) {
     const other = files.get("content/places/other.json") as OtherFile | undefined;
-    if (other) {
-      const o = out as { sections: { id: string; files: DocList }[] };
-      o.sections = o.sections.map((s) => ({ ...s, files: patchDocList(s.files, ix, other.sections.find((x) => x.id === s.id)?.files ?? []) }));
-    }
+    const o = out as OtherJson;
+    o.sections = o.sections.map((s) => {
+      const list = other ? patchDocList(s.files, ix, other.sections.find((x) => x.id === s.id)?.files ?? []) : s.files;
+      return { ...s, files: list, notes: shownNotes(s.notes, shownItems(list, blockShown)) };
+    });
   }
   const refTab = REF_PATH_RE.exec(path)?.groups?.tab;
   if (refTab) {
     const tabs = files.get("content/places/reftabs.json") as RefTabsFile | undefined;
     const tab = tabs?.[refTab as keyof Omit<RefTabsFile, "v">] as RefTabsFile["labs"] | undefined;
-    if (tab) {
-      const r = out as { files: DocList };
-      r.files = patchDocList(r.files, ix, tab.files);
-    }
+    const r = out as RefTabJson;
+    if (tab) r.files = patchDocList(r.files, ix, tab.files);
+    r.subs = r.subs.map((sub) => ({ ...sub, notes: shownNotes(sub.notes, shownItems(null, blockShown)) }));
   }
   const docId = DOC_PATH_RE.exec(path)?.groups?.id;
   if (docId) {
@@ -281,11 +286,30 @@ async function navSources(guide: string, files: Files): Promise<Map<string, Syst
   return out;
 }
 
+/** The blocks of the Word pages the overlay holds as removed, from their published pages. */
+async function hiddenWordBlocks(files: Files): Promise<Set<string>> {
+  const out = new Set<string>();
+  for (const [p, json] of files) {
+    const id = WORD_DOC_RE.exec(p)?.groups?.id;
+    if (!id || !(json as WordDocFile).removed) continue;
+    try {
+      for (const b of (await loadData<DocJson>(docPath(id))).blocks ?? []) out.add(b.id);
+    } catch (e) {
+      // A page the published site no longer has: the build already left its blocks out.
+      if (!(e instanceof NotFoundError)) throw e;
+    }
+  }
+  return out;
+}
+
 async function overlay(path: string, json: unknown): Promise<unknown> {
   if (entries.size === 0 && unsaved.size === 0) return json;
   const files = filesOf();
   const guide = NAV_PATH_RE.exec(path)?.groups?.guide;
-  return patchPublished(path, json, files, await structureFor(path), guide === undefined ? undefined : await navSources(guide, files));
+  const notes = path === OTHER_PATH || REF_PATH_RE.test(path);
+  return patchPublished(
+    path, json, files, await structureFor(path), guide === undefined ? undefined : await navSources(guide, files), notes ? await hiddenWordBlocks(files) : undefined,
+  );
 }
 
 /** Drops every entry the deployed site already contains (compare status identical or ahead). */

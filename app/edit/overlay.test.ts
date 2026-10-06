@@ -2,7 +2,7 @@
 // deployed site contains them, and dropped once it does.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import type { BlockFile, DocJSON, GapFile, OtherFile, StructureFile, WordDocFile, AsIsFile } from "../../lib/content/index.ts";
-import type { DocJson, DocList, PubGap, SystemJson } from "../../lib/derive/published.ts";
+import type { DocJson, DocList, DocRef, OtherJson, PubBlock, PubGap, PubNote, PubOtherNote, RefTabJson, SystemJson } from "../../lib/derive/published.ts";
 import { B, D, G, R } from "../../tools/build/test-fixture.ts";
 import { loadData } from "../data/load.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
@@ -45,6 +45,30 @@ const fileJson = <T>(path: string): T => {
 };
 const para = (text: string): DocJSON => ({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] });
 const pub = <T>(path: string): T => clone(fx.published.get(path) as T);
+const need = <T>(v: T | undefined, what: string): T => {
+  if (v === undefined) throw new Error(`${what} is not in the fixture`);
+  return v;
+};
+
+// The fixture's places have no outline or notes; these put some into their published pages.
+const guidelines = (other: unknown): OtherJson["sections"][number] => need((other as OtherJson).sections.find((s) => s.id === "guidelines"), "the Guidelines section");
+/** Published other.json with `notes` as the Guidelines section's outline. */
+const otherWith = (notes: PubOtherNote[]): OtherJson => {
+  const o = pub<OtherJson>("other.json");
+  return { ...o, sections: o.sections.map((s) => (s.id === "guidelines" ? { ...s, notes } : s)) };
+};
+/** Published ref/labs.json with `notes` as its first sub's notes. */
+const refWith = (notes: PubNote[]): RefTabJson => {
+  const r = pub<RefTabJson>("ref/labs.json");
+  return { ...r, subs: r.subs.map((s, i) => (i === 0 ? { ...s, notes } : s)) };
+};
+/** The blocks of her Word page "Thyroid notes" (D(5)), as published. */
+const thyroidBlocks = (): [PubBlock, PubBlock] => {
+  const [b60, b61] = pub<DocJson>(`docs/${D(5)}.json`).blocks ?? [];
+  if (b60?.id !== B(60) || b61?.id !== B(61)) throw new Error("expected D(5)'s blocks B(60), B(61)");
+  return [b60, b61];
+};
+const blockNote = (block: PubBlock): Extract<PubNote, { block: PubBlock }> => ({ block, basePt: 11, column: null, rows: null });
 
 describe("patchPublished", () => {
   it("returns the published file itself when nothing is overlaid", () => {
@@ -130,6 +154,32 @@ describe("patchPublished", () => {
     expect(list?.pending).toEqual([{ id: added, name: "Lipid guideline", state: "processing" }]);
   });
 
+  describe("a place's outline and notes, by the build's rule", () => {
+    const ACLS = `content/files/${D(1)}/file.json`;
+    const acls = (): DocRef => need(guidelines(pub("other.json")).files.files.find((f) => f.id === D(1)), "D(1) in Guidelines");
+    const outline = (d: DocRef): PubOtherNote[] => [{ heading: "Algorithms", sub: false, id: "algorithms" }, { original: d }, { doc: d }];
+
+    it("drops a removed document's original and doc items", () => {
+      const removed: AsIsFile = { ...fileJson<AsIsFile>(ACLS), removed: { at: "2026-10-04T05:00:00Z", from: "b".repeat(40) } };
+      const out = patchPublished("other.json", otherWith(outline(acls())), new Map([[ACLS, removed]]));
+      expect(guidelines(out).notes).toEqual([{ heading: "Algorithms", sub: false, id: "algorithms" }]);
+    });
+
+    it("shows a renamed document's items under its new name", () => {
+      const renamed: AsIsFile = { ...fileJson<AsIsFile>(ACLS), name: "ACLS algorithms 2025" };
+      const out = patchPublished("other.json", otherWith(outline(acls())), new Map([[ACLS, renamed]]));
+      expect(guidelines(out).notes).toEqual(outline({ ...acls(), name: "ACLS algorithms 2025" }));
+    });
+
+    it("drops the blocks it is told are hidden from a reference tab's notes, and keeps the rest", () => {
+      const [b60, b61] = thyroidBlocks();
+      const notes: PubNote[] = [{ heading: "Thyroid" }, blockNote(b60), blockNote(b61)];
+      const block = { ...fileJson<BlockFile>(`${CV}/blocks/${B(11)}.json`), doc: para("Murmurs, revised") };
+      const out = patchPublished("ref/labs.json", refWith(notes), new Map([[`${CV}/blocks/${B(11)}.json`, block]]), null, undefined, new Set([B(60)]));
+      expect((out as RefTabJson).subs[0]?.notes).toEqual([{ heading: "Thyroid" }, blockNote(b61)]);
+    });
+  });
+
   it("leaves published Removed and Processing documents alone when the overlay holds only other files", () => {
     const block = { ...fileJson<BlockFile>(`${CV}/blocks/${B(11)}.json`), doc: para("Murmurs, revised") };
     const files = new Map([[`${CV}/blocks/${B(11)}.json`, block]]);
@@ -205,6 +255,19 @@ describe("the overlay on the owner's device", () => {
     expect([...overlayEntries().keys()]).toEqual([`${CV}/blocks/${B(14)}.json`]);
     expect(await store.get(PATH)).toBeUndefined();
     expect(await murmurs()).toEqual(pub<SystemJson>(SYS).blocks.find((b) => b.id === B(11))?.doc);
+  });
+
+  it("leaves the blocks of a Word page she removed out of place notes", async () => {
+    const [b60, b61] = thyroidBlocks();
+    published.set("ref/labs.json", refWith([blockNote(b60), blockNote(b61)]));
+    published.set("other.json", otherWith([{ heading: "Thyroid", sub: false, id: "thyroid" }, blockNote(b61)]));
+    published.set("build.json", { commit: "0".repeat(40), builtAt: "2026-10-01T00:00:00Z", siteBytes: 0 });
+    await startOverlay(w.git);
+    const record = `content/docs/${D(5)}/doc.json`;
+    await recordSaved(new Map([[record, { ...fileJson<WordDocFile>(record), removed: { at: "2026-10-04T05:00:00Z", from: "b".repeat(40) } }]]), w.fake.head());
+
+    expect((await loadData<RefTabJson>("ref/labs.json")).subs[0]?.notes).toEqual([]);
+    expect(guidelines(await loadData<OtherJson>("other.json")).notes).toEqual([{ heading: "Thyroid", sub: false, id: "thyroid" }]);
   });
 
   it("keeps everything when build.json can't be read", async () => {

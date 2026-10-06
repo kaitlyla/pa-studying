@@ -1684,8 +1684,10 @@ test.describe("documents", () => {
     await expect.poll(() => new URL(page.url()).hash).toBe(placeHash());
     await expect(toast(page)).toContainText(`Removed “${asIs.name}”.`);
     expect(need(fake.commit(fake.head()), "remove").message).toContain("Pa-Studying-Kind: doc-remove");
-    await expect(page.locator(`main a[href^="#/file/${asIs.id}"]`)).toHaveCount(0);
+    // The toggle first: it shows once the page has its patched data. While the page is still loading it
+    // shows no links at all, so a link count taken then would pass whatever the page goes on to show.
     await expect(ref(page, "removed-docs-toggle")).toHaveText(`Show removed documents (${place().files.removed.length + 1})`);
+    await expect(page.locator(`main a[href^="#/file/${asIs.id}"]`)).toHaveCount(0);
 
     // The Undo stays for 8 seconds.
     await page.waitForTimeout(7_000);

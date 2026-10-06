@@ -23,6 +23,7 @@ import {
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, type PMNode } from "./text.ts";
 import { checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
+import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
 } from "./published.ts";
@@ -568,15 +569,17 @@ export function publish(c: Content): PublishResult {
       (d.text?.pages ?? []).forEach((t, i) => units.push({ ...base, title: `${d.file.name} · p. ${i + 1}`, at: `p${i + 1}`, text: searchText(t) }));
     }
   };
+  /** The shownItems rule for a place listing `docs`: blocks show while on a visible Word page. */
+  const placeShown = (docs: DocList | null): ShownItems => shownItems(docs, (id) => wordBlocks.has(id));
   /** A place's notes; a block no longer on a visible Word page (its page removed, or the block deleted) is dropped. */
-  const placeNoteList = (file: string, ns: readonly PlaceNote[] | undefined): PubNote[] => {
+  const placeNoteList = (file: string, ns: readonly PlaceNote[] | undefined, shown: ShownItems = placeShown(null)): PubNote[] => {
     const out: PubNote[] = [];
     for (const n of ns ?? []) {
       if ("heading" in n) {
         out.push({ heading: n.heading });
         continue;
       }
-      const w = wordBlocks.get(n.block);
+      const w = shown.block(n.block) ? wordBlocks.get(n.block) : undefined;
       if (!w) {
         dropped.push({ file, id: n.block });
         continue;
@@ -958,23 +961,21 @@ export function publish(c: Content): PublishResult {
     }
     for (const d of rt.files) docUnit(d);
   }
-  /**
-   * An Other section's outline. Headings get part slugs unique in the section; a doc or original
-   * item whose document is not visible (removed, processing) is left out here and listed by `files` instead.
-   */
+  /** An Other section's outline. Headings get part slugs unique in the section; hidden items are left out (shownItems). */
   const otherNotes = (sec: OtherFile["sections"][number], secLinks: readonly PubLink[], docs: DocList): PubOtherNote[] => {
     const parts = outlineParts(sec);
+    const shown = placeShown(docs);
     const out: PubOtherNote[] = [];
     for (const [i, n] of (sec.notes ?? []).entries()) {
       if ("heading" in n) {
         out.push({ heading: n.heading, sub: n.sub === true, id: parts[i] ?? "" });
       } else if ("block" in n) {
-        for (const p of placeNoteList("content/places/other.json", [n])) if ("block" in p) out.push(p);
+        for (const p of placeNoteList("content/places/other.json", [n], shown)) if ("block" in p) out.push(p);
       } else if ("doc" in n) {
-        const d = docs.files.find((f) => f.id === n.doc);
+        const d = shown.doc(n.doc);
         if (d) out.push({ doc: d });
       } else if ("original" in n) {
-        const d = docs.files.find((f) => f.id === n.original);
+        const d = shown.doc(n.original);
         if (d) out.push({ original: d });
       } else if ("gap" in n) {
         out.push({ gap: gap(n.gap) });
