@@ -9,13 +9,14 @@
     "type": "table",
     "attrs": {
      "grid": [
-      72,
-      148.5,
-      117,
-      169.35,
-      123.15,
-      144
+      55.6,
+      151.4,
+      163.25,
+      147.35,
+      115.1,
+      141.3
      ],
+     "ownWidths": true,
      "indentPt": -27.25,
      "borders": {
       "top": {
@@ -86,7 +87,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -98,9 +102,15 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
-            "text": "Valvular Disorders"
+            "text": "Valvular Dx"
            }
           ]
          }
@@ -125,7 +135,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -137,6 +150,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "About"
@@ -164,7 +183,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -176,6 +198,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "S/Sxs"
@@ -203,7 +231,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -215,6 +246,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Murmur"
@@ -242,7 +279,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -254,6 +294,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Diagnostics"
@@ -281,7 +327,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -293,6 +342,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
              }
             ],
             "text": "Management"
@@ -307,6 +362,12 @@
               "type": "underline",
               "attrs": {
                "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
               }
              }
             ],
@@ -361,7 +422,7 @@
               "type": "bold"
              }
             ],
-            "text": "Aortic Regurgitation (AR)"
+            "text": "AR"
            }
           ]
          },
@@ -448,7 +509,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Incomplete aortic valve closure leads to LV volume overload w/ eventual LV dilation & HF"
+            "text": "Incomplete aortic valve closure -> LV vol overload w eventual LV dilation & HF"
            }
           ]
          },
@@ -492,7 +553,7 @@
               }
              }
             ],
-            "text": "Etiologies"
+            "text": "Eti"
            },
            {
             "type": "text",
@@ -533,7 +594,28 @@
            },
            {
             "type": "text",
-            "text": ": acute MI, aortic dissection, endocarditis; can lead to pulmonary edema"
+            "text": ": acute MI, aortic dissection, endocarditis, trauma; "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- poss -> pulm edema"
            }
           ]
          },
@@ -570,7 +652,7 @@
            },
            {
             "type": "text",
-            "text": ": aortic dilation – Marfan syndrome, inflammatory disorders, rheumatic fever, syphilis, HTN"
+            "text": ": congenital bicuspid valve; calcific valve dz; prior endocarditis; aortic root dilation – Marfan syndrome, inflam disorders, rheumatic fever, syphilis, HTN"
            }
           ]
          }
@@ -612,7 +694,103 @@
               }
              }
             ],
-            "text": "Signs of widened pulse pressure (seen in "
+            "text": "Acute: "
+           },
+           {
+            "type": "text",
+            "text": "severe dyspnea, pulm edema, acute HF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Chronic:"
+           },
+           {
+            "type": "text",
+            "text": " exertional dyspnea, fatigue, HF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Sx of WPP (in "
            },
            {
             "type": "text",
@@ -687,7 +865,7 @@
               }
              }
             ],
-            "text": "swift upstroke & rapid fall of radial pulse accentuated w/ wrist elevation "
+            "text": "swift upstroke & rapid fall of radial pulse accentuated w wrist elevation "
            }
           ]
          },
@@ -920,7 +1098,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -1067,7 +1245,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•↑ venous return (squatting, supine, leg raise)"
+            "text": "•↑ venous return: squat, supine, leg raise"
            }
           ]
          },
@@ -1176,7 +1354,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•↓ venous return (Valsalva, standing)"
+            "text": "•↓ venous return: Valsalva, standing"
            }
           ]
          },
@@ -1260,7 +1438,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Austin-Flint Murmur: mid-late diastolic rumble @ apex secondary to retrograde regurgitant jet competing w/ antegrade flow from LA into LV"
+            "text": "Austin-Flint Murmur: mid-late diastolic rumble @ apex 2/2 retrograde regurgitant jet competing w antegrade flow from LA into LV"
            }
           ]
          }
@@ -1348,13 +1526,15 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
              }
             ],
             "text": "Cardiac catheterization"
-           },
-           {
-            "type": "text",
-            "text": ": definitive"
            }
           ]
          }
@@ -1396,7 +1576,7 @@
               }
              }
             ],
-            "text": "Medical therapy"
+            "text": "Pharm tx"
            },
            {
             "type": "text",
@@ -1533,7 +1713,7 @@
            },
            {
             "type": "text",
-            "text": ": acute or symptomatic, asymptomatic w/ LV decompensation (EF <55%)"
+            "text": ": acute or Sx, aSx w LV decompensation (EF <55%)"
            }
           ]
          },
