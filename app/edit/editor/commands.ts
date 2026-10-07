@@ -104,6 +104,25 @@ export const HIGHLIGHT_COLORS: readonly { name: string; hex: string }[] = [
   { name: "black", hex: "000000" },
 ];
 
+/**
+ * The highlight and shading colors used in `docs` (a page's editors), most-used first by number of text
+ * runs, ties in the order first met: the Highlight control's "used on this page" colors.
+ */
+export function usedHighlightColors(docs: Iterable<PMNode>): string[] {
+  const runs = new Map<string, number>();
+  for (const doc of docs) {
+    doc.descendants((n) => {
+      for (const m of n.marks) {
+        if (m.type !== highlight && m.type !== shade) continue;
+        const hex = m.attrs.hex as string;
+        runs.set(hex, (runs.get(hex) ?? 0) + 1);
+      }
+      return true;
+    });
+  }
+  return [...runs].sort((a, b) => b[1] - a[1]).map(([hex]) => hex);
+}
+
 /** Highlight the selection (or what she types next) in `hex`, replacing any highlight it had. */
 export function setHighlight(hex: string): Command {
   return (state, dispatch) => {
@@ -127,6 +146,25 @@ export const removeHighlight: Command = (state, dispatch) => {
   }
   return true;
 };
+
+/**
+ * The characters the Symbols control offers: her own set, in her order (shown ten to a row). Where her
+ * guides use one of several look-alikes, this is the one they use (⊘, µ as MICRO SIGN, ⤷).
+ */
+export const SYMBOLS: readonly string[] = [
+  "↑", "↓", "→", "←", "↔", "⊘", "±", "≥", "≤", "≈",
+  "•", "▪", "»", "°", "Δ", "α", "β", "γ",
+  "µ", "♡", "♀", "♂", "×", "½", "✓", "✗", "①", "②",
+  "③", "④", "⑤", "⑥", "⤷", "⇨", "▫", "◦", "∠", "³",
+];
+
+/** Puts `text` in at the cursor, replacing the selection, in the formatting she would type with there. */
+export function insertSymbol(text: string): Command {
+  return (state, dispatch) => {
+    if (dispatch) dispatch(state.tr.insertText(text).scrollIntoView());
+    return true;
+  };
+}
 
 /** The smallest text size the size controls set. */
 export const MIN_SIZE_PT = 4;

@@ -22,7 +22,17 @@
 .etb .tb-gl { font-size: 12px; color: #5b6472; margin-right: 2px; white-space: nowrap; }
 .etb .tb-hl { padding: 0 3px; background: #ff0; }
 .etb .tb-pop { position: relative; display: inline-flex; }
-.etb .tb-swatches { position: absolute; top: 36px; left: 0; z-index: 9; display: flex; flex-wrap: wrap; gap: 2px; width: max-content; max-width: 240px; padding: 4px; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .14); }
+.etb .tb-hl-menu { position: absolute; top: 36px; left: 0; z-index: 9; display: flex; flex-direction: column; gap: 4px; width: max-content; padding: 6px 8px 8px; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .14); }
+.etb .tb-hl-h { font-size: 12px; color: #5b6472; }
+.etb .tb-hl-grid { display: grid; grid-template-columns: repeat(8, 32px); gap: 2px; }
+.etb .tb-hl-grid .tb { min-width: 32px; padding: 0; }
+.etb .tb-hl-grid .swatch { width: 24px; height: 24px; }
+.etb .tb-hl-foot { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.etb .tb-hl-foot .tb { border-color: #c9ced8; }
+.etb .tb-hl-more { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #1f2430; cursor: pointer; }
+.etb .tb-hl-more input { width: 32px; height: 24px; padding: 0; border: 1px solid #9aa3b2; background: none; cursor: pointer; }
+.etb .tb-symbol-grid { position: absolute; top: 36px; left: 0; z-index: 9; display: grid; grid-template-columns: repeat(10, 30px); gap: 2px; padding: 4px; border: 1px solid #c9ced8; border-radius: 6px; background: #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .14); }
+.etb .tb-symbol-grid .tb { min-width: 30px; padding: 0; font-size: 16px; }
 .etb .swatch { display: inline-block; width: 18px; height: 18px; border: 1px solid #9aa3b2; border-radius: 3px; vertical-align: middle; }
 .etb .tb-size { height: 32px; padding: 0 4px; border: 1px solid #d3d8e0; border-radius: 5px; background: #fff; font-size: 13px; }
 .edit-slot img[draggable="true"] { cursor: grab; }
@@ -32,6 +42,10 @@
 .etb.phone .estat { justify-content: flex-end; width: 100%; margin-left: 0; padding-top: 6px; border-top: 1px solid #e3e6ec; }
 .etb.phone .estat > span:first-child { margin-right: auto; }
 .etb.phone .tb, .etb.phone .btn { min-width: 40px; min-height: 40px; }
+/* the tools row scrolls sideways, which would clip a menu inside it: hang the menus off the toolbar instead */
+.etb.phone .tb-pop { position: static; }
+.etb.phone .tb-hl-menu, .etb.phone .tb-symbol-grid { top: 100%; left: 0; }
+.etb.phone .tb-hl-grid .tb, .etb.phone .tb-symbol-grid .tb { min-width: 0; }
 
 /* editors */
 .editing .edit-slot { margin-bottom: 8px; }

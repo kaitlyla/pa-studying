@@ -15,10 +15,10 @@ import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import { PageBarSlot } from "../shell/pageScale.ts";
 import {
-  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
+  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow, insertSymbol, SYMBOLS,
   dragPicture, dragPictureCrop, draggedPictureSize, moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture,
   scaledPictureSize, selectedPictureSize, selectionSize, setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic,
-  toggleUnderline, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
+  toggleUnderline, usedHighlightColors, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
 } from "./editor/commands.ts";
 import { PictureHandles, pictureFile } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
@@ -26,7 +26,7 @@ import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/s
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
 import {
-  copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
+  copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
   setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import { figuresWithLook, gapLook, type Part, type Slot } from "./units.ts";
@@ -268,20 +268,72 @@ function Tool({ label, run, children, refk, disabled, pressed }: { label: string
   );
 }
 
-/** "Highlight" opens these swatches; picking one highlights the selection in it. */
+/** The color a "More colours…" pick starts from. */
+const MORE_COLOURS_START = "FFFF00";
+
+/**
+ * "Highlight" opens the highlight and shading colors used on the page she is editing (most-used first),
+ * Word's standard highlights, "No highlight", and "More colours…" for any other color.
+ */
 function HighlightPicker({ run }: { run: (c: Command) => void }): ReactNode {
+  const [used, setUsed] = useState<string[] | null>(null);
+  const more = useRef<HTMLInputElement>(null);
+  const pick = (c: Command): void => {
+    setUsed(null);
+    run(c);
+  };
+  // A native "change" (not React's onChange, which fires on every move in the color dialog): her final pick.
+  useEffect(() => {
+    const input = more.current;
+    if (!input) return undefined;
+    const picked = (): void => pick(setHighlight(input.value.slice(1).toUpperCase()));
+    input.addEventListener("change", picked);
+    return () => input.removeEventListener("change", picked);
+  });
+  const swatch = (hex: string, label: string, where: string): ReactNode => (
+    <Tool key={hex} label={label} run={() => pick(setHighlight(hex))} refk={`tb-hl${where}-${hex}`}>
+      <span className="swatch" style={{ background: `#${hex}` }} />
+    </Tool>
+  );
+  return (
+    <span className="tb-pop">
+      <Tool label="Highlight" run={() => setUsed((u) => (u ? null : usedHighlightColors(openDocs())))} refk="tb-highlight"><span className="tb-hl">H</span> ▾</Tool>
+      {used && (
+        <span className="tb-hl-menu" role="group" aria-label="Highlight colors" data-ref="tb-highlight-colors">
+          {used.length > 0 && (
+            <>
+              <span className="tb-hl-h">Highlights used on this page</span>
+              <span className="tb-hl-grid" data-ref="tb-hl-used">{used.map((hex) => swatch(hex, `Highlight #${hex}`, "-used"))}</span>
+            </>
+          )}
+          <span className="tb-hl-h">Standard highlights</span>
+          <span className="tb-hl-grid" data-ref="tb-hl-standard">{HIGHLIGHT_COLORS.map((c) => swatch(c.hex, `Highlight ${c.name}`, ""))}</span>
+          <span className="tb-hl-foot">
+            <Tool label="No highlight" run={() => pick(removeHighlight)} refk="tb-unhighlight">No highlight</Tool>
+            <label className="tb-hl-more">
+              More colours…
+              <input ref={more} type="color" defaultValue={`#${MORE_COLOURS_START.toLowerCase()}`} aria-label="More colours" data-ref="tb-hl-more" />
+            </label>
+          </span>
+        </span>
+      )}
+    </span>
+  );
+}
+
+/** "Symbols" opens her characters; picking one puts it in at the cursor. */
+function SymbolPicker({ run }: { run: (c: Command) => void }): ReactNode {
   const [open, setOpen] = useState(false);
   return (
     <span className="tb-pop">
-      <Tool label="Highlight" run={() => setOpen((o) => !o)} refk="tb-highlight"><span className="tb-hl">H</span> ▾</Tool>
+      <Tool label="Symbols" run={() => setOpen((o) => !o)} refk="tb-symbols">Symbols ▾</Tool>
       {open && (
-        <span className="tb-swatches" role="group" aria-label="Highlight colors" data-ref="tb-highlight-colors">
-          {HIGHLIGHT_COLORS.map((c) => (
-            <Tool key={c.hex} label={`Highlight ${c.name}`} run={() => { setOpen(false); run(setHighlight(c.hex)); }} refk={`tb-hl-${c.hex}`}>
-              <span className="swatch" style={{ background: `#${c.hex}` }} />
+        <span className="tb-symbol-grid" role="group" aria-label="Symbols" data-ref="tb-symbol-chars">
+          {SYMBOLS.map((s) => (
+            <Tool key={s} label={`Insert ${s}`} run={() => { setOpen(false); run(insertSymbol(s)); }} refk={`tb-sym-${s.codePointAt(0)!.toString(16).toUpperCase()}`}>
+              {s}
             </Tool>
           ))}
-          <Tool label="Remove highlight" run={() => { setOpen(false); run(removeHighlight); }} refk="tb-unhighlight"><s>H</s></Tool>
         </span>
       )}
     </span>
@@ -401,6 +453,7 @@ function Toolbar(): ReactNode {
         <Tool label="Italic" run={plainCmd(toggleItalic)} refk="tb-italic"><i>I</i></Tool>
         <Tool label="Underline" run={plainCmd(toggleUnderline)} refk="tb-underline"><u>U</u></Tool>
         <HighlightPicker run={(c) => plainCmd(c)()} />
+        <SymbolPicker run={(c) => plainCmd(c)()} />
         <span className="sep" />
         <Tool label="Smaller text" run={cmd((c) => changeSize(-1, c))} refk="tb-smaller">A−</Tool>
         <select

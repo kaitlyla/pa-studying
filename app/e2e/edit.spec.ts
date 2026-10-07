@@ -13,6 +13,7 @@ import { buildPageKey } from "../edit/pageKey.ts";
 import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/editor/commands.ts";
 import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
 import type { TableAttrs } from "../../lib/schemaTypes.ts";
+import { schema } from "../../lib/schema.ts";
 import { commitMessage, inboxItemDir, partName, serializeFile } from "../../lib/content/index.ts";
 import {
   BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
@@ -1679,7 +1680,7 @@ test.describe("pictures and highlight colors", () => {
     await typeMarker(page, marker);
     for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
     await ref(page, "tb-highlight").click();
-    await expect(ref(page, "tb-highlight-colors").locator('[data-ref^="tb-hl-"]')).toHaveCount(15);
+    await expect(ref(page, "tb-hl-standard").locator('[data-ref^="tb-hl-"]')).toHaveCount(15);
     await ref(page, "tb-hl-00FF00").click();
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
@@ -1688,6 +1689,127 @@ test.describe("pictures and highlight colors", () => {
     const run = firstText(nodeAt(saved.after, saved.path));
     expect(String(run.text).startsWith(marker)).toBe(true);
     expect(run.marks).toContainEqual({ type: "highlight", attrs: { hex: "00FF00" } });
+  });
+
+  test("Highlight offers the colors used on the page, most-used first, then the standard ones; More colours… saves any color", async ({ page, context, baseURL }) => {
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, guideViewHash("fm", { kind: "system", system: "cardiovascular" }));
+    await signIn(page);
+    await startEditing(page);
+    await ref(page, "tb-highlight").click();
+    const swatches = (grid: string): Promise<string[]> =>
+      ref(page, grid).locator('[data-ref^="tb-hl-"]').evaluateAll((els) => els.map((el) => el.getAttribute("data-ref")!.split("-").pop()!));
+    // What the page's editors hold, from its stored files: its blocks (drug tables are only stubs here,
+    // edited on their pharm section) and below blocks. Each color counted by text runs as the editor
+    // holds them (neighbouring runs with the same marks are one).
+    const sysDir = join(CONTENT, "guides", "fm", "cardiovascular");
+    const stubs = new Set((JSON.parse(readFileSync(join(sysDir, "structure.json"), "utf8")) as { drugTables: { block: string }[] }).drugTables.map((d) => d.block));
+    const files = [
+      ...readdirSync(join(sysDir, "blocks")).filter((f) => !stubs.has(f.replace(/\.json$/, ""))).map((f) => join(sysDir, "blocks", f)),
+      ...(existsSync(join(sysDir, "below")) ? readdirSync(join(sysDir, "below")).map((f) => join(sysDir, "below", f)) : []),
+    ];
+    const runs = new Map<string, number>();
+    for (const file of files) {
+      schema.nodeFromJSON((JSON.parse(readFileSync(file, "utf8")) as { doc: unknown }).doc).descendants((n) => {
+        for (const m of n.marks) if (m.type.name === "highlight" || m.type.name === "shade") runs.set(m.attrs.hex as string, (runs.get(m.attrs.hex as string) ?? 0) + 1);
+        return true;
+      });
+    }
+    expect(runs.size).toBeGreaterThan(15);
+    const used = await swatches("tb-hl-used");
+    expect([...used].sort()).toEqual([...runs.keys()].sort());
+    const counts = used.map((hex) => runs.get(hex)!);
+    expect(counts).toEqual([...counts].sort((a, b) => b - a));
+    expect(await swatches("tb-hl-standard")).toEqual([
+      "FFFF00", "00FF00", "00FFFF", "FF00FF", "0000FF", "FF0000", "000080", "008080",
+      "008000", "800080", "800000", "808000", "808080", "C0C0C0", "000000",
+    ]);
+    await ref(page, "tb-highlight").click();
+
+    const marker = newMarker();
+    // typeMarker aims at a topic's table row; a system page opens on its own text.
+    await ref(page, "edit-area").locator(".edit-slot").first().locator("p").first().click({ position: { x: 1, y: 2 } });
+    await page.keyboard.press("Home");
+    await page.keyboard.type(marker);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+    await ref(page, "tb-highlight").click();
+    await ref(page, "tb-hl-used-B5E5E4").click();
+    await expect(ref(page, "tb-highlight-colors")).toHaveCount(0);
+    await page.keyboard.press("End");
+    const second = newMarker();
+    await page.keyboard.type(` ${second}`);
+    for (let i = 0; i < second.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+    await ref(page, "tb-highlight").click();
+    // The native color dialog can't be driven; set the input as a pick in it leaves it.
+    await ref(page, "tb-hl-more").evaluate((el) => {
+      const input = el as HTMLInputElement;
+      input.value = "#12ab9c";
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    await expect(ref(page, "tb-highlight-colors")).toHaveCount(0);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = savedParagraph(fake, marker);
+    const para = nodeAt(saved.after, saved.path) as { content: { text: string; marks?: unknown[] }[] };
+    const runOf = (t: string) => need(para.content.find((r) => r.text.includes(t)), `the run holding ${t}`);
+    expect(runOf(marker).marks).toContainEqual({ type: "highlight", attrs: { hex: "B5E5E4" } });
+    expect(runOf(second).marks).toContainEqual({ type: "highlight", attrs: { hex: "12AB9C" } });
+  });
+
+  test("a symbol from Symbols goes in at the cursor, typing carries on after it, and it is saved", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const marker = newMarker();
+    await typeMarker(page, marker);
+    await ref(page, "tb-symbols").click();
+    const grid = ref(page, "tb-symbol-chars");
+    await expect(grid.locator('[data-ref^="tb-sym-"]')).toHaveCount(38);
+    // Her picture's grid: ten to a row.
+    const tops = await grid.locator('[data-ref^="tb-sym-"]').evaluateAll((els) => els.map((el) => Math.round(el.getBoundingClientRect().top)));
+    expect(new Set(tops.slice(0, 10)).size).toBe(1);
+    expect(tops[10]).toBeGreaterThan(tops[9]!);
+    await ref(page, "tb-sym-2298").click();
+    await expect(grid).toHaveCount(0);
+    await page.keyboard.type("x");
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = savedParagraph(fake, marker);
+    expect(String(firstText(nodeAt(saved.after, saved.path)).text).startsWith(`${marker}⊘x`)).toBe(true);
+  });
+
+  test("on a phone the Highlight and Symbols menus open whole on the screen, not cut off by the sideways-scrolling tools row", async ({ page, context, baseURL }) => {
+    await world(context, baseURL, { seed: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await openPage(page, needTopic().hash);
+    await signIn(page);
+    await startEditing(page);
+    await expect(ref(page, "edit-toolbar")).toHaveClass(/phone/);
+    for (const [button, menu] of [["tb-highlight", "tb-highlight-colors"], ["tb-symbols", "tb-symbol-chars"]] as const) {
+      await ref(page, button).click();
+      // Every button in the menu is on the screen and is what a tap at its middle reaches.
+      const unreachable = await ref(page, menu).locator("button, input").evaluateAll((els) => els.filter((el) => {
+        const b = el.getBoundingClientRect();
+        const hit = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2);
+        return b.left < 0 || b.right > innerWidth || !(hit === el || el.contains(hit) || (el instanceof HTMLInputElement && el.labels?.[0]?.contains(hit)));
+      }).map((el) => el.getAttribute("data-ref") ?? el.outerHTML.slice(0, 60)));
+      expect(unreachable).toEqual([]);
+      // Each grid button stays inside the menu, clear of its neighbours.
+      const crowded = await ref(page, menu).evaluate((m) => {
+        const box = m.getBoundingClientRect();
+        const rects = [...m.querySelectorAll(".tb-hl-grid .tb, .tb-symbol-grid .tb")].map((el) => el.getBoundingClientRect());
+        return rects.filter((r, i) => r.left < box.left || r.right > box.right
+          || rects.some((o, j) => j !== i && r.left < o.right - 0.5 && o.left < r.right - 0.5 && r.top < o.bottom - 0.5 && o.top < r.bottom - 0.5)).length;
+      });
+      expect(crowded).toBe(0);
+      await ref(page, button).click();
+      await expect(ref(page, menu)).toHaveCount(0);
+    }
   });
 });
 

@@ -13,7 +13,7 @@ import {
   cropWindow, docLines, dragPicture, dragPictureCrop, draggedPictureCrop, draggedPictureSize, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder,
   moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture, scaledPictureSize, seenPictureSize, selectedPictureSize,
   selectionSize, setHighlight, shownPictureWidth, steppedPictureSize, setSize, uncroppedPictureSize,
-  sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag,
+  sizeOptions, splitParagraph, insertSymbol, SYMBOLS, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag, usedHighlightColors,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
@@ -745,6 +745,49 @@ describe("marks", () => {
     let state = run(selectText(createEditorState(docOf(para([text("a")]))), 2, 2), setHighlight("FF00FF"));
     state = state.apply(state.tr.insertText("b"));
     expect(state.doc.firstChild?.lastChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "highlight", attrs: { hex: "FF00FF" } }]);
+  });
+
+  it("the page's colors are its highlight and shading colors, most text runs first, ties in the order met", () => {
+    const hl = (hex: string) => ({ type: "highlight", attrs: { hex } });
+    const sh = (hex: string) => ({ type: "shade", attrs: { hex } });
+    const first = createEditorState(docOf(
+      para([text("a", [hl("FFFF00")]), text("b"), text("c", [sh("D2C3EE")])]),
+      para([text("d", [hl("FFFF00"), sh("B5E5E4")])]),
+    )).doc;
+    const second = createEditorState(docOf(
+      para([text("e", [sh("D2C3EE")]), text("f", [{ type: "bold" }, sh("D2C3EE")]), text("g", [sh("B5E5E4")])]),
+      table([row(rid(1), [cell("x"), { type: "table_cell", attrs: {}, content: [para([text("h", [hl("000000")])])] }])]),
+    )).doc;
+    // D2C3EE 3 runs; FFFF00 2 and B5E5E4 2 (FFFF00 met first); 000000 1 (inside a table).
+    expect(usedHighlightColors([first, second])).toEqual(["D2C3EE", "FFFF00", "B5E5E4", "000000"]);
+    expect(usedHighlightColors([createEditorState(docOf(para([text("plain", [{ type: "bold" }])]))).doc])).toEqual([]);
+  });
+
+  it("Symbols offers her 38 characters in her order, each one bare character", () => {
+    expect(SYMBOLS.map((s) => [...s].map((c) => c.codePointAt(0)!.toString(16).toUpperCase().padStart(4, "0")).join("+"))).toEqual([
+      "2191", "2193", "2192", "2190", "2194", "2298", "00B1", "2265", "2264", "2248",
+      "2022", "25AA", "00BB", "00B0", "0394", "03B1", "03B2", "03B3",
+      "00B5", "2661", "2640", "2642", "00D7", "00BD", "2713", "2717", "2460", "2461",
+      "2462", "2463", "2464", "2465", "2937", "21E8", "25AB", "25E6", "2220", "00B3",
+    ]);
+  });
+
+  it("a symbol goes in at the cursor in the formatting there, replacing a selection", () => {
+    const bolded = [{ type: "bold" }];
+    let state = selectText(createEditorState(docOf(para([text("ab", bolded), text("cd")]))), 2, 4);
+    state = run(state, insertSymbol("⊘"));
+    expect(state.doc.firstChild?.toJSON().content).toEqual([text("a⊘", bolded), text("d")]);
+    expect(state.selection.from).toBe(3);
+
+    state = run(state, insertSymbol("→"));
+    expect(state.doc.firstChild?.textContent).toBe("a⊘→d");
+    expect(state.doc.firstChild?.firstChild?.text).toBe("a⊘→");
+  });
+
+  it("a symbol takes the formatting she has just turned on", () => {
+    let state = run(selectText(createEditorState(docOf(para([text("a")]))), 2, 2), toggleItalic);
+    state = run(state, insertSymbol("½"));
+    expect(state.doc.firstChild?.lastChild?.toJSON()).toEqual(text("½", [{ type: "italic" }]));
   });
 });
 

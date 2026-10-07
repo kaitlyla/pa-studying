@@ -1,6 +1,7 @@
 // The one open edit (plan 50 §50.3–§50.4): edit start from Git, dirty tracking, Save with its banners,
 // conflicts, the unsaved-changes guard and the draft store. React components read it with useEdit().
 import { useSyncExternalStore } from "react";
+import type { Node as PMNode } from "prosemirror-model";
 import type { EditorView } from "prosemirror-view";
 import { commitMessage, type DocJSON, type GapFile } from "../../lib/content/index.ts";
 import { SITE_PATH, type SiteJson } from "../../lib/derive/published.ts";
@@ -186,6 +187,13 @@ export function registerView(slot: string, view: EditorView, initial: DocJSON): 
 /** Changes of editors that are not mounted: a restored draft waiting for them, or a closed editor's. */
 function unmountedDocs(): [string, DocJSON][] {
   return [...(pendingDocs ?? [])].filter(([slot]) => !views.has(slot));
+}
+
+/** The open edit's docs as they are now, in page order: each editor's, else its unsaved or opened doc. */
+export function openDocs(): PMNode[] {
+  const unit = store.edit?.unit;
+  if (!unit) return [];
+  return [...slotDocs(unit)].map(([slot, doc]) => views.get(slot)?.view.state.doc ?? schema.nodeFromJSON(pendingDocs?.get(slot) ?? doc));
 }
 
 /** The mounted editor of `slot` in the open edit. */
