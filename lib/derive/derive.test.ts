@@ -15,7 +15,7 @@ import { B, C, D, G, GONE, P, PHARM_PAGE, R, S, tableDoc, U, writeFixture, write
 import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
-import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText } from "./pharm.ts";
+import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
   docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
@@ -1140,6 +1140,63 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(medsPanel({ guide: "em", system: "pulmonary", structure: st, topics: t, partFiles: new Map() }, [B(91), B(92)], topic, scoped, (c) => c, new Set(), home, () => new Set()).map((m) => m.card)).toEqual([C(1)]);
     });
 
+    describe("her \"TX:\" lead-in on a topic without a Treatment column", () => {
+      // PANCE GI ETEC sits under an unlabelled "Bacteria" heading row: "TX: ciprofloxacin or azithromycin".
+      const topicOf = (cells: string[]) => {
+        const t = deriveTopics([table(B(91), cells.length + 1, [[R(910), "heading", "PULM", ...cells.map(() => "")], [R(911), "content", "Pulmonary embolism", ...cells]]), drugs], st);
+        const topic = t.topics.find((x) => x.id === R(911));
+        if (!topic) throw new Error("no topic");
+        return { t, topic };
+      };
+      const column = (...cells: string[]) => {
+        const { t, topic } = topicOf(cells);
+        return treatmentColumn(t, topic);
+      };
+      const panel = (...cells: string[]) => {
+        const { t, topic } = topicOf(cells);
+        const home = () => ({ system: "cardiovascular", section: "anticoagulants" });
+        return medsPanel({ guide: "em", system: "pulmonary", structure: st, topics: t, partFiles: new Map() }, [B(91), B(92)], topic, cards, (c) => c, new Set(), home, () => new Set()).map((m) => m.card);
+      };
+
+      it("is her treatment text, so the cards it names show", () => {
+        expect(column("RFs: travel\nTX: DOACs\nor LMWH x 3 mo")).toBe("TX: DOACs\nor LMWH x 3 mo");
+        expect(column("• ACUTE TX: DOACs")).toBe("• ACUTE TX: DOACs");
+        expect(panel("RFs: travel\nTX: DOACs")).toEqual([C(1)]);
+      });
+
+      it("ends at her next labelled lead-in, so a drug named after it treats nothing", () => {
+        // PANCE Hereditary Polyposis: "➁ Peutz-Jeghers syndrome (PJS):" opens the next syndrome, not more treatment.
+        expect(column("TX: LMWH\nDX: DOACs")).toBe("TX: LMWH");
+        expect(column("TX: LMWH\nS/SXS: DOACs")).toBe("TX: LMWH");
+        expect(column("TX: LMWH\nComplications: DOACs")).toBe("TX: LMWH");
+        expect(column("     ▪︎TX: LMWH\n➁ Peutz-Jeghers syndrome (PJS): DOACs")).toBe("     ▪︎TX: LMWH");
+        expect(panel("TX: LMWH\nDX: DOACs")).toEqual([]);
+      });
+
+      it("keeps a labelled line bulleted under it, which is more of her treatment", () => {
+        // EM Metabolic Acidosis: "TX: directed at underlying cause" / "•renal failure: give alkali (NaHCO3…)".
+        expect(column("TX: LMWH\n•renal failure: DOACs")).toBe("TX: LMWH\n•renal failure: DOACs");
+        expect(column("TX:\n  Stage I: DOACs\nDX: biopsy")).toBe("TX:\n  Stage I: DOACs");
+        expect(panel("TX: LMWH\n•renal failure: DOACs")).toEqual([C(1)]);
+      });
+
+      it("leaves out her causes and risk factors outside it", () => {
+        // PANCE C. diff: "RFs: recent ABX use (FQs, clindamycin…)" names causes.
+        expect(column("RFs: recent DOACs use\nTX: LMWH")).toBe("TX: LMWH");
+        expect(panel("RFs: recent DOACs use\nTX: LMWH")).toEqual([]);
+      });
+
+      it("stays within its own cell, and each of her TX lead-ins counts", () => {
+        expect(column("TX: LMWH", "DOACs")).toBe("TX: LMWH");
+        expect(column("ACUTE TX: LMWH", "CHRONIC TX: DOACs")).toBe("ACUTE TX: LMWH\nCHRONIC TX: DOACs");
+      });
+
+      it("is absent when her cells have none", () => {
+        expect(column("RFs: travel\nDOACs")).toBeNull();
+        expect(panel("RFs: travel\nDOACs")).toEqual([]);
+      });
+    });
+
     it("a row only her row name occurs files under its cards written for the condition, else is not hers", () => {
       // PANCE Conduct disorder: propranolol for aggression is not her anxiety β-blocker row.
       // Her section is written for both diseases, so the row lists the card either way.
@@ -1512,6 +1569,13 @@ describe("pharm (40 §40.4–§40.5)", () => {
       // PANCE NMS: "Dantrolene (muscle relaxant), Bromocriptine (DA agonist)".
       expect(m.named("levodopa (anticoagulation)")).toEqual([C(21)]);
       expect(m.named("anticoagulation (warfarin)")).toEqual([C(11)]);
+    });
+
+    it("her qualified class word in those parentheses describes the drug too", () => {
+      // PANCE Metabolic Acidosis: "▪RTA4: furosemide (K-wasting diuretic), fludrocortisone, low-K diet".
+      expect(m.named("levodopa (long-term anticoagulation)")).toEqual([C(21)]);
+      // Outside her parentheses, the class word names its cards.
+      expect(m.named("levodopa (IV), anticoagulation")).toEqual([C(11), C(21)]);
     });
 
     it("a hyphen or slash inside her words does not keep a class word from heading her list", () => {

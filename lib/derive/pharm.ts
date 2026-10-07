@@ -508,9 +508,9 @@ export class CardMatcher {
     const names = this.aliases ? [...nfc.matchAll(this.aliases)].map((m): [number, number] => [m.index, m.index + m[0].length]) : [];
     // A drug word heading her list of its antidotes is the drug they reverse: "Direct thrombin inhibitors: Idarucizumab".
     const headsAntidote = (end: number): boolean => this.antidoteHead?.test(nfc.slice(end)) ?? false;
-    // Her class word in parentheses right after a drug name describes that drug, which names its own
-    // card: "Dantrolene (muscle relaxant)".
-    const describes = (at: number): boolean => names.some(([, e]) => /^[^\S\n]*\([^\S\n]*$/u.test(nfc.slice(e, at)));
+    // Her class word inside parentheses opened right after a drug name describes that drug, which names
+    // its own card: "Dantrolene (muscle relaxant)", "furosemide (K-wasting diuretic)".
+    const describes = (at: number): boolean => names.some(([, e]) => /^[^\S\n]*\([^()\n]*$/u.test(nfc.slice(e, at)));
     const out = new Map<string, string[]>();
     this.cards.forEach((c, i) => {
       const words = [
@@ -906,18 +906,20 @@ export function topicText(t: SystemTopics, topic: Topic): string {
 const TREATMENT_COLUMN = /\b(?:management|treatment|tx)\b/i;
 
 /**
- * The topic's treatment text: the cells under its heading rows' treatment columns, or all its cells
- * when no heading row above it labels one (`treatmentColumn`).
+ * The topic's treatment text: the cells under its heading rows' treatment columns or its "TX:"
+ * lead-ins (`treatmentColumn`), or all its cells when it has neither.
  */
 export function treatmentText(t: SystemTopics, topic: Topic): string {
   return treatmentColumn(t, topic) ?? topicText(t, topic);
 }
 
 /**
- * The cells under the topic's heading rows' treatment columns, or null when no heading row above it
- * labels one. A column whose label reads empty belongs to the labeled column to its left, since a
- * heading cell spanning several columns reads empty in the ones it covers. Drugs named elsewhere in
- * her notes — as a cause, a risk factor, a diagnostic maneuver — do not treat the condition.
+ * The cells under the topic's heading rows' treatment columns. A column whose label reads empty
+ * belongs to the labeled column to its left, since a heading cell spanning several columns reads
+ * empty in the ones it covers. When no heading row above the topic labels one, her "TX:" lead-ins
+ * in its cells (`txSpans`: "TX: ciprofloxacin or azithromycin" under ETEC); null when it has neither.
+ * Drugs named elsewhere in her notes — as a cause, a risk factor, a diagnostic maneuver — do not
+ * treat the condition.
  */
 export function treatmentColumn(t: SystemTopics, topic: Topic): string | null {
   const rows = new Map<string, Row>();
@@ -935,7 +937,50 @@ export function treatmentColumn(t: SystemTopics, topic: Topic): string | null {
       parts.push(rows.get(id)?.cells[i + 1] ?? "");
     });
   }
-  return labeled ? parts.join("\n") : null;
+  if (labeled) return parts.join("\n");
+  const spans = topic.rows.flatMap((id) => (rows.get(id)?.cells ?? []).flatMap(txSpans));
+  return spans.length > 0 ? spans.join("\n") : null;
+}
+
+/** A line opening, after any bullet or numbering, with her treatment lead-in ("TX:", "ACUTE TX:"). */
+const TX_LEAD = /^[^\p{L}]*(?:[A-Za-z]+\s+)?TX\s*:/u;
+/** A line opening, after any bullet or numbering, with a labelled lead-in ("DX:", "S/SXS:", "➁ Peutz-Jeghers syndrome (PJS):"). */
+const LEAD = /^[^\p{L}]*\p{L}[\p{L}0-9 /&()+'’-]{0,30}:/u;
+
+/** How deep a line sits in her list: its leading whitespace, then whether a bullet or number follows. */
+function depth(line: string): [number, boolean] {
+  const prefix = /^[^\p{L}]*/u.exec(line)?.[0] ?? "";
+  const spaces = /^\s*/.exec(prefix)?.[0].length ?? 0;
+  return [spaces, prefix.slice(spaces).trim() !== ""];
+}
+
+/** Whether `line` sits deeper in her list than `tx`: more indented, or as indented with a bullet `tx` lacks. */
+function deeper(line: string, tx: string): boolean {
+  const [ls, lb] = depth(line);
+  const [ts, tb] = depth(tx);
+  return ls > ts || (ls === ts && lb && !tb);
+}
+
+/**
+ * Her treatment text in a cell without a treatment column: each line opening with a TX lead-in and
+ * the lines after it, up to the next labelled lead-in no deeper than it ("DX:", "Complications:",
+ * "➁ Peutz-Jeghers syndrome (PJS):") or the cell's end. A labelled line bulleted under her TX line
+ * is more of her treatment ("TX: directed at underlying cause" / "•renal failure: give alkali").
+ */
+function txSpans(cell: string): string[] {
+  const out: string[] = [];
+  let cur: string[] | null = null;
+  for (const line of cell.split("\n")) {
+    if (TX_LEAD.test(line)) {
+      if (cur) out.push(cur.join("\n"));
+      cur = [line];
+    } else if (cur && LEAD.test(line) && !deeper(line, cur[0]!)) {
+      out.push(cur.join("\n"));
+      cur = null;
+    } else if (cur) cur.push(line);
+  }
+  if (cur) out.push(cur.join("\n"));
+  return out;
 }
 
 /** Where a meds panel finds the cards her text names: in its own system, and in which pharm sections. */
@@ -1023,8 +1068,9 @@ export function meantCards(matcher: CardMatcher, title: string, text: string, na
  * with the pharm section `home` gives it: her pulmonary embolism text names the DOACs card, whose rows
  * are in her cardiovascular tables. So does a card with notes written for the condition its title
  * names (`CardMatcher.partTitled`), though her text names none of its drugs: her levodopa card's
- * restless-legs notes on Restless Leg Syndrome. A topic without a Treatment column shows no named card, since its
- * notes name drugs as causes and risk factors too, unless the card is written for the condition its
+ * restless-legs notes on Restless Leg Syndrome. A topic with neither a Treatment column nor a "TX:"
+ * lead-in (`treatmentColumn`) shows no named card, since its notes name drugs as causes and risk
+ * factors too, unless the card is written for the condition its
  * title names (`CardMatcher.titledFor`): her antiemetic steroids on Nausea/Vomiting. Nor does a card
  * written for other diseases than the condition's, or than its item naming the card
  * (`CardMatcher.writtenFor`): "IVIG" on ITP is not her MS card. Her text names only the cards it
@@ -1059,7 +1105,8 @@ export function medsPanel(
   // right under such a row ("▪︎DHPs: nifedipine" under "Calcium Channel Blockers (CCBs):"). When no
   // row carries them, her drug names name none of its rows if each row is another drug of the card
   // ("prazosin" is not her Propranolol row), and her class words name all of them ("BB"). A topic
-  // without a Treatment column shows no rowless card, so there a card keeps every row of it.
+  // with neither a Treatment column nor a "TX:" lead-in shows no rowless card, so there a card keeps
+  // every row of it.
   const strict = column !== null;
   const variants = (w: string): string[] => {
     const stem = w.replace(/-/g, " ").replace(/s$/u, "");
