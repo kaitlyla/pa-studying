@@ -17,17 +17,19 @@ async function readJson<T>(path: string): Promise<T> {
 export async function imageDataUrl(assetsDir: string, v: ImageVariant): Promise<string> {
   const bytes = await readFile(join(assetsDir, v.asset));
   if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${bytes.toString("base64")}`;
-  // The crop cuts the file as stored, before it is turned or flipped: its own pass, so no other
+  // Every step works on the picture upright, as the screen shows it: a photo whose EXIF Orientation
+  // turns it is turned first (autoOrient), as the browser does.
+  // The crop cuts the upright picture before it is turned or flipped: its own pass, so no other
   // operation can come first.
   const crop = cropOrNull(v.crop);
   let source = bytes;
   if (crop) {
-    const { width, height } = await sharp(bytes).metadata();
+    const { width, height } = (await sharp(bytes).metadata()).autoOrient;
     if (!width || !height) throw new Error(`PDF: image ${v.asset}: no pixel size to crop`);
-    source = await sharp(bytes).extract(cropPixels(width, height, crop)).png().toBuffer();
+    source = await sharp(bytes, { autoOrient: true }).extract(cropPixels(width, height, crop)).png().toBuffer();
   }
   // sharp mirrors (flip, flop) before it rotates, matching the stored transform's order.
-  const png = await sharp(source).flip(v.flipV).flop(v.flipH).rotate(v.rot).png().toBuffer();
+  const png = await sharp(source, { autoOrient: true }).flip(v.flipV).flop(v.flipH).rotate(v.rot).png().toBuffer();
   return `data:image/png;base64,${png.toString("base64")}`;
 }
 

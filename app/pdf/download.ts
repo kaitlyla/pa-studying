@@ -45,7 +45,8 @@ function base64(bytes: Uint8Array): string {
 }
 
 /**
- * Draws the part of an image its crop keeps (cut from the file as stored), turned and flipped as
+ * Draws the part of an image its crop keeps (cut from the file upright, as the screen shows it:
+ * createImageBitmap applies a photo's EXIF orientation by default), turned and flipped as
  * stored (flips first, then the rotation), and encodes PNG.
  */
 export async function convertToPng(blob: Blob, v: ImageVariant): Promise<Blob> {

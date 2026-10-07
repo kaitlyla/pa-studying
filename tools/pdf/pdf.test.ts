@@ -19,6 +19,7 @@ import { decide, guideDigest, headCommit, outsideBuild, publish, releaseRecord, 
 
 const PNG = `${"a".repeat(32)}.png`;
 const GIF = `${"b".repeat(32)}.gif`;
+const JPG = `${"c".repeat(32)}.jpg`;
 const HEAD = "1".repeat(40);
 const OLD = "2".repeat(40);
 
@@ -37,6 +38,20 @@ async function picture(): Promise<ReturnType<typeof sharp>> {
   const red = { r: 255, g: 0, b: 0 };
   const half = await sharp({ create: { width: 2, height: 2, channels: 3, background: { r: 0, g: 0, b: 255 } } }).png().toBuffer();
   return sharp({ create: { width: 4, height: 2, channels: 3, background: red } }).composite([{ input: half, left: 2, top: 0 }]);
+}
+
+/**
+ * A phone photo stored sideways: 40 × 20 px with its left half red and its right half blue, and EXIF
+ * Orientation 6 (turn 90° clockwise to show it). Upright, as the screen shows it, it is 20 × 40 with
+ * red on top.
+ */
+async function sidewaysPhoto(): Promise<Buffer> {
+  const red = await sharp({ create: { width: 20, height: 20, channels: 3, background: { r: 255, g: 0, b: 0 } } }).png().toBuffer();
+  return sharp({ create: { width: 40, height: 20, channels: 3, background: { r: 0, g: 0, b: 255 } } })
+    .composite([{ input: red, left: 0, top: 0 }])
+    .jpeg({ quality: 95 })
+    .withMetadata({ orientation: 6 })
+    .toBuffer();
 }
 
 const imageNode = (asset: string, attrs: Record<string, unknown> = {}) => ({ type: "image", attrs: { asset, widthPt: 40, heightPt: 20, rot: 0, flipH: false, flipV: false, ...attrs } });
@@ -274,7 +289,7 @@ describe("imageDataUrl", () => {
     for (let i = 0; i < data.length; i += 3) expect([data[i], data[i + 2]]).toEqual([255, 0]);
   });
 
-  it("crops the file as stored before mirroring it", async () => {
+  it("crops the upright picture before mirroring it", async () => {
     const dir = join(tmp, "assets");
     await mkdir(dir);
     await (await picture()).png().toFile(join(dir, PNG));
@@ -286,6 +301,65 @@ describe("imageDataUrl", () => {
     const reds = [0, 1, 2].map((x) => data[x * 3]);
     expect(reds).toEqual([0, 0, 255]);
   });
+
+  describe("a phone photo stored sideways (EXIF Orientation 6) works upright, as the screen shows it", () => {
+    /** The converted picture's size and the colour ("red", "blue" or "other") at each point. */
+    async function look(url: string, points: [number, number][]): Promise<{ size: [number, number]; colours: string[] }> {
+      const { data, info } = await sharp(decode(url)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      const colours = points.map(([x, y]) => {
+        const i = (y * info.width + x) * 3;
+        const [r = 0, b = 0] = [data[i], data[i + 2]];
+        return r > 200 && b < 60 ? "red" : b > 200 && r < 60 ? "blue" : "other";
+      });
+      return { size: [info.width, info.height], colours };
+    }
+    async function photoDir(): Promise<string> {
+      const dir = join(tmp, "assets");
+      await mkdir(dir);
+      await writeFile(join(dir, JPG), await sidewaysPhoto());
+      return dir;
+    }
+
+    it("mirrors it upright: still red on top", async () => {
+      const url = await imageDataUrl(await photoDir(), { asset: JPG, rot: 0, flipH: true, flipV: false });
+      expect(await look(url, [[10, 5], [10, 34]])).toEqual({ size: [20, 40], colours: ["red", "blue"] });
+    });
+
+    it("crops the upright picture: keeping its right half keeps red on top, blue below", async () => {
+      // Cut from the raw sideways file, the same crop would keep only blue, 20 × 20.
+      const url = await imageDataUrl(await photoDir(), { asset: JPG, rot: 0, flipH: false, flipV: false, crop: { l: 0.5, t: 0, r: 0, b: 0 } });
+      expect(await look(url, [[5, 5], [5, 34]])).toEqual({ size: [10, 40], colours: ["red", "blue"] });
+    });
+
+    it("turns the upright picture: a quarter turn clockwise puts red on the right", async () => {
+      const url = await imageDataUrl(await photoDir(), { asset: JPG, rot: 90, flipH: false, flipV: false });
+      expect(await look(url, [[34, 10], [5, 10]])).toEqual({ size: [40, 20], colours: ["red", "blue"] });
+    });
+  });
+});
+
+describe("a phone photo stored sideways, embedded as its stored bytes", () => {
+  it("is drawn upright: pdfkit turns it by its EXIF Orientation into the picture's box", async () => {
+    const dataDir = join(tmp, "data");
+    await writeData(dataDir);
+    await writeFile(join(dataDir, "assets", JPG), await sidewaysPhoto());
+    const w = wordDoc();
+    w.blocks = [block("b_AAAAAAAEX6", "prose", doc(para([txt("Photo"), imageNode(JPG, { widthPt: 20, heightPt: 40 })])))];
+    const pdf = await nodeRenderer(dataDir, FONTS_DIR, fontmapFor(["Photo"])).render({ kind: "doc" }, { doc: w });
+
+    const task = getDocument({ data: pdf.slice(), useSystemFonts: false });
+    const ops = await (await (await task.promise).getPage(1)).getOperatorList();
+    await task.destroy();
+    const paint = ops.fnArray.indexOf(OPS.paintImageXObject);
+    expect(paint).toBeGreaterThan(0);
+    const transforms = ops.fnArray
+      .slice(0, paint)
+      .map((f, i) => (f === OPS.transform ? (ops.argsArray[i] as number[]).slice(0, 4).map((n) => Math.round(n)) : null))
+      .filter((m): m is number[] => m !== null);
+    // A quarter turn, then the stored 40 × 20 picture scaled to 40 × 20 pt: upright it fills the 20 × 40 box.
+    expect(transforms).toContainEqual([0, 1, -1, 0]);
+    expect(transforms.at(-1)).toEqual([40, 0, 0, -20]);
+  }, 60_000);
 });
 
 // ---- releases -----------------------------------------------------------------------------------

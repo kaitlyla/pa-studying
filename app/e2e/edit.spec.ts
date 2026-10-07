@@ -1403,9 +1403,10 @@ test.describe("pictures and highlight colors", () => {
 
   /**
    * Opens the meds topic for editing, beside the open sidebar (the page drawn smaller) or with it hidden,
-   * and adds a `w`×`h` picture under Additional info (one color, or the given file); it is left selected.
+   * and adds a `w`×`h` picture under Additional info (one color, or the given file, picked as `name`); it
+   * is left selected.
    */
-  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden", file?: Buffer): Promise<Locator> {
+  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden", file?: Buffer, name = "pic.png"): Promise<Locator> {
     await openPage(page, t.hash);
     if (sidebar === "open") expect(await sidebarScale(page)).toBeLessThan(0.9);
     else await hideSidebar(page);
@@ -1415,7 +1416,7 @@ test.describe("pictures and highlight colors", () => {
     const png = file ?? await sharp({ create: { width: w, height: h, channels: 3, background: { r: 80, g: 140, b: 200 } } }).png().toBuffer();
     const chooser = page.waitForEvent("filechooser");
     await ref(page, "tb-pic-add").click();
-    await (await chooser).setFiles({ name: "pic.png", mimeType: "image/png", buffer: png });
+    await (await chooser).setFiles({ name, mimeType: name.endsWith(".jpg") ? "image/jpeg" : "image/png", buffer: png });
     const img = below.locator("img:not(.ProseMirror-separator)");
     await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(w);
     await expect(ref(page, "pic-handles")).toBeVisible();
@@ -1467,6 +1468,30 @@ test.describe("pictures and highlight colors", () => {
       expect(onPage.h / onPage.w).toBeCloseTo(ratio, 2);
     });
   }
+
+  test("a phone photo stored sideways (EXIF Orientation 6) is added upright: drawn and saved tall, its file unchanged", async ({ page, context, baseURL }) => {
+    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+    const { fake } = await world(context, baseURL, { seed: true });
+    // Stored 400 × 200 with orientation 6, so upright it is 200 × 400.
+    const photo = await sharp({ create: { width: 400, height: 200, channels: 3, background: { r: 80, g: 140, b: 200 } } })
+      .jpeg()
+      .withMetadata({ orientation: 6 })
+      .toBuffer();
+    const img = await addBelowPicture(page, t, 200, 400, "hidden", photo, "photo.jpg");
+    const drawn = await drawnSize(img);
+    expect(drawn.h / drawn.w).toBeCloseTo(2, 2);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const pic = savedBelowPicture(fake);
+    expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(2, 6);
+    expect(String(pic.asset)).toMatch(/^[0-9a-f]{32}\.jpg$/);
+    // Her file is saved as she picked it, sideways bytes and orientation tag included.
+    expect(Buffer.from(need(fake.readBytes(`content/assets/${String(pic.asset)}`), "the saved photo")).equals(photo)).toBe(true);
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    const onPage = await drawnSize(shown);
+    expect(onPage.h / onPage.w).toBeCloseTo(2, 2);
+  });
 
   test("a stretched picture keeps its shape when a narrow window draws it narrower than its width", async ({ page, context, baseURL }) => {
     const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");

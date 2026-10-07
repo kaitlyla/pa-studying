@@ -54,7 +54,8 @@ export type DrawingShape = {
 /**
  * The part of a picture's file it shows, like Word's crop: the fraction of the file's width cut from
  * the left (`l`) and right (`r`), and of its height from the top (`t`) and bottom (`b`). Measured on the
- * file as stored, before the picture's rotation and flips.
+ * file upright, as the screen shows it (a photo's EXIF orientation applied), before the picture's
+ * rotation and flips.
  */
 export type Crop = { l: number; t: number; r: number; b: number };
 
