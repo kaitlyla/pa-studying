@@ -185,6 +185,63 @@ describe("block envelopes (20 §20.4, §20.10)", () => {
   });
 });
 
+describe("her own meds panel for a topic", () => {
+  const R1 = id("r", 1);
+  const C1 = id("c", 1);
+  const C2 = id("c", 2);
+  const P1 = id("p", 1);
+  const path = `content/guides/fm/cardiovascular/meds/${R1}.json`;
+  const rows = { kind: "rows", basePt: 10, title: null, file: null, doc: doc(table(id("r", 5))) };
+  const notes = { kind: "notes", basePt: 8, title: "Beta blockers", file: "Cardio med list", doc: doc(para("Metoprolol")) };
+  const meds = (extra: Record<string, unknown> = {}) => ({ v: 1, add: [], remove: [], own: [], ...extra });
+
+  it("is routed by its topic's path, beside the topic's below file", () => {
+    expect(isContentJSON(path)).toBe(true);
+    expect(isContentJSON(`content/guides/fm/cardiovascular/meds/${C1}.json`)).toBe(false);
+    expect(BLOCK_FILE_RE.test(path)).toBe(false);
+  });
+
+  it("accepts added cards, removed entries of any target kind, and her versions of rows and notes", () => {
+    expect(verdict(path, meds({ add: [C1] }))).toBe("ok");
+    expect(verdict(path, meds({ remove: [C1, R1, P1] }))).toBe("ok");
+    expect(verdict(path, meds({ own: [{ target: C2, pieces: [rows, notes] }, { target: P1, pieces: [] }] }))).toBe("ok");
+  });
+
+  it("refuses an empty file: with nothing added, removed or edited there is no file", () => {
+    expect(verdict(path, meds())).toMatch(/an added, removed or edited entry/);
+  });
+
+  it("refuses a card both added and removed, or listed twice, or two versions of one entry", () => {
+    expect(verdict(path, meds({ add: [C1], remove: [C1] }))).toMatch(/\.add\[0\].*a card not also removed/);
+    expect(verdict(path, meds({ add: [C1, C1] }))).not.toBe("ok");
+    expect(verdict(path, meds({ remove: [R1, R1] }))).not.toBe("ok");
+    expect(verdict(path, meds({ own: [{ target: C1, pieces: [notes] }, { target: C1, pieces: [notes] }] }))).toMatch(/\.own\[\]\.target/);
+  });
+
+  it("refuses an added row or part (only cards can be added) and a target that is no entry id", () => {
+    expect(verdict(path, meds({ add: [R1] }))).toMatch(/\.add\[0\]/);
+    expect(verdict(path, meds({ remove: [B1] }))).toMatch(/\.remove\[0\]/);
+    expect(verdict(path, meds({ own: [{ target: D1, pieces: [notes] }] }))).toMatch(/\.own\[0\]\.target/);
+  });
+
+  it("refuses pieces of the wrong shape: rows that are not one table, a file on rows, a size of 0 (notes may hold a table, as her pharm notes do)", () => {
+    const own = (p: Record<string, unknown>) => meds({ own: [{ target: C1, pieces: [p] }] });
+    expect(verdict(path, own({ ...rows, doc: doc(para("not a table")) }))).toMatch(/\.own\[0\]\.pieces\[0\]\.doc/);
+    expect(verdict(path, own({ ...rows, doc: doc(table(id("r", 5)), para("after")) }))).toMatch(/\.own\[0\]\.pieces\[0\]\.doc/);
+    expect(verdict(path, own({ ...notes, doc: doc(table(id("r", 5)), para("Metoprolol")) }))).toBe("ok");
+    expect(verdict(path, own({ ...rows, file: "Cardio med list" }))).toMatch(/null on guide rows/);
+    expect(verdict(path, own({ ...notes, basePt: 0 }))).toMatch(/a size above 0/);
+    expect(verdict(path, own({ ...notes, kind: "card" }))).toMatch(/\.kind/);
+    expect(verdict(path, own({ ...notes, extra: 1 }))).toMatch(/no such key/);
+  });
+
+  it("normalizes each piece's rich text when written", () => {
+    const loose = { ...notes, doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: "Metoprolol" }] }] } };
+    const out = JSON.parse(serializeFile(path, meds({ own: [{ target: C1, pieces: [loose] }] }))) as { own: { pieces: { doc: { content: { attrs?: unknown }[] } }[] }[] };
+    expect(out.own[0]?.pieces[0]?.doc.content[0]?.attrs).toBeDefined();
+  });
+});
+
 describe("documents (20 §20.5)", () => {
   const filePath = `content/files/${D1}/file.json`;
   const pdf = { v: 1, id: D1, name: "ACLS algorithms", kind: "pdf", original: "ACLS.pdf", view: "ACLS.pdf", pages: 20, text: "text.json", removed: null };

@@ -1,15 +1,16 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
-  type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type OtherFile,
+  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
+  type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type MedsFile, type MedsPiece, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
+import { entryPieces, fileAdds, pageCard } from "../../lib/derive/panel.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
 import { checkMembers, deriveTopics, fitTopicRows, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
-import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
+import type { NavJson, PubMedsCard, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
 import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
@@ -62,7 +63,77 @@ export type Part =
   /** A drug table on a system page: shown as its stub, edited on its pharm section. */
   | { kind: "stub"; block: string; label: string }
   /** A topic's below block (`path`): null `block` while she has added none; the slot then holds an empty doc. */
-  | { kind: "below"; slot: Slot; path: string; block: BlockFile | null; topic: string; sys: SystemCtx };
+  | { kind: "below"; slot: Slot; path: string; block: BlockFile | null; topic: string; sys: SystemCtx }
+  /**
+   * A topic's meds panel: her own panel for it (`path`, null `file` while she has none), each entry it
+   * shows or could show, and the cards she can add.
+   */
+  | MedsPart;
+
+/** One editor of a meds panel entry: its slot and the piece it edits (labels, size, seed doc). */
+export interface MedsSlot extends Slot {
+  piece: MedsPiece;
+}
+
+/** An entry of a topic's meds panel in the editor. */
+export interface MedsEntry {
+  med: PubMedsCard;
+  /** Worked out from her notes (`topic.meds`), not a card she added. */
+  derived: boolean;
+  /** The entry as its card shows it here: editing these makes her own version. */
+  card: MedsSlot[];
+  /** Her own version as stored, or null. */
+  own: MedsSlot[] | null;
+}
+
+export interface MedsPart {
+  kind: "meds";
+  path: string;
+  file: MedsFile | null;
+  topic: string;
+  sys: SystemCtx;
+  entries: MedsEntry[];
+  /** Cards she can add, by title. */
+  catalog: { id: string; title: string }[];
+}
+
+/**
+ * Her choices for a meds panel in the open edit: the cards she added and the entries she took off (in
+ * the MedsFile's order), and the entries whose own version she dropped ("Use the original").
+ */
+export interface MedsChoice {
+  add: string[];
+  remove: string[];
+  original: string[];
+}
+
+/** The entries of `part` worked out from her notes. */
+const derivedTargets = (part: Pick<MedsPart, "entries">): Set<string> => new Set(part.entries.filter((e) => e.derived).map((e) => e.med.target));
+
+/** The choices a panel's stored file stands for (none dropped): its adds as the reader reads them (fileAdds). */
+export const fileChoice = (part: Pick<MedsPart, "file" | "entries">): MedsChoice => ({
+  add: part.file ? fileAdds(part.file, derivedTargets(part)) : [],
+  remove: [...(part.file?.remove ?? [])],
+  original: [],
+});
+
+export const sameChoice = (a: MedsChoice, b: MedsChoice): boolean => JSON.stringify(a) === JSON.stringify(b);
+
+/** Entries the panel shows under `choice`: the worked-out ones less those taken off, then the added cards the page has, in her order. */
+export function shownEntries(part: MedsPart, choice: MedsChoice): MedsEntry[] {
+  const kept = part.entries.filter((e) => e.derived && !choice.remove.includes(e.med.target));
+  const added = choice.add.flatMap((id) => part.entries.filter((e) => !e.derived && e.med.target === id));
+  return [...kept, ...added];
+}
+
+/** Whether `entry` shows her own version under `choice`. */
+export const showsOwn = (entry: MedsEntry, choice: MedsChoice): boolean => entry.own !== null && !choice.original.includes(entry.med.target);
+
+/** The editors `entry` shows under `choice`. */
+export const entrySlots = (entry: MedsEntry, choice: MedsChoice): MedsSlot[] => (showsOwn(entry, choice) ? (entry.own ?? []) : entry.card);
+
+/** The editors a meds panel shows under `choice`. */
+export const shownMedsSlots = (part: MedsPart, choice: MedsChoice): MedsSlot[] => shownEntries(part, choice).flatMap((e) => entrySlots(e, choice));
 
 export interface EditUnit {
   key: string;
@@ -164,6 +235,51 @@ function belowPart(sys: SystemCtx, topic: string, block: BlockFile | null, baseP
     kind: "below", path: topicBelowPath(sys.guide, sys.system, topic), block, topic, sys,
     slot: { id: `${topic}:below`, doc: block?.doc ?? EMPTY_DOC, basePt, ...area },
   };
+}
+
+/** A piece as stored, without the pharm part the panel shows it from. */
+const storedPiece = ({ kind, basePt, title, file, doc }: MedsPiece): MedsPiece => ({ kind, basePt, title, file, doc });
+
+/**
+ * Topic `topic`'s meds panel in the editor: each entry the published page has for it (worked out,
+ * added) and every card the page can show, so a card she adds in this edit has its editors; her own
+ * versions from `file`; and the cards she can add (the class cards of cards.json, never one shown inside
+ * another).
+ */
+async function medsPart(snap: Snapshot, sys: SystemCtx, topic: string, basePt: number, area: ContentArea): Promise<MedsPart> {
+  const path = topicMedsPath(sys.guide, sys.system, topic);
+  const [file, published, cards, pharm] = await Promise.all([
+    snap.jsonIfExists<MedsFile>(path),
+    loadData<SystemJson>(systemPath(sys.guide, sys.system)),
+    snap.json<CardsFile>("content/pharm/cards.json"),
+    pharmFiles(snap),
+  ]);
+  const t = published.topics.find((x) => x.id === topic);
+  const slots = (target: string, mark: string, pieces: readonly MedsPiece[]): MedsSlot[] =>
+    pieces.map((p, i) => ({ id: `${topic}:meds:${target}:${mark}${i}`, doc: p.doc, basePt: p.basePt, ...area, piece: storedPiece(p) }));
+  const entries: MedsEntry[] = [];
+  const add = (med: PubMedsCard, derived: boolean): void => {
+    if (entries.some((e) => e.med.target === med.target)) return;
+    const own = file?.own.find((o) => o.target === med.target);
+    entries.push({
+      med, derived,
+      card: t ? slots(med.target, "o", entryPieces(published, t, med, basePt)) : [],
+      own: own ? slots(med.target, "", own.pieces) : null,
+    });
+  };
+  for (const m of t?.meds ?? []) add(m, true);
+  for (const m of t?.medsEdit?.add ?? []) add(m, false);
+  for (const id of [...(file?.add ?? []), ...Object.keys(published.cards)]) {
+    const m = pageCard(published, id);
+    if (m) add(m, false);
+  }
+  const partTitle = new Map<string, string>();
+  for (const { file: f } of pharm) for (const p of f.parts) if (p.role === "card" && p.card !== null && !partTitle.has(p.card)) partTitle.set(p.card, p.title);
+  const catalog = cards.cards
+    .filter((c) => c.in === undefined)
+    .map((c) => ({ id: c.id, title: published.cards[c.id]?.title ?? partTitle.get(c.id) ?? c.aliases[0] ?? c.id }))
+    .sort((a, b) => a.title.localeCompare(b.title));
+  return { kind: "meds", path, file, topic, sys, entries, catalog };
 }
 
 /** The below blocks shown under a table whose `shown` rows a section or system page shows (topicsBelow). */
@@ -334,7 +450,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
         return rowsPart(sys, block, shown, basePt, area);
       });
-      // Her below area, after the topic's tables (an empty editor until she adds something).
+      // Its meds panel, then her below area (an empty editor until she adds something).
+      parts.push(await medsPart(snap, sys, row, basePt, area));
       parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, area));
       return unit(parts, guideScope(parts), row);
     }
@@ -490,9 +607,35 @@ export function slotDocs(unit: EditUnit): Map<string, DocJSON> {
     if (p.kind === "gap") {
       out.set(p.doc.id, p.doc.doc);
       if (p.differs) out.set(p.differs.id, p.differs.doc);
+    } else if (p.kind === "meds") {
+      for (const s of p.entries.flatMap((e) => [...e.card, ...(e.own ?? [])])) out.set(s.id, s.doc);
     } else out.set(p.slot.id, p.slot.doc);
   }
   return out;
+}
+
+/**
+ * Her meds panel for a topic after the edit: `choice`'s cards and removals, and her own version of
+ * each entry the panel shows — the pieces of the editors it shows (`docs`, slot id → edited doc) when
+ * she edited one of them, else the stored version unless she dropped it. An entry she took off keeps
+ * its stored version for Put back; a card she no longer adds drops it. Versions of entries the editor
+ * does not have are kept. Null when nothing is left.
+ */
+function medsAfter(part: MedsPart, choice: MedsChoice, docs: ReadonlyMap<string, DocJSON>): MedsFile | null {
+  const own = new Map((part.file?.own ?? []).map((o) => [o.target, o.pieces]));
+  const shown = new Set(shownEntries(part, choice).map((e) => e.med.target));
+  for (const e of part.entries) {
+    const target = e.med.target;
+    if (choice.original.includes(target) || (!shown.has(target) && !choice.remove.includes(target))) own.delete(target);
+    if (!shown.has(target)) continue;
+    const slots = entrySlots(e, choice);
+    if (slots.some((s) => docs.has(s.id))) own.set(target, slots.map((s) => ({ ...s.piece, doc: docs.get(s.id) ?? s.piece.doc })));
+  }
+  // A card shown only because she edited it (fileAdds) stays implied by her version, as stored.
+  const implied = new Set(fileChoice(part).add.filter((id) => !part.file?.add.includes(id)));
+  const add = choice.add.filter((id) => !(implied.has(id) && own.has(id)));
+  if (add.length === 0 && choice.remove.length === 0 && own.size === 0) return null;
+  return { v: 1, add, remove: [...choice.remove], own: [...own].map(([target, pieces]) => ({ target, pieces })) };
 }
 
 /**
@@ -629,11 +772,13 @@ function rowsOf(block: BlockFile): RowJSON[] {
  * a slot missing from it is unchanged. With `restore` (the unit at a chosen version, 50 §50.6) the
  * docs are the version's: rows are restored by id with their old structure.json entries, gaps get the
  * version's doc, differs and look. `looks` maps gap id → its edited look (GapLook); a gap missing
- * from it keeps its look. A differs doc she emptied is removed (null).
+ * from it keeps its look. A differs doc she emptied is removed (null). `meds` maps topic id → her
+ * choices for its meds panel (MedsChoice); a panel missing from it keeps the stored ones. A restore
+ * puts back the version's meds file.
  */
 export function buildSave(
   unit: EditUnit, edits: ReadonlyMap<string, DocJSON>, today = localDate(),
-  { restore, looks = new Map() }: { restore?: EditUnit; looks?: ReadonlyMap<string, GapLook> } = {},
+  { restore, looks = new Map(), meds = new Map() }: { restore?: EditUnit; looks?: ReadonlyMap<string, GapLook>; meds?: ReadonlyMap<string, MedsChoice> } = {},
 ): SaveBuild {
   const docs = restore ? slotDocs(restore) : edits;
   const oldRows = (id: string): RowsPart | undefined => restore?.parts.find((p): p is RowsPart => p.kind === "rows" && p.block.id === id);
@@ -656,8 +801,8 @@ export function buildSave(
   };
 
   for (const part of unit.parts) {
-    // A topic's below block is written once its topic's id after the save is known (below).
-    if (part.kind === "stub" || part.kind === "below") continue;
+    // A topic's below block and meds panel are written once its topic's id after the save is known (below).
+    if (part.kind === "stub" || part.kind === "below" || part.kind === "meds") continue;
     if (part.kind === "rows") {
       const full = rowsOf(part.block);
       const table = tableOrThrow(part.block);
@@ -776,6 +921,31 @@ export function buildSave(
     if (part.block && path === part.path) put(path, part.block, normalized);
     else next.set(path, normalized);
     if (part.block && path !== part.path) deleted.push(part.path);
+  }
+
+  for (const part of unit.parts) {
+    if (part.kind !== "meds") continue;
+    const file = restore
+      ? (restore.parts.find((p): p is MedsPart => p.kind === "meds")?.file ?? null)
+      : medsAfter(part, meds.get(part.topic) ?? fileChoice(part), docs);
+    // Like the below block, it follows its topic to a new id unless that topic already has a panel of hers.
+    const s = systems.get(part.sys.structurePath);
+    const topic = s ? topicNow(part.sys, part.topic, s.blocks, s.structure) : part.topic;
+    const dest = topic === null ? part.path : topicMedsPath(part.sys.guide, part.sys.system, topic);
+    const path = dest !== part.path && (unit.snapshot.has(dest) || next.has(dest)) ? part.path : dest;
+    const before = part.file ? canonical(part.path, part.file) : null;
+    if (file === null) {
+      if (part.file) {
+        deleted.push(part.path);
+        changed.add(topic ?? part.topic);
+      }
+      continue;
+    }
+    const after = JSON.parse(canonical(path, file)) as MedsFile;
+    if (path !== part.path || canonical(path, after) !== before) changed.add(topic ?? part.topic);
+    if (part.file && path === part.path) put(path, part.file, after);
+    else next.set(path, after);
+    if (part.file && path !== part.path) deleted.push(part.path);
   }
 
   const changes: TreeChange[] = [];

@@ -5,6 +5,7 @@ import { trimRowText } from "../../lib/derive/trim.ts";
 import { schema } from "../../lib/schema.ts";
 import { tableDoc } from "../../tools/build/test-fixture.ts";
 import { fileHash, guideViewHash } from "../shell/route.ts";
+import { OWN_VERSION } from "./MedsPanel.tsx";
 import {
   asOwner,
   C,
@@ -509,6 +510,44 @@ describe("pharm pages", () => {
     expect(visibleText(card)).toContain("pharm review");
     expect(card.querySelector(".ph-rowblk")).toBeNull();
     expect(card.querySelector("a.phc-more")).toBeNull();
+  });
+
+  it("meds panel shows her own panel for the condition: less what she took off, her version of a card, then a card she added", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    expect(topic.meds.map((m) => m.target)).toEqual([C(2), R(124)]);
+    const mine = "My own nitrates note for stable angina";
+    topic.medsEdit = {
+      remove: [R(124)],
+      add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
+      own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: schema.node("doc", null, [schema.node("paragraph", null, [schema.text(mine)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"] }] },
+    };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 2");
+    expect(anchors(panel)).toEqual([`meds-${C(2)}`, `meds-${C(3)}`]);
+
+    await click(cardBtn(panel, `meds-${C(2)}`));
+    const own = cardEl(panel, `meds-${C(2)}`);
+    expect(visibleText(own)).toContain(mine);
+    // Her version replaces the card's guide rows and notes here.
+    expect(own.querySelector(".ph-rowblk")).toBeNull();
+    expect(visibleText(own)).not.toContain("MOA: venodilation");
+    // The label is hers alone; visitors see her version without it.
+    expect(visibleText(own)).not.toContain(OWN_VERSION);
+    asOwner(true);
+    expect(visibleText(need(own.querySelector(".phn-k.own-only"), "own version label"))).toBe(OWN_VERSION);
+    asOwner(false);
+    expect(need(own.querySelector<HTMLAnchorElement>("a.phc-more"), "pharm link").textContent).toBe("Open in Cardiovascular pharm ›");
+
+    await click(cardBtn(panel, `meds-${C(3)}`));
+    const added = cardEl(panel, `meds-${C(3)}`);
+    expect(visibleText(added)).toContain("MOA: beta-1 blockade");
+    expect(added.textContent).not.toContain(OWN_VERSION);
   });
 
   it("a topic without meds shows no meds panel", async () => {

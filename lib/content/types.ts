@@ -257,6 +257,34 @@ export interface CardsFile {
 }
 
 /**
+ * Her own meds panel for one condition topic of one guide (`content/guides/<g>/<system>/meds/<topic id>.json`).
+ * The panel is otherwise worked out at publish; this changes it for that topic only, and never changes
+ * a card, her guide or her pharm notes. `add`: class cards she added (card ids), after the panel's own.
+ * `remove`: panel entries she took off (each entry's target: a card id, a card-less guide row's id, or
+ * a pharm part's id). `own`: entries she edited there, each shown as its `pieces` instead of the card's
+ * guide rows and pharm notes. At least one of the three is non-empty: with none, there is no file.
+ */
+export interface MedsFile {
+  v: 1;
+  add: string[];
+  remove: string[];
+  own: { target: string; pieces: MedsPiece[] }[];
+}
+
+/**
+ * One thing an edited panel entry shows, in order: rows of her guide's drug table (`rows`: one table,
+ * at the guide's base size), or her pharm notes (`notes`: at `basePt`, her file's size, under `title`
+ * when the notes were cut to a titled column, labeled with her file's name `file`).
+ */
+export interface MedsPiece {
+  kind: "rows" | "notes";
+  basePt: number;
+  title: string | null;
+  file: string | null;
+  doc: DocJSON;
+}
+
+/**
  * Pharm-notes lines written for one use inside notes that are otherwise about the whole class,
  * judged line by line ("Clin Use: Stable angina - Variant angina" in her angina notes on CCBs).
  * Display only: her notes are never edited. A line shows only on the pharm sections in `for` and in

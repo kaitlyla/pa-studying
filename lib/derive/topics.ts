@@ -3,7 +3,7 @@ import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { listedHead, resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
-import type { NavEntry, NavSystem, PubBlock, PubMedsCard, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
+import type { NavEntry, NavSystem, PubBlock, PubMedsCard, PubMedsEdit, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -263,15 +263,19 @@ export function publishedRows(t: SystemTopics): { rows: Record<string, PubRow>; 
 }
 
 /**
- * The system's topics as published in `SystemJson.topics`, each with its meds panel from `meds` and
- * its block from `below` (topic id → the block she added below it).
+ * The system's topics as published in `SystemJson.topics`, each with its meds panel from `meds`, her
+ * own panel for it from `medsEdit` (given the derived panel), and its block from `below` (topic id →
+ * the block she added below it).
  */
-export function publishedTopics(t: SystemTopics, meds: (topic: Topic) => PubMedsCard[], below: ReadonlyMap<string, BlockFile>): PubTopic[] {
+export function publishedTopics(
+  t: SystemTopics, meds: (topic: Topic) => PubMedsCard[], medsEdit: (topic: Topic, derived: PubMedsCard[]) => PubMedsEdit | null, below: ReadonlyMap<string, BlockFile>,
+): PubTopic[] {
   return t.topics.map((topic) => {
     const b = below.get(topic.id);
+    const derived = meds(topic);
     return {
-      id: topic.id, title: topic.title, section: topic.section, condition: topic.condition, rows: withHeadings(t, topic.rows), meds: meds(topic),
-      below: b ? { id: b.id, kind: b.kind, doc: b.doc } : null,
+      id: topic.id, title: topic.title, section: topic.section, condition: topic.condition, rows: withHeadings(t, topic.rows), meds: derived,
+      medsEdit: medsEdit(topic, derived), below: b ? { id: b.id, kind: b.kind, doc: b.doc } : null,
     };
   });
 }

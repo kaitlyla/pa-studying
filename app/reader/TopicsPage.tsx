@@ -67,15 +67,11 @@ function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps
         </span>
       </div>
       <UpdateNotes notes={notesAt(system.notes, block ? [block.id, ...topic.rows] : topic.rows)} />
-      {/* The meds panel follows the rows, and stays above her below area while she edits it. */}
-      <EditRegion
-        pageKey={pageKey}
-        title={topic.title}
-        kept={{ before: "below", node: <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} /> }}
-      >
+      <EditRegion pageKey={pageKey} title={topic.title}>
         {block && <NotesBlock block={block} basePt={nav.basePt} rows={topic.rows} />}
       </EditRegion>
-      {/* Her own notes and pictures below the meds; while editing, they are in the editor above. */}
+      {/* The meds panel and her own notes and pictures below it; while editing, both are in the editors above. */}
+      {!editing && <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} />}
       {topic.below && !editing && <AdditionalInfo block={topic.below} basePt={nav.basePt} />}
     </section>
   );

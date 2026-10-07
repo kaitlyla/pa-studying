@@ -1,7 +1,7 @@
 // The loaded content tree the derivations read (tools/build fills it through lib/content).
 import type {
   AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GapFile,
-  GeneralFile, GuideFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, TrimsFile,
+  GeneralFile, GuideFile, MedsFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, TrimsFile,
   UsesFile, VocabFile, WordDocFile,
 } from "../content/types.ts";
 
@@ -11,6 +11,8 @@ export interface SystemData {
   blocks: BlockFile[];
   /** Topic id → the block she added below that topic (`below/<topic>.json`). */
   below: Map<string, BlockFile>;
+  /** Topic id → her own meds panel for that topic (`meds/<topic>.json`). */
+  meds: Map<string, MedsFile>;
 }
 
 export interface GuideData {

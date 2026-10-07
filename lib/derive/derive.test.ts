@@ -6,9 +6,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { removeContent, writeContent } from "../content/fs.ts";
-import { topicBelowPath } from "../content/files.ts";
+import { topicBelowPath, topicMedsPath } from "../content/files.ts";
 import { systemRowOrder } from "../content/splice.ts";
-import type { BlockFile, StructureFile, UsesFile } from "../content/types.ts";
+import type { BlockFile, MedsFile, MedsPiece, StructureFile, UsesFile } from "../content/types.ts";
 import { schema } from "../schema.ts";
 import { loadContent } from "../../tools/build/load.ts";
 import { B, C, D, G, GONE, P, PHARM_PAGE, R, S, tableDoc, U, writeFixture, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
@@ -23,9 +23,10 @@ import {
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
-import { tableOf } from "./text.ts";
+import { docText, tableOf } from "./text.ts";
 import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
+import { entryPieces, pageCard, panelEntries, publishedEdit, shownPieces } from "./panel.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
   ({ v: 1, id, kind: "table", doc: tableDoc(columns, rows), meta: {} }) as unknown as BlockFile;
@@ -649,6 +650,170 @@ describe("a topic's below block (her notes and pictures under the topic)", () =>
     expect(topicsBelow(topics, ["4", "3", "2"], has).map((t) => t.id)).toEqual(["a", "b"]);
     expect(topicsBelow(topics, ["1"], has)).toEqual([]);
   });
+});
+
+describe("her own meds panel for a topic (content MedsFile)", () => {
+  // In the fixture, FM Stable angina R(104)'s panel is Nitrates C(2) (her rows and notes) then the
+  // card-less Ranolazine row R(124); AF R(101) and Prinzmetal R(123) both show CCBs C(1).
+  const CV = systemPath("fm", "cardiovascular");
+  const para = (text: string) => ({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] });
+  const mine = (text: string): MedsPiece => ({ kind: "notes", basePt: 9, title: null, file: "Cardio med list", doc: para(text) as unknown as MedsPiece["doc"] });
+  const withMeds = (files: [string, MedsFile][]): Content => mutated((c) => {
+    for (const [topic, f] of files) system(c, "fm", "cardiovascular").meds.set(topic, f);
+  });
+  const topicOf = (res: PublishResult, id: string) => {
+    const t = (res.files.get(CV) as SystemJson).topics.find((x) => x.id === id);
+    if (!t) throw new Error(`no topic ${id}`);
+    return t;
+  };
+  /** What `res` reports dropped that the fixture's own publish does not. */
+  const newDropped = (res: PublishResult) => res.dropped.filter((d) => !out.dropped.some((x) => x.file === d.file && x.id === d.id));
+  let loaded: MedsFile;
+
+  // Written and read back through lib/content, as the build reads it.
+  beforeAll(async () => {
+    const path = topicMedsPath("fm", "cardiovascular", R(104));
+    expect(system(base, "fm", "cardiovascular").meds.size).toBe(0);
+    await writeContent(root, path, { v: 1, add: [C(3)], remove: [R(124)], own: [{ target: C(2), pieces: [mine("my nitrates under stable angina")] }] });
+    try {
+      loaded = system(await loadContent(root), "fm", "cardiovascular").meds.get(R(104)) as MedsFile;
+    } finally {
+      await removeContent(root, path);
+    }
+  });
+
+  it("the derived panel is as the fixture says (the cases below rely on it)", () => {
+    expect(topicOf(out, R(104)).meds.map((m) => m.target)).toEqual([C(2), R(124)]);
+    expect(topicOf(out, R(101)).meds.map((m) => m.target)).toEqual([C(1)]);
+    expect(topicOf(out, R(123)).meds.map((m) => m.target)).toEqual([C(1)]);
+    expect((out.files.get(CV) as SystemJson).topics.every((t) => t.medsEdit === null)).toBe(true);
+  });
+
+  it("loads from meds/<topic>.json beside the system's blocks", () => {
+    expect(loaded).toMatchObject({ v: 1, add: [C(3)], remove: [R(124)] });
+    expect(loaded.own.map((o) => o.target)).toEqual([C(2)]);
+  });
+
+  it("publishes on its topic only: the derived panel is kept, and the panel shows hers (removed off, added after, her version)", () => {
+    const res = publish(withMeds([[R(104), loaded]]));
+    const angina = topicOf(res, R(104));
+    expect(angina.meds).toEqual(topicOf(out, R(104)).meds);
+    expect(angina.medsEdit?.remove).toEqual([R(124)]);
+    expect(angina.medsEdit?.add).toEqual([expect.objectContaining({ card: C(3), target: C(3), rows: [] })]);
+    expect(Object.keys(angina.medsEdit?.own ?? {})).toEqual([C(2)]);
+    expect(panelEntries(angina).map((e) => [e.med.target, e.own === null ? null : docText(e.own[0]?.doc ?? { type: "doc", content: [] })])).toEqual([
+      [C(2), "my nitrates under stable angina"],
+      [C(3), null],
+    ]);
+    expect((res.files.get(CV) as SystemJson).topics.filter((t) => t.id !== R(104)).every((t) => t.medsEdit === null)).toBe(true);
+    // The card she added has its notes on the page.
+    expect((res.files.get(CV) as SystemJson).cards[C(3)]).toBeDefined();
+    expect(res.dropped).toEqual(out.dropped);
+  });
+
+  it("her version is found by search on its condition's page, and nothing of hers is left uncovered", () => {
+    const res = publish(withMeds([[R(104), loaded]]));
+    const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+    const unit = res.units.find((u) => u.at === `meds-${C(2)}`);
+    expect(unit).toMatchObject({ title: "Nitrates", route: hosts[R(104)]?.route, label: "notes" });
+    expect(unit?.text).toContain("my nitrates under stable angina");
+    const content = withMeds([[R(104), loaded]]);
+    expect(uncoveredText(content, res.units, res.files)).toEqual(uncoveredText(base, out.units, out.files));
+    const without = res.units.filter((u) => u !== unit);
+    expect(uncoveredText(content, without, res.files).map((u) => u.text)).toContain("my nitrates under stable angina");
+  });
+
+  it("a version of an entry she also removed, or of an entry the panel no longer has, is not shown; one of a card shows it as added", () => {
+    const content = withMeds([[R(104), {
+      v: 1, add: [], remove: [C(2)],
+      own: [{ target: C(2), pieces: [mine("removed")] }, { target: C(1), pieces: [mine("ccb under angina")] }, { target: R(999), pieces: [mine("gone row")] }],
+    }]]);
+    const res = publish(content);
+    const e = topicOf(res, R(104)).medsEdit;
+    expect(e?.add.map((m) => m.target)).toEqual([C(1)]);
+    expect(Object.keys(e?.own ?? {})).toEqual([C(1)]);
+    expect(panelEntries(topicOf(res, R(104))).map((x) => x.med.target)).toEqual([R(124), C(1)]);
+    expect(newDropped(res)).toEqual([{ file: topicMedsPath("fm", "cardiovascular", R(104)), id: R(999) }]);
+    // Coverage checks only what the panel shows: the versions left out are not reported as unsearchable.
+    expect(uncoveredText(content, res.units, res.files)).toEqual(uncoveredText(base, out.units, out.files));
+    const shown = res.units.filter((u) => u.at !== `meds-${C(1)}`);
+    expect(uncoveredText(content, shown, res.files).map((u) => u.text)).toEqual([...uncoveredText(base, out.units, out.files).map((u) => u.text), "ccb under angina"]);
+  });
+
+  it("reports what names nothing to dropped: a removed target the panel lacks, an unknown card, a file for no topic", () => {
+    const res = publish(withMeds([
+      [R(104), { v: 1, add: [C(99)], remove: [R(998)], own: [] }],
+      [R(997), { v: 1, add: [C(3)], remove: [], own: [] }],
+    ]));
+    const where = (t: string) => topicMedsPath("fm", "cardiovascular", t);
+    expect(newDropped(res)).toEqual([
+      { file: where(R(104)), id: C(99) },
+      { file: where(R(104)), id: R(998) },
+      { file: where(R(997)), id: R(997) },
+    ]);
+    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {} });
+  });
+
+  it("an edit to the card's pharm notes changes the condition she has no version for, and not her version", () => {
+    const ccb = (out.files.get(CV) as SystemJson).cards[C(1)];
+    const block = ccb?.blocks[0];
+    if (!block) throw new Error("no CCB notes block");
+    const content = withMeds([[R(101), { v: 1, add: [], remove: [], own: [{ target: C(1), pieces: [mine("my CCB notes for AF")] }] }]]);
+    const notes = content.pharm.flatMap((p) => p.blocks).find((b) => b.id === block);
+    if (!notes) throw new Error("no CCB notes block in content");
+    const first = (n: { text?: string; content?: unknown[] }): { text?: string } | null =>
+      typeof n.text === "string" ? n : (n.content ?? []).reduce<{ text?: string } | null>((f, c) => f ?? first(c as { content?: unknown[] }), null);
+    const leaf = first(notes.doc as { content?: unknown[] });
+    if (!leaf) throw new Error("no text in the CCB notes");
+    leaf.text = `${leaf.text ?? ""} PHARMEDIT`;
+    const sys = publish(content).files.get(CV) as SystemJson;
+    const text = (topic: string) => {
+      const t = sys.topics.find((x) => x.id === topic);
+      const e = t ? panelEntries(t).find((x) => x.med.target === C(1)) : undefined;
+      if (!t || !e) throw new Error(`no CCB entry on ${topic}`);
+      return shownPieces(sys, t, e, 10).map((p) => docText(p.doc)).join("\n");
+    };
+    expect(text(R(123))).toContain("PHARMEDIT");
+    expect(text(R(101))).toBe("my CCB notes for AF");
+  });
+
+  it("entryPieces is what the published panel shows of a card: her guide rows at the guide's size, then her notes at her file's", () => {
+    const sys = out.files.get(CV) as SystemJson;
+    const angina = topicOf(out, R(104));
+    const [nitrates, ranolazine] = angina.meds;
+    if (!nitrates || !ranolazine) throw new Error("no entries");
+    const pieces = entryPieces(sys, angina, nitrates, 10);
+    expect(pieces.map((p) => [p.kind, p.basePt, p.file])).toEqual([["rows", 10, null], ...pieces.slice(1).map((p) => ["notes", sys.cards[C(2)]?.basePt, p.file])]);
+    expect(pieces.length).toBeGreaterThan(1);
+    expect(entryPieces(sys, angina, ranolazine, 10).map((p) => p.kind)).toEqual(["rows"]);
+    expect(shownPieces(sys, angina, { med: nitrates, own: null }, 10)).toEqual(pieces);
+  });
+
+  it("publishedEdit: a card already on the panel is not added twice, nor one she removed", () => {
+    const derived = topicOf(out, R(104)).meds;
+    const missing: string[] = [];
+    const card = (id: string) => (id === C(9) ? { card: id, title: "Nine", rows: [], section: "x", system: "cardiovascular", target: id } : null);
+    const e = publishedEdit({ v: 1, add: [C(2), C(9), C(9), C(8)], remove: [C(8)], own: [] }, derived, card, (t) => missing.push(t));
+    expect(e.add.map((m) => m.target)).toEqual([C(9)]);
+    expect(missing).toEqual([C(8)]);
+  });
+
+  it("pageCard: a card added on another panel of the page, else from its Pharm section, else from a panel entry, else none", () => {
+    const sys = out.files.get(CV) as SystemJson;
+    expect(pageCard(sys, C(99))).toBeNull();
+    const fromSection = pageCard(sys, C(1));
+    expect(fromSection).toMatchObject({ card: C(1), target: C(1), rows: [], system: "cardiovascular" });
+    expect(sys.pharm?.sections.some((s) => s.id === fromSection?.section && s.cards.includes(C(1)))).toBe(true);
+    const noSection = { ...sys, pharm: null };
+    expect(pageCard(noSection, C(2))).toMatchObject({ card: C(2), section: nitrateSection(sys) });
+    const added = { card: C(3), title: "Added", rows: [], section: "elsewhere", system: "pulmonary", target: C(3) };
+    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {} } } : t)) };
+    expect(pageCard(withAdded, C(3))).toBe(added);
+  });
+  const nitrateSection = (sys: SystemJson): string | undefined => {
+    const m = sys.topics.flatMap((t) => t.meds).find((x) => x.card === C(2));
+    return m && m.part === undefined ? m.section : undefined;
+  };
 });
 
 describe("navigation and pages (40 §40.3)", () => {
@@ -2242,11 +2407,10 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
   });
 
   it("puts every shown text block in at least one search unit, and reports any that is missing", () => {
-    const hosts = file<HostsJson>("hosts.json");
-    expect(uncoveredText(base, out.units, hosts)).toEqual([]);
+    expect(uncoveredText(base, out.units, out.files)).toEqual([]);
     // Without the untitled-row and heading-row units, their text is reported.
     const without = out.units.filter((u) => u.at !== R(200) && u.at !== R(100));
-    expect(uncoveredText(base, without, hosts)).toEqual([
+    expect(uncoveredText(base, without, out.files)).toEqual([
       { id: R(100), text: "ARRHYTHMIAS" }, { id: R(100), text: "Presentation" }, { id: R(100), text: "Treatment" },
       { id: R(200), text: "untitled lead" },
     ]);
@@ -2262,9 +2426,8 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
       }).toJSON());
     });
     const res = publish(c);
-    const hosts = res.files.get("hosts.json") as HostsJson;
-    expect(uncoveredText(c, res.units, hosts)).toEqual([]);
-    expect(uncoveredText(c, res.units.filter((u) => u.at !== B(11)), hosts)).toContainEqual({ id: B(11), text: "boxed pearl" });
+    expect(uncoveredText(c, res.units, res.files)).toEqual([]);
+    expect(uncoveredText(c, res.units.filter((u) => u.at !== B(11)), res.files)).toContainEqual({ id: B(11), text: "boxed pearl" });
   });
 
   it("fails naming a structure.json id that does not exist", () => {
@@ -2524,7 +2687,7 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
     ]);
     expect(res.units.filter((u) => u.route === VITAMINS).map((u) => [u.at, u.title, u.tab])).toEqual([[B(60), "Vitamins", "other"]]);
     expect(res.units.filter((u) => u.route === `#/file/${D(5)}`)).toEqual([]);
-    expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+    expect(uncoveredText(c, res.units, res.files)).toEqual([]);
   });
 
   it("publishes a sub's group and intro (null when it has none) and puts the group in its location", () => {
@@ -2565,7 +2728,7 @@ describe("her Word-page blocks shown as notes on place pages (PlaceNote)", () =>
       expect(res.units.filter((u) => u.at === R(600) || u.at === R(601)).map((u) => [u.at, u.route, u.title, u.tab])).toEqual([
         [R(600), CBC, "CBC", "labs"], [R(601), VITAMINS, "Vitamins", "other"],
       ]);
-      expect(uncoveredText(c, res.units, hosts)).toEqual([]);
+      expect(uncoveredText(c, res.units, res.files)).toEqual([]);
     });
   });
 

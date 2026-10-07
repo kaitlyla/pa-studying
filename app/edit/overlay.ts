@@ -2,14 +2,16 @@
 // deployed site contains them, and patched into every published data file her device reads so a page
 // shows her save at once.
 import {
-  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, TOPIC_BELOW_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type OtherFile, type RefTabsFile, type ReplaceFailed,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, TOPIC_BELOW_RE, TOPIC_MEDS_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type MedsFile, type OtherFile, type RefTabsFile,
+  type ReplaceFailed,
   type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
   BUILD_PATH, docPath, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson,
-  type OtherJson, type PubGap, type RefTabJson, type SystemJson,
+  type OtherJson, type PubGap, type PubMedsCard, type PubMedsEdit, type RefTabJson, type SystemJson,
 } from "../../lib/derive/published.ts";
+import { pageCard, publishedEdit } from "../../lib/derive/panel.ts";
 import { shownItems, shownNotes } from "../../lib/derive/placeNotes.ts";
 import { PANCE } from "../../lib/derive/routes.ts";
 import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
@@ -118,9 +120,13 @@ const asBlockFiles = (blocks: SystemJson["blocks"]): BlockFile[] => blocks.map((
 
 /**
  * Re-derives a system page's rows, topics and sections from its (patched) blocks and structure.
- * `below`: the overlaid below blocks by topic id (null: deleted).
+ * `below`: the overlaid below blocks by topic id (null: deleted); `meds`: the overlaid meds files by
+ * topic id (null: deleted).
  */
-function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readonly string[] | null, ix: Index, below: ReadonlyMap<string, BlockFile | null>): SystemJson {
+function rederiveSystem(
+  sys: SystemJson, structure: StructureFile, order: readonly string[] | null, ix: Index, below: ReadonlyMap<string, BlockFile | null>,
+  meds: ReadonlyMap<string, MedsFile | null>,
+): SystemJson {
   const byId = new Map(sys.blocks.map((b) => [b.id, b]));
   const ids = order ?? sys.blocks.map((b) => b.id);
   const blocks = ids.map((id) => {
@@ -128,7 +134,13 @@ function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readon
     return o ? { id, kind: o.kind, doc: o.doc } : byId.get(id);
   }).filter((b): b is SystemJson["blocks"][number] => b !== undefined);
   const t = deriveTopics(asBlockFiles(blocks), structure);
-  const meds = new Map(sys.topics.map((x) => [x.id, x.meds]));
+  const derived = new Map(sys.topics.map((x) => [x.id, x.meds]));
+  const edits = new Map(sys.topics.map((x) => [x.id, x.medsEdit]));
+  const medsEdit = (x: { id: string }, list: PubMedsCard[]): PubMedsEdit | null => {
+    if (!meds.has(x.id)) return edits.get(x.id) ?? null;
+    const file = meds.get(x.id);
+    return file ? publishedEdit(file, list, (id) => pageCard(sys, id)) : null;
+  };
   const belowNow = new Map(sys.topics.flatMap((x) => (x.below ? asBlockFiles([x.below]).map((b): [string, BlockFile] => [x.id, b]) : [])));
   for (const [topic, b] of below) {
     if (b) belowNow.set(topic, b);
@@ -138,7 +150,7 @@ function rederiveSystem(sys: SystemJson, structure: StructureFile, order: readon
     ...sys,
     blocks,
     ...publishedRows(t),
-    topics: publishedTopics(t, (x) => meds.get(x.id) ?? [], belowNow),
+    topics: publishedTopics(t, (x) => derived.get(x.id) ?? [], medsEdit, belowNow),
     sections: publishedSections(t, structure, blocks.map((b) => b.id)),
   };
 }
@@ -192,11 +204,15 @@ export function patchPublished(
     const touched = [...files.keys()].some((p) => p.startsWith(dir));
     const st = (files.get(`${dir}structure.json`) as StructureFile | undefined) ?? structure ?? null;
     const below = new Map<string, BlockFile | null>();
+    const meds = new Map<string, MedsFile | null>();
     for (const [p, json] of files) {
-      const topic = p.startsWith(dir) ? TOPIC_BELOW_RE.exec(p)?.groups?.topic : undefined;
+      if (!p.startsWith(dir)) continue;
+      const topic = TOPIC_BELOW_RE.exec(p)?.groups?.topic;
       if (topic) below.set(topic, json as BlockFile | null);
+      const medsTopic = TOPIC_MEDS_RE.exec(p)?.groups?.topic;
+      if (medsTopic) meds.set(medsTopic, json as MedsFile | null);
     }
-    if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix, below);
+    if (touched && st) out = rederiveSystem(out as SystemJson, st, (files.get(`${dir}system.json`) as SystemFile | undefined)?.blocks ?? null, ix, below, meds);
   }
   // A place's notes and outline follow the build's rule for the patched documents (lib/derive/placeNotes.ts).
   const blockShown = (id: string): boolean => !hiddenBlocks.has(id);

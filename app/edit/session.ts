@@ -19,7 +19,10 @@ import { recordSaved } from "./overlay.ts";
 import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
-import { buildSave, gapLook, loadUnit, sameLook, slotDocs, UnitError, type EditUnit, type GapLook, type SaveBuild } from "./units.ts";
+import {
+  buildSave, fileChoice, gapLook, loadUnit, sameChoice, sameLook, shownMedsSlots, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
+  type SaveBuild,
+} from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
 
 /** Edit start failed for want of a connection (plan wording). */
@@ -66,6 +69,8 @@ export interface EditState {
   generation: number;
   /** Gap blocks whose look she changed (figure sizes, Show as my notes), by gap id: their new look. */
   looks: Readonly<Record<string, GapLook>>;
+  /** Meds panels whose cards she changed (added, took off, dropped her version), by topic id: her choices. */
+  meds: Readonly<Record<string, MedsChoice>>;
 }
 
 /** Her answer to "You have unsaved changes". */
@@ -204,11 +209,29 @@ export function mountedEditor(slot: string): EditorView | undefined {
 /** The open edit's changed gap looks (GapLook), by gap id. */
 const editedLooks = (): Map<string, GapLook> => new Map(Object.entries(store.edit?.looks ?? {}));
 
+/** The open edit's changed meds panel choices (MedsChoice), by topic id. */
+const editedMeds = (): Map<string, MedsChoice> => new Map(Object.entries(store.edit?.meds ?? {}));
+
 function isDirty(): boolean {
   for (const { view, initial } of views.values()) {
     if (!view.state.doc.eq(schema.nodeFromJSON(initial))) return true;
   }
-  return unmountedDocs().length > 0 || editedLooks().size > 0;
+  return unmountedDocs().length > 0 || editedLooks().size > 0 || editedMeds().size > 0;
+}
+
+/** Her choices for meds panel `part` in the open edit: as she changed them, else as stored. */
+export function currentMeds(part: MedsPart): MedsChoice {
+  return store.edit?.meds[part.topic] ?? fileChoice(part);
+}
+
+/** She changed which cards meds panel `part` shows, or dropped her version of one: record it and recompute dirty. */
+export function setMeds(part: MedsPart, choice: MedsChoice): void {
+  const edit = store.edit;
+  if (!edit) return;
+  const meds = { ...edit.meds, [part.topic]: choice };
+  if (sameChoice(choice, fileChoice(part))) delete meds[part.topic];
+  set({ edit: { ...edit, meds } });
+  setEdit({ dirty: isDirty() });
 }
 
 /** The look gap `gap` of the open edit shows now: as she changed it, else as stored. */
@@ -259,14 +282,16 @@ function openError(e: unknown): string {
   return OPEN_FAILED;
 }
 
-/** Slot ids of a unit's editors. */
-function slotIds(unit: EditUnit): Set<string> {
+/** Slot ids of a unit's editors that show with meds panel choices `meds` (by topic id; a panel missing from it as stored). */
+function slotIds(unit: EditUnit, meds: Readonly<Record<string, MedsChoice>>): Set<string> {
   const ids = new Set<string>();
   for (const p of unit.parts) {
     if (p.kind === "stub") continue;
     if (p.kind === "gap") {
       ids.add(p.doc.id);
       if (p.differs) ids.add(p.differs.id);
+    } else if (p.kind === "meds") {
+      for (const s of shownMedsSlots(p, meds[p.topic] ?? fileChoice(p))) ids.add(s.id);
     } else ids.add(p.slot.id);
   }
   return ids;
@@ -277,6 +302,8 @@ export interface DraftStart {
   docs: Map<string, DocJSON>;
   /** Its changed gap looks, by gap id. */
   looks?: Readonly<Record<string, GapLook>>;
+  /** Its changed meds panel choices, by topic id. */
+  meds?: Readonly<Record<string, MedsChoice>>;
   commit: string;
   /** It came from the draft store: delete it there once its docs are in the editors. */
   stored?: boolean;
@@ -292,23 +319,28 @@ export interface DraftStart {
 export async function startEdit(key: string, title: string, draft?: DraftStart): Promise<boolean> {
   if (store.edit) return false;
   resetEditState();
-  set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0, looks: {} }, pageBanner: null });
+  set({ edit: { key, title, unit: null, error: null, dirty: false, saving: false, banner: null, generation: 0, looks: {}, meds: {} }, pageBanner: null });
   try {
     const unit = await load(key, draft?.commit);
     const now = getEditStore().edit;
     if (now?.key !== key) return false;
     let looks: Record<string, GapLook> = {};
+    let meds: Record<string, MedsChoice> = {};
     if (draft) {
-      const slots = slotIds(unit);
+      const topics = new Set(unit.parts.flatMap((p) => (p.kind === "meds" ? [p.topic] : [])));
+      meds = Object.fromEntries(Object.entries(draft.meds ?? {}).filter(([topic]) => topics.has(topic)));
+      // Only docs of editors that show: one of an entry she took off would wait for an editor that never mounts.
+      const slots = slotIds(unit, meds);
       const docs = new Map([...draft.docs].filter(([slot]) => slots.has(slot)));
       pendingDocs = docs.size > 0 ? docs : null;
       const gaps = new Set(unit.parts.flatMap((p) => (p.kind === "gap" ? [p.gap.id] : [])));
       looks = Object.fromEntries(Object.entries(draft.looks ?? {}).filter(([gap]) => gaps.has(gap)));
       // Set before the editors mount: mounted regions register (and apply the draft) as soon as the unit is in the store.
       pendingDraftKey = draft.stored === true ? key : null;
-      resumeAfterApply = (pendingDocs !== null || Object.keys(looks).length > 0) && draft.resumeSave === true;
+      resumeAfterApply = (pendingDocs !== null || Object.keys(looks).length > 0 || Object.keys(meds).length > 0) && draft.resumeSave === true;
     }
-    setEdit({ unit, generation: now.generation + 1, looks, dirty: Object.keys(looks).length > 0 });
+    const changed = Object.keys(looks).length > 0 || Object.keys(meds).length > 0;
+    setEdit({ unit, generation: now.generation + 1, looks, meds, dirty: changed });
     // No doc of the draft fits the page any more: nothing to apply.
     if (draft && pendingDocs === null) draftApplied();
     return true;
@@ -385,7 +417,7 @@ export async function save(): Promise<boolean> {
   setEdit({ saving: true, banner: null });
   try {
     const docs = editedDocs();
-    const build = buildSave(unit, docs, undefined, { looks: editedLooks() });
+    const build = buildSave(unit, docs, undefined, { looks: editedLooks(), meds: editedMeds() });
     if (build.changes.length === 0) {
       discardEdit();
       return true;
@@ -440,8 +472,8 @@ export const COPY_DONE = "Your changes were copied.";
 /** The browser refused the clipboard write (design copyfail). */
 export const COPY_FAILED = "Copy didn’t work. Select the text and copy it yourself.";
 
-/** All of the open edit's changes (docs and gap looks), as one comparable key. */
-const editsKey = (): string => JSON.stringify([[...editedDocs()], [...editedLooks()]]);
+/** All of the open edit's changes (docs, gap looks and meds panel choices), as one comparable key. */
+const editsKey = (): string => JSON.stringify([[...editedDocs()], [...editedLooks()], [...editedMeds()]]);
 
 /**
  * "Copy my changes": the edited views' text (the same docs Save and drafts take), paragraphs and rows
@@ -499,7 +531,7 @@ export async function loadNewer(): Promise<void> {
     if (now?.key !== edit.key) return;
     resetEditState();
     dropKeptDraft();
-    setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied }, looks: {} });
+    setEdit({ unit, dirty: false, generation: now.generation + 1, banner: { kind: "loaded", at, copied }, looks: {}, meds: {} });
   } catch (e) {
     if (getEditStore().edit?.key === edit.key) setEdit({ error: openError(e) });
   } finally {
@@ -529,6 +561,8 @@ export interface Draft {
   docs: Record<string, DocJSON>;
   /** Her changed gap looks, by gap id (absent when she changed none). */
   looks?: Record<string, GapLook>;
+  /** Her changed meds panel choices, by topic id (absent when she changed none). */
+  meds?: Record<string, MedsChoice>;
   /** The commit the edit started from: the restored edit saves against it (conflicts stay conflicts). */
   commit: string;
   /** She had pressed Save and was signing in again when the page left: save once the draft is back. */
@@ -551,6 +585,7 @@ export async function saveDraft(resumeSave = false): Promise<void> {
   if (!edit?.unit || !isDirty()) return;
   const draft: Draft = { title: edit.title, docs: Object.fromEntries(editedDocs()), commit: edit.unit.snapshot.commit };
   if (Object.keys(edit.looks).length > 0) draft.looks = { ...edit.looks };
+  if (Object.keys(edit.meds).length > 0) draft.meds = { ...edit.meds };
   if (resumeSave) draft.resumeSave = true;
   await drafts.put(edit.key, draft);
 }
@@ -603,7 +638,7 @@ function draftApplied(): void {
 export async function restoreDraft(key: string): Promise<boolean> {
   const d = await drafts.get(key);
   if (!d) return false;
-  return startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), looks: d.looks, commit: d.commit, stored: true, resumeSave: d.resumeSave === true });
+  return startEdit(key, d.title, { docs: new Map(Object.entries(d.docs)), looks: d.looks, meds: d.meds, commit: d.commit, stored: true, resumeSave: d.resumeSave === true });
 }
 
 /** `beforeunload` while an edit has unsaved changes shows the browser's prompt. */

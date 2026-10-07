@@ -6,7 +6,7 @@ import type { IdPrefix } from "./ids.ts";
 import { GUIDE_IDS } from "./types.ts";
 import {
   normalizeDoc, validateAsIsFile, validateBlock, validateCards, validateChecks, validateConcepts, validateDeck,
-  validateEvidence, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateOther,
+  validateEvidence, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateMeds, validateOther,
   validatePharmFile, validateRefTabs, validateSite, validateSlide, validateStructure, validateSystem, validateTrims,
   validateUpload, validateUses, validateVocab, validateWordDoc,
 } from "./validate.ts";
@@ -66,6 +66,11 @@ export const TOPIC_BELOW_RE = pathRe(`content/guides/${GUIDE}/${SLUG}/below/(?<t
 export const topicBelowDir = (guide: string, system: string): string => `content/guides/${guide}/${system}/below`;
 export const topicBelowPath = (guide: string, system: string, topic: string): string => `${topicBelowDir(guide, system)}/${topic}.json`;
 
+/** Her own meds panel for a topic (MedsFile), `content/guides/<g>/<system>/meds/<topic id>.json`, the topic in `topic`. */
+export const TOPIC_MEDS_RE = pathRe(`content/guides/${GUIDE}/${SLUG}/meds/(?<topic>${idSource("r")})\\.json`);
+export const topicMedsDir = (guide: string, system: string): string => `content/guides/${guide}/${system}/meds`;
+export const topicMedsPath = (guide: string, system: string, topic: string): string => `${topicMedsDir(guide, system)}/${topic}.json`;
+
 /** Every JSON file of the content tree, by path pattern, with its validator. */
 const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/site\\.json"), validateSite],
@@ -91,6 +96,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/updates/checks\\.json"), validateChecks],
   [pathRe(`${inboxItemDir(ident("d"))}/${UPLOAD_NAME.replace(".", "\\.")}`), validateUpload],
   [TOPIC_BELOW_RE, validateBlock],
+  [TOPIC_MEDS_RE, validateMeds],
   ...BLOCK_LOCATIONS.map((l): [RegExp, Validator] => [pathRe(`${l.dir}/blocks/${ident(l.prefix)}\\.json`), l.validator]),
 ];
 
@@ -142,6 +148,7 @@ export function serializeFile(path: string, value: unknown): string {
 }
 
 function normalizeDocs(path: string, value: unknown): unknown {
+  if (TOPIC_MEDS_RE.test(path)) return normalizeMedsDocs(path, value);
   if (typeof value !== "object" || value === null || !Object.hasOwn(value, "doc")) return value;
   const rec = value as Record<string, unknown>;
   const out: Record<string, unknown> = { ...rec, doc: normalizeDoc(rec.doc, ".doc", path) };
@@ -151,4 +158,17 @@ function normalizeDocs(path: string, value: unknown): unknown {
     out.meta = { ...meta, differs: { ...differs, doc: normalizeDoc(differs.doc, ".meta.differs.doc", path) } };
   }
   return out;
+}
+
+/** A meds file's pieces with their rich text normalized (the shape itself is left to its validator). */
+function normalizeMedsDocs(path: string, value: unknown): unknown {
+  const own = (value as { own?: unknown } | null)?.own;
+  if (!Array.isArray(own)) return value;
+  return {
+    ...(value as Record<string, unknown>),
+    own: own.map((o: { pieces?: unknown }, i) => (!Array.isArray(o?.pieces) ? o : {
+      ...o,
+      pieces: o.pieces.map((p: { doc?: unknown }, j) => (p && typeof p === "object" && Object.hasOwn(p, "doc") ? { ...p, doc: normalizeDoc(p.doc, `.own[${i}].pieces[${j}].doc`, path) } : p)),
+    })),
+  };
 }

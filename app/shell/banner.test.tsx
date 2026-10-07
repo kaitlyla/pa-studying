@@ -7,6 +7,7 @@ import { memoryStore } from "../edit/idb.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "../edit/overlay.ts";
 import { discardEdit, getEditStore, mountedEditor, setDraftStoreForTests, type Draft } from "../edit/session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "../edit/testkit.ts";
+import { fileChoice, shownMedsSlots } from "../edit/units.ts";
 import { asOwner, click, go, renderApp, until, type Mounted } from "../testing.tsx";
 import { hideToast } from "./toast.tsx";
 
@@ -49,7 +50,7 @@ it("after a save, Saved. shows once on the saved page and not on the next page",
 
   const unit = getEditStore().edit?.unit;
   if (!unit) throw new Error("the unit has not loaded");
-  const slots = unit.parts.flatMap((p) => (p.kind === "stub" || p.kind === "gap" ? [] : [p.slot.id]));
+  const slots = unit.parts.flatMap((p) => (p.kind === "stub" || p.kind === "gap" ? [] : p.kind === "meds" ? shownMedsSlots(p, fileChoice(p)).map((s) => s.id) : [p.slot.id]));
   act(() => {
     for (const slot of slots) {
       const view = mountedEditor(slot);

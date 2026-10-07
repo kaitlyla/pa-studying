@@ -4,7 +4,9 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, type ReactNode } from "react";
 import { EditorView } from "prosemirror-view";
-import { B, R } from "../../tools/build/test-fixture.ts";
+import { serializeFile, type DocJSON, type MedsFile } from "../../lib/content/index.ts";
+import { B, C, R } from "../../tools/build/test-fixture.ts";
+import { OWN_VERSION } from "../pharm/MedsPanel.tsx";
 import { setOwner } from "../shell/owner.tsx";
 import { hideToast, Toast } from "../shell/toast.tsx";
 import { asOwner, click, mount, until, type Mounted } from "../testing.tsx";
@@ -24,6 +26,8 @@ import {
   setDraftStoreForTests, showPageBanner, startEdit, viewChanged, type Draft,
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
+import { fileChoice, shownMedsSlots } from "./units.ts";
+import { ADD_CARD, ADDED_LATER, MEDS_HEADING, PUT_BACK, REMOVED_HEADING } from "./MedsEdit.tsx";
 
 const KEY = `topic:fm:${R(101)}`;
 
@@ -84,7 +88,7 @@ function mountEditors(): void {
   const unit = edit().unit;
   if (!unit) throw new Error("the unit has not loaded");
   for (const p of unit.parts) {
-    const slots = p.kind === "stub" ? [] : p.kind === "gap" ? [p.doc, ...(p.differs ? [p.differs] : [])] : [p.slot];
+    const slots = p.kind === "stub" ? [] : p.kind === "gap" ? [p.doc, ...(p.differs ? [p.differs] : [])] : p.kind === "meds" ? shownMedsSlots(p, fileChoice(p)) : [p.slot];
     for (const slot of slots) {
       const view: EditorView = new EditorView(document.createElement("div"), {
         state: createEditorState(slot.doc),
@@ -130,6 +134,11 @@ function stubClipboard(writeText: (text: string) => Promise<void>): void {
 
 const q = (root: ParentNode, ref: string): HTMLElement | null => root.querySelector<HTMLElement>(`[data-ref="${ref}"]`);
 
+function need<T>(v: T | null | undefined): T {
+  if (v === null || v === undefined) throw new Error("missing element");
+  return v;
+}
+
 describe("EditControls and EditRegion", () => {
   const page = (key = KEY): ReactNode => (
     <>
@@ -171,56 +180,33 @@ describe("EditControls and EditRegion", () => {
 
     const editor = await until(() => root.querySelector('[data-ref="edit-area"] [contenteditable="true"]'), "the editor");
     expect(editor.closest("[hidden]")).toBeNull();
-    // The topic's rows, then its below area.
-    const editors = root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]');
-    expect(editors).toHaveLength(2);
-    expect(editors[0]?.closest(".below-edit")).toBeNull();
-    expect(editors[1]?.closest(`section.below-edit[aria-label="${BELOW_HEADING}"]`)).not.toBeNull();
+    // The topic's rows, then one editor per piece of each card in its meds panel, then its below area.
+    const unit = edit().unit;
+    if (!unit) throw new Error("no unit");
+    const meds = unit.parts.flatMap((p) => (p.kind === "meds" ? shownMedsSlots(p, fileChoice(p)) : []));
+    expect(meds.length).toBeGreaterThan(0);
+    const editors = [...root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]')];
+    expect(editors).toHaveLength(2 + meds.length);
+    expect(editors[0]?.closest(".below-edit, .meds-edit")).toBeNull();
+    for (const e of editors.slice(1, -1)) expect(e.closest(`section.meds-edit[aria-label="${MEDS_HEADING}"]`)).not.toBeNull();
+    expect(editors.at(-1)?.closest(`section.below-edit[aria-label="${BELOW_HEADING}"]`)).not.toBeNull();
     expect(q(root, "edit-area")?.textContent).not.toContain("Opening for editing…");
     expect(published(root).closest("[hidden]")).not.toBeNull();
     expect(q(root, "edit-page")).toBeNull();
     expect(q(root, "edit-versions")).toBeNull();
   });
 
-  it("kept content shows once after the body when read, and once between the rows and the Additional info editor while editing", async () => {
+  it("while editing, the topic's meds panel is between its rows and the Additional info editor, with Add a card", async () => {
     asOwner(true);
-    const root = await render(
-      <>
-        <EditControls pageKey={KEY} title="Atrial fibrillation" />
-        <EditRegion pageKey={KEY} kept={{ before: "below", node: <aside data-testid="meds">meds panel</aside> }}>
-          <p data-testid="published">published body</p>
-        </EditRegion>
-      </>,
-    );
-    const meds = (): HTMLElement[] => [...root.querySelectorAll<HTMLElement>('[data-testid="meds"]')];
-    expect(meds()).toHaveLength(1);
-    expect(published(root).compareDocumentPosition(meds()[0] as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(meds()[0]?.closest("[hidden]")).toBeNull();
-
-    // While the unit loads it stays in view, once.
-    act(() => {
-      q(root, "edit-page")?.click();
-    });
-    expect(q(root, "edit-area")?.textContent).toContain("Opening for editing…");
-    expect(meds()).toHaveLength(1);
-    expect(meds()[0]?.closest('[data-ref="edit-area"]')).not.toBeNull();
-
-    await until(() => root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]').length === 2, "both editors");
-    const [rows, below] = [...root.querySelectorAll('[data-ref="edit-area"] [contenteditable="true"]')];
-    if (!rows || !below) throw new Error("no rows and below editors");
-    const area = below.closest(".below-edit");
-    if (!area) throw new Error("the below editor is outside its area");
-    expect(meds()).toHaveLength(1);
-    const shown = meds()[0] as HTMLElement;
-    expect(shown.closest("[hidden]")).toBeNull();
-    expect(rows.compareDocumentPosition(shown) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(shown.compareDocumentPosition(area) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(area.querySelector(".below-h")?.textContent).toBe("Additional info");
-
-    await click(q(root, "edit-done"));
-    await until(() => getEditStore().edit === null && q(root, "edit-area") === null, "edit mode to close");
-    expect(meds()).toHaveLength(1);
-    expect(meds()[0]?.closest("[hidden]")).toBeNull();
+    const root = await render(page());
+    const area = await openEdit(root);
+    const panel = await until(() => area.querySelector<HTMLElement>(`section.meds-edit[aria-label="${MEDS_HEADING}"]`), "the meds panel");
+    const [rows] = [...area.querySelectorAll('[contenteditable="true"]')];
+    const below = area.querySelector(".below-edit");
+    if (!rows || !below) throw new Error("no rows editor and below area");
+    expect(rows.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(panel.compareDocumentPosition(below) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(q(panel, "meds-add")?.textContent).toBe("Add a card");
   });
 
   it("with no changes the toolbar says so and disables Save; Done closes edit mode", async () => {
@@ -238,6 +224,110 @@ describe("EditControls and EditRegion", () => {
     await until(() => getEditStore().edit === null && q(root, "edit-area") === null, "edit mode to close");
     expect(published(root).closest("[hidden]")).toBeNull();
     expect(q(root, "edit-page")).not.toBeNull();
+  });
+
+  describe("the meds panel's buttons (AF R101 shows CCBs C1; the page also has Nitrates C2 and Beta Blockers C3)", () => {
+    const MEDS_FILE = `content/guides/fm/cardiovascular/meds/${R(101)}.json`;
+    const card = (panel: ParentNode, id: string): HTMLElement | null => panel.querySelector<HTMLElement>(`section.phc[data-anchor="meds-${id}"]`);
+    const shownCards = (panel: ParentNode): string[] => [...panel.querySelectorAll<HTMLElement>("section.phc")].map((s) => s.dataset.anchor ?? "");
+    const count = (panel: ParentNode): string | null | undefined => panel.querySelector(".meds-hd .n")?.textContent;
+    const dirtyState = (root: ParentNode): string | null | undefined => q(root, "edit-dirty-state")?.textContent;
+    const editorText = (el: ParentNode): string => [...el.querySelectorAll('[contenteditable="true"]')].map((e) => e.textContent).join("\n");
+    async function openPanel(): Promise<{ root: HTMLElement; panel: HTMLElement }> {
+      asOwner(true);
+      const root = await render(page());
+      const area = await openEdit(root);
+      const panel = await until(() => area.querySelector<HTMLElement>(`section.meds-edit[aria-label="${MEDS_HEADING}"]`), "the meds panel");
+      return { root, panel };
+    }
+    function type(input: HTMLInputElement, value: string): void {
+      act(() => {
+        Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set?.call(input, value);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      });
+    }
+
+    it("Remove from this condition moves a card to the Removed list; Put back returns it and the edit is clean again", async () => {
+      const { root, panel } = await openPanel();
+      expect(shownCards(panel)).toEqual([`meds-${C(1)}`]);
+      expect(q(panel, "meds-removed")).toBeNull();
+
+      await click(q(need(card(panel, C(1))), "meds-remove"));
+      await until(() => card(panel, C(1)) === null, "the CCB card off the panel");
+      expect(count(panel)).toBe("0");
+      const removed = need(q(panel, "meds-removed"));
+      expect(removed.textContent).toContain(REMOVED_HEADING);
+      expect([...removed.querySelectorAll("li")].map((li) => li.textContent)).toEqual([`Calcium Channel Blockers ${PUT_BACK}`]);
+      expect(dirtyState(root)).not.toBe("No changes yet");
+
+      await click(q(removed, "meds-put-back"));
+      await until(() => card(panel, C(1)), "the CCB card back");
+      expect(q(panel, "meds-removed")).toBeNull();
+      expect(count(panel)).toBe("1");
+      expect(dirtyState(root)).toBe("No changes yet");
+    });
+
+    it("Add a card finds a card the panel doesn't show by her words, adds it with editors, and Remove takes it off again", async () => {
+      const { root, panel } = await openPanel();
+      await click(q(panel, "meds-add"));
+      const open = need(q(panel, "meds-add-open"));
+      const picks = (): string[] => [...open.querySelectorAll('[data-ref="meds-add-pick"]')].map((b) => b.textContent ?? "");
+      // The card already on the panel is not offered.
+      expect(picks()).toEqual(expect.arrayContaining(["Beta Blockers", "Nitrates"]));
+      expect(picks()).not.toContain("Calcium Channel Blockers");
+      type(need(q(open, "meds-add-find")) as HTMLInputElement, "nitr");
+      expect(picks()).toEqual(["Nitrates"]);
+
+      await click(q(open, "meds-add-pick"));
+      const added = await until(() => card(panel, C(2)), "the Nitrates card");
+      expect(shownCards(panel)).toEqual([`meds-${C(1)}`, `meds-${C(2)}`]);
+      expect(q(panel, "meds-add-open")).toBeNull();
+      expect(q(panel, "meds-add")?.textContent).toBe(ADD_CARD);
+      expect(added.querySelectorAll('[contenteditable="true"]').length).toBeGreaterThan(0);
+      expect(dirtyState(root)).not.toBe("No changes yet");
+
+      // A card she added goes away on Remove; it is not one to put back.
+      await click(q(added, "meds-remove"));
+      await until(() => card(panel, C(2)) === null, "the Nitrates card off");
+      expect(q(panel, "meds-removed")).toBeNull();
+      expect(dirtyState(root)).toBe("No changes yet");
+    });
+
+    it("with her stored version: its label and text, Use the original and Use my version; a card this page has no notes of shows as added later", async () => {
+      const mine = "My CCB note for AF";
+      const stored: MedsFile = {
+        v: 1,
+        add: [C(9)],
+        remove: [],
+        own: [{ target: C(1), pieces: [{ kind: "notes", basePt: 9, title: null, file: "Cardio med list", doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: mine }] }] } as DocJSON }] }],
+      };
+      w.fake.commitFiles({ [MEDS_FILE]: serializeFile(MEDS_FILE, stored) });
+      const { root, panel } = await openPanel();
+      const ccb = need(card(panel, C(1)));
+      expect(ccb.querySelector(".phn-k.own-only")?.textContent).toBe(OWN_VERSION);
+      expect(editorText(ccb)).toBe(mine);
+      expect(q(ccb, "meds-mine")).toBeNull();
+
+      await click(q(ccb, "meds-original"));
+      await until(() => !editorText(ccb).includes(mine), "the card's own text in the editors");
+      expect(editorText(ccb)).not.toBe("");
+      expect(ccb.querySelector(".phn-k.own-only")).toBeNull();
+      expect(q(ccb, "meds-original")).toBeNull();
+      expect(dirtyState(root)).not.toBe("No changes yet");
+
+      await click(q(ccb, "meds-mine"));
+      await until(() => editorText(ccb) === mine, "her version back");
+      expect(ccb.querySelector(".phn-k.own-only")?.textContent).toBe(OWN_VERSION);
+      expect(dirtyState(root)).toBe("No changes yet");
+
+      const later = need(q(panel, "meds-later"));
+      expect(later.textContent).toContain(C(9));
+      expect(later.textContent).toContain(ADDED_LATER);
+      expect(count(panel)).toBe("2");
+      await click(q(later, "meds-remove"));
+      await until(() => q(panel, "meds-later") === null, "the added-later card off");
+      expect(count(panel)).toBe("1");
+    });
   });
 
   it("a system page shows its drug table as a stub, not an editor", async () => {
@@ -509,7 +599,7 @@ describe("her unsaved changes when she stops being the owner while the edit is o
     });
     await until(() => editorIn(root), "the editor");
     const unit = edit().unit;
-    const slots = unit?.parts.flatMap((p) => (p.kind === "stub" || p.kind === "gap" ? [] : [p.slot.id])) ?? [];
+    const slots = unit?.parts.flatMap((p) => (p.kind === "stub" || p.kind === "gap" ? [] : p.kind === "meds" ? shownMedsSlots(p, fileChoice(p)).map((s) => s.id) : [p.slot.id])) ?? [];
     act(() => {
       for (const slot of slots) {
         const view = mountedEditor(slot);

@@ -2,14 +2,17 @@
 // GitHub fake: what each page key edits, and exactly which files a save writes.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { readContent, writeContent } from "../../lib/content/fs.ts";
-import { serializeFile, type CardsFile, type DocJSON, type GapFile, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
+import { serializeFile, type CardsFile, type DocJSON, type GapFile, type MedsFile, type MedsPiece, type StructureFile, type BlockFile } from "../../lib/content/index.ts";
+import { entryPieces } from "../../lib/derive/panel.ts";
 import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { checkMembers, deriveTopics } from "../../lib/derive/topics.ts";
 import { B, C, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/build/test-fixture.ts";
 import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
-import { buildSave, gapLook, loadUnit, localDate, sameLook, UnitError, type EditUnit, type Part } from "./units.ts";
+import {
+  buildSave, fileChoice, gapLook, loadUnit, localDate, sameLook, shownEntries, shownMedsSlots, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
+} from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
 const CV_STRUCTURE = `${CV}/structure.json`;
@@ -82,10 +85,13 @@ const changeOf = (build: ReturnType<typeof buildSave>, path: string): string | u
 };
 
 describe("loading a page key", () => {
-  it("topic: one rows editor with the topic's rows and its heading, then its empty below area; the block and structure.json are its files", async () => {
+  it("topic: one rows editor with the topic's rows and its heading, then its meds panel, then its empty below area; the block, structure.json and its meds and below files are its files", async () => {
     const unit = await unitAt(`topic:fm:${R(101)}`);
     const part = only(unit, "rows");
-    expect(unit.parts.map((p) => p.kind)).toEqual(["rows", "below"]);
+    expect(unit.parts.map((p) => p.kind)).toEqual(["rows", "meds", "below"]);
+    const meds = only(unit, "meds");
+    expect(meds.file).toBeNull();
+    expect(meds.path).toBe(`${CV}/meds/${R(101)}.json`);
     const below = only(unit, "below");
     expect(below.block).toBeNull();
     expect(below.path).toBe(`${CV}/below/${R(101)}.json`);
@@ -93,7 +99,7 @@ describe("loading a page key", () => {
     expect(rowIds(part.slot.doc)).toEqual([R(100), R(101), R(102)]);
     expect(part.slot.basePt).toBe(10);
     expect(part.slot.pageContentPt).toBe(792 - 36 - 36);
-    expect(unit.scope).toEqual({ files: [blockPath(10), CV_STRUCTURE, below.path].sort(), dirs: [] });
+    expect(unit.scope).toEqual({ files: [blockPath(10), CV_STRUCTURE, meds.path, below.path].sort(), dirs: [] });
     expect(unit.ids).toEqual([R(100), R(101), R(102)]);
     expect(unit.snapshot.commit).toBe(w.fake.head());
   });
@@ -103,6 +109,7 @@ describe("loading a page key", () => {
     expect(unit.parts.map((p) => (p.kind === "rows" ? [p.block.id, p.shown] : p.kind))).toEqual([
       [B(10), [R(103), R(104)]],
       [B(13), [R(130)]],
+      "meds",
       "below",
     ]);
     const cont = only(unit, "rows", 1);
@@ -125,7 +132,7 @@ describe("loading a page key", () => {
 
   it("system: whole tables as rows editors, prose as blocks, and the drug table as its stub", async () => {
     const unit = await unitAt("system:fm:cardiovascular");
-    expect(unit.parts.map((p) => [p.kind, p.kind === "stub" ? p.block : p.kind === "gap" ? p.gap.id : p.kind === "below" ? p.topic : p.block.id])).toEqual([
+    expect(unit.parts.map((p) => [p.kind, p.kind === "stub" ? p.block : p.kind === "gap" ? p.gap.id : p.kind === "below" || p.kind === "meds" ? p.topic : p.block.id])).toEqual([
       ["rows", B(10)], ["block", B(11)], ["stub", B(12)], ["rows", B(13)], ["block", B(14)],
     ]);
     const stub = only(unit, "stub");
@@ -667,6 +674,186 @@ describe("a topic's below area", () => {
     expect(build.topicMoved?.topic).toBe(R(105));
     expect(json<BlockFile>(changeOf(build, belowPath(R(105))))).toEqual(saved);
     expect(build.changes).toContainEqual({ path: belowPath(R(101)), sha: null });
+  });
+});
+
+describe("a topic's meds panel", () => {
+  // In the fixture, Stable angina R104's panel is Nitrates C2 (her guide rows, then her notes) and the
+  // card-less Ranolazine row R124; AF R101's is CCBs C1.
+  const medsPath = (topic: string): string => `${CV}/meds/${topic}.json`;
+  const prose = (text: string): DocJSON => ({ type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text }] }] }) as DocJSON;
+  const notes = (text: string): MedsPiece => ({ kind: "notes", basePt: 9, title: null, file: "Cardio med list", doc: prose(text) });
+  const store = (topic: string, file: MedsFile): void => {
+    w.fake.commitFiles({ [medsPath(topic)]: serializeFile(medsPath(topic), file) });
+  };
+  const choose = (part: MedsPart, c: Partial<MedsChoice>): Map<string, MedsChoice> => new Map([[part.topic, { ...fileChoice(part), ...c }]]);
+  const entry = (part: MedsPart, target: string) => {
+    const e = part.entries.find((x) => x.med.target === target);
+    if (!e) throw new Error(`no entry ${target}`);
+    return e;
+  };
+  const savedMeds = (build: ReturnType<typeof buildSave>, topic = R(104)): MedsFile => json<MedsFile>(changeOf(build, medsPath(topic)));
+  const texts = (pieces: readonly MedsPiece[]): string[] => pieces.map((p) => JSON.stringify(p.doc));
+
+  it("opens with the published panel's entries, each card's editors seeded as the page shows it, then the page's other cards", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const part = only(unit, "meds");
+    expect(part.file).toBeNull();
+    expect(part.entries.filter((e) => e.derived).map((e) => e.med.target)).toEqual([C(2), R(124)]);
+    expect(part.entries.filter((e) => !e.derived).map((e) => e.med.target)).toEqual([C(1), C(3)]);
+    expect(shownEntries(part, fileChoice(part)).map((e) => e.med.target)).toEqual([C(2), R(124)]);
+    const sys = fx.published.get("g/fm/s/cardiovascular.json") as SystemJson;
+    const topic = sys.topics.find((t) => t.id === R(104));
+    const nitrates = entry(part, C(2));
+    if (!topic) throw new Error("no topic");
+    expect(nitrates.card.map((s) => ({ ...s.piece, part: expect.anything() }))).toEqual(entryPieces(sys, topic, nitrates.med, part.entries[0]?.card[0]?.basePt ?? 0).map((p) => ({ ...p, part: expect.anything() })));
+    expect(nitrates.card.map((s) => s.id)).toEqual(nitrates.card.map((_, i) => `${R(104)}:meds:${C(2)}:o${i}`));
+    expect(nitrates.card[0]?.piece).toMatchObject({ kind: "rows", file: null });
+    expect(nitrates.card.length).toBeGreaterThan(1);
+    for (const s of nitrates.card) expect(s.piece).not.toHaveProperty("part");
+    expect(nitrates.own).toBeNull();
+    // Every class card she can add, by title; none shown inside another.
+    expect(part.catalog.map((c) => c.id)).toEqual(expect.arrayContaining([C(1), C(2), C(3)]));
+    expect(part.catalog.map((c) => c.title)).toEqual([...part.catalog.map((c) => c.title)].sort((a, b) => a.localeCompare(b)));
+    expect(unit.scope.files).toContain(medsPath(R(104)));
+  });
+
+  it("an untouched panel, or her choices put back as they were, writes nothing", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const part = only(unit, "meds");
+    expect(buildSave(unit, new Map(), TODAY).changes).toEqual([]);
+    expect(buildSave(unit, new Map(), TODAY, { meds: choose(part, {}) }).changes).toEqual([]);
+  });
+
+  it("editing a card's text makes her version for this topic: every piece of the card, the edited one changed", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const part = only(unit, "meds");
+    const card = entry(part, C(2)).card;
+    const notesSlot = card[1];
+    if (!notesSlot) throw new Error("no notes editor");
+    const build = buildSave(unit, new Map([[notesSlot.id, prose("my nitrates for stable angina")]]), TODAY);
+    expect(build.changes.map((c) => c.path)).toEqual([medsPath(R(104))]);
+    expect(build.changed).toEqual([R(104)]);
+    const saved = savedMeds(build);
+    expect(saved).toMatchObject({ v: 1, add: [], remove: [] });
+    expect(saved.own.map((o) => o.target)).toEqual([C(2)]);
+    const pieces = saved.own[0]?.pieces ?? [];
+    expect(pieces.map((p) => [p.kind, p.basePt, p.title, p.file])).toEqual(card.map((s) => [s.piece.kind, s.piece.basePt, s.piece.title, s.piece.file]));
+    expect(JSON.stringify(pieces[1]?.doc)).toContain("my nitrates for stable angina");
+    expect(texts(pieces.filter((_, i) => i !== 1))).toEqual(texts(card.filter((_, i) => i !== 1).map((s) => s.piece)));
+    for (const p of pieces) expect(p).not.toHaveProperty("part");
+  });
+
+  it("taking an entry off and adding a card save her choices", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const part = only(unit, "meds");
+    const build = buildSave(unit, new Map(), TODAY, { meds: choose(part, { remove: [R(124)], add: [C(3)] }) });
+    expect(savedMeds(build)).toEqual({ v: 1, add: [C(3)], remove: [R(124)], own: [] });
+    expect(build.changed).toEqual([R(104)]);
+  });
+
+  describe("with her version stored", () => {
+    const pieces = [notes("her stored nitrates")];
+    beforeEach(() => {
+      store(R(104), { v: 1, add: [], remove: [R(124)], own: [{ target: C(2), pieces }, { target: R(999), pieces: [notes("a row gone from her guide")] }] });
+    });
+
+    it("opens with her version's editors in place of the card's, and the entry she took off hidden", async () => {
+      const part = only(await unitAt(`topic:fm:${R(104)}`), "meds");
+      const nitrates = entry(part, C(2));
+      expect(nitrates.own?.map((s) => s.id)).toEqual([`${R(104)}:meds:${C(2)}:0`]);
+      expect(shownMedsSlots(part, fileChoice(part)).map((s) => s.id)).toEqual([`${R(104)}:meds:${C(2)}:0`]);
+      expect(shownMedsSlots(part, { ...fileChoice(part), original: [C(2)] }).map((s) => s.id)).toEqual(nitrates.card.map((s) => s.id));
+    });
+
+    it("an edit of her version rewrites it in place, keeping versions of entries the panel lacks", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const slot = entry(only(unit, "meds"), C(2)).own?.[0];
+      if (!slot) throw new Error("no own editor");
+      const saved = savedMeds(buildSave(unit, new Map([[slot.id, prose("edited again")]]), TODAY));
+      expect(saved.remove).toEqual([R(124)]);
+      expect(saved.own.map((o) => [o.target, o.pieces.map((p) => JSON.stringify(p.doc).includes("edited again"))])).toEqual([[C(2), [true]], [R(999), [false]]]);
+    });
+
+    it("Use the original drops her version; an edit of the original then makes a new one", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const original = buildSave(unit, new Map(), TODAY, { meds: choose(part, { original: [C(2)] }) });
+      expect(savedMeds(original).own.map((o) => o.target)).toEqual([R(999)]);
+      // Her version's editor still holding a change does not bring it back.
+      const ownSlot = entry(part, C(2)).own?.[0];
+      const cardSlot = entry(part, C(2)).card[0];
+      if (!ownSlot || !cardSlot) throw new Error("no editors");
+      expect(savedMeds(buildSave(unit, new Map([[ownSlot.id, prose("x")]]), TODAY, { meds: choose(part, { original: [C(2)] }) })).own.map((o) => o.target)).toEqual([R(999)]);
+      const fresh = savedMeds(buildSave(unit, new Map([[cardSlot.id, cardSlot.doc]]), TODAY, { meds: choose(part, { original: [C(2)] }) }));
+      expect(fresh.own.find((o) => o.target === C(2))?.pieces.length).toBe(entry(part, C(2)).card.length);
+    });
+
+    it("taking the edited card off keeps her version for Put back", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const saved = savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { remove: [R(124), C(2)] }) }));
+      expect(saved.remove).toEqual([R(124), C(2)]);
+      const stored = part.file?.own.find((o) => o.target === C(2))?.pieces ?? [];
+      expect(JSON.stringify(stored)).toContain("her stored nitrates");
+      expect(texts(saved.own.find((o) => o.target === C(2))?.pieces ?? [])).toEqual(texts(stored));
+    });
+
+    it("with nothing left of hers the file is deleted", async () => {
+      store(R(104), { v: 1, add: [], remove: [R(124)], own: [{ target: C(2), pieces }] });
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const build = buildSave(unit, new Map(), TODAY, { meds: choose(only(unit, "meds"), { remove: [], original: [C(2)] }) });
+      expect(build.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+      expect(build.files.get(medsPath(R(104)))).toBeNull();
+      expect(build.changed).toEqual([R(104)]);
+    });
+
+    it("a restore writes the version's panel, or deletes hers when the version had none", async () => {
+      const version = await unitAt(`topic:fm:${R(104)}`);
+      store(R(104), { v: 1, add: [C(3)], remove: [], own: [] });
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { restore: version }))).toEqual(only(version, "meds").file);
+      w.fake.commitFiles({ [medsPath(R(104))]: null });
+      const none = await unitAt(`topic:fm:${R(104)}`);
+      store(R(104), { v: 1, add: [C(3)], remove: [], own: [] });
+      const restored = buildSave(await unitAt(`topic:fm:${R(104)}`), new Map(), TODAY, { restore: none });
+      expect(restored.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+    });
+  });
+
+  it("a card she no longer adds loses her version of it", async () => {
+    store(R(104), { v: 1, add: [C(3)], remove: [], own: [{ target: C(3), pieces: [notes("my beta blockers")] }] });
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const build = buildSave(unit, new Map(), TODAY, { meds: choose(only(unit, "meds"), { add: [] }) });
+    expect(build.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+  });
+
+  it("her version of a card the panel no longer works out shows as one she added, and a save of the topic's rows keeps it", async () => {
+    // CCBs C1 is not on Stable angina's worked-out panel and not in her adds: only her version brings it.
+    store(R(104), { v: 1, add: [], remove: [], own: [{ target: C(1), pieces: [notes("my CCBs for angina")] }] });
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const part = only(unit, "meds");
+    expect(shownEntries(part, fileChoice(part)).map((e) => e.med.target)).toEqual([C(2), R(124), C(1)]);
+    expect(shownMedsSlots(part, fileChoice(part)).map((s) => s.id)).toContain(`${R(104)}:meds:${C(1)}:0`);
+    const rows = only(unit, "rows");
+    const build = buildSave(unit, new Map([[rows.slot.id, setCell(rows.slot.doc, R(104), 1, "edited row")]]), TODAY);
+    expect(build.changes.length).toBeGreaterThan(0);
+    expect(build.changes.map((c) => c.path)).not.toContain(medsPath(R(104)));
+    // Remove from this condition takes it off like any card she added, and her version with it.
+    const off = buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [] }) });
+    expect(off.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+  });
+
+  it("follows its topic when a save gives the topic a new first row", async () => {
+    const file: MedsFile = { v: 1, add: [C(3)], remove: [], own: [] };
+    store(R(101), file);
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    const build = buildSave(unit, new Map([[part.slot.id, addRow(dropRow(part.slot.doc, R(101)), R(100), R(105), ["", "before the rest", ""])]]), TODAY);
+    expect(build.topicMoved?.topic).toBe(R(105));
+    expect(savedMeds(build, R(105))).toEqual(file);
+    expect(build.changes).toContainEqual({ path: medsPath(R(101)), sha: null });
+    expect(build.changed).toContain(R(105));
   });
 });
 

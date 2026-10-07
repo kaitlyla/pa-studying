@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, MedsPiece, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -258,6 +258,16 @@ export interface PubMedsPart {
   target: string;
 }
 
+/** Her own meds panel for a topic, as published (content MedsFile). */
+export interface PubMedsEdit {
+  /** Targets of the entries she took off. */
+  remove: string[];
+  /** The cards she added that the panel does not already show, as entries, in her order. */
+  add: PubMedsClass[];
+  /** Target → what the entry shows instead of its card's rows and notes, for the entries she edited that the panel shows. */
+  own: Record<string, MedsPiece[]>;
+}
+
 export interface PubTopic {
   id: string;
   title: string;
@@ -265,8 +275,10 @@ export interface PubTopic {
   condition: boolean;
   /** The topic's rows, each run preceded once by its heading row id. */
   rows: string[];
-  /** Meds panel cards (empty when there are none). */
+  /** Meds panel cards as worked out from her notes (empty when there are none), before her own panel (`medsEdit`). */
   meds: PubMedsCard[];
+  /** Her own meds panel for this topic (content MedsFile), or null when she has none; the panel shows lib/derive/panel.ts `panelEntries`. */
+  medsEdit: PubMedsEdit | null;
   /** Her notes and pictures below the topic (after its meds panel); null when she added none. */
   below: PubBlock | null;
 }

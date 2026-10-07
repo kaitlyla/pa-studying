@@ -3,8 +3,8 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { EditorView } from "prosemirror-view";
 import { createElement } from "react";
-import { parseTrailers, serializeFile, type BlockFile, type DocJSON, type GapFile } from "../../lib/content/index.ts";
-import { B, G, R } from "../../tools/build/test-fixture.ts";
+import { parseTrailers, serializeFile, type BlockFile, type DocJSON, type GapFile, type MedsFile } from "../../lib/content/index.ts";
+import { B, C, G, R } from "../../tools/build/test-fixture.ts";
 import { DATA_BASE, loadData } from "../data/load.ts";
 import { systemPath, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
 import { currentHash, guideViewHash, navigate, setNavigationGuard } from "../shell/route.ts";
@@ -15,11 +15,11 @@ import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import { overlayEntries, setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, copyChanges, currentLook, discardEdit, getEditStore, loadNewer, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
-  OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, setGapLook, startEdit,
+  confirmLeave, copyChanges, currentLook, currentMeds, discardEdit, getEditStore, loadNewer, mountedEditor, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
+  OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, setGapLook, setMeds, startEdit,
   viewChanged, type Draft,
 } from "./session.ts";
-import { gapLook } from "./units.ts";
+import { fileChoice, gapLook, shownMedsSlots, type MedsPart } from "./units.ts";
 import { addPictureFile, pictureSize, setPictureStoreForTests, stopLocalPictures } from "./pictures.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import { docLines } from "./editor/commands.ts";
@@ -69,7 +69,7 @@ function mountEditors(): void {
   const unit = edit().unit;
   if (!unit) throw new Error("the unit has not loaded");
   for (const p of unit.parts) {
-    const slots = p.kind === "stub" ? [] : p.kind === "gap" ? [p.doc, ...(p.differs ? [p.differs] : [])] : [p.slot];
+    const slots = p.kind === "stub" ? [] : p.kind === "gap" ? [p.doc, ...(p.differs ? [p.differs] : [])] : p.kind === "meds" ? shownMedsSlots(p, fileChoice(p)) : [p.slot];
     for (const slot of slots) {
       const view: EditorView = new EditorView(document.createElement("div"), {
         state: createEditorState(slot.doc),
@@ -430,6 +430,65 @@ describe("a gap box's look (a figure's size, Show as my notes)", () => {
     expect(edit().dirty).toBe(true);
     expect(await save()).toBe(true);
     expect((JSON.parse(w.fake.readFile(GAP) ?? "null") as GapFile).meta.asNotes).toBe(true);
+  });
+});
+
+describe("a topic's meds panel (her own panel for the condition)", () => {
+  // AF R101's panel is CCBs C1; the page's other cards include C3.
+  const MEDS = `content/guides/fm/cardiovascular/meds/${R(101)}.json`;
+  const medsOf = (): MedsPart => {
+    const p = edit().unit?.parts.find((x): x is MedsPart => x.kind === "meds");
+    if (!p) throw new Error("no meds part");
+    return p;
+  };
+  const stored = (): MedsFile | null => JSON.parse(w.fake.readFile(MEDS) ?? "null") as MedsFile | null;
+
+  it("a choice alone makes the edit dirty; putting it back makes it clean; Save writes it and keeps it for the page", async () => {
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    const part = medsOf();
+    setMeds(part, { ...currentMeds(part), remove: [C(1)] });
+    expect(edit().dirty).toBe(true);
+    expect(currentMeds(part).remove).toEqual([C(1)]);
+    setMeds(part, fileChoice(part));
+    expect(edit().dirty).toBe(false);
+    expect(edit().meds).toEqual({});
+
+    setMeds(part, { add: [C(3)], remove: [C(1)], original: [] });
+    expect(await save()).toBe(true);
+    expect(stored()).toEqual({ v: 1, add: [C(3)], remove: [C(1)], own: [] });
+    // Her saved file is in the overlay the page is patched from (overlay.test.ts: the patch shows it).
+    expect(overlayEntries().get(MEDS)?.json).toEqual(stored());
+  });
+
+  it("typing in a card under the condition saves her version of it there", async () => {
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    const slot = shownMedsSlots(medsOf(), fileChoice(medsOf())).at(-1);
+    const view = slot ? mountedEditor(slot.id) : undefined;
+    if (!slot || !view) throw new Error("no CCB editor");
+    view.dispatch(view.state.tr.insertText(" (mine)", view.state.doc.content.size - 1));
+    expect(edit().dirty).toBe(true);
+    expect(await save()).toBe(true);
+    expect(stored()?.own.map((o) => o.target)).toEqual([C(1)]);
+    expect(JSON.stringify(stored()?.own[0]?.pieces.at(-1)?.doc)).toContain("(mine)");
+  });
+
+  it("her choices survive the sign-in page load in the draft; only the shown editors wait for its docs", async () => {
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    setMeds(medsOf(), { add: [C(3)], remove: [], original: [] });
+    await saveDraft();
+    destroyEditors();
+    discardEdit();
+
+    expect(await restoreDraft(KEY)).toBe(true);
+    expect(currentMeds(medsOf()).add).toEqual([C(3)]);
+    expect(edit().dirty).toBe(true);
+    mountEditors();
+    await vi.waitFor(async () => expect(await drafts.entries()).toEqual([]));
+    expect(await save()).toBe(true);
+    expect(stored()).toEqual({ v: 1, add: [C(3)], remove: [], own: [] });
   });
 });
 

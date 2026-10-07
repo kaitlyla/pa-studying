@@ -1,7 +1,7 @@
 // Edit mode on a page (plan 50 §50.2–§50.4; UI guide-reader/edit-mode, save-problems): the Edit and
 // Versions buttons, the region that swaps the page body for ProseMirror editors seeded from Git, the
 // toolbar, and the save banners.
-import { Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import type { MarkType } from "prosemirror-model";
 import { NodeSelection, type Selection } from "prosemirror-state";
@@ -26,6 +26,7 @@ import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm } from "./dialogs.tsx";
+import { MedsFrame } from "./MedsEdit.tsx";
 import {
   copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
   setGapLook, startEdit, useEdit, viewChanged, type Banner,
@@ -242,6 +243,8 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
           {slotView(part.slot)}
         </section>
       );
+    case "meds":
+      return <MedsFrame part={part} slotView={slotView} editing={slotView === editorView} />;
     default:
       return slotView(part.slot);
   }
@@ -635,23 +638,12 @@ export function PageBanner({ pageKey }: { pageKey?: string }): ReactNode {
 
 // ---- the region and its buttons -------------------------------------------------------------------
 
-/**
- * Content that is not edited here but stays in view while editing (a topic's meds panel): shown after
- * the region's `children` when read, and among the editors before the first part of kind `before`
- * (after the last part when the unit has none), so it keeps its place in the page in both modes.
- */
-export interface Kept {
-  before: Part["kind"];
-  node: ReactNode;
-}
-
 /** Wraps one editable page body. Not editing: the page as published. Editing: toolbar, banners, editors. */
-export function EditRegion({ pageKey, children, kept }: { pageKey: string; title?: string; children?: ReactNode; kept?: Kept }): ReactNode {
+export function EditRegion({ pageKey, children }: { pageKey: string; title?: string; children?: ReactNode }): ReactNode {
   const { edit } = useEdit();
   const { owner } = useOwner();
   const editing = owner && edit !== null && edit.key === pageKey;
   const open = edit !== null;
-  const keptAt = editing && edit.unit && kept ? edit.unit.parts.findIndex((p) => p.kind === kept.before) : -1;
   useEffect(() => {
     // A draft kept before the sign-in round trip reopens edit mode on its page (50 §50.3).
     if (owner && !open) void restoreDraft(pageKey);
@@ -667,20 +659,13 @@ export function EditRegion({ pageKey, children, kept }: { pageKey: string; title
           {!edit.unit && !edit.error && <p className="edit-loading" role="status">Opening for editing…</p>}
           {edit.unit && (
             <div key={edit.generation}>
-              {edit.unit.parts.map((p, i) => (
-                <Fragment key={i}>
-                  {i === keptAt && kept?.node}
-                  <PartView part={p} />
-                </Fragment>
-              ))}
+              {edit.unit.parts.map((p, i) => <PartView key={i} part={p} />)}
             </div>
           )}
           {edit.unit && edit.unit.parts.length === 0 && <p className="edit-loading">This page has nothing to edit.</p>}
-          {keptAt === -1 && kept?.node}
         </div>
       )}
       <div hidden={editing}>{children}</div>
-      {!editing && kept?.node}
     </>
   );
 }

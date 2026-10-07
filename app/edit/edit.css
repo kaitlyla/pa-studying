@@ -2,6 +2,17 @@
 
 .btn.danger { color: #a3261d; border-color: #e0b4b0; }
 
+/* a topic's meds panel while editing */
+.meds-acts { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px; }
+.meds-later { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 6px 0; font-size: 13px; color: #4a5263; }
+.meds-removed { margin: 10px 0 4px; font-size: 13px; }
+.meds-removed ul { margin: 4px 0 0; padding-left: 18px; }
+.meds-sub { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #4a5263; }
+div.meds-add { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4px; }
+div.meds-add input { min-height: 36px; padding: 6px 10px; border: 1px solid #c3c9d4; border-radius: 6px; font: inherit; }
+div.meds-add ul { margin: 0; padding-left: 18px; }
+.btn.meds-add { margin: 10px 0 4px; }
+
 /* a topic's below area while editing */
 .below-edit { margin-top: 14px; padding-top: 8px; border-top: 1px dashed #c9ced8; }
 .below-edit .below-h { margin-bottom: 4px; font-size: 12px; color: #5b6472; }

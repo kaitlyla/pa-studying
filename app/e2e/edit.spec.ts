@@ -14,7 +14,7 @@ import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/e
 import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
 import type { TableAttrs } from "../../lib/schemaTypes.ts";
 import { schema } from "../../lib/schema.ts";
-import { commitMessage, inboxItemDir, partName, serializeFile } from "../../lib/content/index.ts";
+import { commitMessage, inboxItemDir, partName, serializeFile, topicMedsPath, type MedsFile } from "../../lib/content/index.ts";
 import {
   BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
   type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type RefTabJson,
@@ -2219,6 +2219,128 @@ test("an edit to a card's rows of her page table saves to her one stored table, 
 
   await openPage(page, fileHash(host.id, null));
   await expect(page.locator("main")).toContainText(`${marker}${cellText}`);
+});
+
+test.describe("her own meds panel for a condition", () => {
+  /** A topic whose meds panel shows a class card from a Pharm section of its own guide. */
+  const target = (): { t: TopicTarget; system: string; card: string; section: string; title: string } => {
+    const cards = new Map<string, { system: string; card: string; section: string; title: string }>();
+    const t = need(
+      findTopic((g, system, id) => {
+        const m = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.meds.find((e) => e.part === undefined && e.card !== null && e.system === system);
+        if (!m || m.part !== undefined || m.card === null) return false;
+        cards.set(id, { system, card: m.card, section: m.section, title: m.title });
+        return true;
+      }),
+      "topic whose meds panel shows a class card from its own system's Pharm section",
+    );
+    return { t, ...need(cards.get(t.id), "that card") };
+  };
+  // The owner-only label on her version (MedsPanel's OWN_VERSION; that module pulls in CSS, which Node can't load).
+  const OWN_VERSION = "Your version for this condition";
+  const panelCard = (page: Page, t: TopicTarget, card: string): Locator => page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="meds-${card}"]`);
+
+  test("an edit to a card under a condition saves her version for that condition only; Use the original drops it", async ({ page, context, baseURL }) => {
+    const { t, system, card, section } = target();
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"]`);
+    const paragraph = editing.locator('.edit-slot [contenteditable="true"] p').filter({ hasText: /\S{4}/ }).last();
+    const marker = newMarker();
+    await paragraph.click();
+    await page.keyboard.press("End");
+    await page.keyboard.type(marker);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await expect(paragraph).toContainText(marker);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    // One file changed: her panel for this condition. Her pharm notes are untouched.
+    const changed = changedFiles(fake);
+    expect([...changed.keys()]).toEqual([medsFile]);
+    const saved = JSON.parse(need(changed.get(medsFile), "her meds file")) as MedsFile;
+    expect(saved.add).toEqual([]);
+    expect(saved.remove).toEqual([]);
+    expect(saved.own.map((o) => o.target)).toEqual([card]);
+    expect(JSON.stringify(saved.own[0]?.pieces)).toContain(marker);
+
+    // The page shows her version, labeled for her, at once.
+    const shown = panelCard(page, t, card);
+    await shown.locator(".phc-h button").click();
+    await expect(shown).toContainText(marker);
+    await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
+    // The card in its Pharm section keeps her original notes.
+    await openPage(page, guideViewHash(t.g, { kind: "pharm", system, section, target: card }));
+    const original = page.locator(`.pharm-page section.phc[data-anchor="${card}"]`);
+    await expect(original.locator(".phc-b")).toBeVisible();
+    await expect(original).not.toContainText(marker);
+
+    // Use the original: her version goes, and so does the file.
+    await openPage(page, t.hash);
+    const again = await startEditing(page);
+    const mine = again.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"]`);
+    await expect(mine.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
+    await expect(mine).toContainText(marker);
+    await ref(mine, "meds-original").click();
+    await expect(mine).not.toContainText(marker);
+    await expect(ref(mine, "meds-mine")).toBeVisible();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    expect(fake.readFile(medsFile) ?? null).toBeNull();
+    const back = panelCard(page, t, card);
+    await back.locator(".phc-h button").click();
+    await expect(back.locator(".phc-b")).toBeVisible();
+    await expect(back).not.toContainText(marker);
+    await expect(back.locator(".phn-k.own-only")).toHaveCount(0);
+  });
+
+  test("Remove from this condition, Put back and Add a card choose which cards it shows", async ({ page, context, baseURL }) => {
+    const { t, system, card, title } = target();
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const panel = area.locator("section.meds-edit");
+    const entry = (id: string): Locator => panel.locator(`section.phc[data-anchor="meds-${id}"]`);
+
+    await ref(entry(card), "meds-remove").click();
+    await expect(entry(card)).toHaveCount(0);
+    const removed = ref(panel, "meds-removed");
+    await expect(removed).toContainText(title);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await ref(removed, "meds-put-back").click();
+    await expect(entry(card)).toHaveCount(1);
+    await expect(removed).toHaveCount(0);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("No changes yet");
+
+    // Take it off again, and add a card whose notes this page holds, found by its title.
+    const sys = readData<SystemJson>(systemPath(t.g, system));
+    const shownHere = new Set(sys.topics.find((x) => x.id === t.id)?.meds.map((m) => m.target));
+    const [addId, addCard] = need(Object.entries(sys.cards).find(([k]) => !shownHere.has(k)), "a card on this page that the panel doesn't show");
+    const added = addCard.title;
+    await ref(entry(card), "meds-remove").click();
+    await ref(panel, "meds-add").click();
+    await ref(panel, "meds-add-find").fill(added);
+    await ref(panel, "meds-add-list").getByRole("button", { name: added, exact: true }).first().click();
+    await expect(entry(addId).locator(".phc-t")).toHaveText(added);
+    await expect(entry(addId).locator('.edit-slot [contenteditable="true"]').first()).toBeVisible();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = JSON.parse(need(fake.readFile(medsFile), "her meds file")) as MedsFile;
+    expect(saved.remove).toEqual([card]);
+    expect(saved.add).toEqual([addId]);
+    expect(saved.own).toEqual([]);
+    expect([...changedFiles(fake).keys()]).toEqual([medsFile]);
+    // The page shows her choice at once: the card she took off is gone, the one she added is there.
+    const meds = page.locator(`section.tcard[data-topic="${t.id}"] .meds`);
+    await expect(meds.locator(`section.phc[data-anchor="meds-${card}"]`)).toHaveCount(0);
+    await expect(meds.locator(`section.phc[data-anchor="meds-${addId}"] .phc-t`)).toHaveText(added);
+  });
 });
 
 // ---- 10–14. documents --------------------------------------------------------------------------------------

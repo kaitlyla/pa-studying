@@ -4,7 +4,8 @@ import type { BlockFile } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import type { Content } from "./model.ts";
-import type { HostsJson } from "./published.ts";
+import { panelEntries } from "./panel.ts";
+import { HOSTS_PATH, SYSTEM_PATH_RE, type HostsJson, type SystemJson } from "./published.ts";
 import { nodeText, searchText } from "./text.ts";
 
 export interface Uncovered {
@@ -19,10 +20,13 @@ export interface Uncovered {
 const TEXTBLOCKS = new Set(["paragraph", "heading_line"]);
 const WORD = /[\p{L}\p{N}]+/gu;
 
-/** Every text block (paragraph or heading line, wherever it sits: cells, text boxes, drawings) with text, by owner. */
-function textBlocks(block: BlockFile<unknown>, hosts: HostsJson, out: Uncovered[]): void {
+/**
+ * Every text block (paragraph or heading line, wherever it sits: cells, text boxes, drawings) with
+ * text, by owner: the hosted row holding it, else `block.id`; always `block.id` when `byRow` is false.
+ */
+function textBlocks(block: Pick<BlockFile<unknown>, "id" | "doc">, hosts: HostsJson, out: Uncovered[], byRow = true): void {
   const walk = (n: PMNode, owner: string): void => {
-    const row = n.type === "table_row" && typeof n.attrs?.id === "string" ? n.attrs.id : null;
+    const row = byRow && n.type === "table_row" && typeof n.attrs?.id === "string" ? n.attrs.id : null;
     const here = row !== null && hosts[row] !== undefined ? row : owner;
     if (TEXTBLOCKS.has(n.type)) {
       const text = searchText(nodeText(n));
@@ -35,11 +39,13 @@ function textBlocks(block: BlockFile<unknown>, hosts: HostsJson, out: Uncovered[
 }
 
 /**
- * The text the site shows that is in no search unit's text. "Shown" is what the build hosts
- * (hosts.json: every displayed block and row) plus the pages of as-is files with extracted text;
- * removed and pending documents and unused pharm-notes blocks are not shown, so not checked.
+ * The text the site shows that is in no search unit's text. "Shown" is what the build (`files`, the
+ * published files) hosts (hosts.json: every displayed block and row), her versions of meds panel
+ * entries that the published panels show, and the pages of as-is files with extracted text; removed
+ * and pending documents and unused pharm-notes blocks are not shown, so not checked.
  */
-export function uncoveredText(content: Content, units: readonly SearchUnit[], hosts: HostsJson): Uncovered[] {
+export function uncoveredText(content: Content, units: readonly SearchUnit[], files: ReadonlyMap<string, unknown>): Uncovered[] {
+  const hosts = files.get(HOSTS_PATH) as HostsJson;
   const blocks: BlockFile<unknown>[] = [];
   for (const g of content.guides) {
     blocks.push(...g.preamble);
@@ -55,6 +61,17 @@ export function uncoveredText(content: Content, units: readonly SearchUnit[], ho
   for (const b of blocks) {
     if (hosts[b.id] === undefined) continue;
     textBlocks(b, hosts, shown);
+  }
+  // Her own version of a card under a condition shows on the condition's page (its topic id's host),
+  // copied guide rows included, so each piece the published panel shows is checked against that page.
+  for (const [path, value] of files) {
+    if (!SYSTEM_PATH_RE.test(path)) continue;
+    for (const t of (value as SystemJson).topics) {
+      if (hosts[t.id] === undefined) continue;
+      for (const e of panelEntries(t)) {
+        for (const p of e.own ?? []) textBlocks({ id: t.id, doc: p.doc }, hosts, shown, false);
+      }
+    }
   }
   for (const [id, d] of content.docs) {
     if (d.kind !== "file" || d.text === null || hosts[id] === undefined) continue;

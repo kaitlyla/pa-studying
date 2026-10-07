@@ -1,5 +1,6 @@
 // Published data (plan 40 §40.8) derived from the loaded content, with the content invariants of
 // 40 §40.1 and the search units of 60 §60.1. Pure and browser-safe; tools/build does the I/O.
+import { topicMedsPath } from "../content/files.ts";
 import { citeKey, slug } from "../content/ids.ts";
 import { listedHead, tableNode } from "../content/tables.ts";
 import { GENERAL_KEYS, type BlockFile, type BlockNote, type Flag, type GeneralKey, type GuideId, type OtherFile, type PlaceNote, type RefLink } from "../content/types.ts";
@@ -12,7 +13,7 @@ import {
 } from "./pharm.ts";
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
-  PubFlag, PubGap, PubLink, PubMedsPart, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
+  PubFlag, PubGap, PubLink, PubMedsCard, PubMedsClass, PubMedsEdit, PubMedsPart, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   WorkupJson,
 } from "./published.ts";
 import { pubFigures } from "./published.ts";
@@ -21,7 +22,8 @@ import {
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
-import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics } from "./topics.ts";
+import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics, type Topic } from "./topics.ts";
+import { panelEntries, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
@@ -815,7 +817,21 @@ export function publish(c: Content): PublishResult {
       (topicParts.get(topic.id) ?? [])
         .filter(({ part }) => !columnGone.has(part.id) && pubPartOf(part).blocks.length > 0)
         .map(({ part }) => ({ card: null, part: part.id, title: part.title, rows: [], section: null, system: null, target: part.id }));
-    const topics: PubTopic[] = publishedTopics(t, (topic) => [...medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home, sectionsOf), ...attached(topic)], s.data.below);
+    // Her own panel for a topic: a card she added shows as it would where the panel finds it.
+    const addedCard = (topic: Topic, id: string): PubMedsClass | null => {
+      const at = c.cards.cards.some((x) => x.id === id) ? home(id, relevantTo(topic)) : null;
+      return at ? { card: id, title: cardTitle(id), rows: [], section: at.section, system: at.system, target: id } : null;
+    };
+    const medsEdit = (topic: Topic, derived: PubMedsCard[]): PubMedsEdit | null => {
+      const file = s.data.meds.get(topic.id);
+      if (!file) return null;
+      const where = topicMedsPath(gid, sys, topic.id);
+      return publishedEdit(file, derived, (id) => addedCard(topic, id), (id) => dropped.push({ file: where, id }));
+    };
+    const topics: PubTopic[] = publishedTopics(t, (topic) => [...medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home, sectionsOf), ...attached(topic)], medsEdit, s.data.below);
+    for (const id of s.data.meds.keys()) {
+      if (!topics.some((x) => x.id === id)) dropped.push({ file: topicMedsPath(gid, sys, id), id });
+    }
     for (const topic of topics) publishedTopicIds.add(topic.id);
     usedBlocks(topics.flatMap((x) => (x.below ? [x.below] : [])));
 
@@ -865,7 +881,8 @@ export function publish(c: Content): PublishResult {
       }
     };
     for (const topic of topics) {
-      for (const m of topic.meds) {
+      // The cards she added, and every derived entry: one she removed stays published so she can put it back while editing.
+      for (const m of [...topic.meds, ...(topic.medsEdit?.add ?? [])]) {
         if (m.part !== undefined) useTopicPart(m.part);
         else if (m.card) useCard(m.card);
       }
@@ -934,6 +951,15 @@ export function publish(c: Content): PublishResult {
             tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
             at: topic.id, label: "notes", text: searchText(below ? `${topicText(t, topic)}\n${docText(below.doc)}` : topicText(t, topic)),
           });
+          // Her own version of a card under this condition is text of hers that only its page shows.
+          const pub = topics.find((x) => x.id === topic.id);
+          for (const e of pub ? panelEntries(pub) : []) {
+            if (!e.own) continue;
+            units.push({
+              tab, title: e.med.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
+              at: `meds-${e.med.target}`, label: "notes", text: searchText(e.own.map((p) => docText(p.doc)).join("\n")),
+            });
+          }
         } else if (info?.drug) {
           units.push({ tab, title: collapse(firstCell(r)), loc: pharmLoc(ix, gid, sys), route: hosts[r.id]?.route ?? "", at: r.id, label: "notes", text: searchText(r.cells.join("\n")) });
         } else if (info && (info.kind === "heading" || info.topic === null)) {

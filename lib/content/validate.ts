@@ -14,7 +14,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsFile, MedsPiece, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -460,6 +460,30 @@ export const validateCards: Validator = (v, ctx) => {
     const target = cards.find((x) => x.id === c.in);
     if (!target || target === c || target.in !== undefined) bad(ctx, `.cards[${i}].in`, "another card that is itself in no card", c.in);
   });
+};
+
+/** Her own meds panel for a topic: each target at most once in each list, never both added and removed, and something in it. */
+export const validateMeds: Validator = (v, ctx) => {
+  const target = id("c", "r", "p");
+  shapeOf<MedsFile>({
+    v: v1,
+    add: uniqueArr(id("c")),
+    remove: uniqueArr(target),
+    own: arr(shapeOf<MedsFile["own"][number]>({
+      target,
+      pieces: arr(shapeOf<MedsPiece>({ kind: oneOf("rows", "notes"), basePt: num, title: nullable(str), file: nullable(nonEmpty), doc: anyValue }, {})),
+    }, {})),
+  }, {})(v, "", ctx);
+  const m = v as MedsFile;
+  uniqueArr(str)(m.own.map((o) => o.target), ".own[].target", ctx);
+  m.add.forEach((c, i) => { if (m.remove.includes(c)) bad(ctx, `.add[${i}]`, "a card not also removed", c); });
+  if (m.add.length === 0 && m.remove.length === 0 && m.own.length === 0) bad(ctx, "", "an added, removed or edited entry", v);
+  m.own.forEach((o, i) => o.pieces.forEach((p, j) => {
+    const at = `.own[${i}].pieces[${j}].doc`;
+    if (!(p.basePt > 0)) bad(ctx, `.own[${i}].pieces[${j}].basePt`, "a size above 0", p.basePt);
+    if (p.kind === "rows" && p.file !== null) bad(ctx, `.own[${i}].pieces[${j}].file`, "null on guide rows", p.file);
+    checkDocShape(checkDoc(p.doc, at, ctx), p.kind === "rows" ? "table" : "gapdoc", at, ctx);
+  }));
 };
 
 /** A `for` list: at least one pharm section, none twice. */

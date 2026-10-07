@@ -1,9 +1,9 @@
 // The owner's local overlay (plan 50 §50.5): published data patched with her saved files until the
 // deployed site contains them, and dropped once it does.
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import type { BlockFile, DocJSON, GapFile, OtherFile, StructureFile, WordDocFile, AsIsFile } from "../../lib/content/index.ts";
+import type { BlockFile, DocJSON, GapFile, MedsFile, OtherFile, StructureFile, WordDocFile, AsIsFile } from "../../lib/content/index.ts";
 import type { DocJson, DocList, DocRef, OtherJson, PubBlock, PubGap, PubNote, PubOtherNote, RefTabJson, SystemJson } from "../../lib/derive/published.ts";
-import { B, D, G, R } from "../../tools/build/test-fixture.ts";
+import { B, C, D, G, R } from "../../tools/build/test-fixture.ts";
 import { loadData } from "../data/load.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import {
@@ -121,6 +121,24 @@ describe("patchPublished", () => {
 
     const removed = patchPublished(SYS, added, new Map([[path, null]]), structure) as SystemJson;
     expect(removed.topics.find((t) => t.id === R(101))?.below).toBeNull();
+  });
+
+  it("shows her saved meds panel on its topic (a card off, one added from the page, her version), and drops one the save deleted", () => {
+    const structure = fileJson<StructureFile>(`${CV}/structure.json`);
+    const path = `${CV}/meds/${R(101)}.json`;
+    const pieces = [{ kind: "notes" as const, basePt: 9, title: null, file: "Cardio med list", doc: para("my CCB notes") }];
+    const file: MedsFile = { v: 1, add: [C(3)], remove: [], own: [{ target: C(1), pieces }] };
+    const added = patchPublished(SYS, pub<SystemJson>(SYS), new Map([[path, file]]), structure) as SystemJson;
+    const af = added.topics.find((t) => t.id === R(101));
+    expect(af?.meds).toEqual(pub<SystemJson>(SYS).topics.find((t) => t.id === R(101))?.meds);
+    expect(af?.medsEdit).toEqual({ remove: [], add: [expect.objectContaining({ card: C(3), target: C(3) })], own: { [C(1)]: pieces } });
+    expect(added.topics.filter((t) => t.id !== R(101)).every((t) => t.medsEdit === null)).toBe(true);
+
+    const removed = patchPublished(SYS, added, new Map([[path, null]]), structure) as SystemJson;
+    expect(removed.topics.find((t) => t.id === R(101))?.medsEdit).toBeNull();
+    // A save of another file of the system keeps the published panel of hers.
+    const kept = patchPublished(SYS, added, new Map([[`${CV}/below/${R(104)}.json`, null]]), structure) as SystemJson;
+    expect(kept.topics.find((t) => t.id === R(101))?.medsEdit).toEqual(af?.medsEdit);
   });
 
   it("patches a saved gap block wherever it is shown, with its owner edits", () => {
