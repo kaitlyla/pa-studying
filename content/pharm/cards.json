@@ -4070,6 +4070,9 @@
    "for": [
     "asthma",
     "obstructive-pulmonary-diseases"
+   ],
+   "notDiseases": [
+    "exacerbation"
    ]
   },
   {
@@ -4101,6 +4104,9 @@
    "for": [
     "asthma",
     "obstructive-pulmonary-diseases"
+   ],
+   "notDiseases": [
+    "exacerbation"
    ]
   },
   {
@@ -4169,6 +4175,9 @@
    "for": [
     "asthma",
     "obstructive-pulmonary-diseases"
+   ],
+   "notDiseases": [
+    "exacerbation"
    ]
   },
   {
@@ -5580,6 +5589,86 @@
    "aliases": [],
    "home": {},
    "in": "c_5H2840NP00"
+  },
+  {
+   "id": "c_7ARFRXYEB9",
+   "file": "inhaler-combos",
+   "aliases": [],
+   "home": {},
+   "in": "c_1Y8MCFQ7S7",
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ]
+  },
+  {
+   "id": "c_0PDD7Q5DBT",
+   "file": "inhaler-combos",
+   "aliases": [
+    "ICS/LABA",
+    "ICS + LABA",
+    "Symbicort",
+    "Advair",
+    "Dulera"
+   ],
+   "home": {
+    "em": "pulmonary",
+    "fm": "pulmonary",
+    "im": "pulmonology",
+    "peds": "pulmonology",
+    "pance": "pulmonary"
+   },
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ],
+   "notDiseases": [
+    "exacerbation"
+   ]
+  },
+  {
+   "id": "c_V186SJYWVF",
+   "file": "inhaler-combos",
+   "aliases": [],
+   "home": {},
+   "in": "c_EK0ER25RKG",
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ]
+  },
+  {
+   "id": "c_R7ET6Z4Z8P",
+   "file": "inhaler-combos",
+   "aliases": [],
+   "home": {},
+   "in": "c_9P71DW56HK",
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ]
+  },
+  {
+   "id": "c_HCJZG08QRH",
+   "file": "inhaler-combos",
+   "aliases": [],
+   "home": {},
+   "in": "c_VFE09ZVEV6",
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ]
+  },
+  {
+   "id": "c_9XGMWW8H3Z",
+   "file": "inhaler-combos",
+   "aliases": [],
+   "home": {},
+   "in": "c_B616JSKCNF",
+   "for": [
+    "asthma",
+    "obstructive-pulmonary-diseases"
+   ]
   }
  ]
 }

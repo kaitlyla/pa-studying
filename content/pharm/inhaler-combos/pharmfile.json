@@ -1,0 +1,194 @@
+{
+ "v": 1,
+ "id": "inhaler-combos",
+ "fileName": "inhaler combos",
+ "basePt": 10,
+ "page": "d_1FK3AT4FGD",
+ "blocks": [
+  "b_RSFNZB940P",
+  "b_K56V502XFP",
+  "b_39Z1SDQV9N",
+  "b_0S70DQ7YWK",
+  "b_67CA6F3XA9",
+  "b_PP9PTS506Q",
+  "b_MFAB6963MT",
+  "b_24VDPATSR0",
+  "b_QDKYTAAW7G",
+  "b_E1B65R6HQF"
+ ],
+ "parts": [
+  {
+   "id": "p_NDS8460BNE",
+   "role": "overview",
+   "title": "Asthma and COPD Inhalers on SFHP Formulary",
+   "card": null,
+   "blocks": [
+    "b_RSFNZB940P",
+    "b_K56V502XFP",
+    "b_39Z1SDQV9N"
+   ]
+  },
+  {
+   "id": "p_CGVXE04Y87",
+   "role": "card",
+   "title": "Inhaled Corticosteroid (ICS)",
+   "card": "c_7ARFRXYEB9",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_0S70DQ7YWK"
+   ]
+  },
+  {
+   "id": "p_J31EHZ8ZCR",
+   "role": "card",
+   "title": "Long-Acting Bronchodilator (LABA) + Inhaler Corticosteroids (ICS)",
+   "card": "c_0PDD7Q5DBT",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_67CA6F3XA9"
+   ]
+  },
+  {
+   "id": "p_14B4JNA7WE",
+   "role": "card",
+   "title": "Short-Acting Bronchodilators (SABA)",
+   "card": "c_V186SJYWVF",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_PP9PTS506Q"
+   ]
+  },
+  {
+   "id": "p_TFWH487NB0",
+   "role": "card",
+   "title": "Long-Acting Bronchodilators (LABA)",
+   "card": "c_R7ET6Z4Z8P",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_MFAB6963MT"
+   ]
+  },
+  {
+   "id": "p_86AN5Y3KFT",
+   "role": "card",
+   "title": "Anticholinergics: Short-Acting (SAMA)",
+   "card": "c_HCJZG08QRH",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_24VDPATSR0"
+   ],
+   "rows": [
+    "r_S3ZHCEFBXF",
+    "r_2BGX9Z4BRV"
+   ]
+  },
+  {
+   "id": "p_S8WG82PVE5",
+   "role": "card",
+   "title": "Anticholinergics: Long-Acting (LAMA)",
+   "card": "c_9XGMWW8H3Z",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_24VDPATSR0"
+   ],
+   "rows": [
+    "r_S3ZHCEFBXF",
+    "r_28G29TMJ9F",
+    "r_PF7T03Q1YN"
+   ]
+  },
+  {
+   "id": "p_KAVFJ843E4",
+   "role": "card",
+   "title": "Bronchodilator + Anticholinergic: SABA/SAMA",
+   "card": "c_HCJZG08QRH",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_QDKYTAAW7G"
+   ],
+   "rows": [
+    "r_WVE6WXJ7HT",
+    "r_H6FVFSYRZ8"
+   ]
+  },
+  {
+   "id": "p_W00C2XGP37",
+   "role": "card",
+   "title": "Bronchodilator + Anticholinergic: LABA/LAMA",
+   "card": "c_9XGMWW8H3Z",
+   "diseases": [
+    "asthma",
+    "COPD",
+    "chronic obstructive pulmonary disease",
+    "chronic bronchitis",
+    "emphysema",
+    "bronchospasm"
+   ],
+   "blocks": [
+    "b_QDKYTAAW7G"
+   ],
+   "rows": [
+    "r_WVE6WXJ7HT",
+    "r_2E9KSN1SDH"
+   ]
+  },
+  {
+   "id": "p_Z8GY40BCTR",
+   "role": "lo",
+   "title": "For more information",
+   "card": null,
+   "blocks": [
+    "b_E1B65R6HQF"
+   ]
+  }
+ ]
+}
