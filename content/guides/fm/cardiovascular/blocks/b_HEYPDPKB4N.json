@@ -9,13 +9,14 @@
     "type": "table",
     "attrs": {
      "grid": [
-      72,
-      148.5,
-      117,
-      169.35,
-      123.15,
-      144
+      64.45,
+      166.4,
+      138.5,
+      123.6,
+      119.6,
+      161.45
      ],
+     "ownWidths": true,
      "indentPt": -27.25,
      "borders": {
       "top": {
@@ -4767,7 +4768,7 @@
               "type": "bold"
              }
             ],
-            "text": "Mitral Valve Prolapse (MVP)"
+            "text": "MVP"
            }
           ]
          },
@@ -4854,7 +4855,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•leaflets of the mitral valve bulge (prolapse) into the left atrium during systole"
+            "text": "•mitral valve leaflets bulge into Lt atrium in systole"
            }
           ]
          },
@@ -4890,14 +4891,14 @@
               }
              }
             ],
-            "text": "MVP MCC of MR in the US"
+            "text": "MVP = MCC of MR in the US"
            }
           ]
          },
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 9,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4954,7 +4955,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -4986,7 +4990,7 @@
               }
              }
             ],
-            "text": "Etiologies"
+            "text": "Eti"
            },
            {
             "type": "text",
@@ -5027,6 +5031,56 @@
              }
             ],
             "text": "myxomatous degeneration of the mitral valve "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "009193"
+              }
+             }
+            ],
+            "text": "- "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "gel like sugar complex build up  -connective tissue dz "
            }
           ]
          },
@@ -5097,7 +5151,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Most are asymptomatic "
+            "text": "Most are aSx"
            }
           ]
          },
@@ -5109,7 +5163,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 7
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -5184,7 +5241,7 @@
               }
              }
             ],
-            "text": "atypical chest pain"
+            "text": "atypical CP"
            }
           ]
          },
@@ -5277,7 +5334,7 @@
           "content": [
            {
             "type": "text",
-            "text": "May have narrow AP diameter, low body weight, hypotension, scoliosis, pectus excavatum"
+            "text": "Poss narrow AP diameter, ↓body weight, hypotension, scoliosis, pectus excavatum"
            }
           ]
          }
@@ -5329,7 +5386,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -5415,7 +5472,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -5485,7 +5542,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -5506,7 +5563,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -5594,7 +5651,7 @@
            },
            {
             "type": "text",
-            "text": ": posterior bulging leaflets w/ tissue redundancy "
+            "text": ": posterior bulging leaflets w tissue redundancy "
            }
           ]
          }
@@ -5718,19 +5775,7 @@
               }
              }
             ],
-            "text": "beta blockers"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
+            "text": "bb"
            }
           ]
          },
@@ -5774,28 +5819,11 @@
               }
              }
             ],
-            "text": "Repair/replacement "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
+            "text": "Repair/replacement if "
+           },
            {
             "type": "text",
-            "text": "•reserved for MVP w/ severe MR to prevent CHF"
+            "text": "severe MR to prevent CHF"
            }
           ]
          }
