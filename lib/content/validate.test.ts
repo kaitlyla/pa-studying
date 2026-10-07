@@ -352,10 +352,29 @@ describe("gap-fill (20 §20.9)", () => {
       widthPt,
     });
     expect(verdict(path, gap([], { figures: [fig(300)] }))).toBe("ok");
-    expect(verdict(path, gap([], { figures: [fig(468)] }))).toBe("ok");
-    for (const w of [0, -5, 468.5, "300", null]) {
-      expect(verdict(path, gap([], { figures: [fig(w)] })), String(w)).toMatch(/\.meta\.figures\[0\]\.widthPt: expected a width in pt above 0 and at most 468/);
+    // Wider than a printed page: gap blocks are not printed, so up to what the widest screen frame shows.
+    expect(verdict(path, gap([], { figures: [fig(1062)] }))).toBe("ok");
+    expect(verdict(path, gap([], { figures: [fig(1100)] }))).toBe("ok");
+    for (const w of [0, -5, 1101, "300", null]) {
+      expect(verdict(path, gap([], { figures: [fig(w)] })), String(w)).toMatch(/\.meta\.figures\[0\]\.widthPt: expected a width in pt above 0 and at most 1100/);
     }
+  });
+
+  it("accepts a squished or stretched image's height up to 2000 pt, only with a width", () => {
+    const fig = (size: Record<string, unknown>) => ({
+      asset: `${"0f".repeat(16)}.jpg`, width: 1200, height: 400, caption: "Atrial fibrillation",
+      credit: { author: "Jane Roe", license: "Public domain", licenseUrl: null, page: "https://commons.wikimedia.org/wiki/File:AF.jpg", changes: null },
+      evidence: { quote: "ECG showing atrial fibrillation", accessed: "2026-10-05" },
+      ...size,
+    });
+    expect(verdict(path, gap([], { figures: [fig({ widthPt: 300, heightPt: 400 })] }))).toBe("ok");
+    // Taller than a printed page: her tallest figures already show about 1740 pt tall.
+    expect(verdict(path, gap([], { figures: [fig({ widthPt: 300, heightPt: 1740 })] }))).toBe("ok");
+    expect(verdict(path, gap([], { figures: [fig({ widthPt: 300, heightPt: 2000 })] }))).toBe("ok");
+    for (const h of [0, -5, 2001, "300", null]) {
+      expect(verdict(path, gap([], { figures: [fig({ widthPt: 300, heightPt: h })] })), String(h)).toMatch(/\.meta\.figures\[0\]\.heightPt: expected a height in pt above 0 and at most 2000/);
+    }
+    expect(verdict(path, gap([], { figures: [fig({ heightPt: 300 })] }))).toMatch(/\.meta\.figures\[0\]\.heightPt: expected a height only together with a widthPt/);
   });
 
   it("accepts asNotes only as true (absent means the box stays labeled)", () => {

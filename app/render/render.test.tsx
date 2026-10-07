@@ -549,6 +549,14 @@ describe("labels for content not from her notes", () => {
     expect(imgs[1]?.style.width).toBe("");
   });
 
+  it("gap block: a squished or stretched image keeps its set proportions; one without a set height keeps the file's", async () => {
+    const c = await render(<GapBlock gap={gap({ figures: [{ ...strip, widthPt: 300, heightPt: 250 }, { ...strip, asset: `${"cd".repeat(16)}.png`, widthPt: 300 }] })} />);
+    const imgs = [...c.querySelectorAll<HTMLImageElement>(".gap-figs img")];
+    expect(imgs[0]?.style.width).toBe("27.2727em");
+    expect(imgs[0]?.style.aspectRatio).toBe("300 / 250");
+    expect(imgs[1]?.style.aspectRatio).toBe("");
+  });
+
   it("gap block thumbnails: a set width does not change the thumbnail size", async () => {
     const c = await render(<GapBlock gap={gap({ figures: [{ ...strip, widthPt: 300 }] })} thumbnails />);
     expect(c.querySelector<HTMLImageElement>(".gap-figs img")?.style.width).toBe("");

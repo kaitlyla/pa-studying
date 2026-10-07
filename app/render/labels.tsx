@@ -79,7 +79,8 @@ export interface FigurePicking {
 /**
  * A gap block's example images, each opening full size, with its caption and its credit line: author,
  * license, a link to the source's file page and any change made. The same wording for everyone.
- * Each is shown at its `widthPt` when it has one, else at its natural size, never wider than the column.
+ * Each is shown at its `widthPt` (and `heightPt`, when she squished or stretched it) when it has one,
+ * else at its natural size, never wider than the column.
  * `thumbnails`: shown small, side by side, each opening in the image viewer when clicked.
  * `picking` (edit mode): clicking a figure selects it instead of opening it.
  */
@@ -90,7 +91,10 @@ export function GapFigures({ figures, thumbnails = false, picking }: { figures: 
       {figures.map((f, i) => {
         const url = assetUrl(f.asset);
         const c = f.credit;
-        const sized = !thumbnails && f.widthPt !== undefined ? { width: em(f.widthPt, GAP_BASE_PT) } : undefined;
+        // A squished or stretched one keeps its set proportions when the column narrows it.
+        const sized = !thumbnails && f.widthPt !== undefined
+          ? { width: em(f.widthPt, GAP_BASE_PT), ...(f.heightPt !== undefined ? { aspectRatio: `${f.widthPt} / ${f.heightPt}` } : {}) }
+          : undefined;
         const img = <img src={url} width={f.width} height={f.height} alt={f.caption} loading="lazy" style={sized} />;
         const picked = picking?.picked === i;
         return (

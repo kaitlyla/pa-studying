@@ -41,11 +41,17 @@ function livePos(doc: PMNode, node: PMNode, oldPos: number): number | null {
   return found;
 }
 
-/** The owning document's facts the commands need. */
-export interface DocContext {
-  basePt: number;
-  /** Page content width in pt (page width minus side margins): the picture size limit outside tables. */
+/** The page area of a document: the picture size limits. */
+export interface ContentArea {
+  /** Page content width in pt (page width minus side margins): the picture width limit outside tables. */
   pageContentPt: number;
+  /** Page content height in pt (page height minus top and bottom margins): the picture height limit. */
+  pageContentHeightPt: number;
+}
+
+/** The owning document's facts the commands need. */
+export interface DocContext extends ContentArea {
+  basePt: number;
 }
 
 export const roundHalf = (x: number): number => Math.round(x * 2) / 2;
@@ -611,44 +617,172 @@ function selectedPicture(state: EditorState): NodeSelection | null {
   return null;
 }
 
-/** The width limit for a picture at `$pos`: its table cell's grid width, else the page content width. */
-function pictureLimit($pos: ResolvedPos, ctx: DocContext): number {
+/** A picture's size in pt. */
+export interface PictureSize {
+  widthPt: number;
+  heightPt: number;
+}
+
+/**
+ * The size limits for a picture at `$pos`: its table cell's grid width, else the page content width;
+ * and the page content height.
+ */
+function pictureLimit($pos: ResolvedPos, ctx: DocContext): PictureSize {
   const at = tableAt($pos);
-  if (!at) return ctx.pageContentPt;
+  if (!at) return { widthPt: ctx.pageContentPt, heightPt: ctx.pageContentHeightPt };
   const rect = at.map.findCell(at.cellRel);
   const grid = at.table.attrs.grid as number[];
   let w = 0;
   for (let c = rect.left; c < rect.right; c++) w += grid[c] ?? 0;
-  return w;
+  return { widthPt: w, heightPt: ctx.pageContentHeightPt };
 }
 
-/** The smallest width Picture − makes a picture, in pt. */
+/** The smallest width (and, squished, height) a picture is made, in pt. */
 const MIN_PICTURE_PT = 24;
 
+const upTo = (limitPt: number): number => Math.max(MIN_PICTURE_PT, limitPt);
+
 /**
- * One Picture − / + step for a picture `widthPt` wide: × 1/1.15 or × 1.15, clamped to
- * [24, `limitPt`] (the cell or page width; never below 24).
+ * `s` scaled by `factor`, its proportions kept, within the limits: its width at least 24 pt, and
+ * its width and height at most the `limit` ones (never below 24).
  */
-export function steppedPictureWidth(widthPt: number, dir: 1 | -1, limitPt: number): number {
-  const max = Math.max(MIN_PICTURE_PT, limitPt);
-  return Math.min(max, Math.max(MIN_PICTURE_PT, widthPt * (dir > 0 ? 1.15 : 1 / 1.15)));
+export function scaledPictureSize(s: PictureSize, factor: number, limit: PictureSize): PictureSize {
+  const most = Math.min(upTo(limit.widthPt) / s.widthPt, upTo(limit.heightPt) / s.heightPt);
+  const f = Math.min(most, Math.max(MIN_PICTURE_PT / s.widthPt, factor));
+  return { widthPt: s.widthPt * f, heightPt: s.heightPt * f };
 }
 
-/** Picture − / +: one steppedPictureWidth step within the cell or page width; height scaled alike. */
-export function resizePicture(dir: 1 | -1, ctx: DocContext): Command {
+/** One side of a squished or stretched picture: within [24, `limitPt`] (never below 24). */
+const clampSide = (pt: number, limitPt: number): number => Math.min(upTo(limitPt), Math.max(MIN_PICTURE_PT, pt));
+
+/**
+ * The size a picture of size `s` is seen at: `s` itself, or, when the column caps it (`shownPt`, its
+ * shown width, is narrower), `s` scaled down to that width, its proportions kept as the screen keeps them.
+ */
+export function seenPictureSize(s: PictureSize, shownPt: number | null): PictureSize {
+  if (shownPt === null || shownPt >= s.widthPt) return s;
+  return { widthPt: shownPt, heightPt: (s.heightPt * shownPt) / s.widthPt };
+}
+
+/**
+ * One Picture − / + step: both sides × 1/1.15 or × 1.15 (so a squished picture stays squished),
+ * within scaledPictureSize's limits. `shownPt`: the width it is shown at on screen; Picture − steps
+ * down from the size it is seen at (seenPictureSize), so every click visibly shrinks it.
+ */
+export function steppedPictureSize(s: PictureSize, dir: 1 | -1, limit: PictureSize, shownPt: number | null = null): PictureSize {
+  return dir > 0 ? scaledPictureSize(s, 1.15, limit) : scaledPictureSize(seenPictureSize(s, shownPt), 1 / 1.15, limit);
+}
+
+/** A picture's resize handle: a corner (scales it, proportions kept) or a side (that dimension only). */
+export type PictureHandle = "n" | "s" | "e" | "w" | "ne" | "nw" | "se" | "sw";
+export const PICTURE_HANDLES: readonly PictureHandle[] = ["nw", "n", "ne", "e", "se", "s", "sw", "w"];
+
+/**
+ * The size a drag of `handle` by (dxPt, dyPt) makes a picture that was `start`: a side handle changes
+ * that one dimension only (within [24, its limit]); a corner scales both by the relative change of
+ * whichever dimension changed more (scaledPictureSize), so pulling a corner straight in or out along
+ * one axis follows the pointer. Moving a handle away from the picture's middle makes it bigger.
+ */
+export function draggedPictureSize(start: PictureSize, handle: PictureHandle, dxPt: number, dyPt: number, limit: PictureSize): PictureSize {
+  const sx = handle.includes("e") ? 1 : handle.includes("w") ? -1 : 0;
+  const sy = handle.includes("s") ? 1 : handle.includes("n") ? -1 : 0;
+  const w = start.widthPt + sx * dxPt;
+  const h = start.heightPt + sy * dyPt;
+  if (sx !== 0 && sy !== 0) {
+    const rw = w / start.widthPt;
+    const rh = h / start.heightPt;
+    return scaledPictureSize(start, Math.abs(rw - 1) >= Math.abs(rh - 1) ? rw : rh, limit);
+  }
+  if (sx !== 0) return { widthPt: clampSide(w, limit.widthPt), heightPt: start.heightPt };
+  return { widthPt: start.widthPt, heightPt: clampSide(h, limit.heightPt) };
+}
+
+/** How a picture is turned on screen (imageTransform: rotated, then flipped). */
+export interface PictureTurn {
+  rot?: number;
+  flipH?: boolean;
+  flipV?: boolean;
+}
+
+/**
+ * A (dx, dy) seen on screen, in the picture's own unturned frame: the screen rotates it by `rot`
+ * clockwise after flipping it, so this flips the turned-back vector.
+ */
+function unturned(dx: number, dy: number, t: PictureTurn): [number, number] {
+  const r = (-(t.rot ?? 0) * Math.PI) / 180;
+  const c = Math.round(Math.cos(r));
+  const s = Math.round(Math.sin(r));
+  const x = dx * c - dy * s;
+  const y = dx * s + dy * c;
+  return [t.flipH ? -x : x, t.flipV ? -y : y];
+}
+
+/**
+ * The handle and drag in the picture's own frame for a drag of the handle seen at `handle`, by
+ * (dx, dy) on screen, on a picture turned by `t`: on a picture rotated a quarter turn, the handle seen
+ * on the right is its top one, and a drag to the right moves it up.
+ */
+export function unturnedDrag(handle: PictureHandle, dx: number, dy: number, t: PictureTurn): { handle: PictureHandle; dx: number; dy: number } {
+  const [hx, hy] = unturned(handle.includes("e") ? 1 : handle.includes("w") ? -1 : 0, handle.includes("s") ? 1 : handle.includes("n") ? -1 : 0, t);
+  const [ux, uy] = unturned(dx, dy, t);
+  const own = `${hy > 0 ? "s" : hy < 0 ? "n" : ""}${hx > 0 ? "e" : hx < 0 ? "w" : ""}` as PictureHandle;
+  return { handle: own, dx: ux, dy: uy };
+}
+
+/**
+ * The width in pt a picture's `img` is shown at, its widths being set in em of `basePt`. Read from
+ * layout sizes (offsetWidth and the computed font size), which a CSS scale transform on an ancestor
+ * (the page drawn smaller beside the open sidebar) leaves unscaled; getBoundingClientRect would
+ * include the scale. Null when it isn't laid out.
+ */
+export function shownPictureWidth(img: Node | null | undefined, basePt: number): number | null {
+  if (!(img instanceof HTMLElement) || img.offsetWidth <= 0) return null;
+  const emPx = parseFloat(getComputedStyle(img).fontSize);
+  return emPx > 0 ? (img.offsetWidth / emPx) * basePt : null;
+}
+
+/** The selected picture's size and its size limits (pictureLimit), or null when no picture is selected. */
+export function selectedPictureSize(state: EditorState, ctx: DocContext): { size: PictureSize; limit: PictureSize } | null {
+  const sel = selectedPicture(state);
+  if (!sel) return null;
+  const { widthPt, heightPt } = sel.node.attrs as PictureSize;
+  return { size: { widthPt, heightPt }, limit: pictureLimit(sel.$from, ctx) };
+}
+
+/** The selected picture resized to `size(its size, its limits)`, staying selected. */
+function sizePicture(ctx: DocContext, size: (s: PictureSize, limit: PictureSize) => PictureSize): Command {
   return (state, dispatch) => {
     const sel = selectedPicture(state);
-    if (!sel) return false;
-    const { widthPt, heightPt } = sel.node.attrs as { widthPt: number; heightPt: number };
-    const width = steppedPictureWidth(widthPt, dir, pictureLimit(sel.$from, ctx));
-    const factor = width / widthPt;
+    const now = selectedPictureSize(state, ctx);
+    if (!sel || !now) return false;
     if (dispatch) {
-      const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, widthPt: width, heightPt: heightPt * factor });
+      const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, ...size(now.size, now.limit) });
       tr.setSelection(NodeSelection.create(tr.doc, sel.from));
       dispatch(tr);
     }
     return true;
   };
+}
+
+/**
+ * Picture − / +: one steppedPictureSize step within the cell or page size. `shownPt`: the selected
+ * picture's shown width (shownPictureWidth), when the editor is on screen.
+ */
+export function resizePicture(dir: 1 | -1, ctx: DocContext, shownPt: number | null = null): Command {
+  return sizePicture(ctx, (s, limit) => steppedPictureSize(s, dir, limit, shownPt));
+}
+
+/** A drag of the selected picture's resize handle: its size as draggedPictureSize makes it. */
+export function dragPicture(start: PictureSize, handle: PictureHandle, dxPt: number, dyPt: number, ctx: DocContext): Command {
+  return sizePicture(ctx, (_s, limit) => draggedPictureSize(start, handle, dxPt, dyPt, limit));
+}
+
+/**
+ * Reset shape: the selected picture keeps its width and takes its file's proportions (`naturalRatio`,
+ * height over width) again, scaled down if that makes it taller than the page allows.
+ */
+export function resetPictureShape(naturalRatio: number, ctx: DocContext): Command {
+  return sizePicture(ctx, (s, limit) => scaledPictureSize({ widthPt: s.widthPt, heightPt: s.widthPt * naturalRatio }, 1, limit));
 }
 
 /** A picture file she chose, stored content-addressed (its `asset` name), with its size in pixels. */
@@ -668,7 +802,7 @@ export function naturalPictureWidth(widthPx: number, limitPt: number): number {
 
 /**
  * Add picture: the picture goes in at the cursor (after the selected picture, so none is replaced),
- * at its natural size shrunk to fit the table cell or page there, and is then selected.
+ * at its natural size shrunk to fit the table cell or page there (width and height), and is then selected.
  */
 export function insertPicture(pic: NewPicture, ctx: DocContext): Command {
   return (state, dispatch) => {
@@ -676,8 +810,12 @@ export function insertPicture(pic: NewPicture, ctx: DocContext): Command {
     const sel = state.selection;
     const at = sel instanceof NodeSelection ? sel.to : sel.from;
     const $at = state.doc.resolve(at);
-    const widthPt = naturalPictureWidth(pic.widthPx, pictureLimit($at, ctx));
-    const node = nodes.image.create({ asset: pic.asset, widthPt, heightPt: (widthPt * pic.heightPx) / pic.widthPx });
+    const limit = pictureLimit($at, ctx);
+    const widthPt = naturalPictureWidth(pic.widthPx, limit.widthPt);
+    const heightPt = (widthPt * pic.heightPx) / pic.widthPx;
+    // A tall picture is shrunk further to fit the page's height, its proportions kept.
+    const f = Math.min(1, upTo(limit.heightPt) / heightPt);
+    const node = nodes.image.create({ asset: pic.asset, widthPt: widthPt * f, heightPt: heightPt * f });
     if (!dispatch) return true;
     // Collapsed first, so no selected text is replaced.
     const tr = state.tr.setSelection(TextSelection.near($at)).replaceSelectionWith(node, false);

@@ -10,15 +10,16 @@ import type { DocJSON } from "../../../lib/content/index.ts";
 import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
-  docLines, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, naturalPictureWidth, removeHighlight, resizePicture, selectionSize,
-  setHighlight, steppedPictureWidth, setSize, sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow,
+  docLines, dragPicture, draggedPictureSize, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, naturalPictureWidth, removeHighlight,
+  resetPictureShape, resizePicture, scaledPictureSize, seenPictureSize, selectedPictureSize, selectionSize, setHighlight, shownPictureWidth, steppedPictureSize, setSize,
+  sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
 import { cellPadding, MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
 
-const ctx = { basePt: 11, pageContentPt: 540 };
+const ctx = { basePt: 11, pageContentPt: 540, pageContentHeightPt: 720 };
 const ASSET = `${"a".repeat(32)}.png`;
 
 const text = (t: string, marks: unknown[] = []) => ({ type: "text", text: t, ...(marks.length ? { marks } : {}) });
@@ -832,13 +833,140 @@ describe("picture size", () => {
     expect((state.doc.firstChild?.firstChild as PMNode).attrs.widthPt).toBe(540);
   });
 
-  it("one step (shared by doc pictures and a gap box's figures) is × 1.15 or ÷ 1.15 within [24, limit]", () => {
-    expect(steppedPictureWidth(200, 1, 468)).toBeCloseTo(230, 10);
-    expect(steppedPictureWidth(230, -1, 468)).toBeCloseTo(200, 10);
-    expect(steppedPictureWidth(450, 1, 468)).toBe(468);
-    expect(steppedPictureWidth(26, -1, 468)).toBe(24);
+  const size = (widthPt: number, heightPt: number) => ({ widthPt, heightPt });
+  const LIMIT = size(468, 648);
+  const near = (got: { widthPt: number; heightPt: number }, want: { widthPt: number; heightPt: number }) => {
+    expect(got.widthPt).toBeCloseTo(want.widthPt, 10);
+    expect(got.heightPt).toBeCloseTo(want.heightPt, 10);
+  };
+
+  it("one step (shared by doc pictures and a gap box's figures) is × 1.15 or ÷ 1.15 of both sides within the limits", () => {
+    near(steppedPictureSize(size(200, 100), 1, LIMIT), size(230, 115));
+    near(steppedPictureSize(size(230, 115), -1, LIMIT), size(200, 100));
+    near(steppedPictureSize(size(450, 225), 1, LIMIT), size(468, 234));
+    near(steppedPictureSize(size(26, 13), -1, LIMIT), size(24, 12));
     // A limit under 24 never forces a picture below 24.
-    expect(steppedPictureWidth(30, 1, 10)).toBe(24);
+    near(steppedPictureSize(size(30, 15), 1, size(10, 648)), size(24, 12));
+    // A squished picture stays squished, and a tall one stops at the page's height.
+    near(steppedPictureSize(size(300, 60), -1, LIMIT), size(300 / 1.15, 60 / 1.15));
+    near(steppedPictureSize(size(100, 600), 1, LIMIT), size(108, 648));
+  });
+
+  it("Picture − steps down from the shown width when the column shows the picture narrower; + and a wider shown width don't", () => {
+    near(steppedPictureSize(size(540, 270), -1, size(540, 720), 400), size(400 / 1.15, 200 / 1.15));
+    near(steppedPictureSize(size(300, 150), -1, size(540, 720), 400), size(300 / 1.15, 150 / 1.15));
+    near(steppedPictureSize(size(500, 250), 1, size(540, 720), 400), size(540, 270));
+    near(steppedPictureSize(size(540, 270), -1, size(540, 720), null), size(540 / 1.15, 270 / 1.15));
+    near(seenPictureSize(size(540, 100), 400), size(400, (100 * 400) / 540));
+    near(seenPictureSize(size(300, 100), 400), size(300, 100));
+  });
+
+  it("scaling keeps proportions, the width at least 24, and both sides within the limits", () => {
+    near(scaledPictureSize(size(100, 50), 2, LIMIT), size(200, 100));
+    near(scaledPictureSize(size(100, 50), 0.1, LIMIT), size(24, 12));
+    near(scaledPictureSize(size(400, 100), 2, LIMIT), size(468, 117));
+    near(scaledPictureSize(size(100, 400), 2, LIMIT), size(162, 648));
+  });
+
+  it("a corner drag scales both sides by the side that changed more; a side drag changes only its own side", () => {
+    // Dragging away from the middle makes it bigger: right/down on se, left/up on nw.
+    near(draggedPictureSize(size(200, 100), "se", 100, 10, LIMIT), size(300, 150));
+    near(draggedPictureSize(size(200, 100), "nw", -20, -50, LIMIT), size(300, 150));
+    // Pulled in, the corner follows the side that moved more, even when the other barely moved.
+    near(draggedPictureSize(size(200, 100), "ne", -100, 25, LIMIT), size(100, 50));
+    near(draggedPictureSize(size(200, 100), "se", -80, 0, LIMIT), size(120, 60));
+    near(draggedPictureSize(size(200, 100), "nw", 0, 30, LIMIT), size(140, 70));
+    near(draggedPictureSize(size(200, 100), "sw", 1000, -1000, LIMIT), size(24, 12));
+    near(draggedPictureSize(size(200, 100), "e", 50, 999, LIMIT), size(250, 100));
+    near(draggedPictureSize(size(200, 100), "w", 50, 0, LIMIT), size(150, 100));
+    near(draggedPictureSize(size(200, 100), "s", 999, 80, LIMIT), size(200, 180));
+    near(draggedPictureSize(size(200, 100), "n", 0, 90, LIMIT), size(200, 24));
+    // Squished to the minimum, stretched to the limit; a side drag never moves the other side.
+    near(draggedPictureSize(size(200, 10), "e", -500, 0, LIMIT), size(24, 10));
+    near(draggedPictureSize(size(200, 100), "s", 0, 5000, LIMIT), size(200, 648));
+    near(draggedPictureSize(size(200, 100), "e", 5000, 0, LIMIT), size(468, 100));
+  });
+
+  it("a drag on a turned picture is read in the picture's own frame", () => {
+    // As "handle dx dy" (so a −0 reads as 0).
+    const own = (...a: Parameters<typeof unturnedDrag>): string => {
+      const d = unturnedDrag(...a);
+      return `${d.handle} ${d.dx} ${d.dy}`;
+    };
+    expect(own("se", 10, 20, {})).toBe("se 10 20");
+    // A quarter turn clockwise: the handle seen on the right is its top one, and right is up.
+    expect(own("e", 10, 0, { rot: 90 })).toBe("n 0 -10");
+    expect(own("se", 10, 20, { rot: 90 })).toBe("ne 20 -10");
+    expect(own("e", 10, 0, { rot: 180 })).toBe("w -10 0");
+    // Three quarter turns: its own left side is seen at the bottom, and down is left.
+    expect(own("s", 0, 10, { rot: 270 })).toBe("w -10 0");
+    expect(own("e", 10, 0, { flipH: true })).toBe("w -10 0");
+    expect(own("n", 0, -10, { flipV: true })).toBe("s 0 10");
+    // Dragged outward, the turned picture's own side grows either way.
+    const d = unturnedDrag("e", 30, 0, { rot: 90 });
+    near(draggedPictureSize(size(200, 100), d.handle, d.dx, d.dy, LIMIT), size(200, 130));
+  });
+
+  it("dragPicture saves the dragged size, within the cell's width; Reset shape gives back the file's proportions", () => {
+    const pic = { type: "table_cell", attrs: {}, content: [para([img(90)])] };
+    const s0 = createEditorState(docOf(table([row(rid(1), [pic, cell("B")])], [100, 300])));
+    let imgPos = -1;
+    s0.doc.descendants((n, pos) => { if (n.type === schema.nodes.image) imgPos = pos; });
+    const picked = s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, imgPos)));
+    const attrsOf = (st: typeof s0) => st.doc.nodeAt(imgPos)?.attrs as { widthPt: number; heightPt: number };
+    expect(selectedPictureSize(picked, ctx)).toEqual({ size: size(90, 45), limit: size(100, 720) });
+    // Stretched down 30 pt: only the height changes.
+    const tall = run(picked, dragPicture(size(90, 45), "s", 0, 30, ctx));
+    near(attrsOf(tall), size(90, 75));
+    expect(tall.selection).toBeInstanceOf(NodeSelection);
+    // Widened past the cell: stops at its 100 pt.
+    near(attrsOf(run(tall, dragPicture(size(90, 75), "e", 500, 0, ctx))), size(100, 75));
+    // Reset shape: its width kept, its height back to the file's 2:1.
+    near(attrsOf(run(tall, resetPictureShape(0.5, ctx))), size(90, 45));
+    // Picture + on the stretched picture keeps it stretched.
+    near(attrsOf(run(tall, resizePicture(1, ctx))), size(100, (75 * 100) / 90));
+  });
+
+  it("no picture selected: the size commands do nothing", () => {
+    const s0 = createEditorState(docOf(para([img(90)])));
+    expect(selectedPictureSize(s0, ctx)).toBeNull();
+    expect(dragPicture(size(90, 45), "e", 10, 0, ctx)(s0)).toBe(false);
+    expect(resetPictureShape(0.5, ctx)(s0)).toBe(false);
+  });
+
+  it("a picture put in taller than the page is shrunk to its height, its proportions kept", () => {
+    const s0 = createEditorState(docOf(para([text("x")])));
+    const state = run(s0, insertPicture({ asset: ASSET, widthPx: 400, heightPx: 2000 }, ctx));
+    const pics: { widthPt: number; heightPt: number }[] = [];
+    state.doc.descendants((n) => { if (n.type === schema.nodes.image) pics.push(n.attrs as never); });
+    expect(pics).toHaveLength(1);
+    near(pics[0] ?? size(0, 0), size(144, 720));
+  });
+
+  it("resizePicture's Picture − on a capped picture saves a width below the shown one, height scaled alike", () => {
+    const s0 = createEditorState(docOf(para([img(540)])));
+    const state = run(s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, 1))), resizePicture(-1, ctx, 400));
+    const attrs = (state.doc.firstChild?.firstChild as PMNode).attrs;
+    expect(attrs.widthPt).toBeCloseTo(400 / 1.15, 10);
+    expect(attrs.heightPt).toBeCloseTo(400 / 1.15 / 2, 10);
+  });
+
+  it("the shown width is read from layout sizes, so the page drawn smaller by a scale transform doesn't change it", () => {
+    const el = document.createElement("img");
+    el.style.fontSize = "15px";
+    document.body.append(el);
+    try {
+      // With the page drawn at scale(0.79) beside the open sidebar, the box is drawn at 237 px; its layout width stays 300 px.
+      Object.defineProperty(el, "offsetWidth", { configurable: true, value: 300 });
+      el.getBoundingClientRect = () => ({ width: 237, height: 100, x: 0, y: 0, top: 0, left: 0, right: 237, bottom: 100, toJSON: () => ({}) });
+      expect(shownPictureWidth(el, 11)).toBeCloseTo((300 / 15) * 11, 10);
+      Object.defineProperty(el, "offsetWidth", { configurable: true, value: 0 });
+      expect(shownPictureWidth(el, 11)).toBeNull();
+      expect(shownPictureWidth(null, 11)).toBeNull();
+      expect(shownPictureWidth(document.createTextNode("x"), 11)).toBeNull();
+    } finally {
+      el.remove();
+    }
   });
 
   it("a picture's natural width is 96 px = 72 pt, shrunk to the limit", () => {

@@ -1,7 +1,7 @@
 // PDF content (plan 99 §99.1 lib/pdf/pdf.test.ts; 70 §70.2–§70.4).
 import { describe, expect, it } from "vitest";
 import { schema } from "../schema.ts";
-import { buildDocDefinition, imageRequests, pdfFileName, scopeTitle, wholeGuideAsset, wholeGuideUrl, type PdfInput, type PdfScope } from "./index.ts";
+import { buildDocDefinition, imageKey, imageRequests, pdfFileName, scopeTitle, wholeGuideAsset, wholeGuideUrl, type PdfInput, type PdfScope } from "./index.ts";
 import { FontSplitter } from "./fonts.ts";
 import { block, cardioSystem, doc, FORBIDDEN, fmHome, fmNav, fontmapFor, inlines, lines, para, pulmSystem, R, row, table, wordDoc } from "./testing.ts";
 
@@ -63,6 +63,27 @@ describe("scope content", () => {
     // Myocarditis' section shows the same table but not Angina's last row.
     expect(scoped({ kind: "section", id: "inf" })).toEqual([...T1_HEAD, ...T1_B]);
     expect(scoped({ kind: "system" })).toEqual([INTRO, ...T1_HEAD, ...T1_A, ...T1_B, "BELOW note", ...D1, "Murmurs note", ...D2]);
+  });
+
+  it("prints a picture in a topic's below block at the width she set", () => {
+    const s = cardioSystem();
+    const angina = s.topics.find((t) => t.id === "r_AAAAAAAAA1");
+    if (!angina) throw new Error("no Angina topic");
+    const asset = `${"c".repeat(32)}.png`;
+    const pic = { type: "image", attrs: { asset, widthPt: 150, heightPt: 75, rot: 0, flipH: false, flipV: false } };
+    angina.below = block("b_AAAAAAAABW", "prose", doc({ type: "paragraph", content: [pic] } as never));
+    const images = { [imageKey({ asset, rot: 0, flipH: false, flipV: false })]: "data:image/png;base64,AAAA" };
+    const def = buildDocDefinition({ kind: "topics", ids: ["r_AAAAAAAAA1"] }, { nav, system: s, images }, fontmap);
+    const found: { width?: unknown; height?: unknown }[] = [];
+    const walk = (c: unknown): void => {
+      if (Array.isArray(c)) c.forEach(walk);
+      else if (c && typeof c === "object") {
+        if ("image" in c) found.push(c as { width?: unknown; height?: unknown });
+        Object.values(c).forEach(walk);
+      }
+    };
+    walk(def.content);
+    expect(found).toEqual([expect.objectContaining({ width: 150, height: 75 })]);
   });
 
   it("uses the guide's page, margins and base size", () => {

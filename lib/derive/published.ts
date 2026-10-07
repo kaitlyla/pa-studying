@@ -102,7 +102,9 @@ export type PubFigure = Omit<GapFigure, "evidence">;
 /** A gap block's figures as published: everything but the evidence, which stays in content. */
 export function pubFigures(meta: GapMeta): PubFigure[] {
   return (meta.figures ?? []).map((f) => ({
-    asset: f.asset, width: f.width, height: f.height, ...(f.widthPt !== undefined ? { widthPt: f.widthPt } : {}), caption: f.caption, credit: f.credit,
+    asset: f.asset, width: f.width, height: f.height,
+    ...(f.widthPt !== undefined ? { widthPt: f.widthPt } : {}), ...(f.heightPt !== undefined ? { heightPt: f.heightPt } : {}),
+    caption: f.caption, credit: f.credit,
   }));
 }
 

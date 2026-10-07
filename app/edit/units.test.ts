@@ -9,7 +9,7 @@ import { B, C, D, G, PHARM_PAGE, R, S, writePharmReviewPage } from "../../tools/
 import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
-import { buildSave, loadUnit, localDate, UnitError, type EditUnit, type Part } from "./units.ts";
+import { buildSave, gapLook, loadUnit, localDate, sameLook, UnitError, type EditUnit, type Part } from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
 const CV_STRUCTURE = `${CV}/structure.json`;
@@ -533,6 +533,24 @@ describe("building a save", () => {
       const saved = json<GapFile>(changeOf(build, path));
       expect(saved.meta.figures?.[0]).not.toHaveProperty("widthPt");
       expect(saved.meta).not.toHaveProperty("asNotes");
+    });
+
+    it("a squished or stretched figure saves its height beside its width; one back in proportion drops it", async () => {
+      const { unit } = await gapUnit();
+      const stretched = buildSave(unit, new Map(), TODAY, { looks: new Map([[G(1), { widths: { [ASSET]: 300 }, heights: { [ASSET]: 250 }, asNotes: false }]]) });
+      const saved = json<GapFile>(changeOf(stretched, path));
+      expect(saved.meta.figures?.[0]).toMatchObject({ widthPt: 300, heightPt: 250 });
+      // As stored, the look reads both back, and a draft kept before heights existed is the same look.
+      const { unit: was } = await gapUnit({ figures: [{ ...figure, widthPt: 300, heightPt: 250 }] });
+      const look = gapLook(only(was, "gap").gap);
+      expect(look).toEqual({ widths: { [ASSET]: 300 }, heights: { [ASSET]: 250 }, asNotes: false });
+      expect(sameLook({ widths: { [ASSET]: 300 }, asNotes: false }, { widths: { [ASSET]: 300 }, heights: {}, asNotes: false })).toBe(true);
+      expect(sameLook(look, { widths: { [ASSET]: 300 }, asNotes: false })).toBe(false);
+      // The same sizes set in another order are the same look.
+      expect(sameLook({ widths: { a: 1, b: 2 }, asNotes: false }, { widths: { b: 2, a: 1 }, asNotes: false })).toBe(true);
+      const back = json<GapFile>(changeOf(buildSave(was, new Map(), TODAY, { looks: new Map([[G(1), { widths: { [ASSET]: 300 }, asNotes: false }]]) }), path));
+      expect(back.meta.figures?.[0]?.widthPt).toBe(300);
+      expect(back.meta.figures?.[0]).not.toHaveProperty("heightPt");
     });
 
     it("an unchanged look writes nothing", async () => {

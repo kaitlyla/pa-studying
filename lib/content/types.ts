@@ -417,10 +417,15 @@ export interface GapFigure {
   width: number;
   height: number;
   /**
-   * The width it is shown at, in pt, at most GAP_CONTENT_PT (its height keeps the file's ratio).
-   * Absent: its natural size, never wider than the column.
+   * The width it is shown at, in pt, at most GAP_FIGURE_WIDTH_PT. Absent: its natural size, never wider
+   * than the column.
    */
   widthPt?: number;
+  /**
+   * The height it is shown at, in pt, at most GAP_FIGURE_HEIGHT_PT, when she squished or stretched it;
+   * only together with widthPt. Absent: its height keeps the file's ratio.
+   */
+  heightPt?: number;
   /** What the image shows; also its alternative text. */
   caption: string;
   credit: {
@@ -453,8 +458,19 @@ export interface GapMeta {
   asNotes?: true;
 }
 
-/** A gap block's content width in pt (US Letter with 1-inch margins): the widest a figure is shown. */
+/** A gap block's content width in pt (US Letter with 1-inch margins). */
 export const GAP_CONTENT_PT = 468;
+/** A gap block's content height in pt, on the same page. */
+export const GAP_CONTENT_HEIGHT_PT = 648;
+/**
+ * The largest a gap block's figure can be set, in pt. Gap blocks are not printed, so a figure is held
+ * to what the screen shows rather than to a page: a figure never resized is drawn at its file's own
+ * size within the column, up to about 1062 pt wide in the widest page frame (1400 px) and, for her
+ * tallest figures, about 1740 pt tall. These limits are above that, so no figure shown on screen is
+ * outside them; a column narrower than the set width scales the figure down, keeping its shape.
+ */
+export const GAP_FIGURE_WIDTH_PT = 1100;
+export const GAP_FIGURE_HEIGHT_PT = 2000;
 
 export type GapFile = BlockFile<GapMeta> & { kind: "gap" };
 

@@ -2311,7 +2311,15 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const labs = res.files.get(refPath("labs")) as { subs: { gaps: { id: string; asNotes: boolean; figures: { widthPt?: number }[] }[] }[] };
     const gaps = labs.subs[0]?.gaps ?? [];
     expect(gaps.find((g) => g.id === G(1))?.figures[0]?.widthPt).toBe(300);
+    expect(gaps.find((g) => g.id === G(1))?.figures[0]).not.toHaveProperty("heightPt");
     expect(gaps.find((g) => g.id === G(1))?.asNotes).toBe(true);
+    // A squished or stretched figure publishes its height too.
+    const squished = publish(mutated((x) => {
+      const g = x.gaps.get(G(1));
+      if (g) g.block.meta = { ...g.block.meta, figures: [{ ...figure, heightPt: 40 }] };
+    }));
+    const squishedLabs = squished.files.get(refPath("labs")) as { subs: { gaps: { id: string; figures: { widthPt?: number; heightPt?: number }[] }[] }[] };
+    expect(squishedLabs.subs[0]?.gaps.find((g) => g.id === G(1))?.figures[0]).toMatchObject({ widthPt: 300, heightPt: 40 });
     expect(res.units.find((u) => u.at === G(1))?.label).toBe("notes");
     // Unswitched boxes keep the gap label and publish asNotes false.
     const plain = publish(base);

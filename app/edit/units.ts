@@ -1,7 +1,7 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
+  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
@@ -13,12 +13,13 @@ import type { NavJson, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
 import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
+import type { ContentArea } from "./editor/commands.ts";
 import type { TreeChange } from "./github.ts";
 import { parsePageKey, type PageKind } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
-/** Content width for pictures outside a guide or Word page (US Letter with 1-inch margins). */
-const DEFAULT_CONTENT_PT = 468;
+/** The page area for pictures outside a guide or Word page (US Letter with 1-inch margins). */
+const DEFAULT_AREA: ContentArea = { pageContentPt: GAP_CONTENT_PT, pageContentHeightPt: GAP_CONTENT_HEIGHT_PT };
 
 /** The doc of a topic's below area before she adds anything: one empty paragraph, with its stored attributes. */
 const EMPTY_DOC = schema.node("doc", null, [schema.node("paragraph")]).toJSON() as DocJSON;
@@ -29,11 +30,10 @@ function isBlankDoc(doc: DocJSON): boolean {
 }
 
 /** One editor: a doc and the facts its toolbar needs. */
-export interface Slot {
+export interface Slot extends ContentArea {
   id: string;
   doc: DocJSON;
   basePt: number;
-  pageContentPt: number;
 }
 
 /** A system's stored files at the snapshot (guide and pharm keys). */
@@ -86,7 +86,10 @@ export class UnitError extends Error {
   }
 }
 
-const contentWidth = (page: PageSetup): number => page.widthPt - page.margins.left - page.margins.right;
+const contentArea = (page: PageSetup): ContentArea => ({
+  pageContentPt: page.widthPt - page.margins.left - page.margins.right,
+  pageContentHeightPt: page.heightPt - page.margins.top - page.margins.bottom,
+});
 
 /** The JSON of a row node, by its id. */
 type RowJSON = { type: string; attrs?: Record<string, unknown>; content?: unknown[] };
@@ -106,9 +109,9 @@ function partialTable(block: BlockFile, shown: readonly string[]): DocJSON {
 
 // ---- loading ------------------------------------------------------------------------------------
 
-async function guideFacts(snap: Snapshot, guide: string): Promise<{ basePt: number; width: number }> {
+async function guideFacts(snap: Snapshot, guide: string): Promise<{ basePt: number; area: ContentArea }> {
   const g = await snap.json<GuideFile>(`content/guides/${guide}/guide.json`);
-  return { basePt: g.basePt, width: contentWidth(g.page) };
+  return { basePt: g.basePt, area: contentArea(g.page) };
 }
 
 /** A block file in a directory that keeps its blocks under `blocks/` (a system, a pharm file, a Word page). */
@@ -142,71 +145,89 @@ async function systemOf(guide: string, kind: "topic" | "block", id: string): Pro
   throw new UnitError(`${id} is not on ${guide}'s pages`);
 }
 
-function rowsPart(sys: SystemCtx, block: BlockFile, shown: string[], basePt: number, width: number): Part {
+function rowsPart(sys: SystemCtx, block: BlockFile, shown: string[], basePt: number, area: ContentArea): Part {
   return {
     kind: "rows", path: blockPath(sys, block.id), block, shown, sys,
-    slot: { id: `${block.id}:rows`, doc: partialTable(block, shown), basePt, pageContentPt: width },
+    slot: { id: `${block.id}:rows`, doc: partialTable(block, shown), basePt, ...area },
   };
 }
 
-function blockPart(path: string, block: BlockFile, owner: BlockOwner, basePt: number, width: number): Part {
-  return { kind: "block", path, block, owner, slot: { id: block.id, doc: block.doc, basePt, pageContentPt: width } };
+function blockPart(path: string, block: BlockFile, owner: BlockOwner, basePt: number, area: ContentArea): Part {
+  return { kind: "block", path, block, owner, slot: { id: block.id, doc: block.doc, basePt, ...area } };
 }
 
-const sysBlockPart = (sys: SystemCtx, block: BlockFile, basePt: number, width: number): Part =>
-  blockPart(blockPath(sys, block.id), block, { kind: "system", sys }, basePt, width);
+const sysBlockPart = (sys: SystemCtx, block: BlockFile, basePt: number, area: ContentArea): Part =>
+  blockPart(blockPath(sys, block.id), block, { kind: "system", sys }, basePt, area);
 
-function belowPart(sys: SystemCtx, topic: string, block: BlockFile | null, basePt: number, width: number): Part {
+function belowPart(sys: SystemCtx, topic: string, block: BlockFile | null, basePt: number, area: ContentArea): Part {
   return {
     kind: "below", path: topicBelowPath(sys.guide, sys.system, topic), block, topic, sys,
-    slot: { id: `${topic}:below`, doc: block?.doc ?? EMPTY_DOC, basePt, pageContentPt: width },
+    slot: { id: `${topic}:below`, doc: block?.doc ?? EMPTY_DOC, basePt, ...area },
   };
 }
 
 /** The below blocks shown under a table whose `shown` rows a section or system page shows (topicsBelow). */
-async function belowParts(snap: Snapshot, sys: SystemCtx, t: SystemTopics, shown: readonly string[], basePt: number, width: number): Promise<Part[]> {
+async function belowParts(snap: Snapshot, sys: SystemCtx, t: SystemTopics, shown: readonly string[], basePt: number, area: ContentArea): Promise<Part[]> {
   const topics = topicsBelow(t.topics, shown, (x) => snap.has(topicBelowPath(sys.guide, sys.system, x.id)));
   const blocks = await snap.many<BlockFile>(topics.map((x) => topicBelowPath(sys.guide, sys.system, x.id)));
-  return topics.map((x, i) => belowPart(sys, x.id, blocks[i] as BlockFile, basePt, width));
+  return topics.map((x, i) => belowPart(sys, x.id, blocks[i] as BlockFile, basePt, area));
 }
 
 /**
  * How a gap block is shown apart from its text: the width (pt) each figure is shown at, by asset,
- * for the figures that have one; and whether she shows it as her own notes.
+ * for the figures that have one; the height (pt) of each she squished or stretched, by asset (absent
+ * in drafts kept before heights existed); and whether she shows it as her own notes.
  */
 export interface GapLook {
   widths: Readonly<Record<string, number>>;
+  heights?: Readonly<Record<string, number>>;
   asNotes: boolean;
 }
 
 /** A gap block's look as stored. */
 export function gapLook(gap: GapFile): GapLook {
   const widths: Record<string, number> = {};
-  for (const f of gap.meta.figures ?? []) if (f.widthPt !== undefined) widths[f.asset] = f.widthPt;
-  return { widths, asNotes: gap.meta.asNotes === true };
+  const heights: Record<string, number> = {};
+  for (const f of gap.meta.figures ?? []) {
+    if (f.widthPt !== undefined) widths[f.asset] = f.widthPt;
+    if (f.heightPt !== undefined) heights[f.asset] = f.heightPt;
+  }
+  return { widths, heights, asNotes: gap.meta.asNotes === true };
 }
 
-export const sameLook = (a: GapLook, b: GapLook): boolean => JSON.stringify(a) === JSON.stringify(b);
+/** A size map's entries in asset order, so two maps holding the same sizes compare equal however they were built. */
+const sizesKey = (m: Readonly<Record<string, number>> | undefined): string =>
+  JSON.stringify(Object.entries(m ?? {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)));
 
-/** `meta` showing `look`: each figure's widthPt from it (absent when it has none), and asNotes. */
+/** Looks compare equal when they show the same: a missing heights map is an empty one. */
+export const sameLook = (a: GapLook, b: GapLook): boolean =>
+  a.asNotes === b.asNotes && sizesKey(a.widths) === sizesKey(b.widths) && sizesKey(a.heights) === sizesKey(b.heights);
+
+/** `figures` showing `look`: each one's widthPt and heightPt from it (absent when it has none). */
+export function figuresWithLook<F extends { asset: string; widthPt?: number; heightPt?: number }>(figures: readonly F[], look: GapLook): F[] {
+  return figures.map((f) => {
+    const shown = { ...f };
+    const w = look.widths[f.asset];
+    const h = look.heights?.[f.asset];
+    if (w === undefined) delete shown.widthPt;
+    else shown.widthPt = w;
+    if (h === undefined) delete shown.heightPt;
+    else shown.heightPt = h;
+    return shown;
+  });
+}
+
+/** `meta` showing `look`: each figure's widthPt and heightPt from it (absent when it has none), and asNotes. */
 function withLook(meta: GapMeta, look: GapLook): GapMeta {
   const out: GapMeta = { ...meta };
-  if (meta.figures) {
-    out.figures = meta.figures.map((f) => {
-      const shown = { ...f };
-      const w = look.widths[f.asset];
-      if (w === undefined) delete shown.widthPt;
-      else shown.widthPt = w;
-      return shown;
-    });
-  }
+  if (meta.figures) out.figures = figuresWithLook(meta.figures, look);
   if (look.asNotes) out.asNotes = true;
   else delete out.asNotes;
   return out;
 }
 
 function gapPart(gap: GapFile): Part {
-  const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, pageContentPt: GAP_CONTENT_PT });
+  const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, ...DEFAULT_AREA });
   return {
     kind: "gap", path: gapFilePath(gap.id), gap, doc: slot(gap.id, gap.doc),
     differs: gap.meta.differs ? slot(`${gap.id}:differs`, gap.meta.differs.doc) : null,
@@ -232,7 +253,7 @@ async function placeNoteParts(snap: Snapshot, notes: readonly PlaceNote[] | unde
     const word = await snap.json<WordDocFile>(docFile);
     if (word.removed !== null || !word.blocks.includes(id)) continue;
     const path = blockFileIn(dirOf(docFile), id);
-    parts.push(blockPart(path, await snap.json<BlockFile>(path), { kind: "doc", path: docFile }, word.basePt, contentWidth(word.page)));
+    parts.push(blockPart(path, await snap.json<BlockFile>(path), { kind: "doc", path: docFile }, word.basePt, contentArea(word.page)));
   }
   return parts;
 }
@@ -250,9 +271,9 @@ async function otherOutlineNotes(snap: Snapshot, notes: readonly OtherNote[] | u
 }
 
 /** All rows of a table that take part in resolution are its full content; one-column tables edit as blocks. */
-function wholeBlockPart(sys: SystemCtx, block: BlockFile, basePt: number, width: number, proseLike: boolean): Part {
-  if (block.kind === "table" && !proseLike) return rowsPart(sys, block, tableOrThrow(block).content.map(rowId), basePt, width);
-  return sysBlockPart(sys, block, basePt, width);
+function wholeBlockPart(sys: SystemCtx, block: BlockFile, basePt: number, area: ContentArea, proseLike: boolean): Part {
+  if (block.kind === "table" && !proseLike) return rowsPart(sys, block, tableOrThrow(block).content.map(rowId), basePt, area);
+  return sysBlockPart(sys, block, basePt, area);
 }
 
 async function pharmFiles(snap: Snapshot): Promise<{ dir: string; file: PharmFile }[]> {
@@ -298,7 +319,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
     case "topic": {
       const { guide, row } = k;
       const sys = await loadSystem(snap, guide, await systemOf(guide, "topic", row));
-      const { basePt, width } = await guideFacts(snap, guide);
+      const { basePt, area } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const topic = t.topics.find((x) => x.id === row);
       if (!topic) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
@@ -311,55 +332,55 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const parts = [...byBlock].map(([id, shown]) => {
         const block = sys.blocks.find((b) => b.id === id);
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
-        return rowsPart(sys, block, shown, basePt, width);
+        return rowsPart(sys, block, shown, basePt, area);
       });
       // Her below area, after the topic's tables (an empty editor until she adds something).
-      parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, width));
+      parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, area));
       return unit(parts, guideScope(parts), row);
     }
     case "section": {
       const { guide, system, section } = k;
       const sys = await loadSystem(snap, guide, system);
-      const { basePt, width } = await guideFacts(snap, guide);
+      const { basePt, area } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const byId = new Map(sys.blocks.map((b) => [b.id, b]));
       const parts: Part[] = [];
       for (const item of sectionItems(t, sys.structure, sys.blocks.map((b) => b.id), section)) {
         const b = byId.get(item.block);
         if (!b) throw new UnitError(`Block ${item.block} is no longer in ${sys.system}`);
-        if (item.rows === null) parts.push(sysBlockPart(sys, b, basePt, width));
-        else parts.push(rowsPart(sys, b, item.rows, basePt, width), ...(await belowParts(snap, sys, t, item.rows, basePt, width)));
+        if (item.rows === null) parts.push(sysBlockPart(sys, b, basePt, area));
+        else parts.push(rowsPart(sys, b, item.rows, basePt, area), ...(await belowParts(snap, sys, t, item.rows, basePt, area)));
       }
       return unit(parts);
     }
     case "system": {
       const { guide, system } = k;
       const sys = await loadSystem(snap, guide, system);
-      const { basePt, width } = await guideFacts(snap, guide);
+      const { basePt, area } = await guideFacts(snap, guide);
       const t = deriveTopics(sys.blocks, sys.structure);
       const drug = new Map(sys.structure.drugTables.map((d) => [d.block, d]));
       const parts: Part[] = [];
       for (const b of sys.blocks) {
         const stored = t.tables.get(b.id);
         if (drug.has(b.id)) parts.push({ kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" });
-        else parts.push(wholeBlockPart(sys, b, basePt, width, t.proseBlocks.includes(b.id)));
-        parts.push(...(await belowParts(snap, sys, t, (stored?.rows ?? []).map((r) => r.id), basePt, width)));
+        else parts.push(wholeBlockPart(sys, b, basePt, area, t.proseBlocks.includes(b.id)));
+        parts.push(...(await belowParts(snap, sys, t, (stored?.rows ?? []).map((r) => r.id), basePt, area)));
       }
       return unit(parts);
     }
     case "listed": {
       const { guide, block: blockId } = k;
       const sys = await loadSystem(snap, guide, await systemOf(guide, "block", blockId));
-      const { basePt, width } = await guideFacts(snap, guide);
+      const { basePt, area } = await guideFacts(snap, guide);
       if (!sys.blocks.some((b) => b.id === blockId)) throw new UnitError(`Block ${blockId} is no longer in ${sys.system}`);
       // The listed block and, for an entry listing a run, the blocks recorded under it, in order.
       const run = sys.blocks.filter((b) => b.id === blockId || listedHead(sys.structure, b.id) === blockId);
-      return unit(run.map((b) => sysBlockPart(sys, b, basePt, width)));
+      return unit(run.map((b) => sysBlockPart(sys, b, basePt, area)));
     }
     case "pharm": {
       const { guide, system, section } = k;
       const sys = await loadSystem(snap, guide, system);
-      const { basePt, width } = await guideFacts(snap, guide);
+      const { basePt, area } = await guideFacts(snap, guide);
       const ps = sys.structure.pharmSections.find((s) => s.id === section);
       if (!ps) throw new UnitError(`Pharm section ${section} is no longer in ${system}`);
       const published = await loadData<SystemJson>(systemPath(guide, system));
@@ -377,14 +398,14 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
             fresh.forEach((b) => seen.add(b));
             const blocks = await snap.many<BlockFile>(fresh.map((b) => blockFileIn(store, b)));
             const owner: BlockOwner = file.page === undefined ? { kind: "pharm", path: `${dir}/pharmfile.json`, part: part.id } : { kind: "doc", path: `${store}/doc.json` };
-            blocks.forEach((b) => parts.push(blockPart(blockFileIn(store, b.id), b, owner, file.basePt, width)));
+            blocks.forEach((b) => parts.push(blockPart(blockFileIn(store, b.id), b, owner, file.basePt, area)));
           }
         }
       };
       if (ps.overview) await addPharmPart((p) => p.id === ps.overview);
       for (const id of ps.tables) {
         const b = sys.blocks.find((x) => x.id === id);
-        if (b) parts.push(rowsPart(sys, b, tableOrThrow(b).content.map(rowId), basePt, width));
+        if (b) parts.push(rowsPart(sys, b, tableOrThrow(b).content.map(rowId), basePt, area));
       }
       // A card shows its own parts, then those of the cards shown inside it (publish's card parts).
       const { cards: allCards } = await snap.json<CardsFile>("content/pharm/cards.json");
@@ -422,7 +443,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const { guide, slide: slideId } = k;
       const path = `content/slides/${guide}/blocks/${slideId}.json`;
       const block = await snap.json<BlockFile<SlideMeta>>(path);
-      return unit([{ kind: "slide", path, block, slot: { id: slideId, doc: block.doc, basePt: GAP_BASE_PT, pageContentPt: DEFAULT_CONTENT_PT } }]);
+      return unit([{ kind: "slide", path, block, slot: { id: slideId, doc: block.doc, basePt: GAP_BASE_PT, ...DEFAULT_AREA } }]);
     }
     case "doc": {
       const docId = k.doc;
@@ -436,7 +457,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const dir = `content/docs/${docId}`;
         const blocks = await snap.many<BlockFile>(word.blocks.map((b) => blockFileIn(dir, b)));
         const owner: BlockOwner = { kind: "doc", path: `${dir}/doc.json` };
-        blocks.forEach((b) => parts.push(blockPart(blockFileIn(dir, b.id), b, owner, word.basePt, contentWidth(word.page))));
+        blocks.forEach((b) => parts.push(blockPart(blockFileIn(dir, b.id), b, owner, word.basePt, contentArea(word.page))));
       }
       return { key, snapshot: snap, scope, parts, ids: [docId, ...partIds(parts)], docId, topic: null, fromWord: word !== null };
     }

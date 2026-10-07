@@ -259,6 +259,12 @@ describe("images, anchored content, text boxes, drawings, rules", () => {
     expect(first(build(doc(para([img({ widthPt: 936, heightPt: 100 })]))))).toMatchObject({ width: WIDTH, height: 50 });
   });
 
+  it("prints a squished or stretched picture at its stored width and height, keeping that shape when scaled down", () => {
+    // The file is 2:1 wide (img's 100 × 50); she stretched it tall, then squished one flat and wide.
+    expect(first(build(doc(para([img({ widthPt: 100, heightPt: 300 })]))))).toMatchObject({ width: 100, height: 300 });
+    expect(first(build(doc(para([img({ widthPt: 2 * WIDTH, heightPt: 60 })]))))).toMatchObject({ width: WIDTH, height: 30 });
+  });
+
   it("embeds only the images used, and fails on missing image data", () => {
     const w = wordDoc();
     w.blocks = [block("b_AAAAAAAAW1", "prose", doc(para([img({})])))];

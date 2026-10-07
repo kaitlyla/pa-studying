@@ -5,10 +5,10 @@ import { Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, typ
 import { createPortal } from "react-dom";
 import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import { GAP_CONTENT_PT, type DocJSON, type GapFile } from "../../lib/content/index.ts";
+import { GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, type DocJSON, type GapFigure, type GapFile } from "../../lib/content/index.ts";
 import { pubFigures } from "../../lib/derive/published.ts";
 import { BELOW_HEADING } from "../../lib/derive/topics.ts";
-import { GapChip, GapFigures, gapClass, type FigurePicking } from "../render/index.ts";
+import { GAP_BASE_PT, GapChip, GapFigures, gapClass, type FigurePicking } from "../render/index.ts";
 import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
@@ -16,9 +16,11 @@ import { useIsPhone } from "../shell/responsive.ts";
 import { PageBarSlot } from "../shell/pageScale.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
-  moveParagraph, naturalPictureWidth, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, steppedPictureWidth,
-  toggleBold, toggleItalic, toggleUnderline, type Command, type DocContext,
+  dragPicture, draggedPictureSize, moveParagraph, naturalPictureWidth, removeHighlight, resetPictureShape, resizePicture, scaledPictureSize, selectedPictureSize,
+  selectionSize, setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic, toggleUnderline, type Command,
+  type DocContext, type PictureHandle, type PictureSize, type PictureTurn,
 } from "./editor/commands.ts";
+import { PictureHandles } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
@@ -27,7 +29,7 @@ import {
   copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
   setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
-import { gapLook, type Part, type Slot } from "./units.ts";
+import { figuresWithLook, gapLook, type Part, type Slot } from "./units.ts";
 import { rememberVersionsOrigin } from "./versions.ts";
 import "./edit.css";
 
@@ -65,14 +67,58 @@ function openGap(id: string): GapFile | null {
   return part?.gap ?? null;
 }
 
-/** Picture − / + on the picked figure: one steppedPictureWidth step, from its natural size when it has none. */
-function resizeFigure(p: PickedFigure, dir: 1 | -1): void {
+/** The sizes a gap block's figure can be set to. */
+const FIGURE_LIMIT: PictureSize = { widthPt: GAP_FIGURE_WIDTH_PT, heightPt: GAP_FIGURE_HEIGHT_PT };
+
+/** The picked figure's img on the page. */
+const pickedFigureImg = (): Element | null => document.querySelector(".gap-fig.picked img");
+
+/**
+ * The picked figure in the open edit, and its size: as she set it; else as it is shown (an unsized
+ * figure is drawn at its file's own pixel size, within the column), in its file's proportions; else,
+ * before the page has drawn it, its natural size. An unsized one is held within FIGURE_LIMIT (keeping
+ * its proportions), so a size taken from it always saves.
+ */
+function openFigure(p: PickedFigure): { gap: GapFile; f: GapFigure; size: PictureSize } | null {
   const gap = openGap(p.gapId);
   const f = gap?.meta.figures?.[p.index];
-  if (!gap || !f) return;
+  if (!gap || !f) return null;
   const look = currentLook(gap);
-  const now = look.widths[f.asset] ?? naturalPictureWidth(f.width, GAP_CONTENT_PT);
-  setGapLook(gap, { ...look, widths: { ...look.widths, [f.asset]: steppedPictureWidth(now, dir, GAP_CONTENT_PT) } });
+  const set = look.widths[f.asset];
+  if (set !== undefined) return { gap, f, size: { widthPt: set, heightPt: look.heights?.[f.asset] ?? (set * f.height) / f.width } };
+  const widthPt = shownPictureWidth(pickedFigureImg(), GAP_BASE_PT) ?? naturalPictureWidth(f.width, FIGURE_LIMIT.widthPt);
+  return { gap, f, size: scaledPictureSize({ widthPt, heightPt: (widthPt * f.height) / f.width }, 1, FIGURE_LIMIT) };
+}
+
+/**
+ * The picked figure resized to `size(its size)`, within FIGURE_LIMIT. Its height is kept only when it
+ * is squished or stretched; one in its file's proportions keeps none, so it shows as the file is.
+ */
+function sizeFigure(p: PickedFigure, size: (s: PictureSize) => PictureSize): void {
+  const o = openFigure(p);
+  if (!o) return;
+  const { gap, f } = o;
+  const next = size(o.size);
+  const look = currentLook(gap);
+  const heights = { ...look.heights };
+  if (Math.abs(next.heightPt - (next.widthPt * f.height) / f.width) < 0.01) delete heights[f.asset];
+  else heights[f.asset] = next.heightPt;
+  setGapLook(gap, { ...look, widths: { ...look.widths, [f.asset]: next.widthPt }, heights });
+}
+
+/** Picture − / + on the picked figure: one steppedPictureSize step, as for a picture in her notes. */
+const resizeFigure = (p: PickedFigure, dir: 1 | -1): void =>
+  sizeFigure(p, (s) => steppedPictureSize(s, dir, FIGURE_LIMIT, shownPictureWidth(pickedFigureImg(), GAP_BASE_PT)));
+
+/** The toolbar's button that gives a squished or stretched picture its file's proportions again, keeping its width. */
+export const RESET_SHAPE = "Reset shape";
+
+/** Reset shape on the picked figure (its file's proportions are its stored pixel size's). */
+function resetFigureShape(p: PickedFigure): void {
+  const o = openFigure(p);
+  if (!o) return;
+  const { f } = o;
+  sizeFigure(p, (s) => scaledPictureSize({ widthPt: s.widthPt, heightPt: (s.widthPt * f.height) / f.width }, 1, FIGURE_LIMIT));
 }
 
 function useActive(): { a: Active | null; figure: PickedFigure | null } {
@@ -92,7 +138,7 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
   useLayoutEffect(() => {
     const el = host.current;
     if (!el) return undefined;
-    const ctx: DocContext = { basePt: slot.basePt, pageContentPt: slot.pageContentPt };
+    const ctx: DocContext = { basePt: slot.basePt, pageContentPt: slot.pageContentPt, pageContentHeightPt: slot.pageContentHeightPt };
     const view: EditorView = new EditorView(el, {
       state: createEditorState(slot.doc, { onPictureRefused: () => showToast(PICTURE_REFUSED) }),
       nodeViews: nodeViews(slot.basePt),
@@ -143,13 +189,7 @@ function GapFrame({ part, slotView, editing }: { part: Extract<Part, { kind: "ga
   const { gap } = part;
   const m = gap.meta;
   const look = (editing ? edit?.looks[gap.id] : undefined) ?? gapLook(gap);
-  const figures = pubFigures(m).map((f) => {
-    const shown = { ...f };
-    const w = look.widths[f.asset];
-    if (w === undefined) delete shown.widthPt;
-    else shown.widthPt = w;
-    return shown;
-  });
+  const figures = figuresWithLook(pubFigures(m), look);
   useEffect(() => () => {
     if (picked?.gapId === gap.id) pickFigure(null);
   }, [gap.id]);
@@ -298,7 +338,29 @@ function Toolbar(): ReactNode {
   };
   const plainCmd = (c: Command) => cmd(() => c);
   const sel = a?.view.state.selection;
-  const picture = sel instanceof NodeSelection && (sel.node.type.name === "image" || sel.node.type.name === "image_block");
+  const picSel = sel instanceof NodeSelection && (sel.node.type.name === "image" || sel.node.type.name === "image_block") ? sel : null;
+  const picture = picSel !== null;
+  const pictureImg = (): Element | null => {
+    const n = a && picSel ? a.view.nodeDOM(picSel.from) : null;
+    return n instanceof Element ? n : null;
+  };
+  const shownPicture = (c: DocContext): number | null => shownPictureWidth(pictureImg(), c.basePt);
+  const pictureNow = a && picSel ? selectedPictureSize(a.view.state, a.ctx) : null;
+  const figureOpen = figure !== null && openGap(figure.gapId)?.meta.figures?.[figure.index] !== undefined;
+  // Reset shape: the picture's file proportions, read from the img the editor drew (not yet loaded: none).
+  const resetPicture = (c: DocContext): Command => (state, dispatch) => {
+    const img = pictureImg();
+    if (!(img instanceof HTMLImageElement) || img.naturalWidth <= 0) return false;
+    return resetPictureShape(img.naturalHeight / img.naturalWidth, c)(state, dispatch);
+  };
+  const dragSelected = (start: PictureSize, h: PictureHandle, dxPt: number, dyPt: number): void => {
+    if (!a || !picSel) return;
+    // Applied only to the picture as it was grabbed: one changed or unselected during the drag is left alone.
+    const now = a.view.state.selection;
+    if (!(now instanceof NodeSelection) || now.node !== picSel.node) return;
+    dragPicture(start, h, dxPt, dyPt, a.ctx)(a.view.state, a.view.dispatch);
+    a.view.focus();
+  };
   const inTable = a ? changeCellMargins("sides", 1)(a.view.state) : false;
   const canNarrow = a ? changeColumnWidth(-1)(a.view.state) : false;
   const canWiden = a ? changeColumnWidth(1)(a.view.state) : false;
@@ -367,15 +429,28 @@ function Toolbar(): ReactNode {
             <span className="tb-gl">Picture:</span>
             <Tool label="Make picture smaller" run={() => resizeFigure(figure, -1)} refk="tb-pic-smaller">−</Tool>
             <Tool label="Make picture bigger" run={() => resizeFigure(figure, 1)} refk="tb-pic-bigger">+</Tool>
+            <Tool label={RESET_SHAPE} run={() => resetFigureShape(figure)} refk="tb-pic-reset">{RESET_SHAPE}</Tool>
           </>
         ) : picture && (
           <>
             <span className="sep" />
             <span className="tb-gl">Picture:</span>
-            <Tool label="Make picture smaller" run={cmd((c) => resizePicture(-1, c))} refk="tb-pic-smaller">−</Tool>
-            <Tool label="Make picture bigger" run={cmd((c) => resizePicture(1, c))} refk="tb-pic-bigger">+</Tool>
+            <Tool label="Make picture smaller" run={cmd((c) => resizePicture(-1, c, shownPicture(c)))} refk="tb-pic-smaller">−</Tool>
+            <Tool label="Make picture bigger" run={cmd((c) => resizePicture(1, c, shownPicture(c)))} refk="tb-pic-bigger">+</Tool>
+            <Tool label={RESET_SHAPE} run={cmd(resetPicture)} refk="tb-pic-reset">{RESET_SHAPE}</Tool>
             <Tool label="Delete picture" run={() => { if (a) void deletePicture(editorConfirm)(a.view); }} refk="tb-pic-delete">Delete picture</Tool>
           </>
+        )}
+        {figure && figureOpen ? (
+          <PictureHandles
+            find={pickedFigureImg}
+            basePt={GAP_BASE_PT}
+            size={() => openFigure(figure)?.size ?? null}
+            limit={FIGURE_LIMIT}
+            onResize={(start, h, dxPt, dyPt) => sizeFigure(figure, () => draggedPictureSize(start, h, dxPt, dyPt, FIGURE_LIMIT))}
+          />
+        ) : a && picSel && pictureNow && (
+          <PictureHandles find={pictureImg} basePt={a.ctx.basePt} size={() => pictureNow.size} limit={pictureNow.limit} turn={picSel.node.attrs as PictureTurn} onResize={dragSelected} />
         )}
       </div>
       <span className="estat" data-ref="edit-status-row">

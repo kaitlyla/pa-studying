@@ -40,6 +40,16 @@
 .editing .ProseMirror-selectednode { outline: 3px solid #2b55a3; }
 .editing .stub { display: block; margin: 6px 0; }
 .col-drag-guide { position: fixed; z-index: 1000; width: 0; border-left: 1px dashed #2b55a3; pointer-events: none; }
+/* The selected picture's resize handles, drawn over it (PictureHandles). */
+.pic-handles { position: fixed; z-index: 1000; pointer-events: none; }
+.pic-handles[hidden] { display: none; }
+.pic-handle { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; box-sizing: border-box; background: #fff; border: 1.5px solid #2b55a3; pointer-events: auto; touch-action: none; }
+.pic-handle.nw, .pic-handle.n, .pic-handle.ne { top: 0; }
+.pic-handle.e, .pic-handle.w { top: 50%; }
+.pic-handle.sw, .pic-handle.s, .pic-handle.se { top: 100%; }
+.pic-handle.nw, .pic-handle.w, .pic-handle.sw { left: 0; }
+.pic-handle.n, .pic-handle.s { left: 50%; }
+.pic-handle.ne, .pic-handle.e, .pic-handle.se { left: 100%; }
 .edit-loading { color: #5b6472; }
 
 /* banners */

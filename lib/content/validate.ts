@@ -11,7 +11,7 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GAP_CONTENT_PT, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
@@ -196,15 +196,24 @@ const gapSource: Checker = (v, at, ctx) => {
 const posInt: Checker = (v, at, ctx) => { if (!Number.isInteger(v) || (v as number) < 1) bad(ctx, at, "a positive integer", v); };
 const httpsUrl = re(/^https:\/\/\S+$/, "an https URL");
 const figureWidthPt: Checker = (v, at, ctx) => {
-  if (typeof v !== "number" || !(v > 0 && v <= GAP_CONTENT_PT)) bad(ctx, at, `a width in pt above 0 and at most ${GAP_CONTENT_PT}`, v);
+  if (typeof v !== "number" || !(v > 0 && v <= GAP_FIGURE_WIDTH_PT)) bad(ctx, at, `a width in pt above 0 and at most ${GAP_FIGURE_WIDTH_PT}`, v);
 };
-const gapFigure = shapeOf<GapFigure>({
+const figureHeightPt: Checker = (v, at, ctx) => {
+  if (typeof v !== "number" || !(v > 0 && v <= GAP_FIGURE_HEIGHT_PT)) bad(ctx, at, `a height in pt above 0 and at most ${GAP_FIGURE_HEIGHT_PT}`, v);
+};
+const figureShape = shapeOf<GapFigure>({
   asset: re(ASSET_RE, "a stored asset name"), width: posInt, height: posInt, caption: nonEmpty,
   credit: shapeOf<GapFigure["credit"]>({
     author: nonEmpty, license: nonEmpty, licenseUrl: nullable(httpsUrl), page: httpsUrl, changes: nullable(nonEmpty),
   }, {}),
   evidence: shapeOf<GapFigure["evidence"]>({ quote: nonEmpty, accessed: isoDate }, {}),
-}, { widthPt: figureWidthPt });
+}, { widthPt: figureWidthPt, heightPt: figureHeightPt });
+/** A figure: its shape, and a squished or stretched height only with the width it was set beside. */
+const gapFigure: Checker = (v, at, ctx) => {
+  figureShape(v, at, ctx);
+  const f = v as GapFigure;
+  if (f.heightPt !== undefined && f.widthPt === undefined) bad(ctx, `${at}.heightPt`, "a height only together with a widthPt", f.heightPt);
+};
 
 export const validateGap: Validator = (v, ctx, expectId) => {
   shapeOf<GapFile>({

@@ -8,6 +8,7 @@ import { closeSync, existsSync, ftruncateSync, openSync, readdirSync, readFileSy
 import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
+import sharp from "sharp";
 import { buildPageKey } from "../edit/pageKey.ts";
 import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/editor/commands.ts";
 import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
@@ -312,6 +313,51 @@ async function world(context: BrowserContext, baseURL: string | undefined, opts:
 
 const ref = (scope: Page | Locator, name: string): Locator => scope.locator(`[data-ref="${name}"]`);
 const toast = (page: Page): Locator => page.locator(".toast-region .toast");
+const pageTransform = (page: Page) => page.locator(".page-scale").evaluate((el) => (el as HTMLElement).style.transform);
+
+/**
+ * Waits until the open laptop sidebar draws the page beside it smaller (a transform on .page-scale, so
+ * layout sizes are unchanged) and returns that scale, drawn width over layout width.
+ */
+async function sidebarScale(page: Page): Promise<number> {
+  await expect(page.locator(".side")).toBeVisible();
+  await expect.poll(() => pageTransform(page)).toMatch(/^scale\(0\.\d+\)$/);
+  return page.locator(".page-scale").evaluate((el) => el.getBoundingClientRect().width / (el as HTMLElement).offsetWidth);
+}
+
+/** Hides the laptop sidebar, so the page is drawn at full size. */
+async function hideSidebar(page: Page): Promise<void> {
+  await page.locator(".side-collapse").click();
+  await expect.poll(() => pageTransform(page)).toBe("");
+}
+
+/** Drags a selected picture's handle by (dx, dy) screen px with the mouse; Escape before letting go when `escape`. */
+async function dragHandle(page: Page, handle: string, dx: number, dy: number, escape = false): Promise<void> {
+  const view = need(page.viewportSize(), "the viewport size");
+  // The mouse presses the handle's middle, so that is what must be on screen.
+  const onScreen = async (): Promise<boolean> => {
+    const b = await ref(page, `pic-handle-${handle}`).boundingBox();
+    if (b === null) return false;
+    const x = b.x + b.width / 2;
+    const y = b.y + b.height / 2;
+    return x >= 0 && y >= 0 && x < view.width && y < view.height;
+  };
+  await expect.poll(onScreen, { message: `the ${handle} handle is on screen` }).toBe(true);
+  const knob = need(await ref(page, `pic-handle-${handle}`).boundingBox(), `the ${handle} handle`);
+  const x = knob.x + knob.width / 2;
+  const y = knob.y + knob.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x + dx, y + dy, { steps: 8 });
+  if (escape) await page.keyboard.press("Escape");
+  await page.mouse.up();
+}
+
+/** A picture's size as drawn on screen, in px. */
+const drawnSize = (img: Locator) => img.evaluate((e) => {
+  const r = e.getBoundingClientRect();
+  return { w: r.width, h: r.height };
+});
 const NOT_ON_SITE = "This page isn't on the site";
 
 /** Opens a hash route as a fresh document and waits for its page heading. */
@@ -1072,8 +1118,12 @@ const figureGap = REF_TABS.filter((tab) => tab !== "imaging").flatMap((tab) => r
 test.describe("a gap block's picture size and Show as my notes", () => {
   const target = () => need(figureGap, "reference sub-topic gap block with a picture");
   const gapFile = (fake: FakeGithub, id: string) => JSON.parse(need(changedFiles(fake).get(`content/gapfill/${id}.json`), `${id} in the save`)) as {
-    meta: { asNotes?: true; ownerEdits: string[]; figures: { widthPt?: number }[] };
+    meta: { asNotes?: true; ownerEdits: string[]; figures: { widthPt?: number; heightPt?: number }[] };
   };
+  /** A figure's width as laid out, in pt of the gap block's 11 pt base (what the page shows, unscaled). */
+  const shownPt = (img: Locator) => img.evaluate((e) => ((e as HTMLElement).offsetWidth / parseFloat(getComputedStyle(e).fontSize)) * 11);
+  /** Where a step or drag starts: her set width, else the width it is shown at (her figures all show within the limits). */
+  const startOf = (f: { widthPt?: number }, shown: number): number => f.widthPt ?? shown;
 
   test("picking the picture gives Picture − / +; two steps down save its width, smaller on the page", async ({ page, context, baseURL }) => {
     const { tab, sub, gap } = target();
@@ -1084,6 +1134,7 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     const box = area.getByRole("region", { name: gap.title, exact: true });
     const img = box.locator(".gap-figs img").first();
     const before = await img.evaluate((e) => e.getBoundingClientRect().width);
+    const shown = await shownPt(img);
     await expect(ref(page, "tb-pic-smaller")).toHaveCount(0);
     await ref(box, "gap-fig-pick").first().click();
     await clickN(ref(page, "tb-pic-smaller"), 2);
@@ -1093,7 +1144,9 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
     const f = need(gap.figures[0], "figure");
-    const start = f.widthPt ?? Math.min(f.width * 0.75, 468);
+    // Never resized, it is shown wider than a printed page (468 pt), and the steps start from that width.
+    if (f.widthPt === undefined) expect(shown).toBeGreaterThan(468);
+    const start = startOf(f, shown);
     const saved = gapFile(fake, gap.id);
     expect(saved.meta.figures[0]?.widthPt).toBeCloseTo(start / 1.15 / 1.15, 6);
     expect(saved.meta.ownerEdits).toHaveLength(gap.ownerEdits.length + 1);
@@ -1105,6 +1158,7 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     await openPage(page, refHash(tab, sub));
     await signIn(page);
     let box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    const shown = await shownPt(box.locator(".gap-figs img").first());
     await ref(box, "gap-fig-pick").first().click();
     await ref(page, "tb-pic-smaller").click();
     await ref(page, "edit-save").click();
@@ -1117,9 +1171,92 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     await ref(page, "tb-pic-smaller").click();
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const f = need(gap.figures[0], "figure");
-    const start = f.widthPt ?? Math.min(f.width * 0.75, 468);
+    const start = startOf(need(gap.figures[0], "figure"), shown);
     expect(gapFile(fake, gap.id).meta.figures[0]?.widthPt).toBeCloseTo(start / 1.15 / 1.15, 6);
+  });
+
+  test("Picture − on a picture shown narrower than its width shrinks it at the first click, with the page scaled too", async ({ page, context, baseURL }) => {
+    const { tab, sub, gap } = target();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, refHash(tab, sub));
+    await signIn(page);
+    const box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    const img = box.locator(".gap-figs img").first();
+    // The open sidebar draws the page smaller: the size she sees must not depend on that.
+    expect(await sidebarScale(page)).toBeLessThan(0.9);
+    // As laid out, in pt of the gap block's 11 pt base, and as drawn on screen.
+    const look = async () => ({ shownPt: await shownPt(img), drawn: (await drawnSize(img)).w });
+    // A width of her own first: one step up from where it starts.
+    const start = startOf(need(gap.figures[0], "figure"), await shownPt(img));
+    await ref(box, "gap-fig-pick").first().click();
+    await ref(page, "tb-pic-bigger").click();
+    // Then a narrow column, so it draws the picture narrower than that width.
+    await page.addStyleTag({ content: ".gap-figs { max-width: 300px; }" });
+    const before = await look();
+    expect(before.shownPt).toBeLessThan(Math.min(start * 1.15, 1100));
+
+    await ref(page, "tb-pic-smaller").click();
+    expect((await look()).drawn).toBeLessThan(before.drawn);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    // Stepped from the laid-out width: a drawn read would make it the sidebar's scale × this.
+    const saved = need(gapFile(fake, gap.id).meta.figures[0], "the saved figure");
+    expect(saved.widthPt).toBeCloseTo(before.shownPt / 1.15, 3);
+    // Both sides stepped together: the file's own proportions, so no height of its own.
+    expect(saved.heightPt).toBeUndefined();
+  });
+
+  test("dragging a side handle squishes the picture and saves its height; Escape mid-drag leaves it; Reset shape restores its proportions", async ({ page, context, baseURL }) => {
+    const { tab, sub, gap } = target();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, refHash(tab, sub));
+    await signIn(page);
+    let box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    const img = box.locator(".gap-figs img").first();
+    await expect(ref(page, "pic-handles")).toBeHidden();
+    await ref(box, "gap-fig-pick").first().click();
+    await expect(ref(page, "pic-handles")).toBeVisible();
+    const before = await drawnSize(img);
+    // Never resized, it is shown bigger than a printed page (468 × 648 pt): the drag starts from the size
+    // shown, so the picture follows the pointer from the first move, and that size saves.
+    if (gap.figures[0]?.widthPt === undefined) {
+      expect(await shownPt(img)).toBeGreaterThan(468);
+      expect(await img.evaluate((e) => ((e as HTMLElement).offsetHeight / parseFloat(getComputedStyle(e).fontSize)) * 11)).toBeGreaterThan(648);
+    }
+
+    // Escape before letting go: nothing changes.
+    await dragHandle(page, "e", -80, 0, true);
+    expect(await drawnSize(img)).toEqual(before);
+    await expect(ref(page, "edit-dirty-state")).not.toHaveText("Unsaved changes");
+
+    await dragHandle(page, "e", -80, 0);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    const after = await drawnSize(img);
+    expect(after.w).toBeCloseTo(before.w - 80, 0);
+    expect(after.h).toBeCloseTo(before.h, 0);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    let saved = need(gapFile(fake, gap.id).meta.figures[0], "the saved figure");
+    expect(need(saved.heightPt, "the saved height") / need(saved.widthPt, "the saved width")).toBeCloseTo(after.h / after.w, 2);
+    // The page shows the saved shape.
+    const shown = page.locator(`main section.gap[data-anchor="${gap.id}"] .gap-figs img`).first();
+    const onPage = await drawnSize(shown);
+    expect(onPage.h / onPage.w).toBeCloseTo(after.h / after.w, 2);
+
+    box = (await startEditing(page)).getByRole("region", { name: gap.title, exact: true });
+    await ref(box, "gap-fig-pick").first().click();
+    await ref(page, "tb-pic-reset").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const squished = need(saved.widthPt, "the squished width");
+    saved = need(gapFile(fake, gap.id).meta.figures[0], "the saved figure");
+    // Its width kept, its height back to the file's proportions.
+    expect(saved.heightPt).toBeUndefined();
+    expect(saved.widthPt).toBeCloseTo(squished, 6);
+    const reset = await drawnSize(shown);
+    expect(reset.h / reset.w).toBeCloseTo(before.h / before.w, 2);
   });
 
   test("Show as my notes saves asNotes; the box then shows with no gap box or badge", async ({ page, context, baseURL }) => {
@@ -1213,6 +1350,148 @@ test.describe("pictures and highlight colors", () => {
     await expect(info.locator("img")).toHaveJSProperty("naturalWidth", 1);
     await expect(card.locator(".meds")).toHaveCount(1);
     expect(await card.locator(".meds").evaluate((m, el) => (m.compareDocumentPosition(el as Node) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0, await info.elementHandle())).toBe(true);
+  });
+
+  test("Picture − on a picture wider than the column shrinks it at the first click, with the page drawn smaller beside the sidebar; the size saves and shows", async ({ page, context, baseURL }) => {
+    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+    const { fake } = await world(context, baseURL, { seed: true });
+    // A small laptop window, so a picture at the page width is wider than the column.
+    await page.setViewportSize({ width: 1000, height: 800 });
+    await openPage(page, t.hash);
+    // The open sidebar draws the page smaller: the size she sees must not depend on that.
+    expect(await sidebarScale(page)).toBeLessThan(0.9);
+    await signIn(page);
+    const area = await startEditing(page);
+    const below = area.getByRole("region", { name: "Additional info" });
+    await below.locator(".ProseMirror p").first().click();
+    const wide = await sharp({ create: { width: 2000, height: 1000, channels: 3, background: { r: 200, g: 120, b: 80 } } }).png().toBuffer();
+    const chooser = page.waitForEvent("filechooser");
+    await ref(page, "tb-pic-add").click();
+    await (await chooser).setFiles({ name: "wide.png", mimeType: "image/png", buffer: wide });
+    const img = below.locator("img:not(.ProseMirror-separator)");
+    await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(2000);
+    // Its width in em as set (the stored widthPt over the base size), and as laid out in the column.
+    const look = () => img.evaluate((el) => {
+      const e = el as HTMLImageElement;
+      return { setEm: parseFloat(e.style.width), shownEm: e.offsetWidth / parseFloat(getComputedStyle(e).fontSize), drawn: e.getBoundingClientRect().width };
+    });
+    const before = await look();
+    expect(before.shownEm).toBeLessThan(before.setEm);
+
+    await ref(page, "tb-pic-smaller").click();
+    const after = await look();
+    expect(after.drawn).toBeLessThan(before.drawn);
+    // Stepped from the laid-out width: a drawn read would make it the sidebar's scale × this.
+    expect(after.setEm).toBeCloseTo(before.shownEm / 1.15, 2);
+    // Now it fits the column (offsetWidth is whole pixels, so within a pixel).
+    expect(after.shownEm).toBeCloseTo(after.setEm, 1);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
+    expect(belowFiles).toHaveLength(1);
+    const saved = JSON.parse(need(belowFiles[0], "the below file")[1]) as unknown;
+    const pic = attrsOf(nodeAt(saved, need(findPath(saved, (n) => n.type === "image"), "the picture in the below file")));
+    // The saved width is the one set in the editor (em × base size), height kept in proportion.
+    const basePt = Number(pic.widthPt) / after.setEm;
+    expect(Number(pic.widthPt)).toBeCloseTo((before.shownEm / 1.15) * basePt, 1);
+    expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(0.5, 6);
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    await expect(shown).toHaveCount(1);
+    expect(await shown.evaluate((el) => parseFloat((el as HTMLImageElement).style.width))).toBeCloseTo(after.setEm, 3);
+  });
+
+  /**
+   * Opens the meds topic for editing, beside the open sidebar (the page drawn smaller) or with it hidden,
+   * and adds a `w`×`h` picture under Additional info; it is left selected.
+   */
+  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden"): Promise<Locator> {
+    await openPage(page, t.hash);
+    if (sidebar === "open") expect(await sidebarScale(page)).toBeLessThan(0.9);
+    else await hideSidebar(page);
+    await signIn(page);
+    const below = (await startEditing(page)).getByRole("region", { name: "Additional info" });
+    await below.locator(".ProseMirror p").first().click();
+    const png = await sharp({ create: { width: w, height: h, channels: 3, background: { r: 80, g: 140, b: 200 } } }).png().toBuffer();
+    const chooser = page.waitForEvent("filechooser");
+    await ref(page, "tb-pic-add").click();
+    await (await chooser).setFiles({ name: "pic.png", mimeType: "image/png", buffer: png });
+    const img = below.locator("img:not(.ProseMirror-separator)");
+    await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(w);
+    await expect(ref(page, "pic-handles")).toBeVisible();
+    return img;
+  }
+
+  /** The one picture in the save's below file. */
+  const savedBelowPicture = (fake: FakeGithub): Rec => {
+    const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
+    expect(belowFiles).toHaveLength(1);
+    const saved = JSON.parse(need(belowFiles[0], "the below file")[1]) as unknown;
+    return attrsOf(nodeAt(saved, need(findPath(saved, (n) => n.type === "image"), "the picture in the below file")));
+  };
+
+  for (const sidebar of ["hidden", "open"] as const) {
+    test(`a corner handle resizes a picture in proportion and a side handle squishes it, ${sidebar === "open" ? "with the page drawn smaller beside the open sidebar" : "at full size"}; the shape saves and shows`, async ({ page, context, baseURL }) => {
+      const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+      const { fake } = await world(context, baseURL, { seed: true });
+      const img = await addBelowPicture(page, t, 400, 200, sidebar);
+      const before = await drawnSize(img);
+
+      // The corner follows the pointer along the side that moved more, the other side in proportion.
+      await dragHandle(page, "se", 80, 10);
+      const grown = await drawnSize(img);
+      expect(grown.w).toBeCloseTo(before.w + 80, 0);
+      expect(grown.h / grown.w).toBeCloseTo(before.h / before.w, 2);
+
+      // Pulled straight in, the corner shrinks it, still in proportion.
+      await img.evaluate((e) => e.scrollIntoView({ block: "center" }));
+      await dragHandle(page, "se", -60, 0);
+      const shrunk = await drawnSize(img);
+      expect(shrunk.w).toBeCloseTo(grown.w - 60, 0);
+      expect(shrunk.h / shrunk.w).toBeCloseTo(before.h / before.w, 2);
+
+      // The right side follows the pointer; the height stays.
+      await dragHandle(page, "e", -100, 0);
+      const squished = await drawnSize(img);
+      expect(squished.w).toBeCloseTo(shrunk.w - 100, 0);
+      expect(squished.h).toBeCloseTo(shrunk.h, 0);
+
+      await ref(page, "edit-save").click();
+      await expect(ref(page, "save-success")).toBeVisible();
+      const pic = savedBelowPicture(fake);
+      const ratio = Number(pic.heightPt) / Number(pic.widthPt);
+      expect(ratio).toBeCloseTo(squished.h / squished.w, 2);
+      expect(ratio).not.toBeCloseTo(0.5, 2);
+      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+      const onPage = await drawnSize(shown);
+      expect(onPage.h / onPage.w).toBeCloseTo(ratio, 2);
+    });
+  }
+
+  test("a stretched picture keeps its shape when a narrow window draws it narrower than its width", async ({ page, context, baseURL }) => {
+    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+    const { fake } = await world(context, baseURL, { seed: true });
+    const img = await addBelowPicture(page, t, 600, 300, "hidden");
+    const before = await drawnSize(img);
+    // Pulled down: taller, the width unchanged.
+    await dragHandle(page, "s", 0, 120);
+    const stretched = await drawnSize(img);
+    expect(stretched.w).toBeCloseTo(before.w, 0);
+    expect(stretched.h).toBeCloseTo(before.h + 120, 0);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const pic = savedBelowPicture(fake);
+    const ratio = Number(pic.heightPt) / Number(pic.widthPt);
+    expect(ratio).toBeCloseTo(stretched.h / stretched.w, 2);
+
+    await page.setViewportSize({ width: 360, height: 800 });
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    await shown.scrollIntoViewIfNeeded();
+    const narrow = await drawnSize(shown);
+    // The column caps it, and its height comes down with it.
+    expect(narrow.w).toBeLessThan(stretched.w - 50);
+    expect(narrow.h / narrow.w).toBeCloseTo(ratio, 2);
   });
 
   for (const how of ["pasted", "dropped"] as const) {
