@@ -1355,8 +1355,25 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(cards(levodopa(), "Restless Leg Syndrome")).toEqual([[C(2), [], "parkinson-disease"], [C(1), [], "parkinson-disease"]]);
       expect(cards(levodopa(), "Iron deficiency anemia")).toEqual([[C(2), [], "parkinson-disease"]]);
       expect(cards(levodopa(["restless leg"]), "Restless Leg Syndrome")).toEqual([[C(2), [], "parkinson-disease"]]);
-      expect(levodopa().partTitled("RLS in pregnancy")).toEqual([C(1)]);
-      expect(levodopa().partTitled("Parkinson disease")).toEqual([]);
+      expect(levodopa().partTitled("RLS in pregnancy", new Set())).toEqual([C(1)]);
+      expect(levodopa().partTitled("Parkinson disease", new Set())).toEqual([]);
+    });
+
+    it("a part of a card written `for` a pharm section places its card by title only in a system that has that section", () => {
+      // Her depression notes on the atypical antidepressants card: on adult MDD, whose system has a
+      // depression pharm section, but not on Peds MDD, whose system has none.
+      const parts = new Map([[C(4), [["major depressive disorder", "MDD"]]]]);
+      const atypicals = new CardMatcher(
+        [{ id: C(1), file: "bh", aliases: ["mirtazapine"], home: {} }, { id: C(4), file: "ad", aliases: [], home: {}, in: C(1), for: ["depression"] }],
+        parts,
+      );
+      const home = () => ({ system: "psychiatry", section: "depression" });
+      const section = { id: "depression", title: "Depression", tables: [], overview: null, lo: null, also: [] };
+      const cards = (st: StructureFile) => panelOf([], st, "Major Depressive Disorder (MDD)", "psychotherapy", atypicals, { home }).map((x) => x.card);
+      expect(cards(structureOf({ pharmSections: [section] }))).toEqual([C(1)]);
+      expect(cards(structureOf())).toEqual([]);
+      expect(atypicals.partTitled("Major Depressive Disorder (MDD)", new Set(["depression"]))).toEqual([C(1)]);
+      expect(atypicals.partTitled("Major Depressive Disorder (MDD)", new Set(["anxiety-disorders"]))).toEqual([]);
     });
   });
 

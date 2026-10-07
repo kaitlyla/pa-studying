@@ -552,11 +552,15 @@ export class CardMatcher {
   /**
    * The class cards with a part written for the condition titled `title`: a part of their group lists
    * `diseases`, one of which the title names (her "Restless Leg Syndrome: Levodopa" notes on Restless
-   * Leg Syndrome), unless the title names one of the group's `notDiseases`.
+   * Leg Syndrome), unless the title names one of the group's `notDiseases`. `sections` are the pharm
+   * sections of the condition's system.
    */
-  partTitled(title: string): string[] {
+  partTitled(title: string, sections: ReadonlySet<string>): string[] {
+    // A card written `for` pharm sections places by disease title only where the system teaches one of
+    // them: her depression notes on the atypicals card do not reach Peds, which has no depression section.
+    const teaches = (m: Card): boolean => m.for === undefined || m.for.some((s) => sections.has(s));
     return this.cards
-      .filter((c) => this.membersOf(c.id).some((m) => (this.partDiseases.get(m.id) ?? []).some((d) => phraseMatcher(d)(title))) && !this.notFor(c.id, title))
+      .filter((c) => this.membersOf(c.id).some((m) => teaches(m) && (this.partDiseases.get(m.id) ?? []).some((d) => phraseMatcher(d)(title))) && !this.notFor(c.id, title))
       .map((c) => c.id);
   }
 
@@ -1154,7 +1158,7 @@ export function medsPanel(
   // names none of its drugs: her levodopa card's restless-legs notes on Restless Leg Syndrome.
   const rowless = [
     ...namedCards.filter((c) => !kept.some((g) => g.card === c) && (column !== null || matcher.titledFor(c, topic.title))),
-    ...matcher.partTitled(topic.title).filter((c) => !namedCards.includes(c) && !kept.some((g) => g.card === c)),
+    ...matcher.partTitled(topic.title, new Set(s.structure.pharmSections.map((p) => p.id))).filter((c) => !namedCards.includes(c) && !kept.some((g) => g.card === c)),
   ];
   const withoutRows = rowless.flatMap((c): MedsCard[] => {
     const at = home(c, relevant);
