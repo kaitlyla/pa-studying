@@ -4,7 +4,7 @@ import { Schema } from "prosemirror-model";
 import type { NodeSpec, MarkSpec, AttributeSpec, Node as PMNode } from "prosemirror-model";
 import { idRegExp } from "./content/ids.ts";
 import { DASH_STYLES, isDashStyle } from "./drawing.ts";
-import type { MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
+import type { Crop, MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
 
 type Check = (value: unknown) => void;
 /** Exactly one attribute spec per field of a stored attrs type (lib/schemaTypes.ts). */
@@ -94,6 +94,15 @@ const shapes: Check = (v) => { if (!Array.isArray(v)) fail("shapes", v); v.forEa
 const a = (validate: Check, dflt?: unknown): AttributeSpec =>
   dflt === undefined ? { validate } : { validate, default: dflt };
 
+const cropSide: Check = (v) => { if (!isNum(v) || v < 0 || v >= 1) fail("crop fraction (0 to under 1)", v); };
+const cropShape = shape({ l: cropSide, t: cropSide, r: cropSide, b: cropSide }, "crop");
+const crop: Check = (v) => {
+  if (v === null) return;
+  cropShape(v);
+  const c = v as Crop;
+  if (c.l + c.r >= 1 || c.t + c.b >= 1) fail("crop (it must keep part of the picture)", v);
+};
+
 const imageAttrs = {
   asset: a(asset),
   widthPt: a(num),
@@ -101,6 +110,7 @@ const imageAttrs = {
   rot: a(oneOf(0, 90, 180, 270), 0),
   flipH: a(bool, false),
   flipV: a(bool, false),
+  crop: a(crop, null),
 } satisfies Specs<NodeAttrs["image"]>;
 
 const nodes: Record<string, NodeSpec> = {
@@ -216,17 +226,26 @@ export const schema: Schema = new Schema({ nodes, marks });
 
 type StoredJSON = { type: string; attrs?: Record<string, unknown>; content?: StoredJSON[] };
 
+/** Attributes written only when they differ from these values, by node type. */
+const WRITTEN_WHEN_SET: Readonly<Record<string, readonly [string, unknown]>> = {
+  table: ["ownWidths", false],
+  image: ["crop", null],
+  image_block: ["crop", null],
+};
+
 /**
  * A node as stored: the schema's own serialization (Node.toJSON: every attribute, schema key order),
- * except that a table's `ownWidths` is written only when true. Tables stored before the attribute
- * existed carry none, and every past version in the history must still read as canonical.
+ * except that a table's `ownWidths` is written only when true and a picture's `crop` only when set.
+ * Nodes stored before those attributes existed carry none, and every past version in the history must
+ * still read as canonical.
  */
 export function storedJSON(node: PMNode): unknown {
   // toJSON hands out the node's own attrs object, so a changed one is copied, never edited in place.
   const stored = (n: StoredJSON): StoredJSON => {
     let out = n;
-    if (n.type === "table" && n.attrs?.ownWidths === false) {
-      out = { ...n, attrs: Object.fromEntries(Object.entries(n.attrs).filter(([k]) => k !== "ownWidths")) };
+    const omit = WRITTEN_WHEN_SET[n.type];
+    if (omit && n.attrs && Object.hasOwn(n.attrs, omit[0]) && n.attrs[omit[0]] === omit[1]) {
+      out = { ...n, attrs: Object.fromEntries(Object.entries(n.attrs).filter(([k]) => k !== omit[0])) };
     }
     return out.content ? { ...out, content: out.content.map(stored) } : out;
   };

@@ -5,6 +5,7 @@ import { join, resolve, sep } from "node:path";
 import { PDFDocument } from "@cantoo/pdf-lib";
 import pdfMake from "pdfmake";
 import sharp from "sharp";
+import { cropOrNull, cropPixels } from "../../lib/crop.ts";
 import { FONTMAP_PATH, homePath, navPath, systemPath, type FontMapJson, type HomeJson, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
 import { buildDocDefinition, embedsAsStored, imageKey, storedMime, imageRequests, pdfFonts, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
 
@@ -12,12 +13,21 @@ async function readJson<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf8")) as T;
 }
 
-/** An image variant as a data URL: PNG/JPEG bytes as stored; GIF and turned/flipped pictures as PNG via sharp. */
+/** An image variant as a data URL: PNG/JPEG bytes as stored; GIF and cropped/turned/flipped pictures as PNG via sharp. */
 export async function imageDataUrl(assetsDir: string, v: ImageVariant): Promise<string> {
   const bytes = await readFile(join(assetsDir, v.asset));
   if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${bytes.toString("base64")}`;
+  // The crop cuts the file as stored, before it is turned or flipped: its own pass, so no other
+  // operation can come first.
+  const crop = cropOrNull(v.crop);
+  let source = bytes;
+  if (crop) {
+    const { width, height } = await sharp(bytes).metadata();
+    if (!width || !height) throw new Error(`PDF: image ${v.asset}: no pixel size to crop`);
+    source = await sharp(bytes).extract(cropPixels(width, height, crop)).png().toBuffer();
+  }
   // sharp mirrors (flip, flop) before it rotates, matching the stored transform's order.
-  const png = await sharp(bytes).flip(v.flipV).flop(v.flipH).rotate(v.rot).png().toBuffer();
+  const png = await sharp(source).flip(v.flipV).flop(v.flipH).rotate(v.rot).png().toBuffer();
   return `data:image/png;base64,${png.toString("base64")}`;
 }
 

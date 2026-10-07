@@ -13,6 +13,7 @@ export {
   tableIndent,
   cellStyle,
   imageStyle,
+  croppedImageStyle,
   imageTransform,
   textboxStyle,
   anchoredOffset,

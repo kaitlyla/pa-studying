@@ -6,7 +6,8 @@ import type { EditorState, Transaction } from "prosemirror-state";
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import { newId } from "../../../lib/content/index.ts";
-import type { TableAttrs } from "../../../lib/schemaTypes.ts";
+import { cropOrNull, keptFraction } from "../../../lib/crop.ts";
+import type { Crop, ImageAttrs, TableAttrs } from "../../../lib/schemaTypes.ts";
 import { tableColumns } from "../../render/styles.ts";
 import { M, N as nodes } from "./types.ts";
 
@@ -741,27 +742,106 @@ export function shownPictureWidth(img: Node | null | undefined, basePt: number):
   return emPx > 0 ? (img.offsetWidth / emPx) * basePt : null;
 }
 
-/** The selected picture's size and its size limits (pictureLimit), or null when no picture is selected. */
-export function selectedPictureSize(state: EditorState, ctx: DocContext): { size: PictureSize; limit: PictureSize } | null {
-  const sel = selectedPicture(state);
-  if (!sel) return null;
-  const { widthPt, heightPt } = sel.node.attrs as PictureSize;
-  return { size: { widthPt, heightPt }, limit: pictureLimit(sel.$from, ctx) };
+/** A picture's box (the part it keeps) and its crop. */
+export interface PictureCrop {
+  size: PictureSize;
+  crop: Crop | null;
 }
 
-/** The selected picture resized to `size(its size, its limits)`, staying selected. */
-function sizePicture(ctx: DocContext, size: (s: PictureSize, limit: PictureSize) => PictureSize): Command {
+/** Crop fractions are kept to 6 decimals (a millionth of the file), so stored values stay short. */
+const frac = (v: number): number => Math.round(v * 1e6) / 1e6;
+
+/**
+ * One axis of a crop drag: the moving edge's cut `v` (fraction of the file) changed by `d`, the other
+ * edge's cut `o` fixed, on a file `fullPt` long at the picture's scale. The kept part stays at least
+ * 24 pt (or as small as it already was) and at most `limitPt` (or as large as it already was), and
+ * nothing is cut below 0 (dragging past the file's edge stops there).
+ */
+function cropEdge(v: number, o: number, d: number, fullPt: number, limitPt: number): number {
+  const keptPt = (1 - v - o) * fullPt;
+  const fewest = Math.min(MIN_PICTURE_PT, keptPt);
+  const most = Math.max(limitPt, keptPt);
+  return frac(Math.max(0, 1 - o - most / fullPt, Math.min(v + d, 1 - o - fewest / fullPt)));
+}
+
+/**
+ * The box and crop a drag of crop `handle` (in the picture's own frame) by (dxPt, dyPt) makes of a
+ * picture that was `start`: each side handle moves that edge of the kept part, a corner moves its two
+ * edges; the picture's scale stays, so the box shrinks or grows with the kept part (as in Word).
+ * Moving an edge toward the middle cuts more off.
+ */
+export function draggedPictureCrop(start: PictureCrop, handle: PictureHandle, dxPt: number, dyPt: number, limit: PictureSize): PictureCrop {
+  const c = start.crop ?? { l: 0, t: 0, r: 0, b: 0 };
+  const k = keptFraction(c);
+  const fullW = start.size.widthPt / k.w;
+  const fullH = start.size.heightPt / k.h;
+  const next = { ...c };
+  if (handle.includes("e")) next.r = cropEdge(c.r, c.l, -dxPt / fullW, fullW, limit.widthPt);
+  if (handle.includes("w")) next.l = cropEdge(c.l, c.r, dxPt / fullW, fullW, limit.widthPt);
+  if (handle.includes("s")) next.b = cropEdge(c.b, c.t, -dyPt / fullH, fullH, limit.heightPt);
+  if (handle.includes("n")) next.t = cropEdge(c.t, c.b, dyPt / fullH, fullH, limit.heightPt);
+  const kept = keptFraction(next);
+  return { size: { widthPt: kept.w * fullW, heightPt: kept.h * fullH }, crop: cropOrNull(next) };
+}
+
+/**
+ * Where the part `next` keeps sits within the box of a picture cropped by `now` (both crops of the
+ * same file), as fractions of that box: what crop mode outlines while she drags.
+ */
+export function cropWindow(now: Crop | null, next: Crop | null): { left: number; top: number; width: number; height: number } {
+  const a = now ?? { l: 0, t: 0, r: 0, b: 0 };
+  const b = next ?? { l: 0, t: 0, r: 0, b: 0 };
+  const ka = keptFraction(a);
+  const kb = keptFraction(b);
+  return { left: (b.l - a.l) / ka.w, top: (b.t - a.t) / ka.h, width: kb.w / ka.w, height: kb.h / ka.h };
+}
+
+/**
+ * Reset crop: the whole file again at the picture's scale (its box grows by what the crop cut), scaled
+ * down if that is more than the limits allow.
+ */
+export function uncroppedPictureSize(p: PictureCrop, limit: PictureSize): PictureSize {
+  const k = keptFraction(p.crop);
+  return scaledPictureSize({ widthPt: p.size.widthPt / k.w, heightPt: p.size.heightPt / k.h }, 1, limit);
+}
+
+/** The selected picture's size, crop and size limits (pictureLimit), or null when no picture is selected. */
+export function selectedPictureSize(state: EditorState, ctx: DocContext): { size: PictureSize; crop: Crop | null; limit: PictureSize } | null {
+  const sel = selectedPicture(state);
+  if (!sel) return null;
+  const { widthPt, heightPt, crop } = sel.node.attrs as ImageAttrs;
+  return { size: { widthPt, heightPt }, crop: cropOrNull(crop), limit: pictureLimit(sel.$from, ctx) };
+}
+
+/** The selected picture given `change(it, its limits)`'s size and crop, staying selected. */
+function changePicture(ctx: DocContext, change: (p: PictureCrop, limit: PictureSize) => PictureCrop): Command {
   return (state, dispatch) => {
     const sel = selectedPicture(state);
     const now = selectedPictureSize(state, ctx);
     if (!sel || !now) return false;
     if (dispatch) {
-      const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, ...size(now.size, now.limit) });
+      const next = change(now, now.limit);
+      const tr = state.tr.setNodeMarkup(sel.from, undefined, { ...sel.node.attrs, ...next.size, crop: next.crop });
       tr.setSelection(NodeSelection.create(tr.doc, sel.from));
       dispatch(tr);
     }
     return true;
   };
+}
+
+/** The selected picture resized to `size(its size, its limits)`, its crop kept, staying selected. */
+function sizePicture(ctx: DocContext, size: (s: PictureSize, limit: PictureSize, crop: Crop | null) => PictureSize): Command {
+  return changePicture(ctx, (p, limit) => ({ size: size(p.size, limit, p.crop), crop: p.crop }));
+}
+
+/** A drag of the selected picture's crop handle: its box and crop as draggedPictureCrop makes them. */
+export function dragPictureCrop(start: PictureCrop, handle: PictureHandle, dxPt: number, dyPt: number, ctx: DocContext): Command {
+  return changePicture(ctx, (_p, limit) => draggedPictureCrop(start, handle, dxPt, dyPt, limit));
+}
+
+/** Reset crop on the selected picture (uncroppedPictureSize). */
+export function resetPictureCrop(ctx: DocContext): Command {
+  return changePicture(ctx, (p, limit) => ({ size: uncroppedPictureSize(p, limit), crop: null }));
 }
 
 /**
@@ -779,10 +859,14 @@ export function dragPicture(start: PictureSize, handle: PictureHandle, dxPt: num
 
 /**
  * Reset shape: the selected picture keeps its width and takes its file's proportions (`naturalRatio`,
- * height over width) again, scaled down if that makes it taller than the page allows.
+ * the file's height over width) again, for the part its crop keeps, scaled down if that makes it
+ * taller than the page allows.
  */
 export function resetPictureShape(naturalRatio: number, ctx: DocContext): Command {
-  return sizePicture(ctx, (s, limit) => scaledPictureSize({ widthPt: s.widthPt, heightPt: s.widthPt * naturalRatio }, 1, limit));
+  return sizePicture(ctx, (s, limit, crop) => {
+    const k = keptFraction(crop);
+    return scaledPictureSize({ widthPt: s.widthPt, heightPt: (s.widthPt * naturalRatio * k.h) / k.w }, 1, limit);
+  });
 }
 
 /** A picture file she chose, stored content-addressed (its `asset` name), with its size in pixels. */

@@ -284,6 +284,23 @@ describe("images, anchored content, text boxes, drawings, rules", () => {
     ]);
   });
 
+  it("embeds a cropped picture under its own variant's key, and requests it with its crop", () => {
+    const crop = { l: 0, t: 0.25, r: 0.5, b: 0 };
+    const cropped = imageKey({ asset: IMG, rot: 0, flipH: false, flipV: false, crop });
+    expect(cropped).toBe(`${imageKey({ asset: IMG, rot: 0, flipH: false, flipV: false })}|0,0.25,0.5,0`);
+    expect(imageKey({ asset: IMG, rot: 0, flipH: false, flipV: false, crop: null })).toBe(imageKey({ asset: IMG, rot: 0, flipH: false, flipV: false }));
+    const w = wordDoc();
+    w.blocks = [block("b_AAAAAAAAW1", "prose", doc(para([img({}), img({ crop })])))];
+    expect(imageRequests({ kind: "doc" }, { doc: w })).toEqual([
+      { asset: IMG, rot: 0, flipH: false, flipV: false },
+      { asset: IMG, rot: 0, flipH: false, flipV: false, crop },
+    ]);
+    const def = buildDocDefinition({ kind: "doc" }, { doc: w, images: { ...images, [cropped]: "data:image/png;base64,DDDD" } }, fontmap);
+    expect(Object.keys(def.images).sort()).toEqual([imageKey({ asset: IMG, rot: 0, flipH: false, flipV: false }), cropped].sort());
+    // Printed at its stored extent, which is already the kept part's size.
+    expect(def.content[1]).toMatchObject({ image: cropped, width: 100, height: 50 });
+  });
+
   it("places anchored content at min(offset, space − width)", () => {
     const anchored = (offsetPt: number) => ({ type: "anchored", attrs: { offsetPt }, content: [{ type: "image_block", attrs: { asset: IMG, widthPt: 100, heightPt: 50, rot: 0, flipH: false, flipV: false } }] });
     const [near, far] = build(doc(anchored(10) as never, anchored(1000) as never));

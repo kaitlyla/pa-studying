@@ -1,5 +1,6 @@
 // Browser PDF downloads (plan 70 §70.1–§70.2): the menu (OB6, app/reader) calls downloadPdf with the
 // page data it has loaded, overlay included, so the file reflects her latest saved edits.
+import { cropOrNull, cropPixels } from "../../lib/crop.ts";
 import { FONTMAP_PATH, type FontMapJson } from "../../lib/derive/published.ts";
 import {
   buildDocDefinition,
@@ -43,17 +44,22 @@ function base64(bytes: Uint8Array): string {
   return btoa(bin);
 }
 
-/** Draws an image turned and flipped as stored (flips first, then the rotation) and encodes PNG. */
+/**
+ * Draws the part of an image its crop keeps (cut from the file as stored), turned and flipped as
+ * stored (flips first, then the rotation), and encodes PNG.
+ */
 export async function convertToPng(blob: Blob, v: ImageVariant): Promise<Blob> {
   const bitmap = await createImageBitmap(blob);
+  const crop = cropOrNull(v.crop);
+  const src = crop ? cropPixels(bitmap.width, bitmap.height, crop) : { left: 0, top: 0, width: bitmap.width, height: bitmap.height };
   const turned = v.rot % 180 !== 0;
-  const canvas = new OffscreenCanvas(turned ? bitmap.height : bitmap.width, turned ? bitmap.width : bitmap.height);
+  const canvas = new OffscreenCanvas(turned ? src.height : src.width, turned ? src.width : src.height);
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("PDF: no 2D canvas for image conversion");
   ctx.translate(canvas.width / 2, canvas.height / 2);
   ctx.rotate((v.rot * Math.PI) / 180);
   ctx.scale(v.flipH ? -1 : 1, v.flipV ? -1 : 1);
-  ctx.drawImage(bitmap, -bitmap.width / 2, -bitmap.height / 2);
+  ctx.drawImage(bitmap, src.left, src.top, src.width, src.height, -src.width / 2, -src.height / 2, src.width, src.height);
   bitmap.close();
   return canvas.convertToBlob({ type: "image/png" });
 }

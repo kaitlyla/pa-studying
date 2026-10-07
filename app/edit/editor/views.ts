@@ -9,10 +9,11 @@ import type { MarkViewConstructor, NodeView, NodeViewConstructor } from "prosemi
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import {
-  anchoredOffset, assetUrl, cellStyle, Drawing, em, imageStyle, markerStyle, paragraphStyle, ruleStyle, runStyle,
+  anchoredOffset, assetUrl, cellStyle, croppedImageStyle, Drawing, em, imageStyle, markerStyle, paragraphStyle, ruleStyle, runStyle,
   tableColumns, tableIndent, textboxStyle, underlineStyle,
 } from "../../render/index.ts";
-import type { ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
+import { cropOrNull } from "../../../lib/crop.ts";
+import type { ImageAttrs, ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
 import { N } from "./types.ts";
 
 /** Copies a React style object onto a DOM element. */
@@ -102,6 +103,21 @@ function gridShape(table: PMNode): string {
   return `${map.width}x${map.height}:${map.map.map((o) => ordinal.get(o)).join(",")}`;
 }
 
+/**
+ * A picture's box as the reader draws it: its img, or for a cropped picture an element clipping its
+ * img. The box is what selection, the handles and the size reads measure.
+ */
+function pictureDom(a: ImageAttrs, basePt: number, extra: CSSProperties | null): HTMLElement {
+  const crop = cropOrNull(a.crop);
+  const img = el("img", crop ? croppedImageStyle(crop) : { ...imageStyle(a, basePt), ...extra }) as HTMLImageElement;
+  img.src = assetUrl(a.asset);
+  img.alt = "";
+  if (!crop) return img;
+  const box = el("span", { ...imageStyle(a, basePt), ...extra }, "pic-crop");
+  box.append(img);
+  return box;
+}
+
 export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
   return {
     paragraph: (node) => {
@@ -118,20 +134,8 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
     },
     hard_break: (node) => plain(el("br"), null, node),
     page_break: (node) => plain(el("span", null, "page-break"), null, node),
-    image: (node) => {
-      const a = attrsOf(node, "image");
-      const img = el("img", imageStyle(a, basePt)) as HTMLImageElement;
-      img.src = assetUrl(a.asset);
-      img.alt = "";
-      return plain(img, null, node);
-    },
-    image_block: (node) => {
-      const a = attrsOf(node, "image_block");
-      const img = el("img", { ...imageStyle(a, basePt), display: "block" }) as HTMLImageElement;
-      img.src = assetUrl(a.asset);
-      img.alt = "";
-      return plain(img, null, node);
-    },
+    image: (node) => plain(pictureDom(attrsOf(node, "image"), basePt, null), null, node),
+    image_block: (node) => plain(pictureDom(attrsOf(node, "image_block"), basePt, { display: "block" }), null, node),
     anchored: (node) => {
       const child = node.firstChild;
       const childWidth = Number(child?.attrs.widthPt ?? 0);

@@ -13,7 +13,7 @@ import { asOwner, installOwnerCss, mount, until, visibleText, type Mounted } fro
 import { closeImageViewer, ImageViewer } from "../files/imageViewer.tsx";
 import { GapBlock, ReviewSlidesBadge, UpdateNote } from "./labels.tsx";
 import { RichDoc } from "./RichDoc.tsx";
-import { anchoredOffset, borderCss, cellPadding, em, imageTransform, WORD_CELL_MARGINS, paragraphStyle, runStyle, tableColumns, underlineStyle } from "./styles.ts";
+import { anchoredOffset, borderCss, cellPadding, croppedImageStyle, em, imageTransform, WORD_CELL_MARGINS, paragraphStyle, runStyle, tableColumns, underlineStyle } from "./styles.ts";
 import { layoutTable, selectRows } from "./tableLayout.ts";
 
 let ui: Mounted | null = null;
@@ -351,6 +351,44 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     expect(img?.getAttribute("src")).toMatch(/data\/assets\/0123456789abcdef0123456789abcdef\.png$/);
     expect(img?.style.width).toBe("10em");
     expect(img?.style.transform).toBe("rotate(90deg) scaleX(-1)");
+  });
+
+  it("an uncropped picture is still the img itself, with no clipping box", async () => {
+    const c = await render(<RichDoc basePt={11} doc={docOf({ type: "image_block", attrs: { ...image, crop: null } })} />);
+    const img = need(c.querySelector<HTMLImageElement>(".pic-block > img.pic"), "picture");
+    expect(img.style.overflow).toBe("");
+    expect(img.style.position).toBe("");
+    expect(img.style.aspectRatio).toBe("110 / 55");
+  });
+
+  it("a cropped picture is a box the size of the part it keeps, clipping its file placed by percentages", async () => {
+    const crop = { l: 0.25, t: 0, r: 0.25, b: 0.5 };
+    expect(croppedImageStyle(crop)).toEqual({ position: "absolute", left: "-50%", top: "0%", width: "200%", height: "200%", maxWidth: "none" });
+    expect(croppedImageStyle({ l: 0.1, t: 0.2, r: 0, b: 0 })).toMatchObject({ left: "-11.1111%", top: "-25%", width: "111.1111%", height: "125%" });
+    const c = await render(
+      <>
+        <RichDoc basePt={11} doc={docOf({ type: "image_block", attrs: { ...image, crop } })} />
+        <ImageViewer />
+      </>,
+    );
+    try {
+      const box = need(c.querySelector<HTMLElement>(".pic-block > span.pic"), "picture box");
+      expect(box.style.width).toBe("10em");
+      expect(box.style.aspectRatio).toBe("110 / 55");
+      expect(box.style.overflow).toBe("hidden");
+      expect(box.style.position).toBe("relative");
+      expect(box.style.transform).toBe("rotate(90deg) scaleX(-1)");
+      const img = need(box.querySelector<HTMLImageElement>("img"), "picture file");
+      expect(img.getAttribute("src")).toMatch(/data\/assets\/0123456789abcdef0123456789abcdef\.png$/);
+      expect([img.style.position, img.style.left, img.style.top, img.style.width, img.style.height]).toEqual(["absolute", "-50%", "0%", "200%", "200%"]);
+      // Click to enlarge shows the same part.
+      act(() => box.click());
+      const shown = need(c.querySelector<HTMLElement>('[role="dialog"] .lb-crop'), "viewer crop box");
+      expect(shown.style.overflow).toBe("hidden");
+      expect(shown.querySelector("img")?.style.left).toBe("-50%");
+    } finally {
+      act(() => closeImageViewer());
+    }
   });
 
   it("clamps an anchored child's offset to the container: min(offset, 100% − child width)", async () => {

@@ -50,6 +50,12 @@
 .pic-handle.nw, .pic-handle.w, .pic-handle.sw { left: 0; }
 .pic-handle.n, .pic-handle.s { left: 50%; }
 .pic-handle.ne, .pic-handle.e, .pic-handle.se { left: 100%; }
+.pic-handles.crop .pic-handle { background: #1f2329; border-color: #fff; }
+/* Crop mode: the whole file faded, with the part the picture keeps drawn over it. */
+.pic-crop-ghost { position: fixed; z-index: 999; pointer-events: none; }
+.pic-crop-ghost[hidden] { display: none; }
+.pic-crop-ghost img.faded { opacity: 0.35; }
+.pic-crop-win { position: absolute; overflow: hidden; outline: 1.5px solid #1f2329; }
 .edit-loading { color: #5b6472; }
 
 /* banners */

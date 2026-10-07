@@ -357,4 +357,41 @@ describe("serialization (20: stable formatting)", () => {
       expect(() => parseFile(tablePath, stored)).toThrow(/does not round-trip/);
     });
   });
+
+  describe("a picture's crop, stored only when it cuts something", () => {
+    const picPath = `content/guides/fm/cardiovascular/blocks/${b(3)}.json`;
+    const picBlock = (extra: Record<string, unknown>) => ({
+      v: 1, id: b(3), kind: "prose", meta: {},
+      doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "image", attrs: { asset: `${"a".repeat(32)}.png`, widthPt: 120, heightPt: 60, ...extra } }] }] },
+    });
+    const picAttrs = (text: string): Record<string, unknown> =>
+      (parseFile<{ doc: { content: { content: { attrs: Record<string, unknown> }[] }[] } }>(picPath, text).doc.content[0]?.content[0] as { attrs: Record<string, unknown> }).attrs;
+    const CROP = { l: 0.25, t: 0, r: 0.125, b: 0.5 };
+
+    it("reads a picture saved before crops existed, and writes it back unchanged", () => {
+      const text = serializeFile(picPath, picBlock({}));
+      expect(text).not.toContain("crop");
+      expect(picAttrs(text).crop).toBeUndefined();
+      expect(serializeFile(picPath, parseFile(picPath, text))).toBe(text);
+    });
+
+    it("stores a crop after the flips and reads it back", () => {
+      const text = serializeFile(picPath, picBlock({ crop: CROP }));
+      expect(text).toMatch(/"flipV": false,\n +"crop": \{\n +"l": 0\.25,\n +"t": 0,\n +"r": 0\.125,\n +"b": 0\.5\n +\}/);
+      expect(picAttrs(text).crop).toEqual(CROP);
+      expect(serializeFile(picPath, parseFile(picPath, text))).toBe(text);
+    });
+
+    it("drops a null crop on write, and refuses a stored null as not canonical", () => {
+      expect(serializeFile(picPath, picBlock({ crop: null }))).toBe(serializeFile(picPath, picBlock({})));
+      const stored = serializeFile(picPath, picBlock({ crop: CROP })).replace(/"crop": \{[^}]*\}/, `"crop": null`);
+      expect(() => parseFile(picPath, stored)).toThrow(/does not round-trip/);
+    });
+
+    it("refuses a crop that keeps nothing, cuts a negative amount, or is missing a side", () => {
+      for (const bad of [{ ...CROP, l: 0.5, r: 0.5 }, { ...CROP, t: 0.6 }, { ...CROP, l: -0.1 }, { ...CROP, r: 1 }, { l: 0.1, t: 0, r: 0 }]) {
+        expect(() => serializeFile(picPath, picBlock({ crop: bad })), JSON.stringify(bad)).toThrow(/crop/);
+      }
+    });
+  });
 });

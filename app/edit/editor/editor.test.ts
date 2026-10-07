@@ -10,8 +10,9 @@ import type { DocJSON } from "../../../lib/content/index.ts";
 import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
-  docLines, dragPicture, draggedPictureSize, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, naturalPictureWidth, removeHighlight,
-  resetPictureShape, resizePicture, scaledPictureSize, seenPictureSize, selectedPictureSize, selectionSize, setHighlight, shownPictureWidth, steppedPictureSize, setSize,
+  cropWindow, docLines, dragPicture, dragPictureCrop, draggedPictureCrop, draggedPictureSize, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder,
+  moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture, scaledPictureSize, seenPictureSize, selectedPictureSize,
+  selectionSize, setHighlight, shownPictureWidth, steppedPictureSize, setSize, uncroppedPictureSize,
   sizeOptions, splitParagraph, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag,
   type Command,
 } from "./commands.ts";
@@ -758,7 +759,7 @@ describe("add and move pictures", () => {
   it("goes in at the cursor at its natural size (96 px = 72 pt), selected", () => {
     const state = run(selectText(createEditorState(docOf(para([text("ab")]))), 2, 2), insertPicture(pic(96, 48), ctx));
     expect(state.doc.firstChild?.toJSON().content.map((n: { type: string }) => n.type)).toEqual(["text", "image", "text"]);
-    expect(images(state)[0]?.attrs).toEqual({ asset: ASSET, widthPt: 72, heightPt: 36, rot: 0, flipH: false, flipV: false });
+    expect(images(state)[0]?.attrs).toEqual({ asset: ASSET, widthPt: 72, heightPt: 36, rot: 0, flipH: false, flipV: false, crop: null });
     expect(state.selection instanceof NodeSelection && state.selection.node.type.name).toBe("image");
   });
 
@@ -914,7 +915,7 @@ describe("picture size", () => {
     s0.doc.descendants((n, pos) => { if (n.type === schema.nodes.image) imgPos = pos; });
     const picked = s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, imgPos)));
     const attrsOf = (st: typeof s0) => st.doc.nodeAt(imgPos)?.attrs as { widthPt: number; heightPt: number };
-    expect(selectedPictureSize(picked, ctx)).toEqual({ size: size(90, 45), limit: size(100, 720) });
+    expect(selectedPictureSize(picked, ctx)).toEqual({ size: size(90, 45), crop: null, limit: size(100, 720) });
     // Stretched down 30 pt: only the height changes.
     const tall = run(picked, dragPicture(size(90, 45), "s", 0, 30, ctx));
     near(attrsOf(tall), size(90, 75));
@@ -973,6 +974,116 @@ describe("picture size", () => {
     expect(naturalPictureWidth(96, 468)).toBe(72);
     expect(naturalPictureWidth(960, 468)).toBe(468);
     expect(naturalPictureWidth(960, 10)).toBe(24);
+  });
+});
+
+describe("picture crop", () => {
+  const size = (widthPt: number, heightPt: number) => ({ widthPt, heightPt });
+  const LIMIT = size(468, 648);
+  const crop = (l: number, t: number, r: number, b: number) => ({ l, t, r, b });
+  /** A crop drag's result, its box rounded to a millionth of a pt (the fractions are stored to 6 decimals). */
+  const cropped = (...a: Parameters<typeof draggedPictureCrop>) => {
+    const out = draggedPictureCrop(...a);
+    const pt = (v: number) => Math.round(v * 1e6) / 1e6;
+    return { size: size(pt(out.size.widthPt), pt(out.size.heightPt)), crop: out.crop };
+  };
+  // A 200 × 100 pt picture showing its whole file.
+  const whole = { size: size(200, 100), crop: null };
+
+  it("a side handle cuts its own edge, and the box shrinks with what it keeps, at the picture's scale", () => {
+    expect(cropped(whole, "e", -50, 999, LIMIT)).toEqual({ size: size(150, 100), crop: crop(0, 0, 0.25, 0) });
+    expect(cropped(whole, "w", 40, 0, LIMIT)).toEqual({ size: size(160, 100), crop: crop(0.2, 0, 0, 0) });
+    expect(cropped(whole, "n", 999, 30, LIMIT)).toEqual({ size: size(200, 70), crop: crop(0, 0.3, 0, 0) });
+    expect(cropped(whole, "s", 0, -20, LIMIT)).toEqual({ size: size(200, 80), crop: crop(0, 0, 0, 0.2) });
+  });
+
+  it("a corner cuts both of its edges", () => {
+    expect(cropped(whole, "se", -50, -20, LIMIT)).toEqual({ size: size(150, 80), crop: crop(0, 0, 0.25, 0.2) });
+    expect(cropped(whole, "nw", 20, 10, LIMIT)).toEqual({ size: size(180, 90), crop: crop(0.1, 0.1, 0, 0) });
+  });
+
+  it("dragging an edge outward brings back what was cut, up to the file's own edge", () => {
+    // Cut 25% off each side: the box shows 100 of the file's 200 pt.
+    const start = { size: size(100, 100), crop: crop(0.25, 0, 0.25, 0) };
+    expect(cropped(start, "e", 30, 0, LIMIT)).toEqual({ size: size(130, 100), crop: crop(0.25, 0, 0.1, 0) });
+    expect(cropped(start, "e", 500, 0, LIMIT)).toEqual({ size: size(150, 100), crop: crop(0.25, 0, 0, 0) });
+    // An uncropped picture has nothing to bring back; dragging both cuts away leaves no crop.
+    expect(cropped(whole, "e", 50, 0, LIMIT)).toEqual({ size: size(200, 100), crop: null });
+    expect(cropped({ size: size(150, 100), crop: crop(0, 0, 0.25, 0) }, "e", 80, 0, LIMIT)).toEqual({ size: size(200, 100), crop: null });
+  });
+
+  it("keeps at least 24 pt of the picture, and brings back no more than its size limit allows", () => {
+    expect(cropped(whole, "e", -190, 0, LIMIT)).toEqual({ size: size(24, 100), crop: crop(0, 0, 0.88, 0) });
+    expect(cropped(whole, "sw", 500, -500, LIMIT)).toEqual({ size: size(24, 24), crop: crop(0.88, 0, 0, 0.76) });
+    const start = { size: size(100, 100), crop: crop(0.25, 0, 0.25, 0) };
+    expect(cropped(start, "e", 500, 0, size(120, 648))).toEqual({ size: size(120, 100), crop: crop(0.25, 0, 0.15, 0) });
+  });
+
+  it("cuts a squished picture in its own proportions", () => {
+    // Its file drawn 200 × 50: cutting 25 pt off the bottom cuts half the file's height.
+    expect(cropped({ size: size(200, 50), crop: null }, "s", 0, -25, LIMIT)).toEqual({ size: size(200, 25), crop: crop(0, 0, 0, 0.5) });
+  });
+
+  it("a crop drag on a turned picture cuts the edge seen under the pointer", () => {
+    // Turned a quarter clockwise, the edge seen on the right is its own top.
+    const d = unturnedDrag("e", -30, 0, { rot: 90 });
+    expect(cropped(whole, d.handle, d.dx, d.dy, LIMIT)).toEqual({ size: size(200, 70), crop: crop(0, 0.3, 0, 0) });
+  });
+
+  it("crop mode outlines where the new kept part sits in the picture's current box", () => {
+    expect(cropWindow(crop(0.25, 0, 0.25, 0), crop(0.25, 0, 0.5, 0))).toEqual({ left: 0, top: 0, width: 0.5, height: 1 });
+    expect(cropWindow(crop(0.25, 0, 0.25, 0), crop(0, 0, 0.25, 0))).toEqual({ left: -0.5, top: 0, width: 1.5, height: 1 });
+    expect(cropWindow(null, crop(0.1, 0.2, 0, 0))).toEqual({ left: 0.1, top: 0.2, width: 0.9, height: 0.8 });
+    expect(cropWindow(null, null)).toEqual({ left: 0, top: 0, width: 1, height: 1 });
+  });
+
+  it("Reset crop shows the whole file at the picture's scale, within the limits", () => {
+    const start = { size: size(100, 100), crop: crop(0.25, 0, 0.25, 0) };
+    expect(uncroppedPictureSize(start, LIMIT)).toEqual(size(200, 100));
+    expect(uncroppedPictureSize(start, size(150, 648))).toEqual(size(150, 75));
+    expect(uncroppedPictureSize(whole, LIMIT)).toEqual(size(200, 100));
+  });
+
+  describe("on a selected picture", () => {
+    const img = { type: "image", attrs: { asset: ASSET, widthPt: 200, heightPt: 100 } };
+    const picked = (() => {
+      const s0 = createEditorState(docOf(para([img])));
+      return s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, 1)));
+    })();
+    const attrsOf = (st: EditorState) => st.doc.nodeAt(1)?.attrs as { widthPt: number; heightPt: number; crop: unknown };
+
+    it("a crop drag saves the crop and the box, and the picture stays selected", () => {
+      const st = run(picked, dragPictureCrop(whole, "e", -50, 0, ctx));
+      expect(attrsOf(st)).toMatchObject({ widthPt: 150, heightPt: 100, crop: crop(0, 0, 0.25, 0) });
+      expect(st.selection).toBeInstanceOf(NodeSelection);
+      expect(selectedPictureSize(st, ctx)).toEqual({ size: size(150, 100), crop: crop(0, 0, 0.25, 0), limit: size(540, 720) });
+    });
+
+    it("Picture − / + and a resize drag keep the crop", () => {
+      const st = run(picked, dragPictureCrop(whole, "e", -50, 0, ctx));
+      expect(attrsOf(run(st, resizePicture(1, ctx))).crop).toEqual(crop(0, 0, 0.25, 0));
+      expect(attrsOf(run(st, dragPicture(size(150, 100), "s", 0, 20, ctx)))).toMatchObject({ widthPt: 150, heightPt: 120, crop: crop(0, 0, 0.25, 0) });
+    });
+
+    it("Reset shape gives the kept part the file's proportions", () => {
+      // The file is 2:1 (height/width 0.5); keeping the left half, the kept part is square.
+      const st = run(picked, dragPictureCrop(whole, "e", -100, 0, ctx));
+      const squished = run(st, dragPicture(size(100, 100), "s", 0, -40, ctx));
+      expect(attrsOf(squished)).toMatchObject({ widthPt: 100, heightPt: 60 });
+      expect(attrsOf(run(squished, resetPictureShape(0.5, ctx)))).toMatchObject({ widthPt: 100, heightPt: 100, crop: crop(0, 0, 0.5, 0) });
+    });
+
+    it("Reset crop brings back the whole file and stores no crop", () => {
+      const st = run(run(picked, dragPictureCrop(whole, "se", -50, -20, ctx)), resetPictureCrop(ctx));
+      expect(attrsOf(st)).toMatchObject({ widthPt: 200, heightPt: 100, crop: null });
+      expect(st.selection).toBeInstanceOf(NodeSelection);
+    });
+
+    it("no picture selected: the crop commands do nothing", () => {
+      const s0 = createEditorState(docOf(para([img])));
+      expect(dragPictureCrop(whole, "e", -50, 0, ctx)(s0)).toBe(false);
+      expect(resetPictureCrop(ctx)(s0)).toBe(false);
+    });
   });
 });
 

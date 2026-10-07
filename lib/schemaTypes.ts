@@ -51,6 +51,18 @@ export type DrawingShape = {
   asset: string | null;
 };
 
+/**
+ * The part of a picture's file it shows, like Word's crop: the fraction of the file's width cut from
+ * the left (`l`) and right (`r`), and of its height from the top (`t`) and bottom (`b`). Measured on the
+ * file as stored, before the picture's rotation and flips.
+ */
+export type Crop = { l: number; t: number; r: number; b: number };
+
+/**
+ * `widthPt`/`heightPt`: the box the picture fills, i.e. the part `crop` keeps (the unrotated box).
+ * `crop`: null or absent when the whole file shows. It is written only when set, so pictures stored
+ * before it existed (and every past version) stay canonical.
+ */
 export type ImageAttrs = {
   asset: string;
   widthPt: number;
@@ -58,6 +70,7 @@ export type ImageAttrs = {
   rot: 0 | 90 | 180 | 270;
   flipH: boolean;
   flipV: boolean;
+  crop?: Crop | null;
 };
 
 export type ParagraphAttrs = {

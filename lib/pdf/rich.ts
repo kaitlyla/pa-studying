@@ -1,6 +1,7 @@
 // Stored rich text (20 §20.13) → pdfmake content, following the PDF layout rules of plan 70 §70.3.
 import type { DocJSON } from "../content/types.ts";
-import type { Border, CellBorders, DrawingShape as Shape, ListMarker, MarkJSON as Mark, ParagraphBorders, PMNode, TableBorders } from "../schemaTypes.ts";
+import { cropOrNull } from "../crop.ts";
+import type { Border, CellBorders, Crop, DrawingShape as Shape, ListMarker, MarkJSON as Mark, ParagraphBorders, PMNode, TableBorders } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
 import { CARLITO_LINE_FACTOR, faceOf, spaceWidth, textWidth } from "./metrics.ts";
 import { drawingSvg } from "./svg.ts";
@@ -264,7 +265,9 @@ function boxed(inner: Content, shade: string | null, borders: ParagraphBorders |
 }
 
 function variantOf(n: PMNode): ImageVariant {
-  return { asset: attr(n, "asset", ""), rot: attr(n, "rot", 0), flipH: attr(n, "flipH", false), flipV: attr(n, "flipV", false) };
+  const v: ImageVariant = { asset: attr(n, "asset", ""), rot: attr(n, "rot", 0), flipH: attr(n, "flipH", false), flipV: attr(n, "flipV", false) };
+  const crop = cropOrNull(attr<Crop | null>(n, "crop", null));
+  return crop ? { ...v, crop } : v;
 }
 
 function useImage(env: RichEnv, v: ImageVariant): string {

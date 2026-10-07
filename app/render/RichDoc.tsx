@@ -1,6 +1,7 @@
 // Stored ProseMirror JSON → React elements (plan 40 §40.6). No HTML string is ever built or injected
 // (10 §10.6 control 2): every node becomes a React element and every text is a React text child.
 import { createContext, Fragment, useContext, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { cropOrNull } from "../../lib/crop.ts";
 import { isAllowedHref } from "../../lib/schema.ts";
 import { isMark, isNode, type CellMargins, type ImageAttrs, type ListMarker, type MarkJSON, type MarkName, type NodeJSON, type PMNode, type TableBorders } from "../../lib/schemaTypes.ts";
 import { DATA_BASE } from "../data/load.ts";
@@ -11,6 +12,7 @@ import { HitBlock, Txt } from "./Text.tsx";
 import {
   anchoredOffset,
   cellStyle,
+  croppedImageStyle,
   em,
   imageStyle,
   markerStyle,
@@ -117,7 +119,14 @@ export function withMarks(marks: readonly MarkJSON[] | undefined, child: ReactNo
 function InlineImage({ attrs }: { attrs: ImageAttrs }): ReactNode {
   const { basePt } = useContext(RenderCtx);
   const url = assetUrl(attrs.asset);
-  return <img src={url} alt="" loading="lazy" className="pic" style={imageStyle(attrs, basePt)} onClick={() => openImageViewer(url)} />;
+  const crop = cropOrNull(attrs.crop);
+  const open = (): void => openImageViewer(url, crop);
+  if (!crop) return <img src={url} alt="" loading="lazy" className="pic" style={imageStyle(attrs, basePt)} onClick={open} />;
+  return (
+    <span className="pic" style={imageStyle(attrs, basePt)} onClick={open}>
+      <img src={url} alt="" loading="lazy" style={croppedImageStyle(crop)} />
+    </span>
+  );
 }
 
 /** Character offset where each inline node starts (hard breaks count as one character). */

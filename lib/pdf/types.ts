@@ -1,5 +1,7 @@
 // Inputs and outputs of the PDF builder (plan 70).
+import { cropOrNull } from "../crop.ts";
 import type { DocJson, HomeJson, NavJson, SystemJson } from "../derive/published.ts";
+import type { Crop } from "../schemaTypes.ts";
 
 /** One menu scope (70 §70.2). The whole guide is built by tools/pdf from `preamble` and `system`. */
 export type PdfScope =
@@ -11,12 +13,14 @@ export type PdfScope =
   | { kind: "doc" }
   | { kind: "preamble" };
 
-/** An image as it must appear in the PDF: its asset with rotation and flips baked in. */
+/** An image as it must appear in the PDF: its asset with its crop, rotation and flips baked in. */
 export interface ImageVariant {
   asset: string;
   rot: number;
   flipH: boolean;
   flipV: boolean;
+  /** The part of the file it keeps (cut before it is turned or flipped); absent or null: all of it. */
+  crop?: Crop | null;
 }
 
 /** Image key → data URL (PNG or JPEG) of that variant. */
@@ -41,5 +45,7 @@ export interface DocDefinition {
 }
 
 export function imageKey(v: ImageVariant): string {
-  return `${v.asset}|${v.rot}|${v.flipH ? "h" : "-"}${v.flipV ? "v" : "-"}`;
+  const key = `${v.asset}|${v.rot}|${v.flipH ? "h" : "-"}${v.flipV ? "v" : "-"}`;
+  const c = cropOrNull(v.crop);
+  return c ? `${key}|${c.l},${c.t},${c.r},${c.b}` : key;
 }

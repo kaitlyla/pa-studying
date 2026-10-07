@@ -3,7 +3,7 @@
 // toolbar, and the save banners.
 import { Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { NodeSelection } from "prosemirror-state";
+import { NodeSelection, type Selection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, type DocJSON, type GapFigure, type GapFile } from "../../lib/content/index.ts";
 import { pubFigures } from "../../lib/derive/published.ts";
@@ -16,11 +16,11 @@ import { useIsPhone } from "../shell/responsive.ts";
 import { PageBarSlot } from "../shell/pageScale.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
-  dragPicture, draggedPictureSize, moveParagraph, naturalPictureWidth, removeHighlight, resetPictureShape, resizePicture, scaledPictureSize, selectedPictureSize,
-  selectionSize, setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic, toggleUnderline, type Command,
-  type DocContext, type PictureHandle, type PictureSize, type PictureTurn,
+  dragPicture, dragPictureCrop, draggedPictureSize, moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture,
+  scaledPictureSize, selectedPictureSize, selectionSize, setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic,
+  toggleUnderline, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
 } from "./editor/commands.ts";
-import { PictureHandles } from "./PictureHandles.tsx";
+import { PictureHandles, pictureFile } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
@@ -112,6 +112,10 @@ const resizeFigure = (p: PickedFigure, dir: 1 | -1): void =>
 
 /** The toolbar's button that gives a squished or stretched picture its file's proportions again, keeping its width. */
 export const RESET_SHAPE = "Reset shape";
+/** The toolbar's toggle that turns the selected picture's handles into crop handles, as in Word. */
+export const CROP = "Crop";
+/** The toolbar's button that brings back the whole of a cropped picture's file. */
+export const RESET_CROP = "Reset crop";
 
 /** Reset shape on the picked figure (its file's proportions are its stored pixel size's). */
 function resetFigureShape(p: PickedFigure): void {
@@ -244,13 +248,14 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
 
 // ---- toolbar ------------------------------------------------------------------------------------
 
-function Tool({ label, run, children, refk, disabled }: { label: string; run: () => void; children: ReactNode; refk?: string; disabled?: boolean }): ReactNode {
+function Tool({ label, run, children, refk, disabled, pressed }: { label: string; run: () => void; children: ReactNode; refk?: string; disabled?: boolean; pressed?: boolean }): ReactNode {
   return (
     <button
       type="button"
       className="tb"
       title={label}
       aria-label={label}
+      aria-pressed={pressed}
       data-ref={refk}
       disabled={disabled}
       onMouseDown={(e) => {
@@ -331,6 +336,7 @@ function Toolbar(): ReactNode {
   const { edit } = useEdit();
   const { a, figure } = useActive();
   const phone = useIsPhone();
+  const [cropSel, setCropSel] = useState<Selection | null>(null);
   const cmd = (c: (ctx: DocContext) => Command) => (): void => {
     if (!a) return;
     c(a.ctx)(a.view.state, a.view.dispatch);
@@ -346,20 +352,42 @@ function Toolbar(): ReactNode {
   };
   const shownPicture = (c: DocContext): number | null => shownPictureWidth(pictureImg(), c.basePt);
   const pictureNow = a && picSel ? selectedPictureSize(a.view.state, a.ctx) : null;
+  // Crop mode belongs to the selection it was turned on for (or the one its own last crop left), so
+  // selecting anything else, or changing the picture any other way, ends it.
+  const cropping = picSel !== null && cropSel === picSel;
+  useEffect(() => {
+    if (!cropping) return;
+    const key = (ev: KeyboardEvent): void => {
+      if (ev.key !== "Escape" && ev.key !== "Enter") return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      setCropSel(null);
+    };
+    document.addEventListener("keydown", key, true);
+    return () => document.removeEventListener("keydown", key, true);
+  }, [cropping]);
   const figureOpen = figure !== null && openGap(figure.gapId)?.meta.figures?.[figure.index] !== undefined;
   // Reset shape: the picture's file proportions, read from the img the editor drew (not yet loaded: none).
   const resetPicture = (c: DocContext): Command => (state, dispatch) => {
-    const img = pictureImg();
-    if (!(img instanceof HTMLImageElement) || img.naturalWidth <= 0) return false;
+    const img = pictureFile(pictureImg());
+    if (!img || img.naturalWidth <= 0) return false;
     return resetPictureShape(img.naturalHeight / img.naturalWidth, c)(state, dispatch);
   };
-  const dragSelected = (start: PictureSize, h: PictureHandle, dxPt: number, dyPt: number): void => {
-    if (!a || !picSel) return;
+  /** Runs a handle drag's change; false when the picture grabbed is no longer the one selected. */
+  const onGrabbed = (change: (c: DocContext) => Command): boolean => {
+    if (!a || !picSel) return false;
     // Applied only to the picture as it was grabbed: one changed or unselected during the drag is left alone.
     const now = a.view.state.selection;
-    if (!(now instanceof NodeSelection) || now.node !== picSel.node) return;
-    dragPicture(start, h, dxPt, dyPt, a.ctx)(a.view.state, a.view.dispatch);
+    if (!(now instanceof NodeSelection) || now.node !== picSel.node) return false;
+    change(a.ctx)(a.view.state, a.view.dispatch);
     a.view.focus();
+    return true;
+  };
+  const dragSelected = (start: PictureSize, h: PictureHandle, dxPt: number, dyPt: number): void => {
+    onGrabbed((c) => dragPicture(start, h, dxPt, dyPt, c));
+  };
+  const cropSelected = (start: PictureCrop, h: PictureHandle, dxPt: number, dyPt: number): void => {
+    if (a && onGrabbed((c) => dragPictureCrop(start, h, dxPt, dyPt, c))) setCropSel(a.view.state.selection);
   };
   const inTable = a ? changeCellMargins("sides", 1)(a.view.state) : false;
   const canNarrow = a ? changeColumnWidth(-1)(a.view.state) : false;
@@ -438,6 +466,8 @@ function Toolbar(): ReactNode {
             <Tool label="Make picture smaller" run={cmd((c) => resizePicture(-1, c, shownPicture(c)))} refk="tb-pic-smaller">−</Tool>
             <Tool label="Make picture bigger" run={cmd((c) => resizePicture(1, c, shownPicture(c)))} refk="tb-pic-bigger">+</Tool>
             <Tool label={RESET_SHAPE} run={cmd(resetPicture)} refk="tb-pic-reset">{RESET_SHAPE}</Tool>
+            <Tool label={CROP} pressed={cropping} run={() => setCropSel(cropping ? null : picSel)} refk="tb-pic-crop">{CROP}</Tool>
+            {pictureNow?.crop && <Tool label={RESET_CROP} run={cmd(resetPictureCrop)} refk="tb-pic-uncrop">{RESET_CROP}</Tool>}
             <Tool label="Delete picture" run={() => { if (a) void deletePicture(editorConfirm)(a.view); }} refk="tb-pic-delete">Delete picture</Tool>
           </>
         )}
@@ -450,7 +480,15 @@ function Toolbar(): ReactNode {
             onResize={(start, h, dxPt, dyPt) => sizeFigure(figure, () => draggedPictureSize(start, h, dxPt, dyPt, FIGURE_LIMIT))}
           />
         ) : a && picSel && pictureNow && (
-          <PictureHandles find={pictureImg} basePt={a.ctx.basePt} size={() => pictureNow.size} limit={pictureNow.limit} turn={picSel.node.attrs as PictureTurn} onResize={dragSelected} />
+          <PictureHandles
+            find={pictureImg}
+            basePt={a.ctx.basePt}
+            size={() => pictureNow.size}
+            limit={pictureNow.limit}
+            turn={picSel.node.attrs as PictureTurn}
+            onResize={dragSelected}
+            cropping={cropping ? { crop: pictureNow.crop, onCrop: cropSelected } : null}
+          />
         )}
       </div>
       <span className="estat" data-ref="edit-status-row">

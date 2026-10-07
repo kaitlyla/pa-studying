@@ -5,7 +5,8 @@
 // renders as L / basePt em, so her proportions hold on every screen.
 import type { CSSProperties } from "react";
 import { FONT_FAMILIES } from "../../lib/fonts.ts";
-import type { Border, CellBorders, CellMargins, ImageAttrs, MarkJSON, ParagraphAttrs, TableAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
+import { cropOrNull, keptFraction } from "../../lib/crop.ts";
+import type { Border, CellBorders, CellMargins, Crop, ImageAttrs, MarkJSON, ParagraphAttrs, TableAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
 import { borderVisible, cellSide, TAB_STOP_PT, TEXTBOX_INSET_X_PT, TEXTBOX_INSET_Y_PT, underlineKind, type UnderlineKind } from "../../lib/wordFormat.ts";
 
 export type { Border, MarkJSON, ParagraphAttrs, TableBorders } from "../../lib/schemaTypes.ts";
@@ -209,7 +210,7 @@ export function cellStyle(a: CellAttrs, basePt: number, table: TableBorders | nu
 }
 
 /** CSS transform for a picture's rotation and flips, or undefined. */
-export function imageTransform(a: Partial<Pick<ImageAttrs, "rot" | "flipH" | "flipV">>): string | undefined {
+export function imageTransform(a: { rot?: number; flipH?: boolean; flipV?: boolean }): string | undefined {
   const parts: string[] = [];
   if (a.rot) parts.push(`rotate(${a.rot}deg)`);
   if (a.flipH) parts.push("scaleX(-1)");
@@ -217,6 +218,11 @@ export function imageTransform(a: Partial<Pick<ImageAttrs, "rot" | "flipH" | "fl
   return parts.length ? parts.join(" ") : undefined;
 }
 
+/**
+ * The style of a picture's box: `widthPt` × `heightPt` (the part it keeps), scaled down with its
+ * column, turned and flipped. An uncropped picture's box is its img; a cropped one's is an element
+ * that clips its img (styled by croppedImageStyle).
+ */
 export function imageStyle(a: Pick<ImageAttrs, "widthPt" | "heightPt"> & Partial<ImageAttrs>, basePt: number): CSSProperties {
   const s: CSSProperties = {
     width: em(a.widthPt, basePt),
@@ -224,9 +230,18 @@ export function imageStyle(a: Pick<ImageAttrs, "widthPt" | "heightPt"> & Partial
     height: "auto",
     aspectRatio: a.heightPt > 0 ? `${a.widthPt} / ${a.heightPt}` : undefined,
   };
+  if (cropOrNull(a.crop)) Object.assign(s, { display: "inline-block", position: "relative", overflow: "hidden" });
   const t = imageTransform(a);
   if (t) s.transform = t;
   return s;
+}
+
+const pct = (f: number): string => `${Math.round(f * 1e6) / 1e4}%`;
+
+/** A cropped picture's img inside its box: the whole file, placed so the box shows the kept part. */
+export function croppedImageStyle(crop: Crop): CSSProperties {
+  const k = keptFraction(crop);
+  return { position: "absolute", left: pct(-crop.l / k.w), top: pct(-crop.t / k.h), width: pct(1 / k.w), height: pct(1 / k.h), maxWidth: "none" };
 }
 
 /** A text box with Word's default insets. */

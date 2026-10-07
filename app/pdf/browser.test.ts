@@ -53,7 +53,7 @@ describe("convertToPng", () => {
     const out = await convertToPng(new Blob([PNG_BYTES]), { asset: GIF, rot: 90, flipH: true, flipV: false });
     expect(canvases.map((c) => [c.width, c.height])).toEqual([[2, 4]]);
     // The context applies the last transform first: scale (mirror), then rotate, then centre.
-    expect(calls).toEqual([["translate", 1, 2], ["rotate", Math.PI / 2], ["scale", -1, 1], ["drawImage", -2, -1], ["close"], ["convertToBlob", "image/png"]]);
+    expect(calls).toEqual([["translate", 1, 2], ["rotate", Math.PI / 2], ["scale", -1, 1], ["drawImage", 0, 0, 4, 2, -2, -1, 4, 2], ["close"], ["convertToBlob", "image/png"]]);
     expect(out.type).toBe("image/png");
   });
 
@@ -62,6 +62,14 @@ describe("convertToPng", () => {
     await convertToPng(new Blob([PNG_BYTES]), { asset: GIF, rot: 180, flipH: false, flipV: true });
     expect(canvases.map((c) => [c.width, c.height])).toEqual([[4, 2]]);
     expect(calls.slice(0, 3)).toEqual([["translate", 2, 1], ["rotate", Math.PI], ["scale", 1, -1]]);
+  });
+
+  it("draws only the part a crop keeps, on a canvas that size, before turning it", async () => {
+    const { calls, canvases } = stubCanvas();
+    // The 4 × 2 bitmap keeps its right three quarters and bottom half: 3 × 1 px from (1, 1).
+    await convertToPng(new Blob([PNG_BYTES]), { asset: PNG, rot: 90, flipH: false, flipV: false, crop: { l: 0.25, t: 0.5, r: 0, b: 0 } });
+    expect(canvases.map((c) => [c.width, c.height])).toEqual([[1, 3]]);
+    expect(calls.slice(0, 4)).toEqual([["translate", 0.5, 1.5], ["rotate", Math.PI / 2], ["scale", 1, 1], ["drawImage", 1, 1, 3, 1, -1.5, -0.5, 3, 1]]);
   });
 });
 

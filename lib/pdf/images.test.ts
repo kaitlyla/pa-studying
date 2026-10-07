@@ -25,6 +25,9 @@ describe("embedsAsStored", () => {
     [{ asset: PNG, rot: 90, flipH: false, flipV: false }, false],
     [{ asset: PNG, rot: 0, flipH: true, flipV: false }, false],
     [{ asset: PNG, rot: 0, flipH: false, flipV: true }, false],
+    [{ asset: PNG, rot: 0, flipH: false, flipV: false, crop: null }, true],
+    [{ asset: PNG, rot: 0, flipH: false, flipV: false, crop: { l: 0, t: 0, r: 0.5, b: 0 } }, false],
+    [{ asset: `${"c".repeat(32)}.jpg`, rot: 0, flipH: false, flipV: false, crop: { l: 0.1, t: 0, r: 0, b: 0 } }, false],
   ])("%j → %s", (v, expected) => {
     expect(embedsAsStored(v)).toBe(expected);
   });

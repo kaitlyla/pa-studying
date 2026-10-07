@@ -352,6 +352,31 @@ describe("image viewer", () => {
       m.unmount();
     }
   });
+
+  it("shows only the part a cropped picture keeps: at its own pixel size at Fit, and zoomed by the box", async () => {
+    const m = await mount(<ImageViewer />);
+    try {
+      act(() => openImageViewer("/data/files/c.png", { l: 0.25, t: 0, r: 0.25, b: 0.5 }));
+      const box = (): HTMLElement => need(m.container.querySelector<HTMLElement>(".lb-in .lb-crop"), "crop box");
+      const img = need(box().querySelector<HTMLImageElement>("img"), "viewer image");
+      expect(img.getAttribute("src")).toBe("/data/files/c.png");
+      expect([img.style.left, img.style.width, img.style.height]).toEqual(["-50%", "200%", "200%"]);
+      // Its file is 800 × 400 px; the kept part is 400 × 200.
+      Object.defineProperty(img, "naturalWidth", { configurable: true, value: 800 });
+      Object.defineProperty(img, "naturalHeight", { configurable: true, value: 400 });
+      act(() => { img.dispatchEvent(new Event("load")); });
+      expect(box().style.width).toBe("400px");
+      expect(box().style.maxWidth).toBe("100%");
+      expect(box().style.aspectRatio).toBe("400 / 200");
+      act(() => need(m.container.querySelector<HTMLButtonElement>('button[aria-label="Zoom in"]'), "Zoom in").click());
+      expect(box().style.width).toBe("150%");
+      expect(box().style.maxWidth).toBe("none");
+      expect(img.dataset.zoom).toBe("1.5");
+    } finally {
+      act(() => closeImageViewer());
+      m.unmount();
+    }
+  });
 });
 
 // ---- slide navigation -------------------------------------------------------------------------------

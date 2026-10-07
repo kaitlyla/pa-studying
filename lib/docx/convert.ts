@@ -7,7 +7,7 @@ import { newId } from "../content/ids.ts";
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import type { Theme } from "./drawingml.ts";
 import { readTheme, shapeFill, shapeOutline } from "./drawingml.ts";
-import { cropImage, imageExt } from "./images.ts";
+import { cropImage, imageExt, srcRectCrop } from "./images.ts";
 import type { MarkerResult } from "./numbering.ts";
 import { Numbering, formatNumber } from "./numbering.ts";
 import type { Part, WordPackage } from "./package.ts";
@@ -181,7 +181,7 @@ async function storePicture(ctx: Ctx, part: Part, relId: string | null, srcRect:
         return null;
       }
       if (crop.every((v) => v === 0)) return ctx.opts.storeAsset(bytes, ext);
-      const cropped = await cropImage(bytes, ext, crop as [number, number, number, number]);
+      const cropped = await cropImage(bytes, ext, srcRectCrop(crop as [number, number, number, number]));
       return ctx.opts.storeAsset(cropped.bytes, cropped.ext);
     })();
     ctx.assetCache.set(key, p);

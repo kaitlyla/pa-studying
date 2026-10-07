@@ -262,6 +262,30 @@ describe("imageDataUrl", () => {
     expect([info.width, info.height]).toEqual([4, 2]);
     expect([data[0], data[2]]).toEqual([0, 255]);
   });
+
+  it("cuts a cropped PNG to the part it keeps, so its blue half is gone", async () => {
+    const dir = join(tmp, "assets");
+    await mkdir(dir);
+    await (await picture()).png().toFile(join(dir, PNG));
+    const url = await imageDataUrl(dir, { asset: PNG, rot: 0, flipH: false, flipV: false, crop: { l: 0, t: 0, r: 0.5, b: 0 } });
+    expect(url.startsWith("data:image/png;base64,")).toBe(true);
+    const { data, info } = await sharp(decode(url)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    expect([info.width, info.height]).toEqual([2, 2]);
+    for (let i = 0; i < data.length; i += 3) expect([data[i], data[i + 2]]).toEqual([255, 0]);
+  });
+
+  it("crops the file as stored before mirroring it", async () => {
+    const dir = join(tmp, "assets");
+    await mkdir(dir);
+    await (await picture()).png().toFile(join(dir, PNG));
+    // Stored red red blue blue; the crop keeps red blue blue, and the mirror shows blue blue red.
+    // (Mirroring first would keep blue red red.)
+    const url = await imageDataUrl(dir, { asset: PNG, rot: 0, flipH: true, flipV: false, crop: { l: 0.25, t: 0, r: 0, b: 0 } });
+    const { data, info } = await sharp(decode(url)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    expect([info.width, info.height]).toEqual([3, 2]);
+    const reds = [0, 1, 2].map((x) => data[x * 3]);
+    expect(reds).toEqual([0, 0, 255]);
+  });
 });
 
 // ---- releases -----------------------------------------------------------------------------------

@@ -1403,16 +1403,16 @@ test.describe("pictures and highlight colors", () => {
 
   /**
    * Opens the meds topic for editing, beside the open sidebar (the page drawn smaller) or with it hidden,
-   * and adds a `w`×`h` picture under Additional info; it is left selected.
+   * and adds a `w`×`h` picture under Additional info (one color, or the given file); it is left selected.
    */
-  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden"): Promise<Locator> {
+  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden", file?: Buffer): Promise<Locator> {
     await openPage(page, t.hash);
     if (sidebar === "open") expect(await sidebarScale(page)).toBeLessThan(0.9);
     else await hideSidebar(page);
     await signIn(page);
     const below = (await startEditing(page)).getByRole("region", { name: "Additional info" });
     await below.locator(".ProseMirror p").first().click();
-    const png = await sharp({ create: { width: w, height: h, channels: 3, background: { r: 80, g: 140, b: 200 } } }).png().toBuffer();
+    const png = file ?? await sharp({ create: { width: w, height: h, channels: 3, background: { r: 80, g: 140, b: 200 } } }).png().toBuffer();
     const chooser = page.waitForEvent("filechooser");
     await ref(page, "tb-pic-add").click();
     await (await chooser).setFiles({ name: "pic.png", mimeType: "image/png", buffer: png });
@@ -1492,6 +1492,117 @@ test.describe("pictures and highlight colors", () => {
     // The column caps it, and its height comes down with it.
     expect(narrow.w).toBeLessThan(stretched.w - 50);
     expect(narrow.h / narrow.w).toBeCloseTo(ratio, 2);
+  });
+
+  /** Of a screenshot of `el`: the share of its pixels that are mostly blue, and that are mostly red. */
+  const colors = async (el: Locator): Promise<{ blue: number; red: number }> => {
+    const { data, info } = await sharp(await el.screenshot()).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    let blue = 0;
+    let red = 0;
+    for (let i = 0; i < data.length; i += info.channels) {
+      const [r, g, b] = [Number(data[i]), Number(data[i + 1]), Number(data[i + 2])];
+      if (b > 200 && r < 60 && g < 60) blue += 1;
+      if (r > 200 && b < 60 && g < 60) red += 1;
+    }
+    const n = info.width * info.height;
+    return { blue: blue / n, red: red / n };
+  };
+
+  for (const sidebar of ["hidden", "open"] as const) {
+    test(`Crop trims a picture's side with its handle, Escape mid-drag leaves it, Reset crop brings it all back, ${sidebar === "open" ? "with the page drawn smaller beside the open sidebar" : "at full size"}; the crop saves and the page shows only the kept part`, async ({ page, context, baseURL }) => {
+      const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+      const { fake } = await world(context, baseURL, { seed: true });
+      // Red on the left half, blue on the right.
+      const blueHalf = await sharp({ create: { width: 200, height: 200, channels: 3, background: { r: 0, g: 0, b: 255 } } }).png().toBuffer();
+      const file = await sharp({ create: { width: 400, height: 200, channels: 3, background: { r: 255, g: 0, b: 0 } } }).composite([{ input: blueHalf, left: 200, top: 0 }]).png().toBuffer();
+      const img = await addBelowPicture(page, t, 400, 200, sidebar, file);
+      const below = page.locator('[data-ref="edit-area"]').getByRole("region", { name: "Additional info" });
+      await img.evaluate((e) => e.scrollIntoView({ block: "center" }));
+      const before = await drawnSize(img);
+      const crop = ref(page, "tb-pic-crop");
+      await expect(crop).toHaveAttribute("aria-pressed", "false");
+      await expect(ref(page, "tb-pic-uncrop")).toHaveCount(0);
+
+      await crop.click();
+      await expect(crop).toHaveAttribute("aria-pressed", "true");
+      await expect(ref(page, "pic-handles")).toHaveClass(/\bcrop\b/);
+      await expect(ref(page, "pic-crop-ghost")).toBeVisible();
+      // Escape before letting go: nothing is cut, and crop mode stays on.
+      await dragHandle(page, "e", -before.w / 2, 0, true);
+      await expect(crop).toHaveAttribute("aria-pressed", "true");
+      await expect(ref(page, "tb-pic-uncrop")).toHaveCount(0);
+      // The window is redrawn on the next animation frame, back to the whole picture.
+      await expect.poll(async () => (await drawnSize(ref(page, "pic-crop-window"))).w).toBeCloseTo(before.w, 0);
+
+      // The right side pulled in to the middle: the blue half is cut away, the box half as wide.
+      await dragHandle(page, "e", -before.w / 2, 0);
+      await expect(ref(page, "tb-pic-uncrop")).toBeVisible();
+      await expect(crop).toHaveAttribute("aria-pressed", "true");
+      await page.keyboard.press("Escape");
+      await expect(crop).toHaveAttribute("aria-pressed", "false");
+      await expect(ref(page, "pic-crop-ghost")).toHaveCount(0);
+      const boxed = below.locator(".pic-crop");
+      await expect(boxed).toHaveCount(1);
+      const cropped = await drawnSize(boxed);
+      expect(cropped.w).toBeCloseTo(before.w / 2, 0);
+      expect(cropped.h).toBeCloseTo(before.h, 0);
+      expect(await colors(boxed)).toEqual({ blue: 0, red: expect.closeTo(1, 1) });
+
+      // Reset crop: the whole picture again, drawn exactly as before, as the img itself.
+      await ref(page, "tb-pic-uncrop").click();
+      await expect(below.locator(".pic-crop")).toHaveCount(0);
+      await expect(ref(page, "tb-pic-uncrop")).toHaveCount(0);
+      expect(await img.evaluate((e) => e.parentElement?.classList.contains("pic-crop"))).toBe(false);
+      const whole = await drawnSize(img);
+      expect(whole.w).toBeCloseTo(before.w, 0);
+      expect(whole.h).toBeCloseTo(before.h, 0);
+
+      // Cropped again, then saved.
+      await crop.click();
+      await dragHandle(page, "e", -before.w / 2, 0);
+      await page.keyboard.press("Escape");
+      await expect(below.locator(".pic-crop")).toHaveCount(1);
+      await ref(page, "edit-save").click();
+      await expect(ref(page, "save-success")).toBeVisible();
+      const pic = savedBelowPicture(fake);
+      const saved = pic.crop as { l: number; t: number; r: number; b: number };
+      expect([saved.l, saved.t, saved.b]).toEqual([0, 0, 0]);
+      expect(saved.r).toBeCloseTo(0.5, 2);
+      // The box is the kept part: as tall as before and half as wide, so square.
+      expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(1, 2);
+
+      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(".pic");
+      await expect(shown).toHaveCount(1);
+      await shown.scrollIntoViewIfNeeded();
+      await expect.poll(() => shown.evaluate((e) => e.querySelector("img")?.naturalWidth ?? 0)).toBe(400);
+      const onPage = await drawnSize(shown);
+      expect(onPage.h / onPage.w).toBeCloseTo(1, 2);
+      expect(await colors(shown)).toEqual({ blue: 0, red: expect.closeTo(1, 1) });
+    });
+  }
+
+  test("an uncropped picture on the page is the img itself, drawn at its stored size", async ({ page, context, baseURL }) => {
+    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+    const { fake } = await world(context, baseURL, { seed: true });
+    await addBelowPicture(page, t, 400, 200, "hidden");
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const pic = savedBelowPicture(fake);
+    expect(pic).not.toHaveProperty("crop");
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(".pic");
+    await expect(shown).toHaveCount(1);
+    await shown.scrollIntoViewIfNeeded();
+    await expect.poll(() => shown.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBe(400);
+    const look = await shown.evaluate((e) => {
+      const r = e.getBoundingClientRect();
+      const card = e.closest("section.tcard")?.getBoundingClientRect() ?? r;
+      return { tag: e.tagName, setEm: parseFloat((e as HTMLElement).style.width), emPx: parseFloat(getComputedStyle(e).fontSize), x: r.left - card.left, y: r.top - card.top, w: r.width, h: r.height };
+    });
+    // Logged so a run on the code before crop can be compared: the same size, at the same place.
+    console.log(`uncropped picture drawn at ${JSON.stringify(look)}`);
+    expect(look.tag).toBe("IMG");
+    expect(look.w).toBeCloseTo(look.setEm * look.emPx, 0);
+    expect(look.h / look.w).toBeCloseTo(Number(pic.heightPt) / Number(pic.widthPt), 2);
   });
 
   for (const how of ["pasted", "dropped"] as const) {
