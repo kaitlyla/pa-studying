@@ -170,6 +170,97 @@ test.describe("sidebar", () => {
     await expect(side(page)).toHaveCount(0);
   });
 
+  test("showing or hiding the sidebar keeps the page's line breaks and table columns; beside the open sidebar it is drawn smaller", async ({ page }) => {
+    const first = allSystems[0];
+    if (!first) throw new Error("no EOR system");
+    // 1280 px: the page is 260 px narrower beside the sidebar than beside the rail, and under the 1400 px cap.
+    await page.setViewportSize({ width: 1280, height: 900 });
+    // A search landing, so the page also has the sticky "Showing matches" bar.
+    await open(page, `${guideViewHash(first.g, { kind: "system", system: first.s.id })}?q=the`);
+    await expect(main(page).locator("table").first()).toBeVisible();
+    // Layout sizes (offsetWidth/offsetHeight) are unaffected by a transform; `drawn` is the on-screen scale.
+    const layout = (): Promise<{ pageW: number; cols: number[]; cellH: number; heights: number[]; drawn: number; room: number; overflowX: number }> =>
+      page.evaluate(() => {
+        const m = document.querySelector<HTMLElement>("main.main");
+        const frame = m?.querySelector<HTMLElement>(".main-in");
+        const pg = frame?.querySelector<HTMLElement>(".page-scale");
+        const table = [...(pg?.querySelectorAll("table") ?? [])].find((t) => [...t.rows].some((r) => r.cells.length >= 3));
+        if (!m || !frame || !pg || !table) throw new Error("no table with 3 or more columns on the page");
+        const row = [...table.rows].reduce((a, b) => (b.cells.length > a.cells.length ? b : a));
+        const cell = [...table.querySelectorAll("td")].reduce((a, b) => ((b.textContent ?? "").length > (a.textContent ?? "").length ? b : a));
+        const box = getComputedStyle(frame);
+        return {
+          pageW: pg.offsetWidth,
+          cols: [...row.cells].map((c) => c.offsetWidth),
+          cellH: cell.offsetHeight,
+          // Every paragraph, list item and cell: a changed line break changes its height.
+          heights: [...pg.querySelectorAll("td, th, p, li")].map((e) => (e as HTMLElement).offsetHeight),
+          drawn: pg.getBoundingClientRect().width / pg.offsetWidth,
+          room: frame.clientWidth - parseFloat(box.paddingLeft) - parseFloat(box.paddingRight),
+          overflowX: m.scrollWidth - m.clientWidth,
+        };
+      });
+
+    const shown = await layout();
+    expect(shown.drawn).toBeLessThan(0.9);
+    expect(shown.drawn).toBeCloseTo(shown.room / shown.pageW, 3);
+    expect(shown.overflowX).toBe(0);
+    expect(shown.heights.length).toBeGreaterThan(100);
+
+    // The bar sits outside the scaled content, so it sticks to the top and is drawn at full size.
+    const hitbar = page.locator(".hitbar");
+    await main(page).evaluate((m) => {
+      m.scrollTop = m.scrollHeight / 2;
+    });
+    await expect.poll(async () => {
+      const [b, m] = await Promise.all([hitbar.boundingBox(), main(page).boundingBox()]);
+      return Math.round((b?.y ?? NaN) - (m?.y ?? NaN));
+    }).toBe(0);
+    expect(await hitbar.evaluate((el: HTMLElement) => el.getBoundingClientRect().width / el.offsetWidth)).toBe(1);
+
+    // She keeps her place: the line at the top of the view stays there, so a cell just below it (the
+    // first one starting 100 px down, clear of the sticky bar) moves only by the change in scale.
+    const reading = (): Promise<number> =>
+      page.evaluate(() => {
+        const m = document.querySelector<HTMLElement>("main.main");
+        const td = document.querySelector("td[data-reading]");
+        if (!m || !td) throw new Error("no marked cell");
+        return td.getBoundingClientRect().top - m.getBoundingClientRect().top;
+      });
+    const readingAt = await page.evaluate(() => {
+      const m = document.querySelector<HTMLElement>("main.main");
+      if (!m) throw new Error("no main");
+      const top = m.getBoundingClientRect().top;
+      const td = [...m.querySelectorAll(".page-scale td")].find((c) => c.getBoundingClientRect().top - top > 100);
+      if (!td) throw new Error("no cell below the fold line");
+      td.setAttribute("data-reading", "");
+      return td.getBoundingClientRect().top - top;
+    });
+
+    await page.locator(".side-collapse").click();
+    await expect(page.locator(".side-rail")).toBeVisible();
+    await expect.poll(reading).toBeCloseTo(readingAt / shown.drawn, -1);
+    const hidden = await layout();
+    expect(hidden.drawn).toBe(1);
+    expect(hidden.overflowX).toBe(0);
+    expect(hidden.pageW).toBe(shown.pageW);
+    expect(hidden.cols).toEqual(shown.cols);
+    expect(hidden.cellH).toBe(shown.cellH);
+    expect(hidden.heights).toEqual(shown.heights);
+
+    await page.getByRole("button", { name: "Show sidebar" }).click();
+    await expect(side(page)).toBeVisible();
+    await expect.poll(reading).toBeCloseTo(readingAt, -1);
+    expect(await layout()).toEqual(shown);
+
+    // On a phone the sidebar is a drawer over the page, so the page is not scaled.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator(".site")).toHaveClass(/\bis-phone\b/);
+    const pg = page.locator(".page-scale");
+    await expect.poll(() => pg.evaluate((el: HTMLElement) => el.getBoundingClientRect().width / el.offsetWidth)).toBe(1);
+    await expect(pg).not.toHaveAttribute("style", /transform/);
+  });
+
   test("inside an EOR there is no EOR switcher; the EOR breadcrumb returns to the picker", async ({ page }) => {
     const g = eors[0];
     if (!g) throw new Error("no EOR");

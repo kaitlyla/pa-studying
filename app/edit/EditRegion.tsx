@@ -1,7 +1,8 @@
 // Edit mode on a page (plan 50 §50.2–§50.4; UI guide-reader/edit-mode, save-problems): the Edit and
 // Versions buttons, the region that swaps the page body for ProseMirror editors seeded from Git, the
 // toolbar, and the save banners.
-import { Fragment, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { NodeSelection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { GAP_CONTENT_PT, type DocJSON, type GapFile } from "../../lib/content/index.ts";
@@ -12,6 +13,7 @@ import { currentHash, navigate, versionsHash } from "../shell/route.ts";
 import { useOwner } from "../shell/owner.tsx";
 import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
+import { PageBarSlot } from "../shell/pageScale.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow,
   moveParagraph, naturalPictureWidth, removeHighlight, resizePicture, selectionSize, setHighlight, setSize, sizeOptions, steppedPictureWidth,
@@ -301,7 +303,8 @@ function Toolbar(): ReactNode {
   const canNarrow = a ? changeColumnWidth(-1)(a.view.state) : false;
   const canWiden = a ? changeColumnWidth(1)(a.view.state) : false;
   const sizeNow = a ? selectionSize(a.view.state, a.ctx) : null;
-  return (
+  const slot = useContext(PageBarSlot);
+  const bar = (
     <div className={phone ? "etb phone" : "etb"} data-ref="edit-toolbar">
       <div className="etb-tools" role="toolbar" aria-label="Formatting tools">
         <Tool label="Bold" run={plainCmd(toggleBold)} refk="tb-bold"><b>B</b></Tool>
@@ -382,6 +385,7 @@ function Toolbar(): ReactNode {
       </span>
     </div>
   );
+  return slot ? createPortal(bar, slot) : bar;
 }
 
 // ---- banners ------------------------------------------------------------------------------------

@@ -29,6 +29,7 @@ import { Icon } from "./Icon.tsx";
 import { Link } from "./Link.tsx";
 import { OwnerAvatar, SignInDialog, SignInLink, UnsavedDialog, VersionsPage } from "./mounts.tsx";
 import { DrawerContext } from "./Page.tsx";
+import { PageBarSlot, usePageScale } from "./pageScale.ts";
 import { setSidebarHidden, useSidebarHidden } from "./prefs.ts";
 import { useIsPhone } from "./responsive.ts";
 import { parseHash, PANCE, useRoute, type Route } from "./route.ts";
@@ -308,6 +309,9 @@ export function App(): ReactNode {
   const which = sidebarOf(route);
   const mainRef = useRef<HTMLElement>(null);
   const routeKey = route.path;
+  const sidebarHidden = useSidebarHidden();
+  const pageRef = usePageScale(mainRef, which !== null && !phone && !sidebarHidden);
+  const [barSlot, setBarSlot] = useState<HTMLDivElement | null>(null);
 
   // A layout effect, so the reset runs before the new page's own effects scroll to their target;
   // a passive effect here runs after its children's and would undo that scroll.
@@ -331,15 +335,20 @@ export function App(): ReactNode {
           <div className="main-in">
             <DrawerContext.Provider value={openDrawer}>
               <SearchHighlightProvider>
-                <SearchLanding />
-                <PageBoundary resetKey={routeKey}>
-                  <Suspense fallback={<div className="loading">Loading…</div>}>
-                    <PageFor route={route} />
-                  </Suspense>
-                </PageBoundary>
+                <PageBarSlot.Provider value={barSlot}>
+                  <SearchLanding />
+                  <div className="page-bars" ref={setBarSlot} />
+                  <div className="page-scale" ref={pageRef}>
+                    <PageBoundary resetKey={routeKey}>
+                      <Suspense fallback={<div className="loading">Loading…</div>}>
+                        <PageFor route={route} />
+                      </Suspense>
+                    </PageBoundary>
+                    <Footer />
+                  </div>
+                </PageBarSlot.Provider>
               </SearchHighlightProvider>
             </DrawerContext.Provider>
-            <Footer />
           </div>
         </main>
       </div>

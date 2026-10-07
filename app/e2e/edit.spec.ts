@@ -1276,6 +1276,41 @@ test.describe("pictures and highlight colors", () => {
   });
 });
 
+test("beside the open sidebar the page is drawn smaller but the toolbar is full size, stays at the top while scrolling, and works", async ({ page, context, baseURL }) => {
+  const t = needTopic();
+  const { fake } = await world(context, baseURL, { seed: true });
+  // Short enough that the editor scrolls; narrow enough that hiding the sidebar would widen the page.
+  await page.setViewportSize({ width: 1280, height: 420 });
+  await openPage(page, t.hash);
+  await expect(page.locator(".side")).toBeVisible();
+  await expect.poll(() => page.locator(".page-scale").evaluate((el) => el.style.transform)).toMatch(/^scale\(0\.\d+\)$/);
+  await signIn(page);
+  await startEditing(page);
+  const marker = newMarker();
+  await typeMarker(page, marker);
+  for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+
+  const bar = ref(page, "edit-toolbar");
+  const scrolled = await page.locator("main.main").evaluate((m) => {
+    m.scrollTop = m.scrollHeight;
+    return m.scrollTop;
+  });
+  expect(scrolled).toBeGreaterThan(150);
+  await expect.poll(async () => {
+    const [b, m] = await Promise.all([bar.boundingBox(), page.locator("main.main").boundingBox()]);
+    return Math.round((b?.y ?? NaN) - (m?.y ?? NaN));
+  }).toBe(0);
+  expect(await bar.evaluate((el: HTMLElement) => el.getBoundingClientRect().width / el.offsetWidth)).toBe(1);
+
+  await ref(page, "tb-bold").click();
+  await ref(page, "edit-save").click();
+  await expect(ref(page, "save-success")).toBeVisible();
+  const saved = savedParagraph(fake, marker);
+  const run = firstText(nodeAt(saved.after, saved.path));
+  expect(String(run.text).startsWith(marker)).toBe(true);
+  expect(run.marks).toContainEqual({ type: "bold" });
+});
+
 test("a conflict shows the other save's time, copies the rows tab-separated, and loads the newer version", async ({ page, context, baseURL }) => {
   const t = needTopic();
   const { fake } = await world(context, baseURL, { seed: true });
