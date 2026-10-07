@@ -561,6 +561,56 @@
           }
          },
          {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "RF: age, DM, HTN, hyperlipidemia, smoking"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
           "type": "anchored",
           "attrs": {
            "offsetPt": 1.6045669291338582
@@ -707,7 +757,7 @@
               }
              }
             ],
-            "text": "(pain/cramps distal to occlusion worse w/ exertion & relieved by rest)"
+            "text": "(distal to occlusion worse w exertion & relieved by rest)"
            }
           ]
          },
@@ -784,7 +834,7 @@
               }
              }
             ],
-            "text": ": aortic bifurcation/bilateral iliac arteries"
+            "text": ": aortic bifurcation/ B/L iliac arteries"
            }
           ]
          },
@@ -819,7 +869,7 @@
               }
              }
             ],
-            "text": "   ➀ buttock/thigh claudication ➁ erectile dysfunction ➂ ⇣ femoral pulses"
+            "text": "   ➀ buttock/thigh claudication ➁ ED ➂ ⇣ femoral pulses"
            }
           ]
          },
@@ -1065,42 +1115,7 @@
               }
              }
             ],
-            "text": ": first occurs in toes/feet, worsens w/ reclining (e.g., "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "000000"
-              }
-             }
-            ],
-            "text": " "
+            "text": ": 1st in toes/feet, worsens w reclining (e.g. "
            },
            {
             "type": "text",
@@ -1142,7 +1157,7 @@
               }
              }
             ],
-            "text": ") & relieved w/ dependency"
+            "text": ") & relieved w dependency"
            }
           ]
          },
@@ -1803,7 +1818,7 @@
               }
              }
             ],
-            "text": " w/ "
+            "text": " w "
            },
            {
             "type": "text",
@@ -2263,7 +2278,7 @@
               }
              }
             ],
-            "text": "LATERAL MALLEOLUS"
+            "text": "LAT MALLEOLUS"
            },
            {
             "type": "text",
@@ -2281,7 +2296,7 @@
               }
              }
             ],
-            "text": ", tips of toes, base of heel; "
+            "text": ", tips of toes, base of heel, b/n digits; "
            },
            {
             "type": "text",
@@ -2417,7 +2432,7 @@
               }
              }
             ],
-            "text": "   ▪︎gray-black discoloration w/ clear demarcation between necrotic & viable tissue"
+            "text": "   ▪︎gray-black discoloration w clear demarcation b/n necrotic & viable tissue"
            }
           ]
          },
@@ -2529,7 +2544,7 @@
               }
              }
             ],
-            "text": ": caused by superinfection, coagulative/liquefactive necrosis"
+            "text": " <- superinfection, coagulative/liquefactive necrosis"
            }
           ]
          },
@@ -2564,7 +2579,7 @@
               }
              }
             ],
-            "text": "   ▪︎edema, blistering, discharge, moist appearance, rapid spread of infection"
+            "text": "   ▪︎edema, blistering, d/c, moist appearance, rapid spread of infection"
            }
           ]
          }
@@ -3111,7 +3126,31 @@
               }
              }
             ],
-            "text": ": MR angiography +/- IV contrast"
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "MR angiography +/- IV contrast"
            }
           ]
          },
@@ -3572,7 +3611,7 @@
               }
              }
             ],
-            "text": "» revascularization "
+            "text": "» severe: revascularization "
            }
           ]
          },
@@ -3646,7 +3685,7 @@
               }
              }
             ],
-            "text": ": PDE3 inhibitor w/ vasodilatory, antiplatelet, & antithrombotic properties"
+            "text": ": PDE3-i w vasodilatory, antiplatelet, & antithrombotic properties"
            }
           ]
          },
@@ -3681,7 +3720,7 @@
               }
              }
             ],
-            "text": "▪︎may take up to 12wks to improve SXS"
+            "text": "▪︎up to 12wks to improve Sx"
            }
           ]
          },
@@ -3751,7 +3790,7 @@
               }
              }
             ],
-            "text": "▪︎contraindicated in CHF"
+            "text": "▪︎CI in CHF"
            }
           ]
          },
