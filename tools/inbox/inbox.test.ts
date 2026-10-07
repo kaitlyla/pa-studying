@@ -13,6 +13,7 @@ import type { AsIsFile, BlockFile, DeckFile, FileText, UploadExt, UploadFile, Wo
 import { readContent, readContentIfExists, readStoredFile, writeContent } from "../../lib/content/fs.ts";
 import { buildDocx, para, png, run } from "../../lib/docx/fixtures.ts";
 import { convertDeck } from "../import/pptx.ts";
+import { initTestRepo } from "../testing/git.ts";
 import { verifyWordDoc } from "../verify/index.ts";
 import type { SourceReport } from "../verify/index.ts";
 import { main } from "./index.ts";
@@ -321,7 +322,7 @@ describe("tools/inbox CLI", () => {
   const git = (...args: string[]): string => execFileSync("git", args, { cwd: root, encoding: "utf8" });
 
   it("processes the item read from its inbox branch and commits the result on the checked-out branch", async () => {
-    git("init", "-q", "-b", "main");
+    initTestRepo(root);
     git("config", "user.name", "test");
     git("config", "user.email", "test@example.invalid");
     git("config", "core.autocrlf", "false");
@@ -356,7 +357,7 @@ describe("tools/inbox CLI", () => {
   });
 
   it("fails the job without a commit when moving the result into the tree throws partway, and a re-run from a fresh checkout succeeds", async () => {
-    git("init", "-q", "-b", "main");
+    initTestRepo(root);
     git("config", "user.name", "test");
     git("config", "user.email", "test@example.invalid");
     git("config", "core.autocrlf", "false");

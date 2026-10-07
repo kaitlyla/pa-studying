@@ -8,6 +8,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { parseTrailers } from "../../lib/content/index.ts";
 import type { ChecksFile, Flag, FlagsFile, GapFile } from "../../lib/content/index.ts";
 import { readContent, readContentIfExists, removeContent, writeContent } from "../../lib/content/fs.ts";
+import { initTestRepo } from "../testing/git.ts";
 import { detectEdition, GINA_URL, GOLD_URL, PUBMED_SOURCES } from "./editions.ts";
 import { EUTILS_SPACING_MS, EUTILS_TOOL, Http } from "./http.ts";
 import { main, probe } from "./index.ts";
@@ -678,7 +679,7 @@ describe("the CLI", () => {
   const git = (...args: string[]) => execFileSync("git", args, { cwd: root, encoding: "utf8" });
 
   it("--commit commits only the two updates files with the guidelines trailer; an unchanged rerun makes no commit", async () => {
-    git("init", "-q", "-b", "main");
+    initTestRepo(root);
     git("config", "user.name", "Test");
     git("config", "user.email", "test@example.invalid");
     git("commit", "-q", "--allow-empty", "-m", "start");

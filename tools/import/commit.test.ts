@@ -8,6 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GUIDE_IDS, parseTrailers } from "../../lib/content/index.ts";
 import type { AsIsFile, UploadFile } from "../../lib/content/index.ts";
 import { writeContent } from "../../lib/content/fs.ts";
+import { cloneTestRepo, initTestRepo } from "../testing/git.ts";
 import { commitImport, ghPath, handOffInbox, IMPORT_SUBJECT, PART_BYTES, spawnRunner } from "./commit.ts";
 import type { Runner } from "./commit.ts";
 import { SITE } from "./site.ts";
@@ -25,9 +26,10 @@ beforeEach(async () => {
   root = join(base, "work");
   remote = join(base, "origin.git");
   await mkdir(root);
-  await spawnRunner(base)("git", ["init", "--bare", "-b", "main", remote]);
+  await mkdir(remote);
+  initTestRepo(remote, { bare: true });
+  initTestRepo(root);
   git = spawnRunner(root);
-  await git("git", ["init", "-b", "main"]);
   await git("git", ["remote", "add", "origin", remote]);
 });
 afterEach(async () => { await rm(join(root, ".."), { recursive: true, force: true }); });
@@ -154,7 +156,7 @@ describe("handOffInbox", GIT_TIMEOUT, () => {
     const localHead = (await git("git", ["rev-parse", "HEAD"])).trim();
     // origin/main moves on after this checkout last fetched it.
     const other = join(root, "..", "other");
-    await spawnRunner(join(root, ".."))("git", ["clone", "-q", remote, other]);
+    cloneTestRepo(remote, other);
     await writeFile(join(other, "later.txt"), "y");
     await spawnRunner(other)("git", ["add", "--", "later.txt"]);
     await spawnRunner(other)("git", ["commit", "-m", "later"], { env: ID_ENV });
