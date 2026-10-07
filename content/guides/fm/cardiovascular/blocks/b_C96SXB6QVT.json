@@ -9,11 +9,12 @@
     "type": "table",
     "attrs": {
      "grid": [
-      49.5,
-      189,
-      279,
-      256.5
+      19.3,
+      209.45,
+      301.4,
+      243.9
      ],
+     "ownWidths": true,
      "indentPt": -27.25,
      "borders": {
       "top": {
@@ -84,7 +85,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -96,6 +100,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "BP"
@@ -123,7 +133,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -135,6 +148,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -162,7 +181,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -174,6 +196,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clinical Manifestations/DX"
@@ -201,7 +229,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -213,6 +244,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Management"
@@ -264,9 +301,15 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Hypertension (HTN) "
+            "text": "HTN "
            }
           ]
          }
@@ -300,7 +343,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎HTN associated w/ MI, HF, stroke, & CKD"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎HTN assoc w MI, HF, stroke, & CKD"
            }
           ]
          },
@@ -321,7 +372,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎⇡ prevalence in ethnic minorities, ♀︎, & ⇡ age"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎⇡ in ethnic minorities, ♀︎, & ⇡ age"
            }
           ]
          },
@@ -365,34 +424,31 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "shade",
               "attrs": {
                "hex": "D2C3EE"
               }
              }
             ],
-            "text": "Primary Essential HTN (MCC, 95%)"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
+            "text": "Primary Essential HTN (MCC, 95%): "
+           },
            {
             "type": "text",
-            "text": "▪︎onset usually 25-50yo"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "onset: 25-50yo"
            }
           ]
          },
@@ -419,13 +475,143 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "PATHO"
            },
            {
             "type": "text",
-            "text": ": sympathetic/RAAS overactivation, defect in natriuresis, variations in cardiovascular/renal development, ⇡ intracellular Na/Ca levels"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- sympathetic/RAAS overactivation"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- defect in natriuresis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- variations in cardiovascular/renal development"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- ⇡ intracellular Na/Ca levels"
            }
           ]
          },
@@ -467,6 +653,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "shade",
@@ -479,7 +671,15 @@
            },
            {
             "type": "text",
-            "text": ", i.e., identifiable cause"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": identifiable cause"
            }
           ]
          },
@@ -506,12 +706,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "MCC"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -522,6 +736,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -542,6 +762,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "009193"
@@ -552,6 +778,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "(glomerulonephritis, polycystic kidney disease, SLE, tumors, atrophic kidney)"
            }
           ]
@@ -594,12 +828,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Other common causes"
+            "text": "Other CC"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -621,6 +869,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎"
            },
            {
@@ -633,6 +889,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "942093"
@@ -643,6 +905,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "(d/t "
            },
            {
@@ -655,6 +925,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "6264FE"
@@ -665,6 +941,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ")"
            }
           ]
@@ -686,6 +970,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎primary aldosteronism (Conn syndrome), sleep apnea"
            }
           ]
@@ -728,12 +1020,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Less common"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": drugs (OCPs, NSAIDs, cocaine, stimulants, venlafaxine), pheochromocytoma, Cushing’s syndrome, coarctation of the aorta, hyperparathyroidism"
            }
           ]
@@ -774,13 +1080,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "S/SXS"
            },
            {
             "type": "text",
-            "text": ": mostly asymptomatic +/- HA, blurry vision"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": mostly aSx ± HA, blurry vision"
            }
           ]
          },
@@ -801,7 +1121,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎fundoscopic exam: +/- hemorrhage, papilledema, cotton wool spots, arteriolar "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎fundoscopic exam: ± hemorrhage, papilledema, cotton wool spots, arteriolar "
            }
           ]
          },
@@ -822,6 +1150,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " narrowing, AV nicking (hypertensive retinopathy)"
            }
           ]
@@ -864,13 +1200,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Secondary HTN"
            },
            {
             "type": "text",
-            "text": ": "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": » sus when: severe/resistant HTN, onset <30yo, diastolic HTN onset >65yo"
            }
           ]
          },
@@ -891,27 +1241,14 @@
           "content": [
            {
             "type": "text",
-            "text": "» when to suspect: severe or resistant HTN, onset <30yo, diastolic HTN onset >65yo"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎"
            },
            {
@@ -922,6 +1259,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -934,7 +1277,15 @@
            },
            {
             "type": "text",
-            "text": ": family HX, ⇡ SCr, abnormal UA"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": family Hx, ⇡ SCr, abnormal UA"
            }
           ]
          },
@@ -955,6 +1306,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎"
            },
            {
@@ -967,6 +1326,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "C240FF"
@@ -977,7 +1342,15 @@
            },
            {
             "type": "text",
-            "text": ": ⇡ SCr ≥50% after starting ACEI/ARB, unilateral small kidney, "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": ⇡ SCr ≥50% after starting ACEI/ARB, unilat sm kidney, recurrent flash pulm edema "
            }
           ]
          },
@@ -998,7 +1371,15 @@
           "content": [
            {
             "type": "text",
-            "text": "    recurrent flash pulmonary edema "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "   ▪︎Primary aldosteronism: hypokalemia w urinary K wasting, adrenal mass"
            }
           ]
          },
@@ -1019,27 +1400,14 @@
           "content": [
            {
             "type": "text",
-            "text": "   ▪︎Primary aldosteronism: hypokalemia w/ urinary K wasting, adrenal mass"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎Sleep apnea: overweight/obese, loud snoring, daytime sleepiness"
            }
           ]
@@ -1061,6 +1429,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎Pheochromocytoma: paroxysmal ⇡ BP; triad of HA, palpitations, & sweating"
            }
           ]
@@ -1082,6 +1458,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎CoA: UE SBP > LE SBP, ⇣/delayed femoral pulses"
            }
           ]
@@ -1124,12 +1508,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "DX"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1142,13 +1540,19 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "EC33F7"
               }
              }
             ],
-            "text": "BP ≥130/80 when averaged from 2+ readings obtained on 2+ occasions"
+            "text": "BP ≥130/80 avg from 2+ readings obtained on 2+ occasions"
            }
           ]
          },
@@ -1184,6 +1588,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎"
            },
            {
@@ -1194,13 +1606,48 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "LABS"
            },
            {
             "type": "text",
-            "text": ": CBC, CMP, electrolytes (Na, K, Ca),"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": CBC, CMP, electrolytes (Na, K, Ca), fasting glucose, lipid profile, TSH, UA, EKG"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎EKG: LVH"
            }
           ]
          },
@@ -1214,93 +1661,14 @@
             "type": "image_block",
             "attrs": {
              "asset": "b7eabb74e27da0afd90455aa4009df80.png",
-             "widthPt": 135.08582677165353,
-             "heightPt": 44.52110236220472,
+             "widthPt": 167.16274078462524,
+             "heightPt": 51.00275568266402,
              "rot": 0,
              "flipH": false,
              "flipV": false
             }
            }
           ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": " fasting glucose, lipid profile, TSH, UA, EKG"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "EC33F7"
-              }
-             }
-            ],
-            "text": "EKG"
-           },
-           {
-            "type": "text",
-            "text": ": LVH"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
          }
         ]
        },
@@ -1338,13 +1706,56 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Nonpharmacologic TX"
+            "text": "Nonpharm Tx"
            },
            {
             "type": "text",
-            "text": ": weight loss, DASH diet, smoking cessation, salt restriction ≤1500mg/d, potassium intake 3.5-5g/d, aerobic exercise 90-150min/wk, ≤2drink/d for ♂︎, ≤1drink/d for ♀︎"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": weight loss, DASH diet, smoking cessation, Na restriction ≤1500mg/d, K intake 3.5-5g/d, aerobic exercise 90-150min/wk"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- m = ≤2drink/d ; f = ≤1drink/d"
            }
           ]
          },
@@ -1357,6 +1768,43 @@
            "spaceBefore": 0,
            "spaceAfter": 0,
            "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "image",
+            "attrs": {
+             "asset": "23b1c5281be2b9c93d19a2b15e3bd54e.png",
+             "widthPt": 173.43659564529165,
+             "heightPt": 73.56434109896293,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false,
+             "crop": {
+              "l": 0.222077,
+              "t": 0.313107,
+              "r": 0.055001,
+              "b": 0.535513
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 7
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1380,7 +1828,15 @@
           "content": [
            {
             "type": "text",
-            "text": "Threshhold for initiation of pharmacological TX:"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "Threshold for initiation of pharmacological Tx:"
            }
           ]
          },
@@ -1401,6 +1857,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➀ "
            },
            {
@@ -1408,6 +1872,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1421,6 +1891,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -1441,20 +1917,34 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "plus"
            },
            {
             "type": "text",
-            "text": " any one of the following: "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": " 1 of:  "
            }
           ]
          },
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 9,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -1468,11 +1958,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "    » "
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -1487,6 +1991,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1516,6 +2026,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➁ "
            },
            {
@@ -1523,6 +2041,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1537,6 +2061,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "6264FE"
@@ -1547,6 +2077,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "(everyone else)"
            }
           ]
@@ -1559,7 +2097,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1589,28 +2130,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Monotherapy vs combination"
-           },
-           {
-            "type": "text",
-            "text": ": combination therapy w/ fixed-dose single pill preferred for "
+            "text": "Monotherapy vs combo"
            },
            {
             "type": "text",
             "marks": [
              {
-              "type": "italic"
-             },
-             {
-              "type": "color",
+              "type": "size",
               "attrs": {
-               "hex": "FC5E7D"
+               "pt": 7.5
               }
              }
             ],
-            "text": "stage 2 HTN & >20/10mmHg above target"
+            "text": ": "
            }
           ]
          },
@@ -1631,6 +2171,64 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             }
+            ],
+            "text": "*combo w fixed-dose single pill preferred in "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "stage 2 HTN & >20/10mmHg above target*"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -1641,12 +2239,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Monotherapy (choose 1)"
+            "text": "Monotherapy"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": ➀ "
            },
            {
@@ -1654,6 +2266,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1668,6 +2286,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "4472C4"
@@ -1678,6 +2302,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➁ "
            },
            {
@@ -1685,6 +2317,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1697,6 +2335,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " ➂ "
            },
            {
@@ -1704,6 +2350,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1733,6 +2385,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -1743,12 +2403,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Combo"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": ACEI/ARB + DHP CCB"
            }
           ]
@@ -1756,7 +2430,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -1770,6 +2444,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎amlodipine-benazepril (Lotrel), amlodipine-perindropil (Prestalia)"
            }
           ]
@@ -1791,6 +2473,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -1803,13 +2493,48 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "FF40FF"
               }
              }
             ],
-            "text": "F/u q1mo until BP controlled"
+            "text": "F/u q1M until BP controlled"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "   ▪︎⇡ dose at 1M intervals or add additional agent if BP remains ↑"
            }
           ]
          },
@@ -1830,27 +2555,14 @@
           "content": [
            {
             "type": "text",
-            "text": "   ▪︎⇡ dose at 1mo intervals or add additional agent if BP remains elevated"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -1861,13 +2573,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "BP target"
            },
            {
             "type": "text",
-            "text": ": new AHA/ACC guidelines recommend BP <130/80 for all patients"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": <130/80 for all pt"
            }
           ]
          },
@@ -1909,12 +2635,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "TX by comorbidities"
+            "text": "Tx by comorbidities"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -1936,7 +2676,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎CAD: ACEI/ARB + beta blocker\t\t▪︎CKD, T2DM: ACEI/ARB"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎CAD: ACEI/ARB + bb\t\t                     ▪︎CKD, T2DM: ACEI/ARB"
            }
           ]
          },
@@ -1957,7 +2705,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎gout: avoid thiazide diuretics\t\t▪︎post-MI: beta blockers, ACEI/ARB"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎gout: avoid thiazide diuretics\t\t▪︎post-MI: bb, ACEI/ARB"
            }
           ]
          }
