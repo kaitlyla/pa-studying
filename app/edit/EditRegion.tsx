@@ -3,6 +3,7 @@
 // toolbar, and the save banners.
 import { Fragment, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import type { MarkType } from "prosemirror-model";
 import { NodeSelection, type Selection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, type DocJSON, type GapFigure, type GapFile } from "../../lib/content/index.ts";
@@ -15,10 +16,10 @@ import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import { PageBarSlot } from "../shell/pageScale.ts";
 import {
-  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, HIGHLIGHT_COLORS, insertPicture, insertRow, insertSymbol, SYMBOLS,
-  dragPicture, dragPictureCrop, draggedPictureSize, moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture,
-  scaledPictureSize, selectedPictureSize, selectionSize, setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic,
-  toggleUnderline, usedHighlightColors, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
+  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, FONT_COLOR_MARKS, FONT_COLORS, HIGHLIGHT_COLORS,
+  HIGHLIGHT_MARKS, insertPicture, insertRow, insertSymbol, SYMBOLS, dragPicture, dragPictureCrop, draggedPictureSize, moveParagraph, naturalPictureWidth,
+  removeFontColor, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture, scaledPictureSize, selectedPictureSize, selectionSize, setFontColor,
+  setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic, toggleUnderline, usedColors, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
 } from "./editor/commands.ts";
 import { PictureHandles, pictureFile } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
@@ -268,51 +269,87 @@ function Tool({ label, run, children, refk, disabled, pressed }: { label: string
   );
 }
 
-/** The color a "More colours…" pick starts from. */
-const MORE_COLOURS_START = "FFFF00";
+/** What one color control (Highlight, Font color) offers and does. */
+interface ColorControl {
+  /** The button's name, also the start of each swatch's name. */
+  label: string;
+  face: ReactNode;
+  /** The data-ref of the button; its menu is `${ref}-colors`. */
+  ref: string;
+  /** The start of each swatch's and grid's data-ref. */
+  swatchRef: string;
+  /** The marks whose colors on the page are offered first. */
+  marks: readonly MarkType[];
+  usedHeading: string;
+  standardHeading: string;
+  standard: readonly { name: string; hex: string }[];
+  /** Swatches to a row. */
+  columns: number;
+  set: (hex: string) => Command;
+  clearLabel: string;
+  clearRef: string;
+  clear: Command;
+  /** The color a "More colours…" pick starts from. */
+  moreStart: string;
+}
+
+const HIGHLIGHT: ColorControl = {
+  label: "Highlight", face: <><span className="tb-hl">H</span> ▾</>, ref: "tb-highlight", swatchRef: "tb-hl", marks: HIGHLIGHT_MARKS,
+  usedHeading: "Highlights used on this page", standardHeading: "Standard highlights", standard: HIGHLIGHT_COLORS, columns: 8,
+  set: setHighlight, clearLabel: "No highlight", clearRef: "tb-unhighlight", clear: removeHighlight, moreStart: "FFFF00",
+};
+
+const FONT_COLOR: ColorControl = {
+  label: "Font color", face: <><span className="tb-fc">A</span> ▾</>, ref: "tb-font-color", swatchRef: "tb-fc", marks: FONT_COLOR_MARKS,
+  usedHeading: "Colors used on this page", standardHeading: "Standard colors", standard: FONT_COLORS, columns: 10,
+  set: setFontColor, clearLabel: "Automatic", clearRef: "tb-fc-auto", clear: removeFontColor, moreStart: "FF0000",
+};
 
 /**
- * "Highlight" opens the highlight and shading colors used on the page she is editing (most-used first),
- * Word's standard highlights, "No highlight", and "More colours…" for any other color.
+ * A color control: its button opens the colors of its marks used on the page she is editing (most-used
+ * first), Word's standard colors for it, its clear button, and "More colours…" for any other color.
  */
-function HighlightPicker({ run }: { run: (c: Command) => void }): ReactNode {
+function ColorPicker({ c, run }: { c: ColorControl; run: (cmd: Command) => void }): ReactNode {
   const [used, setUsed] = useState<string[] | null>(null);
   const more = useRef<HTMLInputElement>(null);
-  const pick = (c: Command): void => {
+  const pick = (cmd: Command): void => {
     setUsed(null);
-    run(c);
+    run(cmd);
   };
   // A native "change" (not React's onChange, which fires on every move in the color dialog): her final pick.
   useEffect(() => {
     const input = more.current;
     if (!input) return undefined;
-    const picked = (): void => pick(setHighlight(input.value.slice(1).toUpperCase()));
+    const picked = (): void => pick(c.set(input.value.slice(1).toUpperCase()));
     input.addEventListener("change", picked);
     return () => input.removeEventListener("change", picked);
   });
   const swatch = (hex: string, label: string, where: string): ReactNode => (
-    <Tool key={hex} label={label} run={() => pick(setHighlight(hex))} refk={`tb-hl${where}-${hex}`}>
+    <Tool key={hex} label={label} run={() => pick(c.set(hex))} refk={`${c.swatchRef}${where}-${hex}`}>
       <span className="swatch" style={{ background: `#${hex}` }} />
     </Tool>
   );
+  const grid = (where: string, swatches: ReactNode): ReactNode => (
+    <span className="tb-colors-grid" style={{ gridTemplateColumns: `repeat(${c.columns}, 32px)` }} data-ref={`${c.swatchRef}-${where}`}>{swatches}</span>
+  );
   return (
     <span className="tb-pop">
-      <Tool label="Highlight" run={() => setUsed((u) => (u ? null : usedHighlightColors(openDocs())))} refk="tb-highlight"><span className="tb-hl">H</span> ▾</Tool>
+      <Tool label={c.label} run={() => setUsed((u) => (u ? null : usedColors(openDocs(), c.marks)))} refk={c.ref}>{c.face}</Tool>
       {used && (
-        <span className="tb-hl-menu" role="group" aria-label="Highlight colors" data-ref="tb-highlight-colors">
+        <span className="tb-colors" role="group" aria-label={`${c.label} colors`} data-ref={`${c.ref}-colors`}>
           {used.length > 0 && (
             <>
-              <span className="tb-hl-h">Highlights used on this page</span>
-              <span className="tb-hl-grid" data-ref="tb-hl-used">{used.map((hex) => swatch(hex, `Highlight #${hex}`, "-used"))}</span>
+              <span className="tb-colors-h">{c.usedHeading}</span>
+              {grid("used", used.map((hex) => swatch(hex, `${c.label} #${hex}`, "-used")))}
             </>
           )}
-          <span className="tb-hl-h">Standard highlights</span>
-          <span className="tb-hl-grid" data-ref="tb-hl-standard">{HIGHLIGHT_COLORS.map((c) => swatch(c.hex, `Highlight ${c.name}`, ""))}</span>
-          <span className="tb-hl-foot">
-            <Tool label="No highlight" run={() => pick(removeHighlight)} refk="tb-unhighlight">No highlight</Tool>
-            <label className="tb-hl-more">
+          <span className="tb-colors-h">{c.standardHeading}</span>
+          {grid("standard", c.standard.map((s) => swatch(s.hex, `${c.label} ${s.name}`, "")))}
+          <span className="tb-colors-foot">
+            <Tool label={c.clearLabel} run={() => pick(c.clear)} refk={c.clearRef}>{c.clearLabel}</Tool>
+            <label className="tb-colors-more">
               More colours…
-              <input ref={more} type="color" defaultValue={`#${MORE_COLOURS_START.toLowerCase()}`} aria-label="More colours" data-ref="tb-hl-more" />
+              <input ref={more} type="color" defaultValue={`#${c.moreStart.toLowerCase()}`} aria-label="More colours" data-ref={`${c.swatchRef}-more`} />
             </label>
           </span>
         </span>
@@ -452,7 +489,8 @@ function Toolbar(): ReactNode {
         <Tool label="Bold" run={plainCmd(toggleBold)} refk="tb-bold"><b>B</b></Tool>
         <Tool label="Italic" run={plainCmd(toggleItalic)} refk="tb-italic"><i>I</i></Tool>
         <Tool label="Underline" run={plainCmd(toggleUnderline)} refk="tb-underline"><u>U</u></Tool>
-        <HighlightPicker run={(c) => plainCmd(c)()} />
+        <ColorPicker c={HIGHLIGHT} run={(c) => plainCmd(c)()} />
+        <ColorPicker c={FONT_COLOR} run={(c) => plainCmd(c)()} />
         <SymbolPicker run={(c) => plainCmd(c)()} />
         <span className="sep" />
         <Tool label="Smaller text" run={cmd((c) => changeSize(-1, c))} refk="tb-smaller">A−</Tool>

@@ -32,5 +32,6 @@ export const M = {
   underline: markType("underline"),
   highlight: markType("highlight"),
   shade: markType("shade"),
+  color: markType("color"),
   size: markType("size"),
 } as const;

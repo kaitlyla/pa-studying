@@ -57,7 +57,7 @@ export interface DocContext extends ContentArea {
 
 export const roundHalf = (x: number): number => Math.round(x * 2) / 2;
 
-const { bold, italic, underline, highlight, shade, size } = M;
+const { bold, italic, underline, highlight, shade, color, size } = M;
 
 // ---- marks ---------------------------------------------------------------------------------------
 
@@ -105,15 +105,37 @@ export const HIGHLIGHT_COLORS: readonly { name: string; hex: string }[] = [
 ];
 
 /**
- * The highlight and shading colors used in `docs` (a page's editors), most-used first by number of text
- * runs, ties in the order first met: the Highlight control's "used on this page" colors.
+ * The colors the Font color control offers: Word's standard font colors in Word's order (dark red, red,
+ * orange, yellow, light green, green, light blue, blue, dark blue, purple).
  */
-export function usedHighlightColors(docs: Iterable<PMNode>): string[] {
+export const FONT_COLORS: readonly { name: string; hex: string }[] = [
+  { name: "dark red", hex: "C00000" },
+  { name: "red", hex: "FF0000" },
+  { name: "orange", hex: "FFC000" },
+  { name: "yellow", hex: "FFFF00" },
+  { name: "light green", hex: "92D050" },
+  { name: "green", hex: "00B050" },
+  { name: "light blue", hex: "00B0F0" },
+  { name: "blue", hex: "0070C0" },
+  { name: "dark blue", hex: "002060" },
+  { name: "purple", hex: "7030A0" },
+];
+
+/** The marks whose colors the Highlight control counts and clears: highlight and shading. */
+export const HIGHLIGHT_MARKS: readonly MarkType[] = [highlight, shade];
+/** The mark the Font color control counts, sets and clears. */
+export const FONT_COLOR_MARKS: readonly MarkType[] = [color];
+
+/**
+ * The colors of the `types` marks used in `docs` (a page's editors), most-used first by number of text
+ * runs, ties in the order first met: a color control's "used on this page" colors.
+ */
+export function usedColors(docs: Iterable<PMNode>, types: readonly MarkType[]): string[] {
   const runs = new Map<string, number>();
   for (const doc of docs) {
     doc.descendants((n) => {
       for (const m of n.marks) {
-        if (m.type !== highlight && m.type !== shade) continue;
+        if (!types.includes(m.type)) continue;
         const hex = m.attrs.hex as string;
         runs.set(hex, (runs.get(hex) ?? 0) + 1);
       }
@@ -123,29 +145,40 @@ export function usedHighlightColors(docs: Iterable<PMNode>): string[] {
   return [...runs].sort((a, b) => b[1] - a[1]).map(([hex]) => hex);
 }
 
-/** Highlight the selection (or what she types next) in `hex`, replacing any highlight it had. */
-export function setHighlight(hex: string): Command {
+/** Gives the selection (or what she types next) the `type` mark in `hex`, replacing that mark's old color. */
+function setColorMark(type: MarkType, hex: string): Command {
   return (state, dispatch) => {
-    const mark = highlight.create({ hex });
+    const mark = type.create({ hex });
     const { from, to, empty } = state.selection;
     if (dispatch) dispatch(empty ? state.tr.addStoredMark(mark) : state.tr.addMark(from, to, mark));
     return true;
   };
 }
 
-export const removeHighlight: Command = (state, dispatch) => {
-  const { from, to, empty } = state.selection;
-  if (dispatch) {
-    const tr = state.tr;
-    if (empty) {
-      tr.removeStoredMark(highlight).removeStoredMark(shade);
-    } else {
-      tr.removeMark(from, to, highlight).removeMark(from, to, shade);
+/** Takes the `types` marks off the selection (or off what she types next). */
+function removeColorMarks(types: readonly MarkType[]): Command {
+  return (state, dispatch) => {
+    const { from, to, empty } = state.selection;
+    if (dispatch) {
+      const tr = state.tr;
+      for (const t of types) {
+        if (empty) tr.removeStoredMark(t);
+        else tr.removeMark(from, to, t);
+      }
+      dispatch(tr);
     }
-    dispatch(tr);
-  }
-  return true;
-};
+    return true;
+  };
+}
+
+/** Highlight the selection (or what she types next) in `hex`, replacing any highlight it had. */
+export const setHighlight = (hex: string): Command => setColorMark(highlight, hex);
+/** "No highlight": clears highlight and shading. */
+export const removeHighlight: Command = removeColorMarks(HIGHLIGHT_MARKS);
+/** Color the selection's text (or what she types next) `hex`, replacing any color it had. */
+export const setFontColor = (hex: string): Command => setColorMark(color, hex);
+/** "Automatic": the text's own color again, with no color mark. */
+export const removeFontColor: Command = removeColorMarks(FONT_COLOR_MARKS);
 
 /**
  * The characters the Symbols control offers: her own set, in her order (shown ten to a row). Where her

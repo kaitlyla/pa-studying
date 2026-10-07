@@ -10,10 +10,10 @@ import type { DocJSON } from "../../../lib/content/index.ts";
 import type { TableAttrs } from "../../../lib/schemaTypes.ts";
 import {
   changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, COLUMN_STEP_PT, CONFIRMED_DELETE, MIN_COLUMN_PT, deletePicture, deleteRow, deleteRowPrompt,
-  cropWindow, docLines, dragPicture, dragPictureCrop, draggedPictureCrop, draggedPictureSize, insertPicture, isPictureMove, MAX_CELL_MARGIN_PT, moveColumnBorder,
-  moveParagraph, naturalPictureWidth, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture, scaledPictureSize, seenPictureSize, selectedPictureSize,
-  selectionSize, setHighlight, shownPictureWidth, steppedPictureSize, setSize, uncroppedPictureSize,
-  sizeOptions, splitParagraph, insertSymbol, SYMBOLS, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag, usedHighlightColors,
+  cropWindow, docLines, dragPicture, dragPictureCrop, draggedPictureCrop, draggedPictureSize, FONT_COLOR_MARKS, FONT_COLORS, HIGHLIGHT_MARKS, insertPicture, isPictureMove,
+  MAX_CELL_MARGIN_PT, moveColumnBorder, moveParagraph, naturalPictureWidth, removeFontColor, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture,
+  scaledPictureSize, seenPictureSize, selectedPictureSize, selectionSize, setFontColor, setHighlight, shownPictureWidth, steppedPictureSize, setSize, uncroppedPictureSize,
+  sizeOptions, splitParagraph, insertSymbol, SYMBOLS, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag, usedColors,
   type Command,
 } from "./commands.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
@@ -759,8 +759,50 @@ describe("marks", () => {
       table([row(rid(1), [cell("x"), { type: "table_cell", attrs: {}, content: [para([text("h", [hl("000000")])])] }])]),
     )).doc;
     // D2C3EE 3 runs; FFFF00 2 and B5E5E4 2 (FFFF00 met first); 000000 1 (inside a table).
-    expect(usedHighlightColors([first, second])).toEqual(["D2C3EE", "FFFF00", "B5E5E4", "000000"]);
-    expect(usedHighlightColors([createEditorState(docOf(para([text("plain", [{ type: "bold" }])]))).doc])).toEqual([]);
+    expect(usedColors([first, second], HIGHLIGHT_MARKS)).toEqual(["D2C3EE", "FFFF00", "B5E5E4", "000000"]);
+    expect(usedColors([createEditorState(docOf(para([text("plain", [{ type: "bold" }])]))).doc], HIGHLIGHT_MARKS)).toEqual([]);
+  });
+
+  it("the page's font colors are its text color marks alone, most text runs first, ties in the order met", () => {
+    const fc = (hex: string) => ({ type: "color", attrs: { hex } });
+    const hl = (hex: string) => ({ type: "highlight", attrs: { hex } });
+    const first = createEditorState(docOf(
+      para([text("a", [fc("4472C4")]), text("b", [hl("FFFF00")]), text("c", [fc("C00000")])]),
+      para([text("d", [fc("C00000"), hl("4472C4")])]),
+    )).doc;
+    const second = createEditorState(docOf(
+      para([text("e", [{ type: "bold" }, fc("4472C4")]), text("f"), text("g", [fc("FF40FF")])]),
+      table([row(rid(1), [cell("x"), { type: "table_cell", attrs: {}, content: [para([text("h", [fc("C00000")])])] }])]),
+    )).doc;
+    // C00000 3 runs; 4472C4 2 as a font color (its highlight run is not counted); FF40FF 1. The highlight FFFF00 is not a font color.
+    expect(usedColors([first, second], FONT_COLOR_MARKS)).toEqual(["C00000", "4472C4", "FF40FF"]);
+    expect(usedColors([first, second], HIGHLIGHT_MARKS)).toEqual(["FFFF00", "4472C4"]);
+  });
+
+  it("Font color replaces the old color and keeps the highlight; Automatic takes the color off and keeps the highlight", () => {
+    const hl = { type: "highlight", attrs: { hex: "FFFF00" } };
+    let state = selectText(createEditorState(docOf(para([text("ab", [{ type: "color", attrs: { hex: "4472C4" } }, hl]), text("c")]))), 1, 3);
+    state = run(state, setFontColor("C00000"));
+    expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "color", attrs: { hex: "C00000" } }, hl]);
+    expect(state.doc.firstChild?.lastChild?.marks).toEqual([]);
+    state = run(state, removeFontColor);
+    expect(state.doc.firstChild?.firstChild?.marks.map((m) => m.toJSON())).toEqual([hl]);
+    expect(state.doc.firstChild?.textContent).toBe("abc");
+  });
+
+  it("Font color with nothing selected colors what she types next; Automatic there types in the text's own color", () => {
+    let state = run(selectText(createEditorState(docOf(para([text("a", [{ type: "color", attrs: { hex: "4472C4" } }])]))), 2, 2), setFontColor("7030A0"));
+    state = state.apply(state.tr.insertText("b"));
+    expect(state.doc.firstChild?.lastChild?.text).toBe("b");
+    expect(state.doc.firstChild?.lastChild?.marks.map((m) => m.toJSON())).toEqual([{ type: "color", attrs: { hex: "7030A0" } }]);
+    state = run(state, removeFontColor);
+    state = state.apply(state.tr.insertText("c"));
+    expect(state.doc.firstChild?.lastChild?.text).toBe("c");
+    expect(state.doc.firstChild?.lastChild?.marks).toEqual([]);
+  });
+
+  it("Font color offers Word's ten standard font colors in Word's order", () => {
+    expect(FONT_COLORS.map((c) => c.hex)).toEqual(["C00000", "FF0000", "FFC000", "FFFF00", "92D050", "00B050", "00B0F0", "0070C0", "002060", "7030A0"]);
   });
 
   it("Symbols offers her 38 characters in her order, each one bare character", () => {

@@ -1758,6 +1758,58 @@ test.describe("pictures and highlight colors", () => {
     expect(runOf(second).marks).toContainEqual({ type: "highlight", attrs: { hex: "12AB9C" } });
   });
 
+  test("Font color colors the selected text, the page shows it after saving, and Automatic takes it off again", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const marker = newMarker();
+    await typeMarker(page, marker);
+    for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+    await ref(page, "tb-font-color").click();
+    expect(await ref(page, "tb-fc-standard").locator('[data-ref^="tb-fc-"]').evaluateAll((els) => els.map((el) => el.getAttribute("data-ref")))).toEqual(
+      ["C00000", "FF0000", "FFC000", "FFFF00", "92D050", "00B050", "00B0F0", "0070C0", "002060", "7030A0"].map((hex) => `tb-fc-${hex}`),
+    );
+    await ref(page, "tb-fc-0070C0").click();
+    await expect(ref(page, "tb-font-color-colors")).toHaveCount(0);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    /** The marks of the marker's text run in the latest save (the paragraph's first run, which starts with it). */
+    const savedMarks = (): { type: string; attrs?: unknown }[] => {
+      const saved = savedParagraph(fake, marker);
+      const run = firstText(nodeAt(saved.after, saved.path));
+      expect(String(run.text).startsWith(marker)).toBe(true);
+      return (run.marks as { type: string; attrs?: unknown }[] | undefined) ?? [];
+    };
+    expect(savedMarks()).toContainEqual({ type: "color", attrs: { hex: "0070C0" } });
+
+    // Saving closes the edit; the page as read draws the marker's text in that color.
+    await expect(ref(page, "edit-area")).toHaveCount(0);
+    const shown = (): Promise<string | null> => page.locator("main").evaluate((main, m) => {
+      const walk = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+      for (let n = walk.nextNode(); n; n = walk.nextNode()) if (n.textContent?.includes(m)) return getComputedStyle(n.parentElement!).color;
+      return null;
+    }, marker);
+    await expect.poll(shown).toBe("rgb(0, 112, 192)");
+
+    // Edit again: the color is among the page's colors, and Automatic on the marker takes it off.
+    await startEditing(page);
+    await ref(page, "edit-area").locator("p", { hasText: marker }).first().click({ position: { x: 1, y: 2 } });
+    await page.keyboard.press("Home");
+    for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowRight");
+    await ref(page, "tb-font-color").click();
+    await expect(ref(page, "tb-fc-used-0070C0")).toBeVisible();
+    await ref(page, "tb-fc-auto").click();
+    await expect(ref(page, "tb-font-color-colors")).toHaveCount(0);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    expect(savedMarks().filter((m) => m.type === "color")).toEqual([]);
+    await expect(ref(page, "edit-area")).toHaveCount(0);
+    await expect.poll(shown).not.toBe("rgb(0, 112, 192)");
+    expect(await shown()).not.toBeNull();
+  });
+
   test("a symbol from Symbols goes in at the cursor, typing carries on after it, and it is saved", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
@@ -1783,14 +1835,14 @@ test.describe("pictures and highlight colors", () => {
     expect(String(firstText(nodeAt(saved.after, saved.path)).text).startsWith(`${marker}⊘x`)).toBe(true);
   });
 
-  test("on a phone the Highlight and Symbols menus open whole on the screen, not cut off by the sideways-scrolling tools row", async ({ page, context, baseURL }) => {
+  test("on a phone the Highlight, Font color and Symbols menus open whole on the screen, not cut off by the sideways-scrolling tools row", async ({ page, context, baseURL }) => {
     await world(context, baseURL, { seed: true });
     await page.setViewportSize({ width: 390, height: 844 });
     await openPage(page, needTopic().hash);
     await signIn(page);
     await startEditing(page);
     await expect(ref(page, "edit-toolbar")).toHaveClass(/phone/);
-    for (const [button, menu] of [["tb-highlight", "tb-highlight-colors"], ["tb-symbols", "tb-symbol-chars"]] as const) {
+    for (const [button, menu] of [["tb-highlight", "tb-highlight-colors"], ["tb-font-color", "tb-font-color-colors"], ["tb-symbols", "tb-symbol-chars"]] as const) {
       await ref(page, button).click();
       // Every button in the menu is on the screen and is what a tap at its middle reaches.
       const unreachable = await ref(page, menu).locator("button, input").evaluateAll((els) => els.filter((el) => {
@@ -1802,7 +1854,7 @@ test.describe("pictures and highlight colors", () => {
       // Each grid button stays inside the menu, clear of its neighbours.
       const crowded = await ref(page, menu).evaluate((m) => {
         const box = m.getBoundingClientRect();
-        const rects = [...m.querySelectorAll(".tb-hl-grid .tb, .tb-symbol-grid .tb")].map((el) => el.getBoundingClientRect());
+        const rects = [...m.querySelectorAll(".tb-colors-grid .tb, .tb-symbol-grid .tb")].map((el) => el.getBoundingClientRect());
         return rects.filter((r, i) => r.left < box.left || r.right > box.right
           || rects.some((o, j) => j !== i && r.left < o.right - 0.5 && o.left < r.right - 0.5 && r.top < o.bottom - 0.5 && o.top < r.bottom - 0.5)).length;
       });
