@@ -171,115 +171,6 @@
    {
     "type": "paragraph",
     "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "text": "Example skull radiograph: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "a typical mosaic pattern of areas of increased sclerosis and lucency"
-     },
-     {
-      "type": "text",
-      "text": "; these "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "cotton-wool patches"
-     },
-     {
-      "type": "text",
-      "text": " result from thickening of the calvarium"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "text": "Example pelvis radiograph: pelvic bones with "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "a mottled appearance due to increased porosity"
-     },
-     {
-      "type": "text",
-      "text": ", with secondary osteoarthritis of the hip"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
      "indLeft": 0,
      "indRight": 0,
      "indFirst": 0,
@@ -1009,7 +900,26 @@
     "track": null
    }
   ],
-  "ownerEdits": []
+  "ownerEdits": [],
+  "figures": [
+   {
+    "asset": "6f82006edb1bf7c30f0b955ddd5f8bc2.jpg",
+    "width": 740,
+    "height": 531,
+    "caption": "Paget disease of bone on bone scan: increased uptake in the skull, several vertebrae (Mickey Mouse sign), both sides of the pelvis, the sacrum and the right femur",
+    "credit": {
+     "author": "Tekchand Kalawat et al., Indian Journal of Nuclear Medicine (2012)",
+     "license": "CC BY-NC-SA 3.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+     "page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3628266/",
+     "changes": null
+    },
+    "evidence": {
+     "quote": "Multiple static planar bone scintigraphic images showing increased tracer uptake in skull, multiple vertebrae (Mickey Mouse sign), pelvis on both sides, sacrum, and distal one-third of right femur",
+     "accessed": "2026-10-08"
+    }
+   }
+  ]
  },
  "id": "g_XSTRS3Y4TG"
 }

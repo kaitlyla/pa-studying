@@ -435,8 +435,9 @@ export interface GapSource {
 }
 
 /**
- * An example image shown in a gap block: a freely licensed file stored under `content/assets/`, with
- * the credit its license requires and the quoted source description that shows what it depicts.
+ * An example image shown in a gap block: a file stored under `content/assets/`, with a credit naming
+ * its author, source and actual license (free or not), and the quoted source description that shows
+ * what it depicts.
  */
 export interface GapFigure {
   /** Content-addressed file name under `content/assets/`. */
@@ -458,9 +459,9 @@ export interface GapFigure {
   caption: string;
   credit: {
     author: string;
-    /** License name as the source states it, e.g. "CC BY-SA 4.0", "Public domain". */
+    /** License as the source states it, e.g. "CC BY-SA 4.0", "CC BY-NC-SA 3.0", "Public domain", "All rights reserved". */
     license: string;
-    /** The license's deed; null when the source has none (public domain). */
+    /** The license's page (e.g. its deed); null when the source has no license page. */
     licenseUrl: string | null;
     /** The source's page for this file. */
     page: string;
