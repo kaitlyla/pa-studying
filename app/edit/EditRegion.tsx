@@ -29,8 +29,8 @@ import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm, widthConfirm } from "./dialogs.tsx";
 import { MedsFrame } from "./MedsEdit.tsx";
 import {
-  copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
-  setGapLook, startEdit, useEdit, viewChanged, type Banner,
+  copyWithToast, currentLook, dismissBanner, done, dropEmptyBox, getEditStore, isCardBox, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED,
+  SAVE_OFFLINE, setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import { figuresWithLook, gapLook, type Part, type Slot } from "./units.ts";
 import { rememberVersionsOrigin } from "./versions.ts";
@@ -43,6 +43,8 @@ export { useIsEditing } from "./session.ts";
 interface Active {
   view: EditorView;
   ctx: DocContext;
+  /** Its slot id. */
+  slot: string;
 }
 
 let active: Active | null = null;
@@ -151,18 +153,18 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
       nodeViews: nodeViews(slot.basePt),
       markViews: markViews(slot.basePt),
       clipboardSerializer: clipboardSerializer(slot.basePt),
-      ...pictureFileProps((v, files) => void addPictures(files, { view: v, ctx })),
+      ...pictureFileProps((v, files) => void addPictures(files, { view: v, ctx, slot: slot.id })),
       attributes: { "aria-label": "Editable notes", "data-slot": slot.id },
       dispatchTransaction(tr) {
         view.updateState(view.state.apply(tr));
         if (tr.docChanged) viewChanged();
-        active = { view, ctx };
+        active = { view, ctx, slot: slot.id };
         picked = null;
         touch();
       },
       handleDOMEvents: {
         focus: () => {
-          active = { view, ctx };
+          active = { view, ctx, slot: slot.id };
           picked = null;
           touch();
           return false;
@@ -397,6 +399,15 @@ async function addPictures(files: readonly File[], at: Active): Promise<void> {
   at.view.focus();
 }
 
+/**
+ * Delete row in the editor `at`. In a box of a card on a meds panel, a table's only row takes the table
+ * with it, and a box left with nothing in it goes from the card.
+ */
+async function deleteRowIn(at: Active): Promise<void> {
+  const box = isCardBox(at.slot);
+  if ((await deleteRow(editorConfirm, box)(at.view)) && box) dropEmptyBox(at.slot);
+}
+
 /** "Add picture": a file picker; the chosen picture goes in at the cursor of the editor she was in. */
 function AddPicture({ a }: { a: Active | null }): ReactNode {
   const input = useRef<HTMLInputElement>(null);
@@ -532,7 +543,7 @@ function Toolbar(): ReactNode {
         <span className="sep" />
         <Tool label="Insert row above" run={plainCmd(insertRow("above"))} refk="tb-row-above">Row ↑</Tool>
         <Tool label="Insert row below" run={plainCmd(insertRow("below"))} refk="tb-row-below">Row ↓</Tool>
-        <Tool label="Delete row" run={() => { if (a) void deleteRow(editorConfirm)(a.view); }} refk="tb-row-delete">Delete row</Tool>
+        <Tool label="Delete row" run={() => { if (a) void deleteRowIn(a); }} refk="tb-row-delete">Delete row</Tool>
         {inTable && (
           <span className="tb-group" role="group" aria-label="Cell text margins">
             <span className="tb-gl">Cell margins</span>

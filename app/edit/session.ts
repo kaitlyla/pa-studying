@@ -20,7 +20,7 @@ import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
 import {
-  buildSave, fileChoice, gapLook, loadUnit, sameChoice, sameLook, shownMedsSlots, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
+  buildSave, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownMedsSlots, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
   type SaveBuild,
 } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
@@ -111,6 +111,8 @@ let copiedEdits: string | null = null;
 let keptDraftKey: string | null = null;
 /** "Load newer version" is reading the page. */
 let loadingNewer = false;
+/** Card boxes she cut whose editors have yet to unmount: they go with nothing kept to put back. */
+const cutViews = new Set<string>();
 /** The restored draft wants its save run again once its docs are in the editors. */
 let resumeAfterApply = false;
 /** A save of the open edit hit a conflict: it edits an outdated version until "Load newer version". */
@@ -119,6 +121,7 @@ let conflicted = false;
 /** Forget the editors and everything waiting on them (an edit starts, closes, or reloads). */
 function resetEditState(): void {
   views.clear();
+  cutViews.clear();
   pendingDocs = null;
   pendingDraftKey = null;
   resumeAfterApply = false;
@@ -182,8 +185,10 @@ export function registerView(slot: string, view: EditorView, initial: DocJSON): 
     if (views.get(slot)?.view !== view) return;
     views.delete(slot);
     // The editor went away while its edit is still open (she was signed out, or the page re-suspended):
-    // its changes wait for it to mount again, and save and drafts still take them meanwhile.
-    if (store.edit && !view.state.doc.eq(schema.nodeFromJSON(initial))) {
+    // its changes wait for it to mount again, and save and drafts still take them meanwhile. A box she
+    // cut keeps nothing: brought back, it shows as it was.
+    const cut = cutViews.delete(slot);
+    if (store.edit && !cut && !view.state.doc.eq(schema.nodeFromJSON(initial))) {
       (pendingDocs ??= new Map()).set(slot, view.state.doc.toJSON() as DocJSON);
     }
   };
@@ -232,6 +237,26 @@ export function setMeds(part: MedsPart, choice: MedsChoice): void {
   if (sameChoice(choice, fileChoice(part))) delete meds[part.topic];
   set({ edit: { ...edit, meds } });
   setEdit({ dirty: isDirty() });
+}
+
+/** The open edit's meds panel showing card box `slot` (an editor of one of its cards), or null. */
+function cardBoxPanel(slot: string): MedsPart | null {
+  for (const p of store.edit?.unit?.parts ?? []) {
+    if (p.kind === "meds" && shownMedsSlots(p, currentMeds(p)).some((s) => s.id === slot)) return p;
+  }
+  return null;
+}
+
+/** Whether editor `slot` is a box of a card on a meds panel of the open edit. */
+export const isCardBox = (slot: string): boolean => cardBoxPanel(slot) !== null;
+
+/** Card box `slot` holds nothing now (she deleted the table that was all it had): it goes from its card (cutBox). */
+export function dropEmptyBox(slot: string): void {
+  const part = cardBoxPanel(slot);
+  const view = views.get(slot)?.view;
+  if (!part || !view || !isBlankDoc(view.state.doc.toJSON() as DocJSON)) return;
+  cutViews.add(slot);
+  setMeds(part, cutBox(part, currentMeds(part), slot));
 }
 
 /** The look gap `gap` of the open edit shows now: as she changed it, else as stored. */

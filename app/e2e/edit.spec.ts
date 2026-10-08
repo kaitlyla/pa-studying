@@ -20,6 +20,7 @@ import {
   type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type RefTabJson,
   type SiteJson, type SlidesJson, type SystemJson, type WorkupJson,
 } from "../../lib/derive/published.ts";
+import { entryPieces } from "../../lib/derive/panel.ts";
 import { fileHash, guideViewHash, otherHash, PANCE, REF_TABS, refHash, versionsHash } from "../../lib/derive/routes.ts";
 import { FakeGithub, routeFakeGithub, type FakeRequest } from "./fake-github.ts";
 
@@ -2458,6 +2459,157 @@ test.describe("her own meds panel for a condition", () => {
     const meds = page.locator(`section.tcard[data-topic="${t.id}"] .meds`);
     await expect(meds.locator(`section.phc[data-anchor="meds-${card}"]`)).toHaveCount(0);
     await expect(meds.locator(`section.phc[data-anchor="meds-${addId}"] .phc-t`)).toHaveText(added);
+  });
+
+  test("Delete row on a box that is a one-row table deletes the table, and the box goes from her version", async ({ page, context, baseURL }) => {
+    // A condition without her own panel whose card shows several boxes, one of them a one-row table.
+    const boxes = new Map<string, { system: string; card: string; text: string; count: number }>();
+    const isOneRowTable = (doc: unknown): boolean => {
+      const content = isRec(doc) && Array.isArray(doc.content) ? doc.content : [];
+      const table: unknown = content[0];
+      return content.length === 1 && isRec(table) && table.type === "table" && Array.isArray(table.content) && table.content.length === 1;
+    };
+    const t = need(
+      findTopic((g, system, id) => {
+        const sys = readData<SystemJson>(systemPath(g, system));
+        const topic = sys.topics.find((x) => x.id === id);
+        if (!topic || topic.medsEdit) return false;
+        for (const m of topic.meds) {
+          if (m.part !== undefined || m.card === null) continue;
+          const texts = entryPieces(sys, topic, m, 0).map((p) => ({ one: isOneRowTable(p.doc), text: textOf(p.doc).trim() }));
+          const box = texts.find((x) => x.one && x.text.length > 0 && texts.filter((y) => y.text.includes(x.text)).length === 1);
+          if (texts.length < 2 || !box) continue;
+          boxes.set(id, { system, card: m.target, text: box.text, count: texts.length });
+          return true;
+        }
+        return false;
+      }),
+      "condition whose card shows a one-row table box among others, without her own panel",
+    );
+    const { system, card, text, count } = need(boxes.get(t.id), "that box");
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"]`);
+    const slots = editing.locator(".edit-slot");
+    await expect(slots).toHaveCount(count);
+    const table = editing.locator("table.nt").filter({ hasText: text });
+    await expect(table).toHaveCount(1);
+
+    await table.locator("td").first().click();
+    await ref(page, "tb-row-delete").click();
+    const confirm = page.getByRole("dialog", { name: "Delete this table?" });
+    await expect(confirm).toBeVisible();
+    await ref(confirm, "confirm-ok").click();
+    await expect(table).toHaveCount(0);
+    // The box it left blank is gone too, while the card's other boxes stay.
+    await expect(slots).toHaveCount(count - 1);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    expect([...changedFiles(fake).keys()]).toEqual([medsFile]);
+    const saved = JSON.parse(need(fake.readFile(medsFile), "her meds file")) as MedsFile;
+    expect(saved.remove).toEqual([]);
+    expect(saved.own.map((o) => [o.target, o.pieces.length])).toEqual([[card, count - 1]]);
+    expect(JSON.stringify(saved.own[0]?.pieces)).not.toContain(JSON.stringify(text).slice(1, -1));
+    const shown = panelCard(page, t, card);
+    await shown.locator(".phc-h button").click();
+    await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
+    await expect(shown).not.toContainText(text);
+  });
+
+  test("in her own version, she removes two of a card's boxes (a table by Delete row, a text box by emptying it) and the others stay", async ({ page, context, baseURL }) => {
+    // A condition with her own version of a card: 3+ boxes, one a table of 2–4 rows, one of text only.
+    type Pick = { system: string; card: string; texts: string[]; leads: string[]; table: number; plain: number };
+    const picks = new Map<string, Pick>();
+    const tableRows = (doc: unknown): number => {
+      const content = isRec(doc) && Array.isArray(doc.content) ? doc.content : [];
+      const table: unknown = content[0];
+      return content.length === 1 && isRec(table) && table.type === "table" && Array.isArray(table.content) ? table.content.length : 0;
+    };
+    const squash = (s: string): string => s.replace(/\s+/g, " ").trim();
+    // A box's first words as the page shows them: the leading text of its first text block. Her runs split words
+    // anywhere, so the block's text nodes are joined; list markers and block breaks are drawn outside it.
+    const lead = (n: unknown): string => {
+      const kids: unknown[] = isRec(n) && Array.isArray(n.content) ? n.content : [];
+      const run: string[] = [];
+      for (const c of kids) {
+        if (!isRec(c) || typeof c.text !== "string") break;
+        run.push(c.text);
+      }
+      if (squash(run.join("")) !== "") return squash(run.join(""));
+      for (const c of kids) {
+        const s = lead(c);
+        if (s !== "") return s;
+      }
+      return "";
+    };
+    const t = need(
+      findTopic((g, system, id) => {
+        const own = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit?.own ?? {};
+        for (const [card, pieces] of Object.entries(own)) {
+          const texts = pieces.map((p) => squash(textOf(p.doc)));
+          const leads = pieces.map((p) => lead(p.doc).slice(0, 30));
+          // A box we remove must be findable by its lead alone: long enough, and in no other box of the card.
+          const unique = (i: number): boolean => (leads[i] ?? "").length >= 12 && texts.every((x, j) => j === i || !x.includes(leads[i] ?? ""));
+          const table = pieces.findIndex((p, i) => tableRows(p.doc) >= 2 && tableRows(p.doc) <= 4 && unique(i) && !JSON.stringify(p.doc).includes('"image'));
+          const plain = pieces.findIndex((p, i) => i !== table && unique(i) && !/"(table|image|image_block|textbox|drawing)"/.test(JSON.stringify(p.doc)));
+          if (pieces.length < 3 || table < 0 || plain < 0) continue;
+          picks.set(id, { system, card, texts, leads, table, plain });
+          return true;
+        }
+        return false;
+      }),
+      "condition with her own version of a card holding 3+ boxes, one a 2–4 row table and one of plain text",
+    );
+    const { system, card, texts, leads, table, plain } = need(picks.get(t.id), "that card");
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    const before = readJson(join(ROOT, medsFile)) as MedsFile;
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"]`);
+    await expect(editing.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
+    const slots = editing.locator(".edit-slot");
+    await expect(slots).toHaveCount(texts.length);
+
+    // The text box: select all of it and delete. It stays, blank, until she saves.
+    const words = slots.nth(plain).locator('[contenteditable="true"]');
+    await words.locator("p").filter({ hasText: /\S/ }).first().click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.press("Delete");
+    await expect(words).toHaveText("");
+
+    // The table box: Delete row on each row; the last one takes the table, and the box goes.
+    const rows = slots.nth(table).locator("table.nt > tbody > tr");
+    for (let left = await rows.count(); left > 1; left--) {
+      await rows.first().locator("td").first().click();
+      await ref(page, "tb-row-delete").click();
+      await ref(page.getByRole("dialog", { name: "Delete this table row?" }), "confirm-ok").click();
+      await expect(rows).toHaveCount(left - 1);
+    }
+    await rows.first().locator("td").first().click();
+    await ref(page, "tb-row-delete").click();
+    await ref(page.getByRole("dialog", { name: "Delete this table?" }), "confirm-ok").click();
+    await expect(slots).toHaveCount(texts.length - 1);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const saved = JSON.parse(need(fake.readFile(medsFile), "her meds file")) as MedsFile;
+    const kept = texts.filter((_, i) => i !== table && i !== plain);
+    expect(saved.own.find((o) => o.target === card)?.pieces.map((p) => squash(textOf(p.doc)))).toEqual(kept);
+    expect(saved.own.filter((o) => o.target !== card)).toEqual(before.own.filter((o) => o.target !== card));
+    expect(saved.remove).toEqual(before.remove);
+    const shown = panelCard(page, t, card);
+    await shown.locator(".phc-h button").click();
+    // The card's body only: a box's text can start with the card's own title (her guide row does).
+    const body = shown.locator(".phc-b");
+    for (const k of leads.filter((_, i) => i !== table && i !== plain)) await expect(body).toContainText(k);
+    for (const gone of [leads[table], leads[plain]]) await expect(body).not.toContainText(gone ?? "");
   });
 });
 

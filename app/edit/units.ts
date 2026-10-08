@@ -27,7 +27,7 @@ const DEFAULT_AREA: ContentArea = { pageContentPt: GAP_CONTENT_PT, pageContentHe
 const EMPTY_DOC = schema.node("doc", null, [schema.node("paragraph")]).toJSON() as DocJSON;
 
 /** A doc with nothing in it: only paragraphs, all empty. */
-function isBlankDoc(doc: DocJSON): boolean {
+export function isBlankDoc(doc: DocJSON): boolean {
   return doc.content.every((n) => (n as { type: string }).type === "paragraph" && ((n as { content?: unknown[] }).content ?? []).length === 0);
 }
 
@@ -102,12 +102,14 @@ export interface MedsPart {
 
 /**
  * Her choices for a meds panel in the open edit: the cards she added and the entries she took off (in
- * the MedsFile's order), and the entries whose own version she dropped ("Use the original").
+ * the MedsFile's order), the entries whose own version she dropped ("Use the original"), and the boxes
+ * she cut from the cards shown (slot ids; absent when none).
  */
 export interface MedsChoice {
   add: string[];
   remove: string[];
   original: string[];
+  cut?: string[];
 }
 
 /** The entries of `part` worked out from her notes. */
@@ -132,11 +134,39 @@ export function shownEntries(part: MedsPart, choice: MedsChoice): MedsEntry[] {
 /** Whether `entry` shows her own version under `choice`. */
 export const showsOwn = (entry: MedsEntry, choice: MedsChoice): boolean => entry.own !== null && !choice.original.includes(entry.med.target);
 
-/** The editors `entry` shows under `choice`. */
-export const entrySlots = (entry: MedsEntry, choice: MedsChoice): MedsSlot[] => (showsOwn(entry, choice) ? (entry.own ?? []) : entry.card);
+/** The boxes of the version `entry` shows under `choice` (her own or the card), those she cut included. */
+const allBoxes = (entry: MedsEntry, choice: MedsChoice): MedsSlot[] => (showsOwn(entry, choice) ? (entry.own ?? []) : entry.card);
+
+/** The editors `entry` shows under `choice`: its own version's or its card's, less the boxes she cut. */
+export const entrySlots = (entry: MedsEntry, choice: MedsChoice): MedsSlot[] => allBoxes(entry, choice).filter((s) => !choice.cut?.includes(s.id));
 
 /** The editors a meds panel shows under `choice`. */
 export const shownMedsSlots = (part: MedsPart, choice: MedsChoice): MedsSlot[] => shownEntries(part, choice).flatMap((e) => entrySlots(e, choice));
+
+/** `choice` with every box of entry `target` back (card and own version), so it shows whole again. */
+export function uncut(part: MedsPart, choice: MedsChoice, target: string): MedsChoice {
+  const entry = part.entries.find((e) => e.med.target === target);
+  const ids = new Set([...(entry?.card ?? []), ...(entry?.own ?? [])].map((s) => s.id));
+  const cut = (choice.cut ?? []).filter((id) => !ids.has(id));
+  const out: MedsChoice = { ...choice, cut };
+  if (cut.length === 0) delete out.cut;
+  return out;
+}
+
+/** `choice` with entry `target` off the panel ("Remove from this condition"): a worked-out one is removed, an added card no longer added. */
+export function takeOff(part: MedsPart, choice: MedsChoice, target: string): MedsChoice {
+  const c = uncut(part, choice, target);
+  if (part.entries.some((e) => e.derived && e.med.target === target)) return { ...c, remove: [...c.remove, target] };
+  return { ...c, add: c.add.filter((x) => x !== target) };
+}
+
+/** `choice` with card box `slot` cut from the entry showing it. Cutting the entry's last box takes the entry off (takeOff). */
+export function cutBox(part: MedsPart, choice: MedsChoice, slot: string): MedsChoice {
+  const entry = shownEntries(part, choice).find((e) => entrySlots(e, choice).some((s) => s.id === slot));
+  if (!entry) return choice;
+  if (entrySlots(entry, choice).length === 1) return takeOff(part, choice, entry.med.target);
+  return { ...choice, cut: [...(choice.cut ?? []), slot] };
+}
 
 export interface EditUnit {
   key: string;
@@ -640,11 +670,21 @@ export function slotDocs(unit: EditUnit): Map<string, DocJSON> {
 /**
  * Her meds panel for a topic after the edit: `choice`'s cards and removals, and her own version of
  * each entry the panel shows — the pieces of the editors it shows (`docs`, slot id → edited doc) when
- * she edited one of them, else the stored version unless she dropped it. An entry she took off keeps
- * its stored version for Put back; a card she no longer adds drops it. Versions of entries the editor
- * does not have are kept. Null when nothing is left.
+ * she edited or cut one of them, less the boxes she cut or emptied, else the stored version unless she
+ * dropped it. A card whose every box she cut or emptied goes off the panel, as "Remove from this
+ * condition" takes it. An entry she took off keeps its stored version for Put back; a card she no longer
+ * adds drops it. Versions of entries the editor does not have are kept. Null when nothing is left.
  */
-function medsAfter(part: MedsPart, choice: MedsChoice, docs: ReadonlyMap<string, DocJSON>): MedsFile | null {
+function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string, DocJSON>): MedsFile | null {
+  // Emptied: she took out everything a box had. A box already blank in her notes stays.
+  const emptied = (s: MedsSlot): boolean => {
+    const doc = docs.get(s.id);
+    return doc !== undefined && isBlankDoc(doc) && !isBlankDoc(s.piece.doc);
+  };
+  let choice = chosen;
+  for (const e of shownEntries(part, chosen)) {
+    if (allBoxes(e, chosen).length > 0 && entrySlots(e, chosen).every(emptied)) choice = takeOff(part, choice, e.med.target);
+  }
   const own = new Map((part.file?.own ?? []).map((o) => [o.target, o.pieces]));
   const shown = new Set(shownEntries(part, choice).map((e) => e.med.target));
   for (const e of part.entries) {
@@ -652,7 +692,8 @@ function medsAfter(part: MedsPart, choice: MedsChoice, docs: ReadonlyMap<string,
     if (choice.original.includes(target) || (!shown.has(target) && !choice.remove.includes(target))) own.delete(target);
     if (!shown.has(target)) continue;
     const slots = entrySlots(e, choice);
-    if (slots.some((s) => docs.has(s.id))) own.set(target, slots.map((s) => ({ ...s.piece, doc: docs.get(s.id) ?? s.piece.doc })));
+    const cut = allBoxes(e, choice).length > slots.length;
+    if (cut || slots.some((s) => docs.has(s.id))) own.set(target, slots.filter((s) => !emptied(s)).map((s) => ({ ...s.piece, doc: docs.get(s.id) ?? s.piece.doc })));
   }
   // A card shown only because she edited it (fileAdds) stays implied by her version, as stored.
   const implied = new Set(fileChoice(part).add.filter((id) => !part.file?.add.includes(id)));

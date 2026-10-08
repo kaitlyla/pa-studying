@@ -277,6 +277,59 @@ describe("rows", () => {
     expect(asked).toBe(false);
   });
 
+  describe("on a one-row table in a card box (lastRowTakesTable)", () => {
+    const oneRow = (): ReturnType<typeof table> => table([row(rid(1), [cell("Key Monitoring"), cell("Parameters")])]);
+
+    it("deletes the table after her confirm, keeping the text beside it", async () => {
+      const editor = live(at(createEditorState(docOf(para([text("intro")]), oneRow(), para([text("after")]))), "Key Monitoring"));
+      let prompt: string[] = [];
+      const ok = await deleteRow(async (lines) => { prompt = lines; return true; }, true)(editor);
+      expect(ok).toBe(true);
+      expect(prompt).toEqual(["Delete this table?", "Key Monitoring Parameters"]);
+      const blocks: string[] = [];
+      editor.state.doc.forEach((n) => blocks.push(`${n.type.name}: ${n.textContent}`));
+      expect(blocks).toEqual(["paragraph: intro", "paragraph: after"]);
+    });
+
+    it("leaves a box that held only the table with nothing in it", async () => {
+      const editor = live(at(createEditorState(docOf(oneRow())), "Key Monitoring"));
+      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      const doc = editor.state.doc;
+      expect(doc.childCount).toBe(1);
+      expect(doc.firstChild?.type.name).toBe("paragraph");
+      expect(doc.firstChild?.content.size).toBe(0);
+    });
+
+    it("keeps the table when she cancels, and names its pictures in the confirm", async () => {
+      const picCell = { type: "table_cell", attrs: {}, content: [para([{ type: "image", attrs: { asset: ASSET, widthPt: 20, heightPt: 20 } }])] };
+      const d = docOf(table([row(rid(1), [cell("A"), picCell])]));
+      const editor = live(at(createEditorState(d), "A"));
+      let prompt: string[] = [];
+      expect(await deleteRow(async (lines) => { prompt = lines; return false; }, true)(editor)).toBe(false);
+      expect(prompt[2]).toBe("This table also holds 1 picture(s), which will be deleted too.");
+      expect(editor.state.doc.eq(schema.nodeFromJSON(d))).toBe(true);
+      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      expect(editor.state.doc.firstChild?.type.name).toBe("paragraph");
+    });
+
+    it("is abandoned when the table changed while the confirm was open", async () => {
+      const editor = live(at(createEditorState(docOf(oneRow())), "Key Monitoring"));
+      const ok = await deleteRow(async () => {
+        editor.dispatch(editor.state.tr.insertText("x", posOf(editor.state.doc, "Key Monitoring")));
+        return true;
+      }, true)(editor);
+      expect(ok).toBe(false);
+      expect(rowsOf(editor.state.doc).map((r) => r.textContent)).toEqual(["xKey MonitoringParameters"]);
+    });
+
+    it("still deletes only the row on a table with more rows", async () => {
+      const d = docOf(table([row(rid(1), [cell("A")]), row(rid(2), [cell("B")])]));
+      const editor = live(at(createEditorState(d), "B"));
+      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      expect(rowsOf(editor.state.doc).map((r) => r.attrs.id)).toEqual([rid(1)]);
+    });
+  });
+
   it("Delete row deletes the same row when she typed above the table while the confirm was open", async () => {
     const d = docOf(para([text("intro")]), table([row(rid(1), [cell("A"), cell("B")]), row(rid(2), [cell("C"), cell("D")])]));
     const editor = live(at(createEditorState(d), "C"));

@@ -15,14 +15,14 @@ import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import { overlayEntries, setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, copyChanges, currentLook, currentMeds, discardEdit, getEditStore, loadNewer, mountedEditor, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
+  confirmLeave, copyChanges, currentLook, currentMeds, discardEdit, dropEmptyBox, getEditStore, isCardBox, loadNewer, mountedEditor, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
   OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, setGapLook, setMeds, startEdit,
   viewChanged, type Draft,
 } from "./session.ts";
 import { fileChoice, gapLook, shownMedsSlots, type MedsPart } from "./units.ts";
 import { addPictureFile, pictureSize, setPictureStoreForTests, stopLocalPictures } from "./pictures.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
-import { docLines } from "./editor/commands.ts";
+import { CONFIRMED_DELETE, docLines } from "./editor/commands.ts";
 import { SAVING_AGAIN } from "../auth/auth.ts";
 import { Toast } from "../shell/toast.tsx";
 import { flush, mount, until } from "../testing.tsx";
@@ -53,9 +53,13 @@ afterEach(() => {
   w.stop();
 });
 
+/** Each mounted editor's unregister (registerView's), by slot id: what an editor's unmount runs. */
+const unregisters = new Map<string, () => void>();
+
 function destroyEditors(): void {
   views.forEach((v) => v.destroy());
   views = [];
+  unregisters.clear();
 }
 
 const edit = () => {
@@ -80,7 +84,7 @@ function mountEditors(): void {
           viewChanged();
         },
       });
-      registerView(slot.id, view, slot.doc);
+      unregisters.set(slot.id, registerView(slot.id, view, slot.doc));
       views.push(view);
     }
   }
@@ -489,6 +493,79 @@ describe("a topic's meds panel (her own panel for the condition)", () => {
     await vi.waitFor(async () => expect(await drafts.entries()).toEqual([]));
     expect(await save()).toBe(true);
     expect(stored()).toEqual({ v: 1, add: [C(3)], remove: [], own: [] });
+  });
+
+  describe("a box she empties by deleting its table (dropEmptyBox)", () => {
+    /** Empties box `slot`'s editor, as Delete row on its table's only row leaves it. */
+    const empty = (slot: string): void => {
+      const view = mountedEditor(slot);
+      if (!view) throw new Error(`no editor ${slot}`);
+      view.dispatch(view.state.tr.delete(0, view.state.doc.content.size).setMeta(CONFIRMED_DELETE, true));
+    };
+
+    it("only a card's boxes are card boxes: a topic table's rows and the below area are not", async () => {
+      expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+      mountEditors();
+      const unit = edit().unit;
+      const rows = unit?.parts.find((p) => p.kind === "rows");
+      const below = unit?.parts.find((p) => p.kind === "below");
+      if (rows?.kind !== "rows" || below?.kind !== "below") throw new Error("no rows or below part");
+      for (const s of shownMedsSlots(medsOf(), fileChoice(medsOf()))) expect(isCardBox(s.id)).toBe(true);
+      expect(isCardBox(rows.slot.id)).toBe(false);
+      expect(isCardBox(below.slot.id)).toBe(false);
+    });
+
+    // Stable angina R104's Nitrates card C2 has several boxes.
+    const ANGINA = `topic:fm:${R(104)}`;
+    const nitrateBoxes = () => shownMedsSlots(medsOf(), currentMeds(medsOf())).filter((s) => s.id.startsWith(`${R(104)}:meds:${C(2)}:`));
+
+    it("goes from the card, keeps nothing to bring back, and saves her version without it", async () => {
+      expect(await startEdit(ANGINA, "Stable angina")).toBe(true);
+      mountEditors();
+      const boxes = nitrateBoxes();
+      const [first, ...rest] = boxes;
+      if (!first || rest.length === 0) throw new Error("the Nitrates card needs two boxes");
+
+      // A box with text left in it stays.
+      dropEmptyBox(first.id);
+      expect(currentMeds(medsOf()).cut).toBeUndefined();
+
+      empty(first.id);
+      dropEmptyBox(first.id);
+      expect(currentMeds(medsOf()).cut).toEqual([first.id]);
+      expect(nitrateBoxes()).toEqual(rest);
+      // Its editor unmounts with nothing kept for it.
+      unregisters.get(first.id)?.();
+      await saveDraft();
+      expect(Object.keys((await drafts.get(ANGINA))?.docs ?? {})).not.toContain(first.id);
+
+      expect(await save()).toBe(true);
+      const saved = JSON.parse(w.fake.readFile(`content/guides/fm/cardiovascular/meds/${R(104)}.json`) ?? "null") as MedsFile;
+      expect(saved.remove).toEqual([]);
+      expect(saved.own.map((o) => [o.target, o.pieces.map((p) => JSON.stringify(p.doc))])).toEqual([[C(2), rest.map((s) => JSON.stringify(s.piece.doc))]]);
+    });
+
+    it("her last box takes the card off the condition, and Put back brings the card back whole", async () => {
+      expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+      mountEditors();
+      const boxes = shownMedsSlots(medsOf(), fileChoice(medsOf()));
+      const only = boxes[0];
+      if (!only || boxes.length !== 1) throw new Error("the CCB card should have one box");
+      empty(only.id);
+      dropEmptyBox(only.id);
+      unregisters.get(only.id)?.();
+      expect(currentMeds(medsOf())).toEqual({ ...fileChoice(medsOf()), remove: [C(1)] });
+      await saveDraft();
+      expect((await drafts.get(KEY))?.docs).toEqual({});
+      // Put back (the removed list's button) shows the card's box as it was.
+      setMeds(medsOf(), fileChoice(medsOf()));
+      expect(shownMedsSlots(medsOf(), currentMeds(medsOf()))).toEqual(boxes);
+      expect(edit().dirty).toBe(false);
+
+      setMeds(medsOf(), { ...fileChoice(medsOf()), remove: [C(1)] });
+      expect(await save()).toBe(true);
+      expect(stored()).toEqual({ v: 1, add: [], remove: [C(1)], own: [] });
+    });
   });
 });
 

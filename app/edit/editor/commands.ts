@@ -757,10 +757,20 @@ export function changeColumnWidthAsking(dir: 1 | -1, confirm: Confirm): (editor:
 
 /** The confirm text of Delete row: her editor's wording. */
 export function deleteRowPrompt(row: PMNode, pictures: number): string[] {
-  const text = row.textBetween(0, row.content.size, " ", " ").replace(/\s+/g, " ").trim();
+  return deletePrompt("Delete this table row?", "row", row, pictures);
+}
+
+/** The confirm text of Delete row on a table's only row, which deletes the table: Delete row's wording. */
+export function deleteTablePrompt(table: PMNode, pictures: number): string[] {
+  return deletePrompt("Delete this table?", "table", table, pictures);
+}
+
+/** A delete's question, the start of the text it deletes, and the pictures going with it. */
+function deletePrompt(question: string, what: string, node: PMNode, pictures: number): string[] {
+  const text = node.textBetween(0, node.content.size, " ", " ").replace(/\s+/g, " ").trim();
   const cut = text.length > 80 ? `${text.slice(0, 80)}…` : text;
-  const lines = ["Delete this table row?", cut];
-  if (pictures > 0) lines.push(`This row also holds ${pictures} picture(s), which will be deleted too.`);
+  const lines = [question, cut];
+  if (pictures > 0) lines.push(`This ${what} also holds ${pictures} picture(s), which will be deleted too.`);
   return lines;
 }
 
@@ -773,16 +783,31 @@ function countPictures(node: PMNode): number {
   return n;
 }
 
+/** Delete the one-row table `table` at `pos`, after her confirm (Delete row with `lastRowTakesTable`). */
+async function deleteTable(confirm: Confirm, editor: LiveEditor, table: PMNode, pos: number): Promise<boolean> {
+  if (!(await confirm(deleteTablePrompt(table, countPictures(table))))) return false;
+  // The document may have changed while the dialog was open: delete only the same, unchanged table.
+  const live = editor.state;
+  const at = livePos(live.doc, table, pos);
+  if (at === null) return false;
+  const tr = live.tr.delete(at, at + table.nodeSize);
+  tr.setMeta(CONFIRMED_DELETE, true);
+  tr.setSelection(TextSelection.near(tr.doc.resolve(Math.min(at, tr.doc.content.size))));
+  editor.dispatch(tr.scrollIntoView());
+  return true;
+}
+
 /**
- * Delete row, after her confirm. Refused on a one-row table. Cells spanning into the row shrink; a
- * merged cell starting in the row moves to the next row with one row fewer.
+ * Delete row, after her confirm. On a one-row table it is refused, unless `lastRowTakesTable` (a box of
+ * a card on a meds panel, which she can empty and so drop): then the whole table goes, as in Word. Cells
+ * spanning into the row shrink; a merged cell starting in the row moves to the next row with one row fewer.
  */
-export function deleteRow(confirm: Confirm): (editor: LiveEditor) => Promise<boolean> {
+export function deleteRow(confirm: Confirm, lastRowTakesTable = false): (editor: LiveEditor) => Promise<boolean> {
   return async (editor) => {
     const at = tableAt(editor.state.selection.$from);
     if (!at) return false;
     const { table, map } = at;
-    if (map.height <= 1 || table.childCount <= 1) return false;
+    if (map.height <= 1 || table.childCount <= 1) return lastRowTakesTable ? deleteTable(confirm, editor, table, at.pos) : false;
     const rows = cellsByRow(table, map);
     const r = at.row;
     const pictures = (rows[r] ?? []).reduce((sum, c) => sum + countPictures(c.node), 0);

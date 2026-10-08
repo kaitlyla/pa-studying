@@ -6,7 +6,7 @@ import { ClassCard, CardPieces } from "../pharm/ClassCard.tsx";
 import { OWN_VERSION } from "../pharm/MedsPanel.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { currentMeds, setMeds, useEdit } from "./session.ts";
-import { entrySlots, fileChoice, shownEntries, showsOwn, type MedsChoice, type MedsPart, type Slot } from "./units.ts";
+import { entrySlots, fileChoice, shownEntries, showsOwn, takeOff, uncut, type MedsChoice, type MedsPart, type Slot } from "./units.ts";
 
 export const MEDS_HEADING = "Medications for this condition";
 export const REMOVE_CARD = "Remove from this condition";
@@ -35,10 +35,9 @@ export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotVie
   const later = choice.add.filter((id) => !part.entries.some((e) => !e.derived && e.med.target === id));
   const removed = part.entries.filter((e) => e.derived && choice.remove.includes(e.med.target));
   const update = (c: Partial<MedsChoice>): void => setMeds(part, { ...choice, ...c });
-  const takeOff = (target: string): void => {
-    if (part.entries.some((e) => e.derived && e.med.target === target)) update({ remove: [...choice.remove, target] });
-    else update({ add: choice.add.filter((x) => x !== target) });
-  };
+  const off = (target: string): void => setMeds(part, takeOff(part, choice, target));
+  // Either version shows whole: the boxes she cut come back.
+  const showVersion = (target: string, original: string[]): void => setMeds(part, uncut(part, { ...choice, original }, target));
   const add = (id: string): void => {
     if (choice.remove.includes(id)) update({ remove: choice.remove.filter((x) => x !== id) });
     else update({ add: [...choice.add, id] });
@@ -59,11 +58,11 @@ export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotVie
             <CardPieces pieces={slots.map((s) => ({ ...s.piece, part: null }))} body={(i) => (slots[i] ? slotView(slots[i]) : null)} />
             {editing && (
               <div className="meds-acts">
-                {own && <button type="button" className="btn" onClick={() => update({ original: [...choice.original, t] })} data-ref="meds-original">{USE_ORIGINAL}</button>}
+                {own && <button type="button" className="btn" onClick={() => showVersion(t, [...choice.original, t])} data-ref="meds-original">{USE_ORIGINAL}</button>}
                 {!own && e.own !== null && (
-                  <button type="button" className="btn" onClick={() => update({ original: choice.original.filter((x) => x !== t) })} data-ref="meds-mine">{USE_MINE}</button>
+                  <button type="button" className="btn" onClick={() => showVersion(t, choice.original.filter((x) => x !== t))} data-ref="meds-mine">{USE_MINE}</button>
                 )}
-                <button type="button" className="btn" onClick={() => takeOff(t)} data-ref="meds-remove">{REMOVE_CARD}</button>
+                <button type="button" className="btn" onClick={() => off(t)} data-ref="meds-remove">{REMOVE_CARD}</button>
               </div>
             )}
           </ClassCard>
@@ -72,7 +71,7 @@ export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotVie
       {later.map((id) => (
         <div key={id} className="meds-later" data-ref="meds-later">
           <b>{title(id)}</b> — {ADDED_LATER}
-          {editing && <button type="button" className="linkbtn" onClick={() => takeOff(id)} data-ref="meds-remove">{REMOVE_CARD}</button>}
+          {editing && <button type="button" className="linkbtn" onClick={() => off(id)} data-ref="meds-remove">{REMOVE_CARD}</button>}
         </div>
       ))}
       {editing && removed.length > 0 && (

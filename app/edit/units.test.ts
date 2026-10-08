@@ -11,7 +11,7 @@ import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import {
-  buildSave, fileChoice, gapLook, loadUnit, localDate, sameLook, shownEntries, shownMedsSlots, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
+  buildSave, cutBox, entrySlots, fileChoice, gapLook, loadUnit, localDate, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
 } from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
@@ -772,6 +772,79 @@ describe("a topic's meds panel", () => {
     expect(JSON.stringify(pieces[1]?.doc)).toContain("my nitrates for stable angina");
     expect(texts(pieces.filter((_, i) => i !== 1))).toEqual(texts(card.filter((_, i) => i !== 1).map((s) => s.piece)));
     for (const p of pieces) expect(p).not.toHaveProperty("part");
+  });
+
+  describe("boxes she cut or emptied", () => {
+    const blank: DocJSON = { type: "doc", content: [{ type: "paragraph" }] } as DocJSON;
+    const card = (part: MedsPart) => entry(part, C(2)).card;
+
+    it("a cut box goes from the card: her version is the remaining boxes, though she typed nothing", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const boxes = card(part);
+      const gone = boxes[1];
+      if (!gone || boxes.length < 2) throw new Error("the card needs two boxes");
+      const choice = cutBox(part, fileChoice(part), gone.id);
+      expect(choice.cut).toEqual([gone.id]);
+      expect(entrySlots(entry(part, C(2)), choice).map((s) => s.id)).toEqual(boxes.filter((s) => s !== gone).map((s) => s.id));
+      const saved = savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, choice]]) }));
+      expect(saved.remove).toEqual([]);
+      expect(texts(saved.own.find((o) => o.target === C(2))?.pieces ?? [])).toEqual(texts(boxes.filter((s) => s !== gone).map((s) => s.piece)));
+    });
+
+    it("a box she emptied is dropped from her version", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const boxes = card(only(unit, "meds"));
+      const emptied = boxes[1];
+      if (!emptied) throw new Error("no notes box");
+      const saved = savedMeds(buildSave(unit, new Map([[emptied.id, blank]]), TODAY));
+      expect(texts(saved.own.find((o) => o.target === C(2))?.pieces ?? [])).toEqual(texts(boxes.filter((s) => s !== emptied).map((s) => s.piece)));
+    });
+
+    it("a box already blank in her version stays when she edits another box", async () => {
+      const pieces = [notes("first"), { ...notes(""), doc: blank }, notes("last")];
+      store(R(104), { v: 1, add: [], remove: [], own: [{ target: C(2), pieces }] });
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const own = entry(only(unit, "meds"), C(2)).own ?? [];
+      const first = own[0];
+      if (!first) throw new Error("no own editor");
+      const saved = savedMeds(buildSave(unit, new Map([[first.id, prose("first, edited")]]), TODAY));
+      const after = saved.own.find((o) => o.target === C(2))?.pieces ?? [];
+      expect(after).toHaveLength(3);
+      expect(JSON.stringify(after[0]?.doc)).toContain("first, edited");
+      expect(after[1]?.doc.content.map((n) => [(n as { type: string }).type, (n as { content?: unknown[] }).content ?? []])).toEqual([["paragraph", []]]);
+      expect(JSON.stringify(after[2]?.doc)).toContain("last");
+    });
+
+    it("emptying or cutting every box takes the card off the condition, as Remove from this condition does", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const boxes = card(part);
+      const [last, ...rest] = [...boxes].reverse();
+      if (!last) throw new Error("no boxes");
+      let choice = fileChoice(part);
+      for (const s of rest) choice = cutBox(part, choice, s.id);
+      expect(choice.cut).toHaveLength(boxes.length - 1);
+      choice = cutBox(part, choice, last.id);
+      expect(choice).toEqual({ ...fileChoice(part), remove: [C(2)] });
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, choice]]) }))).toEqual({ v: 1, add: [], remove: [C(2)], own: [] });
+      // The same when she empties every box by hand and saves.
+      const emptied = buildSave(unit, new Map(boxes.map((s) => [s.id, blank])), TODAY);
+      expect(savedMeds(emptied)).toEqual({ v: 1, add: [], remove: [C(2)], own: [] });
+    });
+
+    it("Use the original, and taking the card off, bring every box back", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const boxes = card(part);
+      const gone = boxes[0];
+      if (!gone) throw new Error("no boxes");
+      const cut = cutBox(part, fileChoice(part), gone.id);
+      expect(uncut(part, cut, C(2))).toEqual(fileChoice(part));
+      const off = takeOff(part, cut, C(2));
+      expect(off).toEqual({ ...fileChoice(part), remove: [C(2)] });
+      expect(entrySlots(entry(part, C(2)), { ...off, remove: [] })).toEqual(boxes);
+    });
   });
 
   it("taking an entry off and adding a card save her choices", async () => {
