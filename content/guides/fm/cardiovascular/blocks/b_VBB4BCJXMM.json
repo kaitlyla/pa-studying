@@ -50,9 +50,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 2.15,
+      "right": 0,
       "bottom": 0,
-      "left": 2.15
+      "left": 0
      }
     },
     "content": [
@@ -85,7 +85,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -113,7 +116,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -125,6 +131,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -152,7 +164,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -164,6 +179,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clinical Manifestations"
@@ -191,7 +212,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -203,6 +227,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Diagnostics"
@@ -230,7 +260,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -242,6 +275,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Management "
@@ -1690,7 +1729,14 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        73.39393658370267,
+        172.3,
+        170.75,
+        192.80696351858165,
+        164.7490998977156
+       ]
       },
       "content": [
        {
@@ -1712,7 +1758,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1724,6 +1773,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Aortic Dissection"
@@ -1751,7 +1806,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1760,7 +1818,15 @@
           "content": [
            {
             "type": "text",
-            "text": "Tear through the innermost layer of the aorta (intima) due to cystic medial necrosis "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "Tear through aorta's innermost layer (intima) due to cystic medial necrosis "
            }
           ]
          },
@@ -1772,7 +1838,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1787,7 +1856,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1796,6 +1868,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎"
            },
            {
@@ -1806,12 +1886,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "MC"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": ascending near aortic arch or left subclavian"
            }
           ]
@@ -1824,7 +1918,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1833,6 +1930,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎descending, aortic arch "
            }
           ]
@@ -1845,7 +1950,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1860,7 +1968,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1875,12 +1986,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Risk Factors"
+            "text": "RF"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1893,6 +2018,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "FC5E7D"
@@ -1903,9 +2034,71 @@
            },
            {
             "type": "text",
-            "text": " (most important), age >50yrs, men, vasculitis, trauma, family HX, Turner’s syndrome, collagen d/o (Marfan, Ehlers-Danlos), pregnancy"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": " (most important), age >50yrs, men, vasculitis, trauma, FHx, Turner’s syndrome, collagen d/o (Marfan, Ehlers-Danlos), preg"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
          }
         ]
        },
@@ -1928,7 +2121,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1943,12 +2139,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "S/SXS"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": sudden onset "
            },
            {
@@ -1956,6 +2166,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1968,7 +2184,15 @@
            },
            {
             "type": "text",
-            "text": "; may radiate between the scapulae"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "; may radiate b/n the scapulae"
            }
           ]
          },
@@ -1980,7 +2204,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1989,6 +2216,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎ascending: anterior chest pain "
            }
           ]
@@ -2001,7 +2236,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2010,6 +2248,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎aortic arch: neck/jaw pain "
            }
           ]
@@ -2022,7 +2268,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2031,6 +2280,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎descending: "
            },
            {
@@ -2038,6 +2295,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2052,6 +2315,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
@@ -2070,7 +2339,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2085,7 +2357,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2094,6 +2369,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -2104,6 +2387,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2117,6 +2406,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2136,7 +2431,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2157,57 +2455,13 @@
         },
         "content": [
          {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "DX"
-           },
-           {
-            "type": "text",
-            "text": ":"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": " CTA, MRA, TEE"
-           }
-          ]
-         },
-         {
           "type": "anchored",
           "attrs": {
-           "offsetPt": 79.16692913385826
+           "offsetPt": 0,
+           "float": {
+            "dxPt": 78.9,
+            "dyPt": 0.7
+           }
           },
           "content": [
            {
@@ -2231,7 +2485,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2246,12 +2503,115 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "DX"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ":"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": " CTA, MRA, TEE"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "CXR"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": wide mediastinum "
            }
           ]
@@ -2264,7 +2624,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2292,7 +2655,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2307,12 +2673,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Acute proximal"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2320,6 +2700,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2332,7 +2718,15 @@
            },
            {
             "type": "text",
-            "text": ", preoperative BP control"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ", pre-op BP control"
            }
           ]
          },
@@ -2344,7 +2738,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2359,7 +2756,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2374,12 +2774,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Descending/distal"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": medical "
            }
           ]
@@ -2392,7 +2806,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2401,6 +2818,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "» "
            },
            {
@@ -2408,6 +2833,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2420,7 +2851,15 @@
            },
            {
             "type": "text",
-            "text": "+/- sodium nitroprusside "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "± sodium nitroprusside "
            }
           ]
          },
@@ -2432,7 +2871,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2441,6 +2883,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "   ▪︎SBP "
            },
            {
@@ -2454,13 +2904,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "rapidly"
            },
            {
             "type": "text",
-            "text": " lowered to a goal of 100-120 within 20min"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": " lowered to a goal of 100-120 w.in 20min"
            }
           ]
          }
