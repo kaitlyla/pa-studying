@@ -14,10 +14,10 @@ import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/e
 import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
 import type { TableAttrs } from "../../lib/schemaTypes.ts";
 import { schema } from "../../lib/schema.ts";
-import { commitMessage, inboxItemDir, partName, serializeFile, topicMedsPath, type MedsFile } from "../../lib/content/index.ts";
+import { commitMessage, inboxItemDir, partName, serializeFile, topicMedsPath, type MedsFile, type MedsRoleTag } from "../../lib/content/index.ts";
 import {
   BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
-  type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type RefTabJson,
+  type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type PubGap, type RefTabJson,
   type SiteJson, type SlidesJson, type SystemJson, type WorkupJson,
 } from "../../lib/derive/published.ts";
 import { entryPieces } from "../../lib/derive/panel.ts";
@@ -2820,6 +2820,64 @@ test.describe("her own meds panel for a condition", () => {
     const meds = page.locator(`section.tcard[data-topic="${t.id}"] .meds`);
     await expect(meds.locator(`section.phc[data-anchor="meds-${card}"]`)).toHaveCount(0);
     await expect(meds.locator(`section.phc[data-anchor="meds-${addId}"] .phc-t`)).toHaveText(added);
+  });
+
+  test("a sourced card placed under a condition shows with its role chips and sources; Remove from this condition and Put back keep it in her panel file", async ({ page, context, baseURL }) => {
+    // A condition whose panel file places a sourced card (gap block) with role labels, in the real content.
+    const placed = new Map<string, { system: string; gap: PubGap; roles: MedsRoleTag[] }>();
+    const t = need(
+      findTopic((g, system, id) => {
+        const edit = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit;
+        const gap = edit?.gaps.find((x) => !edit.remove.includes(x.id) && (edit.roles[x.id]?.length ?? 0) > 0);
+        if (!edit || !gap) return false;
+        placed.set(id, { system, gap, roles: need(edit.roles[gap.id], "its roles") });
+        return true;
+      }),
+      "topic whose panel file places a sourced card with role labels",
+    );
+    const { system, gap, roles } = need(placed.get(t.id), "that sourced card");
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    // Role chip wording (Roles.tsx ROLE_LABELS; that module pulls in CSS, which Node can't load).
+    const LABEL: Record<MedsRoleTag["role"], string> = { "1st": "1st-line", "2nd": "2nd-line", alt: "Alternative", adjunct: "Adjunct" };
+    const chipText = roles.map((r) => (r.drugs === null ? LABEL[r.role] : `${LABEL[r.role]}: ${r.drugs}`));
+    const chipTitle = roles.map((r) => `Source: ${r.sources.map((s) => [s.name, s.org].filter((x) => x !== "").join(", ") + (s.year ? ` (${s.year})` : "")).join("; ")}`);
+    const firstLine = need(JSON.stringify(gap.doc).match(/"text":"([^"\\]{12,})/)?.[1], "a line of the card's text").slice(0, 40);
+
+    // A visitor sees the card with one chip per role, each naming its source on hover; opened, it shows the roles and the card.
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="${gap.id}"]`);
+    await expect(shown.locator(".phc-t")).toHaveText(gap.title);
+    await expect(shown.locator(".phc-h .rolec")).toHaveText(chipText);
+    for (const [i, title] of chipTitle.entries()) await expect(shown.locator(".phc-h .rolec").nth(i)).toHaveAttribute("title", title);
+    await shown.locator(".phc-h button").click();
+    await expect(shown.locator(".rolels li")).toHaveCount(roles.length);
+    await expect(shown).toContainText(firstLine);
+
+    // She takes it off this condition and puts it back: nothing to save.
+    await signIn(page);
+    const area = await startEditing(page);
+    const panel = area.locator("section.meds-edit");
+    const entry = panel.locator(`section.phc[data-anchor="${gap.id}"]`);
+    await expect(entry.locator(".phc-h .rolec")).toHaveText(chipText);
+    await ref(entry, "meds-remove").click();
+    await expect(entry).toHaveCount(0);
+    const removed = ref(panel, "meds-removed");
+    await expect(removed).toContainText(gap.title);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await ref(removed, "meds-put-back").click();
+    await expect(entry.locator(".phc-h .rolec")).toHaveText(chipText);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("No changes yet");
+
+    // Taken off and saved: her panel file keeps the card and its roles, and lists it as removed; the page drops it.
+    const before = JSON.parse(need(fake.readFile(medsFile), "her panel file before")) as MedsFile;
+    await ref(entry, "meds-remove").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    expect([...changedFiles(fake).keys()]).toEqual([medsFile]);
+    const saved = JSON.parse(need(fake.readFile(medsFile), "her panel file")) as MedsFile;
+    expect(saved).toEqual({ ...before, remove: [...before.remove, gap.id] });
+    await expect(page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="${gap.id}"]`)).toHaveCount(0);
   });
 
   test("Delete row on a box that is a one-row table deletes the table, and the box goes from her version", async ({ page, context, baseURL }) => {

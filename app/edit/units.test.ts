@@ -11,7 +11,7 @@ import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import {
-  buildSave, cutBox, entrySlots, fileChoice, gapLook, loadUnit, localDate, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
+  buildSave, cutBox, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
 } from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
@@ -1007,6 +1007,48 @@ describe("a topic's meds panel", () => {
     // Remove from this condition takes it off like any card she added, and her version with it.
     const off = buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [] }) });
     expect(off.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+  });
+
+  describe("sourced cards (gaps) and role labels (roles) in her file", () => {
+    const tag: NonNullable<MedsFile["roles"]>[number]["roles"][number] = {
+      role: "1st", drugs: null, note: null, sources: [{ name: "Angina", org: "MSD Manual", year: "2026", url: null }],
+    };
+    const file: MedsFile = { v: 1, add: [], remove: [], own: [], gaps: [G(3), G(2)], roles: [{ target: G(2), roles: [tag] }, { target: C(2), roles: [{ ...tag, role: "2nd" }] }] };
+    beforeEach(() => {
+      store(R(104), file);
+    });
+
+    it("loads each sourced card as a gap editor tagged with the topic, in her order, after the panel", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const gaps = unit.parts.filter((p) => p.kind === "gap");
+      expect(gaps.map((p) => [p.gap.id, p.meds])).toEqual([[G(3), R(104)], [G(2), R(104)]]);
+      const kinds = unit.parts.map((p) => p.kind);
+      expect(kinds.indexOf("gap")).toBe(kinds.indexOf("meds") + 1);
+      expect(medsGapParts(unit.parts, only(unit, "meds")).map((p) => p.gap.id)).toEqual([G(3), G(2)]);
+    });
+
+    it("a save of other panel choices keeps her sourced cards and role labels as stored", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [C(3)] }) }))).toEqual({ ...file, add: [C(3)] });
+    });
+
+    it("Remove from this condition puts a sourced card's id in remove; Put back takes it out, and the file is unchanged", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const off = takeOff(part, fileChoice(part), G(2));
+      expect(off.remove).toEqual([G(2)]);
+      expect(off.add).toEqual([]);
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, off]]) }))).toEqual({ ...file, remove: [G(2)] });
+      expect(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, { ...off, remove: [] }]]) }).changes).toEqual([]);
+    });
+
+    it("a file holding only sourced cards is kept, not deleted, when she changes nothing else", async () => {
+      store(R(104), { v: 1, add: [], remove: [C(2)], own: [], gaps: [G(3)] });
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const saved = savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(only(unit, "meds"), { remove: [] }) }));
+      expect(saved).toEqual({ v: 1, add: [], remove: [], own: [], gaps: [G(3)] });
+    });
   });
 
   it("follows its topic when a save gives the topic a new first row", async () => {

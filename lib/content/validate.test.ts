@@ -237,8 +237,40 @@ describe("her own meds panel for a topic", () => {
     expect(verdict(path, meds({ own: [{ target: C2, pieces: [rows, notes] }, { target: P1, pieces: [] }] }))).toBe("ok");
   });
 
-  it("refuses an empty file: with nothing added, removed or edited there is no file", () => {
-    expect(verdict(path, meds())).toMatch(/an added, removed or edited entry/);
+  it("refuses an empty file: with nothing added, removed, edited, sourced or labeled there is no file", () => {
+    expect(verdict(path, meds())).toMatch(/an added, removed, edited or sourced entry, or a role/);
+    expect(verdict(path, meds({ gaps: [], roles: [] }))).toMatch(/an added, removed, edited or sourced entry, or a role/);
+  });
+
+  describe("sourced cards (gaps) and role labels (roles)", () => {
+    const G1 = id("g", 1);
+    const G2 = id("g", 2);
+    const src = { name: "Hyperthyroidism", org: "MSD Manual Professional", year: "2026", url: "https://www.msdmanuals.com/professional/x" };
+    const role = (extra: Record<string, unknown> = {}) => ({ role: "1st", drugs: "methimazole", note: null, sources: [src], ...extra });
+
+    it("accepts a file holding only sourced cards, or only role labels, each role with its sources", () => {
+      expect(verdict(path, meds({ gaps: [G1, G2] }))).toBe("ok");
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [role(), role({ role: "alt", drugs: "PTU", note: "1st trimester" })] }] }))).toBe("ok");
+      expect(verdict(path, meds({ gaps: [G1], remove: [G1], roles: [{ target: G1, roles: [role({ role: "adjunct", drugs: null })] }] }))).toBe("ok");
+    });
+
+    it("takes a sourced card off only when the file lists it, and labels one only when listed", () => {
+      expect(verdict(path, meds({ gaps: [G1], remove: [G2] }))).toMatch(/\.remove\[0\].*a gap block listed in gaps/);
+      expect(verdict(path, meds({ gaps: [G1], roles: [{ target: G2, roles: [role()] }] }))).toMatch(/\.roles\[0\]\.target.*a gap block listed in gaps/);
+    });
+
+    it("refuses a role of no known kind, a role without a source, an entry with no role, and two label sets for one entry", () => {
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [role({ role: "3rd" })] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.role/);
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [role({ sources: [] })] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.sources.*at least one source/);
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [] }] }))).toMatch(/\.roles\[0\]\.roles.*at least one role/);
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [role()] }, { target: C1, roles: [role()] }] }))).toMatch(/\.roles\[\]\.target/);
+    });
+
+    it("refuses a gap listed twice, a non-gap id in gaps, and a gap id added as a card", () => {
+      expect(verdict(path, meds({ gaps: [G1, G1] }))).not.toBe("ok");
+      expect(verdict(path, meds({ gaps: [C1] }))).toMatch(/\.gaps\[0\]/);
+      expect(verdict(path, meds({ gaps: [G1], add: [G1] }))).toMatch(/\.add\[0\]/);
+    });
   });
 
   it("refuses a card both added and removed, or listed twice, or two versions of one entry", () => {

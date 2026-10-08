@@ -12,10 +12,10 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsFile, MedsPiece, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsFile, MedsPiece, MedsRoleTag, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -473,22 +473,47 @@ export const validateCards: Validator = (v, ctx) => {
   });
 };
 
-/** Her own meds panel for a topic: each target at most once in each list, never both added and removed, and something in it. */
+/**
+ * Her own meds panel for a topic: each target at most once in each list, never both added and removed,
+ * a gap block taken off only if it is listed, each entry's roles once, and something in it.
+ */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
   shapeOf<MedsFile>({
     v: v1,
     add: uniqueArr(id("c")),
-    remove: uniqueArr(target),
+    remove: uniqueArr(id("c", "r", "p", "g")),
     own: arr(shapeOf<MedsFile["own"][number]>({
       target,
       pieces: arr(shapeOf<MedsPiece>({ kind: oneOf("rows", "notes"), basePt: num, title: nullable(str), file: nullable(nonEmpty), doc: anyValue }, {})),
     }, {})),
-  }, {})(v, "", ctx);
+  }, {
+    gaps: uniqueArr(id("g")),
+    roles: arr(shapeOf<NonNullable<MedsFile["roles"]>[number]>({
+      target: id("c", "r", "p", "g"),
+      roles: arr(shapeOf<MedsRoleTag>({
+        role: oneOf(...MEDS_ROLES),
+        drugs: nullable(nonEmpty),
+        note: nullable(nonEmpty),
+        sources: arr(shapeOf<MedsRoleTag["sources"][number]>({ name: nonEmpty, org: str, year: str, url: nullable(nonEmpty) }, {})),
+      }, {})),
+    }, {})),
+  })(v, "", ctx);
   const m = v as MedsFile;
+  const gaps = m.gaps ?? [];
+  const roles = m.roles ?? [];
   uniqueArr(str)(m.own.map((o) => o.target), ".own[].target", ctx);
+  uniqueArr(str)(roles.map((r) => r.target), ".roles[].target", ctx);
   m.add.forEach((c, i) => { if (m.remove.includes(c)) bad(ctx, `.add[${i}]`, "a card not also removed", c); });
-  if (m.add.length === 0 && m.remove.length === 0 && m.own.length === 0) bad(ctx, "", "an added, removed or edited entry", v);
+  m.remove.forEach((t, i) => { if (isId("g", t) && !gaps.includes(t)) bad(ctx, `.remove[${i}]`, "a gap block listed in gaps", t); });
+  roles.forEach((r, i) => {
+    if (isId("g", r.target) && !gaps.includes(r.target)) bad(ctx, `.roles[${i}].target`, "a gap block listed in gaps", r.target);
+    if (r.roles.length === 0) bad(ctx, `.roles[${i}].roles`, "at least one role", r.roles);
+    r.roles.forEach((x, j) => { if (x.sources.length === 0) bad(ctx, `.roles[${i}].roles[${j}].sources`, "at least one source", x.sources); });
+  });
+  if (m.add.length === 0 && m.remove.length === 0 && m.own.length === 0 && gaps.length === 0 && roles.length === 0) {
+    bad(ctx, "", "an added, removed, edited or sourced entry, or a role", v);
+  }
   m.own.forEach((o, i) => o.pieces.forEach((p, j) => {
     const at = `.own[${i}].pieces[${j}].doc`;
     if (!(p.basePt > 0)) bad(ctx, `.own[${i}].pieces[${j}].basePt`, "a size above 0", p.basePt);

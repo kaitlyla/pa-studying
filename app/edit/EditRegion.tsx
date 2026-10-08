@@ -33,7 +33,7 @@ import {
   copyWithToast, currentLook, dismissBanner, done, dropEmptyBox, getEditStore, isCardBox, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED,
   SAVE_OFFLINE, setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
-import { figuresWithLook, gapLook, type Part, type Slot } from "./units.ts";
+import { figuresWithLook, gapLook, medsGapParts, type Part, type Slot } from "./units.ts";
 import { rememberVersionsOrigin } from "./versions.ts";
 import "./edit.css";
 
@@ -236,14 +236,20 @@ function GapFrame({ part, slotView, editing }: { part: Extract<Part, { kind: "ga
   );
 }
 
-/** One part of an edit unit: its slots shown by `slotView` (editors here; read-only in Versions' View). */
-export function PartView({ part, slotView = editorView }: { part: Part; slotView?: SlotView }): ReactNode {
+/**
+ * One part of an edit unit: its slots shown by `slotView` (editors here; read-only in Versions' View).
+ * `parts`: the unit's parts, for the sourced cards a meds panel shows inside it.
+ */
+export function PartView({ part, parts, slotView = editorView }: { part: Part; parts: readonly Part[]; slotView?: SlotView }): ReactNode {
+  // The editors' own view is the open edit; any other (Versions' View) shows a version as stored.
+  const editing = slotView === editorView;
   switch (part.kind) {
     case "stub":
       return <div className="stub"><span className="stub-t">{part.label}</span> drug table — edited on its pharm section</div>;
     case "gap":
-      // The editors' own view is the open edit; any other (Versions' View) shows a version as stored.
-      return <GapFrame part={part} slotView={slotView} editing={slotView === editorView} />;
+      // A sourced card of a meds panel shows inside that panel.
+      if (part.meds !== undefined) return null;
+      return <GapFrame part={part} slotView={slotView} editing={editing} />;
     case "below":
       return (
         <section className="below-edit" aria-label={BELOW_HEADING}>
@@ -252,7 +258,12 @@ export function PartView({ part, slotView = editorView }: { part: Part; slotView
         </section>
       );
     case "meds":
-      return <MedsFrame part={part} slotView={slotView} editing={slotView === editorView} />;
+      return (
+        <MedsFrame
+          part={part} gaps={medsGapParts(parts, part)} slotView={slotView} editing={editing}
+          gapView={(g) => <GapFrame part={g} slotView={slotView} editing={editing} />}
+        />
+      );
     default:
       return slotView(part.slot);
   }
@@ -692,7 +703,7 @@ export function EditRegion({ pageKey, children }: { pageKey: string; title?: str
           {!edit.unit && !edit.error && <p className="edit-loading" role="status">Opening for editing…</p>}
           {edit.unit && (
             <div key={edit.generation}>
-              {edit.unit.parts.map((p, i) => <PartView key={i} part={p} />)}
+              {edit.unit.parts.map((p, i) => <PartView key={i} part={p} parts={edit.unit?.parts ?? []} />)}
             </div>
           )}
           {edit.unit && edit.unit.parts.length === 0 && <p className="edit-loading">This page has nothing to edit.</p>}

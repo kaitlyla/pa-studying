@@ -26,7 +26,7 @@ import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, pars
 import { docText, tableOf } from "./text.ts";
 import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
-import { entryPieces, pageCard, panelEntries, publishedEdit, shownPieces } from "./panel.ts";
+import { byRole, entryPieces, pageCard, panelEntries, panelItems, publishedEdit, roleRank, shownPieces } from "./panel.ts";
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
   ({ v: 1, id, kind: "table", doc: tableDoc(columns, rows), meta: {} }) as unknown as BlockFile;
@@ -751,7 +751,58 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
       { file: where(R(104)), id: R(998) },
       { file: where(R(997)), id: R(997) },
     ]);
-    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {} });
+    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {}, gaps: [], roles: {} });
+  });
+
+  describe("sourced cards (MedsFile gaps) and role labels (roles)", () => {
+    const src = { name: "Angina", org: "MSD Manual Professional", year: "2026", url: "https://example.org/angina" };
+    const tag = (role: "1st" | "2nd" | "alt" | "adjunct", drugs: string | null = null) => ({ role, drugs, note: null, sources: [src] });
+    const hostsOf = (r: PublishResult) => r.files.get(HOSTS_PATH) as HostsJson;
+    // G(3) is listed only in Other; G(2) is the AMS workup's, placed by the guide's general pages first.
+    const file: MedsFile = {
+      v: 1, add: [], remove: [], own: [], gaps: [G(3), G(2)],
+      roles: [{ target: G(3), roles: [tag("2nd")] }, { target: C(2), roles: [tag("adjunct", "nitroglycerin")] }, { target: R(124), roles: [tag("1st")] }],
+    };
+
+    it("publishes the sourced cards in her order and the roles of what the panel shows; the panel orders 1st, 2nd, alt, adjunct, unlabeled last", () => {
+      const angina = topicOf(publish(withMeds([[R(104), file]])), R(104));
+      expect(angina.medsEdit?.gaps.map((g) => [g.id, g.title])).toEqual([[G(3), expect.any(String)], [G(2), expect.any(String)]]);
+      expect(angina.medsEdit?.roles[C(2)]).toEqual([tag("adjunct", "nitroglycerin")]);
+      expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([R(124), G(3), C(2), G(2)]);
+    });
+
+    it("places a sourced card on its dx's page when nothing earlier in site order placed it, and search lands there", () => {
+      const res = publish(withMeds([[R(104), file]]));
+      const hosts = res.files.get(HOSTS_PATH) as HostsJson;
+      const page = hosts[R(104)];
+      expect(hosts[G(3)]).toEqual(page);
+      expect(res.units.find((u) => u.at === G(3))).toMatchObject({ route: page?.route, loc: page?.loc, label: "gap" });
+      // The workup gap keeps its first home.
+      expect(hosts[G(2)]).toEqual(hostsOf(out)[G(2)]);
+      expect(hostsOf(out)[G(3)]).not.toEqual(page);
+      expect(uncoveredText(withMeds([[R(104), file]]), res.units, res.files)).toEqual(uncoveredText(base, out.units, out.files));
+    });
+
+    it("a sourced card she took off stays published (for Put back) but the panel leaves it out", () => {
+      const angina = topicOf(publish(withMeds([[R(104), { ...file, remove: [G(3)] }]])), R(104));
+      expect(angina.medsEdit?.gaps.map((g) => g.id)).toEqual([G(3), G(2)]);
+      expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([R(124), C(2), G(2)]);
+    });
+
+    it("reports a missing gap block and a role for something the panel cannot show to dropped, and publishes neither", () => {
+      const res = publish(withMeds([[R(104), { ...file, gaps: [G(3), G(9)], roles: [{ target: G(9), roles: [tag("1st")] }, { target: C(99), roles: [tag("alt")] }] }]]));
+      const where = topicMedsPath("fm", "cardiovascular", R(104));
+      expect(newDropped(res)).toEqual([{ file: where, id: G(9) }, { file: where, id: G(9) }, { file: where, id: C(99) }]);
+      const e = topicOf(res, R(104)).medsEdit;
+      expect(e?.gaps.map((g) => g.id)).toEqual([G(3)]);
+      expect(e?.roles).toEqual({});
+    });
+
+    it("roleRank: an entry ranks by its best role; byRole keeps her order within a rank", () => {
+      expect(roleRank([tag("adjunct"), tag("2nd")])).toBe(1);
+      expect(roleRank([])).toBe(4);
+      expect(byRole(["a", "b", "c", "d"], (x) => (x === "c" ? [tag("1st")] : x === "a" ? [tag("alt")] : []))).toEqual(["c", "a", "b", "d"]);
+    });
   });
 
   it("an edit to the card's pharm notes changes the condition she has no version for, and not her version", () => {
@@ -807,7 +858,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
     const noSection = { ...sys, pharm: null };
     expect(pageCard(noSection, C(2))).toMatchObject({ card: C(2), section: nitrateSection(sys) });
     const added = { card: C(3), title: "Added", rows: [], section: "elsewhere", system: "pulmonary", target: C(3) };
-    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {} } } : t)) };
+    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {}, gaps: [], roles: {} } } : t)) };
     expect(pageCard(withAdded, C(3))).toBe(added);
   });
   const nitrateSection = (sys: SystemJson): string | undefined => {

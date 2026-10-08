@@ -16,18 +16,21 @@ export interface ClassCardProps {
   anchor: string;
   title: ReactNode;
   sub?: ReactNode;
+  /** Shown just after the title (a meds-panel entry's role chips). */
+  chips?: ReactNode;
   open: boolean;
   onToggle: () => void;
   children?: ReactNode;
 }
 
-export function ClassCard({ anchor, title, sub, open, onToggle, children }: ClassCardProps): ReactNode {
+export function ClassCard({ anchor, title, sub, chips, open, onToggle, children }: ClassCardProps): ReactNode {
   return (
     <section className={`phc${open ? " open" : ""}`} data-anchor={anchor} id={`card-${anchor}`}>
       <h3 className="phc-h">
         <button type="button" aria-expanded={open} onClick={onToggle}>
           <Icon n="chev" size={12} />
           <span className="phc-t">{title}</span>
+          {chips}
           {sub && <span className="phc-s">{sub}</span>}
         </button>
       </h3>

@@ -5,7 +5,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 import { act, type ReactNode } from "react";
 import { EditorView } from "prosemirror-view";
 import { serializeFile, type DocJSON, type MedsFile } from "../../lib/content/index.ts";
-import { B, C, R } from "../../tools/build/test-fixture.ts";
+import { B, C, G, R } from "../../tools/build/test-fixture.ts";
 import { OWN_VERSION } from "../pharm/MedsPanel.tsx";
 import { setOwner } from "../shell/owner.tsx";
 import { hideToast, Toast } from "../shell/toast.tsx";
@@ -327,6 +327,38 @@ describe("EditControls and EditRegion", () => {
       await click(q(later, "meds-remove"));
       await until(() => q(panel, "meds-later") === null, "the added-later card off");
       expect(count(panel)).toBe("1");
+    });
+
+    it("a sourced card placed in her file is edited inside the panel, ordered by its role, and comes off and back like a card", async () => {
+      const stored: MedsFile = {
+        v: 1, add: [], remove: [], own: [], gaps: [G(3)],
+        roles: [{ target: G(3), roles: [{ role: "adjunct", drugs: null, note: null, sources: [{ name: "Atrial Fibrillation", org: "MSD Manual", year: "2026", url: null }] }] }],
+      };
+      w.fake.commitFiles({ [MEDS_FILE]: serializeFile(MEDS_FILE, stored) });
+      const { root, panel } = await openPanel();
+      const gapPart = edit().unit?.parts.find((p) => p.kind === "gap" && p.gap.id === G(3));
+      if (gapPart?.kind !== "gap") throw new Error("no sourced card part");
+      // The labeled entry comes first; the unlabeled card keeps its place after it.
+      expect(shownCards(panel)).toEqual([G(3), `meds-${C(1)}`]);
+      expect(count(panel)).toBe("2");
+      const sourced = need(panel.querySelector<HTMLElement>(`section.phc[data-anchor="${G(3)}"]`));
+      expect(sourced.querySelector(".phc-h .rolec")?.textContent).toBe("Adjunct");
+      expect(editorText(sourced)).not.toBe("");
+      // Its editor is in the panel only: outside it are just the rows editor and the below area.
+      const area = need(q(root, "edit-area"));
+      const outside = [...area.querySelectorAll('[contenteditable="true"]')].filter((e) => e.closest(".meds-edit, .below-edit") === null);
+      expect(outside).toHaveLength(1);
+
+      await click(q(sourced, "meds-remove"));
+      await until(() => panel.querySelector(`section.phc[data-anchor="${G(3)}"]`) === null, "the sourced card off the panel");
+      const removed = need(q(panel, "meds-removed"));
+      expect([...removed.querySelectorAll("li")].map((li) => li.textContent)).toEqual([`${gapPart.gap.meta.title} ${PUT_BACK}`]);
+      expect(dirtyState(root)).not.toBe("No changes yet");
+
+      await click(q(removed, "meds-put-back"));
+      await until(() => panel.querySelector(`section.phc[data-anchor="${G(3)}"]`), "the sourced card back");
+      expect(q(panel, "meds-removed")).toBeNull();
+      expect(dirtyState(root)).toBe("No changes yet");
     });
   });
 

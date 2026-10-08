@@ -3,9 +3,9 @@
 // each entry's content as pieces — her guide rows and her pharm notes, cut and trimmed as published,
 // or her own version of them. Browser-safe.
 import { isId } from "../content/ids.ts";
-import type { MedsFile, MedsPiece } from "../content/types.ts";
+import { MEDS_ROLES, type MedsFile, type MedsPiece, type MedsRoleTag } from "../content/types.ts";
 import { noteView, rowsView } from "./columns.ts";
-import type { PartCut, PubBlock, PubMedsCard, PubMedsClass, PubMedsEdit, PubTopic, SystemJson } from "./published.ts";
+import type { PartCut, PubBlock, PubGap, PubMedsCard, PubMedsClass, PubMedsEdit, PubTopic, SystemJson } from "./published.ts";
 import { allLinesHidden, hiddenLines, panelUses, shownParts, withoutLines } from "./trim.ts";
 
 /** A piece as the panel shows it: the stored piece, and the pharm part it shows (search lands on it), if any. */
@@ -51,6 +51,7 @@ export function fileAdds(file: MedsFile, derived: ReadonlySet<string>): string[]
  */
 export function publishedEdit(
   file: MedsFile, derived: readonly PubMedsCard[], card: (id: string) => PubMedsClass | null, missing: (target: string) => void = () => undefined,
+  gap: (id: string) => PubGap | null = () => null,
 ): PubMedsEdit {
   const has = new Set(derived.map((m) => m.target));
   const add: PubMedsClass[] = [];
@@ -69,8 +70,44 @@ export function publishedEdit(
     }
     own[o.target] = o.pieces;
   }
-  for (const t of file.remove) if (!has.has(t)) missing(t);
-  return { remove: [...file.remove], add, own };
+  const gaps: PubGap[] = [];
+  for (const id of file.gaps ?? []) {
+    const g = gap(id);
+    if (g) gaps.push(g);
+    else missing(id);
+  }
+  const shows = (t: string): boolean => has.has(t) || add.some((m) => m.target === t) || gaps.some((g) => g.id === t);
+  for (const t of file.remove) if (!isId("g", t) && !has.has(t)) missing(t);
+  const roles: Record<string, MedsRoleTag[]> = {};
+  for (const r of file.roles ?? []) {
+    if (shows(r.target)) roles[r.target] = r.roles;
+    else missing(r.target);
+  }
+  return { remove: [...file.remove], add, own, gaps, roles };
+}
+
+/** One entry of a meds panel: a card (as `panelEntries` gives it) or a sourced card she placed (a gap block), with its role labels. */
+export type PanelItem =
+  | { kind: "card"; entry: PanelEntry; roles: MedsRoleTag[] }
+  | { kind: "gap"; gap: PubGap; roles: MedsRoleTag[] };
+
+/** Where entries with these role labels go: by their first-ranked role (1st → 2nd → alt → adjunct), unlabeled last. */
+export function roleRank(roles: readonly MedsRoleTag[]): number {
+  return Math.min(MEDS_ROLES.length, ...roles.map((r) => MEDS_ROLES.indexOf(r.role)));
+}
+
+/** `items` ordered by their roles' rank, keeping her order within a rank. */
+export function byRole<T>(items: readonly T[], roles: (item: T) => readonly MedsRoleTag[]): T[] {
+  return items.map((item, i) => ({ item, i, rank: roleRank(roles(item)) })).sort((a, b) => a.rank - b.rank || a.i - b.i).map((x) => x.item);
+}
+
+/** What a topic's meds panel shows, in order: its entries, then the sourced cards she did not take off, ordered by role. */
+export function panelItems(topic: Pick<PubTopic, "meds" | "medsEdit">): PanelItem[] {
+  const e = topic.medsEdit;
+  const roles = e?.roles ?? {};
+  const cards = panelEntries(topic).map((entry): PanelItem => ({ kind: "card", entry, roles: roles[entry.med.target] ?? [] }));
+  const gaps = (e?.gaps ?? []).filter((g) => !e?.remove.includes(g.id)).map((gap): PanelItem => ({ kind: "gap", gap, roles: roles[gap.id] ?? [] }));
+  return byRole([...cards, ...gaps], (x) => x.roles);
 }
 
 /**

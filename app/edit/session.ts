@@ -313,6 +313,9 @@ function slotIds(unit: EditUnit, meds: Readonly<Record<string, MedsChoice>>): Se
   for (const p of unit.parts) {
     if (p.kind === "stub") continue;
     if (p.kind === "gap") {
+      // A sourced card she took off its meds panel shows no editors.
+      const panel = p.meds === undefined ? undefined : unit.parts.find((x): x is MedsPart => x.kind === "meds" && x.topic === p.meds);
+      if (panel && (meds[panel.topic] ?? fileChoice(panel)).remove.includes(p.gap.id)) continue;
       ids.add(p.doc.id);
       if (p.differs) ids.add(p.differs.id);
     } else if (p.kind === "meds") {

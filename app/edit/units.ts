@@ -1,7 +1,7 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
+  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, isId, listedHead, newId, serializeFile, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type MedsFile, type MedsPiece, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
@@ -60,8 +60,11 @@ export type Part =
   | { kind: "rows"; slot: Slot; path: string; block: BlockFile; shown: string[]; sys: SystemCtx }
   /** A whole prose block (or one-column table, or a Word page block). `owner`: the file whose list holds it. */
   | { kind: "block"; slot: Slot; path: string; block: BlockFile; owner: BlockOwner }
-  /** A gap block: its doc, and its differs doc when it has one. */
-  | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null }
+  /**
+   * A gap block: its doc, and its differs doc when it has one. `meds`: the topic whose meds panel it is
+   * a sourced card of (MedsFile `gaps`); it shows inside that panel, not on its own.
+   */
+  | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null; meds?: string }
   | { kind: "slide"; slot: Slot; path: string; block: BlockFile<SlideMeta> }
   /** A drug table on a system page: shown as its stub, edited on its pharm section. */
   | { kind: "stub"; block: string; label: string }
@@ -153,10 +156,13 @@ export function uncut(part: MedsPart, choice: MedsChoice, target: string): MedsC
   return out;
 }
 
-/** `choice` with entry `target` off the panel ("Remove from this condition"): a worked-out one is removed, an added card no longer added. */
+/**
+ * `choice` with entry `target` off the panel ("Remove from this condition"): a worked-out one or a
+ * sourced card (gap id) is removed, an added card no longer added.
+ */
 export function takeOff(part: MedsPart, choice: MedsChoice, target: string): MedsChoice {
   const c = uncut(part, choice, target);
-  if (part.entries.some((e) => e.derived && e.med.target === target)) return { ...c, remove: [...c.remove, target] };
+  if (isId("g", target) || part.entries.some((e) => e.derived && e.med.target === target)) return { ...c, remove: [...c.remove, target] };
   return { ...c, add: c.add.filter((x) => x !== target) };
 }
 
@@ -394,17 +400,24 @@ function withLook(meta: GapMeta, look: GapLook): GapMeta {
   return out;
 }
 
-function gapPart(gap: GapFile): Part {
+function gapPart(gap: GapFile, meds?: string): GapPart {
   const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, ...DEFAULT_AREA });
   return {
     kind: "gap", path: gapFilePath(gap.id), gap, doc: slot(gap.id, gap.doc),
     differs: gap.meta.differs ? slot(`${gap.id}:differs`, gap.meta.differs.doc) : null,
+    ...(meds !== undefined ? { meds } : {}),
   };
 }
 
+export type GapPart = Extract<Part, { kind: "gap" }>;
+
+/** The sourced cards of a meds panel (MedsFile `gaps`) in `parts`, in her order. */
+export const medsGapParts = (parts: readonly Part[], meds: Pick<MedsPart, "topic">): GapPart[] =>
+  parts.filter((p): p is GapPart => p.kind === "gap" && p.meds === meds.topic);
+
 async function gapParts(snap: Snapshot, ids: readonly (string | null | undefined)[]): Promise<Part[]> {
   const present = ids.filter((id): id is string => typeof id === "string");
-  return (await snap.many<GapFile>(present.map(gapFilePath))).map(gapPart);
+  return (await snap.many<GapFile>(present.map(gapFilePath))).map((g) => gapPart(g));
 }
 
 /**
@@ -502,8 +515,10 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
         return rowsPart(sys, t, block, shown, basePt, area, row);
       });
-      // Its meds panel, then her below area (an empty editor until she adds something).
-      parts.push(await medsPart(snap, sys, row, basePt, area));
+      // Its meds panel and the sourced cards placed in it, then her below area (an empty editor until she adds something).
+      const meds = await medsPart(snap, sys, row, basePt, area);
+      const gapIds = (meds.file?.gaps ?? []).filter((id) => snap.has(gapFilePath(id)));
+      parts.push(meds, ...(await snap.many<GapFile>(gapIds.map(gapFilePath))).map((g) => gapPart(g, row)));
       parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, area));
       return unit(parts, guideScope(parts), row);
     }
@@ -703,8 +718,14 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
   // A card shown only because she edited it (fileAdds) stays implied by her version, as stored.
   const implied = new Set(fileChoice(part).add.filter((id) => !part.file?.add.includes(id)));
   const add = choice.add.filter((id) => !(implied.has(id) && own.has(id)));
-  if (add.length === 0 && choice.remove.length === 0 && own.size === 0) return null;
-  return { v: 1, add, remove: [...choice.remove], own: [...own].map(([target, pieces]) => ({ target, pieces })) };
+  // The sourced cards placed in the panel and the role labels are kept as stored: the editor changes neither.
+  const gaps = part.file?.gaps ?? [];
+  const roles = part.file?.roles ?? [];
+  if (add.length === 0 && choice.remove.length === 0 && own.size === 0 && gaps.length === 0 && roles.length === 0) return null;
+  return {
+    v: 1, add, remove: [...choice.remove], own: [...own].map(([target, pieces]) => ({ target, pieces })),
+    ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles: roles.map((r) => ({ ...r })) } : {}),
+  };
 }
 
 /**

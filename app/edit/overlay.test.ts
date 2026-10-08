@@ -131,7 +131,7 @@ describe("patchPublished", () => {
     const added = patchPublished(SYS, pub<SystemJson>(SYS), new Map([[path, file]]), structure) as SystemJson;
     const af = added.topics.find((t) => t.id === R(101));
     expect(af?.meds).toEqual(pub<SystemJson>(SYS).topics.find((t) => t.id === R(101))?.meds);
-    expect(af?.medsEdit).toEqual({ remove: [], add: [expect.objectContaining({ card: C(3), target: C(3) })], own: { [C(1)]: pieces } });
+    expect(af?.medsEdit).toEqual({ remove: [], add: [expect.objectContaining({ card: C(3), target: C(3) })], own: { [C(1)]: pieces }, gaps: [], roles: {} });
     expect(added.topics.filter((t) => t.id !== R(101)).every((t) => t.medsEdit === null)).toBe(true);
 
     const removed = patchPublished(SYS, added, new Map([[path, null]]), structure) as SystemJson;
@@ -139,6 +139,24 @@ describe("patchPublished", () => {
     // A save of another file of the system keeps the published panel of hers.
     const kept = patchPublished(SYS, added, new Map([[`${CV}/below/${R(104)}.json`, null]]), structure) as SystemJson;
     expect(kept.topics.find((t) => t.id === R(101))?.medsEdit).toEqual(af?.medsEdit);
+  });
+
+  it("a saved meds file keeps the sourced cards its panel already publishes, with her role labels and her taking one off", () => {
+    const structure = fileJson<StructureFile>(`${CV}/structure.json`);
+    const path = `${CV}/meds/${R(101)}.json`;
+    const sourced: PubGap = {
+      id: G(3), title: "Sourced card", relevantTo: "Atrial fibrillation", written: "2026-10-08", doc: para("sourced text"), differs: null,
+      sources: [{ name: "Atrial Fibrillation", org: "MSD Manual", year: "2026", url: null }], ownerEdits: [], figures: [], asNotes: false, notes: [],
+    };
+    const before = pub<SystemJson>(SYS);
+    const af = before.topics.find((t) => t.id === R(101));
+    if (!af) throw new Error("no AF topic");
+    af.medsEdit = { remove: [], add: [], own: {}, gaps: [sourced], roles: {} };
+    const tag = { role: "adjunct" as const, drugs: null, note: null, sources: sourced.sources };
+    const file: MedsFile = { v: 1, add: [], remove: [G(3)], own: [], gaps: [G(3), G(9)], roles: [{ target: G(3), roles: [tag] }] };
+    const after = patchPublished(SYS, before, new Map([[path, file]]), structure) as SystemJson;
+    // The card the page does not publish (G9) is dropped; the published one keeps its block for Put back.
+    expect(after.topics.find((t) => t.id === R(101))?.medsEdit).toEqual({ remove: [G(3)], add: [], own: {}, gaps: [sourced], roles: { [G(3)]: [tag] } });
   });
 
   it("patches a saved gap block wherever it is shown, with its owner edits", () => {

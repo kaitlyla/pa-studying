@@ -2,11 +2,14 @@
 // shows with editors in place of its text (an edit makes her version for this condition only), and the
 // buttons that take a card off, put one back, add one, or go back to the original card.
 import { useState, type ReactNode } from "react";
+import type { MedsRoleTag } from "../../lib/content/types.ts";
+import { byRole } from "../../lib/derive/panel.ts";
 import { ClassCard, CardPieces } from "../pharm/ClassCard.tsx";
 import { OWN_VERSION } from "../pharm/MedsPanel.tsx";
+import { RoleChips, RoleLines } from "../pharm/Roles.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { currentMeds, setMeds, useEdit } from "./session.ts";
-import { entrySlots, fileChoice, shownEntries, showsOwn, takeOff, uncut, type MedsChoice, type MedsPart, type Slot } from "./units.ts";
+import { entrySlots, fileChoice, shownEntries, showsOwn, takeOff, uncut, type GapPart, type MedsChoice, type MedsEntry, type MedsPart, type Slot } from "./units.ts";
 
 export const MEDS_HEADING = "Medications for this condition";
 export const REMOVE_CARD = "Remove from this condition";
@@ -25,15 +28,30 @@ const MATCHES = 12;
  * The panel. `editing`: the open edit's (her choices as she changed them, with the buttons); else as
  * stored (Versions' View). `slotView` draws an editor (or, in Versions, a stored doc).
  */
-export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotView: (slot: Slot) => ReactNode; editing: boolean }): ReactNode {
+export function MedsFrame({ part, gaps, gapView, slotView, editing }: {
+  part: MedsPart;
+  /** The sourced cards placed in this panel (MedsFile `gaps`), and how one is drawn (its gap box). */
+  gaps: readonly GapPart[];
+  gapView: (gap: GapPart) => ReactNode;
+  slotView: (slot: Slot) => ReactNode;
+  editing: boolean;
+}): ReactNode {
   // Subscribed to the open edit, so the panel redraws when her choices change.
   useEdit();
   const choice = editing ? currentMeds(part) : fileChoice(part);
   // In edit mode a card starts open, so its editors are there for her changes and for a restored draft.
   const [closed, setClosed] = useState<Record<string, boolean>>({});
-  const entries = shownEntries(part, choice);
+  const roles = new Map((part.file?.roles ?? []).map((r) => [r.target, r.roles]));
+  const rolesOf = (target: string): MedsRoleTag[] => roles.get(target) ?? [];
+  const items = byRole<{ entry: MedsEntry } | { gap: GapPart }>(
+    [...shownEntries(part, choice).map((entry) => ({ entry })), ...gaps.filter((g) => !choice.remove.includes(g.gap.id)).map((gap) => ({ gap }))],
+    (x) => rolesOf("entry" in x ? x.entry.med.target : x.gap.gap.id),
+  );
   const later = choice.add.filter((id) => !part.entries.some((e) => !e.derived && e.med.target === id));
-  const removed = part.entries.filter((e) => e.derived && choice.remove.includes(e.med.target));
+  const removed = [
+    ...part.entries.filter((e) => e.derived && choice.remove.includes(e.med.target)).map((e) => ({ id: e.med.target, title: e.med.title })),
+    ...gaps.filter((g) => choice.remove.includes(g.gap.id)).map((g) => ({ id: g.gap.id, title: g.gap.meta.title })),
+  ];
   const update = (c: Partial<MedsChoice>): void => setMeds(part, { ...choice, ...c });
   const off = (target: string): void => setMeds(part, takeOff(part, choice, target));
   // Either version shows whole: the boxes she cut come back.
@@ -46,14 +64,32 @@ export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotVie
   return (
     <section className="meds meds-edit" aria-label={MEDS_HEADING}>
       <h3 className="meds-hd">
-        <Icon n="pill" size={15} /> {MEDS_HEADING} <span className="n">{entries.length + later.length}</span>
+        <Icon n="pill" size={15} /> {MEDS_HEADING} <span className="n">{items.length + later.length}</span>
       </h3>
-      {entries.map((e) => {
+      {items.map((item) => {
+        if ("gap" in item) {
+          const g = item.gap.gap.id;
+          const r = rolesOf(g);
+          return (
+            <ClassCard key={g} anchor={g} title={item.gap.gap.meta.title} chips={<RoleChips roles={r} />} open={!closed[g]} onToggle={() => setClosed((c) => ({ ...c, [g]: !c[g] }))}>
+              <RoleLines roles={r} />
+              {gapView(item.gap)}
+              {editing && (
+                <div className="meds-acts">
+                  <button type="button" className="btn" onClick={() => off(g)} data-ref="meds-remove">{REMOVE_CARD}</button>
+                </div>
+              )}
+            </ClassCard>
+          );
+        }
+        const e = item.entry;
         const t = e.med.target;
         const slots = entrySlots(e, choice);
         const own = showsOwn(e, choice);
+        const r = rolesOf(t);
         return (
-          <ClassCard key={t} anchor={`meds-${t}`} title={e.med.title} open={!closed[t]} onToggle={() => setClosed((c) => ({ ...c, [t]: !c[t] }))}>
+          <ClassCard key={t} anchor={`meds-${t}`} title={e.med.title} chips={<RoleChips roles={r} />} open={!closed[t]} onToggle={() => setClosed((c) => ({ ...c, [t]: !c[t] }))}>
+            <RoleLines roles={r} />
             {own && <div className="phn-k own-only">{OWN_VERSION}</div>}
             <CardPieces pieces={slots.map((s) => ({ ...s.piece, part: null }))} body={(i) => (slots[i] ? slotView(slots[i]) : null)} />
             {editing && (
@@ -79,9 +115,9 @@ export function MedsFrame({ part, slotView, editing }: { part: MedsPart; slotVie
           <div className="meds-sub">{REMOVED_HEADING}</div>
           <ul>
             {removed.map((e) => (
-              <li key={e.med.target}>
-                {e.med.title}{" "}
-                <button type="button" className="linkbtn" onClick={() => update({ remove: choice.remove.filter((x) => x !== e.med.target) })} data-ref="meds-put-back">{PUT_BACK}</button>
+              <li key={e.id}>
+                {e.title}{" "}
+                <button type="button" className="linkbtn" onClick={() => update({ remove: choice.remove.filter((x) => x !== e.id) })} data-ref="meds-put-back">{PUT_BACK}</button>
               </li>
             ))}
           </ul>

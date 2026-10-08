@@ -261,14 +261,35 @@ export interface CardsFile {
  * The panel is otherwise worked out at publish; this changes it for that topic only, and never changes
  * a card, her guide or her pharm notes. `add`: class cards she added (card ids), after the panel's own.
  * `remove`: panel entries she took off (each entry's target: a card id, a card-less guide row's id, or
- * a pharm part's id). `own`: entries she edited there, each shown as its `pieces` instead of the card's
- * guide rows and pharm notes. At least one of the three is non-empty: with none, there is no file.
+ * a pharm part's id, or a gap block's id from `gaps`). `own`: entries she edited there, each shown as its
+ * `pieces` instead of the card's guide rows and pharm notes. `gaps`: sourced gap blocks shown as entries
+ * of this panel only (drugs her files have no card for), in her order. `roles`: what each entry's drugs
+ * are for this condition (1st-line, 2nd-line, alternative, adjunct), each with its sources; the panel
+ * shows them on the entry and orders entries by them. At least one list is non-empty: with none, there is
+ * no file.
  */
 export interface MedsFile {
   v: 1;
   add: string[];
   remove: string[];
   own: { target: string; pieces: MedsPiece[] }[];
+  gaps?: string[];
+  roles?: { target: string; roles: MedsRoleTag[] }[];
+}
+
+/** A drug's place in treating a condition; a panel orders its entries in this order. */
+export const MEDS_ROLES = ["1st", "2nd", "alt", "adjunct"] as const;
+export type MedsRole = (typeof MEDS_ROLES)[number];
+
+/**
+ * One role of a meds panel entry: the role, the entry's drugs it applies to (null: the whole entry), a
+ * short qualifier (e.g. "secondary prevention only"), and the sources that give it.
+ */
+export interface MedsRoleTag {
+  role: MedsRole;
+  drugs: string | null;
+  note: string | null;
+  sources: { name: string; org: string; year: string; url: string | null }[];
 }
 
 /**

@@ -444,6 +444,16 @@ export function publish(c: Content): PublishResult {
     for (const v of g.general?.visits ?? []) {
       for (const gap of v.gaps) placeGap(gap, { route: guideViewHash(gid, { kind: "visits", item: v.id }), loc: visitLoc(ix, gid, v.title) }, tabOf(g));
     }
+    // A sourced card she placed under a dx (MedsFile `gaps`) is placed on that dx's page.
+    for (const s of systems) {
+      if (s.guide !== g) continue;
+      for (const [topicId, file] of s.data.meds) {
+        const topic = s.topics.topics.find((x) => x.id === topicId);
+        if (!topic) continue;
+        const place = { route: topicRoute(s, topicId), loc: systemLoc(ix, gid, s.data.file.id, secTitle(s, topic.section)) };
+        for (const id of file.gaps ?? []) placeGap(id, place, tabOf(g));
+      }
+    }
     if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, guideBase(gid), tabOf(g));
     const deck = c.decks.get(gid);
     if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, guideViewHash(gid, { kind: "slides", n: 1 }), tabOf(g));
@@ -842,7 +852,7 @@ export function publish(c: Content): PublishResult {
       const file = s.data.meds.get(topic.id);
       if (!file) return null;
       const where = topicMedsPath(gid, sys, topic.id);
-      return publishedEdit(file, derived, (id) => addedCard(topic, id), (id) => dropped.push({ file: where, id }));
+      return publishedEdit(file, derived, (id) => addedCard(topic, id), (id) => dropped.push({ file: where, id }), (id) => (c.gaps.has(id) ? gap(id) : null));
     };
     const topics: PubTopic[] = publishedTopics(t, (topic) => [...medsPanel(s.pharm, blockOrder, topic, matcher, cardTitle, relevantTo(topic), home, sectionsOf), ...attached(topic)], medsEdit, s.data.below);
     for (const id of s.data.meds.keys()) {
@@ -976,6 +986,7 @@ export function publish(c: Content): PublishResult {
               at: `meds-${e.med.target}`, label: "notes", text: searchText(e.own.map((p) => docText(p.doc)).join("\n")),
             });
           }
+          for (const g of pub?.medsEdit?.gaps ?? []) gapUnit(g.id);
         } else if (info?.drug) {
           units.push({ tab, title: collapse(firstCell(r)), loc: pharmLoc(ix, gid, sys), route: hosts[r.id]?.route ?? "", at: r.id, label: "notes", text: searchText(r.cells.join("\n")) });
         } else if (info && (info.kind === "heading" || info.topic === null)) {

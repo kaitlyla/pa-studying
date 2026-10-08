@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, MedsPiece, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, MedsPiece, MedsRoleTag, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -269,6 +269,13 @@ export interface PubMedsEdit {
   add: PubMedsClass[];
   /** Target → what the entry shows instead of its card's rows and notes, for the entries she edited that the panel shows. */
   own: Record<string, MedsPiece[]>;
+  /**
+   * The sourced cards (gap blocks) she placed under this dx (MedsFile `gaps`), in her order, those she
+   * took off included (their ids are in `remove`) so the editor can put them back; the panel skips them.
+   */
+  gaps: PubGap[];
+  /** Target (card id, row/part target or gap id) → its role labels, each with its sources; only targets the panel can show. */
+  roles: Record<string, MedsRoleTag[]>;
 }
 
 export interface PubTopic {

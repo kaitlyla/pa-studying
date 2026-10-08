@@ -58,7 +58,7 @@ function VersionBody({ unit }: { unit: EditUnit }): ReactNode {
       live = false;
     };
   }, [unit]);
-  if (unit.parts.length > 0) return <>{unit.parts.map((p, i) => <PartView key={i} part={p} slotView={readOnly} />)}</>;
+  if (unit.parts.length > 0) return <>{unit.parts.map((p, i) => <PartView key={i} part={p} parts={unit.parts} slotView={readOnly} />)}</>;
   if (!file) return null;
   return (
     <p>

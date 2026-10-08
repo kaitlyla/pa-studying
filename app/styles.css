@@ -299,6 +299,14 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .meds { margin: 14px 0 6px; padding: 10px 12px 6px; border: 1px solid #d6dbe4; border-radius: 8px; background: #fafbfd; }
 .meds-hd { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 14px; }
 .meds-hd .n { padding: 1px 7px; border-radius: 9px; background: #e6eaf2; font-size: 11px; font-weight: 600; color: #4a5263; }
+.rolecs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.rolec { padding: 1px 7px; border: 1px solid #b9c6e0; border-radius: 9px; background: #f3f6fc; font-size: 11px; font-weight: 600; color: #2b55a3; white-space: nowrap; }
+.rolec.r-2nd { border-color: #c8d3b0; background: #f5f8ee; color: #4d6420; }
+.rolec.r-alt { border-color: #d9c9e6; background: #f8f3fb; color: #6a3d8c; }
+.rolec.r-adjunct { border-color: #d6dbe4; background: #f4f6fa; color: #4a5263; }
+.rolels { margin: 8px 0 4px; padding: 0; list-style: none; font-size: 13px; line-height: 1.5; }
+.rolels li + li { margin-top: 3px; }
+.rolels .rsrc { color: #5b6472; }
 
 /* ---- files, slides, viewers ---- */
 .fv-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }

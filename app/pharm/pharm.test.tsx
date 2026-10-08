@@ -521,6 +521,8 @@ describe("pharm pages", () => {
       remove: [R(124)],
       add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
       own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: schema.node("doc", null, [schema.node("paragraph", null, [schema.text(mine)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"] }] },
+      gaps: [],
+      roles: {},
     };
     server.restore();
     server = serveData(new Map([...files, [CV, mod]]));
@@ -548,6 +550,48 @@ describe("pharm pages", () => {
     const added = cardEl(panel, `meds-${C(3)}`);
     expect(visibleText(added)).toContain("MOA: beta-1 blockade");
     expect(added.textContent).not.toContain(OWN_VERSION);
+  });
+
+  it("meds panel orders entries by role label, shows each label's source, and shows her sourced cards less any she took off", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    const doc = (text: string): SystemJson["notesBlocks"][string]["doc"] => schema.node("doc", null, [schema.node("paragraph", null, [schema.text(text)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"];
+    const src = { name: "Angina Pectoris", org: "MSD Manual Professional", year: "2026", url: "https://www.msdmanuals.com/professional/angina" };
+    const gap = (id: string, title: string, text: string) => ({
+      id, title, relevantTo: "Stable angina", written: "2026-10-08", doc: doc(text), differs: null, sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [],
+    });
+    topic.medsEdit = {
+      remove: ["g_REMOVED000"],
+      add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
+      own: {},
+      gaps: [gap("g_SOURCED000", "Ranolazine (sourced)", "Ranolazine for refractory angina."), gap("g_REMOVED000", "Ivabradine (sourced)", "Ivabradine text she took off.")],
+      roles: {
+        [C(3)]: [{ role: "1st", drugs: "metoprolol", note: null, sources: [src] }],
+        g_SOURCED000: [{ role: "adjunct", drugs: null, note: "refractory symptoms only", sources: [src] }],
+      },
+    };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    // 1st-line before adjunct; the unlabeled cards keep their order after them. The removed sourced card is gone.
+    expect(anchors(panel)).toEqual([`meds-${C(3)}`, "g_SOURCED000", `meds-${C(2)}`, `meds-${R(124)}`]);
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 4");
+    expect(panel.textContent).not.toContain("Ivabradine");
+    const chip = need(cardEl(panel, `meds-${C(3)}`).querySelector<HTMLElement>(".phc-h .rolec"), "role chip");
+    expect(chip.textContent).toBe("1st-line: metoprolol");
+    expect(chip.title).toBe("Source: Angina Pectoris, MSD Manual Professional (2026)");
+    expect(cardEl(panel, `meds-${C(2)}`).querySelector(".rolec")).toBeNull();
+
+    await click(cardBtn(panel, "g_SOURCED000"));
+    const sourced = cardEl(panel, "g_SOURCED000");
+    expect(visibleText(need(sourced.querySelector(".phc-h"), "header"))).toContain("Ranolazine (sourced)");
+    const line = need(sourced.querySelector<HTMLElement>(".rolels li"), "role line");
+    expect(visibleText(line)).toBe("Adjunct — refractory symptoms only · Source: Angina Pectoris, MSD Manual Professional (2026)");
+    expect(need(line.querySelector<HTMLAnchorElement>("a"), "source link").href).toBe(src.url);
+    expect(visibleText(sourced)).toContain("Ranolazine for refractory angina.");
   });
 
   it("a topic without meds shows no meds panel", async () => {
