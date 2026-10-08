@@ -407,13 +407,31 @@ async function startEditing(page: Page): Promise<Locator> {
 }
 
 /**
+ * Clicks the start of `p` in the editor and returns once keys can move the caret safely.
+ *
+ * When the editor gains focus, prosemirror-view (1.42.6) handlers.focus queues a 20 ms timer that
+ * writes the selection ProseMirror last read back into the page. Chrome reports keyboard selection
+ * moves late, so arrow or Shift+arrow presses made before that timer runs can be undone by it. A
+ * timer with the same delay queued after the click runs after ProseMirror's.
+ */
+async function clickIntoEditor(page: Page, p: Locator): Promise<void> {
+  await p.click({ position: { x: 1, y: 2 } });
+  await page.evaluate(() => new Promise<void>((resolve) => setTimeout(resolve, 20)));
+}
+
+/** The text the page has selected. */
+async function selectedText(page: Page): Promise<string | undefined> {
+  return page.evaluate(() => window.getSelection()?.toString());
+}
+
+/**
  * Types `marker` at the start of the first paragraph in the second cell of the topic's first row
  * (not the name cell, which would rename the topic).
  */
 async function typeMarker(page: Page, marker: string): Promise<void> {
   const slot = ref(page, "edit-area").locator(".edit-slot").first();
   const p = slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first();
-  await p.click({ position: { x: 1, y: 2 } });
+  await clickIntoEditor(page, p);
   await page.keyboard.press("Home");
   await page.keyboard.type(marker);
   await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
@@ -1728,7 +1746,7 @@ test.describe("pictures and highlight colors", () => {
 
     const marker = newMarker();
     // typeMarker aims at a topic's table row; a system page opens on its own text.
-    await ref(page, "edit-area").locator(".edit-slot").first().locator("p").first().click({ position: { x: 1, y: 2 } });
+    await clickIntoEditor(page, ref(page, "edit-area").locator(".edit-slot").first().locator("p").first());
     await page.keyboard.press("Home");
     await page.keyboard.type(marker);
     await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
@@ -1767,6 +1785,7 @@ test.describe("pictures and highlight colors", () => {
     const marker = newMarker();
     await typeMarker(page, marker);
     for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
+    expect(await selectedText(page)).toBe(marker);
     await ref(page, "tb-font-color").click();
     expect(await ref(page, "tb-fc-standard").locator('[data-ref^="tb-fc-"]').evaluateAll((els) => els.map((el) => el.getAttribute("data-ref")))).toEqual(
       ["C00000", "FF0000", "FFC000", "FFFF00", "92D050", "00B050", "00B0F0", "0070C0", "002060", "7030A0"].map((hex) => `tb-fc-${hex}`),
@@ -1795,9 +1814,10 @@ test.describe("pictures and highlight colors", () => {
 
     // Edit again: the color is among the page's colors, and Automatic on the marker takes it off.
     await startEditing(page);
-    await ref(page, "edit-area").locator("p", { hasText: marker }).first().click({ position: { x: 1, y: 2 } });
+    await clickIntoEditor(page, ref(page, "edit-area").locator("p", { hasText: marker }).first());
     await page.keyboard.press("Home");
     for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowRight");
+    expect(await selectedText(page)).toBe(marker);
     await ref(page, "tb-font-color").click();
     await expect(ref(page, "tb-fc-used-0070C0")).toBeVisible();
     await ref(page, "tb-fc-auto").click();
