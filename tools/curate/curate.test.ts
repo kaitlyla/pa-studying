@@ -99,6 +99,102 @@ describe("split", () => {
   });
 });
 
+describe("split-table", () => {
+  const DOC5 = `content/docs/${D(5)}`;
+  const T = `${DOC5}/blocks/${B(61)}.json`;
+  /** Her Word page's table: a label row, then four rows. */
+  async function writeTable(): Promise<void> {
+    await writeContent(root, T, {
+      v: 1, id: B(61), kind: "table", meta: {},
+      doc: tableDoc(2, [[R(600), "content", "Test", "Result"], [R(601), "content", "Free T4", "high"], [R(602), "content", "T3", "low"], [R(603), "content", "TSH", "low"], [R(604), "content", "TPO", "positive"]]),
+    });
+  }
+  const rowIds = (b: BlockFile): string[] => (b.doc.content[0] as { content: { attrs: { id: string } }[] }).content.map((r) => r.attrs.id);
+  const rowsOf = (b: BlockFile): unknown[] => (b.doc.content[0] as { content: unknown[] }).content;
+
+  it("moves the rows from the given one on into a new table right after it on the page, under a copy of the label row", async () => {
+    await writeTable();
+    const original = await read<BlockFile>(T);
+    const lines = await run(root, ["split-table", B(61), R(603)]);
+
+    const page = await read<{ blocks: string[] }>(`${DOC5}/doc.json`);
+    const added = newId(page.blocks, [B(60), B(61)]);
+    expect(page.blocks).toEqual([B(60), B(61), added]);
+    const first = await read<BlockFile>(T);
+    const second = await read<BlockFile>(`${DOC5}/blocks/${added}.json`);
+    expect(rowIds(first)).toEqual([R(600), R(601), R(602)]);
+    expect(rowsOf(first)).toEqual(rowsOf(original).slice(0, 3));
+    const [labels, ...moved] = rowsOf(second) as { attrs: { id: string } }[];
+    const copy = must(labels, "label row").attrs.id;
+    expect(copy).toMatch(/^r_[0-9A-HJKMNP-TV-Z]{10}$/);
+    expect(copy).not.toBe(R(600));
+    expect({ ...labels, attrs: { ...labels?.attrs, id: R(600) } }).toEqual(rowsOf(original)[0]);
+    expect(moved).toEqual(rowsOf(original).slice(3));
+    // Both tables keep the table's own look (grid, borders, margins) and the block's kind and meta.
+    const attrsOf = (b: BlockFile): unknown => (b.doc.content[0] as { attrs: unknown }).attrs;
+    expect([attrsOf(first), attrsOf(second)]).toEqual([attrsOf(original), attrsOf(original)]);
+    expect([second.kind, second.meta]).toEqual(["table", original.meta]);
+    expect(lines).toContain(`${B(61)} split at ${R(603)}; the second table is ${added}, its first row ${copy} a copy of ${R(600)}`);
+    const reread = await loadContent(root);
+    expect(() => publish(reread)).not.toThrow();
+  });
+
+  /** Labs › CBC with `notes`. */
+  async function cbcNotes(notes: unknown[]): Promise<void> {
+    const tabs = await read<RefTabsFile>("content/places/reftabs.json");
+    await writeContent(root, "content/places/reftabs.json", { ...tabs, labs: { ...tabs.labs, subs: tabs.labs.subs.map((s) => ({ ...s, notes })) } });
+  }
+
+  it("names the places showing or linking the table whole; a note of rows above the cut keeps them", async () => {
+    await writeTable();
+    await cbcNotes([{ block: B(61) }, { block: B(61), rows: [R(601)] }]);
+    const other = await read<OtherFile>("content/places/other.json");
+    await writeContent(root, "content/places/other.json", {
+      ...other, sections: other.sections.map((s) => (s.id === "pe" ? { ...s, links: [{ target: B(61), covers: "Thyroid labs" }, { target: R(601), covers: "Free T4" }] } : s)),
+    });
+    const lines = await run(root, ["split-table", B(61), R(603)]);
+    expect(lines.filter((l) => l.includes("now its first table only"))).toEqual([
+      `reftabs labs/cbc shows ${B(61)} whole: now its first table only`,
+      `other pe links ${B(61)} ("Thyroid labs"): now its first table only`,
+    ]);
+  });
+
+  it("refuses a place note whose rows reach past the cut", async () => {
+    await writeTable();
+    await cbcNotes([{ block: B(61), rows: [R(601), R(604)] }]);
+    await refused(["split-table", B(61), R(603)], new RegExp(`reftabs labs/cbc: its note of ${B(61)} names rows from ${R(603)} on`), [T, `${DOC5}/doc.json`]);
+  });
+
+  it("refuses a cut a merged cell spans, a cut too near the top, a row the table lacks, a guide table, and a table a pharm file shows", async () => {
+    await writeTable();
+    const merged = await read<BlockFile>(T);
+    const rows = rowsOf(merged) as { content: { attrs?: Record<string, unknown> }[] }[];
+    const [, , r2, r3] = rows;
+    if (!r2 || !r3) throw new Error("missing rows");
+    r2.content[0] = { ...r2.content[0], attrs: { ...r2.content[0]?.attrs, rowspan: 2 } };
+    r3.content.shift();
+    await writeContent(root, T, merged);
+    const files = [T, `${DOC5}/doc.json`];
+    await refused(["split-table", B(61), R(603)], new RegExp(`a cell spans rows across ${R(603)}`), files);
+    // A two-row label: copied alone, its spanning cell would cover the second table's first row.
+    await writeTable();
+    const twoRowLabel = await read<BlockFile>(T);
+    const [h0, h1] = rowsOf(twoRowLabel) as { content: { attrs?: Record<string, unknown> }[] }[];
+    if (!h0 || !h1) throw new Error("missing rows");
+    h0.content[0] = { ...h0.content[0], attrs: { ...h0.content[0]?.attrs, rowspan: 2 } };
+    h1.content.shift();
+    await writeContent(root, T, twoRowLabel);
+    await refused(["split-table", B(61), R(603)], /the label row has a cell spanning rows/, files);
+    await writeTable();
+    await refused(["split-table", B(61), R(601)], /must leave the first row and at least one more above the cut/, files);
+    await refused(["split-table", B(61), R(699)], new RegExp(`${R(699)} is not a row of the table`), files);
+    await refused(["split-table", B(60), R(601)], /not a table block/, files);
+    await refused(["split-table", B(10), R(101)], /only a table on one of her Word pages/, [`${CV}/system.json`, `${CV}/blocks/${B(10)}.json`]);
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    await refused(["split-table", B(61), R(603)], /pharm notes file thyroid-notes shows it/, files);
+  });
+});
+
 describe("rows", () => {
   it("sets the kinds of the named rows and leaves the others", async () => {
     await run(root, ["rows", B(10), `${R(102)}=heading`]);

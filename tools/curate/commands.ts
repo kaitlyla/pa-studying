@@ -8,8 +8,10 @@ import type {
   OtherFile, OtherNote, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
 } from "../../lib/content/types.ts";
 import type { Content } from "../../lib/derive/model.ts";
+import { REF_TABS } from "../../lib/derive/routes.ts";
 import { collapse, nodeText, type PMNode } from "../../lib/derive/text.ts";
 import { deriveTopics, rowSection } from "../../lib/derive/topics.ts";
+import { placeCells } from "../../lib/wordFormat.ts";
 import { CurateError, type Change } from "./tree.ts";
 
 export interface Planned {
@@ -165,6 +167,72 @@ export function split(c: Content, blockId: string, index: number): Planned {
     changes.push({ path: st.path, value: { ...st.value, members: { ...st.value.members, [id]: st.value.members[blockId] } } });
   }
   return { changes, notes: [`${blockId} split at ${index}; the second part is ${id}`] };
+}
+
+/**
+ * `split-table <tableBlockId> <rowId>`: the rows of a table block on one of her Word pages from
+ * `rowId` on become a new table block placed right after it on the page. The new table opens with a
+ * copy of the first row (the column labels), under a new row id; every other row keeps its id, its
+ * cells and its order. Refused when a cell spans rows across the cut, when a pharm notes file made
+ * from the page shows the block, or when a place note's rows name rows on both sides of the cut. A
+ * place showing the block whole keeps showing the first table; the notes name those places.
+ */
+export function splitTable(c: Content, blockId: string, rowId: string): Planned {
+  const owner = findBlock(c, blockId);
+  const { block } = owner;
+  if (!owner.listPath.startsWith("content/docs/")) throw new CurateError(`${blockId}: only a table on one of her Word pages can be split by row`);
+  const table = tableNode(block) as PMNode | null;
+  if (block.kind !== "table" || !table) throw new CurateError(`${blockId}: not a table block`);
+  const rows = table.content ?? [];
+  const index = rows.findIndex((r) => r.attrs?.id === rowId);
+  if (index < 0) throw new CurateError(`${blockId}: ${rowId} is not a row of the table`);
+  if (index < 2) throw new CurateError(`${blockId}: ${rowId} must leave the first row and at least one more above the cut`);
+  const cells = placeCells(rows).cells;
+  // The label row is copied to head the second table, so it must stand alone.
+  if (cells.some((p) => p.row === 0 && p.rowspan > 1)) throw new CurateError(`${blockId}: the label row has a cell spanning rows`);
+  if (cells.some((p) => p.row < index && p.row + p.rowspan > index)) throw new CurateError(`${blockId}: a cell spans rows across ${rowId}`);
+  const pharm = c.pharm.find((p) => p.file.page !== undefined && p.file.blocks.includes(blockId));
+  if (pharm) throw new CurateError(`${blockId}: pharm notes file ${pharm.file.id} shows it; split it there first`);
+
+  const moved = new Set(rows.slice(index).map((r) => String(r.attrs?.id)));
+  const places: { where: string; notes?: readonly (PlaceNote | OtherNote)[]; links?: readonly Link[] }[] = [
+    ...REF_TABS.flatMap((tab) => c.reftabs[tab].subs.map((s) => ({ where: `reftabs ${tab}/${s.id}`, notes: s.notes, links: s.links }))),
+    ...c.other.sections.map((s) => ({ where: `other ${s.id}`, notes: s.notes, links: s.links })),
+    ...c.guides.flatMap((g) => [
+      ...(g.general?.topics ?? []).map((t) => ({ where: `general ${g.file.id}/${t.key}`, links: t.links })),
+      ...(g.general?.visits ?? []).map((v) => ({ where: `general ${g.file.id} visits ${v.id}`, links: v.links })),
+    ]),
+  ];
+  const rescoped: string[] = [];
+  for (const { where, notes, links } of places) {
+    for (const n of notes ?? []) {
+      if (!("block" in n) || n.block !== blockId) continue;
+      if (!n.rows) rescoped.push(`${where} shows ${blockId} whole: now its first table only`);
+      else if (n.rows.some((r) => moved.has(r))) throw new CurateError(`${where}: its note of ${blockId} names rows from ${rowId} on; change it first`);
+    }
+    for (const l of links ?? []) if (l.target === blockId) rescoped.push(`${where} links ${blockId} ("${l.covers}"): now its first table only`);
+  }
+
+  const mint = minter(c);
+  const id = mint("b");
+  const [head, ...above] = clone(rows.slice(0, index));
+  if (!head) throw new CurateError(`${blockId}: the table has no rows`);
+  const labels: PMNode = { ...clone(head), attrs: { ...head.attrs, id: mint("r") } };
+  const first: BlockFile = { ...clone(block), doc: { type: "doc", content: [{ ...table, content: [head, ...above] }] } };
+  const second: BlockFile = { v: 1, id, kind: "table", doc: { type: "doc", content: [{ ...table, content: [labels, ...clone(rows.slice(index))] }] }, meta: clone(block.meta) };
+  const list = clone(owner.list) as { blocks: string[] };
+  const at = list.blocks.indexOf(blockId);
+  list.blocks = [...list.blocks.slice(0, at + 1), id, ...list.blocks.slice(at + 1)];
+  const notes = [`${blockId} split at ${rowId}; the second table is ${id}, its first row ${String(labels.attrs?.id)} a copy of ${String(head.attrs?.id)}`];
+  notes.push(...rescoped);
+  return {
+    changes: [
+      { path: `${owner.dir}/${blockId}.json`, value: first },
+      { path: `${owner.dir}/${id}.json`, value: second },
+      { path: owner.listPath, value: list },
+    ],
+    notes,
+  };
 }
 
 // ---- rows ----------------------------------------------------------------------------------
@@ -421,7 +489,7 @@ export function places(c: Content, draft: { reftabs?: RefTabsFile; other?: Other
   };
   const changes: Change[] = [];
   if (draft.reftabs !== undefined) {
-    for (const tab of ["labs", "imaging", "ekg", "anatomy"] as const) {
+    for (const tab of REF_TABS) {
       const t = draft.reftabs[tab];
       for (const s of t?.subs ?? []) {
         checkNotes(s.notes, `reftabs ${tab}/${s.id}`);
