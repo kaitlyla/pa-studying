@@ -8,7 +8,11 @@ import { schema } from "../../../lib/schema.ts";
 import { newId } from "../../../lib/content/index.ts";
 import { cropOrNull, keptFraction } from "../../../lib/crop.ts";
 import type { Crop, ImageAttrs, TableAttrs } from "../../../lib/schemaTypes.ts";
+import { ownRowWidths, type PlacedCell } from "../../../lib/wordFormat.ts";
 import { tableColumns } from "../../render/styles.ts";
+import {
+  cellLabel, deleteColumnCells, placedRows, reachLines, rowIdOf, rowScope, rowsLayoutOf, tableNow, type CellJSON, type RowJSON, type RowsLayout,
+} from "./rowLayout.ts";
 import { M, N as nodes } from "./types.ts";
 
 /** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
@@ -491,6 +495,8 @@ export function insertRow(where: "above" | "below"): Command {
         minHeightPt: modelRow.attrs.minHeightPt,
         repeatHeader: false,
         cantSplit: modelRow.attrs.cantSplit,
+        // The row's cells are the model row's, on its edges; and a merged cell growing over it joins the two rows.
+        widths: modelRow.attrs.widths,
       },
       newCells,
     );
@@ -554,35 +560,147 @@ const roundTwip = (x: number): number => Math.round(x * 20) / 20;
  * column goes under MIN_COLUMN_PT, the first one included: a move past it stops at it.
  */
 export function moveColumnBorder(table: Pick<TableAttrs, "grid" | "ownWidths">, border: number, deltaPt: number): number[] | null {
-  const grid = table.grid;
-  if (border < 0 || border + 1 >= grid.length) return null;
-  const sum = grid.reduce((x, y) => x + y, 0);
-  const widths = tableColumns(table).map((pct) => roundTwip((pct * sum) / 100));
-  const [grow, shrink] = deltaPt > 0 ? [border, border + 1] : [border + 1, border];
-  const step = roundTwip(Math.min(Math.abs(deltaPt), (widths[shrink] ?? 0) - MIN_COLUMN_PT));
-  if (step <= 0) return null;
-  widths[grow] = roundTwip((widths[grow] ?? 0) + step);
-  widths[shrink] = roundTwip((widths[shrink] ?? 0) - step);
-  return widths;
+  return moveBorder(drawnWidths(table), border, deltaPt);
 }
 
-/** A column border of a table: the one between grid columns `border` and `border + 1`. */
-export interface ColumnBorder {
+/** A table's column widths in pt as the screen draws them (tableColumns, kept to twips). */
+function drawnWidths(table: Pick<TableAttrs, "grid" | "ownWidths">): number[] {
+  return shownWidths(table).map(roundTwip);
+}
+
+/**
+ * The same widths unrounded: a dx row's widths start from these, so each border a change doesn't move
+ * stays exactly where the table's other rows draw theirs.
+ */
+function shownWidths(table: Pick<TableAttrs, "grid" | "ownWidths">): number[] {
+  const sum = table.grid.reduce((x, y) => x + y, 0);
+  return tableColumns(table).map((pct) => (pct * sum) / 100);
+}
+
+/**
+ * `widths` (pt per grid column) after moving the border after column `border` by `deltaPt`, as
+ * moveColumnBorder does: the starting widths of a width target (widthTarget) go in as they are.
+ */
+export function moveBorder(widths: readonly number[], border: number, deltaPt: number): number[] | null {
+  if (border < 0 || border + 1 >= widths.length) return null;
+  const out = [...widths];
+  const [grow, shrink] = deltaPt > 0 ? [border, border + 1] : [border + 1, border];
+  const step = roundTwip(Math.min(Math.abs(deltaPt), (out[shrink] ?? 0) - MIN_COLUMN_PT));
+  if (step <= 0) return null;
+  // The shrinking column gives up exactly what the growing one gains, so the pair's outer borders stay
+  // put; widths already kept to twips (a grid) stay on them.
+  const pair = (out[grow] ?? 0) + (out[shrink] ?? 0);
+  out[grow] = roundTwip((out[grow] ?? 0) + step);
+  const rest = pair - out[grow];
+  out[shrink] = Math.abs(roundTwip(rest) - rest) < 1e-9 ? roundTwip(rest) : rest;
+  return out;
+}
+
+/** The cursor's cell in the whole table (the stored rows with the editor's spliced in), and the rows its dx's column changes reach. */
+interface DxRows {
+  layout: RowsLayout;
+  /** The whole table's rows now. */
+  rows: RowJSON[];
+  /** The cursor's cell placed on the grid. */
+  cell: PlacedCell<CellJSON>;
+  /** The cursor's row. */
+  row: RowJSON;
+  /** The dx being changed: the topic page's, or on a table page the cursor row's (null: a row in no topic). */
+  topic: string | null;
+  /** The rows a column change reaches (rowScope): the dx's content rows and every row a merged cell joins to them. */
+  scope: Set<string>;
+}
+
+const isHeadingRow = (row: RowJSON | undefined): boolean => row?.attrs?.kind === "heading";
+
+/**
+ * The cursor's dx rows in a rows editor (a table block's rows editor; null in any other editor). On a
+ * topic page the dx is the page's (its content rows); on a table page, the cursor row's topic, or the
+ * cursor row alone when it is in no topic.
+ */
+function dxRows(state: EditorState, at: TableAt): DxRows | null {
+  const layout = rowsLayoutOf(state);
+  if (!layout) return null;
+  const held = (at.table.toJSON() as { content?: RowJSON[] }).content ?? [];
+  // The cursor cell's row (the one containing its position) and its index there (the cell starting at it).
+  const { index: r, offset: rowStart } = at.table.childAfter(at.cellRel);
+  const cellIndex = at.table.child(r).childAfter(at.cellRel - rowStart - 1).index;
+  const rows = tableNow(layout, held);
+  const id = rowIdOf(held[r]);
+  const ri = rows.findIndex((x) => rowIdOf(x) === id);
+  const cell = placedRows(rows)[ri]?.[cellIndex];
+  const row = rows[ri];
+  if (!cell || !row) return null;
+  let topic: string | null;
+  let seeds: string[];
+  if (layout.page === "dx") {
+    topic = layout.topic;
+    seeds = held.filter((x) => !isHeadingRow(x)).map(rowIdOf);
+  } else {
+    topic = isHeadingRow(row) ? null : (layout.pages[id]?.[0] ?? null);
+    seeds = topic === null ? [id] : rows.filter((x) => !isHeadingRow(x) && layout.pages[rowIdOf(x)]?.includes(topic as string)).map(rowIdOf);
+  }
+  const scope = rowScope(rows, seeds);
+  // A topic page's heading row no merged cell joins to the dx is not the dx's: its columns are not changed there.
+  if (!scope.has(id)) return null;
+  return { layout, rows, cell, row, topic, scope };
+}
+
+/**
+ * What a column width change at the cursor's cell moves: the table's grid, or (in a dx's rows) the
+ * widths of that dx's rows. A topic page changes its dx's rows; a table page its grid, except in a row
+ * with its own widths, which changes that row's dx as its topic page would (zeke's rulings).
+ */
+export interface WidthTarget {
   table: PMNode;
   /** Position of the table node. */
   pos: number;
+  /** The cursor cell's first grid column and the column after its last. */
+  left: number;
+  right: number;
+  /** The grid columns a border can sit between. */
+  columns: number;
+  /** The widths (pt per grid column) the border moves in. */
+  widths: number[];
+  /** The ids of the editor's rows taking the new widths; null: the table's grid takes them. */
+  rows: string[] | null;
+  /** The confirm lines when the change reaches other dxs (reachLines); none: []. */
+  reach: string[];
+}
+
+export function widthTarget($pos: ResolvedPos, state: EditorState): WidthTarget | null {
+  const at = tableAt($pos);
+  if (!at) return null;
+  const t = at.table.attrs as TableAttrs;
+  const n = t.grid.length;
+  const dx = dxRows(state, at);
+  if (!dx && rowsLayoutOf(state)?.page === "dx") return null;
+  const own = dx ? ownRowWidths(dx.row.attrs?.widths, n) : null;
+  if (dx && (dx.layout.page === "dx" || own !== null)) {
+    const held = new Set<string>();
+    at.table.forEach((row) => held.add(String(row.attrs.id)));
+    return {
+      table: at.table, pos: at.pos, left: dx.cell.col, right: dx.cell.col + dx.cell.colspan, columns: n,
+      widths: own ?? shownWidths(t), rows: [...dx.scope].filter((id) => held.has(id)), reach: reachLines(dx.rows, dx.scope, dx.layout, dx.topic),
+    };
+  }
+  const rect = at.map.findCell(at.cellRel);
+  return { table: at.table, pos: at.pos, left: rect.left, right: rect.right, columns: Math.min(n, at.map.width), widths: drawnWidths(t), rows: null, reach: [] };
+}
+
+/** A column border to move: the one after grid column `border`, in `target`'s widths. */
+export interface ColumnBorder {
+  target: WidthTarget;
   border: number;
 }
 
 /** The border on the `side` of the cell holding `$pos`; null at the table's outer edges or outside a table. */
-export function cellBorder($pos: ResolvedPos, side: "left" | "right"): ColumnBorder | null {
-  const at = tableAt($pos);
-  if (!at) return null;
-  const rect = at.map.findCell(at.cellRel);
-  const border = side === "right" ? rect.right - 1 : rect.left - 1;
-  const columns = (at.table.attrs.grid as number[]).length;
-  if (border < 0 || border + 1 >= Math.min(columns, at.map.width)) return null;
-  return { table: at.table, pos: at.pos, border };
+export function cellBorder($pos: ResolvedPos, side: "left" | "right", state: EditorState): ColumnBorder | null {
+  const target = widthTarget($pos, state);
+  if (!target) return null;
+  const border = side === "right" ? target.right - 1 : target.left - 1;
+  if (border < 0 || border + 1 >= target.columns) return null;
+  return { target, border };
 }
 
 /** The table at `pos` (a table node's position) with its grid replaced by widths she set (ownWidths). */
@@ -591,25 +709,49 @@ export function setTableGrid(state: EditorState, pos: number, grid: number[]): T
   return state.tr.setNodeMarkup(pos, undefined, { ...table?.attrs, grid, ownWidths: true });
 }
 
+/** `target`'s table (at `target.pos` in `state`) with `widths` given to its grid, or to the rows it names. */
+export function setWidths(state: EditorState, target: WidthTarget, widths: number[]): Transaction {
+  if (target.rows === null) return setTableGrid(state, target.pos, widths);
+  const tr = state.tr;
+  const rows = new Set(target.rows);
+  target.table.forEach((row, offset) => {
+    if (rows.has(String(row.attrs.id))) tr.setNodeMarkup(target.pos + 1 + offset, undefined, { ...row.attrs, widths });
+  });
+  return tr;
+}
+
 /**
  * Column narrower (−1) / wider (+1) for the cursor's cell: its right border moves one step (its left
- * border when the cell ends the table) — moveColumnBorder, the same move a drag of that border makes.
- * False (the toolbar greys the button) when it cannot act: outside a table, in a one-column table, in a
- * cell spanning every column, or with the column at its limit.
+ * border when the cell ends the table) — moveColumnBorder, the same move a drag of that border makes —
+ * in the table's grid or its dx's rows (widthTarget). False (the toolbar greys the button) when it
+ * cannot act: outside a table, in a one-column table, in a cell spanning every column, or with the
+ * column at its limit. Applies without asking; changeColumnWidthAsking confirms a change reaching other dxs.
  */
 export function changeColumnWidth(dir: 1 | -1): Command {
   return (state, dispatch) => {
-    const at = tableAt(state.selection.$from);
-    if (!at) return false;
-    const t = at.table.attrs as TableAttrs;
-    const rect = at.map.findCell(at.cellRel);
-    const ends = rect.right >= at.map.width;
-    const border = ends ? rect.left - 1 : rect.right - 1;
-    if (border < 0 || border + 1 >= t.grid.length) return false;
-    const next = moveColumnBorder(t, border, (ends ? -dir : dir) * COLUMN_STEP_PT);
+    const target = widthTarget(state.selection.$from, state);
+    if (!target) return false;
+    const ends = target.right >= target.columns;
+    const border = ends ? target.left - 1 : target.right - 1;
+    if (border < 0 || border + 1 >= target.columns) return false;
+    const next = moveBorder(target.widths, border, (ends ? -dir : dir) * COLUMN_STEP_PT);
     if (!next) return false;
-    if (dispatch) dispatch(setTableGrid(state, at.pos, next));
+    if (dispatch) dispatch(setWidths(state, target, next));
     return true;
+  };
+}
+
+/** changeColumnWidth, after her confirm when the change reaches other dxs (zeke's ruling). */
+export function changeColumnWidthAsking(dir: 1 | -1, confirm: Confirm): (editor: LiveEditor) => Promise<boolean> {
+  return async (editor) => {
+    const state = editor.state;
+    const target = widthTarget(state.selection.$from, state);
+    if (!target || !changeColumnWidth(dir)(state)) return false;
+    if (target.reach.length > 0 && !(await confirm(target.reach))) return false;
+    // The document may have changed while the dialog was open: change only the same, unchanged table.
+    const live = editor.state;
+    if (widthTarget(live.selection.$from, live)?.table !== target.table) return false;
+    return changeColumnWidth(dir)(live, editor.dispatch);
   };
 }
 
@@ -676,6 +818,87 @@ export function deleteRow(confirm: Confirm): (editor: LiveEditor) => Promise<boo
     tr.setMeta(CONFIRMED_DELETE, true);
     const target = Math.min(pos + 1, tr.doc.content.size);
     tr.setSelection(TextSelection.near(tr.doc.resolve(target)));
+    editor.dispatch(tr.scrollIntoView());
+    return true;
+  };
+}
+
+/** Shows her a message (a refusal). */
+export type Notify = (message: string) => void;
+
+/** The rows Delete column at the cursor would change, all of them in this editor; else why not. */
+function columnDelete(state: EditorState): { at: TableAt; dx: DxRows; rows: RowJSON[]; removed: CellJSON[] } | { refused: string } | null {
+  const at = tableAt(state.selection.$from);
+  if (!at) return null;
+  const dx = dxRows(state, at);
+  if (!dx) return null;
+  const held = new Set<string>();
+  at.table.forEach((row) => held.add(String(row.attrs.id)));
+  const outside = dx.rows.filter((r) => dx.scope.has(rowIdOf(r)) && !held.has(rowIdOf(r)));
+  if (outside.length > 0) {
+    // A merged cell joins rows this page does not hold (another dx's): only the system page holds them all (zeke's ruling).
+    const ids = new Set(outside.map(rowIdOf));
+    const topics = [...new Set(outside.flatMap((r) => dx.layout.pages[rowIdOf(r)] ?? []))].filter((t) => t !== dx.topic);
+    const covers = (c: PlacedCell<CellJSON>, pick: (id: string) => boolean): boolean =>
+      dx.rows.slice(c.row, c.row + c.rowspan).some((r) => pick(rowIdOf(r)));
+    const joining = placedRows(dx.rows).flat().find((c) => c.rowspan > 1 && covers(c, (id) => ids.has(id)) && covers(c, (id) => held.has(id)));
+    const names = topics.map((t) => dx.layout.titles[t] ?? t).join(", ");
+    const what = joining ? ` ('${cellLabel(joining.node)}')` : "";
+    return { refused: `This column is merged with rows of ${names || "other rows"}${what}. Delete it on the system page.` };
+  }
+  const done = deleteColumnCells(dx.rows, dx.scope, dx.cell.col);
+  if ("refused" in done) return done;
+  return { at, dx, rows: done.rows, removed: done.removed };
+}
+
+/** Delete column can act at the cursor (the toolbar greys it otherwise): in a rows editor's table, not in the first column. */
+export function canDeleteColumn(state: EditorState): boolean {
+  const at = tableAt(state.selection.$from);
+  const dx = at ? dxRows(state, at) : null;
+  return dx !== null && dx.cell.col > 0;
+}
+
+/** The confirm text of Delete column: the dx, the text of the cells it deletes, their pictures, and the other dxs it changes. */
+export function deleteColumnPrompt(title: string | null, removed: readonly CellJSON[], reach: readonly string[]): string[] {
+  const cells = removed.map((c) => schema.nodeFromJSON(c));
+  const text = cells.map((c) => c.textBetween(0, c.content.size, " ", " ").replace(/\s+/g, " ").trim()).filter((t) => t !== "").join(" / ");
+  const cut = text.length > 80 ? `${text.slice(0, 80)}…` : text;
+  const lines = [title === null ? "Delete this column in this row?" : `Delete this column in ${title}?`, cut];
+  const pictures = cells.reduce((sum, c) => sum + countPictures(c), 0);
+  if (pictures > 0) lines.push(`This column also holds ${pictures} picture(s), which will be deleted too.`);
+  return [...lines, ...reach];
+}
+
+/**
+ * Delete column, after her confirm: in the cursor's dx rows (dxRows), the cell in the cursor cell's
+ * column goes with its text and pictures, and the cell to its left widens over it (deleteColumnCells;
+ * zeke's ruling). Refused, with a message, in the first column, when the merged cells beside it do not
+ * line up, and on a page that does not hold every row a merged cell joins to the dx's.
+ */
+export function deleteColumn(confirm: Confirm, notify: Notify): (editor: LiveEditor) => Promise<boolean> {
+  return async (editor) => {
+    const plan = columnDelete(editor.state);
+    if (plan === null) return false;
+    if ("refused" in plan) {
+      notify(plan.refused);
+      return false;
+    }
+    const { at, dx } = plan;
+    const title = dx.topic === null ? null : (dx.layout.titles[dx.topic] ?? null);
+    if (!(await confirm(deleteColumnPrompt(title, plan.removed, reachLines(dx.rows, dx.scope, dx.layout, dx.topic))))) return false;
+    // The document may have changed while the dialog was open: delete only from the same, unchanged table.
+    const live = editor.state;
+    const pos = livePos(live.doc, at.table, at.pos);
+    if (pos === null) return false;
+    const byId = new Map(plan.rows.map((r) => [rowIdOf(r), r]));
+    const rows: PMNode[] = [];
+    at.table.forEach((row) => {
+      const next = dx.scope.has(String(row.attrs.id)) ? byId.get(String(row.attrs.id)) : undefined;
+      rows.push(next ? schema.nodeFromJSON(next) : row);
+    });
+    const tr = live.tr.replaceWith(pos, pos + at.table.nodeSize, at.table.type.create(at.table.attrs, rows));
+    tr.setMeta(CONFIRMED_DELETE, true);
+    tr.setSelection(TextSelection.near(tr.doc.resolve(Math.min(pos + 1, tr.doc.content.size))));
     editor.dispatch(tr.scrollIntoView());
     return true;
   };

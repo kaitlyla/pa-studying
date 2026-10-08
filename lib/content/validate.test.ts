@@ -143,6 +143,36 @@ describe("rich-text schema (20 §20.13)", () => {
     expect(verdict(blockPath, block("table", doc(cell({ borders: { top: null, left: { style: "single", widthPt: 1, color: "000000" } }, vAlign: "center", fill: "FF0000" }))))).toBe("ok");
     expect(verdict(blockPath, block("table", doc({ ...t, attrs: { ...t.attrs, grid: ["1"] } })))).toMatch(/grid/);
   });
+
+  describe("a row's own widths", () => {
+    const t = table(id("r", 1), id("r", 2));
+    const rowsWith = (first: Record<string, unknown>, second: Record<string, unknown> = {}, firstCell: Record<string, unknown> = {}) => ({
+      ...t,
+      content: [
+        { ...t.content[0], attrs: { id: id("r", 1), ...first }, content: [{ type: "table_cell", attrs: firstCell, content: [para("x")] }, { type: "table_cell", content: [para("y")] }] },
+        { ...t.content[1], attrs: { id: id("r", 2), ...second }, content: firstCell.rowspan ? [{ type: "table_cell", content: [para("y")] }] : t.content[1]?.content },
+      ],
+    });
+
+    it("are stored only when set, and round-trip", () => {
+      const text = serializeFile(blockPath, block("table", doc(rowsWith({ widths: [150, 150] }))));
+      const stored = JSON.parse(text);
+      expect(stored.doc.content[0].content[0].attrs.widths).toEqual([150, 150]);
+      expect("widths" in stored.doc.content[0].content[1].attrs).toBe(false);
+      expect(() => validateFile(blockPath, stored)).not.toThrow();
+    });
+
+    it("must number the grid's columns, each positive", () => {
+      expect(verdict(blockPath, block("table", doc(rowsWith({ widths: [100, 100, 100] }))))).toMatch(/has widths for 3 columns; its table has 2/);
+      expect(verdict(blockPath, block("table", doc(rowsWith({ widths: [100, 0] }))))).toMatch(/widths/);
+      expect(verdict(blockPath, block("table", doc(rowsWith({ widths: "wide" }))))).toMatch(/widths/);
+    });
+
+    it("are the same in rows a merged cell joins", () => {
+      expect(verdict(blockPath, block("table", doc(rowsWith({ widths: [150, 150] }, {}, { rowspan: 2 }))))).toMatch(/share a merged cell but not their widths/);
+      expect(verdict(blockPath, block("table", doc(rowsWith({ widths: [150, 150] }, { widths: [150, 150] }, { rowspan: 2 }))))).toBe("ok");
+    });
+  });
 });
 
 describe("block envelopes (20 §20.4, §20.10)", () => {

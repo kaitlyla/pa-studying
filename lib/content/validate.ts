@@ -4,6 +4,7 @@
 // interfaces in types.ts through `shapeOf`, so a field added to a type must be validated too.
 import { Node } from "prosemirror-model";
 import { ASSET_RE, schema, storedJSON } from "../schema.ts";
+import { rowWidthsProblem } from "../wordFormat.ts";
 import {
   arr, bad, bool, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
   num, one, oneOf, re, record, shapeOf, str, uniqueArr,
@@ -82,11 +83,20 @@ function checkKnownKeys(json: unknown, at: string, file: string): void {
   if (Array.isArray(json.content)) json.content.forEach((c, i) => checkKnownKeys(c, `${at}.content[${i}]`, file));
 }
 
-/** Build a doc with the schema and run `Node.check()`, reporting failures at field `at`. */
+/**
+ * Build a doc with the schema and run `Node.check()`, and check every table's row widths
+ * (rowWidthsProblem), reporting failures at field `at`.
+ */
 function parseDoc(doc: unknown, at: string, file: string): Node {
   try {
     const node = Node.fromJSON(schema, doc);
     node.check();
+    node.descendants((n) => {
+      if (n.type.name !== "table") return true;
+      const problem = rowWidthsProblem(n.toJSON() as Parameters<typeof rowWidthsProblem>[0]);
+      if (problem !== null) throw new Error(problem);
+      return true;
+    });
     return node;
   } catch (e) {
     throw new ContentError(file, `${at}: invalid rich text: ${(e as Error).message}`);

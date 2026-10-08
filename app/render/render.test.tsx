@@ -271,6 +271,26 @@ describe("tables", () => {
     expect(styleOf(trs[1]).height).toBe("2em");
   });
 
+  it("draws a row with its own widths on its own edges, beside rows drawn on the table's columns", async () => {
+    const withWidths = (r: PMNode, widths: number[]): PMNode => ({ ...r, attrs: { ...r.attrs, widths } });
+    const c = await render(
+      <RichDoc
+        basePt={11}
+        doc={docOf(
+          tableNode([20, 40, 40], [
+            row("r1", [cell("A"), cell("B"), cell("C")], "heading"),
+            // One dx's row: its first column is half the table, and E covers the other two columns.
+            withWidths(row("r2", [cell("D"), cell("E", { colspan: 2 })]), [50, 25, 25]),
+          ]),
+        )}
+      />,
+    );
+    // Edges: the heading's at 20 and 60, the dx row's at 50.
+    expect([...c.querySelectorAll<HTMLElement>("col")].map((col) => col.style.width)).toEqual(["20%", "30%", "10%", "40%"]);
+    const tds = [...c.querySelectorAll<HTMLTableCellElement>("td")];
+    expect(tds.map((td) => `${td.textContent ?? ""}:${td.colSpan}`)).toEqual(["A:1", "B:2", "C:1", "D:2", "E:2"]);
+  });
+
   it("uses outer borders on the table's edges and inside borders between cells, and a cell's own side over both", async () => {
     const outer = { style: "single", widthPt: 2.2, color: "000000" };
     const inside = { style: "dashed", widthPt: 1.1, color: "999999" };

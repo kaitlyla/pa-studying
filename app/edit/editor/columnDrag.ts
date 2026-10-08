@@ -1,12 +1,11 @@
 // Drag a table's column border to resize the two columns beside it, as in Word: while dragging a
-// guide line follows the pointer; on release the table's grid takes the new widths (moveColumnBorder,
-// the same move as Column narrower / wider), so the widths save and show on the site and in the PDFs.
+// guide line follows the pointer; on release the new widths go where Column narrower / wider puts them
+// (widthTarget: the table's grid, or a dx's rows) by the same move (moveBorder), so the widths
+// save and show on the site and in the PDFs. A change reaching other dxs is applied after her confirm.
 import { Plugin } from "prosemirror-state";
 import type { EditorView } from "prosemirror-view";
-import type { TableAttrs } from "../../../lib/schemaTypes.ts";
-import { tableColumns } from "../../render/styles.ts";
-import { cellBorder, moveColumnBorder, setTableGrid } from "./commands.ts";
-import type { ColumnBorder } from "./commands.ts";
+import { cellBorder, moveBorder, setWidths } from "./commands.ts";
+import type { ColumnBorder, Confirm } from "./commands.ts";
 
 /** How close to a cell's edge, in px, the pointer grabs the border. */
 export const BORDER_GRAB_PX = 4;
@@ -26,21 +25,22 @@ export function borderAt(view: EditorView, event: MouseEvent): ColumnBorder | nu
   } catch {
     return null;
   }
-  return cellBorder(view.state.doc.resolve(pos), side);
+  return cellBorder(view.state.doc.resolve(pos), side, view.state);
 }
 
 /** The x (viewport px) of `border` in a table drawn `box` wide with these widths. */
-function borderX(table: Pick<TableAttrs, "grid" | "ownWidths">, border: number, box: DOMRect): number {
-  const pct = tableColumns(table).slice(0, border + 1).reduce((a, b) => a + b, 0);
-  return box.left + (pct * box.width) / 100;
+function borderX(widths: readonly number[], border: number, box: DOMRect): number {
+  const sum = widths.reduce((a, b) => a + b, 0);
+  const upTo = widths.slice(0, border + 1).reduce((a, b) => a + b, 0);
+  return box.left + (sum > 0 ? (upTo * box.width) / sum : 0);
 }
 
-function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): void {
-  const tableDom = view.nodeDOM(grab.pos);
+function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent, confirm: Confirm): void {
+  const { target } = grab;
+  const tableDom = view.nodeDOM(target.pos);
   if (!(tableDom instanceof HTMLElement)) return;
   const doc = view.dom.ownerDocument;
-  const table = grab.table.attrs as TableAttrs;
-  const sum = table.grid.reduce((a, b) => a + b, 0);
+  const sum = target.widths.reduce((a, b) => a + b, 0);
   const startX = event.clientX;
   let next: number[] | null = null;
 
@@ -48,9 +48,7 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   guide.className = "col-drag-guide";
   const place = (): void => {
     const box = tableDom.getBoundingClientRect();
-    Object.assign(guide.style, {
-      left: `${borderX(next ? { grid: next, ownWidths: true } : table, grab.border, box)}px`, top: `${box.top}px`, height: `${box.height}px`,
-    });
+    Object.assign(guide.style, { left: `${borderX(next ?? target.widths, grab.border, box)}px`, top: `${box.top}px`, height: `${box.height}px` });
   };
   place();
   doc.body.append(guide);
@@ -58,7 +56,7 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   const move = (e: MouseEvent): void => {
     const width = tableDom.getBoundingClientRect().width;
     if (width <= 0) return;
-    next = moveColumnBorder(table, grab.border, ((e.clientX - startX) * sum) / width);
+    next = moveBorder(target.widths, grab.border, ((e.clientX - startX) * sum) / width);
     place();
   };
   const stop = (): void => {
@@ -68,11 +66,17 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
     doc.removeEventListener("keydown", key, true);
     view.dom.style.cursor = "";
   };
+  // Applied only to the table as it was grabbed: an edit during the drag or the confirm leaves it alone.
+  const apply = (widths: number[]): void => {
+    if (view.state.doc.nodeAt(target.pos) === target.table) view.dispatch(setWidths(view.state, target, widths));
+  };
   const up = (e: MouseEvent): void => {
     move(e);
     stop();
-    // Applied only to the table as it was grabbed: an edit during the drag leaves it alone.
-    if (next && view.state.doc.nodeAt(grab.pos) === grab.table) view.dispatch(setTableGrid(view.state, grab.pos, next));
+    const widths = next;
+    if (!widths) return;
+    if (target.reach.length === 0) apply(widths);
+    else void confirm(target.reach).then((ok) => { if (ok) apply(widths); });
   };
   const key = (e: KeyboardEvent): void => {
     if (e.key !== "Escape") return;
@@ -84,7 +88,8 @@ function startDrag(view: EditorView, grab: ColumnBorder, event: MouseEvent): voi
   doc.addEventListener("keydown", key, true);
 }
 
-export function columnDrag(): Plugin {
+/** `confirm` asks her before a drag that changes other dxs' rows takes effect. */
+export function columnDrag(confirm: Confirm): Plugin {
   return new Plugin({
     props: {
       handleDOMEvents: {
@@ -102,7 +107,7 @@ export function columnDrag(): Plugin {
           const grab = borderAt(view, event);
           if (!grab) return false;
           event.preventDefault();
-          startDrag(view, grab, event);
+          startDrag(view, grab, event, confirm);
           return true;
         },
       },

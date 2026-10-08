@@ -10,7 +10,8 @@ import type { EditorProps, EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import { columnDrag } from "./columnDrag.ts";
-import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline } from "./commands.ts";
+import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline, type Confirm } from "./commands.ts";
+import { rowsLayoutPlugin, type RowsLayout } from "./rowLayout.ts";
 
 /** Her editor's status text when an edit would remove a picture (`_editor/editor.js` refusePictureRemoval). */
 export const PICTURE_REFUSED = "That would remove a picture. To remove a picture, click it and press \"Delete picture\".";
@@ -18,7 +19,13 @@ export const PICTURE_REFUSED = "That would remove a picture. To remove a picture
 export interface EditorOptions {
   /** Called when the picture guard refuses an edit; the editor shows PICTURE_REFUSED. */
   onPictureRefused?: () => void;
+  /** A table block's rows editor: its table's layout facts (the column commands read them). */
+  rows?: RowsLayout;
+  /** Asks her before a column border drag that changes other dxs' rows; without it such a drag is not applied. */
+  confirm?: Confirm;
 }
+
+const declined: Confirm = () => Promise.resolve(false);
 
 /**
  * Rejects any transaction that lowers the count of pictures, text boxes, drawings or anchors, unless
@@ -49,7 +56,8 @@ export function editorPlugins(opts: EditorOptions = {}): Plugin[] {
     }),
     keymap(baseKeymap),
     pictureGuard(opts.onPictureRefused),
-    columnDrag(),
+    columnDrag(opts.confirm ?? declined),
+    ...(opts.rows ? [rowsLayoutPlugin(opts.rows)] : []),
   ];
 }
 

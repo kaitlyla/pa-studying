@@ -3,6 +3,7 @@
 import { createContext, Fragment, useContext, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import { cropOrNull } from "../../lib/crop.ts";
 import { isAllowedHref } from "../../lib/schema.ts";
+import { drawnGrid } from "../../lib/wordFormat.ts";
 import { isMark, isNode, type CellMargins, type ImageAttrs, type ListMarker, type MarkJSON, type MarkName, type NodeJSON, type PMNode, type TableBorders } from "../../lib/schemaTypes.ts";
 import { DATA_BASE } from "../data/load.ts";
 import { openImageViewer } from "../files/imageViewer.tsx";
@@ -227,18 +228,20 @@ export interface TableView {
 
 interface CellProps {
   placed: PlacedCell;
+  /** Drawn columns the cell spans (drawnGrid). */
+  colspan: number;
   rowspan: number;
   edges: { top: boolean; right: boolean; bottom: boolean; left: boolean };
   borders: TableBorders | null;
   margins: CellMargins;
 }
 
-function Cell({ placed, rowspan, edges, borders, margins }: CellProps): ReactNode {
+function Cell({ placed, colspan, rowspan, edges, borders, margins }: CellProps): ReactNode {
   const { basePt } = useContext(RenderCtx);
   const cell = placed.node;
   return (
     <td
-      colSpan={placed.colspan > 1 ? placed.colspan : undefined}
+      colSpan={colspan > 1 ? colspan : undefined}
       rowSpan={rowspan > 1 ? rowspan : undefined}
       style={cellStyle(isNode(cell, "table_cell") ? cell.attrs : {}, basePt, borders, edges, margins)}
     >
@@ -250,15 +253,17 @@ function Cell({ placed, rowspan, edges, borders, margins }: CellProps): ReactNod
 function GridTable({ node, rows }: { node: PMNode & NodeJSON<"table">; rows: DrawRow[] }): ReactNode {
   const { basePt } = useContext(RenderCtx);
   const a = node.attrs;
-  const cols = tableColumns(a);
+  const base = tableColumns(a);
+  // Rows with their own widths (one diagnosis's columns) draw their cells' edges where those put them.
+  const drawn = drawnGrid(rows.map((r) => ({ widths: r.row.node.attrs?.widths, cells: r.cells.map((c) => c.cell) })), base);
   const borders = a.borders;
-  const columns = Math.max(cols.length, ...rows.flatMap((r) => r.cells.map((c) => c.cell.col + c.cell.colspan)));
+  const columns = Math.max(base.length, ...rows.flatMap((r) => r.cells.map((c) => c.cell.col + c.cell.colspan)));
   const last = rows.length - 1;
   return (
     <div className="ntw">
       <table className="nt" style={{ marginLeft: tableIndent(a.indentPt, basePt) }}>
         <colgroup>
-          {cols.map((w, i) => (
+          {drawn.widths.map((w, i) => (
             <col key={i} style={{ width: `${Math.round(w * 100) / 100}%` }} />
           ))}
         </colgroup>
@@ -273,6 +278,7 @@ function GridTable({ node, rows }: { node: PMNode & NodeJSON<"table">; rows: Dra
                   <Cell
                     key={ci}
                     placed={c.cell}
+                    colspan={drawn.spans[ri]?.[ci]?.colspan ?? c.cell.colspan}
                     rowspan={c.rowspan}
                     borders={borders}
                     margins={a.cellMarginPt}

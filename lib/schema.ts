@@ -83,6 +83,9 @@ const markList: Check = (v) => {
   }
 };
 const grid: Check = (v) => { if (!Array.isArray(v) || !v.every(isNum)) fail("grid", v); };
+const rowWidths: Check = (v) => {
+  if (v !== null && (!Array.isArray(v) || v.length === 0 || !v.every((w) => isNum(w) && w > 0))) fail("row widths (null or positive numbers)", v);
+};
 const dashStyle: Check = (v) => { if (v !== null && !isDashStyle(v)) fail(`dash style (one of ${DASH_STYLES.join(", ")})`, v); };
 const stroke = nullable(shape({ color: hex, widthPt: num, dash: dashStyle }, "stroke"));
 const drawingShape = shape({
@@ -184,6 +187,7 @@ const nodes: Record<string, NodeSpec> = {
       minHeightPt: a(numOrNull, null),
       repeatHeader: a(bool, false),
       cantSplit: a(bool, false),
+      widths: a(rowWidths, null),
     } satisfies Specs<NodeAttrs["table_row"]>,
   },
   table_cell: {
@@ -229,13 +233,15 @@ type StoredJSON = { type: string; attrs?: Record<string, unknown>; content?: Sto
 /** Attributes written only when they differ from these values, by node type. */
 const WRITTEN_WHEN_SET: Readonly<Record<string, readonly [string, unknown]>> = {
   table: ["ownWidths", false],
+  table_row: ["widths", null],
   image: ["crop", null],
   image_block: ["crop", null],
 };
 
 /**
  * A node as stored: the schema's own serialization (Node.toJSON: every attribute, schema key order),
- * except that a table's `ownWidths` is written only when true and a picture's `crop` only when set.
+ * except that a table's `ownWidths` is written only when true, a row's `widths` and a picture's `crop`
+ * only when set.
  * Nodes stored before those attributes existed carry none, and every past version in the history must
  * still read as canonical.
  */

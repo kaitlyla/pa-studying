@@ -151,6 +151,7 @@ interface TopicTarget {
   title: string;
   hash: string;
   key: string;
+  system: string;
   /** The topic's system page. */
   systemHash: string;
   /** Repository path of the table block that holds the topic's first row. */
@@ -166,7 +167,7 @@ const findTopic = (fits: (g: string, system: string, id: string) => boolean = ()
     for (const f of readdirSync(dir)) {
       const json = readJson(join(dir, f));
       if (findPath(json, (n) => n.type === "table_row" && attrsOf(n).id === e.id)) {
-        return { g, id: e.id, title: e.title, hash: guideViewHash(g, { kind: "topics", ids: [e.id] }), key: buildPageKey("topic", g, e.id), systemHash: guideViewHash(g, { kind: "system", system: e.system }), blockPath: repoPath(join(dir, f)) };
+        return { g, id: e.id, title: e.title, hash: guideViewHash(g, { kind: "topics", ids: [e.id] }), key: buildPageKey("topic", g, e.id), system: e.system, systemHash: guideViewHash(g, { kind: "system", system: e.system }), blockPath: repoPath(join(dir, f)) };
       }
     }
   }
@@ -440,6 +441,55 @@ async function typeMarker(page: Page, marker: string): Promise<void> {
 
 async function clickN(target: Locator, n: number): Promise<void> {
   for (let i = 0; i < n; i++) await target.click();
+}
+
+/** The table in a block file's JSON that holds row `rowId`. */
+function tableHolding(json: unknown, rowId: string): Rec {
+  return nodeAt(json, need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === rowId) !== null), `the table holding ${rowId}`));
+}
+
+const tableRows = (table: Rec): Rec[] => (Array.isArray(table.content) ? table.content.filter(isRec) : []);
+const rowIn = (table: Rec, id: string): Rec => need(tableRows(table).find((r) => attrsOf(r).id === id), `row ${id}`);
+
+/** The topic's own rows in `table`: its published rows that are not heading rows. */
+function topicContentRows(t: TopicTarget, table: Rec): string[] {
+  const rows = need(readData<SystemJson>(systemPath(t.g, t.system)).topics.find((x) => x.id === t.id), `topic ${t.id}`).rows;
+  return tableRows(table).map((r) => attrsOf(r)).filter((a) => rows.includes(String(a.id)) && a.kind !== "heading").map((a) => String(a.id));
+}
+
+/**
+ * Where a stored row's cell edges fall, as fractions of the row's width, given the widths it is drawn
+ * with: the left edge of each cell, then the right edge of the last. Its cells sit side by side from
+ * the first column (the rows these tests use have no cell merged into them from above).
+ */
+function storedEdges(row: Rec, widths: readonly number[]): number[] {
+  const sum = widths.reduce((a, b) => a + b, 0);
+  const edges = [0];
+  let col = 0;
+  for (const cell of tableRows(row)) {
+    const span = numAttr(cell, "colspan") || 1;
+    col += span;
+    edges.push(widths.slice(0, col).reduce((a, b) => a + b, 0) / sum);
+  }
+  return edges;
+}
+
+/** The same edges as `table` draws row `rowId` (by its data-anchor), as fractions of the table's drawn width. */
+function drawnEdges(table: Locator, rowId: string): Promise<number[]> {
+  return table.evaluate((el, id) => {
+    const box = el.getBoundingClientRect();
+    const row = el.querySelector(`:scope > tbody > tr[data-anchor="${id}"]`);
+    if (!row) throw new Error(`the table draws no row ${id}`);
+    const cells = [...row.querySelectorAll(":scope > td")].map((td) => td.getBoundingClientRect());
+    const last = cells[cells.length - 1];
+    return [...cells.map((c) => (c.left - box.left) / box.width), ...(last ? [(last.right - box.left) / box.width] : [])];
+  }, rowId);
+}
+
+/** Edges agree to half a percent of the table's width (a few pixels, borders included). */
+function expectEdges(actual: number[], expected: number[], what: string): void {
+  expect(actual, what).toHaveLength(expected.length);
+  expected.forEach((e, i) => expect(Math.abs((actual[i] ?? NaN) - e), `${what}, edge ${i}: ${actual[i]} vs ${e}`).toBeLessThan(0.005));
 }
 
 /** The files the commit `sha` changed (against its first parent), with their text at `sha`. */
@@ -789,17 +839,13 @@ test.describe("toolbar limits", () => {
     expect(sizeMark(run)).toBe(7.5);
   });
 
-  test("Column Wider widens the cursor's column, and the save keeps the widths and the page shows them", async ({ page, context, baseURL }) => {
+  test("Column Wider on a topic page widens the cursor's column in that topic's rows only, and the save keeps them and the page draws them", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
     await signIn(page);
     await startEditing(page);
-    const tableWith = (json: unknown): Rec => {
-      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
-      return nodeAt(json, tablePath);
-    };
-    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const beforeTable = attrsOf(tableHolding(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)), t.id)) as TableAttrs;
     const before = beforeTable.grid;
     const sum = before.reduce((a, b) => a + b, 0);
     const shown = tableColumns(beforeTable).map((p) => (p * sum) / 100);
@@ -818,9 +864,18 @@ test.describe("toolbar limits", () => {
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
 
-    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
-    const saved = savedTable.grid;
-    expect(savedTable.ownWidths).toBe(true);
+    const after = tableHolding(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)), t.id);
+    const savedTable = attrsOf(after) as TableAttrs;
+    // The table's own columns are unchanged: the change is the topic's rows'.
+    expect(savedTable.grid).toEqual(before);
+    expect(savedTable.ownWidths).toBe(beforeTable.ownWidths);
+    const dx = topicContentRows(t, after);
+    expect(dx).toContain(t.id);
+    const saved = need(attrsOf(rowIn(after, t.id)).widths as number[] | undefined, "the topic row's widths");
+    for (const r of tableRows(after)) {
+      const a = attrsOf(r);
+      expect(a.widths ?? null, `row ${String(a.id)}'s widths`).toEqual(dx.includes(String(a.id)) ? saved : null);
+    }
     expect(saved).toHaveLength(before.length);
     expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
     expect((saved[1] ?? 0) - (shown[1] ?? 0)).toBeCloseTo(3 * COLUMN_STEP_PT, 1);
@@ -829,11 +884,12 @@ test.describe("toolbar limits", () => {
     expect(others).toHaveLength(1);
     expect(others[0]).toBeCloseTo(-3 * COLUMN_STEP_PT, 1);
 
-    // The page, now read, draws the saved widths.
+    // The page, now read, draws the topic's row at its widths, and the rows outside it at the table's.
     const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
-    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
-    expect(widths).toHaveLength(saved.length);
-    tableColumns(savedTable).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+    expectEdges(await drawnEdges(shownTable, t.id), storedEdges(rowIn(after, t.id), saved), "the topic row");
+    const drawnOthers = await shownTable.locator(":scope > tbody > tr").evaluateAll((trs) => trs.map((tr) => tr.getAttribute("data-anchor") ?? ""));
+    const outside = drawnOthers.filter((id) => id !== "" && !dx.includes(id));
+    for (const id of outside) expectEdges(await drawnEdges(shownTable, id), storedEdges(rowIn(after, id), tableColumns(savedTable)), `row ${id}`);
   });
 
   test("Column Wider greys out once the column beside it is at its narrowest, while Narrower still works", async ({ page, context, baseURL }) => {
@@ -853,17 +909,13 @@ test.describe("toolbar limits", () => {
     await expect(wider).toBeEnabled();
   });
 
-  test("dragging a column border resizes the two columns beside it, and the save keeps the widths and the page shows them", async ({ page, context, baseURL }) => {
+  test("dragging a column border on a topic page resizes the two columns beside it in that topic's rows, and the save keeps them and the page draws them", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
     await signIn(page);
     await startEditing(page);
-    const tableWith = (json: unknown): Rec => {
-      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
-      return nodeAt(json, tablePath);
-    };
-    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const beforeTable = attrsOf(tableHolding(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)), t.id)) as TableAttrs;
     const before = beforeTable.grid;
     expect(before.length).toBeGreaterThan(1);
     const sum = before.reduce((a, b) => a + b, 0);
@@ -889,33 +941,30 @@ test.describe("toolbar limits", () => {
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
-    const saved = savedTable.grid;
-    expect(savedTable.ownWidths).toBe(true);
+    const after = tableHolding(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)), t.id);
+    const savedTable = attrsOf(after) as TableAttrs;
+    // The table's own columns are unchanged; the topic's rows took the move.
+    expect(savedTable.grid).toEqual(before);
+    expect(savedTable.ownWidths).toBe(beforeTable.ownWidths);
+    const saved = need(attrsOf(rowIn(after, t.id)).widths as number[] | undefined, "the topic row's widths");
     // The border moved 60 px of the table's drawn width: the name column grew that much, the next shrank as much.
     const expected = need(moveColumnBorder(beforeTable, 0, (60 * sum) / tableWidth), "a border move");
     expect(saved).toHaveLength(before.length);
     expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
     saved.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
 
-    // The page, now read, draws the saved widths.
+    // The page, now read, draws the topic's row at its widths.
     const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
-    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
-    expect(widths).toHaveLength(saved.length);
-    tableColumns(savedTable).forEach((pct, i) => expect(widths[i]).toBeCloseTo(pct, 1));
+    expectEdges(await drawnEdges(shownTable, t.id), storedEdges(rowIn(after, t.id), saved), "the topic row");
   });
 
-  test("dragging the first column's border left narrows a name column drawn at the screen's minimum, and the save keeps her width and the page shows it", async ({ page, context, baseURL }) => {
+  test("dragging the first column's border left on a topic page narrows a name column drawn at the screen's minimum, and the save keeps her width in that topic's rows and the page draws it", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
     await signIn(page);
     await startEditing(page);
-    const tableWith = (json: unknown): Rec => {
-      const tablePath = need(findPath(json, (n) => n.type === "table" && findPath(n, (r) => r.type === "table_row" && attrsOf(r).id === t.id) !== null), "the topic's table");
-      return nodeAt(json, tablePath);
-    };
-    const beforeTable = attrsOf(tableWith(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)))) as TableAttrs;
+    const beforeTable = attrsOf(tableHolding(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)), t.id)) as TableAttrs;
     const sum = beforeTable.grid.reduce((a, b) => a + b, 0);
     // Her Word width is narrower than the minimum, so the name column is drawn at it.
     expect(beforeTable.ownWidths).toBeUndefined();
@@ -939,20 +988,69 @@ test.describe("toolbar limits", () => {
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const savedTable = attrsOf(tableWith(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)))) as TableAttrs;
-    expect(savedTable.ownWidths).toBe(true);
+    const after = tableHolding(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)), t.id);
+    const savedTable = attrsOf(after) as TableAttrs;
+    expect(savedTable.grid).toEqual(beforeTable.grid);
+    expect(savedTable.ownWidths).toBeUndefined();
+    const saved = need(attrsOf(rowIn(after, t.id)).widths as number[] | undefined, "the topic row's widths");
     const expected = need(moveColumnBorder(beforeTable, 0, (-40 * sum) / tableWidth), "a border move");
-    expect(savedTable.grid).toHaveLength(beforeTable.grid.length);
-    expect(savedTable.grid.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
-    savedTable.grid.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
-    const firstPct = (100 * (savedTable.grid[0] ?? 0)) / sum;
+    expect(saved).toHaveLength(beforeTable.grid.length);
+    expect(saved.reduce((a, b) => a + b, 0)).toBeCloseTo(sum, 0);
+    saved.forEach((w, i) => expect(Math.abs(w - (expected[i] ?? 0))).toBeLessThan(1));
+    const firstPct = (100 * (saved[0] ?? 0)) / sum;
     expect(firstPct).toBeLessThan(MIN_FIRST_COLUMN_PCT - 2);
 
-    // The page, now read, draws her width: under the minimum, exactly as stored.
+    // The page, now read, draws her width in the topic's row: under the minimum, exactly as stored.
     const shownTable = page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
-    const widths = await shownTable.locator(":scope > colgroup > col").evaluateAll((cols) => cols.map((c) => parseFloat((c as HTMLElement).style.width)));
-    expect(widths).toHaveLength(savedTable.grid.length);
-    savedTable.grid.forEach((w, i) => expect(widths[i]).toBeCloseTo((100 * w) / sum, 1));
+    const edges = await drawnEdges(shownTable, t.id);
+    expectEdges(edges, storedEdges(rowIn(after, t.id), saved), "the topic row");
+    expect(100 * (edges[1] ?? 1)).toBeLessThan(MIN_FIRST_COLUMN_PCT - 2);
+  });
+
+  test("Delete column and Wider on a topic page change only that topic's rows, and its system page draws them with the same column edges", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const before = tableHolding(JSON.parse(need(fake.readFile(t.blockPath), t.blockPath)), t.id);
+    const beforeCells = tableRows(rowIn(before, t.id));
+    expect(beforeCells.length, "the topic row's cells").toBeGreaterThan(2);
+    const deletedText = textOf(beforeCells[2]);
+    expect(deletedText.length, "the third cell's text").toBeGreaterThan(10);
+
+    const row = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt > tbody > tr:not(.hrow)").first();
+    const cells = row.locator(":scope > td");
+    // Delete the third cell's column in this topic: she confirms, its text goes and the cell to its left takes its width.
+    await cells.nth(2).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await ref(page, "tb-col-delete").click();
+    const confirm = page.getByRole("dialog", { name: `Delete this column in ${t.title}?` });
+    await expect(confirm).toBeVisible();
+    await ref(confirm, "confirm-ok").click();
+    await expect(cells).toHaveCount(beforeCells.length - 1);
+    // Then the name column wider.
+    await cells.nth(0).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await clickN(ref(page, "tb-col-wider"), 3);
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    const after = tableHolding(JSON.parse(need(changedFiles(fake).get(t.blockPath), `${t.blockPath} in the save`)), t.id);
+    expect((attrsOf(after) as TableAttrs).grid).toEqual((attrsOf(before) as TableAttrs).grid);
+    const afterRow = rowIn(after, t.id);
+    expect(tableRows(afterRow)).toHaveLength(beforeCells.length - 1);
+    expect(textOf(afterRow)).not.toContain(deletedText);
+    const widths = need(attrsOf(afterRow).widths as number[] | undefined, "the topic row's widths");
+    const dx = topicContentRows(t, after);
+    for (const r of tableRows(after)) if (!dx.includes(String(attrsOf(r).id))) expect(attrsOf(r).widths ?? null, `row ${String(attrsOf(r).id)}'s widths`).toBeNull();
+
+    // The topic page draws the row as stored, and the system page draws it with the same edges (the scale divided out).
+    const tableOf = (): Locator => page.locator("main table.nt").filter({ has: page.locator(`[data-anchor="${t.id}"]`) }).first();
+    const onTopic = new Map<string, number[]>();
+    for (const id of dx) onTopic.set(id, await drawnEdges(tableOf(), id));
+    expectEdges(need(onTopic.get(t.id), "the topic row's edges"), storedEdges(afterRow, widths), "the topic page's row");
+    await openPage(page, t.systemHash);
+    await expect(tableOf()).toBeVisible();
+    for (const id of dx) expectEdges(await drawnEdges(tableOf(), id), need(onTopic.get(id), `row ${id}'s edges`), `row ${id} on the system page`);
   });
 
   test("Cell margins Sides + and Top/bottom + pad every cell on screen while editing, and the save keeps them and the page shows them", async ({ page, context, baseURL }) => {

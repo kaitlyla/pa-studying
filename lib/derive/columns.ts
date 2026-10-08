@@ -43,7 +43,8 @@ export function columnView(doc: DocJSON, column: number, label: number | null = 
       const colspan = keptCols.filter((c) => p.col <= c && c < p.col + p.colspan).length;
       content.push({ ...p.node, attrs: { ...p.node.attrs, colspan, rowspan: p.row + p.rowspan - first, colwidth: null } });
     }
-    return { ...row, content };
+    // A row's own widths number the whole table's columns; the cut draws its kept columns on its own grid.
+    return row.attrs?.widths != null ? { ...row, attrs: { ...row.attrs, widths: null }, content } : { ...row, content };
   });
 
   const grid = Array.isArray(table.attrs?.grid) ? (table.attrs.grid as number[]) : [];

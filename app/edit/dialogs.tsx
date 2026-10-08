@@ -75,6 +75,11 @@ export function editorConfirm(lines: string[]): Promise<boolean> {
   return askConfirm(title, rest, { action: "Delete", danger: true });
 }
 
+/** The confirm before a column width change that also changes other diagnoses' rows (the lines name them). */
+export function widthConfirm(lines: string[]): Promise<boolean> {
+  return askConfirm("Change this column for them too?", lines, { action: "Change" });
+}
+
 function ConfirmHost(): ReactNode {
   const p = useSyncExternalStore((cb) => {
     listeners.add(cb);

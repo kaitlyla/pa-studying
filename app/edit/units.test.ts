@@ -298,6 +298,36 @@ describe("building a save", () => {
     expect(build.changed).toEqual([R(100), R(101), R(102), R(103), R(104)]);
   });
 
+  it("a topic page's own row widths stay on its rows; another dx's row a merged cell joins to them takes the same widths", async () => {
+    const unit = await unitAt(`topic:fm:${R(101)}`);
+    const part = only(unit, "rows");
+    // In memory: her R102 cell in column 1 is merged down into R103, the next topic's row (as her hepatitis tables do).
+    const block = clone(part.block);
+    const stored = rowsOfDoc(block.doc);
+    const r102 = stored.find((r) => r.attrs?.id === R(102)) as Node;
+    const r103 = stored.find((r) => r.attrs?.id === R(103)) as Node;
+    (r102.content?.[1] as Node).attrs = { ...(r102.content?.[1] as Node).attrs, rowspan: 2 };
+    r103.content = (r103.content ?? []).filter((_, i) => i !== 1);
+    (part as { block: BlockFile }).block = block;
+
+    const edited = clone(part.slot.doc);
+    const table = edited.content[0] as Node;
+    const grid = table.attrs?.grid as number[];
+    const widths = grid.map((g, i) => (i === 0 ? g + 9 : i === 1 ? g - 9 : g));
+    for (const r of rowsOfDoc(edited)) {
+      if (r.attrs?.kind !== "heading") r.attrs = { ...r.attrs, widths };
+      // The page's own copy of the merged cell (the stored block was merged above, after the page was cut).
+      if (r.attrs?.id === R(102)) (r.content?.[1] as Node).attrs = { ...(r.content?.[1] as Node).attrs, rowspan: 2 };
+    }
+    const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+    expect((saved.doc.content[0] as Node).attrs?.grid).toEqual(grid);
+    const widthsOf = Object.fromEntries(rowsOfDoc(saved.doc).map((r) => [String(r.attrs?.id), r.attrs?.widths ?? null]));
+    expect(widthsOf).toEqual({ [R(100)]: null, [R(101)]: widths, [R(102)]: widths, [R(103)]: widths, [R(104)]: null });
+    expect(build.changed).toEqual([R(101), R(102), R(103)]);
+  });
+
   it("an added row goes after the topic's last row, before the hidden rows that follow, and joins the section above it", async () => {
     const unit = await unitAt(`topic:fm:${R(101)}`);
     const part = only(unit, "rows");

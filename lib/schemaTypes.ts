@@ -97,12 +97,19 @@ export type DrawingTextAttrs = { x: number; y: number; w: number; h: number; fil
  * stored. Stored only when true (absent means false; see storedJSON in lib/schema.ts).
  */
 export type TableAttrs = { grid: number[]; ownWidths?: boolean; indentPt: number; borders: TableBorders; cellMarginPt: CellMargins };
+/**
+ * `widths`: the row's own column widths, in pt per grid column (as many as the table's `grid`), set
+ * when she changes one diagnosis's columns; the row is drawn with them, its cells' edges where they
+ * fall. Null: drawn with the table's grid. Rows joined by a merged cell have the same widths. Stored
+ * only when set (absent means null; see storedJSON in lib/schema.ts).
+ */
 export type TableRowAttrs = {
   id: string;
   kind: "heading" | "content";
   minHeightPt: number | null;
   repeatHeader: boolean;
   cantSplit: boolean;
+  widths?: number[] | null;
 };
 export type TableCellAttrs = {
   colspan: number;

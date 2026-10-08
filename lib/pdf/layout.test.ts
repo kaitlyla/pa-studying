@@ -131,33 +131,90 @@ describe("marks", () => {
 });
 
 describe("tables", () => {
-  it("uses her grid in pt when it fits, minus cell padding and borders", () => {
-    const t = tableOf(first(build(doc(table([100, 200], [row("r_AAAAAAAAA1", "content", ["a", "b"])])), "table")));
-    expect(t.widths).toHaveLength(2);
-    expect(t.widths[0]).toBeCloseTo(100 - 10.8 - 0.5, 10);
-    expect(t.widths[1]).toBeCloseTo(200 - 10.8 - 0.5 - 0.5, 10);
+  /**
+   * Each column's width on the page as pdfmake draws it: its width, its padding and its left rule (and
+   * the right rule for the last column).
+   */
+  const outerOf = (c: Content): number[] => {
+    const t = tableOf(c);
+    const lay = layoutOf(c);
+    const n = t.widths.length;
+    return t.widths.map((w, i) => w + (lay.paddingLeft?.(i) ?? 0) + (lay.paddingRight?.(i) ?? 0) + (lay.vLineWidth?.(i) ?? 0) + (i === n - 1 ? (lay.vLineWidth?.(n) ?? 0) : 0));
+  };
+  const edgesOf = (outer: number[]): number[] => outer.reduce<number[]>((e, w) => [...e, (e.at(-1) ?? 0) + w], [0]);
+  const sumOf = (xs: number[]): number => xs.reduce((a, b) => a + b, 0);
+
+  it("draws her grid in pt when it fits, with each cell's margins inside the cell", () => {
+    const c = first(build(doc(table([100, 200], [row("r_AAAAAAAAA1", "content", ["a", "b"])])), "table"));
+    const outer = outerOf(c);
+    expect(outer[0]).toBeCloseTo(100, 10);
+    expect(outer[1]).toBeCloseTo(200, 10);
+    expect(tableOf(c).body[0]?.map((x) => x.margin)).toEqual([[5.4, 0, 5.4, 0], [5.4, 0, 5.4, 0]]);
   });
 
   it("draws a name column she set under the screen's first-column minimum at her width", () => {
     // 30 of 400 pt is 7.5%: the screen's 11% minimum applies only to Word widths; the PDF draws her grid either way.
     for (const attrs of [{}, { ownWidths: true }]) {
-      const t = tableOf(first(build(doc(table([30, 370], [row("r_AAAAAAAAA1", "content", ["a", "b"])], attrs)), "table")));
-      expect(t.widths[0]).toBeCloseTo(30 - 10.8 - 0.5, 10);
-      expect(t.widths[1]).toBeCloseTo(370 - 10.8 - 0.5 - 0.5, 10);
+      const outer = outerOf(first(build(doc(table([30, 370], [row("r_AAAAAAAAA1", "content", ["a", "b"])], attrs)), "table")));
+      expect(outer[0]).toBeCloseTo(30, 10);
+      expect(outer[1]).toBeCloseTo(370, 10);
     }
+  });
+
+  it("draws a column narrower than its cell margins at its stored width, so no edge to its right moves", () => {
+    // 5.25 pt is less than the 10.8 pt of default margins: the cell gives them up in proportion, keeping 1 pt for text.
+    const c = first(build(doc(table([5.25, 100, 100], [row("r_AAAAAAAAA1", "content", ["a", "b", "c"])])), "table"));
+    const edges = edgesOf(outerOf(c));
+    [0, 5.25, 105.25, 205.25].forEach((x, i) => expect(edges[i]).toBeCloseTo(x, 10));
+    const narrow = tableOf(c).body[0]?.[0]?.margin as number[];
+    expect((narrow[0] ?? 0) + (narrow[2] ?? 0)).toBeCloseTo(5.25 - 0.5 - 1, 10);
+    expect(narrow[0]).toBeCloseTo(narrow[2] ?? NaN, 10);
   });
 
   it("scales every column by one factor when the grid is wider than the page", () => {
     const grid = [100, 400, 400];
-    const c = first(build(doc(table(grid, [row("r_AAAAAAAAA1", "content", ["a", "b", "c"])])), "table"));
-    const t = tableOf(c);
-    const lay = layoutOf(c);
-    const outer = t.widths.map((w, i) => w + 10.8 + (lay.vLineWidth?.(i) ?? 0) + (i === 2 ? (lay.vLineWidth?.(3) ?? 0) : 0));
-    expect(outer.reduce((a, b) => a + b, 0)).toBeCloseTo(WIDTH, 6);
+    const outer = outerOf(first(build(doc(table(grid, [row("r_AAAAAAAAA1", "content", ["a", "b", "c"])])), "table")));
+    expect(sumOf(outer)).toBeCloseTo(WIDTH, 6);
     for (let i = 0; i < 3; i++) expect((outer[i] ?? 0) / (grid[i] ?? 1)).toBeCloseTo(WIDTH / 900, 6);
   });
 
-  it("pads cells by cellMarginPt and keeps fills, vertical alignment, spans and per-cell borders", () => {
+  it("draws the narrow column one Wider step makes between a dx row's moved border and her grid's", () => {
+    // Grid edges at 117, 234, 351; the dx row's second border moved 9 pt right, to 243.
+    const rows = [row("r_AAAAAAAAA1", "heading", ["a", "b", "c", "d"]), row("r_AAAAAAAAA2", "content", ["e", "f", "g", "h"], { widths: [117, 126, 108, 117] })];
+    const c = first(build(doc(table([117, 117, 117, 117], rows)), "table"));
+    const edges = edgesOf(outerOf(c));
+    [0, 117, 234, 243, 351, 468].forEach((x, i) => expect(edges[i]).toBeCloseTo(x, 10));
+    expect(edges).toHaveLength(6);
+  });
+
+  it("in a table with dx rows, draws the other rows on the screen's columns so the borders she didn't move line up", () => {
+    // 36 of 468 pt is under the screen's 11% minimum: the screen draws 51.48 pt, then 138.84 pt for each of the
+    // others. The dx row's widths start from those and its first border moved 9 pt right.
+    const rows = [row("r_AAAAAAAAA1", "heading", ["a", "b", "c", "d"]), row("r_AAAAAAAAA2", "content", ["e", "f", "g", "h"], { widths: [60.48, 129.84, 138.84, 138.84] })];
+    const c = first(build(doc(table([36, 144, 144, 144], rows)), "table"));
+    const edges = edgesOf(outerOf(c));
+    [0, 51.48, 60.48, 190.32, 329.16, 468].forEach((x, i) => expect(Math.abs((edges[i] ?? NaN) - x)).toBeLessThan(0.05));
+    expect(edges).toHaveLength(6);
+  });
+
+  it("draws a row with its own widths on its own edges, beside rows on her grid", () => {
+    // Grid edges at 100, 300; the dx row's (widths 200:100:100) at 200, with its second cell over two columns.
+    const rows = [
+      row("r_AAAAAAAAA1", "heading", ["a", "b", "c"]),
+      row("r_AAAAAAAAA2", "content", ["d", cell("e", { colspan: 2 })], { widths: [200, 100, 100] }),
+    ];
+    const c = first(build(doc(table([100, 200, 100], rows)), "table"));
+    const t = tableOf(c);
+    const outer = outerOf(c);
+    expect(outer.map((w) => Math.round(w * 1e6) / 1e6)).toEqual([100, 100, 100, 100]);
+    expect(t.body[0]?.[1]).toMatchObject({ colSpan: 2 });
+    expect(t.body[0]?.[3]?.colSpan).toBeUndefined();
+    expect(t.body[1]?.[0]).toMatchObject({ colSpan: 2 });
+    expect(t.body[1]?.[2]).toMatchObject({ colSpan: 2 });
+    expect(t.body[1]?.[1]).toEqual({ text: "" });
+  });
+
+  it("keeps cellMarginPt inside each cell and keeps fills, vertical alignment, spans and per-cell borders", () => {
     const red = { style: "single", widthPt: 1.5, color: "FF0000" };
     const rows = [
       row("r_AAAAAAAAA1", "content", [cell("wide", { colspan: 2, fill: "DEEAF6" }), cell("tall", { rowspan: 2, vAlign: "center" })]),
@@ -166,7 +223,9 @@ describe("tables", () => {
     const c = first(build(doc(table([50, 50, 50], rows, { cellMarginPt: { top: 2, right: 4, bottom: 3, left: 6 } })), "table"));
     const t = tableOf(c);
     const lay = layoutOf(c);
-    expect([lay.paddingLeft?.(0), lay.paddingRight?.(0), lay.paddingTop?.(0), lay.paddingBottom?.(0)]).toEqual([6, 4, 2, 3]);
+    expect([lay.paddingLeft?.(0), lay.paddingRight?.(0), lay.paddingTop?.(0), lay.paddingBottom?.(0)]).toEqual([0, 0, 2, 3]);
+    expect([t.body[0]?.[0]?.margin, t.body[0]?.[2]?.margin, t.body[1]?.[0]?.margin]).toEqual([[6, 0, 4, 0], [6, 0, 4, 0], [6, 0, 4, 0]]);
+    [0, 50, 100, 150].forEach((x, i) => expect(edgesOf(outerOf(c))[i]).toBeCloseTo(x, 10));
     expect(t.body[0]?.[0]).toMatchObject({ colSpan: 2, fillColor: "#DEEAF6" });
     expect(t.body[0]?.[1]).toEqual({ text: "" });
     expect(t.body[0]?.[2]).toMatchObject({ rowSpan: 2, verticalAlignment: "middle" });

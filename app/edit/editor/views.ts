@@ -13,6 +13,7 @@ import {
   tableColumns, tableIndent, textboxStyle, underlineStyle,
 } from "../../render/index.ts";
 import { cropOrNull } from "../../../lib/crop.ts";
+import { drawnGrid, placeCells } from "../../../lib/wordFormat.ts";
 import type { ImageAttrs, ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
 import { N } from "./types.ts";
 
@@ -103,6 +104,43 @@ function gridShape(table: PMNode): string {
   return `${map.width}x${map.height}:${map.map.map((o) => ordinal.get(o)).join(",")}`;
 }
 
+/** How a table is drawn (drawnGrid): its columns in % and each cell's drawn column span, by the cell's offset in the table. */
+interface DrawnTable {
+  pct: number[];
+  colspan: Map<number, number>;
+  /** Compares equal while the drawing's columns stay the same; with row widths, while the widths do too. */
+  key: string;
+}
+
+const drawnTables = new WeakMap<PMNode, DrawnTable>();
+
+/** A table's drawing: rows with their own widths (one dx's) put their cells' edges where those widths do. */
+function drawnTable(table: PMNode): DrawnTable {
+  const cached = drawnTables.get(table);
+  if (cached) return cached;
+  const rows: PMNode[] = [];
+  const offsets: number[][] = [];
+  table.forEach((row, rowOffset) => {
+    rows.push(row);
+    const list: number[] = [];
+    row.forEach((_cell, cellOffset) => list.push(rowOffset + 1 + cellOffset));
+    offsets.push(list);
+  });
+  const byRow: { col: number; colspan: number }[][] = rows.map(() => []);
+  for (const c of placeCells(rows.map((r) => ({ content: r.children }))).cells) byRow[c.row]?.push(c);
+  const drawn = drawnGrid(rows.map((r, i) => ({ widths: r.attrs.widths, cells: byRow[i] ?? [] })), tableColumns(attrsOf(table, "table")));
+  const colspan = new Map<number, number>();
+  drawn.spans.forEach((spans, r) => spans.forEach((s, c) => {
+    const offset = offsets[r]?.[c];
+    if (offset !== undefined) colspan.set(offset, s.colspan);
+  }));
+  const own = rows.some((r) => r.attrs.widths != null);
+  const key = `${drawn.widths.length}:${drawn.spans.map((s) => s.map((x) => x.colspan).join(",")).join(";")}${own ? `:${drawn.widths.map((w) => w.toFixed(4)).join(",")}` : ""}`;
+  const out = { pct: drawn.widths, colspan, key };
+  drawnTables.set(table, out);
+  return out;
+}
+
 /**
  * A picture's box as the reader draws it: its img, or for a cropped picture an element clipping its
  * img. The box is what selection, the handles and the size reads measure.
@@ -179,19 +217,20 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
         const a = attrsOf(n, "table");
         table.removeAttribute("style");
         applyStyle(table, { tableLayout: "fixed", marginLeft: tableIndent(a.indentPt, basePt) });
-        colgroup.replaceChildren(...tableColumns(a).map((pct) => el("col", { width: `${pct}%` })));
+        colgroup.replaceChildren(...drawnTable(n).pct.map((pct) => el("col", { width: `${pct}%` })));
       };
       draw(node);
       // A cell's outer/inside borders depend on its place in the grid, and ProseMirror keeps the views of
-      // unchanged cells; when the grid's shape changes (a row added or deleted) the whole table is drawn
-      // again so every cell takes the edges of its new place.
-      const shape = gridShape(node);
+      // unchanged cells; when the grid's shape changes (a row added or deleted), or how its rows are drawn
+      // (a dx's row widths, a deleted cell), the whole table is drawn again so every cell takes the edges
+      // and drawn columns of its new place.
+      const shape = `${gridShape(node)}|${drawnTable(node).key}`;
       let current = node;
       return {
         dom: table,
         contentDOM: body,
         update: (next) => {
-          if (next.type !== current.type || gridShape(next) !== shape) return false;
+          if (next.type !== current.type || `${gridShape(next)}|${drawnTable(next).key}` !== shape) return false;
           if (!next.sameMarkup(current)) {
             // The table's own attributes changed (column widths, cell margins). ProseMirror would move the
             // unchanged cells' views into a new table view as they are, keeping the margins and borders
@@ -224,7 +263,8 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
       const tableNode = $pos ? $pos.node($pos.depth - 1) : null;
       const offset = $pos && pos !== undefined ? pos - $pos.start($pos.depth - 1) : 0;
       const td = el("td", tableCellStyle(node, tableNode, offset, basePt)) as HTMLTableCellElement;
-      td.colSpan = a.colspan;
+      // The drawn columns it spans: in a row with its own widths, those between its edges (drawnTable).
+      td.colSpan = tableNode?.type === N.table ? (drawnTable(tableNode).colspan.get(offset) ?? a.colspan) : a.colspan;
       td.rowSpan = a.rowspan;
       return plain(td, td, node);
     },

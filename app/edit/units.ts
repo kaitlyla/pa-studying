@@ -16,6 +16,7 @@ import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
 import type { ContentArea } from "./editor/commands.ts";
 import type { TreeChange } from "./github.ts";
+import { followMergedWidths, type RowJSON as LayoutRow, type RowsLayout } from "./editor/rowLayout.ts";
 import { parsePageKey, type PageKind } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
@@ -35,6 +36,8 @@ export interface Slot extends ContentArea {
   id: string;
   doc: DocJSON;
   basePt: number;
+  /** A table block's rows editor: the table's layout facts (a dx's own column changes). */
+  rows?: RowsLayout;
 }
 
 /** A system's stored files at the snapshot (guide and pharm keys). */
@@ -216,10 +219,29 @@ async function systemOf(guide: string, kind: "topic" | "block", id: string): Pro
   throw new UnitError(`${id} is not on ${guide}'s pages`);
 }
 
-function rowsPart(sys: SystemCtx, block: BlockFile, shown: string[], basePt: number, area: ContentArea): Part {
+/**
+ * Where a table's rows are seen, for a rows editor showing `shown` of `block` on a topic page (`topic`)
+ * or a table page (null): each row's topic pages (a heading row's, every topic under it) and their titles.
+ */
+function rowsLayout(t: SystemTopics, block: BlockFile, shown: string[], topic: string | null): RowsLayout {
+  const stored = tableOrThrow(block).content as LayoutRow[];
+  const ids = new Set(stored.map(rowId));
+  const pages: Record<string, string[]> = {};
+  const titles: Record<string, string> = {};
+  for (const x of t.topics) {
+    for (const id of withHeadings(t, x.rows)) {
+      if (!ids.has(id)) continue;
+      (pages[id] ??= []).push(x.id);
+      titles[x.id] = x.title;
+    }
+  }
+  return { page: topic === null ? "table" : "dx", topic, stored, shown, pages, titles };
+}
+
+function rowsPart(sys: SystemCtx, t: SystemTopics, block: BlockFile, shown: string[], basePt: number, area: ContentArea, topic: string | null = null): Part {
   return {
     kind: "rows", path: blockPath(sys, block.id), block, shown, sys,
-    slot: { id: `${block.id}:rows`, doc: partialTable(block, shown), basePt, ...area },
+    slot: { id: `${block.id}:rows`, doc: partialTable(block, shown), basePt, ...area, rows: rowsLayout(t, block, shown, topic) },
   };
 }
 
@@ -387,8 +409,8 @@ async function otherOutlineNotes(snap: Snapshot, notes: readonly OtherNote[] | u
 }
 
 /** All rows of a table that take part in resolution are its full content; one-column tables edit as blocks. */
-function wholeBlockPart(sys: SystemCtx, block: BlockFile, basePt: number, area: ContentArea, proseLike: boolean): Part {
-  if (block.kind === "table" && !proseLike) return rowsPart(sys, block, tableOrThrow(block).content.map(rowId), basePt, area);
+function wholeBlockPart(sys: SystemCtx, t: SystemTopics, block: BlockFile, basePt: number, area: ContentArea): Part {
+  if (block.kind === "table" && !t.proseBlocks.includes(block.id)) return rowsPart(sys, t, block, tableOrThrow(block).content.map(rowId), basePt, area);
   return sysBlockPart(sys, block, basePt, area);
 }
 
@@ -448,7 +470,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const parts = [...byBlock].map(([id, shown]) => {
         const block = sys.blocks.find((b) => b.id === id);
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
-        return rowsPart(sys, block, shown, basePt, area);
+        return rowsPart(sys, t, block, shown, basePt, area, row);
       });
       // Its meds panel, then her below area (an empty editor until she adds something).
       parts.push(await medsPart(snap, sys, row, basePt, area));
@@ -466,7 +488,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const b = byId.get(item.block);
         if (!b) throw new UnitError(`Block ${item.block} is no longer in ${sys.system}`);
         if (item.rows === null) parts.push(sysBlockPart(sys, b, basePt, area));
-        else parts.push(rowsPart(sys, b, item.rows, basePt, area), ...(await belowParts(snap, sys, t, item.rows, basePt, area)));
+        else parts.push(rowsPart(sys, t, b, item.rows, basePt, area), ...(await belowParts(snap, sys, t, item.rows, basePt, area)));
       }
       return unit(parts);
     }
@@ -480,7 +502,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       for (const b of sys.blocks) {
         const stored = t.tables.get(b.id);
         if (drug.has(b.id)) parts.push({ kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" });
-        else parts.push(wholeBlockPart(sys, b, basePt, area, t.proseBlocks.includes(b.id)));
+        else parts.push(wholeBlockPart(sys, t, b, basePt, area));
         parts.push(...(await belowParts(snap, sys, t, (stored?.rows ?? []).map((r) => r.id), basePt, area)));
       }
       return unit(parts);
@@ -520,9 +542,10 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         }
       };
       if (ps.overview) await addPharmPart((p) => p.id === ps.overview);
+      const t = deriveTopics(sys.blocks, sys.structure);
       for (const id of ps.tables) {
         const b = sys.blocks.find((x) => x.id === id);
-        if (b) parts.push(rowsPart(sys, b, tableOrThrow(b).content.map(rowId), basePt, area));
+        if (b) parts.push(rowsPart(sys, t, b, tableOrThrow(b).content.map(rowId), basePt, area));
       }
       // A card shows its own parts, then those of the cards shown inside it (publish's card parts).
       const { cards: allCards } = await snap.json<CardsFile>("content/pharm/cards.json");
@@ -817,7 +840,11 @@ export function buildSave(
         const doc = docs.get(part.slot.id);
         if (!doc) continue;
         const editedTable = doc.content[0] as RowJSON | undefined;
-        spliced = spliceRows(full, part.shown, (editedTable?.content ?? []) as RowJSON[], rowId);
+        const edited = (editedTable?.content ?? []) as RowJSON[];
+        spliced = spliceRows(full, part.shown, edited, rowId);
+        // Another dx's rows joined to an edited row by a merged cell take the widths she gave it (rowLayout).
+        const held = new Set([...part.shown, ...edited.map(rowId)]);
+        spliced = { ...spliced, rows: followMergedWidths(full as LayoutRow[], spliced.rows as LayoutRow[], held) };
         attrs = editedTable?.attrs ?? attrs;
       }
       const block: BlockFile = { ...part.block, doc: { type: "doc", content: [{ ...table, attrs, content: spliced.rows }] } };

@@ -5,7 +5,7 @@ import type { Border, CellBorders, Crop, DrawingShape as Shape, ListMarker, Mark
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
 import { CARLITO_LINE_FACTOR, faceOf, spaceWidth, textWidth } from "./metrics.ts";
 import { drawingSvg } from "./svg.ts";
-import { borderVisible as visible, cellSide, placeCells, TAB_STOP_PT as TAB_STOP, TEXTBOX_INSET_X_PT as BOX_INSET_X, TEXTBOX_INSET_Y_PT as BOX_INSET_Y, underlineKind, type PlacedCell } from "../wordFormat.ts";
+import { borderVisible as visible, cellSide, drawnGrid, ownRowWidths, placeCells, tableColumns, TAB_STOP_PT as TAB_STOP, TEXTBOX_INSET_X_PT as BOX_INSET_X, TEXTBOX_INSET_Y_PT as BOX_INSET_Y, underlineKind, type PlacedCell } from "../wordFormat.ts";
 import { imageKey, type Content, type ImageData, type ImageVariant } from "./types.ts";
 import { SITE_URL } from "../site.ts";
 
@@ -361,10 +361,24 @@ function table(n: PMNode, ctx: Ctx): Content {
   const tb = attr<Partial<TableBorders>>(n, "borders", {});
   const m = attr<{ top: number; right: number; bottom: number; left: number }>(n, "cellMarginPt", { top: 0, right: 5.4, bottom: 0, left: 5.4 });
   const indent = attr(n, "indentPt", 0);
-  const { cells, columns: placedCols } = placeCells(rows);
+  const placedCells = placeCells(rows);
   const grid = attr<number[]>(n, "grid", []);
-  const columns = Math.max(grid.length, placedCols, 1);
-  const gridFull = Array.from({ length: columns }, (_, i) => grid[i] ?? grid.at(-1) ?? TAB_STOP);
+  const gridCols = Math.max(grid.length, placedCells.columns, 1);
+  const her = Array.from({ length: gridCols }, (_, i) => grid[i] ?? grid.at(-1) ?? TAB_STOP);
+  // Rows with their own widths (one diagnosis's columns) draw their cells' edges where those put them:
+  // from here on columns are the drawn ones, and each cell sits on them. Such widths start from the
+  // screen's columns (tableColumns), so in their table the other rows are drawn on those too, and a
+  // border she didn't move stays in line with theirs. Other tables draw her grid as stored.
+  const byRow = rows.map((_, r) => placedCells.cells.filter((p) => p.row === r));
+  const drawnRows = rows.map((row, r) => ({ widths: attr<unknown>(row, "widths", null), cells: byRow[r] ?? [] }));
+  const herSum = her.reduce((a, b) => a + b, 0);
+  const base = drawnRows.some((r) => ownRowWidths(r.widths, gridCols) !== null)
+    ? tableColumns({ grid: her, ownWidths: attr<boolean | undefined>(n, "ownWidths", undefined) }).map((pct) => (pct * herSum) / 100)
+    : her;
+  const drawn = drawnGrid(drawnRows, base);
+  const cells: PlacedCell<PMNode>[] = byRow.flatMap((rowCells, r) => rowCells.map((p, i) => ({ ...p, ...(drawn.spans[r]?.[i] ?? {}) })));
+  const gridFull = drawn.widths;
+  const columns = gridFull.length;
   const nrows = rows.length;
 
   const sideOf = (p: PlacedCell<PMNode>, side: "left" | "top" | "right" | "bottom"): Border | null => {
@@ -388,18 +402,26 @@ function table(n: PMNode, ctx: Ctx): Content {
   const avail = Math.max(1, ctx.width - indent);
   const sum = gridFull.reduce((a, b) => a + b, 0);
   const scale = sum > avail ? avail / sum : 1;
-  const widths = gridFull.map((g, i) => Math.max(1, g * scale - m.left - m.right - (vW[i] ?? 0) - (i === columns - 1 ? (vW[columns] ?? 0) : 0)));
+  // pdfmake pads every column by the same amount, so a column narrower than the cell margins would come
+  // out wider than stored and push every edge to its right. Columns therefore carry no padding: each is
+  // its width less its rules, and a cell keeps its margins inside itself.
+  const widths = gridFull.map((g, i) => Math.max(0, g * scale - (vW[i] ?? 0) - (i === columns - 1 ? (vW[columns] ?? 0) : 0)));
 
   const body: Content[][] = Array.from({ length: nrows }, () => Array.from({ length: columns }, () => ({ text: "" })));
   cells.forEach((p, i) => {
-    let inner = 0;
-    for (let c = p.col; c < p.col + p.colspan; c++) inner += widths[c] ?? 0;
-    inner += (p.colspan - 1) * (m.left + m.right);
-    for (let c = p.col + 1; c < p.col + p.colspan; c++) inner += vW[c] ?? 0;
+    let span = 0;
+    for (let c = p.col; c < p.col + p.colspan; c++) span += widths[c] ?? 0;
+    for (let c = p.col + 1; c < p.col + p.colspan; c++) span += vW[c] ?? 0;
+    // A cell narrower than its margins gives them up in proportion, keeping a 1pt line for its text.
+    const room = Math.max(0, span - 1);
+    const shrink = m.left + m.right > room ? room / (m.left + m.right) : 1;
+    const left = m.left * shrink;
+    const right = m.right * shrink;
     const s = sides[i] as { left: Border | null; top: Border | null; right: Border | null; bottom: Border | null };
     const order = [s.left, s.top, s.right, s.bottom];
     const cell: Content = {
-      stack: blocks(p.node.content ?? [], { ...ctx, width: inner, flow: false }),
+      margin: [left, 0, right, 0],
+      stack: blocks(p.node.content ?? [], { ...ctx, width: Math.max(1, span - left - right), flow: false }),
       border: order.map((b) => b !== null),
       borderColor: order.map((b) => (b ? hex(b.color) : "#000000")),
     };
@@ -427,8 +449,8 @@ function table(n: PMNode, ctx: Ctx): Content {
       defaultBorder: false,
       hLineWidth: (i: number) => hW[i] ?? 0,
       vLineWidth: (i: number) => vW[i] ?? 0,
-      paddingLeft: () => m.left,
-      paddingRight: () => m.right,
+      paddingLeft: () => 0,
+      paddingRight: () => 0,
       paddingTop: () => m.top,
       paddingBottom: () => m.bottom,
     },

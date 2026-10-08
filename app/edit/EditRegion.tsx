@@ -16,7 +16,8 @@ import { showToast } from "../shell/toast.tsx";
 import { useIsPhone } from "../shell/responsive.ts";
 import { PageBarSlot } from "../shell/pageScale.ts";
 import {
-  changeCellMargins, changeColumnWidth, changeLineSpacing, changeSize, changeSpace, deletePicture, deleteRow, FONT_COLOR_MARKS, FONT_COLORS, HIGHLIGHT_COLORS,
+  canDeleteColumn, changeCellMargins, changeColumnWidth, changeColumnWidthAsking, changeLineSpacing, changeSize, changeSpace, deleteColumn, deletePicture, deleteRow,
+  FONT_COLOR_MARKS, FONT_COLORS, HIGHLIGHT_COLORS,
   HIGHLIGHT_MARKS, insertPicture, insertRow, insertSymbol, SYMBOLS, dragPicture, dragPictureCrop, draggedPictureSize, moveParagraph, naturalPictureWidth,
   removeFontColor, removeHighlight, resetPictureCrop, resetPictureShape, resizePicture, scaledPictureSize, selectedPictureSize, selectionSize, setFontColor,
   setHighlight, setSize, shownPictureWidth, sizeOptions, steppedPictureSize, toggleBold, toggleItalic, toggleUnderline, usedColors, type Command, type DocContext, type PictureCrop, type PictureHandle, type PictureSize, type PictureTurn,
@@ -25,7 +26,7 @@ import { PictureHandles, pictureFile } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
-import { editorConfirm } from "./dialogs.tsx";
+import { editorConfirm, widthConfirm } from "./dialogs.tsx";
 import { MedsFrame } from "./MedsEdit.tsx";
 import {
   copyWithToast, currentLook, dismissBanner, done, getEditStore, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED, SAVE_OFFLINE,
@@ -146,7 +147,7 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
     if (!el) return undefined;
     const ctx: DocContext = { basePt: slot.basePt, pageContentPt: slot.pageContentPt, pageContentHeightPt: slot.pageContentHeightPt };
     const view: EditorView = new EditorView(el, {
-      state: createEditorState(slot.doc, { onPictureRefused: () => showToast(PICTURE_REFUSED) }),
+      state: createEditorState(slot.doc, { onPictureRefused: () => showToast(PICTURE_REFUSED), rows: slot.rows, confirm: widthConfirm }),
       nodeViews: nodeViews(slot.basePt),
       markViews: markViews(slot.basePt),
       clipboardSerializer: clipboardSerializer(slot.basePt),
@@ -484,6 +485,11 @@ function Toolbar(): ReactNode {
   const inTable = a ? changeCellMargins("sides", 1)(a.view.state) : false;
   const canNarrow = a ? changeColumnWidth(-1)(a.view.state) : false;
   const canWiden = a ? changeColumnWidth(1)(a.view.state) : false;
+  const canDeleteCol = a ? canDeleteColumn(a.view.state) : false;
+  const columnWidth = (dir: 1 | -1) => (): void => {
+    if (!a) return;
+    void changeColumnWidthAsking(dir, widthConfirm)(a.view).then(() => a.view.focus());
+  };
   const sizeNow = a ? selectionSize(a.view.state, a.ctx) : null;
   const slot = useContext(PageBarSlot);
   const bar = (
@@ -539,8 +545,9 @@ function Toolbar(): ReactNode {
         {inTable && (
           <span className="tb-group" role="group" aria-label="Column width">
             <span className="tb-gl">Column</span>
-            <Tool label="Make this column narrower" run={plainCmd(changeColumnWidth(-1))} refk="tb-col-narrower" disabled={!canNarrow}>Narrower</Tool>
-            <Tool label="Make this column wider" run={plainCmd(changeColumnWidth(1))} refk="tb-col-wider" disabled={!canWiden}>Wider</Tool>
+            <Tool label="Make this column narrower" run={columnWidth(-1)} refk="tb-col-narrower" disabled={!canNarrow}>Narrower</Tool>
+            <Tool label="Make this column wider" run={columnWidth(1)} refk="tb-col-wider" disabled={!canWiden}>Wider</Tool>
+            <Tool label="Delete this column in this diagnosis" run={() => { if (a) void deleteColumn(editorConfirm, showToast)(a.view); }} refk="tb-col-delete" disabled={!canDeleteCol}>Delete</Tool>
           </span>
         )}
         <span className="sep" />
