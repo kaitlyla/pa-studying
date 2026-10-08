@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_8V57JQB39P",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "GU and Hematopoietic Drugs Med Lists and LOs",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Vitamins"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0.4969940185546875,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Hydroxocobalamin"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0.4969940185546875,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: 1 hydroxocobalamin bind 1 cyanide ion -> replaces hydroxo ligand linked to trivalent cobalt ion -> cyanocobalamin -> excreted renally"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: IV, Deep IM"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "gaps": [
+  "g_5BFTR458X2"
+ ],
+ "roles": [
+  {
+   "target": "c_8V57JQB39P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "hydroxocobalamin 5 g IV over 15 min",
+     "note": null,
+     "sources": [
+      {
+       "name": "Systemic Asphyxiant Chemical-Warfare Agents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/mass-casualty-weapons/systemic-asphyxiant-chemical-warfare-agents"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5BFTR458X2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "sodium nitrite + sodium thiosulfate",
+     "note": null,
+     "sources": [
+      {
+       "name": "Systemic Asphyxiant Chemical-Warfare Agents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/mass-casualty-weapons/systemic-asphyxiant-chemical-warfare-agents"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

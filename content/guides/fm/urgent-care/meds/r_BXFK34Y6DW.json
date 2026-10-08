@@ -1,0 +1,67 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_9R7SQQ9S0Z",
+  "g_YVAKT17ZF3"
+ ],
+ "roles": [
+  {
+   "target": "g_9R7SQQ9S0Z",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "N-acetylcysteine, PO or IV",
+     "note": "equally effective",
+     "sources": [
+      {
+       "name": "Acetaminophen Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/acetaminophen-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "fomepizole",
+     "note": "adjunct to NAC (never instead) in high-risk cases (massive OD, above the 300 line, acidosis, King's criteria, late presentation); data uncertain",
+     "sources": [
+      {
+       "name": "Acetaminophen Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/acetaminophen-poisoning"
+      },
+      {
+       "name": "Chen F, et al. The role of fomepizole in acetaminophen-related poisoning: a narrative review. Clin Exp Emerg Med 2026",
+       "org": "Clinical and Experimental Emergency Medicine",
+       "year": "2026",
+       "url": "https://europepmc.org/article/PMC/PMC13071955"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YVAKT17ZF3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "activated charcoal",
+     "note": "if APAP is likely still in the GI tract",
+     "sources": [
+      {
+       "name": "Acetaminophen Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/acetaminophen-poisoning"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
