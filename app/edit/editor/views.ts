@@ -5,7 +5,7 @@ import { createElement, type CSSProperties } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { DOMSerializer } from "prosemirror-model";
 import type { DOMOutputSpec, Mark, Node as PMNode } from "prosemirror-model";
-import type { MarkViewConstructor, NodeView, NodeViewConstructor } from "prosemirror-view";
+import type { MarkViewConstructor, NodeView, NodeViewConstructor, ViewMutationRecord } from "prosemirror-view";
 import { TableMap } from "prosemirror-tables";
 import { schema } from "../../../lib/schema.ts";
 import {
@@ -13,6 +13,7 @@ import {
   tableColumns, tableIndent, textboxStyle, underlineStyle,
 } from "../../render/index.ts";
 import { cropOrNull } from "../../../lib/crop.ts";
+import { FLOAT_PIC } from "../../render/floats.ts";
 import { drawnGrid, placeCells } from "../../../lib/wordFormat.ts";
 import type { ImageAttrs, ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
 import { N } from "./types.ts";
@@ -31,6 +32,11 @@ function el(tag: string, style?: CSSProperties | null, className?: string): HTML
   applyStyle(e, style);
   if (className) e.className = className;
   return e;
+}
+
+/** Whether a DOM change is to `dom`'s own style attribute (one the page's layout writes, not her edit). */
+function isOwnStyle(m: ViewMutationRecord, dom: HTMLElement): boolean {
+  return m.type === "attributes" && m.target === dom && m.attributeName === "style";
 }
 
 /** A view whose DOM is rebuilt whenever the node's attributes change. */
@@ -175,9 +181,17 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
     image: (node) => plain(pictureDom(attrsOf(node, "image"), basePt, null), null, node),
     image_block: (node) => plain(pictureDom(attrsOf(node, "image_block"), basePt, { display: "block" }), null, node),
     anchored: (node) => {
+      const a = attrsOf(node, "anchored");
       const child = node.firstChild;
+      if (a.float && child?.type === N.image_block) {
+        // Placed by the floats plugin (render/floats.ts), which writes only its position style.
+        const d = el("div", null, FLOAT_PIC);
+        d.dataset.dx = String(a.float.dxPt / basePt);
+        d.dataset.dy = String(a.float.dyPt / basePt);
+        return { ...plain(d, d, node), ignoreMutation: (m) => isOwnStyle(m, d) };
+      }
       const childWidth = Number(child?.attrs.widthPt ?? 0);
-      const d = el("div", { marginLeft: anchoredOffset(attrsOf(node, "anchored").offsetPt, childWidth, basePt) }, "anchored");
+      const d = el("div", { marginLeft: anchoredOffset(a.offsetPt, childWidth, basePt) }, "anchored");
       return plain(d, d, node);
     },
     rule: (node) => {
@@ -229,6 +243,8 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
       return {
         dom: table,
         contentDOM: body,
+        // The room below it for a picture floating past its end (render/floats.ts).
+        ignoreMutation: (m) => isOwnStyle(m, table),
         update: (next) => {
           if (next.type !== current.type || `${gridShape(next)}|${drawnTable(next).key}` !== shape) return false;
           if (!next.sameMarkup(current)) {

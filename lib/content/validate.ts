@@ -3,7 +3,7 @@
 // ContentError on the first violation. Nothing is ever repaired. Record shapes are keyed to the
 // interfaces in types.ts through `shapeOf`, so a field added to a type must be validated too.
 import { Node } from "prosemirror-model";
-import { ASSET_RE, schema, storedJSON } from "../schema.ts";
+import { ASSET_RE, checkFloats, schema, storedJSON } from "../schema.ts";
 import { rowWidthsProblem } from "../wordFormat.ts";
 import {
   arr, bad, bool, ContentError, either, int, isNull, isObj, isoDate, isoUtc, ISO_MONTH_RE, nonEmpty, nullable,
@@ -91,6 +91,7 @@ function parseDoc(doc: unknown, at: string, file: string): Node {
   try {
     const node = Node.fromJSON(schema, doc);
     node.check();
+    checkFloats(node);
     node.descendants((n) => {
       if (n.type.name !== "table") return true;
       const problem = rowWidthsProblem(n.toJSON() as Parameters<typeof rowWidthsProblem>[0]);

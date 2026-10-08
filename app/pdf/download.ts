@@ -3,12 +3,12 @@
 import { cropOrNull, cropPixels } from "../../lib/crop.ts";
 import { FONTMAP_PATH, type FontMapJson } from "../../lib/derive/published.ts";
 import {
-  buildDocDefinition,
   embedsAsStored,
   imageKey,
   imageRequests,
   pdfFileName,
   pdfFonts,
+  renderPdf,
   storedMime,
   type DocDefinition,
   type ImageData,
@@ -22,10 +22,10 @@ import { localAssetOf } from "../render/RichDoc.tsx";
 export type { PdfInput, PdfScope } from "../../lib/pdf/index.ts";
 export { pdfFileName, wholeGuideUrl } from "../../lib/pdf/index.ts";
 
-/** The part of pdfmake's API the download uses. */
+/** The part of pdfmake's API the download uses (a document renders once, on its first getBuffer or download). */
 export interface PdfMake {
   fonts: Record<string, Record<string, string>>;
-  createPdf(def: DocDefinition): { download(fileName: string): Promise<unknown> };
+  createPdf(def: DocDefinition): { getBuffer(): Promise<unknown>; download(fileName: string): Promise<unknown> };
 }
 
 /** What the download needs from the browser; tests substitute their own. */
@@ -95,9 +95,9 @@ export async function downloadPdf(scope: PdfScope, input: PdfInput, env: PdfEnvi
   const variants = imageRequests(scope, input);
   const loaded = await Promise.all(variants.map(async (v) => [imageKey(v), await env.image(v)] as const));
   const images: ImageData = Object.fromEntries(loaded);
-  const def = buildDocDefinition(scope, { ...input, images }, fontmap);
   const name = pdfFileName(scope, input);
   pdfMake.fonts = pdfFonts(fontmap, env.fontUrl);
-  await pdfMake.createPdf(def).download(name);
+  const pdf = await renderPdf(scope, { ...input, images }, fontmap, (def) => pdfMake.createPdf(def));
+  await pdf.download(name);
   return name;
 }

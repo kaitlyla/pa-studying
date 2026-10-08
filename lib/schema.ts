@@ -106,6 +106,11 @@ const crop: Check = (v) => {
   if (c.l + c.r >= 1 || c.t + c.b >= 1) fail("crop (it must keep part of the picture)", v);
 };
 
+const floatAt = nullable(shape({
+  dxPt: num,
+  dyPt: (v) => { if (!isNum(v) || v < 0) fail("float dyPt (0 or more)", v); },
+}, "float"));
+
 const imageAttrs = {
   asset: a(asset),
   widthPt: a(num),
@@ -143,7 +148,7 @@ const nodes: Record<string, NodeSpec> = {
   anchored: {
     group: "block",
     content: "image_block | textbox | drawing",
-    attrs: { offsetPt: a(num, 0) } satisfies Specs<NodeAttrs["anchored"]>,
+    attrs: { offsetPt: a(num, 0), float: a(floatAt, null) } satisfies Specs<NodeAttrs["anchored"]>,
   },
   image_block: { atom: true, attrs: imageAttrs satisfies Specs<NodeAttrs["image_block"]> },
   rule: { group: "block", atom: true, attrs: { color: a(hex), widthPt: a(num) } satisfies Specs<NodeAttrs["rule"]> },
@@ -228,30 +233,40 @@ const marks: Record<string, MarkSpec> = {
 
 export const schema: Schema = new Schema({ nodes, marks });
 
+/** Refuses a floating anchor (`anchored.float` set) anywhere but as a picture in body text or a table cell. */
+export function checkFloats(doc: PMNode): void {
+  doc.descendants((n, _pos, parent) => {
+    if (n.type.name !== "anchored" || n.attrs.float == null) return true;
+    if (parent !== doc && parent?.type.name !== "table_cell") fail("floating picture (only in body text or a table cell)", n.attrs.float);
+    if (n.firstChild?.type.name !== "image_block") fail("floating anchor (only a picture floats)", n.attrs.float);
+    return false;
+  });
+}
+
 type StoredJSON = { type: string; attrs?: Record<string, unknown>; content?: StoredJSON[] };
 
 /** Attributes written only when they differ from these values, by node type. */
-const WRITTEN_WHEN_SET: Readonly<Record<string, readonly [string, unknown]>> = {
-  table: ["ownWidths", false],
-  table_row: ["widths", null],
-  image: ["crop", null],
-  image_block: ["crop", null],
+const WRITTEN_WHEN_SET: Readonly<Record<string, Readonly<Record<string, unknown>>>> = {
+  table: { ownWidths: false },
+  table_row: { widths: null },
+  image: { crop: null },
+  image_block: { crop: null },
+  anchored: { float: null },
 };
 
 /**
  * A node as stored: the schema's own serialization (Node.toJSON: every attribute, schema key order),
- * except that a table's `ownWidths` is written only when true, a row's `widths` and a picture's `crop`
- * only when set.
- * Nodes stored before those attributes existed carry none, and every past version in the history must
- * still read as canonical.
+ * except that a table's `ownWidths` is written only when true, and a row's `widths`, a picture's `crop`
+ * and an anchor's `float` only when set. Nodes stored before those attributes existed carry none, and
+ * every past version in the history must still read as canonical.
  */
 export function storedJSON(node: PMNode): unknown {
   // toJSON hands out the node's own attrs object, so a changed one is copied, never edited in place.
   const stored = (n: StoredJSON): StoredJSON => {
     let out = n;
     const omit = WRITTEN_WHEN_SET[n.type];
-    if (omit && n.attrs && Object.hasOwn(n.attrs, omit[0]) && n.attrs[omit[0]] === omit[1]) {
-      out = { ...n, attrs: Object.fromEntries(Object.entries(n.attrs).filter(([k]) => k !== omit[0])) };
+    if (omit && n.attrs && Object.entries(omit).some(([k, v]) => n.attrs?.[k] === v)) {
+      out = { ...n, attrs: Object.fromEntries(Object.entries(n.attrs).filter(([k, v]) => !(Object.hasOwn(omit, k) && omit[k] === v))) };
     }
     return out.content ? { ...out, content: out.content.map(stored) } : out;
   };

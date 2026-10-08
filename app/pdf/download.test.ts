@@ -30,10 +30,12 @@ function testEnvironment(texts: string[], image: (v: ImageVariant) => Promise<st
   const pdfMake: PdfMake = {
     fonts: {},
     createPdf(def: DocDefinition) {
+      serverPdfMake.fonts = pdfMake.fonts;
+      const pdf = serverPdfMake.createPdf(def);
       return {
+        getBuffer: () => pdf.getBuffer(),
         async download(name: string) {
-          serverPdfMake.fonts = pdfMake.fonts;
-          downloads.push({ name, pdf: new Uint8Array(await serverPdfMake.createPdf(def).getBuffer()), fonts: pdfMake.fonts });
+          downloads.push({ name, pdf: new Uint8Array(await pdf.getBuffer()), fonts: pdfMake.fonts });
         },
       };
     },

@@ -1229,6 +1229,366 @@ test.describe("toolbar limits", () => {
   }
 });
 
+// ---- floating pictures (Wrap text) ------------------------------------------------------------------------
+
+test.describe("floating pictures", () => {
+  type Box = { left: number; top: number; right: number; bottom: number };
+  const rectOf = (l: Locator): Promise<Box> => l.evaluate((e) => {
+    const r = e.getBoundingClientRect();
+    return { left: r.left, top: r.top, right: r.right, bottom: r.bottom };
+  });
+  /** Every line of text in `scope` as drawn (one rect per line of each text node), in client px. */
+  const lineRects = (scope: Locator): Promise<Box[]> => scope.evaluate((root) => {
+    const out: { left: number; top: number; right: number; bottom: number }[] = [];
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent?.trim()) continue;
+      const range = document.createRange();
+      range.selectNodeContents(n);
+      for (const r of range.getClientRects()) if (r.width > 0 && r.height > 0) out.push({ left: r.left, top: r.top, right: r.right, bottom: r.bottom });
+    }
+    return out;
+  });
+  /** Whether two boxes share more than a pixel each way. */
+  const overlaps = (a: Box, b: Box): boolean => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+  /** Lines in `scope` that the picture `pic` covers (none, when the text moves aside). */
+  const covered = async (scope: Locator, pic: Locator): Promise<Box[]> => {
+    const box = await rectOf(pic);
+    return (await lineRects(scope)).filter((l) => overlaps(l, box));
+  };
+  /** Lines in `scope` beside the picture: within its height, not covered by it. */
+  const beside = async (scope: Locator, pic: Locator): Promise<Box[]> => {
+    const box = await rectOf(pic);
+    return (await lineRects(scope)).filter((l) => l.top < box.bottom - 1 && l.bottom > box.top + 1 && !overlaps(l, box));
+  };
+  /** Presses a floating picture and drags it so its top-left lands at (x, y), in client px. */
+  async function dragPictureTo(page: Page, pic: Locator, x: number, y: number): Promise<void> {
+    const b = need(await pic.boundingBox(), "the floating picture");
+    const grabX = b.x + Math.min(10, b.width / 2);
+    const grabY = b.y + Math.min(10, b.height / 2);
+    await page.mouse.move(grabX, grabY);
+    await page.mouse.down();
+    await page.mouse.move(grabX + (x - b.x), grabY + (y - b.y), { steps: 12 });
+    await page.mouse.up();
+  }
+  /** The anchor (with its float) holding `asset` in the saved block, and the node after it. */
+  function savedFloat(fake: FakeGithub, blockPath: string, asset: string): { float: Rec; next: Rec; column: string; json: unknown } {
+    const json: unknown = JSON.parse(need(changedFiles(fake).get(blockPath), `${blockPath} in the save`));
+    const path = need(findPath(json, (n) => n.type === "anchored" && JSON.stringify(n).includes(asset)), "the picture's anchor in the saved block");
+    const parent = nodeAt(json, path.slice(0, -2));
+    const next = (parent.content as unknown[])[Number(path[path.length - 1]) + 1];
+    if (!isRec(next)) throw new Error("the anchor is the last block of its column");
+    return { float: need(attrsOf(nodeAt(json, path)).float as Rec | null | undefined, "the anchor's float"), next, column: String(parent.type), json };
+  }
+  /** Text with its whitespace runs as single spaces (innerText and stored text differ only there). */
+  const squash = (s: string): string => s.replace(/\s+/g, " ").trim();
+
+  interface FloatCase { hash: string; blockPath: string; asset: string; widthPt: number; text: string }
+  /**
+   * A picture on a system page (non-drug block, its asset used once in that system) with text close
+   * enough to drag it onto: `cell`, an inline picture in a table row (no merged rows) whose next row
+   * has a paragraph of 40+ characters; `bullet`, the same with a bulleted paragraph (a marker and a
+   * hanging indent); `page`, a body picture (not in a table or text box) with a body paragraph of 40+
+   * characters at most five blocks above it, with a paragraph of text right above that. `text` is the
+   * farthest such paragraph's.
+   */
+  function findFloatCase(where: "cell" | "bullet" | "page"): FloatCase | null {
+    const guidesDir = join(CONTENT, "guides");
+    const picOf = (n: unknown): Rec | null => {
+      const p = findPath(n, (x) => x.type === "image" || x.type === "image_block");
+      return p ? nodeAt(n, p) : null;
+    };
+    const smallPic = (pic: Rec | null): pic is Rec => pic !== null && Number(attrsOf(pic).widthPt) > 30 && Number(attrsOf(pic).widthPt) <= 200;
+    for (const g of readdirSync(guidesDir)) {
+      for (const system of readdirSync(join(guidesDir, g))) {
+        const sysDir = join(guidesDir, g, system);
+        const blocksDir = join(sysDir, "blocks");
+        if (system === "_preamble" || !existsSync(join(sysDir, "structure.json")) || !existsSync(blocksDir)) continue;
+        const st = readJson(join(sysDir, "structure.json"));
+        const drug = new Set(isRec(st) && Array.isArray(st.drugTables) ? st.drugTables.map((d) => (isRec(d) ? d.block : null)) : []);
+        const blocks = readdirSync(blocksDir).map((f) => ({ f, block: readJson(join(blocksDir, f)) })).filter((b) => isRec(b.block) && !drug.has(b.block.id));
+        const uses = new Map<string, number>();
+        for (const { block } of blocks) {
+          JSON.stringify(block).replace(/"asset":"([^"]+)"/g, (_m, a: string) => {
+            uses.set(a, (uses.get(a) ?? 0) + 1);
+            return "";
+          });
+        }
+        const found = (f: string, pic: Rec, text: string): FloatCase | null => {
+          const asset = String(attrsOf(pic).asset);
+          if (uses.get(asset) !== 1) return null;
+          return { hash: guideViewHash(g, { kind: "system", system }), blockPath: repoPath(join(blocksDir, f)), asset, widthPt: Number(attrsOf(pic).widthPt), text };
+        };
+        for (const { f, block } of blocks) {
+          const top = isRec(block) && isRec(block.doc) && Array.isArray(block.doc.content) ? block.doc.content.filter(isRec) : [];
+          if (where === "page") {
+            for (let i = 0; i < top.length; i++) {
+              const n = top[i];
+              const pic = n && (n.type === "paragraph" || (n.type === "anchored" && !attrsOf(n).float)) ? picOf(n) : null;
+              if (!smallPic(pic)) continue;
+              const text = (x: Rec | undefined): string => (x?.type === "paragraph" && !picOf(x) ? textOf(x) : "");
+              let j = -1;
+              for (let k = i - 1; k >= Math.max(1, i - 5); k--) if (text(top[k]).length >= 40 && text(top[k - 1]).trim().length > 0) j = k;
+              const hit = j >= 1 && found(f, pic, text(top[j]));
+              if (hit) return hit;
+            }
+            continue;
+          }
+          for (const table of top.filter((n) => n.type === "table")) {
+            const rows = Array.isArray(table.content) ? table.content.filter(isRec) : [];
+            const cells = (r: Rec): Rec[] => (Array.isArray(r.content) ? r.content.filter(isRec) : []);
+            if (where === "cell" && rows.some((r) => cells(r).some((c) => numAttr(c, "rowspan") > 1))) continue;
+            for (let i = 0; i < rows.length; i++) {
+              const row = rows[i];
+              const below = rows[i + 1];
+              if (!below && where !== "bullet") continue;
+              const picCell = row ? cells(row).find((c) => smallPic(picOf(c))) : undefined;
+              const pic = picCell ? picOf(picCell) : null;
+              if (!row || !pic || attrsOf(pic).asset === undefined) continue;
+              const bulleted = (x: Rec): boolean => where !== "bullet" || (numAttr(x, "indFirst") < 0 && isRec(attrsOf(x).marker));
+              // A bullet may be in another cell of the picture's row too.
+              const belowCells = below ? cells(below) : [];
+              const near = where === "bullet" ? [...cells(row).filter((c) => c !== picCell), ...belowCells] : belowCells;
+              const next = near.flatMap((c) => (Array.isArray(c.content) ? c.content.filter(isRec) : [])).find((x) => x.type === "paragraph" && textOf(x).length >= 40 && !picOf(x) && bulleted(x));
+              const hit = next && found(f, pic, textOf(next));
+              if (hit) return hit;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  /** The floating picture of `asset` within `scope` (a `has` locator is matched inside each candidate, so it starts from the page). */
+  const shownPic = (scope: Locator, asset: string): Locator => scope.locator(".float-pic").filter({ has: scope.page().locator(`img[src$="${asset}"]`) });
+  /** The same, as a `has` filter for its ancestors. */
+  const picHas = (page: Page, asset: string): Locator => page.locator(".float-pic").filter({ has: page.locator(`img[src$="${asset}"]`) });
+  /** The bulleted paragraphs in `scope` whose bullet is beside the picture with no text after it on its line (its text went on below). */
+  const bulletsAlone = async (scope: Locator, pic: Locator): Promise<string[]> => {
+    const box = await rectOf(pic);
+    return scope.evaluate((root, b) => {
+      const alone: string[] = [];
+      for (const p of root.querySelectorAll("p")) {
+        const marker = p.querySelector(":scope > .marker");
+        if (!marker || !(parseFloat(getComputedStyle(p).textIndent) < 0)) continue;
+        const m = marker.getBoundingClientRect();
+        if (!(m.bottom > b.top + 1 && m.top < b.bottom - 1)) continue;
+        const walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+        let after = false;
+        for (let n = walk.nextNode(); n && !after; n = walk.nextNode()) {
+          if (marker.contains(n) || !n.textContent?.trim()) continue;
+          const range = document.createRange();
+          range.selectNodeContents(n);
+          after = [...range.getClientRects()].some((r) => r.width > 0 && r.top < m.bottom - 1 && r.bottom > m.top + 1 && r.left >= m.right - 1);
+        }
+        if (!after) alone.push((p.textContent ?? "").slice(0, 40));
+      }
+      return alone;
+    }, box);
+  };
+
+  test("Wrap text on a table picture; dragged onto the next row's text, that text moves aside, in the editor and once saved; narrow windows keep it in the table; phones draw it in place", async ({ page, context, baseURL }) => {
+    const pic = need(findFloatCase("cell"), "picture in a table row whose next row has text, on a system page");
+    const words = pic.text;
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, pic.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const img = area.locator(`img[src$="${pic.asset}"]`);
+    await img.click();
+    await ref(page, "tb-pic-wrap").click();
+    const floating = shownPic(area, pic.asset);
+    await expect(floating).toHaveCount(1);
+    await expect(ref(page, "tb-pic-inline")).toBeVisible();
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+
+    // Onto the first line of the next row's paragraph.
+    const target = area.locator("table.nt td p").filter({ hasText: squash(words).slice(0, 30) }).first();
+    await floating.evaluate((e) => e.scrollIntoView({ block: "center" }));
+    const first = need((await lineRects(target))[0], "the paragraph's first line");
+    expect(first.bottom, "the next row's text is on screen with the picture").toBeLessThan(need(page.viewportSize(), "viewport").height);
+    await dragPictureTo(page, floating, first.left + 4, first.top + 2);
+    const cell = area.locator("table.nt td").filter({ has: page.locator("p").filter({ hasText: squash(words).slice(0, 30) }) }).last();
+    await expect(cell.locator(":scope > .float-pic")).toHaveCount(1);
+    await expect.poll(() => covered(cell, floating), { message: "no line of the cell under it" }).toEqual([]);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const saved = savedFloat(fake, pic.blockPath, pic.asset);
+    expect(Number(saved.float.dyPt)).toBeGreaterThanOrEqual(0);
+    // Anchored before the paragraph it was dropped on, in the next row's cell.
+    expect(saved.column).toBe("table_cell");
+    expect(squash(textOf(saved.next))).toBe(squash(words));
+    expect(findPath(saved.json, (n) => n.type === "image" && attrsOf(n).asset === pic.asset), "no inline copy left").toBeNull();
+
+    // The reader: the picture over the next row's text, the lines it would cover moved aside.
+    const shown = shownPic(page.locator("main"), pic.asset);
+    await expect(shown).toHaveCount(1);
+    const table = page.locator("main table.nt").filter({ has: picHas(page, pic.asset) }).last();
+    const shownCell = table.locator("td").filter({ has: picHas(page, pic.asset) }).last();
+    expect(overlaps(await rectOf(shown), await rectOf(shownCell)), "the picture is over the cell").toBe(true);
+    await expect.poll(() => covered(table, shown), { message: "no line of the table under it" }).toEqual([]);
+    // Beside it: in this cell, or in the next one where the picture is wider than the cell's room.
+    await expect.poll(async () => (await beside(table, shown)).length, { message: "the table's text runs beside it" }).toBeGreaterThan(0);
+
+    // A narrower window: still inside its table, still not over any line.
+    await page.setViewportSize({ width: 960, height: 900 });
+    await expect.poll(async () => {
+      const p = await rectOf(shown);
+      const t = await rectOf(table);
+      return p.left >= t.left - 1 && p.right <= t.right + 1;
+    }, { message: "the picture stays within its table" }).toBe(true);
+    await expect.poll(() => covered(table, shown), { message: "no line of the table under it" }).toEqual([]);
+
+    // A phone: drawn in its place in the text, not floating.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator("main .float-pic")).toHaveCount(0);
+    await expect(page.locator(`main img[src$="${pic.asset}"]`)).toBeVisible();
+  });
+
+  test("a body picture dragged onto a paragraph floats there: the paragraph's lines move aside, in the editor and once saved", async ({ page, context, baseURL }) => {
+    const pic = need(findFloatCase("page"), "body picture with a long body paragraph above it, on a system page");
+    const words = pic.text;
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, pic.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const img = area.locator(`img[src$="${pic.asset}"]`);
+    const slot = area.locator(".edit-slot").filter({ has: page.locator(`img[src$="${pic.asset}"]`) });
+    const target = slot.locator(".ProseMirror > p").filter({ hasText: squash(words).slice(0, 30) }).first();
+    // Her blocks, without the room elements the editor puts among them once a picture floats.
+    const NOT_ROOM = ":not(.fx):not(.fx-end)";
+    const blocks = slot.locator(`.ProseMirror > ${NOT_ROOM}`);
+    const indexOf = (el: Locator): Promise<number> => el.evaluate((e, sel) => [...(e.parentElement?.children ?? [])].filter((c) => c.matches(sel)).indexOf(e), NOT_ROOM);
+    const picAt = await indexOf(blocks.filter({ has: page.locator(`img[src$="${pic.asset}"]`) }).first());
+    const targetAt = await indexOf(target);
+    expect(targetAt, "the paragraph is above the picture").toBeLessThan(picAt);
+    // The lines above `block`, from the editor's top-left. The picture never reaches them: not in the text
+    // below them, not floating there, and not when dropped onto the first line of `block` or one below it.
+    const linesAbove = async (block: Locator): Promise<Box[]> => {
+      const s = await rectOf(slot);
+      const top = (await rectOf(block)).top;
+      return (await lineRects(slot.locator(".ProseMirror"))).filter((r) => r.bottom < top - 0.5)
+        .map((r) => ({ left: r.left - s.left, top: r.top - s.top, right: r.right - s.left, bottom: r.bottom - s.top }));
+    };
+    // The paragraph and the text blocks between it and the picture, nearest the picture first.
+    const steps: { block: Locator; before: Box[] }[] = [];
+    for (let i = picAt - 1; i >= targetAt; i--) {
+      const block = blocks.nth(i);
+      if ((await lineRects(block)).length > 0) steps.push({ block, before: await linesAbove(block) });
+    }
+    expect(steps.at(-1)?.before.length, "lines above the paragraph").toBeGreaterThan(0);
+    await img.click();
+    await ref(page, "tb-pic-wrap").click();
+    const floating = shownPic(area, pic.asset);
+    await expect(floating).toHaveCount(1);
+
+    // Up a block at a time onto each one's first line, a little in from its left, ending on the paragraph.
+    for (const { block, before } of steps) {
+      await floating.evaluate((e) => e.scrollIntoView({ block: "center" }));
+      const first = need((await lineRects(block))[0], "the block's first line");
+      expect(first.bottom, "the block is on screen with the picture").toBeLessThan(need(page.viewportSize(), "viewport").height);
+      await dragPictureTo(page, floating, first.left + 30, first.top + 2);
+      // It stays where it was let go, and the text moves instead.
+      await expect.poll(async () => {
+        const b = await rectOf(floating);
+        return Math.abs(b.left - (first.left + 30)) < 3 && Math.abs(b.top - (first.top + 2)) < 3;
+      }, { message: "the picture stays where it was dropped" }).toBe(true);
+      await expect.poll(() => covered(slot.locator(".ProseMirror"), floating), { message: "no body line under it" }).toEqual([]);
+      const after = await linesAbove(block);
+      expect(after.length, "the same lines above the block").toBe(before.length);
+      const moved = after.filter((r, i) => {
+        const b = before[i];
+        return !b || Math.abs(r.left - b.left) > 0.6 || Math.abs(r.top - b.top) > 0.6;
+      });
+      expect(moved, "no line above the picture moves").toEqual([]);
+    }
+    await expect.poll(async () => (await beside(target, floating)).length, { message: "the paragraph runs beside it" }).toBeGreaterThan(0);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const saved = savedFloat(fake, pic.blockPath, pic.asset);
+    expect(saved.column, "a block of body text, not of a table").toBe("doc");
+    expect(squash(textOf(saved.next))).toBe(squash(words));
+    expect(Number(saved.float.dxPt)).toBeGreaterThan(0);
+
+    const shown = shownPic(page.locator("main"), pic.asset);
+    await expect(shown).toHaveCount(1);
+    const frame = page.locator("main .float-frame").filter({ has: picHas(page, pic.asset) });
+    await expect.poll(() => covered(frame, shown), { message: "no line under it" }).toEqual([]);
+    const para = frame.locator("p").filter({ hasText: squash(words).slice(0, 30) }).first();
+    expect(overlaps(await rectOf(shown), await rectOf(para)), "the picture is over the paragraph").toBe(true);
+    await expect.poll(async () => (await beside(para, shown)).length, { message: "the paragraph runs beside it" }).toBeGreaterThan(0);
+
+    // A phone: drawn in its place in the text, not floating.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator("main .float-pic")).toHaveCount(0);
+    await expect(page.locator(`main img[src$="${pic.asset}"]`)).toBeVisible();
+  });
+
+  test("a table picture dropped on a bullet keeps each bullet beside it with its text, or sends both below it, at 1280 and 960 px", async ({ page, context, baseURL }) => {
+    const pic = need(findFloatCase("bullet"), "picture in a table row whose next row has a bulleted paragraph, on a system page");
+    const words = pic.text;
+    await world(context, baseURL, { seed: true });
+    await openPage(page, pic.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    await area.locator(`img[src$="${pic.asset}"]`).click();
+    await ref(page, "tb-pic-wrap").click();
+    const floating = shownPic(area, pic.asset);
+    await expect(floating).toHaveCount(1);
+    const target = area.locator("table.nt td p").filter({ hasText: squash(words).slice(0, 30) }).first();
+    await floating.evaluate((e) => e.scrollIntoView({ block: "center" }));
+    const first = need((await lineRects(target))[0], "the bullet's line");
+    await dragPictureTo(page, floating, first.left + 4, first.top + 2);
+    const table = area.locator("table.nt").filter({ has: picHas(page, pic.asset) }).last();
+    // Dropped onto the bullet's line: that line now runs beside the picture or below it.
+    expect((await rectOf(target.locator(":scope > .marker"))).bottom, "the bullet it was dropped on").toBeGreaterThan((await rectOf(floating)).top);
+    await expect.poll(() => covered(table, floating), { message: "no line of the table under it" }).toEqual([]);
+    await expect.poll(() => bulletsAlone(table, floating), { message: "no bullet beside it without its text" }).toEqual([]);
+
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const shown = shownPic(page.locator("main"), pic.asset);
+    await expect(shown).toHaveCount(1);
+    const shownTable = page.locator("main table.nt").filter({ has: picHas(page, pic.asset) }).last();
+    for (const width of [1280, 960]) {
+      await page.setViewportSize({ width, height: 900 });
+      await expect.poll(() => covered(shownTable, shown), { message: `no line of the table under it at ${width} px` }).toEqual([]);
+      await expect.poll(() => bulletsAlone(shownTable, shown), { message: `no bullet beside it without its text at ${width} px` }).toEqual([]);
+    }
+  });
+
+  test("a floating picture still resizes by its handles, and In line with text puts it back in the text", async ({ page, context, baseURL }) => {
+    const pic = need(findPicture("cell"), "picture in a table cell on a system page");
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, pic.hash);
+    await signIn(page);
+    const area = await startEditing(page);
+    const img = area.locator(`img[src$="${pic.asset}"]`);
+    await img.click();
+    await ref(page, "tb-pic-wrap").click();
+    const floating = shownPic(area, pic.asset);
+    await expect(floating).toHaveCount(1);
+    await expect(ref(page, "pic-handles")).toBeVisible();
+    const before = await drawnSize(img);
+    await dragHandle(page, "e", -20, 0);
+    await expect.poll(async () => (await drawnSize(img)).w).toBeLessThan(before.w - 10);
+    await expect(floating).toHaveCount(1);
+
+    await ref(page, "tb-pic-inline").click();
+    await expect(area.locator(".float-pic")).toHaveCount(0);
+    await expect(img).toHaveCount(1);
+    await expect(ref(page, "tb-pic-wrap")).toBeVisible();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    const json: unknown = JSON.parse(need(changedFiles(fake).get(pic.blockPath), `${pic.blockPath} in the save`));
+    const inline = nodeAt(json, need(findPath(json, (n) => n.type === "image" && attrsOf(n).asset === pic.asset), "the picture back in the text"));
+    expect(Number(attrsOf(inline).widthPt)).toBeLessThan(pic.widthPt);
+    expect(findPath(json, (n) => n.type === "anchored" && attrsOf(n).float != null), "nothing floats").toBeNull();
+  });
+});
+
 /** A reference sub-topic's gap block with a picture shown at full size (Imaging shows thumbnails), from the published data. */
 const figureGap = REF_TABS.filter((tab) => tab !== "imaging").flatMap((tab) => readData<RefTabJson>(refPath(tab)).subs.flatMap((s) => s.gaps.map((g) => ({ tab, sub: s.id, gap: g }))))
   .find((x) => x.gap.figures.length > 0) ?? null;

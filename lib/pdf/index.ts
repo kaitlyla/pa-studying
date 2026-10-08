@@ -8,10 +8,10 @@ import { belowUnder } from "../derive/topics.ts";
 import { allLinesHidden, hiddenLines, shownParts, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
-import { docContent, imagesOf, type RichEnv } from "./rich.ts";
-import type { DocDefinition, ImageVariant, PdfInput, PdfScope } from "./types.ts";
+import { docContent, FLOAT_ID, imagesOf, type RichEnv } from "./rich.ts";
+import type { DocDefinition, ImageVariant, LaidNode, PdfInput, PdfScope } from "./types.ts";
 
-export type { Content, DocDefinition, ImageData, ImageVariant, PdfInput, PdfScope } from "./types.ts";
+export type { Content, DocDefinition, ImageData, ImageVariant, LaidNode, PdfInput, PdfScope } from "./types.ts";
 export { imageKey } from "./types.ts";
 export { EMBED_MIME, embedsAsStored, storedMime } from "./images.ts";
 export { pdfFonts, CARLITO_FACES } from "./fonts.ts";
@@ -206,16 +206,15 @@ export function wholeGuideUrl(repo: string, guide: string, source: string): stri
   return `https://github.com/${repo}/releases/download/pdf-${guide}/${encodeURIComponent(wholeGuideAsset(source))}`;
 }
 
-/** The pdfmake document definition of a scope (70 §70.1–§70.4). */
-export function buildDocDefinition(scope: PdfScope, data: PdfInput, fontmap: FontMapJson): DocDefinition {
+function definition(scope: PdfScope, data: PdfInput, fontmap: FontMapJson, lifts: ReadonlyMap<string, number>): { def: DocDefinition; floats: number } {
   const sel = select(scope, data);
   const { page } = sel;
-  const env: RichEnv = { fonts: new FontSplitter(fontmap), images: data.images ?? {}, used: new Set(), pendingBreak: false };
+  const env: RichEnv = { fonts: new FontSplitter(fontmap), images: data.images ?? {}, used: new Set(), pendingBreak: false, floats: 0, lifts };
   const width = page.widthPt - page.margins.left - page.margins.right;
   const content = sel.parts.flatMap((p) => docContent(p.doc, p.basePt, width, env));
   const images: Record<string, string> = {};
   for (const key of env.used) images[key] = env.images[key] as string;
-  return {
+  const def: DocDefinition = {
     pageSize: { width: page.widthPt, height: page.heightPt },
     pageMargins: [page.margins.left, page.margins.top, page.margins.right, page.margins.bottom],
     content,
@@ -223,4 +222,51 @@ export function buildDocDefinition(scope: PdfScope, data: PdfInput, fontmap: Fon
     images,
     info: { title: "doc" in data ? data.doc.name : `${stem(data.nav.source)} - ${scopeTitle(scope, data)}` },
   };
+  return { def, floats: env.floats };
+}
+
+/**
+ * The pdfmake document definition of a scope (70 §70.1–§70.4). `lifts`: how far up each floating
+ * picture is drawn so that it ends on its page (floatLifts of a first layout; see renderPdf).
+ */
+export function buildDocDefinition(scope: PdfScope, data: PdfInput, fontmap: FontMapJson, lifts: ReadonlyMap<string, number> = new Map()): DocDefinition {
+  return definition(scope, data, fontmap, lifts).def;
+}
+
+/**
+ * How far up each floating picture laid out at `laid` (by id) must be drawn to end within its page's
+ * inner area: by as much as it runs past the bottom, but never above the top. Pictures that fit are
+ * not listed.
+ */
+export function floatLifts(laid: ReadonlyMap<string, LaidNode>): Map<string, number> {
+  const lifts = new Map<string, number>();
+  for (const [id, node] of laid) {
+    const at = node.startPosition;
+    const innerTop = at.top - at.verticalRatio * at.pageInnerHeight;
+    const over = at.top + (node.height ?? 0) - (innerTop + at.pageInnerHeight);
+    const lift = Math.min(over, at.top - innerTop);
+    if (lift > 0.01) lifts.set(id, lift);
+  }
+  return lifts;
+}
+
+/**
+ * Makes a scope's PDF with pdfmake (`create`, whose result renders on getBuffer and keeps what it
+ * rendered). Floating pictures are drawn on their anchors' pages wherever they fall, so where one runs
+ * past its page's end is known only once laid out: such a PDF is laid out once to read back where each
+ * picture fell, and made again with those pictures lifted (moving them moves nothing else, as they take
+ * no room). One without floating pictures, or whose pictures all fit, is made once.
+ */
+export async function renderPdf<T extends { getBuffer(): Promise<unknown> }>(scope: PdfScope, data: PdfInput, fontmap: FontMapJson, create: (def: DocDefinition) => T): Promise<T> {
+  const { def, floats } = definition(scope, data, fontmap, new Map());
+  if (floats === 0) return create(def);
+  const laid = new Map<string, LaidNode>();
+  def.pageBreakBefore = (node) => {
+    if (node.id?.startsWith(FLOAT_ID)) laid.set(node.id, node);
+    return false;
+  };
+  const first = create(def);
+  await first.getBuffer();
+  const lifts = floatLifts(laid);
+  return lifts.size === 0 ? first : create(buildDocDefinition(scope, data, fontmap, lifts));
 }

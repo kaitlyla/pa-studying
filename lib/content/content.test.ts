@@ -394,4 +394,68 @@ describe("serialization (20: stable formatting)", () => {
       }
     });
   });
+
+  describe("a floating picture, stored only when it floats", () => {
+    const floatPath = `content/guides/fm/cardiovascular/blocks/${b(4)}.json`;
+    const FLOAT = { dxPt: 36, dyPt: 4.5 };
+    const picture = { type: "image_block", attrs: { asset: `${"a".repeat(32)}.png`, widthPt: 120, heightPt: 60 } };
+    const anchored = (float: unknown, child: object = picture) => ({ type: "anchored", attrs: { offsetPt: 0, ...(float === undefined ? {} : { float }) }, content: [child] });
+    const inBody = (a: object) => ({ v: 1, id: b(4), kind: "prose", meta: {}, doc: { type: "doc", content: [a, { type: "paragraph" }] } });
+    const inCell = (a: object) => ({
+      v: 1, id: b(4), kind: "table", meta: {},
+      doc: { type: "doc", content: [{
+        type: "table",
+        attrs: { grid: [300], borders: { top: null, right: null, bottom: null, left: null, insideH: null, insideV: null }, cellMarginPt: { top: 0, right: 5.4, bottom: 0, left: 5.4 } },
+        content: [{ type: "table_row", attrs: { id: r(1) }, content: [{ type: "table_cell", content: [a, { type: "paragraph" }] }] }],
+      }] },
+    });
+    const floatsIn = (text: string): unknown[] => {
+      const out: unknown[] = [];
+      const walk = (n: { type: string; attrs?: Record<string, unknown>; content?: unknown[] }): void => {
+        if (n.type === "anchored") out.push(n.attrs?.float);
+        for (const c of n.content ?? []) walk(c as typeof n);
+      };
+      walk(parseFile<{ doc: Parameters<typeof walk>[0] }>(floatPath, text).doc);
+      return out;
+    };
+
+    it("reads an anchor saved before floats existed, and writes it back unchanged", () => {
+      const text = serializeFile(floatPath, inCell(anchored(undefined)));
+      expect(text).not.toContain("float");
+      expect(floatsIn(text)).toEqual([undefined]);
+      expect(serializeFile(floatPath, parseFile(floatPath, text))).toBe(text);
+    });
+
+    it("stores a float after the offset, in a table cell and in body text, and reads it back", () => {
+      for (const block of [inCell(anchored(FLOAT)), inBody(anchored(FLOAT))]) {
+        const text = serializeFile(floatPath, block);
+        expect(text).toMatch(/"offsetPt": 0,\n +"float": \{\n +"dxPt": 36,\n +"dyPt": 4\.5\n +\}/);
+        expect(floatsIn(text)).toEqual([FLOAT]);
+        expect(serializeFile(floatPath, parseFile(floatPath, text))).toBe(text);
+      }
+    });
+
+    it("drops a null float on write, and refuses a stored null as not canonical", () => {
+      expect(serializeFile(floatPath, inCell(anchored(null)))).toBe(serializeFile(floatPath, inCell(anchored(undefined))));
+      const stored = serializeFile(floatPath, inCell(anchored(FLOAT))).replace(/"float": \{[^}]*\}/, `"float": null`);
+      expect(() => parseFile(floatPath, stored)).toThrow(/does not round-trip/);
+    });
+
+    it("refuses a float above its paragraph or missing a coordinate", () => {
+      expect(() => serializeFile(floatPath, inCell(anchored({ dxPt: 0, dyPt: -1 })))).toThrow(/float dyPt \(0 or more\)/);
+      for (const bad of [{ dxPt: 0 }, { dyPt: 0 }]) {
+        expect(() => serializeFile(floatPath, inCell(anchored(bad))), JSON.stringify(bad)).toThrow(/float/);
+      }
+      expect(() => serializeFile(floatPath, inCell(anchored({ dxPt: "1", dyPt: 0 })))).toThrow(/Invalid number/);
+    });
+
+    it("floats only a picture, and only in body text or a table cell", () => {
+      const textbox = { type: "textbox", attrs: { widthPt: 100, fill: null, border: null, inline: false }, content: [{ type: "paragraph" }] };
+      expect(() => serializeFile(floatPath, inCell(anchored(FLOAT, textbox)))).toThrow(/only a picture floats/);
+      const inTextbox = inBody({ ...textbox, content: [anchored(FLOAT), { type: "paragraph" }] });
+      expect(() => serializeFile(floatPath, inTextbox)).toThrow(/only in body text or a table cell/);
+      // The same picture anchored in place is fine there.
+      expect(() => serializeFile(floatPath, inBody({ ...textbox, content: [anchored(undefined), { type: "paragraph" }] }))).not.toThrow();
+    });
+  });
 });

@@ -25,6 +25,7 @@ import {
 import { PictureHandles, pictureFile } from "./PictureHandles.tsx";
 import { addPictureFile, PICTURE_ACCEPT } from "./pictures.ts";
 import { createEditorState, PICTURE_REFUSED, pictureFileProps } from "./editor/state.ts";
+import { floatPicture, inlinePicture, placeFloat } from "./editor/floats.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm, widthConfirm } from "./dialogs.tsx";
 import { MedsFrame } from "./MedsEdit.tsx";
@@ -121,6 +122,10 @@ export const RESET_SHAPE = "Reset shape";
 export const CROP = "Crop";
 /** The toolbar's button that brings back the whole of a cropped picture's file. */
 export const RESET_CROP = "Reset crop";
+/** The toolbar's button that takes the selected picture out of the text, floating where it is, with the text it covers moving aside (Word's square wrap). */
+export const WRAP_TEXT = "Wrap text";
+/** The toolbar's button that puts a floating picture back into the text (Word's "In line with text"). */
+export const IN_LINE = "In line with text";
 
 /** Reset shape on the picked figure (its file's proportions are its stored pixel size's). */
 function resetFigureShape(p: PickedFigure): void {
@@ -149,7 +154,7 @@ function SlotEditor({ slot }: { slot: Slot }): ReactNode {
     if (!el) return undefined;
     const ctx: DocContext = { basePt: slot.basePt, pageContentPt: slot.pageContentPt, pageContentHeightPt: slot.pageContentHeightPt };
     const view: EditorView = new EditorView(el, {
-      state: createEditorState(slot.doc, { onPictureRefused: () => showToast(PICTURE_REFUSED), rows: slot.rows, confirm: widthConfirm }),
+      state: createEditorState(slot.doc, { onPictureRefused: () => showToast(PICTURE_REFUSED), basePt: slot.basePt, rows: slot.rows, confirm: widthConfirm }),
       nodeViews: nodeViews(slot.basePt),
       markViews: markViews(slot.basePt),
       clipboardSerializer: clipboardSerializer(slot.basePt),
@@ -455,6 +460,13 @@ function Toolbar(): ReactNode {
     return n instanceof Element ? n : null;
   };
   const shownPicture = (c: DocContext): number | null => shownPictureWidth(pictureImg(), c.basePt);
+  const floating = picSel !== null && picSel.$from.parent.type.name === "anchored" && picSel.$from.parent.attrs.float != null;
+  // Wrap text: the picture floats where it is drawn now, and the text it covers moves aside.
+  const wrapText = (c: DocContext): Command => (state, dispatch) => {
+    const img = pictureImg();
+    const place = a && img ? placeFloat(a.view, img.getBoundingClientRect(), c.basePt) : null;
+    return place !== null && floatPicture(place)(state, dispatch);
+  };
   const pictureNow = a && picSel ? selectedPictureSize(a.view.state, a.ctx) : null;
   // Crop mode belongs to the selection it was turned on for (or the one its own last crop left), so
   // selecting anything else, or changing the picture any other way, ends it.
@@ -580,6 +592,9 @@ function Toolbar(): ReactNode {
             <Tool label={RESET_SHAPE} run={cmd(resetPicture)} refk="tb-pic-reset">{RESET_SHAPE}</Tool>
             <Tool label={CROP} pressed={cropping} run={() => setCropSel(cropping ? null : picSel)} refk="tb-pic-crop">{CROP}</Tool>
             {pictureNow?.crop && <Tool label={RESET_CROP} run={cmd(resetPictureCrop)} refk="tb-pic-uncrop">{RESET_CROP}</Tool>}
+            {floating
+              ? <Tool label={IN_LINE} run={plainCmd(inlinePicture)} refk="tb-pic-inline">{IN_LINE}</Tool>
+              : <Tool label={WRAP_TEXT} run={cmd(wrapText)} refk="tb-pic-wrap">{WRAP_TEXT}</Tool>}
             <Tool label="Delete picture" run={() => { if (a) void deletePicture(editorConfirm)(a.view); }} refk="tb-pic-delete">Delete picture</Tool>
           </>
         )}

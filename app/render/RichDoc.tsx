@@ -1,14 +1,16 @@
 // Stored ProseMirror JSON → React elements (plan 40 §40.6). No HTML string is ever built or injected
 // (10 §10.6 control 2): every node becomes a React element and every text is a React text child.
-import { createContext, Fragment, useContext, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { createContext, Fragment, useContext, useLayoutEffect, useRef, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import { cropOrNull } from "../../lib/crop.ts";
 import { isAllowedHref } from "../../lib/schema.ts";
 import { drawnGrid } from "../../lib/wordFormat.ts";
 import { isMark, isNode, type CellMargins, type ImageAttrs, type ListMarker, type MarkJSON, type MarkName, type NodeJSON, type PMNode, type TableBorders } from "../../lib/schemaTypes.ts";
 import { DATA_BASE } from "../data/load.ts";
 import { openImageViewer } from "../files/imageViewer.tsx";
+import { useIsPhone } from "../shell/responsive.ts";
 import { navigate } from "../shell/route.ts";
 import { Drawing } from "./Drawing.tsx";
+import { docHasFloat, FLOAT_FRAME, FLOAT_PIC, FX, FX_END, watchFloats } from "./floats.ts";
 import { HitBlock, Txt } from "./Text.tsx";
 import {
   anchoredOffset,
@@ -236,8 +238,15 @@ interface CellProps {
   margins: CellMargins;
 }
 
+/**
+ * Whether floating pictures here are drawn floating: in a doc drawn in a float frame (never on a
+ * phone), outside a stacked table (which draws them in their place).
+ */
+const FloatsCtx = createContext(false);
+
 function Cell({ placed, colspan, rowspan, edges, borders, margins }: CellProps): ReactNode {
   const { basePt } = useContext(RenderCtx);
+  const floats = useContext(FloatsCtx);
   const cell = placed.node;
   return (
     <td
@@ -245,6 +254,8 @@ function Cell({ placed, colspan, rowspan, edges, borders, margins }: CellProps):
       rowSpan={rowspan > 1 ? rowspan : undefined}
       style={cellStyle(isNode(cell, "table_cell") ? cell.attrs : {}, basePt, borders, edges, margins)}
     >
+      {/* Holds the room its text keeps clear of the pictures over it (watchFloats draws it). */}
+      {floats && <div className={FX} aria-hidden="true" />}
       <Blocks nodes={placed.node.content ?? []} />
     </td>
   );
@@ -350,7 +361,11 @@ function StackedTable({ rows }: { rows: DrawRow[] }): ReactNode {
       </div>,
     );
   });
-  return <div className="stacked">{out}</div>;
+  return (
+    <FloatsCtx.Provider value={false}>
+      <div className="stacked">{out}</div>
+    </FloatsCtx.Provider>
+  );
 }
 
 const TableViewCtx = createContext<TableView>({ rows: null, stacked: false });
@@ -421,10 +436,21 @@ function DrawingNode({ node }: { node: PMNode & NodeJSON<"drawing"> }): ReactNod
 
 function Anchored({ node }: { node: PMNode & NodeJSON<"anchored"> }): ReactNode {
   const { basePt } = useContext(RenderCtx);
+  const floating = useContext(FloatsCtx);
   const child = node.content?.[0];
+  const float = node.attrs.float ?? null;
+  if (float && floating && child && isNode(child, "image_block")) {
+    return (
+      <div className={FLOAT_PIC} data-dx={float.dxPt / basePt} data-dy={float.dyPt / basePt}>
+        <InlineImage attrs={child.attrs} />
+      </div>
+    );
+  }
+  // A floating picture not drawn floating (on a phone) is drawn in its place, as far right as it floats.
+  const offsetPt = float ? Math.max(0, float.dxPt) : node.attrs.offsetPt;
   return (
     <div className="anchored">
-      <div style={{ marginLeft: anchoredOffset(node.attrs.offsetPt, childWidthPt(child), basePt), width: "fit-content", maxWidth: "100%" }}>
+      <div style={{ marginLeft: anchoredOffset(offsetPt, childWidthPt(child), basePt), width: "fit-content", maxWidth: "100%" }}>
         {child && <Block node={child} />}
       </div>
     </div>
@@ -484,12 +510,43 @@ export interface RichDocProps {
   pharmNotes?: boolean;
 }
 
-/** Renders one stored doc. The caller sets the reading font size (13px laptop / 14px phone). */
+/**
+ * A doc with floating pictures: its blocks in one frame, each run of body text and each grid table cell
+ * starting with the element its text keeps clear of the pictures in (floats.ts), laid out once drawn,
+ * before it shows, and again whenever what is drawn changes.
+ */
+function FloatFrame({ nodes }: { nodes: readonly PMNode[] }): ReactNode {
+  const { basePt, pharmNotes } = useContext(RenderCtx);
+  const { rows, stacked } = useContext(TableViewCtx);
+  const ref = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => (ref.current ? watchFloats(ref.current).stop : undefined), [nodes, basePt, pharmNotes, rows, stacked]);
+  return (
+    <div ref={ref} className={FLOAT_FRAME}>
+      <FloatsCtx.Provider value={true}>
+        <div className={FX} aria-hidden="true" />
+        {nodes.map((n, i) => (
+          <Fragment key={i}>
+            <Block node={n} />
+            {!stacked && isNode(n, "table") && <div className={FX} aria-hidden="true" />}
+          </Fragment>
+        ))}
+        <div className={FX_END} aria-hidden="true" />
+      </FloatsCtx.Provider>
+    </div>
+  );
+}
+
+/**
+ * Renders one stored doc. The caller sets the reading font size (13px laptop / 14px phone). On a phone
+ * the column is too narrow for text beside a picture, so floating pictures are drawn in their place.
+ */
 export function RichDoc({ doc, basePt, rows = null, stacked = false, pharmNotes = false }: RichDocProps): ReactNode {
+  const nodes = ((doc as PMNode).content ?? []) as PMNode[];
+  const phone = useIsPhone();
   return (
     <RenderCtx.Provider value={{ basePt, pharmNotes }}>
       <TableViewCtx.Provider value={{ rows, stacked }}>
-        <Blocks nodes={((doc as PMNode).content ?? []) as PMNode[]} />
+        {!phone && docHasFloat(doc as PMNode) ? <FloatFrame nodes={nodes} /> : <Blocks nodes={nodes} />}
       </TableViewCtx.Provider>
     </RenderCtx.Provider>
   );

@@ -7,7 +7,7 @@ import pdfMake from "pdfmake";
 import sharp from "sharp";
 import { cropOrNull, cropPixels } from "../../lib/crop.ts";
 import { FONTMAP_PATH, homePath, navPath, systemPath, type FontMapJson, type HomeJson, type NavJson, type SystemJson } from "../../lib/derive/published.ts";
-import { buildDocDefinition, embedsAsStored, imageKey, storedMime, imageRequests, pdfFonts, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
+import { embedsAsStored, imageKey, storedMime, imageRequests, pdfFonts, renderPdf, type ImageData, type ImageVariant, type PdfInput, type PdfScope } from "../../lib/pdf/index.ts";
 
 async function readJson<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf8")) as T;
@@ -49,8 +49,8 @@ export function nodeRenderer(dataDir: string, fontsDir: string, fontmap: FontMap
       const variants = imageRequests(scope, input);
       const images: ImageData = {};
       for (const v of variants) images[imageKey(v)] = await imageDataUrl(assetsDir, v);
-      const def = buildDocDefinition(scope, { ...input, images }, fontmap);
-      return new Uint8Array(await pdfMake.createPdf(def).getBuffer());
+      const pdf = await renderPdf(scope, { ...input, images }, fontmap, (def) => pdfMake.createPdf(def));
+      return new Uint8Array(await pdf.getBuffer());
     },
   };
 }

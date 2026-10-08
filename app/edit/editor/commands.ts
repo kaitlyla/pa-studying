@@ -951,7 +951,8 @@ export function deleteColumn(confirm: Confirm, notify: Notify): (editor: LiveEdi
 
 // ---- pictures ------------------------------------------------------------------------------------
 
-function selectedPicture(state: EditorState): NodeSelection | null {
+/** The selected picture (inline, or a block one in an anchor), or null. */
+export function selectedPicture(state: EditorState): NodeSelection | null {
   const sel = state.selection;
   if (sel instanceof NodeSelection && (sel.node.type === nodes.image || sel.node.type === nodes.image_block)) return sel;
   return null;
@@ -964,13 +965,14 @@ export interface PictureSize {
 }
 
 /**
- * The size limits for a picture at `$pos`: its table cell's grid width, else the page content width;
- * and the page content height.
+ * The size limits for a picture at `$pos`: its table cell's grid width (the whole table's for a
+ * picture floating over it), else the page content width; and the page content height.
  */
 function pictureLimit($pos: ResolvedPos, ctx: DocContext): PictureSize {
   const at = tableAt($pos);
   if (!at) return { widthPt: ctx.pageContentPt, heightPt: ctx.pageContentHeightPt };
-  const rect = at.map.findCell(at.cellRel);
+  const floating = $pos.parent.type === nodes.anchored && $pos.parent.attrs.float != null;
+  const rect = floating ? { left: 0, right: at.map.width } : at.map.findCell(at.cellRel);
   const grid = at.table.attrs.grid as number[];
   let w = 0;
   for (let c = rect.left; c < rect.right; c++) w += grid[c] ?? 0;
@@ -1287,8 +1289,11 @@ export function deletePicture(confirm: Confirm): (editor: LiveEditor) => Promise
   };
 }
 
-/** Kinds of node a transaction may not lose without a confirm. */
-const GUARDED = new Set(["image", "image_block", "textbox", "drawing", "anchored"]);
+/**
+ * Kinds of node a transaction may not lose without a confirm. An anchor is not counted itself: it
+ * always holds one of these, so it is never lost without one, and a picture may move in and out of one.
+ */
+const GUARDED = new Set(["image", "image_block", "textbox", "drawing"]);
 
 export function guardedCount(doc: PMNode): number {
   let n = 0;

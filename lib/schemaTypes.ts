@@ -87,7 +87,21 @@ export type ParagraphAttrs = {
   marker: ListMarker | null;
 };
 
-export type AnchoredAttrs = { offsetPt: number };
+/**
+ * A picture floating over the text, which wraps around it (as Word's square wrap, placed relative to
+ * its column and paragraph): its top-left corner `dxPt` right of the left edge of the column holding
+ * it (its table cell's content, or the doc's text column) and `dyPt` below the top of the block after
+ * it, so it moves with that block. It takes no room where it sits; a table's keeps within the table's
+ * width and may reach into its other rows and columns, a body picture's within the column's.
+ */
+export type AnchoredFloat = { dxPt: number; dyPt: number };
+
+/**
+ * `float`: null or absent for an anchor drawn in its place, `offsetPt` right of the left edge. Set
+ * only on a picture (`image_block`) in body text or a table cell. Written only when set, so anchors
+ * stored before it existed (and every past version) stay canonical.
+ */
+export type AnchoredAttrs = { offsetPt: number; float?: AnchoredFloat | null };
 export type RuleAttrs = { color: string; widthPt: number };
 export type TextboxAttrs = { widthPt: number; fill: string | null; border: Border | null; inline: boolean };
 export type DrawingAttrs = { widthPt: number; heightPt: number; shapes: DrawingShape[] };

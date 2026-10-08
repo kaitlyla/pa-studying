@@ -183,6 +183,14 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .pic { display: inline-block; max-width: 100%; }
 .pic-block { margin: .2em 0; }
 .textbox, .anchored { max-width: 100%; }
+/* floating pictures (render/floats.ts): placed in their doc's frame, or in their table */
+.float-frame, .float-frame table.nt { position: relative; }
+.float-pic { position: absolute; z-index: 1; }
+.float-pic > .pic { display: block; }
+.fx { height: 0; }
+/* A bullet's text-indent is minus its width, so its line would take no width and fit beside a
+   picture that leaves no room, the bullet alone there and its text below; a hair more keeps them together. */
+.float-frame .marker { margin-right: .1px; }
 .drawing { display: block; max-width: 100%; height: auto; overflow: visible; }
 .drawing-text { font-family: var(--text-stack, "Carlito", sans-serif); }
 .tcard { margin-bottom: 18px; }

@@ -35,6 +35,22 @@ export type PdfInput =
 /** A pdfmake document-definition node. pdfmake ships no types; the builder emits plain objects. */
 export type Content = Record<string, unknown>;
 
+/** Where pdfmake laid a node out: its page, and its top (pt from the page's top) within the page's inner area. */
+export interface LaidPosition {
+  pageNumber: number;
+  top: number;
+  pageInnerHeight: number;
+  /** (top − the page's top margin) / pageInnerHeight. */
+  verticalRatio: number;
+}
+
+/** What pdfmake's pageBreakBefore is told of each laid-out node (the fields the builder reads). */
+export interface LaidNode {
+  id?: string;
+  height?: number;
+  startPosition: LaidPosition;
+}
+
 export interface DocDefinition {
   pageSize: { width: number; height: number };
   pageMargins: [number, number, number, number];
@@ -42,6 +58,8 @@ export interface DocDefinition {
   defaultStyle: { font: string; fontSize: number };
   images: ImageData;
   info: { title: string };
+  /** Called by pdfmake for each laid-out node; true breaks the page before it. */
+  pageBreakBefore?: (node: LaidNode) => boolean;
 }
 
 export function imageKey(v: ImageVariant): string {

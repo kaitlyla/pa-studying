@@ -10,6 +10,7 @@ import type { EditorProps, EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import { columnDrag } from "./columnDrag.ts";
+import { floatsPlugin } from "./floats.ts";
 import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline, type Confirm } from "./commands.ts";
 import { rowsLayoutPlugin, type RowsLayout } from "./rowLayout.ts";
 
@@ -19,6 +20,8 @@ export const PICTURE_REFUSED = "That would remove a picture. To remove a picture
 export interface EditorOptions {
   /** Called when the picture guard refuses an edit; the editor shows PICTURE_REFUSED. */
   onPictureRefused?: () => void;
+  /** The pt of 1em in this editor's text (her page's base size): floating pictures move by dragging only with it. */
+  basePt?: number;
   /** A table block's rows editor: its table's layout facts (the column commands read them). */
   rows?: RowsLayout;
   /** Asks her before a column border drag that changes other dxs' rows; without it such a drag is not applied. */
@@ -57,6 +60,7 @@ export function editorPlugins(opts: EditorOptions = {}): Plugin[] {
     keymap(baseKeymap),
     pictureGuard(opts.onPictureRefused),
     columnDrag(opts.confirm ?? declined),
+    floatsPlugin(opts.basePt ?? null),
     ...(opts.rows ? [rowsLayoutPlugin(opts.rows)] : []),
   ];
 }

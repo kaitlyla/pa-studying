@@ -420,6 +420,29 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     expect(holder?.querySelector("img")).not.toBeNull();
   });
 
+  it("draws a doc with a floating picture in one frame: the picture out of the flow at its offset in em, and a region start for the body, each cell and after each table", async () => {
+    const floating = { type: "anchored", attrs: { offsetPt: 0, float: { dxPt: 22, dyPt: 5.5 } }, content: [{ type: "image_block", attrs: image }] };
+    const inCell: PMNode = { type: "table_cell", attrs: { colspan: 1, rowspan: 1, colwidth: null, fill: null, vAlign: "top", borders: null }, content: [floating, para("beside")] };
+    const doc = docOf(para("top"), tableNode([50, 50], [row("r1", [inCell, cell("B")])]), para("below"));
+    const c = await render(<RichDoc basePt={11} doc={doc} />);
+    const frame = need(c.querySelector<HTMLElement>(".float-frame"), "frame");
+    expect([...frame.children].map((e) => e.className || e.tagName)).toEqual(["fx", "P", "ntw", "fx", "P", "fx-end"]);
+    const pic = need(frame.querySelector<HTMLElement>("td > .float-pic"), "floating picture");
+    expect(pic.dataset).toMatchObject({ dx: "2", dy: "0.5" });
+    expect(pic.nextElementSibling?.textContent).toBe("beside");
+    expect(getComputedStyle(pic).position).toBe("absolute");
+    expect(frame.querySelectorAll("td > .fx:first-child")).toHaveLength(2);
+    expect(c.querySelector(".anchored")).toBeNull();
+  });
+
+  it("draws a floating picture in its place, as far right as it floats, in a phone's stacked table and in a doc without a frame", async () => {
+    const floating = { type: "anchored", attrs: { offsetPt: 0, float: { dxPt: 22, dyPt: 5.5 } }, content: [{ type: "image_block", attrs: image }] };
+    const inCell: PMNode = { type: "table_cell", attrs: { colspan: 1, rowspan: 1, colwidth: null, fill: null, vAlign: "top", borders: null }, content: [floating, para("beside")] };
+    const c = await render(<RichDoc basePt={11} doc={docOf(tableNode([50, 50], [row("h", [cell("Name"), cell("Col")], "heading"), row("r1", [cell("AF"), inCell])]))} stacked />);
+    expect(c.querySelector(".float-pic")).toBeNull();
+    expect(c.querySelector<HTMLElement>(".stacked .anchored > div")?.style.marginLeft).toBe("min(2em, 100% - 10em)");
+  });
+
   it("draws a text box with its width, border, fill and Word's default insets", async () => {
     const c = await render(
       <RichDoc

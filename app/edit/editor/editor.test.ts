@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import type { Node as PMNode } from "prosemirror-model";
 import { EditorState, NodeSelection, TextSelection } from "prosemirror-state";
 import type { Transaction } from "prosemirror-state";
-import { redo, undo } from "prosemirror-history";
+import { closeHistory, redo, undo } from "prosemirror-history";
 import { EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
@@ -19,6 +19,7 @@ import {
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
 import { cellPadding, MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
+import { floatPicture, frameDecorations, hasFloat, inlinePicture } from "./floats.ts";
 
 const ctx = { basePt: 11, pageContentPt: 540, pageContentHeightPt: 720 };
 const ASSET = `${"a".repeat(32)}.png`;
@@ -1294,5 +1295,178 @@ describe("node views", () => {
     const view = new EditorView(host, { state: createEditorState(d), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
     expect((host.querySelector("table") as HTMLElement).style.marginLeft).toBe("0em");
     view.destroy();
+  });
+});
+
+describe("floating pictures", () => {
+  const IMG = { asset: ASSET, widthPt: 60, heightPt: 30 };
+  const inline = { type: "image", attrs: IMG };
+  const floating = (dxPt: number, dyPt: number, attrs: Record<string, unknown> = IMG) =>
+    ({ type: "anchored", attrs: { offsetPt: 0, float: { dxPt, dyPt } }, content: [{ type: "image_block", attrs }] });
+  const cellOf = (...content: unknown[]) => ({ type: "table_cell", attrs: {}, content });
+  const positions = (doc: PMNode, type: string): number[] => {
+    const out: number[] = [];
+    doc.descendants((n, pos) => { if (n.type.name === type) out.push(pos); });
+    return out;
+  };
+  const first = (doc: PMNode, type: string): number => {
+    const pos = positions(doc, type)[0];
+    if (pos === undefined) throw new Error(`no ${type}`);
+    return pos;
+  };
+  const picked = (d: DocJSON, type: "image" | "image_block"): EditorState => {
+    const s0 = createEditorState(d);
+    return s0.apply(s0.tr.setSelection(NodeSelection.create(s0.doc, first(s0.doc, type))));
+  };
+  /** A node's tree: its text, or its type with its children's trees. */
+  const outline = (n: PMNode): unknown => {
+    if (n.isText) return n.text;
+    if (!n.childCount) return n.type.name;
+    const kids: unknown[] = [];
+    n.forEach((c) => kids.push(outline(c)));
+    return { [n.type.name]: kids };
+  };
+  const cellAt = (doc: PMNode, i: number): PMNode => doc.nodeAt(positions(doc, "table_cell")[i] ?? -1) as PMNode;
+  const pictures = (doc: PMNode): number => positions(doc, "image").length + positions(doc, "image_block").length;
+  const selectedType = (st: EditorState): string | null => (st.selection instanceof NodeSelection ? st.selection.node.type.name : null);
+
+  // A table cell holding "a<picture>b", a cell "B", and body text "after".
+  const withCellPicture = docOf(table([row(rid(1), [cellOf(para([text("a"), inline, text("b")])), cell("B")])], [100, 300]), para([text("after")]));
+
+  it("Wrap text takes a picture out of its line into a floating anchor before the paragraph, keeping all it has, selected", () => {
+    const st = picked(withCellPicture, "image");
+    const attrs = st.doc.nodeAt(first(st.doc, "image"))?.attrs;
+    const after = run(st, floatPicture({ anchorPos: first(st.doc, "paragraph"), dxPt: 12, dyPt: 6 }));
+    expect(outline(cellAt(after.doc, 0))).toEqual({ table_cell: [{ anchored: ["image_block"] }, { paragraph: ["ab"] }] });
+    expect(after.doc.nodeAt(first(after.doc, "anchored"))?.attrs).toEqual({ offsetPt: 0, float: { dxPt: 12, dyPt: 6 } });
+    expect(after.doc.nodeAt(first(after.doc, "image_block"))?.attrs).toEqual(attrs);
+    expect(selectedType(after)).toBe("image_block");
+    expect(pictures(after.doc)).toBe(1);
+  });
+
+  it("a floating picture moves to another cell or into body text, never above its paragraph's top, and undoes in one step", () => {
+    const st = picked(withCellPicture, "image");
+    const floated = run(st, floatPicture({ anchorPos: first(st.doc, "paragraph"), dxPt: 12, dyPt: 6 }));
+    const toB = run(floated, floatPicture({ anchorPos: positions(floated.doc, "paragraph")[1] ?? -1, dxPt: 0, dyPt: -4 }));
+    expect(outline(cellAt(toB.doc, 0))).toEqual({ table_cell: [{ paragraph: ["ab"] }] });
+    expect(outline(cellAt(toB.doc, 1))).toEqual({ table_cell: [{ anchored: ["image_block"] }, { paragraph: ["B"] }] });
+    expect(toB.doc.nodeAt(first(toB.doc, "anchored"))?.attrs.float).toEqual({ dxPt: 0, dyPt: 0 });
+    expect(selectedType(toB)).toBe("image_block");
+
+    const editor = live(toB);
+    // As after a pause: the edits before it are an undo step of their own.
+    editor.dispatch(closeHistory(editor.state.tr));
+    const body = toB.doc.content.size - (toB.doc.lastChild as PMNode).nodeSize;
+    expect(floatPicture({ anchorPos: body, dxPt: 30, dyPt: 2 })(editor.state, editor.dispatch)).toBe(true);
+    expect(editor.state.doc.toJSON().content.map((n: { type: string }) => n.type)).toEqual(["table", "anchored", "paragraph"]);
+    expect(outline(cellAt(editor.state.doc, 1))).toEqual({ table_cell: [{ paragraph: ["B"] }] });
+    expect(undo(editor.state, editor.dispatch)).toBe(true);
+    expect(editor.state.doc.eq(toB.doc)).toBe(true);
+  });
+
+  it("refuses an anchor that is not a block of body text or a table cell, or is inside the picture itself", () => {
+    const box = { type: "anchored", attrs: { offsetPt: 0 }, content: [{ type: "textbox", attrs: { widthPt: 100, fill: null, border: null, inline: false }, content: [para([text("in box")])] }] };
+    const st = picked(docOf(para([text("x"), inline]), box), "image");
+    const no = (anchorPos: number, s = st): boolean => floatPicture({ anchorPos, dxPt: 0, dyPt: 0 })(s);
+    expect(no(posOf(st.doc, "in box") - 1)).toBe(false);
+    expect(no(posOf(st.doc, "x") + 1)).toBe(false);
+    expect(no(0)).toBe(true);
+    // Nothing selected.
+    expect(no(0, createEditorState(docOf(para([text("x"), inline]))))).toBe(false);
+    // Moving a floating picture to a place inside its own anchor.
+    const fl = picked(docOf(floating(0, 0), para([text("x")])), "image_block");
+    expect(no(1, fl)).toBe(false);
+  });
+
+  it("In line puts a floating picture at the start of its paragraph, or in a paragraph of its own before a table", () => {
+    const st = picked(docOf(floating(10, 5), para([text("x")])), "image_block");
+    const attrs = st.doc.nodeAt(1)?.attrs;
+    const back = run(st, inlinePicture);
+    expect(outline(back.doc)).toEqual({ doc: [{ paragraph: ["image", "x"] }] });
+    expect(back.doc.nodeAt(1)?.attrs).toEqual(attrs);
+    expect(selectedType(back)).toBe("image");
+
+    const beforeTable = run(picked(docOf(floating(10, 5), table([row(rid(1), [cell("A")])], [100])), "image_block"), inlinePicture);
+    expect(outline(beforeTable.doc)).toEqual({ doc: [{ paragraph: ["image"] }, { table: [{ table_row: [{ table_cell: [{ paragraph: ["A"] }] }] }] }] });
+    expect(selectedType(beforeTable)).toBe("image");
+  });
+
+  it("In line does nothing to a picture that does not float", () => {
+    const placed = { type: "anchored", attrs: { offsetPt: 10 }, content: [{ type: "image_block", attrs: IMG }] };
+    expect(inlinePicture(picked(docOf(placed, para()), "image_block"))).toBe(false);
+    expect(inlinePicture(picked(docOf(para([inline])), "image"))).toBe(false);
+  });
+
+  it("the picture guard still refuses losing a floating picture without the confirm", () => {
+    let refused = 0;
+    const state = createEditorState(docOf(floating(0, 0), para([text("x")])), { onPictureRefused: () => { refused++; } });
+    const after = state.apply(state.tr.delete(0, (state.doc.firstChild as PMNode).nodeSize));
+    expect(after.doc.eq(state.doc)).toBe(true);
+    expect(refused).toBe(1);
+  });
+
+  const size = (widthPt: number, heightPt: number) => ({ widthPt, heightPt });
+
+  it("a picture floating over a table may grow to the whole table's width; one in body text to the page's", () => {
+    const inTable = picked(docOf(table([row(rid(1), [cellOf(floating(0, 0), para()), cell("B")])], [100, 300])), "image_block");
+    expect(selectedPictureSize(inTable, ctx)?.limit).toEqual(size(400, 720));
+    expect(selectedPictureSize(picked(docOf(floating(0, 0), para()), "image_block"), ctx)?.limit).toEqual(size(540, 720));
+  });
+
+  it("the picture handles, crop and turn work on a floating picture, which stays floating and selected", () => {
+    const turned = { ...IMG, widthPt: 200, heightPt: 100, rot: 90 };
+    const st = picked(docOf(table([row(rid(1), [cellOf(floating(12, 6, turned), para([text("a")])), cell("B")])], [100, 300])), "image_block");
+    const pic = (s: EditorState) => s.doc.nodeAt(first(s.doc, "image_block"))?.attrs;
+    const float = (s: EditorState) => s.doc.nodeAt(first(s.doc, "anchored"))?.attrs.float;
+    expect(selectedPictureSize(st, ctx)).toEqual({ size: size(200, 100), crop: null, limit: size(400, 720) });
+    // Turned a quarter, the edge seen on the right is its own top.
+    const d = unturnedDrag("e", -30, 0, { rot: 90 });
+    const cut = run(st, dragPictureCrop({ size: size(200, 100), crop: null }, d.handle, d.dx, d.dy, ctx));
+    expect(pic(cut)).toMatchObject({ widthPt: 200, heightPt: 70, rot: 90, crop: { l: 0, t: 0.3, r: 0, b: 0 } });
+    const wide = run(cut, dragPicture(size(200, 70), "e", 500, 0, ctx));
+    expect(pic(wide)).toMatchObject({ widthPt: 400, heightPt: 70, crop: { l: 0, t: 0.3, r: 0, b: 0 } });
+    const smaller = run(wide, resizePicture(-1, ctx));
+    expect(pic(smaller)?.widthPt).toBeCloseTo(400 / 1.15, 10);
+    for (const s of [cut, wide, smaller]) {
+      expect(float(s)).toEqual({ dxPt: 12, dyPt: 6 });
+      expect(selectedType(s)).toBe("image_block");
+    }
+  });
+
+  it("marks out the frame's regions only in a doc with a floating picture: its start, after each table, each cell's start, and its end", () => {
+    const plain = createEditorState(docOf(para([text("p")]), table([row(rid(1), [cell("A")])], [100])));
+    expect(hasFloat(plain.doc)).toBe(false);
+    expect(frameDecorations(plain.doc).find()).toEqual([]);
+
+    const st = createEditorState(docOf(para([text("p")]), table([row(rid(1), [cellOf(floating(0, 0), para()), cell("B")])], [100, 300]), para([text("q")])));
+    expect(hasFloat(st.doc)).toBe(true);
+    const tableEnd = first(st.doc, "table") + (st.doc.nodeAt(first(st.doc, "table")) as PMNode).nodeSize;
+    const [c1, c2] = positions(st.doc, "table_cell") as [number, number];
+    const marks = frameDecorations(st.doc).find().map((d) => [d.from, (d.spec as { key: string }).key]).sort((a, b) => Number(a[0]) - Number(b[0]));
+    expect(marks).toEqual([[0, "fx-0"], [c1 + 1, `fxc-${c1}`], [c2 + 1, `fxc-${c2}`], [tableEnd, `fx-${tableEnd}`], [st.doc.content.size, "fx-end"]]);
+  });
+
+  it("draws a floating picture placed by the frame, with its offset in em, and stops when none floats", () => {
+    const host = document.createElement("div");
+    const d = docOf(table([row(rid(1), [cellOf(floating(22, 5.5), para([text("a")])), cell("B")])], [100, 300]), para([text("q")]));
+    const view = new EditorView(host, { state: createEditorState(d), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
+    try {
+      expect(view.dom.classList.contains("float-frame")).toBe(true);
+      const pic = view.dom.querySelector(".float-pic") as HTMLElement;
+      expect(pic.dataset).toMatchObject({ dx: "2", dy: "0.5" });
+      expect(pic.querySelector("img")).not.toBeNull();
+      expect(pic.closest("td")).not.toBeNull();
+      // The doc's start, after the table, and each of the 2 cells; and the end.
+      expect(view.dom.querySelectorAll(".fx")).toHaveLength(4);
+      expect(view.dom.querySelectorAll("td > .fx")).toHaveLength(2);
+      expect(view.dom.lastElementChild?.classList.contains("fx-end")).toBe(true);
+
+      view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, first(view.state.doc, "image_block"))));
+      expect(inlinePicture(view.state, view.dispatch)).toBe(true);
+      expect(view.dom.classList.contains("float-frame")).toBe(false);
+      expect(view.dom.querySelectorAll(".fx, .fx-end, .float-pic")).toHaveLength(0);
+    } finally {
+      view.destroy();
+    }
   });
 });

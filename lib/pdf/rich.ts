@@ -1,7 +1,7 @@
 // Stored rich text (20 §20.13) → pdfmake content, following the PDF layout rules of plan 70 §70.3.
 import type { DocJSON } from "../content/types.ts";
 import { cropOrNull } from "../crop.ts";
-import type { Border, CellBorders, Crop, DrawingShape as Shape, ListMarker, MarkJSON as Mark, ParagraphBorders, PMNode, TableBorders } from "../schemaTypes.ts";
+import type { AnchoredFloat, Border, CellBorders, Crop, DrawingShape as Shape, ListMarker, MarkJSON as Mark, ParagraphBorders, PMNode, TableBorders } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
 import { CARLITO_LINE_FACTOR, faceOf, spaceWidth, textWidth } from "./metrics.ts";
 import { drawingSvg } from "./svg.ts";
@@ -20,6 +20,19 @@ export interface RichEnv {
   used: Set<string>;
   /** A `page_break` was seen and the next top-level node starts a new page. */
   pendingBreak: boolean;
+  /** How many floating pictures have been drawn: the next one's id is FLOAT_ID + this. */
+  floats: number;
+  /** How far up (pt) each floating picture, by id, is drawn so that it ends on its page (floatLifts). */
+  lifts: ReadonlyMap<string, number>;
+}
+
+/** The id prefix of a floating picture's node, so its place can be read back from a layout. */
+export const FLOAT_ID = "float-";
+
+/** What a floating picture keeps within: its left and width, pt, from the left of its column. */
+interface FloatFrame {
+  left: number;
+  width: number;
 }
 
 interface Ctx {
@@ -29,6 +42,8 @@ interface Ctx {
   width: number;
   /** In the page's block flow (not inside a table, text box or drawing): page breaks apply. */
   flow: boolean;
+  /** The frame of a picture floating in this column: the doc's column itself, or a table cell's table. */
+  frame: FloatFrame;
 }
 
 const attr = <T>(n: { attrs?: Record<string, unknown> }, key: string, dflt: T): T => (n.attrs?.[key] as T | undefined) ?? dflt;
@@ -337,9 +352,32 @@ function drawing(n: PMNode, ctx: Ctx): Content & { width: number } {
   return { stack, width: w * scale };
 }
 
-function anchored(n: PMNode, ctx: Ctx): Content {
+/**
+ * A floating picture, drawn over the text as the screen places it (her answer: "Over the text"; the
+ * text does not wrap): `dxPt` right of its column's left, kept within its frame, and `dyPt` below the
+ * top of the block after it (`gap` is that block's space above), taking no room. pdfmake moves an image
+ * that does not fit the rest of its page to the next page unless it has an absolute position; a null
+ * one skips that move and places nothing, so the picture is drawn on its anchor's page, lifted by
+ * `env.lifts` when it would run past the page's end.
+ */
+function floating(child: PMNode, float: AnchoredFloat, gap: number, ctx: Ctx): Content {
+  const pic = image(child, { ...ctx, width: ctx.frame.width });
+  const id = `${FLOAT_ID}${ctx.env.floats++}`;
+  const x = Math.max(ctx.frame.left, Math.min(float.dxPt, ctx.frame.left + ctx.frame.width - pic.width));
+  return { ...pic, id, absolutePosition: null, relativePosition: { x, y: gap + float.dyPt - (ctx.env.lifts.get(id) ?? 0) } };
+}
+
+/** The space above the block a floating anchor at `i` floats by: the next block that is not one. */
+function gapAfter(nodes: readonly PMNode[], i: number): number {
+  const next = nodes.slice(i + 1).find((n) => !(n.type === "anchored" && n.attrs?.float != null));
+  return next?.type === "paragraph" || next?.type === "heading_line" ? attr(next, "spaceBefore", 0) : 0;
+}
+
+function anchored(n: PMNode, ctx: Ctx, gap: number): Content {
   const child = n.content?.[0];
   if (!child) return { text: "" };
+  const float = attr<AnchoredFloat | null>(n, "float", null);
+  if (float && child.type === "image_block") return placed(ctx, floating(child, float, gap, ctx));
   let node: Content & { width: number };
   if (child.type === "image_block") node = image(child, ctx);
   else if (child.type === "textbox") node = textbox(child, ctx);
@@ -407,6 +445,16 @@ function table(n: PMNode, ctx: Ctx): Content {
   // its width less its rules, and a cell keeps its margins inside itself.
   const widths = gridFull.map((g, i) => Math.max(0, g * scale - (vW[i] ?? 0) - (i === columns - 1 ? (vW[columns] ?? 0) : 0)));
 
+  // pdfmake lays each column out as its left line and its width, then the table's right line: where
+  // each column starts inside its line, from the table's left, and the whole width.
+  const starts: number[] = [];
+  let tableWidth = 0;
+  for (let c = 0; c < columns; c++) {
+    starts.push(tableWidth + (vW[c] ?? 0));
+    tableWidth += (vW[c] ?? 0) + (widths[c] ?? 0);
+  }
+  tableWidth += vW[columns] ?? 0;
+
   const body: Content[][] = Array.from({ length: nrows }, () => Array.from({ length: columns }, () => ({ text: "" })));
   cells.forEach((p, i) => {
     let span = 0;
@@ -419,9 +467,11 @@ function table(n: PMNode, ctx: Ctx): Content {
     const right = m.right * shrink;
     const s = sides[i] as { left: Border | null; top: Border | null; right: Border | null; bottom: Border | null };
     const order = [s.left, s.top, s.right, s.bottom];
+    // A picture floating in a cell keeps within the whole table; its text starts `left` inside the column.
+    const frame = { left: -((starts[p.col] ?? 0) + left), width: tableWidth };
     const cell: Content = {
       margin: [left, 0, right, 0],
-      stack: blocks(p.node.content ?? [], { ...ctx, width: Math.max(1, span - left - right), flow: false }),
+      stack: blocks(p.node.content ?? [], { ...ctx, width: Math.max(1, span - left - right), flow: false, frame }),
       border: order.map((b) => b !== null),
       borderColor: order.map((b) => (b ? hex(b.color) : "#000000")),
     };
@@ -461,14 +511,14 @@ function table(n: PMNode, ctx: Ctx): Content {
 
 function blocks(nodes: readonly PMNode[], ctx: Ctx): Content[] {
   const out: Content[] = [];
-  for (const node of nodes) {
+  nodes.forEach((node, i) => {
     switch (node.type) {
       case "paragraph":
       case "heading_line":
         out.push(...paragraph(node, ctx));
         break;
       case "table": out.push(table(node, ctx)); break;
-      case "anchored": out.push(anchored(node, ctx)); break;
+      case "anchored": out.push(anchored(node, ctx, gapAfter(nodes, i))); break;
       case "textbox": out.push(placed(ctx, textbox(node, ctx))); break;
       case "drawing": out.push(placed(ctx, drawing(node, ctx))); break;
       case "rule": out.push(rule(node, ctx)); break;
@@ -476,13 +526,13 @@ function blocks(nodes: readonly PMNode[], ctx: Ctx): Content[] {
       case "slide_card": out.push(...blocks(node.content ?? [], ctx)); break;
       default: break;
     }
-  }
+  });
   return out;
 }
 
 /** One stored doc as top-level PDF content. */
 export function docContent(doc: DocJSON, basePt: number, width: number, env: RichEnv): Content[] {
-  return blocks((doc.content ?? []) as PMNode[], { env, basePt, width, flow: true });
+  return blocks((doc.content ?? []) as PMNode[], { env, basePt, width, flow: true, frame: { left: 0, width } });
 }
 
 /** Every image variant a doc references: pictures, and drawing pictures (unrotated, the SVG turns them). */
