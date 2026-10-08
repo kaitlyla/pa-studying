@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_1W9T6QFWR7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "initial: LMWH (enoxaparin, dalteparin, tinzaparin) or fondaparinux",
+     "note": "UFH if thrombolysis is planned or bleeding risk is high",
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "fondaparinux",
+     "note": "heparin-induced thrombocytopenia",
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_0MBJ1P5NT5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "initial: apixaban or rivaroxaban (no parenteral lead-in); maintenance: apixaban, rivaroxaban, edoxaban",
+     "note": "edoxaban after 5-10 days of parenteral drug",
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_JMD5FWCZJV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "warfarin (overlap ≥ 5 days and INR 2-3 for 24 h)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_CT8T2JFNS0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "dabigatran (after 5-10 days parenteral); argatroban for heparin-induced thrombocytopenia",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_ZJVQB3DDA6",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "thrombolytics (alteplase)",
+     "note": "hypotension not resolved by fluids; selected RV dysfunction",
+     "sources": [
+      {
+       "name": "Pulmonary Embolism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

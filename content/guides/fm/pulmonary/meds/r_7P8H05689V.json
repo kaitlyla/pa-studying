@@ -1,0 +1,49 @@
+{
+ "v": 1,
+ "add": [
+  "c_9BTY4MXEMW"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_74ARE3C5E9"
+ ],
+ "roles": [
+  {
+   "target": "c_9BTY4MXEMW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "tirzepatide",
+     "note": "weight loss lowers OSA severity; CPAP/oral appliance are first-line",
+     "sources": [
+      {
+       "name": "Obstructive Sleep Apnea",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/sleep-apnea/obstructive-sleep-apnea"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_74ARE3C5E9",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "wake-promoting agents: modafinil, solriamfetol",
+     "note": "residual sleepiness despite CPAP",
+     "sources": [
+      {
+       "name": "Obstructive Sleep Apnea",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/sleep-apnea/obstructive-sleep-apnea"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
