@@ -183,111 +183,6 @@
    {
     "type": "paragraph",
     "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "text": "Example radial-shaft radiograph: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "subperiosteal reactive new bone formation in a classic \"sunburst\" periosteal reaction"
-     },
-     {
-      "type": "text",
-      "text": " along with "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "lytic destruction of cortical bone"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
-     "indLeft": 18,
-     "indRight": 0,
-     "indFirst": -18,
-     "spaceBefore": 0,
-     "spaceAfter": 0,
-     "line": null,
-     "align": "left",
-     "shade": null,
-     "borders": null,
-     "marker": {
-      "text": "•",
-      "font": null,
-      "marks": [],
-      "tabPt": 18
-     }
-    },
-    "content": [
-     {
-      "type": "text",
-      "text": "Example shoulder radiograph: "
-     },
-     {
-      "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       },
-       {
-        "type": "highlight",
-        "attrs": {
-         "hex": "FF0000"
-        }
-       }
-      ],
-      "text": "a permeative destructive tumor arising in the proximal humerus"
-     },
-     {
-      "type": "text",
-      "text": ", typical of Ewing sarcoma"
-     }
-    ]
-   },
-   {
-    "type": "paragraph",
-    "attrs": {
      "indLeft": 0,
      "indRight": 0,
      "indFirst": 0,
@@ -615,7 +510,26 @@
     "track": null
    }
   ],
-  "ownerEdits": []
+  "ownerEdits": [],
+  "figures": [
+   {
+    "asset": "cc1aaee32d0b65457edd8125d1fe8f71.png",
+    "width": 873,
+    "height": 873,
+    "caption": "Ewing sarcoma of the proximal humerus on a lateral X-ray (zoomed): a permeative lesion with layered, onion-skin periosteal reaction",
+    "credit": {
+     "author": "Leonardo Lustosa, Radiopaedia.org, rID 231652",
+     "license": "CC BY-NC-SA 3.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+     "page": "https://radiopaedia.org/cases/ewing-sarcoma-39",
+     "changes": null
+    },
+    "evidence": {
+     "quote": "Ill-defined permeative lesion in the proximal metaphysis of the left humerus. No signs of epihyseal lesion. Layered , multilayered ( onion skin appearance) and Codman triangle periosteal reaction. Small humeral shaft displacement relative to the proximal epiphysis ( epiphysiolysis ).",
+     "accessed": "2026-10-08"
+    }
+   }
+  ]
  },
  "id": "g_DASZ681E9X"
 }
