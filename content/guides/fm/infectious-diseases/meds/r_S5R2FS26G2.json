@@ -1,0 +1,42 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_KVKEXZFDHC"
+ ],
+ "roles": [
+  {
+   "target": "g_KVKEXZFDHC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "all ages, including children under 8 and pregnancy; start on suspicion, best within the first 5 days",
+     "sources": [
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "chloramphenicol",
+     "note": "the only alternative; higher death risk than tetracyclines; no oral form in the US",
+     "sources": [
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
