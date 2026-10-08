@@ -32,6 +32,10 @@ const MARGINS = { top: 0, right: 5.4, bottom: 0, left: 5.4 };
 const table = (rows: unknown[], grid = [100, 200]) => ({ type: "table", attrs: { grid, borders: NONE, cellMarginPt: MARGINS }, content: rows });
 const docOf = (...content: unknown[]): DocJSON => ({ type: "doc", content });
 const rid = (n: number) => `r_${String(n).padStart(10, "0")}`;
+/** A refusal message where none is expected (a plain editor has no rows the page does not hold). */
+const unrefused = (message: string): void => {
+  throw new Error(`refused: ${message}`);
+};
 
 function run(state: EditorState, cmd: Command): EditorState {
   let next = state;
@@ -272,7 +276,7 @@ describe("rows", () => {
   it("Delete row is refused on a one-row table", async () => {
     const state = at(createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B")])]))), "A");
     let asked = false;
-    const ok = await deleteRow(async () => { asked = true; return true; })(live(state));
+    const ok = await deleteRow(async () => { asked = true; return true; }, unrefused)(live(state));
     expect(ok).toBe(false);
     expect(asked).toBe(false);
   });
@@ -283,7 +287,7 @@ describe("rows", () => {
     it("deletes the table after her confirm, keeping the text beside it", async () => {
       const editor = live(at(createEditorState(docOf(para([text("intro")]), oneRow(), para([text("after")]))), "Key Monitoring"));
       let prompt: string[] = [];
-      const ok = await deleteRow(async (lines) => { prompt = lines; return true; }, true)(editor);
+      const ok = await deleteRow(async (lines) => { prompt = lines; return true; }, unrefused, true)(editor);
       expect(ok).toBe(true);
       expect(prompt).toEqual(["Delete this table?", "Key Monitoring Parameters"]);
       const blocks: string[] = [];
@@ -293,7 +297,7 @@ describe("rows", () => {
 
     it("leaves a box that held only the table with nothing in it", async () => {
       const editor = live(at(createEditorState(docOf(oneRow())), "Key Monitoring"));
-      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      expect(await deleteRow(async () => true, unrefused, true)(editor)).toBe(true);
       const doc = editor.state.doc;
       expect(doc.childCount).toBe(1);
       expect(doc.firstChild?.type.name).toBe("paragraph");
@@ -305,10 +309,10 @@ describe("rows", () => {
       const d = docOf(table([row(rid(1), [cell("A"), picCell])]));
       const editor = live(at(createEditorState(d), "A"));
       let prompt: string[] = [];
-      expect(await deleteRow(async (lines) => { prompt = lines; return false; }, true)(editor)).toBe(false);
+      expect(await deleteRow(async (lines) => { prompt = lines; return false; }, unrefused, true)(editor)).toBe(false);
       expect(prompt[2]).toBe("This table also holds 1 picture(s), which will be deleted too.");
       expect(editor.state.doc.eq(schema.nodeFromJSON(d))).toBe(true);
-      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      expect(await deleteRow(async () => true, unrefused, true)(editor)).toBe(true);
       expect(editor.state.doc.firstChild?.type.name).toBe("paragraph");
     });
 
@@ -317,7 +321,7 @@ describe("rows", () => {
       const ok = await deleteRow(async () => {
         editor.dispatch(editor.state.tr.insertText("x", posOf(editor.state.doc, "Key Monitoring")));
         return true;
-      }, true)(editor);
+      }, unrefused, true)(editor);
       expect(ok).toBe(false);
       expect(rowsOf(editor.state.doc).map((r) => r.textContent)).toEqual(["xKey MonitoringParameters"]);
     });
@@ -325,7 +329,7 @@ describe("rows", () => {
     it("still deletes only the row on a table with more rows", async () => {
       const d = docOf(table([row(rid(1), [cell("A")]), row(rid(2), [cell("B")])]));
       const editor = live(at(createEditorState(d), "B"));
-      expect(await deleteRow(async () => true, true)(editor)).toBe(true);
+      expect(await deleteRow(async () => true, unrefused, true)(editor)).toBe(true);
       expect(rowsOf(editor.state.doc).map((r) => r.attrs.id)).toEqual([rid(1)]);
     });
   });
@@ -336,7 +340,7 @@ describe("rows", () => {
     const ok = await deleteRow(async () => {
       editor.dispatch(editor.state.tr.insertText("more ", 1));
       return true;
-    })(editor);
+    }, unrefused)(editor);
     expect(ok).toBe(true);
     expect(editor.state.doc.firstChild?.textContent).toBe("more intro");
     const t = editor.state.doc.child(1);
@@ -351,7 +355,7 @@ describe("rows", () => {
     const ok = await deleteRow(async () => {
       editor.dispatch(editor.state.tr.insertText("x", posOf(editor.state.doc, "A")));
       return true;
-    })(editor);
+    }, unrefused)(editor);
     expect(ok).toBe(false);
     expect(rowsOf(editor.state.doc).map((r) => r.textContent)).toEqual(["xAB", "CD"]);
   });
@@ -364,7 +368,7 @@ describe("rows", () => {
     ]));
     const editor = live(at(createEditorState(d), "C"));
     let prompt: string[] = [];
-    const ok = await deleteRow(async (lines) => { prompt = lines; return true; })(editor);
+    const ok = await deleteRow(async (lines) => { prompt = lines; return true; }, unrefused)(editor);
     expect(ok).toBe(true);
     expect(prompt).toEqual(["Delete this table row?", "C"]);
     const rows = rowsOf(editor.state.doc);
@@ -381,7 +385,7 @@ describe("rows", () => {
     const d = docOf(table([row(rid(1), [cell("A"), cell("B")]), row(rid(2), [cell("C"), picCell])]));
     const editor = live(at(createEditorState(d), "C"));
     let prompt: string[] = [];
-    await deleteRow(async (lines) => { prompt = lines; return true; })(editor);
+    await deleteRow(async (lines) => { prompt = lines; return true; }, unrefused)(editor);
     expect(prompt[2]).toBe("This row also holds 1 picture(s), which will be deleted too.");
     expect(rowsOf(editor.state.doc)).toHaveLength(1);
   });
@@ -1254,7 +1258,7 @@ describe("table cell borders", () => {
     expect(rows[2]?.every((td) => red(td.style.borderBottom))).toBe(true);
 
     view.dispatch(view.state.tr.setSelection(TextSelection.create(view.state.doc, posOf(view.state.doc, "A"))));
-    expect(await deleteRow(async () => true)(view)).toBe(true);
+    expect(await deleteRow(async () => true, unrefused)(view)).toBe(true);
     rows = tds();
     expect(rows).toHaveLength(2);
     expect(rows[0]?.map((td) => td.textContent)).toEqual(["C", "D"]);

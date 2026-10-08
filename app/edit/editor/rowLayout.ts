@@ -3,8 +3,8 @@
 // Pure operations on the table's stored rows, shared by the editor's commands and the save.
 import { Plugin, PluginKey } from "prosemirror-state";
 import type { EditorState } from "prosemirror-state";
-import { spliceRows } from "../../../lib/content/index.ts";
-import { mergedRowGroups, placeCells, type PlacedCell } from "../../../lib/wordFormat.ts";
+import { spliceRows, type SpliceResult } from "../../../lib/content/index.ts";
+import { mergedRowGroups, placeCells, shownCells, type PlacedCell, type ShownCell } from "../../../lib/wordFormat.ts";
 
 /** A table cell in its stored form. */
 export interface CellJSON {
@@ -47,15 +47,103 @@ export const rowsLayoutOf = (state: EditorState): RowsLayout | null => rowsLayou
 
 export const rowIdOf = (row: RowJSON | undefined): string => String(row?.attrs?.id);
 
-/** The whole table now: the stored rows with the editor's rows spliced back in, as the save puts them. */
-export const tableNow = (layout: RowsLayout, edited: readonly RowJSON[]): RowJSON[] =>
-  spliceRows(layout.stored, layout.shown, edited, rowIdOf).rows;
-
 /** Each row's cells placed on the grid, by row index. */
 export function placedRows(rows: readonly RowJSON[]): PlacedCell<CellJSON>[][] {
   const out: PlacedCell<CellJSON>[][] = rows.map(() => []);
   for (const c of placeCells(rows).cells) out[c.row]?.push(c);
   return out;
+}
+
+const spanOf = (cell: CellJSON, rowspan: unknown): CellJSON => {
+  const attrs: Record<string, unknown> = { ...cell.attrs, rowspan };
+  if (rowspan === undefined) delete attrs.rowspan;
+  return { ...cell, attrs };
+};
+
+/** The stored rows `shown` (ids) and the cells each draws when only they are shown (shownCells). */
+function projection(stored: readonly RowJSON[], shown: readonly string[]): { at: number[]; placed: PlacedCell<CellJSON>[][]; drawn: ShownCell<CellJSON>[][] } {
+  const index = new Map(stored.map((r, i) => [rowIdOf(r), i]));
+  const at = shown.map((id) => index.get(id)).filter((i): i is number => i !== undefined);
+  const placed = placedRows(stored);
+  return { at, placed, drawn: shownCells(placed.flat(), at) };
+}
+
+/** A drawn cell that is not where, or not as long as, it is stored: it starts in a hidden row, or hidden rows cut its span. */
+const moved = (c: ShownCell<CellJSON>, row: number): boolean => c.cell.row !== row || c.rowspan !== c.cell.rowspan;
+
+/**
+ * The rows a rows editor holds for `shown` of a table's `stored` rows: each with the cells the reader
+ * draws in it (shownCells), a cell starting in a hidden row in the first shown row it covers, and a
+ * span cut by hidden rows covering the shown rows of its span. Rows with neither are as stored.
+ */
+export function partialRows(stored: readonly RowJSON[], shown: readonly string[]): RowJSON[] {
+  const { at, drawn } = projection(stored, shown);
+  return at.map((ri, k) => {
+    const row = stored[ri] as RowJSON;
+    const cells = drawn[k] ?? [];
+    if (!cells.some((c) => moved(c, ri))) return row;
+    return { ...row, content: cells.map((c) => (moved(c, ri) ? spanOf(c.cell.node, c.rowspan) : c.cell.node)) };
+  });
+}
+
+/**
+ * The inverse of partialRows, then spliceRows: the whole table for the editor's `edited` rows. A cell
+ * partialRows drew in another row goes back, as edited, to the hidden row it is stored in, and each cell
+ * it moved or cut gets its stored span back. Throws when an edited row no longer holds the cells it was
+ * given there (the editor refuses the row and column changes that would do that, at merged cells
+ * reaching rows the page does not hold).
+ */
+export function spliceShown(stored: readonly RowJSON[], shown: readonly string[], edited: readonly RowJSON[]): SpliceResult<RowJSON> {
+  const { at, placed, drawn } = projection(stored, shown);
+  const full = [...stored];
+  const byId = new Map(edited.map((r, i) => [rowIdOf(r), i]));
+  const rows = [...edited];
+  at.forEach((ri, k) => {
+    const cells = drawn[k] ?? [];
+    if (!cells.some((c) => moved(c, ri))) return;
+    const id = rowIdOf(stored[ri]);
+    const e = byId.get(id);
+    const row = e === undefined ? undefined : edited[e];
+    if (!row || (row.content ?? []).length !== cells.length) {
+      throw new Error(`Row ${id} no longer holds the merged cells it shares with rows this page does not show`);
+    }
+    const content: CellJSON[] = [];
+    cells.forEach((c, j) => {
+      const now = row.content?.[j] as CellJSON;
+      if (!moved(c, ri)) return void content.push(now);
+      const back = spanOf(now, c.cell.node.attrs?.rowspan);
+      if (c.cell.row === ri) return void content.push(back);
+      const origin = full[c.cell.row] as RowJSON;
+      const list = [...(origin.content ?? [])];
+      list[(placed[c.cell.row] ?? []).indexOf(c.cell)] = back;
+      full[c.cell.row] = { ...origin, content: list };
+    });
+    rows[e as number] = { ...row, content };
+  });
+  return spliceRows(full, shown, rows, rowIdOf);
+}
+
+/** The whole table now: the stored rows with the editor's rows put back in, as the save puts them. */
+export const tableNow = (layout: RowsLayout, edited: readonly RowJSON[]): RowJSON[] => spliceShown(layout.stored, layout.shown, edited).rows;
+
+/**
+ * Where the cell at `index` of the editor's row `id` is in `rows`, the whole table now (tableNow): its
+ * row there (an index) and its index in that row's cells. A cell partialRows drew from a hidden row is that row's.
+ */
+export function storedCell(layout: RowsLayout, rows: readonly RowJSON[], id: string, index: number): { row: number; index: number } | null {
+  const own = rows.findIndex((r) => rowIdOf(r) === id);
+  if (own === -1) return null;
+  const { at, placed, drawn } = projection(layout.stored, layout.shown);
+  const k = at.findIndex((ri) => rowIdOf(layout.stored[ri]) === id);
+  const cells = k === -1 ? [] : (drawn[k] ?? []);
+  const c = cells[index];
+  // A row whose cells are as stored (or a new row) holds its own cells, in order.
+  if (!c || !cells.some((x) => moved(x, at[k] as number))) return { row: own, index };
+  if (c.cell.row !== at[k]) {
+    const row = rows.findIndex((r) => rowIdOf(r) === rowIdOf(layout.stored[c.cell.row]));
+    return { row, index: (placed[c.cell.row] ?? []).indexOf(c.cell) };
+  }
+  return { row: own, index: cells.slice(0, index).filter((x) => x.cell.row === at[k]).length };
 }
 
 /** The cell covering grid column `col` in row `r`, wherever it starts. */
@@ -97,6 +185,57 @@ export function cellLabel(cell: CellJSON | undefined): string {
 }
 
 const listOf = (names: readonly string[]): string => names.join(", ");
+
+/**
+ * Why a row or column change can't be made in this rows editor, or null: `cell`, a merged cell of
+ * `rows` (the whole table now), covers rows the page does not hold, and so only the system page holds
+ * all it changes (zeke's rulings). `what` is the thing refused ("This column"), `doing` what to do there.
+ */
+export function mergedRefusal(rows: readonly RowJSON[], layout: RowsLayout, held: ReadonlySet<string>, cell: PlacedCell<CellJSON> | null, what: string, doing: string): string | null {
+  if (!cell) return null;
+  const outside = rows.slice(cell.row, cell.row + cell.rowspan).map(rowIdOf).filter((id) => !held.has(id));
+  if (outside.length === 0) return null;
+  const topics = [...new Set(outside.flatMap((id) => layout.pages[id] ?? []))].filter((t) => t !== layout.topic);
+  const names = listOf(topics.map((t) => layout.titles[t] ?? t)) || "other rows";
+  return `${what} is merged with rows of ${names} ('${cellLabel(cell.node)}'). ${doing} on the system page.`;
+}
+
+/** The first merged cell of `rows` that covers a row of each of two kinds (by id). */
+export function joiningCell(rows: readonly RowJSON[], a: (id: string) => boolean, b: (id: string) => boolean): PlacedCell<CellJSON> | null {
+  const covers = (c: PlacedCell<CellJSON>, pick: (id: string) => boolean): boolean => rows.slice(c.row, c.row + c.rowspan).some((r) => pick(rowIdOf(r)));
+  return placedRows(rows).flat().find((c) => c.rowspan > 1 && covers(c, a) && covers(c, b)) ?? null;
+}
+
+const heldIds = (held: readonly RowJSON[]): Set<string> => new Set(held.map(rowIdOf));
+
+/**
+ * Why Delete row can't delete the editor's row `id` (`held` are the editor's rows), or null: a merged
+ * cell joins it to a row the page does not hold.
+ */
+export function deleteRowRefusal(layout: RowsLayout, held: readonly RowJSON[], id: string): string | null {
+  const rows = tableNow(layout, held);
+  const ids = heldIds(held);
+  return mergedRefusal(rows, layout, ids, joiningCell(rows, (x) => x === id, (x) => !ids.has(x)), "This row", "Delete it");
+}
+
+/**
+ * Why Row ↑ / Row ↓ can't add a row at index `at` of the editor's rows `held`, or null: where the save
+ * puts the new row (spliceRows), a merged cell covering a row the page does not hold joins the rows
+ * either side of it.
+ */
+export function insertRowRefusal(layout: RowsLayout, held: readonly RowJSON[], at: number): string | null {
+  // Not a row id (r_ and 10 letters or digits).
+  const mark = "the new row";
+  const withNew = [...held.slice(0, at), { type: "table_row", attrs: { id: mark }, content: [] }, ...held.slice(at)];
+  const placed = tableNow(layout, withNew);
+  const p = placed.findIndex((r) => rowIdOf(r) === mark);
+  const rows = placed.filter((r) => rowIdOf(r) !== mark);
+  if (p <= 0 || p >= rows.length) return null;
+  const ids = heldIds(held);
+  const reachesOut = (c: PlacedCell<CellJSON>): boolean => rows.slice(c.row, c.row + c.rowspan).some((r) => !ids.has(rowIdOf(r)));
+  const cell = placedRows(rows).flat().find((c) => c.row <= p - 1 && p < c.row + c.rowspan && reachesOut(c)) ?? null;
+  return mergedRefusal(rows, layout, ids, cell, "The new row would split a cell that", "Add the row");
+}
 
 /**
  * The confirm lines naming the other dxs a change to `scope` reaches (none: []): those whose rows a

@@ -90,6 +90,39 @@ export function placeCells<C extends CellLike>(rows: readonly { content?: readon
   return { cells, columns };
 }
 
+/** A cell drawn in a shown row: the cell as placed in the whole table, and the shown rows it covers from that row. */
+export interface ShownCell<C> {
+  cell: PlacedCell<C>;
+  rowspan: number;
+}
+
+/**
+ * The cells each of the `shown` rows draws (indexes into the placed rows, in the order shown) when only
+ * those rows of a table are shown (a topic or section page, 40 §40.3), in column order. A cell whose
+ * span is cut by hidden rows covers the shown rows of its span; a cell starting in a hidden row that
+ * covers a shown row is drawn in the first shown row it covers, so no shown position is left empty.
+ * The reader draws these, and the editor holds them (its partial table).
+ */
+export function shownCells<C>(cells: readonly PlacedCell<C>[], shown: readonly number[]): ShownCell<C>[][] {
+  const shownSet = new Set(shown);
+  const drawn = new Set<PlacedCell<C>>();
+  return shown.map((ri) => {
+    const out: ShownCell<C>[] = [];
+    for (const cell of cells) {
+      if (drawn.has(cell)) continue;
+      const end = cell.row + cell.rowspan;
+      if (ri < cell.row || ri >= end) continue;
+      if (cell.row !== ri && shownSet.has(cell.row)) continue;
+      // The first shown row this cell covers is ri only if no earlier shown row in its span exists.
+      const firstShown = shown.find((s) => s >= cell.row && s < end);
+      if (firstShown !== ri) continue;
+      drawn.add(cell);
+      out.push({ cell, rowspan: shown.filter((s) => s >= cell.row && s < end && s >= ri).length });
+    }
+    return out.sort((a, b) => a.cell.col - b.cell.col);
+  });
+}
+
 /**
  * The narrowest the screen draws a table's first (name) column, in % of the table, for widths that
  * came from her Word files (guide-reader/table-spacing; widths she set in the editor are drawn as set).

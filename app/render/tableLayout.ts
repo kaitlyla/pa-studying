@@ -1,6 +1,6 @@
 // Grid placement of a stored table's cells, and the cells to draw when only some rows are shown
 // (topic and section pages show a subset of a table's rows, 40 §40.3).
-import { placeCells, type PlacedCell as Placed } from "../../lib/wordFormat.ts";
+import { placeCells, shownCells, type PlacedCell as Placed, type ShownCell } from "../../lib/wordFormat.ts";
 import type { PMNode } from "../../lib/schemaTypes.ts";
 
 export type PlacedCell = Placed<PMNode>;
@@ -26,42 +26,17 @@ export function layoutTable(table: PMNode): TableLayout {
   return { rows, columns };
 }
 
-export interface DrawCell {
-  cell: PlacedCell;
-  rowspan: number;
-}
+export type DrawCell = ShownCell<PMNode>;
 
 export interface DrawRow {
   row: PlacedRow;
   cells: DrawCell[];
 }
 
-/**
- * The rows to draw for `ids` (in the given order) and the cells each draws. A cell whose span is cut
- * by hidden rows gets the number of shown rows it covers; a cell starting in a hidden row that covers
- * a shown row is drawn in the first shown row it covers, so no shown position is left empty.
- */
+/** The rows to draw for `ids` (in the given order) and the cells each draws (shownCells, the editor's rule too). */
 export function selectRows(layout: TableLayout, ids: readonly string[] | null): DrawRow[] {
   const index = new Map(layout.rows.map((r, i) => [r.id, i]));
   const shown = ids === null ? layout.rows.map((_, i) => i) : ids.map((id) => index.get(id)).filter((i): i is number => i !== undefined);
-  const shownSet = new Set(shown);
-  const drawn = new Set<PlacedCell>();
-  const all = layout.rows.flatMap((r) => r.cells);
-  return shown.map((ri) => {
-    const row = layout.rows[ri] as PlacedRow;
-    const cells: DrawCell[] = [];
-    for (const cell of all) {
-      if (drawn.has(cell)) continue;
-      const end = cell.row + cell.rowspan;
-      if (ri < cell.row || ri >= end) continue;
-      if (cell.row !== ri && shownSet.has(cell.row)) continue;
-      // The first shown row this cell covers is ri only if no earlier shown row in its span exists.
-      const firstShown = shown.find((s) => s >= cell.row && s < end);
-      if (firstShown !== ri) continue;
-      drawn.add(cell);
-      cells.push({ cell, rowspan: shown.filter((s) => s >= cell.row && s < end && s >= ri).length });
-    }
-    cells.sort((a, b) => a.cell.col - b.cell.col);
-    return { row, cells };
-  });
+  const drawn = shownCells(layout.rows.flatMap((r) => r.cells), shown);
+  return shown.map((ri, k) => ({ row: layout.rows[ri] as PlacedRow, cells: drawn[k] ?? [] }));
 }

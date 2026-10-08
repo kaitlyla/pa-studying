@@ -405,7 +405,7 @@ async function addPictures(files: readonly File[], at: Active): Promise<void> {
  */
 async function deleteRowIn(at: Active): Promise<void> {
   const box = isCardBox(at.slot);
-  if ((await deleteRow(editorConfirm, box)(at.view)) && box) dropEmptyBox(at.slot);
+  if ((await deleteRow(editorConfirm, showToast, box)(at.view)) && box) dropEmptyBox(at.slot);
 }
 
 /** "Add picture": a file picker; the chosen picture goes in at the cursor of the editor she was in. */
@@ -541,8 +541,8 @@ function Toolbar(): ReactNode {
           <Tool label="More space below" run={plainCmd(changeSpace("spaceAfter", 1))} refk="tb-below-more">Below +</Tool>
         </span>
         <span className="sep" />
-        <Tool label="Insert row above" run={plainCmd(insertRow("above"))} refk="tb-row-above">Row ↑</Tool>
-        <Tool label="Insert row below" run={plainCmd(insertRow("below"))} refk="tb-row-below">Row ↓</Tool>
+        <Tool label="Insert row above" run={plainCmd(insertRow("above", showToast))} refk="tb-row-above">Row ↑</Tool>
+        <Tool label="Insert row below" run={plainCmd(insertRow("below", showToast))} refk="tb-row-below">Row ↓</Tool>
         <Tool label="Delete row" run={() => { if (a) void deleteRowIn(a); }} refk="tb-row-delete">Delete row</Tool>
         {inTable && (
           <span className="tb-group" role="group" aria-label="Cell text margins">

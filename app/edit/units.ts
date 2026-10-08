@@ -1,7 +1,7 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, spliceRows, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
+  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, listedHead, newId, serializeFile, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type MedsFile, type MedsPiece, type OtherFile,
   type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
@@ -16,7 +16,7 @@ import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
 import type { ContentArea } from "./editor/commands.ts";
 import type { TreeChange } from "./github.ts";
-import { followMergedWidths, type RowJSON as LayoutRow, type RowsLayout } from "./editor/rowLayout.ts";
+import { followMergedWidths, partialRows, spliceShown, type RowJSON as LayoutRow, type RowsLayout } from "./editor/rowLayout.ts";
 import { parsePageKey, type PageKind } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
@@ -205,10 +205,10 @@ function tableOrThrow(block: BlockFile): RowJSON & { content: RowJSON[] } {
   return { ...t, content: (t.content ?? []) as RowJSON[] } as RowJSON & { content: RowJSON[] };
 }
 
+/** The table a rows editor holds: its `shown` rows, with the cells the page draws in them (partialRows). */
 function partialTable(block: BlockFile, shown: readonly string[]): DocJSON {
   const t = tableOrThrow(block);
-  const want = new Set(shown);
-  return { type: "doc", content: [{ ...t, content: t.content.filter((r: RowJSON) => want.has(rowId(r))) }] };
+  return { type: "doc", content: [{ ...t, content: partialRows(t.content as LayoutRow[], shown) }] };
 }
 
 // ---- loading ------------------------------------------------------------------------------------
@@ -882,7 +882,7 @@ export function buildSave(
         if (!doc) continue;
         const editedTable = doc.content[0] as RowJSON | undefined;
         const edited = (editedTable?.content ?? []) as RowJSON[];
-        spliced = spliceRows(full, part.shown, edited, rowId);
+        spliced = spliceShown(full as LayoutRow[], part.shown, edited as LayoutRow[]);
         // Another dx's rows joined to an edited row by a merged cell take the widths she gave it (rowLayout).
         const held = new Set([...part.shown, ...edited.map(rowId)]);
         spliced = { ...spliced, rows: followMergedWidths(full as LayoutRow[], spliced.rows as LayoutRow[], held) };

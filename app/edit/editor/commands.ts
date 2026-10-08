@@ -11,7 +11,8 @@ import type { Crop, ImageAttrs, TableAttrs } from "../../../lib/schemaTypes.ts";
 import { ownRowWidths, type PlacedCell } from "../../../lib/wordFormat.ts";
 import { tableColumns } from "../../render/styles.ts";
 import {
-  cellLabel, deleteColumnCells, placedRows, reachLines, rowIdOf, rowScope, rowsLayoutOf, tableNow, type CellJSON, type RowJSON, type RowsLayout,
+  cellLabel, deleteColumnCells, deleteRowRefusal, insertRowRefusal, joiningCell, placedRows, reachLines, rowIdOf, rowScope, rowsLayoutOf, storedCell, tableNow,
+  type CellJSON, type RowJSON, type RowsLayout,
 } from "./rowLayout.ts";
 import { M, N as nodes } from "./types.ts";
 
@@ -446,9 +447,11 @@ function firstParagraph(cell: PMNode): PMNode | null {
 /**
  * Row ↑ / Row ↓ (her editor's span-aware rule): a new content row above or below the cursor's row. A
  * merged cell spanning the insertion boundary grows by one row; every other column gets a blank cell
- * modeled on the cursor row's cell there. The caret moves to the first new cell.
+ * modeled on the cursor row's cell there. The caret moves to the first new cell. In a rows editor,
+ * refused (`notify` tells her why) where the new row would split a merged cell that covers rows the
+ * page does not hold (insertRowRefusal; zeke's ruling).
  */
-export function insertRow(where: "above" | "below"): Command {
+export function insertRow(where: "above" | "below", notify?: Notify): Command {
   return (state, dispatch) => {
     const at = tableAt(state.selection.$from);
     if (!at) return false;
@@ -456,6 +459,14 @@ export function insertRow(where: "above" | "below"): Command {
     const rows = cellsByRow(table, map);
     const modelRow = table.child(at.row);
     const boundary = where === "above" ? at.row : at.row + 1;
+    const layout = rowsLayoutOf(state);
+    if (layout) {
+      const why = insertRowRefusal(layout, (table.toJSON() as { content?: RowJSON[] }).content ?? [], boundary);
+      if (why !== null) {
+        if (dispatch) notify?.(why);
+        return false;
+      }
+    }
 
     const grow = new Set<PMNode>();
     const newCells: PMNode[] = [];
@@ -627,9 +638,10 @@ function dxRows(state: EditorState, at: TableAt): DxRows | null {
   const cellIndex = at.table.child(r).childAfter(at.cellRel - rowStart - 1).index;
   const rows = tableNow(layout, held);
   const id = rowIdOf(held[r]);
-  const ri = rows.findIndex((x) => rowIdOf(x) === id);
-  const cell = placedRows(rows)[ri]?.[cellIndex];
-  const row = rows[ri];
+  const row = rows.find((x) => rowIdOf(x) === id);
+  // The cell as stored: one the page draws from a hidden row is that row's (partialRows).
+  const where = storedCell(layout, rows, id, cellIndex);
+  const cell = where ? placedRows(rows)[where.row]?.[where.index] : undefined;
   if (!cell || !row) return null;
   let topic: string | null;
   let seeds: string[];
@@ -801,13 +813,23 @@ async function deleteTable(confirm: Confirm, editor: LiveEditor, table: PMNode, 
  * Delete row, after her confirm. On a one-row table it is refused, unless `lastRowTakesTable` (a box of
  * a card on a meds panel, which she can empty and so drop): then the whole table goes, as in Word. Cells
  * spanning into the row shrink; a merged cell starting in the row moves to the next row with one row fewer.
+ * In a rows editor, refused (`notify` tells her why) when a merged cell joins the row to a row the page
+ * does not hold (deleteRowRefusal; zeke's ruling).
  */
-export function deleteRow(confirm: Confirm, lastRowTakesTable = false): (editor: LiveEditor) => Promise<boolean> {
+export function deleteRow(confirm: Confirm, notify: Notify, lastRowTakesTable = false): (editor: LiveEditor) => Promise<boolean> {
   return async (editor) => {
     const at = tableAt(editor.state.selection.$from);
     if (!at) return false;
     const { table, map } = at;
     if (map.height <= 1 || table.childCount <= 1) return lastRowTakesTable ? deleteTable(confirm, editor, table, at.pos) : false;
+    const layout = rowsLayoutOf(editor.state);
+    if (layout) {
+      const why = deleteRowRefusal(layout, (table.toJSON() as { content?: RowJSON[] }).content ?? [], String(table.child(at.row).attrs.id));
+      if (why !== null) {
+        notify(why);
+        return false;
+      }
+    }
     const rows = cellsByRow(table, map);
     const r = at.row;
     const pictures = (rows[r] ?? []).reduce((sum, c) => sum + countPictures(c.node), 0);
@@ -864,9 +886,7 @@ function columnDelete(state: EditorState): { at: TableAt; dx: DxRows; rows: RowJ
     // A merged cell joins rows this page does not hold (another dx's): only the system page holds them all (zeke's ruling).
     const ids = new Set(outside.map(rowIdOf));
     const topics = [...new Set(outside.flatMap((r) => dx.layout.pages[rowIdOf(r)] ?? []))].filter((t) => t !== dx.topic);
-    const covers = (c: PlacedCell<CellJSON>, pick: (id: string) => boolean): boolean =>
-      dx.rows.slice(c.row, c.row + c.rowspan).some((r) => pick(rowIdOf(r)));
-    const joining = placedRows(dx.rows).flat().find((c) => c.rowspan > 1 && covers(c, (id) => ids.has(id)) && covers(c, (id) => held.has(id)));
+    const joining = joiningCell(dx.rows, (id) => ids.has(id), (id) => held.has(id));
     const names = topics.map((t) => dx.layout.titles[t] ?? t).join(", ");
     const what = joining ? ` ('${cellLabel(joining.node)}')` : "";
     return { refused: `This column is merged with rows of ${names || "other rows"}${what}. Delete it on the system page.` };

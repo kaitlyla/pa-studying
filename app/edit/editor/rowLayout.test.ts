@@ -6,8 +6,10 @@ import { TextSelection, type EditorState, type Transaction } from "prosemirror-s
 import { EditorView } from "prosemirror-view";
 import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
-import { canDeleteColumn, changeColumnWidth, changeColumnWidthAsking, COLUMN_STEP_PT, CONFIRMED_DELETE, deleteColumn } from "./commands.ts";
-import { cellLabel, deleteColumnCells, followMergedWidths, reachLines, rowScope, type CellJSON, type RowJSON, type RowsLayout } from "./rowLayout.ts";
+import { canDeleteColumn, changeColumnWidth, changeColumnWidthAsking, COLUMN_STEP_PT, CONFIRMED_DELETE, deleteColumn, deleteRow, insertRow } from "./commands.ts";
+import {
+  cellLabel, deleteColumnCells, followMergedWidths, partialRows, reachLines, rowScope, rowsLayoutOf, tableNow, type CellJSON, type RowJSON, type RowsLayout,
+} from "./rowLayout.ts";
 import { createEditorState } from "./state.ts";
 import { markViews, nodeViews } from "./views.ts";
 
@@ -41,7 +43,7 @@ const TITLES: Record<string, string> = { ...Object.fromEntries(HEP.map((x) => [t
 function dxPage(stored: RowJSON[], topic: string, pages = PAGES, titles = TITLES, confirm?: (lines: string[]) => Promise<boolean>): EditorState {
   const shown = stored.filter((r) => (pages[String(r.attrs?.id)] ?? []).includes(topic)).map((r) => String(r.attrs?.id));
   const layout: RowsLayout = { page: "dx", topic, stored, shown, pages, titles };
-  return createEditorState(docOf(stored.filter((r) => shown.includes(String(r.attrs?.id)))), { rows: layout, ...(confirm ? { confirm } : {}) });
+  return createEditorState(docOf(partialRows(stored, shown)), { rows: layout, ...(confirm ? { confirm } : {}) });
 }
 
 /** The rows editor of a system page: every row. */
@@ -253,6 +255,85 @@ describe("Delete column", () => {
     const [heading, f] = rowsOf(editor.state);
     expect(cellsOf(heading)).toEqual(["F name", "Label 1", "Label 2×2", "Label 4"]);
     expect(cellsOf(f)).toEqual(["f1", "f2×2", "f4"]);
+  });
+});
+
+describe("a merged cell reaching rows the page does not hold", () => {
+  const prodromal = (rows: RowJSON[]): CellJSON | undefined => rows.flatMap((r) => r.content ?? []).find((c) => cellLabel(c) === "Prodromal sxs");
+
+  it("is drawn in the first row of a topic page it covers, where Wider changes the dx's rows after naming the others", async () => {
+    const yes = asker(true);
+    const editor = live(at(dxPage(STORED, topicOf("B")), "Prodromal sxs:"));
+    expect(cellsOf(rowsOf(editor.state)[1])).toEqual(["HBV", "B etiology", "B clinical", "Prodromal sxs", "B serology"]);
+    expect(await changeColumnWidthAsking(1, yes.confirm)(editor)).toBe(true);
+    expect(yes.asked).toEqual([["This also changes Hepatitis A, Hepatitis C, Hepatitis D, Hepatitis E because 'Prodromal sxs' is merged across them."]]);
+    expect(widthsOf(editor.state)[idOf("B")]).toEqual([60, 100, 100, 100 + COLUMN_STEP_PT, 100 - COLUMN_STEP_PT]);
+  });
+
+  it("Delete row on Hepatitis A's page is refused, naming the dxs and the cell, and Prodromal survives; the system page deletes the row", async () => {
+    const told: string[] = [];
+    const page = dxPage(STORED, topicOf("A"));
+    const editor = live(at(page, "HAV"));
+    expect(await deleteRow(never, (m) => told.push(m))(editor)).toBe(false);
+    expect(told).toEqual(["This row is merged with rows of Hepatitis B, Hepatitis C, Hepatitis D, Hepatitis E ('Prodromal sxs'). Delete it on the system page."]);
+    expect(editor.trs).toEqual([]);
+    const layout = rowsLayoutOf(editor.state) as RowsLayout;
+    expect(prodromal(tableNow(layout, rowsOf(editor.state)))?.attrs?.rowspan).toBe(5);
+
+    const yes = asker(true);
+    const system = live(at(systemPage(STORED), "HAV"));
+    expect(await deleteRow(yes.confirm, () => { throw new Error("refused"); })(system)).toBe(true);
+    const rows = rowsOf(system.state);
+    expect(rows.map((r) => r.attrs?.id)).toEqual(["r_HEAD000000", ...["B", "C", "D", "E"].map(idOf), "r_XTHER00000"]);
+    expect(prodromal(rows)?.attrs?.rowspan).toBe(4);
+  });
+
+  it("Row ↑ / Row ↓ are refused on a topic page only where the new row would split the cell, and act on the system page", () => {
+    const tryInsert = (state: EditorState, where: "above" | "below"): { told: string[]; next: EditorState | null } => {
+      const told: string[] = [];
+      let next: EditorState | null = null;
+      insertRow(where, (m) => told.push(m))(state, (tr) => { next = state.apply(tr); });
+      return { told, next };
+    };
+    const refusal = (others: string): string =>
+      `The new row would split a cell that is merged with rows of ${others} ('Prodromal sxs'). Add the row on the system page.`;
+
+    const aboveB = tryInsert(at(dxPage(STORED, topicOf("B")), "HBV"), "above");
+    expect(aboveB).toEqual({ told: [refusal("Hepatitis A, Hepatitis C, Hepatitis D, Hepatitis E")], next: null });
+    const belowA = tryInsert(at(dxPage(STORED, topicOf("A")), "HAV"), "below");
+    expect(belowA).toEqual({ told: [refusal("Hepatitis B, Hepatitis C, Hepatitis D, Hepatitis E")], next: null });
+    // Without a dispatch (the toolbar asking whether it can act) nothing is told.
+    const told: string[] = [];
+    expect(insertRow("below", (m) => told.push(m))(at(dxPage(STORED, topicOf("A")), "HAV"))).toBe(false);
+    expect(told).toEqual([]);
+
+    // Above Hepatitis A and below Hepatitis E the new row splits nothing.
+    const aboveA = tryInsert(at(dxPage(STORED, topicOf("A")), "HAV"), "above");
+    expect(aboveA.told).toEqual([]);
+    expect(rowsOf(aboveA.next as unknown as EditorState)).toHaveLength(3);
+    const belowE = tryInsert(at(dxPage(STORED, topicOf("E")), "HEV"), "below");
+    expect(belowE.told).toEqual([]);
+    expect(rowsOf(belowE.next as unknown as EditorState)).toHaveLength(3);
+
+    // The system page holds every row: the cell grows over the new row.
+    const system = tryInsert(at(systemPage(STORED), "HAV"), "below");
+    expect(system.told).toEqual([]);
+    expect(prodromal(rowsOf(system.next as unknown as EditorState))?.attrs?.rowspan).toBe(6);
+  });
+
+  it("Row ↓ is refused when a cell merged over the dx's own rows comes before the one that reaches another dx", () => {
+    // "Dx T" joins T's two rows only; "Shared", placed after it, also covers U's row.
+    const x1 = row("r_XA00000000", [cell("Dx T", { rowspan: 2 }), cell("Shared", { rowspan: 3 }), cell("t1a"), cell("t1b"), cell("t1c")]);
+    const x2 = row("r_XB00000000", [cell("t2a"), cell("t2b"), cell("t2c")]);
+    const y = row("r_YA00000000", [cell("Dx U"), cell("u1a"), cell("u1b"), cell("u1c")]);
+    const pages = { r_XA00000000: ["t_T"], r_XB00000000: ["t_T"], r_YA00000000: ["t_U"] };
+    const titles = { t_T: "T", t_U: "U" };
+    const told: string[] = [];
+    const state = at(dxPage([x1, x2, y], "t_T", pages, titles), "t1a");
+    let dispatched = false;
+    insertRow("below", (m) => told.push(m))(state, () => { dispatched = true; });
+    expect(told).toEqual(["The new row would split a cell that is merged with rows of U ('Shared'). Add the row on the system page."]);
+    expect(dispatched).toBe(false);
   });
 });
 

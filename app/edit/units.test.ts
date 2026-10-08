@@ -298,34 +298,93 @@ describe("building a save", () => {
     expect(build.changed).toEqual([R(100), R(101), R(102), R(103), R(104)]);
   });
 
-  it("a topic page's own row widths stay on its rows; another dx's row a merged cell joins to them takes the same widths", async () => {
-    const unit = await unitAt(`topic:fm:${R(101)}`);
-    const part = only(unit, "rows");
-    // In memory: her R102 cell in column 1 is merged down into R103, the next topic's row (as her hepatitis tables do).
-    const block = clone(part.block);
-    const stored = rowsOfDoc(block.doc);
-    const r102 = stored.find((r) => r.attrs?.id === R(102)) as Node;
-    const r103 = stored.find((r) => r.attrs?.id === R(103)) as Node;
-    (r102.content?.[1] as Node).attrs = { ...(r102.content?.[1] as Node).attrs, rowspan: 2 };
-    r103.content = (r103.content ?? []).filter((_, i) => i !== 1);
-    (part as { block: BlockFile }).block = block;
+  describe("a merged cell across two topics' rows", () => {
+    // Her R102 cell in column 1 ("more AF text") merged down over R103, the next topic's heading row, as her
+    // hepatitis tables merge "Prodromal sxs" across five topics' rows. R103 then holds no cell of its own there.
+    beforeEach(() => {
+      const path = blockPath(10);
+      const block = JSON.parse(new TextDecoder().decode(fx.files[path])) as BlockFile;
+      const stored = rowsOfDoc(block.doc);
+      const r102 = stored.find((r) => r.attrs?.id === R(102)) as Node;
+      const r103 = stored.find((r) => r.attrs?.id === R(103)) as Node;
+      (r102.content?.[1] as Node).attrs = { ...(r102.content?.[1] as Node).attrs, rowspan: 2 };
+      r103.content = (r103.content ?? []).filter((_, i) => i !== 1);
+      w.fake.commitFiles({ [path]: serializeFile(path, block) }, { message: "Merge" });
+    });
 
-    const edited = clone(part.slot.doc);
-    const table = edited.content[0] as Node;
-    const grid = table.attrs?.grid as number[];
-    const widths = grid.map((g, i) => (i === 0 ? g + 9 : i === 1 ? g - 9 : g));
-    for (const r of rowsOfDoc(edited)) {
-      if (r.attrs?.kind !== "heading") r.attrs = { ...r.attrs, widths };
-      // The page's own copy of the merged cell (the stored block was merged above, after the page was cut).
-      if (r.attrs?.id === R(102)) (r.content?.[1] as Node).attrs = { ...(r.content?.[1] as Node).attrs, rowspan: 2 };
-    }
-    const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+    const rowOf = (doc: DocJSON, id: string): Node => rowsOfDoc(doc).find((r) => r.attrs?.id === id) as Node;
+    const texts = (row: Node): string[] => (row.content ?? []).map((_, i) => cellText(row, i));
+    const spans = (row: Node): unknown[] => (row.content ?? []).map((c) => c.attrs?.rowspan ?? 1);
 
-    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
-    expect((saved.doc.content[0] as Node).attrs?.grid).toEqual(grid);
-    const widthsOf = Object.fromEntries(rowsOfDoc(saved.doc).map((r) => [String(r.attrs?.id), r.attrs?.widths ?? null]));
-    expect(widthsOf).toEqual({ [R(100)]: null, [R(101)]: widths, [R(102)]: widths, [R(103)]: widths, [R(104)]: null });
-    expect(build.changed).toEqual([R(101), R(102), R(103)]);
+    it("a topic page whose first row the cell covers draws it in that row, as the page does, so the row's cells keep their columns", async () => {
+      const part = only(await unitAt(`topic:fm:${R(104)}`), "rows");
+      expect(part.shown).toEqual([R(103), R(104)]);
+      const r103 = rowOf(part.slot.doc, R(103));
+      expect(texts(r103)).toEqual(["Stable angina", "more AF text", "T"]);
+      expect(spans(r103)).toEqual([1, 1, 1]);
+    });
+
+    it("a topic page whose row starts the cell draws it over its own rows only", async () => {
+      const part = only(await unitAt(`topic:fm:${R(101)}`), "rows");
+      expect(part.shown).toEqual([R(100), R(101), R(102)]);
+      expect(spans(rowOf(part.slot.doc, R(102)))).toEqual([1, 1, 1]);
+    });
+
+    it("an unchanged page writes nothing, on either topic page", async () => {
+      for (const key of [`topic:fm:${R(101)}`, `topic:fm:${R(104)}`]) {
+        const unit = await unitAt(key);
+        const docs = new Map(unit.parts.flatMap((p) => (p.kind === "rows" ? [[p.slot.id, clone(p.slot.doc)] as const] : [])));
+        expect(buildSave(unit, docs, TODAY).changes, key).toEqual([]);
+      }
+    });
+
+    it("an edit to the cell on the page it was drawn down to is saved in the row it starts in, still merged over both rows", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "rows");
+      const edited = clone(part.slot.doc);
+      (rowOf(edited, R(103)).content as Node[])[1] = { ...cell("more AF text, revised"), attrs: { rowspan: 1 } };
+      (rowOf(edited, R(104)).content as Node[])[2] = cell("nitrates; aspirin");
+      const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+      const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+      expect(rowIds(saved.doc)).toEqual([R(100), R(101), R(102), R(103), R(104)]);
+      const r102 = rowOf(saved.doc, R(102));
+      const r103 = rowOf(saved.doc, R(103));
+      expect(texts(r102)).toEqual(["", "more AF text, revised", ""]);
+      expect(spans(r102)).toEqual([1, 2, 1]);
+      expect(texts(r103)).toEqual(["Stable angina", "T"]);
+      expect(texts(rowOf(saved.doc, R(104)))).toEqual(["", "chest pain on exertion", "nitrates; aspirin"]);
+      expect(build.changed).toEqual([R(102), R(104)]);
+    });
+
+    it("an edit on the page that starts the cell keeps it merged over the hidden row", async () => {
+      const unit = await unitAt(`topic:fm:${R(101)}`);
+      const part = only(unit, "rows");
+      const build = buildSave(unit, new Map([[part.slot.id, setCell(part.slot.doc, R(101), 1, "irregular")]]), TODAY);
+
+      const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+      expect(spans(rowOf(saved.doc, R(102)))).toEqual([1, 2, 1]);
+      expect(texts(rowOf(saved.doc, R(103)))).toEqual(["Stable angina", "T"]);
+      expect(build.changed).toEqual([R(101)]);
+    });
+
+    it("a topic page's own row widths stay on its rows; another dx's row the cell joins to them takes the same widths", async () => {
+      const unit = await unitAt(`topic:fm:${R(101)}`);
+      const part = only(unit, "rows");
+      const edited = clone(part.slot.doc);
+      const table = edited.content[0] as Node;
+      const grid = table.attrs?.grid as number[];
+      const widths = grid.map((g, i) => (i === 0 ? g + 9 : i === 1 ? g - 9 : g));
+      for (const r of rowsOfDoc(edited)) if (r.attrs?.kind !== "heading") r.attrs = { ...r.attrs, widths };
+      const build = buildSave(unit, new Map([[part.slot.id, edited]]), TODAY);
+
+      const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+      expect((saved.doc.content[0] as Node).attrs?.grid).toEqual(grid);
+      const widthsOf = Object.fromEntries(rowsOfDoc(saved.doc).map((r) => [String(r.attrs?.id), r.attrs?.widths ?? null]));
+      expect(widthsOf).toEqual({ [R(100)]: null, [R(101)]: widths, [R(102)]: widths, [R(103)]: widths, [R(104)]: null });
+      expect(spans(rowOf(saved.doc, R(102)))).toEqual([1, 2, 1]);
+      expect(build.changed).toEqual([R(101), R(102), R(103)]);
+    });
   });
 
   it("an added row goes after the topic's last row, before the hidden rows that follow, and joins the section above it", async () => {
