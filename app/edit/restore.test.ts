@@ -560,6 +560,7 @@ describe("pageHash", () => {
     expect(pageHash("pharm:fm:cardiovascular:antianginals")).toBe(guideViewHash("fm", { kind: "pharm", system: "cardiovascular", section: "antianginals", target: null }));
     expect(pageHash("general:fm:labs")).toBe(guideViewHash("fm", { kind: "general", key: "labs" }));
     expect(pageHash("workup:fm:ams")).toBe(guideViewHash("fm", { kind: "workup", item: "ams" }));
+    expect(pageHash("visit:fm:2-months")).toBe("#/eor/fm/visits/2-months");
     expect(pageHash("ref:labs:cbc")).toBe(refHash("labs", "cbc"));
     expect(pageHash("other:vaccines")).toBe(otherHash("vaccines"));
     expect(pageHash(`doc:${D(5)}`)).toBe(fileHash(D(5), null));

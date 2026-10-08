@@ -242,6 +242,7 @@ const routeCases: RouteCase[] = [
     }),
   },
   { name: "the initial workup page", hash: inGuides((g) => (existsSync(join(DATA, "g", g, "workup.json")) ? view(g, { kind: "workup", item: null }) : undefined)) },
+  { name: "a well child visit page", hash: inGuides((g, n) => (n.visits[0] ? view(g, { kind: "visits", item: n.visits[0].id }) : undefined)) },
   {
     name: "a review slides deck",
     hash: inGuides((g, n) => (n.slides ? view(g, { kind: "slides", n: 1 }) : undefined)),

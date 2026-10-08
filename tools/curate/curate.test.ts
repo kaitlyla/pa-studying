@@ -365,7 +365,10 @@ describe("general and places", () => {
   const GEN = "content/guides/fm/general.json";
   const gen = (over: Partial<GeneralFile> = {}): GeneralFile => ({
     v: 1,
-    topics: [{ key: "labs", howto: "labs", links: [{ target: R(101), covers: "AF labs" }], files: [D(5)], gaps: [G(1)] }],
+    topics: [
+      { key: "labs", howto: "labs", links: [{ target: R(101), covers: "AF labs" }], files: [D(5)], gaps: [G(1)] },
+      { key: "workup", howto: null, links: [], files: [], gaps: [] },
+    ],
     workup: [{ id: "ams", title: "Altered mental status (AMS)", conds: "Delirium", gap: G(2) }, { id: "chest-pain", title: "Chest pain", conds: "Pulmonary embolism", gap: G(1) }],
     ...over,
   });
@@ -383,8 +386,19 @@ describe("general and places", () => {
     await refused(["general", "pance", await draft("e", gen())], /no general\.json/, [GEN]);
   });
 
+  it("writes well-child visits, and refuses a visit's unknown link target or gap", async () => {
+    const visitsTopic = { key: "visits" as const, howto: null, links: [], files: [], gaps: [] };
+    const withVisit = (links: GeneralFile["topics"][number]["links"], gaps: string[]): GeneralFile =>
+      gen({ topics: [...gen().topics, visitsTopic], visits: [{ id: "newborn", title: "Newborn", links, gaps }] });
+    await refused(["general", "fm", await draft("a", withVisit([{ target: R(777), covers: "x" }], [G(1)]))], new RegExp(`${R(777)} names nothing`), [GEN]);
+    await refused(["general", "fm", await draft("b", withVisit([], [G(9)]))], new RegExp(`${G(9)} names nothing`), [GEN]);
+    const ok = withVisit([{ target: R(201), covers: "Asthma" }], [G(1), G(2)]);
+    await run(root, ["general", "fm", await draft("c", ok)]);
+    expect(await read<GeneralFile>(GEN)).toEqual(ok);
+  });
+
   it("refuses a link the build would drop: a one-column table's row is shown only as its block", async () => {
-    const linking = (target: string): GeneralFile => gen({ topics: [{ key: "labs", howto: null, links: [{ target, covers: "Mnemonic" }], files: [], gaps: [] }] });
+    const linking = (target: string): GeneralFile => gen({ topics: [{ key: "labs", howto: null, links: [{ target, covers: "Mnemonic" }], files: [], gaps: [] }], workup: [] });
     await refused(["general", "fm", await draft("a", linking(R(140)))], new RegExp(`${GEN}: ${R(140)} is dropped by the build`), [GEN]);
     await run(root, ["general", "fm", await draft("b", linking(B(14)))]);
     expect((await read<GeneralFile>(GEN)).topics[0]?.links).toEqual([{ target: B(14), covers: "Mnemonic" }]);

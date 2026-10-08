@@ -183,6 +183,9 @@ describe("loading a page key", () => {
     expect(only(general, "gap").doc.basePt).toBe(11);
     expect(general.scope.files).toEqual([`content/gapfill/${G(1)}.json`]);
     expect((await unitAt("workup:fm:ams")).parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind))).toEqual([G(2)]);
+    const visit = await unitAt("visit:fm:2-months");
+    expect(visit.parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind))).toEqual([G(4), G(5)]);
+    expect(visit.scope.files).toEqual([`content/gapfill/${G(4)}.json`, `content/gapfill/${G(5)}.json`]);
     expect((await unitAt("ref:labs:cbc")).parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind))).toEqual([G(1)]);
     expect((await unitAt("other:vaccines")).parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind))).toEqual([G(3)]);
     expect((await unitAt("other:emergency")).parts).toEqual([]);

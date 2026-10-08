@@ -10,6 +10,7 @@ import { Link } from "../shell/Link.tsx";
 import { EditControls, EditRegion } from "../shell/mounts.tsx";
 import { PageHead } from "../shell/Page.tsx";
 import { ThreeParts } from "./ThreeParts.tsx";
+import { VisitsPage } from "./VisitsPage.tsx";
 import { WorkupPage } from "./WorkupPage.tsx";
 import { buildPageKey } from "../edit/pageKey.ts";
 
@@ -56,5 +57,6 @@ function GeneralTopic({ guide, topic: key }: { guide: string; topic: GeneralKey 
 
 export function GeneralPage({ guide, topic }: { guide: string; topic: GeneralKey }): ReactNode {
   if (topic === "workup") return <WorkupPage guide={guide} item={null} />;
+  if (topic === "visits") return <VisitsPage guide={guide} item={null} />;
   return <GeneralTopic guide={guide} topic={topic} />;
 }

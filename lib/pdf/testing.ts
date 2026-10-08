@@ -92,6 +92,7 @@ export function fmNav(): NavJson {
       { id: "pulmonary", title: "Pulmonary", pct: "12%", sections: [], entries: [], pharm: null },
     ],
     general: [],
+    visits: [],
     slides: null,
     sidebarEnd: null,
     removed: [],

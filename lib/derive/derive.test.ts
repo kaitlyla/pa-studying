@@ -18,11 +18,11 @@ import type { Content, GuideData, SystemData } from "./model.ts";
 import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
-  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
-  type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type RefTabJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson,
+  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
+  type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type RefTabJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson, type VisitsJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
-import { fileLocation, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
+import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { docText, tableOf } from "./text.ts";
 import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
@@ -843,13 +843,18 @@ describe("navigation and pages (40 §40.3)", () => {
   });
 
   it("general keys come in the fixed order and only those present", () => {
-    expect(nav("fm").general).toEqual([{ key: "labs", label: "Labs" }]);
+    expect(nav("fm").general).toEqual([{ key: "labs", label: "Labs" }, { key: "workup", label: GENERAL_LABELS.workup }, { key: "visits", label: "Well child visits" }]);
     const c = mutated((x) => {
       const gen = guide(x, "fm").general;
       gen?.topics.unshift({ key: "screenings", howto: null, links: [], files: [], gaps: [] }, { key: "ekg", howto: null, links: [], files: [], gaps: [] });
     });
     const n = publish(c).files.get("g/fm/nav.json") as NavJson;
-    expect(n.general.map((x) => x.key)).toEqual(["labs", "ekg", "screenings"]);
+    expect(n.general.map((x) => x.key)).toEqual(["labs", "ekg", "screenings", "workup", "visits"]);
+  });
+
+  it("lists the well-child visits in their stored order, and none for a guide without them", () => {
+    expect(nav("fm").visits).toEqual([{ id: "newborn", title: "Newborn" }, { id: "2-months", title: "2 months" }]);
+    expect(nav("psy").visits).toEqual([]);
   });
 
   it("an EOR guide carries its deck title as the slides item; a removed own deck shows none and is listed as removed", () => {
@@ -2528,6 +2533,7 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(out.dropped).toEqual([
       { file: "content/updates/concepts.json", id: GONE },
       { file: "content/guides/fm/general.json", id: GONE },
+      { file: "content/guides/fm/general.json", id: GONE },
       { file: `content/slides/fm/blocks/${S(2)}.json`, id: GONE },
     ]);
     expect(file<GeneralJson>("g/fm/general/labs.json").links).toEqual([{
@@ -2589,6 +2595,28 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     expect(hosts[S(2)]?.route).toBe("#/eor/fm/slides/2");
   });
 
+  it("publishes each well-child visit's links and gaps; a gap two visits share is hosted on the first", () => {
+    const v = file<VisitsJson>(visitsPath("fm"));
+    expect(v.guide).toBe("fm");
+    expect(v.items.map((x) => [x.id, x.title, x.links.map((l) => [l.target, l.covers]), x.gaps.map((g) => g.id)])).toEqual([
+      ["newborn", "Newborn", [[R(201), "Asthma at birth"]], [G(4)]],
+      ["2-months", "2 months", [], [G(4), G(5)]],
+    ]);
+    expect(v.items[0]?.links[0]?.route).toBe(`#/eor/fm/t/${R(201)}`);
+    expect(out.files.has(visitsPath("psy"))).toBe(false);
+    const hosts = file<HostsJson>("hosts.json");
+    expect(hosts[G(4)]).toEqual({ route: "#/eor/fm/visits/newborn", loc: "EOR › Family Medicine › Well child visits › Newborn" });
+    expect(hosts[G(5)]).toEqual({ route: "#/eor/fm/visits/2-months", loc: "EOR › Family Medicine › Well child visits › 2 months" });
+    // One search unit per visit title, and one per gap at its host.
+    const units = out.units.filter((u) => u.route.startsWith("#/eor/fm/visits/"));
+    expect(units.map((u) => [u.route, u.at, u.title, u.loc])).toEqual([
+      ["#/eor/fm/visits/newborn", null, "Newborn", "EOR › Family Medicine › Well child visits"],
+      ["#/eor/fm/visits/newborn", G(4), "Infant history", "EOR › Family Medicine › Well child visits › Newborn"],
+      ["#/eor/fm/visits/2-months", null, "2 months", "EOR › Family Medicine › Well child visits"],
+      ["#/eor/fm/visits/2-months", G(5), "2-month screening", "EOR › Family Medicine › Well child visits › 2 months"],
+    ]);
+  });
+
   it("every route the build emits round-trips through the shared parser", () => {
     const routes = new Set<string>();
     const collect = (v: unknown): void => {
@@ -2613,7 +2641,7 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const expected = new Map<string, string>([[SITE_PATH, "site"], [HOSTS_PATH, "hosts"], [UPDATES_PATH, "updates"], [OTHER_PATH, "other"]]);
     for (const g of base.guides) {
       const gid = g.file.id;
-      expected.set(homePath(gid), "home").set(navPath(gid), "nav").set(workupPath(gid), "workup").set(slidesPath(gid), "slides");
+      expected.set(homePath(gid), "home").set(navPath(gid), "nav").set(workupPath(gid), "workup").set(visitsPath(gid), "visits").set(slidesPath(gid), "slides");
       for (const s of g.systems) expected.set(systemPath(gid, s.file.id), "system");
       for (const key of GENERAL_KEYS) expected.set(generalPath(gid, key), "general");
     }
@@ -2624,7 +2652,7 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
       expect(expected.has(path), path).toBe(true);
       kinds.add(expected.get(path) as string);
     }
-    expect([...kinds].sort()).toEqual(["doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "workup"]);
+    expect([...kinds].sort()).toEqual(["doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "visits", "workup"]);
   });
 
   it("REF_PATH_RE matches exactly the reference tab paths refPath builds", () => {

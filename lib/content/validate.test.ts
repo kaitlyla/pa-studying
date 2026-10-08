@@ -860,6 +860,26 @@ describe("places (20 §20.8)", () => {
     expect(verdict("content/guides/pance/general.json", general)).toMatch(/no general\.json/);
   });
 
+  it("validates well-child visits: a visits topic exactly when there are visits, unique ids, row/block links", () => {
+    const visitsTopic = { key: "visits", howto: null, links: [], files: [], gaps: [] };
+    const visit = (vid: string) => ({ id: vid, title: "2 months", links: [{ target: id("r", 1), covers: "Vaccine: DTaP" }], gaps: [G1, G2] });
+    const withVisits = { ...general, topics: [...general.topics, visitsTopic], visits: [visit("newborn"), visit("2-months")] };
+    const at = "content/guides/psy/general.json";
+    expect(verdict(at, withVisits)).toBe("ok");
+    expect(verdict(at, { ...withVisits, visits: [] })).toMatch(/a visits topic exactly when visits is non-empty/);
+    expect(verdict(at, { ...general, visits: [visit("newborn")] })).toMatch(/a visits topic exactly when visits is non-empty/);
+    expect(verdict(at, { ...withVisits, visits: [visit("newborn"), visit("newborn")] })).toMatch(/visits\[\]\.id/);
+    expect(verdict(at, { ...withVisits, visits: [{ ...visit("newborn"), gaps: [G1, G1] }] })).toMatch(/visits\[0\]\.gaps/);
+    expect(verdict(at, { ...withVisits, visits: [{ ...visit("newborn"), links: [{ target: D1, covers: "x" }] }] })).toMatch(/a r_ or b_ id/);
+    expect(verdict(at, { ...withVisits, visits: [{ ...visit("Newborn") }] })).toMatch(/visits\[0\]\.id/);
+    // Initial workup follows the same rule: its topic exactly when it has items.
+    expect(verdict(at, { ...general, topics: [general.topics[0]] })).toMatch(/a workup topic exactly when workup is non-empty/);
+    expect(verdict(at, { ...general, workup: [] })).toMatch(/a workup topic exactly when workup is non-empty/);
+    expect(verdict(at, { ...general, topics: [general.topics[0]], workup: [] })).toBe("ok");
+    // The visits topic sits last, after screenings.
+    expect(verdict(at, { ...withVisits, topics: [visitsTopic, ...general.topics] })).toMatch(/in the order/);
+  });
+
   it("validates reftabs.json", () => {
     const tab = { subs: [{ id: "cbc", title: "CBC", links: [], gaps: [G1] }], files: [D1] };
     expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab, anatomy: tab })).toBe("ok");

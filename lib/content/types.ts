@@ -326,13 +326,23 @@ export interface Link {
   covers: string;
 }
 
-export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "workup"] as const;
+export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "workup", "visits"] as const;
 export type GeneralKey = (typeof GENERAL_KEYS)[number];
+
+/** A well-child visit's page: links into her notes, then gap blocks (several visits may share one). */
+export interface Visit {
+  id: string;
+  title: string;
+  links: Link[];
+  gaps: string[];
+}
 
 export interface GeneralFile {
   v: 1;
   topics: { key: GeneralKey; howto: string | null; links: Link[]; files: string[]; gaps: string[] }[];
   workup: { id: string; title: string; conds: string; gap: string }[];
+  /** Well-child visits in age order; listed under the `visits` topic, which is present exactly when there are some. */
+  visits?: Visit[];
 }
 
 /**

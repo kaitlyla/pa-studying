@@ -155,6 +155,8 @@ a { color: #2b55a3; }
 .wk-lead, .ph-lead { margin: 0 0 10px; color: #4a5263; }
 .wk-h { margin: 6px 0 0; font-size: 18px; }
 .wk-back { display: inline-block; margin-bottom: 6px; font-size: 13px; }
+.vis-nav { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 6px; font-size: 13px; }
+.vis-h { margin: 6px 0 0; font-size: 18px; }
 .opart-h { margin: 22px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #dde1e8; font-size: 18px; scroll-margin-top: 12px; }
 .opart.sub .opart-h { margin-top: 16px; border-bottom: 0; font-size: 15px; }
 .osoon { margin: 4px 0 14px; font-size: 13px; color: #555; font-style: italic; }

@@ -111,7 +111,7 @@ describe("EOR picker", () => {
     expect(h1(c)).toBe("EOR study guides");
     const cards = [...c.querySelectorAll(".pick a.card")];
     expect(cards.map((e) => e.querySelector(".cn")?.textContent)).toEqual(["Family Medicine", "Psychiatry"]);
-    expect(cards.map((e) => e.querySelector(".cm")?.textContent)).toEqual(["3 systems · 1 general topic", "0 sections · 0 general topics"]);
+    expect(cards.map((e) => e.querySelector(".cm")?.textContent)).toEqual(["3 systems · 3 general topics", "0 sections · 0 general topics"]);
     expect(cards.map((e) => e.getAttribute("href"))).toEqual(["#/eor/fm", "#/eor/psy"]);
     expect(c.querySelector("aside.side")).toBeNull();
 

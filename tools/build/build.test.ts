@@ -88,7 +88,7 @@ describe("build:data", () => {
     expect(b).toEqual(result);
     expect(b).toMatchObject({ commit: COMMIT, builtAt: "2026-10-04T05:00:00Z", siteBytes: 0, uncoveredGlyphs: ["U+F0000"] });
     expect(b.dropped.map((d) => d.file)).toEqual([
-      "content/updates/concepts.json", "content/guides/fm/general.json", expect.stringMatching(/^content\/slides\/fm\/blocks\//),
+      "content/updates/concepts.json", "content/guides/fm/general.json", "content/guides/fm/general.json", expect.stringMatching(/^content\/slides\/fm\/blocks\//),
     ]);
   });
 });

@@ -595,6 +595,11 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
       return unit(await gapParts(snap, [general.workup.find((w) => w.id === item)?.gap]));
     }
+    case "visit": {
+      const { guide, item } = k;
+      const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
+      return unit(await gapParts(snap, general.visits?.find((v) => v.id === item)?.gaps ?? []));
+    }
     case "ref": {
       const { tab, sub } = k;
       const tabs = await snap.json<RefTabsFile>("content/places/reftabs.json");

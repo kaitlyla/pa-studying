@@ -10,6 +10,7 @@ import { GeneralPage } from "../general/GeneralPage.tsx";
 import { OtherPage } from "../general/OtherPage.tsx";
 import { OtherSidebar } from "../general/OtherSidebar.tsx";
 import { RefSidebar, RefTabPage } from "../general/RefTab.tsx";
+import { VisitsPage } from "../general/VisitsPage.tsx";
 import { WorkupPage } from "../general/WorkupPage.tsx";
 import { PharmPage } from "../pharm/PharmPage.tsx";
 import { Picker } from "../picker/Picker.tsx";
@@ -212,6 +213,8 @@ function PageFor({ route }: { route: Route }): ReactNode {
           return <GeneralPage guide={guide} topic={view.key} />;
         case "workup":
           return <WorkupPage guide={guide} item={view.item} />;
+        case "visits":
+          return <VisitsPage guide={guide} item={view.item} />;
         case "slides":
           return <ReviewSlidesPage guide={guide} n={view.n} />;
       }

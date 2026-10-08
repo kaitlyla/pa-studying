@@ -15,6 +15,7 @@ import type {
   SiteJson,
   SlidesJson,
   SystemJson,
+  VisitsJson,
   WorkupJson,
 } from "../../lib/derive/published.ts";
 import { pdfFileName } from "../../lib/pdf/index.ts";
@@ -46,6 +47,9 @@ const systemsWord = (g: string, n: number): string => (g === "psy" || g === "ob"
 const topicHash = (g: string, ids: string[]): string => guideViewHash(g, { kind: "topics", ids });
 const pharmHash = (g: string, system: string, section: string | null = null, target: string | null = null): string =>
   guideViewHash(g, { kind: "pharm", system, section, target });
+
+/** A general topic shown as a topic page: Initial workup and Well child visits have their own list pages. */
+const isTopicPage = (x: NavJson["general"][number]): boolean => x.key !== "workup" && x.key !== "visits";
 
 /** Every EOR system, with its guide. */
 const allSystems = eors.flatMap((g) => navOf(g).systems.map((s) => ({ g, s })));
@@ -111,7 +115,7 @@ test.describe("picker", () => {
   });
 
   test("the picker's guide, a system's pharm row and a general topic each open", async ({ page }) => {
-    const pick = allSystems.find(({ g, s }) => s.pharm !== null && navOf(g).general.some((x) => x.key !== "workup"));
+    const pick = allSystems.find(({ g, s }) => s.pharm !== null && navOf(g).general.some(isTopicPage));
     if (!pick) throw new Error("no EOR has both a pharm system and a general topic");
     const { g, s } = pick;
     const nav = navOf(g);
@@ -124,7 +128,7 @@ test.describe("picker", () => {
     await expect.poll(() => hashOf(page)).toBe(pharmHash(g, s.id));
     await expect(h1(page)).toHaveText(`${s.title} pharm`);
 
-    const gen = nav.general.find((x) => x.key !== "workup");
+    const gen = nav.general.find(isTopicPage);
     if (!gen) throw new Error("no general topic");
     await side(page).locator(".gen a.ent", { hasText: gen.label }).first().click();
     await expect.poll(() => hashOf(page)).toBe(guideViewHash(g, { kind: "general", key: gen.key }));
@@ -726,7 +730,7 @@ test.describe("review slides", () => {
 test.describe("general topics, workup and Other", () => {
   const generals = eors.flatMap((g) =>
     navOf(g)
-      .general.filter((x) => x.key !== "workup")
+      .general.filter(isTopicPage)
       .map((x) => ({ g, data: read<GeneralJson>(`g/${g}/general/${x.key}.json`) })),
   );
 
@@ -751,6 +755,42 @@ test.describe("general topics, workup and Other", () => {
     await expect(main(page).locator(".wk-h")).toHaveText(first.title);
     await main(page).getByRole("link", { name: "‹ All presentations" }).click();
     await expect.poll(() => hashOf(page)).toBe(listHash);
+  });
+
+  test("well child visits: the sidebar group lists the visits in age order; a visit shows its note links and gap blocks, and steps to the next", async ({ page }) => {
+    const g = eors.find((x) => navOf(x).visits.length > 0);
+    if (!g) throw new Error("no EOR has well child visits");
+    const data = read<VisitsJson>(`g/${g}/visits.json`);
+    expect(data.items.map((x) => x.id)).toEqual(navOf(g).visits.map((x) => x.id));
+    const [first, second] = data.items;
+    if (!first || !second) throw new Error("fewer than two well child visits");
+    // The group sits last among the general topics.
+    expect(navOf(g).general.at(-1)?.key).toBe("visits");
+
+    await open(page, guideViewHash(g, { kind: "visits", item: null }));
+    await expect(h1(page)).toContainText(`Well child visits for ${guideName(g)}`);
+    await expect(main(page).locator(".visits-page .lnk > li .lt")).toHaveText(data.items.map((x) => x.title));
+    const group = side(page).locator("li.grp").filter({ has: page.locator(".grp-row .sys-name", { hasText: "Well child visits" }) });
+    await expect(group.locator(".grp-n")).toHaveText(String(data.items.length));
+
+    await main(page).locator(".visits-page .lnk > li a").first().click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(g, { kind: "visits", item: first.id }));
+    await expect(main(page).locator(".vis-h")).toHaveText(first.title);
+    await expect(main(page).locator(".visits-page .gsec .lnk > li")).toHaveCount(first.links.length);
+    await expect(main(page).locator(".visits-page section.gap")).toHaveCount(first.gaps.length);
+    const firstGap = first.gaps[0];
+    if (!firstGap) throw new Error(`${first.title} has no gap block`);
+    await expect(main(page).locator(".visits-page section.gap").first()).toHaveAttribute("data-anchor", firstGap.id);
+    const entries = group.locator(".grp-ents a.ent");
+    await expect(entries).toHaveText(data.items.map((x) => x.title));
+    await expect(entries.first()).toHaveAttribute("aria-current", "page");
+
+    await main(page).locator('.vis-nav a[rel="next"]').click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(g, { kind: "visits", item: second.id }));
+    await expect(main(page).locator(".vis-h")).toHaveText(second.title);
+    await expect(entries.nth(1)).toHaveAttribute("aria-current", "page");
+    await main(page).getByRole("link", { name: "‹ All visits" }).click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(g, { kind: "visits", item: null }));
   });
 
   test("Other: 9 sections with file counts or 'Sourced reference', 2 across at 390 px; gap blocks only in Screenings, Legal, PA professional, Physical exam and Documentation, one box per placement (a block under several headings shows under each), plus the Vaccines lead", async ({ page }) => {

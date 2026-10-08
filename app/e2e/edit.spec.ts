@@ -638,6 +638,7 @@ const coverage: CoverageCase[] = [
   },
   { name: "a general topic page", edit: true, hash: inGuides((g, n) => (n.general[0] ? guideViewHash(g, { kind: "general", key: n.general[0].key }) : undefined)) },
   { name: "a workup item page", edit: true, hash: workup },
+  { name: "a well child visit page", edit: true, hash: inGuides((g, n) => (n.visits[0] ? guideViewHash(g, { kind: "visits", item: n.visits[0].id }) : undefined)) },
   { name: "a reference sub-topic page", edit: true, hash: refWithSub?.ref.subs[0] ? refHash(refWithSub.tab, refWithSub.ref.subs[0].id) : null },
   { name: "an Other section page", edit: true, hash: other.sections[0] ? otherHash(other.sections[0].id) : null },
   { name: "a generated review slide", edit: true, hash: generated === null ? null : guideViewHash(generated, { kind: "slides", n: 2 }) },

@@ -66,7 +66,7 @@ const evidence = (gid: string, claims: string[], result = "pass") => ({
  * Writes the fixture tree under `root`:
  * - fm (EOR): cardiovascular (sections; topic, drug and one-column tables), pulmonary (flat, untitled
  *   lead rows), renal (Pharm by `pharmFiles` only); general topic labs with links, files and a gap;
- *   a workup item; a generated deck.
+ *   a workup item; two well-child visits sharing a gap; a generated deck.
  * - psy (EOR): no systems; an own deck whose document is removed.
  * - pance: a drug table whose row matches a card; `sidebarEnd`.
  */
@@ -128,8 +128,16 @@ export async function writeFixture(root: string): Promise<void> {
   await w("guides/fm/renal/structure.json", { ...empty, pharmFiles: [D(2)] });
   await w("guides/fm/general.json", {
     v: 1,
-    topics: [{ key: "labs", howto: null, links: [{ target: R(101), covers: "AF labs" }, { target: GONE, covers: "deleted" }], files: [D(5), D(6), D(7)], gaps: [G(1)] }],
+    topics: [
+      { key: "labs", howto: null, links: [{ target: R(101), covers: "AF labs" }, { target: GONE, covers: "deleted" }], files: [D(5), D(6), D(7)], gaps: [G(1)] },
+      { key: "workup", howto: null, links: [], files: [], gaps: [] },
+      { key: "visits", howto: null, links: [], files: [], gaps: [] },
+    ],
     workup: [{ id: "ams", title: "Altered mental status", conds: "Delirium", gap: G(2) }],
+    visits: [
+      { id: "newborn", title: "Newborn", links: [{ target: R(201), covers: "Asthma at birth" }, { target: GONE, covers: "deleted" }], gaps: [G(4)] },
+      { id: "2-months", title: "2 months", links: [], gaps: [G(4), G(5)] },
+    ],
   });
   await w("slides/fm/deck.json", { v: 1, guide: "fm", kind: "generated", title: "High-yield review slides", file: null, slides: [S(1), S(2)] });
   await w(`slides/fm/blocks/${S(1)}.json`, block(S(1), "slide", doc({ type: "heading_line", content: [{ type: "text", text: "High-yield review slides" }] })));
@@ -217,6 +225,10 @@ export async function writeFixture(root: string): Promise<void> {
   await w(`gapfill/${G(2)}.evidence.json`, evidence(G(2), ["Check glucose."]));
   await w(`gapfill/${G(3)}.json`, gapBlock(G(3), "Vaccine schedule", ["Follow the schedule."]));
   await w(`gapfill/${G(3)}.evidence.json`, evidence(G(3), ["Follow the schedule."]));
+  await w(`gapfill/${G(4)}.json`, gapBlock(G(4), "Infant history", ["Ask about feeding."]));
+  await w(`gapfill/${G(4)}.evidence.json`, evidence(G(4), ["Ask about feeding."]));
+  await w(`gapfill/${G(5)}.json`, gapBlock(G(5), "2-month screening", ["Screen for depression in the parent."]));
+  await w(`gapfill/${G(5)}.evidence.json`, evidence(G(5), ["Screen for depression in the parent."]));
 
   // ---- places
   const tab = { subs: [], files: [] };

@@ -342,6 +342,99 @@ describe("initial workup", () => {
   });
 });
 
+describe("well child visits", () => {
+  /** The sidebar's "Well child visits" group. */
+  function visitsGroup(m: Mounted): HTMLElement {
+    const row = byText(m.container, ".side-in .grp-row .sys-name", "Well child visits");
+    const li = row?.closest<HTMLElement>("li.grp");
+    if (!li) throw new Error("no Well child visits group in the sidebar");
+    return li;
+  }
+
+  it("lists the visits in age order, each opening its own page", async () => {
+    const a = await renderApp("#/eor/fm/visits");
+    app = a;
+    await until(() => byText(a.container, ".visits-page .lnk li", "Newborn"), "visits list");
+    const main = mainOf(a);
+    expect(main.querySelector("h1")?.textContent).toBe("Well child visits for Family Medicine");
+    const items = [...main.querySelectorAll(".visits-page .lnk li a")];
+    expect(items.map((l) => [l.textContent, l.getAttribute("href")])).toEqual([
+      ["Newborn", "#/eor/fm/visits/newborn"],
+      ["2 months", "#/eor/fm/visits/2-months"],
+    ]);
+    expect(main.querySelector(".visits-page section.gap")).toBeNull();
+    await click(at(items, 1));
+    expect(location.hash).toBe("#/eor/fm/visits/2-months");
+    await until(() => byText(main, ".visits-page .vis-h", "2 months"), "2 months page");
+  });
+
+  it("renders the visits list for the general/visits key too", async () => {
+    const a = await renderApp("#/eor/fm/general/visits");
+    app = a;
+    const li = await until(() => byText(a.container, ".visits-page .lnk li", "2 months"), "visits list");
+    expect(li.querySelector("a")?.getAttribute("href")).toBe("#/eor/fm/visits/2-months");
+  });
+
+  it("shows a visit's links into her notes, then its gap blocks, with previous/next visits", async () => {
+    const a = await renderApp("#/eor/fm/visits/newborn");
+    app = a;
+    const main = mainOf(a);
+    await until(() => main.querySelector(`.visits-page section.gap[data-anchor="${G(4)}"]`), "newborn page");
+    expect(main.querySelector(".vis-h")?.textContent).toBe("Newborn");
+    expect(byText(main, ".crumbs a", "Well child visits")?.getAttribute("href")).toBe("#/eor/fm/visits");
+    const link = main.querySelector(".visits-page .lnk li a");
+    expect(link?.getAttribute("href")).toBe(`#/eor/fm/t/${R(201)}`);
+    expect(link?.querySelector(".ll")?.textContent).toBe("EOR › Family Medicine › Pulmonary — Asthma at birth");
+    expect([...main.querySelectorAll(".visits-page section.gap")].map((g) => g.getAttribute("aria-label"))).toEqual(["Infant history"]);
+    const parts = main.querySelectorAll(".visits-page .gsec");
+    expect(before(at(parts, 0), at(parts, 1))).toBe(true);
+    expect(at(parts, 0).querySelector(".lnk")).not.toBeNull();
+    expect(main.querySelector(".visits-page .fchip")).toBeNull();
+
+    const nav = main.querySelector(".vis-nav");
+    expect([...(nav?.querySelectorAll("a") ?? [])].map((l) => [l.textContent, l.getAttribute("href"), l.getAttribute("rel")])).toEqual([
+      ["‹ All visits", "#/eor/fm/visits", null],
+      ["2 months →", "#/eor/fm/visits/2-months", "next"],
+    ]);
+    await click(nav?.querySelector('a[rel="next"]'));
+    expect(location.hash).toBe("#/eor/fm/visits/2-months");
+    await until(() => main.querySelector(`.visits-page section.gap[data-anchor="${G(5)}"]`), "2 months page");
+    expect([...main.querySelectorAll(".visits-page section.gap")].map((g) => g.getAttribute("data-anchor"))).toEqual([G(4), G(5)]);
+    expect([...(main.querySelector(".vis-nav")?.querySelectorAll("a") ?? [])].map((l) => [l.textContent, l.getAttribute("href"), l.getAttribute("rel")])).toEqual([
+      ["‹ All visits", "#/eor/fm/visits", null],
+      ["← Newborn", "#/eor/fm/visits/newborn", "prev"],
+    ]);
+  });
+
+  it("is a closed sidebar group under the general topics until a visit page opens it, marking the open visit", async () => {
+    const a = await renderApp("#/eor/fm/general/labs");
+    app = a;
+    await until(() => byText(a.container, ".side-in .grp-row .sys-name", "Well child visits"), "visits group");
+    const group = visitsGroup(a);
+    expect(group.querySelector(".grp-n")?.textContent).toBe("2");
+    expect(group.querySelector(".sys-name")?.getAttribute("href")).toBe("#/eor/fm/visits");
+    expect(group.querySelector(".grp-ents")).toBeNull();
+    // It comes after Labs, the topic before it.
+    const labs = byText(a.container, ".side-in .gen a", "Labs");
+    if (!labs) throw new Error("no Labs entry");
+    expect(before(labs, group)).toBe(true);
+
+    await go("#/eor/fm/visits/2-months");
+    const entries = await until(() => visitsGroup(a).querySelector(".grp-ents"), "open visits group");
+    expect([...entries.querySelectorAll("a")].map((l) => [l.textContent, l.getAttribute("href"), l.getAttribute("aria-current")])).toEqual([
+      ["Newborn", "#/eor/fm/visits/newborn", null],
+      ["2 months", "#/eor/fm/visits/2-months", "page"],
+    ]);
+  });
+
+  it("a guide without visits has no Well child visits entry", async () => {
+    const a = await renderApp("#/eor/psy");
+    app = a;
+    await until(() => a.container.querySelector("aside.side .side-sec"), "sidebar");
+    expect(byText(a.container, ".side-in .sys-name", "Well child visits")).toBeNull();
+  });
+});
+
 describe("reference tab", () => {
   it("lands on a list of the tab's topics and files, with the sidebar", async () => {
     const a = await renderApp("#/labs");
@@ -836,11 +929,11 @@ describe("Other tab", () => {
 });
 
 describe("unknown pages", () => {
-  it.each(["#/eor/fm/workup/nope", "#/labs/nope", "#/other/nope"])("%s is not on the site", async (hash) => {
+  it.each(["#/eor/fm/workup/nope", "#/eor/fm/visits/nope", "#/labs/nope", "#/other/nope"])("%s is not on the site", async (hash) => {
     const a = await renderApp(hash);
     app = a;
     const h = await until(() => byText(a.container, "h1", "This page isn't on the site"), "not-on-site page");
     expect(h.textContent).toBe("This page isn't on the site");
-    expect(a.container.querySelector(".workup-page, .ref-page, .other-page")).toBeNull();
+    expect(a.container.querySelector(".workup-page, .visits-page, .ref-page, .other-page")).toBeNull();
   });
 });

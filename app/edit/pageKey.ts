@@ -9,6 +9,7 @@ const FIELDS = {
   pharm: ["guide", "system", "section"],
   general: ["guide", "key"],
   workup: ["guide", "item"],
+  visit: ["guide", "item"],
   ref: ["tab", "sub"],
   other: ["section"],
   slide: ["guide", "slide"],

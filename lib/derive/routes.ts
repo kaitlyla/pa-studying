@@ -13,6 +13,7 @@ export const GENERAL_LABELS: Record<GeneralKey, string> = {
   guidelines: "Guidelines",
   screenings: "Screenings",
   workup: "Initial workup of common presentations",
+  visits: "Well child visits",
 };
 
 export const REF_TABS = ["labs", "imaging", "ekg", "anatomy"] as const;
@@ -32,6 +33,7 @@ export type GuideView =
   | { kind: "pharm"; system: string; section: string | null; target: string | null }
   | { kind: "general"; key: GeneralKey }
   | { kind: "workup"; item: string | null }
+  | { kind: "visits"; item: string | null }
   | { kind: "slides"; n: number };
 
 export type RoutePage =
@@ -90,6 +92,8 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
       return !isPance && a && b === undefined && isGeneralKey(a) ? page({ kind: "general", key: a }) : NOT_FOUND;
     case "workup":
       return !isPance && b === undefined ? page({ kind: "workup", item: a ?? null }) : NOT_FOUND;
+    case "visits":
+      return !isPance && b === undefined ? page({ kind: "visits", item: a ?? null }) : NOT_FOUND;
     case "slides": {
       if (isPance || b !== undefined) return NOT_FOUND;
       if (a === undefined) return page({ kind: "slides", n: 1 });
@@ -173,6 +177,8 @@ export function guideViewHash(guide: string, view: GuideView): string {
       return `${base}/general/${view.key}`;
     case "workup":
       return view.item ? `${base}/workup/${enc(view.item)}` : `${base}/workup`;
+    case "visits":
+      return view.item ? `${base}/visits/${enc(view.item)}` : `${base}/visits`;
     case "slides":
       return `${base}/slides/${view.n}`;
   }
@@ -250,6 +256,11 @@ export function generalLoc(ix: SiteIndex, guide: string, key: GeneralKey): strin
 /** "EOR › <Guide> › Initial workup". */
 export function workupLoc(ix: SiteIndex, guide: string): string {
   return `${guideLoc(ix, guide)} › Initial workup`;
+}
+
+/** "EOR › <Guide> › Well child visits › <Visit>". */
+export function visitLoc(ix: SiteIndex, guide: string, visit: string): string {
+  return `${generalLoc(ix, guide, "visits")} › ${visit}`;
 }
 
 /** "EOR › <Guide> › Review slides". */

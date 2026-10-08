@@ -173,6 +173,8 @@ describe("pages", () => {
     "#/eor/fm/pharm/cardiovascular/antianginals",
     "#/eor/fm/general/labs",
     "#/eor/fm/workup",
+    "#/eor/fm/visits",
+    "#/eor/fm/visits/2-months",
     "#/eor/fm/slides",
     "#/pance",
     "#/labs",

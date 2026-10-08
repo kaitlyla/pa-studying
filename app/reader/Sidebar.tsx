@@ -39,6 +39,7 @@ function currentOf(route: Route, guide: string): Current {
 const sysKey = (s: string): string => `s:${s}`;
 const secKey = (s: string, sec: string): string => `g:${s}:${sec}`;
 const pharmKey = (s: string): string => `ph:${s}`;
+const VISITS_KEY = "visits";
 
 /** The groups the current page lives in: they open automatically. */
 function autoOpen(nav: NavJson, cur: Current): Set<string> {
@@ -51,6 +52,7 @@ function autoOpen(nav: NavJson, cur: Current): Set<string> {
     out.add(secKey(v.system, v.section));
   }
   if (v.kind === "pharm") out.add(pharmKey(v.system));
+  if (v.kind === "visits") out.add(VISITS_KEY);
   if (v.kind === "topics" || v.kind === "block") {
     const ids = v.kind === "topics" ? v.ids : [v.id];
     for (const s of nav.systems) {
@@ -272,6 +274,61 @@ function SystemItem({ guide, system: s, cur, isOpen, setOpen, onNavigate }: Syst
   );
 }
 
+interface VisitsProps {
+  guide: string;
+  label: string;
+  nav: NavJson;
+  cur: Current;
+  isOpen: (key: string) => boolean;
+  setOpen: (key: string, open: boolean) => void;
+  onNavigate: () => void;
+}
+
+/** The well-child visits general topic: a group whose entries are the visits, in age order. */
+function VisitsItem({ guide, label, nav, cur, isOpen, setOpen, onNavigate }: VisitsProps): ReactNode {
+  const v = cur.view;
+  const open = isOpen(VISITS_KEY);
+  return (
+    <li className="grp">
+      <GroupRow
+        className="ent-row grp-row"
+        label={label}
+        plain={label}
+        to={guideViewHash(guide, { kind: "visits", item: null })}
+        open={open}
+        current={(v?.kind === "visits" && v.item === null) || (v?.kind === "general" && v.key === "visits")}
+        count={nav.visits.length}
+        onToggle={(o) => setOpen(VISITS_KEY, o)}
+        onNavigate={onNavigate}
+      />
+      {open && (
+        <ul className="ents grp-ents">
+          {nav.visits.map((x) => {
+            const on = v?.kind === "visits" && v.item === x.id;
+            return (
+              <li key={x.id}>
+                <div className="ent-row">
+                  <Link
+                    to={guideViewHash(guide, { kind: "visits", item: x.id })}
+                    className={`ent${on ? " open" : ""}`}
+                    aria-current={on ? "page" : undefined}
+                    title={x.title}
+                    onClick={onNavigate}
+                  >
+                    <span className="ent-t">
+                      <Txt text={x.title} />
+                    </span>
+                  </Link>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </li>
+  );
+}
+
 /** The review deck's sidebar label: her own Psychiatry deck, or the generated deck's title. */
 export function slidesLabel(guide: string, nav: NavJson): string | null {
   if (!nav.slides) return null;
@@ -318,6 +375,7 @@ export function GuideSidebar({ guide, onNavigate }: { guide: string; onNavigate:
           <div className="side-sec">General topics</div>
           <ul className="gen">
             {nav.general.map((g) => {
+              if (g.key === "visits") return <VisitsItem key={g.key} guide={guide} label={g.label} nav={nav} cur={cur} isOpen={isOpen} setOpen={setOpen} onNavigate={onNavigate} />;
               const on = g.key === "workup" ? v?.kind === "workup" : v?.kind === "general" && v.key === g.key;
               const to = g.key === "workup" ? guideViewHash(guide, { kind: "workup", item: null }) : guideViewHash(guide, { kind: "general", key: g.key });
               return (

@@ -267,6 +267,8 @@ export function pageHash(key: string): string | null {
       return isGeneralKey(k.key) ? guideViewHash(k.guide, { kind: "general", key: k.key }) : null;
     case "workup":
       return guideViewHash(k.guide, { kind: "workup", item: k.item });
+    case "visit":
+      return guideViewHash(k.guide, { kind: "visits", item: k.item });
     case "slide":
       return guideViewHash(k.guide, { kind: "slides", n: 1 });
     case "ref":

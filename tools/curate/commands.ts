@@ -397,6 +397,10 @@ export function general(c: Content, guide: string, draft: unknown): Planned {
     requireIds(t.gaps ?? [], new Set(c.gaps.keys()), `general ${t.key} gaps`);
   }
   requireIds((Array.isArray(file?.workup) ? file.workup : []).map((w) => w.gap), new Set(c.gaps.keys()), "general workup");
+  for (const v of Array.isArray(file?.visits) ? file.visits : []) {
+    checkLinks(v.links, targets, `general visits ${v.id}`);
+    requireIds(v.gaps ?? [], new Set(c.gaps.keys()), `general visits ${v.id} gaps`);
+  }
   return { changes: [{ path: `content/guides/${guide}/general.json`, value: draft }], notes: [] };
 }
 

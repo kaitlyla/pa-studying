@@ -12,6 +12,7 @@ describe("page keys", () => {
       [buildPageKey("pharm", "fm", "cardio", "p1"), { kind: "pharm", guide: "fm", system: "cardio", section: "p1" }],
       [buildPageKey("general", "fm", "vaccines"), { kind: "general", guide: "fm", key: "vaccines" }],
       [buildPageKey("workup", "psy", "ams"), { kind: "workup", guide: "psy", item: "ams" }],
+      [buildPageKey("visit", "peds", "2-months"), { kind: "visit", guide: "peds", item: "2-months" }],
       [buildPageKey("ref", "labs", "cbc"), { kind: "ref", tab: "labs", sub: "cbc" }],
       [buildPageKey("other", "howto"), { kind: "other", section: "howto" }],
       [buildPageKey("slide", "fm", "s_A"), { kind: "slide", guide: "fm", slide: "s_A" }],
@@ -20,7 +21,7 @@ describe("page keys", () => {
     for (const [key, parsed] of cases) expect(parsePageKey(key)).toEqual(parsed);
     expect(cases.map(([key]) => key)).toEqual([
       "topic:fm:r_A", "section:fm:cardio:cad", "system:fm:cardio", "listed:fm:b_A", "pharm:fm:cardio:p1",
-      "general:fm:vaccines", "workup:psy:ams", "ref:labs:cbc", "other:howto", "slide:fm:s_A", "doc:d_A",
+      "general:fm:vaccines", "workup:psy:ams", "visit:peds:2-months", "ref:labs:cbc", "other:howto", "slide:fm:s_A", "doc:d_A",
     ]);
   });
 

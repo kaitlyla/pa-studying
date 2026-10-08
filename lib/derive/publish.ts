@@ -14,12 +14,12 @@ import {
 import type {
   DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
   PubFlag, PubGap, PubLink, PubMedsCard, PubMedsClass, PubMedsEdit, PubMedsPart, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
-  WorkupJson,
+  VisitsJson, WorkupJson,
 } from "./published.ts";
 import { pubFigures } from "./published.ts";
 import {
   fileHash, fileLocation, GENERAL_LABELS, generalLoc, guideBase, guideLoc, guideViewHash, otherHash, otherLoc, PANCE, pharmLoc, REF_TABS,
-  refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, workupLoc, type GuideView, type SiteIndex,
+  refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, visitLoc, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
 import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics, type Topic } from "./topics.ts";
@@ -27,7 +27,7 @@ import { panelEntries, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
-  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, workupPath,
+  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
 } from "./published.ts";
 
 export interface PublishResult {
@@ -441,6 +441,9 @@ export function publish(c: Content): PublishResult {
       for (const gap of t.gaps) placeGap(gap, { route, loc: generalLoc(ix, gid, t.key) }, tabOf(g));
     }
     for (const w of g.general?.workup ?? []) placeGap(w.gap, { route: guideViewHash(gid, { kind: "workup", item: w.id }), loc: workupLoc(ix, gid) }, tabOf(g));
+    for (const v of g.general?.visits ?? []) {
+      for (const gap of v.gaps) placeGap(gap, { route: guideViewHash(gid, { kind: "visits", item: v.id }), loc: visitLoc(ix, gid, v.title) }, tabOf(g));
+    }
     if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, guideBase(gid), tabOf(g));
     const deck = c.decks.get(gid);
     if (deck?.file.kind === "own" && deck.file.file) placeDoc(deck.file.file, guideViewHash(gid, { kind: "slides", n: 1 }), tabOf(g));
@@ -727,7 +730,20 @@ export function publish(c: Content): PublishResult {
           gapUnit(w.gap);
         }
       }
+      for (const v of g.general.visits ?? []) {
+        const route = guideViewHash(gid, { kind: "visits", item: v.id });
+        units.push({ tab, title: collapse(v.title), loc: generalLoc(ix, gid, "visits"), route, at: null, label: "notes", text: searchText(v.title) });
+        for (const id of v.gaps) gapUnit(id);
+      }
+      if (g.general.visits?.length) {
+        const out: VisitsJson = {
+          guide: gid,
+          items: g.general.visits.map((v) => ({ id: v.id, title: v.title, links: links(`content/guides/${gid}/general.json`, v.links), gaps: v.gaps.map(gap) })),
+        };
+        files.set(visitsPath(gid), out);
+      }
     }
+    const visitsNav: NavJson["visits"] = (g.general?.visits ?? []).map((v) => ({ id: v.id, title: v.title }));
 
     // slides
     let slidesNav: NavJson["slides"] = null;
@@ -785,7 +801,7 @@ export function publish(c: Content): PublishResult {
 
     const nav: NavJson = {
       guide: gid, title: c.site.guideNames[gid], source: g.file.source, page: g.file.page, basePt: g.file.basePt,
-      systems: navSystems, general, slides: slidesNav, sidebarEnd, removed, pending,
+      systems: navSystems, general, visits: visitsNav, slides: slidesNav, sidebarEnd, removed, pending,
     };
     files.set(navPath(gid), nav);
   }

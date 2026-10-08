@@ -17,7 +17,7 @@ import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsFile, MedsPiece, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
-  TrimsFile, UploadFile, UsesFile, VocabFile, WordDocFile,
+  TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
 } from "./types.ts";
 
 /** Every file validator: the record, the file context, and the identity its path fixes (if any). */
@@ -597,7 +597,9 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
     v: v1,
     topics: arr(shapeOf<GeneralFile["topics"][number]>({ key: oneOf(...GENERAL_KEYS), howto: nullable(nonEmpty), links: arr(link), files: uniqueArr(id("d")), gaps: uniqueArr(id("g")) }, {})),
     workup: arr(shapeOf<GeneralFile["workup"][number]>({ id: slugC, title: nonEmpty, conds: str, gap: id("g") }, {})),
-  }, {})(v, "", ctx);
+  }, {
+    visits: arr(shapeOf<Visit>({ id: slugC, title: nonEmpty, links: arr(link), gaps: uniqueArr(id("g")) }, {})),
+  })(v, "", ctx);
   const g = v as GeneralFile;
   g.topics.map((t) => GENERAL_KEYS.indexOf(t.key)).reduce((prev, k) => {
     if (k <= prev) bad(ctx, ".topics", `keys once each, in the order ${GENERAL_KEYS.join(", ")}`, g.topics.map((t) => t.key));
@@ -608,6 +610,12 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
     if (prev !== null && prev.localeCompare(w.title, "en", { sensitivity: "base" }) > 0) bad(ctx, ".workup", "items in alphabetical order by title", w.title);
     return w.title;
   }, null);
+  const visits = g.visits ?? [];
+  uniqueArr(str)(visits.map((x) => x.id), ".visits[].id", ctx);
+  // The sidebar reaches a list page only through its topic, so the topic and the list come together.
+  for (const [key, items] of [["workup", g.workup], ["visits", visits]] as const) {
+    if (g.topics.some((t) => t.key === key) !== items.length > 0) bad(ctx, ".topics", `a ${key} topic exactly when ${key} is non-empty`, g.topics.map((t) => t.key));
+  }
 };
 
 const columnC: Checker = (v, at, ctx) => {
