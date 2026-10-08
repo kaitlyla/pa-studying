@@ -50,9 +50,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 2.15,
+      "right": 0,
       "bottom": 0,
-      "left": 2.15
+      "left": 0
      }
     },
     "content": [
@@ -85,7 +85,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -113,7 +116,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -125,6 +131,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -152,7 +164,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -164,6 +179,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clinical Manifestations"
@@ -191,7 +212,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -203,6 +227,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Diagnostics"
@@ -230,7 +260,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -242,6 +275,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Management"
@@ -259,7 +298,14 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        70.43547169811319,
+        191.05,
+        245.7145283018868,
+        150.9,
+        115.9
+       ]
       },
       "content": [
        {
@@ -281,7 +327,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -293,6 +342,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Vasospastic Angina "
@@ -307,7 +362,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -322,7 +380,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -337,6 +398,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Prinzmetal"
@@ -346,6 +413,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": " or "
@@ -358,6 +431,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Variant Angina"
@@ -385,7 +464,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -400,13 +482,59 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "PATHO"
            },
            {
             "type": "text",
-            "text": ": focal or diffuse spasm of epicardial coronary artery resulting in dynamic high-grade obstruction"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": focal or diffuse spasm of epicardial coronary artery "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 27,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "-> dynamic high-grade obstruction"
            }
           ]
          },
@@ -418,7 +546,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -427,7 +558,47 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎vascular smooth muscle hyperreactivity "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎vasocontrictors (acetylcholine, noradrenaline) "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 27,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "-> vascular smooth muscle hyperreactivity "
            }
           ]
          },
@@ -439,7 +610,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -448,6 +622,46 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪imbalance b/n sympathetic & vagal tone"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -460,7 +674,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -475,13 +692,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "Risk Factors"
+            "text": "RF"
            },
            {
             "type": "text",
-            "text": ": female, <50yo, smokers, hx of other vasospastic d/o (e.g., Raynaud phenomenon, migraine)"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": female, +50yo, smokers, hx of other vasospastic d/o (Raynaud phenomenon, migraine)"
            }
           ]
          },
@@ -493,7 +724,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -508,7 +742,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -523,13 +760,27 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Cocaine"
            },
            {
             "type": "text",
-            "text": ": can induce ischemia & infarction by causing coronary artery vasoconstriction via "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": induce ischemia & infarction via coronary artery vasoconstriction via "
            },
            {
             "type": "text",
@@ -541,17 +792,11 @@
               "type": "italic"
              },
              {
-              "type": "color",
+              "type": "size",
               "attrs": {
-               "hex": "009193"
+               "pt": 7.5
               }
-             }
-            ],
-            "text": "alpha-1 receptor"
-           },
-           {
-            "type": "text",
-            "marks": [
+             },
              {
               "type": "color",
               "attrs": {
@@ -559,10 +804,18 @@
               }
              }
             ],
-            "text": " "
+            "text": "alpha-1-r "
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "activation "
            }
           ]
@@ -588,7 +841,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -603,12 +859,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Chest pain/angina characteristics"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -621,7 +891,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -630,88 +903,30 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎CP "
-           },
-           {
-            "type": "text",
             "marks": [
              {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             }
-            ],
-            "text": "indistinguishable"
-           },
-           {
-            "type": "text",
-            "text": " from obstructive CAD"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎occurs predominantly at "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             }
-            ],
-            "text": "rest"
-           },
-           {
-            "type": "text",
-            "text": ", "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "highlight",
+              "type": "size",
               "attrs": {
-               "hex": "FFFF00"
+               "pt": 7.5
               }
              }
             ],
-            "text": "often 12am to early morning"
-           },
-           {
-            "type": "text",
-            "text": " "
+            "text": "▪︎CP @rest - indistinguishable from obstructive CAD"
            }
           ]
          },
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -720,7 +935,21 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎lasts 5-15 minutes, responds rapidly to NTG"
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- often due to emotional stress of cold weather"
            }
           ]
          },
@@ -732,7 +961,42 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎5-15 min, responds rapidly to NTG"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -747,7 +1011,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -762,12 +1029,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Possible triggers"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            }
           ]
@@ -780,7 +1061,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -789,7 +1073,33 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎changes in autonomic activity (⇡ vagal tone)"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎chg in autonomic activity (⇡ vagal tone = "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "why 12am -early morning have highest Sx"
            }
           ]
          },
@@ -801,7 +1111,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -810,6 +1123,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎cocaine, amphetamines, marijuana, alcohol"
            }
           ]
@@ -822,7 +1143,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -831,7 +1155,47 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎ephedrine-based products, triptans, 5-FU, ergonovine"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎ephedrine-based prod, triptans, 5-FU, ergonovine -5-HT1B, 1D agonist "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 27,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "-> contract smooth muscle"
            }
           ]
          },
@@ -843,7 +1207,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -852,6 +1219,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎Mg deficiency, hyperventilation, allergic reactions"
            }
           ]
@@ -864,7 +1239,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -873,7 +1251,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎exposure to extreme cold  "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎extreme cold  "
            }
           ]
          },
@@ -885,7 +1271,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -900,7 +1289,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -915,13 +1307,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "PE"
            },
            {
             "type": "text",
-            "text": ": +/- tachycardia, HTN, diaphoresis, S4 gallop"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": ± tachycardia, HTN, diaphoresis, S4 gallop"
            }
           ]
          }
@@ -946,7 +1352,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -961,12 +1370,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "COVADIS Diagnostic Criteria"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -979,7 +1402,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -988,6 +1414,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➀ "
            },
            {
@@ -995,6 +1429,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1015,7 +1455,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1024,6 +1467,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➁ "
            },
            {
@@ -1033,13 +1484,19 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "FF40FF"
               }
              }
             ],
-            "text": "transient ischemic EKG changes"
+            "text": "transient ischemic EKG chg"
            }
           ]
          },
@@ -1051,7 +1508,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1060,6 +1520,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "➂ "
            },
            {
@@ -1067,6 +1535,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1087,7 +1561,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1096,7 +1573,15 @@
           "content": [
            {
             "type": "text",
-            "text": "    » defined as >90% constriction  "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "    » >90% constriction  "
            }
           ]
          },
@@ -1108,7 +1593,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1123,7 +1611,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1138,13 +1629,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "EKG"
            },
            {
             "type": "text",
-            "text": ": normal between episodes"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": normal b/n episodes"
            }
           ]
          },
@@ -1156,7 +1661,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1165,6 +1673,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎transient ST-elevation/depression "
            }
           ]
@@ -1177,7 +1693,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1192,7 +1711,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1201,7 +1723,47 @@
           "content": [
            {
             "type": "text",
-            "text": "If ⊕ EKG findings ⇢ cardiac troponins to r/o MI"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "If ⊕ EKG findings ⇢ troponins to r/o MI"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎⊖ in vasospastic angina "
            }
           ]
          },
@@ -1213,28 +1775,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎troponins ⊖ in vasospastic angina "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1249,7 +1793,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1258,6 +1805,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Exercise stress test, ambulatory EKG monitoring  "
            }
           ]
@@ -1283,7 +1838,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1292,6 +1850,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎sublingual NTG"
            }
           ]
@@ -1304,7 +1870,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1313,6 +1882,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎smoking cessation "
            }
           ]
@@ -1325,7 +1902,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1334,7 +1914,15 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎ASCVD risk factor modification "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎ASCVD RF modification "
            }
           ]
          },
@@ -1346,7 +1934,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1361,7 +1952,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1376,12 +1970,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "CCBs"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1394,6 +2002,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "4472C4"
@@ -1404,6 +2018,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", "
            },
            {
@@ -1416,6 +2038,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "4472C4"
@@ -1426,6 +2054,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", etc."
            }
           ]
@@ -1438,7 +2074,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1447,6 +2086,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎prevent vasoconstriction & promote vasodilation in coronary vasculature "
            }
           ]
@@ -1459,7 +2106,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1474,7 +2124,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1491,6 +2144,12 @@
               "type": "underline",
               "attrs": {
                "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
               }
              },
              {
@@ -1504,7 +2163,15 @@
            },
            {
             "type": "text",
-            "text": ": nonselective beta blockers "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": nonselective bb (propranolol) "
            }
           ]
          },
@@ -1516,7 +2183,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1525,27 +2195,14 @@
           "content": [
            {
             "type": "text",
-            "text": "  – e.g., propranolol "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – can exacerbate vasospasm   "
            }
           ]
