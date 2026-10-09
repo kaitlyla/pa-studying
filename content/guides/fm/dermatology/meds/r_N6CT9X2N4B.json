@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_E6D11AJ0HK",
+  "g_A0D5T2K0J5",
+  "g_4EYJ4WA8DP"
+ ],
+ "roles": [
+  {
+   "target": "c_ZJBYRE8N73",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Symptom relief (it resolves on its own): oral antihistamines",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/erythema-multiforme"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E6D11AJ0HK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Symptom relief (it resolves on its own): topical glucocorticoids and topical anesthetics",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/erythema-multiforme"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_YQFR337AY2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Recurrent EM linked to HSV: continuous oral acyclovir 400 mg q12h, valacyclovir 500 mg q12h or famciclovir 250 mg q12h for 6 months",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/erythema-multiforme"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_A0D5T2K0J5",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Persistent or recalcitrant recurrent EM: dapsone",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/erythema-multiforme"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4EYJ4WA8DP",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Persistent or recalcitrant recurrent EM: azathioprine or mycophenolate mofetil",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/erythema-multiforme"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

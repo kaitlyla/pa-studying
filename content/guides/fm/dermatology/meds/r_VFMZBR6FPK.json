@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_TFB6CE2MYW",
+  "g_TS5YD8JFGB"
+ ],
+ "roles": [
+  {
+   "target": "c_MTBV2T2NY0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical antibiotics: erythromycin 2% gel or cream BID",
+     "note": null,
+     "sources": [
+      {
+       "name": "Perioral Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/acne-and-related-disorders/perioral-dermatitis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_ZB7VYFCV14",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "No response or extensive: oral tetracyclines (doxycycline or minocycline 50–100 mg BID, or tetracycline 250–500 mg BID between meals) for 4 weeks, then taper to the lowest effective dose. Unlike acne, antibiotics can usually be stopped",
+     "note": null,
+     "sources": [
+      {
+       "name": "Perioral Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/acne-and-related-disorders/perioral-dermatitis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TFB6CE2MYW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Topical pimecrolimus (patients > 2 years) reduces severity",
+     "note": null,
+     "sources": [
+      {
+       "name": "Perioral Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/acne-and-related-disorders/perioral-dermatitis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TS5YD8JFGB",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Granulomatous perioral dermatitis: isotretinoin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Perioral Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/acne-and-related-disorders/perioral-dermatitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

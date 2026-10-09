@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "add": [
+  "c_ZJBYRE8N73"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_MTZ5G96YTH",
+  "g_SS20VFKX46"
+ ],
+ "roles": [
+  {
+   "target": "g_MTZ5G96YTH",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Standard wound care: clean, ice for pain, elevation, tetanus prophylaxis, observation",
+     "note": null,
+     "sources": [
+      {
+       "name": "Spider Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/spider-bites"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_D6WSQJSTYW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Ulcerating lesions: topical antibiotic ointment (eg, neomycin/polymyxin B/bacitracin)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Spider Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/spider-bites"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_ZJBYRE8N73",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Urticarial lesions: antihistamines",
+     "note": null,
+     "sources": [
+      {
+       "name": "Spider Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/spider-bites"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SS20VFKX46",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Urticarial lesions: topical corticosteroids",
+     "note": null,
+     "sources": [
+      {
+       "name": "Spider Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/spider-bites"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_35QBPAGSVX",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Pain: NSAIDs",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_W3T72E7Z57",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Pain: opioids if severe",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
