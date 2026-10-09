@@ -6306,5 +6306,57 @@
     }
    ]
   }
+ ],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_1W44S79ASK",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "non-dihydropyridine CCB (diltiazem, verapamil)",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Vasospastic Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/vasospastic-angina"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_6WH0EEY3ZA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sublingual nitroglycerin",
+     "note": "acute attacks",
+     "sources": [
+      {
+       "name": "Vasospastic Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/vasospastic-angina"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "long-acting nitrate",
+     "note": "added if a CCB alone doesn't control attacks",
+     "sources": [
+      {
+       "name": "Vasospastic Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/vasospastic-angina"
+      }
+     ]
+    }
+   ]
+  }
  ]
 }

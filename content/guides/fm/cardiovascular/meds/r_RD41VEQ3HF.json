@@ -1,16 +1,14 @@
 {
  "v": 1,
  "add": [],
- "remove": [
-  "c_CT8T2JFNS0"
- ],
+ "remove": [],
  "own": [
   {
-   "target": "c_FHBEK18ECJ",
+   "target": "c_J8MKYPWFXG",
    "pieces": [
     {
      "kind": "rows",
-     "basePt": 8,
+     "basePt": 11,
      "title": null,
      "file": null,
      "doc": {
@@ -20,14 +18,10 @@
         "type": "table",
         "attrs": {
          "grid": [
-          61.25,
-          81.7,
-          4.45,
-          49.9,
-          341.2,
-          235.55
+          99,
+          445.5,
+          229.5
          ],
-         "ownWidths": true,
          "indentPt": -27.25,
          "borders": {
           "top": {
@@ -63,16 +57,16 @@
          },
          "cellMarginPt": {
           "top": 0,
-          "right": 1,
+          "right": 2.15,
           "bottom": 0,
-          "left": 1
+          "left": 2.15
          }
         },
         "content": [
          {
           "type": "table_row",
           "attrs": {
-           "id": "r_51PTT4PMFG",
+           "id": "r_KG4ZY3KBHJ",
            "kind": "heading",
            "minHeightPt": null,
            "repeatHeader": false,
@@ -98,10 +92,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 6.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -115,49 +106,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "ANTIPLATELET"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 3,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "FF7E79",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 6.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "RX"
+                "text": "ANTIARRHYTHMICS"
                }
               ]
              }
@@ -182,10 +131,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 6.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -199,7 +145,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "About"
+                "text": "ABOUT"
                }
               ]
              }
@@ -224,10 +170,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 6.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -241,7 +184,7 @@
          {
           "type": "table_row",
           "attrs": {
-           "id": "r_WRG28H74WY",
+           "id": "r_3VDG5KV3BA",
            "kind": "content",
            "minHeightPt": null,
            "repeatHeader": false,
@@ -267,10 +210,40 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Class III"
                },
+               {
+                "type": "text",
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -290,29 +263,10 @@
                   }
                  }
                 ],
-                "text": "Aspirin (ASA)"
+                "text": "Dronedarone\tDofetilide"
                }
               ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": {
-              "right": {
-               "style": "single",
-               "widthPt": 0.5,
-               "color": "F2F2F2"
-              }
-             }
-            },
-            "content": [
+             },
              {
               "type": "paragraph",
               "attrs": {
@@ -321,47 +275,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 2,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": {
-              "left": {
-               "style": "single",
-               "widthPt": 0.5,
-               "color": "F2F2F2"
-              }
-             }
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": -72,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -370,7 +284,50 @@
               "content": [
                {
                 "type": "text",
-                "text": "Monitoring: LFTs,    SCr, BUN,    CBC"
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Sotalol\t\tIbutilide"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Amiodarone"
                }
               ]
              }
@@ -395,10 +352,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -419,23 +373,7 @@
                },
                {
                 "type": "text",
-                "text": ": "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "irreversibly binds to/inhibits COX-1/COX-2 enzymes"
-               },
-               {
-                "type": "text",
-                "text": ", dose-related effects"
+                "text": ": K-channel blockers; delays phase 3 repolarization resulting in marked prolongation of AP duration & refractory period"
                }
               ]
              },
@@ -447,10 +385,22 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -459,85 +409,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "▪︎"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": "COX-1 inhibition = TXA2 inhibition = "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": "⇣"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": " platelet activation/aggregation, "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": "⇣"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": " vasodilation"
+                "text": "▪︎Sotalol: life-threatening ventricular arrhythmias; maintenance\t▪︎Amiodarone: DOC in pts w/ heart failure \t "
                }
               ]
              },
@@ -549,10 +421,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -561,123 +430,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "  – "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "cardioprotective effects 75-160mg"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Indications"
-               },
-               {
-                "type": "text",
-                "text": ": ACS (chewed) "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "- Prevent: stroke    - primary MI -↓thrombus size &"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "highlight",
-                  "attrs": {
-                   "hex": "FFFF00"
-                  }
-                 }
-                ],
-                "text": "↓mortality: "
-               },
-               {
-                "type": "text",
-                "text": "pre & post MI      - CV death        "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "- PAD"
+                "text": " of NSR in AFIB "
                }
               ]
              }
@@ -702,68 +455,7 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "CI"
-               },
-               {
-                "type": "text",
-                "text": ": NSAID/salicylate allergy, asthma, rhinitis, nasal polyps, children (<21yr) w viral infection ("
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "C00000"
-                  }
-                 }
-                ],
-                "text": "Reyes"
-               },
-               {
-                "type": "text",
-                "text": ")"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -784,7 +476,43 @@
                },
                {
                 "type": "text",
-                "text": ": "
+                "text": ": QT prolongation "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "▪︎Amiodarone: photosensitivity ("
                },
                {
                 "type": "text",
@@ -802,26 +530,23 @@
                   }
                  }
                 ],
-                "text": "*bleeding"
+                "text": "blue discoloration"
                },
                {
                 "type": "text",
-                "text": ", dyspepsia, heartburn, nausea"
+                "text": "), neurotoxicity, "
                }
               ]
              },
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 18,
+               "indLeft": 0,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
@@ -830,63 +555,24 @@
               "content": [
                {
                 "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "Warnings"
-               },
-               {
-                "type": "text",
-                "text": ": tinnitus, severe skin rash (rare) "
+                "text": " hypothyroidism, corneal microdeposits, DILE "
                }
               ]
              },
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 18,
+               "indLeft": 0,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
+               "line": null,
                "align": "left",
                "shade": null,
                "borders": null,
                "marker": null
               }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 18,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "AVOID IN 3RD TM"
-               }
-              ]
              }
             ]
            }
@@ -901,7 +587,7 @@
      "kind": "notes",
      "basePt": 8,
      "title": null,
-     "file": "Antiplatelet Antithrombotics Fibrinolytics Med List LOs 3.12.26 (1)",
+     "file": "Cardio II Med List (1)",
      "doc": {
       "type": "doc",
       "content": [
@@ -927,19 +613,97 @@
           "type": "text",
           "marks": [
            {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
+            "type": "bold"
            }
           ],
-          "text": "Nonsteroidal Antiinflammatory Drug (NSAID):"
+          "text": "MC—-----------Class III agents: amiodarone, sotalol—-----------------"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: block K, ↑ phase 3, ↑ AP -> ↑ ERP @ Atrial-Ventricular tissue"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Contraindications: ↑ QT"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Monitoring:↑ QT, ↑ PR, ↑ QRS"
          }
         ]
        },
@@ -963,22 +727,14 @@
         "content": [
          {
           "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Aspirin"
+          "text": "Amiodarone: A-B-Na-K-Ca blocking (class 1,2,3,4 effects) "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1000,39 +756,7 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9D2E9"
-            }
-           }
-          ],
-          "text": "irreversibly "
-         },
-         {
-          "type": "text",
-          "text": "inhibit arachidonic acid -> prostaglandin H2 -> thromboxane A2 (prostaglandin thromboxane"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": " (TXA2))"
-         },
-         {
-          "type": "text",
-          "text": "   "
+          "text": "Clin Use:"
          }
         ]
        },
@@ -1061,124 +785,14 @@
         "content": [
          {
           "type": "text",
-          "text": "via inhibit acetylation of cyclooxygenase-1 (COX-1) -> ↓platelet activation, ↓vascoconstriction"
+          "text": "Atrial-Ventricular arrhythmia "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "Inhibit platelet aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "target": "c_5Q5AHW0S2K",
-   "pieces": [
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Antiplatelet Antithrombotics Fibrinolytics Med List LOs 3.12.26 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Cilostazol"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1200,7 +814,193 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: inhibit ph"
+          "text": "A-Fib"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: VERY LONG ½ LIFE 30-100D"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Metabolism:CYP INHIBITOR -MANY DRUG INTERACTIONS "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects:  "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Pulm fibrosis           \t     \t-       GI                                                                                - Ataxia, dizziness\t\t-       Neuropathy, "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Photosensitivity, ophthalmic effects \t-       muscle weak, tremor             "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "EA9999"
+            }
+           }
+          ],
+          "text": "Blue skin discolor (iodine accum)"
+         },
+         {
+          "type": "text",
+          "text": "\t-       Hypo-hyper thyroid  "
          },
          {
           "type": "text",
@@ -1208,22 +1008,42 @@
            {
             "type": "shade",
             "attrs": {
-             "hex": "C9DAF8"
+             "hex": "EA9999"
             }
            }
           ],
-          "text": "osphodiesterase 3 & inhibit cAMP br"
-         },
-         {
-          "type": "text",
-          "text": "eakdown -> ↑cAMP in platelets & blood vessels -> inhibit platelet aggregation & vasodilates  "
+          "text": "   "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Sotalol "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1246,25 +1066,13 @@
          {
           "type": "text",
           "text": "Clin Use: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "Intermittent claudication"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 81,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1286,14 +1094,14 @@
         "content": [
          {
           "type": "text",
-          "text": "Off label use: Buerger dz             -    Vasc sclerosis complicating DM                        -    Sx tx of Chronic cerebral ischemia "
+          "text": "Atrial & Ventricular dysrhythmias "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1315,14 +1123,14 @@
         "content": [
          {
           "type": "text",
-          "text": "SE:   -   GI effects     -     HA"
+          "text": "Class 3 effects & non-selective BB"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1344,58 +1152,14 @@
         "content": [
          {
           "type": "text",
-          "text": "CI: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "CHF"
+          "text": "Adverse Effects:  MUST BE ADMINISTERED IN HSP"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Pentoxifylline"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1412,9 +1176,9 @@
           "font": null,
           "marks": [
            {
-            "type": "size",
+            "type": "shade",
             "attrs": {
-             "pt": 7.5
+             "hex": "FFE599"
             }
            }
           ],
@@ -1426,174 +1190,20 @@
           "type": "text",
           "marks": [
            {
-            "type": "size",
+            "type": "shade",
             "attrs": {
-             "pt": 7.5
+             "hex": "FFE599"
             }
            }
           ],
-          "text": "MOA: methylxanthine derivative (like theophylline is) -but pentoxifylline ⍉have bronchodilator effects   "
+          "text": "Torsades"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "                                -    inhibit "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "erythrocyte (RBC) phosphodiesterase"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "->↑RBC cAMP activity-> RBC membrane maintain integrity->resistant to deformity->"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "↑RBC flexibil"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "ity "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "                                -     ↓[plasma fibrinogen] & ↑ fibrinolytic activity->  "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "↓blood viscosity"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "  -> ↑blood flow to microcirculation -> ↑tissue O2  "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1615,67 +1225,89 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use:"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": " PAD: 2nd line, pt cannot use cilostazol "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Poss sickle cell due to flexibility "
+          "text": "BB adverse effects"
          }
         ]
        }
       ]
      }
-    }
-   ]
-  },
-  {
-   "target": "c_0MBJ1P5NT5",
-   "pieces": [
+    },
     {
      "kind": "notes",
      "basePt": 8,
      "title": null,
-     "file": "Antiplatelet Antithrombotics Fibrinolytics Med List LOs 3.12.26 (1)",
+     "file": "Cardio II Med List (1)",
      "doc": {
       "type": "doc",
       "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "center",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 12
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
+            }
+           }
+          ],
+          "text": "Cardio II Key Monitoring Parameter"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 12
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
+            }
+           }
+          ],
+          "text": "s "
+         }
+        ]
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -1702,156 +1334,58 @@
             "attrs": {
              "style": "single"
             }
-           }
-          ],
-          "text": "Factor Xa Inhibitors:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: i"
-         },
-         {
-          "type": "text",
-          "marks": [
+           },
            {
-            "type": "shade",
+            "type": "size",
             "attrs": {
-             "hex": "C9DAF8"
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
             }
            }
           ],
-          "text": "nactivate factor Xa"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Admin: PO"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "ADR: Bleeding: major & minor"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "DI: poss dose adjust   -"
+          "text": "Amiodarone: pr"
          },
          {
           "type": "text",
           "marks": [
            {
-            "type": "shade",
+            "type": "underline",
             "attrs": {
-             "hex": "F4CCCC"
+             "style": "single"
+            }
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
             }
            }
           ],
-          "text": "CYP3A4  -    P-GP"
+          "text": "ior to use "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 39,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1864,94 +1398,287 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Monitoring: None -drug levels are predictable "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Rivaro"
-         },
-         {
-          "type": "text",
           "marks": [
            {
-            "type": "bold"
-           }
-          ],
-          "text": "xaban"
-         },
-         {
-          "type": "text",
-          "text": " (Xarelto) "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Reversal: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
+            "type": "size",
             "attrs": {
-             "hex": "FFF2CC"
+             "pt": 9
             }
            }
           ],
-          "text": "AndexXa (factor Xa)"
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "liver function tests"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 39,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 9
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "pulmonary function"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 39,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 9
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "thyroid function"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 39,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 9
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "chest X-ray"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 39,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 9
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "EKG"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 39,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 9
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "ophthalmologic exam"
          }
         ]
        }
@@ -1964,54 +1691,31 @@
  "gaps": [],
  "roles": [
   {
-   "target": "c_FHBEK18ECJ",
+   "target": "c_J8MKYPWFXG",
    "roles": [
     {
      "role": "1st",
-     "drugs": "antiplatelet (aspirin or clopidogrel)",
-     "note": "all symptomatic patients",
+     "drugs": "IV amiodarone",
+     "note": "stable sustained VT",
      "sources": [
       {
-       "name": "Peripheral Artery Disease",
+       "name": "Ventricular Tachycardia",
        "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/peripheral-artery-disease"
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/ventricular-tachycardia-vt"
       }
      ]
-    }
-   ]
-  },
-  {
-   "target": "c_0MBJ1P5NT5",
-   "roles": [
+    },
     {
      "role": "adjunct",
-     "drugs": "rivaroxaban 2.5 mg + aspirin",
-     "note": "cuts CV events",
+     "drugs": "sotalol, then amiodarone",
+     "note": "prevention (with an ICD)",
      "sources": [
       {
-       "name": "Peripheral Artery Disease",
+       "name": "Ventricular Tachycardia",
        "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/peripheral-artery-disease"
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "target": "c_5Q5AHW0S2K",
-   "roles": [
-    {
-     "role": "adjunct",
-     "drugs": "cilostazol",
-     "note": "claudication; contraindicated in systolic HF",
-     "sources": [
-      {
-       "name": "Peripheral Artery Disease",
-       "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/peripheral-artery-disease"
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/ventricular-tachycardia-vt"
       }
      ]
     }

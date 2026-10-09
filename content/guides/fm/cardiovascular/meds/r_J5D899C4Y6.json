@@ -9899,5 +9899,44 @@
     }
    ]
   }
+ ],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_4399D44A7Y",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV beta-blocker (metoprolol, esmolol, labetalol)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Aortic Dissection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_YRPKJQ8JCP",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "nitroprusside",
+     "note": "SBP > 110 despite beta-blocker/CCB; never without one",
+     "sources": [
+      {
+       "name": "Aortic Dissection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection"
+      }
+     ]
+    }
+   ]
+  }
  ]
 }
