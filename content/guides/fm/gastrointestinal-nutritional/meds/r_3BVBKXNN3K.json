@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_SQE7ND7G4K"
+ ],
+ "roles": [
+  {
+   "target": "p_XKPGFYNXYB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "albendazole",
+     "note": "treat all intestinal Ascaris infections",
+     "sources": [
+      {
+       "name": "Ascariasis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/ascariasis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_KNCEWDGEX9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "mebendazole",
+     "note": "treat all intestinal Ascaris infections",
+     "sources": [
+      {
+       "name": "Ascariasis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/ascariasis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SQE7ND7G4K",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ivermectin",
+     "note": "treat all intestinal Ascaris infections",
+     "sources": [
+      {
+       "name": "Ascariasis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/ascariasis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "pyrantel pamoate",
+     "note": "pregnancy (benzimidazoles potentially teratogenic)",
+     "sources": [
+      {
+       "name": "Ascariasis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/ascariasis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

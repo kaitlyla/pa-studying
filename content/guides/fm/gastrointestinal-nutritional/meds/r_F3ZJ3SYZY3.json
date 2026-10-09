@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_HM575VYCJR"
+ ],
+ "roles": [
+  {
+   "target": "p_KNCEWDGEX9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "single dose of mebendazole, repeated in 2 weeks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pinworm Infestation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/pinworm-infestation"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HM575VYCJR",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "single dose of pyrantel pamoate or albendazole, repeated in 2 weeks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pinworm Infestation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/pinworm-infestation"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
