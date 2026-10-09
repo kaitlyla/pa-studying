@@ -751,7 +751,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
       { file: where(R(104)), id: R(998) },
       { file: where(R(997)), id: R(997) },
     ]);
-    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {}, gaps: [], roles: {} });
+    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {}, ownGaps: {}, gaps: [], roles: {} });
   });
 
   describe("sourced cards (MedsFile gaps) and role labels (roles)", () => {
@@ -798,6 +798,40 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
       expect(e?.roles).toEqual({});
     });
 
+    describe("a gap block held by her version of an entry (own gap)", () => {
+      const held: MedsFile = { v: 1, add: [], remove: [], own: [{ target: C(2), pieces: [mine("my nitrates, trimmed")], gap: G(3) }] };
+
+      it("publishes it on her version's entry only, not as an entry of its own", () => {
+        const angina = topicOf(publish(withMeds([[R(104), held]])), R(104));
+        expect(angina.medsEdit?.ownGaps[C(2)]?.id).toBe(G(3));
+        expect(angina.medsEdit?.gaps).toEqual([]);
+        expect(panelEntries(angina).map((e) => [e.med.target, e.gap?.id ?? null])).toEqual([[C(2), G(3)], [R(124), null]]);
+        expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([C(2), R(124)]);
+      });
+
+      it("places it on the dx's page, and its search result opens her version's entry", () => {
+        const res = publish(withMeds([[R(104), held]]));
+        const page = hostsOf(res)[R(104)];
+        expect(hostsOf(res)[G(3)]).toEqual(page);
+        const unit = res.units.find((u) => u.label === "gap" && u.at === `meds-${C(2)}`);
+        expect(unit).toMatchObject({ route: page?.route, loc: page?.loc });
+        expect(res.units.some((u) => u.at === G(3))).toBe(false);
+        expect(uncoveredText(withMeds([[R(104), held]]), res.units, res.files)).toEqual(uncoveredText(base, out.units, out.files));
+      });
+
+      it("shows no block when she took the entry off, and reports a missing block to dropped", () => {
+        const offContent = withMeds([[R(104), { ...held, remove: [C(2)] }]]);
+        const offRes = publish(offContent);
+        expect(topicOf(offRes, R(104)).medsEdit?.ownGaps).toEqual({});
+        // Not shown on the dx page, so not placed there: the block keeps its home in Other, and every line stays searchable.
+        expect(hostsOf(offRes)[G(3)]).toEqual(hostsOf(out)[G(3)]);
+        expect(uncoveredText(offContent, offRes.units, offRes.files)).toEqual(uncoveredText(base, out.units, out.files));
+        const res = publish(withMeds([[R(104), { ...held, own: [{ target: C(2), pieces: [mine("x")], gap: G(9) }] }]]));
+        expect(newDropped(res)).toEqual([{ file: topicMedsPath("fm", "cardiovascular", R(104)), id: G(9) }]);
+        expect(topicOf(res, R(104)).medsEdit?.ownGaps).toEqual({});
+      });
+    });
+
     it("roleRank: an entry ranks by its best role; byRole keeps her order within a rank", () => {
       expect(roleRank([tag("adjunct"), tag("2nd")])).toBe(1);
       expect(roleRank([])).toBe(4);
@@ -837,7 +871,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
     expect(pieces.map((p) => [p.kind, p.basePt, p.file])).toEqual([["rows", 10, null], ...pieces.slice(1).map((p) => ["notes", sys.cards[C(2)]?.basePt, p.file])]);
     expect(pieces.length).toBeGreaterThan(1);
     expect(entryPieces(sys, angina, ranolazine, 10).map((p) => p.kind)).toEqual(["rows"]);
-    expect(shownPieces(sys, angina, { med: nitrates, own: null }, 10)).toEqual(pieces);
+    expect(shownPieces(sys, angina, { med: nitrates, own: null, gap: null }, 10)).toEqual(pieces);
   });
 
   it("publishedEdit: a card already on the panel is not added twice, nor one she removed", () => {
@@ -858,7 +892,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
     const noSection = { ...sys, pharm: null };
     expect(pageCard(noSection, C(2))).toMatchObject({ card: C(2), section: nitrateSection(sys) });
     const added = { card: C(3), title: "Added", rows: [], section: "elsewhere", system: "pulmonary", target: C(3) };
-    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {}, gaps: [], roles: {} } } : t)) };
+    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {}, ownGaps: {}, gaps: [], roles: {} } } : t)) };
     expect(pageCard(withAdded, C(3))).toBe(added);
   });
   const nitrateSection = (sys: SystemJson): string | undefined => {

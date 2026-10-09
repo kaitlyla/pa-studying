@@ -269,6 +269,8 @@ export interface PubMedsEdit {
   add: PubMedsClass[];
   /** Target → what the entry shows instead of its card's rows and notes, for the entries she edited that the panel shows. */
   own: Record<string, MedsPiece[]>;
+  /** Target → the gap block shown under the entry's own pieces (MedsFile own `gap`), for the entries in `own` that have one. */
+  ownGaps: Record<string, PubGap>;
   /**
    * The sourced cards (gap blocks) she placed under this dx (MedsFile `gaps`), in her order, those she
    * took off included (their ids are in `remove`) so the editor can put them back; the panel skips them.

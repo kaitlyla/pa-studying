@@ -13,19 +13,26 @@ export interface PanelPiece extends MedsPiece {
   part: string | null;
 }
 
-/** One entry of a panel and, when she edited it for this topic, her version of it. */
+/**
+ * One entry of a panel and, when she edited it for this topic, her version of it, with the gap block
+ * her version shows under its pieces (null when it has none, and always when the entry is not hers).
+ */
 export interface PanelEntry {
   med: PubMedsCard;
   own: MedsPiece[] | null;
+  gap: PubGap | null;
 }
 
 /** The entries a topic's meds panel shows: its own less those she took off, then the cards she added. */
 export function panelEntries(topic: Pick<PubTopic, "meds" | "medsEdit">): PanelEntry[] {
   const e = topic.medsEdit;
-  if (!e) return topic.meds.map((med) => ({ med, own: null }));
+  if (!e) return topic.meds.map((med) => ({ med, own: null, gap: null }));
   const kept = topic.meds.filter((m) => !e.remove.includes(m.target));
   const shown = new Set(kept.map((m) => m.target));
-  return [...kept, ...e.add.filter((m) => !shown.has(m.target))].map((med) => ({ med, own: e.own[med.target] ?? null }));
+  return [...kept, ...e.add.filter((m) => !shown.has(m.target))].map((med) => {
+    const own = e.own[med.target] ?? null;
+    return { med, own, gap: own ? (e.ownGaps[med.target] ?? null) : null };
+  });
 }
 
 /**
@@ -41,6 +48,14 @@ export function fileAdds(file: MedsFile, derived: ReadonlySet<string>): string[]
     if (isId("c", t) && !derived.has(t) && !file.remove.includes(t) && !add.includes(t)) add.push(t);
   }
   return add;
+}
+
+/**
+ * Her versions in a file of entries she did not take off: only these can show, with their gap blocks.
+ * The published panel and the gap block's placement on the dx page both read them this way.
+ */
+export function keptOwn(file: MedsFile): MedsFile["own"] {
+  return file.own.filter((o) => !file.remove.includes(o.target));
 }
 
 /**
@@ -62,13 +77,17 @@ export function publishedEdit(
     else if (file.add.includes(id)) missing(id);
   }
   const own: Record<string, MedsPiece[]> = {};
-  for (const o of file.own) {
-    if (file.remove.includes(o.target)) continue;
+  const ownGaps: Record<string, PubGap> = {};
+  for (const o of keptOwn(file)) {
     if (!has.has(o.target) && !add.some((m) => m.target === o.target)) {
       missing(o.target);
       continue;
     }
     own[o.target] = o.pieces;
+    if (o.gap === undefined) continue;
+    const g = gap(o.gap);
+    if (g) ownGaps[o.target] = g;
+    else missing(o.gap);
   }
   const gaps: PubGap[] = [];
   for (const id of file.gaps ?? []) {
@@ -83,7 +102,7 @@ export function publishedEdit(
     if (shows(r.target)) roles[r.target] = r.roles;
     else missing(r.target);
   }
-  return { remove: [...file.remove], add, own, gaps, roles };
+  return { remove: [...file.remove], add, own, ownGaps, gaps, roles };
 }
 
 /** One entry of a meds panel: a card (as `panelEntries` gives it) or a sourced card she placed (a gap block), with its role labels. */

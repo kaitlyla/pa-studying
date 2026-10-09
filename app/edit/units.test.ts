@@ -11,7 +11,7 @@ import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import {
-  buildSave, cutBox, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
+  buildSave, cutBox, entryGapParts, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
 } from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
@@ -1048,6 +1048,46 @@ describe("a topic's meds panel", () => {
       const unit = await unitAt(`topic:fm:${R(104)}`);
       const saved = savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(only(unit, "meds"), { remove: [] }) }));
       expect(saved).toEqual({ v: 1, add: [], remove: [], own: [], gaps: [G(3)] });
+    });
+  });
+
+  describe("a gap block held by her version of an entry (own gap)", () => {
+    const file: MedsFile = { v: 1, add: [], remove: [], own: [{ target: C(2), pieces: [notes("her trimmed nitrates")], gap: G(3) }] };
+    beforeEach(() => {
+      store(R(104), file);
+    });
+
+    it("loads it as a gap editor of the panel tagged with her version's entry, apart from the panel's sourced cards", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      expect(unit.parts.filter((p) => p.kind === "gap").map((p) => [p.gap.id, p.meds, p.entry])).toEqual([[G(3), R(104), C(2)]]);
+      expect(entryGapParts(unit.parts, part).map((p) => p.gap.id)).toEqual([G(3)]);
+      expect(medsGapParts(unit.parts, part)).toEqual([]);
+    });
+
+    it("an edit of her version keeps its block; taking the card off keeps both for Put back", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const slot = entry(part, C(2)).own?.[0];
+      if (!slot) throw new Error("no own editor");
+      const edited = savedMeds(buildSave(unit, new Map([[slot.id, prose("trimmed again")]]), TODAY));
+      expect(edited.own.map((o) => [o.target, o.gap])).toEqual([[C(2), G(3)]]);
+      expect(JSON.stringify(edited.own[0]?.pieces)).toContain("trimmed again");
+      const off = savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { remove: [C(2)] }) }));
+      expect(off).toEqual({ ...part.file, remove: [C(2)] });
+      expect(off.own[0]?.gap).toBe(G(3));
+    });
+
+    it("Use the original drops her version and its block together, and an edit of the original makes a version without one", async () => {
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      const original = buildSave(unit, new Map(), TODAY, { meds: choose(part, { original: [C(2)] }) });
+      expect(original.changes).toEqual([{ path: medsPath(R(104)), sha: null }]);
+      const cardSlot = entry(part, C(2)).card[0];
+      if (!cardSlot) throw new Error("no card editor");
+      const fresh = savedMeds(buildSave(unit, new Map([[cardSlot.id, cardSlot.doc]]), TODAY, { meds: choose(part, { original: [C(2)] }) }));
+      expect(fresh.own.map((o) => o.target)).toEqual([C(2)]);
+      expect(fresh.own[0]).not.toHaveProperty("gap");
     });
   });
 

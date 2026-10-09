@@ -20,7 +20,7 @@ import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
 import {
-  buildSave, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownMedsSlots, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
+  buildSave, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownEntries, shownMedsSlots, showsOwn, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
   type SaveBuild,
 } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
@@ -313,9 +313,11 @@ function slotIds(unit: EditUnit, meds: Readonly<Record<string, MedsChoice>>): Se
   for (const p of unit.parts) {
     if (p.kind === "stub") continue;
     if (p.kind === "gap") {
-      // A sourced card she took off its meds panel shows no editors.
+      // A sourced card she took off its meds panel shows no editors, nor does the block of a version of hers the panel does not show.
       const panel = p.meds === undefined ? undefined : unit.parts.find((x): x is MedsPart => x.kind === "meds" && x.topic === p.meds);
-      if (panel && (meds[panel.topic] ?? fileChoice(panel)).remove.includes(p.gap.id)) continue;
+      const choice = panel ? (meds[panel.topic] ?? fileChoice(panel)) : null;
+      if (panel && choice && p.entry === undefined && choice.remove.includes(p.gap.id)) continue;
+      if (panel && choice && p.entry !== undefined && !shownEntries(panel, choice).some((e) => e.med.target === p.entry && showsOwn(e, choice))) continue;
       ids.add(p.doc.id);
       if (p.differs) ids.add(p.differs.id);
     } else if (p.kind === "meds") {

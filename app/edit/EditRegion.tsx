@@ -33,7 +33,7 @@ import {
   copyWithToast, currentLook, dismissBanner, done, dropEmptyBox, getEditStore, isCardBox, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED,
   SAVE_OFFLINE, setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
-import { figuresWithLook, gapLook, medsGapParts, type Part, type Slot } from "./units.ts";
+import { entryGapParts, figuresWithLook, gapLook, medsGapParts, type Part, type Slot } from "./units.ts";
 import { rememberVersionsOrigin } from "./versions.ts";
 import "./edit.css";
 
@@ -260,7 +260,7 @@ export function PartView({ part, parts, slotView = editorView }: { part: Part; p
     case "meds":
       return (
         <MedsFrame
-          part={part} gaps={medsGapParts(parts, part)} slotView={slotView} editing={editing}
+          part={part} gaps={medsGapParts(parts, part)} entryGaps={entryGapParts(parts, part)} slotView={slotView} editing={editing}
           gapView={(g) => <GapFrame part={g} slotView={slotView} editing={editing} />}
         />
       );

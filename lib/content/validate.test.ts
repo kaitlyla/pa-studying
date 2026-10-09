@@ -271,6 +271,17 @@ describe("her own meds panel for a topic", () => {
       expect(verdict(path, meds({ gaps: [C1] }))).toMatch(/\.gaps\[0\]/);
       expect(verdict(path, meds({ gaps: [G1], add: [G1] }))).toMatch(/\.add\[0\]/);
     });
+
+    it("accepts a gap block held by her version of an entry, one block per version", () => {
+      expect(verdict(path, meds({ own: [{ target: C1, pieces: [notes], gap: G1 }, { target: C2, pieces: [notes], gap: G2 }] }))).toBe("ok");
+    });
+
+    it("refuses a version's gap block that is not a gap id, held twice, listed in gaps, or taken off", () => {
+      expect(verdict(path, meds({ own: [{ target: C1, pieces: [notes], gap: C2 }] }))).toMatch(/\.own\[0\]\.gap/);
+      expect(verdict(path, meds({ own: [{ target: C1, pieces: [notes], gap: G1 }, { target: C2, pieces: [notes], gap: G1 }] }))).toMatch(/\.own\[\]\.gap/);
+      expect(verdict(path, meds({ gaps: [G1], own: [{ target: C1, pieces: [notes], gap: G1 }] }))).toMatch(/\.own\[0\]\.gap.*a gap block not also in gaps/);
+      expect(verdict(path, meds({ remove: [G1], own: [{ target: C1, pieces: [notes], gap: G1 }] }))).toMatch(/\.remove\[0\].*a gap block listed in gaps/);
+    });
   });
 
   it("refuses a card both added and removed, or listed twice, or two versions of one entry", () => {

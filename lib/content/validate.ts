@@ -475,7 +475,8 @@ export const validateCards: Validator = (v, ctx) => {
 
 /**
  * Her own meds panel for a topic: each target at most once in each list, never both added and removed,
- * a gap block taken off only if it is listed, each entry's roles once, and something in it.
+ * a gap block taken off only if it is listed, an edited entry's gap block in no other list, each entry's
+ * roles once, and something in it.
  */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
@@ -486,7 +487,7 @@ export const validateMeds: Validator = (v, ctx) => {
     own: arr(shapeOf<MedsFile["own"][number]>({
       target,
       pieces: arr(shapeOf<MedsPiece>({ kind: oneOf("rows", "notes"), basePt: num, title: nullable(str), file: nullable(nonEmpty), doc: anyValue }, {})),
-    }, {})),
+    }, { gap: id("g") })),
   }, {
     gaps: uniqueArr(id("g")),
     roles: arr(shapeOf<NonNullable<MedsFile["roles"]>[number]>({
@@ -506,6 +507,11 @@ export const validateMeds: Validator = (v, ctx) => {
   uniqueArr(str)(roles.map((r) => r.target), ".roles[].target", ctx);
   m.add.forEach((c, i) => { if (m.remove.includes(c)) bad(ctx, `.add[${i}]`, "a card not also removed", c); });
   m.remove.forEach((t, i) => { if (isId("g", t) && !gaps.includes(t)) bad(ctx, `.remove[${i}]`, "a gap block listed in gaps", t); });
+  const ownGaps = m.own.flatMap((o) => (o.gap === undefined ? [] : [o.gap]));
+  uniqueArr(str)(ownGaps, ".own[].gap", ctx);
+  m.own.forEach((o, i) => {
+    if (o.gap !== undefined && gaps.includes(o.gap)) bad(ctx, `.own[${i}].gap`, "a gap block not also in gaps", o.gap);
+  });
   roles.forEach((r, i) => {
     if (isId("g", r.target) && !gaps.includes(r.target)) bad(ctx, `.roles[${i}].target`, "a gap block listed in gaps", r.target);
     if (r.roles.length === 0) bad(ctx, `.roles[${i}].roles`, "at least one role", r.roles);

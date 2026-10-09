@@ -62,9 +62,10 @@ export type Part =
   | { kind: "block"; slot: Slot; path: string; block: BlockFile; owner: BlockOwner }
   /**
    * A gap block: its doc, and its differs doc when it has one. `meds`: the topic whose meds panel it is
-   * a sourced card of (MedsFile `gaps`); it shows inside that panel, not on its own.
+   * a sourced card of (MedsFile `gaps`), or, with `entry` (an entry's target), the block her version of
+   * that entry holds (MedsFile own `gap`); it shows inside that panel, not on its own.
    */
-  | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null; meds?: string }
+  | { kind: "gap"; path: string; gap: GapFile; doc: Slot; differs: Slot | null; meds?: string; entry?: string }
   | { kind: "slide"; slot: Slot; path: string; block: BlockFile<SlideMeta> }
   /** A drug table on a system page: shown as its stub, edited on its pharm section. */
   | { kind: "stub"; block: string; label: string }
@@ -400,12 +401,13 @@ function withLook(meta: GapMeta, look: GapLook): GapMeta {
   return out;
 }
 
-function gapPart(gap: GapFile, meds?: string): GapPart {
+function gapPart(gap: GapFile, meds?: string, entry?: string): GapPart {
   const slot = (id: string, doc: DocJSON): Slot => ({ id, doc, basePt: GAP_BASE_PT, ...DEFAULT_AREA });
   return {
     kind: "gap", path: gapFilePath(gap.id), gap, doc: slot(gap.id, gap.doc),
     differs: gap.meta.differs ? slot(`${gap.id}:differs`, gap.meta.differs.doc) : null,
     ...(meds !== undefined ? { meds } : {}),
+    ...(entry !== undefined ? { entry } : {}),
   };
 }
 
@@ -413,7 +415,11 @@ export type GapPart = Extract<Part, { kind: "gap" }>;
 
 /** The sourced cards of a meds panel (MedsFile `gaps`) in `parts`, in her order. */
 export const medsGapParts = (parts: readonly Part[], meds: Pick<MedsPart, "topic">): GapPart[] =>
-  parts.filter((p): p is GapPart => p.kind === "gap" && p.meds === meds.topic);
+  parts.filter((p): p is GapPart => p.kind === "gap" && p.meds === meds.topic && p.entry === undefined);
+
+/** The gap blocks her versions of a meds panel's entries hold (MedsFile own `gap`) in `parts`. */
+export const entryGapParts = (parts: readonly Part[], meds: Pick<MedsPart, "topic">): GapPart[] =>
+  parts.filter((p): p is GapPart => p.kind === "gap" && p.meds === meds.topic && p.entry !== undefined);
 
 async function gapParts(snap: Snapshot, ids: readonly (string | null | undefined)[]): Promise<Part[]> {
   const present = ids.filter((id): id is string => typeof id === "string");
@@ -515,10 +521,14 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         if (!block) throw new UnitError(`Topic ${row} is no longer in ${sys.system}`);
         return rowsPart(sys, t, block, shown, basePt, area, row);
       });
-      // Its meds panel and the sourced cards placed in it, then her below area (an empty editor until she adds something).
+      // Its meds panel, the sourced cards placed in it and the blocks her versions of its entries hold, then
+      // her below area (an empty editor until she adds something).
       const meds = await medsPart(snap, sys, row, basePt, area);
       const gapIds = (meds.file?.gaps ?? []).filter((id) => snap.has(gapFilePath(id)));
+      const entryGaps = (meds.file?.own ?? []).flatMap((o) => (o.gap !== undefined && snap.has(gapFilePath(o.gap)) ? [{ id: o.gap, entry: o.target }] : []));
       parts.push(meds, ...(await snap.many<GapFile>(gapIds.map(gapFilePath))).map((g) => gapPart(g, row)));
+      const entryFiles = await snap.many<GapFile>(entryGaps.map((x) => gapFilePath(x.id)));
+      parts.push(...entryFiles.map((g, i) => gapPart(g, row, entryGaps[i]?.entry)));
       parts.push(belowPart(sys, row, await snap.jsonIfExists<BlockFile>(topicBelowPath(guide, sys.system, row)), basePt, area));
       return unit(parts, guideScope(parts), row);
     }
@@ -706,9 +716,12 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
     if (allBoxes(e, chosen).length > 0 && entrySlots(e, chosen).every(emptied)) choice = takeOff(part, choice, e.med.target);
   }
   const own = new Map((part.file?.own ?? []).map((o) => [o.target, o.pieces]));
+  // The gap block her version holds stays with it through her edits, and goes when she drops the version.
+  const ownGap = new Map((part.file?.own ?? []).flatMap((o) => (o.gap !== undefined ? [[o.target, o.gap] as const] : [])));
   const shown = new Set(shownEntries(part, choice).map((e) => e.med.target));
   for (const e of part.entries) {
     const target = e.med.target;
+    if (choice.original.includes(target)) ownGap.delete(target);
     if (choice.original.includes(target) || (!shown.has(target) && !choice.remove.includes(target))) own.delete(target);
     if (!shown.has(target)) continue;
     const slots = entrySlots(e, choice);
@@ -723,7 +736,11 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
   const roles = part.file?.roles ?? [];
   if (add.length === 0 && choice.remove.length === 0 && own.size === 0 && gaps.length === 0 && roles.length === 0) return null;
   return {
-    v: 1, add, remove: [...choice.remove], own: [...own].map(([target, pieces]) => ({ target, pieces })),
+    v: 1, add, remove: [...choice.remove],
+    own: [...own].map(([target, pieces]) => {
+      const gap = ownGap.get(target);
+      return gap === undefined ? { target, pieces } : { target, pieces, gap };
+    }),
     ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles: roles.map((r) => ({ ...r })) } : {}),
   };
 }

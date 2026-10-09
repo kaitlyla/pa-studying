@@ -1,6 +1,7 @@
 // "Medications for this condition" under a condition topic (40 §40.5, pharm/meds-panel): one
 // collapsible card per entry of the panel as she shaped it for this condition (lib/derive/panel.ts),
-// each with its guide rows and her notes, or her own version of them, and a drug class's link into
+// each with its guide rows and her notes, or her own version of them (with the sourced block her
+// version holds under them, if any), and a drug class's link into
 // the pharm section that holds it; then the sourced cards placed under this condition only (gap
 // blocks). Entries with role labels are ordered by role, each label shown with its source.
 // View-only: in edit mode the topic's region edits the panel.
@@ -48,6 +49,7 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
             <RoleLines roles={item.roles} />
             {e.own && <div className="phn-k own-only">{OWN_VERSION}</div>}
             <CardPieces pieces={shownPieces(system, topic, e, basePt)} />
+            {e.gap && <GapBlock gap={e.gap} titled={false} />}
             {linked && (
               <Link to={guideViewHash(guide, { kind: "pharm", system: linked.id, section: m.section, target: m.target })} className="linkbtn phc-more">
                 Open in {linked.title} pharm ›

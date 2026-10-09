@@ -1,7 +1,7 @@
 // A topic's meds panel in edit mode (her own panel for the condition, content MedsFile): each card it
 // shows with editors in place of its text (an edit makes her version for this condition only), and the
 // buttons that take a card off, put one back, add one, or go back to the original card.
-import { useState, type ReactNode } from "react";
+import { Fragment, useState, type ReactNode } from "react";
 import type { MedsRoleTag } from "../../lib/content/types.ts";
 import { byRole } from "../../lib/derive/panel.ts";
 import { ClassCard, CardPieces } from "../pharm/ClassCard.tsx";
@@ -28,10 +28,12 @@ const MATCHES = 12;
  * The panel. `editing`: the open edit's (her choices as she changed them, with the buttons); else as
  * stored (Versions' View). `slotView` draws an editor (or, in Versions, a stored doc).
  */
-export function MedsFrame({ part, gaps, gapView, slotView, editing }: {
+export function MedsFrame({ part, gaps, entryGaps = [], gapView, slotView, editing }: {
   part: MedsPart;
   /** The sourced cards placed in this panel (MedsFile `gaps`), and how one is drawn (its gap box). */
   gaps: readonly GapPart[];
+  /** The blocks her versions of its entries hold (MedsFile own `gap`), each shown under its version. */
+  entryGaps?: readonly GapPart[];
   gapView: (gap: GapPart) => ReactNode;
   slotView: (slot: Slot) => ReactNode;
   editing: boolean;
@@ -92,6 +94,7 @@ export function MedsFrame({ part, gaps, gapView, slotView, editing }: {
             <RoleLines roles={r} />
             {own && <div className="phn-k own-only">{OWN_VERSION}</div>}
             <CardPieces pieces={slots.map((s) => ({ ...s.piece, part: null }))} body={(i) => (slots[i] ? slotView(slots[i]) : null)} />
+            {own && entryGaps.filter((g) => g.entry === t).map((g) => <Fragment key={g.gap.id}>{gapView(g)}</Fragment>)}
             {editing && (
               <div className="meds-acts">
                 {own && <button type="button" className="btn" onClick={() => showVersion(t, [...choice.original, t])} data-ref="meds-original">{USE_ORIGINAL}</button>}

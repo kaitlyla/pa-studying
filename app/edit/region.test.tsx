@@ -12,6 +12,7 @@ import { hideToast, Toast } from "../shell/toast.tsx";
 import { asOwner, click, mount, until, type Mounted } from "../testing.tsx";
 import { askConfirm, UnsavedDialog } from "./dialogs.tsx";
 import { BELOW_HEADING } from "../../lib/derive/topics.ts";
+import { docText } from "../../lib/derive/text.ts";
 import { EditControls, EditRegion, PageBanner, SaveBanner } from "./EditRegion.tsx";
 import { createEditorState } from "./editor/state.ts";
 import { markViews, nodeViews } from "./editor/views.ts";
@@ -359,6 +360,30 @@ describe("EditControls and EditRegion", () => {
       await until(() => panel.querySelector(`section.phc[data-anchor="${G(3)}"]`), "the sourced card back");
       expect(q(panel, "meds-removed")).toBeNull();
       expect(dirtyState(root)).toBe("No changes yet");
+    });
+
+    it("the gap block her version holds is edited under her version, inside its card, and goes and comes back with Use the original / Use my version", async () => {
+      const mine = "My CCB note for AF";
+      const stored: MedsFile = {
+        v: 1, add: [], remove: [],
+        own: [{ target: C(1), pieces: [{ kind: "notes", basePt: 9, title: null, file: "Cardio med list", doc: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: mine }] }] } as DocJSON }], gap: G(3) }],
+      };
+      w.fake.commitFiles({ [MEDS_FILE]: serializeFile(MEDS_FILE, stored) });
+      const { panel } = await openPanel();
+      const gapPart = edit().unit?.parts.find((p) => p.kind === "gap" && p.gap.id === G(3));
+      if (gapPart?.kind !== "gap") throw new Error("no gap part");
+      const gapText = docText(gapPart.gap.doc);
+      expect(gapText).not.toBe("");
+      // Not an entry of its own: the panel shows just the CCB card, holding her notes then the block.
+      expect(shownCards(panel)).toEqual([`meds-${C(1)}`]);
+      const ccb = need(card(panel, C(1)));
+      await until(() => editorText(ccb).includes(gapText), "the block's editor in her version");
+      expect(editorText(ccb).indexOf(mine)).toBeLessThan(editorText(ccb).indexOf(gapText));
+
+      await click(q(ccb, "meds-original"));
+      await until(() => !editorText(ccb).includes(gapText), "the block gone with her version");
+      await click(q(ccb, "meds-mine"));
+      await until(() => editorText(ccb).includes(gapText), "the block back with her version");
     });
   });
 

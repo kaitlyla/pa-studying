@@ -521,6 +521,7 @@ describe("pharm pages", () => {
       remove: [R(124)],
       add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
       own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: schema.node("doc", null, [schema.node("paragraph", null, [schema.text(mine)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"] }] },
+      ownGaps: {},
       gaps: [],
       roles: {},
     };
@@ -552,6 +553,31 @@ describe("pharm pages", () => {
     expect(added.textContent).not.toContain(OWN_VERSION);
   });
 
+  it("meds panel shows the gap block her version holds under her version's notes, with its sources, and not as an entry", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    const doc = (text: string): SystemJson["notesBlocks"][string]["doc"] => schema.node("doc", null, [schema.node("paragraph", null, [schema.text(text)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"];
+    const src = { name: "Nitroglycerin label", org: "DailyMed", year: "2026", url: "https://dailymed.nlm.nih.gov/x" };
+    const held = {
+      id: "g_HELD000000", title: "Nitrates: EOR additions", relevantTo: "Stable angina", written: "2026-10-09", doc: doc("Avoid with PDE-5 inhibitors."), differs: null,
+      sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [],
+    };
+    topic.medsEdit = { remove: [], add: [], own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: doc("My trimmed nitrates") }] }, ownGaps: { [C(2)]: held }, gaps: [], roles: {} };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect(anchors(panel)).toEqual([`meds-${C(2)}`, `meds-${R(124)}`]);
+    await click(cardBtn(panel, `meds-${C(2)}`));
+    const own = cardEl(panel, `meds-${C(2)}`);
+    const text = visibleText(own);
+    expect(text).toContain("Avoid with PDE-5 inhibitors.");
+    expect(text.indexOf("My trimmed nitrates")).toBeLessThan(text.indexOf("Avoid with PDE-5 inhibitors."));
+    expect(text).toContain("Nitroglycerin label");
+  });
+
   it("meds panel orders entries by role label, shows each label's source, and shows her sourced cards less any she took off", async () => {
     const mod = structuredClone(systemJson(CV));
     const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
@@ -564,6 +590,7 @@ describe("pharm pages", () => {
       remove: ["g_REMOVED000"],
       add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
       own: {},
+      ownGaps: {},
       gaps: [gap("g_SOURCED000", "Ranolazine (sourced)", "Ranolazine for refractory angina."), gap("g_REMOVED000", "Ivabradine (sourced)", "Ivabradine text she took off.")],
       roles: {
         [C(3)]: [{ role: "1st", drugs: "metoprolol", note: null, sources: [src] }],

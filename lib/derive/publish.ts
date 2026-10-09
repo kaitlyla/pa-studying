@@ -23,7 +23,7 @@ import {
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
 import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics, type Topic } from "./topics.ts";
-import { panelEntries, publishedEdit } from "./panel.ts";
+import { keptOwn, panelEntries, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
@@ -452,6 +452,7 @@ export function publish(c: Content): PublishResult {
         if (!topic) continue;
         const place = { route: topicRoute(s, topicId), loc: systemLoc(ix, gid, s.data.file.id, secTitle(s, topic.section)) };
         for (const id of file.gaps ?? []) placeGap(id, place, tabOf(g));
+        for (const o of keptOwn(file)) if (o.gap !== undefined) placeGap(o.gap, place, tabOf(g));
       }
     }
     if (g.file.sidebarEnd) placeDoc(g.file.sidebarEnd, guideBase(gid), tabOf(g));
@@ -570,7 +571,8 @@ export function publish(c: Content): PublishResult {
     };
   };
   const gapUnits = new Set<string>();
-  const gapUnit = (id: string): void => {
+  /** `at`: where its search result lands, when not on the block itself (a block inside an entry lands on the entry, which opens it). */
+  const gapUnit = (id: string, at: string = id): void => {
     const g = c.gaps.get(id);
     const home = gapHome.get(id);
     if (!g || !home || gapUnits.has(id)) return;
@@ -581,7 +583,7 @@ export function publish(c: Content): PublishResult {
     ].join("\n");
     // A block she shows as her own notes is labelled as her notes in search too.
     const label = m.asNotes === true ? "notes" : "gap";
-    units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at: id, label, text: searchText(text) });
+    units.push({ tab: home.tab, title: collapse(m.title), loc: home.place.loc, route: home.place.route, at, label, text: searchText(text) });
   };
   type UnitBase = Omit<SearchUnit, "ord" | "title" | "at" | "text">;
   /** Search units of one of her Word-page blocks: one per table row (`rowAt`: a row found elsewhere), else one for the block. */
@@ -985,6 +987,7 @@ export function publish(c: Content): PublishResult {
               tab, title: e.med.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
               at: `meds-${e.med.target}`, label: "notes", text: searchText(e.own.map((p) => docText(p.doc)).join("\n")),
             });
+            if (e.gap) gapUnit(e.gap.id, `meds-${e.med.target}`);
           }
           for (const g of pub?.medsEdit?.gaps ?? []) gapUnit(g.id);
         } else if (info?.drug) {

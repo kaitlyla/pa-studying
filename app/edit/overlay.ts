@@ -139,7 +139,8 @@ function rederiveSystem(
   const medsEdit = (x: { id: string }, list: PubMedsCard[]): PubMedsEdit | null => {
     if (!meds.has(x.id)) return edits.get(x.id) ?? null;
     const file = meds.get(x.id);
-    const gap = (id: string): PubGap | null => sys.topics.flatMap((t) => t.medsEdit?.gaps ?? []).find((g) => g.id === id) ?? null;
+    const gap = (id: string): PubGap | null =>
+      sys.topics.flatMap((t) => (t.medsEdit ? [...t.medsEdit.gaps, ...Object.values(t.medsEdit.ownGaps)] : [])).find((g) => g.id === id) ?? null;
     return file ? publishedEdit(file, list, (id) => pageCard(sys, id), undefined, gap) : null;
   };
   const belowNow = new Map(sys.topics.flatMap((x) => (x.below ? asBlockFiles([x.below]).map((b): [string, BlockFile] => [x.id, b]) : [])));

@@ -131,7 +131,7 @@ describe("patchPublished", () => {
     const added = patchPublished(SYS, pub<SystemJson>(SYS), new Map([[path, file]]), structure) as SystemJson;
     const af = added.topics.find((t) => t.id === R(101));
     expect(af?.meds).toEqual(pub<SystemJson>(SYS).topics.find((t) => t.id === R(101))?.meds);
-    expect(af?.medsEdit).toEqual({ remove: [], add: [expect.objectContaining({ card: C(3), target: C(3) })], own: { [C(1)]: pieces }, gaps: [], roles: {} });
+    expect(af?.medsEdit).toEqual({ remove: [], add: [expect.objectContaining({ card: C(3), target: C(3) })], own: { [C(1)]: pieces }, ownGaps: {}, gaps: [], roles: {} });
     expect(added.topics.filter((t) => t.id !== R(101)).every((t) => t.medsEdit === null)).toBe(true);
 
     const removed = patchPublished(SYS, added, new Map([[path, null]]), structure) as SystemJson;
@@ -151,12 +151,12 @@ describe("patchPublished", () => {
     const before = pub<SystemJson>(SYS);
     const af = before.topics.find((t) => t.id === R(101));
     if (!af) throw new Error("no AF topic");
-    af.medsEdit = { remove: [], add: [], own: {}, gaps: [sourced], roles: {} };
+    af.medsEdit = { remove: [], add: [], own: {}, ownGaps: {}, gaps: [sourced], roles: {} };
     const tag = { role: "adjunct" as const, drugs: null, note: null, sources: sourced.sources };
     const file: MedsFile = { v: 1, add: [], remove: [G(3)], own: [], gaps: [G(3), G(9)], roles: [{ target: G(3), roles: [tag] }] };
     const after = patchPublished(SYS, before, new Map([[path, file]]), structure) as SystemJson;
     // The card the page does not publish (G9) is dropped; the published one keeps its block for Put back.
-    expect(after.topics.find((t) => t.id === R(101))?.medsEdit).toEqual({ remove: [G(3)], add: [], own: {}, gaps: [sourced], roles: { [G(3)]: [tag] } });
+    expect(after.topics.find((t) => t.id === R(101))?.medsEdit).toEqual({ remove: [G(3)], add: [], own: {}, ownGaps: {}, gaps: [sourced], roles: { [G(3)]: [tag] } });
   });
 
   it("patches a saved gap block wherever it is shown, with its owner edits", () => {

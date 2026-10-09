@@ -262,7 +262,8 @@ export interface CardsFile {
  * a card, her guide or her pharm notes. `add`: class cards she added (card ids), after the panel's own.
  * `remove`: panel entries she took off (each entry's target: a card id, a card-less guide row's id, or
  * a pharm part's id, or a gap block's id from `gaps`). `own`: entries she edited there, each shown as its
- * `pieces` instead of the card's guide rows and pharm notes. `gaps`: sourced gap blocks shown as entries
+ * `pieces` instead of the card's guide rows and pharm notes, and with `gap` (a gap block's id, in no
+ * other list of the file) shown under those pieces, as part of the entry. `gaps`: sourced gap blocks shown as entries
  * of this panel only (drugs her files have no card for), in her order. `roles`: what each entry's drugs
  * are for this condition (1st-line, 2nd-line, alternative, adjunct), each with its sources; the panel
  * shows them on the entry and orders entries by them. At least one list is non-empty: with none, there is
@@ -272,7 +273,7 @@ export interface MedsFile {
   v: 1;
   add: string[];
   remove: string[];
-  own: { target: string; pieces: MedsPiece[] }[];
+  own: { target: string; pieces: MedsPiece[]; gap?: string }[];
   gaps?: string[];
   roles?: { target: string; roles: MedsRoleTag[] }[];
 }
