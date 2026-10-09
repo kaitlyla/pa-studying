@@ -350,6 +350,30 @@ describe("a pharm notes file made from her Word page (pharm-doc)", () => {
     expect(topic).toEqual({ id: expect.stringMatching(/^p_/), role: "topic", title: "T3: level", card: null, blocks: [B(61)], column: 1, label: 0, rows: [R(601)], topics: [R(101)] });
   });
 
+  it("pharm-parts takes a part's cut from the draft alone: a stored cut the draft leaves out is cleared, and the part's other stored fields stay", async () => {
+    await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
+    const t4card = { key: "t4", aliases: ["levothyroxine"], home: { fm: "cardiovascular" }, for: ["antianginals"] };
+    await run(root, ["pharm-parts", "thyroid-notes", await draft("cut", {
+      parts: [
+        { role: "overview", title: "Overview", card: null, blocks: [B(60)] },
+        { role: "card", title: "Free T4", card: "t4", blocks: [B(61)], rows: [R(600)] },
+        { role: "card", title: "T3", card: "t3", blocks: [B(61)], rows: [R(601)] },
+      ],
+      cards: [t4card, { key: "t3", aliases: ["liothyronine"], home: { fm: "cardiovascular" }, for: ["antianginals"] }],
+    })]);
+    const pf0 = await read<PharmFile>(THY);
+    const ov = must(pf0.parts[0], "overview part");
+    const t4 = must(pf0.parts[1], "Free T4 part");
+    await writeContent(root, THY, { ...pf0, parts: pf0.parts.map((p) => (p.id === t4.id ? { ...p, diseases: ["hypothyroidism"] } : p)) });
+    // Free T4 now shows the whole table; the draft gives it no rows.
+    await run(root, ["pharm-parts", "thyroid-notes", await draft("whole", {
+      parts: [{ id: ov.id, role: "overview", title: "Overview", card: null, blocks: [B(60)] }, { id: t4.id, role: "card", title: "Free T4", card: t4.card, blocks: [B(61)] }],
+      cards: [{ ...t4card, key: undefined, id: t4.card }],
+    })]);
+    const parts = (await read<PharmFile>(THY)).parts;
+    expect(parts[1]).toEqual({ id: t4.id, role: "card", title: "Free T4", card: t4.card, blocks: [B(61)], diseases: ["hypothyroidism"] });
+  });
+
   it("a split of the page's block stays on the page, and in the pharm part showing it", async () => {
     await writeContent(root, `${DOC5}/blocks/${B(60)}.json`, { v: 1, id: B(60), kind: "prose", doc: doc(para("TSH first"), para("then free T4")), meta: {} });
     await run(root, ["pharm-doc", D(5), "thyroid-notes"]);
@@ -430,6 +454,29 @@ describe("pharm-parts", () => {
     expect(after.cards.map((c) => [c.id, c.in, c.for, c.classWords, c.diseases])).toEqual([
       [C(1), undefined, undefined, undefined, undefined], [C(2), C(1), ["antianginals"], ["vasodilators"], ["angina"]], [bb, undefined, undefined, undefined, undefined],
     ]);
+  });
+
+  it("keeps a part's and a card's stored fields that the draft omits, and keeps cards.json in its order", async () => {
+    const pfPath = `${PHARM}/pharmfile.json`;
+    const pf0 = await read<PharmFile>(pfPath);
+    await writeContent(root, pfPath, { ...pf0, parts: pf0.parts.map((p) => (p.id === P(3) ? { ...p, diseases: ["stable angina"] } : p)) });
+    const cards0 = await read<CardsFile>("content/pharm/cards.json");
+    await writeContent(root, "content/pharm/cards.json", { ...cards0, cards: cards0.cards.map((c) => (c.id === C(2) ? { ...c, notDiseases: ["heart failure"] } : c)) });
+    // The draft lists the cards out of their stored order and gives neither field.
+    await run(root, ["pharm-parts", "cardio-med-list", await draft("keep", { parts: [overview, ccb, nitrates, beta], cards: [cards3[1], cards3[0], cards3[2]] })]);
+    const pf = await read<PharmFile>(pfPath);
+    const cards = await read<CardsFile>("content/pharm/cards.json");
+    expect(pf.parts.map((p) => [p.id, p.diseases])).toEqual([[P(1), undefined], [P(2), undefined], [P(3), ["stable angina"]], [P(4), undefined]]);
+    expect(cards.cards.map((c) => [c.id, c.notDiseases, c.aliases])).toEqual([
+      [C(1), undefined, ["amlodipine"]], [C(2), ["heart failure"], ["nitroglycerin"]], [C(3), undefined, ["metoprolol"]],
+    ]);
+  });
+
+  it("refuses a draft card that is another file's card, or that gives a file", async () => {
+    await refused(["pharm-parts", "cardio-med-list", await draft("file", { parts: [overview, ccb, nitrates, beta], cards: [cards3[0], { ...cards3[1], file: "other-list" }, cards3[2]] })], new RegExp(`card ${C(2)} gives a file`), files);
+    const cards0 = await read<CardsFile>("content/pharm/cards.json");
+    await writeContent(root, "content/pharm/cards.json", { ...cards0, cards: cards0.cards.map((c) => (c.id === C(3) ? { ...c, file: "other-list" } : c)) });
+    await refused(["pharm-parts", "cardio-med-list", await draft("other", { parts: [overview, ccb, nitrates, beta], cards: cards3 })], new RegExp(`card ${C(3)} is a card of other-list`), files);
   });
 
   it("refuses an unknown pharm notes file", async () => {

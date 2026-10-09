@@ -1,0 +1,251 @@
+{
+ "v": 1,
+ "add": [
+  "c_28Z3H593E5"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_28Z3H593E5",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "GU and Hematopoietic Drugs Med Lists and LOs",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Topical/Vaginal Estrogens -⍉ ORAL (⍉EFFICACY DATA AND RISKS OF CA)  "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: localized estrogen -> tx atrophic vaginitis & ↑urethral tone "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Conjugated estrogen vaginal cream"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Estradiol vaginal ring"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: systemic estrogen absorption "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        }
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "gaps": [
+  "g_GP5P096ADR"
+ ],
+ "roles": [
+  {
+   "target": "c_28Z3H593E5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Low-dose vaginal estrogen (moderate to severe symptoms)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Menopause",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GP5P096ADR",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Intravaginal DHEA",
+     "note": null,
+     "sources": [
+      {
+       "name": "Menopause",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Ospemifene (oral SERM)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Menopause",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Systemic hormone therapy",
+     "note": null,
+     "sources": [
+      {
+       "name": "Menopause",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

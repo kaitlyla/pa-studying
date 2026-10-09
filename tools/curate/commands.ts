@@ -5,7 +5,7 @@ import type { IdPrefix } from "../../lib/content/index.ts";
 import { tableNode } from "../../lib/content/tables.ts";
 import type {
   BlockFile, CardsFile, ConceptsFile, DeckFile, DocJSON, EvidenceFile, Flag, FlagsFile, GapFile, GeneralFile, GuideId, Link,
-  OtherFile, OtherNote, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
+  OtherFile, OtherNote, PartCut, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
 } from "../../lib/content/types.ts";
 import type { Content } from "../../lib/derive/model.ts";
 import { REF_TABS } from "../../lib/derive/routes.ts";
@@ -322,43 +322,32 @@ export function structure(c: Content, guide: string, system: string, draft: unkn
 
 // ---- pharm parts and cards -----------------------------------------------------------------
 
-interface DraftCard {
-  id?: string;
-  key?: string;
-  aliases: string[];
-  home: Partial<Record<GuideId, string>>;
-  /** The class card it shows inside; omitted, an existing card keeps its own. */
-  in?: string;
-  /** The pharm sections its notes are written for; omitted, an existing card keeps its own. */
-  for?: string[];
-  /** Her words for its wider drug class; omitted, an existing card keeps its own. */
-  classWords?: string[];
-  /** The conditions its notes are written for; omitted, an existing card keeps its own. */
-  diseases?: string[];
-}
-interface DraftPart {
-  id?: string;
-  role: PharmPart["role"];
-  title: string;
-  /** A card id, or the `key` of a draft card that has no id yet. */
-  card: string | null;
-  blocks: string[];
-  /**
-   * With one table block: the part shows only that column, or those rows, or (a topic part) both; or
-   * (a card or lo part) those rows cut to `columns` grid columns from `column` on (content PharmPart).
-   */
-  column?: number;
-  columns?: number;
-  label?: number;
-  rows?: string[];
-  /** A topic part's guide topic ids. */
-  topics?: string[];
+/**
+ * A card of the draft: any CardsFile card field, with `key` naming a card that has no id yet. A field
+ * the draft leaves out keeps an existing card's stored value.
+ */
+type DraftCard = Omit<CardsFile["cards"][number], "id" | "file"> & { id?: string; key?: string };
+/**
+ * A part of the draft: any PharmPart field, its `card` a card id or the `key` of a draft card that has
+ * no id yet. Its cut (NO_CUT) is the draft's alone; any other field the draft leaves out keeps an
+ * existing part's stored value.
+ */
+type DraftPart = Omit<PharmPart, "id"> & { id?: string };
+
+/** A part's cut of its block and a topic part's topics, cleared: a draft re-cutting a part gives all of it. */
+const NO_CUT = { column: undefined, columns: undefined, label: undefined, rows: undefined, topics: undefined } satisfies Record<keyof PartCut | "topics", undefined>;
+
+/** `d` without its `omit` fields and without the fields whose value is undefined. */
+function draftFields<T extends object, K extends keyof T = never>(d: T, omit: readonly K[]): Omit<T, K> {
+  const drop: readonly PropertyKey[] = omit;
+  return Object.fromEntries(Object.entries(d).filter(([k, v]) => v !== undefined && !drop.includes(k))) as Omit<T, K>;
 }
 
 /**
  * `pharm-parts <file-slug> <file.json>` with `{ parts, cards }`: the file's parts, and the cards of
- * that file (replacing the file's earlier cards in `cards.json`). Missing part and card ids are
- * assigned. Parts must cover the file's blocks exactly once; every card has at least one part.
+ * that file (replacing the file's earlier cards in `cards.json`, each in its place, new ones last).
+ * Missing part and card ids are assigned. Parts must cover the file's blocks exactly once; every card
+ * has at least one part.
  */
 export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknown; cards?: unknown }): Planned {
   const pf = c.pharm.find((p) => p.file.id === fileSlug);
@@ -374,16 +363,10 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
       if (keys.has(d.key)) throw new CurateError(`pharm-parts: card key "${d.key}" used twice`);
       keys.set(d.key, id);
     }
+    if ("file" in d) throw new CurateError(`pharm-parts: card ${d.key ?? id} gives a file; the draft's cards are cards of ${fileSlug}`);
     const had = c.cards.cards.find((x) => x.id === id);
-    const within = d.in ?? had?.in;
-    const use = d.for ?? had?.for;
-    const words = d.classWords ?? had?.classWords;
-    const diseases = d.diseases ?? had?.diseases;
-    return {
-      id, file: fileSlug, aliases: d.aliases, home: d.home,
-      ...(within === undefined ? {} : { in: within }), ...(use === undefined ? {} : { for: use }), ...(words === undefined ? {} : { classWords: words }),
-      ...(diseases === undefined ? {} : { diseases }),
-    };
+    if (had !== undefined && had.file !== fileSlug) throw new CurateError(`pharm-parts: card ${id} is a card of ${had.file}`);
+    return { id, file: fileSlug, ...had, ...draftFields(d, ["id", "key"]) };
   });
   const cardIds = new Set(cards.map((x) => x.id));
   const parts: PharmPart[] = (draft.parts as DraftPart[]).map((d) => {
@@ -396,17 +379,20 @@ export function pharmParts(c: Content, fileSlug: string, draft: { parts?: unknow
       const b = pf.blocks.find((x) => x.id === d.blocks[0]);
       requireIds(d.rows, new Set((b ? tableNode(b)?.content ?? [] : []).map((r) => String(r.attrs?.id))), `pharm-parts part "${d.title}" rows`);
     }
-    return {
-      id, role: d.role, title: d.title, card, blocks: d.blocks,
-      ...(d.column === undefined ? {} : { column: d.column }), ...(d.columns === undefined ? {} : { columns: d.columns }),
-      ...(d.label === undefined ? {} : { label: d.label }),
-      ...(d.rows === undefined ? {} : { rows: d.rows }), ...(d.topics === undefined ? {} : { topics: d.topics }),
-    };
+    const had = pf.file.parts.find((p) => p.id === id);
+    // The stored cut is cleared in place (keeping the stored key order); the draft's cut fills it.
+    return draftFields({ id, ...(had === undefined ? {} : { ...had, ...NO_CUT }), ...draftFields(d, ["id"]), card }, []);
   });
   for (const card of cardIds) {
     if (!parts.some((p) => p.card === card)) throw new CurateError(`pharm-parts: card ${card} has no part`);
   }
-  const allCards: CardsFile = { v: 1, cards: [...c.cards.cards.filter((x) => x.file !== fileSlug), ...cards] };
+  const drafted = new Map(cards.map((x) => [x.id, x]));
+  const kept = c.cards.cards.flatMap((x) => {
+    const now = drafted.get(x.id);
+    if (now !== undefined) return [now];
+    return x.file === fileSlug ? [] : [x];
+  });
+  const allCards: CardsFile = { v: 1, cards: [...kept, ...cards.filter((x) => !kept.includes(x))] };
   return {
     changes: [
       { path: `content/pharm/${fileSlug}/pharmfile.json`, value: { ...pf.file, parts } },

@@ -1,0 +1,96 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_02WE7KQF2F"
+ ],
+ "roles": [
+  {
+   "target": "c_YSYYSQ9VG4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Metronidazole 500 mg PO BID x7 days, or metronidazole gel intravaginally",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_JVHE92XFE3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Clindamycin cream intravaginally",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Clindamycin PO or ovules",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_02WE7KQF2F",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Secnidazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_G97ECCM4EM",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Tinidazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
