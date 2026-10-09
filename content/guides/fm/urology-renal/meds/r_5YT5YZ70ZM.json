@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_ZGE8S52PYV",
+  "g_XF0YFBDSSF",
+  "g_ATXD9CNQTJ"
+ ],
+ "roles": [
+  {
+   "target": "g_ZGE8S52PYV",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "nitrofurantoin 100 mg BID x5 days",
+     "note": "women; not if CrCl < 60; not for men",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_P05KHJTR8A",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX 160/800 mg BID x3 days",
+     "note": "women; men: TMP or TMP-SMX x7 days",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XF0YFBDSSF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fosfomycin 3 g once",
+     "note": "women",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_8XW495JD17",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "fluoroquinolone or beta-lactam",
+     "note": "less desirable choices; FQ if cystitis recurs within 1-2 weeks (culture the urine)",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ATXD9CNQTJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "phenazopyridine",
+     "note": "severe dysuria, no more than 2 days",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
