@@ -1,0 +1,65 @@
+{
+ "v": 1,
+ "add": [
+  "c_4963YVBQA7"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_GFCC8F6X3N",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Cholinesterase inhibitors, equally effective: donepezil is first-line (once daily, well tolerated); rivastigmine (liquid or patch); galantamine (may help behavioral symptoms more). Continue only if function improves after several months",
+     "note": null,
+     "sources": [
+      {
+       "name": "Alzheimer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/delirium-and-dementia/alzheimer-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_R8QA9FF653",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Memantine: moderate to severe disease, alone or with a cholinesterase inhibitor; reduce dose or avoid in renal insufficiency",
+     "note": null,
+     "sources": [
+      {
+       "name": "Alzheimer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/delirium-and-dementia/alzheimer-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_4963YVBQA7",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Selected patients with mild disease (or MCI): anti-amyloid monoclonal antibodies (lecanemab, donanemab); modest benefit; ARIA (cerebral edema, microhemorrhage)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Alzheimer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/delirium-and-dementia/alzheimer-disease"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
