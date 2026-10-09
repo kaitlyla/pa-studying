@@ -1,0 +1,93 @@
+{
+ "v": 1,
+ "add": [
+  "c_FH3EV4GFD7"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_VHXWP2A364"
+ ],
+ "roles": [
+  {
+   "target": "g_VHXWP2A364",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "C5 inhibitor (eculizumab, ravulizumab)",
+     "note": "symptomatic anemia, transfusion need or thrombosis",
+     "sources": [
+      {
+       "name": "Paroxysmal Nocturnal Hemoglobinuria (PNH)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "proximal complement inhibitor (pegcetacoplan, iptacopan)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Paroxysmal Nocturnal Hemoglobinuria (PNH)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "danicopan added to a C5 inhibitor",
+     "note": "symptomatic extravascular hemolysis",
+     "sources": [
+      {
+       "name": "Paroxysmal Nocturnal Hemoglobinuria (PNH)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_FH3EV4GFD7",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral iron",
+     "note": "supportive",
+     "sources": [
+      {
+       "name": "Paroxysmal Nocturnal Hemoglobinuria (PNH)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_HRBA2EA6QF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "folic acid",
+     "note": "supportive",
+     "sources": [
+      {
+       "name": "Paroxysmal Nocturnal Hemoglobinuria (PNH)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/paroxysmal-nocturnal-hemoglobinuria-pnh"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

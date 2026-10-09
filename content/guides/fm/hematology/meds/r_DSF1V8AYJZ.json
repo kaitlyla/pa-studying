@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_CE2Y6EZHAS"
+ ],
+ "roles": [
+  {
+   "target": "p_T1SXZCZB1P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "factor VIII replacement (hemophilia A)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "aminocaproic acid or tranexamic acid",
+     "note": "mucosal/dental bleeding",
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_P0WNFENKDV",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "factor IX replacement (hemophilia B)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CE2Y6EZHAS",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "emicizumab (A)",
+     "note": "subcutaneous every 1, 2 or 4 weeks",
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "fitusiran, concizumab, marstacimab (A and B)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "aminocaproic acid or tranexamic acid",
+     "note": "mucosal/dental bleeding",
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_J38PGTRXAN",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "desmopressin",
+     "note": "mild hemophilia A (factor VIII >= 5%) with a proven response",
+     "sources": [
+      {
+       "name": "Hemophilia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/hemophilia"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

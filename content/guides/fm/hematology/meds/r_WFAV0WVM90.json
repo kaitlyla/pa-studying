@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "add": [
+  "c_J38PGTRXAN"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_J38PGTRXAN",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "desmopressin (test dose first)",
+     "note": "type 1; usually ineffective in type 2 and 3; can worsen thrombocytopenia in 2B",
+     "sources": [
+      {
+       "name": "Von Willebrand Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/von-willebrand-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_40HFB1VTPC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "VWF replacement (intermediate-purity factor VIII concentrate)",
+     "note": "types 2 and 3, or type 1 with major procedures",
+     "sources": [
+      {
+       "name": "Von Willebrand Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/von-willebrand-disease"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "tranexamic acid or aminocaproic acid",
+     "note": null,
+     "sources": [
+      {
+       "name": "Von Willebrand Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/von-willebrand-disease"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

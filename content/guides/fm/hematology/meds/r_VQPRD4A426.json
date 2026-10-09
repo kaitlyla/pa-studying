@@ -1,0 +1,55 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_APD0HX994M"
+ ],
+ "roles": [
+  {
+   "target": "g_APD0HX994M",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "encephalopathy: dimercaprol + CaNa2EDTA",
+     "note": "dimercaprol >= 4 hours before the first EDTA dose",
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "no encephalopathy: succimer orally",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "symptomatic without encephalopathy: dimercaprol + CaNa2EDTA for 5 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
