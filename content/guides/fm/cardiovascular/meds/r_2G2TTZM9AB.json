@@ -578,6 +578,162 @@
             ]
            }
           ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_5GAB28NT6K",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Contraindications"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": active internal bleed, hx of stroke in last 2-3mo, hx of ICH, surgery/trauma in previous 2-3mo, uncontrolled HTN "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
          }
         ]
        }
@@ -636,7 +792,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -649,16 +805,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -710,7 +859,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -723,36 +872,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -768,7 +888,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -781,7 +901,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -809,7 +929,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -822,313 +942,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Reversal: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "Aminocaproic acid: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: block plasminogen activation"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: PO, IV"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Adverse Effects:  -  Thrombosis   -  ↓BP    -  Arrhythmias  "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "Tranexamic acid "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "MOA: blocks plasminogen -> plasmin ->break down fibrin "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: PO, IV"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Adverse Effects: thrombosis "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1156,7 +970,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1169,7 +983,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1197,7 +1011,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1210,7 +1024,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1226,7 +1040,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1239,7 +1053,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1255,7 +1069,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1268,7 +1082,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1278,6 +1092,291 @@
          {
           "type": "text",
           "text": "Head trauma                                       -    intra -cranial (IC) bleed"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Reversal: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "FFF2CC"
+            }
+           }
+          ],
+          "text": "Aminocaproic acid: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: block plasminogen activation"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: PO, IV"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects:  -  Thrombosis   -  ↓BP    -  Arrhythmias  "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "FFF2CC"
+            }
+           }
+          ],
+          "text": "Tranexamic acid "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "MOA: blocks plasminogen -> plasmin ->break down fibrin "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: PO, IV"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects: thrombosis "
          }
         ]
        },
@@ -1316,7 +1415,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1329,7 +1428,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1345,7 +1444,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1358,16 +1457,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1485,7 +1577,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1498,7 +1590,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1530,7 +1622,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1543,7 +1635,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1559,7 +1651,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1572,7 +1664,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1588,7 +1680,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1601,7 +1693,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1617,7 +1709,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1630,16 +1722,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1661,7 +1746,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1674,16 +1759,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1701,553 +1779,12 @@
           "text": "Contraindication:  DO NOT USE REPEATEDLY IN SAME PT "
          }
         ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 4
-            }
-           }
-          ],
-          "text": "—-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------—---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 4
-            }
-           }
-          ],
-          "text": "—-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------—-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          229.5,
-          234,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_GPEA5N7GR0",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "FFD966",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "FIBRINOLYTICS"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "FFD966",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "FFD966",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "FFD966",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_5GAB28NT6K",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Contraindications"
-               },
-               {
-                "type": "text",
-                "text": ": active internal bleed, hx of stroke in last 2-3mo, hx of ICH, surgery/trauma in previous 2-3mo, uncontrolled HTN "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_CEFCQVH2PM"
   },
   {
    "target": "c_1W9T6QFWR7",
@@ -2257,1259 +1794,6 @@
      "basePt": 8,
      "title": null,
      "file": "Antiplatelet Antithrombotics Fibrinolytics Med List LOs 3.12.26 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Heparin and Related Drugs"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: catalyst activity ("
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "reusable"
-         },
-         {
-          "type": "text",
-          "text": ") -> p"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "otentiates antithrombin 3 (AT-3)"
-         },
-         {
-          "type": "text",
-          "text": " activity -> inactivate clotting factors "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Potentiating AT-3: ↑rate of action by 1000-4000x) "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "Mostly in vasc system BUT semi-degraded heparin drugs->appear in urine "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Acute thrombotic disorders: peripheral & PE, venous thrombosis"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Adverse Effects:                                             -    "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "Thrombocytopenia "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Bleeding: minor/major             -    Hypersensitivity"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "Thrombosis: chronic or intermittent -> ↓antithrombin 3 activity "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "paradoxical effect (20-30%)  "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Monitoring: Anti-factor Xa"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "He"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "parin: "
-         },
-         {
-          "type": "text",
-          "text": "unfractionated heparin "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: inactivate"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": " 2a (thrombin) & Xa"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Natural macromolecule in mastcells, basophils, vasc endothelium "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Harvest from porcine intestine or bovine lung"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: cont. IV -in hsp   or deep subcut"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Half-life: 90min "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Response: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "Variable"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Bioavailability: 20%"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Reversal: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "protamine sulfate: IV                    "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "FFP or clotting factors "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Metabolism: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "renal & hepatic elimination "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Adverse Effects:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Freq bleeding "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "Heparin induced thrombocytopenia (HIT): D/C    - Poss fatal thrombosis "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Contraindication: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Heparin sensitivity           -     Bleeding disorders"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "ETOH "
-         },
-         {
-          "type": "text",
-          "text": "                                 - "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "   Recent surgery: eye, brain, spinal cord "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Monitoring: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "aPTT: activated partial thromboembolism time -> dose based on "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Antiplatelet Antithrombotics Fibrinolytics Med List LOs 3.12.26 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Heparin:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Activated partial thromboplastin time (aPTT)"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
      "doc": {
       "type": "doc",
       "content": [
@@ -3960,11 +2244,1151 @@
           ]
          }
         ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Heparin and Related Drugs"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: catalyst activity ("
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "reusable"
+         },
+         {
+          "type": "text",
+          "text": ") -> p"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "otentiates antithrombin 3 (AT-3)"
+         },
+         {
+          "type": "text",
+          "text": " activity -> inactivate clotting factors "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Potentiating AT-3: ↑rate of action by 1000-4000x) "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7
+            }
+           }
+          ],
+          "text": "Mostly in vasc system BUT semi-degraded heparin drugs->appear in urine "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Acute thrombotic disorders: peripheral & PE, venous thrombosis"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects:                                             -    "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "Thrombocytopenia "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Bleeding: minor/major             -    Hypersensitivity"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "Thrombosis: chronic or intermittent -> ↓antithrombin 3 activity "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "paradoxical effect (20-30%)  "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Monitoring: Anti-factor Xa"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "He"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "parin: "
+         },
+         {
+          "type": "text",
+          "text": "unfractionated heparin "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Heparin:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Metabolism: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "renal & hepatic elimination "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Activated partial thromboplastin time (aPTT)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: inactivate"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": " 2a (thrombin) & Xa"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Natural macromolecule in mastcells, basophils, vasc endothelium "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Harvest from porcine intestine or bovine lung"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: cont. IV -in hsp   or deep subcut"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Half-life: 90min "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Response: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "Variable"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Bioavailability: 20%"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "Heparin induced thrombocytopenia (HIT): D/C    - Poss fatal thrombosis "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Contraindication: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Heparin sensitivity           -     Bleeding disorders"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "ETOH "
+         },
+         {
+          "type": "text",
+          "text": "                                 - "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "   Recent surgery: eye, brain, spinal cord "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Monitoring: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "aPTT: activated partial thromboembolism time -> dose based on "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Reversal: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "FFF2CC"
+            }
+           }
+          ],
+          "text": "protamine sulfate: IV                    "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "FFF2CC"
+            }
+           }
+          ],
+          "text": "FFP or clotting factors "
+         }
+        ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_FR6FDHKDMS"
   }
  ],
  "gaps": [],

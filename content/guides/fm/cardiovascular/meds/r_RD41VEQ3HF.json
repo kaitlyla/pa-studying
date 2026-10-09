@@ -747,7 +747,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -756,65 +756,57 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
+            }
+           }
+          ],
+          "text": "Amiodarone: pr"
          },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
          {
           "type": "text",
-          "text": "Atrial-Ventricular arrhythmia "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "A-Fib"
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
+            }
+           }
+          ],
+          "text": "ior to use "
          }
         ]
        },
@@ -834,36 +826,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: VERY LONG ½ LIFE 30-100D"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -892,7 +855,352 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "liver function tests"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "pulmonary function"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "thyroid function"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "chest X-ray"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "EKG"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 10
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "ophthalmologic exam"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Atrial-Ventricular arrhythmia "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: VERY LONG ½ LIFE 30-100D"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -921,7 +1229,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -950,7 +1258,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -979,7 +1287,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1056,7 +1364,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1085,7 +1393,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1114,7 +1422,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1143,7 +1451,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1172,16 +1480,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFE599"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1216,7 +1517,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1228,18 +1529,7 @@
           "text": "BB adverse effects"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Cardio II Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -1307,385 +1597,12 @@
           "text": "s "
          }
         ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           },
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
-          "text": "Amiodarone: pr"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
-          "text": "ior to use "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "liver function tests"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "pulmonary function"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "thyroid function"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "chest X-ray"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "EKG"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 39,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 9
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 10
-            }
-           },
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "ophthalmologic exam"
-         }
-        ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_33RF0HMJ0F"
   }
  ],
  "gaps": [],

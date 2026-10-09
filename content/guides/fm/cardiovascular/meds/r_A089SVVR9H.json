@@ -953,69 +953,7 @@
             ]
            }
           ]
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "rows",
-     "basePt": 11,
-     "title": null,
-     "file": null,
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          99,
-          445.5,
-          229.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
          },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 2.15,
-          "bottom": 0,
-          "left": 2.15
-         }
-        },
-        "content": [
          {
           "type": "table_row",
           "attrs": {
@@ -1062,6 +1000,34 @@
                 "text": "ANTIARRHYTHMICS"
                }
               ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FF7E79",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
              }
             ]
            },
@@ -1193,6 +1159,34 @@
            {
             "type": "table_cell",
             "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
              "colspan": 1,
              "rowspan": 1,
              "colwidth": null,
@@ -1264,6 +1258,1646 @@
                {
                 "type": "text",
                 "text": ": used to slow ventricular rate in SVTs, such as AFIB"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_5TXWYRA25Y",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Non-Selective Beta Blockers"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Propranolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Nadolol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Pindolol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Penbutolol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": block both beta-1 & beta-2 receptors (heart, airway, vasculature) "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Indications"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": arrhythmias"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": depression, fatigue, N/V, insomnia, SOB, dizziness, lightheadedness, HA, diarrhea, rash "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_FFYHMA92N6",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Cardioselective Beta Blockers"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Metoprolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Atenolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Bisoprolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Acebutolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Betaxolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Esmolol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Nebivolol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": block beta-1 receptors in the heart "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•slowing of sinus HR"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•slowed AV conduction"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•decreased CO"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•opposes reflex tachycardia "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": dizziness, HA, fatigue, weakness, dry mouth/eyes, N/V"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_T5TJW2SSAK",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Combined Beta Blockers"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Labetalol"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Carvedilol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Carteolol"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 3,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": block beta-1, beta-2, & alpha-1 receptors "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": dizziness, lightheadedness, nausea, fatigue, SOB, itching, rash, irregular HR, depression, low BP, diarrhea, HA, cough, impotence "
                }
               ]
              }
@@ -1372,7 +3006,312 @@
         "content": [
          {
           "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7
+            }
+           }
+          ],
+          "text": "BP w/in 2 to 3 hr after dosing & @ end of each dosing interval during dose titration (***first dose syncope)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "pure antagonist OR partial agonist->compete w catecholamine & BB"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Block renin release "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "ISA =↓effects of ↓HDL-sex dysfun-broncoconstrict-HR-contractility "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "ISA ⍉ CKD OR HF"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "B2: poss ↓insulin release (↑blood sugar) & bronchospasms -asthma "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "highlight",
+            "attrs": {
+             "hex": "FFFF00"
+            }
+           }
+          ],
+          "text": "Lipophilic cleared by liver"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
           "text": "Clin Use: cardioselective"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "↓ HR, ↓ contractility, ↓ renin release"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "HTN\t\t\t- Arrhythmia "
          }
         ]
        },
@@ -1421,7 +3360,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1450,7 +3389,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1479,16 +3418,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1523,7 +3455,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1552,7 +3484,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1568,7 +3500,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 85.5,
+         "indLeft": 81,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1581,7 +3513,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "•",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1591,6 +3523,64 @@
          {
           "type": "text",
           "text": "Dizzy, Confused, Depression, lethargy, insomnia, fatigue"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Contraindications: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "ISA BB less effective -avoid"
          }
         ]
        },
@@ -1639,7 +3629,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1668,7 +3658,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1697,7 +3687,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1726,7 +3716,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1755,7 +3745,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1813,16 +3803,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1844,7 +3827,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 85.5,
+         "indLeft": 81,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1857,16 +3840,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "■",
+          "text": "•",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1901,7 +3877,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1911,64 +3887,6 @@
          {
           "type": "text",
           "text": "1st dose @ home -> slow HR/fatigue, non-selective -> ↓ alertness/coord "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "●",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Contraindications: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "ISA BB less effective -avoid"
          }
         ]
        },
@@ -2004,35 +3922,6 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Low lipid solubility"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
          "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
@@ -2046,7 +3935,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2055,7 +3944,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Use: HFrEF"
+          "text": "Low lipid solubility"
          }
         ]
        },
@@ -2091,7 +3980,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2104,7 +3993,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2120,7 +4009,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2133,7 +4022,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2170,7 +4059,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2199,36 +4088,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "HFrEF"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2277,7 +4137,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2290,16 +4150,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -2318,75 +4171,6 @@
          }
         ]
        },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Use: ↓ lipid peroxidation & ↓vasc wall thickening-> HFrEF"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Need vasodilating ex HTN"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Cardio II Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
        {
         "type": "paragraph",
         "attrs": {
@@ -2461,7 +4245,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2490,7 +4274,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2519,7 +4303,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2548,7 +4332,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2606,7 +4390,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2635,7 +4419,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2664,7 +4448,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2762,7 +4546,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2791,48 +4575,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Use:            1. Surgery          2. Dx procedures               3. HTN EMERGENCY"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "B6D7A8"
-            }
-           }
-          ],
           "tabPt": 18
          }
         },
@@ -2855,473 +4600,6 @@
          {
           "type": "text",
           "text": ":        w/  food"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Propranolol: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
-          "text": "also used for anxiety:  "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
-          "text": "High lipid solubility"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "Β-blockers"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "pure antagonist OR partial agonist->compete w catecholamine & BB"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Block renin release "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "ISA =↓effects of ↓HDL-sex dysfun-broncoconstrict-HR-contractility "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 85.5,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "ISA ⍉ CKD OR HF"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "B2: poss ↓insulin release (↑blood sugar) & bronchospasms -asthma "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
-          "text": "Lipophilic cleared by liver"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clinical Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↓ HR, ↓ contractility, ↓ renin release"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "HTN\t\t\t- Arrhythmia "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Angina\t\t- MI"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "CHF, HF -> 1st line \t- Anxiety  "
          }
         ]
        },
@@ -3390,7 +4668,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3403,7 +4681,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3431,7 +4709,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 45,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3446,11 +4724,7 @@
          "marker": {
           "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -3481,7 +4755,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 45,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3496,11 +4770,7 @@
          "marker": {
           "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -3523,7 +4793,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 45,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3538,11 +4808,7 @@
          "marker": {
           "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -3657,7 +4923,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3670,7 +4936,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3686,7 +4952,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3699,7 +4965,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3715,7 +4981,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 94.5,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3728,7 +4994,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3744,7 +5010,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 94.5,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3757,7 +5023,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3773,7 +5039,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3786,7 +5052,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3802,9 +5068,9 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 71.99999999999999,
+         "indLeft": 54,
          "indRight": 0,
-         "indFirst": -17.99999999999998,
+         "indFirst": -18,
          "spaceBefore": 0,
          "spaceAfter": 0,
          "line": {
@@ -3815,10 +5081,10 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
-          "tabPt": 17.99999999999998
+          "tabPt": 18
          }
         },
         "content": [
@@ -3831,9 +5097,9 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 71.99999999999999,
+         "indLeft": 54,
          "indRight": 0,
-         "indFirst": -17.99999999999998,
+         "indFirst": -18,
          "spaceBefore": 0,
          "spaceAfter": 0,
          "line": {
@@ -3844,10 +5110,10 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
-          "tabPt": 17.99999999999998
+          "tabPt": 18
          }
         },
         "content": [
@@ -3860,9 +5126,9 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 71.99999999999999,
+         "indLeft": 54,
          "indRight": 0,
-         "indFirst": -17.99999999999998,
+         "indFirst": -18,
          "spaceBefore": 0,
          "spaceAfter": 0,
          "line": {
@@ -3873,10 +5139,10 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
-          "tabPt": 17.99999999999998
+          "tabPt": 18
          }
         },
         "content": [
@@ -3902,7 +5168,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "–",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3923,7 +5189,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 63,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3936,7 +5202,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -3952,7 +5218,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 63,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3965,7 +5231,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -4043,7 +5309,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4056,7 +5322,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -4088,101 +5354,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "   - Block a1 R: ↓ PVR"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 1
-            }
-           }
-          ],
-          "text": "—----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4195,1483 +5367,24 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
         "content": [
          {
           "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "β-blockers"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 56.000000000000036,
-         "indRight": 0,
-         "indFirst": -18.000000000000014,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 18.000000000000014
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "BP w/in 2 to 3 hr after dosing & @ end of each dosing interval during dose titration (***first dose syncope)"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          229.5,
-          234,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_F7RV2MDA8F",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D883FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "PHARM"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D883FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D883FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Indications/Contraindications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D883FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ADRs/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_5TXWYRA25Y",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Non-Selective Beta Blockers"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Propranolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Nadolol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Pindolol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Penbutolol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": block both beta-1 & beta-2 receptors (heart, airway, vasculature) "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Indications"
-               },
-               {
-                "type": "text",
-                "text": ": HTN, angina, migraines, arrhythmias, glaucoma (timolol)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": depression, fatigue, N/V, insomnia, SOB, dizziness, lightheadedness, HA, diarrhea, rash "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_FFYHMA92N6",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Cardioselective Beta Blockers"
-               },
-               {
-                "type": "text",
-                "text": ": "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Metoprolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Atenolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Bisoprolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Acebutolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Betaxolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Esmolol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Nebivolol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": block beta-1 receptors in the heart "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•slowing of sinus HR"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•slowed AV conduction"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•decreased CO"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•opposes reflex tachycardia "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": dizziness, HA, fatigue, weakness, dry mouth/eyes, N/V"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_T5TJW2SSAK",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Combined Beta Blockers"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Labetalol"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Carvedilol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Carteolol"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": block beta-1, beta-2, & alpha-1 receptors "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": dizziness, lightheadedness, nausea, fatigue, SOB, itching, rash, irregular HR, depression, low BP, diarrhea, HA, cough, impotence "
-               }
-              ]
-             }
-            ]
-           }
-          ]
+          "text": "   - Block a1 R: ↓ PVR"
          }
         ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_P7MNYK44XX"
   },
   {
    "target": "c_1W44S79ASK",
@@ -6246,6 +5959,151 @@
        {
         "type": "paragraph",
         "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AA respond better "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Bind L-type Ca voltage channel -> block -> ↓ Ca into cell -> ↓ contractility "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "In ♡, coronary, peripheral vasc -> smooth muscle relax "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Slight diuretic effect: Intrinsic naturietic  effect -> ⍉ need diuretic "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Vasodilate "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
          "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
@@ -6317,7 +6175,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6327,35 +6185,6 @@
          {
           "type": "text",
           "text": "BB: sensitive to ♡depressant effect "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "CHF"
          }
         ]
        },
@@ -6404,7 +6233,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6433,7 +6262,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6462,7 +6291,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6474,18 +6303,7 @@
           "text": "Liver function "
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Cardio II Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -6560,7 +6378,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6589,16 +6407,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -6662,7 +6473,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6691,16 +6502,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -6739,7 +6543,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6826,7 +6630,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6855,7 +6659,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6884,16 +6688,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -6957,7 +6754,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6998,7 +6795,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -7027,7 +6824,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -7056,7 +6853,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -7085,16 +6882,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "EA9999"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -7129,16 +6919,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "○",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "EA9999"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -7154,50 +6937,6 @@
            }
           ],
           "text": "Cardiogenic shock"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "○",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "EA9999"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "EA9999"
-            }
-           }
-          ],
-          "text": "HF <- b/c (-) inoptrope activity "
          }
         ]
        },
@@ -7239,7 +6978,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7338,7 +7077,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 54,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7395,315 +7134,9 @@
        }
       ]
      }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "Calcium Channel Blockers (CCBs)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: AA respond better "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Bind L-type Ca voltage channel -> block -> ↓ Ca into cell -> ↓ contractility "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "In ♡, coronary, peripheral vasc -> smooth muscle relax "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Slight diuretic effect: Intrinsic naturietic  effect -> ⍉ need diuretic "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Vasodilate "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clinical Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↓ afterload: dilate coronary/peripheral a"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↓ systemic vascular resistance"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration:  oral"
-         }
-        ]
-       }
-      ]
-     }
     }
-   ]
+   ],
+   "gap": "g_92AG12V4XM"
   },
   {
    "target": "c_3ZB55BF17S",
@@ -8169,7 +7602,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8182,32 +7615,23 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
         "content": [
          {
           "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
-          "text": "Digoxin (Lanoxin)"
+          "text": "circulation & red SNS -> ↓ PVR -> ↓ HR & ↓ O2 demand "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8220,7 +7644,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8236,31 +7660,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": 36,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "circulation & red SNS -> ↓ PVR -> ↓ HR & ↓ O2 demand "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8273,7 +7673,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8289,7 +7689,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8302,7 +7702,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8318,7 +7718,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8347,7 +7747,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8376,7 +7776,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8405,7 +7805,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8418,7 +7818,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8434,7 +7834,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8463,7 +7863,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8492,7 +7892,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8521,7 +7921,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8534,7 +7934,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8550,7 +7950,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8579,7 +7979,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8608,7 +8008,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 108,
+         "indLeft": 81,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8637,7 +8037,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 108,
+         "indLeft": 81,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8652,14 +8052,7 @@
          "marker": {
           "text": "•",
           "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "E69138"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -8685,7 +8078,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8714,7 +8107,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8727,7 +8120,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -8743,7 +8136,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8772,7 +8165,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8801,7 +8194,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8826,18 +8219,41 @@
           "text": "Serum [digoxin]"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           }
+          ],
+          "text": "Digoxin (Lanoxin)"
+         }
+        ]
+       },
        {
         "type": "table",
         "attrs": {
@@ -9280,18 +8696,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Cardio II Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -9366,16 +8771,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -9458,7 +8856,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9516,7 +8914,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9545,7 +8943,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9587,53 +8985,6 @@
          }
         ]
        },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1.0791666666666666
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Cardio II Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
        {
         "type": "table",
         "attrs": {
@@ -9810,7 +9161,376 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_NXKSCA4XJ9"
+  },
+  {
+   "target": "r_5E8S49HPJZ",
+   "pieces": [
+    {
+     "kind": "rows",
+     "basePt": 11,
+     "title": null,
+     "file": null,
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          99,
+          445.5,
+          229.5
+         ],
+         "indentPt": -27.25,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          }
+         },
+         "cellMarginPt": {
+          "top": 0,
+          "right": 2.15,
+          "bottom": 0,
+          "left": 2.15
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_QCHAYSJJDV",
+           "kind": "heading",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FF7E79",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "Miscellaneous AADs"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FF7E79",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "ABOUT"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FF7E79",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_5E8S49HPJZ",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Adenosine"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "text": ": slows conduction through the AV node via activation of adenosine-I receptors; ⇣ conduction velocity, ⇡ ERP"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Indications"
+               },
+               {
+                "type": "text",
+                "text": ": rapid conversion to NSR in PSVT"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "text": ": transient, new arrhythmias; facial flushing, chest pain, dizziness, transient ⇣ in BP, GI distress, dyspepsia "
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_831C5N6B4R"
   }
  ],
  "gaps": [],

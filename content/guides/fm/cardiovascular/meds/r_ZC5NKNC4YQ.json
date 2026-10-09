@@ -539,7 +539,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -568,7 +568,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -626,7 +626,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -636,64 +636,6 @@
          {
           "type": "text",
           "text": "Atrial & Ventricular arrhythmias"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "V-dysrhythmias"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Refractory V-tach -combo w class 3"
          }
         ]
        },
@@ -795,123 +737,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "acute SVT "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Hemodynamically stable V-tach"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: PO,IV"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -940,7 +766,94 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "acute SVT "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: PO,IV"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -969,7 +882,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1010,7 +923,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1026,7 +939,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_MVA075P942"
   }
  ],
  "gaps": [],
