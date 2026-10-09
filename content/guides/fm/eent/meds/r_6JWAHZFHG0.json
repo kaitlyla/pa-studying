@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_T7QDQGKCSW",
+  "g_7056BT3CVF"
+ ],
+ "roles": [
+  {
+   "target": "g_T7QDQGKCSW",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Diabetic macular edema: intraocular anti-VEGF (ranibizumab, bevacizumab, aflibercept) and/or focal laser; faricimab",
+     "note": null,
+     "sources": [
+      {
+       "name": "Diabetic Retinopathy",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/retinal-disorders/diabetic-retinopathy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7056BT3CVF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Persistent macular edema: dexamethasone implant, intravitreal triamcinolone, fluocinolone implant",
+     "note": null,
+     "sources": [
+      {
+       "name": "Diabetic Retinopathy",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/retinal-disorders/diabetic-retinopathy"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

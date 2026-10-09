@@ -1,0 +1,67 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_503RCZ2T9F",
+  "g_MK367P5ZQF",
+  "g_GDCKKH036D"
+ ],
+ "roles": [
+  {
+   "target": "g_503RCZ2T9F",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "AREDS supplements (dry AMD with extensive drusen or GA; and the other eye in unilateral wet AMD)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Age-Related Macular Degeneration",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/retinal-disorders/age-related-macular-degeneration-amd-or-armd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MK367P5ZQF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Wet AMD: intravitreal anti-VEGF (ranibizumab, bevacizumab, aflibercept)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Age-Related Macular Degeneration",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/retinal-disorders/age-related-macular-degeneration-amd-or-armd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GDCKKH036D",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Geographic atrophy: intravitreal pegcetacoplan or avacincaptad pegol",
+     "note": null,
+     "sources": [
+      {
+       "name": "Age-Related Macular Degeneration",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/retinal-disorders/age-related-macular-degeneration-amd-or-armd"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
