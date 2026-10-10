@@ -1,10 +1,9 @@
 // Rendered check (30 §30.13): builds the site from the working tree, serves it with `vite preview`,
 // and checks in Chromium that each block's page shows its paragraph texts in order and loads its images.
 import { spawn } from "node:child_process";
-import type { ChildProcess } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "@playwright/test";
 import type { BlockFile } from "../../lib/content/index.ts";
 import { HOSTS_PATH } from "../../lib/derive/published.ts";
@@ -66,27 +65,24 @@ function run(cmd: string, args: string[], cwd: string): Promise<void> {
 }
 
 /**
- * `vite preview` of `root`'s built site on a free port. Vite's own entry runs under this Node with no
- * shell in between, so `stop()` ends the server itself (a shell wrapper's kill leaves it running on Windows).
+ * Vite's preview server for `root`'s built site, in its own process (preview-server.ts) run with `root` as
+ * its working directory, on the free port the server bound. `stop()` asks the server to close rather than
+ * killing it, and resolves once that process has exited — which it does only after everything it started
+ * has ended, so nothing it ran is left holding `root` open.
  */
 export async function startPreview(root: string): Promise<{ port: number; stop: () => Promise<void> }> {
-  const port = 4173 + Math.floor(Math.random() * 1000);
-  const pkgPath = createRequire(import.meta.url).resolve("vite/package.json");
-  const pkg = JSON.parse(await readFile(pkgPath, "utf8")) as { bin: { vite: string } };
-  const vite = join(dirname(pkgPath), pkg.bin.vite);
-  const child: ChildProcess = spawn(process.execPath, [vite, "preview", "--port", String(port), "--strictPort"], {
-    cwd: root, stdio: ["ignore", "pipe", "inherit"],
+  const child = spawn(process.execPath, [fileURLToPath(new URL("./preview-server.ts", import.meta.url))], {
+    cwd: root, stdio: ["ignore", "inherit", "inherit", "ipc"],
   });
-  await new Promise<void>((resolve, reject) => {
+  const exited = new Promise<void>((resolve) => child.once("exit", () => resolve()));
+  const port = await new Promise<number>((resolve, reject) => {
     child.once("exit", (code) => reject(new Error(`vite preview exited ${code}`)));
-    child.stdout?.on("data", (d: Buffer) => { if (String(d).includes(String(port))) resolve(); });
+    child.once("message", (m) => resolve((m as { port: number }).port));
   });
   return {
     port,
     stop: async () => {
-      if (child.exitCode !== null || child.signalCode !== null) return;
-      const exited = new Promise<void>((resolve) => child.once("exit", () => resolve()));
-      child.kill();
+      if (child.connected) child.disconnect();
       await exited;
     },
   };

@@ -1,10 +1,11 @@
 import { createServer } from "node:http";
 import type { Server } from "node:http";
 import type { AddressInfo } from "node:net";
+import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { BlockFile } from "../../lib/content/index.ts";
 import { newId } from "../../lib/content/ids.ts";
 import type { DocJSON } from "../../lib/content/types.ts";
@@ -141,20 +142,59 @@ describe("renderedCheck in Chromium", () => {
 });
 
 describe("startPreview", () => {
+  let root: string;
+  beforeEach(async () => {
+    root = await mkdtemp(join(tmpdir(), "pa-preview-"));
+    await mkdir(join(root, "dist"), { recursive: true });
+    await writeFile(join(root, "dist", "index.html"), "<!doctype html><title>built</title>");
+  });
+  afterEach(async () => {
+    // No retries: once stop() has resolved, nothing the server ran may still hold its directory open.
+    await rm(root, { recursive: true, force: true });
+  });
+
   it("serves the built site and stop() shuts the server itself down", async () => {
-    const root = await mkdtemp(join(tmpdir(), "pa-preview-"));
+    const preview = await startPreview(root);
     try {
-      await mkdir(join(root, "dist"), { recursive: true });
-      await writeFile(join(root, "dist", "index.html"), "<!doctype html><title>built</title>");
-      const preview = await startPreview(root);
       const url = `http://localhost:${preview.port}/`;
       expect((await fetch(url)).status).toBe(200);
       await preview.stop();
       await expect(fetch(url)).rejects.toThrow();
-      await preview.stop();
     } finally {
-      // Windows can hold the exited server's working directory open for a moment.
-      await rm(root, { recursive: true, force: true, maxRetries: 20, retryDelay: 100 });
+      await preview.stop();
+    }
+  }, 60_000);
+
+  it("serves each concurrent preview on the port its own server bound", async () => {
+    // With Math.random pinned, any randomly guessed port is the same guess twice and the two collide.
+    const random = vi.spyOn(Math, "random").mockReturnValue(0);
+    const started = await Promise.allSettled([startPreview(root), startPreview(root)]);
+    random.mockRestore();
+    try {
+      const [a, b] = started.map((s) => { if (s.status === "rejected") throw s.reason; return s.value; });
+      expect(a!.port).not.toBe(b!.port);
+      for (const p of [a!, b!]) expect((await fetch(`http://localhost:${p.port}/`)).status).toBe(200);
+    } finally {
+      await Promise.all(started.map((s) => (s.status === "fulfilled" ? s.value.stop() : undefined)));
+    }
+  }, 60_000);
+
+  it("stop() resolves only once every process the server started has exited", async () => {
+    // Like Vite's own `net use` at startup on Windows: a child the server starts in the site's directory.
+    // It writes `child-exited` there as it ends.
+    const child = "setTimeout(() => require('node:fs').writeFileSync('child-exited', ''), 1500)";
+    await writeFile(join(root, "vite.config.mjs"), [
+      `import { spawn } from "node:child_process";`,
+      `export default { plugins: [{ name: "child", configurePreviewServer() {`,
+      `  spawn(process.execPath, ["-e", ${JSON.stringify(child)}], { stdio: "ignore" });`,
+      `} }] };`,
+    ].join("\n"));
+    const preview = await startPreview(root);
+    try {
+      await preview.stop();
+      expect(existsSync(join(root, "child-exited"))).toBe(true);
+    } finally {
+      await preview.stop();
     }
   }, 60_000);
 });
