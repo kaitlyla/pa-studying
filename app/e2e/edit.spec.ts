@@ -2940,71 +2940,119 @@ test.describe("her own meds panel for a condition", () => {
     await expect(shown).not.toContainText(text);
   });
 
-  test("in her own version, she removes two of a card's boxes (a table by Delete row, a text box by emptying it) and the others stay", async ({ page, context, baseURL }) => {
-    // A condition with her own version of a card: 3+ boxes, one a table of 2–4 rows, one of text only.
-    type Pick = { system: string; card: string; texts: string[]; leads: string[]; table: number; plain: number };
-    const picks = new Map<string, Pick>();
-    const tableRows = (doc: unknown): number => {
-      const content = isRec(doc) && Array.isArray(doc.content) ? doc.content : [];
-      const table: unknown = content[0];
-      return content.length === 1 && isRec(table) && table.type === "table" && Array.isArray(table.content) ? table.content.length : 0;
-    };
-    const squash = (s: string): string => s.replace(/\s+/g, " ").trim();
-    // A box's first words as the page shows them: the leading text of its first text block. Her runs split words
-    // anywhere, so the block's text nodes are joined; list markers and block breaks are drawn outside it.
-    const lead = (n: unknown): string => {
-      const kids: unknown[] = isRec(n) && Array.isArray(n.content) ? n.content : [];
-      const run: string[] = [];
-      for (const c of kids) {
-        if (!isRec(c) || typeof c.text !== "string") break;
-        run.push(c.text);
-      }
-      if (squash(run.join("")) !== "") return squash(run.join(""));
-      for (const c of kids) {
-        const s = lead(c);
-        if (s !== "") return s;
-      }
-      return "";
-    };
+  // Her own version of a card as the EOR pass lays it out: two boxes, a table of 2–4 rows, then one of text only.
+  // `leads` holds each box's first words; a sourced block her version holds comes last, its index `gap`.
+  type OwnPair = { t: TopicTarget; system: string; card: string; leads: string[]; table: number; plain: number; gap: number | null };
+  const tableRowCount = (doc: unknown): number => {
+    const content = isRec(doc) && Array.isArray(doc.content) ? doc.content : [];
+    const table: unknown = content[0];
+    return content.length === 1 && isRec(table) && table.type === "table" && Array.isArray(table.content) ? table.content.length : 0;
+  };
+  const squash = (s: string): string => s.replace(/\s+/g, " ").trim();
+  // A box's first words as the page shows them: the leading text of its first text block. Her runs split words
+  // anywhere, so the block's text nodes are joined; list markers and block breaks are drawn outside it.
+  const lead = (n: unknown): string => {
+    const kids: unknown[] = isRec(n) && Array.isArray(n.content) ? n.content : [];
+    const run: string[] = [];
+    for (const c of kids) {
+      if (!isRec(c) || typeof c.text !== "string") break;
+      run.push(c.text);
+    }
+    if (squash(run.join("")) !== "") return squash(run.join(""));
+    for (const c of kids) {
+      const s = lead(c);
+      if (s !== "") return s;
+    }
+    return "";
+  };
+  const ownPair = (): OwnPair => {
+    const picks = new Map<string, Omit<OwnPair, "t">>();
     const t = need(
       findTopic((g, system, id) => {
-        const own = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit?.own ?? {};
-        for (const [card, pieces] of Object.entries(own)) {
-          const texts = pieces.map((p) => squash(textOf(p.doc)));
-          const leads = pieces.map((p) => lead(p.doc).slice(0, 30));
-          // A box we remove must be findable by its lead alone: long enough, and in no other box of the card.
+        const edit = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit;
+        for (const [card, pieces] of Object.entries(edit?.own ?? {})) {
+          if (pieces.length !== 2) continue;
+          // The sourced block her version may hold is drawn under its boxes, and is a box of its own in the editor.
+          const gap = edit?.ownGaps?.[card];
+          const texts = [...pieces.map((p) => squash(textOf(p.doc))), ...(gap ? [squash(textOf(gap.doc))] : [])];
+          const leads = [...pieces.map((p) => lead(p.doc).slice(0, 30)), ...(gap ? [lead(gap.doc).slice(0, 30)] : [])];
+          // A box must be findable on the card by its lead alone: long enough, and in no other box of the card.
           const unique = (i: number): boolean => (leads[i] ?? "").length >= 12 && texts.every((x, j) => j === i || !x.includes(leads[i] ?? ""));
-          const table = pieces.findIndex((p, i) => tableRows(p.doc) >= 2 && tableRows(p.doc) <= 4 && unique(i) && !JSON.stringify(p.doc).includes('"image'));
-          const plain = pieces.findIndex((p, i) => i !== table && unique(i) && !/"(table|image|image_block|textbox|drawing)"/.test(JSON.stringify(p.doc)));
-          if (pieces.length < 3 || table < 0 || plain < 0) continue;
-          picks.set(id, { system, card, texts, leads, table, plain });
+          const table = pieces.findIndex((p, i) => tableRowCount(p.doc) >= 2 && tableRowCount(p.doc) <= 4 && unique(i) && !JSON.stringify(p.doc).includes('"image'));
+          const plain = 1 - table;
+          if (table < 0 || !unique(plain) || (gap && !unique(2)) || /"(table|image|image_block|textbox|drawing)"/.test(JSON.stringify(pieces[plain]?.doc))) continue;
+          picks.set(id, { system, card, leads, table, plain, gap: gap ? 2 : null });
           return true;
         }
         return false;
       }),
-      "condition with her own version of a card holding 3+ boxes, one a 2–4 row table and one of plain text",
+      "condition with her own version of a card in two boxes, a 2–4 row table and one of plain text",
     );
-    const { system, card, texts, leads, table, plain } = need(picks.get(t.id), "that card");
+    return { t, ...need(picks.get(t.id), "that card") };
+  };
+
+  /**
+   * After her save took box `gone` out of her version: the saved file holds her version with the other box
+   * exactly as it was, still on this condition; the page shows that box and not the removed one, and so does the
+   * page opened again (the overlay re-applies her save over the published build), where editing shows the one box.
+   */
+  async function keptOnly(page: Page, w: World, pair: OwnPair, before: MedsFile, gone: number): Promise<void> {
+    const { t, system, card, leads } = pair;
+    const keep = 1 - gone;
     const medsFile = topicMedsPath(t.g, system, t.id);
-    const before = readJson(join(ROOT, medsFile)) as MedsFile;
-    const { fake } = await world(context, baseURL, { seed: true });
+    const entry = need(before.own.find((o) => o.target === card), "her version of that card before");
+    expect([...changedFiles(w.fake).keys()]).toEqual([medsFile]);
+    const saved = JSON.parse(need(w.fake.readFile(medsFile), "her meds file")) as MedsFile;
+    expect(saved.own.find((o) => o.target === card)).toEqual({ ...entry, pieces: [entry.pieces[keep]] });
+    expect(saved.own.filter((o) => o.target !== card)).toEqual(before.own.filter((o) => o.target !== card));
+    expect(saved.remove).toEqual(before.remove);
+    expect(saved.remove).not.toContain(card);
+
+    const shows = async (): Promise<void> => {
+      const shown = panelCard(page, t, card);
+      await expect(shown).toHaveCount(1);
+      await shown.locator(".phc-h button").click();
+      await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
+      // The card's body only: a box's text can start with the card's own title.
+      const body = shown.locator(".phc-b");
+      await expect(body).toContainText(need(leads[keep], "the kept box's lead"));
+      await expect(body).not.toContainText(need(leads[gone], "the removed box's lead"));
+      if (pair.gap !== null) await expect(body).toContainText(need(leads[pair.gap], "the sourced block's lead"));
+    };
+    await shows();
+    const head = w.fake.head();
     await openPage(page, t.hash);
+    await expect.poll(() => w.fake.requests.some((r) => r.url.includes(`/compare/${head}...${w.build.commit}`))).toBe(true);
+    await shows();
+    const area = await startEditing(page);
+    const slots = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"] .edit-slot`);
+    await expect(slots).toHaveCount(pair.gap === null ? 1 : 2);
+    await expect(slots.first()).toContainText(need(leads[keep], "the kept box's lead"));
+    for (let i = 0; i < (await slots.count()); i++) await expect(slots.nth(i)).not.toContainText(need(leads[gone], "the removed box's lead"));
+    if (pair.gap !== null) await expect(slots.nth(1)).toContainText(need(leads[pair.gap], "the sourced block's lead"));
+  }
+
+  /** Opens the pair's condition signed in and editing; returns her version's boxes there, checked to be its two (and its sourced block). */
+  async function editPair(page: Page, pair: OwnPair): Promise<Locator> {
+    await openPage(page, pair.t.hash);
     await signIn(page);
     const area = await startEditing(page);
-    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"]`);
+    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${pair.card}"]`);
     await expect(editing.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
     const slots = editing.locator(".edit-slot");
-    await expect(slots).toHaveCount(texts.length);
+    await expect(slots).toHaveCount(pair.leads.length);
+    for (const [i, k] of pair.leads.entries()) await expect(slots.nth(i)).toContainText(k);
+    return slots;
+  }
 
-    // The text box: select all of it and delete. It stays, blank, until she saves.
-    const words = slots.nth(plain).locator('[contenteditable="true"]');
-    await words.locator("p").filter({ hasText: /\S/ }).first().click();
-    await page.keyboard.press("Control+a");
-    await page.keyboard.press("Delete");
-    await expect(words).toHaveText("");
+  test("in her own version of a card in two boxes, Delete row on every table row takes the table box away and the text box stays", async ({ page, context, baseURL }) => {
+    const pair = ownPair();
+    const before = readJson(join(ROOT, topicMedsPath(pair.t.g, pair.system, pair.t.id))) as MedsFile;
+    const w = await world(context, baseURL, { seed: true });
+    const slots = await editPair(page, pair);
 
-    // The table box: Delete row on each row; the last one takes the table, and the box goes.
-    const rows = slots.nth(table).locator("table.nt > tbody > tr");
+    // Delete row on each row; the last one takes the table, and the box it leaves blank goes.
+    const rows = slots.nth(pair.table).locator("table.nt > tbody > tr");
     for (let left = await rows.count(); left > 1; left--) {
       await rows.first().locator("td").first().click();
       await ref(page, "tb-row-delete").click();
@@ -3014,21 +3062,32 @@ test.describe("her own meds panel for a condition", () => {
     await rows.first().locator("td").first().click();
     await ref(page, "tb-row-delete").click();
     await ref(page.getByRole("dialog", { name: "Delete this table?" }), "confirm-ok").click();
-    await expect(slots).toHaveCount(texts.length - 1);
+    await expect(slots).toHaveCount(pair.leads.length - 1);
+    await expect(slots.first()).toContainText(need(pair.leads[pair.plain], "the text box's lead"));
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
 
-    const saved = JSON.parse(need(fake.readFile(medsFile), "her meds file")) as MedsFile;
-    const kept = texts.filter((_, i) => i !== table && i !== plain);
-    expect(saved.own.find((o) => o.target === card)?.pieces.map((p) => squash(textOf(p.doc)))).toEqual(kept);
-    expect(saved.own.filter((o) => o.target !== card)).toEqual(before.own.filter((o) => o.target !== card));
-    expect(saved.remove).toEqual(before.remove);
-    const shown = panelCard(page, t, card);
-    await shown.locator(".phc-h button").click();
-    // The card's body only: a box's text can start with the card's own title (her guide row does).
-    const body = shown.locator(".phc-b");
-    for (const k of leads.filter((_, i) => i !== table && i !== plain)) await expect(body).toContainText(k);
-    for (const gone of [leads[table], leads[plain]]) await expect(body).not.toContainText(gone ?? "");
+    await keptOnly(page, w, pair, before, pair.table);
+  });
+
+  test("in her own version of a card in two boxes, emptying the text box takes it away and the table box stays", async ({ page, context, baseURL }) => {
+    const pair = ownPair();
+    const before = readJson(join(ROOT, topicMedsPath(pair.t.g, pair.system, pair.t.id))) as MedsFile;
+    const w = await world(context, baseURL, { seed: true });
+    const slots = await editPair(page, pair);
+
+    // Select all of the text box and delete. It stays, blank, until she saves.
+    const words = slots.nth(pair.plain).locator('[contenteditable="true"]');
+    await words.locator("p").filter({ hasText: /\S/ }).first().click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.press("Delete");
+    await expect(words).toHaveText("");
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+
+    await keptOnly(page, w, pair, before, pair.plain);
   });
 });
 
