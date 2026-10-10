@@ -361,7 +361,7 @@
                },
                {
                 "type": "text",
-                "text": ": smoking cessation, depression, prevention of weight gain"
+                "text": ": smoking cessation, prevention of weight gain"
                }
               ]
              },
@@ -588,6 +588,35 @@
                 "text": "rare"
                }
               ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•minimal anticholinergic or CV effects"
+               }
+              ]
              }
             ]
            },
@@ -742,7 +771,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -754,7 +783,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -766,7 +800,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -778,19 +812,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: depression    -    smoking cessation    -    ADHD (off-label)"
+          "text": "-    Clin Use: smoking cessation"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -802,7 +841,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -814,7 +858,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -826,7 +870,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -838,7 +887,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -850,7 +899,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -858,18 +912,7 @@
           "text": "-    Note: activating (⍉ sexual dysfun, ⍉ weight gain)    -    t½ ~21 h"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -1596,412 +1639,6 @@
                 "text": "349"
                }
               ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          243,
-          220.5,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_WCAFB1EXFQ",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "FFFFFF"
-                  }
-                 }
-                ],
-                "text": "ANTIDEPRESSANTS"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "FFFFFF"
-                  }
-                 }
-                ],
-                "text": "MOA/Indications "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "FFFFFF"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "FFFFFF"
-                  }
-                 }
-                ],
-                "text": "Contraindications/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_V3R26K1477",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Bupropion"
-               },
-               {
-                "type": "text",
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•minimal anticholinergic or CV effects"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
              }
             ]
            }

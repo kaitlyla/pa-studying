@@ -384,6 +384,53 @@
                "shade": null,
                "borders": null,
                "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": several proposed mechanisms, may be related to lithium’s ability to inhibit excitatory NT (DA, NE) function &/or function of membrane-bound enzymes that activate second messengers (increased activity during mania)"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
               }
              },
              {
@@ -466,6 +513,143 @@
                {
                 "type": "text",
                 "text": ": SCr, electrolytes, TSH, weight, UPT, CBC, EKG"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Contraindications/Others:"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Onset of therapeutic effect"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•treating mania: 7-10d"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•improving depression: 6-8wks "
                }
               ]
              }
@@ -962,6 +1146,82 @@
                {
                 "type": "text",
                 "text": ")"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•chronic treatment: nephrogenic diabetes insipidus, hypothyroidism, weight gain, edema, chronic interstitial nephritis, minimal change glomerulopathy "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": GI (nausea, loose stools), polyuria, polydipsia, fine hand tremor, muscle weakness "
                }
               ]
              },
@@ -2605,6 +2865,53 @@
                "shade": null,
                "borders": null,
                "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": in addition to antiseizure effects, carbamazepine has anticholinergic, antineuralgic, antidiuretic, muscle relaxant, antimanic, antidepressive, and antiarrhythmic properties"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
               }
              },
              {
@@ -3744,6 +4051,985 @@
             ]
            }
           ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_YND517H37E",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "000000"
+                  }
+                 }
+                ],
+                "text": "Approach to treatment "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA/Indications:"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Mood stabilizers"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•lithium & anticonvulsants – valproate, lamotrigine, carbamazepine "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•treat both mania & depression w/o inducing either state"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Antipsychotics"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•indicated for mania w/ psychosis present "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Antidepressants"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•can induce manic episodes & cycling frequency; only used as adjunct therapy to a mood stabilizer"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Benzodiazepines:"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•anti-mania; adjunct agents for short-term use only "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_M4WCFY4T46",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Divalproex Sodium (Depakote)"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": enhances inhibitory actions of GABA "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "1:1 mixture of valproic acid/sodium valproate "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•long term – weight gain, fine hand tremor, PCOS, alopecia, hyperammonemia "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "•dose-related – thrombocytopenia, leukopenia "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_X2G3NH1GQV",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Lamotrigine"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "000000"
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": inhibits release of glutamate (an excitatory amino acid) and inhibits voltage-sensitive sodium channels, which stabilizes neuronal membranes"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": rash, dry mouth, itching, SJS/TEN, aseptic meningitis, DRESS"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
          }
         ]
        }
@@ -3855,7 +5141,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3867,7 +5153,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3879,7 +5170,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3891,7 +5182,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3903,7 +5199,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3915,7 +5211,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3927,7 +5228,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3939,7 +5240,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3951,7 +5257,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3963,7 +5269,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3975,7 +5286,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -3987,7 +5298,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -3999,7 +5315,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4011,7 +5327,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4023,7 +5344,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4035,7 +5356,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4047,7 +5373,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4059,7 +5385,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4071,7 +5402,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4083,7 +5414,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4095,7 +5431,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4107,7 +5443,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4145,7 +5486,7 @@
             "type": "bold"
            }
           ],
-          "text": "nticonvulsants: mood stabilizers, BD mono, anxiety, acute depression BD, acute mani, antipsych  "
+          "text": "nticonvulsants: mood stabilizers, BD mono, acute depression BD, acute mani, antipsych  "
          }
         ]
        },
@@ -4176,7 +5517,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4188,7 +5529,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4200,7 +5546,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4212,19 +5558,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: bipolar I maintenance (delays mood episodes; ⍉ acute mania)    -    sz adj"
+          "text": "-    Clin Use: bipolar I maintenance (delays mood episodes; ⍉ acute mania)"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4236,7 +5587,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4248,7 +5604,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4260,7 +5616,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4272,7 +5633,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4284,7 +5645,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4320,7 +5686,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4332,7 +5698,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4368,7 +5739,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4380,7 +5751,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4392,7 +5768,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4404,19 +5780,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: acute mania (bipolar)    -    sz    -    migraine ppx"
+          "text": "-    Clin Use: acute mania (bipolar)"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4428,7 +5809,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4440,7 +5826,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4452,19 +5838,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Monitoring: serum levels — mania 50-125 mcg/mL, epilepsy 50-100    -    LFTs prior + frequently (esp first 6 mo)    -    CBC/platelets (thrombocytopenia ↑ at ≥110 F / ≥135 M)"
+          "text": "-    Monitoring: serum levels — mania 50-125 mcg/mL    -    LFTs prior + frequently (esp first 6 mo)    -    CBC/platelets (thrombocytopenia ↑ at ≥110 F / ≥135 M)"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4476,7 +5867,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4512,7 +5908,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4524,7 +5920,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -4536,7 +5937,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -4548,26 +5949,20 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: bipolar (mania/maintenance)    -    sz    -    trigeminal neuralgia"
+          "text": "-    Clin Use: bipolar (mania/maintenance)"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -5300,47 +6695,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -7066,1755 +8421,6 @@
        }
       ]
      }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          243,
-          220.5,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_QH05RZYB0Z",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": "DRUGS FOR BIPOLAR "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA/Indications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ADRs"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Contraindications/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_YND517H37E",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": "Approach to treatment "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "Mood stabilizers"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•lithium & anticonvulsants – valproate, lamotrigine, carbamazepine "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•treat both mania & depression w/o inducing either state"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "Antipsychotics"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•indicated for mania w/ psychosis present "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "Antidepressants"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•can induce manic episodes & cycling frequency; only used as adjunct therapy to a mood stabilizer"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "Benzodiazepines:"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•anti-mania; adjunct agents for short-term use only "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          243,
-          220.5,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_QH05RZYB0Z",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": "DRUGS FOR BIPOLAR "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA/Indications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ADRs"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Contraindications/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_CB860NWA9N",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Lithium"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": several proposed mechanisms, may be related to lithium’s ability to inhibit excitatory NT (DA, NE) function &/or function of membrane-bound enzymes that activate second messengers (increased activity during mania)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": GI (nausea, loose stools), polyuria, polydipsia, fine hand tremor, muscle weakness "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•chronic treatment: nephrogenic diabetes insipidus, hypothyroidism, weight gain, edema, chronic interstitial nephritis, minimal change glomerulopathy "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Onset of therapeutic effect"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•treating mania: 7-10d"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•improving depression: 6-8wks "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_M4WCFY4T46",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Divalproex Sodium (Depakote)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": enhances inhibitory actions of GABA "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "1:1 mixture of valproic acid/sodium valproate "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•long term – weight gain, fine hand tremor, PCOS, alopecia, hyperammonemia "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•dose-related – thrombocytopenia, leukopenia "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_X2G3NH1GQV",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Lamotrigine"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": inhibits release of glutamate (an excitatory amino acid) and inhibits voltage-sensitive sodium channels, which stabilizes neuronal membranes"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": rash, dry mouth, itching, SJS/TEN, aseptic meningitis, DRESS"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_ET8NQ2FF9N",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Carbamazepine"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": " "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": in addition to antiseizure effects, carbamazepine has anticholinergic, antineuralgic, antidiuretic, muscle relaxant, antimanic, antidepressive, and antiarrhythmic properties"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
     }
    ]
   },
@@ -9723,7 +9329,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9735,7 +9341,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9747,7 +9358,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9759,7 +9370,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9795,7 +9411,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9807,7 +9423,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9819,7 +9440,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9831,7 +9452,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9843,7 +9469,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9855,7 +9481,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9867,7 +9498,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9879,7 +9510,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9891,7 +9527,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9903,7 +9539,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9915,7 +9556,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9927,7 +9568,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9939,7 +9585,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_9PY8AZ7NR5"
   },
   {
    "target": "c_YJ8ZNY90PE",
@@ -11566,39 +11213,6 @@
                "borders": null,
                "marker": null
               }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Other Indications"
-               },
-               {
-                "type": "text",
-                "text": ": ASD-associated irritability, treatment resistant MDD, Tourette disorder"
-               }
-              ]
              }
             ]
            },
@@ -12311,7 +11925,7 @@
                },
                {
                 "type": "text",
-                "text": ": acute agitation, tx resistant MDD"
+                "text": ": acute agitation"
                }
               ]
              },
@@ -12937,39 +12551,6 @@
                "borders": null,
                "marker": null
               }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Other Indications"
-               },
-               {
-                "type": "text",
-                "text": ": adjunct to ADs for MDD "
-               }
-              ]
              }
             ]
            },
@@ -14107,7 +13688,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14119,7 +13700,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14131,7 +13717,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14143,7 +13729,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14155,7 +13746,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14167,7 +13758,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14179,7 +13775,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14191,7 +13787,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14227,7 +13828,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14239,7 +13840,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14251,7 +13857,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14263,7 +13869,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14275,7 +13886,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14287,7 +13898,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14299,7 +13915,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14311,7 +13927,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14323,7 +13944,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14335,7 +13956,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14371,7 +13997,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14383,7 +14009,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14395,7 +14026,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14407,7 +14038,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14419,7 +14055,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14431,7 +14067,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14443,7 +14084,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14455,7 +14096,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14463,24 +14109,6 @@
           "text": "-    BBW: ↑mortality — elderly w dementia-related psychosis"
          }
         ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
        },
        {
         "type": "paragraph",
@@ -14509,7 +14137,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14521,7 +14149,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14533,7 +14166,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14545,7 +14178,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14557,7 +14195,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14569,7 +14207,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14581,7 +14224,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14593,7 +14236,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14605,7 +14253,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14617,7 +14265,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14629,7 +14282,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14641,7 +14294,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14677,7 +14335,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14689,7 +14347,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14701,7 +14364,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14713,7 +14376,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14725,7 +14393,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14737,7 +14405,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14749,7 +14422,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14761,7 +14434,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14773,7 +14451,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14785,7 +14463,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14797,7 +14480,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14809,7 +14492,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14845,7 +14533,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14857,7 +14545,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14869,7 +14562,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14881,7 +14574,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14893,7 +14591,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14905,7 +14603,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14917,7 +14620,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14929,7 +14632,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14965,7 +14673,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -14977,7 +14685,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -14989,7 +14702,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15001,19 +14714,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: psychotic dx · BD · adj MDD"
+          "text": "-    Clin Use: BD"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15025,7 +14743,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15037,7 +14760,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15049,7 +14772,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15061,7 +14789,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15073,7 +14801,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15085,7 +14818,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15097,7 +14830,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15133,7 +14871,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15145,31 +14883,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: schizophrenia · schizoaffective dx"
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
          }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
         },
         "content": [
          {
@@ -15181,7 +14900,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15193,7 +14912,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15205,7 +14929,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15217,7 +14941,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15229,7 +14958,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15241,7 +14970,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15277,7 +15011,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15289,7 +15023,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15301,7 +15040,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15313,19 +15052,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: schizophrenia · bipolar mania + depression · MDD adj"
+          "text": "-    Clin Use: bipolar mania + depression"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15337,7 +15081,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15349,7 +15098,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15361,7 +15110,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15373,7 +15127,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15385,7 +15139,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15397,7 +15156,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15409,7 +15168,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15445,7 +15209,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15457,7 +15221,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15469,7 +15238,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15481,19 +15250,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: schizophrenia · bipolar mania (mono + adj)"
+          "text": "-    Clin Use: bipolar mania (mono + adj)"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15505,7 +15279,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15517,7 +15296,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15529,7 +15308,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15541,7 +15325,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15553,7 +15337,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15589,7 +15378,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15601,7 +15390,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15613,7 +15407,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15625,19 +15419,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: schizophrenia · bipolar mania"
+          "text": "-    Clin Use: bipolar mania"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15649,7 +15448,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15661,7 +15465,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15673,7 +15477,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15685,7 +15494,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15697,7 +15506,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15709,7 +15523,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15721,7 +15535,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15757,7 +15576,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15769,7 +15588,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15781,7 +15605,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15793,19 +15617,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: schizophrenia · bipolar depression (mono/adj) · MDD adj"
+          "text": "-    Clin Use: bipolar depression (mono/adj)"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15817,7 +15646,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15829,7 +15663,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15841,7 +15675,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15853,7 +15692,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15865,7 +15704,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -15877,7 +15721,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -15889,7 +15733,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {

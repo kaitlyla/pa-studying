@@ -534,6 +534,53 @@
                "shade": null,
                "borders": null,
                "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Indications"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": alcohol withdrawal "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
               }
              },
              {
@@ -582,6 +629,85 @@
                {
                 "type": "text",
                 "text": ")"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "MOA/Indications:"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Physiologic Effects"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": anxiolytic, anticonvulsant, sedative, muscle relaxant "
                }
               ]
              }
@@ -982,6 +1108,53 @@
                "shade": null,
                "borders": null,
                "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": "Contraindications"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 8
+                  }
+                 }
+                ],
+                "text": ": severe respiratory insufficiency, severe liver disease, acute narrow-angle glaucoma, use in children <6mo, pregnancy/lactation"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
               }
              },
              {
@@ -1315,7 +1488,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1328,7 +1501,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1337,7 +1510,271 @@
         "content": [
          {
           "type": "text",
-          "text": "Adj chronic ASM tx                           -    EToH w.draw (see below)"
+          "text": "EToH w.draw (see below)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    MOA: (+) allosteric GABAa modulator -> ↑FREQUENCY of Cl- channel opening -> ↑Cl- influx -> hyperpolarization -> ↓action potential -> CNS depression    -    BBB -> CNS active    -    cross placenta/breast milk -> ⍉ preg    -    met CYP450 (3A4, 2C19)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Admin: Taper: 5-25% of dose q1-4wk tolerated    -    Ashton: ↓2 mg diazepam-equiv q1-2wk    -    switch to long-acting (diazepam)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    SE: sedation    -    confusion/irritability/cog impair    -    ataxia    -    dizziness    -    dep    -    w.draw (abrupt d/c ↑dose long-term -> confusion/anxiety/agitation, restlessness, insomnia, tension, sz)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Caution: ↑cog impair/delirium    -    ↑depression    -    CNS depressants (additive)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    CI: older (Beers list)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Pt ed: slow taper -> rebound anxiety, sz    -    1yr+ -> 2-4M taper    -    switch to long-acting benzo -> ↓w.draw risk & ↓daily dose    -    conjunction tx for immediate relief"
          }
         ]
        },
@@ -1368,7 +1805,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1381,384 +1818,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "AWS = chronic EtOH ↑GABA tol & ⍉glut during use"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "cessation → unopposed glut excitation → CNS mayhem"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Sx spectrum (progress if untx):"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Minor sx: HA   -   insomnia         -   tremulousness   -   mild anxiety "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "GI upset/anorexia   -   diaphoresis         -   palpitations"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Alcoholic hallucinations: visual -poss tactile/auditory"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "w.in 12–24 hr of stop       -     EtOH levels ⍉0 to start"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "aware of hallucinations   -    stable vitals"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": " tonic-clonic sz: 12-24hr of stop"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "assoc w chronic abuse     -     Poss status epilepticus "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "untx → Delirium Tremens"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 130.5,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Hallucination     -   disorientation   -   diaphoresis "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 130.5,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↑HR/↑BP/↑temp      -    agitation   "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1774,7 +1834,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1787,7 +1847,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1803,7 +1863,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1816,7 +1876,384 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AWS = chronic EtOH ↑GABA tol & ⍉glut during use"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "cessation → unopposed glut excitation → CNS mayhem"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Sx spectrum (progress if untx):"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Minor sx: HA   -   insomnia         -   tremulousness   -   mild anxiety "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "GI upset/anorexia   -   diaphoresis         -   palpitations"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Alcoholic hallucinations: visual -poss tactile/auditory"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "w.in 12–24 hr of stop       -     EtOH levels ⍉0 to start"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "aware of hallucinations   -    stable vitals"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": " tonic-clonic sz: 12-24hr of stop"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "assoc w chronic abuse     -     Poss status epilepticus "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "untx → Delirium Tremens"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 108,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "◦",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Hallucination     -   disorientation   -   diaphoresis "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 108,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "◦",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "↑HR/↑BP/↑temp      -    agitation   "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1832,7 +2269,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1845,7 +2282,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1861,7 +2298,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1874,7 +2311,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1890,7 +2327,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1903,7 +2340,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1919,7 +2356,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1932,7 +2369,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1948,7 +2385,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1961,7 +2398,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1977,7 +2414,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1990,7 +2427,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2030,7 +2467,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2043,7 +2480,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2071,7 +2508,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2084,7 +2521,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2148,7 +2585,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2161,7 +2598,139 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Admin: IM/IV for agitation"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Onset: rapid    -    duration: intermed    -    t½ ~12 h    -    inactive glucuronide metabolite"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    CI: closed-angle glaucoma"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2177,7 +2746,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2190,7 +2759,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2206,7 +2775,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2219,7 +2788,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2259,7 +2828,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2272,7 +2841,139 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Clin Use: EToH w.draw    -    agitation: acute"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Onset: rapid    -    duration: long    -    t½ up to 48 h + active metabolite N-desmethyldiazepam up to 100 h"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    CI: hepatic dx    -    sleep apnea    -    resp depression    -    myasthenia gravis (AI -> ⍉ acetylcholine @ musc)    -    infant/neonate    -    closed-angle glaucoma"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2288,7 +2989,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2301,7 +3002,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2317,7 +3018,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2330,7 +3031,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2370,7 +3071,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2383,7 +3084,139 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    MOA: benzo — GABAa PAM    -    long-acting (t½ 24-48 h, active metabolites)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Clin Use: EToH w.draw (prototype)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Caution: accum w long t½, esp elderly"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2423,7 +3256,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2436,7 +3269,95 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Clin Use: EToH w.draw    -    agitation: acute"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
+            }
+           }
+          ],
+          "text": "-    Onset: slow    -    duration: intermed    -    t½ ~8.2 h (5.7-10.9)    -    inactive glucuronide metabolite"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2452,7 +3373,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2465,7 +3386,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -2494,223 +3415,21 @@
          "shade": null,
          "borders": null,
          "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
         },
         "content": [
          {
           "type": "text",
           "marks": [
-           {
-            "type": "bold"
-           },
            {
             "type": "underline",
             "attrs": {
              "style": "single"
             }
-           }
-          ],
-          "text": "Benzodiazepines:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    MOA: (+) allosteric GABAa modulator -> ↑FREQUENCY of Cl- channel opening -> ↑Cl- influx -> hyperpolarization -> ↓action potential -> CNS depression    -    BBB -> CNS active    -    cross placenta/breast milk -> ⍉ preg    -    met CYP450 (3A4, 2C19)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Admin: Taper: 5-25% of dose q1-4wk tolerated    -    Ashton: ↓2 mg diazepam-equiv q1-2wk    -    switch to long-acting (diazepam)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    SE: sedation    -    confusion/irritability/cog impair    -    ataxia    -    dizziness    -    dep    -    w.draw (abrupt d/c ↑dose long-term -> confusion/anxiety/agitation, restlessness, insomnia, tension, sz)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Caution: ↑cog impair/delirium    -    ↑depression    -    CNS depressants (additive)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    CI: older (Beers list)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Pt ed: slow taper -> rebound anxiety, sz    -    1yr+ -> 2-4M taper    -    switch to long-acting benzo -> ↓w.draw risk & ↓daily dose    -    conjunction tx for immediate relief"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
+           },
            {
-            "type": "underline",
+            "type": "size",
             "attrs": {
-             "style": "single"
+             "pt": 8
             }
            }
           ],
@@ -2738,203 +3457,17 @@
         "content": [
          {
           "type": "text",
-          "text": "Oxazepam (Serax)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: ↓anxiety (↓dose)    -    EToH w.draw    -    agitation: acute"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Onset: slow    -    duration: intermed    -    t½ ~8.2 h (5.7-10.9)    -    inactive glucuronide metabolite"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Lorazepam (Ativan)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: panic dx    -    ↓anxiety (↓dose)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Admin: IM/IV for agitation"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Onset: rapid    -    duration: intermed    -    t½ ~12 h    -    inactive glucuronide metabolite"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    CI: closed-angle glaucoma"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
           "marks": [
            {
             "type": "underline",
             "attrs": {
              "style": "single"
+            }
+           },
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 8
             }
            }
           ],
@@ -2942,209 +3475,6 @@
          }
         ]
        },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Diazepam (Valium)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: panic dx    -    ↓anxiety (↓dose)    -    anticonvuls    -    musc relaxant (↑dose)    -    EToH w.draw    -    agitation: acute"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Onset: rapid    -    duration: long    -    t½ up to 48 h + active metabolite N-desmethyldiazepam up to 100 h"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    CI: hepatic dx    -    sleep apnea    -    resp depression    -    myasthenia gravis (AI -> ⍉ acetylcholine @ musc)    -    infant/neonate    -    closed-angle glaucoma"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Chlordiazepoxide (Librium)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    MOA: benzo — GABAa PAM    -    long-acting (t½ 24-48 h, active metabolites)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: EToH w.draw (prototype)    -    anxiety"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Caution: accum w long t½, esp elderly"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
        {
         "type": "table",
         "attrs": {
@@ -4870,519 +5200,6 @@
        }
       ]
      }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          243,
-          220.5,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_DRKPT3AK7N",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ANXIOLYTICS "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA/Indications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ADRs"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "0432FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Contraindications/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_54BVJ1E00P",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Physiologic Effects"
-               },
-               {
-                "type": "text",
-                "text": ": anxiolytic, anticonvulsant, sedative, muscle relaxant "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Indications"
-               },
-               {
-                "type": "text",
-                "text": ": anxiety, seizures, insomnia, alcohol withdrawal "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Contraindications"
-               },
-               {
-                "type": "text",
-                "text": ": severe respiratory insufficiency, severe liver disease, acute narrow-angle glaucoma, use in children <6mo, pregnancy/lactation"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
     }
    ]
   },
@@ -5394,312 +5211,6 @@
      "basePt": 8,
      "title": null,
      "file": "Med list_NSAIDs_Pain",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "Opioid Antagonists"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "↑opioid-r binding affinity"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 63,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Opioid-naive = no effect   -    opioid-exposed: precipitate w.draw Sx/S"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Naltrexone"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "maintenance version of naloxone"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "alcohol dep"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Admin: orally active                -    longer duration"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "AE: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "hepatotox"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
      "doc": {
       "type": "doc",
       "content": [
@@ -6120,11 +5631,307 @@
           ]
          }
         ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Opioid Antagonists"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "↑opioid-r binding affinity"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Opioid-naive = no effect   -    opioid-exposed: precipitate w.draw Sx/S"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Naltrexone"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "maintenance version of naloxone"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "alcohol dep"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin: orally active                -    longer duration"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AE: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "hepatotox"
+         }
+        ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_PSRCFABPQ3"
   },
   {
    "target": "c_1FA98GAQXX",
@@ -7031,7 +6838,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7043,7 +6850,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7055,7 +6867,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7067,7 +6879,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7103,7 +6920,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7115,7 +6932,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7127,7 +6949,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7139,7 +6961,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7151,7 +6978,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7163,7 +6990,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7175,7 +7007,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7187,7 +7019,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7199,7 +7036,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7211,7 +7048,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7223,7 +7065,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -7235,7 +7077,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -7247,7 +7094,251 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_4KENYB4EHT"
+  },
+  {
+   "target": "c_HRBA2EA6QF",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "GU and Hematopoietic Drugs Med Lists and LOs",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Folic Acid"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: water soluble, B-Complex vit "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use: Folic acid deficiency "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "Administration: Oral ->⍉tol -> dilute inj solution w SW for inj oral or parenteral"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Parenteral (IV, subcutaneous, deep IM) -> only if oral not feasible "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects:      -    Bad taste in mouth                   -    "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "CFE2F3"
+            }
+           }
+          ],
+          "text": "anorexia, nausea "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Monitoring:      -    CBC             -     Serum folate           -    Serum vitamin B12 "
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_0MNXX99TBB"
   }
  ],
  "gaps": [

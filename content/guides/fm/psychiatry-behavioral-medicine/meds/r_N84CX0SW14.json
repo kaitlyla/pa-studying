@@ -18,131 +18,6 @@
         "type": "table",
         "attrs": {
          "grid": [
-          102.6,
-          180.9,
-          277.15,
-          213.35
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_PHZFJJC59T",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 4,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "First Line: SSRIs/SNRIs ("
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "may require HIGHER doses vs depression, but must be started at LOWER doses to minimize short-term agitation"
-               },
-               {
-                "type": "text",
-                "text": ") "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "rows",
-     "basePt": 11,
-     "title": null,
-     "file": null,
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
           108,
           220.5,
           81,
@@ -440,80 +315,6 @@
                  }
                 ],
                 "text": "premature ejaculation"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "Fluoxetine"
-               },
-               {
-                "type": "text",
-                "text": ": PMDD, bulimia"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "Paroxetine"
-               },
-               {
-                "type": "text",
-                "text": ": vasomotor sxs of menopause"
                }
               ]
              }
@@ -895,6 +696,68 @@
             ]
            }
           ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_PHZFJJC59T",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 5,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "First Line: SSRIs/SNRIs ("
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "italic"
+                 }
+                ],
+                "text": "may require HIGHER doses vs depression, but must be started at LOWER doses to minimize short-term agitation"
+               },
+               {
+                "type": "text",
+                "text": ") "
+               }
+              ]
+             }
+            ]
+           }
+          ]
          }
         ]
        }
@@ -982,7 +845,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -994,7 +857,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1006,7 +874,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1018,7 +886,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1030,7 +903,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1042,7 +915,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1054,7 +932,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1066,7 +944,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1078,7 +961,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1090,7 +973,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1102,7 +990,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1114,7 +1002,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1126,7 +1019,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1138,7 +1031,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1174,7 +1072,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1186,7 +1084,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1198,7 +1101,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1210,19 +1113,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    SE: insomnia    -    anorexia    -    irritation/agitation (activating)"
+          "text": "-    SE: insomnia"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1234,7 +1142,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1270,7 +1183,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1282,7 +1195,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1294,7 +1212,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1306,7 +1224,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1318,7 +1241,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1330,7 +1253,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1366,7 +1294,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1378,7 +1306,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1390,7 +1323,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1402,7 +1335,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1438,7 +1376,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1450,19 +1388,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: depression    -    PMDD"
+          "text": "-    Clin Use: depression"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1474,7 +1417,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1486,7 +1434,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1498,7 +1446,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1534,7 +1487,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1546,7 +1499,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1558,7 +1516,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1570,7 +1528,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1606,7 +1569,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1618,7 +1581,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1630,7 +1598,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1642,7 +1610,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1650,18 +1623,7 @@
           "text": "-    SE: HA    -    sedation    -    weight gain"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -5364,18 +5326,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -6117,7 +6068,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6129,7 +6080,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6141,7 +6097,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6153,7 +6109,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6165,7 +6126,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6177,7 +6138,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6189,7 +6155,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6201,7 +6167,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6213,7 +6184,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6225,7 +6196,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6261,7 +6237,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6273,7 +6249,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6285,7 +6266,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6297,7 +6278,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6309,7 +6295,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6321,7 +6307,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6357,7 +6348,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6369,7 +6360,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6381,7 +6377,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6393,7 +6389,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6405,7 +6406,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6417,7 +6418,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6453,7 +6459,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6465,7 +6471,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6477,7 +6488,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6489,19 +6500,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: GAD (best anxiety)    -    DPNP, fibromyalgia, chronic MSK pain    -    depression"
+          "text": "-    Clin Use: depression"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6513,7 +6529,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6525,7 +6546,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6537,7 +6558,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6549,7 +6575,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6561,7 +6587,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6597,7 +6628,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6609,7 +6640,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6621,7 +6657,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6633,7 +6669,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6645,7 +6686,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6657,7 +6698,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -6958,77 +7004,6 @@
                {
                 "type": "text",
                 "text": ": inhibits 5HT reuptake, metabolite is 5HT2A antagonist"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Uses"
-               },
-               {
-                "type": "text",
-                "text": ": "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "0432FF"
-                  }
-                 }
-                ],
-                "text": "insomnia"
-               },
-               {
-                "type": "text",
-                "text": " 50-100mg QHS ("
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "not for depression at all"
-               },
-               {
-                "type": "text",
-                "text": ")"
                }
               ]
              }
@@ -8080,76 +8055,7 @@
                },
                {
                 "type": "text",
-                "text": ": smoking cessation, depression, prevention of weight gain"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 }
-                ],
-                "text": "Zyban:"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "7030A0"
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "0432FF"
-                  }
-                 }
-                ],
-                "text": "smoking cessation"
+                "text": ": depression"
                }
               ]
              }
@@ -8864,7 +8770,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8876,7 +8782,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -8888,7 +8799,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8900,19 +8811,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: depression    -    smoking cessation    -    ADHD (off-label)"
+          "text": "-    Clin Use: depression"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8924,7 +8840,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -8936,7 +8857,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8948,7 +8869,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -8960,7 +8886,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -8972,7 +8898,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9008,7 +8939,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9020,7 +8951,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9032,7 +8968,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9044,7 +8980,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9056,7 +8997,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9068,7 +9009,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9104,7 +9050,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9116,7 +9062,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9128,7 +9079,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9140,19 +9091,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Clin Use: depression    -    insomnia (off-label, 50-100 mg qHS)"
+          "text": "-    Clin Use: depression"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9164,7 +9120,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9200,7 +9161,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9212,7 +9173,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9224,7 +9190,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9236,7 +9202,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9248,7 +9219,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9260,7 +9231,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9296,7 +9272,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9308,7 +9284,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9320,7 +9301,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9332,7 +9313,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9344,7 +9330,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9356,7 +9342,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -9364,18 +9355,7 @@
           "text": "-    Caution: take w food (fasted AUC ↓~50%)    -    diarrhea, nausea    -    ⍉ w MAOI    -    t½ ~25 h"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -11428,41 +11408,6 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Note: Relative potency = mg ≈ fluoxetine 40 mg/day (Hayasaka 2015)    -    — = no published RCT equivalent"
-         }
-        ]
        },
        {
         "type": "paragraph",
@@ -11484,24 +11429,7 @@
         "content": [
          {
           "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 5
-            }
-           }
-          ],
-          "text": "—------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------—------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+          "text": "Note: Relative potency = mg ≈ fluoxetine 40 mg/day (Hayasaka 2015)    -    — = no published RCT equivalent"
          }
         ]
        }
