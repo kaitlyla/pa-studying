@@ -371,54 +371,6 @@
                 "text": " (nasal, oral)"
                }
               ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "PO: "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "rizatriptan, eletriptan, almotriptan"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": " "
-               }
-              ]
              }
             ]
            },
@@ -500,89 +452,6 @@
                {
                 "type": "text",
                 "text": "& block pain pathways in the brainstem "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Indications"
-               },
-               {
-                "type": "text",
-                "text": ": "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "942093"
-                  }
-                 }
-                ],
-                "text": "mod-severe migraines"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "942093"
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "text": "or "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "942093"
-                  }
-                 }
-                ],
-                "text": "no response to analgesics in mild dz"
-               },
-               {
-                "type": "text",
-                "text": "; can be combined w/ analgesics "
                }
               ]
              }
@@ -793,7 +662,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -806,16 +675,54 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Caution: "
+         },
+         {
+          "type": "text",
           "marks": [
            {
-            "type": "size",
+            "type": "shade",
             "attrs": {
-             "pt": 7.5
+             "hex": "F4CCCC"
             }
            }
           ],
+          "text": "SSRIs -5-HT syndrome -↓risk"
+         },
+         {
+          "type": "text",
+          "text": " "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -837,7 +744,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -850,16 +757,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -971,7 +871,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -984,7 +884,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1040,7 +940,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1053,44 +953,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Clin Use: acute/abortive migraine"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1106,7 +969,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1119,16 +982,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1150,7 +1006,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1163,16 +1019,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1194,7 +1043,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1207,16 +1056,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1256,7 +1098,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1269,61 +1111,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Caution: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "SSRIs -5-HT syndrome -↓risk"
-         },
-         {
-          "type": "text",
-          "text": " "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
           "tabPt": 18
          }
         },
@@ -1375,7 +1165,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1388,16 +1178,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1437,7 +1220,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1450,7 +1233,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1508,7 +1291,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1521,16 +1304,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -1629,58 +1405,6 @@
           "rule": "auto",
           "value": 1
          },
-         "align": "center",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "no head-to-head trials"
-         },
-         {
-          "type": "text",
-          "text": "       **"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "sumatriptan-naproxen combo > either alone"
-         },
-         {
-          "type": "text",
-          "text": "**"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
          "align": "left",
          "shade": null,
          "borders": null,
@@ -1704,7 +1428,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1717,7 +1441,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1734,7 +1458,7 @@
             }
            }
           ],
-          "text": "SQ (faster onset), IN, PO; ± naproxen (best-studied combo)"
+          "text": "SQ (faster onset), IN, PO"
          }
         ]
        },
@@ -1773,7 +1497,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1786,7 +1510,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -1810,7 +1534,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_CE2V7HHGS8"
   },
   {
    "target": "c_41WBD0ATKS",
@@ -1823,6 +1548,794 @@
      "doc": {
       "type": "doc",
       "content": [
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          108,
+          243,
+          220.5,
+          202.5
+         ],
+         "indentPt": -27.25,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          }
+         },
+         "cellMarginPt": {
+          "top": 0,
+          "right": 5.4,
+          "bottom": 0,
+          "left": 5.4
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_QH05RZYB0Z",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "9437FF",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "000000"
+                  }
+                 }
+                ],
+                "text": "DRUGS FOR BIPOLAR "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "9437FF",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "MOA/Indications"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "9437FF",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "ADRs"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "9437FF",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "Contraindications/Other"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_CB860NWA9N",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Lithium"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "text": ": several proposed mechanisms, may be related to lithium’s ability to inhibit excitatory NT (DA, NE) function &/or function of membrane-bound enzymes that activate second messengers (increased activity during mania)"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "text": ": GI (nausea, loose stools), polyuria, polydipsia, fine hand tremor, muscle weakness "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•chronic treatment: nephrogenic diabetes insipidus, hypothyroidism, weight gain, edema, chronic interstitial nephritis, minimal change glomerulopathy "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Boxed Warning"
+               },
+               {
+                "type": "text",
+                "text": ": serum lithium levels should be monitored to avoid toxicity "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_M4WCFY4T46",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Divalproex Sodium (Depakote)"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "text": ": enhances inhibitory actions of GABA "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "1:1 mixture of valproic acid/sodium valproate "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•MC – GI disturbances, sedation, drowsiness, lethargy "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•long term – weight gain, fine hand tremor, PCOS, alopecia, hyperammonemia "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•dose-related – thrombocytopenia, leukopenia "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•rare, serious – hepatotoxicity, pancreatitis "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "F2F2F2",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Contraindications"
+               },
+               {
+                "type": "text",
+                "text": ": hepatic dysfunction, 1"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "vertAlign",
+                  "attrs": {
+                   "value": "sup"
+                  }
+                 }
+                ],
+                "text": "st"
+               },
+               {
+                "type": "text",
+                "text": " TM pregnancy "
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
        {
         "type": "paragraph",
         "attrs": {
@@ -1920,7 +2433,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1932,7 +2445,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -1944,7 +2462,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -1956,55 +2474,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: bipolar — acute mania & maintenance"
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
          }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Onset: some antimanic after 1wk -> full effect 1.5-3 wk"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
         },
         "content": [
          {
@@ -2016,7 +2491,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2028,7 +2503,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2040,7 +2520,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2052,7 +2532,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2064,7 +2549,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2076,7 +2561,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2088,7 +2578,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2100,7 +2590,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2112,7 +2607,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2124,7 +2619,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2136,7 +2636,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2148,7 +2648,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2160,7 +2665,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2172,19 +2677,24 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "-    Pt ed: 60-80% effective    -    = salt (maintain sodium)    -    ⍉ dehydrate    -    adherence therapy"
+          "text": "-    Pt ed: = salt (maintain sodium)    -    ⍉ dehydrate    -    adherence therapy"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2196,7 +2706,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2234,7 +2749,7 @@
             "type": "bold"
            }
           ],
-          "text": "nticonvulsants: mood stabilizers, BD mono, anxiety, acute depression BD, acute mani, antipsych  "
+          "text": "nticonvulsants  "
          }
         ]
        },
@@ -2265,7 +2780,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2277,7 +2792,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2313,7 +2833,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2325,7 +2845,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2337,7 +2862,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2349,31 +2874,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: acute mania (bipolar)    -    sz    -    migraine ppx"
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
          }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
         },
         "content": [
          {
@@ -2385,7 +2891,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2397,7 +2903,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2409,7 +2920,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2421,7 +2932,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2457,7 +2973,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2469,7 +2985,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
@@ -2481,7 +3002,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -2493,31 +3014,12 @@
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "-    Clin Use: partial-onset + primary gen tonic-clonic sz — mono (≥2 y), adj (partial, PGTC, Lennox-Gastaut)    -    migraine prevention (≥12 y)"
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
          }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
         },
         "content": [
          {
@@ -2525,18 +3027,7 @@
           "text": "-    Caution: met acidosis (baseline + periodic bicarbonate)    -    acute myopia + 2ndry angle-closure glaucoma    -    oligohidrosis/hyperthermia (peds)    -    kidney stones"
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -3269,18 +3760,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -4676,956 +5156,6 @@
        }
       ]
      }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "Behavioral Health Med List and LOs (6)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Note: Relative potency: — = no standard equivalence scale"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 5
-            }
-           }
-          ],
-          "text": "—------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------—------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          108,
-          243,
-          220.5,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_QH05RZYB0Z",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "000000"
-                  }
-                 }
-                ],
-                "text": "DRUGS FOR BIPOLAR "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA/Indications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "ADRs"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "9437FF",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Contraindications/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_CB860NWA9N",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Lithium"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": several proposed mechanisms, may be related to lithium’s ability to inhibit excitatory NT (DA, NE) function &/or function of membrane-bound enzymes that activate second messengers (increased activity during mania)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ": GI (nausea, loose stools), polyuria, polydipsia, fine hand tremor, muscle weakness "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•chronic treatment: nephrogenic diabetes insipidus, hypothyroidism, weight gain, edema, chronic interstitial nephritis, minimal change glomerulopathy "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "D9D9D9",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Boxed Warning"
-               },
-               {
-                "type": "text",
-                "text": ": serum lithium levels should be monitored to avoid toxicity "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Onset of therapeutic effect"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•treating mania: 7-10d"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•improving depression: 6-8wks "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_M4WCFY4T46",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": "Divalproex Sodium (Depakote)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "MOA"
-               },
-               {
-                "type": "text",
-                "text": ": enhances inhibitory actions of GABA "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "1:1 mixture of valproic acid/sodium valproate "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "ADRs"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•MC – GI disturbances, sedation, drowsiness, lethargy "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•long term – weight gain, fine hand tremor, PCOS, alopecia, hyperammonemia "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•dose-related – thrombocytopenia, leukopenia "
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•rare, serious – hepatotoxicity, pancreatitis "
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Contraindications"
-               },
-               {
-                "type": "text",
-                "text": ": hepatic dysfunction, 1"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "vertAlign",
-                  "attrs": {
-                   "value": "sup"
-                  }
-                 }
-                ],
-                "text": "st"
-               },
-               {
-                "type": "text",
-                "text": " TM pregnancy "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
     }
    ]
   },
@@ -5720,7 +5250,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5729,14 +5259,14 @@
         "content": [
          {
           "type": "text",
-          "text": "Intracellular Ca ↑ in ischemia -> ↑ enzymes that worsen ischemia"
+          "text": "AA respond better "
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 67.5,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -5749,7 +5279,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5758,7 +5288,123 @@
         "content": [
          {
           "type": "text",
-          "text": "CCB protect tissues via block Ca into cell (via relaxing smooth muscle to get blood)"
+          "text": "Bind L-type Ca voltage channel -> block -> ↓ Ca into cell -> ↓ contractility "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "In ♡, coronary, peripheral vasc -> smooth muscle relax "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Slight diuretic effect: Intrinsic naturietic  effect -> ⍉ need diuretic "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Vasodilate "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration:  oral"
          }
         ]
        },
@@ -5836,7 +5482,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5865,7 +5511,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5923,7 +5569,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5952,7 +5598,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5981,7 +5627,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -5991,371 +5637,6 @@
          {
           "type": "text",
           "text": "Liver function "
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "Calcium Channel Blockers (CCBs)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: AA respond better "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Bind L-type Ca voltage channel -> block -> ↓ Ca into cell -> ↓ contractility "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "In ♡, coronary, peripheral vasc -> smooth muscle relax "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Slight diuretic effect: Intrinsic naturietic  effect -> ⍉ need diuretic "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Vasodilate "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clinical Use:"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↓ afterload: dilate coronary/peripheral a"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "↓ systemic vascular resistance"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "HTN"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Protective against stoke "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration:  oral"
          }
         ]
        },
@@ -6398,7 +5679,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6411,7 +5692,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6427,7 +5708,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6440,7 +5721,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6456,7 +5737,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6485,7 +5766,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6498,138 +5779,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "Angina"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "SVT"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 72,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Afib"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: IV"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6645,7 +5795,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6674,7 +5824,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6703,7 +5853,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6718,14 +5868,7 @@
          "marker": {
           "text": "–",
           "font": null,
-          "marks": [
-           {
-            "type": "highlight",
-            "attrs": {
-             "hex": "FFFF00"
-            }
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -6747,7 +5890,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6760,7 +5903,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6776,7 +5919,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6817,7 +5960,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6846,7 +5989,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 72,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6859,13 +6002,9 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "–",
+          "text": "●",
           "font": null,
-          "marks": [
-           {
-            "type": "bold"
-           }
-          ],
+          "marks": [],
           "tabPt": 18
          }
         },
@@ -6884,7 +6023,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 108,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6897,7 +6036,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6913,7 +6052,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 108,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6926,7 +6065,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "•",
+          "text": "–",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -6942,7 +6081,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 144,
+         "indLeft": 81,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -6970,201 +6109,9 @@
        }
       ]
      }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "cardio med list 1 (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "•",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           },
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "Calcium Channel Blockers"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54.000000000000014,
-         "indRight": 0,
-         "indFirst": -17.99999999999997,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 17.99999999999997
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "Efficacy (depend on dx): BP, HR, improve angina or arrhythmia "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54.000000000000014,
-         "indRight": 0,
-         "indFirst": -17.99999999999997,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 17.99999999999997
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "ECG monitoring"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54.000000000000014,
-         "indRight": 0,
-         "indFirst": -17.99999999999997,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "–",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "tabPt": 17.99999999999997
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7
-            }
-           }
-          ],
-          "text": "Most agents: liver function; periodically"
-         }
-        ]
-       }
-      ]
-     }
     }
-   ]
+   ],
+   "gap": "g_KTE33M1K47"
   },
   {
    "target": "c_CSF60KE111",
@@ -7174,1044 +6121,6 @@
      "basePt": 8,
      "title": null,
      "file": "GI LOs and Med List (1)",
-     "doc": {
-      "type": "doc",
-      "content": [
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "Glucocorticoids"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "MOA: anti-inflam via multi actions on several types of leukocytes "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
-         "offsetPt": 158.25
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "d46563fe62d4cddb68bf12b17e11d8e7.png",
-           "widthPt": 129.75,
-           "heightPt": 93.12795275590551,
-           "rot": 0,
-           "flipH": false,
-           "flipV": false
-          }
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Many"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Administration: PO, IV, rectal"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Take w food"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Adverse Effects: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "FFF2CC"
-            }
-           }
-          ],
-          "text": "Hyperglycemia  "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "                             "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "insomnia "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "Death on sudden w/draw"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "Acute adrenal insuff if ⍉tapper "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "↑bone catabolism or antagonize vit D driven Ca absorb"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": " Stim gastric acid & pepsin prod -> take w food"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 54,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "Cushing Syndrome Effects (w +2Wk usage)"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "puffy/round/moon face         -     Hirsutism"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "size",
-            "attrs": {
-             "pt": 7.5
-            }
-           }
-          ],
-          "text": "Musc wasting/weakening      -    ↑weight"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 27,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "BBW: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "F4CCCC"
-            }
-           }
-          ],
-          "text": "TAPPER"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "Prednisone: MC "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Admin: IV for critically ill, PO, rectal"
-         }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
-         "offsetPt": 0
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "b28a48315dfbdf906f051d53d6521f26.png",
-           "widthPt": 129.6,
-           "heightPt": 126,
-           "rot": 0,
-           "flipH": false,
-           "flipV": false
-          }
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        }
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 8,
-     "title": null,
-     "file": "pharm review",
      "doc": {
       "type": "doc",
       "content": [
@@ -8835,144 +6744,6 @@
                "shade": null,
                "borders": null,
                "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "Clinical uses of glucocorticoids"
-               },
-               {
-                "type": "text",
-                "text": ":"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•Replacement therapy: adrenal insufficiency (Addison's disease) and congenital adrenal hyperplasia (defects in enzymes for steroid hormone synthesis)"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•Dexamethasone suppression test (DST): diagnosis of Cushing’s syndrome"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•Treatment of chronic inflammatory diseases:  RA, ulcerative colitis, asthma, SLE, eye and skin inflammation"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•Treatment of allergic reactions: drug, serum, and transfusion reactions"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "text": "•Immunosuppression: prevention of graft rejection after transplantation"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
               }
              },
              {
@@ -9119,11 +6890,597 @@
           ]
          }
         ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Glucocorticoids"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Clin Use:"
+         }
+        ]
+       },
+       {
+        "type": "anchored",
+        "attrs": {
+         "offsetPt": 158.25
+        },
+        "content": [
+         {
+          "type": "image_block",
+          "attrs": {
+           "asset": "d46563fe62d4cddb68bf12b17e11d8e7.png",
+           "widthPt": 129.75,
+           "heightPt": 93.12795275590551,
+           "rot": 0,
+           "flipH": false,
+           "flipV": false
+          }
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Many"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: PO, IV, rectal"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Take w food"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse Effects: "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "Death on sudden w/draw"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "Acute adrenal insuff if ⍉tapper "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "↑bone catabolism or antagonize vit D driven Ca absorb"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": " Stim gastric acid & pepsin prod -> take w food"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "Cushing Syndrome Effects (w +2Wk usage)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "puffy/round/moon face         -     Hirsutism"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 81,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "•",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "Musc wasting/weakening      -    ↑weight"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "BBW: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "TAPPER"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Prednisone: MC "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin: IV for critically ill, PO, rectal"
+         }
+        ]
+       },
+       {
+        "type": "anchored",
+        "attrs": {
+         "offsetPt": 0
+        },
+        "content": [
+         {
+          "type": "image_block",
+          "attrs": {
+           "asset": "b28a48315dfbdf906f051d53d6521f26.png",
+           "widthPt": 129.6,
+           "heightPt": 126,
+           "rot": 0,
+           "flipH": false,
+           "flipV": false
+          }
+         }
+        ]
        }
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_3QS003X7ED"
   },
   {
    "target": "c_FFJJ3XMRKF",
@@ -9177,7 +7534,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9190,236 +7547,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "MOA: "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "C9DAF8"
-            }
-           }
-          ],
-          "text": "bind CGRP ligand"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Clin Use: "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 108,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "migraine prophylaxis"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "Admin:"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "  long "
-         },
-         {
-          "type": "text",
-          "text": "1/2"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": "life"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
-          "font": null,
-          "marks": [],
-          "tabPt": 18
-         }
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": "AE"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           }
-          ],
-          "text": ": "
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "000000"
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "D9EAD3"
-            }
-           }
-          ],
-          "text": "inj-site rxn; hypersensitivity"
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 36,
-         "indRight": 0,
-         "indFirst": -18,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9475,7 +7603,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9488,7 +7616,178 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "MOA: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "bind CGRP ligand"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin:"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "  long "
+         },
+         {
+          "type": "text",
+          "text": "1/2"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "life"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AE"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": ": "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "inj-site rxn; hypersensitivity"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9591,7 +7890,7 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 36,
+         "indLeft": 27,
          "indRight": 0,
          "indFirst": -18,
          "spaceBefore": 0,
@@ -9604,7 +7903,7 @@
          "shade": null,
          "borders": null,
          "marker": {
-          "text": "-",
+          "text": "●",
           "font": null,
           "marks": [],
           "tabPt": 18
@@ -9620,7 +7919,2006 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_JMHGNPA1Z3"
+  },
+  {
+   "target": "c_MVK2JVY2RY",
+   "pieces": [
+    {
+     "kind": "rows",
+     "basePt": 11,
+     "title": null,
+     "file": null,
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          63,
+          153,
+          261,
+          297
+         ],
+         "indentPt": -27.25,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          }
+         },
+         "cellMarginPt": {
+          "top": 0,
+          "right": 5.4,
+          "bottom": 0,
+          "left": 5.4
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_MZWS2VC38T",
+           "kind": "heading",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "PHARM"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "Drugs"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "About"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "ADRs/Contraindications"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_9EZR06YCFJ",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "Ergotamines "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": {
+              "right": {
+               "style": "single",
+               "widthPt": 0.5,
+               "color": "000000"
+              }
+             }
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Ergotamine"
+               },
+               {
+                "type": "text",
+                "text": " (oral)"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Dihydroergotamine"
+               },
+               {
+                "type": "text",
+                "text": " (IM, IV, SQ, intranasal)"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": {
+              "left": {
+               "style": "single",
+               "widthPt": 0.5,
+               "color": "000000"
+              }
+             }
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "text": ": "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "009193"
+                  }
+                 }
+                ],
+                "text": "serotonin (5HT-1b/d) agonists cause vasoconstriction"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "009193"
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "text": "& block pain pathways in the brainstem "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Indications"
+               },
+               {
+                "type": "text",
+                "text": ": "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "942093"
+                  }
+                 }
+                ],
+                "text": "reserved use"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "942093"
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "text": "d/t ADRs and contraindications "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "ADRs"
+               },
+               {
+                "type": "text",
+                "text": ": "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "ED7D31"
+                  }
+                 }
+                ],
+                "text": "rebound HA"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "Contraindications"
+               },
+               {
+                "type": "text",
+                "text": ": "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "FF0000"
+                  }
+                 }
+                ],
+                "text": "CAD, HTN, cerebrovascular or peripheral arterial disease"
+               },
+               {
+                "type": "text",
+                "text": ", hepatic or renal disease, migraines w/ prolonged aura "
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "Med list_NSAIDs_Pain",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Ergotamine alkaloids (class"
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": ")"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "MOA:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7.5
+            }
+           }
+          ],
+          "text": "α-adrenergic & DA-r activity → N/V, periph vasoconstrict"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Similar structure to 5-HT"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "CIs:  HTN   -   vasc dz   -   Hx stroke    -   MAO-i     -   Triptans     -    PAD"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "ergots = absolute CI in preg (hypertonic uterine contractions, vasospasm → fetal harm)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           }
+          ],
+          "text": "Ergotamine:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin:  SL/PO/rectal"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "combo w caffeine & analgesics       -  most effective early"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AE: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "rebound HA → daily & "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "wkly "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "000000"
+            }
+           },
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "dose limits"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Dihydroergotamine (DHE 45)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "less bioavail"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin: IV, IM, SQ, IN"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "AE: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "D9EAD3"
+            }
+           }
+          ],
+          "text": "less than ergotamine"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_H68VPCDWTG"
+  },
+  {
+   "target": "c_BN2NE4V4S9",
+   "pieces": [
+    {
+     "kind": "rows",
+     "basePt": 11,
+     "title": null,
+     "file": null,
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          72,
+          434.9,
+          267.1
+         ],
+         "indentPt": -27.25,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "000000"
+          }
+         },
+         "cellMarginPt": {
+          "top": 0,
+          "right": 5.4,
+          "bottom": 0,
+          "left": 5.4
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_ANP5SB41W6",
+           "kind": "heading",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "PHARM"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "About"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "FFC68A",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 }
+                ],
+                "text": "ADRs"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_RB2MKD3NQT",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Valproic Acid"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "4472C4"
+                  }
+                 }
+                ],
+                "text": "Divalproex Sodium"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "MOA"
+               },
+               {
+                "type": "text",
+                "text": ": (1) "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "009193"
+                  }
+                 }
+                ],
+                "text": "↑ GABA’s effects"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "009193"
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "text": "(↑ CNS inhibition) (2) inhibits glutamate/NMDA receptor-mediated neuronal excitation "
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": "D9D9D9",
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "•"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "ED7D31"
+                  }
+                 }
+                ],
+                "text": "pancreatitis, hepatotoxicity"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "color",
+                  "attrs": {
+                   "hex": "ED7D31"
+                  }
+                 }
+                ],
+                "text": " "
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "underline",
+                  "attrs": {
+                   "style": "single"
+                  }
+                 }
+                ],
+                "text": "CI/Caution"
+               },
+               {
+                "type": "text",
+                "text": ": hepatic disorders "
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "kind": "notes",
+     "basePt": 7.5,
+     "title": null,
+     "file": "Epilepsy_and_Neurodegen Dz_ med list",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           }
+          ],
+          "text": "Valproic Acid (Depakene, Stavzor)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "size",
+            "attrs": {
+             "pt": 7
+            }
+           }
+          ],
+          "text": "MOA: Multi-mech → ↑brain [GABA] + poss Na channel + blocks Ca channel (T-type)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "italic"
+           }
+          ],
+          "text": "Divalproex sodium (Depakote, Depakote ER or DR) contains sodium valproate and valproic acid in a 1:1 compound. Valproic acid, sodium valproate, and divalproex share the same pharmacology; however, there are pharmacokinetic diff among products."
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Admin: PO, IV"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Adverse: Sedation    -    "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "↑weight"
+         },
+         {
+          "type": "text",
+          "text": "    -    "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": "↓hair"
+         },
+         {
+          "type": "text",
+          "text": "    -    N/V    -   "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "C9DAF8"
+            }
+           }
+          ],
+          "text": " thrombocytopenia"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Contraindication:  "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "E69138"
+            }
+           }
+          ],
+          "text": "⍉preg → major congenital malform + neurodevelop impair"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Drug interaction: "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "shade",
+            "attrs": {
+             "hex": "F4CCCC"
+            }
+           }
+          ],
+          "text": "CYP INHIBITOR → "
+         },
+         {
+          "type": "text",
+          "text": "↑[serum of other drugs] (warfarin "
+         },
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "italic"
+           }
+          ],
+          "text": "supratx"
+         },
+         {
+          "type": "text",
+          "text": "). "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 54,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Opposite effect to inducers"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Monitoring: Drug levels       -    hepatic fxn        -    platelets"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_WKWZDXZGAM"
   }
  ],
  "gaps": [],
