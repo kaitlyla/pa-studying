@@ -174,18 +174,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 10,
-     "title": null,
-     "file": "Antibiotic Flower Charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -366,6 +355,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-positive"
                }
               ]
@@ -432,6 +429,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-negative"
                }
               ]
@@ -648,6 +653,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Piperacillin/"
@@ -674,6 +685,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "tazobactam"
@@ -713,12 +730,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -726,6 +757,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecalis"
@@ -752,6 +789,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -778,6 +821,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Strep pyogenes"
@@ -804,12 +853,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MSSA)"
                }
               ]
@@ -847,6 +910,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Serratia"
@@ -873,12 +942,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Klebsiella"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -886,6 +969,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "pneumoniae"
@@ -912,6 +1001,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "E. coli"
@@ -938,12 +1033,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Proteus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -951,6 +1060,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "mirabilis"
@@ -977,6 +1092,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "H. influenzae"
@@ -1003,6 +1124,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterobacter spp"
@@ -1029,6 +1156,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Pseudomonas"
@@ -1068,12 +1201,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -1081,12 +1228,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecium "
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "(VRE)"
                }
               ]
@@ -1111,12 +1272,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MRSA)"
                }
               ]
@@ -1154,12 +1329,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Bacteroides"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -1167,6 +1356,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "fragilis"
@@ -1182,7 +1377,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_DB1EJEGGC9"
   },
   {
    "target": "c_VXA8SDW8G2",
@@ -1353,18 +1549,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 10,
-     "title": null,
-     "file": "Antibiotic Flower Charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -1514,6 +1699,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "GRAM POSITIVE"
@@ -1538,6 +1729,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "GRAM NEGATIVE"
@@ -1604,6 +1801,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "3"
@@ -1619,6 +1822,12 @@
                   "attrs": {
                    "value": "sup"
                   }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "rd"
@@ -1628,6 +1837,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": " Generation Cephalosporins"
@@ -1684,18 +1899,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 10,
-     "title": null,
-     "file": "Antibiotic Flower Charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -1876,6 +2080,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-positive"
                }
               ]
@@ -1942,6 +2154,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-negative"
                }
               ]
@@ -2158,6 +2378,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Ceftriaxone"
@@ -2184,6 +2410,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Cefotaxime"
@@ -2223,6 +2455,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -2249,6 +2487,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Strep pyogenes"
@@ -2275,12 +2519,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MSSA)"
                }
               ]
@@ -2318,12 +2576,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Klebsiella"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -2331,6 +2603,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "pneumoniae"
@@ -2357,6 +2635,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "E. coli"
@@ -2383,12 +2667,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Proteus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -2396,6 +2694,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "mirabilis"
@@ -2422,6 +2726,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "H. influenzae"
@@ -2448,6 +2758,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterobacter spp"
@@ -2487,12 +2803,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Bacteroides"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -2500,6 +2830,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "fragilis"
@@ -2526,6 +2862,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Pseudomonas"
@@ -2552,12 +2894,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -2565,12 +2921,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecium "
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "(VRE)"
                }
               ]
@@ -2595,12 +2965,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -2608,6 +2992,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecalis"
@@ -2634,12 +3024,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MRSA)"
                }
               ]
@@ -2677,6 +3081,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Serratia"
@@ -2692,7 +3102,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_KH66V09DMH"
   },
   {
    "target": "c_8XW495JD17",
@@ -2950,18 +3361,33 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 11,
-     "title": "Fluoroquinolone",
-     "file": "Abx flow charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           }
+          ],
+          "text": "Fluoroquinolone"
+         }
+        ]
+       },
        {
         "type": "table",
         "attrs": {
@@ -3066,18 +3492,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 10,
-     "title": null,
-     "file": "Antibiotic Flower Charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -3258,6 +3673,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-positive"
                }
               ]
@@ -3324,6 +3747,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-negative"
                }
               ]
@@ -3540,6 +3971,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Levofloxacin"
@@ -3579,6 +4016,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -3605,6 +4048,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Strep pyogenes"
@@ -3631,12 +4080,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MSSA)"
                }
               ]
@@ -3674,6 +4137,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Serratia"
@@ -3700,12 +4169,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Klebsiella"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -3713,6 +4196,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "pneumoniae"
@@ -3739,6 +4228,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "E. coli"
@@ -3765,12 +4260,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Proteus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -3778,6 +4287,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "mirabilis"
@@ -3804,6 +4319,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterobacter spp"
@@ -3830,6 +4351,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Pseudomonas"
@@ -3869,12 +4396,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Bacteroides"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -3882,6 +4423,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "fragilis"
@@ -3908,12 +4455,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -3921,12 +4482,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecium "
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "(VRE)"
                }
               ]
@@ -3951,12 +4526,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -3964,6 +4553,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecalis"
@@ -3990,12 +4585,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MRSA)"
                }
               ]
@@ -4033,6 +4642,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Haemophilus influenzae"
@@ -4129,6 +4744,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Ciprofloxacin"
@@ -4168,12 +4789,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MSSA)"
                }
               ]
@@ -4211,6 +4846,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Serratia"
@@ -4237,12 +4878,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Klebsiella"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -4250,6 +4905,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "pneumoniae"
@@ -4276,6 +4937,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "E. coli"
@@ -4302,12 +4969,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Proteus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -4315,6 +4996,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "mirabilis"
@@ -4341,6 +5028,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterobacter spp"
@@ -4367,6 +5060,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Pseudomonas"
@@ -4406,12 +5105,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Bacteroides"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -4419,6 +5132,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "fragilis"
@@ -4445,12 +5164,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -4458,12 +5191,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecium "
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "(VRE)"
                }
               ]
@@ -4488,12 +5235,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -4501,6 +5262,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecalis"
@@ -4527,6 +5294,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -4553,6 +5326,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Strep pyogenes"
@@ -4579,12 +5358,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MRSA)"
                }
               ]
@@ -4622,6 +5415,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Haemophilus influenzae"
@@ -4637,7 +5436,8 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_7ZBTYWB1K3"
   },
   {
    "target": "c_YC3SWRW6Z9",
@@ -4895,18 +5695,7 @@
           ]
          }
         ]
-       }
-      ]
-     }
-    },
-    {
-     "kind": "notes",
-     "basePt": 10,
-     "title": null,
-     "file": "Antibiotic Flower Charts",
-     "doc": {
-      "type": "doc",
-      "content": [
+       },
        {
         "type": "table",
         "attrs": {
@@ -5087,6 +5876,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-positive"
                }
               ]
@@ -5153,6 +5950,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "Gram-negative"
                }
               ]
@@ -5369,6 +6174,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Imipenem"
@@ -5395,6 +6206,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Meropenem"
@@ -5421,6 +6238,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Doripenem"
@@ -5460,12 +6283,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -5473,6 +6310,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecalis"
@@ -5499,6 +6342,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -5525,6 +6374,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Strep pyogenes"
@@ -5551,12 +6406,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MSSA)"
                }
               ]
@@ -5594,12 +6463,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Klebsiella"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -5607,6 +6490,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "pneumoniae"
@@ -5633,6 +6522,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "E. coli"
@@ -5659,12 +6554,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Proteus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -5672,6 +6581,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "mirabilis"
@@ -5698,6 +6613,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "H. influenzae"
@@ -5724,6 +6645,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterobacter spp"
@@ -5750,12 +6677,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Bacteroides"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -5763,6 +6704,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "fragilis"
@@ -5789,6 +6736,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Pseudomonas"
@@ -5828,12 +6781,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Enterococcus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " "
                },
                {
@@ -5841,12 +6808,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "faecium "
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": "(VRE)"
                }
               ]
@@ -5871,12 +6852,26 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Staph aureus"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
                 "text": " (MRSA)"
                }
               ]
@@ -5914,6 +6909,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
                  }
                 ],
                 "text": "Serratia"
@@ -5929,7 +6930,1353 @@
       ]
      }
     }
-   ]
+   ],
+   "gap": "g_4VYARJ6KPA"
+  },
+  {
+   "target": "c_YSYYSQ9VG4",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           }
+          ],
+          "text": "Metronidazole"
+         }
+        ]
+       },
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          576
+         ],
+         "indentPt": 0,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 1,
+           "color": "000000"
+          }
+         },
+         "cellMarginPt": {
+          "top": 5,
+          "right": 5,
+          "bottom": 5,
+          "left": 5
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_MP2F8219T4",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": {
+                "rule": "auto",
+                "value": 1
+               },
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "image",
+                "attrs": {
+                 "asset": "7fe2f5f21d406788fee882524e997f97.png",
+                 "widthPt": 250.87503937007875,
+                 "heightPt": 164.17031496062992,
+                 "rot": 0,
+                 "flipH": false,
+                 "flipV": false
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table",
+        "attrs": {
+         "grid": [
+          34,
+          110,
+          150,
+          150,
+          150,
+          126
+         ],
+         "indentPt": 0,
+         "borders": {
+          "top": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          },
+          "right": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          },
+          "bottom": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          },
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          },
+          "insideH": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          },
+          "insideV": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "1F3864"
+          }
+         },
+         "cellMarginPt": {
+          "top": 2,
+          "right": 4,
+          "bottom": 2,
+          "left": 4
+         }
+        },
+        "content": [
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_2XHEVDS2RK",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": true,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "Slide"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "Antibiotic"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Gram-positive"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "(left side): inside the petals"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Gram-negative"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "(right side): inside the petals"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "Outside the petals"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "Unclear on slide (name runs over a petal's edge)"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "table_row",
+          "attrs": {
+           "id": "r_9KTKZT7GTP",
+           "kind": "content",
+           "minHeightPt": null,
+           "repeatHeader": false,
+           "cantSplit": false
+          },
+          "content": [
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 9
+                  }
+                 }
+                ],
+                "text": "25"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Metronidazole"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 3,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              }
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Serratia"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Klebsiella"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "pneumoniae"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "E. coli"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Proteus"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "mirabilis"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Haemophilus influenzae"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Enterobacter spp"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Pseudomonas"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Enterococcus"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "faecium "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "(VRE)"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Enterococcus"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "faecalis"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "S. pneumoniae"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Strep pyogenes"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Staph aureus"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " (MSSA)"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Staph aureus"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " (MRSA)"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "table_cell",
+            "attrs": {
+             "colspan": 1,
+             "rowspan": 1,
+             "colwidth": null,
+             "fill": null,
+             "vAlign": "top",
+             "borders": null
+            },
+            "content": [
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "Bacteroides"
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": " "
+               },
+               {
+                "type": "text",
+                "marks": [
+                 {
+                  "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 10
+                  }
+                 }
+                ],
+                "text": "fragilis"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_54BW7HHBKB"
   }
  ],
  "gaps": [],
