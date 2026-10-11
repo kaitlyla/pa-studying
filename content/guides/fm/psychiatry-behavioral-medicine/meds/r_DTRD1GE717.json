@@ -3047,7 +3047,11 @@
    "gap": "g_F8GK1F95XP"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_YW2PQTN96Z",
+  "g_TYXXC0AV08",
+  "g_02C9VAM96A"
+ ],
  "roles": [
   {
    "target": "c_D2AJWCXW8B",
@@ -3075,6 +3079,19 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/opioid-use-disorder/opioid-use-disorder"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "prevention: take-home naloxone (no prescription needed in the US)",
+     "note": "friends or family can rescue an apneic pt",
+     "sources": [
+      {
+       "name": "Opioid Toxicity and Withdrawal",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/opioid-use-disorder/opioid-toxicity-and-withdrawal"
       }
      ]
     }
@@ -3170,6 +3187,66 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_YW2PQTN96Z",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "lofexidine",
+     "note": "w.draw Sx; abrupt opioid discontinuation",
+     "sources": [
+      {
+       "name": "LUCEMYRA (lofexidine) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0a848cc2-4dda-40d9-8b01-d789fe8981ed"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TYXXC0AV08",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "clonidine, acetaminophen, loperamide",
+     "note": "w.draw Sx; only w an offer of maintenance tx",
+     "sources": [
+      {
+       "name": "Opioid Use Disorder",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/opioid-use-disorder/opioid-use-disorder"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_02C9VAM96A",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "extended-release buprenorphine injection (Sublocade, Brixadi)",
+     "note": "after a transmucosal buprenorphine start or already on buprenorphine",
+     "sources": [
+      {
+       "name": "SUBLOCADE (buprenorphine extended-release) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6189fb21-9432-45f8-8481-0bfaf3ccde95"
+      },
+      {
+       "name": "BRIXADI (buprenorphine) extended-release injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5d8a8fd0-8619-422a-a664-d1d2e8970f48"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -3177,7 +3254,8 @@
    "title": "Opioids",
    "members": [
     "c_WSHAWG4JTZ",
-    "c_7VZ1NNQY04"
+    "c_7VZ1NNQY04",
+    "g_02C9VAM96A"
    ]
   }
  ]

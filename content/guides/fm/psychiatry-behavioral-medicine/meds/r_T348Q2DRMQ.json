@@ -5241,7 +5241,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_JSTE4Z0R4G",
+  "g_9CH1FT174N"
+ ],
  "roles": [
   {
    "target": "c_J969V94V29",
@@ -5352,6 +5355,42 @@
        "org": "Hematology Reports",
        "year": "2018",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6297863/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JSTE4Z0R4G",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "stop the causative drug; rapid cooling; aggressive airway, fluid and BP management",
+     "note": "supportive care",
+     "sources": [
+      {
+       "name": "Neuroleptic Malignant Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/heat-illness/neuroleptic-malignant-syndrome"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9CH1FT174N",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bromocriptine",
+     "note": "DA agonist; w dantrolene for rigidity",
+     "sources": [
+      {
+       "name": "Neuroleptic Malignant Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/heat-illness/neuroleptic-malignant-syndrome"
       }
      ]
     }

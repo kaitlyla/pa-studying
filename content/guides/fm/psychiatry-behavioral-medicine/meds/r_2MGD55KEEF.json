@@ -15817,7 +15817,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "acute mania: quetiapine, asenapine, aripiprazole, paliperidone or cariprazine",
+     "drugs": "acute mania: quetiapine, asenapine, aripiprazole or cariprazine",
      "note": "lithium takes 4 to 10 days, so a faster drug = often added",
      "sources": [
       {
@@ -15856,7 +15856,7 @@
     },
     {
      "role": "alt",
-     "drugs": "other SGAs (risperidone, olanzapine, ziprasidone, lumateperone)",
+     "drugs": "other SGAs (risperidone, olanzapine, ziprasidone)",
      "note": "on MSD's list of bipolar meds, ⍉its first-line lists",
      "sources": [
       {
@@ -15877,6 +15877,32 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/mood-disorders/bipolar-disorders"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "bipolar I or II depression: lumateperone (alone or + lithium or valproate)",
+     "note": "FDA-approved for bipolar depression",
+     "sources": [
+      {
+       "name": "CAPLYTA (lumateperone) capsule",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=db730b06-6351-47fd-8183-e61e61bbead5"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "paliperidone",
+     "note": "off-label: FDA-approved for schizophrenia and schizoaffective dx, ⍉bipolar",
+     "sources": [
+      {
+       "name": "INVEGA (paliperidone) extended-release tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7b8e5b26-b9e4-4704-921b-3c3c0d159916"
       }
      ]
     }

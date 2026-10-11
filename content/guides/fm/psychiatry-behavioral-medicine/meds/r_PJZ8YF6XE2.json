@@ -1,0 +1,92 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_9BVX4Q47BG",
+  "g_WZD9YMTR7P",
+  "g_DA0D9X45BN",
+  "g_ERVMKYFSME"
+ ],
+ "roles": [
+  {
+   "target": "g_9BVX4Q47BG",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone IM + doxycycline + metronidazole",
+     "note": "CDC regimen for adolescent and adult female survivors",
+     "sources": [
+      {
+       "name": "Sexually Transmitted Infections Treatment Guidelines, 2021 (MMWR Recomm Rep 2021;70(4))",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WZD9YMTR7P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "emergency contraception: levonorgestrel, ulipristal or copper IUD",
+     "note": "reproductive-aged female survivors",
+     "sources": [
+      {
+       "name": "Sexually Transmitted Infections Treatment Guidelines, 2021 (MMWR Recomm Rep 2021;70(4))",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      },
+      {
+       "name": "Postcoital Contraception",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559157/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DA0D9X45BN",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "HIV nPEP: bictegravir/emtricitabine/TAF or dolutegravir-based regimen",
+     "note": "when indicated; ≤ 72 h after exposure",
+     "sources": [
+      {
+       "name": "Updated Guidelines for Antiretroviral Postexposure Prophylaxis After Sexual, Injection Drug Use, or Other Nonoccupational Exposure to HIV, 2025 (MMWR Recomm Rep)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12064164/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ERVMKYFSME",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: hepatitis B vaccine (+ HBIG if assailant HBsAg+); HPV vaccine (9–26 y)",
+     "note": "unvaccinated or incompletely vaccinated survivors",
+     "sources": [
+      {
+       "name": "Sexually Transmitted Infections Treatment Guidelines, 2021 (MMWR Recomm Rep 2021;70(4))",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

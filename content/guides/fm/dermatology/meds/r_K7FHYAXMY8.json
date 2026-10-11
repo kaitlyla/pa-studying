@@ -2338,7 +2338,10 @@
  "gaps": [
   "g_VTZN0AYWZP",
   "g_N52HQS7E6Y",
-  "g_3EM5C3QRNB"
+  "g_3EM5C3QRNB",
+  "g_T6XGQMM804",
+  "g_9RY863CTX4",
+  "g_Q7EWGGH7BK"
  ],
  "roles": [
   {
@@ -2402,13 +2405,19 @@
     {
      "role": "adjunct",
      "drugs": "Triple antibiotic ointment (bacitracin, neomycin, polymyxin B)",
-     "note": null,
+     "note": "bacitracin and neomycin are both common contact allergens",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
        "year": "",
        "url": null
+      },
+      {
+       "name": "Contact Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/contact-dermatitis"
       }
      ]
     }
@@ -2481,6 +2490,79 @@
        "org": "American Family Physician (AAFP)",
        "year": "2012",
        "url": "https://www.aafp.org/afp/2012/0101/p25"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_T6XGQMM804",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Superficial burns: OTC pain medicine or topical analgesics",
+     "note": null,
+     "sources": [
+      {
+       "name": "Thermal Burns",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430773/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "Superficial burns: topical aloe vera",
+     "note": null,
+     "sources": [
+      {
+       "name": "Thermal Burns",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430773/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9RY863CTX4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Smoke inhalation with suspected cyanide poisoning: hydroxocobalamin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Inhalation Injury",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK513261/"
+      },
+      {
+       "name": "Cyanide Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507796/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q7EWGGH7BK",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Large burns (> 20% TBSA): IV fluid resuscitation by the Parkland formula; smoke inhalation: 100% oxygen",
+     "note": null,
+     "sources": [
+      {
+       "name": "Burns",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/burns/burns"
       }
      ]
     }

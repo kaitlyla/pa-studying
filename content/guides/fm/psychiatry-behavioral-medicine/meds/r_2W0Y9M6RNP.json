@@ -13591,7 +13591,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_PQZ98J34BE",
+  "g_N36VBBCNHX"
+ ],
  "roles": [
   {
    "target": "c_ZYVKFVRFDH",
@@ -13672,6 +13675,48 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/anxiety-and-trauma-and-stressor-related-disorders/social-anxiety-disorder"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PQZ98J34BE",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "pregabalin or gabapentin",
+     "note": "off-label",
+     "sources": [
+      {
+       "name": "Pregabalin",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470341/"
+      },
+      {
+       "name": "Gabapentin",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493228/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N36VBBCNHX",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "phenelzine (MAOI)",
+     "note": "refractory",
+     "sources": [
+      {
+       "name": "Phenelzine",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554508/"
       }
      ]
     }

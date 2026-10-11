@@ -7153,13 +7153,15 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_6J492ZYJWD"
+ ],
  "roles": [
   {
    "target": "c_J969V94V29",
    "roles": [
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "benzodiazepine (eg, lorazepam, diazepam)",
      "note": "may help severe anxiety (hallucinogens); can be used for agitation and seizures (ketamine, PCP); a quiet, calming environment USU suffices",
      "sources": [
@@ -7174,6 +7176,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/ketamine-and-phencyclidine-pcp"
+      },
+      {
+       "name": "Phencyclidine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507865/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6J492ZYJWD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "external cooling; IV fluids",
+     "note": "hyperthermia; PCP rhabdomyolysis",
+     "sources": [
+      {
+       "name": "Hallucinogens",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/hallucinogens"
+      },
+      {
+       "name": "Phencyclidine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507865/"
+      },
+      {
+       "name": "Rhabdomyolysis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/"
       }
      ]
     }

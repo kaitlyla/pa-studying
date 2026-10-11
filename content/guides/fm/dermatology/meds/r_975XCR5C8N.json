@@ -4920,7 +4920,9 @@
   "g_T95ZP764EQ",
   "g_46SJ5VD96J",
   "g_ZMX7C84GJ0",
-  "g_0RRMDFP37Z"
+  "g_0RRMDFP37Z",
+  "g_P8F5D8KREJ",
+  "g_1NMQXJDY3J"
  ],
  "roles": [
   {
@@ -5207,7 +5209,7 @@
     {
      "role": "adjunct",
      "drugs": "Women: antiandrogens (finasteride)",
-     "note": null,
+     "note": "contraindicated in women who are or may become preg",
      "sources": [
       {
        "name": "Hidradenitis Suppurativa: Rapid Evidence Review. Am Fam Physician",
@@ -5220,6 +5222,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/acne-and-related-disorders/hidradenitis-suppurativa"
+      },
+      {
+       "name": "PROPECIA (finasteride) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2022",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6f904709-65aa-44ce-b144-b4c8a0416e36"
       }
      ]
     }
@@ -5292,6 +5300,42 @@
        "org": "American Family Physician (AAFP)",
        "year": "2019",
        "url": "https://www.aafp.org/afp/2019/1101/p562"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P8F5D8KREJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "All patients: weight loss and smoking cessation counseling and support",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hidradenitis Suppurativa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534867/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1NMQXJDY3J",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Pain: topical lidocaine, NSAIDs, acetaminophen; gabapentin or pregabalin, SNRIs (duloxetine) by pain type",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hidradenitis Suppurativa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534867/"
       }
      ]
     }

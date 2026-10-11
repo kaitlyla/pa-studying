@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_ESWGKRBW2T",
+  "g_V52QVY27RV",
+  "g_XA8RT8SJHZ",
+  "g_SGRYDGJ7S4"
+ ],
+ "roles": [
+  {
+   "target": "g_ESWGKRBW2T",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "benzodiazepine (lorazepam, diazepam, midazolam)",
+     "note": "seizures",
+     "sources": [
+      {
+       "name": "Caffeine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK532910/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_V52QVY27RV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "esmolol or metoprolol",
+     "note": "Tachy",
+     "sources": [
+      {
+       "name": "Caffeine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK532910/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XA8RT8SJHZ",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "activated charcoal",
+     "note": "recent ingestion",
+     "sources": [
+      {
+       "name": "Caffeine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK532910/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "hemodialysis",
+     "note": "severe, life-threatening ingestion",
+     "sources": [
+      {
+       "name": "Caffeine Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK532910/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SGRYDGJ7S4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "withdrawal: gradual caffeine taper; simple analgesics",
+     "note": "HA",
+     "sources": [
+      {
+       "name": "Caffeine Withdrawal",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430790/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1653,7 +1653,8 @@
   }
  ],
  "gaps": [
-  "g_BR6Y31G3K8"
+  "g_BR6Y31G3K8",
+  "g_7065DV5KKG"
  ],
  "roles": [
   {
@@ -1684,6 +1685,19 @@
        "url": "https://www.msdmanuals.com/professional/special-subjects/tobacco-use/smoking-cessation"
       }
      ]
+    },
+    {
+     "role": "alt",
+     "drugs": "varenicline + nicotine replacement",
+     "note": "Combo",
+     "sources": [
+      {
+       "name": "Smoking Cessation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/tobacco-use/smoking-cessation"
+      }
+     ]
     }
    ]
   },
@@ -1703,6 +1717,33 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_7065DV5KKG",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "nortriptyline",
+     "note": "off-label",
+     "sources": [
+      {
+       "name": "Nortriptyline",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482214/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antidepressants",
+   "members": [
+    "c_C1XJCQJP92",
+    "g_7065DV5KKG"
    ]
   }
  ]

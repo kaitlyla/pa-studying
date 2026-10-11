@@ -3500,7 +3500,9 @@
   "g_AQZP0HHWCW",
   "g_G1MMVRQQCW",
   "g_FKHSBM44RV",
-  "g_N71DYYV4N7"
+  "g_N71DYYV4N7",
+  "g_JMZGWEX1PV",
+  "g_TCAEZSS2EA"
  ],
  "roles": [
   {
@@ -3553,19 +3555,6 @@
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/seborrheic-dermatitis"
       },
-      {
-       "name": "Your guide table under this diagnosis",
-       "org": "",
-       "year": "",
-       "url": null
-      }
-     ]
-    },
-    {
-     "role": "alt",
-     "drugs": "Severe or resistant: oral ketoconazole",
-     "note": null,
-     "sources": [
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
@@ -3727,6 +3716,42 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JMZGWEX1PV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Topical nonsteroid: roflumilast 0.3% foam (≥9 y)",
+     "note": null,
+     "sources": [
+      {
+       "name": "ZORYVE (roflumilast) foam",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f9e0b4a9-a227-4947-b00c-41fb18d16589"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TCAEZSS2EA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Infant cradle cap (mild): mineral oil to loosen scale, gentle combing",
+     "note": null,
+     "sources": [
+      {
+       "name": "Seborrheic Dermatitis",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/0800/seborrheic-dermatitis"
       }
      ]
     }

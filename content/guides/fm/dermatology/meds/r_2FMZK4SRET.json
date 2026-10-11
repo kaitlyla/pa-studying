@@ -4336,7 +4336,11 @@
    "gap": "g_9CEFEXFWNK"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_YGPJCCWMPB",
+  "g_NSQ8DKAVNM",
+  "g_RVNGE1V7NW"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -4344,7 +4348,7 @@
     {
      "role": "1st",
      "drugs": "Significant systemic involvement: systemic glucocorticoids (prednisone, methylprednisolone)",
-     "note": null,
+     "note": "taper slowly: flare-ups and relapses occur mainly during steroid tapering",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -4357,6 +4361,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/hypersensitivity-and-inflammatory-skin-disorders/drug-eruptions-and-reactions"
+      },
+      {
+       "name": "EAACI position paper on drug reaction with eosinophilia and systemic symptoms (DRESS) in children (Pediatr Allergy Immunol, 2025)",
+       "org": "Pediatric Allergy and Immunology (PMC12210004)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12210004/"
       }
      ]
     }
@@ -4384,6 +4394,69 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_YGPJCCWMPB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Mild DRESS: supportive care plus topical corticosteroids",
+     "note": null,
+     "sources": [
+      {
+       "name": "EAACI position paper on drug reaction with eosinophilia and systemic symptoms (DRESS) in children (Pediatr Allergy Immunol, 2025)",
+       "org": "Pediatric Allergy and Immunology (PMC12210004)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12210004/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NSQ8DKAVNM",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Severe, steroid-refractory or steroid-dependent DRESS: cyclosporine",
+     "note": null,
+     "sources": [
+      {
+       "name": "EAACI position paper on drug reaction with eosinophilia and systemic symptoms (DRESS) in children (Pediatr Allergy Immunol, 2025)",
+       "org": "Pediatric Allergy and Immunology (PMC12210004)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12210004/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RVNGE1V7NW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "All patients: stop the culprit and suspected drugs promptly; avoid empiric antibiotics, analgesics and other nonessential drugs",
+     "note": null,
+     "sources": [
+      {
+       "name": "EAACI position paper on drug reaction with eosinophilia and systemic symptoms (DRESS) in children (Pediatr Allergy Immunol, 2025)",
+       "org": "Pediatric Allergy and Immunology (PMC12210004)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12210004/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Corticosteroids",
+   "members": [
+    "c_CSF60KE111",
+    "g_YGPJCCWMPB"
    ]
   }
  ]

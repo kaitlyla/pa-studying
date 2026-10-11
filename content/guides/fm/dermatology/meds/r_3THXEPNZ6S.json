@@ -15308,7 +15308,9 @@
    "gap": "g_JNH8T36DP8"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_917DQXKYN5"
+ ],
  "roles": [
   {
    "target": "c_58MCDAZQHM",
@@ -15459,6 +15461,19 @@
        "url": null
       }
      ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Penicillin allergy: ceftriaxone or cefazolin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erysipelas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/erysipelas"
+      }
+     ]
     }
    ]
   },
@@ -15500,6 +15515,19 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Penicillin allergy: cefazolin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erysipelas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/erysipelas"
       }
      ]
     }
@@ -15644,6 +15672,24 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_917DQXKYN5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Recurrence prevention: treat fungal foot infection (entry site)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erysipelas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/erysipelas"
       }
      ]
     }

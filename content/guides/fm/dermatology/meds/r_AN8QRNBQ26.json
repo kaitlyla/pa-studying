@@ -4689,7 +4689,8 @@
  ],
  "gaps": [
   "g_QPDQ5EK7F5",
-  "g_WFBYGSC7MB"
+  "g_WFBYGSC7MB",
+  "g_9M475W96HZ"
  ],
  "roles": [
   {
@@ -4867,6 +4868,19 @@
        "url": null
       }
      ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Acute HAE attacks: oral sebetralstat (≥12 y)",
+     "note": null,
+     "sources": [
+      {
+       "name": "EKTERLY (sebetralstat) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1d145e2f-8e7e-2e90-e063-6294a90a4449"
+      }
+     ]
     }
    ]
   },
@@ -4883,6 +4897,61 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/angioedema"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9M475W96HZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "HAE long-term prophylaxis: lanadelumab, berotralstat, C1 inhibitor (SC or IV), garadacimab or donidalorsen",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hereditary Angioedema",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482266/"
+      },
+      {
+       "name": "ANDEMBRY (garadacimab) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=07b0b671-db81-49f0-a402-0c0219db7fa2"
+      },
+      {
+       "name": "DAWNZERA (donidalorsen) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3ff501e0-f75f-07da-e063-6294a90a0cb7"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "HAE long-term prophylaxis, limited use: androgens (toxicity), tranexamic acid (low efficacy)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hereditary Angioedema",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482266/"
+      },
+      {
+       "name": "ANDEMBRY (garadacimab) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=07b0b671-db81-49f0-a402-0c0219db7fa2"
+      },
+      {
+       "name": "DAWNZERA (donidalorsen) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3ff501e0-f75f-07da-e063-6294a90a0cb7"
       }
      ]
     }

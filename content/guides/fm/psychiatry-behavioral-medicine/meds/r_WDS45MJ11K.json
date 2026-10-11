@@ -37672,7 +37672,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_KTRB0FYS9M",
+  "g_CEB0AJZYTT",
+  "g_C1H12QX70B"
+ ],
  "roles": [
   {
    "target": "c_ZYVKFVRFDH",
@@ -37723,6 +37727,19 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/mood-disorders/depressive-disorders"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "dextromethorphan-bupropion (Auvelity)",
+     "note": "FDA-approved for MDD in adults",
+     "sources": [
+      {
+       "name": "AUVELITY (dextromethorphan-bupropion) extended-release tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dcefda7c-9a68-278e-e053-2995a90aec79"
       }
      ]
     }
@@ -37825,6 +37842,66 @@
        "org": "Your notes",
        "year": "2026",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KTRB0FYS9M",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "esketamine nasal spray",
+     "note": "TRD, alone or w an oral antidepressant; REMS, CIII",
+     "sources": [
+      {
+       "name": "SPRAVATO (esketamine) nasal spray",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d81a6a79-a74a-44b7-822c-0dfa3036eaed"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CEB0AJZYTT",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "postpartum depression: zuranolone",
+     "note": "FDA-approved for PPD",
+     "sources": [
+      {
+       "name": "ZURZUVAE (zuranolone) capsule",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f18e53b0-d0bb-422d-8de7-ab64b7292b29"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_C1H12QX70B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "lithium or triiodothyronine (T3) augmentation",
+     "note": "Inadeq response to an antidepressant",
+     "sources": [
+      {
+       "name": "Lithium",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519062/"
+      },
+      {
+       "name": "Korean Medication Algorithm Project for Depressive Disorder 2025: comparison with other guidelines (Clin Psychopharmacol Neurosci, 2026)",
+       "org": "Clinical Psychopharmacology and Neuroscience (PMC12854112)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12854112/"
       }
      ]
     }

@@ -1168,7 +1168,11 @@
    "gap": "g_TAKKFHMTBG"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_888NK7BVNF",
+  "g_PV4NVDB2PE",
+  "g_DMEGT4YAPB"
+ ],
  "roles": [
   {
    "target": "c_1FA98GAQXX",
@@ -1176,13 +1180,85 @@
     {
      "role": "adjunct",
      "drugs": "haloperidol",
-     "note": "intoxication, if severe aggression (your table; MSD names ⍉antipsychotic)",
+     "note": "intoxication, if severe aggression (your table; MSD names ⍉antipsychotic); use Epi w caution (sensitized myocardium)",
      "sources": [
       {
        "name": "Your FM guide table, Inhalants: \"Intoxication: APs (Haloperidol) if severe aggression\" (kept by your Oct 9, 2026 answer)",
        "org": "Your notes",
        "year": "2026",
        "url": null
+      },
+      {
+       "name": "The Clinical Assessment and Treatment of Inhalant Abuse (Perm J, 2023)",
+       "org": "The Permanente Journal (PMC10266853)",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10266853/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_888NK7BVNF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "methylene blue",
+     "note": "nitrite methemoglobinemia",
+     "sources": [
+      {
+       "name": "Volatile Solvents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/volatile-solvents"
+      },
+      {
+       "name": "Methemoglobinemia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537317/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PV4NVDB2PE",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "esmolol",
+     "note": "ventricular dysrhythmias after huffing, even pulseless; use Epi w caution",
+     "sources": [
+      {
+       "name": "Volatile Solvents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/volatile-solvents"
+      },
+      {
+       "name": "The Clinical Assessment and Treatment of Inhalant Abuse (Perm J, 2023)",
+       "org": "The Permanente Journal (PMC10266853)",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10266853/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DMEGT4YAPB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "correct metabolic acidosis and electrolytes (potassium)",
+     "note": "toluene",
+     "sources": [
+      {
+       "name": "Toluene Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599523/"
       }
      ]
     }

@@ -11746,7 +11746,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_1EPEZQ0ANY",
+  "g_6B8JJXYWS5"
+ ],
  "roles": [
   {
    "target": "c_YJ8ZNY90PE",
@@ -11907,6 +11910,42 @@
        "org": "Your notes",
        "year": "2026",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1EPEZQ0ANY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "xanomeline-trospium (Cobenfy)",
+     "note": "muscarinic; ⍉an antipsychotic class drug",
+     "sources": [
+      {
+       "name": "COBENFY (xanomeline and trospium chloride) capsule",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8f0e73bf-6025-44f6-ab64-0983322de0df"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6B8JJXYWS5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "metformin",
+     "note": "antipsychotic-induced wt gain; after lifestyle measures",
+     "sources": [
+      {
+       "name": "Metformin for the management and prevention of antipsychotic-induced weight gain (Med Int (Lond), 2026)",
+       "org": "Medicine International (PMC13077268)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13077268/"
       }
      ]
     }

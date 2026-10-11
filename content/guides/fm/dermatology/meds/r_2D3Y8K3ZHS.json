@@ -7524,7 +7524,11 @@
   }
  ],
  "gaps": [
-  "g_2TWMMC832E"
+  "g_2TWMMC832E",
+  "g_XTJ6H2QN66",
+  "g_2P4GXATWQ1",
+  "g_EJVK1AHXE2",
+  "g_G5Q8JJFAYR"
  ],
  "roles": [
   {
@@ -7789,6 +7793,103 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XTJ6H2QN66",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Prevention: varicella vaccine, 2 doses (healthy children, susceptible adults)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chickenpox",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/chickenpox"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Postexposure: varicella vaccine within 5 days of exposure",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chickenpox",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/chickenpox"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2P4GXATWQ1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Prevention: recombinant zoster vaccine, 2 doses (adults ≥50 y; ≥19 y if immunodeficient or immunosuppressed)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Herpes Zoster",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-zoster"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EJVK1AHXE2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Supportive: acetaminophen for chickenpox fever (no aspirin, Reye syndrome); systemic analgesics for zoster pain",
+     "note": null,
+     "sources": [
+      {
+       "name": "Varicella-Zoster Virus (Chickenpox)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448191/"
+      },
+      {
+       "name": "Herpes Zoster",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-zoster"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G5Q8JJFAYR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Chickenpox itch: oral antihistamines, colloidal oatmeal baths, calamine lotion, wet compresses",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chickenpox",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/chickenpox"
+      },
+      {
+       "name": "Varicella-Zoster Virus (Chickenpox)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448191/"
       }
      ]
     }

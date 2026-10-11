@@ -6991,7 +6991,9 @@
   }
  ],
  "gaps": [
-  "g_BZ7GSGTM9Y"
+  "g_BZ7GSGTM9Y",
+  "g_KXQXDY7W5B",
+  "g_7F712YZN7N"
  ],
  "roles": [
   {
@@ -7020,6 +7022,54 @@
      "drugs": "cyproheptadine",
      "note": "Sx persist despite supportive care; low-quality evidence",
      "sources": [
+      {
+       "name": "Serotonin Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/heat-illness/serotonin-syndrome"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KXQXDY7W5B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "stop all serotonergic drugs; IV fluids, oxygen, cooling, cardiac monitoring",
+     "note": "supportive care",
+     "sources": [
+      {
+       "name": "Serotonin Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/heat-illness/serotonin-syndrome"
+      },
+      {
+       "name": "Serotonin Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482377/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7F712YZN7N",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sedation, intubation and neuromuscular blockade (ICU)",
+     "note": "severe: temp ≥ 41.1 °C",
+     "sources": [
+      {
+       "name": "Serotonin Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482377/"
+      },
       {
        "name": "Serotonin Syndrome",
        "org": "MSD Manual Professional Edition",

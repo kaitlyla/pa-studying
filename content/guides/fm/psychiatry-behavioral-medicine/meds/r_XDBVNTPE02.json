@@ -3938,7 +3938,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_GQAHG39NY5",
+  "g_0EHME962FW",
+  "g_P5QQVPWBRH"
+ ],
  "roles": [
   {
    "target": "c_ZYVKFVRFDH",
@@ -3959,6 +3963,60 @@
        "org": "American Family Physician (AAFP)",
        "year": "2021",
        "url": "https://www.aafp.org/pubs/afp/issues/2021/0101/p22.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GQAHG39NY5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral potassium chloride",
+     "note": "purging hypokalemia",
+     "sources": [
+      {
+       "name": "Bulimia Nervosa",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/feeding-and-eating-disorders/bulimia-nervosa"
+      },
+      {
+       "name": "Hypokalemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hypokalemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0EHME962FW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "water or fluoride mouth rinse after vomiting; PPI",
+     "note": "⍉brushing w.in 30 min of vomiting; PPI for esophagitis",
+     "sources": [
+      {
+       "name": "Bulimia Nervosa",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/feeding-and-eating-disorders/bulimia-nervosa"
+      },
+      {
+       "name": "Bulimia Nervosa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK562178/"
+      },
+      {
+       "name": "Gastroesophageal Reflux Disease (GERD)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/gastroesophageal-reflux-disease-gerd"
       }
      ]
     }

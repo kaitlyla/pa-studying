@@ -11439,7 +11439,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_3V6388DN8C",
+  "g_WVGPGDF2DS",
+  "g_G75K7C21HX"
+ ],
  "roles": [
   {
    "target": "c_ZYVKFVRFDH",
@@ -11472,6 +11476,85 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/suicidal-behavior/suicidal-behavior"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3V6388DN8C",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "esketamine nasal spray + an oral antidepressant",
+     "note": "treats depressive Sx in MDD w acute suicidal ideation; ⍉proven to prevent suicide",
+     "sources": [
+      {
+       "name": "SPRAVATO (esketamine) nasal spray",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d81a6a79-a74a-44b7-822c-0dfa3036eaed"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WVGPGDF2DS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "lithium",
+     "note": "major depression or bipolar dx",
+     "sources": [
+      {
+       "name": "Suicidal Behavior",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/suicidal-behavior/suicidal-behavior"
+      },
+      {
+       "name": "CLOZARIL (clozapine) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=90876802-0e3a-44c9-9ff7-1754dfbe736a"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "clozapine",
+     "note": "schizophrenia or schizoaffective dx",
+     "sources": [
+      {
+       "name": "Suicidal Behavior",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/suicidal-behavior/suicidal-behavior"
+      },
+      {
+       "name": "CLOZARIL (clozapine) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=90876802-0e3a-44c9-9ff7-1754dfbe736a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G75K7C21HX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "take-home naloxone",
+     "note": "opioid OD rescue",
+     "sources": [
+      {
+       "name": "Opioid Toxicity and Withdrawal",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/opioid-use-disorder/opioid-toxicity-and-withdrawal"
       }
      ]
     }

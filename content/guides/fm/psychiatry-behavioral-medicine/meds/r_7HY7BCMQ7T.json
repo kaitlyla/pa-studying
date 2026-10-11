@@ -6982,7 +6982,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_MQRMB3YFKA",
+  "g_3EX7ZMXB6V",
+  "g_MZ8CQWD8J9"
+ ],
  "roles": [
   {
    "target": "c_J969V94V29",
@@ -7010,6 +7014,60 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/sedatives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MQRMB3YFKA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "supportive care: airway, respirations; intubation and mechanical ventilation if needed",
+     "note": "OD",
+     "sources": [
+      {
+       "name": "Sedatives",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/sedatives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3EX7ZMXB6V",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "withdrawal: slow taper w pentobarbital or phenobarbital substitution",
+     "note": "dependence",
+     "sources": [
+      {
+       "name": "Sedatives",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/sedatives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MZ8CQWD8J9",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "multiple-dose activated charcoal",
+     "note": "severe long-acting barbiturate (phenobarbital) toxicity",
+     "sources": [
+      {
+       "name": "Barbiturate Toxicity",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK499875/"
       }
      ]
     }

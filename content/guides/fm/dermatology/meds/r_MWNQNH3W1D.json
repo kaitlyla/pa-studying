@@ -7508,7 +7508,10 @@
   "g_4MS11W7AYS",
   "g_GEEJ77YJ9Q",
   "g_ZGMVK4PFZT",
-  "g_PSGN6484E6"
+  "g_PSGN6484E6",
+  "g_77KS60SY1Z",
+  "g_9RWQFF46BQ",
+  "g_56S98GZN7K"
  ],
  "roles": [
   {
@@ -7598,6 +7601,19 @@
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/atopic-dermatitis-eczema"
       }
      ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Mild-mod AD: roflumilast cream (0.15% if ≥6 y; 0.05% if 2–5 y)",
+     "note": null,
+     "sources": [
+      {
+       "name": "ZORYVE (roflumilast) cream",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec1bb0d1-f38a-4080-831a-68791d1d1fdb"
+      }
+     ]
     }
    ]
   },
@@ -7620,6 +7636,25 @@
        "org": "American Family Physician (AAFP)",
        "year": "2020",
        "url": "https://www.aafp.org/afp/2020/0515/p590"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Mod-severe AD (≥12 y) not controlled with topical Rx: lebrikizumab (≥40 kg) or nemolizumab (with topical corticosteroids and/or calcineurin inhibitors)",
+     "note": null,
+     "sources": [
+      {
+       "name": "EBGLYSS (lebrikizumab-lbkz) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7a774ea2-acde-4aaa-9a8f-ccba5a5b1d5f"
+      },
+      {
+       "name": "NEMLUVIO (nemolizumab-ilto) injection",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e9229ef1-ac60-4c24-afb6-009d3c781687"
       }
      ]
     }
@@ -7690,7 +7725,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Oral JAK inhibitors (upadacitinib, abrocitinib, baricitinib), ≥ 12 years, after other systemic agents incl. biologics",
+     "drugs": "Oral JAK inhibitors (upadacitinib, abrocitinib), ≥ 12 years, after other systemic agents incl. biologics",
      "note": null,
      "sources": [
       {
@@ -7698,6 +7733,24 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/atopic-dermatitis-eczema"
+      },
+      {
+       "name": "RINVOQ (upadacitinib) extended-release tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2966aec7-2ef0-923c-d8ff-fe1a957bf095"
+      },
+      {
+       "name": "CIBINQO (abrocitinib) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=16c12a56-4550-414b-ac9d-b785b41fea6b"
+      },
+      {
+       "name": "OLUMIANT (baricitinib) tablet",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=866e9f35-9035-4581-a4b1-75a621ab55cf"
       }
      ]
     }
@@ -7769,7 +7822,7 @@
     {
      "role": "adjunct",
      "drugs": "Severe flares only: short course of systemic corticosteroids as a bridge; avoid long-term use (flare on stopping)",
-     "note": null,
+     "note": "AAD: systemic corticosteroids strongly recommended against; AD tends to flare when they are stopped",
      "sources": [
       {
        "name": "Atopic Dermatitis (Eczema)",
@@ -7782,6 +7835,12 @@
        "org": "American Family Physician (AAFP)",
        "year": "2020",
        "url": "https://www.aafp.org/afp/2020/0515/p590"
+      },
+      {
+       "name": "Guidelines of care for the management of atopic dermatitis",
+       "org": "American Academy of Dermatology (AAD)",
+       "year": "2023",
+       "url": "https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis"
       }
      ]
     }
@@ -7890,6 +7949,72 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/atopic-dermatitis-eczema"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_77KS60SY1Z",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Daily skin care: moisturizers (ointments or creams; ceramide-containing products useful)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Atopic Dermatitis (Eczema)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/atopic-dermatitis-eczema"
+      },
+      {
+       "name": "Guidelines of care for the management of atopic dermatitis",
+       "org": "American Academy of Dermatology (AAD)",
+       "year": "2023",
+       "url": "https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9RWQFF46BQ",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Topical nonsteroid: tapinarof cream (≥2 y)",
+     "note": null,
+     "sources": [
+      {
+       "name": "VTAMA (tapinarof) cream",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9309d20f-8cd4-4c96-93fa-7f730e83c7ab"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_56S98GZN7K",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Skin superinfection: dilute bleach baths",
+     "note": null,
+     "sources": [
+      {
+       "name": "Atopic Dermatitis (Eczema)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/atopic-dermatitis-eczema"
+      },
+      {
+       "name": "Guidelines of care for the management of atopic dermatitis",
+       "org": "American Academy of Dermatology (AAD)",
+       "year": "2023",
+       "url": "https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis"
       }
      ]
     }

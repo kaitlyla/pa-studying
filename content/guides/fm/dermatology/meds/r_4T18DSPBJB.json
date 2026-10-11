@@ -5320,7 +5320,9 @@
  "gaps": [
   "g_9H5750647Y",
   "g_VD5XAENWMT",
-  "g_B6VRBX509Z"
+  "g_B6VRBX509Z",
+  "g_6RNB3B2KZ4",
+  "g_0W9Z5FFMZZ"
  ],
  "roles": [
   {
@@ -5437,6 +5439,42 @@
     {
      "role": "alt",
      "drugs": "Long-term systemic immunosuppression if needed: methotrexate",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hand and Foot Dermatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/dermatitis/hand-and-foot-dermatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6RNB3B2KZ4",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Chronic hand eczema in adults after topical corticosteroids: delgocitinib cream",
+     "note": null,
+     "sources": [
+      {
+       "name": "ANZUPGO (delgocitinib) cream",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a59bf36e-6f04-4b47-b385-8040c95f040c"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0W9Z5FFMZZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "All patients: avoid contact allergens and irritants, especially frequent or prolonged water and detergent contact",
      "note": null,
      "sources": [
       {

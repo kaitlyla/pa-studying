@@ -8,6 +8,65 @@
   "c_C1XJCQJP92"
  ],
  "own": [],
- "gaps": [],
- "roles": []
+ "gaps": [
+  "g_JC10T35M0C",
+  "g_7DSPJ12DYE",
+  "g_7RGB71WSMN"
+ ],
+ "roles": [
+  {
+   "target": "g_JC10T35M0C",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "capsaicin cream",
+     "note": "CHS; case reports only",
+     "sources": [
+      {
+       "name": "Cannabinoid Hyperemesis Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK549915/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7DSPJ12DYE",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "haloperidol",
+     "note": "CHS vomiting resistant to ondansetron or metoclopramide; sm case studies",
+     "sources": [
+      {
+       "name": "Cannabinoid Hyperemesis Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK549915/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7RGB71WSMN",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "short-course benzodiazepine",
+     "note": "severe panic or agitation; use cautiously",
+     "sources": [
+      {
+       "name": "Cannabis Use Disorder",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK538131/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
 }

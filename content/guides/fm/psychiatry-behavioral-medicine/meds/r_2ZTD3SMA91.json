@@ -1273,7 +1273,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_ZBTT3NWPNF",
+  "g_7ER4P3R16E",
+  "g_2ZN1GT4X5C"
+ ],
  "roles": [
   {
    "target": "c_J969V94V29",
@@ -1288,6 +1292,60 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/psychiatric-disorders/schizophrenia-and-related-disorders/antipsychotic-medications"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZBTT3NWPNF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "propranolol",
+     "note": "historical use; limited high-quality data",
+     "sources": [
+      {
+       "name": "Akathisia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519543/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7ER4P3R16E",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "low-dose mirtazapine",
+     "note": "as effective as BBs; may be considered first-line",
+     "sources": [
+      {
+       "name": "Akathisia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519543/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2ZN1GT4X5C",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "benztropine",
+     "note": "only w concomitant pseudoparkinsonism",
+     "sources": [
+      {
+       "name": "Akathisia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519543/"
       }
      ]
     }

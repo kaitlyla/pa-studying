@@ -9345,7 +9345,10 @@
   }
  ],
  "gaps": [
-  "g_80NPVKBHYK"
+  "g_80NPVKBHYK",
+  "g_E3Q3V1G0ZS",
+  "g_E3E1FFKN1R",
+  "g_1EKVSQAB6J"
  ],
  "roles": [
   {
@@ -9421,6 +9424,97 @@
        "org": "JAMA Psychiatry",
        "year": "2026",
        "url": "https://doi.org/10.1001/jamapsychiatry.2026.0159"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E3Q3V1G0ZS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sodium bicarbonate",
+     "note": "cocaine QRS widening; case-report evidence (MSD doesn't name it)",
+     "sources": [
+      {
+       "name": "Cocaine",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/cocaine"
+      },
+      {
+       "name": "Not Your Typical V-Tach: Cocaine’s Cardiac Trickery (Spartan Med Res J, 2025)",
+       "org": "Spartan Medical Research Journal (PMC12450405)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12450405/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E3E1FFKN1R",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV nitrates, nicardipine or alpha-blockers",
+     "note": "CV effects unresponsive to benzodiazepines; ⍉BBs",
+     "sources": [
+      {
+       "name": "Cocaine",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/cocaine"
+      },
+      {
+       "name": "Acute Coronary Syndrome and Recreational Drug Use: A Comprehensive Review (Medicina, 2026)",
+       "org": "Medicina (PMC13514705)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13514705/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "antiplatelet and antithrombotic therapy",
+     "note": "cocaine CP/MI",
+     "sources": [
+      {
+       "name": "Cocaine",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/cocaine"
+      },
+      {
+       "name": "Acute Coronary Syndrome and Recreational Drug Use: A Comprehensive Review (Medicina, 2026)",
+       "org": "Medicina (PMC13514705)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13514705/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1EKVSQAB6J",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "external cooling (ice bath, evaporative)",
+     "note": "hyperthermia; ⍉phenothiazines for agitation",
+     "sources": [
+      {
+       "name": "Cocaine",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/cocaine"
+      },
+      {
+       "name": "Amphetamines",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/amphetamines"
       }
      ]
     }

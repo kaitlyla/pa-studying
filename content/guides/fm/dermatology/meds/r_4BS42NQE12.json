@@ -4525,7 +4525,8 @@
   }
  ],
  "gaps": [
-  "g_5C016C1S3S"
+  "g_5C016C1S3S",
+  "g_PC9Y13Z85X"
  ],
  "roles": [
   {
@@ -4643,7 +4644,7 @@
     {
      "role": "1st",
      "drugs": "Topical clotrimazole BID ×10–14 days. Combination antifungal-corticosteroid products such as clotrimazole-betamethasone generally should be avoided (AAFP)",
-     "note": null,
+     "note": "nystatin ineffective for tinea; use clotrimazole",
      "sources": [
       {
        "name": "Tinea Cruris (Jock Itch)",
@@ -4662,6 +4663,12 @@
        "org": "",
        "year": "",
        "url": null
+      },
+      {
+       "name": "Tinea Corporis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK544360/"
       }
      ]
     }
@@ -4800,6 +4807,30 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PC9Y13Z85X",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevent recurrence: treat coexisting tinea pedis; avoid walking barefoot, footwear in public facilities",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554602/"
+      },
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
       }
      ]
     }

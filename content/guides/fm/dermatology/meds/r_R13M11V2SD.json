@@ -1449,7 +1449,8 @@
  "gaps": [
   "g_GYW163ZAGN",
   "g_NPFFVKG4X6",
-  "g_D4EG2MQQQN"
+  "g_D4EG2MQQQN",
+  "g_JW16K5R2HD"
  ],
  "roles": [
   {
@@ -1501,7 +1502,7 @@
     },
     {
      "role": "alt",
-     "drugs": "Lindane 1%: CDC alternative only if other therapies can't be tolerated or have failed; MSD: no longer recommended (neurotoxic)",
+     "drugs": "Lindane 1%: CDC alternative only if other therapies can't be tolerated or have failed; MSD: no longer recommended (neurotoxic). Label boxed warning: seizures and deaths; caution in infants, children, elderly, other skin disease, <50 kg; contraindicated in premature infants and uncontrolled seizures",
      "note": null,
      "sources": [
       {
@@ -1521,6 +1522,12 @@
        "org": "",
        "year": "",
        "url": null
+      },
+      {
+       "name": "Lindane Lotion USP, 1%",
+       "org": "DailyMed (NLM)",
+       "year": "2009",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=54b9526e-29ab-46b0-ab82-d765fbee5c6f"
       }
      ]
     }
@@ -1572,6 +1579,19 @@
        "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Crusted scabies: oral ivermectin (3, 5 or 7 doses by severity) plus a topical scabicide; keratolytic cream for crusts",
+     "note": null,
+     "sources": [
+      {
+       "name": "Clinical Care of Scabies",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/scabies/hcp/clinical-care/index.html"
+      }
+     ]
     }
    ]
   },
@@ -1605,6 +1625,24 @@
        "name": "Scabies",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/parasitic-skin-infections/scabies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JW16K5R2HD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Treat all close contacts at the same time; hot-wash and high-heat dry clothing and bedding (or bag for 1 week)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Scabies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
        "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/parasitic-skin-infections/scabies"
       }
      ]

@@ -3835,7 +3835,8 @@
  "gaps": [
   "g_E6D11AJ0HK",
   "g_A0D5T2K0J5",
-  "g_4EYJ4WA8DP"
+  "g_4EYJ4WA8DP",
+  "g_9ERN1F56QW"
  ],
  "roles": [
   {
@@ -3944,6 +3945,33 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_9ERN1F56QW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Severe or mucosal EM major: short course of systemic corticosteroid (limited evidence)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Erythema Multiforme",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470259/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Corticosteroids",
+   "members": [
+    "g_E6D11AJ0HK",
+    "g_9ERN1F56QW"
    ]
   }
  ]
