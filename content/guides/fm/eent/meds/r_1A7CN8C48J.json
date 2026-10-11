@@ -1210,6 +1210,12 @@
                   "attrs": {
                    "pt": 10
                   }
+                 },
+                 {
+                  "type": "highlight",
+                  "attrs": {
+                   "hex": "FFFF00"
+                  }
                  }
                 ],
                 "text": "S. pneumoniae"
@@ -1792,6 +1798,12 @@
                   "attrs": {
                    "pt": 10
                   }
+                 },
+                 {
+                  "type": "highlight",
+                  "attrs": {
+                   "hex": "FFFF00"
+                  }
                  }
                 ],
                 "text": "H. influenzae"
@@ -2088,6 +2100,12 @@
                   "type": "size",
                   "attrs": {
                    "pt": 10
+                  }
+                 },
+                 {
+                  "type": "highlight",
+                  "attrs": {
+                   "hex": "FFFF00"
                   }
                  }
                 ],
@@ -5787,6 +5805,29 @@
         ]
        },
        {
+        "type": "anchored",
+        "attrs": {
+         "offsetPt": 0,
+         "float": {
+          "dxPt": 270.2,
+          "dyPt": 7.5
+         }
+        },
+        "content": [
+         {
+          "type": "image_block",
+          "attrs": {
+           "asset": "1d20fb75d16a7c9b270c4918d247c9e1.png",
+           "widthPt": 492.4229144863203,
+           "heightPt": 246.53930205972893,
+           "rot": 0,
+           "flipH": false,
+           "flipV": false
+          }
+         }
+        ]
+       },
+       {
         "type": "paragraph",
         "attrs": {
          "indLeft": 0,
@@ -5847,25 +5888,6 @@
          {
           "type": "text",
           "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
-         "offsetPt": 158.25
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "d46563fe62d4cddb68bf12b17e11d8e7.png",
-           "widthPt": 129.75,
-           "heightPt": 93.12795275590551,
-           "rot": 0,
-           "flipH": false,
-           "flipV": false
-          }
          }
         ]
        },
@@ -6420,25 +6442,6 @@
        {
         "type": "anchored",
         "attrs": {
-         "offsetPt": 171.75
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "3c185787f4b975aedff84796b6eda183.png",
-           "widthPt": 214.98818897637796,
-           "heightPt": 115.87503937007874,
-           "rot": 90,
-           "flipH": false,
-           "flipV": false
-          }
-         }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
          "offsetPt": 0
         },
         "content": [
@@ -6446,8 +6449,8 @@
           "type": "image_block",
           "attrs": {
            "asset": "b28a48315dfbdf906f051d53d6521f26.png",
-           "widthPt": 129.6,
-           "heightPt": 126,
+           "widthPt": 171.73136721185165,
+           "heightPt": 166.9610514559669,
            "rot": 0,
            "flipH": false,
            "flipV": false
@@ -6516,9 +6519,9 @@
          },
          "cellMarginPt": {
           "top": 0,
-          "right": 5.4,
+          "right": 0.5,
           "bottom": 0,
-          "left": 5.4
+          "left": 0.5
          }
         },
         "content": [
@@ -6551,7 +6554,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6.5
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6590,7 +6596,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6.5
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6629,7 +6638,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6.5
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6668,7 +6680,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6.5
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6719,7 +6734,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6764,7 +6782,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6810,7 +6831,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6856,7 +6880,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6889,7 +6916,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6904,7 +6934,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6937,7 +6970,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -6952,7 +6988,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 8
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7673,12 +7712,13 @@
         "type": "table",
         "attrs": {
          "grid": [
-          56.4,
-          65,
-          218.8,
-          251.3,
-          183.25
+          85.2,
+          30.4,
+          242,
+          198.75,
+          218.35
          ],
+         "ownWidths": true,
          "indentPt": -27.25,
          "borders": {
           "top": {
@@ -7714,9 +7754,9 @@
          },
          "cellMarginPt": {
           "top": 0,
-          "right": 5.4,
+          "right": 0.5,
           "bottom": 0,
-          "left": 5.4
+          "left": 0.5
          }
         },
         "content": [
@@ -7749,7 +7789,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7761,6 +7804,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -7794,7 +7843,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7806,6 +7858,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -7839,7 +7897,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7851,6 +7912,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -7884,7 +7951,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7896,6 +7966,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -7941,7 +8017,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -7953,6 +8032,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -7986,7 +8071,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8003,6 +8091,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8014,6 +8108,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8033,6 +8133,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8044,6 +8150,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8063,7 +8175,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8078,7 +8193,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8088,6 +8206,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8107,7 +8231,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8122,7 +8249,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "center",
                "shade": null,
                "borders": null,
@@ -8133,8 +8263,8 @@
                 "type": "image",
                 "attrs": {
                  "asset": "3340d5d2c01f5014ce8faaf30fd5588a.png",
-                 "widthPt": 208,
-                 "heightPt": 55.611102362204726,
+                 "widthPt": 242,
+                 "heightPt": 64.58282208588957,
                  "rot": 0,
                  "flipH": false,
                  "flipV": false
@@ -8163,7 +8293,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8180,6 +8313,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8191,6 +8330,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8210,7 +8355,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8225,7 +8373,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8242,6 +8393,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8253,6 +8410,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8285,7 +8448,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8302,6 +8468,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8313,6 +8485,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8332,7 +8510,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8347,7 +8528,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8364,6 +8548,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8375,6 +8565,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8394,7 +8590,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8406,6 +8605,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -8426,7 +8631,10 @@
                "indFirst": -18,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8449,6 +8657,12 @@
                 "type": "text",
                 "marks": [
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8467,7 +8681,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8477,6 +8694,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8496,7 +8719,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8508,6 +8734,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -8528,7 +8760,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8540,6 +8775,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -8560,7 +8801,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8575,7 +8819,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8592,6 +8839,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8603,6 +8856,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8622,7 +8881,10 @@
                "indFirst": -18,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8644,6 +8906,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8663,7 +8931,10 @@
                "indFirst": -18,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8685,6 +8956,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8704,7 +8981,10 @@
                "indFirst": -18,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8726,6 +9006,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8745,7 +9031,10 @@
                "indFirst": -18,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8768,6 +9057,12 @@
                 "type": "text",
                 "marks": [
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8786,7 +9081,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8801,7 +9099,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8818,6 +9119,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8829,6 +9136,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8873,7 +9186,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8885,6 +9201,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -8918,7 +9240,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8935,6 +9260,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -8946,6 +9277,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -8978,7 +9315,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -8995,6 +9335,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -9007,6 +9353,12 @@
                 "type": "text",
                 "marks": [
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -9016,21 +9368,6 @@
                 "text": ": broad spectrum; only oral agent active against Zygomycetes; active vs. all Candida & Aspergillosis species "
                }
               ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
              }
             ]
            },
@@ -9053,7 +9390,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9070,6 +9410,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -9081,6 +9427,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -9125,7 +9477,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9137,6 +9492,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -9170,7 +9531,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9187,6 +9551,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -9198,6 +9568,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -9230,7 +9606,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9247,6 +9626,12 @@
                   }
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "000000"
@@ -9258,6 +9643,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -9290,7 +9681,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9323,12 +9717,13 @@
         "type": "table",
         "attrs": {
          "grid": [
-          108,
-          157.5,
-          157.5,
-          179.85,
-          171.15
+          53.9,
+          131.7,
+          177.2,
+          172.45,
+          238.75
          ],
+         "ownWidths": true,
          "indentPt": -27.25,
          "borders": {
           "top": {
@@ -9364,9 +9759,9 @@
          },
          "cellMarginPt": {
           "top": 0,
-          "right": 5.4,
+          "right": 0.5,
           "bottom": 0,
-          "left": 5.4
+          "left": 0.5
          }
         },
         "content": [
@@ -9399,7 +9794,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9411,6 +9809,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "TETRACYCLINES"
@@ -9438,7 +9842,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9450,6 +9857,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "MOA"
@@ -9477,7 +9890,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9489,6 +9905,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "Spectrum of Activity"
@@ -9516,7 +9938,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9528,6 +9953,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "Indications/Contraindications"
@@ -9555,7 +9986,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 6
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9567,6 +10001,12 @@
                 "marks": [
                  {
                   "type": "bold"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "ADRs/Other"
@@ -9606,7 +10046,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9618,6 +10061,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -9638,7 +10087,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9650,6 +10102,12 @@
                 "marks": [
                  {
                   "type": "italic"
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  },
                  {
                   "type": "color",
@@ -9670,7 +10128,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9684,6 +10145,12 @@
                   "type": "italic"
                  },
                  {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
+                 {
                   "type": "color",
                   "attrs": {
                    "hex": "4472C4"
@@ -9695,6 +10162,12 @@
                {
                 "type": "text",
                 "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 },
                  {
                   "type": "color",
                   "attrs": {
@@ -9727,7 +10200,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9742,12 +10218,26 @@
                   "attrs": {
                    "style": "single"
                   }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "MOA"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": ": protein synthesis inhibitor (binds to 30S ribosomal subunit); bacteriostatic "
                }
               ]
@@ -9773,7 +10263,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9782,6 +10275,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•broad spectrum of activity – good against gram (+), gram (-), atypical organisms, & organisms other than bacteria "
                }
               ]
@@ -9807,7 +10308,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9822,7 +10326,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9837,12 +10344,26 @@
                   "attrs": {
                    "style": "single"
                   }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
-                "text": "Contraindications"
+                "text": "CI"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": ": pregnancy, renal impairment (except Doxycycline)"
                }
               ]
@@ -9868,7 +10389,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9883,12 +10407,26 @@
                   "attrs": {
                    "style": "single"
                   }
+                 },
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
                  }
                 ],
                 "text": "ADRs"
                },
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": ":"
                }
               ]
@@ -9901,7 +10439,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9910,6 +10451,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•poor GI tolerance: may cause diarrhea & gastritis "
                }
               ]
@@ -9922,7 +10471,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9931,6 +10483,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•deposition in calcified tissue: deposition in teeth causes teeth discoloration & may affect growth (not usually given in children <8yo for >21d)"
                }
               ]
@@ -9943,7 +10503,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9952,6 +10515,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•hepatotoxic, photosensitivity, Pseudotumor cerebri "
                }
               ]
@@ -9964,7 +10535,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9973,6 +10547,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•impaired absorption if given w/ dairy products, Ca, Al, Mg, Fe"
                }
               ]
@@ -9985,7 +10567,10 @@
                "indFirst": 0,
                "spaceBefore": 0,
                "spaceAfter": 0,
-               "line": null,
+               "line": {
+                "rule": "exact",
+                "value": 9
+               },
                "align": "left",
                "shade": null,
                "borders": null,
@@ -9994,6 +10579,14 @@
               "content": [
                {
                 "type": "text",
+                "marks": [
+                 {
+                  "type": "size",
+                  "attrs": {
+                   "pt": 7.5
+                  }
+                 }
+                ],
                 "text": "•Tetracycline: vestibular ADRs (hearing loss, tinnitus) "
                }
               ]

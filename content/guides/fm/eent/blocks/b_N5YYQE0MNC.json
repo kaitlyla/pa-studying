@@ -49,9 +49,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 1,
+      "right": 0,
       "bottom": 0,
-      "left": 1
+      "left": 0
      }
     },
     "content": [
@@ -84,7 +84,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 5.5
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -129,7 +132,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 5.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -174,7 +180,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 5.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -219,7 +228,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 5.5
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -254,7 +266,13 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        43.75,
+        420.2,
+        185.1,
+        124.95000000000002
+       ]
       },
       "content": [
        {
@@ -276,7 +294,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -321,7 +342,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -348,7 +372,7 @@
            },
            {
             "type": "text",
-            "text": ": symptomatic inflammation of the nasal cavity & paranasal sinuses lasting <4wks"
+            "text": ": Sx inflam of the nasal cavity & paranasal sinuses lasting <4wks"
            }
           ]
          },
@@ -360,7 +384,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -401,6 +428,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
              }
             ],
             "text": "MC type"
@@ -449,7 +482,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -496,9 +532,33 @@
               "attrs": {
                "hex": "FC5E7D"
               }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "C9DAF8"
+              }
              }
             ],
-            "text": "S. pneumo, H. influenzae, M. catarrhalis"
+            "text": "S. pneumo, H. influenzae, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FC5E7D"
+              }
+             }
+            ],
+            "text": "M. catarrhalis"
            },
            {
             "type": "text",
@@ -526,7 +586,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -553,7 +616,7 @@
            },
            {
             "type": "text",
-            "text": ": inflammatory condition involving paranasal sinuses & nasal passage linings lasting ≥12wks"
+            "text": ": inflam condition involving paranasal sinuses & nasal passage linings lasting ≥12wks"
            }
           ]
          },
@@ -565,7 +628,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -592,7 +658,7 @@
            },
            {
             "type": "text",
-            "text": ": immunocompromised* patients; Aspergillus spp., Fusarium spp., Mucorales"
+            "text": ": IC * pt; Aspergillus spp., Fusarium spp., Mucorales"
            }
           ]
          },
@@ -604,7 +670,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -619,7 +688,52 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Co-Factors: air pollution, nasal polyps, preg, oral HTN, anti-OP, mucocilliary dysfun, rhinitis medicamentosa "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -662,7 +776,7 @@
            },
            {
             "type": "text",
-            "text": ", rhinorrhea, purulent nasal \t\t"
+            "text": ", rhinorrhea    \t                                       "
            },
            {
             "type": "text",
@@ -690,7 +804,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -699,7 +816,16 @@
           "content": [
            {
             "type": "text",
-            "text": "discharge, "
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Major Sx:"
+           },
+           {
+            "type": "text",
+            "text": " purulent nasal d/c , "
            },
            {
             "type": "text",
@@ -717,7 +843,74 @@
               }
              }
             ],
-            "text": "facial pain/pressure worse leaning forward"
+            "text": "facial pain/pressure worse                ➀ A/P nasal mucopurulent drainage"
+           }
+          ]
+         },
+         {
+          "type": "anchored",
+          "attrs": {
+           "offsetPt": 0,
+           "float": {
+            "dxPt": 344.9,
+            "dyPt": 5.5
+           }
+          },
+          "content": [
+           {
+            "type": "image_block",
+            "attrs": {
+             "asset": "0a7f30028257057e8592ecc89c3aa638.png",
+             "widthPt": 87.45588694013725,
+             "heightPt": 44.84452514227462,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false,
+             "crop": {
+              "l": 0.331684,
+              "t": 0.28594,
+              "r": 0.143609,
+              "b": 0.340471
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "ED7D31"
+              }
+             }
+            ],
+            "text": "leaning forward"
            },
            {
             "type": "text",
@@ -743,7 +936,7 @@
            },
            {
             "type": "text",
-            "text": ",\t➀ "
+            "text": ", "
            },
            {
             "type": "text",
@@ -752,16 +945,17 @@
               "type": "bold"
              },
              {
-              "type": "italic"
-             },
-             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
               }
              }
             ],
-            "text": "anterior/posterior nasal mucopurulent drainage"
+            "text": "hyposmia/anosmia"
+           },
+           {
+            "type": "text",
+            "text": "\t"
            },
            {
             "type": "text",
@@ -773,7 +967,22 @@
               }
              }
             ],
-            "text": " "
+            "text": "                                        "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "ED7D31"
+              }
+             }
+            ],
+            "text": "➁ nasal obstruction/congestion "
            }
           ]
          },
@@ -785,7 +994,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -794,7 +1006,16 @@
           "content": [
            {
             "type": "text",
-            "text": "fatigue, cough, hyposmia/anosmia, HA, ear pressure/fullness,\t➁ "
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Minor Sx: "
+           },
+           {
+            "type": "text",
+            "text": "fatigue, cough, HA, ear pressure/fullness,\t                    "
            },
            {
             "type": "text",
@@ -803,28 +1024,32 @@
               "type": "bold"
              },
              {
-              "type": "italic"
-             },
-             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
               }
              }
             ],
-            "text": "nasal obstruction/congestion"
+            "text": "➂ facial pain/pressure "
            },
            {
             "type": "text",
             "marks": [
              {
+              "type": "bold"
+             },
+             {
               "type": "color",
               "attrs": {
-               "hex": "ED7D31"
+               "hex": "FFC000"
               }
              }
             ],
             "text": " "
+           },
+           {
+            "type": "text",
+            "text": "       "
            }
           ]
          },
@@ -836,7 +1061,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -845,7 +1073,7 @@
           "content": [
            {
             "type": "text",
-            "text": "halitosis (bad breath) \t\t\t\t\t\t\t\t\t➂ "
+            "text": "halitosis, dental pain\t\t\t\t\t"
            },
            {
             "type": "text",
@@ -854,16 +1082,13 @@
               "type": "bold"
              },
              {
-              "type": "italic"
-             },
-             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
               }
              }
             ],
-            "text": "facial pain/pressure"
+            "text": "➃ hyposmia/anosmia"
            }
           ]
          },
@@ -875,7 +1100,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -918,29 +1146,11 @@
               }
              }
             ],
-            "text": "partial/complete resolution within 10d"
+            "text": "partial/complete resolution w.in 10d"
            },
            {
             "type": "text",
-            "text": "\t\t\t\t➃ "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "ED7D31"
-              }
-             }
-            ],
-            "text": "hyposmia/anosmia"
+            "text": "\t\t"
            }
           ]
          },
@@ -952,7 +1162,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -989,7 +1202,7 @@
               "type": "italic"
              }
             ],
-            "text": "symptoms >10d"
+            "text": "Sx >10d"
            },
            {
             "type": "text",
@@ -1023,7 +1236,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1032,7 +1248,55 @@
           "content": [
            {
             "type": "text",
-            "text": "   ⤷i.e., symptoms worsen after initial improvement\t\t\t"
+            "text": "   ⤷i.e., Sx worsen after initial improvement\t"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "     - - acute onset of severe Sx, fever 102F or purulent nasal d/c"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 144,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "\t\t"
            },
            {
             "type": "text",
@@ -1060,7 +1324,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1137,7 +1404,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1146,7 +1416,7 @@
           "content": [
            {
             "type": "text",
-            "text": "of the middle meatus, inferior turbinate hypertrophy\t\t\t» "
+            "text": "of the middle meatus, inferior turbinate hypertrophy\t\t» "
            },
            {
             "type": "text",
@@ -1168,7 +1438,7 @@
            },
            {
             "type": "text",
-            "text": ": +/- black eschar in nasal mucosa"
+            "text": ": ± black eschar in nasal mucosa, ↓transillumination"
            }
           ]
          }
@@ -1193,7 +1463,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1214,7 +1487,7 @@
            },
            {
             "type": "text",
-            "text": ": clinical"
+            "text": ": clin"
            }
           ]
          },
@@ -1226,7 +1499,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1259,7 +1535,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1274,7 +1553,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1356,7 +1638,7 @@
               }
              }
             ],
-            "text": "evidence of inflammation"
+            "text": "evidence of inflam"
            }
           ]
          },
@@ -1368,7 +1650,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1389,7 +1674,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1410,7 +1698,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1431,7 +1722,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1452,31 +1746,15 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
            "marker": null
           }
-         },
-         {
-          "type": "anchored",
-          "attrs": {
-           "offsetPt": 93.25
-          },
-          "content": [
-           {
-            "type": "image_block",
-            "attrs": {
-             "asset": "58ac7dda92f6da9fd6055dd4b7a31bdf.png",
-             "widthPt": 87.85740157480315,
-             "heightPt": 59.155826771653544,
-             "rot": 0,
-             "flipH": false,
-             "flipV": false
-            }
-           }
-          ]
          },
          {
           "type": "paragraph",
@@ -1486,7 +1764,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1507,9 +1788,68 @@
            },
            {
             "type": "text",
-            "text": ": nasal endoscopy w/ BX"
+            "text": ": nasal endoscopy w BX    -if ⊘respond to abx"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "anchored",
+          "attrs": {
+           "offsetPt": 0,
+           "float": {
+            "dxPt": -0.3,
+            "dyPt": 0
+           }
+          },
+          "content": [
+           {
+            "type": "image_block",
+            "attrs": {
+             "asset": "58ac7dda92f6da9fd6055dd4b7a31bdf.png",
+             "widthPt": 116.12336489560543,
+             "heightPt": 78.1782916374355,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
          }
         ]
        },
@@ -1532,7 +1872,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1565,7 +1908,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1574,7 +1920,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎saline irrigation, ibuprofen/APAP "
+            "text": "▪︎saline irrigation, ibuprofen/APAP, oral decongestants, IN glucocorticoids, mucolytics, topical nasal vasocontrictors"
            }
           ]
          },
@@ -1586,7 +1932,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1601,7 +1950,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1634,7 +1986,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1643,7 +1998,18 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "▪︎↑dose "
            },
            {
             "type": "text",
@@ -1661,7 +2027,7 @@
               }
              }
             ],
-            "text": "amoxicillin or Augmentin x5-10d"
+            "text": "amoxicillin or Augmentin x7-14d"
            }
           ]
          },
@@ -1673,7 +2039,63 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "    -"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "doxycyline if penicillin allergy"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1688,7 +2110,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1721,7 +2146,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1742,7 +2170,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1763,7 +2194,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1796,7 +2230,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1825,7 +2262,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1840,7 +2280,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1861,7 +2304,7 @@
            },
            {
             "type": "text",
-            "text": ": amphotericin B +/- surgical debridement of necrotic tissue"
+            "text": ": amphotericin B ± surgical debridement of necrotic tissue"
            }
           ]
          }
