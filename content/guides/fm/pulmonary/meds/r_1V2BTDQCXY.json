@@ -17945,7 +17945,9 @@
   }
  ],
  "gaps": [
-  "g_Y2KV8EJ8CY"
+  "g_Y2KV8EJ8CY",
+  "g_KD52V9W53N",
+  "g_MFKAGWMBX3"
  ],
  "roles": [
   {
@@ -17978,15 +17980,21 @@
      ]
     },
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "piperacillin/tazobactam",
-     "note": "Pseudomonas risk",
+     "note": "Pseudomonas risk: replaces strd regimen",
      "sources": [
       {
        "name": "Community-Acquired Pneumonia",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the ATS and IDSA. Am J Respir Crit Care Med 2019;200(7):e45-e67",
+       "org": "American Thoracic Society (ATS) / Infectious Diseases Society of America (IDSA)",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ]
     },
@@ -18035,15 +18043,21 @@
      ]
     },
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "cefepime or ceftazidime",
-     "note": "Pseudomonas risk",
+     "note": "Pseudomonas risk: replaces strd regimen",
      "sources": [
       {
        "name": "Community-Acquired Pneumonia",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the ATS and IDSA. Am J Respir Crit Care Med 2019;200(7):e45-e67",
+       "org": "American Thoracic Society (ATS) / Infectious Diseases Society of America (IDSA)",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ]
     },
@@ -18163,15 +18177,21 @@
    "target": "c_YC3SWRW6Z9",
    "roles": [
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "imipenem or meropenem",
-     "note": "Pseudomonas risk",
+     "note": "Pseudomonas risk: replaces strd regimen",
      "sources": [
       {
        "name": "Community-Acquired Pneumonia",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the ATS and IDSA. Am J Respir Crit Care Med 2019;200(7):e45-e67",
+       "org": "American Thoracic Society (ATS) / Infectious Diseases Society of America (IDSA)",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ]
     },
@@ -18239,6 +18259,79 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KD52V9W53N",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Community-Acquired Pneumonia (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430749/"
+      },
+      {
+       "name": "CAPVAXIVE (pneumococcal 21-valent conjugate vaccine) prescribing information (FDA label, DailyMed)",
+       "org": "Merck Sharp & Dohme LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1a264c2f-d2f8-4ab5-bc5e-fbed0001ede6"
+      },
+      {
+       "name": "AREXVY (respiratory syncytial virus vaccine, adjuvanted) prescribing information (FDA label, DailyMed)",
+       "org": "GlaxoSmithKline Biologicals SA (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e50f275-002e-413f-a840-66ee3cb3740c"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MFKAGWMBX3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluconazole",
+     "note": "coccidioidomycosis (fibrocavitary dz)",
+     "sources": [
+      {
+       "name": "Coccidioidomycosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448161/"
+      },
+      {
+       "name": "Histoplasmosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448185/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "itraconazole",
+     "note": "histoplasmosis (when tx needed)",
+     "sources": [
+      {
+       "name": "Coccidioidomycosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448161/"
+      },
+      {
+       "name": "Histoplasmosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448185/"
       }
      ]
     }

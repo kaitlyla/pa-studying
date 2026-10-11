@@ -12573,7 +12573,8 @@
   }
  ],
  "gaps": [
-  "g_VMKX3HD069"
+  "g_VMKX3HD069",
+  "g_VP87FXDKG1"
  ],
  "roles": [
   {
@@ -12629,8 +12630,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "systemic glucocorticoid: prednisone 30-60 mg PO daily 5-7 days, or methylprednisolone IV",
-     "note": "all but mild exacerbations; GOLD: up to 5 days",
+     "drugs": "GOLD: prednisone 40 mg/day × 5 days; or prednisone 30-60 mg PO daily 5-7 days, or methylprednisolone IV",
+     "note": "all but mild exacerbations",
      "sources": [
       {
        "name": "Treatment of Acute COPD Exacerbation",
@@ -12643,6 +12644,12 @@
        "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
        "year": "2026",
        "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      },
+      {
+       "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
       }
      ]
     }
@@ -12751,6 +12758,24 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-acute-copd-exacerbation"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VP87FXDKG1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "target SpO2 88-92%",
+     "sources": [
+      {
+       "name": "Chronic Obstructive Pulmonary Disease (COPD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/"
       }
      ]
     }

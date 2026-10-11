@@ -1816,7 +1816,12 @@
   }
  ],
  "gaps": [
-  "g_5T1G5CKT4N"
+  "g_5T1G5CKT4N",
+  "g_VDJ8D0SYMH",
+  "g_GBSZ134ADC",
+  "g_0W30WXYPMP",
+  "g_6HYDMNSFNS",
+  "g_0SM7JW5WKB"
  ],
  "roles": [
   {
@@ -1871,6 +1876,169 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_VDJ8D0SYMH",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": "antitussive",
+     "sources": [
+      {
+       "name": "Cough: Evaluation and Management (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493221/"
+      },
+      {
+       "name": "Benzonatate capsules prescribing information (FDA label, DailyMed)",
+       "org": "REMEDYREPACK INC. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ed756746-4cbb-4196-a972-5a8c23702b2a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GBSZ134ADC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "Sx relief; ⍉<12 mo",
+     "sources": [
+      {
+       "name": "Acute Bronchitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448067/"
+      },
+      {
+       "name": "Botulism (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459273/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0W30WXYPMP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "pertussis",
+     "sources": [
+      {
+       "name": "Pertussis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519008/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "clarithromycin or erythromycin",
+     "note": "pertussis",
+     "sources": [
+      {
+       "name": "Pertussis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519008/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "macrolide intolerance; >2 mo",
+     "sources": [
+      {
+       "name": "Pertussis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519008/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "azithromycin PEP",
+     "note": "close contacts",
+     "sources": [
+      {
+       "name": "Pertussis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK519008/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6HYDMNSFNS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "bronchitis from influenza",
+     "sources": [
+      {
+       "name": "Influenza (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459363/"
+      },
+      {
+       "name": "XOFLUZA (baloxavir marboxil) prescribing information (FDA label, DailyMed)",
+       "org": "Sportpharm LLC (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b58b2899-4d22-41e1-8f0c-bdead8917694"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0SM7JW5WKB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "COVID-19 w high risk of severe dz",
+     "sources": [
+      {
+       "name": "COVID-19",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/covid-19/covid-19"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antitussives",
+   "members": [
+    "g_5T1G5CKT4N",
+    "g_VDJ8D0SYMH"
+   ]
+  },
+  {
+   "title": "Antivirals",
+   "members": [
+    "g_0SM7JW5WKB",
+    "g_6HYDMNSFNS"
    ]
   }
  ]

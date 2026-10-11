@@ -4449,7 +4449,9 @@
    "gap": "g_ABS0AJ0678"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_EYCE1C6DCC"
+ ],
  "roles": [
   {
    "target": "c_VXA8SDW8G2",
@@ -4470,6 +4472,25 @@
        "org": "World Society of Emergency Surgery (WSES)",
        "year": "2020",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "selected uncomplicated: abx alone (eg, ceftriaxone + metronidazole)",
+     "note": "use w caution (CODA); Recurr common",
+     "sources": [
+      {
+       "name": "Appendicitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+      },
+      {
+       "name": "Appendicitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/appendicitis"
       }
      ]
     }
@@ -4496,6 +4517,25 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/"
       }
      ]
+    },
+    {
+     "role": "alt",
+     "drugs": "selected uncomplicated: abx alone (eg, metronidazole + ceftriaxone)",
+     "note": "use w caution (CODA); Recurr common",
+     "sources": [
+      {
+       "name": "Appendicitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+      },
+      {
+       "name": "Appendicitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/appendicitis"
+      }
+     ]
     }
    ]
   },
@@ -4518,6 +4558,24 @@
        "org": "World Society of Emergency Surgery (WSES)",
        "year": "2020",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EYCE1C6DCC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV opioid (fentanyl, morphine)",
+     "note": "pain; ⍉masks peritoneal signs",
+     "sources": [
+      {
+       "name": "Acute Abdominal Pain",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/acute-abdominal-pain"
       }
      ]
     }

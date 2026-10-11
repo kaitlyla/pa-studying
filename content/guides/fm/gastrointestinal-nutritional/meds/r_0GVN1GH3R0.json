@@ -3667,7 +3667,10 @@
   }
  ],
  "gaps": [
-  "g_TJK9N48GP8"
+  "g_TJK9N48GP8",
+  "g_JV3Y9VPWPC",
+  "g_1AAFSR6NB4",
+  "g_8JXKHYB4BR"
  ],
  "roles": [
   {
@@ -3695,19 +3698,6 @@
      "role": "1st",
      "drugs": "IV octreotide",
      "note": "Sus variceal bleed",
-     "sources": [
-      {
-       "name": "Overview of Gastrointestinal Bleeding",
-       "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastrointestinal-bleeding/overview-of-gastrointestinal-bleeding"
-      }
-     ]
-    },
-    {
-     "role": "adjunct",
-     "drugs": "tranexamic acid",
-     "note": "may have a role in variceal bleed",
      "sources": [
       {
        "name": "Overview of Gastrointestinal Bleeding",
@@ -3744,6 +3734,140 @@
        "org": "U.S. Food and Drug Administration (FDA)",
        "year": "2026",
        "url": "https://api.fda.gov/drug/drugsfda.json?search=products.brand_name:%22NOROXIN%22"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JV3Y9VPWPC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "erythromycin 250 mg IV",
+     "note": "20-90 min b4 endoscopy",
+     "sources": [
+      {
+       "name": "Upper Gastrointestinal Bleeding (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470300/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1AAFSR6NB4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "PCC + vit K",
+     "note": "warfarin/VKA reversal",
+     "sources": [
+      {
+       "name": "Upper Gastrointestinal Bleeding (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470300/"
+      },
+      {
+       "name": "BALFAXAR (prothrombin complex concentrate, human) prescribing information (FDA label, DailyMed)",
+       "org": "Octapharma USA Inc (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=68fa4f90-8b01-6498-4140-e0be5247c3fe"
+      },
+      {
+       "name": "PRAXBIND (idarucizumab) prescribing information (FDA label, DailyMed)",
+       "org": "Boehringer Ingelheim Pharmaceuticals, Inc. (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c7400f8a-dcf4-a6df-6d07-983081b1bf34"
+      },
+      {
+       "name": "Update on the Safety of Andexxa (FDA safety communication, 18 Dec 2025)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/vaccines-blood-biologics/safety-availability-biologics/update-safety-andexxa"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "PCC",
+     "note": "DOAC w.in 24 h + life-threatening bleed",
+     "sources": [
+      {
+       "name": "Upper Gastrointestinal Bleeding (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470300/"
+      },
+      {
+       "name": "BALFAXAR (prothrombin complex concentrate, human) prescribing information (FDA label, DailyMed)",
+       "org": "Octapharma USA Inc (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=68fa4f90-8b01-6498-4140-e0be5247c3fe"
+      },
+      {
+       "name": "PRAXBIND (idarucizumab) prescribing information (FDA label, DailyMed)",
+       "org": "Boehringer Ingelheim Pharmaceuticals, Inc. (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c7400f8a-dcf4-a6df-6d07-983081b1bf34"
+      },
+      {
+       "name": "Update on the Safety of Andexxa (FDA safety communication, 18 Dec 2025)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/vaccines-blood-biologics/safety-availability-biologics/update-safety-andexxa"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "idarucizumab",
+     "note": "dabigatran",
+     "sources": [
+      {
+       "name": "Upper Gastrointestinal Bleeding (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470300/"
+      },
+      {
+       "name": "BALFAXAR (prothrombin complex concentrate, human) prescribing information (FDA label, DailyMed)",
+       "org": "Octapharma USA Inc (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=68fa4f90-8b01-6498-4140-e0be5247c3fe"
+      },
+      {
+       "name": "PRAXBIND (idarucizumab) prescribing information (FDA label, DailyMed)",
+       "org": "Boehringer Ingelheim Pharmaceuticals, Inc. (FDA label, DailyMed)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c7400f8a-dcf4-a6df-6d07-983081b1bf34"
+      },
+      {
+       "name": "Update on the Safety of Andexxa (FDA safety communication, 18 Dec 2025)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/vaccines-blood-biologics/safety-availability-biologics/update-safety-andexxa"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8JXKHYB4BR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "H. pylori test-and-treat",
+     "note": "after ulcer bleed",
+     "sources": [
+      {
+       "name": "Upper Gastrointestinal Bleeding (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470300/"
       }
      ]
     }

@@ -1,0 +1,67 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_G96R8F4E13",
+  "g_XB91CZAQ1F"
+ ],
+ "roles": [
+  {
+   "target": "g_G96R8F4E13",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HBV vaccine; HCV DAAs",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Hepatocellular Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/liver-cancers/hepatocellular-carcinoma?autoredirectid=37523"
+      },
+      {
+       "name": "Hepatocellular Carcinoma (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559177/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XB91CZAQ1F",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "atezolizumab + bevacizumab, tremelimumab + durvalumab, lenvatinib or regorafenib",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hepatocellular Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/liver-cancers/hepatocellular-carcinoma?autoredirectid=37523"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "sorafenib",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hepatocellular Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/liver-cancers/hepatocellular-carcinoma?autoredirectid=37523"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -8056,7 +8056,9 @@
    "gap": "g_BX46CPNKBB"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_Q47F09B2KX"
+ ],
  "roles": [
   {
    "target": "c_YSYYSQ9VG4",
@@ -8168,15 +8170,21 @@
    "target": "c_58MCDAZQHM",
    "roles": [
     {
-     "role": "alt",
+     "role": "1st",
      "drugs": "amoxicillin/clavulanate",
-     "note": "oral",
+     "note": "oral; 7-10 days (as common as oral FQ + metronidazole)",
      "sources": [
       {
        "name": "Diverticulitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/diverticulitis"
+      },
+      {
+       "name": "Diverticular Disease of the Colon (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK541110/"
       }
      ]
     },
@@ -8190,6 +8198,30 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/diverticulitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q47F09B2KX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "acetaminophen",
+     "note": "pain; ⍉NSAIDs",
+     "sources": [
+      {
+       "name": "Diverticular Disease of the Colon (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK541110/"
+      },
+      {
+       "name": "Colonic Diverticulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/colonic-diverticulitis?autoredirectid=4008"
       }
      ]
     }

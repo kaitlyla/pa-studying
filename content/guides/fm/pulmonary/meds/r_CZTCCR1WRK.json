@@ -10074,7 +10074,9 @@
   }
  ],
  "gaps": [
-  "g_4VZCYKT28F"
+  "g_4VZCYKT28F",
+  "g_FWWVDM7N6B",
+  "g_MZ9K5GPNV9"
  ],
  "roles": [
   {
@@ -10202,13 +10204,19 @@
     {
      "role": "alt",
      "drugs": "nebulized ciprofloxacin",
-     "note": "reduce bact load; evidence strongest in CF",
+     "note": "reduce bact load; evidence strongest in CF; no US inhaled product (DailyMed)",
      "sources": [
       {
        "name": "Bronchiectasis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/bronchiectasis-and-atelectasis/bronchiectasis"
+      },
+      {
+       "name": "DailyMed label search: ciprofloxacin (no inhalation product listed)",
+       "org": "National Library of Medicine (DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=ciprofloxacin"
       }
      ]
     }
@@ -10238,13 +10246,19 @@
     {
      "role": "alt",
      "drugs": "nebulized aztreonam",
-     "note": "reduce bact load; evidence strongest in CF",
+     "note": "reduce bact load; evidence strongest in CF (label: CF only)",
      "sources": [
       {
        "name": "Bronchiectasis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/bronchiectasis-and-atelectasis/bronchiectasis"
+      },
+      {
+       "name": "CAYSTON (aztreonam for inhalation solution) prescribing information (FDA label, DailyMed)",
+       "org": "Gilead Sciences, Inc. (FDA label, DailyMed)",
+       "year": "2019",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=67300ca3-8c53-4ce4-8e86-2c03be1f9b8a"
       }
      ]
     }
@@ -10299,6 +10313,48 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/bronchiectasis-and-atelectasis/bronchiectasis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FWWVDM7N6B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "non-CF bronchiectasis, age ≥12",
+     "sources": [
+      {
+       "name": "FDA Approves BRINSUPRI (brensocatib) as the First and Only Treatment for Non-Cystic Fibrosis Bronchiectasis (Insmed press release, 12 Aug 2025)",
+       "org": "Insmed Incorporated",
+       "year": "2025",
+       "url": "https://www.biospace.com/press-releases/fda-approves-brinsupri-brensocatib-as-the-first-and-only-treatment-for-non-cystic-fibrosis-bronchiectasis-a-serious-chronic-lung-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MZ9K5GPNV9",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Bronchiectasis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/bronchiectasis-and-atelectasis/bronchiectasis"
+      },
+      {
+       "name": "Bronchiectasis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430810/"
       }
      ]
     }

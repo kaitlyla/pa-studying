@@ -9132,7 +9132,9 @@
    "gap": "g_GE4N4CQT3Z"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_2VQ7K8J6RM"
+ ],
  "roles": [
   {
    "target": "c_58MCDAZQHM",
@@ -9141,6 +9143,24 @@
      "role": "1st",
      "drugs": "IV ampicillin/sulbactam or piperacillin/tazobactam",
      "note": "empiric gram-negative enteric coverage; benefit in mild cholecystitis = unproven",
+     "sources": [
+      {
+       "name": "Acute Cholecystitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/acute-cholecystitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2VQ7K8J6RM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NSAID (ketorolac) or opioid",
+     "note": "pain",
      "sources": [
       {
        "name": "Acute Cholecystitis",

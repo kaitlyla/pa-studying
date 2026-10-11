@@ -1397,7 +1397,8 @@
   }
  ],
  "gaps": [
-  "g_DBCDS57JQK"
+  "g_DBCDS57JQK",
+  "g_6FEPVRWJCY"
  ],
  "roles": [
   {
@@ -1436,14 +1437,26 @@
     },
     {
      "role": "adjunct",
-     "drugs": "naltrexone or nalmefene; baclofen or acamprosate; disulfiram",
-     "note": "craving and w.draw; evidence for disulfiram weaker",
+     "drugs": "naltrexone; baclofen or acamprosate; disulfiram",
+     "note": "craving and w.draw; evidence for disulfiram weaker; label cautions in liver dz",
      "sources": [
       {
        "name": "Alcohol-Related Liver Disease",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/alcohol-related-liver-disease/alcohol-related-liver-disease"
+      },
+      {
+       "name": "Disulfiram tablets prescribing information (FDA label, DailyMed)",
+       "org": "Golden State Medical Supply, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d3832a1a-a140-49c1-a7df-134fa81341e3"
+      },
+      {
+       "name": "Naltrexone hydrochloride tablets prescribing information (FDA label, DailyMed)",
+       "org": "Aphena Pharma Solutions - Tennessee, LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=57e8b767-54c2-dfa3-e063-6394a90ae6c2"
       }
      ]
     },
@@ -1456,6 +1469,24 @@
        "name": "Alcohol-Related Liver Disease",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/alcohol-related-liver-disease/alcohol-related-liver-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6FEPVRWJCY",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NAC",
+     "note": "w prednisolone",
+     "sources": [
+      {
+       "name": "Alcohol-Related Liver Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/alcohol-related-liver-disease/alcohol-related-liver-disease"
       }
      ]

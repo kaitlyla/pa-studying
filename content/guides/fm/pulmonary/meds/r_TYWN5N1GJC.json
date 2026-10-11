@@ -8951,7 +8951,9 @@
    "gap": "g_XKQK9MZ3EE"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_35MQ3NKKXF"
+ ],
  "roles": [
   {
    "target": "c_1W9T6QFWR7",
@@ -8979,6 +8981,31 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "LMWH",
+     "note": "pregnancy (preferred); warfarin CI except mechanical valves; apixaban ⍉recommended",
+     "sources": [
+      {
+       "name": "Deep Venous Thrombosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/"
+      },
+      {
+       "name": "Warfarin sodium tablets prescribing information (FDA label, DailyMed)",
+       "org": "A-S Medication Solutions (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=654ca5d2-d4c1-48f8-90c4-130a21162bb0"
+      },
+      {
+       "name": "ELIQUIS (apixaban) prescribing information (FDA label, DailyMed)",
+       "org": "Aphena Pharma Solutions - Tennessee, LLC (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=41a133ef-e461-48ad-8221-b735bdd0ec25"
       }
      ]
     }
@@ -9017,6 +9044,44 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "warfarin",
+     "note": "APS w arterial thrombosis (preferred over DOACs); apixaban ⍉recommended in triple-positive APS",
+     "sources": [
+      {
+       "name": "Antiphospholipid Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430980/"
+      },
+      {
+       "name": "ELIQUIS (apixaban) prescribing information (FDA label, DailyMed)",
+       "org": "Aphena Pharma Solutions - Tennessee, LLC (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=41a133ef-e461-48ad-8221-b735bdd0ec25"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "warfarin",
+     "note": "mechanical heart valve (dabigatran CI; apixaban ⍉recommended)",
+     "sources": [
+      {
+       "name": "PRADAXA (dabigatran etexilate) prescribing information (FDA label, DailyMed)",
+       "org": "Boehringer Ingelheim Pharmaceuticals Inc. (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ba74e3cd-b06f-4145-b284-5fd6b84ff3c9"
+      },
+      {
+       "name": "ELIQUIS (apixaban) prescribing information (FDA label, DailyMed)",
+       "org": "Aphena Pharma Solutions - Tennessee, LLC (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=41a133ef-e461-48ad-8221-b735bdd0ec25"
+      }
+     ]
     }
    ]
   },
@@ -9051,6 +9116,24 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_35MQ3NKKXF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "norepinephrine",
+     "note": "hypotension despite IV fluids",
+     "sources": [
+      {
+       "name": "Pulmonary Embolism (PE)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pulmonary-embolism/pulmonary-embolism-pe"
       }
      ]
     }

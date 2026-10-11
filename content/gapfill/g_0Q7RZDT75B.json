@@ -52,6 +52,32 @@
     "content": [
      {
       "type": "text",
+      "text": "GOLD: 5 days of abx for outpt AECOPD."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
       "marks": [
        {
         "type": "bold"
@@ -234,6 +260,21 @@
     "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=12eeb72a-403d-41be-bae4-4cb930862884",
     "type": "reference",
     "track": null
+   },
+   {
+    "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+    "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+    "year": "2026",
+    "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf",
+    "type": "guideline",
+    "track": {
+     "edition": 2026,
+     "label": "GOLD COPD report",
+     "method": "fixed",
+     "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+     "series": "gold",
+     "source": "gold"
+    }
    }
   ],
   "ownerEdits": []

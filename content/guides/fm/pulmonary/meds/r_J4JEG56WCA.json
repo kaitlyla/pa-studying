@@ -3954,7 +3954,9 @@
    "gap": "g_TZ0RZTVC3F"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_7TS6Q0CBPH"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -3989,6 +3991,19 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-pulmonary-diseases/beryllium-disease"
       }
      ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "folic acid 1 mg w weekly methotrexate 7.5 mg",
+     "note": null,
+     "sources": [
+      {
+       "name": "Berylliosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470364/"
+      }
+     ]
     }
    ]
   },
@@ -4005,6 +4020,24 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-pulmonary-diseases/beryllium-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7TS6Q0CBPH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Berylliosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470364/"
       }
      ]
     }

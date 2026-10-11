@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_WMS2J0TW7H",
+  "g_7BE1G8908A",
+  "g_B6YF9YYZJX",
+  "g_33BQDTJ3H1"
+ ],
+ "roles": [
+  {
+   "target": "g_WMS2J0TW7H",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "supplemental O2",
+     "note": "only if hypoxemic",
+     "sources": [
+      {
+       "name": "Pneumothorax",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7BE1G8908A",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "↓ Recurr",
+     "sources": [
+      {
+       "name": "Pneumothorax",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax"
+      },
+      {
+       "name": "Spontaneous Pneumothorax (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459302/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_B6YF9YYZJX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "pain control",
+     "sources": [
+      {
+       "name": "Acute Pneumothorax Evaluation and Treatment (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK538316/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_33BQDTJ3H1",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": "when VATS ⍉possible",
+     "sources": [
+      {
+       "name": "Spontaneous Pneumothorax (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459302/"
+      },
+      {
+       "name": "Pneumothorax",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

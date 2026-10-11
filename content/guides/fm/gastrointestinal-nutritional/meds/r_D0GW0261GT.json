@@ -15589,7 +15589,10 @@
   }
  ],
  "gaps": [
-  "g_WEV0W5TEQQ"
+  "g_WEV0W5TEQQ",
+  "g_M5EX3KYVH2",
+  "g_56ZZRJTCDH",
+  "g_65KQE0TXNZ"
  ],
  "roles": [
   {
@@ -15598,13 +15601,19 @@
     {
      "role": "adjunct",
      "drugs": "loperamide",
-     "note": "⍉recommended in children",
+     "note": "⍉recommended in children; label: ⍉use w bloody or black stool; ask a doctor first if fever",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastroenteritis/overview-of-gastroenteritis"
+      },
+      {
+       "name": "Loperamide hydrochloride capsules (OTC) prescribing information (FDA label, DailyMed)",
+       "org": "YYBA CORP (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5a728c6d-26ec-3316-e063-6394a90ade08"
       }
      ]
     }
@@ -15616,13 +15625,19 @@
     {
      "role": "adjunct",
      "drugs": "diphenoxylate/atropine",
-     "note": "⍉recommended in children",
+     "note": "⍉recommended in children; label CI: <6 yrs; invasive organisms or C. diff",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastroenteritis/overview-of-gastroenteritis"
+      },
+      {
+       "name": "LOMOTIL (diphenoxylate hydrochloride and atropine sulfate) prescribing information (FDA label, DailyMed)",
+       "org": "Pfizer Laboratories Div Pfizer Inc (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f170584a-1072-4fd7-b1dc-6756703483b9"
       }
      ]
     },
@@ -15642,7 +15657,7 @@
     {
      "role": "1st",
      "drugs": "cholera: doxycycline",
-     "note": "nonpregnant adults (see your call 6 for preg and children)",
+     "note": "adults (incl preg) + children",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
@@ -15710,13 +15725,25 @@
     {
      "role": "adjunct",
      "drugs": "prochlorperazine or promethazine",
-     "note": "severe vomiting once a surg cause = excluded",
+     "note": "severe vomiting once a surg cause = excluded; promethazine ⍉<2 yrs (boxed: fatal resp depression); prochlorperazine ⍉<2 yrs or <20 lbs; children w gastroenteritis or dehydration: ↑dystonia risk",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastroenteritis/overview-of-gastroenteritis"
+      },
+      {
+       "name": "Promethazine hydrochloride tablets prescribing information (FDA label, DailyMed)",
+       "org": "REMEDYREPACK INC. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6728bb41-5d50-4abb-bb73-993dcc16ee66"
+      },
+      {
+       "name": "Prochlorperazine maleate tablets prescribing information (FDA label, DailyMed)",
+       "org": "Sportpharm LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3d28dab2-0264-482e-b99d-f56a9314b8a5"
       }
      ]
     }
@@ -15799,7 +15826,7 @@
     {
      "role": "alt",
      "drugs": "cholera: azithromycin",
-     "note": null,
+     "note": "if doxycycline resistance is documented",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
@@ -15881,7 +15908,7 @@
     {
      "role": "alt",
      "drugs": "cholera: ciprofloxacin",
-     "note": null,
+     "note": "if doxycycline resistance is documented",
      "sources": [
       {
        "name": "Overview of Gastroenteritis",
@@ -16111,6 +16138,84 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_M5EX3KYVH2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ORS",
+     "note": "rehydration",
+     "sources": [
+      {
+       "name": "Viral Gastroenteritis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK518995/"
+      },
+      {
+       "name": "Travelers' Diarrhea (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459348/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_56ZZRJTCDH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bismuth subsalicylate",
+     "note": "travelers' diarrhea (tx or prevention)",
+     "sources": [
+      {
+       "name": "Travelers' Diarrhea (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459348/"
+      },
+      {
+       "name": "Pepto-Bismol (bismuth subsalicylate) (OTC) prescribing information (FDA label, DailyMed)",
+       "org": "Procter & Gamble Manufactura S de RL de CV (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0429d816-f3a9-2076-e063-6394a90aef21"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_65KQE0TXNZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rotavirus; cholera (travel); typhoid (travel)",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "ROTATEQ (rotavirus vaccine, live, oral, pentavalent) prescribing information (FDA label, DailyMed)",
+       "org": "Merck Sharp & Dohme LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=aaf3b24e-85fd-43ee-b657-2ee4df312ec3"
+      },
+      {
+       "name": "VAXCHORA (cholera vaccine, live, oral) prescribing information (FDA label, DailyMed)",
+       "org": "Bavarian Nordic A/S (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2d33d9ae-1fe6-477e-9285-8890f6e98be4"
+      },
+      {
+       "name": "Typhoid Fever (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK557513/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -16126,6 +16231,13 @@
    "members": [
     "c_Z3W9VNTMAH",
     "c_FHJ5EZAEK6"
+   ]
+  },
+  {
+   "title": "Antidiarrheals",
+   "members": [
+    "c_64K0606W4M",
+    "g_56ZZRJTCDH"
    ]
   }
  ]

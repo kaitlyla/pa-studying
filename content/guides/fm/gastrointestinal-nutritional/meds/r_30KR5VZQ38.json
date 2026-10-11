@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_KDWWRRG04N",
+  "g_95RE5KDDW9",
+  "g_WKKVC6MPA8",
+  "g_XG0BZCVN1E"
+ ],
+ "roles": [
+  {
+   "target": "g_KDWWRRG04N",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pancrelipase",
+     "note": "exocrine insufficiency",
+     "sources": [
+      {
+       "name": "Pancreatic Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/pancreatic-cancer?autoredirectid=37273"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_95RE5KDDW9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral opioid",
+     "note": "mod-severe pain",
+     "sources": [
+      {
+       "name": "Pancreatic Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/pancreatic-cancer?autoredirectid=37273"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "celiac plexus block",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pancreatic Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/pancreatic-cancer?autoredirectid=37273"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WKKVC6MPA8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "LMWH",
+     "note": "cancer-associated VTE",
+     "sources": [
+      {
+       "name": "Cancer-Associated Thrombosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK562222/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "DOAC (eg, apixaban)",
+     "note": "cancer-associated VTE",
+     "sources": [
+      {
+       "name": "Cancer-Associated Thrombosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK562222/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XG0BZCVN1E",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "FOLFIRINOX or gemcitabine + nab-paclitaxel",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pancreatic Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/pancreatic-cancer?autoredirectid=37273"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

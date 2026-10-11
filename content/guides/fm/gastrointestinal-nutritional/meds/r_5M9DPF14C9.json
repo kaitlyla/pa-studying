@@ -4,7 +4,11 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_H7XSKK5W3E"
+  "g_H7XSKK5W3E",
+  "g_KRGMA2JPMN",
+  "g_QA5TMQSFT6",
+  "g_5E9QC5M470",
+  "g_C7RH30BWGA"
  ],
  "roles": [
   {
@@ -27,6 +31,91 @@
      "role": "adjunct",
      "drugs": "vitamins A, D, E, K",
      "note": "fat malabsorb",
+     "sources": [
+      {
+       "name": "Chronic Pancreatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/chronic-pancreatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KRGMA2JPMN",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "APAP, NSAIDs, pregabalin, SSRIs, TCAs",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chronic Pancreatitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482325/"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "opioids (start w tramadol)",
+     "note": "w non-opioids",
+     "sources": [
+      {
+       "name": "Chronic Pancreatitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482325/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QA5TMQSFT6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": "slows progression",
+     "sources": [
+      {
+       "name": "Chronic Pancreatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/chronic-pancreatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5E9QC5M470",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "insulin",
+     "note": "pancreatogenic (type 3c) DM; cautious",
+     "sources": [
+      {
+       "name": "Chronic Pancreatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/chronic-pancreatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_C7RH30BWGA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vit D + calcium",
+     "note": "bone health",
      "sources": [
       {
        "name": "Chronic Pancreatitis",

@@ -14410,7 +14410,11 @@
    "gap": "g_A5GT70EE6M"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_KC56PEJ3KH",
+  "g_Q2VQ4VCRXJ",
+  "g_84HWBSKJKM"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -14616,6 +14620,94 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_KC56PEJ3KH",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "risankizumab, mirikizumab or guselkumab",
+     "note": "mod-severe",
+     "sources": [
+      {
+       "name": "Crohn Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/crohn-disease"
+      },
+      {
+       "name": "SKYRIZI (risankizumab-rzaa) prescribing information (FDA label, DailyMed)",
+       "org": "AbbVie Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7148c8eb-b39e-e20a-6494-a6df82392858"
+      },
+      {
+       "name": "OMVOH (mirikizumab-mrkz) prescribing information (FDA label, DailyMed)",
+       "org": "Eli Lilly and Company (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=472cbe04-263e-433d-9a0f-58c1b50b715a"
+      },
+      {
+       "name": "TREMFYA (guselkumab) prescribing information (FDA label, DailyMed)",
+       "org": "Janssen Biotech, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e6dc9ae-1c4c-42d9-87aa-c315ecc51b56"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q2VQ4VCRXJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "↓ Recurr",
+     "sources": [
+      {
+       "name": "Crohn Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/crohn-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_84HWBSKJKM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vit B12, iron",
+     "note": "deficiency",
+     "sources": [
+      {
+       "name": "Crohn Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/crohn-disease"
+      },
+      {
+       "name": "Crohn Disease (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK436021/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Biologics",
+   "members": [
+    "c_R4ZA7XX945",
+    "c_KSRP94XSBR",
+    "g_KC56PEJ3KH"
    ]
   }
  ]

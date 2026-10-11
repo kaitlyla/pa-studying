@@ -10947,7 +10947,12 @@
   }
  ],
  "gaps": [
-  "g_5NA0Z7W2YR"
+  "g_5NA0Z7W2YR",
+  "g_NMH6H8P3NM",
+  "g_15Y5F2V78P",
+  "g_4J589YXQMJ",
+  "g_2M73CNVH4W",
+  "g_5J0M71GHDX"
  ],
  "roles": [
   {
@@ -10955,7 +10960,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "single long-acting bronchodilator (LABA or LAMA)",
+     "drugs": "single long-acting bronchodilator: LABA",
      "note": "GOLD group A (few Sx, ⍉exacerbations)",
      "sources": [
       {
@@ -10974,7 +10979,7 @@
     },
     {
      "role": "1st",
-     "drugs": "LABA + LAMA",
+     "drugs": "LABA (w a LAMA)",
      "note": "initial therapy for most pts (GOLD group B: dyspnea; group E: exacerbations)",
      "sources": [
       {
@@ -10987,7 +10992,7 @@
     },
     {
      "role": "2nd",
-     "drugs": "LABA + LAMA",
+     "drugs": "LABA (w a LAMA)",
      "note": "first escalation (for group A pts started on one bronchodilator)",
      "sources": [
       {
@@ -11011,7 +11016,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "single long-acting bronchodilator (LABA or LAMA)",
+     "drugs": "single long-acting bronchodilator: LAMA",
      "note": "GOLD group A (few Sx, ⍉exacerbations)",
      "sources": [
       {
@@ -11030,7 +11035,7 @@
     },
     {
      "role": "1st",
-     "drugs": "LABA + LAMA",
+     "drugs": "LAMA (w a LABA)",
      "note": "initial therapy for most pts (GOLD group B: dyspnea; group E: exacerbations)",
      "sources": [
       {
@@ -11043,7 +11048,7 @@
     },
     {
      "role": "2nd",
-     "drugs": "LABA + LAMA",
+     "drugs": "LAMA (w a LABA)",
      "note": "first escalation (for group A pts started on one bronchodilator)",
      "sources": [
       {
@@ -11178,6 +11183,121 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NMH6H8P3NM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "⍉on ICS",
+     "sources": [
+      {
+       "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_15Y5F2V78P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "varenicline",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chronic Obstructive Pulmonary Disease (COPD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "bupropion or NRT",
+     "note": null,
+     "sources": [
+      {
+       "name": "Chronic Obstructive Pulmonary Disease (COPD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4J589YXQMJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Treatment of Stable COPD",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
+      },
+      {
+       "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2M73CNVH4W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": "AATD w lung dz",
+     "sources": [
+      {
+       "name": "Alpha-1 Antitrypsin Deficiency (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK442030/"
+      },
+      {
+       "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5J0M71GHDX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "opioids",
+     "note": "palliative, refractory breathlessness",
+     "sources": [
+      {
+       "name": "2026 GOLD Report (Global Strategy for the Diagnosis, Management, and Prevention of COPD)",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
       }
      ]
     }

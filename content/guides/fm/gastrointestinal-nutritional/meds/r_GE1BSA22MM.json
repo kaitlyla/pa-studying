@@ -5203,7 +5203,9 @@
    "gap": "g_MC4FD6GAPV"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_C0C39QDHGB"
+ ],
  "roles": [
   {
    "target": "c_63QY6YSHKS",
@@ -5265,13 +5267,56 @@
     {
      "role": "adjunct",
      "drugs": "metoclopramide 10 mg before meals and at bedtime",
-     "note": "added to a PPI; less effective",
+     "note": "only w gastroparesis (added to a PPI); max 12 wks",
      "sources": [
       {
        "name": "Gastroesophageal Reflux Disease (GERD)",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/gastroesophageal-reflux-disease-gerd"
+      },
+      {
+       "name": "Gastroesophageal Reflux Disease (GERD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554462/"
+      },
+      {
+       "name": "REGLAN (metoclopramide) prescribing information (FDA label, DailyMed)",
+       "org": "ANI Pharmaceuticals, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=de55c133-eb08-4a35-91a2-5dc093027397"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_C0C39QDHGB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antacids PRN",
+     "note": "Sx relief",
+     "sources": [
+      {
+       "name": "Gastroesophageal Reflux Disease (GERD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554462/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "sucralfate",
+     "note": "preg only",
+     "sources": [
+      {
+       "name": "Gastroesophageal Reflux Disease (GERD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554462/"
       }
      ]
     }

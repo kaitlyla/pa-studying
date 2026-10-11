@@ -839,7 +839,10 @@
   }
  ],
  "gaps": [
-  "g_RKM4205ASM"
+  "g_RKM4205ASM",
+  "g_2RPKMWZT10",
+  "g_XYQEMEX03J",
+  "g_8G5H0NEMNZ"
  ],
  "roles": [
   {
@@ -880,6 +883,73 @@
      "role": "adjunct",
      "drugs": "cholestyramine 4-16 g/day",
      "note": "pruritus; separate from UDCA and other drugs",
+     "sources": [
+      {
+       "name": "Primary Biliary Cholangitis (PBC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/primary-biliary-cholangitis-pbc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2RPKMWZT10",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": "cholestatic pruritus",
+     "sources": [
+      {
+       "name": "LYNAVOY (linerixibat) prescribing information (FDA label, DailyMed)",
+       "org": "Intercept Pharmaceuticals Inc (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c00317c8-709c-4707-a6d1-632bff123026"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XYQEMEX03J",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "rifampin, naltrexone or sertraline",
+     "note": "pruritus",
+     "sources": [
+      {
+       "name": "Primary Biliary Cholangitis (PBC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/primary-biliary-cholangitis-pbc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8G5H0NEMNZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "calcium + vit D; bisphosphonate",
+     "note": "osteoporosis",
+     "sources": [
+      {
+       "name": "Primary Biliary Cholangitis (PBC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/primary-biliary-cholangitis-pbc"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "vitamins A, D, E, K",
+     "note": "fat malabsorption",
      "sources": [
       {
        "name": "Primary Biliary Cholangitis (PBC)",

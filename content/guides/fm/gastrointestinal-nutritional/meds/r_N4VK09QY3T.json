@@ -839,7 +839,10 @@
   }
  ],
  "gaps": [
-  "g_ZZSHRSZ3DH"
+  "g_ZZSHRSZ3DH",
+  "g_C0EJMMYVER",
+  "g_XN1ZESBVGD",
+  "g_MS64R60J1E"
  ],
  "roles": [
   {
@@ -889,6 +892,82 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_C0EJMMYVER",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "UDCA 13-15 mg/kg/day",
+     "note": "labs only; high dose CI",
+     "sources": [
+      {
+       "name": "Primary Sclerosing Cholangitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537181/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XN1ZESBVGD",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "rifampin, naltrexone or sertraline",
+     "note": "cholestatic pruritus",
+     "sources": [
+      {
+       "name": "Primary Sclerosing Cholangitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537181/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MS64R60J1E",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HAV + HBV vaccines",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Primary Sclerosing Cholangitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537181/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "vitamins A, D, E, K; calcium + vit D",
+     "note": "chronic cholestasis",
+     "sources": [
+      {
+       "name": "Primary Sclerosing Cholangitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537181/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Bile acids",
+   "members": [
+    "g_ZZSHRSZ3DH",
+    "g_C0EJMMYVER"
    ]
   }
  ]

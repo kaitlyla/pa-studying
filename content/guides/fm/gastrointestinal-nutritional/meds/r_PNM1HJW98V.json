@@ -14691,7 +14691,11 @@
    "gap": "g_T2X733TFPC"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_HTQCQN61VG",
+  "g_YS0WS9DHHF",
+  "g_XA4XE3BCVJ"
+ ],
  "roles": [
   {
    "target": "c_YQ1GFXBC9D",
@@ -14744,6 +14748,19 @@
      "role": "1st",
      "drugs": "severe: high-dose IV glucocorticoids",
      "note": "exclude C. difficile and CMV first",
+     "sources": [
+      {
+       "name": "Ulcerative Colitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "oral budesonide MMX 9 mg/day",
+     "note": "induction, mild-mod left-sided dz",
      "sources": [
       {
        "name": "Ulcerative Colitis",
@@ -14923,6 +14940,82 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_HTQCQN61VG",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "ozanimod or etrasimod",
+     "note": "mod-severe UC",
+     "sources": [
+      {
+       "name": "Ulcerative Colitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis"
+      },
+      {
+       "name": "ZEPOSIA (ozanimod) prescribing information (FDA label, DailyMed)",
+       "org": "Celgene Corporation (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=93ce2fab-edfb-4804-8074-963071de51e4"
+      },
+      {
+       "name": "VELSIPITY (etrasimod) prescribing information (FDA label, DailyMed)",
+       "org": "Pfizer Laboratories Div Pfizer Inc (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=65171e4a-d136-4abc-b08c-c40c1b486ff6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YS0WS9DHHF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "guselkumab, risankizumab or mirikizumab",
+     "note": "mod/extensive dz",
+     "sources": [
+      {
+       "name": "Ulcerative Colitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XA4XE3BCVJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DVT prophylaxis",
+     "note": "hospitalized severe/fulminant UC",
+     "sources": [
+      {
+       "name": "Ulcerative Colitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Biologics",
+   "members": [
+    "c_R4ZA7XX945",
+    "c_KSRP94XSBR",
+    "g_YS0WS9DHHF"
    ]
   }
  ]

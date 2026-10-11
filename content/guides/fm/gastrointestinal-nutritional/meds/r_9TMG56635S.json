@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_WJE047BWE8",
+  "g_VYVKNT4RGD"
+ ],
+ "roles": [
+  {
+   "target": "g_WJE047BWE8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "entecavir or tenofovir",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hepatitis B, Chronic",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-b-chronic"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "tenofovir from 28 wks",
+     "note": "preg, HBV DNA >200,000 IU/mL",
+     "sources": [
+      {
+       "name": "Hepatitis B, Chronic",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-b-chronic"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VYVKNT4RGD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HepB vaccine; HBIG",
+     "note": "prevention; PEP",
+     "sources": [
+      {
+       "name": "Weng MK, et al. Universal Hepatitis B Vaccination in Adults Aged 19-59 Years: Updated Recommendations of the Advisory Committee on Immunization Practices - United States, 2022. MMWR 2022;71(13):477-483",
+       "org": "Centers for Disease Control and Prevention (CDC) / ACIP",
+       "year": "2022",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8979596/"
+      },
+      {
+       "name": "HEPLISAV-B (hepatitis B vaccine, recombinant, adjuvanted) prescribing information (FDA label, DailyMed)",
+       "org": "A-S Medication Solutions (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=618db7b8-a5e4-49c8-9390-38912e6f39fd"
+      },
+      {
+       "name": "Overview of Acute Viral Hepatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/overview-of-acute-viral-hepatitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

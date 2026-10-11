@@ -2772,7 +2772,10 @@
   }
  ],
  "gaps": [
-  "g_S1HK1TKQEX"
+  "g_S1HK1TKQEX",
+  "g_HT4MN19NCP",
+  "g_MCKPQ9W0G7",
+  "g_5YY2HFJZQ8"
  ],
  "roles": [
   {
@@ -2852,6 +2855,45 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/tumors-of-the-lungs/lung-carcinoma"
       }
      ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "dexamethasone (oral or IV)",
+     "note": "brain mets",
+     "sources": [
+      {
+       "name": "Brain Metastasis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470246/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "dexamethasone 10 mg IV bolus, then 4 mg IV Q6h",
+     "note": "spinal cord compression",
+     "sources": [
+      {
+       "name": "Spinal Cord Compression (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK557604/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "corticosteroids",
+     "note": "SVC syndrome",
+     "sources": [
+      {
+       "name": "Superior Vena Cava Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/"
+      }
+     ]
     }
    ]
   },
@@ -2868,6 +2910,174 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/tumors-of-the-lungs/lung-carcinoma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HT4MN19NCP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "NS hydration + bisphosphonate (zoledronic acid > pamidronate)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hypercalcemia (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "denosumab",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hypercalcemia (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "calcitonin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hypercalcemia (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MCKPQ9W0G7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluid restriction",
+     "note": null,
+     "sources": [
+      {
+       "name": "Syndrome of Inappropriate Antidiuretic Hormone Secretion (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507777/"
+      },
+      {
+       "name": "SAMSCA (tolvaptan) prescribing information (FDA label, DailyMed)",
+       "org": "Otsuka America Pharmaceutical, Inc. (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5526617c-c7b9-4556-886d-729bbabbc566"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "oral salt tabs or IV saline",
+     "note": "hyponatremia persists",
+     "sources": [
+      {
+       "name": "Syndrome of Inappropriate Antidiuretic Hormone Secretion (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507777/"
+      },
+      {
+       "name": "SAMSCA (tolvaptan) prescribing information (FDA label, DailyMed)",
+       "org": "Otsuka America Pharmaceutical, Inc. (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5526617c-c7b9-4556-886d-729bbabbc566"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "hypertonic saline",
+     "note": "severe Sxtomatic or resistant",
+     "sources": [
+      {
+       "name": "Syndrome of Inappropriate Antidiuretic Hormone Secretion (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507777/"
+      },
+      {
+       "name": "SAMSCA (tolvaptan) prescribing information (FDA label, DailyMed)",
+       "org": "Otsuka America Pharmaceutical, Inc. (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5526617c-c7b9-4556-886d-729bbabbc566"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "tolvaptan or conivaptan",
+     "note": "severe persistent SIADH",
+     "sources": [
+      {
+       "name": "Syndrome of Inappropriate Antidiuretic Hormone Secretion (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507777/"
+      },
+      {
+       "name": "SAMSCA (tolvaptan) prescribing information (FDA label, DailyMed)",
+       "org": "Otsuka America Pharmaceutical, Inc. (FDA label, DailyMed)",
+       "year": "2021",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5526617c-c7b9-4556-886d-729bbabbc566"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5YY2HFJZQ8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "varenicline",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lung Cancer (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482357/"
+      },
+      {
+       "name": "Chronic Obstructive Pulmonary Disease (COPD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "bupropion or NRT",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lung Cancer (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482357/"
+      },
+      {
+       "name": "Chronic Obstructive Pulmonary Disease (COPD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/"
       }
      ]
     }

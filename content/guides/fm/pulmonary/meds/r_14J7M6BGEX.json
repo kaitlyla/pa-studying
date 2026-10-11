@@ -2969,7 +2969,8 @@
   }
  ],
  "gaps": [
-  "g_4SF05JPPEQ"
+  "g_4SF05JPPEQ",
+  "g_ZYN68YHCDK"
  ],
  "roles": [
   {
@@ -3000,6 +3001,32 @@
        "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "rifampin daily 3-4 months",
+     "note": "latent TB",
+     "sources": [
+      {
+       "name": "Latent Tuberculosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "rifampin or rifapentine + isoniazid 3-4 months",
+     "note": "latent TB",
+     "sources": [
+      {
+       "name": "Latent Tuberculosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
+      }
+     ]
     }
    ]
   },
@@ -3016,6 +3043,32 @@
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2025",
        "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "isoniazid + rifampin or rifapentine 3-4 months",
+     "note": "latent TB",
+     "sources": [
+      {
+       "name": "Latent Tuberculosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "isoniazid alone daily 6-9 months",
+     "note": "latent TB",
+     "sources": [
+      {
+       "name": "Latent Tuberculosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
       }
      ]
     }
@@ -3072,6 +3125,19 @@
        "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "rifapentine (dosed weekly) + isoniazid 3-4 months",
+     "note": "latent TB",
+     "sources": [
+      {
+       "name": "Latent Tuberculosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
+      }
+     ]
     }
    ]
   },
@@ -3092,6 +3158,30 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_ZYN68YHCDK",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": null,
+     "note": "drug-resistant TB",
+     "sources": [
+      {
+       "name": "Tuberculosis (TB)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/tuberculosis-tb"
+      },
+      {
+       "name": "Pretomanid tablets prescribing information (FDA label, DailyMed)",
+       "org": "Viatris Specialty LLC (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f1906fc9-cb3c-4e13-8a4a-da76100c1bf3"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -3102,7 +3192,8 @@
     "r_MZBRJ29YP5",
     "r_9P3SHF5TQS",
     "r_JNTH1AY6XW",
-    "g_4SF05JPPEQ"
+    "g_4SF05JPPEQ",
+    "g_ZYN68YHCDK"
    ]
   }
  ]

@@ -7816,7 +7816,12 @@
    "gap": "g_MR6G8385KF"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_HG3Z7NTV25",
+  "g_ZCVRE521D0",
+  "g_12M5JR7MQS",
+  "g_HFX9Q8TYBQ"
+ ],
  "roles": [
   {
    "target": "c_WSHAWG4JTZ",
@@ -7885,6 +7890,84 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/acute-pancreatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HG3Z7NTV25",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "LR 1.5 mL/kg/h",
+     "note": null,
+     "sources": [
+      {
+       "name": "Acute Pancreatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/acute-pancreatitis"
+      },
+      {
+       "name": "Acute Pancreatitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZCVRE521D0",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "N/V",
+     "sources": [
+      {
+       "name": "Acute Pancreatitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/pancreatitis/acute-pancreatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_12M5JR7MQS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "acetaminophen; regional nerve blocks",
+     "note": "opioid-sparing",
+     "sources": [
+      {
+       "name": "Acute Pancreatitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HFX9Q8TYBQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "insulin infusion, heparin or plasmapheresis",
+     "note": "TG >1000 mg/dL",
+     "sources": [
+      {
+       "name": "Acute Pancreatitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/"
       }
      ]
     }

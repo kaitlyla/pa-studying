@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_SWS4R3DT0A",
+  "g_E02RZMYM67"
+ ],
+ "roles": [
+  {
+   "target": "g_SWS4R3DT0A",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sofosbuvir/velpatasvir × 12 wks or glecaprevir/pibrentasvir × 8 wks",
+     "note": "tx-naive; ⍉cirrhosis or compensated",
+     "sources": [
+      {
+       "name": "Hepatitis C, Chronic",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-c-chronic"
+      },
+      {
+       "name": "MAVYRET (glecaprevir and pibrentasvir) prescribing information (FDA label, DailyMed)",
+       "org": "AbbVie Inc. (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7bf99777-0401-9095-8645-16c6e907fcc0"
+      },
+      {
+       "name": "EPCLUSA (sofosbuvir and velpatasvir) prescribing information (FDA label, DailyMed)",
+       "org": "Gilead Sciences, Inc. (FDA label, DailyMed)",
+       "year": "2020",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=996466df-f236-4804-b10f-838aa83231a1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E02RZMYM67",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HAV + HBV vaccines",
+     "note": "prevention; test HBV b4 DAAs",
+     "sources": [
+      {
+       "name": "AASLD-IDSA HCV Guidance Panel. Hepatitis C Guidance 2019 Update: AASLD-IDSA Recommendations for Testing, Managing, and Treating Hepatitis C Virus Infection. Hepatology 2020;71(2):686-721",
+       "org": "American Association for the Study of Liver Diseases (AASLD) / Infectious Diseases Society of America (IDSA)",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9710295/"
+      },
+      {
+       "name": "EPCLUSA (sofosbuvir and velpatasvir) prescribing information (FDA label, DailyMed)",
+       "org": "Gilead Sciences, Inc. (FDA label, DailyMed)",
+       "year": "2020",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=996466df-f236-4804-b10f-838aa83231a1"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

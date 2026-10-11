@@ -31,11 +31,18 @@
    "accessed": "2026-10-09"
   },
   {
-   "text": "Cholera: doxycycline = first-line for nonpregnant adults; azithro = first-line for children and preg women and second-line for others.",
-   "source": 1,
-   "quote": "In general, doxycycline is the recommended first-line antibiotic for non-pregnant adults. Azithromycin is first-line for children and pregnant women and second-line for others.",
-   "locator": "Table: Treatment for Infectious Gastroenteritis, footnote ‡",
-   "accessed": "2026-10-09"
+   "text": "Cholera: doxycycline = first-line for adults (incl preg) and children;",
+   "source": 4,
+   "quote": "Doxycycline is recommended as first-line treatment for adults (including pregnant patients) and children.",
+   "locator": "Treatment",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "azithro or cipro if doxycycline resistance is documented.",
+   "source": 4,
+   "quote": "If resistance to doxycycline is documented, azithromycin and ciprofloxacin are alternative options",
+   "locator": "Treatment",
+   "accessed": "2026-10-11"
   },
   {
    "text": "Giardiasis: tinidazole (single dose), metronidazole (5-7 days),",
@@ -113,11 +120,25 @@
    "quote": "Antidiarrheal (antimotility) agents are not recommended in children < 18 years of age with acute diarrhea",
    "locator": "Treatment of Gastroenteritis",
    "accessed": "2026-10-09"
+  },
+  {
+   "text": "Lomotil label CI: age <6 yrs (resp + CNS depression);",
+   "source": 5,
+   "quote": "Pediatric patients less than 6 years of age due to the risks of respiratory and central nervous system (CNS) depression",
+   "locator": "Contraindications",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "diarrhea w organisms that penetrate the GI mucosa (toxigenic E. coli, Salmonella, Shigella) or pseudomembranous enterocolitis (C. diff).",
+   "source": 5,
+   "quote": "in patients with diarrhea associated with organisms that penetrate the GI mucosa (toxigenic E. coli, Salmonella, Shigella), and pseudomembranous enterocolitis (Clostridium difficile)",
+   "locator": "Warnings",
+   "accessed": "2026-10-11"
   }
  ],
  "verification": {
   "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
-  "at": "2026-10-08",
+  "at": "2026-10-11",
   "result": "pass",
   "notes": []
  },

@@ -5727,7 +5727,11 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_KC02V4THCT",
+  "g_F35RYQP2S7",
+  "g_7Z892JVSF3"
+ ],
  "roles": [
   {
    "target": "c_JB56RPMPJM",
@@ -5752,7 +5756,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "antispasmodic (dicyclomine, hyoscine)",
+     "drugs": "antispasmodic (dicyclomine, hyoscyamine)",
      "note": "Abd pain, all subtypes; evidence quality ↓",
      "sources": [
       {
@@ -5760,6 +5764,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/irritable-bowel-syndrome-ibs/irritable-bowel-syndrome-ibs"
+      },
+      {
+       "name": "Irritable Bowel Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534810/"
       }
      ]
     }
@@ -5850,6 +5860,72 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/irritable-bowel-syndrome-ibs/irritable-bowel-syndrome-ibs"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KC02V4THCT",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "amitriptyline or nortriptyline (low dose)",
+     "note": "Abd pain; IBS-D",
+     "sources": [
+      {
+       "name": "Irritable Bowel Syndrome (IBS)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/irritable-bowel-syndrome-ibs/irritable-bowel-syndrome-ibs"
+      },
+      {
+       "name": "Irritable Bowel Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534810/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F35RYQP2S7",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": "IBS-D; ⍉if no gallbladder",
+     "sources": [
+      {
+       "name": "VIBERZI (eluxadoline) prescribing information (FDA label, DailyMed)",
+       "org": "Allergan, Inc. (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7821bd40-4c84-4984-951b-6436ae20421a"
+      },
+      {
+       "name": "Irritable Bowel Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534810/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7Z892JVSF3",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "enteric-coated peppermint oil",
+     "note": "when antispasmodics fail",
+     "sources": [
+      {
+       "name": "Irritable Bowel Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK534810/"
       }
      ]
     }

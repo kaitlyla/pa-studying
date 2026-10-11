@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_Y4ADJNTYDC",
+  "g_ME56C1R218",
+  "g_825BDDE9MF"
+ ],
+ "roles": [
+  {
+   "target": "g_Y4ADJNTYDC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": "initial mgmt",
+     "sources": [
+      {
+       "name": "Small Bowel Obstruction (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448079/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ME56C1R218",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "water-soluble contrast",
+     "note": "adhesional SBO",
+     "sources": [
+      {
+       "name": "Small Bowel Obstruction (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448079/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_825BDDE9MF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV neostigmine",
+     "note": "Ogilvie (ACPO)",
+     "sources": [
+      {
+       "name": "Ogilvie Syndrome (Archived) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": null
+      },
+      {
+       "name": "Ileus",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/ileus"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

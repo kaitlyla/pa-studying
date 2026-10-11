@@ -12828,7 +12828,12 @@
   }
  ],
  "gaps": [
-  "g_MHC3GC5FD0"
+  "g_MHC3GC5FD0",
+  "g_VBJ01BMQ2E",
+  "g_CSCQSV4XYS",
+  "g_29A3B4SFVC",
+  "g_BDA0TK3JT3",
+  "g_VMNNCQVEDD"
  ],
  "roles": [
   {
@@ -12957,7 +12962,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "mast cell stabilizer",
+     "drugs": "cromolyn (nebulized only)",
      "note": "Alt controller @ steps 2-4",
      "sources": [
       {
@@ -12965,6 +12970,18 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/asthma-and-related-disorders/asthma"
+      },
+      {
+       "name": "2026 GINA Strategy Report (Global Strategy for Asthma Management and Prevention)",
+       "org": "Global Initiative for Asthma (GINA)",
+       "year": "2026",
+       "url": "https://ginasthma.org/reports/"
+      },
+      {
+       "name": "Cromolyn sodium inhalation solution prescribing information (FDA label, DailyMed)",
+       "org": "Ritedose Pharmaceuticals, LLC (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0209cd6c-5c43-0b93-e063-6294a90ac964"
       }
      ]
     }
@@ -13047,6 +13064,114 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_VBJ01BMQ2E",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "severe eosinophilic asthma (add-on maintenance)",
+     "sources": [
+      {
+       "name": "Exdensur (depemokimab) approved by US FDA for the treatment of severe asthma (press release, 16 Dec 2025)",
+       "org": "GSK",
+       "year": "2025",
+       "url": "https://www.gsk.com/en-gb/media/press-releases/exdensur-depemokimab-approved-by-us-fda-for-the-treatment-of-severe-asthma/"
+      },
+      {
+       "name": "2026 GINA Strategy Report (Global Strategy for Asthma Management and Prevention)",
+       "org": "Global Initiative for Asthma (GINA)",
+       "year": "2026",
+       "url": "https://ginasthma.org/reports/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CSCQSV4XYS",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": "reliever (as-needed ICS-SABA), adults",
+     "sources": [
+      {
+       "name": "AIRSUPRA (albuterol/budesonide) prescribing information (FDA label, DailyMed)",
+       "org": "AstraZeneca (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e60aa9f9-5139-44df-b886-ebddc3c7eb13"
+      },
+      {
+       "name": "2026 GINA Strategy Report (Global Strategy for Asthma Management and Prevention)",
+       "org": "Global Initiative for Asthma (GINA)",
+       "year": "2026",
+       "url": "https://ginasthma.org/reports/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_29A3B4SFVC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2026 GINA Strategy Report (Global Strategy for Asthma Management and Prevention)",
+       "org": "Global Initiative for Asthma (GINA)",
+       "year": "2026",
+       "url": "https://ginasthma.org/reports/"
+      },
+      {
+       "name": "AREXVY (respiratory syncytial virus vaccine, adjuvanted) prescribing information (FDA label, DailyMed)",
+       "org": "GlaxoSmithKline Biologicals SA (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e50f275-002e-413f-a840-66ee3cb3740c"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BDA0TK3JT3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "severe exacerbation ⍉responding to initial tx",
+     "sources": [
+      {
+       "name": "2026 GINA Strategy Report (Global Strategy for Asthma Management and Prevention)",
+       "org": "Global Initiative for Asthma (GINA)",
+       "year": "2026",
+       "url": "https://ginasthma.org/reports/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VMNNCQVEDD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "severe exacerbation",
+     "sources": [
+      {
+       "name": "Status Asthmaticus (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK526070/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -13057,7 +13182,8 @@
     "c_B616JSKCNF",
     "c_KHM3DHV655",
     "c_VFE09ZVEV6",
-    "c_9P71DW56HK"
+    "c_9P71DW56HK",
+    "g_CSCQSV4XYS"
    ]
   },
   {
@@ -13065,6 +13191,13 @@
    "members": [
     "c_1Y8MCFQ7S7",
     "c_CSF60KE111"
+   ]
+  },
+  {
+   "title": "Monoclonal antibodies",
+   "members": [
+    "c_W86AY8ACGG",
+    "g_VBJ01BMQ2E"
    ]
   }
  ]

@@ -1872,7 +1872,10 @@
    "gap": "g_55TCZCYAST"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_PYYPQR8C6C",
+  "g_KKEXQWQGS8"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -1905,6 +1908,48 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-pulmonary-diseases/silicosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PYYPQR8C6C",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "LTBI screening and tx",
+     "sources": [
+      {
+       "name": "Silicosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-and-occupational-pulmonary-diseases/silicosis"
+      },
+      {
+       "name": "Silicosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK594245/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KKEXQWQGS8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Silicosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-and-occupational-pulmonary-diseases/silicosis"
       }
      ]
     }

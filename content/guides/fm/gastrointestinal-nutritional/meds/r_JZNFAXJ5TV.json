@@ -4074,7 +4074,7 @@
    "target": "g_Q3TSTM1YMV",
    "roles": [
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "resmetirom",
      "note": "steatohepatitis w moderate-severe (F2-F3) fibrosis, w lifestyle Δ",
      "sources": [
@@ -4089,19 +4089,31 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/metabolic-dysfunction-associated-liver-disease-masld"
+      },
+      {
+       "name": "REZDIFFRA (resmetirom) prescribing information (FDA label, DailyMed)",
+       "org": "Madrigal Pharmaceuticals, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e67ea09f-a840-439c-86c8-f98585f978b2"
       }
      ]
     },
     {
      "role": "alt",
      "drugs": "thiazolidinediones or vitamin E",
-     "note": "preliminary evidence; may ⍉reduce fibrosis; ↑dose vit E contraindicated in diabetes",
+     "note": "preliminary evidence; may ⍉reduce fibrosis; vit E: nondiabetic MASH (stage 2+ fibrosis)",
      "sources": [
       {
        "name": "Metabolic Dysfunction-Associated Liver Disease (MASLD)",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/metabolic-dysfunction-associated-liver-disease-masld"
+      },
+      {
+       "name": "Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK541033/"
       }
      ]
     }
@@ -4111,7 +4123,7 @@
    "target": "c_9BTY4MXEMW",
    "roles": [
     {
-     "role": "adjunct",
+     "role": "1st",
      "drugs": "semaglutide",
      "note": "steatohepatitis w moderate-severe (F2-F3) fibrosis, w lifestyle Δ",
      "sources": [
@@ -4126,6 +4138,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/metabolic-dysfunction-associated-liver-disease-masld"
+      },
+      {
+       "name": "WEGOVY (semaglutide) prescribing information (FDA label, DailyMed)",
+       "org": "Novo Nordisk Pharmaceutical Industries, LP (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ee06186f-2aa3-4990-a760-757579d8f77b"
       }
      ]
     }
@@ -4137,13 +4155,19 @@
     {
      "role": "alt",
      "drugs": "thiazolidinediones",
-     "note": "preliminary evidence; may ⍉reduce fibrosis; ↑dose vit E contraindicated in diabetes",
+     "note": "preliminary evidence; may ⍉reduce fibrosis; vit E: nondiabetic MASH (stage 2+ fibrosis)",
      "sources": [
       {
        "name": "Metabolic Dysfunction-Associated Liver Disease (MASLD)",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/metabolic-dysfunction-associated-liver-disease-masld"
+      },
+      {
+       "name": "Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK541033/"
       }
      ]
     }

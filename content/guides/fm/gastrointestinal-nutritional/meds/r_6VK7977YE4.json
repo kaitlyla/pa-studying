@@ -14066,7 +14066,9 @@
  ],
  "gaps": [
   "g_YN4TPRJ42R",
-  "g_H29FZVFBSX"
+  "g_H29FZVFBSX",
+  "g_89M53F93NZ",
+  "g_DZBPDCKXW1"
  ],
  "roles": [
   {
@@ -14106,19 +14108,6 @@
      "role": "1st",
      "drugs": "variceal bleed: endoscopic banding + IV octreotide for 3-5 days",
      "note": "octreotide preferred over vasopressin/terlipressin (fewer SE)",
-     "sources": [
-      {
-       "name": "Varices",
-       "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastrointestinal-bleeding/varices"
-      }
-     ]
-    },
-    {
-     "role": "adjunct",
-     "drugs": "tranexamic acid",
-     "note": "may improve banding success and reduce rebleeding in some pts",
      "sources": [
       {
        "name": "Varices",
@@ -14375,6 +14364,60 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/nutritional-disorders/mineral-deficiency-and-toxicity/wilson-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_89M53F93NZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "terlipressin + albumin",
+     "note": "HRS-AKI",
+     "sources": [
+      {
+       "name": "Hepatorenal Syndrome (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430856/"
+      },
+      {
+       "name": "TERLIVAZ (terlipressin) prescribing information (FDA label, DailyMed)",
+       "org": "Mallinckrodt Hospital Products Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3a35b86c-f451-4fac-8499-43019e4da354"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DZBPDCKXW1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HAV, HBV, pneumococcal, influenza vaccines",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Cirrhosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/cirrhosis"
+      },
+      {
+       "name": "AASLD-IDSA HCV Guidance Panel. Hepatitis C Guidance 2019 Update: AASLD-IDSA Recommendations for Testing, Managing, and Treating Hepatitis C Virus Infection. Hepatology 2020;71(2):686-721",
+       "org": "American Association for the Study of Liver Diseases (AASLD) / Infectious Diseases Society of America (IDSA)",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9710295/"
+      },
+      {
+       "name": "Hepatic Cirrhosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482419/"
       }
      ]
     }

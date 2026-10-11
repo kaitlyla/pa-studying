@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_097AJGY3FQ",
+  "g_AC8E440Q1V",
+  "g_K4869MTTA6",
+  "g_X3HPPR6RQK"
+ ],
+ "roles": [
+  {
+   "target": "g_097AJGY3FQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluconazole",
+     "note": "Candida",
+     "sources": [
+      {
+       "name": "Infectious Esophageal Disorders",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/infectious-esophageal-disorders"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AC8E440Q1V",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "other azoles or echinocandins",
+     "note": "refractory Candida",
+     "sources": [
+      {
+       "name": "Infectious Esophageal Disorders",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/infectious-esophageal-disorders"
+      },
+      {
+       "name": "Esophageal Candidiasis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537268/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_K4869MTTA6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "acyclovir, valacyclovir or famciclovir",
+     "note": "HSV",
+     "sources": [
+      {
+       "name": "Infectious Esophageal Disorders",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/infectious-esophageal-disorders"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_X3HPPR6RQK",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV ganciclovir or oral valganciclovir",
+     "note": "CMV",
+     "sources": [
+      {
+       "name": "Infectious Esophageal Disorders",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/infectious-esophageal-disorders"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antifungals",
+   "members": [
+    "g_097AJGY3FQ",
+    "g_AC8E440Q1V"
+   ]
+  },
+  {
+   "title": "Antivirals",
+   "members": [
+    "g_K4869MTTA6",
+    "g_X3HPPR6RQK"
+   ]
+  }
+ ]
+}

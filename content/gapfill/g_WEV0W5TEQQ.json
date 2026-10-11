@@ -52,7 +52,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Cholera: doxycycline = first-line for nonpregnant adults; azithro = first-line for children and preg women and second-line for others."
+      "text": "Cholera: doxycycline = first-line for adults (incl preg) and children; azithro or cipro if doxycycline resistance is documented."
      }
     ]
    },
@@ -133,6 +133,32 @@
       "text": "Diphenoxylate/atropine = the other effective antidiarrheal; antimotility drugs aren't recommended in children < 18 years w acute diarrhea."
      }
     ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Lomotil label CI: age <6 yrs (resp + CNS depression); diarrhea w organisms that penetrate the GI mucosa (toxigenic E. coli, Salmonella, Shigella) or pseudomembranous enterocolitis (C. diff)."
+     }
+    ]
    }
   ]
  },
@@ -171,6 +197,22 @@
     "org": "MSD Manual Professional Edition",
     "year": "2024",
     "url": "https://www.msdmanuals.com/professional/infectious-diseases/intestinal-protozoa-and-microsporidia/amebiasis",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "MSD Manual Professional Edition: Cholera",
+    "org": "Merck & Co., Inc. (MSD Manuals)",
+    "year": "2024",
+    "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/cholera",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "LOMOTIL (diphenoxylate hydrochloride and atropine sulfate) prescribing information (FDA label, DailyMed)",
+    "org": "Pfizer Laboratories Div Pfizer Inc (FDA label, DailyMed)",
+    "year": "2026",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f170584a-1072-4fd7-b1dc-6756703483b9",
     "type": "reference",
     "track": null
    }
