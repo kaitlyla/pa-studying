@@ -1,6 +1,8 @@
 {
  "v": 1,
- "add": [],
+ "add": [
+  "c_35QBPAGSVX"
+ ],
  "remove": [],
  "own": [
   {
@@ -1136,7 +1138,9 @@
   }
  ],
  "gaps": [
-  "g_Y4AGW8297B"
+  "g_Y4AGW8297B",
+  "g_E56G4B06BT",
+  "g_V0HKF3NV9R"
  ],
  "roles": [
   {
@@ -1167,6 +1171,19 @@
        "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "chemoprophylaxis: oseltamivir (≥3 months), inhaled zanamivir (≥5 y), baloxavir post-exposure (≥5 y)",
+     "note": "⍉amantadine/rimantadine (resistance)",
+     "sources": [
+      {
+       "name": "Influenza Antiviral Medications: Summary for Clinicians",
+       "org": "CDC",
+       "year": "2026",
+       "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
+      }
+     ]
     }
    ]
   },
@@ -1178,6 +1195,54 @@
      "drugs": "antipyretics (e.g., acetaminophen); rest, hydration",
      "note": "Sxtomatic care, which = the tx for most pts; ⍉ASA @ age ≤18 (Reye syndrome)",
      "sources": [
+      {
+       "name": "Influenza",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/respiratory-viruses/influenza"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E56G4B06BT",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: annual influenza vaccine (≥6 months); HD-IIV3, RIV3 or aIIV3 preferred @ ≥65",
+     "note": null,
+     "sources": [
+      {
+       "name": "Prevention and Control of Seasonal Influenza with Vaccines: ACIP Recommendations, 2025-26 (MMWR 2025;74(32))",
+       "org": "CDC",
+       "year": "2025",
+       "url": "https://www.cdc.gov/mmwr/volumes/74/wr/mm7432a2.htm"
+      },
+      {
+       "name": "FDA Approves Nasal Spray Influenza Vaccine for Self- or Caregiver-Administration",
+       "org": "FDA",
+       "year": "2024",
+       "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-nasal-spray-influenza-vaccine-self-or-caregiver-administration"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_35QBPAGSVX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ibuprofen",
+     "note": "fever, aches and pains (FDA); antipyretics as needed (MSD)",
+     "sources": [
+      {
+       "name": "Use Caution When Giving Cough and Cold Products to Kids",
+       "org": "FDA",
+       "year": "",
+       "url": "https://www.fda.gov/drugs/safe-use-over-counter-otc-medicines-children/use-caution-when-giving-cough-and-cold-products-kids"
+      },
       {
        "name": "Influenza",
        "org": "MSD Manual Professional Edition",

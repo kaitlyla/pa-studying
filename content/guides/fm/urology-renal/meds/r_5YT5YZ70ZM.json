@@ -4444,7 +4444,9 @@
  "gaps": [
   "g_ZGE8S52PYV",
   "g_XF0YFBDSSF",
-  "g_ATXD9CNQTJ"
+  "g_ATXD9CNQTJ",
+  "g_5Z47G6PP7C",
+  "g_RE6AF5KYDT"
  ],
  "roles": [
   {
@@ -4453,13 +4455,25 @@
     {
      "role": "1st",
      "drugs": "nitrofurantoin 100 mg BID x5 days",
-     "note": "women; ⍉if CrCl < 60; ⍉for men",
+     "note": "women; ⍉if CrCl < 60 (label); older adults: Beers 2023 avoid if CrCl < 30; ⍉for men",
      "sources": [
       {
        "name": "Bacterial Urinary Tract Infections",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "MACROBID (nitrofurantoin monohydrate/macrocrystals) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=28bc9ec9-b8db-4ece-a14a-8bcf618cbf7e"
+      },
+      {
+       "name": "American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults",
+       "org": "American Geriatrics Society",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
       }
      ]
     }
@@ -4532,6 +4546,125 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5Z47G6PP7C",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: topical vaginal estrogen",
+     "note": "postmenopausal w atrophic vaginitis or urethritis",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "prevention: continuous or postcoital antibiotic prophylaxis (TMP-SMX, nitrofurantoin, cephalexin, fosfomycin)",
+     "note": "if behavioral measures fail; Beers 2023: older adults avoid nitrofurantoin for long-term suppression",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults",
+       "org": "American Geriatrics Society",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "prevention: methenamine",
+     "note": "older adults w CrCl > 30 mL/min",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "prevention: cranberry products",
+     "note": "may be considered, w behavioral measures",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RE6AF5KYDT",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "gepotidacin",
+     "note": "allergy or resistance to first-line abx; females ≥12 y",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "BLUJEPA (gepotidacin) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=80b57cfe-7819-4d95-a57d-014af42f118d"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "sulopenem etzadroxil/probenecid",
+     "note": "reserve: limited or no alternative oral options",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "FDA approves new treatment for uncomplicated urinary tract infections in adult women who have limited or no alternative oral antibiotic treatment options (Orlynvah)",
+       "org": "FDA",
+       "year": "2024",
+       "url": "https://www.fda.gov/drugs/news-events-human-drugs/fda-approves-new-treatment-uncomplicated-urinary-tract-infections-adult-women-who-have-limited-or-no"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "pivmecillinam",
+     "note": "FDA-approved for uncomp UTI in women",
+     "sources": [
+      {
+       "name": "FDA Approves New Treatment for Uncomplicated Urinary Tract Infections (Pivya)",
+       "org": "FDA",
+       "year": "2024",
+       "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-new-treatment-uncomplicated-urinary-tract-infections"
       }
      ]
     }

@@ -546,7 +546,9 @@
    "gap": "g_CY4941E7Q9"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_C2PMZZ25N2"
+ ],
  "roles": [
   {
    "target": "c_FXMNXJ6WTF",
@@ -561,6 +563,37 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-myeloid-leukemia-cml"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_C2PMZZ25N2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "TKI (imatinib, nilotinib, dasatinib, bosutinib, ponatinib)",
+     "note": "chronic phase: initial tx",
+     "sources": [
+      {
+       "name": "Chronic Myeloid Leukemia (CML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-myeloid-leukemia-cml"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "asciminib (Scemblix)",
+     "note": "newly dx Ph+ CML, chronic phase (accelerated approval)",
+     "sources": [
+      {
+       "name": "SCEMBLIX (asciminib) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e33001e7-3650-42b1-ae56-cddb5c43aa2b"
       }
      ]
     }

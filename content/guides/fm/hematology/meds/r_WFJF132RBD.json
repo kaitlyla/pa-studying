@@ -2411,7 +2411,9 @@
    "gap": "g_WBG27QVXRJ"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_Y3G7AFVHAK"
+ ],
  "roles": [
   {
    "target": "c_1W9T6QFWR7",
@@ -2425,6 +2427,50 @@
        "name": "Disseminated Intravascular Coagulation (DIC)",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/disseminated-intravascular-coagulation-dic"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Y3G7AFVHAK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "platelet concentrates",
+     "note": "severe/critical-site bleed or urgent surg; PLT rapidly ↓ or < 10,000-20,000/microL",
+     "sources": [
+      {
+       "name": "Disseminated Intravascular Coagulation (DIC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/disseminated-intravascular-coagulation-dic"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "cryoprecipitate",
+     "note": "severe/critical-site bleed or urgent surg; fibrinogen rapidly ↓ or < 100 mg/dL",
+     "sources": [
+      {
+       "name": "Disseminated Intravascular Coagulation (DIC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/disseminated-intravascular-coagulation-dic"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "FFP",
+     "note": "severe/critical-site bleed or urgent surg",
+     "sources": [
+      {
+       "name": "Disseminated Intravascular Coagulation (DIC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/coagulation-disorders/disseminated-intravascular-coagulation-dic"
       }
      ]

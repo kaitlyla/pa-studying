@@ -478,7 +478,10 @@
    "gap": "g_2F9WGK08PN"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_0X22GEYJ7Z",
+  "g_GAFW007E2P"
+ ],
  "roles": [
   {
    "target": "c_GEQ38H1TVH",
@@ -486,13 +489,19 @@
     {
      "role": "1st",
      "drugs": "warfarin: vitamin K, prothrombin complex concentrate (PCC)",
-     "note": null,
+     "note": "major bleed: 4F-PCC rather than plasma + vit K 5–10 mg slow IV. ⍉bleeding: INR 4.5–10 ⍉routine vit K; INR >10 oral vit K",
      "sources": [
       {
        "name": "General Principles of Poisoning",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/general-principles-of-poisoning"
+      },
+      {
+       "name": "Evidence-based management of anticoagulant therapy: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed (Chest 2012;141(2 Suppl):e152S)",
+       "org": "ACCP (CHEST)",
+       "year": "2012",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278055/"
       }
      ]
     },
@@ -511,8 +520,8 @@
     },
     {
      "role": "alt",
-     "drugs": "oral factor Xa inhibitors",
-     "note": "andexanet alfa withdrawn from the US market (Dec 2025). GI bleed on a DOAC: ACG-CAG 2022 suggests against PCC; selective use may be justified for a life-threatening GI bleed w the last DOAC dose w.in 24 h",
+     "drugs": "oral factor Xa inhibitors: 4-factor PCC",
+     "note": "may be considered if andexanet alfa unavailable; 50 U/kg IV; reserve for life-threatening bleeding. Andexanet alfa withdrawn from the US market (Dec 2025). GI bleed on a DOAC: ACG-CAG 2022 suggests against PCC; selective use may be justified for a life-threatening GI bleed w the last DOAC dose w.in 24 h",
      "sources": [
       {
        "name": "Update on the Safety of Andexxa by AstraZeneca: FDA Safety Communication",
@@ -525,6 +534,74 @@
        "org": "American College of Gastroenterology / Canadian Association of Gastroenterology",
        "year": "2022",
        "url": "https://europepmc.org/article/PMC/PMC8966740"
+      },
+      {
+       "name": "Medications for Deep Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/medications-for-deep-venous-thrombosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0X22GEYJ7Z",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "heparins: protamine",
+     "note": "partial for LMWH",
+     "sources": [
+      {
+       "name": "Medications for Deep Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/medications-for-deep-venous-thrombosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GAFW007E2P",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "activated charcoal",
+     "note": "rivaroxaban ≤8 h, apixaban ≤6 h, edoxaban or dabigatran ≤2 h",
+     "sources": [
+      {
+       "name": "Medications for Deep Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/medications-for-deep-venous-thrombosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "fresh frozen plasma",
+     "note": "only if PCC unavailable",
+     "sources": [
+      {
+       "name": "Medications for Deep Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/medications-for-deep-venous-thrombosis"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "tranexamic acid",
+     "note": "can be tried; not studied for anticoagulant reversal",
+     "sources": [
+      {
+       "name": "Medications for Deep Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/medications-for-deep-venous-thrombosis"
       }
      ]
     }

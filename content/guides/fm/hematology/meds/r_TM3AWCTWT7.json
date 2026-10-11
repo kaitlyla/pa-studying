@@ -1295,7 +1295,9 @@
    "gap": "g_HMC4H946XX"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_W87RHDTCHB"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -1310,6 +1312,43 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/hodgkin-lymphoma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_W87RHDTCHB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ABVD ± radiation",
+     "note": "limited-stage",
+     "sources": [
+      {
+       "name": "Hodgkin Lymphoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/hodgkin-lymphoma"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "ABVD, AVD, BEACOPP, AVD + brentuximab vedotin, or AVD + nivolumab",
+     "note": "advanced; AVD + nivolumab poised to become the new standard",
+     "sources": [
+      {
+       "name": "Hodgkin Lymphoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/hodgkin-lymphoma"
+      },
+      {
+       "name": "ADCETRIS (brentuximab vedotin) label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3904f8dd-1aef-3490-e48f-bd55f32ed67f"
       }
      ]
     }

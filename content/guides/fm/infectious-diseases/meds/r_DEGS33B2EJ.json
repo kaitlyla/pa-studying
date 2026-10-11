@@ -2287,7 +2287,13 @@
   }
  ],
  "gaps": [
-  "g_8A3Q21FFKT"
+  "g_8A3Q21FFKT",
+  "g_BGSJQ9Z9QK",
+  "g_WRCR6MJGD0",
+  "g_XE7CN9XRJ5",
+  "g_N8NKEYNMXD",
+  "g_94ZRWDWY1H",
+  "g_CHSJ5P9E5P"
  ],
  "roles": [
   {
@@ -2411,6 +2417,177 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_BGSJQ9Z9QK",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "PrEP: TDF/FTC or TAF/FTC (oral); cabotegravir IM every 2 months; lenacapavir every 6 months",
+     "note": "TAF/FTC ⍉receptive vaginal sex",
+     "sources": [
+      {
+       "name": "Human Immunodeficiency Virus (HIV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv-infection/human-immunodeficiency-virus-hiv-infection"
+      },
+      {
+       "name": "Clinical Recommendation for the Use of Injectable Lenacapavir as HIV Preexposure Prophylaxis, United States, 2025 (MMWR)",
+       "org": "CDC",
+       "year": "2025",
+       "url": "https://www.cdc.gov/mmwr/volumes/74/wr/mm7435a1.htm"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "nPEP: bictegravir/FTC/TAF, or dolutegravir + (TAF or TDF) + (FTC or 3TC), 28 days",
+     "note": "start ≤72 h after exposure",
+     "sources": [
+      {
+       "name": "Antiretroviral Postexposure Prophylaxis After Sexual, Injection Drug Use, or Other Nonoccupational Exposure to HIV: CDC Recommendations, 2025 (MMWR Recomm Rep 74(1))",
+       "org": "CDC",
+       "year": "2025",
+       "url": "https://www.cdc.gov/mmwr/volumes/74/rr/rr7401a1.htm"
+      },
+      {
+       "name": "Human Immunodeficiency Virus (HIV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv-infection/human-immunodeficiency-virus-hiv-infection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WRCR6MJGD0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX 1 DS PO daily",
+     "note": "PCP ppx w CD4 <200; Toxo ppx if Toxo IgG (+) w CD4 <100",
+     "sources": [
+      {
+       "name": "Pneumocystis Pneumonia: Adult and Adolescent OIs",
+       "org": "NIH/HHS Clinical Guidelines for Adult and Adolescent Opportunistic Infections",
+       "year": "2026",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
+      },
+      {
+       "name": "Toxoplasma gondii Encephalitis: Adult and Adolescent OIs",
+       "org": "NIH/HHS Clinical Guidelines for Adult and Adolescent Opportunistic Infections",
+       "year": "",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/toxoplasmosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "dapsone + pyrimethamine + leucovorin; atovaquone",
+     "note": "TMP-SMX ⍉tolerated; G6PD screen b4 dapsone",
+     "sources": [
+      {
+       "name": "Pneumocystis Pneumonia: Adult and Adolescent OIs",
+       "org": "NIH/HHS Clinical Guidelines for Adult and Adolescent Opportunistic Infections",
+       "year": "2026",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
+      },
+      {
+       "name": "Human Immunodeficiency Virus (HIV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv-infection/human-immunodeficiency-virus-hiv-infection"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "dapsone alone; aerosolized pentamidine",
+     "note": "PCP only: only if Toxo-seronegative",
+     "sources": [
+      {
+       "name": "Pneumocystis Pneumonia: Adult and Adolescent OIs",
+       "org": "NIH/HHS Clinical Guidelines for Adult and Adolescent Opportunistic Infections",
+       "year": "2026",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XE7CN9XRJ5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: pneumococcal (PCV15/20/21), influenza, HBV, HPV, MenACWY, recombinant zoster, COVID-19 vaccines; HAV and mpox if @ risk",
+     "note": "varicella and MMR ⍉if CD4 <200",
+     "sources": [
+      {
+       "name": "Human Immunodeficiency Virus (HIV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv-infection/human-immunodeficiency-virus-hiv-infection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N8NKEYNMXD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "moderate-intensity statin: pitavastatin 4 mg (AI), atorvastatin 20 mg, rosuvastatin 10 mg",
+     "note": "primary ASCVD prevention (REPRIEVE: age 40-75); ⍉simvastatin/lovastatin w boosted ARVs",
+     "sources": [
+      {
+       "name": "Recommendations for the Use of Statin Therapy as Primary Prevention of Atherosclerotic Cardiovascular Disease in People With HIV",
+       "org": "HHS Panel on Antiretroviral Guidelines for Adults and Adolescents",
+       "year": "2024",
+       "url": "https://clinicalinfo.hiv.gov/sites/g/files/mnhszr391/files/guidelines/archive/adult-adolescent-arv-statin-therapy-2024-02-27.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_94ZRWDWY1H",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "latent TB: isoniazid + rifapentine weekly × 3 months (w pyridoxine), or rifampin-based × 3-4 months",
+     "note": "isoniazid × 6-9 months = alt if rifamycin-based tx not suitable",
+     "sources": [
+      {
+       "name": "Human Immunodeficiency Virus (HIV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv-infection/human-immunodeficiency-virus-hiv-infection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CHSJ5P9E5P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxy-PEP: doxycycline 200 mg w.in 72 h after sex",
+     "note": "MSM and TGW w a bacterial STI in the past 12 months",
+     "sources": [
+      {
+       "name": "CDC Clinical Guidelines on the Use of Doxycycline Postexposure Prophylaxis for Bacterial STI Prevention (MMWR Recomm Rep 2024;73(2))",
+       "org": "CDC",
+       "year": "2024",
+       "url": "https://www.cdc.gov/mmwr/volumes/73/rr/rr7302a1.htm"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -2421,7 +2598,8 @@
     "c_N43E2GDCC6",
     "g_8A3Q21FFKT",
     "c_MH9EXNSFGZ",
-    "c_1TYKEFQEGB"
+    "c_1TYKEFQEGB",
+    "g_BGSJQ9Z9QK"
    ]
   }
  ]

@@ -1,0 +1,74 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_RY0QK71TY0",
+  "g_MSQMGNWCSH"
+ ],
+ "roles": [
+  {
+   "target": "g_RY0QK71TY0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV calcium; IV insulin + glucose",
+     "note": "mod-severe hyperK",
+     "sources": [
+      {
+       "name": "Hyperkalemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hyperkalemia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "inhaled albuterol 10-20 mg",
+     "note": "mod-severe hyperK",
+     "sources": [
+      {
+       "name": "Hyperkalemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hyperkalemia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "IV sodium bicarbonate",
+     "note": "hyperK; evidence limited",
+     "sources": [
+      {
+       "name": "Hyperkalemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hyperkalemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MSQMGNWCSH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "loop diuretic",
+     "note": "volume overload only; ⍉to prevent or treat AKI",
+     "sources": [
+      {
+       "name": "KDIGO Clinical Practice Guideline for Acute Kidney Injury",
+       "org": "KDIGO",
+       "year": "2012",
+       "url": "https://kdigo.org/guidelines/acute-kidney-injury/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

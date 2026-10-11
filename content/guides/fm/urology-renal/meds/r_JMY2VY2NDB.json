@@ -14131,7 +14131,13 @@
  ],
  "gaps": [
   "g_N8NSTM1CTM",
-  "g_WYYFHF3C34"
+  "g_WYYFHF3C34",
+  "g_FWKVR0WM8N",
+  "g_SZXWRAFQFD",
+  "g_QJXBXQWSBH",
+  "g_CDT79YFC3Z",
+  "g_6CJKBTC97D",
+  "g_B4RBBHJTAB"
  ],
  "roles": [
   {
@@ -14401,6 +14407,177 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_FWKVR0WM8N",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "G5D needing PTH-lowering: calcimimetic (cinacalcet), calcitriol or vitamin D analog, or combination",
+     "note": null,
+     "sources": [
+      {
+       "name": "KDIGO 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD)",
+       "org": "KDIGO",
+       "year": "2017",
+       "url": "https://kdigo.org/guidelines/ckd-mbd/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "calcitriol or vitamin D analog (not on dialysis)",
+     "note": "⍉routine; reserve for G4-G5 w severe, progressive HPT",
+     "sources": [
+      {
+       "name": "KDIGO 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD)",
+       "org": "KDIGO",
+       "year": "2017",
+       "url": "https://kdigo.org/guidelines/ckd-mbd/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "vitamin D repletion",
+     "note": "deficiency or insufficiency, as for the general population",
+     "sources": [
+      {
+       "name": "KDIGO 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD)",
+       "org": "KDIGO",
+       "year": "2017",
+       "url": "https://kdigo.org/guidelines/ckd-mbd/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SZXWRAFQFD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: pneumococcal and influenza vaccines",
+     "note": "influenza also for household contacts",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "prevention: hepatitis B vaccine, Engerix 40 µg 4-dose schedule",
+     "note": "adult hemodialysis; ⍉Heplisav-B (not established on HD)",
+     "sources": [
+      {
+       "name": "Prevention of Hepatitis B Virus Infection in the United States: Recommendations of the ACIP (MMWR Recomm Rep 2018;67(1))",
+       "org": "CDC",
+       "year": "2018",
+       "url": "https://www.cdc.gov/mmwr/volumes/67/rr/rr6701a1.htm"
+      },
+      {
+       "name": "HEPLISAV-B (hepatitis B vaccine, recombinant, adjuvanted) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=618db7b8-a5e4-49c8-9390-38912e6f39fd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QJXBXQWSBH",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "potassium binder (patiromer, sodium zirconium cyclosilicate)",
+     "note": "mild hyperK; keep the RASi; ⍉emergency tx",
+     "sources": [
+      {
+       "name": "Hyperkalemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hyperkalemia"
+      },
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+       "org": "KDIGO",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/ckd-evaluation-and-management/"
+      },
+      {
+       "name": "VELTASSA (patiromer) label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bf002984-d6c9-46df-aecb-a07733f763c1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CDT79YFC3Z",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "finerenone (nonsteroidal MRA)",
+     "note": "T2D, eGFR ≥25, normal K, albuminuria ≥30 mg/g despite max RASi",
+     "sources": [
+      {
+       "name": "KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease",
+       "org": "KDIGO",
+       "year": "2022",
+       "url": "https://kdigo.org/guidelines/diabetes-ckd/"
+      },
+      {
+       "name": "KERENDIA (finerenone) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fc726765-5d5a-4d6e-b037-b847bda9fb7c"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6CJKBTC97D",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "semaglutide (GLP-1 RA)",
+     "note": "T2D + CKD: ↓eGFR decline, ESKD, CV death",
+     "sources": [
+      {
+       "name": "OZEMPIC (semaglutide) injection label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_B4RBBHJTAB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "difelikefalin IV",
+     "note": "mod-severe CKD-associated pruritus on HD",
+     "sources": [
+      {
+       "name": "KORSUVA (difelikefalin) injection label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0c7b81f2-0fd3-47cb-8b0f-185e07f19c87"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -14417,7 +14594,8 @@
    "title": "Anti-hyperglycemic agents",
    "members": [
     "c_V42Z9Q4VNP",
-    "c_9BTY4MXEMW"
+    "c_9BTY4MXEMW",
+    "g_6CJKBTC97D"
    ]
   }
  ]

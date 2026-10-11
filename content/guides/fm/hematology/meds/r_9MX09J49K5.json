@@ -1295,7 +1295,12 @@
    "gap": "g_0N9XWMGACB"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_M6AR3YXRDS",
+  "g_VN4C5ZF01S",
+  "g_JAM5CRGPHP",
+  "g_PXETAYD8CH"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -1309,6 +1314,85 @@
        "name": "Non-Hodgkin Lymphomas",
        "org": "MSD Manual Professional Edition",
        "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/non-hodgkin-lymphomas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_M6AR3YXRDS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "R-CHOP (rituximab + cyclophosphamide, doxorubicin, vincristine, prednisone)",
+     "note": "aggressive B-cell lymphoma",
+     "sources": [
+      {
+       "name": "Non-Hodgkin Lymphomas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/non-hodgkin-lymphomas"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Pola-R-CHP (polatuzumab vedotin replaces vincristine)",
+     "note": "untreated DLBCL/HGBL, IPI ≥ 2",
+     "sources": [
+      {
+       "name": "Non-Hodgkin Lymphomas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/non-hodgkin-lymphomas"
+      },
+      {
+       "name": "POLIVY (polatuzumab vedotin) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=20a16ab2-f338-4abb-9dcd-254bd949a2bc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VN4C5ZF01S",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "H. pylori eradication",
+     "note": "H. pylori+ gastric MALT lymphoma",
+     "sources": [
+      {
+       "name": "Helicobacter pylori Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/helicobacter-pylori-infection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PXETAYD8CH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "hydration + allopurinol or rasburicase",
+     "note": "TLS prevention; rasburicase ⍉in G6PD deficiency",
+     "sources": [
+      {
+       "name": "Acute Myeloid Leukemia (AML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-myeloid-leukemia-aml"
+      },
+      {
+       "name": "Non-Hodgkin Lymphomas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
        "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/non-hodgkin-lymphomas"
       }
      ]

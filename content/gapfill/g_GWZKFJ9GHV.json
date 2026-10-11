@@ -52,7 +52,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Typical diarrhea-associated HUS: eculizumab or ravulizumab = commonly given if dialysis = needed."
+      "text": "Typical diarrhea-associated HUS in children: eculizumab or ravulizumab = commonly given if dialysis = needed."
      }
     ]
    },
@@ -81,6 +81,32 @@
       "text": "Give the meningococcal vax (higher meningococcal meningitis risk)."
      }
     ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "STEC producing Shiga toxin 2 (or toxin unknown): avoid abx; abx and antidiarrheals in STEC diarrhea may ↑HUS risk."
+     }
+    ]
    }
   ]
  },
@@ -95,6 +121,14 @@
     "org": "MSD Manual Professional Edition",
     "year": "2026",
     "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/hemolytic-uremic-syndrome-hus",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea (Clin Infect Dis 2017)",
+    "org": "IDSA",
+    "year": "2017",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5850553/",
     "type": "reference",
     "track": null
    }

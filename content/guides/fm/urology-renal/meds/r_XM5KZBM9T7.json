@@ -5985,7 +5985,13 @@
    "gap": "g_TKZKN2W53H"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_WEHHQMNQR6",
+  "g_55S75CFM5E",
+  "g_P827MH27P4",
+  "g_7FDF92FHKN",
+  "g_R6EBDZ7FM3"
+ ],
  "roles": [
   {
    "target": "c_VXA8SDW8G2",
@@ -6084,7 +6090,7 @@
     {
      "role": "alt",
      "drugs": "levofloxacin 500 mg daily x7 days",
-     "note": "chlamydia",
+     "note": "chlamydia; ⍉for gonorrhea (CDC stopped recommending FQs for GC)",
      "sources": [
       {
        "name": "STI Treatment Guidelines, 2021: Chlamydial Infections",
@@ -6097,6 +6103,85 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/urogenital-chlamydial-infections"
+      },
+      {
+       "name": "Gonococcal Infections Among Adolescents and Adults - STI Treatment Guidelines, 2021",
+       "org": "CDC",
+       "year": "2021",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-adults.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WEHHQMNQR6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxycycline 100 mg BID x7 days",
+     "note": "NGU / chlamydia; add for gonorrhea if chlamydia not excluded",
+     "sources": [
+      {
+       "name": "Urethritis and Cervicitis - STI Treatment Guidelines, 2021",
+       "org": "CDC",
+       "year": "2021",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/urethritis-and-cervicitis.htm"
+      },
+      {
+       "name": "Gonococcal Infections Among Adolescents and Adults - STI Treatment Guidelines, 2021",
+       "org": "CDC",
+       "year": "2021",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-adults.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_55S75CFM5E",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "doxycycline x7 days, then moxifloxacin 400 mg daily x7 days",
+     "note": "persistent NGU / M. genitalium, ⍉resistance testing",
+     "sources": [
+      {
+       "name": "Urethritis and Cervicitis - STI Treatment Guidelines, 2021",
+       "org": "CDC",
+       "year": "2021",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/urethritis-and-cervicitis.htm"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "metronidazole 2 g once (or tinidazole 2 g once)",
+     "note": "MSW w persistent or recurrent urethritis where T. vaginalis is prevalent",
+     "sources": [
+      {
+       "name": "Urethritis and Cervicitis - STI Treatment Guidelines, 2021",
+       "org": "CDC",
+       "year": "2021",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/urethritis-and-cervicitis.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_R6EBDZ7FM3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: doxycycline 200 mg w.in 72 h after sex (doxy-PEP)",
+     "note": "MSM and TGW w a bacterial STI in the past 12 months",
+     "sources": [
+      {
+       "name": "CDC Clinical Guidelines on the Use of Doxycycline Postexposure Prophylaxis for Bacterial STI Prevention (MMWR Recomm Rep 2024;73(2))",
+       "org": "CDC",
+       "year": "2024",
+       "url": "https://www.cdc.gov/mmwr/volumes/73/rr/rr7302a1.htm"
       }
      ]
     }

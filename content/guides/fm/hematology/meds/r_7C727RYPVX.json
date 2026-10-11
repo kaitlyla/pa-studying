@@ -3697,7 +3697,11 @@
    "gap": "g_WXCF7Q5WPT"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_WP1GB9B5PC",
+  "g_MA60NR5CAY",
+  "g_NMXKGT08J7"
+ ],
  "roles": [
   {
    "target": "c_FXMNXJ6WTF",
@@ -3784,6 +3788,78 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hematology/myeloproliferative-disorders/polycythemia-vera"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WP1GB9B5PC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "phlebotomy",
+     "note": "Hct < 45% men, < 42% women",
+     "sources": [
+      {
+       "name": "Polycythemia Vera",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/myeloproliferative-disorders/polycythemia-vera"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MA60NR5CAY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "recombinant interferon alfa (ropeginterferon (Besremi), peginterferon)",
+     "note": "cytoreduction",
+     "sources": [
+      {
+       "name": "BESREMI (ropeginterferon alfa-2b) injection label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9583405d-53a0-49dc-88eb-5e6384ebabcb"
+      },
+      {
+       "name": "Updated management recommendations for Philadelphia-negative MPNs: European LeukemiaNet 2021 (Leukemia 2022; abstract)",
+       "org": "European LeukemiaNet",
+       "year": "2021",
+       "url": "https://europepmc.org/article/MED/35358444"
+      },
+      {
+       "name": "Polycythemia Vera",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/myeloproliferative-disorders/polycythemia-vera"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NMXKGT08J7",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "ruxolitinib",
+     "note": "hydroxyurea inadequate response or intolerance",
+     "sources": [
+      {
+       "name": "JAKAFI (ruxolitinib) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f1c82580-87ae-11e0-bc84-0002a5d5c51b"
+      },
+      {
+       "name": "Updated management recommendations for Philadelphia-negative MPNs: European LeukemiaNet 2021 (Leukemia 2022; abstract)",
+       "org": "European LeukemiaNet",
+       "year": "2021",
+       "url": "https://europepmc.org/article/MED/35358444"
       }
      ]
     }

@@ -5986,7 +5986,9 @@
    "gap": "g_5B5MFRB1JZ"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_GXBD4T0V61"
+ ],
  "roles": [
   {
    "target": "c_8XW495JD17",
@@ -6067,6 +6069,24 @@
      "role": "1st",
      "drugs": "TMP/SMX (oral)",
      "note": "children, same high-risk indications",
+     "sources": [
+      {
+       "name": "Nontyphoidal Salmonella Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GXBD4T0V61",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral or IV fluids",
+     "note": "uncomp gastroenteritis",
      "sources": [
       {
        "name": "Nontyphoidal Salmonella Infections",

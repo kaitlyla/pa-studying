@@ -1295,7 +1295,15 @@
    "gap": "g_WR37ST3MRX"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_SJ0QGP8KTV",
+  "g_6857VMXRKB",
+  "g_XVVFPXP18B",
+  "g_WHEKECT9JM",
+  "g_089ARZRSFP",
+  "g_QJGSMXMXQX",
+  "g_F6D9QPY9CR"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -1310,6 +1318,183 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-lymphoblastic-leukemia-all"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "dexamethasone 10 mg IV every 12 hours",
+     "note": "APL differentiation syndrome: until Sx resolve, minimum 3 days",
+     "sources": [
+      {
+       "name": "TRISENOX (arsenic trioxide) injection label",
+       "org": "DailyMed (NLM)",
+       "year": "2022",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=101fc347-d0ad-4aee-8b06-9feb187fd741"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SJ0QGP8KTV",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "7+3: cytarabine x7 days + daunorubicin or idarubicin x3 days",
+     "note": "AML induction",
+     "sources": [
+      {
+       "name": "Acute Myeloid Leukemia (AML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-myeloid-leukemia-aml"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "intrathecal + systemic chemotherapy",
+     "note": "ALL CNS prophylaxis",
+     "sources": [
+      {
+       "name": "Acute Lymphoblastic Leukemia (ALL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-lymphoblastic-leukemia-all"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6857VMXRKB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "venetoclax + azacitidine, decitabine or low-dose cytarabine",
+     "note": "newly dx AML, age ≥ 75 or unfit for intensive induction",
+     "sources": [
+      {
+       "name": "Acute Myeloid Leukemia (AML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-myeloid-leukemia-aml"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XVVFPXP18B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "midostaurin (+ 7+3)",
+     "note": "newly dx FLT3+ AML",
+     "sources": [
+      {
+       "name": "RYDAPT (midostaurin) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=11fa3fc9-6776-49a6-b1c1-653f627c3e58"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "quizartinib",
+     "note": "newly dx FLT3-ITD+ AML",
+     "sources": [
+      {
+       "name": "VANFLYTA (quizartinib) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=29cdbcfe-497d-4e78-bb7b-2d4acafe8e86"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WHEKECT9JM",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tretinoin + arsenic trioxide",
+     "note": "low- and intermediate-risk APL",
+     "sources": [
+      {
+       "name": "Acute Myeloid Leukemia (AML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-myeloid-leukemia-aml"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_089ARZRSFP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tyrosine kinase inhibitor (added to chemotherapy)",
+     "note": "Ph+ ALL",
+     "sources": [
+      {
+       "name": "Acute Lymphoblastic Leukemia (ALL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-lymphoblastic-leukemia-all"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QJGSMXMXQX",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "blinatumomab",
+     "note": "CD19+ Ph- B-ALL consolidation",
+     "sources": [
+      {
+       "name": "BLINCYTO (blinatumomab) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=38b482a8-960b-4591-9857-5031ecb830aa"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F6D9QPY9CR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "hydration + allopurinol or rasburicase",
+     "note": "TLS; rasburicase ⍉in G6PD deficiency",
+     "sources": [
+      {
+       "name": "Acute Myeloid Leukemia (AML)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/acute-myeloid-leukemia-aml"
+      },
+      {
+       "name": "Non-Hodgkin Lymphomas",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/lymphomas/non-hodgkin-lymphomas"
+      },
+      {
+       "name": "ELITEK (rasburicase) label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0ae10bc4-6b65-402f-9db5-2d7753054922"
       }
      ]
     }

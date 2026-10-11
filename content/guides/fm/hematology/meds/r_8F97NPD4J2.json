@@ -4,7 +4,10 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_N1W34Y0G23"
+  "g_N1W34Y0G23",
+  "g_53X5VMQJWT",
+  "g_FBAHG3GABF",
+  "g_SFWJA0315G"
  ],
  "roles": [
   {
@@ -12,7 +15,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "iron chelation",
+     "drugs": "iron chelation (deferasirox, deferiprone)",
      "note": "transfusional Fe overload: ferritin > 1000 ng/mL or after about 1-2 years of transfusions",
      "sources": [
       {
@@ -20,6 +23,18 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      },
+      {
+       "name": "JADENU (deferasirox) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2020",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fee89140-fff1-4443-9f42-24ac004fcda1"
+      },
+      {
+       "name": "FERRIPROX (deferiprone) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=946718ff-df43-1baa-74d1-e5bcfbe8ad86"
       }
      ]
     },
@@ -33,6 +48,54 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_53X5VMQJWT",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "mitapivat (Aqvesme)",
+     "note": "anemia in adults; REMS (hepatocellular injury)",
+     "sources": [
+      {
+       "name": "AQVESME (mitapivat) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1d4e2654-1636-0d01-e063-6394a90af303"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FBAHG3GABF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "gene therapy (betibeglogene (Zynteglo), exa-cel (Casgevy)) or allogeneic SCT",
+     "note": "potentially curative; transfusion-dependent β-thal",
+     "sources": [
+      {
+       "name": "Thalassemias",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      },
+      {
+       "name": "ZYNTEGLO (betibeglogene autotemcel) label",
+       "org": "DailyMed (NLM)",
+       "year": "2022",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=86931613-c262-47f5-8202-bc31fa69ad3d"
+      },
+      {
+       "name": "CASGEVY (exagamglogene autotemcel) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7c3e12ad-e2fe-4d3f-a630-ea7364d9e846"
       }
      ]
     }

@@ -8161,7 +8161,11 @@
    "gap": "g_2P2R7H3SQ8"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_CKGMTQ2JA2",
+  "g_MCRY5RCP6Z",
+  "g_7RJNNZF7S4"
+ ],
  "roles": [
   {
    "target": "c_0ZM9E73K4D",
@@ -8217,13 +8221,19 @@
     {
      "role": "adjunct",
      "drugs": "antibiotics",
-     "note": "poststreptococcal: prevent GN only if given w.in 36 hrs of the infect",
+     "note": "poststreptococcal GN: if streptococci cultured from any site, mainly to prevent spread; won't alter GN course",
      "sources": [
       {
        "name": "Postinfectious Glomerulonephritis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/glomerular-disorders/postinfectious-glomerulonephritis-pign"
+      },
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases, Figure 57 (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
       }
      ]
     }
@@ -8286,6 +8296,131 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/glomerular-disorders/immunoglobulin-a-nephropathy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MCRY5RCP6Z",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Nefecon (targeted-release budesonide), 9-month course",
+     "note": "IgAN at risk of progression",
+     "sources": [
+      {
+       "name": "KDIGO 2025 Clinical Practice Guideline for the Management of IgA Nephropathy and IgA Vasculitis (Kidney Int 2025;108(4S):S1-S71)",
+       "org": "KDIGO",
+       "year": "2025",
+       "url": "https://kdigo.org/guidelines/iga-nephropathy-and-iga-vasculitis/"
+      },
+      {
+       "name": "TARPEYO (budesonide) delayed release capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=938cada4-d6bf-4252-836f-dd40f9eadb4d"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "sparsentan",
+     "note": "IgAN at risk of progression; ⍉w ACEI/ARB",
+     "sources": [
+      {
+       "name": "KDIGO 2025 Clinical Practice Guideline for the Management of IgA Nephropathy and IgA Vasculitis (Kidney Int 2025;108(4S):S1-S71)",
+       "org": "KDIGO",
+       "year": "2025",
+       "url": "https://kdigo.org/guidelines/iga-nephropathy-and-iga-vasculitis/"
+      },
+      {
+       "name": "FILSPARI (sparsentan) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d7354af1-f304-f4d9-e053-2995a90ab219"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "iptacopan",
+     "note": "IgAN at risk of progression (FDA label; not a KDIGO 2025 rec)",
+     "sources": [
+      {
+       "name": "FABHALTA (iptacopan) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a76b5845-6e21-4d3b-ad07-cd8df1b60bee"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "atrasentan",
+     "note": "IgAN proteinuria, rapid progression risk (FDA accelerated approval; not a KDIGO 2025 rec)",
+     "sources": [
+      {
+       "name": "VANRAFIA (atrasentan) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9a7e7f85-bfd0-44a0-beda-3bcfa8215c64"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7RJNNZF7S4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "lupus nephritis: hydroxychloroquine",
+     "note": "all SLE unless CI",
+     "sources": [
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Management of Lupus Nephritis (Kidney Int 2024;105(1S):S1-S69)",
+       "org": "KDIGO",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/lupus-nephritis/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "lupus nephritis (class III/IV): glucocorticoids + belimumab + (MPAA or low-dose IV cyclophosphamide)",
+     "note": null,
+     "sources": [
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Management of Lupus Nephritis (Kidney Int 2024;105(1S):S1-S69)",
+       "org": "KDIGO",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/lupus-nephritis/"
+      },
+      {
+       "name": "BENLYSTA (belimumab) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2fa3c528-1777-4628-8a55-a69dae2381a3"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "lupus nephritis (class III/IV): glucocorticoids + MPAA + CNI (voclosporin)",
+     "note": "kidney funct not severely impaired",
+     "sources": [
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Management of Lupus Nephritis (Kidney Int 2024;105(1S):S1-S69)",
+       "org": "KDIGO",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/lupus-nephritis/"
+      },
+      {
+       "name": "LUPKYNIS (voclosporin) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9f489295-1156-52c7-5fd0-5c4c52f9b813"
       }
      ]
     }

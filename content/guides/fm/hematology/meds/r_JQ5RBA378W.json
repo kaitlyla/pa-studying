@@ -2380,7 +2380,7 @@
             }
            }
           ],
-          "text": "AndexXa (Xa)"
+          "text": "AndexXa (Xa) withdrawn from the US market (Dec 2025); 4-factor PCC may be considered"
          }
         ]
        },
@@ -2458,7 +2458,7 @@
             }
            }
           ],
-          "text": "AndexXa (Xa)"
+          "text": "AndexXa (Xa) withdrawn from the US market (Dec 2025); 4-factor PCC may be considered"
          }
         ]
        },
@@ -2809,7 +2809,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_FWRCVG58NT",
+  "g_1Z0MMMPNJK"
+ ],
  "roles": [
   {
    "target": "c_CT8T2JFNS0",
@@ -2895,6 +2898,24 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_FWRCVG58NT",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV vitamin K",
+     "note": "on a VKA @ HIT dx: stop the VKA; give w the non-heparin anticoagulant",
+     "sources": [
+      {
+       "name": "American Society of Hematology 2018 guidelines for management of VTE: heparin-induced thrombocytopenia (Blood Adv 2018)",
+       "org": "ASH",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6258919/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -2903,7 +2924,8 @@
    "members": [
     "c_CT8T2JFNS0",
     "c_1W9T6QFWR7",
-    "c_0MBJ1P5NT5"
+    "c_0MBJ1P5NT5",
+    "g_1Z0MMMPNJK"
    ]
   }
  ]

@@ -6113,7 +6113,7 @@
             }
            }
           ],
-          "text": "AndexXa (Xa)"
+          "text": "AndexXa (Xa) withdrawn from the US market (Dec 2025); 4-factor PCC may be considered"
          }
         ]
        },
@@ -6191,7 +6191,7 @@
             }
            }
           ],
-          "text": "AndexXa (Xa)"
+          "text": "AndexXa (Xa) withdrawn from the US market (Dec 2025); 4-factor PCC may be considered"
          }
         ]
        },
@@ -6226,7 +6226,10 @@
    "gap": "g_BB56EGC4N5"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_KMGP1DQW11",
+  "g_6S9T4HDGRW"
+ ],
  "roles": [
   {
    "target": "c_0MBJ1P5NT5",
@@ -6312,6 +6315,24 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_KMGP1DQW11",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "postpartum antithrombotic prophylaxis",
+     "note": "pregnancy w a family hx of VTE; ⍉antepartum prophylaxis",
+     "sources": [
+      {
+       "name": "American Society of Hematology 2018 guidelines for management of VTE: VTE in the context of pregnancy (Blood Adv 2018)",
+       "org": "ASH",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6258928/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -6321,7 +6342,8 @@
     "c_JMD5FWCZJV",
     "c_CT8T2JFNS0",
     "c_0MBJ1P5NT5",
-    "c_1W9T6QFWR7"
+    "c_1W9T6QFWR7",
+    "g_6S9T4HDGRW"
    ]
   }
  ]

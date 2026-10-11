@@ -615,7 +615,11 @@
    "gap": "g_YZGE74HAPP"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_T17KJND2NJ",
+  "g_F7CR8KKVM7",
+  "g_X1EVRYENWD"
+ ],
  "roles": [
   {
    "target": "c_WSHAWG4JTZ",
@@ -630,6 +634,73 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/acute-abdominal-pain"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_T17KJND2NJ",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "ceftriaxone (or cefotaxime) + metronidazole",
+     "note": "mild IAI",
+     "sources": [
+      {
+       "name": "2017 WSES guidelines for management of intra-abdominal infections (World J Emerg Surg 2017;12:29)",
+       "org": "WSES",
+       "year": "2017",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5504840/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "piperacillin/tazobactam",
+     "note": "severe IAI",
+     "sources": [
+      {
+       "name": "2017 WSES guidelines for management of intra-abdominal infections (World J Emerg Surg 2017;12:29)",
+       "org": "WSES",
+       "year": "2017",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5504840/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F7CR8KKVM7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV crystalloids",
+     "note": "sepsis from IAI",
+     "sources": [
+      {
+       "name": "2017 WSES guidelines for management of intra-abdominal infections (World J Emerg Surg 2017;12:29)",
+       "org": "WSES",
+       "year": "2017",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5504840/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_X1EVRYENWD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV PPI (eg, pantoprazole)",
+     "note": "possible upper GI bleed; use if bleeding ulcer confirmed",
+     "sources": [
+      {
+       "name": "Overview of Gastrointestinal Bleeding",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastrointestinal-bleeding/overview-of-gastrointestinal-bleeding"
       }
      ]
     }

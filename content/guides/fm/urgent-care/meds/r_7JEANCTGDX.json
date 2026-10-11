@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "add": [
+  "c_8V57JQB39P"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_8V57JQB39P",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "GU and Hematopoietic Drugs Med Lists and LOs",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.15
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Vitamins"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0.4969940185546875,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Hydroxocobalamin"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0.4969940185546875,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "MOA: 1 hydroxocobalamin bind 1 cyanide ion -> replaces hydroxo ligand linked to trivalent cobalt ion -> cyanocobalamin -> excreted renally"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 27,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Administration: IV, Deep IM"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_05B35Z7MYP"
+  }
+ ],
+ "gaps": [
+  "g_93286R7M19"
+ ],
+ "roles": [
+  {
+   "target": "g_93286R7M19",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "100% oxygen (nonrebreather mask)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Carbon Monoxide Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/carbon-monoxide-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "hyperbaric oxygen",
+     "note": "cardiopulm complications, chest pain, AMS, any LOC, COHb >25%, pregnancy; increasingly controversial",
+     "sources": [
+      {
+       "name": "Carbon Monoxide Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/carbon-monoxide-poisoning"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_8V57JQB39P",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "hydroxocobalamin",
+     "note": "smoke inhalation w suspected cyanide poisoning",
+     "sources": [
+      {
+       "name": "Systemic Asphyxiant Chemical-Warfare Agents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/mass-casualty-weapons/systemic-asphyxiant-chemical-warfare-agents"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

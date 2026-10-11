@@ -1,0 +1,42 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_T4RJK5QQA8"
+ ],
+ "roles": [
+  {
+   "target": "g_T4RJK5QQA8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cisplatin-based chemo: BEP x3 or EP x4 cycles",
+     "note": "after orchiectomy when chemo is indicated",
+     "sources": [
+      {
+       "name": "Testicular Cancer Treatment (PDQ) - Health Professional Version",
+       "org": "National Cancer Institute",
+       "year": "",
+       "url": "https://www.cancer.gov/types/testicular/hp/testicular-treatment-pdq"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "single-dose carboplatin",
+     "note": "stage I seminoma, adjuvant (= RT or surveillance cure rates)",
+     "sources": [
+      {
+       "name": "Testicular Cancer Treatment (PDQ) - Health Professional Version",
+       "org": "National Cancer Institute",
+       "year": "",
+       "url": "https://www.cancer.gov/types/testicular/hp/testicular-treatment-pdq"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

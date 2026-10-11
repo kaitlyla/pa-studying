@@ -139,7 +139,8 @@
   }
  ],
  "gaps": [
-  "g_5BFTR458X2"
+  "g_5BFTR458X2",
+  "g_RH7VVFRQQW"
  ],
  "roles": [
   {
@@ -166,6 +167,24 @@
     {
      "role": "alt",
      "drugs": "sodium nitrite + sodium thiosulfate",
+     "note": null,
+     "sources": [
+      {
+       "name": "Systemic Asphyxiant Chemical-Warfare Agents",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/mass-casualty-weapons/systemic-asphyxiant-chemical-warfare-agents"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RH7VVFRQQW",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "airway support and 100% oxygen",
      "note": null,
      "sources": [
       {

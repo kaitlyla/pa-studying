@@ -9672,7 +9672,13 @@
    "gap": "g_30BC9M5BVW"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_T40TY9GXR4",
+  "g_JX1N92K709",
+  "g_KWC60B98M4",
+  "g_XR97BSCK8D",
+  "g_NBJ94ZRKNB"
+ ],
  "roles": [
   {
    "target": "c_0ZM9E73K4D",
@@ -9873,6 +9879,115 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_T40TY9GXR4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: pneumococcal, influenza (pt + household) and recombinant zoster (Shingrix) vaccines",
+     "note": "⍉live vaccines if immunosuppressed",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JX1N92K709",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "SGLT2 inhibitor",
+     "note": "CKD w eGFR ≥20 and ACR ≥200 mg/g (KDIGO 2024)",
+     "sources": [
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+       "org": "KDIGO",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/ckd-evaluation-and-management/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KWC60B98M4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "potassium-sparing diuretic (spironolactone, amiloride)",
+     "note": "keeps K normal; may add to loop/thiazide natriuresis",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XR97BSCK8D",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "TMP-SMX",
+     "note": "PJP ppx during high-dose prednisone (± rituximab)",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "bisphosphonate",
+     "note": "prolonged glucocorticoids; ⍉in kidney failure",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      },
+      {
+       "name": "2022 American College of Rheumatology Guideline for the Prevention and Treatment of Glucocorticoid-Induced Osteoporosis (abstract)",
+       "org": "ACR",
+       "year": "2023",
+       "url": "https://europepmc.org/article/MED/37884467"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NBJ94ZRKNB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "prophylactic anticoagulation",
+     "note": "thromboembolic risk > bleeding risk; esp membranous w low albumin",
+     "sources": [
+      {
+       "name": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases (Kidney Int 2021;100:S1-S276)",
+       "org": "KDIGO",
+       "year": "2021",
+       "url": "https://kdigo.org/guidelines/gd/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -9881,7 +9996,8 @@
    "members": [
     "c_7D4VJHMBXF",
     "c_WFBTYPJCNW",
-    "c_MA2BT06AGF"
+    "c_MA2BT06AGF",
+    "g_KWC60B98M4"
    ]
   }
  ]

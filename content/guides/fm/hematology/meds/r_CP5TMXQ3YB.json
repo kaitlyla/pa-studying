@@ -246,5 +246,54 @@
    ],
    "gap": "g_Q3RHQSF6PY"
   }
+ ],
+ "gaps": [
+  "g_1PCV6ZB97K",
+  "g_9ACMZB9CY6",
+  "g_SGSZWB6Q9S"
+ ],
+ "roles": [
+  {
+   "target": "g_1PCV6ZB97K",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "iron chelation (eg, deferiprone)",
+     "note": "transfusional Fe overload",
+     "sources": [
+      {
+       "name": "Thalassemias",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      },
+      {
+       "name": "FERRIPROX (deferiprone) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=946718ff-df43-1baa-74d1-e5bcfbe8ad86"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9ACMZB9CY6",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "mitapivat (Aqvesme)",
+     "note": "anemia in adults; REMS (hepatocellular injury)",
+     "sources": [
+      {
+       "name": "AQVESME (mitapivat) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1d4e2654-1636-0d01-e063-6394a90af303"
+      }
+     ]
+    }
+   ]
+  }
  ]
 }

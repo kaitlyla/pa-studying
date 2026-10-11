@@ -883,7 +883,10 @@
    "gap": "g_V3FYHPHQQ4"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_WCFBNSHMH5",
+  "g_9FKMQV9ZJZ"
+ ],
  "roles": [
   {
    "target": "c_J38PGTRXAN",
@@ -929,6 +932,48 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/von-willebrand-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WCFBNSHMH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "hormonal therapy (combined hormonal contraception or levonorgestrel IUS) or tranexamic acid",
+     "note": "heavy menstrual bleed, ⍉wishing to conceive; over desmopressin",
+     "sources": [
+      {
+       "name": "ASH ISTH NHF WFH 2021 guidelines on the management of von Willebrand disease (Blood Adv 2021)",
+       "org": "ASH/ISTH/NHF/WFH",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7805326/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9FKMQV9ZJZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "long-term prophylaxis (eg, recombinant VWF (Vonvendi), adults)",
+     "note": "hx of severe and frequent bleeds",
+     "sources": [
+      {
+       "name": "ASH ISTH NHF WFH 2021 guidelines on the management of von Willebrand disease (Blood Adv 2021)",
+       "org": "ASH/ISTH/NHF/WFH",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7805326/"
+      },
+      {
+       "name": "VONVENDI (von Willebrand factor, recombinant) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=53b6d198-6175-4a26-8606-dc0d2a0f12d6"
       }
      ]
     }

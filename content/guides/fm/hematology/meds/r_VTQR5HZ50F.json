@@ -1994,7 +1994,9 @@
   }
  ],
  "gaps": [
-  "g_A98T2Y4Z7R"
+  "g_A98T2Y4Z7R",
+  "g_JBYZCP6X4E",
+  "g_AGCCN416TY"
  ],
  "roles": [
   {
@@ -2002,14 +2004,20 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "glucocorticoids",
-     "note": null,
+     "drugs": "glucocorticoids: prednisone 0.5-2.0 mg/kg/day or dexamethasone 40 mg/day x4 days",
+     "note": "adults; prednisone ≤ 6 wks incl taper",
      "sources": [
       {
        "name": "Immune Thrombocytopenia (ITP)",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/immune-thrombocytopenia-itp"
+      },
+      {
+       "name": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (Blood Adv 2019)",
+       "org": "ASH",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963252/"
       }
      ]
     },
@@ -2090,6 +2098,37 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/hematology/thrombocytopenia-and-platelet-dysfunction/immune-thrombocytopenia-itp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JBYZCP6X4E",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "children: short-course glucocorticoids (≤ 7 days)",
+     "note": "non-life-threatening mucosal bleed or ↓QoL; no or minor bleed: observation",
+     "sources": [
+      {
+       "name": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (Blood Adv 2019)",
+       "org": "ASH",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963252/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "children: IVIG or anti-D",
+     "note": "non-life-threatening mucosal bleed",
+     "sources": [
+      {
+       "name": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (Blood Adv 2019)",
+       "org": "ASH",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963252/"
       }
      ]
     }

@@ -1,0 +1,93 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_FZDKK6EKN9",
+  "g_081WA8G7G6",
+  "g_72VVWFH79W"
+ ],
+ "roles": [
+  {
+   "target": "g_FZDKK6EKN9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "topical clotrimazole 1% or miconazole 2%",
+     "note": "candidal; BID until Sx settle",
+     "sources": [
+      {
+       "name": "UK National Guideline on the Management of Balanoposthitis 2008",
+       "org": "BASHH",
+       "year": "2008",
+       "url": "https://www.bashh.org/_userfiles/pages/files/resources/balano_posthitis_2008.pdf"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "fluconazole 150 mg PO once",
+     "note": "candidal, severe Sx",
+     "sources": [
+      {
+       "name": "UK National Guideline on the Management of Balanoposthitis 2008",
+       "org": "BASHH",
+       "year": "2008",
+       "url": "https://www.bashh.org/_userfiles/pages/files/resources/balano_posthitis_2008.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_081WA8G7G6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole 400 mg BID x1 week",
+     "note": "anaerobic",
+     "sources": [
+      {
+       "name": "UK National Guideline on the Management of Balanoposthitis 2008",
+       "org": "BASHH",
+       "year": "2008",
+       "url": "https://www.bashh.org/_userfiles/pages/files/resources/balano_posthitis_2008.pdf"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "amoxicillin-clavulanate 375 mg TID x1 week",
+     "note": "anaerobic",
+     "sources": [
+      {
+       "name": "UK National Guideline on the Management of Balanoposthitis 2008",
+       "org": "BASHH",
+       "year": "2008",
+       "url": "https://www.bashh.org/_userfiles/pages/files/resources/balano_posthitis_2008.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_72VVWFH79W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "potent topical steroid (clobetasol)",
+     "note": "lichen sclerosus; daily until remission, then taper",
+     "sources": [
+      {
+       "name": "UK National Guideline on the Management of Balanoposthitis 2008",
+       "org": "BASHH",
+       "year": "2008",
+       "url": "https://www.bashh.org/_userfiles/pages/files/resources/balano_posthitis_2008.pdf"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

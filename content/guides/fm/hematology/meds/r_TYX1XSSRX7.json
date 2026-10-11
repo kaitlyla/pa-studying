@@ -1679,7 +1679,12 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_8G7QJDZM6V",
+  "g_FJYRT8QXCM",
+  "g_97PWGF83BG",
+  "g_NQR5VPRA3V"
+ ],
  "roles": [
   {
    "target": "c_3EJW0DQPB4",
@@ -1718,13 +1723,61 @@
     {
      "role": "adjunct",
      "drugs": "ascorbic acid 500 mg (or orange juice) with the iron",
-     "note": "enhances absorb",
+     "note": "enhances absorb; optional (RCT: Fe alone equivalent)",
      "sources": [
       {
        "name": "Iron Deficiency Anemia",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-deficient-erythropoiesis/iron-deficiency-anemia"
+      },
+      {
+       "name": "Effect of Vitamin C Supplements in Addition to Oral Iron vs Oral Iron Alone in Iron Deficiency Anemia: A Randomized Clinical Trial (JAMA Netw Open 2020)",
+       "org": "JAMA Netw Open",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607440/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8G7QJDZM6V",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "H. pylori eradication: bismuth quadruple therapy x14 days",
+     "note": "H. pylori+ (H. pylori ↓Fe absorption)",
+     "sources": [
+      {
+       "name": "Iron Deficiency Anemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-deficient-erythropoiesis/iron-deficiency-anemia"
+      },
+      {
+       "name": "ACG Clinical Guideline: Treatment of Helicobacter pylori Infection (Am J Gastroenterol 2024; abstract)",
+       "org": "ACG",
+       "year": "2024",
+       "url": "https://europepmc.org/article/MED/39626064"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NQR5VPRA3V",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "low-dose oral iron 30 mg/day",
+     "note": "prevention in pregnancy: start @ the first prenatal visit",
+     "sources": [
+      {
+       "name": "Recommendations to Prevent and Control Iron Deficiency in the United States (MMWR 1998;47(RR-3))",
+       "org": "CDC",
+       "year": "1998",
+       "url": "https://www.cdc.gov/mmwr/preview/mmwrhtml/00051880.htm"
       }
      ]
     }
@@ -1736,7 +1789,10 @@
    "title": "Fe",
    "members": [
     "c_3EJW0DQPB4",
-    "c_FH3EV4GFD7"
+    "c_FH3EV4GFD7",
+    "g_FJYRT8QXCM",
+    "g_97PWGF83BG",
+    "g_NQR5VPRA3V"
    ]
   }
  ]

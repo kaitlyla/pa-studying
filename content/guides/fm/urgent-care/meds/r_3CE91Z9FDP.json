@@ -4930,7 +4930,8 @@
  "gaps": [
   "g_JRFQ17R55G",
   "g_ZREQGYGGVH",
-  "g_G81M7GM281"
+  "g_G81M7GM281",
+  "g_JFM8XFFV85"
  ],
  "roles": [
   {
@@ -4951,7 +4952,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     },
@@ -4964,7 +4965,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     }
@@ -4988,7 +4989,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     }
@@ -5012,7 +5013,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     }
@@ -5030,7 +5031,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     }
@@ -5072,7 +5073,7 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
       }
      ]
     }
@@ -5096,7 +5097,38 @@
        "name": "Anaphylaxis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-reactions-and-other-hypersensitivity-disorders/anaphylaxis"
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JFM8XFFV85",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "isotonic IV fluids (0.9% saline)",
+     "note": "persistent hypotension",
+     "sources": [
+      {
+       "name": "Anaphylaxis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/immunology-allergic-disorders/allergic-autoimmune-and-other-hypersensitivity-disorders/anaphylaxis"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "inhaled ipratropium",
+     "note": "further bronchodilator, w or instead of salbutamol; no data favor one",
+     "sources": [
+      {
+       "name": "Emergency treatment of anaphylaxis: Guidelines for healthcare providers",
+       "org": "Resuscitation Council UK",
+       "year": "2021",
+       "url": "https://resus.org.uk/media/337/download"
       }
      ]
     }

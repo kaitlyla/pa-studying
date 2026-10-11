@@ -1,7 +1,8 @@
 {
  "v": 1,
  "add": [
-  "c_58MCDAZQHM"
+  "c_58MCDAZQHM",
+  "c_35QBPAGSVX"
  ],
  "remove": [],
  "own": [
@@ -5431,6 +5432,19 @@
        "url": "https://www.cdc.gov/lyme/hcp/clinical-care/neurologic-lyme-disease.html"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "PEP: doxycycline single dose (200 mg adults; 4.4 mg/kg, max 200 mg, children)",
+     "note": "high-risk Ixodes bite, w.in 72 h of tick removal",
+     "sources": [
+      {
+       "name": "Clinical Practice Guidelines by IDSA, AAN and ACR: 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease (Clin Infect Dis 2021;72:e1-e48)",
+       "org": "IDSA/AAN/ACR",
+       "year": "2020",
+       "url": "https://www.gencourt.state.nh.us/statstudcomm/committees/1493/documents/2020%20IDSA%20Clinical%20Guidelines.pdf"
+      }
+     ]
     }
    ]
   },
@@ -5539,6 +5553,24 @@
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2026",
        "url": "https://www.cdc.gov/lyme/hcp/clinical-care/erythema-migrans-rash.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_35QBPAGSVX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NSAIDs",
+     "note": "Sx relief",
+     "sources": [
+      {
+       "name": "Lyme Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/spirochetes/lyme-disease"
       }
      ]
     }

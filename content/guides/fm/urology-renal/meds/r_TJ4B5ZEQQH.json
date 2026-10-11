@@ -3745,7 +3745,11 @@
    "gap": "g_F9AF4R4GXM"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_WF59J4B973",
+  "g_AK4JJS5P81",
+  "g_RBTQ5TRT5M"
+ ],
  "roles": [
   {
    "target": "c_35QBPAGSVX",
@@ -3832,6 +3836,92 @@
      "role": "adjunct",
      "drugs": "prevention: thiazide (chlorthalidone, indapamide) + potassium citrate",
      "note": "hypercalciuria",
+     "sources": [
+      {
+       "name": "Urinary Calculi",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/urinary-calculi/urinary-calculi"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WF59J4B973",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "antibiotics + urgent decompression (ureteral stent or nephrostomy)",
+     "note": "infection + obstruction",
+     "sources": [
+      {
+       "name": "Urinary Calculi",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/urinary-calculi/urinary-calculi"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AK4JJS5P81",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "acetaminophen",
+     "note": "renal colic, w or instead of NSAIDs",
+     "sources": [
+      {
+       "name": "Urological Guidelines for Kidney Stones: Overview and Comprehensive Update (J Clin Med 2024)",
+       "org": "J Clin Med",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10889283/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RBTQ5TRT5M",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "prevention: allopurinol",
+     "note": "hyperuricosuria if diet can't change; recurrent calcium stones",
+     "sources": [
+      {
+       "name": "Urinary Calculi",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/urinary-calculi/urinary-calculi"
+      },
+      {
+       "name": "Kidney Stones: Treatment and Prevention (Am Fam Physician 2019;99(8):490)",
+       "org": "AAFP",
+       "year": "2019",
+       "url": "https://www.aafp.org/pubs/afp/issues/2019/0415/p490.html"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "prevention: potassium citrate",
+     "note": "uric acid stones: urine pH 6-6.5",
+     "sources": [
+      {
+       "name": "Urinary Calculi",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/genitourinary-disorders/urinary-calculi/urinary-calculi"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "ondansetron",
+     "note": "persistent vomiting",
      "sources": [
       {
        "name": "Urinary Calculi",

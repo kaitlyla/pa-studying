@@ -2072,7 +2072,11 @@
    "gap": "g_MRYVBGPQX6"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_P3TESQPS5P",
+  "g_MKGGWAFER4",
+  "g_S147MGMRYZ"
+ ],
  "roles": [
   {
    "target": "c_2079N83KH5",
@@ -2113,6 +2117,66 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/hematology/plasma-cell-disorders/multiple-myeloma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P3TESQPS5P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "daratumumab + bortezomib, lenalidomide, dexamethasone (D-VRd)",
+     "note": "newly dx, transplant-eligible: induction + consolidation",
+     "sources": [
+      {
+       "name": "DARZALEX FASPRO (daratumumab and hyaluronidase-fihj) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4bb241af-4299-4373-8762-2d6709515db0"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MKGGWAFER4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antiviral (herpes zoster) prophylaxis",
+     "note": "on daratumumab: start w.in 1 wk; cont 3 months after tx ends",
+     "sources": [
+      {
+       "name": "DARZALEX FASPRO (daratumumab and hyaluronidase-fihj) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4bb241af-4299-4373-8762-2d6709515db0"
+      },
+      {
+       "name": "Multiple Myeloma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/plasma-cell-disorders/multiple-myeloma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_S147MGMRYZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "anti-thrombotic prophylaxis",
+     "note": "on lenalidomide + dexamethasone (boxed VTE/arterial thromboembolism warning)",
+     "sources": [
+      {
+       "name": "REVLIMID (lenalidomide) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5fa97bf5-28a2-48f1-8955-f56012d296be"
       }
      ]
     }
