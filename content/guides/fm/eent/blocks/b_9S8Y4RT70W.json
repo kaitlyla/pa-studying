@@ -245,11 +245,11 @@
        "repeatHeader": false,
        "cantSplit": false,
        "widths": [
-        64.51614906832296,
-        79.25,
+        41.866149068322954,
+        101.9,
         279.7,
-        192.23385093167707,
-        158.3
+        158.43385093167709,
+        192.1
        ]
       },
       "content": [
@@ -423,6 +423,56 @@
             "text": "(MC b/c maculopathy)"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "RF: A1C ±7%"
+           }
+          ]
          }
         ]
        },
@@ -474,7 +524,7 @@
               }
              }
             ],
-            "text": "⍉proliferative (background)"
+            "text": "non-proliferative"
            },
            {
             "type": "text",
@@ -486,7 +536,7 @@
               }
              }
             ],
-            "text": ": "
+            "text": ": torturous, dialted macula vessels, poss retinal hemorrhages"
            }
           ]
          },
@@ -527,7 +577,7 @@
               }
              }
             ],
-            "text": "microaneurysms"
+            "text": "- microaneurysms"
            }
           ]
          },
@@ -559,60 +609,7 @@
               }
              }
             ],
-            "text": "cotton wool spots: soft exudates -resemble fluffy gray-white spots b/c n. layer microinfarctions"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 9
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "942093"
-              }
-             }
-            ],
-            "text": "hard exudates"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ": yellow spots w sharp margins often circinate -lipid/lipoprotein deposits from leaky blood vessels"
+            "text": "- cotton wool spots: soft exudates -resemble fluffy gray-white spots b/c n. layer microinfarctions"
            }
           ]
          },
@@ -653,7 +650,60 @@
               }
              }
             ],
-            "text": "blot & dot hemorrhages"
+            "text": "- hard exudates"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": yellow spots w sharp margins often circinate -lipid/lipoprotein deposits from - leaky blood vessels"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "942093"
+              }
+             }
+            ],
+            "text": "- blot & dot hemorrhages"
            },
            {
             "type": "text",
@@ -724,7 +774,7 @@
               }
              }
             ],
-            "text": "flame-shaped hemorrhages"
+            "text": "- flame-shaped hemorrhages"
            },
            {
             "type": "text",
@@ -775,26 +825,25 @@
             "text": "fiber layer hemorrhage"
            }
           ]
-         }
-        ]
-       },
-       {
-        "type": "table_cell",
-        "attrs": {
-         "colspan": 1,
-         "rowspan": 1,
-         "colwidth": null,
-         "fill": "F1E4FA",
-         "vAlign": "top",
-         "borders": {
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "EEE5F0"
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
-         }
-        },
-        "content": [
+         },
          {
           "type": "paragraph",
           "attrs": {
@@ -820,79 +869,39 @@
               "type": "bold"
              },
              {
-              "type": "size",
+              "type": "underline",
               "attrs": {
-               "pt": 7.5
+               "style": "single"
               }
              }
             ],
-            "text": "Proliferative"
+            "text": "Proliferative: neovascularization:"
            },
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ": "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "942093"
-              }
-             }
-            ],
-            "text": "neovascularization: "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "growth of new abnorm blood vessels that can lead to vitreous hemorrhage"
+            "text": " growth of new abnorm blood vessels poss ->  vitreous hemorrhage, retinal fibrosis, retinal detachment"
            }
           ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 9
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F1E4FA",
+         "vAlign": "top",
+         "borders": {
+          "left": {
+           "style": "single",
+           "widthPt": 0.5,
+           "color": "EEE5F0"
           }
-         },
+         }
+        },
+        "content": [
          {
           "type": "paragraph",
           "attrs": {
@@ -968,7 +977,7 @@
               }
              }
             ],
-            "text": "macular edema or exudates"
+            "text": "- macular edema or exudates"
            }
           ]
          },
@@ -1000,7 +1009,7 @@
               }
              }
             ],
-            "text": "blurred/⇣ central vision loss"
+            "text": "- blurred/⇣ central vision loss"
            }
           ]
          },
@@ -1032,7 +1041,7 @@
               }
              }
             ],
-            "text": "can occur @ any stag "
+            "text": "- can occur @ any stage"
            }
           ]
          },
@@ -1064,7 +1073,57 @@
               }
              }
             ],
-            "text": "vision loss in ⍉proliferative often b/c macular edema "
+            "text": "- vision loss in ⍉proliferative often b/c macular edema "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "Dx: once proliferative/⊘profliferative on fundoscopic -> optic CT for macular edema"
            }
           ]
          }
@@ -1107,27 +1166,13 @@
               "attrs": {
                "style": "single"
               }
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
              }
             ],
-            "text": "Nonproliferative"
+            "text": "⊘macular edema:"
            },
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ": strict glucose control, laser tx"
+            "text": " glucose ↓agent & monitor"
            }
           ]
          },
@@ -1141,7 +1186,209 @@
            "spaceAfter": 0,
            "line": {
             "rule": "exact",
+            "value": 6.5
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
             "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "macular edema &↓visual acuity:"
+           },
+           {
+            "type": "text",
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- intravitriol inj VEGF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- focal photocoagulation if microhemorrhage"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "Non-proliferative"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": strict glucose control, "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- pan-retinal laser photocoagulation (↓risk of proliferative)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 6.5
            },
            "align": "left",
            "shade": null,
@@ -1225,7 +1472,7 @@
               }
              }
             ],
-            "text": "), laser photocoagulation tx, strict glucose control"
+            "text": ") + non-proliferative tx"
            }
           ]
          },
@@ -1239,7 +1486,7 @@
            "spaceAfter": 0,
            "line": {
             "rule": "exact",
-            "value": 9
+            "value": 6.5
            },
            "align": "left",
            "shade": null,
@@ -1321,6 +1568,70 @@
              }
             ],
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- glycemic control                  - BP control"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- regular exercise                   - tx OSA"
            }
           ]
          }
