@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_T8R5WGY9W2",
+  "g_927B72WS70"
+ ],
+ "roles": [
+  {
+   "target": "g_T8R5WGY9W2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "dexamethasone",
+     "note": "malignant compression; then surg decompression",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Cord Compression",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-cord-compression"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_927B72WS70",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin + ceftriaxone",
+     "note": "spinal epidural abscess",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "ceftazidime, cefepime or meropenem, + vancomycin",
+     "note": "after neurosurgery or urologic instrumentation",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

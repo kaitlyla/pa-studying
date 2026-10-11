@@ -14649,7 +14649,9 @@
   }
  ],
  "gaps": [
-  "g_9P47PJJ0SB"
+  "g_9P47PJJ0SB",
+  "g_BC38DNRWMC",
+  "g_VC17GGSWTM"
  ],
  "roles": [
   {
@@ -14882,13 +14884,19 @@
     {
      "role": "adjunct",
      "drugs": "statin",
-     "note": "Comp prev",
+     "note": "Comp prev; ASCVD: high-intensity statin, LDL goal <55 mg/dL (ADA 2026)",
      "sources": [
       {
        "name": "Type 2 Diabetes Mellitus",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/type-2-diabetes-mellitus"
+      },
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 10. Cardiovascular Disease and Risk Management: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690187/"
       }
      ]
     }
@@ -14961,6 +14969,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/type-2-diabetes-mellitus"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BC38DNRWMC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "glucagon",
+     "note": "on insulin or at high risk for hypoglycemia",
+     "sources": [
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 6. Glycemic Goals, Hypoglycemia, and Hyperglycemic Crises: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VC17GGSWTM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "influenza, pneumococcal, hep B, COVID-19, RSV and zoster (Shingrix) vaccines",
+     "note": null,
+     "sources": [
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 4. Comprehensive Medical Evaluation and Assessment of Comorbidities: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690184/"
       }
      ]
     }

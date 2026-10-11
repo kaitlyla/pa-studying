@@ -5623,7 +5623,8 @@
   }
  ],
  "gaps": [
-  "g_YXFY778D4X"
+  "g_YXFY778D4X",
+  "g_J4H20FE0KG"
  ],
  "roles": [
   {
@@ -5724,6 +5725,50 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/joint-disorders/reactive-arthritis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J4H20FE0KG",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxycycline 100 mg PO BID × 7 d",
+     "note": "C. trachomatis trigger",
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "azithromycin 1 g PO once, or levofloxacin 500 mg PO daily × 7 d",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "presumptive tx of partners",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ]
     }

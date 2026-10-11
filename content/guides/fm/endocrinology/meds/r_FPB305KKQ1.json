@@ -3290,7 +3290,9 @@
    "gap": "g_ATC6Y1JQKQ"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_X39RMBBPPQ"
+ ],
  "roles": [
   {
    "target": "c_624R1MFBY1",
@@ -3371,6 +3373,33 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_X39RMBBPPQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "levothyroxine dose ↑ ~20–30% at sus/confirmed preg",
+     "note": "preg",
+     "sources": [
+      {
+       "name": "Alexander EK, et al. 2017 Guidelines of the American Thyroid Association for the Diagnosis and Management of Thyroid Disease During Pregnancy and the Postpartum. Thyroid 2017;27(3):315-389",
+       "org": "American Thyroid Association (ATA)",
+       "year": "2017",
+       "url": "https://journals.sagepub.com/doi/full/10.1089/thy.2016.0457"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Thyroid hormones",
+   "members": [
+    "c_624R1MFBY1",
+    "g_X39RMBBPPQ"
    ]
   }
  ]

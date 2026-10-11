@@ -2699,7 +2699,11 @@
    "gap": "g_GYTWC0A1YW"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_4G5NMCV8PS",
+  "g_2E4ADMH9A1",
+  "g_KW8BQGFWNV"
+ ],
  "roles": [
   {
    "target": "c_7M08HT2J5B",
@@ -2732,6 +2736,66 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/neck-and-back-pain/overview-of-neck-and-back-pain"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4G5NMCV8PS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "muscle relaxant",
+     "note": "visible/palpable spasm; ≤72 h",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Overview of Neck and Back Pain",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2024",
+       "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/neck-and-back-pain/overview-of-neck-and-back-pain"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2E4ADMH9A1",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "duloxetine",
+     "note": "chronic LBP",
+     "sources": [
+      {
+       "name": "Qaseem A, et al. Noninvasive Treatments for Acute, Subacute, and Chronic Low Back Pain: A Clinical Practice Guideline From the American College of Physicians. Ann Intern Med 2017;166(7):514-530",
+       "org": "American College of Physicians (ACP)",
+       "year": "2017",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/28192789/"
+      },
+      {
+       "name": "Duloxetine delayed-release capsules prescribing information (FDA label, DailyMed)",
+       "org": "Hawaii Repack, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=79bfd6be-a1ff-4786-b4e2-abbd0a3e3932"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KW8BQGFWNV",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "tramadol",
+     "note": "chronic LBP",
+     "sources": [
+      {
+       "name": "Qaseem A, et al. Noninvasive Treatments for Acute, Subacute, and Chronic Low Back Pain: A Clinical Practice Guideline From the American College of Physicians. Ann Intern Med 2017;166(7):514-530",
+       "org": "American College of Physicians (ACP)",
+       "year": "2017",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/28192789/"
       }
      ]
     }

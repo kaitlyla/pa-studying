@@ -2858,7 +2858,10 @@
   }
  ],
  "gaps": [
-  "g_YESPCFJ5V2"
+  "g_YESPCFJ5V2",
+  "g_RG6REN711T",
+  "g_GFQX4CWGE5",
+  "g_YHCBYH1NW4"
  ],
  "roles": [
   {
@@ -2867,7 +2870,7 @@
     {
      "role": "2nd",
      "drugs": "metyrapone or ketoconazole",
-     "note": "Surg = 1st-line; drugs are a bridge to surg, or for surg failure / inoperable pts, or severe hypercortisolism",
+     "note": "Surg = 1st-line; drugs are a bridge to surg, or for surg failure / inoperable pts, or severe hypercortisolism; ketoconazole: ⍉FDA-approved for Cushing; ALT weekly",
      "sources": [
       {
        "name": "Cushing Syndrome",
@@ -2880,6 +2883,12 @@
        "org": "Pituitary Society",
        "year": "2021",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8743006/"
+      },
+      {
+       "name": "Ketoconazole tablets prescribing information (FDA label, DailyMed)",
+       "org": "Amerisyn LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1d598696-c6f3-4b7c-ad73-949d2089df35"
       }
      ]
     },
@@ -2974,6 +2983,85 @@
        "org": "Pituitary Society",
        "year": "2021",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8743006/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RG6REN711T",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "glucocorticoid replacement",
+     "note": "hypocortisolemic after surgical remission",
+     "sources": [
+      {
+       "name": "Nieman LK, et al. Treatment of Cushing's Syndrome: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2015;100(8):2807-2831",
+       "org": "Endocrine Society",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4525003/"
+      },
+      {
+       "name": "Beuschlein F, et al. European Society of Endocrinology and Endocrine Society Joint Clinical Guideline: Diagnosis and Therapy of Glucocorticoid-induced Adrenal Insufficiency. J Clin Endocrinol Metab 2024",
+       "org": "European Society of Endocrinology / Endocrine Society",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11180513/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "gradual glucocorticoid taper",
+     "note": "iatrogenic (long-term glucocorticoid tx), once the underlying dz = controlled",
+     "sources": [
+      {
+       "name": "Nieman LK, et al. Treatment of Cushing's Syndrome: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2015;100(8):2807-2831",
+       "org": "Endocrine Society",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4525003/"
+      },
+      {
+       "name": "Beuschlein F, et al. European Society of Endocrinology and Endocrine Society Joint Clinical Guideline: Diagnosis and Therapy of Glucocorticoid-induced Adrenal Insufficiency. J Clin Endocrinol Metab 2024",
+       "org": "European Society of Endocrinology / Endocrine Society",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11180513/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GFQX4CWGE5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral bisphosphonate",
+     "note": "long-term glucocorticoids, high fracture risk",
+     "sources": [
+      {
+       "name": "2022 American College of Rheumatology Guideline for the Prevention and Treatment of Glucocorticoid-Induced Osteoporosis (guideline summary)",
+       "org": "American College of Rheumatology (ACR)",
+       "year": "2022",
+       "url": "https://assets.contentstack.io/v3/assets/bltee37abb6b278ab2c/blt8c68fa62e5f70069/giop-guideline-summary-2022.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YHCBYH1NW4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "TMP-SMX (dapsone if sulfa allergy)",
+     "note": "PJP ppx; esp bedridden/low-mobility or UFC >5× normal",
+     "sources": [
+      {
+       "name": "Nieman LK, et al. Treatment of Cushing's Syndrome: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2015;100(8):2807-2831",
+       "org": "Endocrine Society",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4525003/"
       }
      ]
     }

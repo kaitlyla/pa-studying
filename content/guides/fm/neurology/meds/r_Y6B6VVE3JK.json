@@ -606,7 +606,10 @@
    "gap": "g_VRSRE305B7"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_6GNDTQNF13",
+  "g_P4RWDGYDXK"
+ ],
  "roles": [
   {
    "target": "p_YQFR337AY2",
@@ -621,6 +624,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6GNDTQNF13",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "supportive measures",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P4RWDGYDXK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "empiric bacterial-meningitis abx",
+     "note": "partially treated pts",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
       }
      ]
     }

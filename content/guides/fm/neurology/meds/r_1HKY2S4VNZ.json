@@ -15991,7 +15991,9 @@
    "gap": "g_Q8MY4RB3XK"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_Z92Y6FQWGE"
+ ],
  "roles": [
   {
    "target": "c_ZJVQB3DDA6",
@@ -16202,6 +16204,19 @@
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/stroke/ischemic-stroke"
       }
      ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "LMWH",
+     "note": "VTE ppx in immobile pts w.o contraindications (IPC also recommended)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Ischemic Stroke",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/ischemic-stroke"
+      }
+     ]
     }
    ]
   },
@@ -16224,6 +16239,24 @@
        "org": "",
        "year": "",
        "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Z92Y6FQWGE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "long-term antihypertensives",
+     "note": "goal BP <130/80",
+     "sources": [
+      {
+       "name": "Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack: A Guideline From the AHA/ASA. Stroke 2021;52(7):e364-e467",
+       "org": "American Heart Association / American Stroke Association (AHA/ASA)",
+       "year": "2021",
+       "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000375"
       }
      ]
     }

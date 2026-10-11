@@ -1,0 +1,54 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_PK7V3RSKRK",
+  "g_CPT3X2FEK8"
+ ],
+ "roles": [
+  {
+   "target": "g_PK7V3RSKRK",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "analgesics",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Vertebral Compression Fractures",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/injuries-poisoning/fractures/vertebral-compression-fractures"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CPT3X2FEK8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bisphosphonate; calcitonin; anabolic agent b4 an antiresorptive",
+     "note": "if osteoporosis",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Vertebral Compression Fractures",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/injuries-poisoning/fractures/vertebral-compression-fractures"
+      },
+      {
+       "name": "MSD Manual Professional Edition: Osteoporosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/osteoporosis/osteoporosis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

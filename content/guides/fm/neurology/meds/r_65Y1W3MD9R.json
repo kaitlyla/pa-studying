@@ -18010,7 +18010,13 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_5S3E82GDGE",
+  "g_2X42FGY3P2",
+  "g_P44VR2ACD7",
+  "g_4M18J8FZV7",
+  "g_TFQMSNK2KW"
+ ],
  "roles": [
   {
    "target": "c_35QBPAGSVX",
@@ -18483,6 +18489,60 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_2X42FGY3P2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "acetaminophen/aspirin/caffeine (Excedrin Migraine)",
+     "note": "acute",
+     "sources": [
+      {
+       "name": "EXCEDRIN MIGRAINE (acetaminophen, aspirin and caffeine) tablets, Drug Facts (DailyMed)",
+       "org": "Select Consumer Group",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3caa4adf-abe3-67c3-e063-6294a90a87a4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P44VR2ACD7",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "magnesium; riboflavin",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Holland S, et al. Evidence-based guideline update: NSAIDs and other complementary treatments for episodic migraine prevention in adults (AAN/AHS). Neurology 2012;78(17):1346-1353",
+       "org": "American Academy of Neurology / American Headache Society (AAN/AHS)",
+       "year": "2012",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/22529203/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4M18J8FZV7",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "meloxicam/rizatriptan (Symbravo)",
+     "note": "acute",
+     "sources": [
+      {
+       "name": "SYMBRAVO (meloxicam and rizatriptan) tablets prescribing information (FDA label, DailyMed)",
+       "org": "Axsome Therapeutics, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dcf1ecd1-08a0-8e47-e053-2a95a90abdc7"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -18490,7 +18550,8 @@
    "title": "Antiepileptics",
    "members": [
     "c_P4NHYP74P8",
-    "c_BN2NE4V4S9"
+    "c_BN2NE4V4S9",
+    "g_5S3E82GDGE"
    ]
   },
   {
@@ -18505,6 +18566,13 @@
    "members": [
     "c_35QBPAGSVX",
     "c_5QVPZZ6A5E"
+   ]
+  },
+  {
+   "title": "5-HT1F agonists",
+   "members": [
+    "c_DS459S84HE",
+    "g_TFQMSNK2KW"
    ]
   }
  ]

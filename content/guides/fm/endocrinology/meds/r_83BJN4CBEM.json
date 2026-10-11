@@ -2966,14 +2966,16 @@
    "gap": "g_844T948JMA"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_XQ2Y7B65KP"
+ ],
  "roles": [
   {
    "target": "c_58MCDAZQHM",
    "roles": [
     {
      "role": "1st",
-     "drugs": "empiric penicillinase-resistant penicillin + beta-lactamase inhibitor (e.g., piperacillin/tazobactam)",
+     "drugs": "empiric amoxicillin-clavulanate, ceftriaxone or cefazolin",
      "note": "hospitalize; adjust to cx; drain abscess urgently if the airway = threatened",
      "sources": [
       {
@@ -2981,6 +2983,12 @@
        "org": "American Family Physician (AAFP)",
        "year": "2021",
        "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      },
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ]
     }
@@ -2999,6 +3007,24 @@
        "org": "American Family Physician (AAFP)",
        "year": "2021",
        "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XQ2Y7B65KP",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "clindamycin or metronidazole",
+     "note": "anaerobes, when a pyriform sinus fistula = sus",
+     "sources": [
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ]
     }

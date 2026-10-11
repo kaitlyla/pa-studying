@@ -5421,7 +5421,11 @@
   }
  ],
  "gaps": [
-  "g_VZ9DYKQDYA"
+  "g_VZ9DYKQDYA",
+  "g_S8APVBQJQV",
+  "g_FJC1RT3MFF",
+  "g_3NRYFEA6S8",
+  "g_X45W0DAE60"
  ],
  "roles": [
   {
@@ -5556,6 +5560,90 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/systemic-rheumatic-diseases/systemic-lupus-erythematosus-sle"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_S8APVBQJQV",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "voclosporin; obinutuzumab",
+     "note": "active LN, added to background/standard immunosuppression",
+     "sources": [
+      {
+       "name": "LUPKYNIS (voclosporin) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Aurinia Pharma U.S., Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9f489295-1156-52c7-5fd0-5c4c52f9b813"
+      },
+      {
+       "name": "GAZYVA (obinutuzumab) injection prescribing information (FDA label, DailyMed)",
+       "org": "Genentech, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=df12ceb2-5b4b-4ab5-a317-2a36bf2a3cda"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FJC1RT3MFF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "RAAS blockade (ACEi or ARB)",
+     "note": "LN, stable, ⍉AKI",
+     "sources": [
+      {
+       "name": "KDIGO 2024 Clinical Practice Guideline for the Management of Lupus Nephritis. Kidney Int 2024;105(1S):S1-S69",
+       "org": "Kidney Disease: Improving Global Outcomes (KDIGO)",
+       "year": "2024",
+       "url": "https://kdigo.org/guidelines/lupus-nephritis/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3NRYFEA6S8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "sunscreen SPF >50 (UVA + UVB)",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Systemic Lupus Erythematosus (SLE)",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/systemic-rheumatic-diseases/systemic-lupus-erythematosus-sle"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_X45W0DAE60",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "pneumococcal, HPV, influenza, COVID-19 and recombinant zoster vaccines",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Systemic Lupus Erythematosus (SLE)",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/systemic-rheumatic-diseases/systemic-lupus-erythematosus-sle"
+      },
+      {
+       "name": "Bass AR, et al. 2022 American College of Rheumatology Guideline for Vaccinations in Patients With Rheumatic and Musculoskeletal Diseases. Arthritis Care Res 2023;75(3):449-464",
+       "org": "American College of Rheumatology (ACR)",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10291822/"
       }
      ]
     }

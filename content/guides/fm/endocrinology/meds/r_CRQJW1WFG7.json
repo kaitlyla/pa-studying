@@ -1439,7 +1439,8 @@
   }
  ],
  "gaps": [
-  "g_W561F9QZF3"
+  "g_W561F9QZF3",
+  "g_G05M0B7D00"
  ],
  "roles": [
   {
@@ -1489,6 +1490,46 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_G05M0B7D00",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "prednisolone",
+     "note": "if hydrocortisone = unavailable",
+     "sources": [
+      {
+       "name": "Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2016;101(2):364-389",
+       "org": "Endocrine Society",
+       "year": "2016",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4880116/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "dexamethasone",
+     "note": "least preferred; only if no other glucocorticoid",
+     "sources": [
+      {
+       "name": "Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2016;101(2):364-389",
+       "org": "Endocrine Society",
+       "year": "2016",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4880116/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Corticosteroids",
+   "members": [
+    "c_CSF60KE111",
+    "g_G05M0B7D00"
    ]
   }
  ]

@@ -4115,7 +4115,9 @@
    "gap": "g_5Y8Y0PCJC0"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_MY70PJAT8B"
+ ],
  "roles": [
   {
    "target": "c_9PY70SGTWM",
@@ -4159,13 +4161,25 @@
     {
      "role": "alt",
      "drugs": "SNRI (duloxetine, milnacipran)",
-     "note": "a reasonable alt, esp w severe fatigue and depression",
+     "note": "a reasonable alt, esp w severe fatigue and depression; duloxetine and milnacipran = FDA-approved for FM",
      "sources": [
       {
        "name": "Fibromyalgia",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/bursa-muscle-and-tendon-disorders/fibromyalgia"
+      },
+      {
+       "name": "Duloxetine delayed-release capsules prescribing information (FDA label, DailyMed)",
+       "org": "Hawaii Repack, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=79bfd6be-a1ff-4786-b4e2-abbd0a3e3932"
+      },
+      {
+       "name": "SAVELLA (milnacipran) tablets prescribing information (FDA label, DailyMed)",
+       "org": "Allergan, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=16a4a314-f97e-4e91-95e9-576a3773d284"
       }
      ]
     }
@@ -4177,13 +4191,37 @@
     {
      "role": "alt",
      "drugs": "pregabalin or gabapentin",
-     "note": "Esp more severe sleep problems",
+     "note": "Esp more severe sleep problems; pregabalin = FDA-approved for FM",
      "sources": [
       {
        "name": "Fibromyalgia",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/bursa-muscle-and-tendon-disorders/fibromyalgia"
+      },
+      {
+       "name": "Pregabalin capsules prescribing information (FDA label, DailyMed)",
+       "org": "RemedyRepack Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=44ec2918-4e0c-4e2d-9157-81295a15df57"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MY70PJAT8B",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "cyclobenzaprine SL (Tonmya)",
+     "note": "FDA-approved for FM",
+     "sources": [
+      {
+       "name": "TONMYA (cyclobenzaprine HCl) sublingual tablets prescribing information (FDA label, DailyMed)",
+       "org": "Tonix Medicines, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6fa59588-ce9b-48cf-8c5f-725a448f8571"
       }
      ]
     }
@@ -4196,6 +4234,13 @@
    "members": [
     "c_9PY70SGTWM",
     "c_M1T5GWT01D"
+   ]
+  },
+  {
+   "title": "Skeletal muscle relaxants",
+   "members": [
+    "c_JTHANAED3Z",
+    "g_MY70PJAT8B"
    ]
   }
  ]

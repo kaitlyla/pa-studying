@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_P2NK93MX9C",
+  "g_J7GR6B6MK8"
+ ],
+ "roles": [
+  {
+   "target": "g_P2NK93MX9C",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "acetaminophen",
+     "note": "HA",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sports-Related Concussion",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2024",
+       "url": "https://www.merckmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/sports-related-concussion"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J7GR6B6MK8",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "NSAIDs",
+     "note": "HA (alternative to APAP)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sports-Related Concussion",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2024",
+       "url": "https://www.merckmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/sports-related-concussion"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -2095,7 +2095,9 @@
   }
  ],
  "gaps": [
-  "g_RAA414A5TA"
+  "g_RAA414A5TA",
+  "g_ZV67QFHB6V",
+  "g_6HGYQM7G9T"
  ],
  "roles": [
   {
@@ -2166,6 +2168,48 @@
        "org": "National Cancer Institute (NCI)",
        "year": "2025",
        "url": "https://www.cancer.gov/types/thyroid/hp/thyroid-treatment-pdq"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZV67QFHB6V",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral calcium + calcitriol",
+     "note": "post-thyroidectomy hypocalcemia",
+     "sources": [
+      {
+       "name": "Ross DS, et al. 2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis. Thyroid 2016;26(10):1343-1421",
+       "org": "American Thyroid Association (ATA)",
+       "year": "2016",
+       "url": "https://nursing.duke.edu/sites/default/files/media/main/hyperthyroidism_guidelines_2016.pdf"
+      },
+      {
+       "name": "MSD Manual Professional Edition: Hypoparathyroidism",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/parathyroid-disorders/hypoparathyroidism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6HGYQM7G9T",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "thyrotropin alfa (rhTSH)",
+     "note": "Tg testing; remnant ablation",
+     "sources": [
+      {
+       "name": "THYROGEN (thyrotropin alfa) for injection prescribing information (FDA label, DailyMed)",
+       "org": "Genzyme Corporation",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b52dfa36-f90b-4e19-9b5e-26db9d04df2b"
       }
      ]
     }

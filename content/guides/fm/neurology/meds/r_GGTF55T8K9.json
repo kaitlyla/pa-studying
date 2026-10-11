@@ -11574,7 +11574,10 @@
    "gap": "g_A4HJABDR59"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_AQEVQWB673",
+  "g_TWHWTYN4ST"
+ ],
  "roles": [
   {
    "target": "c_J969V94V29",
@@ -11595,13 +11598,19 @@
     {
      "role": "2nd",
      "drugs": "Status epilepticus, no IV: sublingual/rectal benzodiazepine",
-     "note": null,
+     "note": "AES 2016: IM midazolam superior to IV lorazepam in adults when ⍉IV access (Level A)",
      "sources": [
       {
        "name": "Seizure Disorders",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/seizure-disorders/seizure-disorders"
+      },
+      {
+       "name": "Glauser T, et al. Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults: Report of the Guideline Committee of the American Epilepsy Society. Epilepsy Curr 2016;16(1):48-61",
+       "org": "American Epilepsy Society (AES)",
+       "year": "2016",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4749120/"
       }
      ]
     },
@@ -11677,13 +11686,19 @@
     {
      "role": "1st",
      "drugs": "Focal seizures: carbamazepine, fosphenytoin, lamotrigine, oxcarbazepine, phenytoin or topiramate",
-     "note": null,
+     "note": "fosphenytoin: only when oral phenytoin ⍉possible (label)",
      "sources": [
       {
        "name": "Antiseizure Medications",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/seizure-disorders/antiseizure-medications"
+      },
+      {
+       "name": "CEREBYX (fosphenytoin sodium) injection prescribing information (FDA label, DailyMed)",
+       "org": "Pfizer Laboratories Div Pfizer Inc",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d4c36fad-0ba2-4cd4-9c5e-dcf843f38a5a"
       }
      ]
     },
@@ -11729,13 +11744,19 @@
     {
      "role": "1st",
      "drugs": "Absence: lamotrigine",
-     "note": null,
+     "note": "ethosuximide and valproate > lamotrigine in childhood absence (Glauser 2010)",
      "sources": [
       {
        "name": "Antiseizure Medications",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/seizure-disorders/antiseizure-medications"
+      },
+      {
+       "name": "Glauser TA, et al. Ethosuximide, Valproic Acid, and Lamotrigine in Childhood Absence Epilepsy. N Engl J Med 2010;362(9):790-799",
+       "org": "New England Journal of Medicine",
+       "year": "2010",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2924476/"
       }
      ]
     },
@@ -11753,8 +11774,8 @@
      ]
     },
     {
-     "role": "1st",
-     "drugs": "Juvenile myoclonic epilepsy: lamotrigine 2nd line; carbamazepine or oxcarbazepine can make it worse",
+     "role": "2nd",
+     "drugs": "Juvenile myoclonic epilepsy: lamotrigine (2nd-line monotherapy or adjunct); carbamazepine or oxcarbazepine can make it worse",
      "note": null,
      "sources": [
       {
@@ -11857,19 +11878,6 @@
     {
      "role": "2nd",
      "drugs": "Absence: levetiracetam",
-     "note": null,
-     "sources": [
-      {
-       "name": "Antiseizure Medications",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/seizure-disorders/antiseizure-medications"
-      }
-     ]
-    },
-    {
-     "role": "1st",
-     "drugs": "Juvenile myoclonic epilepsy: gabapentin can make it worse",
      "note": null,
      "sources": [
       {
@@ -12056,6 +12064,54 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_AQEVQWB673",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "folic acid ≥0.4 mg/d",
+     "note": "people w epilepsy of childbearing potential",
+     "sources": [
+      {
+       "name": "Pack AM, et al. Teratogenesis, Perinatal, and Neurodevelopmental Outcomes After In Utero Exposure to Antiseizure Medication: Practice Guideline From the AAN, AES, and SMFM. Neurology 2024",
+       "org": "Neurology (AAN, AES and SMFM guideline)",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11175651/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TWHWTYN4ST",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "intranasal midazolam (Nayzilam); intranasal diazepam (Valtoco); buccal diazepam (Libervant)",
+     "note": "seizure clusters (home rescue)",
+     "sources": [
+      {
+       "name": "NAYZILAM (midazolam) nasal spray prescribing information (FDA label, DailyMed)",
+       "org": "UCB, Inc.",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b29422e-54d5-4a49-8522-e9cf752368c3"
+      },
+      {
+       "name": "VALTOCO (diazepam) nasal spray prescribing information (FDA label, DailyMed)",
+       "org": "Neurelis, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1a8bcc90-68fa-474d-832c-0df01e825f39"
+      },
+      {
+       "name": "LIBERVANT (diazepam) buccal film prescribing information (FDA label, DailyMed)",
+       "org": "Aquestive Therapeutics",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=12527569-8eb3-4624-b3c0-5c0e0c5f88c9"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -12065,6 +12121,13 @@
     "c_BN2NE4V4S9",
     "c_P4NHYP74P8",
     "c_BGTDFV5012"
+   ]
+  },
+  {
+   "title": "Benzodiazepines",
+   "members": [
+    "c_J969V94V29",
+    "g_TWHWTYN4ST"
    ]
   }
  ]

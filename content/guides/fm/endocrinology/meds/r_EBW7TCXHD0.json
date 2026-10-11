@@ -4,7 +4,8 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_DE9TDA1QHS"
+  "g_DE9TDA1QHS",
+  "g_5V6P1CSK74"
  ],
  "roles": [
   {
@@ -20,6 +21,43 @@
        "org": "American Family Physician (AAFP)",
        "year": "2021",
        "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "rituximab",
+     "note": "refractory to glucocorticoids and tamoxifen",
+     "sources": [
+      {
+       "name": "Riedel's thyroiditis: clinical presentation, treatment and outcomes. Endocr Connect 2018",
+       "org": "Endocrine Connections",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5845586/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5V6P1CSK74",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "levothyroxine",
+     "note": "if hypothyroid",
+     "sources": [
+      {
+       "name": "Quintero, Yazbeck, Sweeney. Thyroiditis: Evaluation and Treatment. Am Fam Physician 2021;104(6):609-617",
+       "org": "American Family Physician (AAFP)",
+       "year": "2021",
+       "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      },
+      {
+       "name": "Riedel's thyroiditis: clinical presentation, treatment and outcomes. Endocr Connect 2018",
+       "org": "Endocrine Connections",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5845586/"
       }
      ]
     }

@@ -9839,7 +9839,12 @@
   }
  ],
  "gaps": [
-  "g_09NEKTHS3C"
+  "g_09NEKTHS3C",
+  "g_W4QNE1J01R",
+  "g_FAK7RXP6DY",
+  "g_YRY2V8TRP1",
+  "g_8546W4K2W9",
+  "g_TBQ66S072T"
  ],
  "roles": [
   {
@@ -9991,6 +9996,127 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_W4QNE1J01R",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rivastigmine",
+     "note": "PD dementia",
+     "sources": [
+      {
+       "name": "EXELON PATCH (rivastigmine transdermal system) prescribing information (FDA label, DailyMed)",
+       "org": "Novartis Pharmaceuticals Corporation",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=07c12e14-bbd5-4ec8-84e4-fbe7b5ba10e0"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FAK7RXP6DY",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "droxidopa",
+     "note": "neurogenic OH",
+     "sources": [
+      {
+       "name": "NORTHERA (droxidopa) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Lundbeck Pharmaceuticals LLC",
+       "year": "2019",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2179f02c-48d7-48eb-8007-5ae43d8d16bc"
+      },
+      {
+       "name": "Midodrine hydrochloride tablets prescribing information (FDA label, DailyMed)",
+       "org": "Cardinal Health 107, LLC",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=24847065-0be0-46eb-a084-7e5425a8be73"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "midodrine",
+     "note": "symptomatic OH",
+     "sources": [
+      {
+       "name": "NORTHERA (droxidopa) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Lundbeck Pharmaceuticals LLC",
+       "year": "2019",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2179f02c-48d7-48eb-8007-5ae43d8d16bc"
+      },
+      {
+       "name": "Midodrine hydrochloride tablets prescribing information (FDA label, DailyMed)",
+       "org": "Cardinal Health 107, LLC",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=24847065-0be0-46eb-a084-7e5425a8be73"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YRY2V8TRP1",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "carbidopa/levodopa ER (Crexont); foscarbidopa/foslevodopa (Vyalev)",
+     "note": "Vyalev: motor fluctuations in advanced PD",
+     "sources": [
+      {
+       "name": "CREXONT (carbidopa and levodopa) extended-release capsules prescribing information (FDA label, DailyMed)",
+       "org": "Amneal Pharmaceuticals LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=095a08b6-b0b8-4f88-b759-67e8b87287a0"
+      },
+      {
+       "name": "VYALEV (foscarbidopa/foslevodopa) injection prescribing information (FDA label, DailyMed)",
+       "org": "AbbVie Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=28e806e4-951c-40a9-9f0c-d0929caf054c"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8546W4K2W9",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "tavapadon",
+     "note": null,
+     "sources": [
+      {
+       "name": "JUVMO (tavapadon) tablets prescribing information (FDA label, DailyMed)",
+       "org": "AbbVie Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1ae6df6e-6ca0-420f-bec9-effa7acdd085"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TBQ66S072T",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "incobotulinumtoxinA",
+     "note": "sialorrhea",
+     "sources": [
+      {
+       "name": "XEOMIN (incobotulinumtoxinA) for injection prescribing information (FDA label, DailyMed)",
+       "org": "Merz North America, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3f35d6e0-3450-4abc-a0da-cc7b277e7c6e"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -9999,6 +10125,20 @@
    "members": [
     "c_YJ8ZNY90PE",
     "g_09NEKTHS3C"
+   ]
+  },
+  {
+   "title": "Dopamine precursors",
+   "members": [
+    "c_JT86N5SWVY",
+    "g_YRY2V8TRP1"
+   ]
+  },
+  {
+   "title": "Dopamine agonists",
+   "members": [
+    "c_R33DHA2WC9",
+    "g_8546W4K2W9"
    ]
   }
  ]

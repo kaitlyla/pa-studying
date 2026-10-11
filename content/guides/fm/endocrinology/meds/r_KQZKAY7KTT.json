@@ -5130,7 +5130,12 @@
    "gap": "g_Q8QAZ1YFH0"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_05HTKFEJ3G",
+  "g_7FCAJMB7J8",
+  "g_SK796NNS6B",
+  "g_A8G6Q5CKRG"
+ ],
  "roles": [
   {
    "target": "c_XKXCX65ZTY",
@@ -5258,6 +5263,103 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_05HTKFEJ3G",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "thiazide-type diuretic, long-acting DHP CCB or ACEi/ARB",
+     "note": "HTN component",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Metabolic Syndrome",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/obesity-and-the-metabolic-syndrome/metabolic-syndrome"
+      },
+      {
+       "name": "New in Clinical Guidance | High Blood Pressure Focus of New ACC/AHA Guideline (summary of the 2025 AHA/ACC high blood pressure guideline)",
+       "org": "American College of Cardiology (ACC)",
+       "year": "2025",
+       "url": "https://www.acc.org/latest-in-cardiology/articles/2025/10/01/01/new-in-clinical-guidance-hbp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7FCAJMB7J8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral semaglutide (Wegovy tablets), orforglipron (Foundayo)",
+     "note": "anti-obesity drug",
+     "sources": [
+      {
+       "name": "WEGOVY (semaglutide) injection and tablets prescribing information (FDA label, DailyMed)",
+       "org": "Novo Nordisk",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ee06186f-2aa3-4990-a760-757579d8f77b"
+      },
+      {
+       "name": "FOUNDAYO (orforglipron) tablets prescribing information (FDA label, DailyMed)",
+       "org": "Eli Lilly and Company",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ac446c5-feba-474f-a103-23facb9b5c62"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SK796NNS6B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "phentermine/topiramate, naltrexone/bupropion",
+     "note": "anti-obesity drug",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Obesity",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/obesity-and-the-metabolic-syndrome/obesity"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_A8G6Q5CKRG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "icosapent ethyl",
+     "note": "added to a statin; high-risk pts w TG >150 mg/dL",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Dyslipidemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/lipid-disorders/dyslipidemia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "fibrate",
+     "note": "TG >1000 mg/dL",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Dyslipidemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/lipid-disorders/dyslipidemia"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -5266,7 +5368,15 @@
    "members": [
     "c_XKXCX65ZTY",
     "c_2EGZDEPZP5",
-    "c_9BTY4MXEMW"
+    "c_9BTY4MXEMW",
+    "g_7FCAJMB7J8"
+   ]
+  },
+  {
+   "title": "Lipid-lowering agents",
+   "members": [
+    "c_Y55RXRWBW9",
+    "g_A8G6Q5CKRG"
    ]
   }
  ]

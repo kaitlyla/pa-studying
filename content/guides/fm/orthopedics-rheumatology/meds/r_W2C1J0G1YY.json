@@ -4419,7 +4419,9 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_TEK7RK15H6"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -4496,6 +4498,43 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/crystal-induced-arthritides/calcium-pyrophosphate-deposition-disease"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "anakinra (IL-1 antagonist)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Calcium Pyrophosphate Deposition Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/crystal-induced-arthritides/calcium-pyrophosphate-deposition-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TEK7RK15H6",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "hydroxychloroquine",
+     "note": "chronic CPP inflammatory arthritis",
+     "sources": [
+      {
+       "name": "Zhang W, et al. EULAR recommendations for calcium pyrophosphate deposition. Part II: management. Ann Rheum Dis 2011;70(4):571-575",
+       "org": "Annals of the Rheumatic Diseases (EULAR)",
+       "year": "2011",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/21257614/"
+      },
+      {
+       "name": "Recent advances in the therapeutic management of calcium pyrophosphate deposition disease. Front Med 2024",
+       "org": "Frontiers in Medicine",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10961350/"
       }
      ]
     }

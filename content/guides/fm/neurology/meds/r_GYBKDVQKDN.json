@@ -10128,7 +10128,9 @@
   }
  ],
  "gaps": [
-  "g_VM76Y9JBJW"
+  "g_VM76Y9JBJW",
+  "g_TEMVF4QGJB",
+  "g_390PC7K96V"
  ],
  "roles": [
   {
@@ -10405,6 +10407,60 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TEMVF4QGJB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rifampin, ceftriaxone or a fluoroquinolone (azithromycin if cipro resistance)",
+     "note": "close contacts, meningococcal meningitis",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Acute Bacterial Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      },
+      {
+       "name": "Mbaeyi SA, et al. Meningococcal Vaccination: Recommendations of the Advisory Committee on Immunization Practices, United States, 2020. MMWR Recomm Rep 2020;69(9):1-41",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7527029/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_390PC7K96V",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal (PCV20/PCV21) vaccines",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Acute Bacterial Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      },
+      {
+       "name": "Use of the GSK MenACWY-CRM/MenB-4C Pentavalent Meningococcal Vaccine Among Persons Aged ≥10 Years: Recommendations of the ACIP. MMWR Morb Mortal Wkly Rep 2026;75(1)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12782235/"
+      },
+      {
+       "name": "Kobayashi M, et al. Expanded Recommendations for Use of Pneumococcal Conjugate Vaccines Among Adults Aged ≥50 Years: Recommendations of the ACIP, United States, 2024. MMWR Morb Mortal Wkly Rep 2025;74(1):1-8",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11709131/"
       }
      ]
     }

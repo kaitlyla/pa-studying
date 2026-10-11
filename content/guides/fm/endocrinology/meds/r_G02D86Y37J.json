@@ -6199,7 +6199,11 @@
   }
  ],
  "gaps": [
-  "g_M7YA4G9HH9"
+  "g_M7YA4G9HH9",
+  "g_Z2D3WJX98W",
+  "g_65FZ0BB435",
+  "g_1GQMTBDH0W",
+  "g_4JB7REZ3DA"
  ],
  "roles": [
   {
@@ -6287,6 +6291,84 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetes-mellitus-dm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Z2D3WJX98W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "glucagon",
+     "note": "severe hypoglycemia; all pts on insulin",
+     "sources": [
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 6. Glycemic Goals, Hypoglycemia, and Hyperglycemic Crises: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/"
+      },
+      {
+       "name": "BAQSIMI (glucagon) nasal powder prescribing information (FDA label, DailyMed)",
+       "org": "SportPharm LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=32ba41fa-4158-40af-8cb2-03693c248994"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_65FZ0BB435",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral glucose 15 g",
+     "note": "conscious, glucose <70 mg/dL; repeat in 15 min prn",
+     "sources": [
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 6. Glycemic Goals, Hypoglycemia, and Hyperglycemic Crises: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1GQMTBDH0W",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "teplizumab",
+     "note": "delay Stage 3 in Stage 2 T1D (≥1 yr)",
+     "sources": [
+      {
+       "name": "TZIELD (teplizumab-mzwv) injection prescribing information (FDA label, DailyMed)",
+       "org": "Provention Bio, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e8a39a5f-139c-4510-9777-71cbb00138fa"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4JB7REZ3DA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "influenza, pneumococcal, hep B and COVID-19 vaccines",
+     "note": null,
+     "sources": [
+      {
+       "name": "American Diabetes Association Professional Practice Committee. 4. Comprehensive Medical Evaluation and Assessment of Comorbidities: Standards of Care in Diabetes—2026. Diabetes Care 2026;49(Suppl 1)",
+       "org": "American Diabetes Association (ADA)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690184/"
       }
      ]
     }

@@ -9827,7 +9827,8 @@
  ],
  "gaps": [
   "g_34D4MTTYAD",
-  "g_EB598PZDNA"
+  "g_EB598PZDNA",
+  "g_RS87CBAQB2"
  ],
  "roles": [
   {
@@ -9966,6 +9967,19 @@
        "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hyperthyroidism"
       }
      ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "glucocorticoid coverage w RAI",
+     "note": "mild active ophthalmopathy",
+     "sources": [
+      {
+       "name": "Ross DS, et al. 2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis. Thyroid 2016;26(10):1343-1421",
+       "org": "American Thyroid Association (ATA)",
+       "year": "2016",
+       "url": "https://nursing.duke.edu/sites/default/files/media/main/hyperthyroidism_guidelines_2016.pdf"
+      }
+     ]
     }
    ]
   },
@@ -9989,6 +10003,24 @@
        "year": "2016",
        "url": "https://www.aafp.org/pubs/afp/issues/2016/0301/p363.html"
       },
+      {
+       "name": "Ross DS, et al. 2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis. Thyroid 2016;26(10):1343-1421",
+       "org": "American Thyroid Association (ATA)",
+       "year": "2016",
+       "url": "https://nursing.duke.edu/sites/default/files/media/main/hyperthyroidism_guidelines_2016.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RS87CBAQB2",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "levothyroxine",
+     "note": "after thyroidectomy; 1.6 mcg/kg/day",
+     "sources": [
       {
        "name": "Ross DS, et al. 2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis. Thyroid 2016;26(10):1343-1421",
        "org": "American Thyroid Association (ATA)",

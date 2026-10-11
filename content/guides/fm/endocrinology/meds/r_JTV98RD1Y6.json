@@ -1931,7 +1931,10 @@
    "gap": "g_N0JSMS5H8N"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_4TTH95A7KS",
+  "g_AJS9AB4DZC"
+ ],
  "roles": [
   {
    "target": "c_TSY20J46RR",
@@ -1972,6 +1975,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/primary-aldosteronism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4TTH95A7KS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "additional antihypertensive",
+     "note": "bilat hyperplasia",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Primary Aldosteronism",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/primary-aldosteronism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AJS9AB4DZC",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "low-dose dexamethasone",
+     "note": "FH-1/GRA only",
+     "sources": [
+      {
+       "name": "A systematic review of pathophysiology and management of familial hyperaldosteronism type 1 in pregnancy. Endocrine 2021",
+       "org": "Endocrine",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8440273/"
       }
      ]
     }
