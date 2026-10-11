@@ -637,6 +637,39 @@ describe("gap", () => {
     await refused(["gap", "g_bad", await draft("y", { block: block(sentences), evidence: evidence(claims) })], /not a g_ id/, g2);
     expect(await readContentIfExists(root, `content/gapfill/${G(9)}.json`)).toBeNull();
   });
+
+  describe("numbers inside her abbreviations", () => {
+    beforeEach(async () => {
+      await writeContent(root, "content/vocab/abbreviations.json", {
+        v: 1,
+        entries: [
+          { abbr: ["b4"], meanings: ["before"] },
+          { abbr: ["O2 · H2O · CO2"], meanings: ["oxygen · water · carbon dioxide"] },
+          { abbr: ["Q4h"], meanings: ["every 4 hours"] },
+        ],
+      });
+    });
+    const gapOf = async (pairs: [string, string][]) => ["gap", G(2), await draft("v", { block: block(pairs.map(([t]) => t)), evidence: evidence(pairs) })];
+    const g2 = [`content/gapfill/${G(2)}.json`, `content/gapfill/${G(2)}.evidence.json`];
+
+    it("reads a name's digits as part of the name, including its capitalized and listed forms", async () => {
+      const lines = await run(root, await gapOf([
+        ["Check LFTs b4 starting.", "Liver function tests are needed before starting"],
+        ["B4 surgery, give O2 and H2O.", "Before surgery give oxygen and water"],
+      ]));
+      expect(lines).toContain(`wrote content/gapfill/${G(2)}.json`);
+    });
+
+    it("still refuses a claim number its quote lacks, beside a name or inside a name-like word", async () => {
+      await refused(await gapOf([["Check LFTs b4 day 5.", "check LFTs before day 3"]]), /claim 0 has the number 5/, g2);
+      await refused(await gapOf([["Give 4 doses b4 noon.", "give the doses before noon"]]), /claim 0 has the number 4/, g2);
+      await refused(await gapOf([["Use pb4 strips.", "use the test strips"]]), /claim 0 has the number 4/, g2);
+    });
+
+    it("keeps checking an abbreviation whose meaning carries the number", async () => {
+      await refused(await gapOf([["Dose Q4h.", "dose every 6 hours"]]), /claim 0 has the number 4/, g2);
+    });
+  });
 });
 
 describe("slides", () => {

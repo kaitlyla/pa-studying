@@ -5,12 +5,13 @@ import type { IdPrefix } from "../../lib/content/index.ts";
 import { tableNode } from "../../lib/content/tables.ts";
 import type {
   BlockFile, CardsFile, ConceptsFile, DeckFile, DocJSON, EvidenceFile, Flag, FlagsFile, GapFile, GeneralFile, GuideId, Link,
-  OtherFile, OtherNote, PartCut, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile,
+  OtherFile, OtherNote, PartCut, PharmFile, PharmPart, PlaceNote, RefTabsFile, SlideMeta, StructureFile, VocabFile,
 } from "../../lib/content/types.ts";
 import type { Content } from "../../lib/derive/model.ts";
 import { REF_TABS } from "../../lib/derive/routes.ts";
 import { collapse, nodeText, type PMNode } from "../../lib/derive/text.ts";
 import { deriveTopics, rowSection } from "../../lib/derive/topics.ts";
+import { escapeRegExp } from "../../lib/search/index.ts";
 import { placeCells } from "../../lib/wordFormat.ts";
 import { CurateError, type Change } from "./tree.ts";
 
@@ -500,8 +501,27 @@ export function places(c: Content, draft: { reftabs?: RefTabsFile; other?: Other
 
 // ---- gap blocks ----------------------------------------------------------------------------
 
-/** Number tokens of a text (digits with any decimal or thousands separators). */
-const numbers = (text: string): string[] => text.match(/\d+(?:[.,]\d+)*/g) ?? [];
+/**
+ * Matches, as whole words, her abbreviations whose digits are part of a name rather than a quantity
+ * ("b4" = before, "O2" = oxygen, "2/2" = secondary): every short form with a digit from an entry none
+ * of whose meanings has one. An entry whose meaning carries the number ("Q4h" = every 4 hours, "x5D" =
+ * × 5 days) is left out, so its digits stay checked. A lowercase form also matches capitalized, as it
+ * stands at the start of a sentence ("B4 starting"). Null when the list has no such form. Only claim
+ * text is read this way: a source quote is not in her shorthand ("T3" there can be tube 3).
+ */
+function digitNames(vocab: VocabFile): RegExp | null {
+  const forms = vocab.entries
+    .filter((e) => !e.meanings.some((m) => /\d/.test(m)))
+    .flatMap((e) => e.abbr.flatMap((a) => a.split(" · ").map((p) => p.trim())))
+    .filter((f) => /\d/.test(f))
+    .flatMap((f) => (/^\p{Ll}/u.test(f) ? [f, f.charAt(0).toUpperCase() + f.slice(1)] : [f]));
+  if (forms.length === 0) return null;
+  const alternatives = [...new Set(forms)].sort((a, b) => b.length - a.length).map(escapeRegExp);
+  return new RegExp(`(?<![\\p{L}\\p{N}])(?:${alternatives.join("|")})(?![\\p{L}\\p{N}])`, "gu");
+}
+
+/** Number tokens of a text (digits with any decimal or thousands separators), outside `names`. */
+const numbers = (text: string, names: RegExp | null): string[] => (names ? text.replace(names, " ") : text).match(/\d+(?:[.,]\d+)*/g) ?? [];
 
 /**
  * `gap <g_id> <file.json>` with `{ block, evidence }`: a gap block and its evidence file (90 §90.4).
@@ -522,9 +542,10 @@ export function gap(c: Content, gapId: string, draft: { block?: GapFile; evidenc
   }
   if (evidence.author === evidence.verification?.verifier) throw new CurateError("gap: the verifier must be a different session from the author");
   const sources = block.meta?.sources ?? [];
+  const names = digitNames(c.vocab);
   (evidence.claims ?? []).forEach((cl, i) => {
     if (!Number.isInteger(cl.source) || cl.source < 0 || cl.source >= sources.length) throw new CurateError(`gap: claim ${i} names source ${cl.source}, which the block does not have`);
-    for (const n of numbers(cl.text)) if (!numbers(cl.quote).includes(n)) throw new CurateError(`gap: claim ${i} has the number ${n}, which its quote lacks`);
+    for (const n of numbers(cl.text, names)) if (!numbers(cl.quote, null).includes(n)) throw new CurateError(`gap: claim ${i} has the number ${n}, which its quote lacks`);
   });
   return {
     changes: [
