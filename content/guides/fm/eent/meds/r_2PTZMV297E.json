@@ -2643,6 +2643,29 @@
         ]
        },
        {
+        "type": "anchored",
+        "attrs": {
+         "offsetPt": 0,
+         "float": {
+          "dxPt": 318.5,
+          "dyPt": 6.3
+         }
+        },
+        "content": [
+         {
+          "type": "image_block",
+          "attrs": {
+           "asset": "b28a48315dfbdf906f051d53d6521f26.png",
+           "widthPt": 157.18783981170304,
+           "heightPt": 133.70472782413938,
+           "rot": 0,
+           "flipH": false,
+           "flipV": false
+          }
+         }
+        ]
+       },
+       {
         "type": "paragraph",
         "attrs": {
          "indLeft": 0,
@@ -2703,25 +2726,6 @@
          {
           "type": "text",
           "text": "Clin Use:"
-         }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
-         "offsetPt": 158.25
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "d46563fe62d4cddb68bf12b17e11d8e7.png",
-           "widthPt": 129.75,
-           "heightPt": 93.12795275590551,
-           "rot": 0,
-           "flipH": false,
-           "flipV": false
-          }
          }
         ]
        },
@@ -3274,36 +3278,34 @@
         ]
        },
        {
-        "type": "anchored",
+        "type": "paragraph",
         "attrs": {
-         "offsetPt": 171.75
-        },
-        "content": [
-         {
-          "type": "image_block",
-          "attrs": {
-           "asset": "3c185787f4b975aedff84796b6eda183.png",
-           "widthPt": 214.98818897637796,
-           "heightPt": 115.87503937007874,
-           "rot": 90,
-           "flipH": false,
-           "flipV": false
-          }
+         "indLeft": 18,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "●",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
          }
-        ]
-       },
-       {
-        "type": "anchored",
-        "attrs": {
-         "offsetPt": 0
         },
         "content": [
          {
-          "type": "image_block",
+          "type": "image",
           "attrs": {
-           "asset": "b28a48315dfbdf906f051d53d6521f26.png",
-           "widthPt": 129.6,
-           "heightPt": 126,
+           "asset": "579014c8f8e4fbf50fff9f0ed684af69.png",
+           "widthPt": 301.8559028312374,
+           "heightPt": 143.38155384483778,
            "rot": 0,
            "flipH": false,
            "flipV": false
