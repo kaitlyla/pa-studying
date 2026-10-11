@@ -40,7 +40,9 @@
     "fentanyl",
     "ketamine",
     "etomidate",
-    "dexmedetomidine"
+    "dexmedetomidine",
+    "IV Anesthetics",
+    "IV anesthetic"
    ],
    "home": {}
   },
@@ -121,7 +123,11 @@
     "aspirin 81 mg",
     "low-dose aspirin",
     "low dose aspirin",
-    "baby aspirin"
+    "baby aspirin",
+    "ASA",
+    "low-dose ASA",
+    "low dose ASA",
+    "baby ASA"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -191,7 +197,9 @@
    "aliases": [
     "Vitamin K Antagonist",
     "vitamin K antagonists",
-    "warfarin"
+    "warfarin",
+    "VKA",
+    "Vit K antagonists"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -232,7 +240,8 @@
     "unfractionated heparin",
     "LMWH",
     "enoxaparin",
-    "fondaparinux"
+    "fondaparinux",
+    "UFH"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -252,7 +261,9 @@
     "factor Xa inhibitor",
     "rivaroxaban",
     "apixaban",
-    "edoxaban"
+    "edoxaban",
+    "Xa Inhibitors",
+    "Xa inhibitor"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -732,7 +743,9 @@
     "Melatonin Receptor Agonists",
     "melatonin receptor agonist",
     "ramelteon",
-    "tasimelteon"
+    "tasimelteon",
+    "Melatonin-r Agonists",
+    "melatonin-r agonist"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -794,7 +807,8 @@
     "H1 blockers",
     "H1 blocker",
     "diphenhydramine",
-    "promethazine"
+    "promethazine",
+    "antihist"
    ],
    "home": {
     "pance": "psychiatry-behavioral-medicine"
@@ -832,7 +846,8 @@
     "nitrates",
     "isosorbide dinitrate",
     "isosorbide mononitrate",
-    "nitroglycerin"
+    "nitroglycerin",
+    "NTG"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -965,7 +980,9 @@
    "aliases": [
     "Cholesterol Absorption Inhibitor",
     "cholesterol absorption inhibitors",
-    "ezetimibe"
+    "ezetimibe",
+    "cholest absorb Inhibitor",
+    "cholest absorb inhibitors"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -995,7 +1012,8 @@
     "PCSK9 inhibitors",
     "PCSK9i",
     "alirocumab",
-    "evolocumab"
+    "evolocumab",
+    "PCSK9is"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1246,7 +1264,8 @@
     "lisinopril",
     "moexipril",
     "quinapril",
-    "ramipril"
+    "ramipril",
+    "ACEis"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1270,7 +1289,9 @@
     "losartan",
     "olmesartan",
     "telmisartan",
-    "valsartan"
+    "valsartan",
+    "Angiotensin II-r Blockers",
+    "angiotensin II-r blocker"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1301,7 +1322,8 @@
     "non-dihydropyridines",
     "NDHP",
     "diltiazem",
-    "verapamil"
+    "verapamil",
+    "NDHPs"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1321,7 +1343,8 @@
     "isradipine",
     "nicardipine",
     "nifedipine",
-    "nisoldipine"
+    "nisoldipine",
+    "DHPs"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1441,7 +1464,8 @@
     "SGLT2i",
     "dapagliflozin",
     "empagliflozin",
-    "SGLT2s"
+    "SGLT2s",
+    "SGLT2is"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -1639,7 +1663,9 @@
    "aliases": [
     "NMDA Receptor Antagonist",
     "NMDA receptor antagonists",
-    "memantine"
+    "memantine",
+    "NMDA-r Antagonist",
+    "NMDA-r antagonists"
    ],
    "home": {
     "pance": "neurologic-system"
@@ -1728,7 +1754,9 @@
     "pramipexole",
     "ropinirole",
     "rotigotine",
-    "apomorphine"
+    "apomorphine",
+    "DA-r Agonists",
+    "DA-r agonist"
    ],
    "notDiseases": [
     "pituitary adenoma",
@@ -1745,7 +1773,8 @@
    "file": "epilepsy-and-neurodegen-dz-med-list",
    "aliases": [
     "Adenosine A2A Receptor Antagonist",
-    "istradefylline"
+    "istradefylline",
+    "Adenosine A2A-r Antagonist"
    ],
    "home": {
     "pance": "neurologic-system"
@@ -1812,7 +1841,9 @@
    ],
    "classWords": [
     "alpha-blockers",
-    "alpha blockers"
+    "alpha blockers",
+    "α-blockers",
+    "α blockers"
    ]
   },
   {
@@ -1829,7 +1860,9 @@
    },
    "classWords": [
     "5-alpha reductase inhibitors",
-    "5-alpha-reductase inhibitors"
+    "5-alpha-reductase inhibitors",
+    "5-α reductase inhibitors",
+    "5-α-reductase inhibitors"
    ]
   },
   {
@@ -1942,7 +1975,8 @@
     "conjugated estrogen",
     "estradiol",
     "pseudoephedrine",
-    "phenylephrine"
+    "phenylephrine",
+    "Conj estrogen"
    ],
    "diseases": [
     "stress incontinence",
@@ -2016,7 +2050,8 @@
    "id": "c_FH3EV4GFD7",
    "file": "gu-and-hematopoietic-drugs-med-lists-and-los",
    "aliases": [
-    "iron"
+    "iron",
+    "Fe"
    ],
    "home": {
     "pance": "hematologic-system"
@@ -2031,7 +2066,8 @@
     "ferrous gluconate",
     "ferrous fumarate",
     "polysaccharide iron complex",
-    "ferrous bisglycinate chelate"
+    "ferrous bisglycinate chelate",
+    "polysaccharide Fe complex"
    ],
    "home": {
     "pance": "hematologic-system"
@@ -2045,7 +2081,10 @@
     "iron dextran",
     "iron sucrose",
     "sodium ferric gluconate",
-    "ferumoxytol"
+    "ferumoxytol",
+    "Parenteral Fe",
+    "Fe dextran",
+    "Fe sucrose"
    ],
    "home": {
     "pance": "hematologic-system"
@@ -2081,7 +2120,8 @@
    "file": "gu-and-hematopoietic-drugs-med-lists-and-los",
    "aliases": [
     "Erythropoiesis-Stimulating Agents",
-    "erythropoiesis-stimulating agent"
+    "erythropoiesis-stimulating agent",
+    "ESAs"
    ],
    "home": {
     "pance": "hematologic-system"
@@ -2089,7 +2129,8 @@
    "classWords": [
     "ESAs",
     "erythropoietin",
-    "darbepoetin"
+    "darbepoetin",
+    "EPO"
    ]
   },
   {
@@ -2177,7 +2218,9 @@
     "vitamin D3",
     "cholecalciferol",
     "vitamin D2",
-    "ergocalciferol"
+    "ergocalciferol",
+    "Vit D3",
+    "Vit D2"
    ],
    "home": {
     "pance": "msk-rheumatology"
@@ -2194,7 +2237,10 @@
     "raloxifene",
     "bisphosphonates",
     "bisphosphonate",
-    "etidronate"
+    "etidronate",
+    "antiresorb Therapy",
+    "antiresorb",
+    "bisphos"
    ],
    "home": {
     "pance": "msk-rheumatology"
@@ -2259,7 +2305,9 @@
     "tirzepatide",
     "GLP-1s",
     "GLP-1 receptor agonists",
-    "GLP-1 receptor agonist"
+    "GLP-1 receptor agonist",
+    "GLP-1-r agonists",
+    "GLP-1-r agonist"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2305,7 +2353,8 @@
     "Salicylates",
     "salicylate",
     "aspirin",
-    "methyl salicylate"
+    "methyl salicylate",
+    "ASA"
    ],
    "home": {
     "pance": "msk-rheumatology"
@@ -2469,7 +2518,9 @@
     "baclofen",
     "cyclobenzaprine",
     "carisoprodol",
-    "metaxalone"
+    "metaxalone",
+    "Skeletal musc Relaxants",
+    "skeletal musc relaxant"
    ],
    "home": {
     "pance": "msk-rheumatology"
@@ -2477,7 +2528,10 @@
    "classWords": [
     "muscle relaxants",
     "muscle relaxant",
-    "muscle relaxers"
+    "muscle relaxers",
+    "musc relaxants",
+    "musc relaxant",
+    "musc relaxers"
    ]
   },
   {
@@ -2662,7 +2716,8 @@
     "methotrexate",
     "hydroxychloroquine",
     "leflunomide",
-    "sulfasalazine"
+    "sulfasalazine",
+    "MTX"
    ],
    "home": {
     "pance": "msk-rheumatology"
@@ -2782,7 +2837,9 @@
     "palonosetron",
     "granisetron",
     "dolasteron",
-    "dolasetron"
+    "dolasetron",
+    "Serotonin 5-HT3-r Antagonists",
+    "5-HT3-r antagonist"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2798,7 +2855,9 @@
    "file": "gi-los-and-med-list-1",
    "aliases": [
     "Dopamine D2 Receptor Antagonists",
-    "dopamine D2 receptor antagonist"
+    "dopamine D2 receptor antagonist",
+    "DA D2-r Antagonists",
+    "DA D2-r antagonist"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2895,7 +2954,8 @@
     "dimenhydrinate",
     "diphenhydramine",
     "meclizine",
-    "doxylamine"
+    "doxylamine",
+    "H1 antihist"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -2935,7 +2995,9 @@
     "neurokinin-1 receptor antagonists",
     "aprepitant",
     "cannabinoids",
-    "dronabinol"
+    "dronabinol",
+    "Neurokinin-1-r Antagonist",
+    "neurokinin-1-r antagonists"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -3015,7 +3077,8 @@
     "H2 blockers",
     "H2 blocker",
     "H2 receptor antagonists",
-    "H2 antagonists"
+    "H2 antagonists",
+    "H2RAs"
    ]
   },
   {
@@ -3168,7 +3231,8 @@
    "id": "c_21ATJFZ464",
    "file": "gi-los-and-med-list-1",
    "aliases": [
-    "methotrexate"
+    "methotrexate",
+    "MTX"
    ],
    "home": {
     "pance": "gastrointestinal-system-nutrition"
@@ -3726,7 +3790,8 @@
    "file": "pharm-review",
    "aliases": [
     "Non-Selective Alpha Blockers",
-    "phenoxybenzamine"
+    "phenoxybenzamine",
+    "Non-Selective α Blockers"
    ],
    "home": {
     "pance": "cardiovascular"
@@ -4062,7 +4127,8 @@
    "aliases": [
     "Inhaled Corticosteroids",
     "inhaled corticosteroid",
-    "ICS"
+    "ICS",
+    "ICSs"
    ],
    "home": {
     "pance": "pulmonary"
@@ -4118,7 +4184,8 @@
     "leukotriene receptor antagonists",
     "montelukast",
     "zafirlukast",
-    "zileuton"
+    "zileuton",
+    "leukotriene-r antagonists"
    ],
    "home": {
     "pance": "pulmonary"
@@ -4292,7 +4359,8 @@
    "id": "c_JT9GMEDEPW",
    "file": "pharm-review",
    "aliases": [
-    "rifampin"
+    "rifampin",
+    "RIF"
    ],
    "home": {
     "pance": "pulmonary"
@@ -5135,7 +5203,9 @@
     "Alpha-Glucosidase Inhibitors",
     "alpha-glucosidase inhibitor",
     "acarbose",
-    "miglitol"
+    "miglitol",
+    "α-Glucosidase Inhibitors",
+    "α-glucosidase inhibitor"
    ],
    "home": {
     "pance": "endocrine-system"
@@ -5164,7 +5234,8 @@
     "DPP-4 inhibitor",
     "sitagliptin",
     "linagliptin",
-    "saxagliptin"
+    "saxagliptin",
+    "DPP-4is"
    ],
    "home": {
     "pance": "endocrine-system"
@@ -5869,7 +5940,8 @@
     "Zithromax",
     "Z-pak",
     "macrolide",
-    "macrolides"
+    "macrolides",
+    "azithro"
    ],
    "home": {
     "fm": "infectious-diseases",
@@ -5925,7 +5997,8 @@
     "fluoroquinolone",
     "fluoroquinolones",
     "FQ",
-    "FQs"
+    "FQs",
+    "cipro"
    ],
    "home": {
     "fm": "infectious-diseases",

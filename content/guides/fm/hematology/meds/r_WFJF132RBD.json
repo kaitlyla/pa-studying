@@ -185,7 +185,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "ADRs"
+                "text": "SE"
                }
               ]
              }
@@ -360,7 +360,7 @@
                },
                {
                 "type": "text",
-                "text": ": binds antithrombin III to accelerate its activity which enhances inactivation of thrombin and factor Xa; also directly binds & inhibits thrombin "
+                "text": ": binds AT-3 to accelerate its activity which enhances inactivation of thrombin and Xa; also directly binds & inhibits thrombin "
                }
               ]
              }
@@ -402,11 +402,11 @@
                   }
                  }
                 ],
-                "text": "ADRs"
+                "text": "SE"
                },
                {
                 "type": "text",
-                "text": ": bleeding, HIT, osteoporosis (long term) "
+                "text": ": bleed, HIT, osteoporosis (long term) "
                }
               ]
              }
@@ -452,7 +452,7 @@
                },
                {
                 "type": "text",
-                "text": ": HIT/hx of HIT, active bleeding, severe HTN, ICH, severe thrombocytopenia, hypersensitivity to pork, neonates/infants "
+                "text": ": HIT/hx of HIT, active bleed, severe HTN, ICH, severe thrombocytopenia, hypersensitivity to pork, neonates/infants "
                }
               ]
              }
@@ -661,7 +661,7 @@
                },
                {
                 "type": "text",
-                "text": ": binds antithrombin III to accelerate its activity which enhances inactivation of thrombin and factor Xa; has a greater affinity for inhibiting factor Xa "
+                "text": ": binds AT-3 to accelerate its activity which enhances inactivation of thrombin and Xa; has a greater affinity for inhibiting Xa "
                }
               ]
              }
@@ -703,11 +703,11 @@
                   }
                  }
                 ],
-                "text": "ADRs"
+                "text": "SE"
                },
                {
                 "type": "text",
-                "text": ": bleeding, anemia, ↑ LFTs, thrombocytopenia, hyperkalemia "
+                "text": ": bleed, anemia, ↑ LFTs, thrombocytopenia, hyperkalemia "
                }
               ]
              }
@@ -753,7 +753,7 @@
                },
                {
                 "type": "text",
-                "text": ": hx of HIT, active bleeding, pork hypersensitivity  "
+                "text": ": hx of HIT, active bleed, pork hypersensitivity  "
                }
               ]
              }
@@ -982,7 +982,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Acute thrombotic disorders: peripheral & PE, venous thrombosis"
+          "text": "Acute thrombotic disorders: periph & PE, venous thrombosis"
          }
         ]
        },
@@ -1011,7 +1011,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Adverse Effects:                                             -    "
+          "text": "SE:                                             -    "
          },
          {
           "type": "text",
@@ -1177,7 +1177,7 @@
          },
          {
           "type": "text",
-          "text": "unfractionated heparin "
+          "text": "UFH "
          }
         ]
        },
@@ -1261,7 +1261,7 @@
             }
            }
           ],
-          "text": "renal & hepatic elimination "
+          "text": "renal & hepatic elim "
          }
         ]
        },
@@ -1455,7 +1455,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Half-life: 90min "
+          "text": "½ life: 90min "
          }
         ]
        },
@@ -1496,7 +1496,7 @@
             }
            }
           ],
-          "text": "Variable"
+          "text": "var"
          }
         ]
        },
@@ -1554,7 +1554,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Adverse Effects:"
+          "text": "SE:"
          }
         ]
        },
@@ -1655,7 +1655,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Heparin sensitivity           -     Bleeding disorders"
+          "text": "Heparin sensitivity           -     bleed disorders"
          }
         ]
        },
@@ -1708,7 +1708,7 @@
             }
            }
           ],
-          "text": "   Recent surgery: eye, brain, spinal cord "
+          "text": "   Recent surg: eye, brain, spinal cord "
          }
         ]
        },
@@ -1944,7 +1944,7 @@
             }
            }
           ],
-          "text": " size of unfractionated heparin "
+          "text": " size of UFH "
          }
         ]
        },
@@ -1973,7 +1973,7 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: inactivate factor Xa"
+          "text": "MOA: inactivate Xa"
          }
         ]
        },
@@ -2130,7 +2130,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Adverse Effects:"
+          "text": "SE:"
          }
         ]
        },
@@ -2231,7 +2231,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Heparin sensitivity          -    Bleeding disorders"
+          "text": "Heparin sensitivity          -    bleed disorders"
          }
         ]
        },
@@ -2284,7 +2284,7 @@
             }
            }
           ],
-          "text": "    Recent surgery: eye, brain, spinal cor"
+          "text": "    Recent surg: eye, brain, spinal cor"
          },
          {
           "type": "text",
@@ -2363,7 +2363,7 @@
             }
            }
           ],
-          "text": "Does NOT require monitoring of aPTT"
+          "text": "Does ⍉require monitoring of aPTT"
          }
         ]
        },
@@ -2419,7 +2419,7 @@
     {
      "role": "adjunct",
      "drugs": "heparin",
-     "note": "slowly evolving DIC with venous/arterial thrombosis, or retained dead fetus; not in rapidly evolving DIC with bleeding",
+     "note": "slowly evolving DIC w venous/arterial thrombosis, or retained dead fetus; ⍉in rapidly evolving DIC w bleed",
      "sources": [
       {
        "name": "Disseminated Intravascular Coagulation (DIC)",

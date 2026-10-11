@@ -1,5 +1,5 @@
 // Pharm cards, alias matching, pharm sections, drug-table stubs and meds panels (plan 40 §40.4–§40.5).
-import type { CardsFile, StructureFile, UsesFile } from "../content/types.ts";
+import type { CardsFile, StructureFile, UsesFile, VocabFile } from "../content/types.ts";
 import { escapeRegExp } from "../search/index.ts";
 import { BuildError } from "./errors.ts";
 import { collapse, firstCell, type Row, type Table } from "./text.ts";
@@ -45,17 +45,22 @@ const NEGATIVE_SIGN = String.raw`(?<!(?:⊖|\(\s*[-−]\s*\)|negative)\s*)`;
  * Her words that make the drugs after them drugs to avoid, stop or be wary of ("avoid vasodilators",
  * "AVOID nitrates, diuretics", "stop all anticoagulants", "DC/⇣ opioid", "cautious use of digoxin",
  * "Elimination of topical steroids"). Her "DC cardioversion" is a shock, and a stop weighed against
- * going on is a choice, not a stop: "DC anticoagulation vs continue indefinitely".
+ * going on is a choice, not a stop: "DC anticoagulation vs continue indefinitely". Her abbreviation
+ * list writes avoid, no and not as ⍉, set right against the word after it ("⍉nitrates"), and
+ * elimination as elim.
  */
 const AVOID =
-  /(?<![\p{L}\p{N}])(?:avoid|no|not|contraindicated|hold|CI|cautious\s+use\s+of|elimination\s+of|eliminate|(?:stop|discontinue|D\/C|DC(?!\s*(?:cardioversion|shock)))(?![\p{L}\p{N}])(?![^\n;▪•»]*(?<![\p{L}\p{N}])(?:vs|versus)(?![\p{L}\p{N}])))(?![\p{L}\p{N}])/giu;
+  /(?:(?<![\p{L}\p{N}])(?:avoid|no|not|contraindicated|hold|CI|cautious\s+use\s+of|elim(?:ination)?\s+of|eliminate|(?:stop|discontinue|D\/C|DC(?!\s*(?:cardioversion|shock)))(?![\p{L}\p{N}])(?![^\n;▪•»]*(?<![\p{L}\p{N}])(?:vs|versus)(?![\p{L}\p{N}])))(?![\p{L}\p{N}])|⍉)/giu;
 
-/** Her line heading a list of drugs to avoid ("AVOID: nonselective beta blockers"). */
-const AVOID_HEAD = /^[^\S\n]*(?:avoid|contraindicated|CI)[^\S\n]*:/iu;
+/** Her line heading a list of drugs to avoid ("AVOID: nonselective beta blockers", "⍉: …"). */
+const AVOID_HEAD = /^[^\S\n]*(?:avoid|contraindicated|CI|⍉)[^\S\n]*:/iu;
 
-/** Her line heading a list of causes ("First search for reversible causes"), unless it says to treat them. */
-const CAUSE_HEAD = /(?<![\p{L}\p{N}])(?:causes|triggers|precipitants)[^\S\n]*:?[^\S\n]*$/iu;
-const TREATS = /(?<![\p{L}\p{N}])(?:treat|tx|manage|correct|directed|address)/iu;
+/**
+ * Her line heading a list of causes ("First search for reversible causes", "reversible Eti:", her
+ * list's Eti for the noun), unless it says to treat them.
+ */
+const CAUSE_HEAD = /(?<![\p{L}\p{N}])(?:causes|eti|triggers|precipitants)[^\S\n]*:?[^\S\n]*$/iu;
+const TREATS = /(?<![\p{L}\p{N}])(?:treat|tx|manage|mgnt|correct|directed|address)/iu;
 
 /** A line of her bulleted or dashed list ("▪︎beta blockers", "  – e.g., propranolol"). */
 const LIST_LINE = /^[^\S\n]*[▪•»➀-➓–—*-]/u;
@@ -77,8 +82,8 @@ function headedOut(text: string, at: number): boolean {
   return false;
 }
 
-/** Her words after an avoid word that turn to what to do instead: "D/C offending AP drug or switch to …". */
-const INSTEAD = /(?<![\p{L}\p{N}])(?:switch(?:ing)?\s+to|change\s+to|instead|initiation\s+of)(?![\p{L}\p{N}])/iu;
+/** Her words after an avoid word that turn to what to do instead: "D/C offending AP drug or switch to …", "chg to …". */
+const INSTEAD = /(?<![\p{L}\p{N}])(?:switch(?:ing)?\s+to|(?:change|chg|Δ)\s+to|instead|initiation\s+of)(?![\p{L}\p{N}])/iu;
 
 /** Her words that stop a drug too, so "DC/avoid cardiotoxic drugs" still avoids them. */
 const STOP_WORD = /^(?:avoid|no|not|contraindicated|hold|CI|DC|D\/C|stop|discontinue)$/iu;
@@ -140,8 +145,11 @@ function avoidReaches(item: string, from: number, to: number, drugs: RegExp | nu
 /** Her words for drugs ending the text before a colon: "hepatotoxic drugs:". */
 const DRUGS_HEAD = /(?<![\p{L}\p{N}])(?:drugs|meds|medications|agents)\s*$/iu;
 
-/** A list element of hers that says when to avoid, not what: "AVOID in inferior, PDE-5 inhibitor in last 24h". */
-const CONDITION = /^\s*(?:in|if|w\/|with|after|during|when|for|unless)(?![\p{L}\p{N}])/iu;
+/**
+ * A list element of hers that says when to avoid, not what: "AVOID in inferior, PDE-5 inhibitor in last 24h";
+ * "w" is her list's with.
+ */
+const CONDITION = /^\s*(?:(?:in|if|w\/|with|after|during|when|for|unless)(?![\p{L}\p{N}])|w(?=\s))/iu;
 
 /**
  * Whether her avoid word at `m` is a word of a slash pair with a word that does not stop a drug —
@@ -196,13 +204,16 @@ function untilEnd(rest: string, ends: RegExp): string {
  * Whether her point sets a condition on having the drug word (escaped, `word`) rather than treating
  * with it: the word under her ⊘, Ø, ∅ or ⍉ ("without", "not") sign — "≥185/110 (thrombolytic therapy)
  * or ≥220/120 (⊘thrombolytic therapy)", "Ø memantine, ineffective" — or the word twice with one
- * followed by "not" — "before thrombolytic therapy started – If thrombolytic therapy not planned". A
- * lone "SSRIs have not been effective, but may be used for comorbid anxiety" still names them.
+ * followed by "not" (her ⍉) — "before thrombolytic therapy started – If thrombolytic therapy not
+ * planned". A lone "SSRIs have not been effective, but may be used for comorbid anxiety" still names them.
  */
 function contrasted(point: string, word: string): boolean {
   if (new RegExp(`[⊘Ø∅⍉]\\s*${word}(?![\\p{L}\\p{N}])`, "iu").test(point)) return true;
   const all = new RegExp(`(?<![\\p{L}\\p{N}])${word}(?![\\p{L}\\p{N}])`, "giu");
-  const negated = new RegExp(`(?<![\\p{L}\\p{N}])${word}(?:\\s+(?!(?:if|unless|when)(?![\\p{L}\\p{N}]))\\p{L}+)?\\s+not(?![\\p{L}\\p{N}])`, "iu");
+  const negated = new RegExp(
+    `(?<![\\p{L}\\p{N}])${word}(?:\\s+(?!(?:if|unless|when)(?![\\p{L}\\p{N}]))\\p{L}+)?\\s+(?:not(?![\\p{L}\\p{N}])|⍉)`,
+    "iu",
+  );
   return [...point.matchAll(all)].length > 1 && negated.test(point);
 }
 
@@ -251,10 +262,10 @@ const OTHER_BEFORE = /(?<![\p{L}\p{N}])(?:endogenous|serum|plasma|topical|(?:\p{
  * to toxic levels", "APAP nomogram", "opiate OD", "Opioid-induced", "PEG-INF", her heading for
  * treating a poison: "Iron TX: chelation therapy", her heading for the drug as the cause:
  * "Corticosteroid use: gradual taper", a lost substance: "folic acid depletion", and a culture
- * medium: "sorbitol agar".
+ * medium: "sorbitol agar". Her list writes withdrawal as w.draw and accumulation as accum.
  */
 const PROBLEM_AFTER =
-  /^(?:[^\S\n]+|-)(?:overload|deficiency|deficient|depletion|toxicity|poisoning|overdose|OD|levels?|concentrations?|accumulates|accumulation|nomogram|induced|withdrawal|intoxication|chelation|agar|INF|IFN|TX\s*:|use\s*:)(?![\p{L}\p{N}])/iu;
+  /^(?:[^\S\n]+|-)(?:overload|deficiency|deficient|depletion|toxicity|poisoning|overdose|OD|levels?|concentrations?|accumulates|accumulation|accum|nomogram|induced|withdrawal|w\.draw|intoxication|chelation|agar|INF|IFN|TX\s*:|use\s*:)(?![\p{L}\p{N}])/iu;
 
 /**
  * Her open parenthetical of the therapy a patient already needs, which makes them eligible for
@@ -326,12 +337,15 @@ function unavoided(re: RegExp | null, text: string, drugs: RegExp | null, option
 
 /**
  * Her parenthetical right after a word, naming her choice: "anticoagulation (enoxaparin)". Her
- * examples do not narrow the word: "vasodilators (e.g., nitrates)".
+ * examples do not narrow the word: "vasodilators (e.g., nitrates)", "(incl …)".
  */
-const PARENTHETICAL = /^[^\S\n]*\((?![^\S\n]*(?:e\.?\s?g\b|ex\b|such as\b|including\b))([^()\n]*)\)/iu;
+const PARENTHETICAL = /^[^\S\n]*\((?![^\S\n]*(?:e\.?\s?g\b|ex\b|such as\b|including\b|incl\b))([^()\n]*)\)/iu;
 
-/** Her drug named with "w/" right after a word, naming her choice the same way: "anticoagulate w/ Warfarin". */
-const WITH_CHOICE = /^[^\S\n]*(?:w\/|with(?![\p{L}\p{N}]))([^\n,;()]*)/iu;
+/**
+ * Her drug named with "w/" right after a word, naming her choice the same way: "anticoagulate w/ Warfarin"
+ * (her list's "w" too).
+ */
+const WITH_CHOICE = /^[^\S\n]*(?:w\/|with(?![\p{L}\p{N}])|w(?=[^\S\n]))([^\n,;()]*)/iu;
 
 /** Her card of reversal agents, by its own name: the antidotes she lists under a drug she reverses. */
 const ANTIDOTE_CARD = /^(?:reversal agents?|antidotes?)$/iu;
@@ -357,6 +371,43 @@ function mentions(phrases: readonly string[], text: string, drugs: RegExp | null
  * without a class noun's ending (plural "-s", "-al", "-ic", "-ant", "-or", "-er", "-ist").
  */
 const DRUG_NAME = /^\p{Ll}[\p{Ll}-]*(?: \p{Ll}[\p{Ll}-]*)?(?<!s|al|ic|ant|or|er|ist)$/u;
+
+/** A phrase as her list's pairs are compared: lower case, hyphens as spaces, each word without a plural "s". */
+function pairKey(phrase: string): string {
+  return phrase
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/-/g, " ")
+    .split(/\s+/u)
+    .filter((w) => w !== "")
+    .map((w) => w.replace(/(?<=..)s$/u, ""))
+    .join(" ");
+}
+
+/**
+ * Her abbreviation list's pairs of words for the same thing (`pairKey`ed): each short form with its
+ * meaning ("BB" = "beta-blocker"), her positional lists element by element ("vanco · cipro · azithro"
+ * = "vancomycin · ciprofloxacin · azithromycin") and each of her "OR" alternatives ("ICS" =
+ * "intercostal space  OR  inhaled corticosteroid"). Suffixes and symbols ("-r", "↑") pair no words.
+ */
+function listPairs(entries: VocabFile["entries"]): [string, string][] {
+  const pairs: [string, string][] = [];
+  const word = (p: string): boolean => /^[\p{L}\p{N}]/u.test(p) && !p.includes("(");
+  const add = (a: string, m: string): void => {
+    if (word(a) && word(m) && pairKey(a) !== pairKey(m)) pairs.push([pairKey(a), pairKey(m)]);
+  };
+  for (const e of entries) {
+    for (const abbr of e.abbr) {
+      const shorts = abbr.split(" · ").map((p) => p.trim());
+      for (const meaning of e.meanings) {
+        const longs = meaning.split(" · ").map((p) => p.trim());
+        if (shorts.length > 1 && shorts.length === longs.length) shorts.forEach((s, i) => add(s, longs[i] ?? ""));
+        else if (shorts.length === 1 && longs.length === 1 && !/\s/u.test(abbr.trim())) for (const alt of meaning.split(/\s+OR\s+/u)) add(abbr, alt.trim());
+      }
+    }
+  }
+  return pairs;
+}
 
 /** The phrases (lowercased, once each) that occur in `text` as whole words. */
 function foundIn(phrases: readonly string[], text: string): string[] {
@@ -387,10 +438,19 @@ export class CardMatcher {
   private readonly antidoteHead: RegExp | null;
   /** Per card, the `diseases` of its parts (content PharmPart): the conditions some of its notes are written for. */
   private readonly partDiseases: ReadonlyMap<string, readonly (readonly string[])[]>;
+  /** Her abbreviation list's pairs of words for the same thing (`listPairs`). */
+  private readonly pairs: readonly [string, string][];
+  /** Per phrase, its `pairKey` and the keys one swap of a pair's word for its partner makes of it. */
+  private readonly formsCache = new Map<string, Set<string>>();
 
-  constructor(cards: readonly Card[], partDiseases: ReadonlyMap<string, readonly (readonly string[])[]> = new Map()) {
+  constructor(
+    cards: readonly Card[],
+    partDiseases: ReadonlyMap<string, readonly (readonly string[])[]> = new Map(),
+    vocab: VocabFile["entries"] = [],
+  ) {
     this.all = cards;
     this.partDiseases = partDiseases;
+    this.pairs = listPairs(vocab);
     this.cards = cards.filter((c) => c.in === undefined);
     this.members = new Map(this.cards.map((c) => [c.id, cardGroup(cards, c.id)]));
     this.aliasWords = this.cards.map((c) => drugWords(this.membersOf(c.id).flatMap((m) => m.aliases)));
@@ -472,14 +532,61 @@ export class CardMatcher {
   }
 
   /**
-   * Whether `word` (lowercased) names one drug of the class card's group, not its class: an alias she
-   * writes in lower case as a drug's own name ("prazosin", "bismuth subsalicylate") rather than a
-   * class word, an abbreviation ("BB") or a class name ("thiazide diuretic", "sglt2 inhibitors").
+   * Whether `word` (lowercased) names one drug of the class card's group, not its class, as she files
+   * it on the card: an alias she writes in lower case as a drug's own name ("prazosin", "bismuth
+   * subsalicylate") rather than a class word, an abbreviation ("BB") or a class name ("thiazide
+   * diuretic", "sglt2 inhibitors"). A word she files among the card's class words is a class word for
+   * it, whatever drug her list makes it short for: "MTX" on her DMARD card, so "sulfasalazine, MTX"
+   * names her DMARD card by another of its class words (`meantCards`).
    */
   namesDrug(classId: string, word: string): boolean {
     const members = this.membersOf(classId);
     if (members.some((m) => (m.classWords ?? []).some((w) => w.normalize("NFC").toLowerCase() === word))) return false;
     return DRUG_NAME.test(word) && members.some((m) => m.aliases.some((a) => a.normalize("NFC") === word));
+  }
+
+  /**
+   * Whether `word` (lowercased) reads as one drug of the class card's group when choosing its rows: a
+   * drug's own name (`namesDrug`), or her list's short form of one (`sameWords`), "asa" for "aspirin",
+   * which names her Aspirin row and not her Clopidogrel row though she files "ASA" as a class word.
+   * Only another word of her list does: the singular "corticosteroid" beside her plural
+   * "corticosteroids" leaves the plural a class word.
+   */
+  readsAsDrug(classId: string, word: string): boolean {
+    const key = pairKey(word);
+    return this.sameWords(classId, word).some((w) => (w === word || pairKey(w) !== key) && this.namesDrug(classId, w));
+  }
+
+  /** The `pairKey` of `phrase` and every key one swap of a whole word or words of her list's pairs (`listPairs`) for its partner makes of it. */
+  private forms(phrase: string): Set<string> {
+    const key = pairKey(phrase);
+    const cached = this.formsCache.get(key);
+    if (cached) return cached;
+    const out = new Set([key]);
+    const padded = ` ${key} `;
+    for (const [a, b] of this.pairs) {
+      for (const [from, to] of [[a, b], [b, a]] as const) {
+        let at = padded.indexOf(` ${from} `);
+        while (at >= 0) {
+          out.add(`${padded.slice(0, at + 1)}${to}${padded.slice(at + from.length + 1)}`.trim());
+          at = padded.indexOf(` ${from} `, at + 1);
+        }
+      }
+    }
+    this.formsCache.set(key, out);
+    return out;
+  }
+
+  /**
+   * `word` (lowercased) and the aliases and class words (lowercased) of the class card's group that
+   * her abbreviation list makes the same words (`forms`): "asa" and her aspirin card's "aspirin", "bbs"
+   * and her beta-blocker card's "beta blockers". Never another drug of the card: "topiramate" is not
+   * her Na-channel card's "lamotrigine".
+   */
+  sameWords(classId: string, word: string): string[] {
+    const own = this.forms(word);
+    const words = this.membersOf(classId).flatMap((m) => [...m.aliases, ...(m.classWords ?? [])].map((w) => w.normalize("NFC").toLowerCase()));
+    return [...new Set([word, ...words.filter((w) => w !== word && [...this.forms(w)].some((f) => own.has(f)))])];
   }
 
   /** Whether one of the class card's group was written for the pharm section `section` by name (its `for`). */
@@ -652,7 +759,7 @@ function contentRows(table: Table, conditionRows: readonly string[]): Row[] {
 const DRUG_COLUMN = /^(?:drugs?|rx|pharm)$/i;
 
 /** Her combination partner after an agent ("Amiloride (combo w/ HCTZ → Moduretic)"): another class's drug, up to her closing parenthesis, arrow or line end. */
-const COMBO_PARTNER = /(?<![\p{L}\p{N}])(?:combo|combination|combined)\s+(?:w\/|with(?![\p{L}\p{N}]))[^()\n→⇢🡪]*/giu;
+const COMBO_PARTNER = /(?<![\p{L}\p{N}])(?:combo|combination|combined)\s+(?:w\/|with(?![\p{L}\p{N}])|w(?=[^\S\n]))[^()\n→⇢🡪]*/giu;
 
 /**
  * The cells under the drug row's heading-row drug-name columns, where her tables list the agents
@@ -902,8 +1009,8 @@ export function topicText(t: SystemTopics, topic: Topic): string {
   return topic.rows.map((id) => rows.get(id)?.cells.join("\n") ?? "").join("\n");
 }
 
-/** A heading-row column label that names her treatment column ("Management", "Treatment", "DX/TX", …). */
-const TREATMENT_COLUMN = /\b(?:management|treatment|tx)\b/i;
+/** A heading-row column label that names her treatment column ("Management", "Treatment", "DX/TX", her list's "Mgnt", …). */
+const TREATMENT_COLUMN = /\b(?:management|mgnt|treatment|tx)\b/i;
 
 /**
  * The topic's treatment text: the cells under its heading rows' treatment columns or its "TX:"
@@ -1118,11 +1225,15 @@ export function medsPanel(
   // her class word ("BB" in her heart failure Beta Blockers row's indications).
   const drugText = (c: string, r: Row): string => {
     const first = firstCell(r);
-    const drugRow = matcher.aliasesIn(c, first).some((a) => matcher.namesDrug(c, a));
+    const drugRow = matcher.aliasesIn(c, first).some((a) => matcher.readsAsDrug(c, a));
     return drugRow ? `${first}\n${drugColumnText(s.topics, r)}` : r.cells.join("\n");
   };
+  // Her list's other words for her word that the card carries name its rows too (`sameWords`): her
+  // "ASA" names her Aspirin row.
   const onRow = (c: string, r: Row): boolean =>
-    (namedBy.get(c) ?? []).some((w) => phraseMatcher(variants(w))(matcher.namesDrug(c, w) ? drugText(c, r) : r.cells.join("\n")));
+    (namedBy.get(c) ?? []).some((w) =>
+      phraseMatcher(matcher.sameWords(c, w).flatMap(variants))(matcher.readsAsDrug(c, w) ? drugText(c, r) : r.cells.join("\n")),
+    );
   const ownRows = (c: string): { row: Row; section: string }[] =>
     drugBlocks.flatMap((b) => rowsOf(b).map((row) => ({ row, section: sectionOf(b) }))).filter((r) => (byRow.get(r.row.id) ?? []).includes(c));
   // Her rows in the pharm section named for the condition come first, then those in the sections
@@ -1136,7 +1247,7 @@ export function medsPanel(
   const rowRule = new Map<string, { how: "named" | "none" | "all"; scope: ReadonlySet<string> }>();
   for (const c of namedCards) {
     const own = ownRows(c);
-    const drugsOnly = (namedBy.get(c) ?? []).every((w) => matcher.namesDrug(c, w));
+    const drugsOnly = (namedBy.get(c) ?? []).every((w) => matcher.readsAsDrug(c, w));
     const tiers = [own.filter((r) => namesCondition(r.section)), own.filter((r) => relevant.has(r.section)), own].filter((t) => t.length > 0);
     const ids = (t: typeof own): ReadonlySet<string> => new Set(t.map((r) => r.row.id));
     const tier = tiers.find((t) => !drugsOnly || t.some((r) => onRow(c, r.row)));

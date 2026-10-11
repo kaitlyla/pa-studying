@@ -228,7 +228,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "ADRs/Other"
+                "text": "SE/Other"
                }
               ]
              }
@@ -368,7 +368,7 @@
                   }
                  }
                 ],
-                "text": "ADRs"
+                "text": "SE"
                },
                {
                 "type": "text",
@@ -618,7 +618,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Adverse Effects: "
+          "text": "SE: "
          }
         ]
        },
@@ -915,7 +915,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "ADRs/Other"
+                "text": "SE/Other"
                }
               ]
              }
@@ -1048,7 +1048,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Anti-inflammatory"
+                "text": "Anti-inflam"
                }
               ]
              },
@@ -1196,11 +1196,11 @@
                   }
                  }
                 ],
-                "text": "ADRs"
+                "text": "SE"
                },
                {
                 "type": "text",
-                "text": ": GI (irritation, gastritis, PUD, bleeding), increased bleeding time, decreased GFR, ischemia, acute renal failure, salt/water retention, CHF risk, rash, SJS, asthmatics (bronchospasm, dyspnea, wheezing), aseptic meningitis, exacerbation of anemia, rebound HA"
+                "text": ": GI (irritate, gastritis, PUD, bleed), ↑bleed time, ↓GFR, ischemia, acute renal failure, salt/H2O retention, CHF risk, rash, SJS, asthmatics (bronchospasm, dyspnea, wheezing), aseptic meningitis, exacerbation of anemia, rebound HA"
                }
               ]
              },
@@ -1248,7 +1248,7 @@
                },
                {
                 "type": "text",
-                "text": ": avoid concurrent use of aspirin "
+                "text": ": ⍉concurrent use of ASA "
                }
               ]
              }
@@ -1452,7 +1452,7 @@
             }
            }
           ],
-          "text": "TX (thromboxane) A2 in platelets → aggregat"
+          "text": "TX (thromboxane) A2 in PLT → aggregat"
          },
          {
           "type": "text",
@@ -1680,7 +1680,7 @@
             }
            }
           ],
-          "text": "Adverse effect: "
+          "text": "SE: "
          },
          {
           "type": "text",
@@ -2060,7 +2060,7 @@
             }
            }
           ],
-          "text": "↑serious CV thrombotic events (MI, stroke) -poss fatal (↑if CVD or RF)"
+          "text": "↑serious CV thrombotic events (MI, CVA) -poss fatal (↑if CVD or RF)"
          }
         ]
        },
@@ -2286,7 +2286,7 @@
             }
            }
           ],
-          "text": "peri-op pain in CABG surgery"
+          "text": "peri-op pain in CABG surg"
          }
         ]
        },
@@ -2364,7 +2364,7 @@
             }
            }
           ],
-          "text": "cardiac: ↑CV thrombotic risk -> avoid chronic if CVD hx"
+          "text": "♡: ↑CV thrombotic risk -> ⍉chronic if CVD hx"
          }
         ]
        },
@@ -2401,7 +2401,7 @@
             }
            }
           ],
-          "text": "preg: avoid ±20wk -> fetal renal dysfun, oligohydramnios"
+          "text": "preg: ⍉ ±20wk -> fetal renal dysfun, oligohydramnios"
          }
         ]
        },
@@ -2438,7 +2438,7 @@
             }
            }
           ],
-          "text": "avoid ±30wk -> premature closure ductus arteriosus"
+          "text": "⍉ ±30wk -> premature closure ductus arteriosus"
          }
         ]
        },
@@ -2750,7 +2750,7 @@
             }
            }
           ],
-          "text": "avoid or ↓dose in CKD"
+          "text": "⍉ or ↓dose in CKD"
          }
         ]
        },
@@ -3236,7 +3236,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↓ Na/Cl transport,  ↓ K reabsorb"
+          "text": "↓ Na/Cl transp,  ↓ K reabsorb"
          }
         ]
        },
@@ -3368,7 +3368,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Adverse Effects:"
+          "text": "SE:"
          }
         ]
        },
@@ -3608,7 +3608,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Blood Glucose\t\t- Lipids"
+          "text": "BG\t\t- Lipids"
          }
         ]
        },
@@ -3753,7 +3753,7 @@
     {
      "role": "1st",
      "drugs": "NSAID (ketorolac) preferred",
-     "note": "renal colic; NSAIDs relieve pain as well or better with less vomiting (EAU)",
+     "note": "renal colic; NSAIDs relieve pain as well or better w less vomiting (EAU)",
      "sources": [
       {
        "name": "Urinary Calculi",
@@ -3783,7 +3783,7 @@
     {
      "role": "2nd",
      "drugs": "opioid (morphine; fentanyl for rapid onset) if NSAIDs are contraindicated or not enough",
-     "note": "renal colic; NSAIDs relieve pain as well or better with less vomiting (EAU)",
+     "note": "renal colic; NSAIDs relieve pain as well or better w less vomiting (EAU)",
      "sources": [
       {
        "name": "Urinary Calculi",
@@ -3813,7 +3813,7 @@
     {
      "role": "1st",
      "drugs": "tamsulosin (medical expulsive therapy)",
-     "note": "stones < 1 cm without infection or obstruction",
+     "note": "stones < 1 cm w.o infect or obstruct",
      "sources": [
       {
        "name": "Urinary Calculi",

@@ -1227,6 +1227,132 @@ describe("pharm (40 §40.4–§40.5)", () => {
     expect(rows(["heart-failure"])).toEqual([[C(1), [R(920), R(930)]]]);
   });
 
+  describe("her list's short form names the drug-table rows carrying the full word it stands for", () => {
+    const vocab = [
+      { abbr: ["ASA"], meanings: ["aspirin"] },
+      { abbr: ["BB"], meanings: ["beta-blocker"] },
+      { abbr: ["TPM"], meanings: ["topiramate"] },
+    ];
+    const antiplatelets = { id: C(1), file: "f", aliases: ["aspirin", "ASA", "clopidogrel"], home: {} };
+    const betaBlockers = { id: C(2), file: "f", aliases: ["beta blockers", "BBs", "propranolol"], home: {} };
+    const naChannel = { id: C(3), file: "f", aliases: ["Na-channel blockers", "topiramate", "lamotrigine"], home: {} };
+    const cards = new CardMatcher([antiplatelets, betaBlockers, naChannel], new Map(), vocab);
+    const panelRows = (management: string) => {
+      const blocks = [
+        table(B(91), 2, [
+          [R(910), "heading", "DX", "Management"],
+          [R(911), "content", "Condition", management],
+        ]),
+        table(B(92), 2, [
+          [R(920), "content", "Aspirin", "81 mg"],
+          [R(921), "content", "Clopidogrel", "75 mg"],
+          [R(922), "content", "Beta blockers", "class II"],
+          [R(923), "content", "Propranolol", "non-selective"],
+          [R(924), "content", "Topiramate", "migraine prevention"],
+          [R(925), "content", "Lamotrigine", "focal seizures"],
+        ]),
+      ];
+      const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "x", conditionRows: [] }] });
+      const t = deriveTopics(blocks, st);
+      const topic = t.topics.find((x) => x.id === R(911));
+      if (!topic) throw new Error("no topic");
+      const s = { guide: "fm", system: "x", structure: st, topics: t, partFiles: new Map() };
+      return medsPanel(s, [B(91), B(92)], topic, cards, (c) => c, new Set(["x"]), () => null, () => new Set()).map((m) => [m.card, m.rows]);
+    };
+
+    it.each([
+      ["ASA", "aspirin", C(1), [R(920)]],
+      ["BBs", "beta blockers", C(2), [R(922)]],
+    ])("%s names the same rows as %s", (short, full, card, rows) => {
+      expect(panelRows(`${short} daily`)).toEqual([[card, rows]]);
+      expect(panelRows(`${full} daily`)).toEqual([[card, rows]]);
+    });
+
+    it("a drug's name names only its own row, not another drug's row of the card", () => {
+      expect(panelRows("topiramate daily")).toEqual([[C(3), [R(924)]]]);
+    });
+
+    it("pairs only the card's words her list makes the same", () => {
+      expect(cards.sameWords(C(1), "asa")).toEqual(["asa", "aspirin"]);
+      expect(cards.sameWords(C(2), "bbs")).toEqual(["bbs", "beta blockers"]);
+      expect(cards.sameWords(C(3), "topiramate")).toEqual(["topiramate"]);
+    });
+
+    it("a plural class word stays a class word beside the card's singular alias", () => {
+      // FM Gout: her "corticosteroids" is her Gout table's Glucocorticoids row, not her RA table's
+      // Corticosteroids row, though her steroid card also lists the singular "corticosteroid".
+      const steroids = new CardMatcher([{ id: C(4), file: "f", aliases: ["corticosteroids", "corticosteroid", "glucocorticoids"], home: {} }], new Map(), vocab);
+      const blocks = [
+        table(B(91), 2, [
+          [R(910), "heading", "DX", "Management"],
+          [R(911), "content", "Gout", "corticosteroids if NSAIDs CI"],
+        ]),
+        table(B(92), 2, [[R(920), "content", "Glucocorticoids", "intraarticular or PO"]]),
+        table(B(93), 2, [[R(930), "content", "Corticosteroids", "low-dose oral"]]),
+      ];
+      const st = structureOf({
+        drugTables: [
+          { block: B(92), pharmSection: "gout", conditionRows: [] },
+          { block: B(93), pharmSection: "rheumatoid-arthritis", conditionRows: [] },
+        ],
+      });
+      const t = deriveTopics(blocks, st);
+      const gout = t.topics.find((x) => x.id === R(911));
+      if (!gout) throw new Error("no topic");
+      const s = { guide: "fm", system: "x", structure: st, topics: t, partFiles: new Map() };
+      const relevant = new Set(["gout", "rheumatoid-arthritis"]);
+      const panel = medsPanel(s, [B(91), B(92), B(93)], gout, steroids, (c) => c, relevant, () => null, () => new Set()).map((m) => [m.card, m.rows]);
+      expect(steroids.namesDrug(C(4), "corticosteroids")).toBe(false);
+      expect(panel).toEqual([[C(4), [R(920)]]]);
+    });
+
+    describe("a short form she files as a card's class word stays its class word", () => {
+      // FM Reactive Arthritis: "sulfasalazine, MTX" is her DMARD card, which files "MTX" among its class
+      // words, not her IBD card, which also lists sulfasalazine; the drug words still name their rows.
+      // Her steroid card shares her IBD card's med list and pharm section, and her oncology methotrexate
+      // card files "MTX" too, as in her cards.
+      const dmards = { id: C(5), file: "f", aliases: ["DMARDs", "sulfasalazine", "methotrexate"], classWords: ["MTX"], home: {} };
+      const ibd = { id: C(6), file: "gi", aliases: ["aminosalicylates", "sulfasalazine", "mesalamine"], home: {} };
+      const aspirin = { id: C(7), file: "f", aliases: ["aspirin", "clopidogrel"], classWords: ["ASA"], home: {} };
+      const mtx = { id: C(8), file: "onc", aliases: ["methotrexate"], classWords: ["MTX"], home: {} };
+      const steroids = { id: C(9), file: "gi", aliases: ["steroid", "steroids"], home: {} };
+      const filed = new CardMatcher([dmards, ibd, aspirin, mtx, steroids], new Map(), [...vocab, { abbr: ["MTX"], meanings: ["methotrexate"] }]);
+      const sectionsOf = (c: string): ReadonlySet<string> => new Set(c === C(6) || c === C(9) ? ["ibd"] : ["x"]);
+      const panel = (management: string) => {
+        const blocks = [
+          table(B(91), 2, [
+            [R(910), "heading", "DX", "Management"],
+            [R(911), "content", "Condition", management],
+          ]),
+          table(B(92), 2, [
+            [R(920), "content", "Sulfasalazine", "DMARD"],
+            [R(921), "content", "Methotrexate", "DMARD"],
+            [R(922), "content", "Aspirin", "81 mg"],
+            [R(923), "content", "Clopidogrel", "75 mg; with aspirin after stents"],
+          ]),
+        ];
+        const st = structureOf({ drugTables: [{ block: B(92), pharmSection: "x", conditionRows: [] }] });
+        const t = deriveTopics(blocks, st);
+        const topic = t.topics.find((x) => x.id === R(911));
+        if (!topic) throw new Error("no topic");
+        const s = { guide: "fm", system: "x", structure: st, topics: t, partFiles: new Map() };
+        const home = (c: string) => (c === C(6) ? { system: "gi", section: "ibd" } : null);
+        return medsPanel(s, [B(91), B(92)], topic, filed, (c) => c, new Set(["x"]), home, sectionsOf).map((m) => [m.card, m.rows]);
+      };
+
+      it("names the card that files it, over another med list's card sharing the drug word", () => {
+        const shown = panel("TX: NSAIDs first line ▪︎if no response ⇢ sulfasalazine, MTX, steroid injections");
+        expect(shown).toEqual([[C(5), [R(920), R(921)]]]);
+        expect(filed.namesDrug(C(5), "mtx")).toBe(false);
+        expect(filed.readsAsDrug(C(5), "mtx")).toBe(true);
+      });
+
+      it("still reads as its drug when choosing the card's rows", () => {
+        expect(panel("ASA daily")).toEqual([[C(7), [R(922)]]]);
+      });
+    });
+  });
+
   describe("a meds panel offers only drugs named in the condition's treatment column", () => {
     // EM Cardiovascular as imported: infective endocarditis sits in the block just before the antiarrhythmics table.
     const drugs = table(B(92), 2, [
@@ -1409,6 +1535,28 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(panelFor("furosemide (dobutamine if not tolerated)")).toEqual([[C(1), [R(922)]], [C(3), [R(923)]]]);
     });
 
+    describe("her abbreviation list's short forms read as the words they stand for", () => {
+      const k = [[C(2), [R(921)]], [C(1), [R(922)]]];
+
+      it.each(["⍉dobutamine, diuretics", "⍉ dobutamine, diuretics"])("her ⍉ (avoid, no, not) rules out the drugs after it, through her list: %s", (text) => {
+        expect(panelFor(text)).toEqual([]);
+      });
+
+      it("her ⍉ heading a list rules out the list, until a blank line", () => {
+        expect(panelFor("⍉:\n▪︎dobutamine\n▪︎diuretics")).toEqual([]);
+        expect(panelFor("⍉:\n▪︎dobutamine\n\n▪︎diuretics")).toEqual(k);
+      });
+
+      it("her w (with) after an avoid is a when, so the avoid goes on past it", () => {
+        // ACS: "*AVOID in inferior, PDE-5 inhibitor in last 24h", in her list's "w" for with.
+        expect(panelFor("*AVOID w inferior MI, diuretics in last 24h")).toEqual([]);
+      });
+
+      it("her ⍉ after a drug word her point has twice is her not, so it sets a condition", () => {
+        expect(panelFor("•Labetalol\n  – Lower BP before inotropic support started\n  – If inotropic support ⍉ planned, only ↓ BP if >220/120")).toEqual([]);
+      });
+    });
+
     it("a card's own name follows the same rules as a class word", () => {
       expect(panelFor("furosemide")).toEqual([[C(1), [R(922)]]]);
       expect(panelFor("AVOID furosemide")).toEqual([]);
@@ -1514,6 +1662,13 @@ describe("pharm (40 §40.4–§40.5)", () => {
       if (!topic) throw new Error("no topic");
       const home = () => ({ system: "cardiovascular", section: "anticoagulants" });
       expect(medsPanel({ guide: "em", system: "pulmonary", structure: st, topics: t, partFiles: new Map() }, [B(91), B(92)], topic, scoped, (c) => c, new Set(), home, () => new Set()).map((m) => m.card)).toEqual([C(1)]);
+    });
+
+    it("her abbreviation list's Mgnt heads her treatment column", () => {
+      const t = deriveTopics([table(B(91), 3, [[R(910), "heading", "PULM", "Etiology", "Mgnt"], [R(911), "content", "Pulmonary embolism", "LMWH use", "DOACs"]]), drugs], st);
+      const topic = t.topics.find((x) => x.id === R(911));
+      if (!topic) throw new Error("no topic");
+      expect(treatmentColumn(t, topic)).toBe("DOACs");
     });
 
     describe("her \"TX:\" lead-in on a topic without a Treatment column", () => {
@@ -1958,6 +2113,28 @@ describe("pharm (40 §40.4–§40.5)", () => {
       // HIT: "Immediate D/C of all heparin + initiation of non-heparin anticoagulants:" then her bulleted agents.
       expect(m.namedBy("initiation of non-heparin anticoagulants:\n•warfarin").get(C(11))).toEqual(["warfarin"]);
     });
+
+    describe("her abbreviation list's short forms read as the words they stand for", () => {
+      it("her elim of (elimination of) rules out the drugs after it", () => {
+        expect(m.named("elim of NSAIDs, memantine")).toEqual([]);
+      });
+
+      it("her Eti (causes) heads a list of causes", () => {
+        expect(m.named("Consider reversible Eti:\n•NSAIDs\n•opiates 🡪 memantine")).toEqual([C(20)]);
+      });
+
+      it("a causes heading saying to manage them (her Mgnt) lists treatments", () => {
+        expect(m.named("Mgnt of reversible causes:\n•NSAIDs")).toEqual([C(15)]);
+      });
+
+      it.each(["D/C NSAIDs, chg to clozapine", "D/C NSAIDs, Δ to clozapine"])("her chg to and Δ to (change to) end the stop's reach: %s", (text) => {
+        expect(m.named(text)).toEqual([C(16)]);
+      });
+
+      it.each(["opiate w.draw", "chelation when iron accum"])("her w.draw (withdrawal) and accum (accumulation) make the drug word the problem: %s", (text) => {
+        expect(m.named(text)).toEqual([]);
+      });
+    });
   });
 
   describe("a class word or drug word her list after it qualifies", () => {
@@ -1977,6 +2154,14 @@ describe("pharm (40 §40.4–§40.5)", () => {
       // Myocarditis "vasodilators (e.g., nitrates)"; a parenthetical naming no card of the class leaves it whole.
       expect(m.named("anticoagulation (e.g., warfarin)")).toEqual([C(1), C(2)]);
       expect(m.named("anticoagulation (indefinite)")).toEqual([C(1), C(2)]);
+    });
+
+    it("her abbreviation list's w (with) names her choice", () => {
+      expect(m.named("anticoagulation w warfarin (INR 2-3)")).toEqual([C(1)]);
+    });
+
+    it("her abbreviation list's incl (including) gives examples, which do not narrow the class word", () => {
+      expect(m.named("anticoagulation (incl warfarin)")).toEqual([C(1), C(2)]);
     });
 
     it("a drug word heading her list of its antidotes names nothing; the antidotes name their card", () => {
@@ -2118,6 +2303,8 @@ describe("pharm (40 §40.4–§40.5)", () => {
       ]);
       expect(cardsOf(m, "Potassium-Sparing Diuretics", "Amiloride (combo w/ HCTZ → Moduretic)\nTriamterene (combination with HCTZ)")).toEqual([C(2)]);
       expect(cardsOf(m, "Potassium-Sparing Diuretics", "Amiloride, HCTZ")).toEqual([C(1), C(2)]);
+      // Her abbreviation list's "w" for with.
+      expect(cardsOf(m, "Potassium-Sparing Diuretics", "Amiloride (combo w HCTZ → Moduretic)")).toEqual([C(2)]);
     });
 
     describe("a drug two classes share goes to the class the row is about", () => {

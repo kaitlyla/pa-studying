@@ -213,7 +213,7 @@ export function publish(c: Content): PublishResult {
   for (const p of c.pharm.flatMap((f) => f.file.parts)) {
     if (p.card !== null && p.diseases !== undefined) partDiseases.set(p.card, [...(partDiseases.get(p.card) ?? []), p.diseases]);
   }
-  const matcher = new CardMatcher(c.cards.cards, partDiseases);
+  const matcher = new CardMatcher(c.cards.cards, partDiseases, c.vocab.entries);
   const placements: Placements = placeCards(systems.map((s) => s.pharm), matcher, new Set(c.pharm.map((p) => p.file.id)));
   const panels = conditionUses(c.uses.conditions, systems.map((s) => s.pharm));
   /** The parts of a class card's whole group: its own, then those of each card shown inside it, each with its card's `for`. */
