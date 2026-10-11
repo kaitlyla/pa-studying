@@ -4,7 +4,9 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_CBR68P2KGM"
+  "g_CBR68P2KGM",
+  "g_PQV8MZZYKW",
+  "g_2NP2TAVJPG"
  ],
  "roles": [
   {
@@ -111,6 +113,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/breast-disorders/breast-cancer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PQV8MZZYKW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Risk reduction (↑risk women): tamoxifen, raloxifene or AI",
+     "note": null,
+     "sources": [
+      {
+       "name": "USPSTF Recommendation: Breast Cancer: Medication Use to Reduce Risk (September 3, 2019)",
+       "org": "U.S. Preventive Services Task Force (USPSTF)",
+       "year": "2019",
+       "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/breast-cancer-medications-for-risk-reduction"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2NP2TAVJPG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "On AI: bisphosphonate or denosumab",
+     "note": null,
+     "sources": [
+      {
+       "name": "Assessment and management of bone health in women with oestrogen receptor-positive breast cancer receiving endocrine therapy: position statement summary. Med J Aust. 2019;211(5):224-229 (abstract, PubMed)",
+       "org": "The Medical Journal of Australia",
+       "year": "2019",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/31318068/"
       }
      ]
     }

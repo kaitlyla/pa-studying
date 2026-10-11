@@ -7343,7 +7343,8 @@
   "g_AK4A64Z5JB",
   "g_A1JP5REKPR",
   "g_4BS87DXF2T",
-  "g_CYNWXSM12N"
+  "g_CYNWXSM12N",
+  "g_FTS5A3CYJF"
  ],
  "roles": [
   {
@@ -7491,13 +7492,19 @@
     {
      "role": "adjunct",
      "drugs": "Cycloplegic: atropine 1% or scopolamine 0.25% TID (your table: cyclopentolate)",
-     "note": null,
+     "note": "⍉ophthalmic scopolamine FDA-listed (Drugs@FDA: transdermal only)",
      "sources": [
       {
        "name": "Corneal Ulcer",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/eye-disorders/corneal-disorders/corneal-ulcer"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
       }
      ]
     }
@@ -7516,6 +7523,30 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/eye-disorders/corneal-disorders/corneal-ulcer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FTS5A3CYJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Acanthamoeba",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Corneal Ulcer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-30728/"
+      },
+      {
+       "name": "StatPearls: Acanthamoeba Keratitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-81120/"
       }
      ]
     }

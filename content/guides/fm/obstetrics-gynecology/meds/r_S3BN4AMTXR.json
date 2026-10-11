@@ -4,7 +4,9 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_0CNB2ZVNER"
+  "g_0CNB2ZVNER",
+  "g_MSQT3WP0GE",
+  "g_5R85J3MCWF"
  ],
  "roles": [
   {
@@ -36,6 +38,64 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_MSQT3WP0GE",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "RVVC, ⍉reproductive potential",
+     "note": null,
+     "sources": [
+      {
+       "name": "VIVJOA (oteseconazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Mycovia Pharmaceuticals, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e21d5008-800e-4417-927f-14340341865f"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5R85J3MCWF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Non-albicans: nonfluconazole azole 7–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Recurr non-albicans: boric acid vaginal x3 wks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Azole antifungals",
+   "members": [
+    "g_0CNB2ZVNER",
+    "g_MSQT3WP0GE"
    ]
   }
  ]

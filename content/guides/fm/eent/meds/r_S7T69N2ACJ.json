@@ -2127,7 +2127,10 @@
   }
  ],
  "gaps": [
-  "g_ZZDD21B8ED"
+  "g_ZZDD21B8ED",
+  "g_GSAQGM5F97",
+  "g_BDDTN4AMVS",
+  "g_ZPFYRZQGQ0"
  ],
  "roles": [
   {
@@ -2171,7 +2174,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Bilateral polyps or severe CRSwNP: biologics (omalizumab, dupilumab, mepolizumab, benralizumab)",
+     "drugs": "Bilateral polyps or severe CRSwNP: biologics (omalizumab, dupilumab, mepolizumab, tezepelumab)",
      "note": null,
      "sources": [
       {
@@ -2179,6 +2182,78 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/nasal-polyps"
+      },
+      {
+       "name": "TEZSPIRE (tezepelumab-ekko) injection prescribing information (FDA label, DailyMed)",
+       "org": "Amgen Inc",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=60f0aa03-ad25-4d48-80ce-7fcfa76f325f"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GSAQGM5F97",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "With INCS",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Nasal Polyps",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25545/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BDDTN4AMVS",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Safety, Efficacy, and Mechanism of Action of Budesonide in Rhinitis and Rhinosinusitis: A Systematic Review. World J Otorhinolaryngol Head Neck Surg. 2026 (abstract, PubMed)",
+       "org": "World Journal of Otorhinolaryngology – Head and Neck Surgery",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/42662515/"
+      },
+      {
+       "name": "XHANCE (fluticasone propionate) nasal spray prescribing information (FDA label, DailyMed)",
+       "org": "Optinose US, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c79bbb9f-e483-4093-8c92-ea978e7bf278"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZPFYRZQGQ0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "AERD",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Nasal Polyps",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25545/"
+      },
+      {
+       "name": "Aspirin-exacerbated respiratory disease review. Laryngoscope Investig Otolaryngol. 2020 (PMC7314471)",
+       "org": "Laryngoscope Investigative Otolaryngology",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7314471/"
       }
      ]
     }
@@ -2190,7 +2265,8 @@
    "title": "Corticosteroids",
    "members": [
     "p_P8WEGKDZNY",
-    "c_CSF60KE111"
+    "c_CSF60KE111",
+    "g_BDDTN4AMVS"
    ]
   }
  ]

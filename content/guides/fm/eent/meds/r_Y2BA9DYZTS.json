@@ -2082,7 +2082,10 @@
   "g_1WZ0X599TP",
   "g_1E12GVAAE8",
   "g_PK73HA4W3D",
-  "g_E0RBGWBVSN"
+  "g_E0RBGWBVSN",
+  "g_8MHZDPSKTJ",
+  "g_WHDPZ4YGYN",
+  "g_N0YYX410ZB"
  ],
  "roles": [
   {
@@ -2199,13 +2202,115 @@
     {
      "role": "alt",
      "drugs": "Cholinergic agonists",
-     "note": null,
+     "note": "⍉FDA-listed topical carbachol for glaucoma; Miostat is intraocular; Yuvezzi (carbachol + brimonidine) is labeled for presbyopia",
      "sources": [
       {
        "name": "Primary Open-Angle Glaucoma",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/eye-disorders/glaucoma/primary-open-angle-glaucoma"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
+      },
+      {
+       "name": "YUVEZZI (carbachol and brimonidine tartrate ophthalmic solution) prescribing information (FDA label, DailyMed)",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=68198098-0f33-458f-83b8-eb2a5ec69012"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8MHZDPSKTJ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Gazzard G, et al. Selective laser trabeculoplasty versus eye drops for first-line treatment of ocular hypertension and glaucoma (LiGHT). Lancet. 2019;393(10180):1505-1516 (abstract, PubMed)",
+       "org": "The Lancet",
+       "year": "2019",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/30862377/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WHDPZ4YGYN",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Additional Tx",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Primary Open-Angle Glaucoma",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/glaucoma/primary-open-angle-glaucoma"
+      },
+      {
+       "name": "COSOPT (dorzolamide HCl and timolol maleate ophthalmic solution) prescribing information (FDA label, DailyMed)",
+       "org": "Thea Pharma Inc.",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=23bdf1c1-3134-4ad1-8e7c-bc655156bdc6"
+      },
+      {
+       "name": "COMBIGAN (brimonidine tartrate/timolol maleate ophthalmic solution) prescribing information (FDA label, DailyMed)",
+       "org": "Allergan, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=feaf1480-a4b8-4486-992a-96be3a596243"
+      },
+      {
+       "name": "SIMBRINZA (brinzolamide/brimonidine tartrate ophthalmic suspension) prescribing information (FDA label, DailyMed)",
+       "org": "Alcon Laboratories, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a49c157e-6310-0011-7b7f-e26fc1820d59"
+      },
+      {
+       "name": "ROCKLATAN (netarsudil and latanoprost ophthalmic solution) prescribing information (FDA label, DailyMed)",
+       "org": "Alcon Laboratories, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b1d71f41-be06-4a08-94d4-e352198f09c2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N0YYX410ZB",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "OMLONTI (omidenepag isopropyl ophthalmic solution) prescribing information (FDA label, DailyMed)",
+       "org": "Ocuvex Therapeutics, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4258e437-7e92-4b09-baf1-01cb158cfc05"
+      },
+      {
+       "name": "DURYSTA (bimatoprost intracameral implant) prescribing information (FDA label, DailyMed)",
+       "org": "Allergan, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3f59da84-0bcc-4c84-b3e2-e215681ef341"
+      },
+      {
+       "name": "iDose TR (travoprost intracameral implant) prescribing information (FDA label, DailyMed)",
+       "org": "Glaukos Corporation",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=92f6d3e2-8328-47df-972c-23008f4a1c1c"
       }
      ]
     }

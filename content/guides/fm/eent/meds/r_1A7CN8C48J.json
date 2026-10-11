@@ -13899,7 +13899,12 @@
   "g_P13PYJ06WH",
   "g_V0X6P9ADRM",
   "g_PJVV1E0GHM",
-  "g_RQSA19GBJE"
+  "g_RQSA19GBJE",
+  "g_DK29R3ZQP8",
+  "g_BHEHDFR42M",
+  "g_PB8PSXG4XN",
+  "g_B68T7TRX1E",
+  "g_QZG0WQ46YJ"
  ],
  "roles": [
   {
@@ -14035,13 +14040,19 @@
     {
      "role": "adjunct",
      "drugs": "2nd-gen oral antihistamines (fexofenadine, cetirizine)",
-     "note": null,
+     "note": "⍉advised for acute sinusitis",
      "sources": [
       {
        "name": "Sinusitis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
+      },
+      {
+       "name": "StatPearls: Acute Sinusitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-29065/"
       }
      ]
     }
@@ -14053,13 +14064,19 @@
     {
      "role": "adjunct",
      "drugs": "2nd-gen oral antihistamines (loratadine)",
-     "note": null,
+     "note": "⍉advised for acute sinusitis",
      "sources": [
       {
        "name": "Sinusitis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
+      },
+      {
+       "name": "StatPearls: Acute Sinusitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-29065/"
       }
      ]
     }
@@ -14214,6 +14231,139 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_DK29R3ZQP8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Chronic RS",
+     "note": null,
+     "sources": [
+      {
+       "name": "Clinical Practice Guideline: Adult Sinusitis Update (AAO-HNSF, 2025), key action statements as reproduced by Guideline Central",
+       "org": "American Academy of Otolaryngology–Head and Neck Surgery Foundation (AAO-HNSF)",
+       "year": "2025",
+       "url": "https://www.guidelinecentral.com/insights/aug-2025-aaohnsf-adultsinusitis-guideline-spotlight/"
+      },
+      {
+       "name": "Is Rinsing Your Sinuses With Neti Pots Safe? (FDA Consumer Update)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/consumers/consumer-updates/rinsing-your-sinuses-neti-pots-safe"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "ABRS or viral RS: Sx relief (option)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Clinical Practice Guideline: Adult Sinusitis Update (AAO-HNSF, 2025), key action statements as reproduced by Guideline Central",
+       "org": "American Academy of Otolaryngology–Head and Neck Surgery Foundation (AAO-HNSF)",
+       "year": "2025",
+       "url": "https://www.guidelinecentral.com/insights/aug-2025-aaohnsf-adultsinusitis-guideline-spotlight/"
+      },
+      {
+       "name": "Is Rinsing Your Sinuses With Neti Pots Safe? (FDA Consumer Update)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/consumers/consumer-updates/rinsing-your-sinuses-neti-pots-safe"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BHEHDFR42M",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Uncomp ABRS, adults, w assured f/u",
+     "note": null,
+     "sources": [
+      {
+       "name": "Clinical Practice Guideline: Adult Sinusitis Update (AAO-HNSF, 2025), key action statements as reproduced by Guideline Central",
+       "org": "American Academy of Otolaryngology–Head and Neck Surgery Foundation (AAO-HNSF)",
+       "year": "2025",
+       "url": "https://www.guidelinecentral.com/insights/aug-2025-aaohnsf-adultsinusitis-guideline-spotlight/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PB8PSXG4XN",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Amoxicillin ± clavulanate: adults 5–7 days, children 10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Clinical Practice Guideline: Adult Sinusitis Update (AAO-HNSF, 2025), key action statements as reproduced by Guideline Central",
+       "org": "American Academy of Otolaryngology–Head and Neck Surgery Foundation (AAO-HNSF)",
+       "year": "2025",
+       "url": "https://www.guidelinecentral.com/insights/aug-2025-aaohnsf-adultsinusitis-guideline-spotlight/"
+      },
+      {
+       "name": "StatPearls: Sinusitis (Archived)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-35997/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_B68T7TRX1E",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Chronic RS w.o polyps",
+     "note": null,
+     "sources": [
+      {
+       "name": "XHANCE (fluticasone propionate) nasal spray prescribing information (FDA label, DailyMed)",
+       "org": "Optinose US, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c79bbb9f-e483-4093-8c92-ea978e7bf278"
+      },
+      {
+       "name": "Clinical Practice Guideline: Adult Sinusitis Update (AAO-HNSF, 2025), key action statements as reproduced by Guideline Central",
+       "org": "American Academy of Otolaryngology–Head and Neck Surgery Foundation (AAO-HNSF)",
+       "year": "2025",
+       "url": "https://www.guidelinecentral.com/insights/aug-2025-aaohnsf-adultsinusitis-guideline-spotlight/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QZG0WQ46YJ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Orbital (complicated) sinusitis: IV",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Orbital Cellulitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-35996/"
+      },
+      {
+       "name": "StatPearls: Sinusitis (Archived)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-35997/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -14221,7 +14371,8 @@
    "title": "Corticosteroids",
    "members": [
     "c_CSF60KE111",
-    "p_P8WEGKDZNY"
+    "p_P8WEGKDZNY",
+    "g_B68T7TRX1E"
    ]
   },
   {
@@ -14236,6 +14387,13 @@
    "members": [
     "g_P13PYJ06WH",
     "g_V0X6P9ADRM"
+   ]
+  },
+  {
+   "title": "Beta-Lactams",
+   "members": [
+    "c_58MCDAZQHM",
+    "g_PB8PSXG4XN"
    ]
   }
  ]

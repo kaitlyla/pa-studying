@@ -8284,7 +8284,9 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_NSR2KDGXJS"
+ ],
  "roles": [
   {
    "target": "c_CSF60KE111",
@@ -8459,6 +8461,24 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_NSR2KDGXJS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "N/V",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Labyrinthitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-36027/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -8467,6 +8487,13 @@
    "members": [
     "c_ZJBYRE8N73",
     "c_YN5JKKW1N1"
+   ]
+  },
+  {
+   "title": "Antiemetics",
+   "members": [
+    "c_FHJ5EZAEK6",
+    "g_NSR2KDGXJS"
    ]
   }
  ]

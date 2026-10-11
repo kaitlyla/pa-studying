@@ -2322,7 +2322,9 @@
   }
  ],
  "gaps": [
-  "g_PCAAN2J7W5"
+  "g_PCAAN2J7W5",
+  "g_1DCNVX8FNQ",
+  "g_SFJT58Q0ZA"
  ],
  "roles": [
   {
@@ -2367,13 +2369,55 @@
     {
      "role": "alt",
      "drugs": "Tinidazole 2 g x1",
-     "note": null,
+     "note": "Avoid in preg (CDC 2021: animal data show moderate risk)",
      "sources": [
       {
        "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep 2021;70(4):1-187",
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2021",
        "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+      },
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1DCNVX8FNQ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Partners",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SFJT58Q0ZA",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Secnidazole 2 g PO single dose",
+     "note": null,
+     "sources": [
+      {
+       "name": "SOLOSEC (secnidazole) oral granules prescribing information (FDA label, DailyMed)",
+       "org": "Evofem Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=056485b6-8bba-4a21-ae00-cdb4e7ae4bfa"
       }
      ]
     }
@@ -2386,7 +2430,8 @@
    "members": [
     "c_YSYYSQ9VG4",
     "p_69FBK5H413",
-    "p_G97ECCM4EM"
+    "p_G97ECCM4EM",
+    "g_SFJT58Q0ZA"
    ]
   }
  ]

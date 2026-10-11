@@ -11088,7 +11088,9 @@
   }
  ],
  "gaps": [
-  "g_EG9FCCD2BF"
+  "g_EG9FCCD2BF",
+  "g_9VEQWVB7R6",
+  "g_SWDDQ83G1C"
  ],
  "roles": [
   {
@@ -11193,8 +11195,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "PCN allergy: clindamycin (resistance ~1%); resistance varies by place and time",
-     "note": null,
+     "drugs": "PCN allergy: clindamycin; resistance varies by place and time",
+     "note": "US invasive GAS clindamycin nonsusceptibility 17% → 24% (2015–17 vs 2018–19)",
      "sources": [
       {
        "name": "Shulman ST et al. Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update. Clin Infect Dis 2012;55(10):e86-102",
@@ -11207,6 +11209,12 @@
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2025",
        "url": "https://www.cdc.gov/group-a-strep/hcp/clinical-guidance/strep-throat.html"
+      },
+      {
+       "name": "Li Y, et al. Continued Increase of Erythromycin Nonsusceptibility and Clindamycin Nonsusceptibility Among Invasive Group A Streptococci. Clin Infect Dis. 2023;76(3):e1266-e1269 (abstract, PubMed)",
+       "org": "Clinical Infectious Diseases",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35684991/"
       }
      ]
     }
@@ -11217,8 +11225,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "PCN allergy: a macrolide (azithromycin, clarithromycin; US resistance ~5–8%); resistance varies by place and time",
-     "note": null,
+     "drugs": "PCN allergy: a macrolide (azithromycin, clarithromycin); resistance varies by place and time",
+     "note": "US invasive GAS erythromycin nonsusceptibility 18% → 25% (2015–17 vs 2018–19)",
      "sources": [
       {
        "name": "Shulman ST et al. Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update. Clin Infect Dis 2012;55(10):e86-102",
@@ -11231,6 +11239,12 @@
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2025",
        "url": "https://www.cdc.gov/group-a-strep/hcp/clinical-guidance/strep-throat.html"
+      },
+      {
+       "name": "Li Y, et al. Continued Increase of Erythromycin Nonsusceptibility and Clindamycin Nonsusceptibility Among Invasive Group A Streptococci. Clin Infect Dis. 2023;76(3):e1266-e1269 (abstract, PubMed)",
+       "org": "Clinical Infectious Diseases",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35684991/"
       }
      ]
     }
@@ -11260,13 +11274,19 @@
     {
      "role": "adjunct",
      "drugs": "A single glucocorticoid dose",
-     "note": null,
+     "note": "⍉recommended routinely (IDSA)",
      "sources": [
       {
        "name": "Tonsillopharyngitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/tonsillopharyngitis"
+      },
+      {
+       "name": "StatPearls: Streptococcal Pharyngitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-29526/"
       }
      ]
     }
@@ -11289,6 +11309,42 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_9VEQWVB7R6",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Streptococcal Pharyngitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-29526/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SWDDQ83G1C",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Secondary ARF prophylaxis",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Acute Rheumatic Fever",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-155742/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -11298,7 +11354,8 @@
     "c_58MCDAZQHM",
     "p_63TZ7SGX5G",
     "p_GR39ZF9CS1",
-    "c_VXA8SDW8G2"
+    "c_VXA8SDW8G2",
+    "g_SWDDQ83G1C"
    ]
   }
  ]

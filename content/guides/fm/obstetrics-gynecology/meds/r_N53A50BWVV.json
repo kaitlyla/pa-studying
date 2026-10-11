@@ -5360,7 +5360,9 @@
   }
  ],
  "gaps": [
-  "g_V57GT1GR6N"
+  "g_V57GT1GR6N",
+  "g_2ATA9AG82B",
+  "g_EYENK2B8QH"
  ],
  "roles": [
   {
@@ -5433,6 +5435,51 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_2ATA9AG82B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Partners (EPT)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EYENK2B8QH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevention: MSM and TGW w a bacterial STI in past 12 mo",
+     "note": null,
+     "sources": [
+      {
+       "name": "Bachmann LH, et al. CDC Clinical Guidelines on the Use of Doxycycline Postexposure Prophylaxis for Bacterial Sexually Transmitted Infection Prevention, United States, 2024. MMWR Recomm Rep. 2024;73(2):1-8 (PMC11166373)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11166373/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Tetracyclines",
+   "members": [
+    "p_ZB7VYFCV14",
+    "g_EYENK2B8QH"
    ]
   }
  ]

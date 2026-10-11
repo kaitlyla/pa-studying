@@ -4042,7 +4042,9 @@
  ],
  "gaps": [
   "g_S7BS55NVN0",
-  "g_8A3SQGN56Y"
+  "g_8A3SQGN56Y",
+  "g_ZAMNZ4XPSS",
+  "g_ZAJVFEY7CA"
  ],
  "roles": [
   {
@@ -4100,13 +4102,19 @@
     {
      "role": "adjunct",
      "drugs": "Symptom relief only: topical anesthetics (benzocaine; your table: lidocaine)",
-     "note": null,
+     "note": "FDA warns against OTC oral benzocaine <2 y/o",
      "sources": [
       {
        "name": "Recurrent Aphthous Stomatitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/dental-disorders/symptoms-of-dental-and-oral-disorders/recurrent-aphthous-stomatitis"
+      },
+      {
+       "name": "StatPearls: Benzocaine",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18219/"
       }
      ]
     }
@@ -4141,6 +4149,48 @@
       {
        "name": "Recurrent Aphthous Stomatitis",
        "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/dental-disorders/symptoms-of-dental-and-oral-disorders/recurrent-aphthous-stomatitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZAMNZ4XPSS",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Recurrent RAS; Behçet",
+     "note": null,
+     "sources": [
+      {
+       "name": "Topical betamethasone and systemic colchicine for treatment of recurrent aphthous stomatitis: a randomised clinical trial. BMC Oral Health. 2023;23:709 (abstract, PubMed)",
+       "org": "BMC Oral Health",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37789351/"
+      },
+      {
+       "name": "StatPearls: Behcet Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18191/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZAJVFEY7CA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Recurrent Aphthous Stomatitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/dental-disorders/symptoms-of-dental-and-oral-disorders/recurrent-aphthous-stomatitis"
       }

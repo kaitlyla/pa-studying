@@ -3160,7 +3160,9 @@
   }
  ],
  "gaps": [
-  "g_02WE7KQF2F"
+  "g_02WE7KQF2F",
+  "g_QA2TXN8A6K",
+  "g_GFVT7V774H"
  ],
  "roles": [
   {
@@ -3247,6 +3249,48 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_QA2TXN8A6K",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Recurrent",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GFVT7V774H",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Recurrent",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      },
+      {
+       "name": "StatPearls: Bacterial Vaginosis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-30951/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -3254,7 +3298,8 @@
    "title": "Nitroimidazoles",
    "members": [
     "c_YSYYSQ9VG4",
-    "p_G97ECCM4EM"
+    "p_G97ECCM4EM",
+    "g_QA2TXN8A6K"
    ]
   }
  ]

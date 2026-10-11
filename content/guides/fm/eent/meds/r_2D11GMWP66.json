@@ -1358,7 +1358,9 @@
  "gaps": [
   "g_7NB8PZXD9R",
   "g_FW8WCBHDEA",
-  "g_ZKCDX9V8W6"
+  "g_ZKCDX9V8W6",
+  "g_F3FGWJMQFA",
+  "g_SBMZWZP445"
  ],
  "roles": [
   {
@@ -1445,13 +1447,55 @@
     {
      "role": "adjunct",
      "drugs": "Consider an osmotic agent (oral glycerol, IV mannitol, oral isosorbide)",
-     "note": null,
+     "note": "Oral isosorbide (Ismotic): discontinued (Drugs@FDA)",
      "sources": [
       {
        "name": "Angle-Closure Glaucoma",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/eye-disorders/glaucoma/angle-closure-glaucoma"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F3FGWJMQFA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Acute Angle-Closure Glaucoma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-22261/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SBMZWZP445",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Emergency management: angle-closure glaucoma. Community Eye Health J. 2018 (PMC6253313)",
+       "org": "Community Eye Health Journal",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6253313/"
       }
      ]
     }

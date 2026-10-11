@@ -1846,7 +1846,10 @@
   }
  ],
  "gaps": [
-  "g_Z9D4ZYMD5X"
+  "g_Z9D4ZYMD5X",
+  "g_Q8495CR3XH",
+  "g_6ZHQYTHSZR",
+  "g_KYPMMWH119"
  ],
  "roles": [
   {
@@ -1880,6 +1883,91 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/approach-to-the-patient-with-nasal-and-pharyngeal-symptoms/epistaxis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q8495CR3XH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevent recurrence",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Epistaxis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-21259/"
+      },
+      {
+       "name": "Tunkel DE, et al. Clinical Practice Guideline: Nosebleed (Epistaxis). Otolaryngol Head Neck Surg. 2020;162(1 Suppl):S1-S38 (abstract, PubMed)",
+       "org": "Otolaryngology–Head and Neck Surgery (AAO-HNSF)",
+       "year": "2020",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/31910111/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6ZHQYTHSZR",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Efficacy of topical tranexamic acid in epistaxis: A systematic review and meta-analysis. Am J Emerg Med. 2022;51:169-175 (abstract, PubMed)",
+       "org": "The American Journal of Emergency Medicine",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/34763235/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KYPMMWH119",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Silver nitrate cautery if topical Tx fails",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Epistaxis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-21259/"
+      },
+      {
+       "name": "MSD Manual Professional Edition: How To Treat Anterior Epistaxis With Cautery",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/how-to-do-nose-procedures/how-to-treat-anterior-epistaxis-with-cautery"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "Bacitracin ointment after cautery",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Epistaxis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2022",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-21259/"
+      },
+      {
+       "name": "MSD Manual Professional Edition: How To Treat Anterior Epistaxis With Cautery",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/how-to-do-nose-procedures/how-to-treat-anterior-epistaxis-with-cautery"
       }
      ]
     }

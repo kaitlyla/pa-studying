@@ -7026,7 +7026,10 @@
   }
  ],
  "gaps": [
-  "g_BYQG2C6KXM"
+  "g_BYQG2C6KXM",
+  "g_653M2SKMXQ",
+  "g_BVMZA87B6M",
+  "g_CEDCM0W148"
  ],
  "roles": [
   {
@@ -7130,6 +7133,75 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_653M2SKMXQ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Partners (EPT)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BVMZA87B6M",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevention: MSM and TGW w a bacterial STI in past 12 mo",
+     "note": null,
+     "sources": [
+      {
+       "name": "Bachmann LH, et al. CDC Clinical Guidelines on the Use of Doxycycline Postexposure Prophylaxis for Bacterial Sexually Transmitted Infection Prevention, United States, 2024. MMWR Recomm Rep. 2024;73(2):1-8 (PMC11166373)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11166373/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CEDCM0W148",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Uncomp urogenital only",
+     "note": null,
+     "sources": [
+      {
+       "name": "BLUJEPA (gepotidacin) tablets prescribing information (FDA label, DailyMed)",
+       "org": "GlaxoSmithKline LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=80b57cfe-7819-4d95-a57d-014af42f118d"
+      },
+      {
+       "name": "NUZOLVENCE (zoliflodacin) prescribing information (FDA label, DailyMed)",
+       "org": "La Jolla Pharmaceutical Company",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4beda35a-21b0-4b34-84ea-be6ea8cae50f"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Tetracyclines",
+   "members": [
+    "p_ZB7VYFCV14",
+    "g_BVMZA87B6M"
    ]
   }
  ]

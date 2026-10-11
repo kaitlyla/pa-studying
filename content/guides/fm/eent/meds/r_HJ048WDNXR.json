@@ -984,7 +984,10 @@
   }
  ],
  "gaps": [
-  "g_DCBFPPXND3"
+  "g_DCBFPPXND3",
+  "g_9A0W7MSMNW",
+  "g_64MQ5QT5BP",
+  "g_Q6K8AGPN9D"
  ],
  "roles": [
   {
@@ -1011,16 +1014,85 @@
     {
      "role": "1st",
      "drugs": "Idiopathic intracranial hypertension: topiramate, with weight loss",
-     "note": null,
+     "note": "↓contraceptive efficacy and ↑breakthrough bleed, esp >200 mg/day",
      "sources": [
       {
        "name": "Papilledema",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/eye-disorders/optic-nerve-disorders/papilledema"
+      },
+      {
+       "name": "Topiramate tablets prescribing information (FDA label, DailyMed)",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b6b0642-fb91-4641-9c51-d3be2021992b"
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_9A0W7MSMNW",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "CVT",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Venous Sinus Thrombosis (Archived)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18543/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_64MQ5QT5BP",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "IIH",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Idiopathic Intracranial Hypertension",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27957/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q6K8AGPN9D",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "IIH, acetazolamide/topiramate not tolerated",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Idiopathic Intracranial Hypertension",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27957/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Diuretics",
+   "members": [
+    "g_DCBFPPXND3",
+    "g_Q6K8AGPN9D"
    ]
   }
  ]

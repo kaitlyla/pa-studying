@@ -4942,7 +4942,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_48W8WWSP70",
+  "g_P3QRSNP6XY"
+ ],
  "roles": [
   {
    "target": "p_SXP2W7MBYG",
@@ -4986,13 +4989,19 @@
     {
      "role": "adjunct",
      "drugs": "MRSA coverage (TMP-SMX); MSD says it's unclear whether it's needed",
-     "note": null,
+     "note": "Breastfeeding: use w caution, esp if the infant is jaundiced, ill, stressed or premature (bilirubin displacement, kernicterus)",
      "sources": [
       {
        "name": "Mastitis",
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/postpartum-care-and-associated-disorders/mastitis"
+      },
+      {
+       "name": "Sulfamethoxazole and trimethoprim oral suspension prescribing information (FDA label, DailyMed)",
+       "org": "Preferred Pharmaceuticals Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c6171b62-835c-465e-905e-97f70438186e"
       }
      ]
     }
@@ -5015,6 +5024,67 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_48W8WWSP70",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Dicloxacillin PO after drainage",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Breast Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18595/"
+      },
+      {
+       "name": "MSD Manual Professional Edition: Mastitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/postpartum-care-and-associated-disorders/mastitis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "PCN allergy: cephalexin PO",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Breast Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18595/"
+      },
+      {
+       "name": "MSD Manual Professional Edition: Mastitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/postpartum-care-and-associated-disorders/mastitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P3QRSNP6XY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Nonlactational: amox-clav, or metronidazole + dicloxacillin or cephalexin",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Breast Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18595/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -5022,7 +5092,9 @@
    "title": "Beta-Lactams",
    "members": [
     "c_58MCDAZQHM",
-    "p_SXP2W7MBYG"
+    "p_SXP2W7MBYG",
+    "g_48W8WWSP70",
+    "g_P3QRSNP6XY"
    ]
   }
  ]

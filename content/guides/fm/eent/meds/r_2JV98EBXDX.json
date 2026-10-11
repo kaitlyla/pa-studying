@@ -8139,7 +8139,11 @@
    "gap": "g_27CQ1B7RP0"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_6HMW567VMB",
+  "g_5HAFCJ2ATV",
+  "g_4RY312Z91K"
+ ],
  "roles": [
   {
    "target": "c_7M08HT2J5B",
@@ -8258,6 +8262,66 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/otitis-media-acute"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6HMW567VMB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevention",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Acute Otitis Media",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17163/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5HAFCJ2ATV",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Tube otorrhea; TM perforation",
+     "note": null,
+     "sources": [
+      {
+       "name": "Rosenfeld RM, et al. Clinical Practice Guideline: Tympanostomy Tubes in Children (Update). Otolaryngol Head Neck Surg. 2022;166(1 Suppl):S1-S55 (abstract, PubMed)",
+       "org": "Otolaryngology–Head and Neck Surgery (AAO-HNSF)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35138954/"
+      },
+      {
+       "name": "StatPearls: Acute Otitis Media",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17163/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4RY312Z91K",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Nonsevere AOM",
+     "note": null,
+     "sources": [
+      {
+       "name": "Harmes KM, et al. Otitis Media: Diagnosis and Treatment. Am Fam Physician. 2013;88(7):435-440",
+       "org": "American Academy of Family Physicians (AAFP)",
+       "year": "2013",
+       "url": "https://www.aafp.org/pubs/afp/issues/2013/1001/p435.html"
       }
      ]
     }

@@ -2930,7 +2930,11 @@
  "gaps": [
   "g_01QNAN4GNX",
   "g_PKW5R6GGC7",
-  "g_KSHN74VJXG"
+  "g_KSHN74VJXG",
+  "g_QJYFKB5W07",
+  "g_82G68HHYBW",
+  "g_HD2TYAVV5Z",
+  "g_0R67VNDNGJ"
  ],
  "roles": [
   {
@@ -3138,6 +3142,84 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_QJYFKB5W07",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Inadequate response to meds",
+     "note": null,
+     "sources": [
+      {
+       "name": "Seidman MD, et al. Clinical practice guideline: Allergic rhinitis. Otolaryngol Head Neck Surg. 2015;152(1 Suppl):S1-S43 (abstract, PubMed)",
+       "org": "Otolaryngology–Head and Neck Surgery (AAO-HNSF)",
+       "year": "2015",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/25644617/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_82G68HHYBW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Allergic Rhinitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17370/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HD2TYAVV5Z",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Short-term only",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Allergic Rhinitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17370/"
+      },
+      {
+       "name": "Meijer Mucus-D (guaifenesin and pseudoephedrine HCl) extended-release tablets, Drug Facts (FDA label, DailyMed)",
+       "org": "Meijer Distribution, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5d0c5ded-cf78-4c42-8dc0-8d546884871f"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0R67VNDNGJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Nonallergic rhinitis",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Nonallergic Rhinitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-31035/"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -3146,6 +3228,13 @@
    "members": [
     "p_QXHNJ141S3",
     "g_01QNAN4GNX"
+   ]
+  },
+  {
+   "title": "Decongestants",
+   "members": [
+    "g_PKW5R6GGC7",
+    "g_HD2TYAVV5Z"
    ]
   }
  ]

@@ -5890,7 +5890,10 @@
   }
  ],
  "gaps": [
-  "g_4X8RH6KJH9"
+  "g_4X8RH6KJH9",
+  "g_CSS2720GH7",
+  "g_YXXTR1DGGK",
+  "g_ECRCQ6WBP5"
  ],
  "roles": [
   {
@@ -5915,8 +5918,8 @@
    "target": "g_4X8RH6KJH9",
    "roles": [
     {
-     "role": "adjunct",
-     "drugs": "Mifepristone 200 mg PO 24 h before misoprostol",
+     "role": "1st",
+     "drugs": "Mifepristone 200 mg PO, then misoprostol 24 h later (combination regimen)",
      "note": null,
      "sources": [
       {
@@ -5924,6 +5927,18 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/abnormalities-of-pregnancy/spontaneous-abortion"
+      },
+      {
+       "name": "StatPearls: Early Pregnancy Loss (Spontaneous Abortion)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-29399/"
+      },
+      {
+       "name": "StatPearls: Abortion",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17038/"
       }
      ]
     }
@@ -6022,6 +6037,66 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/abnormalities-of-pregnancy/septic-abortion"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CSS2720GH7",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Rh-neg, ≥12 wks",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Procedural and Medical Abortion",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/family-planning/procedural-and-medical-abortion"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YXXTR1DGGK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Abortion Complications",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17037/"
+      },
+      {
+       "name": "StatPearls: Abortion",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-17038/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ECRCQ6WBP5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Contraception: start immediately",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Procedural and Medical Abortion",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/family-planning/procedural-and-medical-abortion"
       }
      ]
     }

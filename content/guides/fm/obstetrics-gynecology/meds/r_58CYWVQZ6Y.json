@@ -3057,7 +3057,9 @@
   }
  ],
  "gaps": [
-  "g_C56P334VSJ"
+  "g_C56P334VSJ",
+  "g_99SSPM600V",
+  "g_5VGQX26VFV"
  ],
  "roles": [
   {
@@ -3140,13 +3142,19 @@
     {
      "role": "alt",
      "drugs": "Oxybutynin",
-     "note": null,
+     "note": "Anticholinergic: ↑dementia risk w most anticholinergic OAB drugs",
      "sources": [
       {
        "name": "Menopause",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      },
+      {
+       "name": "Pharmacotherapy for overactive bladder syndrome and the risk of incident dementia. World J Urol. 2025 (abstract, PubMed)",
+       "org": "World Journal of Urology",
+       "year": "2025",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/40183931/"
       }
      ]
     }
@@ -3157,7 +3165,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "SSRIs (eg, paroxetine)",
+     "drugs": "SSRIs (eg, paroxetine; Brisdelle 7.5 mg QD at bedtime is FDA-labeled for mod–severe VMS)",
      "note": null,
      "sources": [
       {
@@ -3165,6 +3173,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      },
+      {
+       "name": "BRISDELLE (paroxetine) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Legacy Pharma USA, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=502311b3-b617-4cbd-a3ab-a60f2c62880a"
       }
      ]
     }
@@ -3183,6 +3197,30 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/menopause/menopause"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5VGQX26VFV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Sexual interest/arousal disorder, only after estrogen and other meds fail",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sexual Interest/Arousal Disorder",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/female-sexual-function-and-dysfunction/sexual-interest-arousal-disorder"
+      },
+      {
+       "name": "Site owner's answer to a review question (relayed by zeke-69273, 2026-10-11)",
+       "org": "Course notes",
+       "year": "2026",
+       "url": null
       }
      ]
     }

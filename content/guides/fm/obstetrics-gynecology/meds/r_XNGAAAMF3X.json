@@ -2951,7 +2951,9 @@
   }
  ],
  "gaps": [
-  "g_2BGZTE7HDB"
+  "g_2BGZTE7HDB",
+  "g_WVWF5HJHJQ",
+  "g_KYD8KJ8WP1"
  ],
  "roles": [
   {
@@ -3018,6 +3020,57 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_WVWF5HJHJQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical NSAID (eg, diclofenac gel)",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Mastalgia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24762/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KYD8KJ8WP1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Breast pain, ⍉monotx",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Fibrocystic Breast Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-21731/"
+      },
+      {
+       "name": "Site owner's answer to a review question (relayed by zeke-69273, 2026-10-11)",
+       "org": "Course notes",
+       "year": "2026",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "NSAIDs",
+   "members": [
+    "c_35QBPAGSVX",
+    "g_WVWF5HJHJQ"
    ]
   }
  ]

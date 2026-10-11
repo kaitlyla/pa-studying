@@ -1147,7 +1147,9 @@
  "gaps": [
   "g_9J9X023BM1",
   "g_MBGWZC6N18",
-  "g_D2XTKF08HX"
+  "g_D2XTKF08HX",
+  "g_RSN6G2H3N4",
+  "g_T8TEBT1P7G"
  ],
  "roles": [
   {
@@ -1174,13 +1176,19 @@
     {
      "role": "1st",
      "drugs": "If IOP rises: brimonidine 0.15–0.2% BID",
-     "note": null,
+     "note": "Brimonidine CI <2 y/o",
      "sources": [
       {
        "name": "Globe Injury (hyphema section)",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/eye-trauma/globe-injury"
+      },
+      {
+       "name": "Brimonidine tartrate ophthalmic solution prescribing information (FDA label, DailyMed)",
+       "org": "Upsher-Smith Laboratories, LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5a634ed6-f00a-472e-93c9-8dcd496997a2"
       }
      ]
     }
@@ -1192,13 +1200,19 @@
     {
      "role": "adjunct",
      "drugs": "Mydriatic (scopolamine 0.25% or atropine 1%) + steroid drop (prednisolone acetate 1%); evidence not definitive",
-     "note": null,
+     "note": "⍉ophthalmic scopolamine FDA-listed (Drugs@FDA: transdermal only)",
      "sources": [
       {
        "name": "Globe Injury (hyphema section)",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/eye-trauma/globe-injury"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
       }
      ]
     }
@@ -1210,13 +1224,19 @@
     {
      "role": "adjunct",
      "drugs": "Mydriatic (scopolamine 0.25% or atropine 1%) + steroid drop (prednisolone acetate 1%); evidence not definitive",
-     "note": null,
+     "note": "⍉ophthalmic scopolamine FDA-listed (Drugs@FDA: transdermal only)",
      "sources": [
       {
        "name": "Globe Injury (hyphema section)",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/eye-trauma/globe-injury"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
       }
      ]
     }
@@ -1235,6 +1255,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/eye-trauma/globe-injury"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RSN6G2H3N4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Hyphema",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-23249/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_T8TEBT1P7G",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Eye shield",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Hyphema",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-23249/"
       }
      ]
     }

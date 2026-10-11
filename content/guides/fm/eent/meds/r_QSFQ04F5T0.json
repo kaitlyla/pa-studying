@@ -7443,7 +7443,9 @@
   }
  ],
  "gaps": [
-  "g_VGR754RN2S"
+  "g_VGR754RN2S",
+  "g_20EERJ8RZX",
+  "g_3D3DKBJW39"
  ],
  "roles": [
   {
@@ -7496,13 +7498,19 @@
     {
      "role": "alt",
      "drugs": "Ciprofloxacin-resistant Pseudomonas: piperacillin–tazobactam or piperacillin + an aminoglycoside",
-     "note": null,
+     "note": "Plain piperacillin may be hard to find",
      "sources": [
       {
        "name": "Malignant External Otitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/external-ear-disorders/malignant-external-otitis"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
       }
      ]
     }
@@ -7514,13 +7522,19 @@
     {
      "role": "alt",
      "drugs": "Ciprofloxacin-resistant Pseudomonas: piperacillin + an aminoglycoside",
-     "note": null,
+     "note": "Plain piperacillin may be hard to find",
      "sources": [
       {
        "name": "Malignant External Otitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/external-ear-disorders/malignant-external-otitis"
+      },
+      {
+       "name": "Drugs@FDA marketing-status data (openFDA drugsfda endpoint), queried 2026-10-11",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://api.fda.gov/drug/drugsfda.json"
       }
      ]
     }
@@ -7557,6 +7571,55 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/external-ear-disorders/malignant-external-otitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_20EERJ8RZX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3D3DKBJW39",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Fungal: amphotericin B",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Fungal: itraconazole, voriconazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
       }
      ]
     }

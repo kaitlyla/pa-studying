@@ -6997,7 +6997,10 @@
    ]
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_70P1TGFFYF",
+  "g_ZE7E3S0P8N"
+ ],
  "roles": [
   {
    "target": "p_63TZ7SGX5G",
@@ -7023,13 +7026,19 @@
     {
      "role": "alt",
      "drugs": "A 1st-gen cephalosporin",
-     "note": null,
+     "note": "Alone lacks anaerobic coverage (aerobes + anaerobes usu present)",
      "sources": [
       {
        "name": "Peritonsillar Abscess and Cellulitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/peritonsillar-abscess-and-cellulitis"
+      },
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
       }
      ]
     }
@@ -7041,13 +7050,19 @@
     {
      "role": "alt",
      "drugs": "A 1st-gen cephalosporin",
-     "note": null,
+     "note": "Alone lacks anaerobic coverage (aerobes + anaerobes usu present)",
      "sources": [
       {
        "name": "Peritonsillar Abscess and Cellulitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/peritonsillar-abscess-and-cellulitis"
+      },
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
       }
      ]
     }
@@ -7097,6 +7112,42 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/peritonsillar-abscess-and-cellulitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_70P1TGFFYF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZE7E3S0P8N",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
       }
      ]
     }
