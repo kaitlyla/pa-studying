@@ -266,8 +266,9 @@ export interface CardsFile {
  * other list of the file) shown under those pieces, as part of the entry. `gaps`: sourced gap blocks shown as entries
  * of this panel only (drugs her files have no card for), in her order. `roles`: what each entry's drugs
  * are for this condition (1st-line, 2nd-line, alternative, adjunct), each with its sources; the panel
- * shows them on the entry and orders entries by them. At least one list is non-empty: with none, there is
- * no file.
+ * shows them on the entry and orders entries by them. `classes`: entries of one drug class shown under one
+ * header, each entry (a member) keeping its own title inside it. At least one list is non-empty: with
+ * none, there is no file.
  */
 export interface MedsFile {
   v: 1;
@@ -276,6 +277,16 @@ export interface MedsFile {
   own: { target: string; pieces: MedsPiece[]; gap?: string }[];
   gaps?: string[];
   roles?: { target: string; roles: MedsRoleTag[] }[];
+  classes?: MedsClassGroup[];
+}
+
+/**
+ * One drug class of a meds panel: its header `title`, and the entries shown under it (`members`: entry
+ * targets, as in `remove`, at least two, each in no other class of the file, none taken off), in order.
+ */
+export interface MedsClassGroup {
+  title: string;
+  members: string[];
 }
 
 /** A drug's place in treating a condition; a panel orders its entries in this order. */

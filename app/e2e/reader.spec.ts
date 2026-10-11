@@ -18,6 +18,7 @@ import type {
   VisitsJson,
   WorkupJson,
 } from "../../lib/derive/published.ts";
+import { itemTarget, panelItems, type PanelItem } from "../../lib/derive/panel.ts";
 import { pdfFileName } from "../../lib/pdf/index.ts";
 import { fileHash, guideBase, guideViewHash, isRefTab, otherHash, parseHash, pharmLoc, refHash, TAB_LABELS } from "../../lib/derive/routes.ts";
 
@@ -970,6 +971,46 @@ test.describe("pharm", () => {
     await expect(target.locator(".phc-h button")).toHaveAttribute("aria-expanded", "true");
     await expect(target.locator(".phc-b")).toBeVisible();
     await expect(target).toBeInViewport();
+  });
+
+  test("meds panel: one of her drug classes is one header, with its entries inside it under their own titles", async ({ page }) => {
+    let pick: { g: string; topic: string; items: PanelItem[]; cls: Extract<PanelItem, { kind: "class" }> } | null = null;
+    for (const { g, s } of allSystems) {
+      for (const t of systemOf(g, s.id).topics) {
+        const items = panelItems(t);
+        const cls = items.find((x) => x.kind === "class");
+        if (cls?.kind === "class") {
+          pick = { g, topic: t.id, items, cls };
+          break;
+        }
+      }
+      if (pick) break;
+    }
+    if (!pick) throw new Error("no condition topic with one of her drug classes");
+    const { g, topic, items, cls } = pick;
+    const titleOf = (x: PanelItem): string => (x.kind === "class" ? x.title : x.kind === "gap" ? x.gap.title : x.entry.med.title);
+    await open(page, topicHash(g, [topic]));
+    const meds = main(page).locator(".meds");
+    await expect(meds.locator(".meds-hd .n")).toHaveText(String(items.length));
+    await expect(meds.locator(":scope > section.phc .phc-t")).toHaveText(items.map(titleOf));
+    const card = meds.locator(":scope > section.phc").nth(items.indexOf(cls));
+    await card.locator(".phc-h button").click();
+    await expect(card.locator(".meds-mem .meds-mt")).toHaveText(cls.members.map(titleOf));
+    // The class's card has an anchor of its own: no card or entry of the panel shares one.
+    const anchors = await meds.locator(":scope > section.phc, .meds-mem").evaluateAll((els) => els.map((e) => e.getAttribute("data-anchor") ?? ""));
+    expect(anchors).toHaveLength(items.length + cls.members.length);
+    expect(new Set(anchors).size).toBe(anchors.length);
+
+    // A search result landing on an entry of the class opens the class's card at that entry (on a page of its own:
+    // a hash change alone keeps this page's open card open).
+    const last = cls.members[cls.members.length - 1];
+    if (!last) throw new Error("a class with no entries");
+    const at = last.kind === "gap" ? last.gap.id : `meds-${itemTarget(last)}`;
+    const fresh = await page.context().newPage();
+    await open(fresh, `${topicHash(g, [topic])}?at=${at}`);
+    const landed = main(fresh).locator(".meds > section.phc").nth(items.indexOf(cls));
+    await expect(landed.locator(".phc-h button")).toHaveAttribute("aria-expanded", "true");
+    await expect(landed.locator(`.meds-mem[data-anchor="${at}"]`)).toBeVisible();
   });
 
   test("meds panel: a part of her pharm notes attached to the topic opens to its own cell beside its own name, with no pharm link", async ({ page }) => {

@@ -1043,6 +1043,18 @@ describe("a topic's meds panel", () => {
       expect(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, { ...off, remove: [] }]]) }).changes).toEqual([]);
     });
 
+    it("a save keeps her drug classes; an entry she takes off leaves its class, and a class left with one entry goes", async () => {
+      const classes = [{ title: "Antianginals", members: [G(3), C(2), G(2)] }];
+      store(R(104), { ...file, classes });
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [C(3)] }) }))).toEqual({ ...file, add: [C(3)], classes });
+      const one = takeOff(part, fileChoice(part), G(2));
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, one]]) }))).toEqual({ ...file, remove: [G(2)], classes: [{ title: "Antianginals", members: [G(3), C(2)] }] });
+      const two = takeOff(part, one, C(2));
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, two]]) }))).toEqual({ ...file, remove: [G(2), C(2)] });
+    });
+
     it("a file holding only sourced cards is kept, not deleted, when she changes nothing else", async () => {
       store(R(104), { v: 1, add: [], remove: [C(2)], own: [], gaps: [G(3)] });
       const unit = await unitAt(`topic:fm:${R(104)}`);

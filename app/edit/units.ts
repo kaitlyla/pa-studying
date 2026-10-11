@@ -734,7 +734,11 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
   // The sourced cards placed in the panel and the role labels are kept as stored: the editor changes neither.
   const gaps = part.file?.gaps ?? [];
   const roles = part.file?.roles ?? [];
-  if (add.length === 0 && choice.remove.length === 0 && own.size === 0 && gaps.length === 0 && roles.length === 0) return null;
+  // Her drug classes keep the entries still shown (an entry she took off leaves its class); a class
+  // left with one entry is no class.
+  const stays = (t: string): boolean => (isId("g", t) ? gaps.includes(t) && !choice.remove.includes(t) : shown.has(t));
+  const classes = (part.file?.classes ?? []).map((c) => ({ title: c.title, members: c.members.filter(stays) })).filter((c) => c.members.length > 1);
+  if (add.length === 0 && choice.remove.length === 0 && own.size === 0 && gaps.length === 0 && roles.length === 0 && classes.length === 0) return null;
   return {
     v: 1, add, remove: [...choice.remove],
     own: [...own].map(([target, pieces]) => {
@@ -742,6 +746,7 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
       return gap === undefined ? { target, pieces } : { target, pieces, gap };
     }),
     ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles: roles.map((r) => ({ ...r })) } : {}),
+    ...(classes.length > 0 ? { classes } : {}),
   };
 }
 

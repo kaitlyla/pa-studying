@@ -15,7 +15,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsFile, MedsPiece, MedsRoleTag, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -476,7 +476,8 @@ export const validateCards: Validator = (v, ctx) => {
 /**
  * Her own meds panel for a topic: each target at most once in each list, never both added and removed,
  * a gap block taken off only if it is listed, an edited entry's gap block in no other list, each entry's
- * roles once, and something in it.
+ * roles once, each class two or more entries not taken off and each entry in one class at most, and
+ * something in it.
  */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
@@ -499,10 +500,20 @@ export const validateMeds: Validator = (v, ctx) => {
         sources: arr(shapeOf<MedsRoleTag["sources"][number]>({ name: nonEmpty, org: str, year: str, url: nullable(nonEmpty) }, {})),
       }, {})),
     }, {})),
+    classes: arr(shapeOf<MedsClassGroup>({ title: nonEmpty, members: uniqueArr(id("c", "r", "p", "g")) }, {})),
   })(v, "", ctx);
   const m = v as MedsFile;
   const gaps = m.gaps ?? [];
   const roles = m.roles ?? [];
+  const classes = m.classes ?? [];
+  uniqueArr(str)(classes.flatMap((c) => c.members), ".classes[].members", ctx);
+  classes.forEach((c, i) => {
+    if (c.members.length < 2) bad(ctx, `.classes[${i}].members`, "at least two entries", c.members);
+    c.members.forEach((t, j) => {
+      if (m.remove.includes(t)) bad(ctx, `.classes[${i}].members[${j}]`, "an entry not taken off", t);
+      if (isId("g", t) && !gaps.includes(t)) bad(ctx, `.classes[${i}].members[${j}]`, "a gap block listed in gaps", t);
+    });
+  });
   uniqueArr(str)(m.own.map((o) => o.target), ".own[].target", ctx);
   uniqueArr(str)(roles.map((r) => r.target), ".roles[].target", ctx);
   m.add.forEach((c, i) => { if (m.remove.includes(c)) bad(ctx, `.add[${i}]`, "a card not also removed", c); });
@@ -517,8 +528,8 @@ export const validateMeds: Validator = (v, ctx) => {
     if (r.roles.length === 0) bad(ctx, `.roles[${i}].roles`, "at least one role", r.roles);
     r.roles.forEach((x, j) => { if (x.sources.length === 0) bad(ctx, `.roles[${i}].roles[${j}].sources`, "at least one source", x.sources); });
   });
-  if (m.add.length === 0 && m.remove.length === 0 && m.own.length === 0 && gaps.length === 0 && roles.length === 0) {
-    bad(ctx, "", "an added, removed, edited or sourced entry, or a role", v);
+  if (m.add.length === 0 && m.remove.length === 0 && m.own.length === 0 && gaps.length === 0 && roles.length === 0 && classes.length === 0) {
+    bad(ctx, "", "an added, removed, edited or sourced entry, a role, or a class", v);
   }
   m.own.forEach((o, i) => o.pieces.forEach((p, j) => {
     const at = `.own[${i}].pieces[${j}].doc`;

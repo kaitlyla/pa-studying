@@ -23,7 +23,7 @@ import {
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
 import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics, type Topic } from "./topics.ts";
-import { keptOwn, panelEntries, publishedEdit } from "./panel.ts";
+import { itemPieces, keptOwn, panelItems, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
@@ -979,15 +979,22 @@ export function publish(c: Content): PublishResult {
             tab, title: topic.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
             at: topic.id, label: "notes", text: searchText(below ? `${topicText(t, topic)}\n${docText(below.doc)}` : topicText(t, topic)),
           });
-          // Her own version of a card under this condition is text of hers that only its page shows.
+          // Her own version of a card under this condition is text of hers that only its page shows, as
+          // the panel shows it (in one of her drug classes, each fact under the entry showing it).
           const pub = topics.find((x) => x.id === topic.id);
-          for (const e of pub ? panelEntries(pub) : []) {
-            if (!e.own) continue;
-            units.push({
-              tab, title: e.med.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
-              at: `meds-${e.med.target}`, label: "notes", text: searchText(e.own.map((p) => docText(p.doc)).join("\n")),
-            });
-            if (e.gap) gapUnit(e.gap.id, `meds-${e.med.target}`);
+          if (pub) {
+            for (const item of panelItems(pub)) {
+              const pieces = itemPieces(out, pub, item, s.guide.file.basePt);
+              (item.kind === "class" ? item.members : [item]).forEach((m, i) => {
+                if (m.kind !== "card" || !m.entry.own) return;
+                const e = m.entry;
+                units.push({
+                  tab, title: e.med.title, loc: systemLoc(ix, gid, sys, secTitle(s, topic.section)), route: topicRoute(s, topic.id),
+                  at: `meds-${e.med.target}`, label: "notes", text: searchText((pieces[i] ?? []).map((p) => docText(p.doc)).join("\n")),
+                });
+                if (e.gap) gapUnit(e.gap.id, `meds-${e.med.target}`);
+              });
+            }
           }
           for (const g of pub?.medsEdit?.gaps ?? []) gapUnit(g.id);
         } else if (info?.drug) {

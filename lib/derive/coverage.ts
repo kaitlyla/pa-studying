@@ -4,7 +4,7 @@ import type { BlockFile } from "../content/types.ts";
 import type { SearchUnit } from "../search/index.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import type { Content } from "./model.ts";
-import { panelEntries } from "./panel.ts";
+import { itemPieces, panelItems } from "./panel.ts";
 import { HOSTS_PATH, SYSTEM_PATH_RE, type HostsJson, type SystemJson } from "./published.ts";
 import { nodeText, searchText } from "./text.ts";
 
@@ -63,13 +63,19 @@ export function uncoveredText(content: Content, units: readonly SearchUnit[], fi
     textBlocks(b, hosts, shown);
   }
   // Her own version of a card under a condition shows on the condition's page (its topic id's host),
-  // copied guide rows included, so each piece the published panel shows is checked against that page.
+  // copied guide rows included, so each piece the published panel shows is checked against that page,
+  // as it shows it (in one of her drug classes, each fact once). Sizes do not matter to text: base 0.
   for (const [path, value] of files) {
     if (!SYSTEM_PATH_RE.test(path)) continue;
-    for (const t of (value as SystemJson).topics) {
+    const system = value as SystemJson;
+    for (const t of system.topics) {
       if (hosts[t.id] === undefined) continue;
-      for (const e of panelEntries(t)) {
-        for (const p of e.own ?? []) textBlocks({ id: t.id, doc: p.doc }, hosts, shown, false);
+      for (const item of panelItems(t)) {
+        const pieces = itemPieces(system, t, item, 0);
+        (item.kind === "class" ? item.members : [item]).forEach((m, i) => {
+          if (m.kind !== "card" || !m.entry.own) return;
+          for (const p of pieces[i] ?? []) textBlocks({ id: t.id, doc: p.doc }, hosts, shown, false);
+        });
       }
     }
   }

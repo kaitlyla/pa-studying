@@ -105,6 +105,24 @@ function linesUnder(nodes: readonly PMNode[], i: number, hidden: ReadonlySet<num
 }
 
 /**
+ * Paragraph indexes of a notes doc's lines `nodes` that say word for word, about the same `subject`
+ * and under the same lines, a line `seen` holds (lines already shown); each stays while any line under
+ * it stays. Then adds the doc's lines to `seen`, so a later doc on the same subject shows none of them
+ * again. A line about another subject is not a repeat, however it reads.
+ */
+export function repeatedLines(nodes: readonly PMNode[], seen: Set<string>, subject: string): Set<number> {
+  const keys = lineKeys(nodes).map((k) => (k === null ? null : `${subject}\n${k}`));
+  const hidden = new Set<number>();
+  for (let i = nodes.length - 1; i >= 0; i--) {
+    const k = keys[i];
+    if (k === null || k === undefined || !seen.has(k)) continue;
+    if (linesUnder(nodes, i, hidden).allHidden) hidden.add(i);
+  }
+  for (const k of keys) if (k !== null) seen.add(k);
+  return hidden;
+}
+
+/**
  * Paragraph indexes to leave out of each of the card's notes blocks (in card order), where the card
  * is shown with the rows in `shown` on a page where the pharm sections `at` are relevant. A line
  * written for another use goes (content/pharm/uses.json); a covered line goes when one of its rows is

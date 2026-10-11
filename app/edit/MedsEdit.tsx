@@ -3,7 +3,7 @@
 // buttons that take a card off, put one back, add one, or go back to the original card.
 import { Fragment, useState, type ReactNode } from "react";
 import type { MedsRoleTag } from "../../lib/content/types.ts";
-import { byRole } from "../../lib/derive/panel.ts";
+import { classAnchor, withClasses } from "../../lib/derive/panel.ts";
 import { ClassCard, CardPieces } from "../pharm/ClassCard.tsx";
 import { OWN_VERSION } from "../pharm/MedsPanel.tsx";
 import { RoleChips, RoleLines } from "../pharm/Roles.tsx";
@@ -23,6 +23,9 @@ export const ADDED_LATER = "Its notes show here once the site updates.";
 
 /** How many cards the Add a card list shows at once. */
 const MATCHES = 12;
+
+/** An entry of the panel being edited: a card entry, or a sourced card placed in it. */
+type Item = { entry: MedsEntry } | { gap: GapPart };
 
 /**
  * The panel. `editing`: the open edit's (her choices as she changed them, with the buttons); else as
@@ -45,9 +48,10 @@ export function MedsFrame({ part, gaps, entryGaps = [], gapView, slotView, editi
   const [closed, setClosed] = useState<Record<string, boolean>>({});
   const roles = new Map((part.file?.roles ?? []).map((r) => [r.target, r.roles]));
   const rolesOf = (target: string): MedsRoleTag[] => roles.get(target) ?? [];
-  const items = byRole<{ entry: MedsEntry } | { gap: GapPart }>(
+  const targetOf = (x: Item): string => ("entry" in x ? x.entry.med.target : x.gap.gap.id);
+  const items = withClasses<Item>(
     [...shownEntries(part, choice).map((entry) => ({ entry })), ...gaps.filter((g) => !choice.remove.includes(g.gap.id)).map((gap) => ({ gap }))],
-    (x) => rolesOf("entry" in x ? x.entry.med.target : x.gap.gap.id),
+    targetOf, (x) => rolesOf(targetOf(x)), part.file?.classes ?? [],
   );
   const later = choice.add.filter((id) => !part.entries.some((e) => !e.derived && e.med.target === id));
   const removed = [
@@ -63,47 +67,73 @@ export function MedsFrame({ part, gaps, entryGaps = [], gapView, slotView, editi
     else update({ add: [...choice.add, id] });
   };
   const title = (id: string): string => part.catalog.find((c) => c.id === id)?.title ?? id;
+  // Where search lands on an entry, as in the reader: a sourced card's gap id, else `meds-<target>`.
+  const anchorOf = (x: Item): string => ("gap" in x ? x.gap.gap.id : `meds-${x.entry.med.target}`);
+  /** What an entry shows inside its card: its role labels, its editors or gap box, and its buttons. */
+  const body = (item: Item): ReactNode => {
+    if ("gap" in item) {
+      const g = item.gap.gap.id;
+      return (
+        <>
+          <RoleLines roles={rolesOf(g)} />
+          {gapView(item.gap)}
+          {editing && (
+            <div className="meds-acts">
+              <button type="button" className="btn" onClick={() => off(g)} data-ref="meds-remove">{REMOVE_CARD}</button>
+            </div>
+          )}
+        </>
+      );
+    }
+    const e = item.entry;
+    const t = e.med.target;
+    const slots = entrySlots(e, choice);
+    const own = showsOwn(e, choice);
+    return (
+      <>
+        <RoleLines roles={rolesOf(t)} />
+        {own && <div className="phn-k own-only">{OWN_VERSION}</div>}
+        <CardPieces pieces={slots.map((s) => ({ ...s.piece, part: null }))} body={(i) => (slots[i] ? slotView(slots[i]) : null)} />
+        {own && entryGaps.filter((g) => g.entry === t).map((g) => <Fragment key={g.gap.id}>{gapView(g)}</Fragment>)}
+        {editing && (
+          <div className="meds-acts">
+            {own && <button type="button" className="btn" onClick={() => showVersion(t, [...choice.original, t])} data-ref="meds-original">{USE_ORIGINAL}</button>}
+            {!own && e.own !== null && (
+              <button type="button" className="btn" onClick={() => showVersion(t, choice.original.filter((x) => x !== t))} data-ref="meds-mine">{USE_MINE}</button>
+            )}
+            <button type="button" className="btn" onClick={() => off(t)} data-ref="meds-remove">{REMOVE_CARD}</button>
+          </div>
+        )}
+      </>
+    );
+  };
   return (
     <section className="meds meds-edit" aria-label={MEDS_HEADING}>
       <h3 className="meds-hd">
         <Icon n="pill" size={15} /> {MEDS_HEADING} <span className="n">{items.length + later.length}</span>
       </h3>
       {items.map((item) => {
-        if ("gap" in item) {
-          const g = item.gap.gap.id;
-          const r = rolesOf(g);
+        if ("members" in item) {
+          // One of her drug classes: one card under its title, each entry under its own title inside it.
+          const first = item.members[0];
+          if (!first) return null;
+          const k = classAnchor(targetOf(first));
           return (
-            <ClassCard key={g} anchor={g} title={item.gap.gap.meta.title} chips={<RoleChips roles={r} />} open={!closed[g]} onToggle={() => setClosed((c) => ({ ...c, [g]: !c[g] }))}>
-              <RoleLines roles={r} />
-              {gapView(item.gap)}
-              {editing && (
-                <div className="meds-acts">
-                  <button type="button" className="btn" onClick={() => off(g)} data-ref="meds-remove">{REMOVE_CARD}</button>
+            <ClassCard key={k} anchor={k} title={item.title} chips={<RoleChips roles={item.roles} />} open={!closed[k]} onToggle={() => setClosed((c) => ({ ...c, [k]: !c[k] }))}>
+              {item.members.map((m) => (
+                <div key={anchorOf(m)} className="meds-mem" data-anchor={anchorOf(m)}>
+                  <h4 className="meds-mt">{"gap" in m ? m.gap.gap.meta.title : m.entry.med.title}</h4>
+                  {body(m)}
                 </div>
-              )}
+              ))}
             </ClassCard>
           );
         }
-        const e = item.entry;
-        const t = e.med.target;
-        const slots = entrySlots(e, choice);
-        const own = showsOwn(e, choice);
-        const r = rolesOf(t);
+        const k = anchorOf(item);
+        const title = "gap" in item ? item.gap.gap.meta.title : item.entry.med.title;
         return (
-          <ClassCard key={t} anchor={`meds-${t}`} title={e.med.title} chips={<RoleChips roles={r} />} open={!closed[t]} onToggle={() => setClosed((c) => ({ ...c, [t]: !c[t] }))}>
-            <RoleLines roles={r} />
-            {own && <div className="phn-k own-only">{OWN_VERSION}</div>}
-            <CardPieces pieces={slots.map((s) => ({ ...s.piece, part: null }))} body={(i) => (slots[i] ? slotView(slots[i]) : null)} />
-            {own && entryGaps.filter((g) => g.entry === t).map((g) => <Fragment key={g.gap.id}>{gapView(g)}</Fragment>)}
-            {editing && (
-              <div className="meds-acts">
-                {own && <button type="button" className="btn" onClick={() => showVersion(t, [...choice.original, t])} data-ref="meds-original">{USE_ORIGINAL}</button>}
-                {!own && e.own !== null && (
-                  <button type="button" className="btn" onClick={() => showVersion(t, choice.original.filter((x) => x !== t))} data-ref="meds-mine">{USE_MINE}</button>
-                )}
-                <button type="button" className="btn" onClick={() => off(t)} data-ref="meds-remove">{REMOVE_CARD}</button>
-              </div>
-            )}
+          <ClassCard key={k} anchor={k} title={title} chips={<RoleChips roles={rolesOf(targetOf(item))} />} open={!closed[k]} onToggle={() => setClosed((c) => ({ ...c, [k]: !c[k] }))}>
+            {body(item)}
           </ClassCard>
         );
       })}

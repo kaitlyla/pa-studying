@@ -524,6 +524,7 @@ describe("pharm pages", () => {
       ownGaps: {},
       gaps: [],
       roles: {},
+      classes: [],
     };
     server.restore();
     server = serveData(new Map([...files, [CV, mod]]));
@@ -562,7 +563,7 @@ describe("pharm pages", () => {
       id: "g_HELD000000", title: "Nitrates: EOR additions", relevantTo: "Stable angina", written: "2026-10-09", doc: doc("Avoid with PDE-5 inhibitors."), differs: null,
       sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [],
     };
-    topic.medsEdit = { remove: [], add: [], own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: doc("My trimmed nitrates") }] }, ownGaps: { [C(2)]: held }, gaps: [], roles: {} };
+    topic.medsEdit = { remove: [], add: [], own: { [C(2)]: [{ kind: "notes", basePt: 11, title: null, file: "angina", doc: doc("My trimmed nitrates") }] }, ownGaps: { [C(2)]: held }, gaps: [], roles: {}, classes: [] };
     server.restore();
     server = serveData(new Map([...files, [CV, mod]]));
 
@@ -596,6 +597,7 @@ describe("pharm pages", () => {
         [C(3)]: [{ role: "1st", drugs: "metoprolol", note: null, sources: [src] }],
         g_SOURCED000: [{ role: "adjunct", drugs: null, note: "refractory symptoms only", sources: [src] }],
       },
+      classes: [],
     };
     server.restore();
     server = serveData(new Map([...files, [CV, mod]]));
@@ -619,6 +621,60 @@ describe("pharm pages", () => {
     expect(visibleText(line)).toBe("Adjunct — refractory symptoms only · Source: Angina Pectoris, MSD Manual Professional (2026)");
     expect(need(line.querySelector<HTMLAnchorElement>("a"), "source link").href).toBe(src.url);
     expect(visibleText(sourced)).toContain("Ranolazine for refractory angina.");
+  });
+
+  it("meds panel shows one of her drug classes as one card: its entries inside under their own titles, a search landing on one opens it", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    const doc = (text: string): SystemJson["notesBlocks"][string]["doc"] => schema.node("doc", null, [schema.node("paragraph", null, [schema.text(text)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"];
+    const src = { name: "Angina Pectoris", org: "MSD Manual Professional", year: "2026", url: null };
+    const sourced = {
+      id: "g_SOURCED000", title: "Ranolazine (sourced)", relevantTo: "Stable angina", written: "2026-10-08", doc: doc("Ranolazine for refractory angina."), differs: null,
+      sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [],
+    };
+    const adjunct = { role: "adjunct" as const, drugs: null, note: null, sources: [src] };
+    topic.medsEdit = {
+      remove: [],
+      add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
+      own: {},
+      ownGaps: {},
+      gaps: [sourced],
+      roles: { [C(3)]: [{ role: "1st", drugs: "metoprolol", note: null, sources: [src] }], g_SOURCED000: [adjunct], [C(2)]: [adjunct] },
+      classes: [{ title: "Antianginals", members: ["g_SOURCED000", C(3), C(2)] }],
+    };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    // One header for the class (anchored on its own), ranked 1st by its beta blocker, then the entry in no class.
+    const classKey = "meds-class-g_SOURCED000";
+    expect(anchors(panel)).toEqual([classKey, `meds-${R(124)}`]);
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 2");
+    const cls = cardEl(panel, classKey);
+    expect(need(cls.querySelector(".phc-t"), "class title").textContent).toBe("Antianginals");
+    // Each role once on the header: the adjunct label two entries share shows one chip.
+    expect([...cls.querySelectorAll(".phc-h .rolec")].map((c) => c.textContent)).toEqual(["Adjunct", "1st-line: metoprolol"]);
+    expect(cardBtn(panel, classKey).getAttribute("aria-expanded")).toBe("false");
+
+    await click(cardBtn(panel, classKey));
+    const members = [...cls.querySelectorAll<HTMLElement>(".meds-mem")];
+    expect(members.map((m) => m.dataset.anchor)).toEqual(["g_SOURCED000", `meds-${C(3)}`, `meds-${C(2)}`]);
+    // No card or entry of the panel shares an anchor: the class card's is its own.
+    expect([...panel.querySelectorAll<HTMLElement>("section.phc, .meds-mem")].map((e) => e.dataset.anchor)).toEqual([classKey, "g_SOURCED000", `meds-${C(3)}`, `meds-${C(2)}`, `meds-${R(124)}`]);
+    expect(members.map((m) => m.querySelector(".meds-mt")?.textContent)).toEqual(["Ranolazine (sourced)", "Beta Blockers", topic.meds.find((m) => m.target === C(2))?.title]);
+    expect(visibleText(need(members[0], "sourced member"))).toContain("Ranolazine for refractory angina.");
+    expect(visibleText(need(members[1]?.querySelector(".rolels"), "beta blocker roles"))).toContain("1st-line: metoprolol");
+    a.unmount();
+
+    // A search result for an entry of the class lands with the class's card open.
+    const landed = await renderApp(`#/eor/fm/t/${topic.id}?at=meds-${C(2)}`);
+    app = landed;
+    const panel2 = await until(() => landed.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect(cardBtn(panel2, classKey).getAttribute("aria-expanded")).toBe("true");
+    expect(panel2.querySelector(`.meds-mem[data-anchor="meds-${C(2)}"]`)).not.toBeNull();
+    expect(cardBtn(panel2, `meds-${R(124)}`).getAttribute("aria-expanded")).toBe("false");
   });
 
   it("a topic without meds shows no meds panel", async () => {

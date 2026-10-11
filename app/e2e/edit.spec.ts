@@ -20,7 +20,7 @@ import {
   type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type PubGap, type RefTabJson,
   type SiteJson, type SlidesJson, type SystemJson, type WorkupJson,
 } from "../../lib/derive/published.ts";
-import { entryPieces } from "../../lib/derive/panel.ts";
+import { classAnchor, entryPieces, itemTarget, panelItems } from "../../lib/derive/panel.ts";
 import { fileHash, guideViewHash, otherHash, PANCE, REF_TABS, refHash, versionsHash } from "../../lib/derive/routes.ts";
 import { FakeGithub, routeFakeGithub, type FakeRequest } from "./fake-github.ts";
 
@@ -2718,7 +2718,23 @@ test.describe("her own meds panel for a condition", () => {
   };
   // The owner-only label on her version (MedsPanel's OWN_VERSION; that module pulls in CSS, which Node can't load).
   const OWN_VERSION = "Your version for this condition";
-  const panelCard = (page: Page, t: TopicTarget, card: string): Locator => page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="meds-${card}"]`);
+  /**
+   * The anchor of the card a condition's meds panel shows an entry in: the entry's own, or its drug class's card.
+   * Taken from the published panel, since a closed class card holds none of its entries to find it by.
+   */
+  const cardAnchor = (t: TopicTarget, system: string, card: string): string => {
+    const topic = need(readData<SystemJson>(systemPath(t.g, system)).topics.find((x) => x.id === t.id), "the condition");
+    const item = need(
+      panelItems(topic).find((i) => (i.kind === "class" ? i.members : [i]).some((m) => itemTarget(m) === card)),
+      "the entry on the condition's panel",
+    );
+    return item.kind === "class" ? classAnchor(itemTarget(need(item.members[0], "the class's first entry"))) : `meds-${card}`;
+  };
+  const panelCard = (page: Page, t: TopicTarget, system: string, card: string): Locator =>
+    page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="${cardAnchor(t, system, card)}"]`);
+  /** What that card, opened, shows of the entry alone: its own card's body, or its part of its class's card. */
+  const panelEntry = (shown: Locator, t: TopicTarget, system: string, card: string): Locator =>
+    cardAnchor(t, system, card) === `meds-${card}` ? shown.locator(":scope > .phc-b") : shown.locator(`.meds-mem[data-anchor="meds-${card}"]`);
 
   test("an edit to a card under a condition saves her version for that condition only; Use the original drops it", async ({ page, context, baseURL }) => {
     const { t, system, card, section } = target();
@@ -2748,7 +2764,7 @@ test.describe("her own meds panel for a condition", () => {
     expect(JSON.stringify(saved.own[0]?.pieces)).toContain(marker);
 
     // The page shows her version, labeled for her, at once.
-    const shown = panelCard(page, t, card);
+    const shown = panelCard(page, t, system, card);
     await shown.locator(".phc-h button").click();
     await expect(shown).toContainText(marker);
     await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
@@ -2770,7 +2786,7 @@ test.describe("her own meds panel for a condition", () => {
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
     expect(fake.readFile(medsFile) ?? null).toBeNull();
-    const back = panelCard(page, t, card);
+    const back = panelCard(page, t, system, card);
     await back.locator(".phc-h button").click();
     await expect(back.locator(".phc-b")).toBeVisible();
     await expect(back).not.toContainText(marker);
@@ -2934,7 +2950,7 @@ test.describe("her own meds panel for a condition", () => {
     expect(saved.remove).toEqual([]);
     expect(saved.own.map((o) => [o.target, o.pieces.length])).toEqual([[card, count - 1]]);
     expect(JSON.stringify(saved.own[0]?.pieces)).not.toContain(JSON.stringify(text).slice(1, -1));
-    const shown = panelCard(page, t, card);
+    const shown = panelCard(page, t, system, card);
     await shown.locator(".phc-h button").click();
     await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
     await expect(shown).not.toContainText(text);
@@ -2965,13 +2981,14 @@ test.describe("her own meds panel for a condition", () => {
     }
     return "";
   };
-  const ownPair = (): OwnPair => {
+  /** Such a card: one inside one of her drug classes' cards (`inClass`), or one in a card of its own. */
+  const ownPair = (inClass: boolean): OwnPair => {
     const picks = new Map<string, Omit<OwnPair, "t">>();
     const t = need(
       findTopic((g, system, id) => {
         const edit = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit;
         for (const [card, pieces] of Object.entries(edit?.own ?? {})) {
-          if (pieces.length !== 2) continue;
+          if (pieces.length !== 2 || (edit?.classes.some((c) => c.members.includes(card)) ?? false) !== inClass) continue;
           // The sourced block her version may hold is drawn under its boxes, and is a box of its own in the editor.
           const gap = edit?.ownGaps?.[card];
           const texts = [...pieces.map((p) => squash(textOf(p.doc))), ...(gap ? [squash(textOf(gap.doc))] : [])];
@@ -2986,7 +3003,7 @@ test.describe("her own meds panel for a condition", () => {
         }
         return false;
       }),
-      "condition with her own version of a card in two boxes, a 2–4 row table and one of plain text",
+      `condition with her own version of a card ${inClass ? "inside a drug class's card" : "in a card of its own"} in two boxes, a 2–4 row table and one of plain text`,
     );
     return { t, ...need(picks.get(t.id), "that card") };
   };
@@ -3009,12 +3026,13 @@ test.describe("her own meds panel for a condition", () => {
     expect(saved.remove).not.toContain(card);
 
     const shows = async (): Promise<void> => {
-      const shown = panelCard(page, t, card);
+      const shown = panelCard(page, t, system, card);
       await expect(shown).toHaveCount(1);
       await shown.locator(".phc-h button").click();
-      await expect(shown.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
-      // The card's body only: a box's text can start with the card's own title.
-      const body = shown.locator(".phc-b");
+      // The entry alone: a box's text can start with the card's own title, and a class's other entries are not hers to check.
+      const body = panelEntry(shown, t, system, card);
+      await expect(body).toHaveCount(1);
+      await expect(body.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
       await expect(body).toContainText(need(leads[keep], "the kept box's lead"));
       await expect(body).not.toContainText(need(leads[gone], "the removed box's lead"));
       if (pair.gap !== null) await expect(body).toContainText(need(leads[pair.gap], "the sourced block's lead"));
@@ -3025,7 +3043,7 @@ test.describe("her own meds panel for a condition", () => {
     await expect.poll(() => w.fake.requests.some((r) => r.url.includes(`/compare/${head}...${w.build.commit}`))).toBe(true);
     await shows();
     const area = await startEditing(page);
-    const slots = area.locator(`section.meds-edit section.phc[data-anchor="meds-${card}"] .edit-slot`);
+    const slots = area.locator(`section.meds-edit [data-anchor="meds-${card}"] .edit-slot`);
     await expect(slots).toHaveCount(pair.gap === null ? 1 : 2);
     await expect(slots.first()).toContainText(need(leads[keep], "the kept box's lead"));
     for (let i = 0; i < (await slots.count()); i++) await expect(slots.nth(i)).not.toContainText(need(leads[gone], "the removed box's lead"));
@@ -3037,7 +3055,8 @@ test.describe("her own meds panel for a condition", () => {
     await openPage(page, pair.t.hash);
     await signIn(page);
     const area = await startEditing(page);
-    const editing = area.locator(`section.meds-edit section.phc[data-anchor="meds-${pair.card}"]`);
+    // The entry's own card, or its part of its drug class's card (open in the editor).
+    const editing = area.locator(`section.meds-edit [data-anchor="meds-${pair.card}"]`);
     await expect(editing.locator(".phn-k.own-only")).toHaveText(OWN_VERSION);
     const slots = editing.locator(".edit-slot");
     await expect(slots).toHaveCount(pair.leads.length);
@@ -3045,8 +3064,8 @@ test.describe("her own meds panel for a condition", () => {
     return slots;
   }
 
-  test("in her own version of a card in two boxes, Delete row on every table row takes the table box away and the text box stays", async ({ page, context, baseURL }) => {
-    const pair = ownPair();
+  test("in her own version of a card in two boxes, inside a drug class's card, Delete row on every table row takes the table box away and the text box stays", async ({ page, context, baseURL }) => {
+    const pair = ownPair(true);
     const before = readJson(join(ROOT, topicMedsPath(pair.t.g, pair.system, pair.t.id))) as MedsFile;
     const w = await world(context, baseURL, { seed: true });
     const slots = await editPair(page, pair);
@@ -3071,8 +3090,8 @@ test.describe("her own meds panel for a condition", () => {
     await keptOnly(page, w, pair, before, pair.table);
   });
 
-  test("in her own version of a card in two boxes, emptying the text box takes it away and the table box stays", async ({ page, context, baseURL }) => {
-    const pair = ownPair();
+  test("in her own version of a card in two boxes, in a card of its own, emptying the text box takes it away and the table box stays", async ({ page, context, baseURL }) => {
+    const pair = ownPair(false);
     const before = readJson(join(ROOT, topicMedsPath(pair.t.g, pair.system, pair.t.id))) as MedsFile;
     const w = await world(context, baseURL, { seed: true });
     const slots = await editPair(page, pair);

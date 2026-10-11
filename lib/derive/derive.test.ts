@@ -23,10 +23,14 @@ import {
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
-import { docText, tableOf } from "./text.ts";
+import { docText, nodeText, tableOf } from "./text.ts";
 import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
-import { byRole, entryPieces, pageCard, panelEntries, panelItems, publishedEdit, roleRank, shownPieces } from "./panel.ts";
+import { byRole, classPieces, entryPieces, itemTarget, pageCard, panelEntries, panelItems, publishedEdit, roleRank, rowSource, shownPieces, type PanelItem, type PanelPiece, type RowSource } from "./panel.ts";
+import type { PMNode } from "./text.ts";
+
+/** A panel item as a test reads it: an entry's target, or a class's title. */
+const itemKey = (x: PanelItem): string => (x.kind === "class" ? x.title : itemTarget(x));
 
 const table = (id: string, columns: number, rows: Parameters<typeof tableDoc>[1]): BlockFile =>
   ({ v: 1, id, kind: "table", doc: tableDoc(columns, rows), meta: {} }) as unknown as BlockFile;
@@ -751,7 +755,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
       { file: where(R(104)), id: R(998) },
       { file: where(R(997)), id: R(997) },
     ]);
-    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {}, ownGaps: {}, gaps: [], roles: {} });
+    expect(topicOf(res, R(104)).medsEdit).toEqual({ remove: [R(998)], add: [], own: {}, ownGaps: {}, gaps: [], roles: {}, classes: [] });
   });
 
   describe("sourced cards (MedsFile gaps) and role labels (roles)", () => {
@@ -768,7 +772,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
       const angina = topicOf(publish(withMeds([[R(104), file]])), R(104));
       expect(angina.medsEdit?.gaps.map((g) => [g.id, g.title])).toEqual([[G(3), expect.any(String)], [G(2), expect.any(String)]]);
       expect(angina.medsEdit?.roles[C(2)]).toEqual([tag("adjunct", "nitroglycerin")]);
-      expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([R(124), G(3), C(2), G(2)]);
+      expect(panelItems(angina).map(itemKey)).toEqual([R(124), G(3), C(2), G(2)]);
     });
 
     it("places a sourced card on its dx's page when nothing earlier in site order placed it, and search lands there", () => {
@@ -786,7 +790,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
     it("a sourced card she took off stays published (for Put back) but the panel leaves it out", () => {
       const angina = topicOf(publish(withMeds([[R(104), { ...file, remove: [G(3)] }]])), R(104));
       expect(angina.medsEdit?.gaps.map((g) => g.id)).toEqual([G(3), G(2)]);
-      expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([R(124), C(2), G(2)]);
+      expect(panelItems(angina).map(itemKey)).toEqual([R(124), C(2), G(2)]);
     });
 
     it("reports a missing gap block and a role for something the panel cannot show to dropped, and publishes neither", () => {
@@ -806,7 +810,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
         expect(angina.medsEdit?.ownGaps[C(2)]?.id).toBe(G(3));
         expect(angina.medsEdit?.gaps).toEqual([]);
         expect(panelEntries(angina).map((e) => [e.med.target, e.gap?.id ?? null])).toEqual([[C(2), G(3)], [R(124), null]]);
-        expect(panelItems(angina).map((x) => (x.kind === "card" ? x.entry.med.target : x.gap.id))).toEqual([C(2), R(124)]);
+        expect(panelItems(angina).map(itemKey)).toEqual([C(2), R(124)]);
       });
 
       it("places it on the dx's page, and its search result opens her version's entry", () => {
@@ -829,6 +833,123 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
         const res = publish(withMeds([[R(104), { ...held, own: [{ target: C(2), pieces: [mine("x")], gap: G(9) }] }]]));
         expect(newDropped(res)).toEqual([{ file: topicMedsPath("fm", "cardiovascular", R(104)), id: G(9) }]);
         expect(topicOf(res, R(104)).medsEdit?.ownGaps).toEqual({});
+      });
+    });
+
+    describe("her drug classes (MedsFile classes)", () => {
+      const withClass = (classes: MedsFile["classes"]): MedsFile => ({ ...file, classes });
+
+      it("shows a class's entries under one header, in her member order, where its best-ranked role puts it, with each role once", () => {
+        const both = { role: "adjunct" as const, drugs: "nitroglycerin", note: null, sources: [src] };
+        const angina = topicOf(publish(withMeds([[R(104), { ...withClass([{ title: "Nitrates", members: [G(2), C(2)] }]), roles: [...(file.roles ?? []), { target: G(2), roles: [both, tag("alt")] }] }]])), R(104));
+        expect(angina.medsEdit?.classes).toEqual([{ title: "Nitrates", members: [G(2), C(2)] }]);
+        const items = panelItems(angina);
+        expect(items.map(itemKey)).toEqual([R(124), G(3), "Nitrates"]);
+        const cls = items[2];
+        if (cls?.kind !== "class") throw new Error("no class item");
+        expect(cls.members.map(itemKey)).toEqual([G(2), C(2)]);
+        // The alt label ranks the class above an unlabeled entry; the label both members carry shows once.
+        expect(cls.roles).toEqual([both, tag("alt")]);
+      });
+
+      it("without classes every entry keeps its own header", () => {
+        const angina = topicOf(publish(withMeds([[R(104), file]])), R(104));
+        expect(angina.medsEdit?.classes).toEqual([]);
+        expect(panelItems(angina).every((x) => x.kind !== "class")).toBe(true);
+      });
+
+      it("drops a member the panel cannot show to dropped, and a class left with one entry shows none", () => {
+        const res = publish(withMeds([[R(104), withClass([{ title: "Nitrates", members: [C(2), C(99)] }])]]));
+        expect(newDropped(res)).toEqual([{ file: topicMedsPath("fm", "cardiovascular", R(104)), id: C(99) }]);
+        const angina = topicOf(res, R(104));
+        expect(angina.medsEdit?.classes).toEqual([]);
+        expect(panelItems(angina).map(itemKey)).toEqual([R(124), G(3), C(2), G(2)]);
+      });
+
+      it("a class ranks by its best member: a 1st-line member brings it first, its members still in her order", () => {
+        const items = panelItems(topicOf(publish(withMeds([[R(104), withClass([{ title: "Cards", members: [C(2), R(124)] }])]])), R(104)));
+        expect(items.map(itemKey)).toEqual(["Cards", G(3), G(2)]);
+        expect(items[0]?.kind === "class" ? items[0].members.map(itemKey) : []).toEqual([C(2), R(124)]);
+      });
+
+      describe("each fact once across a class (classPieces)", () => {
+        const p = (text: string, indLeft = 0): PMNode => ({ type: "paragraph", attrs: { indLeft }, content: text === "" ? [] : [{ type: "text", text }] });
+        const tc = (text: string, rowspan = 1): PMNode => ({ type: "table_cell", attrs: { rowspan }, content: [p(text)] });
+        const tb = (...rows: PMNode[]): PMNode => ({ type: "table", attrs: {}, content: rows });
+        const piece = (...content: PMNode[]): PanelPiece => ({ kind: "notes", basePt: 8, title: null, file: "pharm review", doc: { type: "doc", content } as MedsPiece["doc"], part: null });
+        const lines = (ps: PanelPiece[]): string[] => ps.flatMap((x) => (x.doc.content as PMNode[]).map((n) => (n.type === "table" ? (n.content ?? []).map((r) => (r.content ?? []).map(nodeText).join(" | ")).join(" / ") : nodeText(n))));
+        const MOA = "MOA: H1 receptor antagonists";
+        const row = (id: string, ...cells: PMNode[]): PMNode => ({ type: "table_row", attrs: { id }, content: cells });
+        const LABELS = (): PMNode => row(R(1), tc("2ND GEN ANTIHISTAMINES"), tc("MOA"), tc("ADRs"));
+        /** Her pharm table, in a notes block, as the class's cuts read it by row id. */
+        const herFiles = (...rows: PMNode[]): RowSource => rowSource({ blocks: [], notesBlocks: { b_HER: { id: "b_HER", doc: { type: "doc", content: [tb(...rows)] } } } } as unknown as Pick<SystemJson, "blocks" | "notesBlocks">);
+        const none: RowSource = () => undefined;
+
+        it("a later entry's cut of the same rows of her table shows its rows without her column labels or the copy of the cell she merged over them", () => {
+          const source = herFiles(LABELS(), row(R(2), tc("Cetirizine (Zyrtec)"), tc(MOA, 3), tc("drowsy")), row(R(3), tc("Fexofenadine (Allegra)"), tc("")), row(R(4), tc("Loratadine (Claritin)"), tc("less drowsy")));
+          const [first, second] = classPieces([
+            [piece(tb(LABELS(), row(R(2), tc("Cetirizine (Zyrtec)"), tc(MOA, 2), tc("drowsy")), row(R(3), tc("Fexofenadine (Allegra)"), tc(""))))],
+            [piece(tb(LABELS(), row(R(4), tc("Loratadine (Claritin)"), tc(MOA), tc("less drowsy"))))],
+          ], source);
+          expect(lines(first ?? [])).toEqual(["2ND GEN ANTIHISTAMINES | MOA | ADRs / Cetirizine (Zyrtec) | MOA: H1 receptor antagonists | drowsy / Fexofenadine (Allegra) | "]);
+          expect(lines(second ?? [])).toEqual(["Loratadine (Claritin) |  | less drowsy"]);
+        });
+
+        it("her own versions' copies of one merged cell, cut down the same way, show once; a copy she changed stays", () => {
+          const source = herFiles(LABELS(), row(R(2), tc("Cetirizine"), tc(`${MOA} General indications: rhinitis`, 3), tc("drowsy")), row(R(3), tc("Fexofenadine"), tc("")), row(R(4), tc("Loratadine"), tc("less drowsy")));
+          const cut = (moa: string): PanelPiece[][] => classPieces([
+            [piece(tb(LABELS(), row(R(2), tc("Cetirizine"), tc(MOA, 2), tc("drowsy")), row(R(3), tc("Fexofenadine"), tc(""))))],
+            [piece(tb(LABELS(), row(R(4), tc("Loratadine"), tc(moa), tc("less drowsy"))))],
+          ], source);
+          expect(lines(cut(MOA)[1] ?? [])).toEqual(["Loratadine |  | less drowsy"]);
+          expect(lines(cut(`${MOA} (desloratadine too)`)[1] ?? [])).toEqual([`Loratadine | ${MOA} (desloratadine too) | less drowsy`]);
+        });
+
+        it("a later entry's table starting with the same row of hers cut another way keeps that row", () => {
+          const source = herFiles(row(R(6), tc("Fluoxetine"), tc("Citalopram"), tc("Venlafaxine"), tc("Duloxetine")));
+          const [, second] = classPieces([
+            [piece(tb(row(R(6), tc("Fluoxetine"), tc("Citalopram"), tc("Venlafaxine"), tc("Duloxetine"))))],
+            [piece(tb(row(R(6), tc("Venlafaxine"), tc("Duloxetine"))))],
+          ], source);
+          expect(lines(second ?? [])).toEqual(["Venlafaxine | Duloxetine"]);
+        });
+
+        it("another drug's own cell saying the same words stays: only a copy of one merged cell of hers goes", () => {
+          const source = herFiles(LABELS(), row(R(2), tc("Cetirizine (Zyrtec)"), tc(MOA), tc("drowsy")), row(R(4), tc("Loratadine (Claritin)"), tc(MOA), tc("drowsy")));
+          const [, second] = classPieces([
+            [piece(tb(LABELS(), row(R(2), tc("Cetirizine (Zyrtec)"), tc(MOA), tc("drowsy"))))],
+            [piece(tb(LABELS(), row(R(4), tc("Loratadine (Claritin)"), tc(MOA), tc("drowsy"))))],
+          ], source);
+          expect(lines(second ?? [])).toEqual(["Loratadine (Claritin) | MOA: H1 receptor antagonists | drowsy"]);
+        });
+
+        it("keeps whole a table cut from other rows (even with the same column labels), and an entry's own repeats", () => {
+          const other = (id: string, drug: string): PMNode => tb(row(id, tc("2ND GEN ANTIHISTAMINES"), tc("MOA"), tc("ADRs")), row(R(9), tc(drug), tc(MOA), tc("drowsy")));
+          const [, second] = classPieces([[piece(other(R(1), "Cetirizine"))], [piece(other(R(5), "Mometasone"), other(R(5), "Mometasone"))]], none);
+          expect(lines(second ?? [])).toEqual(["2ND GEN ANTIHISTAMINES | MOA | ADRs / Mometasone | MOA: H1 receptor antagonists | drowsy", "2ND GEN ANTIHISTAMINES | MOA | ADRs / Mometasone | MOA: H1 receptor antagonists | drowsy"]);
+        });
+
+        it("a line about another drug stays, however it reads", () => {
+          const [first, second] = classPieces([
+            [piece(p("SSRIs"), p("Clin Use: depression", 18), p("Monitoring:", 18), p("Serum Na", 36))],
+            [piece(p("SNRIs"), p("Clin Use: depression", 18), p("Monitoring:", 18), p("Serum Na", 36), p("BP", 36))],
+          ], none);
+          expect(lines(first ?? [])).toEqual(["SSRIs", "Clin Use: depression", "Monitoring:", "Serum Na"]);
+          expect(lines(second ?? [])).toEqual(["SNRIs", "Clin Use: depression", "Monitoring:", "Serum Na", "BP"]);
+        });
+
+        it("a line an earlier piece said about the same drug, under the same lines, shows once; a label stays while a line of its own stays under it", () => {
+          const [, second] = classPieces([
+            [piece(p("SSRIs"), p("Clin Use: depression", 18), p("Monitoring:", 18), p("Serum Na", 36))],
+            [piece(p("SSRIs"), p("Clin Use: depression", 18), p("Monitoring:", 18), p("Serum Na", 36), p("BP", 36))],
+          ], none);
+          expect(lines(second ?? [])).toEqual(["SSRIs", "Monitoring:", "BP"]);
+        });
+
+        it("a piece left with nothing goes", () => {
+          const [, second] = classPieces([[piece(p("Iron"), p("Monitoring: Hgb/HCT", 18))], [piece(p("Iron"), p("Monitoring: Hgb/HCT", 18))]], none);
+          expect(second).toEqual([]);
+        });
       });
     });
 
@@ -892,7 +1013,7 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
     const noSection = { ...sys, pharm: null };
     expect(pageCard(noSection, C(2))).toMatchObject({ card: C(2), section: nitrateSection(sys) });
     const added = { card: C(3), title: "Added", rows: [], section: "elsewhere", system: "pulmonary", target: C(3) };
-    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {}, ownGaps: {}, gaps: [], roles: {} } } : t)) };
+    const withAdded = { ...sys, topics: sys.topics.map((t) => (t.id === R(101) ? { ...t, medsEdit: { remove: [], add: [added], own: {}, ownGaps: {}, gaps: [], roles: {}, classes: [] } } : t)) };
     expect(pageCard(withAdded, C(3))).toBe(added);
   });
   const nitrateSection = (sys: SystemJson): string | undefined => {

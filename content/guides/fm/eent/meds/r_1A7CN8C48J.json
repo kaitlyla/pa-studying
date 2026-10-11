@@ -13896,7 +13896,10 @@
   }
  ],
  "gaps": [
-  "g_V0X6P9ADRM"
+  "g_P13PYJ06WH",
+  "g_V0X6P9ADRM",
+  "g_PJVV1E0GHM",
+  "g_RQSA19GBJE"
  ],
  "roles": [
   {
@@ -13904,9 +13907,15 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ABRS: amoxicillin/clavulanate 875 mg PO q12h (2 g q12h if at risk of resistance); AAFP also lists amoxicillin as first-line",
+     "drugs": "ABRS: high-dose amoxicillin or amoxicillin/clavulanate (Augmentin) PO for 7–14 days; amoxicillin/clavulanate 875 mg PO q12h (2 g q12h if at risk of resistance)",
      "note": null,
      "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      },
       {
        "name": "Acute Rhinosinusitis: Rapid Evidence Review. Am Fam Physician 2025 (Jan)",
        "org": "American Family Physician (AAFP)",
@@ -13928,9 +13937,15 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "PCN allergy, adults: doxycycline",
+     "drugs": "Doxycycline (adults), particularly with penicillin allergy",
      "note": null,
      "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      },
       {
        "name": "Sinusitis",
        "org": "MSD Manual Professional Edition",
@@ -13995,9 +14010,15 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Topical decongestant (phenylephrine, oxymetazoline), ≤5 days or 3 days on/3 off",
+     "drugs": null,
      "note": null,
      "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      },
       {
        "name": "Sinusitis",
        "org": "MSD Manual Professional Edition",
@@ -14067,9 +14088,15 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Viral rhinosinusitis: ibuprofen",
+     "drugs": "NSAIDs for pain (ibuprofen)",
      "note": null,
      "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      },
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
@@ -14132,6 +14159,83 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_P13PYJ06WH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PJVV1E0GHM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RQSA19GBJE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "Blueprint (operator-supplied text, 2026-10-11)",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Corticosteroids",
+   "members": [
+    "c_CSF60KE111",
+    "p_P8WEGKDZNY"
+   ]
+  },
+  {
+   "title": "Antihistamines",
+   "members": [
+    "p_QXHNJ141S3",
+    "p_D4VS12XD6M"
+   ]
+  },
+  {
+   "title": "Decongestants",
+   "members": [
+    "g_P13PYJ06WH",
+    "g_V0X6P9ADRM"
    ]
   }
  ]

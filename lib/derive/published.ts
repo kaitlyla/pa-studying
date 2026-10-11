@@ -1,5 +1,5 @@
 // Shapes of the published data under `dist/data/` (plan 40 §40.8). Written by tools/build, read by the app.
-import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, MedsPiece, MedsRoleTag, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
+import type { DocJSON, FileKind, Flag, GapFigure, GapMeta, GeneralKey, GuideId, MedsClassGroup, MedsPiece, MedsRoleTag, PageSetup, PartCut, ReplaceFailed } from "../content/types.ts";
 import { REF_TABS, type SiteIndex } from "./routes.ts";
 
 // ---- data file paths (relative to dist/data/) ----
@@ -278,6 +278,8 @@ export interface PubMedsEdit {
   gaps: PubGap[];
   /** Target (card id, row/part target or gap id) → its role labels, each with its sources; only targets the panel can show. */
   roles: Record<string, MedsRoleTag[]>;
+  /** Her drug classes (MedsFile `classes`), in her order; members are entry targets, each in one class at most. */
+  classes: MedsClassGroup[];
 }
 
 export interface PubTopic {

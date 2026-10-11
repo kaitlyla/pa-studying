@@ -238,8 +238,26 @@ describe("her own meds panel for a topic", () => {
   });
 
   it("refuses an empty file: with nothing added, removed, edited, sourced or labeled there is no file", () => {
-    expect(verdict(path, meds())).toMatch(/an added, removed, edited or sourced entry, or a role/);
-    expect(verdict(path, meds({ gaps: [], roles: [] }))).toMatch(/an added, removed, edited or sourced entry, or a role/);
+    expect(verdict(path, meds())).toMatch(/an added, removed, edited or sourced entry, a role, or a class/);
+    expect(verdict(path, meds({ gaps: [], roles: [], classes: [] }))).toMatch(/an added, removed, edited or sourced entry, a role, or a class/);
+  });
+
+  describe("drug classes (classes)", () => {
+    const G1 = id("g", 1);
+    const cls = (title: string, members: string[]) => ({ title, members });
+
+    it("accepts a file holding only classes, each two or more entries of any target kind", () => {
+      expect(verdict(path, meds({ classes: [cls("Corticosteroids", [C1, P1]), cls("Antihistamines", [C2, R1])] }))).toBe("ok");
+      expect(verdict(path, meds({ gaps: [G1], classes: [cls("Decongestants", [G1, C1])] }))).toBe("ok");
+    });
+
+    it("refuses a class with one entry or no title, an entry in two classes, a taken-off entry, and an unlisted gap block", () => {
+      expect(verdict(path, meds({ classes: [cls("Corticosteroids", [C1])] }))).toMatch(/\.classes\[0\]\.members.*at least two entries/);
+      expect(verdict(path, meds({ classes: [cls("", [C1, C2])] }))).toMatch(/\.classes\[0\]\.title/);
+      expect(verdict(path, meds({ classes: [cls("A", [C1, C2]), cls("B", [C1, P1])] }))).toMatch(/\.classes\[\]\.members/);
+      expect(verdict(path, meds({ remove: [C2], classes: [cls("A", [C1, C2])] }))).toMatch(/\.classes\[0\]\.members\[1\].*an entry not taken off/);
+      expect(verdict(path, meds({ classes: [cls("A", [C1, G1])] }))).toMatch(/\.classes\[0\]\.members\[1\].*a gap block listed in gaps/);
+    });
   });
 
   describe("sourced cards (gaps) and role labels (roles)", () => {
