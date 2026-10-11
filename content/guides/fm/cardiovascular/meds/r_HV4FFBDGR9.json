@@ -19125,7 +19125,13 @@
    "gap": "g_JXVXC8NQVA"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_R6TMQ74D0A",
+  "g_VBNV8G9PD8",
+  "g_3ZCKS6541H",
+  "g_P2FDPM3AMS",
+  "g_H6RXXTHDVM"
+ ],
  "roles": [
   {
    "target": "c_6WH0EEY3ZA",
@@ -19295,6 +19301,124 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_R6TMQ74D0A",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "clopidogrel (P2Y12 inhibitor) alone",
+     "note": "aspirin-intolerant",
+     "sources": [
+      {
+       "name": "Stable Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/stable-angina"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VBNV8G9PD8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "influenza, COVID-19 and pneumococcal vaccines",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      },
+      {
+       "name": "Stable Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/stable-angina"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3ZCKS6541H",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "varenicline, bupropion or combination NRT",
+     "note": "w behavioral support",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P2FDPM3AMS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "SGLT2 inhibitor",
+     "note": "CCD + T2DM",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_H6RXXTHDVM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "GLP-1 receptor agonist",
+     "note": "CCD + T2DM",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "semaglutide (Wegovy)",
+     "note": "established CVD + obesity or overweight",
+     "sources": [
+      {
+       "name": "WEGOVY (semaglutide) injection prescribing information (FDA label, DailyMed)",
+       "org": "A-S Medication Solutions",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f5e548d0-cc79-4c34-a3f5-e20a5b8b6564"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antiplatelets",
+   "members": [
+    "c_FHBEK18ECJ",
+    "g_R6TMQ74D0A"
    ]
   }
  ]

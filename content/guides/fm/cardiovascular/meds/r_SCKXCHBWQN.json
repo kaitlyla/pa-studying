@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_PC2E4RJXWW",
+  "g_AQPRHXP7JM",
+  "g_C2GC59SXKR",
+  "g_HKDW0Q3SDY",
+  "g_E9MM9CMQ76"
+ ],
+ "roles": [
+  {
+   "target": "g_PC2E4RJXWW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "midodrine",
+     "note": "Recurr VVS or OH (reasonable)",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AQPRHXP7JM",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "fludrocortisone",
+     "note": "Recurr VVS (might be reasonable)",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_C2GC59SXKR",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "acute water bolus",
+     "note": "neurogenic OH, temp relief",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "↑salt and fluid intake; reduce hypotensive meds",
+     "note": "OH (reasonable); selected VVS (may be reasonable)",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HKDW0Q3SDY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "droxidopa",
+     "note": "neurogenic OH",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      },
+      {
+       "name": "NORTHERA (droxidopa) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Lundbeck Pharmaceuticals LLC",
+       "year": "2019",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2179f02c-48d7-48eb-8007-5ae43d8d16bc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E9MM9CMQ76",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "pyridostigmine",
+     "note": "neurogenic OH refractory to other tx",
+     "sources": [
+      {
+       "name": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.03.003"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -8657,7 +8657,13 @@
    "gap": "g_3PDS4V8C63"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_A3YA7YYHS4",
+  "g_1TGD49QF10",
+  "g_7VSJXDKNCD",
+  "g_FWY9BDJMVD",
+  "g_TSZA5Q33Q9"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
@@ -8693,6 +8699,117 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_A3YA7YYHS4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DOAC (VKA 2nd-line)",
+     "note": "AF, regardless of CHA2DS2-VASc",
+     "sources": [
+      {
+       "name": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001250"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1TGD49QF10",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "mavacamten or aficamten",
+     "note": "obstructive HCM w Sx despite BB/NDHP CCB (adults)",
+     "sources": [
+      {
+       "name": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001250"
+      },
+      {
+       "name": "CAMZYOS (mavacamten) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Myokardia, Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=669c936b-3ee6-4e36-8a22-79dd11b1255b"
+      },
+      {
+       "name": "MYQORZO (aficamten) tablets prescribing information (FDA label, DailyMed)",
+       "org": "Cytokinetics Inc.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fd778507-1274-4d1a-a659-5431d55c543a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7VSJXDKNCD",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "disopyramide + AV-nodal blocker",
+     "note": "obstructive HCM w Sx despite BB/NDHP CCB",
+     "sources": [
+      {
+       "name": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001250"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FWY9BDJMVD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV phenylephrine (+ fluids)",
+     "note": "acute hypotension in obstructive HCM",
+     "sources": [
+      {
+       "name": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001250"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TSZA5Q33Q9",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "amiodarone (favored); other antiarrhythmics",
+     "note": "AF rhythm control",
+     "sources": [
+      {
+       "name": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001250"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antiarrhythmics",
+   "members": [
+    "g_7VSJXDKNCD",
+    "g_TSZA5Q33Q9"
    ]
   }
  ]

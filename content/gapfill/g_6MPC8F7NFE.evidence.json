@@ -1,0 +1,45 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "All pts (incl after surg or endovascular repair): long-term antihypertensives, USU BBs, NDHP CCBs and ACEi.",
+   "source": 0,
+   "quote": "All patients, including those treated by surgery or endovascular methods, are given long-term antihypertensive therapy, usually including beta-blockers, nondihydropyridine calcium channel blockers, and angiotensin-converting enzyme (ACE) inhibitors",
+   "locator": "Treatment: Long-term",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Marfan syndrome: a BB or an ARB @ max tolerated doses = recommended to ↓aortic dilate;",
+   "source": 1,
+   "quote": "In patients with Marfan syndrome, treatment with either a beta blocker or an ARB, in maximally tolerated doses (unless contraindicated), is recommended to reduce the rate of aortic dilation",
+   "locator": "§8.1 Marfan syndrome",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "BB + ARB together = reasonable.",
+   "source": 1,
+   "quote": "In patients with Marfan syndrome, the use of both a beta blocker and an ARB, in maximally tolerated doses (unless contraindicated), is reasonable to reduce the rate of aortic dilation",
+   "locator": "§8.1 Marfan syndrome",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "Marfan/class/outcome outside quote",
+    "resolution": "full rec sentence"
+   },
+   {
+    "claim": 2,
+    "issue": "Marfan/class/outcome outside quote",
+    "resolution": "full rec sentence"
+   }
+  ]
+ },
+ "block": "g_6MPC8F7NFE"
+}

@@ -6066,7 +6066,9 @@
    "gap": "g_ZNHDV7DCA8"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_CBJ17H3CYM"
+ ],
  "roles": [
   {
    "target": "c_1W9T6QFWR7",
@@ -6119,6 +6121,24 @@
      "role": "1st",
      "drugs": "anticoagulation as for DVT for ≥ 6 weeks",
      "note": "W.in 3 cm of the saphenofemoral junction",
+     "sources": [
+      {
+       "name": "Superficial Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/superficial-venous-thrombosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CBJ17H3CYM",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "NSAIDs + warm compresses, compression, elevation",
+     "note": "Sx relief",
      "sources": [
       {
        "name": "Superficial Venous Thrombosis",

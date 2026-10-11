@@ -14689,7 +14689,15 @@
    "gap": "g_SFKZ36S9WJ"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_W4AJQGVR69",
+  "g_FFXW0T185S",
+  "g_AF5CCFD492",
+  "g_V2B1GYQRRK",
+  "g_8H00FCEFY7",
+  "g_BCSAWTG62S",
+  "g_KVSPVF0F3B"
+ ],
  "roles": [
   {
    "target": "c_WFBTYPJCNW",
@@ -14786,6 +14794,19 @@
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertension"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "extended-release nifedipine",
+     "note": "Preg",
+     "sources": [
+      {
+       "name": "Antihypertensive Medications in Pregnancy and Lactation: A Practical Approach (ACC Expert Analysis)",
+       "org": "American College of Cardiology (ACC)",
+       "year": "2026",
+       "url": "https://www.acc.org/latest-in-cardiology/articles/2026/07/02/15/04/antihypertensive-medications-in-pregnancy-and-lactation"
+      }
+     ]
     }
    ]
   },
@@ -14804,7 +14825,181 @@
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertension"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "labetalol",
+     "note": "Preg",
+     "sources": [
+      {
+       "name": "Antihypertensive Medications in Pregnancy and Lactation: A Practical Approach (ACC Expert Analysis)",
+       "org": "American College of Cardiology (ACC)",
+       "year": "2026",
+       "url": "https://www.acc.org/latest-in-cardiology/articles/2026/07/02/15/04/antihypertensive-medications-in-pregnancy-and-lactation"
+      }
+     ]
     }
+   ]
+  },
+  {
+   "target": "g_W4AJQGVR69",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "spironolactone",
+     "note": "resistant HTN, add-on",
+     "sources": [
+      {
+       "name": "Spironolactone versus placebo, bisoprolol, and doxazosin to determine the optimal treatment for drug-resistant hypertension (PATHWAY-2): a randomised, double-blind, crossover trial (Lancet 2015;386:2059-68)",
+       "org": "The Lancet (Williams B, et al.)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4655321/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FFXW0T185S",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "loop diuretic",
+     "note": "instead of a thiazide if eGFR <30",
+     "sources": [
+      {
+       "name": "Medications for Hypertension",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/medications-for-hypertension"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AF5CCFD492",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "methyldopa",
+     "note": "Preg, when preferred agents are available",
+     "sources": [
+      {
+       "name": "Antihypertensive Medications in Pregnancy and Lactation: A Practical Approach (ACC Expert Analysis)",
+       "org": "American College of Cardiology (ACC)",
+       "year": "2026",
+       "url": "https://www.acc.org/latest-in-cardiology/articles/2026/07/02/15/04/antihypertensive-medications-in-pregnancy-and-lactation"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_V2B1GYQRRK",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "doxazosin",
+     "note": "resistant HTN add-on; ⍉for primary tx",
+     "sources": [
+      {
+       "name": "Spironolactone versus placebo, bisoprolol, and doxazosin to determine the optimal treatment for drug-resistant hypertension (PATHWAY-2): a randomised, double-blind, crossover trial (Lancet 2015;386:2059-68)",
+       "org": "The Lancet (Williams B, et al.)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4655321/"
+      },
+      {
+       "name": "Medications for Hypertension",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/medications-for-hypertension"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8H00FCEFY7",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "hydralazine",
+     "note": "adjunct antiHTN",
+     "sources": [
+      {
+       "name": "Medications for Hypertension",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/medications-for-hypertension"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "minoxidil",
+     "note": "severe, refractory HTN only",
+     "sources": [
+      {
+       "name": "Medications for Hypertension",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/medications-for-hypertension"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BCSAWTG62S",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "baxdrostat",
+     "note": "add-on w other antihypertensives",
+     "sources": [
+      {
+       "name": "Novel Drug Approvals for 2026",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KVSPVF0F3B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "aprocitentan",
+     "note": "add-on, ⍉controlled on other drugs",
+     "sources": [
+      {
+       "name": "Novel Drug Approvals for 2024",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2024",
+       "url": "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2024"
+      },
+      {
+       "name": "TRYVIO (aprocitentan) tablets prescribing information (FDA label, DailyMed)",
+       "org": "Idorsia Pharmaceuticals Ltd",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dfe7a2ee-612c-4aba-834a-d68e6b59a0a6"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Diuretics",
+   "members": [
+    "c_WFBTYPJCNW",
+    "g_W4AJQGVR69",
+    "g_FFXW0T185S"
    ]
   }
  ]

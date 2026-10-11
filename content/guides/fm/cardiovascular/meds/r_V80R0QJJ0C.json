@@ -11163,7 +11163,16 @@
    "gap": "g_Y58BACWZJM"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_PJTQ9RH88H",
+  "g_E6866HSHM3",
+  "g_T2VPQJWFFY",
+  "g_39E4B1KDPT",
+  "g_9BHEZTYK1V",
+  "g_K002WBENNG",
+  "g_H90NMM48TR",
+  "g_TCXJNB54SW"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
@@ -11194,20 +11203,14 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "HFrEF therapy: ACE inhibitor (ARNI or ARB as alternatives)",
-     "note": null,
+     "drugs": "HFrEF therapy: ACE inhibitor",
+     "note": "if ARNI ⍉feasible",
      "sources": [
       {
-       "name": "Dilated Cardiomyopathy",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/dilated-cardiomyopathy"
-      },
-      {
-       "name": "Chronic Heart Failure",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/heart-failure/chronic-heart-failure"
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
       }
      ]
     }
@@ -11286,6 +11289,176 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/dilated-cardiomyopathy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PJTQ9RH88H",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "SGLT2 inhibitor",
+     "note": "HFrEF therapy",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_E6866HSHM3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ARNI (sacubitril/valsartan)",
+     "note": "HFrEF therapy",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_T2VPQJWFFY",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "hydralazine + isosorbide dinitrate",
+     "note": "African American pts, NYHA III–IV on optimal tx",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "hydralazine + isosorbide dinitrate",
+     "note": "ARNi/ACEi/ARB intol or renal insuff (might be considered)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_39E4B1KDPT",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DOAC (preferred over warfarin)",
+     "note": "AF w CHA2DS2-VASc ≥2 men / ≥3 women",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "warfarin",
+     "note": "Mech valve (DOACs ⍉recommended)",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9BHEZTYK1V",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "ivabradine",
+     "note": "HFrEF add-on (can be beneficial)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_K002WBENNG",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "digoxin",
+     "note": "HFrEF add-on (might be considered)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_H90NMM48TR",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "vericiguat",
+     "note": "HFrEF add-on (may be considered)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TCXJNB54SW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV iron",
+     "note": "Fe deficiency",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
       }
      ]
     }

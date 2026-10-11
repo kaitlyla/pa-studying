@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Adding colchicine for 2/2 prev may be considered to ↓recurr ASCVD events.",
+   "source": 0,
+   "quote": "In patients with CCD, the addition of colchicine for secondary prevention may be considered to reduce recurrent ASCVD events.",
+   "locator": "§4.3.4 Colchicine",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Lodoco: ↓risk of MI, CVA, coronary revasc and CV death in adults w established atherosclerotic dz or multi RFs.",
+   "source": 1,
+   "quote": "to reduce the risk of myocardial infarction (MI), stroke, coronary revascularization, and cardiovascular death in adult patients with established atherosclerotic disease or with multiple risk factors",
+   "locator": "1 Indications and Usage",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "'prev' dropped 'secondary'",
+    "resolution": "'2/2 prev'"
+   }
+  ]
+ },
+ "block": "g_2FP4E0JYA2"
+}

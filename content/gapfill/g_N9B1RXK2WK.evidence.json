@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "\"Inflammatory phenotype\" (fever, ↑CRP and/or inflam on ♡ MRI): IL-1 inhibitors (eg, anakinra, rilonacept) are preferred as second-line tx.",
+   "source": 0,
+   "quote": "For patients with an \"inflammatory phenotype,\" with fever, elevated C-reactive protein (CRP), and/or inflammation seen on cardiac MRI, interleukin-1 (IL-1) inhibitors (eg, anakinra, rilonacept, goflikicept) are preferred as second-line therapy",
+   "locator": "Treatment: Recurrent pericarditis",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Rilonacept (Arcalyst): FDA-labeled for recurr pericarditis and ↓risk of recurr.",
+   "source": 1,
+   "quote": "treatment of recurrent pericarditis (RP) and reduction in risk of recurrence",
+   "locator": "1 Indications and Usage",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "phenotype frame outside quote",
+    "resolution": "quote extended"
+   }
+  ]
+ },
+ "block": "g_N9B1RXK2WK"
+}

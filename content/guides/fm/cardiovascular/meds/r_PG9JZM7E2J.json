@@ -5736,7 +5736,9 @@
    "gap": "g_E717A7K04Y"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_787JMVXTRP"
+ ],
  "roles": [
   {
    "target": "c_1W44S79ASK",
@@ -5782,6 +5784,30 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/vasospastic-angina"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_787JMVXTRP",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "varenicline, bupropion or combination NRT",
+     "note": "Smoke = a common vasospasm trigger",
+     "sources": [
+      {
+       "name": "Vasospastic Angina",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/vasospastic-angina"
+      },
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
       }
      ]
     }

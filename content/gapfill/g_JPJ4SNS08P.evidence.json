@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Lyte abnormalities (esp hypokalemia, hypomagnesemia), acidemia, hypoxemia and adverse drug effects contribute to VT.",
+   "source": 0,
+   "quote": "Electrolyte abnormalities (particularly hypokalemia or hypomagnesemia), acidemia, hypoxemia, and adverse medication effects contribute",
+   "locator": "Etiology",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "TdP w acquired QT prolongation: replete K to ≥4.0 mmol/L and Mg to norm (eg, ≥2.0 mmol/L).",
+   "source": 1,
+   "quote": "For patients with torsades de pointes associated with acquired QT prolongation, potassium repletion to 4.0 mmol per L or more and magnesium repletion to normal values (e.g., ≥2.0 mmol/L) are beneficial",
+   "locator": "§9.3 TdP, rec 4",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "≥ dropped in (e.g., ≥2.0 mmol/L)",
+    "resolution": "fixed in quote and claim"
+   }
+  ]
+ },
+ "block": "g_JPJ4SNS08P"
+}

@@ -16056,7 +16056,9 @@
    "gap": "g_FDTYESXSG2"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_A44BXWCMKV"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
@@ -16134,15 +16136,21 @@
    "target": "c_JMD5FWCZJV",
    "roles": [
     {
-     "role": "1st",
+     "role": "alt",
      "drugs": "anticoagulation as for AF: warfarin (INR 2-3)",
-     "note": null,
+     "note": "DOACs preferred (⍉mod-severe rheumatic MS or mech valve)",
      "sources": [
       {
-       "name": "Atrial Flutter",
-       "org": "MSD Manual Professional Edition",
-       "year": "2024",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/atrial-flutter"
+       "name": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/38033089/"
+      },
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
       }
      ]
     }
@@ -16201,6 +16209,37 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_A44BXWCMKV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "oral dofetilide or IV ibutilide",
+     "note": "drug cardioversion",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "amiodarone, dofetilide or sotalol",
+     "note": "maintain sinus rhythm",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -16217,7 +16256,8 @@
    "title": "Antiarrhythmics",
    "members": [
     "c_8SGB8NX108",
-    "c_H35BG04WS2"
+    "c_H35BG04WS2",
+    "g_A44BXWCMKV"
    ]
   }
  ]

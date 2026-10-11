@@ -20624,7 +20624,13 @@
   }
  ],
  "gaps": [
-  "g_DD2ZVT5T6C"
+  "g_DD2ZVT5T6C",
+  "g_4P9771CJDX",
+  "g_JCFR6G7G8X",
+  "g_NHKCKNDJAG",
+  "g_Y02A4QD1DQ",
+  "g_9YGGTBZHAA",
+  "g_GAP8E27SGV"
  ],
  "roles": [
   {
@@ -20937,6 +20943,133 @@
        "org": "U.S. Food and Drug Administration (FDA)",
        "year": "2025",
        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2025/215341Orig1s009ltr.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4P9771CJDX",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "SGLT2 inhibitor",
+     "note": "HFrEF",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "SGLT2 inhibitor",
+     "note": "HFmrEF / HFpEF (can be beneficial)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JCFR6G7G8X",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "yearly influenza and SARS-CoV-2 vaccines",
+     "note": "Prev (reasonable)",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      },
+      {
+       "name": "Chronic Heart Failure",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/heart-failure/chronic-heart-failure"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NHKCKNDJAG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV iron",
+     "note": "HFrEF + Fe deficiency",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Y02A4QD1DQ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "GLP-1 RA or tirzepatide",
+     "note": "HFpEF + obesity + T2DM",
+     "sources": [
+      {
+       "name": "StatPearls: Heart Failure With Preserved Ejection Fraction (HFpEF)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599960/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9YGGTBZHAA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "patiromer or sodium zirconium cyclosilicate",
+     "note": "K ≥5.5 on a RAASi; benefit uncertain",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GAP8E27SGV",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "statin",
+     "note": "prior MI or ACS",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
       }
      ]
     }

@@ -1,0 +1,45 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Anti-inflam drugs may resolve the transient constriction seen in 10–20% of cases w.in a few months.",
+   "source": 0,
+   "quote": "medical therapy (generally based on anti-inflammatory drugs) may solve the transient constriction occurring in 10–20% of cases within a few months",
+   "locator": "§3.4 Constrictive pericarditis, therapy",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "↑CRP and imaging evidence of pericardial inflam may help identify potentially reversible cases.",
+   "source": 0,
+   "quote": "The detection of elevated CRP and imaging evidence of pericardial inflammation by contrast enhancement on CT and/or CMR may be helpful to identify patients with potentially reversible forms of constriction",
+   "locator": "§3.4 Constrictive pericarditis, therapy",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Newly diagnosed constrictive pericarditis, hemodynamically stable, ⍉chronic constriction: may get a 3-month trial of anti-inflammatories rather than pericardiectomy.",
+   "source": 1,
+   "quote": "Patients with newly diagnosed constrictive pericarditis who are hemodynamically stable and without evidence of chronic constriction may be given a 3-month trial of anti-inflammatory medications, rather than pericardiectomy",
+   "locator": "Treatment: Constrictive pericarditis",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "claim beyond quote",
+    "resolution": "quote extended"
+   },
+   {
+    "claim": 2,
+    "issue": "'b4' vs 'rather than'; population missing",
+    "resolution": "full MSD sentence; claim reworded"
+   }
+  ]
+ },
+ "block": "g_062JDC7Z2A"
+}

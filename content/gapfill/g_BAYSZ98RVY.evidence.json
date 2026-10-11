@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Other NSAIDs were effective in sm trials; naproxen 7.5–10 mg/kg PO BID = the most studied.",
+   "source": 0,
+   "quote": "Other nonsteroidal anti-inflammatory drugs (NSAIDs) have been reported in small trials to be effective; naproxen (7.5 to 10 mg/kg orally 2 times a day) is the most studied",
+   "locator": "Treatment",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Naproxen 5–10 mg/kg every 12 h = equally effective for arthritis.",
+   "source": 1,
+   "quote": "typically naproxen 5 to 10 mg/kg every 12 hours with a maximum daily dose of 1000 mg until symptoms resolve, is equally effective",
+   "locator": "Treatment / Management",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "'equally effective' outside quote",
+    "resolution": "quote extended"
+   }
+  ]
+ },
+ "block": "g_BAYSZ98RVY"
+}

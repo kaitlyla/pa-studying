@@ -9533,7 +9533,9 @@
    "gap": "g_831C5N6B4R"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_BJN891N4SW"
+ ],
  "roles": [
   {
    "target": "r_5E8S49HPJZ",
@@ -9570,15 +9572,15 @@
      ]
     },
     {
-     "role": "adjunct",
-     "drugs": "prevention: non-DHP CCB",
-     "note": null,
+     "role": "1st",
+     "drugs": "prevention: oral verapamil or diltiazem",
+     "note": "if ablation isn’t an option",
      "sources": [
       {
-       "name": "Reentrant Paroxysmal Supraventricular Tachycardias",
-       "org": "MSD Manual Professional Edition",
-       "year": "2024",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/reentrant-paroxysmal-supraventricular-tachycardias-psvt"
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
       }
      ]
     }
@@ -9619,15 +9621,33 @@
    "target": "c_3ZB55BF17S",
    "roles": [
     {
-     "role": "adjunct",
-     "drugs": "prevention: digoxin",
-     "note": null,
+     "role": "alt",
+     "drugs": "prevention: oral digoxin",
+     "note": "may be reasonable; after verapamil/diltiazem",
      "sources": [
       {
-       "name": "Reentrant Paroxysmal Supraventricular Tachycardias",
-       "org": "MSD Manual Professional Edition",
-       "year": "2024",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/reentrant-paroxysmal-supraventricular-tachycardias-psvt"
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BJN891N4SW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "flecainide or propafenone",
+     "note": "Prev, ⍉struct/ischemic Hdz; after BB/diltiazem/verapamil",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
       }
      ]
     }

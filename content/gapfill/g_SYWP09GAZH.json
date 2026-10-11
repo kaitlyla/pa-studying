@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "AF w CHA2DS2-VASc ≥2 (men) or ≥3 (women): anticoagulation recommended to prevent CVA and systemic thromboembolism."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "DOACs are recommended over warfarin."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Anticoagulants (SND w AF)",
+  "relevantTo": "FM Cardiovascular › Sinus Node Dysfunction (SND) “Sick Sinus Syndrome”",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2023",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38033089/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-af",
+     "label": "ACC/AHA atrial fibrillation guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2023,
+     "method": "pubmed",
+     "term": "atrial[ti] AND fibrillation[ti] AND guideline[ti] AND management[ti] AND (Circulation[ta] OR \"J Am Coll Cardiol\"[ta])",
+     "title": "^(\\d{4}) (?:ACC/AHA|AHA/ACC)[^:]*Guideline for the (?:Diagnosis and )?Management of (?:Patients With )?Atrial Fibrillation"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_SYWP09GAZH"
+}

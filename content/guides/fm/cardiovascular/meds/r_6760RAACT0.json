@@ -1903,7 +1903,14 @@
    "gap": "g_BEDANJH9HA"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_N2HD8GP6CR",
+  "g_4D6ZE9TCV8",
+  "g_M7DA4SCX0V",
+  "g_X3610HGR7Q",
+  "g_6EXX6CM0YE",
+  "g_CFF3TQ4354"
+ ],
  "roles": [
   {
    "target": "c_FHBEK18ECJ",
@@ -1954,6 +1961,114 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/peripheral-artery-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N2HD8GP6CR",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "high-intensity statin",
+     "note": "all PAD",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4D6ZE9TCV8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "varenicline, bupropion and/or NRT",
+     "note": "w counseling",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_M7DA4SCX0V",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ACEi or ARB",
+     "note": "PAD + HTN (↓MACE)",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_X3610HGR7Q",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "SGLT2 inhibitor",
+     "note": "PAD + T2DM",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6EXX6CM0YE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "GLP-1 RA (liraglutide, semaglutide)",
+     "note": "PAD + T2DM",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_CFF3TQ4354",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "annual influenza vaccine",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
       }
      ]
     }

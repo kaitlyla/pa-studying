@@ -22680,7 +22680,11 @@
    "gap": "g_T24HKDERAZ"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_YRM32F5WMS",
+  "g_PG2BHG05C1",
+  "g_7MB0YZ89D0"
+ ],
  "roles": [
   {
    "target": "c_FHBEK18ECJ",
@@ -22870,6 +22874,60 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/medications-for-acute-coronary-syndromes"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YRM32F5WMS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "MRA (eplerenone, spironolactone)",
+     "note": "LVEF ≤40% + HF Sx and/or DM",
+     "sources": [
+      {
+       "name": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes (PubMed record, PMID 40014670)",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2025",
+       "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=40014670&rettype=abstract&retmode=text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PG2BHG05C1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "annual influenza vaccine",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes (PubMed record, PMID 40014670)",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2025",
+       "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=40014670&rettype=abstract&retmode=text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7MB0YZ89D0",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "varenicline, bupropion or combination NRT",
+     "note": "w behavioral support",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
       }
      ]
     }

@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "SL NTG or NTG spray: immediate short-term relief of angina.",
+   "source": 0,
+   "quote": "In patients with CCD, sublingual nitroglycerin or nitroglycerin spray is recommended for immediate short-term relief of angina or equivalent symptoms.",
+   "locator": "§4.3.6 Antianginal Therapy, rec 4",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Antianginal therapy w a BB, CCB or long-acting nitrate = recommended for angina relief.",
+   "source": 0,
+   "quote": "antianginal therapy with either a beta blocker, CCB, or long-acting nitrate is recommended for relief of angina",
+   "locator": "§4.3.6 Antianginal Therapy, rec 1",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "quote 'longacting' dropped real hyphen (CCD23 p51)",
+    "resolution": "fixed: 'long-acting'"
+   }
+  ]
+ },
+ "block": "g_BPAKPCV27S"
+}

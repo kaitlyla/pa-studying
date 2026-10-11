@@ -4,7 +4,8 @@
  "remove": [],
  "own": [],
  "gaps": [
-  "g_KQT5D1R30E"
+  "g_KQT5D1R30E",
+  "g_ETX1N4TKR1"
  ],
  "roles": [
   {
@@ -39,13 +40,49 @@
     {
      "role": "alt",
      "drugs": "lidocaine; IV isoproterenol or temporary pacing",
-     "note": null,
+     "note": "isoproterenol: acquired (brady/pause-dependent) TdP only; congenital LQTS: IV BB rather than isoproterenol",
      "sources": [
       {
        "name": "Torsades de Pointes Ventricular Tachycardia",
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/torsades-de-pointes-ventricular-tachycardia"
+      },
+      {
+       "name": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death: Executive Summary",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.10.053"
+      },
+      {
+       "name": "Long QT Interval Syndromes",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/arrhythmogenic-cardiac-disorders/long-qt-interval-syndromes"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ETX1N4TKR1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "nadolol or slow-release propranolol",
+     "note": "congenital LQTS, long-term",
+     "sources": [
+      {
+       "name": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death: Executive Summary",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2017",
+       "url": "https://doi.org/10.1016/j.jacc.2017.10.053"
+      },
+      {
+       "name": "Long QT Interval Syndromes",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/arrhythmogenic-cardiac-disorders/long-qt-interval-syndromes"
       }
      ]
     }

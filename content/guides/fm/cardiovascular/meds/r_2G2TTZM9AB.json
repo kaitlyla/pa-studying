@@ -3391,7 +3391,12 @@
    "gap": "g_FR6FDHKDMS"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_7FHNB5NYKX",
+  "g_J1PFQHH75P",
+  "g_GS1QC3229H",
+  "g_87WHZKF3MR"
+ ],
  "roles": [
   {
    "target": "c_1W9T6QFWR7",
@@ -3430,6 +3435,97 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/acute-limb-ischemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7FHNB5NYKX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rivaroxaban 2.5 mg BID + low-dose aspirin",
+     "note": "after revasc",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "anticoagulant",
+     "note": "cardioembolic source (eg, AF)",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      },
+      {
+       "name": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/38033089/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J1PFQHH75P",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antiplatelet",
+     "note": "after revasc",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GS1QC3229H",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "high-intensity statin",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2024",
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_87WHZKF3MR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "pain control",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Acute Arterial Occlusion (Archived)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK441851/"
       }
      ]
     }

@@ -9408,7 +9408,10 @@
    "gap": "g_E8KNR6H4XK"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_YZQPAHPV14",
+  "g_NBNEGP8X3Z"
+ ],
  "roles": [
   {
    "target": "r_5E8S49HPJZ",
@@ -9468,6 +9471,88 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_YZQPAHPV14",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "flecainide or propafenone",
+     "note": "Prev; ⍉struct/ischemic Hdz (reasonable)",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "dofetilide or sotalol",
+     "note": "Prev (may be reasonable)",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NBNEGP8X3Z",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV procainamide (or ibutilide)",
+     "note": "pre-excited AF / antidromic AVRT, stable; ⍉AV-nodal blockers",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      },
+      {
+       "name": "Wolff-Parkinson-White Syndrome (WPW Syndrome)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/wolff-parkinson-white-syndrome-wpw-syndrome"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_3ZB55BF17S",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "oral digoxin",
+     "note": "Prev, only w/o pre-excitation on resting ECG (may be reasonable)",
+     "sources": [
+      {
+       "name": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000311"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Antiarrhythmics",
+   "members": [
+    "g_NBNEGP8X3Z",
+    "g_YZQPAHPV14"
    ]
   }
  ]

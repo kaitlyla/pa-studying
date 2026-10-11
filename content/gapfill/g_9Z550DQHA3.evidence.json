@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "↑risk: pts ≤18 yr taking ASA (Reye syndrome risk).",
+   "source": 0,
+   "quote": "Patients ≤ 18 years taking aspirin (because of the risk of Reye syndrome)",
+   "locator": "Prevention: high-risk groups",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "LAIV CI in children/adolescents on ASA or other salicylates.",
+   "source": 1,
+   "quote": "For children and adolescents, concomitant use of aspirin or other salicylates",
+   "locator": "Contraindications: LAIV",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "'use inactivated vax' unsupported",
+    "resolution": "dropped"
+   }
+  ]
+ },
+ "block": "g_9Z550DQHA3"
+}

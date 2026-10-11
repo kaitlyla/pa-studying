@@ -4734,21 +4734,85 @@
    "gap": "g_Z4TWKHPN2X"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_V97NHT4WW7",
+  "g_VS05E2DNAA",
+  "g_TH4PD6MJZB"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "antihypertensives as appropriate; risk-factor control",
-     "note": null,
+     "drugs": "antihypertensives to <130/80",
+     "note": "BB or ACEi/ARB have the most evidence; none proven to slow AAA growth",
      "sources": [
       {
-       "name": "Abdominal Aortic Aneurysms",
-       "org": "MSD Manual Professional Edition",
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_V97NHT4WW7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "varenicline, bupropion and/or NRT",
+     "note": "w counseling",
+     "sources": [
+      {
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
+      },
+      {
+       "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
        "year": "2024",
-       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/abdominal-aortic-aneurysms-aaa"
+       "url": "https://doi.org/10.1161/CIR.0000000000001251"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VS05E2DNAA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "moderate- or high-intensity statin",
+     "note": "atherosclerotic aorta (may consider otherwise)",
+     "sources": [
+      {
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TH4PD6MJZB",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "low-dose aspirin",
+     "note": "concomitant atheroma/PAU (may be considered)",
+     "sources": [
+      {
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
       }
      ]
     }

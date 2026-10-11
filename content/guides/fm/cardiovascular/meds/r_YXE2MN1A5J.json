@@ -4455,7 +4455,13 @@
    "gap": "g_4JN76VZ1RG"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_HQHWRAVEEW",
+  "g_WGX376A2SM",
+  "g_TND5F13HKK",
+  "g_WSG175Q0JR",
+  "g_64DQYZA77D"
+ ],
  "roles": [
   {
    "target": "c_Y55RXRWBW9",
@@ -4492,6 +4498,179 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_HQHWRAVEEW",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "ezetimibe",
+     "note": "add-on to max statin if LDL-C above goal (<70 ASCVD; <55 very ↑risk)",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "ezetimibe",
+     "note": "statin-intolerant",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WGX376A2SM",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "PCSK9 mAb (evolocumab, alirocumab)",
+     "note": "add-on to max statin if LDL-C above goal",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "PCSK9 mAb",
+     "note": "statin-intolerant",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "inclisiran",
+     "note": "if a PCSK9 mAb can’t be tolerated or obtained (reasonable)",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "lerodalcibep",
+     "note": "LDL-C lowering",
+     "sources": [
+      {
+       "name": "LEROCHOL (lerodalcibep-liga) injection prescribing information (FDA label, DailyMed)",
+       "org": "LIB Therapeutics, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=422f8b04-6ce8-4e64-a0a9-0ccc9a4a5860"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TND5F13HKK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bempedoic acid",
+     "note": "add-on to a statin (reasonable)",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "bempedoic acid",
+     "note": "statin-intolerant (esp musc Sx)",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      },
+      {
+       "name": "Dyslipidemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/lipid-disorders/dyslipidemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WSG175Q0JR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "icosapent ethyl",
+     "note": "TG 150–499 on max statin w ASCVD or DM + RFs",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      },
+      {
+       "name": "VASCEPA (icosapent ethyl) capsules prescribing information (FDA label, DailyMed)",
+       "org": "Amarin Pharma Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9c1a2828-1583-4414-ab22-a60480e8e508"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_64DQYZA77D",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "colesevelam",
+     "note": "Preg or planning preg; caution TG >300, CI TG >500",
+     "sources": [
+      {
+       "name": "Dyslipidemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/lipid-disorders/dyslipidemia"
+      },
+      {
+       "name": "COLESEVELAM HYDROCHLORIDE (colesevelam) tablets prescribing information (FDA label, DailyMed)",
+       "org": "A-S Medication Solutions",
+       "year": "2023",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0127afae-8d8d-43f2-97f9-4f99f6947e81"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -4499,7 +4678,12 @@
    "title": "Lipid-lowering agents",
    "members": [
     "c_Y55RXRWBW9",
-    "c_N7HGJ8ZKGD"
+    "c_N7HGJ8ZKGD",
+    "g_HQHWRAVEEW",
+    "g_WGX376A2SM",
+    "g_TND5F13HKK",
+    "g_WSG175Q0JR",
+    "g_64DQYZA77D"
    ]
   }
  ]

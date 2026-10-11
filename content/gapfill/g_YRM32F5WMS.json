@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "ACS w LVEF ≤40% and HF Sx and/or DM: an MRA = indicated to ↓all-cause death and MACE."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "MRA (ACS, LVEF ≤40%)",
+  "relevantTo": "FM Cardiovascular › ACS",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes (PubMed record, PMID 40014670)",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2025",
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=40014670&rettype=abstract&retmode=text",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-acs",
+     "label": "ACC/AHA acute coronary syndromes guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2025,
+     "method": "pubmed",
+     "term": "guideline[ti] AND management[ti] AND acute[ti] AND coronary[ti] AND syndromes[ti]",
+     "title": "^(\\d{4}) (?:ACC/AHA|AHA/ACC)[A-Za-z/]* Guideline for the Management of Patients With Acute Coronary Syndromes"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_YRM32F5WMS"
+}

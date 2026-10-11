@@ -7957,7 +7957,10 @@
    "gap": "g_48WSM5TP61"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_K845SWQ61G",
+  "g_6MPC8F7NFE"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
@@ -7990,6 +7993,55 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_K845SWQ61G",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "pain control",
+     "note": "Prn; helps BP/HR control",
+     "sources": [
+      {
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6MPC8F7NFE",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "long-term oral antihypertensives (usually BB, NDHP CCB, ACEi)",
+     "note": "chronic, incl after repair",
+     "sources": [
+      {
+       "name": "Aortic Dissection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "BB or ARB (or both)",
+     "note": "Marfan syndrome",
+     "sources": [
+      {
+       "name": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2022",
+       "url": "https://doi.org/10.1161/CIR.0000000000001106"
       }
      ]
     }

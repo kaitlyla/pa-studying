@@ -4831,7 +4831,13 @@
    "gap": "g_8CCA1DKCRM"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_69V5WVD6EA",
+  "g_KEBFSJYTCH",
+  "g_BAYSZ98RVY",
+  "g_9Z550DQHA3",
+  "g_5NVY55EC0J"
+ ],
  "roles": [
   {
    "target": "c_5QVPZZ6A5E",
@@ -4884,6 +4890,25 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "prophylaxis: benzathine PCN G IM every 3–4 wk",
+     "note": "⍉carditis: 5 yr or to age 21; carditis w/o residual dz: 10 yr or to age 21; residual Hdz: 10 yr or to age 40",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      },
+      {
+       "name": "Rheumatic Fever",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever"
+      }
+     ]
     }
    ]
   },
@@ -4903,6 +4928,130 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "target": "g_69V5WVD6EA",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "cephalexin (or other cephalosporin)",
+     "note": "⍉anaphylactic PCN allergy, GAS eradication",
+     "sources": [
+      {
+       "name": "StatPearls: Acute Rheumatic Fever",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK594238/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KEBFSJYTCH",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "sulfadiazine",
+     "note": "prophylaxis",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      },
+      {
+       "name": "Rheumatic Fever",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BAYSZ98RVY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "naproxen",
+     "note": "arthritis, instead of ASA",
+     "sources": [
+      {
+       "name": "Rheumatic Fever",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever"
+      },
+      {
+       "name": "StatPearls: Acute Rheumatic Fever",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK594238/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9Z550DQHA3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "annual inactivated influenza vaccine (not LAIV)",
+     "note": "while on ASA",
+     "sources": [
+      {
+       "name": "Influenza",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/respiratory-viruses/influenza"
+      },
+      {
+       "name": "Influenza Vaccine",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/immunization/influenza-vaccine"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5NVY55EC0J",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "carbamazepine or valproic acid",
+     "note": "Sydenham chorea affecting ADLs",
+     "sources": [
+      {
+       "name": "StatPearls: Acute Rheumatic Fever",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK594238/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Beta-Lactams",
+   "members": [
+    "c_58MCDAZQHM",
+    "g_69V5WVD6EA"
+   ]
+  },
+  {
+   "title": "NSAIDs",
+   "members": [
+    "c_5QVPZZ6A5E",
+    "g_BAYSZ98RVY"
    ]
   }
  ]

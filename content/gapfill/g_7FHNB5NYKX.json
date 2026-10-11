@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "kind": "gap",
+ "doc": {
+  "type": "doc",
+  "content": [
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "After endovascular or surg revasc: ↓dose rivaroxaban 2.5 mg BID + low-dose ASA."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "ALI: testing for a CV cause of thromboembolism can be useful; AF → anticoagulate per AF risk (CHA2DS2-VASc ≥2 men / ≥3 women)."
+     }
+    ]
+   }
+  ]
+ },
+ "meta": {
+  "title": "Anticoagulants (after ALI)",
+  "relevantTo": "FM Cardiovascular › Acute Limb Ischemia (ALI)",
+  "written": "2026-10",
+  "differs": null,
+  "sources": [
+   {
+    "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2024",
+    "url": "https://doi.org/10.1161/CIR.0000000000001251",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-pad",
+     "label": "ACC/AHA lower extremity peripheral artery disease guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2024,
+     "method": "none"
+    }
+   },
+   {
+    "name": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+    "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+    "year": "2023",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38033089/",
+    "type": "guideline",
+    "track": {
+     "series": "acc-aha-af",
+     "label": "ACC/AHA atrial fibrillation guideline",
+     "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+     "edition": 2023,
+     "method": "pubmed",
+     "term": "atrial[ti] AND fibrillation[ti] AND guideline[ti] AND management[ti] AND (Circulation[ta] OR \"J Am Coll Cardiol\"[ta])",
+     "title": "^(\\d{4}) (?:ACC/AHA|AHA/ACC)[^:]*Guideline for the (?:Diagnosis and )?Management of (?:Patients With )?Atrial Fibrillation"
+    }
+   }
+  ],
+  "ownerEdits": []
+ },
+ "id": "g_7FHNB5NYKX"
+}

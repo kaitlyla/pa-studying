@@ -15187,7 +15187,6 @@
    "gap": "g_VZTNWKANBH"
   }
  ],
- "gaps": [],
  "roles": [
   {
    "target": "c_FAP5K30TWZ",
@@ -15202,6 +15201,68 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/valvular-disorders/aortic-regurgitation"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "ARB (or ACEi/ARNI)",
+     "note": "severe AR, Sx and/or LV dysfun (C2/D), prohibitive surg risk",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_0ZM9E73K4D",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ACE inhibitor (or ARB/ARNI)",
+     "note": "severe AR, Sx and/or LV dysfun (C2/D), prohibitive surg risk",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "treat HTN",
+     "note": "chronic AR (B/C), SBP >140",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_YRPKJQ8JCP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV nitroprusside (± dobutamine)",
+     "note": "acute severe AR, bridge to surg",
+     "sources": [
+      {
+       "name": "StatPearls: Aortic Regurgitation (Archived)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK555944/"
       }
      ]
     }

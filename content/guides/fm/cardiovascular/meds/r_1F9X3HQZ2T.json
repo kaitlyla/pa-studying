@@ -13552,7 +13552,10 @@
    "gap": "g_18X4GQQQ7S"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_WXN3AHA2K0",
+  "g_MM93VHD7S6"
+ ],
  "roles": [
   {
    "target": "c_0ZM9E73K4D",
@@ -13597,6 +13600,42 @@
      "role": "1st",
      "drugs": "HF therapy once stable: MRA",
      "note": null,
+     "sources": [
+      {
+       "name": "Myocarditis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/myocarditis-and-pericarditis/myocarditis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WXN3AHA2K0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "SGLT2 inhibitor",
+     "note": "HF therapy w ↓LVEF",
+     "sources": [
+      {
+       "name": "Myocarditis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/myocarditis-and-pericarditis/myocarditis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MM93VHD7S6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "immunosuppression (start w glucocorticoids)",
+     "note": "eosinophilic, giant-cell, chronic lymphocytic w/o viral cause, autoimmune, sarcoid, ICI myocarditis",
      "sources": [
       {
        "name": "Myocarditis",

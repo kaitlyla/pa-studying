@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Chronic HF w AF and CHA2DS2-VASc ≥2 (men) or ≥3 (women): chronic anticoagulation.",
+   "source": 0,
+   "quote": "Patients with chronic HF with permanent-persistent-paroxysmal AF and a CHA2DS2-VASc score of ≥2 (for men) and ≥3 (for women) should receive chronic anticoagulant therapy",
+   "locator": "§11.1 AF, rec 1",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "DOAC recommended over warfarin in eligible pts.",
+   "source": 0,
+   "quote": "DOAC is recommended over warfarin in eligible patients.",
+   "locator": "§11.1 AF, rec 2",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "Mech valve: warfarin; NOACs are ⍉recommended.",
+   "source": 1,
+   "quote": "In patients with mechanical heart valves with or without AF who require long-term anticoagulation with VKA to prevent valve thrombosis, NOACs are not recommended.",
+   "locator": "§2.4.2 Anticoagulation, rec 4",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "⍉evidence of benefit for anticoagulation in HF w/o a specific indication (eg, VTE, AF, prior thromboembolism, cardioembolic source).",
+   "source": 0,
+   "quote": "Therefore, there is no evidence of benefit for anticoagulation in HF patients without a specific indication (eg, VTE, AF, a previous thromboembolic event, or a cardioembolic source)",
+   "locator": "§7.3.9 Anticoagulation, supportive text",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 0,
+    "issue": "≥ dropped in CHA2DS2-VASc ≥2/≥3",
+    "resolution": "fixed in quote and claim"
+   }
+  ]
+ },
+ "block": "g_39E4B1KDPT"
+}

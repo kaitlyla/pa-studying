@@ -4736,7 +4736,11 @@
    "gap": "g_Q8JHYWB24S"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_N9B1RXK2WK",
+  "g_KHYN1WESE5",
+  "g_N3HBG2MWEZ"
+ ],
  "roles": [
   {
    "target": "c_5QVPZZ6A5E",
@@ -4798,13 +4802,99 @@
     {
      "role": "2nd",
      "drugs": "low-to-moderate-dose prednisone",
-     "note": "⍉inflammatory type ⍉responding to NSAIDs + colchicine",
+     "note": "⍉inflam type ⍉responding to NSAIDs + colchicine",
      "sources": [
       {
        "name": "Pericarditis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/myocarditis-and-pericarditis/pericarditis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "lowest effective prednisone dose",
+     "note": "Preg and breastfeed",
+     "sources": [
+      {
+       "name": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+       "org": "European Society of Cardiology (ESC)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7539677/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N9B1RXK2WK",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "IL-1 inhibitor (anakinra, rilonacept)",
+     "note": "Inflam phenotype (fever, ↑CRP, MRI inflam)",
+     "sources": [
+      {
+       "name": "Pericarditis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/myocarditis-and-pericarditis/pericarditis"
+      },
+      {
+       "name": "ARCALYST (rilonacept) injection prescribing information (FDA label, DailyMed)",
+       "org": "Kiniksa Pharmaceuticals (UK), Ltd.",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ad965f38-dd22-4607-a673-2fb92f3b527a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KHYN1WESE5",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "acetaminophen",
+     "note": "Preg ≥20 wk, when NSAIDs are CI",
+     "sources": [
+      {
+       "name": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+       "org": "European Society of Cardiology (ESC)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7539677/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N3HBG2MWEZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "rifampicin-based anti-TB regimen",
+     "note": "TB pericarditis",
+     "sources": [
+      {
+       "name": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+       "org": "European Society of Cardiology (ESC)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7539677/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "corticosteroids",
+     "note": "TB pericarditis w/o HIV only (may be reasonable)",
+     "sources": [
+      {
+       "name": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+       "org": "European Society of Cardiology (ESC)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7539677/"
       }
      ]
     }

@@ -14144,7 +14144,12 @@
    "gap": "g_77VJ6E7WWN"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_TPPSC1RVT6",
+  "g_EB15H9SVNE",
+  "g_EXM5FAQ2B9",
+  "g_Q5D1AEQ63Y"
+ ],
  "roles": [
   {
    "target": "c_6WH0EEY3ZA",
@@ -14226,6 +14231,90 @@
      "drugs": "loop diuretic",
      "note": "dyspnea",
      "sources": [
+      {
+       "name": "Mitral Regurgitation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/valvular-disorders/mitral-regurgitation"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TPPSC1RVT6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "beta-blocker (eg, carvedilol)",
+     "note": "2/2 MR w ↓LVEF (HF GDMT)",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      },
+      {
+       "name": "Mitral Regurgitation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/valvular-disorders/mitral-regurgitation"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EB15H9SVNE",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sacubitril/valsartan",
+     "note": "2/2 MR w ↓LVEF (HF GDMT)",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EXM5FAQ2B9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "SGLT2 inhibitor",
+     "note": "MR w Sxtomatic HFrEF",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q5D1AEQ63Y",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DOAC or warfarin",
+     "note": "AF; warfarin 3–6 mo after mitral bioprosthesis",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      },
       {
        "name": "Mitral Regurgitation",
        "org": "MSD Manual Professional Edition",

@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "Chronic severe 2/2 MR (C/D) + HFrEF: strd HF GDMT (ACEi, ARBs, BBs, aldosterone antagonists and/or sacubitril/valsartan; biventricular pacing as indicated).",
+   "source": 0,
+   "quote": "Patients with chronic severe secondary MR (Stages C and D) and HF with reduced LVEF should receive standard GDMT for HF, including ACE inhibitors, ARBs, beta blockers, aldosterone antagonists, and/or sacubitril/valsartan, and biventricular pacing as indicated.",
+   "locator": "§7.4.2 Secondary MR, rec 1",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "LV dilate or dysfun: incl a vasodilating BB (eg, carvedilol).",
+   "source": 1,
+   "quote": "if LV dilation or dysfunction is present, therapy using an angiotensin II receptor blocker, neprilysin inhibitor (eg, sacubitril, combined with the angiotensin II blocker valsartan), aldosterone antagonist, and/or vasodilating beta-blocker (eg, carvedilol) is indicated",
+   "locator": "Treatment",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-11",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "LV condition outside quote",
+    "resolution": "quote extended"
+   }
+  ]
+ },
+ "block": "g_TPPSC1RVT6"
+}

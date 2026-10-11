@@ -9590,7 +9590,11 @@
    "gap": "g_7AGY0E3Q4R"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_XFZAJ35Q80",
+  "g_QZ98VJXD4R",
+  "g_S7J6CA1RSZ"
+ ],
  "roles": [
   {
    "target": "c_4399D44A7Y",
@@ -9605,6 +9609,25 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV labetalol",
+     "note": "severe HTN in preg",
+     "sources": [
+      {
+       "name": "StatPearls: Preeclampsia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK570611/"
+      },
+      {
+       "name": "Preeclampsia and Eclampsia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/antenatal-complications/preeclampsia-and-eclampsia"
       }
      ]
     }
@@ -9625,6 +9648,19 @@
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
       }
      ]
+    },
+    {
+     "role": "1st",
+     "drugs": "PO immediate-release nifedipine",
+     "note": "severe HTN in preg; favored if ⍉IV access",
+     "sources": [
+      {
+       "name": "StatPearls: Preeclampsia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK570611/"
+      }
+     ]
     }
    ]
   },
@@ -9634,7 +9670,7 @@
     {
      "role": "1st",
      "drugs": "IV fenoldopam or nitroprusside",
-     "note": "hypertensive emergency, titrated in ICU",
+     "note": "hypertensive emergency, titrated in ICU; clevidipine may be preferred over nitroprusside",
      "sources": [
       {
        "name": "Hypertensive Emergencies",
@@ -9654,6 +9690,25 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV hydralazine",
+     "note": "severe HTN in preg",
+     "sources": [
+      {
+       "name": "StatPearls: Preeclampsia",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK570611/"
+      },
+      {
+       "name": "Preeclampsia and Eclampsia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/antenatal-complications/preeclampsia-and-eclampsia"
       }
      ]
     }
@@ -9684,6 +9739,66 @@
      "role": "adjunct",
      "drugs": "IV enalaprilat",
      "note": "acute LV failure",
+     "sources": [
+      {
+       "name": "Hypertensive Emergencies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XFZAJ35Q80",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "magnesium sulfate",
+     "note": "eclampsia; preeclampsia w severe features",
+     "sources": [
+      {
+       "name": "Preeclampsia and Eclampsia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gynecology-and-obstetrics/antenatal-complications/preeclampsia-and-eclampsia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QZ98VJXD4R",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "phentolamine",
+     "note": "hypertensive crisis from pheochromocytoma",
+     "sources": [
+      {
+       "name": "Hypertensive Emergencies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+      },
+      {
+       "name": "Pheochromocytoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/pheochromocytoma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_S7J6CA1RSZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral antihypertensives (eg, 2-drug combination)",
+     "note": "ASx severe HTN; outpt f/u; ⍉IV",
      "sources": [
       {
        "name": "Hypertensive Emergencies",

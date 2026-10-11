@@ -603,7 +603,11 @@
    "gap": "g_PZDTYWKF24"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_QR5MS4F6XY",
+  "g_GJVQR1SP2B",
+  "g_H47YJPBZD1"
+ ],
  "roles": [
   {
    "target": "c_Y8XCXZT189",
@@ -618,6 +622,99 @@
        "org": "MSD Manual Professional Edition",
        "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/specific-cardiac-arrhythmias/atrioventricular-block"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "atropine",
+     "note": "2nd/3rd-degree AV block @ the AV-node level w Sx; unlikely to help infranodal block",
+     "sources": [
+      {
+       "name": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2018",
+       "url": "https://doi.org/10.1161/CIR.0000000000000628"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QR5MS4F6XY",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "isoproterenol, dopamine, dobutamine or epinephrine",
+     "note": "may be considered",
+     "sources": [
+      {
+       "name": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2018",
+       "url": "https://doi.org/10.1161/CIR.0000000000000628"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GJVQR1SP2B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone 2 g IV daily × 14–21 days",
+     "note": "Lyme carditis",
+     "sources": [
+      {
+       "name": "Guidelines for Antibiotic Treatment of Lyme Disease in Adults (table)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/multimedia/table/guidelines-for-antibiotic-treatment-of-lyme-disease-in-adults"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "oral doxycycline or amoxicillin",
+     "note": "mild Lyme carditis",
+     "sources": [
+      {
+       "name": "Guidelines for Antibiotic Treatment of Lyme Disease in Adults (table)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/multimedia/table/guidelines-for-antibiotic-treatment-of-lyme-disease-in-adults"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_H47YJPBZD1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IV calcium; glucagon; high-dose insulin",
+     "note": "CCB or BB OD",
+     "sources": [
+      {
+       "name": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2018",
+       "url": "https://doi.org/10.1161/CIR.0000000000000628"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "digoxin Fab antibody fragment",
+     "note": "digoxin toxicity",
+     "sources": [
+      {
+       "name": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2018",
+       "url": "https://doi.org/10.1161/CIR.0000000000000628"
       }
      ]
     }

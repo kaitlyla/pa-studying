@@ -15798,6 +15798,17 @@
    "gap": "g_TZQ6SEZ06Z"
   }
  ],
+ "gaps": [
+  "g_BPAKPCV27S",
+  "g_SF9B8X2MGE",
+  "g_MH32YNC06A",
+  "g_8Y5282XRHC",
+  "g_YHRBEAH4D0",
+  "g_3SJWSW8NSG",
+  "g_Q99BKXYHCK",
+  "g_KZEX9H9AHK",
+  "g_2FP4E0JYA2"
+ ],
  "roles": [
   {
    "target": "c_FHBEK18ECJ",
@@ -15930,6 +15941,213 @@
      ]
     }
    ]
+  },
+  {
+   "target": "g_BPAKPCV27S",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sublingual nitroglycerin or NTG spray",
+     "note": "acute angina relief",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "long-acting nitrate",
+     "note": "antianginal (or a BB or CCB)",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SF9B8X2MGE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "SGLT2 inhibitor",
+     "note": "CCD + T2DM",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MH32YNC06A",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "GLP-1 receptor agonist",
+     "note": "CCD + T2DM",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "semaglutide (Wegovy)",
+     "note": "established CVD + obesity or overweight",
+     "sources": [
+      {
+       "name": "WEGOVY (semaglutide) injection prescribing information (FDA label, DailyMed)",
+       "org": "A-S Medication Solutions",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f5e548d0-cc79-4c34-a3f5-e20a5b8b6564"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8Y5282XRHC",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "varenicline, bupropion or combination NRT",
+     "note": "w behavioral support",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YHRBEAH4D0",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "annual influenza vaccine",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3SJWSW8NSG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ezetimibe",
+     "note": "add-on to max statin if LDL-C above goal",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q99BKXYHCK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "PCSK9 mAb (evolocumab, alirocumab)",
+     "note": "add-on to max statin if LDL-C above goal",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "inclisiran",
+     "note": "if a PCSK9 mAb can’t be tolerated or obtained",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_KZEX9H9AHK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bempedoic acid",
+     "note": "add-on to a statin (reasonable)",
+     "sources": [
+      {
+       "name": "2026 ACC/AHA/AACVPR/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Dyslipidemia",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2026",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/41824590/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2FP4E0JYA2",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "low-dose colchicine (Lodoco)",
+     "note": "may be considered; ↓recurr ASCVD events",
+     "sources": [
+      {
+       "name": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease",
+       "org": "American Heart Association / American College of Cardiology (AHA/ACC)",
+       "year": "2023",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/37471501/"
+      },
+      {
+       "name": "LODOCO (colchicine) tablets prescribing information (FDA label, DailyMed)",
+       "org": "AGEPHA Pharma USA, LLC",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ff06d68f-d65f-d097-e053-6294a90a7e5f"
+      }
+     ]
+    }
+   ]
   }
  ],
  "classes": [
@@ -15938,6 +16156,15 @@
    "members": [
     "c_FHBEK18ECJ",
     "c_GC3ARVE1M9"
+   ]
+  },
+  {
+   "title": "Lipid-lowering agents",
+   "members": [
+    "c_Y55RXRWBW9",
+    "g_3SJWSW8NSG",
+    "g_Q99BKXYHCK",
+    "g_KZEX9H9AHK"
    ]
   }
  ]

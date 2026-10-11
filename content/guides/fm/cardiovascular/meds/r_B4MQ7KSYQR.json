@@ -8237,7 +8237,9 @@
   }
  ],
  "gaps": [
-  "g_TBQ79CBGMN"
+  "g_TBQ79CBGMN",
+  "g_219HHMS1PX",
+  "g_B5BTTMBJWE"
  ],
  "roles": [
   {
@@ -8272,13 +8274,19 @@
     {
      "role": "1st",
      "drugs": "enterococci: vancomycin + gentamicin",
-     "note": null,
+     "note": "only if unable to tolerate a β-lactam, or PCN-resistant strain",
      "sources": [
       {
        "name": "Infective Endocarditis",
        "org": "MSD Manual Professional Edition",
-       "year": "2025",
+       "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/endocarditis/infective-endocarditis"
+      },
+      {
+       "name": "Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications: A Scientific Statement for Healthcare Professionals From the American Heart Association",
+       "org": "American Heart Association (AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000296"
       }
      ]
     },
@@ -8373,13 +8381,19 @@
     {
      "role": "1st",
      "drugs": "enterococci: gentamicin + vancomycin",
-     "note": null,
+     "note": "only if unable to tolerate a β-lactam, or PCN-resistant strain",
      "sources": [
       {
        "name": "Infective Endocarditis",
        "org": "MSD Manual Professional Edition",
-       "year": "2025",
+       "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/endocarditis/infective-endocarditis"
+      },
+      {
+       "name": "Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications: A Scientific Statement for Healthcare Professionals From the American Heart Association",
+       "org": "American Heart Association (AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000296"
       }
      ]
     },
@@ -8472,6 +8486,61 @@
        "name": "Infective Endocarditis",
        "org": "MSD Manual Professional Edition",
        "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/endocarditis/infective-endocarditis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_219HHMS1PX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "amoxicillin 2 g PO 30–60 min before dental procedure",
+     "note": "highest-risk pts only",
+     "sources": [
+      {
+       "name": "Prevention of Viridans Group Streptococcal Infective Endocarditis: A Scientific Statement From the American Heart Association",
+       "org": "American Heart Association (AHA)",
+       "year": "2021",
+       "url": "https://doi.org/10.1161/CIR.0000000000000969"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "cephalexin, azithromycin/clarithromycin or doxycycline",
+     "note": "PCN allergy",
+     "sources": [
+      {
+       "name": "Prevention of Viridans Group Streptococcal Infective Endocarditis: A Scientific Statement From the American Heart Association",
+       "org": "American Heart Association (AHA)",
+       "year": "2021",
+       "url": "https://doi.org/10.1161/CIR.0000000000000969"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_B5BTTMBJWE",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "linezolid",
+     "note": "VRE / resistant enterococcus",
+     "sources": [
+      {
+       "name": "Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications: A Scientific Statement for Healthcare Professionals From the American Heart Association",
+       "org": "American Heart Association (AHA)",
+       "year": "2015",
+       "url": "https://doi.org/10.1161/CIR.0000000000000296"
+      },
+      {
+       "name": "Infective Endocarditis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/endocarditis/infective-endocarditis"
       }
      ]

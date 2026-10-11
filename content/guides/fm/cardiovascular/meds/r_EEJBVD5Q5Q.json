@@ -3611,7 +3611,12 @@
    "gap": "g_HBZERHB8HN"
   }
  ],
- "gaps": [],
+ "gaps": [
+  "g_BG3TQ2YVGC",
+  "g_BPPZ147281",
+  "g_TSK6CTBJRV",
+  "g_8GASKEX7C3"
+ ],
  "roles": [
   {
    "target": "c_1W44S79ASK",
@@ -3626,6 +3631,90 @@
        "org": "MSD Manual Professional Edition",
        "year": "2025",
        "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/thromboangiitis-obliterans"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BG3TQ2YVGC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "bupropion or varenicline",
+     "note": "⍉NRT",
+     "sources": [
+      {
+       "name": "Thromboangiitis Obliterans (Buerger's Disease) (Eplasty 2015;15:ic22)",
+       "org": "Eplasty (Sinclair NR, Laub DR)",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4404841/"
+      },
+      {
+       "name": "StatPearls: Buerger Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430858/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BPPZ147281",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "cilostazol",
+     "note": "limited data",
+     "sources": [
+      {
+       "name": "Thromboangiitis Obliterans",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-artery-disorders/thromboangiitis-obliterans"
+      },
+      {
+       "name": "StatPearls: Buerger Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430858/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TSK6CTBJRV",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NSAIDs or narcotic analgesia",
+     "note": "ischemic pain",
+     "sources": [
+      {
+       "name": "StatPearls: Buerger Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430858/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8GASKEX7C3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antibiotics",
+     "note": "mild dist extremity ulcers",
+     "sources": [
+      {
+       "name": "StatPearls: Buerger Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430858/"
       }
      ]
     }

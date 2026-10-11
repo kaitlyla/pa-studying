@@ -1,0 +1,67 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_DF4CBDVPHA",
+  "g_1PX5C3PHZT",
+  "g_JRPQ9AQ1YJ"
+ ],
+ "roles": [
+  {
+   "target": "g_DF4CBDVPHA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antihypertensives (start low, titrate slowly)",
+     "note": "HTN w AS",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1PX5C3PHZT",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "aspirin 75–100 mg daily",
+     "note": "after TAVI",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JRPQ9AQ1YJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "warfarin (INR 2.5) × 3–6 mo",
+     "note": "after surg bioprosthetic valve, ↓bleed risk",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
