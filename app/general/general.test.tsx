@@ -1,4 +1,6 @@
-import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import type { DocJson } from "../../lib/derive/published.ts";
+import { DATA_BASE } from "../data/load.ts";
 import {
   asOwner,
   B,
@@ -19,6 +21,16 @@ import {
   type DataServer,
   type Mounted,
 } from "../testing.tsx";
+
+// pdf.js cannot open a PDF under Vitest (Node takes its fake-worker path and jsdom has no canvas), so
+// inline PDFs render as a stub that exposes the URL they were handed. Real rendering is covered in e2e.
+vi.mock("../files/pdf.tsx", async (importOriginal) => {
+  const { createElement } = await import("react");
+  return {
+    ...(await importOriginal<typeof import("../files/pdf.tsx")>()),
+    PdfPages: ({ url }: { url: string }) => createElement("div", { className: "pdf-stub", "data-pdf": url }),
+  };
+});
 
 const LABS = "g/fm/general/labs.json";
 const REF = "ref/labs.json";
@@ -758,6 +770,8 @@ describe("Other tab", () => {
   describe("a section with an outline", () => {
     // Physical exam's outline: a top heading with her Word doc whole and a sub heading holding one
     // table column, then a top heading with a PDF and a gap block (two named items: sub-entries).
+    let outline: Map<string, unknown>;
+
     beforeEach(async () => {
       const fx = await publishFixture((content) => {
         const pe = content.other.sections.find((s) => s.id === "pe");
@@ -776,11 +790,18 @@ describe("Other tab", () => {
           ],
         });
       });
+      outline = fx.published;
       server.restore();
-      server = serveData(fx.published);
+      server = serveData(outline);
     });
 
     it("shows every part on the section page: her doc whole with an Open file link, headings, the PDF and the gap block", async () => {
+      // A view distinct from the original, so the URL the PDF viewer gets shows which one was used.
+      const acls = outline.get(`docs/${D(1)}.json`) as DocJson;
+      const view = `files/${D(1)}/ACLS algorithms (view).pdf`;
+      expect(acls.original).not.toBe(view);
+      server.restore();
+      server = serveData(new Map(outline).set(`docs/${D(1)}.json`, { ...acls, view }));
       const a = await renderApp("#/other/pe");
       app = a;
       const page = await until(() => (a.container.querySelector(`.other-page .odoc[data-anchor="${D(5)}"] .notes`) ? a.container.querySelector(".other-page") : null), "pe outline");
@@ -793,7 +814,11 @@ describe("Other tab", () => {
       expect(thyroid?.querySelector("h3")?.textContent).toBe("Thyroid notes");
       expect(thyroid?.textContent).toContain("TSH first");
       expect(byText(thyroid ?? page, "a", "Open file")?.getAttribute("href")).toBe(`#/file/${D(5)}?from=${encodeURIComponent("#/other/pe")}`);
-      expect(page.querySelector(`.odoc[data-anchor="${D(1)}"] h3`)?.textContent).toBe("ACLS algorithms");
+      const pdf = page.querySelector(`.odoc[data-anchor="${D(1)}"]`);
+      expect(pdf?.querySelector("h3")?.textContent).toBe("ACLS algorithms");
+      const viewer = await until(() => pdf?.querySelector(".pdf-stub"), "the PDF viewer");
+      expect(viewer.getAttribute("data-pdf")).toBe(`${DATA_BASE}${view}`);
+      expect(page.querySelector('[role="alert"]')).toBeNull();
       expect(page.querySelector(`section.gap[data-anchor="${G(1)}"]`)).not.toBeNull();
       // Every listed file and gap is in the outline: nothing is left over as chips.
       expect(page.querySelector(".fchip")).toBeNull();
