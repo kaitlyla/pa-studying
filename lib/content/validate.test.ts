@@ -260,6 +260,30 @@ describe("her own meds panel for a topic", () => {
     });
   });
 
+  describe("a panel shown by scenario (scenarios)", () => {
+    const G1 = id("g", 1);
+    const G2 = id("g", 2);
+    const src = { name: "Cellulitis", org: "MSD Manual Professional", year: "2026", url: null };
+    const role = (scenario?: string) => ({ role: "1st", drugs: null, note: null, sources: [src], ...(scenario === undefined ? {} : { scenario }) });
+    const scn = (title: string, gaps: string[] = []) => ({ title, gaps });
+
+    it("accepts scenarios with header gap blocks listed in gaps, and roles naming them", () => {
+      expect(verdict(path, meds({ gaps: [G1, G2], scenarios: [scn("Mild", [G1]), scn("Severe")], roles: [{ target: C1, roles: [role("Mild"), role("Severe")] }, { target: G2, roles: [role()] }] }))).toBe("ok");
+    });
+
+    it("refuses no scenarios, classes beside them, a repeated title, an unlisted, repeated or labeled header gap block, and a role naming no scenario", () => {
+      const roles = [{ target: C1, roles: [role()] }];
+      expect(verdict(path, meds({ roles, scenarios: [] }))).toMatch(/\.scenarios.*at least one scenario/);
+      expect(verdict(path, meds({ roles, scenarios: [scn("A")], classes: [{ title: "X", members: [C1, C2] }] }))).toMatch(/\.classes.*no drug classes on a panel shown by scenario/);
+      expect(verdict(path, meds({ roles, scenarios: [scn("A"), scn("A")] }))).toMatch(/\.scenarios\[\]\.title/);
+      expect(verdict(path, meds({ roles, scenarios: [scn("A", [G1])] }))).toMatch(/\.scenarios\[0\]\.gaps\[0\].*a gap block listed in gaps/);
+      expect(verdict(path, meds({ roles, gaps: [G1], scenarios: [scn("A", [G1]), scn("B", [G1])] }))).toMatch(/\.scenarios\[\]\.gaps/);
+      expect(verdict(path, meds({ gaps: [G1], scenarios: [scn("A", [G1])], roles: [{ target: G1, roles: [role("A")] }] }))).toMatch(/\.scenarios\[0\]\.gaps\[0\].*with no roles/);
+      expect(verdict(path, meds({ scenarios: [scn("A")], roles: [{ target: C1, roles: [role("B")] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.scenario.*one of the file's scenarios/);
+      expect(verdict(path, meds({ roles: [{ target: C1, roles: [role("B")] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.scenario/);
+    });
+  });
+
   describe("sourced cards (gaps) and role labels (roles)", () => {
     const G1 = id("g", 1);
     const G2 = id("g", 2);

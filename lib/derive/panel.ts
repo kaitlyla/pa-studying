@@ -110,7 +110,13 @@ export function publishedEdit(
     for (const t of c.members) if (!shows(t)) missing(t);
     if (members.length > 1) classes.push({ title: c.title, members });
   }
-  return { remove: [...file.remove], add, own, ownGaps, gaps, roles, classes };
+  const edit: PubMedsEdit = { remove: [...file.remove], add, own, ownGaps, gaps, roles, classes };
+  if (file.scenarios === undefined) return edit;
+  const scenarios = file.scenarios.map((s) => ({
+    title: s.title,
+    gaps: s.gaps.flatMap((id) => (file.remove.includes(id) ? [] : gaps.filter((g) => g.id === id))),
+  }));
+  return { ...edit, scenarios };
 }
 
 /** One entry of a meds panel: a card (as `panelEntries` gives it) or a sourced card she placed (a gap block), with its role labels. */
@@ -191,6 +197,52 @@ export function panelItems(topic: Pick<PubTopic, "meds" | "medsEdit">): PanelIte
   const cards = panelEntries(topic).map((entry): PanelEntryItem => ({ kind: "card", entry, roles: roles[entry.med.target] ?? [] }));
   const gaps = (e?.gaps ?? []).filter((g) => !e?.remove.includes(g.id)).map((gap): PanelEntryItem => ({ kind: "gap", gap, roles: roles[gap.id] ?? [] }));
   return withClasses([...cards, ...gaps], itemTarget, (x) => x.roles, e?.classes ?? []).map((x): PanelItem => ("kind" in x ? x : { kind: "class", ...x }));
+}
+
+/**
+ * One entry under a scenario of a panel shown by scenario: the entry, its roles for that scenario, and
+ * whether this is the first scenario it shows under (search lands there).
+ */
+export interface ScenarioEntry {
+  item: PanelEntryItem;
+  roles: MedsRoleTag[];
+  first: boolean;
+}
+
+/** One scenario of a panel shown by scenario: its title, the gap blocks under its header, and its entries ordered by role. */
+export interface ScenarioGroup {
+  title: string;
+  gaps: PubGap[];
+  entries: ScenarioEntry[];
+}
+
+/**
+ * A panel shown by scenario (her file's `scenarios`), or null for a panel shown by drug class. Each
+ * scenario lists every entry with a role for it, ordered by role then panel order; an entry with roles
+ * for several scenarios shows under each. `rest`: the entries with no scenario role, after the scenarios,
+ * ordered by role. A gap block shown under a scenario's header is no entry.
+ */
+export function scenarioGroups(topic: Pick<PubTopic, "meds" | "medsEdit">): { groups: ScenarioGroup[]; rest: PanelEntryItem[] } | null {
+  const scenarios = topic.medsEdit?.scenarios;
+  if (scenarios === undefined) return null;
+  const intro = new Set(scenarios.flatMap((s) => s.gaps.map((g) => g.id)));
+  const items = panelItems(topic).flatMap((x) => (x.kind === "class" ? x.members : [x])).filter((x) => !(x.kind === "gap" && intro.has(x.gap.id)));
+  const seen = new Set<string>();
+  const groups = scenarios.map((s): ScenarioGroup => {
+    const under = items.flatMap((item) => {
+      const roles = item.roles.filter((r) => r.scenario === s.title);
+      return roles.length > 0 ? [{ item, roles }] : [];
+    });
+    const entries = byRole(under, (x) => x.roles).map(({ item, roles }) => {
+      const t = itemTarget(item);
+      const first = !seen.has(t);
+      seen.add(t);
+      return { item, roles, first };
+    });
+    return { title: s.title, gaps: s.gaps, entries };
+  });
+  const rest = byRole(items.filter((x) => !x.roles.some((r) => r.scenario !== undefined)), (x) => x.roles);
+  return { groups, rest };
 }
 
 /**

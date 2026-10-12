@@ -267,8 +267,10 @@ export interface CardsFile {
  * of this panel only (drugs her files have no card for), in her order. `roles`: what each entry's drugs
  * are for this condition (1st-line, 2nd-line, alternative, adjunct), each with its sources; the panel
  * shows them on the entry and orders entries by them. `classes`: entries of one drug class shown under one
- * header, each entry (a member) keeping its own title inside it. At least one list is non-empty: with
- * none, there is no file.
+ * header, each entry (a member) keeping its own title inside it. `scenarios`: when present, the panel
+ * shows by clinical scenario instead of by drug class (and has no `classes`): each scenario under its
+ * own header, in this order, with the entries whose roles name it (MedsRoleTag `scenario`). At least
+ * one list is non-empty: with none, there is no file.
  */
 export interface MedsFile {
   v: 1;
@@ -278,6 +280,17 @@ export interface MedsFile {
   gaps?: string[];
   roles?: { target: string; roles: MedsRoleTag[] }[];
   classes?: MedsClassGroup[];
+  scenarios?: MedsScenario[];
+}
+
+/**
+ * One clinical scenario of a meds panel shown by scenario: its header `title` (unique in the file), and
+ * the sourced gap blocks shown under the header before its entries (`gaps`: ids listed in the file's
+ * `gaps`, each under one scenario at most, e.g. how long that scenario is treated).
+ */
+export interface MedsScenario {
+  title: string;
+  gaps: string[];
 }
 
 /**
@@ -295,13 +308,15 @@ export type MedsRole = (typeof MEDS_ROLES)[number];
 
 /**
  * One role of a meds panel entry: the role, the entry's drugs it applies to (null: the whole entry), a
- * short qualifier (e.g. "secondary prevention only"), and the sources that give it.
+ * short qualifier (e.g. "secondary prevention only"), and the sources that give it. `scenario`: on a
+ * panel shown by scenario (MedsFile `scenarios`), the title of the scenario the role is for.
  */
 export interface MedsRoleTag {
   role: MedsRole;
   drugs: string | null;
   note: string | null;
   sources: { name: string; org: string; year: string; url: string | null }[];
+  scenario?: string;
 }
 
 /**

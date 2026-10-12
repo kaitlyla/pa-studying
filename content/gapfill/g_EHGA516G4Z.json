@@ -26,6 +26,76 @@
     "content": [
      {
       "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "MOA:"
+     },
+     {
+      "type": "text",
+      "text": " oxazolidinone; inhibits protein synth by binding the 50S ribosomal subunit."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Spectrum:"
+     },
+     {
+      "type": "text",
+      "text": " streptococci, enterococci (incl VRE), staphylococci (incl MRSA), mycobacteria, some anaerobes."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
       "text": "Myelosuppression (anemia, leukopenia, pancytopenia, thrombocytopenia), reverses on stopping. Periph and optic neuropathy, mainly beyond 28 days. Hypoglycemia in diabetics on insulin or oral agents."
      }
     ]
@@ -137,7 +207,7 @@
   ]
  },
  "meta": {
-  "title": "Linezolid -oxazolidinone: EOR additions",
+  "title": "Linezolid",
   "relevantTo": "FM Dermatology › Cellulitis",
   "written": "2026-10",
   "differs": null,
@@ -147,6 +217,22 @@
     "org": "Pharmacia & Upjohn (Pfizer)",
     "year": "2026",
     "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6e70e63b-bfd5-478d-a8ee-8ba22c9efabd",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "MSD Manual Professional Edition: Linezolid and Tedizolid",
+    "org": "Merck & Co., Inc. (MSD Manuals)",
+    "year": "2024",
+    "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/linezolid-and-tedizolid",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "MSD Manual Professional Edition: Lincosamides, Oxazolidinones, and Streptogramins",
+    "org": "Merck & Co., Inc. (MSD Manuals)",
+    "year": "2024",
+    "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/lincosamides-oxazolidinones-and-streptogramins",
     "type": "reference",
     "track": null
    }

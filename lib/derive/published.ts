@@ -280,6 +280,17 @@ export interface PubMedsEdit {
   roles: Record<string, MedsRoleTag[]>;
   /** Her drug classes (MedsFile `classes`), in her order; members are entry targets, each in one class at most. */
   classes: MedsClassGroup[];
+  /**
+   * Present only on a panel shown by scenario (MedsFile `scenarios`): each scenario's title and the gap
+   * blocks shown under its header, those she took off left out, in her order.
+   */
+  scenarios?: PubMedsScenario[];
+}
+
+/** One scenario of a meds panel shown by scenario, as published. */
+export interface PubMedsScenario {
+  title: string;
+  gaps: PubGap[];
 }
 
 export interface PubTopic {

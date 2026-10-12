@@ -52,7 +52,68 @@
     "content": [
      {
       "type": "text",
-      "text": "N/V, rash most often; more SE in AIDS (fever, rash, neutropenia). Serious: SJS/TEN, DRESS, hepatic necrosis, agranulocytosis/aplastic anemia: stop @ the first rash. Hyperkalemia (↑dose TMP for PCP, renal insuff, K-raising drugs). Folate deficiency (macrocytic anemia). Benign creatinine rise (blocks tubular secretion). Hemolysis in G6PD deficiency."
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Spectrum:"
+     },
+     {
+      "type": "text",
+      "text": " broad gram (+), incl some MRSA; broad gram (-). Inactive vs anaerobes and P. aeruginosa."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Drug of choice for oral tx of uncomplicated CA-MRSA infections. Not clinically effective for group A strep pharyngitis."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "N/V, rash most often; more SE in AIDS (fever, rash, neutropenia). Serious: SJS/TEN, DRESS, hepatic necrosis, serious blood disorders: stop @ the first rash. Hyperkalemia (↑dose TMP for PCP, renal insuff, K-raising drugs). Folate deficiency (macrocytic anemia). Benign creatinine rise (blocks tubular secretion). Hemolysis in G6PD deficiency."
      }
     ]
    },
@@ -163,7 +224,7 @@
   ]
  },
  "meta": {
-  "title": "Trimethoprim/Sulfamethoxazole: EOR additions",
+  "title": "TMP-SMX",
   "relevantTo": "FM Dermatology › Cellulitis",
   "written": "2026-10",
   "differs": null,

@@ -15,7 +15,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -477,7 +477,8 @@ export const validateCards: Validator = (v, ctx) => {
  * Her own meds panel for a topic: each target at most once in each list, never both added and removed,
  * a gap block taken off only if it is listed, an edited entry's gap block in no other list, each entry's
  * roles once, each class two or more entries not taken off and each entry in one class at most, and
- * something in it.
+ * something in it. Shown by scenario: no classes, each scenario titled once, its gap blocks listed in
+ * gaps, under one scenario at most and with no roles, and each role's scenario one of the file's.
  */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
@@ -498,14 +499,30 @@ export const validateMeds: Validator = (v, ctx) => {
         drugs: nullable(nonEmpty),
         note: nullable(nonEmpty),
         sources: arr(shapeOf<MedsRoleTag["sources"][number]>({ name: nonEmpty, org: str, year: str, url: nullable(nonEmpty) }, {})),
-      }, {})),
+      }, { scenario: nonEmpty })),
     }, {})),
     classes: arr(shapeOf<MedsClassGroup>({ title: nonEmpty, members: uniqueArr(id("c", "r", "p", "g")) }, {})),
+    scenarios: arr(shapeOf<MedsScenario>({ title: nonEmpty, gaps: uniqueArr(id("g")) }, {})),
   })(v, "", ctx);
   const m = v as MedsFile;
   const gaps = m.gaps ?? [];
   const roles = m.roles ?? [];
   const classes = m.classes ?? [];
+  const scenarios = m.scenarios;
+  if (scenarios !== undefined) {
+    if (scenarios.length === 0) bad(ctx, ".scenarios", "at least one scenario (leave it out for a panel by drug class)", scenarios);
+    if (classes.length > 0) bad(ctx, ".classes", "no drug classes on a panel shown by scenario", classes);
+    uniqueArr(str)(scenarios.map((s) => s.title), ".scenarios[].title", ctx);
+    uniqueArr(str)(scenarios.flatMap((s) => s.gaps), ".scenarios[].gaps", ctx);
+    scenarios.forEach((s, i) => s.gaps.forEach((g, j) => {
+      if (!gaps.includes(g)) bad(ctx, `.scenarios[${i}].gaps[${j}]`, "a gap block listed in gaps", g);
+      if (roles.some((r) => r.target === g)) bad(ctx, `.scenarios[${i}].gaps[${j}]`, "a gap block with no roles (it shows under the scenario's header, not as an entry)", g);
+    }));
+  }
+  const titles = new Set((scenarios ?? []).map((s) => s.title));
+  roles.forEach((r, i) => r.roles.forEach((x, j) => {
+    if (x.scenario !== undefined && !titles.has(x.scenario)) bad(ctx, `.roles[${i}].roles[${j}].scenario`, "the title of one of the file's scenarios", x.scenario);
+  }));
   uniqueArr(str)(classes.flatMap((c) => c.members), ".classes[].members", ctx);
   classes.forEach((c, i) => {
     if (c.members.length < 2) bad(ctx, `.classes[${i}].members`, "at least two entries", c.members);

@@ -738,6 +738,8 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
   // left with one entry is no class.
   const stays = (t: string): boolean => (isId("g", t) ? gaps.includes(t) && !choice.remove.includes(t) : shown.has(t));
   const classes = (part.file?.classes ?? []).map((c) => ({ title: c.title, members: c.members.filter(stays) })).filter((c) => c.members.length > 1);
+  // A panel shown by scenario stays so, its scenarios as stored: the editor changes none.
+  const scenarios = part.file?.scenarios;
   if (add.length === 0 && choice.remove.length === 0 && own.size === 0 && gaps.length === 0 && roles.length === 0 && classes.length === 0) return null;
   return {
     v: 1, add, remove: [...choice.remove],
@@ -747,6 +749,7 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
     }),
     ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles: roles.map((r) => ({ ...r })) } : {}),
     ...(classes.length > 0 ? { classes } : {}),
+    ...(scenarios !== undefined ? { scenarios: scenarios.map((s) => ({ title: s.title, gaps: [...s.gaps] })) } : {}),
   };
 }
 

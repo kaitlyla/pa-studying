@@ -677,6 +677,68 @@ describe("pharm pages", () => {
     expect(cardBtn(panel2, `meds-${R(124)}`).getAttribute("aria-expanded")).toBe("false");
   });
 
+  it("meds panel shown by scenario: each scenario under its header with its sourced blocks, entries titled by their drugs with role-only chips, a search landing on the first", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    const doc = (text: string): SystemJson["notesBlocks"][string]["doc"] => schema.node("doc", null, [schema.node("paragraph", null, [schema.text(text)])]).toJSON() as SystemJson["notesBlocks"][string]["doc"];
+    const src = { name: "Angina Pectoris", org: "MSD Manual Professional", year: "2026", url: null };
+    const gap = (id: string, title: string, text: string) => ({
+      id, title, relevantTo: "Stable angina", written: "2026-10-08", doc: doc(text), differs: null, sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [],
+    });
+    const duration = gap("g_DURATION00", "Mild: duration", "Treat for 5 days.");
+    topic.medsEdit = {
+      remove: [],
+      add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
+      own: {},
+      ownGaps: {},
+      gaps: [gap("g_SOURCED000", "Ranolazine (sourced)", "Ranolazine for refractory angina."), duration],
+      roles: {
+        [C(3)]: [{ role: "1st", drugs: "metoprolol", note: null, sources: [src], scenario: "Mild" }, { role: "adjunct", drugs: null, note: null, sources: [src], scenario: "Severe" }],
+        [C(2)]: [{ role: "2nd", drugs: null, note: null, sources: [src], scenario: "Severe" }],
+        g_SOURCED000: [{ role: "alt", drugs: null, note: null, sources: [src] }],
+      },
+      classes: [],
+      scenarios: [{ title: "Mild", gaps: [duration] }, { title: "Severe", gaps: [] }],
+    };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    const scns = [...panel.querySelectorAll<HTMLElement>(".meds-scn")];
+    expect(scns.map((s) => s.querySelector(".meds-scn-t")?.textContent)).toEqual(["Mild", "Severe"]);
+    // The scenario's sourced block shows under its header, titled, and is no entry.
+    expect(visibleText(need(scns[0]?.querySelector<HTMLElement>('[data-anchor="g_DURATION00"]'), "duration block"))).toContain("Treat for 5 days.");
+    // By scenario, then by role inside it; the beta blocker shows under both, its later card anchored apart; entries with no scenario last.
+    expect(anchors(need(scns[0], "Mild"))).toEqual([`meds-${C(3)}`]);
+    expect(anchors(need(scns[1], "Severe"))).toEqual([`meds-${C(2)}`, `meds-${C(3)}@1`]);
+    expect(anchors(panel)).toEqual([`meds-${C(3)}`, `meds-${C(2)}`, `meds-${C(3)}@1`, "g_SOURCED000", `meds-${R(124)}`]);
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 4");
+    // A card is titled by the drugs its roles there name, the entry's title beside them; chips name the role only.
+    const mild = cardEl(panel, `meds-${C(3)}`);
+    expect(need(mild.querySelector(".phc-t"), "title").textContent).toBe("metoprolol");
+    expect(need(mild.querySelector(".phc-s"), "sub").textContent).toBe("Beta Blockers");
+    expect([...mild.querySelectorAll(".phc-h .rolec")].map((c) => c.textContent)).toEqual(["1st-line"]);
+    const severe = cardEl(panel, `meds-${C(3)}@1`);
+    expect(need(severe.querySelector(".phc-t"), "title").textContent).toBe("Beta Blockers");
+    expect(severe.querySelector(".phc-s")).toBeNull();
+    expect([...severe.querySelectorAll(".phc-h .rolec")].map((c) => c.textContent)).toEqual(["Adjunct"]);
+    // Open, a card spells out only that scenario's roles.
+    await click(cardBtn(panel, `meds-${C(3)}@1`));
+    expect([...cardEl(panel, `meds-${C(3)}@1`).querySelectorAll<HTMLElement>(".rolels li")].map((l) => visibleText(l))).toEqual([
+      "Adjunct · Source: Angina Pectoris, MSD Manual Professional (2026)",
+    ]);
+    a.unmount();
+
+    // A search result for the entry opens its card under its first scenario only.
+    const landed = await renderApp(`#/eor/fm/t/${topic.id}?at=meds-${C(3)}`);
+    app = landed;
+    const panel2 = await until(() => landed.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    expect(cardBtn(panel2, `meds-${C(3)}`).getAttribute("aria-expanded")).toBe("true");
+    expect(cardBtn(panel2, `meds-${C(3)}@1`).getAttribute("aria-expanded")).toBe("false");
+  });
+
   it("a topic without meds shows no meds panel", async () => {
     const cv = systemJson(CV);
     const topic = need(cv.topics.find((t) => t.meds.length === 0 && t.id === R(131)), "Heart failure topic without meds");

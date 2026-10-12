@@ -8,7 +8,8 @@
 // role, each label shown with its source. A search result landing on an entry opens its card.
 // View-only: in edit mode the topic's region edits the panel.
 import { useState, type ReactNode } from "react";
-import { classAnchor, itemPieces, itemTarget, panelItems, type PanelEntryItem, type PanelPiece } from "../../lib/derive/panel.ts";
+import type { MedsRoleTag } from "../../lib/content/types.ts";
+import { classAnchor, itemPieces, itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelPiece } from "../../lib/derive/panel.ts";
 import type { NavSystem, PubTopic, SystemJson } from "../../lib/derive/published.ts";
 import { GapBlock } from "../render/labels.tsx";
 import { Icon } from "../shell/Icon.tsx";
@@ -31,12 +32,12 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
   const at = useRoute().query.at;
   const items = panelItems(topic);
   if (items.length === 0) return null;
-  /** What an entry shows inside its card (its role labels with their sources first), with its pieces `pieces`. */
-  const body = (item: PanelEntryItem, pieces: PanelPiece[]): ReactNode => {
+  /** What an entry shows inside its card (its role labels `roles` with their sources first), with its pieces `pieces`. */
+  const body = (item: PanelEntryItem, pieces: PanelPiece[], roles: readonly MedsRoleTag[] = item.roles): ReactNode => {
     if (item.kind === "gap") {
       return (
         <>
-          <RoleLines roles={item.roles} />
+          <RoleLines roles={roles} />
           <GapBlock gap={item.gap} titled={false} />
         </>
       );
@@ -47,7 +48,7 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
     const linked = m.part !== undefined || m.system === null ? undefined : systems.find((s) => s.id === m.system);
     return (
       <>
-        <RoleLines roles={item.roles} />
+        <RoleLines roles={roles} />
         {e.own && <div className="phn-k own-only">{OWN_VERSION}</div>}
         <CardPieces pieces={pieces} />
         {e.gap && <GapBlock gap={e.gap} titled={false} />}
@@ -59,6 +60,51 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
       </>
     );
   };
+  const sc = scenarioGroups(topic);
+  if (sc !== null) {
+    /**
+     * An entry's card under a scenario: titled by the drugs its roles there name (else the entry's
+     * title, which then shows beside them), with chips naming only the role. Its first scenario holds
+     * the entry's anchor (search lands there); a later one is anchored `<anchor>@<scenario index>`.
+     */
+    const card = (item: PanelEntryItem, roles: readonly MedsRoleTag[], key: string, landing: boolean): ReactNode => {
+      const isOpen = open[key] ?? (landing && entryAnchor(item) === at);
+      const toggle = (): void => setOpen((o) => ({ ...o, [key]: !isOpen }));
+      const drugs = [...new Set(roles.flatMap((r) => (r.drugs === null ? [] : [r.drugs])))];
+      const pieces = isOpen ? itemPieces(system, topic, item, basePt) : [];
+      return (
+        <ClassCard
+          key={key}
+          anchor={key}
+          title={drugs.length > 0 ? drugs.join(", ") : entryTitle(item)}
+          sub={drugs.length > 0 ? entryTitle(item) : undefined}
+          chips={<RoleChips roles={roles.map((r) => ({ ...r, drugs: null }))} />}
+          open={isOpen}
+          onToggle={toggle}
+        >
+          {body(item, pieces[0] ?? [], roles)}
+        </ClassCard>
+      );
+    };
+    const shown = new Set([...sc.groups.flatMap((g) => g.entries.map((x) => entryAnchor(x.item))), ...sc.rest.map(entryAnchor)]);
+    return (
+      <div className="meds">
+        <h3 className="meds-hd">
+          <Icon n="pill" size={15} /> Medications for this condition <span className="n">{shown.size}</span>
+        </h3>
+        {sc.groups.map((g, i) => (
+          <section key={g.title} className="meds-scn" aria-label={g.title}>
+            <h4 className="meds-scn-t">{g.title}</h4>
+            {g.gaps.map((gap) => (
+              <GapBlock key={gap.id} gap={gap} />
+            ))}
+            {g.entries.map(({ item, roles, first }) => card(item, roles, first ? entryAnchor(item) : `${entryAnchor(item)}@${i}`, first))}
+          </section>
+        ))}
+        {sc.rest.map((item) => card(item, item.roles, entryAnchor(item), true))}
+      </div>
+    );
+  }
   return (
     <div className="meds">
       <h3 className="meds-hd">

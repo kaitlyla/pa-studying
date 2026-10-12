@@ -18,7 +18,7 @@ import type {
   VisitsJson,
   WorkupJson,
 } from "../../lib/derive/published.ts";
-import { itemTarget, panelItems, type PanelItem } from "../../lib/derive/panel.ts";
+import { itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelItem } from "../../lib/derive/panel.ts";
 import { pdfFileName } from "../../lib/pdf/index.ts";
 import { fileHash, guideBase, guideViewHash, isRefTab, otherHash, parseHash, pharmLoc, refHash, TAB_LABELS } from "../../lib/derive/routes.ts";
 
@@ -1011,6 +1011,54 @@ test.describe("pharm", () => {
     const landed = main(fresh).locator(".meds > section.phc").nth(items.indexOf(cls));
     await expect(landed.locator(".phc-h button")).toHaveAttribute("aria-expanded", "true");
     await expect(landed.locator(`.meds-mem[data-anchor="${at}"]`)).toBeVisible();
+  });
+
+  test("meds panel shown by scenario (FM Cellulitis): a header per scenario with its duration box, cards titled by drug with role-only chips, and no pictures or tables", async ({ page }) => {
+    // Her ask for Cellulitis: grouped by scenario, each drug's MOA, coverage and cautions, the abx duration per scenario, no flow charts.
+    const g = "fm";
+    const topic = navOf(g)
+      .systems.map((s) => systemOf(g, s.id).topics.find((t) => t.id === "r_WY205EY47S"))
+      .find((t) => t !== undefined);
+    if (!topic) throw new Error("no FM Cellulitis topic");
+    const sc = scenarioGroups(topic);
+    if (!sc) throw new Error("FM Cellulitis is not shown by scenario");
+    const anchorOf = (x: PanelEntryItem): string => (x.kind === "gap" ? x.gap.id : `meds-${itemTarget(x)}`);
+    const titleOf = (x: PanelEntryItem): string => (x.kind === "gap" ? x.gap.title : x.entry.med.title);
+    await open(page, topicHash(g, [topic.id]));
+    const meds = main(page).locator(".meds");
+    const distinct = new Set([...sc.groups.flatMap((s) => s.entries.map((e) => anchorOf(e.item))), ...sc.rest.map(anchorOf)]);
+    await expect(meds.locator(".meds-hd .n")).toHaveText(String(distinct.size));
+    await expect(meds.locator(".meds-scn-t")).toHaveText(sc.groups.map((s) => s.title));
+    for (const [i, s] of sc.groups.entries()) {
+      const sec = meds.locator("section.meds-scn").nth(i);
+      expect(s.gaps.length).toBeGreaterThan(0);
+      for (const gap of s.gaps) await expect(sec.locator(`section[data-anchor="${gap.id}"] .gap-h h3`)).toHaveText(gap.title);
+      const cards = sec.locator(":scope > section.phc");
+      await expect(cards.locator(":scope > .phc-h .phc-t")).toHaveText(
+        s.entries.map(({ item, roles }) => {
+          const drugs = [...new Set(roles.flatMap((r) => (r.drugs === null ? [] : [r.drugs])))];
+          return drugs.length > 0 ? drugs.join(", ") : titleOf(item);
+        }),
+      );
+      for (const [j, { roles }] of s.entries.entries()) {
+        await expect(cards.nth(j).locator(":scope > .phc-h .rolec")).toHaveText(roles.map((r) => ({ "1st": "1st-line", "2nd": "2nd-line", alt: "Alternative", adjunct: "Adjunct" })[r.role]));
+      }
+    }
+    // Every card open: no picture or table anywhere in the panel.
+    const heads = meds.locator(":scope > section.meds-scn > section.phc > .phc-h button, :scope > section.phc > .phc-h button");
+    for (const b of await heads.all()) await b.click();
+    await expect(heads.and(page.locator("[aria-expanded=false]"))).toHaveCount(0);
+    await expect(meds.locator("img, table")).toHaveCount(0);
+
+    // An entry under several scenarios: search lands on its first card only.
+    const twice = sc.groups.flatMap((s, i) => s.entries.filter((e) => !e.first).map((e) => ({ i, item: e.item })))[0];
+    if (!twice) throw new Error("no entry under two scenarios");
+    const at = anchorOf(twice.item);
+    const fresh = await page.context().newPage();
+    await open(fresh, `${topicHash(g, [topic.id])}?at=${at}`);
+    const fm = main(fresh).locator(".meds");
+    await expect(fm.locator(`section.phc[data-anchor="${at}"] .phc-h button`)).toHaveAttribute("aria-expanded", "true");
+    await expect(fm.locator(`section.phc[data-anchor="${at}@${twice.i}"] .phc-h button`)).toHaveAttribute("aria-expanded", "false");
   });
 
   test("meds panel: a part of her pharm notes attached to the topic opens to its own cell beside its own name, with no pharm link", async ({ page }) => {

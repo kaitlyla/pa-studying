@@ -52,7 +52,16 @@
     "content": [
      {
       "type": "text",
-      "text": "Usual IV dose 2 g/day (500 mg q6h or 1 g q12h), each dose over ≥60 min and ≤10 mg/min."
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Spectrum:"
+     },
+     {
+      "type": "text",
+      "text": " gram (+): most cocci and bacilli, incl almost all S. aureus resistant to penicillins and cephalosporins; many enterococci."
      }
     ]
    },
@@ -78,16 +87,33 @@
     "content": [
      {
       "type": "text",
-      "marks": [
-       {
-        "type": "bold"
-       }
-      ],
-      "text": "Invasive MRSA:"
-     },
+      "text": "Less effective than antistaphylococcal beta-lactams for MSSA."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
      {
       "type": "text",
-      "text": " dose to an AUC of 400–600 (trough targeting ⍉longer recommended). Monitor renal funct in all pts."
+      "text": "Monitor renal funct in all pts."
      }
     ]
    },
@@ -146,7 +172,7 @@
   ]
  },
  "meta": {
-  "title": "Vanco: EOR additions",
+  "title": "Vancomycin",
   "relevantTo": "FM Dermatology › Cellulitis",
   "written": "2026-10",
   "differs": null,

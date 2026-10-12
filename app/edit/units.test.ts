@@ -1055,6 +1055,18 @@ describe("a topic's meds panel", () => {
       expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, two]]) }))).toEqual({ ...file, remove: [G(2), C(2)] });
     });
 
+    it("a save keeps a panel shown by scenario as stored, each role keeping its scenario", async () => {
+      const byScenario: MedsFile = {
+        ...file,
+        scenarios: [{ title: "Mild", gaps: [G(3)] }, { title: "Severe", gaps: [] }],
+        roles: [{ target: G(2), roles: [{ ...tag, scenario: "Severe" }] }, { target: C(2), roles: [{ ...tag, role: "2nd", scenario: "Mild" }] }],
+      };
+      store(R(104), byScenario);
+      const unit = await unitAt(`topic:fm:${R(104)}`);
+      const part = only(unit, "meds");
+      expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [C(3)] }) }))).toEqual({ ...byScenario, add: [C(3)] });
+    });
+
     it("a file holding only sourced cards is kept, not deleted, when she changes nothing else", async () => {
       store(R(104), { v: 1, add: [], remove: [C(2)], own: [], gaps: [G(3)] });
       const unit = await unitAt(`topic:fm:${R(104)}`);

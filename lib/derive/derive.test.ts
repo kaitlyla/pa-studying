@@ -26,7 +26,7 @@ import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, pars
 import { docText, nodeText, tableOf } from "./text.ts";
 import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
-import { byRole, classPieces, entryPieces, itemTarget, pageCard, panelEntries, panelItems, publishedEdit, roleRank, rowSource, shownPieces, type PanelItem, type PanelPiece, type RowSource } from "./panel.ts";
+import { byRole, classPieces, entryPieces, itemTarget, pageCard, panelEntries, panelItems, publishedEdit, roleRank, rowSource, scenarioGroups, shownPieces, type PanelItem, type PanelPiece, type RowSource } from "./panel.ts";
 import type { PMNode } from "./text.ts";
 
 /** A panel item as a test reads it: an entry's target, or a class's title. */
@@ -833,6 +833,47 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
         const res = publish(withMeds([[R(104), { ...held, own: [{ target: C(2), pieces: [mine("x")], gap: G(9) }] }]]));
         expect(newDropped(res)).toEqual([{ file: topicMedsPath("fm", "cardiovascular", R(104)), id: G(9) }]);
         expect(topicOf(res, R(104)).medsEdit?.ownGaps).toEqual({});
+      });
+    });
+
+    describe("a panel shown by scenario (MedsFile scenarios)", () => {
+      const at = (t: ReturnType<typeof tag>, scenario: string) => ({ ...t, scenario });
+      const byScenario: MedsFile = {
+        v: 1, add: [], remove: [], own: [], gaps: [G(3), G(2)],
+        scenarios: [{ title: "Mild", gaps: [G(2)] }, { title: "Severe", gaps: [] }],
+        roles: [
+          { target: C(2), roles: [at(tag("1st", "nitroglycerin"), "Mild"), at(tag("adjunct"), "Severe")] },
+          { target: R(124), roles: [at(tag("2nd"), "Severe")] },
+          { target: G(3), roles: [tag("alt")] },
+        ],
+      };
+
+      it("publishes each scenario's title and header gap blocks in her order", () => {
+        const e = topicOf(publish(withMeds([[R(104), byScenario]])), R(104)).medsEdit;
+        expect(e?.scenarios?.map((s) => [s.title, s.gaps.map((g) => g.id)])).toEqual([["Mild", [G(2)]], ["Severe", []]]);
+      });
+
+      it("lists under each scenario the entries with a role for it, by role, with only that scenario's roles; an entry under two scenarios is first under the earlier", () => {
+        const sc = scenarioGroups(topicOf(publish(withMeds([[R(104), byScenario]])), R(104)));
+        if (sc === null) throw new Error("no scenarios");
+        const shape = sc.groups.map((g) => [g.title, g.entries.map((x) => [itemTarget(x.item), x.roles.map((r) => r.role), x.first])]);
+        expect(shape).toEqual([
+          ["Mild", [[C(2), ["1st"], true]]],
+          ["Severe", [[R(124), ["2nd"], true], [C(2), ["adjunct"], false]]],
+        ]);
+        // A header gap block is no entry; an entry with no scenario role shows after the scenarios.
+        expect(sc.rest.map(itemTarget)).toEqual([G(3)]);
+      });
+
+      it("leaves out a header gap block she took off", () => {
+        const e = topicOf(publish(withMeds([[R(104), { ...byScenario, remove: [G(2)] }]])), R(104)).medsEdit;
+        expect(e?.scenarios?.map((s) => s.gaps.map((g) => g.id))).toEqual([[], []]);
+      });
+
+      it("a panel without scenarios publishes no scenarios key and is shown by drug class", () => {
+        const angina = topicOf(publish(withMeds([[R(104), file]])), R(104));
+        expect(angina.medsEdit !== null && "scenarios" in angina.medsEdit).toBe(false);
+        expect(scenarioGroups(angina)).toBeNull();
       });
     });
 
