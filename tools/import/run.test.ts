@@ -137,6 +137,7 @@ afterEach(async () => {
 });
 
 describe("runImport", () => {
+  // A full import of all 17 sources: about 0.7 s alone, measured 5.1–5.3 s under full-suite parallel load.
   it("converts every source kind into content/ and never changes a source file", async () => {
     const files = await writeProject();
     const log: string[] = [];
@@ -245,7 +246,7 @@ describe("runImport", () => {
     // The duplicate is proven and not imported.
     expect(log).toContain("duplicate w/Labs (1).docx: same paragraph texts and pictures as w/Labs.docx; not imported");
     expect((await readdir(at("content/docs"))).sort()).toEqual([id("w/Labs.docx"), id("w/Cardiac drugs.docx")].sort());
-  });
+  }, 15_000);
 
   it("refuses to run again once content/guides/ exists, writing nothing", async () => {
     await writeProject();

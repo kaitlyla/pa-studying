@@ -4,7 +4,7 @@
 // chosen from the published data and content/, so the spec follows the content; a target the content
 // does not have fails with "the published content has no …" rather than skipping.
 import { createHash } from "node:crypto";
-import { closeSync, existsSync, ftruncateSync, openSync, readdirSync, readFileSync, writeSync } from "node:fs";
+import { closeSync, existsSync, ftruncateSync, openSync, readdirSync, readFileSync, statSync, writeSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
@@ -3317,24 +3317,39 @@ test.describe("documents", () => {
     await expect(toast(page)).toHaveCount(0, { timeout: 4_000 });
   });
 
-  /** Every pharm page (system level) that lists `docId`. */
-  function pharmPlaces(docId: string): { hash: string; removed: number }[] {
-    const out: { hash: string; removed: number }[] = [];
+  type PharmPlace = { g: string; hash: string; removed: number; bytes: number };
+
+  /** Every pharm page (system level), keyed by each document it lists. */
+  function pharmPlacesByDoc(): Map<string, PharmPlace[]> {
+    const out = new Map<string, PharmPlace[]>();
     for (const { g, nav } of navs) {
       for (const s of nav.systems) {
         if (!s.pharm) continue;
-        const files = readData<SystemJson>(systemPath(g, s.id)).pharm?.files;
-        if (files?.files.some((f) => f.id === docId)) {
-          out.push({ hash: guideViewHash(g, { kind: "pharm", system: s.id, section: null, target: null }), removed: files.removed.length });
-        }
+        const path = systemPath(g, s.id);
+        const files = readData<SystemJson>(path).pharm?.files;
+        if (!files) continue;
+        const place = {
+          g,
+          hash: guideViewHash(g, { kind: "pharm", system: s.id, section: null, target: null }),
+          removed: files.removed.length,
+          bytes: statSync(join(DATA, path)).size,
+        };
+        for (const f of files.files) out.set(f.id, [...(out.get(f.id) ?? []), place]);
       }
     }
     return out;
   }
 
   test("a removed pharm document shows under Show removed documents at every pharm page that listed it, and Restore brings it back everywhere", async ({ page, context, baseURL }) => {
-    const pharmDocs = [...new Set(docs.map((d) => d.id))].map((id) => ({ id, places: pharmPlaces(id) })).filter((x) => x.places.length >= 2);
-    const target = need(pharmDocs.sort((a, b) => b.places.length - a.places.length)[0], "document listed on two or more pharm pages");
+    // Every pharm page reads a document's removed state from the one document record, so the lightest
+    // document listed in two or more guides proves the claim; the most-listed document spans dozens of
+    // multi-MB pharm pages, loaded twice each, and runs past the test's time limit.
+    const placesByDoc = pharmPlacesByDoc();
+    const pharmDocs = [...new Set(docs.map((d) => d.id))]
+      .map((id) => ({ id, places: placesByDoc.get(id) ?? [] }))
+      .filter((x) => new Set(x.places.map((p) => p.g)).size >= 2)
+      .map((x) => ({ ...x, bytes: x.places.reduce((n, p) => n + p.bytes, 0) }));
+    const target = need(pharmDocs.sort((a, b) => a.bytes - b.bytes)[0], "document listed on pharm pages in two or more guides");
     const name = need(docs.find((d) => d.id === target.id), "document").name;
     const [home, ...others] = target.places;
     const first = need(home, "pharm place");
