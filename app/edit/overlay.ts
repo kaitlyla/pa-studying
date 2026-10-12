@@ -260,6 +260,43 @@ const unsaved = new Map<string, unknown>();
 let git: Git | null = null;
 let timer: ReturnType<typeof setInterval> | null = null;
 
+/** GitHub Pages' own cache lifetime: what it serves when a response's `Cache-Control` says nothing. */
+const PAGES_CACHE_SECONDS = 600;
+
+/**
+ * Until when the bytes a page reads may still be the copies fetched before the deployed build: Pages
+ * serves every file with `max-age=600`, its CDN answers from its own copy whatever the request asks
+ * for, and it drops a query key, so a read can keep returning the pre-deploy file for up to one cache
+ * lifetime after the build lands. An entry the build contains must not be dropped before then.
+ */
+let servedMayLagUntil = 0;
+let laggedBuild: string | null = null;
+
+/** A response's `max-age`, in seconds. */
+function cacheSeconds(res: Response): number {
+  const m = /(?:^|,)\s*max-age\s*=\s*(\d+)/i.exec(res.headers.get("cache-control") ?? "");
+  return m ? Number(m[1]) : PAGES_CACHE_SECONDS;
+}
+
+/**
+ * A served `build.json` that carries `commit` proves that build's deployment was live when this copy
+ * was fetched, and `Age` says how long ago that was. Every copy fetched before the deployment expires
+ * within one cache lifetime of it, so this notes the moment after which none can still be served; the
+ * earliest such moment for a build is the one that counts.
+ */
+function noteServedBuild(commit: string, res: Response): void {
+  const age = res.headers.get("age");
+  if (age === null) return;
+  const seconds = Number(age);
+  if (!Number.isFinite(seconds) || seconds < 0) return;
+  const until = Date.now() + Math.max(0, cacheSeconds(res) - seconds) * 1000;
+  if (commit === laggedBuild) servedMayLagUntil = Math.min(servedMayLagUntil, until);
+  else {
+    laggedBuild = commit;
+    servedMayLagUntil = until;
+  }
+}
+
 /** Replaces the IndexedDB store (tests). */
 export function setOverlayStoreForTests(s: KvStore<OverlayEntry>): void {
   store = s;
@@ -338,6 +375,7 @@ export async function pruneOverlay(): Promise<void> {
     const res = await fetch(`${DATA_BASE}${BUILD_PATH}`, { cache: "no-store" });
     if (!res.ok) return;
     build = (await res.json()) as BuildJson;
+    noteServedBuild(build.commit, res);
   } catch {
     return;
   }
@@ -351,6 +389,9 @@ export async function pruneOverlay(): Promise<void> {
       continue;
     }
     if (status !== "identical" && status !== "ahead") continue;
+    // The build has her save, but the copies a page reads can still predate it (see `servedMayLagUntil`):
+    // dropping now would take the save away before the site serves it.
+    if (Date.now() < servedMayLagUntil) continue;
     for (const [path, e] of [...entries]) {
       if (e.commit !== commit) continue;
       entries.delete(path);
@@ -384,6 +425,8 @@ export function stopOverlay(): void {
   git = null;
   entries.clear();
   unsaved.clear();
+  servedMayLagUntil = 0;
+  laggedBuild = null;
   if (timer !== null) clearInterval(timer);
   timer = null;
   setDataOverlay(null);

@@ -269,7 +269,7 @@ interface World {
   /** The import commit (every page's Original); the fake's first commit when not seeded. */
   seed: string;
   /** What the routed build.json reports; tests change it between loads. */
-  build: { commit: string; siteBytes: number };
+  build: { commit: string; siteBytes: number; age?: string };
   /** build.json fetches so far. */
   buildFetches: () => number;
 }
@@ -301,14 +301,21 @@ async function world(context: BrowserContext, baseURL: string | undefined, opts:
   const seed = opts.seed
     ? fake.commitFiles(contentFiles(), { message: commitMessage("Import her source files", { kind: "import" }), date: IMPORT_DATE })
     : fake.head();
-  const build = { commit: seed, siteBytes: opts.siteBytes ?? 300_000_000 };
+  const build: World["build"] = { commit: seed, siteBytes: opts.siteBytes ?? 300_000_000 };
   let fetches = 0;
   // Context routes: the sign-in popup's first navigation happens before its Page exists.
   await routeFakeGithub(context, fake, { workerOrigin: WORKER_ORIGIN, returnUrl: baseURL });
   await context.route((url) => url.pathname.endsWith(`/data/${BUILD_PATH}`), async (route) => {
     fetches += 1;
     const body: BuildJson = { commit: build.commit, builtAt: IMPORT_DATE, siteBytes: build.siteBytes, dropped: [], uncoveredGlyphs: [] };
-    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });
+    // `build.age` models the CDN's answer: Pages serves data with `max-age=600`, and a copy carries the
+    // age it already has. Without it the response looks like one straight from the site.
+    const headers: Record<string, string> = { "content-type": "application/json" };
+    if (build.age !== undefined) {
+      headers["cache-control"] = "max-age=600";
+      headers.age = build.age;
+    }
+    await route.fulfill({ status: 200, headers, body: JSON.stringify(body) });
   });
   await missingDataIs404(context);
   return { fake, seed, build, buildFetches: () => fetches };
@@ -3577,5 +3584,54 @@ test.describe("processing and failed documents", () => {
       await visitor.close();
     }
   });
+});
+
+// ---- a save the deployed build contains while the served data still predates it ---------------------------------
+
+test("a saved row survives the build that contains it landing while the served data may still be a copy from before", async ({ page, context, baseURL }) => {
+  const { fake, build } = await world(context, baseURL, { seed: true });
+  const g = "fm";
+  const system = "dermatology";
+  const topicId = "r_4H0H7P6JG9";
+  const hash = guideViewHash(g, { kind: "topics", ids: [topicId] });
+  const systemHash = guideViewHash(g, { kind: "system", system });
+  await openPage(page, hash);
+  await expect(page.locator("main h1").first()).toHaveText("Bullous Pemphigoid");
+  await signIn(page);
+  await startEditing(page);
+  const slot = ref(page, "edit-area").locator(".edit-slot").first();
+  const rows = slot.locator("table.nt > tbody > tr:not(.hrow)");
+  await clickIntoEditor(page, rows.first().locator(":scope > td").nth(1).locator("p").first());
+  await ref(page, "tb-row-below").click();
+  const marker = newMarker();
+  // Like her save: the new row's first cell stays empty — a continuation row — and its content goes in a later cell.
+  await clickIntoEditor(page, rows.nth(1).locator(":scope > td").nth(1).locator("p").first());
+  await page.keyboard.type(marker);
+  await ref(page, "edit-save").click();
+  await expect(ref(page, "save-success")).toBeVisible();
+
+  const saved = changedFiles(fake);
+  const savedBlock = JSON.parse(need(saved.get("content/guides/fm/dermatology/blocks/b_M7E59HAVZW.json"), "the saved block")) as unknown;
+  const beforeIds = new Set<string>();
+  findPath(readJson("content/guides/fm/dermatology/blocks/b_M7E59HAVZW.json"), (n) => { if (n.type === "table_row") beforeIds.add(String(attrsOf(n).id)); return false; });
+  const added = findPath(savedBlock, (n) => n.type === "table_row" && !beforeIds.has(String(attrsOf(n).id)) && textOf(n).includes(marker)) as Path | null;
+  const row = page.locator(`[data-anchor="${need(added === null ? null : String(attrsOf(nodeAt(savedBlock, added)).id), "the new row's id")}"]`);
+  await expect(row).toHaveCount(1);
+
+  // Her save is deployed now, but every data read is still answered from a copy fetched before that
+  // deployment: Pages serves its files for 10 minutes and its CDN answers from its own copy whatever the
+  // request asks for, so the row must stay on the page rather than be dropped with the build's arrival.
+  build.commit = fake.head();
+  build.age = "0";
+  page.on("response", (r) => { if (r.url().includes(BUILD_PATH)) console.log("PROBE build.json response", r.status(), JSON.stringify(r.headers())); });
+  await page.evaluate((h) => { window.location.hash = h; }, systemHash);
+  await expect(page.locator("main h1").first()).toHaveText(/^Dermatology/);
+  await page.evaluate((h) => { window.location.hash = h; }, hash);
+  await expect(page.locator("main h1").first()).toHaveText("Bullous Pemphigoid");
+  await expect(row).toHaveCount(1);
+
+  // A fresh document (the overlay is loaded and pruned again on sign-in) still has it.
+  await open(page, hash);
+  await expect(row).toHaveCount(1);
 });
 

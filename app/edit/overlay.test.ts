@@ -1,10 +1,11 @@
 // The owner's local overlay (plan 50 §50.5): published data patched with her saved files until the
 // deployed site contains them, and dropped once it does.
-import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { BlockFile, DocJSON, GapFile, MedsFile, OtherFile, StructureFile, WordDocFile, AsIsFile } from "../../lib/content/index.ts";
+import { BUILD_PATH } from "../../lib/derive/published.ts";
 import type { DocJson, DocList, DocRef, OtherJson, PubBlock, PubGap, PubNote, PubOtherNote, RefTabJson, SystemJson } from "../../lib/derive/published.ts";
 import { B, C, D, G, R } from "../../tools/build/test-fixture.ts";
-import { loadData } from "../data/load.ts";
+import { DATA_BASE, loadData } from "../data/load.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import {
   overlayEntries, patchPublished, pruneOverlay, recordSaved, setOverlayStoreForTests, startOverlay, stopOverlay, type OverlayEntry,
@@ -321,5 +322,44 @@ describe("the overlay on the owner's device", () => {
     await startOverlay(w.git);
     await pruneOverlay();
     expect(overlayEntries().has(PATH)).toBe(true);
+  });
+
+  /** Answers build.json with the CDN's headers: `age` is how old the served copy already is. */
+  function serveBuild(age: string): void {
+    const served = globalThis.fetch;
+    vi.stubGlobal("fetch", (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+      if (url !== `${DATA_BASE}${BUILD_PATH}`) return served(input, init);
+      const headers = { "content-type": "application/json", "cache-control": "max-age=600", age };
+      return Promise.resolve(new Response(JSON.stringify(published.get(BUILD_PATH)), { status: 200, headers }));
+    });
+  }
+
+  it("keeps a save the deployed build contains until the served copies can no longer predate it", async () => {
+    const savedAt = w.fake.commitFiles({ "content/x.txt": "1" }, { message: "Edit: Murmurs" });
+    await store.put(PATH, { commit: savedAt, json: saved() });
+    published.set(BUILD_PATH, { commit: savedAt, builtAt: "x", siteBytes: 0 });
+    serveBuild("100"); // a copy fetched 100 s into its 600 s lifetime can still be the pre-deploy file
+    await startOverlay(w.git);
+
+    expect(overlayEntries().has(PATH)).toBe(true);
+    expect(await murmurs()).toEqual(para("Murmurs, saved here"));
+
+    vi.spyOn(Date, "now").mockReturnValue(Date.now() + 600_000); // that copy has lived out its lifetime
+    await pruneOverlay();
+
+    expect(overlayEntries().has(PATH)).toBe(false);
+    expect(await store.get(PATH)).toBeUndefined();
+    expect(await murmurs()).toEqual(pub<SystemJson>(SYS).blocks.find((b) => b.id === B(11))?.doc);
+  });
+
+  it("drops at once when the served build.json has no Age: nothing cached in front of the site", async () => {
+    const savedAt = w.fake.commitFiles({ "content/x.txt": "1" }, { message: "Edit: Murmurs" });
+    await store.put(PATH, { commit: savedAt, json: saved() });
+    published.set(BUILD_PATH, { commit: savedAt, builtAt: "x", siteBytes: 0 });
+
+    await startOverlay(w.git);
+
+    expect(overlayEntries().has(PATH)).toBe(false);
   });
 });
