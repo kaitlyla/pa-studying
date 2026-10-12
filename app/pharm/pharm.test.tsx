@@ -743,6 +743,49 @@ describe("pharm pages", () => {
     expect(cardBtn(panel2, `meds-${C(3)}@1`).getAttribute("aria-expanded")).toBe("false");
   });
 
+  it("meds panel shown by scenario: a patient group under its own sub-header after the scenario's cards, and her drug classes after the scenarios", async () => {
+    const mod = structuredClone(systemJson(CV));
+    const topic = need(mod.topics.find((t) => t.id === R(104)), "Stable angina topic");
+    const src = { name: "Angina Pectoris", org: "MSD Manual Professional", year: "2026", url: null };
+    const doc = schema.node("doc", null, [schema.node("paragraph", null, [schema.text("Ranolazine for refractory angina.")])]).toJSON() as SystemJson["notesBlocks"][string]["doc"];
+    const sourced = { id: "g_SOURCED000", title: "Ranolazine (sourced)", relevantTo: "Stable angina", written: "2026-10-08", doc, differs: null, sources: [src], ownerEdits: [], figures: [], asNotes: false, notes: [] };
+    topic.medsEdit = {
+      remove: [],
+      add: [{ card: C(3), title: "Beta Blockers", rows: [], section: "beta-blockers", system: null, target: C(3) }],
+      own: {},
+      ownGaps: {},
+      gaps: [sourced],
+      roles: {
+        [C(3)]: [
+          { role: "1st", drugs: "metoprolol", note: null, sources: [src], scenario: "Mild" },
+          { role: "alt", drugs: "atenolol", note: "if metoprolol is not tolerated", sources: [src], scenario: "Mild", population: "Peds" },
+        ],
+      },
+      classes: [{ title: "Other drugs", members: [R(124), "g_SOURCED000"] }],
+      scenarios: [{ title: "Mild", gaps: [] }],
+    };
+    server.restore();
+    server = serveData(new Map([...files, [CV, mod]]));
+
+    const a = await renderApp(`#/eor/fm/t/${topic.id}`);
+    app = a;
+    const panel = await until(() => a.container.querySelector<HTMLElement>(`section.tcard[data-topic="${topic.id}"] .meds`), "meds panel");
+    const mild = need(panel.querySelector<HTMLElement>(".meds-scn"), "Mild");
+    // The scenario's own card first, then its patient group under a sub-header, the same entry anchored apart there.
+    const pop = need(mild.querySelector<HTMLElement>(".meds-pop"), "Peds group");
+    expect(need(pop.querySelector(".meds-pop-t"), "sub-header").textContent).toBe("Peds");
+    expect(anchors(mild)).toEqual([`meds-${C(3)}`, `meds-${C(3)}@0.Peds`]);
+    expect(need(cardEl(panel, `meds-${C(3)}@0.Peds`).querySelector(".phc-s"), "sub").textContent).toBe("atenolol · Alternative · if metoprolol is not tolerated");
+    expect(need(cardEl(panel, `meds-${C(3)}`).querySelector(".phc-s"), "sub").textContent).toBe("metoprolol");
+    // After the scenarios: an entry with no scenario role as its own card, and her class of such entries as one card under its title, its entries inside it.
+    const rest = [...panel.querySelectorAll<HTMLElement>(":scope > .phc")];
+    expect(rest.map((c) => c.querySelector(".phc-t")?.textContent)).toEqual(["Nitrates", "Other drugs"]);
+    const cls = need(rest[1], "class card");
+    await click(need(cls.querySelector<HTMLElement>("button"), "class card button"));
+    expect([...cls.querySelectorAll<HTMLElement>(".meds-mem")].map((m) => m.dataset.anchor)).toEqual([`meds-${R(124)}`, "g_SOURCED000"]);
+    expect(visibleText(need(panel.querySelector(".meds-hd"), "meds heading"))).toBe("Medications for this condition 4");
+  });
+
   it("a topic without meds shows no meds panel", async () => {
     const cv = systemJson(CV);
     const topic = need(cv.topics.find((t) => t.meds.length === 0 && t.id === R(131)), "Heart failure topic without meds");

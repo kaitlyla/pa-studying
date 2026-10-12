@@ -268,8 +268,9 @@ export interface CardsFile {
  * are for this condition (1st-line, 2nd-line, alternative, adjunct), each with its sources; the panel
  * shows them on the entry and orders entries by them. `classes`: entries of one drug class shown under one
  * header, each entry (a member) keeping its own title inside it. `scenarios`: when present, the panel
- * shows by clinical scenario instead of by drug class (and has no `classes`): each scenario under its
- * own header, in this order, with the entries whose roles name it (MedsRoleTag `scenario`). At least
+ * shows by clinical scenario: each scenario under its own header, in this order, with the entries whose
+ * roles name it (MedsRoleTag `scenario`); its `classes` hold only entries with no scenario role, shown
+ * after the scenarios. At least
  * one list is non-empty: with none, there is no file.
  */
 export interface MedsFile {
@@ -306,10 +307,16 @@ export interface MedsClassGroup {
 export const MEDS_ROLES = ["1st", "2nd", "alt", "adjunct"] as const;
 export type MedsRole = (typeof MEDS_ROLES)[number];
 
+/** The patient groups a scenario of a meds panel may show apart, under their own sub-headers, in this order. */
+export const MEDS_POPULATIONS = ["Allergy", "Elderly", "Pregnant", "Peds"] as const;
+export type MedsPopulation = (typeof MEDS_POPULATIONS)[number];
+
 /**
  * One role of a meds panel entry: the role, the entry's drugs it applies to (null: the whole entry), a
  * short qualifier (e.g. "secondary prevention only"), and the sources that give it. `scenario`: on a
  * panel shown by scenario (MedsFile `scenarios`), the title of the scenario the role is for.
+ * `population`: only with `scenario`, the patient group of that scenario the role is for (shown under
+ * the group's sub-header in the scenario, not among its main entries).
  */
 export interface MedsRoleTag {
   role: MedsRole;
@@ -317,6 +324,7 @@ export interface MedsRoleTag {
   note: string | null;
   sources: { name: string; org: string; year: string; url: string | null }[];
   scenario?: string;
+  population?: MedsPopulation;
 }
 
 /**

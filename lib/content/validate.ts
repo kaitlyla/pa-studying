@@ -12,7 +12,7 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_POPULATIONS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
@@ -477,8 +477,9 @@ export const validateCards: Validator = (v, ctx) => {
  * Her own meds panel for a topic: each target at most once in each list, never both added and removed,
  * a gap block taken off only if it is listed, an edited entry's gap block in no other list, each entry's
  * roles once, each class two or more entries not taken off and each entry in one class at most, and
- * something in it. Shown by scenario: no classes, each scenario titled once, its gap blocks listed in
- * gaps and with no roles (one may show under several scenarios), and each role's scenario one of the file's.
+ * something in it. Shown by scenario: each scenario titled once, its gap blocks listed in gaps and with
+ * no roles (one may show under several scenarios), each role's scenario one of the file's, a role's
+ * population only with a scenario, and no class member with a scenario role (classes show after the scenarios).
  */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
@@ -499,7 +500,7 @@ export const validateMeds: Validator = (v, ctx) => {
         drugs: nullable(nonEmpty),
         note: nullable(nonEmpty),
         sources: arr(shapeOf<MedsRoleTag["sources"][number]>({ name: nonEmpty, org: str, year: str, url: nullable(nonEmpty) }, {})),
-      }, { scenario: nonEmpty })),
+      }, { scenario: nonEmpty, population: oneOf(...MEDS_POPULATIONS) })),
     }, {})),
     classes: arr(shapeOf<MedsClassGroup>({ title: nonEmpty, members: uniqueArr(id("c", "r", "p", "g")) }, {})),
     scenarios: arr(shapeOf<MedsScenario>({ title: nonEmpty, gaps: uniqueArr(id("g")) }, {})),
@@ -511,7 +512,10 @@ export const validateMeds: Validator = (v, ctx) => {
   const scenarios = m.scenarios;
   if (scenarios !== undefined) {
     if (scenarios.length === 0) bad(ctx, ".scenarios", "at least one scenario (leave it out for a panel by drug class)", scenarios);
-    if (classes.length > 0) bad(ctx, ".classes", "no drug classes on a panel shown by scenario", classes);
+    const scenarioed = new Set(roles.filter((r) => r.roles.some((x) => x.scenario !== undefined)).map((r) => r.target));
+    classes.forEach((c, i) => c.members.forEach((t, j) => {
+      if (scenarioed.has(t)) bad(ctx, `.classes[${i}].members[${j}]`, "an entry with no scenario role (a panel shown by scenario shows its classes after the scenarios)", t);
+    }));
     uniqueArr(str)(scenarios.map((s) => s.title), ".scenarios[].title", ctx);
     scenarios.forEach((s, i) => s.gaps.forEach((g, j) => {
       if (!gaps.includes(g)) bad(ctx, `.scenarios[${i}].gaps[${j}]`, "a gap block listed in gaps", g);
@@ -521,6 +525,7 @@ export const validateMeds: Validator = (v, ctx) => {
   const titles = new Set((scenarios ?? []).map((s) => s.title));
   roles.forEach((r, i) => r.roles.forEach((x, j) => {
     if (x.scenario !== undefined && !titles.has(x.scenario)) bad(ctx, `.roles[${i}].roles[${j}].scenario`, "the title of one of the file's scenarios", x.scenario);
+    if (x.population !== undefined && x.scenario === undefined) bad(ctx, `.roles[${i}].roles[${j}].population`, "a population only on a role with a scenario", x.population);
   }));
   uniqueArr(str)(classes.flatMap((c) => c.members), ".classes[].members", ctx);
   classes.forEach((c, i) => {

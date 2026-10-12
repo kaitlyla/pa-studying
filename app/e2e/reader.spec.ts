@@ -1026,7 +1026,10 @@ test.describe("pharm", () => {
     const titleOf = (x: PanelEntryItem): string => (x.kind === "gap" ? x.gap.title : x.entry.med.title);
     await open(page, topicHash(g, [topic.id]));
     const meds = main(page).locator(".meds");
-    const distinct = new Set([...sc.groups.flatMap((s) => s.entries.map((e) => anchorOf(e.item))), ...sc.rest.map(anchorOf)]);
+    const distinct = new Set([
+      ...sc.groups.flatMap((s) => [...s.entries, ...s.populations.flatMap((p) => p.entries)].map((e) => anchorOf(e.item))),
+      ...sc.rest.flatMap((x) => (x.kind === "class" ? x.members : [x]).map(anchorOf)),
+    ]);
     await expect(meds.locator(".meds-hd .n")).toHaveText(String(distinct.size));
     // Her table's scenarios, in her words, are the panel's only headers: nothing shows outside them.
     expect(sc.groups.map((s) => s.title)).toEqual(["Oral", "IV", "Cat bite", "Dog or human bite", "MRSA PO", "MRSA IV"]);

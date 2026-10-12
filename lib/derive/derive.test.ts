@@ -862,7 +862,26 @@ describe("her own meds panel for a topic (content MedsFile)", () => {
           ["Severe", [[R(124), ["2nd"], true], [C(2), ["adjunct"], false]]],
         ]);
         // A header gap block is no entry; an entry with no scenario role shows after the scenarios.
-        expect(sc.rest.map(itemTarget)).toEqual([G(3)]);
+        expect(sc.rest.map((x) => (x.kind === "class" ? x.title : itemTarget(x)))).toEqual([G(3)]);
+      });
+
+      it("shows a scenario's patient groups after its entries, in Allergy, Elderly, Pregnant, Peds order, and her classes of unscenario'd entries after the scenarios", () => {
+        const pop = (t: ReturnType<typeof tag>, scenario: string, population: "Allergy" | "Peds") => ({ ...t, scenario, population });
+        const groups: MedsFile = {
+          v: 1, add: [], remove: [], own: [], gaps: [G(3)],
+          scenarios: [{ title: "Mild", gaps: [] }],
+          roles: [{ target: C(2), roles: [at(tag("1st"), "Mild"), pop(tag("alt", "nitroglycerin"), "Mild", "Peds"), pop(tag("1st"), "Mild", "Allergy")] }],
+          classes: [{ title: "Other", members: [R(124), G(3)] }],
+        };
+        const sc = scenarioGroups(topicOf(publish(withMeds([[R(104), groups]])), R(104)));
+        if (sc === null) throw new Error("no scenarios");
+        const [mild] = sc.groups;
+        expect(mild?.entries.map((x) => [itemTarget(x.item), x.roles.map((r) => r.role), x.first])).toEqual([[C(2), ["1st"], true]]);
+        expect(mild?.populations.map((p) => [p.population, p.entries.map((x) => [itemTarget(x.item), x.roles.map((r) => r.role), x.first])])).toEqual([
+          ["Allergy", [[C(2), ["1st"], false]]],
+          ["Peds", [[C(2), ["alt"], false]]],
+        ]);
+        expect(sc.rest.map((x) => (x.kind === "class" ? [x.title, x.members.map(itemTarget)] : itemTarget(x)))).toEqual([["Other", [R(124), G(3)]]]);
       });
 
       it("leaves out a header gap block she took off", () => {

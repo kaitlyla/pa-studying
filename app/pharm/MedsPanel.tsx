@@ -9,7 +9,7 @@
 // View-only: in edit mode the topic's region edits the panel.
 import { useState, type ReactNode } from "react";
 import type { MedsRoleTag } from "../../lib/content/types.ts";
-import { classAnchor, itemPieces, itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelPiece } from "../../lib/derive/panel.ts";
+import { classAnchor, itemPieces, itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelItem, type PanelPiece, type ScenarioEntry } from "../../lib/derive/panel.ts";
 import type { NavSystem, PubGap, PubTopic, SystemJson } from "../../lib/derive/published.ts";
 import { collapse, docText } from "../../lib/derive/text.ts";
 import { GapBlock } from "../render/labels.tsx";
@@ -90,15 +90,46 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
       </>
     );
   };
+  /** An entry's card, or one of her drug classes' card holding its entries, as a panel by drug class shows it (with role chips). */
+  const itemCard = (item: PanelItem): ReactNode => {
+    const members = item.kind === "class" ? item.members : [item];
+    const first = members[0];
+    if (!first) return null;
+    // An entry's card is keyed and anchored by the entry, a class's by its own anchor; it starts open when a search result lands on one of its entries.
+    const key = item.kind === "class" ? classAnchor(itemTarget(first)) : entryAnchor(first);
+    const isOpen = open[key] ?? members.some((m) => entryAnchor(m) === at);
+    const toggle = (): void => setOpen((o) => ({ ...o, [key]: !isOpen }));
+    const chips = <RoleChips roles={item.roles} />;
+    const pieces = isOpen ? itemPieces(system, topic, item, basePt) : [];
+    if (item.kind !== "class") {
+      return (
+        <ClassCard key={key} anchor={key} title={entryTitle(item)} chips={chips} open={isOpen} onToggle={toggle}>
+          {body(item, pieces[0] ?? [])}
+        </ClassCard>
+      );
+    }
+    return (
+      <ClassCard key={key} anchor={key} title={item.title} chips={chips} open={isOpen} onToggle={toggle}>
+        {item.members.map((m, i) => (
+          <div key={entryAnchor(m)} className="meds-mem" data-anchor={entryAnchor(m)}>
+            <h4 className="meds-mt">{entryTitle(m)}</h4>
+            {body(m, pieces[i] ?? [])}
+          </div>
+        ))}
+      </ClassCard>
+    );
+  };
   const sc = scenarioGroups(topic);
   if (sc !== null) {
     /**
      * An entry's card under a scenario: titled by the entry (its drug class), with the drugs its roles
-     * there name on one line beside the title. Its first scenario holds the entry's anchor (search
-     * lands there); a later one is anchored `<anchor>@<scenario index>`.
+     * there name on one line beside the title. Its first place holds the entry's anchor (search lands
+     * there); a later one is anchored `<anchor>@<scenario index>`, or `<anchor>@<scenario index>.<population>`
+     * under a patient group.
      */
-    const card = (item: PanelEntryItem, roles: readonly MedsRoleTag[], key: string, landing: boolean): ReactNode => {
-      const isOpen = open[key] ?? (landing && entryAnchor(item) === at);
+    const card = ({ item, roles, first }: ScenarioEntry, place: string): ReactNode => {
+      const key = first ? entryAnchor(item) : `${entryAnchor(item)}@${place}`;
+      const isOpen = open[key] ?? (first && entryAnchor(item) === at);
       const toggle = (): void => setOpen((o) => ({ ...o, [key]: !isOpen }));
       const pieces = isOpen ? itemPieces(system, topic, item, basePt) : [];
       return (
@@ -107,7 +138,10 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
         </ClassCard>
       );
     };
-    const shown = new Set([...sc.groups.flatMap((g) => g.entries.map((x) => entryAnchor(x.item))), ...sc.rest.map(entryAnchor)]);
+    const shown = new Set([
+      ...sc.groups.flatMap((g) => [...g.entries, ...g.populations.flatMap((p) => p.entries)].map((x) => entryAnchor(x.item))),
+      ...sc.rest.flatMap((x) => (x.kind === "class" ? x.members : [x]).map(entryAnchor)),
+    ]);
     return (
       <div className="meds">
         <h3 className="meds-hd">
@@ -119,10 +153,16 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
             {g.gaps.map((gap) => (
               <ScenarioLine key={gap.id} gap={gap} />
             ))}
-            {g.entries.map(({ item, roles, first }) => card(item, roles, first ? entryAnchor(item) : `${entryAnchor(item)}@${i}`, first))}
+            {g.entries.map((x) => card(x, String(i)))}
+            {g.populations.map((p) => (
+              <section key={p.population} className="meds-pop" aria-label={`${g.title}: ${p.population}`}>
+                <h5 className="meds-pop-t">{p.population}</h5>
+                {p.entries.map((x) => card(x, `${i}.${p.population}`))}
+              </section>
+            ))}
           </section>
         ))}
-        {sc.rest.map((item) => card(item, item.roles, entryAnchor(item), true))}
+        {sc.rest.map((x) => (x.kind === "class" ? itemCard(x) : card({ item: x, roles: x.roles, first: true }, "")))}
       </div>
     );
   }
@@ -131,34 +171,7 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
       <h3 className="meds-hd">
         <Icon n="pill" size={15} /> Medications for this condition <span className="n">{items.length}</span>
       </h3>
-      {items.map((item) => {
-        const members = item.kind === "class" ? item.members : [item];
-        const first = members[0];
-        if (!first) return null;
-        // An entry's card is keyed and anchored by the entry, a class's by its own anchor; it starts open when a search result lands on one of its entries.
-        const key = item.kind === "class" ? classAnchor(itemTarget(first)) : entryAnchor(first);
-        const isOpen = open[key] ?? members.some((m) => entryAnchor(m) === at);
-        const toggle = (): void => setOpen((o) => ({ ...o, [key]: !isOpen }));
-        const chips = <RoleChips roles={item.roles} />;
-        const pieces = isOpen ? itemPieces(system, topic, item, basePt) : [];
-        if (item.kind !== "class") {
-          return (
-            <ClassCard key={key} anchor={key} title={entryTitle(item)} chips={chips} open={isOpen} onToggle={toggle}>
-              {body(item, pieces[0] ?? [])}
-            </ClassCard>
-          );
-        }
-        return (
-          <ClassCard key={key} anchor={key} title={item.title} chips={chips} open={isOpen} onToggle={toggle}>
-            {item.members.map((m, i) => (
-              <div key={entryAnchor(m)} className="meds-mem" data-anchor={entryAnchor(m)}>
-                <h4 className="meds-mt">{entryTitle(m)}</h4>
-                {body(m, pieces[i] ?? [])}
-              </div>
-            ))}
-          </ClassCard>
-        );
-      })}
+      {items.map(itemCard)}
     </div>
   );
 }

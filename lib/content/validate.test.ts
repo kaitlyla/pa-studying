@@ -264,7 +264,9 @@ describe("her own meds panel for a topic", () => {
     const G1 = id("g", 1);
     const G2 = id("g", 2);
     const src = { name: "Cellulitis", org: "MSD Manual Professional", year: "2026", url: null };
-    const role = (scenario?: string) => ({ role: "1st", drugs: null, note: null, sources: [src], ...(scenario === undefined ? {} : { scenario }) });
+    const role = (scenario?: string, population?: string) => ({
+      role: "1st", drugs: null, note: null, sources: [src], ...(scenario === undefined ? {} : { scenario }), ...(population === undefined ? {} : { population }),
+    });
     const scn = (title: string, gaps: string[] = []) => ({ title, gaps });
 
     it("accepts scenarios with header gap blocks listed in gaps (one under several scenarios), and roles naming them", () => {
@@ -272,10 +274,18 @@ describe("her own meds panel for a topic", () => {
       expect(verdict(path, meds({ roles: [{ target: C1, roles: [role("A")] }], gaps: [G1], scenarios: [scn("A", [G1]), scn("B", [G1])] }))).toBe("ok");
     });
 
-    it("refuses no scenarios, classes beside them, a repeated title, an unlisted or labeled header gap block, and a role naming no scenario", () => {
+    it("accepts drug classes beside scenarios when none of their entries has a scenario role, and a scenario role for a patient group", () => {
+      const C3 = id("c", 3);
+      expect(verdict(path, meds({ scenarios: [scn("A")], roles: [{ target: C3, roles: [role("A")] }, { target: C1, roles: [role()] }], classes: [{ title: "X", members: [C1, C2] }] }))).toBe("ok");
+      expect(verdict(path, meds({ scenarios: [scn("A")], roles: [{ target: C1, roles: [role("A"), role("A", "Allergy"), role("A", "Peds")] }] }))).toBe("ok");
+    });
+
+    it("refuses no scenarios, a class entry with a scenario role, a repeated title, an unlisted or labeled header gap block, a role naming no scenario, and a population without a scenario or unknown", () => {
       const roles = [{ target: C1, roles: [role()] }];
       expect(verdict(path, meds({ roles, scenarios: [] }))).toMatch(/\.scenarios.*at least one scenario/);
-      expect(verdict(path, meds({ roles, scenarios: [scn("A")], classes: [{ title: "X", members: [C1, C2] }] }))).toMatch(/\.classes.*no drug classes on a panel shown by scenario/);
+      expect(verdict(path, meds({ roles: [{ target: C2, roles: [role("A")] }], scenarios: [scn("A")], classes: [{ title: "X", members: [C1, C2] }] }))).toMatch(/\.classes\[0\]\.members\[1\].*an entry with no scenario role/);
+      expect(verdict(path, meds({ scenarios: [scn("A")], roles: [{ target: C1, roles: [role(undefined, "Peds")] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.population.*only on a role with a scenario/);
+      expect(verdict(path, meds({ scenarios: [scn("A")], roles: [{ target: C1, roles: [role("A", "Kids")] }] }))).toMatch(/\.roles\[0\]\.roles\[0\]\.population/);
       expect(verdict(path, meds({ roles, scenarios: [scn("A"), scn("A")] }))).toMatch(/\.scenarios\[\]\.title/);
       expect(verdict(path, meds({ roles, scenarios: [scn("A", [G1])] }))).toMatch(/\.scenarios\[0\]\.gaps\[0\].*a gap block listed in gaps/);
       expect(verdict(path, meds({ gaps: [G1], scenarios: [scn("A", [G1])], roles: [{ target: G1, roles: [role("A")] }] }))).toMatch(/\.scenarios\[0\]\.gaps\[0\].*with no roles/);

@@ -3,7 +3,7 @@
 // each entry's content as pieces — her guide rows and her pharm notes, cut and trimmed as published,
 // or her own version of them. Browser-safe.
 import { isId } from "../content/ids.ts";
-import { MEDS_ROLES, type DocJSON, type MedsClassGroup, type MedsFile, type MedsPiece, type MedsRoleTag } from "../content/types.ts";
+import { MEDS_POPULATIONS, MEDS_ROLES, type DocJSON, type MedsClassGroup, type MedsFile, type MedsPiece, type MedsPopulation, type MedsRoleTag } from "../content/types.ts";
 import { placeCells } from "../wordFormat.ts";
 import { keepTableRows, noteView, rowsView } from "./columns.ts";
 import type { PartCut, PubBlock, PubGap, PubMedsCard, PubMedsClass, PubMedsEdit, PubTopic, SystemJson } from "./published.ts";
@@ -209,39 +209,51 @@ export interface ScenarioEntry {
   first: boolean;
 }
 
-/** One scenario of a panel shown by scenario: its title, the gap blocks under its header, and its entries ordered by role. */
+/**
+ * One scenario of a panel shown by scenario: its title, the gap blocks under its header, its entries
+ * ordered by role (their roles there for no population), then each patient group with roles there, in
+ * MEDS_POPULATIONS order, with its entries ordered by role.
+ */
 export interface ScenarioGroup {
   title: string;
   gaps: PubGap[];
   entries: ScenarioEntry[];
+  populations: { population: MedsPopulation; entries: ScenarioEntry[] }[];
 }
 
 /**
  * A panel shown by scenario (her file's `scenarios`), or null for a panel shown by drug class. Each
  * scenario lists every entry with a role for it, ordered by role then panel order; an entry with roles
- * for several scenarios shows under each. `rest`: the entries with no scenario role, after the scenarios,
- * ordered by role. A gap block shown under a scenario's header is no entry.
+ * for several scenarios (or patient groups) shows under each, and its first place holds its anchor.
+ * `rest`: what has no scenario role, after the scenarios, as a panel by drug class shows it (her drug
+ * classes under one header). A gap block shown under a scenario's header is no entry.
  */
-export function scenarioGroups(topic: Pick<PubTopic, "meds" | "medsEdit">): { groups: ScenarioGroup[]; rest: PanelEntryItem[] } | null {
+export function scenarioGroups(topic: Pick<PubTopic, "meds" | "medsEdit">): { groups: ScenarioGroup[]; rest: PanelItem[] } | null {
   const scenarios = topic.medsEdit?.scenarios;
   if (scenarios === undefined) return null;
   const intro = new Set(scenarios.flatMap((s) => s.gaps.map((g) => g.id)));
-  const items = panelItems(topic).flatMap((x) => (x.kind === "class" ? x.members : [x])).filter((x) => !(x.kind === "gap" && intro.has(x.gap.id)));
+  const all = panelItems(topic).filter((x) => !(x.kind === "gap" && intro.has(x.gap.id)));
+  const items = all.flatMap((x) => (x.kind === "class" ? x.members : [x]));
   const seen = new Set<string>();
-  const groups = scenarios.map((s): ScenarioGroup => {
-    const under = items.flatMap((item) => {
-      const roles = item.roles.filter((r) => r.scenario === s.title);
+  const under = (pick: (r: MedsRoleTag) => boolean): ScenarioEntry[] => {
+    const found = items.flatMap((item) => {
+      const roles = item.roles.filter(pick);
       return roles.length > 0 ? [{ item, roles }] : [];
     });
-    const entries = byRole(under, (x) => x.roles).map(({ item, roles }) => {
+    return byRole(found, (x) => x.roles).map(({ item, roles }) => {
       const t = itemTarget(item);
       const first = !seen.has(t);
       seen.add(t);
       return { item, roles, first };
     });
-    return { title: s.title, gaps: s.gaps, entries };
+  };
+  const groups = scenarios.map((s): ScenarioGroup => {
+    const entries = under((r) => r.scenario === s.title && r.population === undefined);
+    const populations = MEDS_POPULATIONS.map((population) => ({ population, entries: under((r) => r.scenario === s.title && r.population === population) })).filter((p) => p.entries.length > 0);
+    return { title: s.title, gaps: s.gaps, entries, populations };
   });
-  const rest = byRole(items.filter((x) => !x.roles.some((r) => r.scenario !== undefined)), (x) => x.roles);
+  // Her file puts no entry with a scenario role in a class, so a class here is wholly unscenario'd.
+  const rest = all.filter((x) => x.kind === "class" || !x.roles.some((r) => r.scenario !== undefined));
   return { groups, rest };
 }
 
