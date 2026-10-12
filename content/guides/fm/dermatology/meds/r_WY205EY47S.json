@@ -1329,9 +1329,7 @@
   "g_1C3ZKEV6GY",
   "g_MGXR974VC4",
   "g_YT0EGXY704",
-  "g_PQCGMEV91W",
-  "g_10Y5SG4VBB",
-  "g_9SEWS96FTW"
+  "g_10Y5SG4VBB"
  ],
  "roles": [
   {
@@ -1339,7 +1337,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "cephalexin",
+     "drugs": "cephalexin (PO)",
      "note": null,
      "sources": [
       {
@@ -1355,11 +1353,11 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "Oral"
+     "scenario": "PO/IV"
     },
     {
      "role": "1st",
-     "drugs": "cefazolin",
+     "drugs": "cefazolin (IV)",
      "note": null,
      "sources": [
       {
@@ -1369,7 +1367,7 @@
        "url": null
       }
      ],
-     "scenario": "IV"
+     "scenario": "PO/IV"
     }
    ]
   },
@@ -1378,7 +1376,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "dicloxacillin",
+     "drugs": "dicloxacillin (PO)",
      "note": null,
      "sources": [
       {
@@ -1394,11 +1392,11 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "Oral"
+     "scenario": "PO/IV"
     },
     {
      "role": "1st",
-     "drugs": "nafcillin",
+     "drugs": "nafcillin (IV)",
      "note": null,
      "sources": [
       {
@@ -1408,7 +1406,7 @@
        "url": null
       }
      ],
-     "scenario": "IV"
+     "scenario": "PO/IV"
     }
    ]
   },
@@ -1473,8 +1471,89 @@
    "target": "g_ASRB06FGJF",
    "roles": [
     {
-     "role": "1st",
+     "role": "alt",
      "drugs": "clindamycin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      }
+     ],
+     "scenario": "PO/IV",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": "with cipro or TMP-SMX",
+     "sources": [
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      }
+     ],
+     "scenario": "Cat bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Cat bite",
+     "population": "Peds"
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": "with TMP-SMX or cipro",
+     "sources": [
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      },
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": "PCN allergy: with TMP-SMX",
+     "sources": [
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Peds"
+    },
+    {
+     "role": "1st",
+     "drugs": "clindamycin (PO)",
      "note": "clindamycin resistance becoming more prevalent",
      "sources": [
       {
@@ -1490,35 +1569,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "MRSA PO"
-    },
-    {
-     "role": "alt",
-     "drugs": "clindamycin",
-     "note": "PCN allergy: with cipro",
-     "sources": [
-      {
-       "name": "Cellulitis",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
-      }
-     ],
-     "scenario": "Cat bite"
-    },
-    {
-     "role": "alt",
-     "drugs": "clindamycin",
-     "note": "PCN allergy: with cipro",
-     "sources": [
-      {
-       "name": "Cellulitis",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
-      }
-     ],
-     "scenario": "Dog or human bite"
+     "scenario": "MRSA (PO/IV)"
     }
    ]
   },
@@ -1528,7 +1579,7 @@
     {
      "role": "alt",
      "drugs": "cipro",
-     "note": "PCN allergy: with clindamycin",
+     "note": "with clindamycin",
      "sources": [
       {
        "name": "Cellulitis",
@@ -1537,21 +1588,74 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "Cat bite"
+     "scenario": "Cat bite",
+     "population": "Allergy"
     },
     {
      "role": "alt",
      "drugs": "cipro",
-     "note": "PCN allergy: with clindamycin",
+     "note": "listed for adults only",
+     "sources": [
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Cat bite",
+     "population": "Peds"
+    },
+    {
+     "role": "alt",
+     "drugs": "cipro",
+     "note": "only if benefit exceeds risk and no safer alt",
+     "sources": [
+      {
+       "name": "Fluoroquinolones",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/fluoroquinolones"
+      }
+     ],
+     "scenario": "Cat bite",
+     "population": "Pregnant"
+    },
+    {
+     "role": "alt",
+     "drugs": "cipro",
+     "note": "with clindamycin (dog bites: adults)",
      "sources": [
       {
        "name": "Cellulitis",
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      },
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
       }
      ],
-     "scenario": "Dog or human bite"
+     "scenario": "Dog or human bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "cipro",
+     "note": "only if benefit exceeds risk and no safer alt",
+     "sources": [
+      {
+       "name": "Fluoroquinolones",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/fluoroquinolones"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Pregnant"
     }
    ]
   },
@@ -1559,8 +1663,23 @@
    "target": "p_ZB7VYFCV14",
    "roles": [
     {
-     "role": "1st",
+     "role": "alt",
      "drugs": "doxycycline",
+     "note": "dog bites; not in children < 8 yrs or pregnancy",
+     "sources": [
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline (PO)",
      "note": null,
      "sources": [
       {
@@ -1576,7 +1695,22 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "MRSA PO"
+     "scenario": "MRSA (PO/IV)"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "avoid when safer alternatives are available",
+     "sources": [
+      {
+       "name": "Tetracyclines",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/tetracyclines"
+      }
+     ],
+     "scenario": "MRSA (PO/IV)",
+     "population": "Pregnant"
     }
    ]
   },
@@ -1584,8 +1718,59 @@
    "target": "g_ED5WK3G6Q2",
    "roles": [
     {
-     "role": "1st",
+     "role": "alt",
      "drugs": "TMP-SMX",
+     "note": "with clindamycin",
+     "sources": [
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      }
+     ],
+     "scenario": "Cat bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "with clindamycin",
+     "sources": [
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      },
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "PCN allergy: with clindamycin",
+     "sources": [
+      {
+       "name": "Human and Mammal Bites",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/bites-and-stings/human-and-mammal-bites"
+      }
+     ],
+     "scenario": "Dog or human bite",
+     "population": "Peds"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX (PO)",
      "note": null,
      "sources": [
       {
@@ -1601,7 +1786,52 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "MRSA PO"
+     "scenario": "MRSA (PO/IV)"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "CI in sulfonamide allergy",
+     "sources": [
+      {
+       "name": "BACTRIM / BACTRIM DS (sulfamethoxazole and trimethoprim) prescribing information (FDA label, DailyMed)",
+       "org": "Sun Pharmaceutical Industries",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
+      }
+     ],
+     "scenario": "MRSA (PO/IV)",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "avoid in 1st trimester and near term",
+     "sources": [
+      {
+       "name": "Trimethoprim and Sulfamethoxazole",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/trimethoprim-and-sulfamethoxazole"
+      }
+     ],
+     "scenario": "MRSA (PO/IV)",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "CI < 2 months of age",
+     "sources": [
+      {
+       "name": "BACTRIM / BACTRIM DS (sulfamethoxazole and trimethoprim) prescribing information (FDA label, DailyMed)",
+       "org": "Sun Pharmaceutical Industries",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
+      }
+     ],
+     "scenario": "MRSA (PO/IV)",
+     "population": "Peds"
     }
    ]
   },
@@ -1610,7 +1840,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "linezolid",
+     "drugs": "linezolid (PO)",
      "note": null,
      "sources": [
       {
@@ -1620,7 +1850,7 @@
        "url": null
       }
      ],
-     "scenario": "MRSA PO"
+     "scenario": "MRSA (PO/IV)"
     }
    ]
   },
@@ -1629,7 +1859,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "vanco",
+     "drugs": "vanco (IV)",
      "note": null,
      "sources": [
       {
@@ -1645,22 +1875,16 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
       }
      ],
-     "scenario": "MRSA IV"
+     "scenario": "MRSA (PO/IV)"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Oral",
+   "title": "PO/IV",
    "gaps": [
     "g_MGXR974VC4"
-   ]
-  },
-  {
-   "title": "IV",
-   "gaps": [
-    "g_PQCGMEV91W"
    ]
   },
   {
@@ -1676,15 +1900,9 @@
    ]
   },
   {
-   "title": "MRSA PO",
+   "title": "MRSA (PO/IV)",
    "gaps": [
     "g_YT0EGXY704"
-   ]
-  },
-  {
-   "title": "MRSA IV",
-   "gaps": [
-    "g_9SEWS96FTW"
    ]
   }
  ]

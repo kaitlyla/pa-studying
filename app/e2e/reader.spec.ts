@@ -1032,7 +1032,7 @@ test.describe("pharm", () => {
     ]);
     await expect(meds.locator(".meds-hd .n")).toHaveText(String(distinct.size));
     // Her table's scenarios, in her words, are the panel's only headers: nothing shows outside them.
-    expect(sc.groups.map((s) => s.title)).toEqual(["Oral", "IV", "Cat bite", "Dog or human bite", "MRSA PO", "MRSA IV"]);
+    expect(sc.groups.map((s) => s.title)).toEqual(["PO/IV", "Cat bite", "Dog or human bite", "MRSA (PO/IV)"]);
     expect(sc.rest).toEqual([]);
     await expect(meds.locator(".meds-scn-t")).toHaveText(sc.groups.map((s) => s.title));
     const label = { "1st": null, "2nd": "2nd-line", alt: "Alternative", adjunct: "Adjunct" } as const;
@@ -1050,7 +1050,18 @@ test.describe("pharm", () => {
       await expect(cards.locator(":scope > .phc-h .phc-s")).toHaveText(
         s.entries.map(({ roles }) => roles.map((r) => [r.drugs, label[r.role], r.note].filter((x) => x !== null).join(" · ")).join("; ")),
       );
+      // Her patient groups follow the scenario's cards, each under its own sub-header with its cards and lines.
+      const pops = sec.locator(":scope > section.meds-pop");
+      await expect(pops.locator(":scope > .meds-pop-t")).toHaveText(s.populations.map((p) => p.population));
+      for (const [j, p] of s.populations.entries()) {
+        const pc = pops.nth(j).locator(":scope > section.phc");
+        await expect(pc.locator(":scope > .phc-h .phc-t")).toHaveText(p.entries.map(({ item }) => titleOf(item)));
+        await expect(pc.locator(":scope > .phc-h .phc-s")).toHaveText(
+          p.entries.map(({ roles }) => roles.map((r) => [r.drugs, label[r.role], r.note].filter((x) => x !== null).join(" · ")).join("; ")),
+        );
+      }
     }
+    expect(sc.groups.map((s) => s.populations.map((p) => p.population))).toEqual([["Allergy"], ["Allergy", "Pregnant", "Peds"], ["Allergy", "Pregnant", "Peds"], ["Allergy", "Pregnant", "Peds"]]);
     await expect(meds.locator(".rolec")).toHaveCount(0);
     // Every card open: no picture or table anywhere in the panel.
     const heads = meds.locator(":scope > section.meds-scn > section.phc > .phc-h button, :scope > section.phc > .phc-h button");
