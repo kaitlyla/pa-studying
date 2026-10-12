@@ -14,7 +14,7 @@ import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts
 import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_POPULATIONS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
-  AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, Flag,
+  AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FavoritesFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
@@ -648,6 +648,20 @@ export const validateStructure: Validator = (v, ctx) => {
     if (!pharmIds.includes(d.pharmSection)) bad(ctx, `.drugTables[${i}].pharmSection`, "a pharm section id of this system", d.pharmSection);
   });
 };
+
+/** A favorites pair: two topic rows, in id order, so one pair stands for both directions. */
+const favoritePair: Checker = (v, at, ctx) => {
+  if (!Array.isArray(v) || v.length !== 2 || !v.every((x) => isId("r", x))) bad(ctx, at, "a pair of two topic ids", v);
+  const [a, b] = v as [string, string];
+  if (a >= b) bad(ctx, at, "a pair in id order (never a topic with itself)", v);
+};
+
+/** Her comparison favorites (site/compare): the pairs sorted, each once, so a save is a stable whole file. */
+export const validateFavorites: Validator = whole((v, at, ctx) => {
+  shapeOf<FavoritesFile>({ v: v1, pairs: arr(favoritePair) }, {})(v, at, ctx);
+  const keys = (v as FavoritesFile).pairs.map(([a, b]) => `${a},${b}`);
+  if (keys.some((k, i) => i > 0 && (keys[i - 1] as string) >= k)) bad(ctx, `${at}.pairs`, "pairs in sorted order, each once", keys);
+});
 
 // ---- places (20.8) ----------------------------------------------------------------------------
 

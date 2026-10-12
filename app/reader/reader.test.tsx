@@ -542,6 +542,64 @@ describe("topics page", () => {
   });
 });
 
+describe("compare page", () => {
+  it("the dx page's Compare button opens the view; quadrants add, pick, remove, and show the same card", async () => {
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    await until(() => c.querySelector(`section.tcard[data-topic="${stable().id}"]`), "Stable angina card");
+
+    await click(byText(c, ".main .acts button", "Compare"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 1, "one quadrant");
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id}`);
+    const first = must(c.querySelector(".cmp-q"), "first quadrant");
+    expect(must(first.querySelector("select"), "first picker").value).toBe(stable().id);
+    expect(row(must(first.querySelector(".tcard"), "card"), R(104))).not.toBeNull();
+    expect(first.querySelector("button[aria-label^='Remove quadrant']")).toBeNull();
+    expect(c.querySelector(".favm")).toBeNull();
+
+    // Adding a quadrant makes an empty slot the picker fills.
+    await click(byText(c, ".main .acts button", "Add quadrant"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 2, "two quadrants");
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id},`);
+    const second = must([...c.querySelectorAll(".cmp-q")][1], "second quadrant");
+    expect(second.querySelector(".tcard")).toBeNull();
+    const pick = must(second.querySelector("select"), "second picker");
+    await act(async () => {
+      pick.value = af().id;
+      pick.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    await until(() => c.querySelectorAll(".cmp-q .tcard").length === 2, "two cards");
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id},${af().id}`);
+
+    // Up to four: then the add control goes, and a quadrant can be taken off.
+    await click(byText(c, ".main .acts button", "Add quadrant"));
+    await click(byText(c, ".main .acts button", "Add quadrant"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 4, "four quadrants");
+    expect(byText(c, ".main .acts button", "Add quadrant")).toBeNull();
+    await click(must(c.querySelector("button[aria-label='Remove quadrant 1']"), "remove the first quadrant"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 3, "three quadrants");
+    expect(location.hash).toBe(`#/eor/fm/compare/${af().id},,`);
+  });
+
+  it("groups the picker by system, and a topic the guide doesn't have, or five slots, isn't on the site", async () => {
+    quietErrors();
+    const a = await renderApp(`#/eor/fm/compare/${stable().id}`);
+    app = a;
+    const c = a.container;
+    await until(() => c.querySelector(".cmp-q .tcard"), "card");
+    expect([...c.querySelectorAll(".cmp-q select optgroup")].map((g) => g.getAttribute("label"))).toContain("Cardiovascular");
+    expect([...c.querySelectorAll(".cmp-q select option")].map((o) => (o as HTMLOptionElement).value)).toContain(af().id);
+
+    await go(`#/eor/fm/compare/r_0000009999`);
+    await until(() => notFound(c), "unknown topic not on site");
+    await go(`#/eor/fm/compare/${stable().id}`);
+    await until(() => c.querySelector(".cmp-q .tcard"), "a real compare page again");
+    await go("#/eor/fm/compare/r_0000000001,r_0000000002,r_0000000003,r_0000000004,r_0000000005");
+    await until(() => notFound(c), "five slots not on site");
+  });
+});
+
 describe("block page", () => {
   it("renders a listed block whole under its section crumb", async () => {
     const a = await renderApp(`#/eor/fm/b/${B(11)}`);

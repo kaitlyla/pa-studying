@@ -15,6 +15,7 @@ import { WorkupPage } from "../general/WorkupPage.tsx";
 import { PharmPage } from "../pharm/PharmPage.tsx";
 import { Picker } from "../picker/Picker.tsx";
 import { BlockPage } from "../reader/BlockPage.tsx";
+import { ComparePage } from "../reader/ComparePage.tsx";
 import { GuideHome } from "../reader/GuideHome.tsx";
 import { ReviewSlidesPage } from "../reader/ReviewSlidesPage.tsx";
 import { SectionPage } from "../reader/SectionPage.tsx";
@@ -205,6 +206,8 @@ function PageFor({ route }: { route: Route }): ReactNode {
           return <SectionPage guide={guide} system={view.system} section={view.section} />;
         case "topics":
           return <TopicsPage guide={guide} ids={view.ids} />;
+        case "compare":
+          return <ComparePage guide={guide} ids={view.ids} />;
         case "block":
           return <BlockPage guide={guide} block={view.id} />;
         case "pharm":

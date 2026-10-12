@@ -11,7 +11,7 @@ import { EditControls, EditRegion, useIsEditing } from "../shell/mounts.tsx";
 import { PageHead, type Crumb } from "../shell/Page.tsx";
 import { guideViewHash, navigate } from "../shell/route.ts";
 import { AdditionalInfo, notesAt, NotesBlock } from "./blocks.tsx";
-import { guideCrumbs, systemCrumb, topicHash, useNav, useSite, useSystem } from "./data.ts";
+import { COMPARE, entryTitle, guideCrumbs, systemCrumb, topicHash, useNav, useSite, useSystem } from "./data.ts";
 import { PdfMenu } from "./PdfMenu.tsx";
 import { buildPageKey } from "../edit/pageKey.ts";
 
@@ -39,7 +39,7 @@ interface TopicCardProps {
   multi: boolean;
 }
 
-function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps): ReactNode {
+export function TopicCard({ guide, nav, id, system: sysId, ids, multi }: TopicCardProps): ReactNode {
   const system = useSystem(guide, sysId);
   const topic = topicIn(system, id);
   const first = topic.rows.map((r) => system.rows[r]).find((r) => r !== undefined);
@@ -106,13 +106,7 @@ export function TopicsPage({ guide, ids }: { guide: string; ids: string[] }): Re
     return { id, ...at };
   });
   const multi = located.length > 1;
-  const titleOf = (id: string): string => {
-    for (const s of nav.systems) {
-      const e = [...s.entries, ...s.sections.flatMap((x) => x.entries)].find((x) => x.id === id);
-      if (e) return e.title;
-    }
-    return id;
-  };
+  const titleOf = (id: string): string => entryTitle(nav, id);
   const one = located[0];
   if (!one) throw new PageNotFound("no topic");
   const sys = nav.systems.find((s) => s.id === one.system);
@@ -138,6 +132,11 @@ export function TopicsPage({ guide, ids }: { guide: string; ids: string[] }): Re
             {multi && last && (
               <button type="button" className="btn" onClick={() => void navigate(topicHash(guide, [last.id]))}>
                 Close others
+              </button>
+            )}
+            {!multi && (
+              <button type="button" className="btn" onClick={() => void navigate(guideViewHash(guide, { kind: "compare", ids: [one.id] }))}>
+                {COMPARE}
               </button>
             )}
             {oneSystem ? (

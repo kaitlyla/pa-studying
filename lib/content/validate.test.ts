@@ -2,7 +2,7 @@
 // violations 20 names.
 import { describe, expect, it } from "vitest";
 import { ContentError } from "./check.ts";
-import { BLOCK_FILE_RE, inboxItemDir, inboxUploadPath, isContentJSON, partName, serializeFile, UPLOAD_NAME, validateFile } from "./files.ts";
+import { BLOCK_FILE_RE, favoritesPath, inboxItemDir, inboxUploadPath, isContentJSON, partName, serializeFile, UPLOAD_NAME, validateFile } from "./files.ts";
 import { checkTrackSeries, isCdcOrg } from "./validate.ts";
 import type { GapFile } from "./types.ts";
 
@@ -11,6 +11,9 @@ const B1 = id("b", 1);
 const D1 = id("d", 1);
 const G1 = id("g", 1);
 const G2 = id("g", 2);
+const R1 = id("r", 1);
+const R2 = id("r", 2);
+const R3 = id("r", 3);
 
 const para = (text: string, attrs: Record<string, unknown> = {}) => ({ type: "paragraph", attrs, content: [{ type: "text", text }] });
 const doc = (...content: unknown[]) => ({ type: "doc", content });
@@ -1169,5 +1172,29 @@ describe("paths (20 §20.2)", () => {
       expect(isContentJSON(path), path).toBe(true);
       expect(BLOCK_FILE_RE.test(path), path).toBe(false);
     }
+  });
+});
+
+describe("favorites (site/compare)", () => {
+  const path = favoritesPath("fm");
+
+  it("knows exactly the guide's favorites file", () => {
+    expect(isContentJSON(path)).toBe(true);
+    expect(isContentJSON("content/guides/derm/favorites.json")).toBe(false);
+    expect(isContentJSON("content/guides/fm/favorites.json.bak")).toBe(false);
+  });
+
+  it("accepts pairs in id order, the list sorted, each once", () => {
+    expect(verdict(path, { v: 1, pairs: [] })).toBe("ok");
+    expect(verdict(path, { v: 1, pairs: [[R1, R2], [R2, R3]] })).toBe("ok");
+  });
+
+  it("refuses a pair out of order, a topic with itself, a non-topic and an unsorted or repeated list", () => {
+    expect(verdict(path, { v: 1, pairs: [[R2, R1]] })).toMatch(/in id order/);
+    expect(verdict(path, { v: 1, pairs: [[R1, R1]] })).toMatch(/in id order/);
+    expect(verdict(path, { v: 1, pairs: [[R1, B1]] })).toMatch(/pair of two topic ids/);
+    expect(verdict(path, { v: 1, pairs: [[R2, R3], [R1, R2]] })).toMatch(/sorted order/);
+    expect(verdict(path, { v: 1, pairs: [[R1, R2], [R1, R2]] })).toMatch(/sorted order/);
+    expect(verdict(path, { v: 1, pairs: [[R1, R2]], page: 1 })).toMatch(/no such key/);
   });
 });

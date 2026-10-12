@@ -29,6 +29,8 @@ export type GuideView =
   | { kind: "system"; system: string }
   | { kind: "section"; system: string; section: string }
   | { kind: "topics"; ids: string[] }
+  /** Up to four diagnoses side by side (compare): one slot per quadrant, `""` for an empty one. */
+  | { kind: "compare"; ids: string[] }
   | { kind: "block"; id: string }
   | { kind: "pharm"; system: string; section: string | null; target: string | null }
   | { kind: "general"; key: GeneralKey }
@@ -82,6 +84,10 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
     case "t": {
       const ids = (a ?? "").split(",").filter((x) => x !== "");
       return ids.length > 0 && b === undefined ? page({ kind: "topics", ids }) : NOT_FOUND;
+    }
+    case "compare": {
+      const slots = (a ?? "").split(",");
+      return a !== undefined && b === undefined && slots.length <= 4 ? page({ kind: "compare", ids: slots }) : NOT_FOUND;
     }
     case "b":
       return a && b === undefined ? page({ kind: "block", id: a }) : NOT_FOUND;
@@ -165,6 +171,8 @@ export function guideViewHash(guide: string, view: GuideView): string {
       return `${base}/sec/${enc(view.system)}/${enc(view.section)}`;
     case "topics":
       return `${base}/t/${view.ids.map(enc).join(",")}`;
+    case "compare":
+      return `${base}/compare/${view.ids.map(enc).join(",")}`;
     case "block":
       return `${base}/b/${enc(view.id)}`;
     case "pharm": {

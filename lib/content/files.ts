@@ -6,7 +6,7 @@ import type { IdPrefix } from "./ids.ts";
 import { GUIDE_IDS } from "./types.ts";
 import {
   normalizeDoc, validateAsIsFile, validateBlock, validateCards, validateChecks, validateConcepts, validateDeck,
-  validateEvidence, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateMeds, validateOther,
+  validateEvidence, validateFavorites, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateMeds, validateOther,
   validatePharmFile, validateRefTabs, validateSite, validateSlide, validateStructure, validateSystem, validateTrims,
   validateUpload, validateUses, validateVocab, validateWordDoc,
 } from "./validate.ts";
@@ -71,12 +71,17 @@ export const TOPIC_MEDS_RE = pathRe(`content/guides/${GUIDE}/${SLUG}/meds/(?<top
 export const topicMedsDir = (guide: string, system: string): string => `content/guides/${guide}/${system}/meds`;
 export const topicMedsPath = (guide: string, system: string, topic: string): string => `${topicMedsDir(guide, system)}/${topic}.json`;
 
+/** Her comparison favorites for a guide: `content/guides/<g>/favorites.json` (read by the owner's app, never published). */
+export const FAVORITES_FILE_RE = pathRe(`content/guides/${named(GUIDE)}/favorites\\.json`);
+export const favoritesPath = (guide: string): string => `content/guides/${guide}/favorites.json`;
+
 /** Every JSON file of the content tree, by path pattern, with its validator. */
 const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/site\\.json"), validateSite],
   [pathRe("content/vocab/abbreviations\\.json"), validateVocab],
   [pathRe(`content/guides/${named(GUIDE)}/guide\\.json`), validateGuide],
   [pathRe(`content/guides/${named(GUIDE)}/general\\.json`), validateGeneral],
+  [FAVORITES_FILE_RE, validateFavorites],
   [pathRe(`content/guides/${GUIDE}/${named(SLUG)}/system\\.json`), validateSystem],
   [pathRe(`content/guides/${GUIDE}/${SLUG}/structure\\.json`), validateStructure],
   [pathRe("content/pharm/cards\\.json"), validateCards],

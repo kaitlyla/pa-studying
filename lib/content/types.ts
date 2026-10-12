@@ -228,6 +228,17 @@ export interface StructureFile {
   pharmFiles: string[];
 }
 
+// 20.7 (compare)
+/**
+ * Her saved comparison favorites for a guide: the topic pairs she compares, "both ways" (one pair
+ * stands for both), each pair sorted by id, the list sorted, no pair twice and no topic with itself.
+ * Never published: the owner reads and saves it through Git (50 §50.4); a visitor sees nothing of it.
+ */
+export interface FavoritesFile {
+  v: 1;
+  pairs: [string, string][];
+}
+
 export interface CardsFile {
   v: 1;
   /**

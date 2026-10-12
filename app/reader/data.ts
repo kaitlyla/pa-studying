@@ -38,3 +38,15 @@ export function guideFile(nav: NavJson): string {
 
 /** Topic route. */
 export const topicHash = (g: string, ids: readonly string[]): string => guideViewHash(g, { kind: "topics", ids: [...ids] });
+
+/** The compare view's name: the diagnosis page's button and the view's title. */
+export const COMPARE = "Compare";
+
+/** The title the sidebar gives topic or listed block `id`, or the id itself. */
+export function entryTitle(nav: NavJson, id: string): string {
+  for (const s of nav.systems) {
+    const e = [...s.entries, ...s.sections.flatMap((x) => x.entries)].find((x) => x.id === id);
+    if (e) return e.title;
+  }
+  return id;
+}

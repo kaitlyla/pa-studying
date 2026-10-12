@@ -8,7 +8,7 @@ import { ISO_UTC_RE } from "./check.ts";
  */
 export const COMMIT_KINDS = [
   "import", "curation", "authoring", "edit", "restore", "doc-add", "doc-rename", "doc-replace",
-  "doc-remove", "doc-restore", "doc-marker", "inbox", "guidelines",
+  "doc-remove", "doc-restore", "doc-marker", "inbox", "guidelines", "favorites",
 ] as const;
 export type CommitKind = (typeof COMMIT_KINDS)[number];
 
