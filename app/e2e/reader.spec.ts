@@ -1013,8 +1013,8 @@ test.describe("pharm", () => {
     await expect(landed.locator(`.meds-mem[data-anchor="${at}"]`)).toBeVisible();
   });
 
-  test("meds panel shown by scenario (FM Cellulitis): a header per scenario with its duration box, cards titled by drug with role-only chips, and no pictures or tables", async ({ page }) => {
-    // Her ask for Cellulitis: grouped by scenario, each drug's MOA, coverage and cautions, the abx duration per scenario, no flow charts.
+  test("meds panel shown by scenario (FM Cellulitis): her table's scenarios as the only headers, each with one duration line, cards titled by class with that scenario's drugs beside them, no chips, pictures or tables", async ({ page }) => {
+    // Her ask for Cellulitis: the only headers are her scenarios; one card per abx class with the scenario's drugs on it; a duration per scenario; no flow charts.
     const g = "fm";
     const topic = navOf(g)
       .systems.map((s) => systemOf(g, s.id).topics.find((t) => t.id === "r_WY205EY47S"))
@@ -1028,22 +1028,27 @@ test.describe("pharm", () => {
     const meds = main(page).locator(".meds");
     const distinct = new Set([...sc.groups.flatMap((s) => s.entries.map((e) => anchorOf(e.item))), ...sc.rest.map(anchorOf)]);
     await expect(meds.locator(".meds-hd .n")).toHaveText(String(distinct.size));
+    // Her table's scenarios, in her words, are the panel's only headers: nothing shows outside them.
+    expect(sc.groups.map((s) => s.title)).toEqual(["Oral", "IV", "Cat bite", "Dog or human bite", "MRSA PO", "MRSA IV"]);
+    expect(sc.rest).toEqual([]);
     await expect(meds.locator(".meds-scn-t")).toHaveText(sc.groups.map((s) => s.title));
+    const label = { "1st": null, "2nd": "2nd-line", alt: "Alternative", adjunct: "Adjunct" } as const;
     for (const [i, s] of sc.groups.entries()) {
       const sec = meds.locator("section.meds-scn").nth(i);
-      expect(s.gaps.length).toBeGreaterThan(0);
-      for (const gap of s.gaps) await expect(sec.locator(`section[data-anchor="${gap.id}"] .gap-h h3`)).toHaveText(gap.title);
+      // One duration line, not a box.
+      expect(s.gaps.length).toBe(1);
+      for (const gap of s.gaps) await expect(sec.locator(`:scope > .meds-scn-l[data-anchor="${gap.id}"]`)).toHaveText(/^Duration: \S/);
+      await expect(sec.locator(":scope > section.gap")).toHaveCount(0);
+      // One card per class, each class once; the scenario's drugs (role unless 1st-line, note) beside its title.
       const cards = sec.locator(":scope > section.phc");
-      await expect(cards.locator(":scope > .phc-h .phc-t")).toHaveText(
-        s.entries.map(({ item, roles }) => {
-          const drugs = [...new Set(roles.flatMap((r) => (r.drugs === null ? [] : [r.drugs])))];
-          return drugs.length > 0 ? drugs.join(", ") : titleOf(item);
-        }),
+      const titles = s.entries.map(({ item }) => titleOf(item));
+      expect(new Set(titles).size).toBe(titles.length);
+      await expect(cards.locator(":scope > .phc-h .phc-t")).toHaveText(titles);
+      await expect(cards.locator(":scope > .phc-h .phc-s")).toHaveText(
+        s.entries.map(({ roles }) => roles.map((r) => [r.drugs, label[r.role], r.note].filter((x) => x !== null).join(" · ")).join("; ")),
       );
-      for (const [j, { roles }] of s.entries.entries()) {
-        await expect(cards.nth(j).locator(":scope > .phc-h .rolec")).toHaveText(roles.map((r) => ({ "1st": "1st-line", "2nd": "2nd-line", alt: "Alternative", adjunct: "Adjunct" })[r.role]));
-      }
     }
+    await expect(meds.locator(".rolec")).toHaveCount(0);
     // Every card open: no picture or table anywhere in the panel.
     const heads = meds.locator(":scope > section.meds-scn > section.phc > .phc-h button, :scope > section.phc > .phc-h button");
     for (const b of await heads.all()) await b.click();

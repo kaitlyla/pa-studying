@@ -285,8 +285,8 @@ export interface MedsFile {
 
 /**
  * One clinical scenario of a meds panel shown by scenario: its header `title` (unique in the file), and
- * the sourced gap blocks shown under the header before its entries (`gaps`: ids listed in the file's
- * `gaps`, each under one scenario at most, e.g. how long that scenario is treated).
+ * the sourced gap blocks shown as one line each under the header before its entries (`gaps`: ids listed
+ * in the file's `gaps`, e.g. how long that scenario is treated; one may serve several scenarios).
  */
 export interface MedsScenario {
   title: string;

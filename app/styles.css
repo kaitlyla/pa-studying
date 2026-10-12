@@ -311,6 +311,8 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .meds-mt { margin: 8px 0 2px; font-size: 14px; font-weight: 700; color: #1f2633; }
 .meds-scn + .meds-scn, .meds-scn + .phc { margin-top: 14px; padding-top: 10px; border-top: 1px solid #e1e5ec; }
 .meds-scn-t { margin: 0 0 6px; font-size: 14px; font-weight: 700; color: #1f2633; }
+.meds-scn-l { margin: 0 0 6px; font-size: 13px; line-height: 1.5; color: #1f2633; }
+.meds-scn-l .rsrc { font-size: 12px; color: #5b6472; }
 
 /* ---- files, slides, viewers ---- */
 .fv-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }

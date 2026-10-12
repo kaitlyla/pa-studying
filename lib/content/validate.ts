@@ -478,7 +478,7 @@ export const validateCards: Validator = (v, ctx) => {
  * a gap block taken off only if it is listed, an edited entry's gap block in no other list, each entry's
  * roles once, each class two or more entries not taken off and each entry in one class at most, and
  * something in it. Shown by scenario: no classes, each scenario titled once, its gap blocks listed in
- * gaps, under one scenario at most and with no roles, and each role's scenario one of the file's.
+ * gaps and with no roles (one may show under several scenarios), and each role's scenario one of the file's.
  */
 export const validateMeds: Validator = (v, ctx) => {
   const target = id("c", "r", "p");
@@ -513,7 +513,6 @@ export const validateMeds: Validator = (v, ctx) => {
     if (scenarios.length === 0) bad(ctx, ".scenarios", "at least one scenario (leave it out for a panel by drug class)", scenarios);
     if (classes.length > 0) bad(ctx, ".classes", "no drug classes on a panel shown by scenario", classes);
     uniqueArr(str)(scenarios.map((s) => s.title), ".scenarios[].title", ctx);
-    uniqueArr(str)(scenarios.flatMap((s) => s.gaps), ".scenarios[].gaps", ctx);
     scenarios.forEach((s, i) => s.gaps.forEach((g, j) => {
       if (!gaps.includes(g)) bad(ctx, `.scenarios[${i}].gaps[${j}]`, "a gap block listed in gaps", g);
       if (roles.some((r) => r.target === g)) bad(ctx, `.scenarios[${i}].gaps[${j}]`, "a gap block with no roles (it shows under the scenario's header, not as an entry)", g);

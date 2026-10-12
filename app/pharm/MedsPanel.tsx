@@ -10,13 +10,15 @@
 import { useState, type ReactNode } from "react";
 import type { MedsRoleTag } from "../../lib/content/types.ts";
 import { classAnchor, itemPieces, itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelPiece } from "../../lib/derive/panel.ts";
-import type { NavSystem, PubTopic, SystemJson } from "../../lib/derive/published.ts";
+import type { NavSystem, PubGap, PubTopic, SystemJson } from "../../lib/derive/published.ts";
+import { collapse, docText } from "../../lib/derive/text.ts";
 import { GapBlock } from "../render/labels.tsx";
+import { Txt } from "../render/Text.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
 import { guideViewHash, useRoute } from "../shell/route.ts";
 import { CardPieces, ClassCard } from "./ClassCard.tsx";
-import { RoleChips, RoleLines } from "./Roles.tsx";
+import { ROLE_LABELS, RoleChips, RoleLines } from "./Roles.tsx";
 
 /** Owner-only label on an entry she edited for this condition. */
 export const OWN_VERSION = "Your version for this condition";
@@ -26,6 +28,34 @@ export const entryAnchor = (item: PanelEntryItem): string => (item.kind === "gap
 
 /** An entry's title. */
 const entryTitle = (item: PanelEntryItem): string => (item.kind === "gap" ? item.gap.title : item.entry.med.title);
+
+/** What one role names on a scenario card's header: its drugs, its role unless 1st-line, and its note ("cipro · Alternative · PCN allergy: with clindamycin"). */
+export function scenarioDrugs(r: MedsRoleTag): string {
+  return [r.drugs, r.role === "1st" ? null : ROLE_LABELS[r.role], r.note].filter((x) => x !== null).join(" · ");
+}
+
+/** A sourced gap block under a scenario's header (e.g. how long it is treated), as one line with its sources linked. */
+function ScenarioLine({ gap }: { gap: PubGap }): ReactNode {
+  return (
+    <p className="meds-scn-l" data-anchor={gap.id}>
+      <b>Duration:</b> <Txt text={collapse(docText(gap.doc))} />
+      {gap.sources.map((s, i) => (
+        <span key={i} className="rsrc">
+          {" "}
+          · <Txt text={s.name} />
+          {s.url !== null && /^https?:\/\//.test(s.url) && (
+            <>
+              {" "}
+              <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source: ${s.name}`}>
+                <Icon n="ext" size={11} />
+              </a>
+            </>
+          )}
+        </span>
+      ))}
+    </p>
+  );
+}
 
 export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: string; system: SystemJson; systems: readonly NavSystem[]; topic: PubTopic; basePt: number }): ReactNode {
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -63,25 +93,16 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
   const sc = scenarioGroups(topic);
   if (sc !== null) {
     /**
-     * An entry's card under a scenario: titled by the drugs its roles there name (else the entry's
-     * title, which then shows beside them), with chips naming only the role. Its first scenario holds
-     * the entry's anchor (search lands there); a later one is anchored `<anchor>@<scenario index>`.
+     * An entry's card under a scenario: titled by the entry (its drug class), with the drugs its roles
+     * there name on one line beside the title. Its first scenario holds the entry's anchor (search
+     * lands there); a later one is anchored `<anchor>@<scenario index>`.
      */
     const card = (item: PanelEntryItem, roles: readonly MedsRoleTag[], key: string, landing: boolean): ReactNode => {
       const isOpen = open[key] ?? (landing && entryAnchor(item) === at);
       const toggle = (): void => setOpen((o) => ({ ...o, [key]: !isOpen }));
-      const drugs = [...new Set(roles.flatMap((r) => (r.drugs === null ? [] : [r.drugs])))];
       const pieces = isOpen ? itemPieces(system, topic, item, basePt) : [];
       return (
-        <ClassCard
-          key={key}
-          anchor={key}
-          title={drugs.length > 0 ? drugs.join(", ") : entryTitle(item)}
-          sub={drugs.length > 0 ? entryTitle(item) : undefined}
-          chips={<RoleChips roles={roles.map((r) => ({ ...r, drugs: null }))} />}
-          open={isOpen}
-          onToggle={toggle}
-        >
+        <ClassCard key={key} anchor={key} title={entryTitle(item)} sub={roles.map(scenarioDrugs).join("; ")} open={isOpen} onToggle={toggle}>
           {body(item, pieces[0] ?? [], roles)}
         </ClassCard>
       );
@@ -96,7 +117,7 @@ export function MedsPanel({ guide, system, systems, topic, basePt }: { guide: st
           <section key={g.title} className="meds-scn" aria-label={g.title}>
             <h4 className="meds-scn-t">{g.title}</h4>
             {g.gaps.map((gap) => (
-              <GapBlock key={gap.id} gap={gap} />
+              <ScenarioLine key={gap.id} gap={gap} />
             ))}
             {g.entries.map(({ item, roles, first }) => card(item, roles, first ? entryAnchor(item) : `${entryAnchor(item)}@${i}`, first))}
           </section>
