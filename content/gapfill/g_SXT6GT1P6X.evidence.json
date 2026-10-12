@@ -1,0 +1,47 @@
+{
+ "v": 1,
+ "author": "zane-52795 (all-rounder-01a1115a-a0c3-73a2-a538-072c2208363a)",
+ "claims": [
+  {
+   "text": "PCN-susceptible strep, NVE: PCN G 4 wk, or 2 wk if given w gentamicin.",
+   "source": 0,
+   "quote": "For NVE: Penicillin G 12–18 million units a day IV continuously or 2–3 million units every 4 hours for 4 weeks or, if gentamicin 3 mg/kg† IV or IM once a day is given concurrently, for 2 weeks",
+   "locator": "Some Antibiotic Regimens for Endocarditis in the United States (table) › Streptococci susceptible to penicillin",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "PVE: PCN G 6 wk, or 2 wk if given w gentamicin.",
+   "source": 0,
+   "quote": "For PVE: Penicillin G 24 million units a day IV continuously or 4 million units every 4 hours for 6 weeks or, if gentamicin 3 mg/kg† IV or IM (up to 80 mg) is given concurrently, for 2 weeks",
+   "locator": "Some Antibiotic Regimens for Endocarditis in the United States (table) › Streptococci susceptible to penicillin",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "PCN allergy (no anaphylaxis Hx): ceftriaxone 4 wk for NVE (6 wk for PVE), or 2 wk if given w gentamicin.",
+   "source": 0,
+   "quote": "Ceftriaxone 2 g IV or IM once a day for 4 weeks for NVE (6 weeks for PVE) or, if gentamicin 3 mg/kg† IV or IM once a day is given concurrently, for 2 weeks if there is no history of penicillin anaphylaxis",
+   "locator": "Some Antibiotic Regimens for Endocarditis in the United States (table) › Streptococci susceptible to penicillin › Adults allergic to penicillin",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "PCN allergy: vancomycin 4 wk for NVE (6 wk for PVE).",
+   "source": 0,
+   "quote": "Vancomycin‡ 15 mg/kg IV every 12 hours for 4 weeks for NVE (6 weeks for PVE)",
+   "locator": "Some Antibiotic Regimens for Endocarditis in the United States (table) › Streptococci susceptible to penicillin › Adults allergic to penicillin",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-12",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 2,
+    "issue": "ceftriaxone is in MSD's PCN-allergic column; allergy/anaphylaxis condition dropped",
+    "resolution": "claim prefixed 'PCN allergy (no anaphylaxis Hx)'"
+   }
+  ]
+ },
+ "block": "g_SXT6GT1P6X"
+}
