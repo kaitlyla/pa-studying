@@ -5,6 +5,8 @@ on:
     branches: [main]
   push:
     branches: [main]
+    # Content-only pushes skip CI; publish.yml still builds the site from them.
+    paths-ignore: ["content/**"]
 
 permissions: {}
 
