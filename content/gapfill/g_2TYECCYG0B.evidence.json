@@ -3,6 +3,27 @@
  "author": "ray-41289 (all-rounder-01a10e67-0e67-7603-ba03-d54292308298)",
  "claims": [
   {
+   "text": "MOA: beta-lactam; binds and inactivates enzymes required for bacterial cell wall synth.",
+   "source": 2,
+   "quote": "All beta-lactams bind to and inactivate enzymes required for bacterial cell wall synthesis.",
+   "locator": "Overview of Beta-Lactams",
+   "accessed": "2026-10-12"
+  },
+  {
+   "text": "Treats: extremely broad: gram (-) bacilli, anaerobes, most Enterobacterales (incl AmpC/ESBL producers), MSSA and strep.",
+   "source": 0,
+   "quote": "Carbapenems are parenteral bactericidal beta-lactam antibiotics that have an extremely broad spectrum. They are active against Gram-negative bacilli Anaerobes Most Enterobacterales (including those that produce AmpC beta-lactamase and extended-spectrum beta-lactamase [ESBL], although Proteus mirabilis tends to have a higher imipenem minimum inhibitory concentration [MIC]) Methicillin-sensitive staphylococci and streptococci, including Streptococcus pneumoniae (except possibly strains with reduced penicillin sensitivity)",
+   "locator": "Carbapenems",
+   "accessed": "2026-10-12"
+  },
+  {
+   "text": "Treats (gaps): ertapenem misses E. faecalis and P. aeruginosa (imipenem/meropenem cover many); E. faecium, Stenotrophomonas and MRSA are resistant to all.",
+   "source": 0,
+   "quote": "Most Enterococcus faecalis and many Pseudomonas aeruginosa strains, including those resistant to broad-spectrum penicillins and cephalosporins, are susceptible to imipenem and meropenem but are resistant to ertapenem. However, meropenem is less active against E. faecalis than imipenem. Carbapenems are active synergistically with aminoglycosides against P. aeruginosa. However, E. faecium, Stenotrophomonas maltophilia, and methicillin-resistant staphylococci are resistant.",
+   "locator": "Carbapenems",
+   "accessed": "2026-10-12"
+  },
+  {
    "text": "Parenteral bactericidal beta-lactams w an extremely broad spectrum.",
    "source": 0,
    "quote": "Carbapenems are parenteral bactericidal beta-lactam antibiotics that have an extremely broad spectrum.",
@@ -10,7 +31,7 @@
    "accessed": "2026-10-09"
   },
   {
-   "text": "Seizures and other CNS effects, mostly w CNS disorders, meningitis or renal impairment",
+   "text": "Seizures and other CNS effects (meropenem label), mostly w CNS disorders, meningitis or renal impairment",
    "source": 1,
    "quote": "Seizures and other adverse CNS experiences have been reported during treatment with Meropenem for injection. These experiences have occurred most commonly in patients with CNS disorders (e.g., brain lesions or history of seizures) or with bacterial meningitis and/or compromised renal function",
    "locator": "5.4 Seizure Potential",
@@ -45,7 +66,7 @@
    "accessed": "2026-10-09"
   },
   {
-   "text": "Lowers valproic acid levels: risk of breakthrough seizures.",
+   "text": "Lowers valproic acid levels (meropenem label): risk of breakthrough seizures.",
    "source": 1,
    "quote": "Co-administration of meropenem for injection with valproic acid or divalproex sodium reduces the serum concentration of valproic acid potentially increasing the risk of breakthrough seizures.",
    "locator": "Highlights › Warnings and Precautions",
@@ -54,7 +75,7 @@
  ],
  "verification": {
   "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
-  "at": "2026-10-10",
+  "at": "2026-10-12",
   "result": "pass",
   "notes": []
  },

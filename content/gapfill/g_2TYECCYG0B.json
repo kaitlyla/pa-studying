@@ -26,6 +26,111 @@
     "content": [
      {
       "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "MOA:"
+     },
+     {
+      "type": "text",
+      "text": " beta-lactam; binds and inactivates enzymes required for bacterial cell wall synth."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Treats:"
+     },
+     {
+      "type": "text",
+      "text": " extremely broad: gram (-) bacilli, anaerobes, most Enterobacterales (incl AmpC/ESBL producers), MSSA and strep."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Treats (gaps):"
+     },
+     {
+      "type": "text",
+      "text": " ertapenem misses E. faecalis and P. aeruginosa (imipenem/meropenem cover many); E. faecium, Stenotrophomonas and MRSA are resistant to all."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
       "text": "Parenteral bactericidal beta-lactams w an extremely broad spectrum."
      }
     ]
@@ -52,7 +157,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Seizures and other CNS effects, mostly w CNS disorders, meningitis or renal impairment (imipenem ⍉used in meningitis for sz risk). C. difficile diarrhea."
+      "text": "Seizures and other CNS effects (meropenem label), mostly w CNS disorders, meningitis or renal impairment (imipenem ⍉used in meningitis for sz risk). C. difficile diarrhea."
      }
     ]
    },
@@ -109,7 +214,7 @@
         "type": "bold"
        }
       ],
-      "text": "Lowers valproic acid levels:"
+      "text": "Lowers valproic acid levels (meropenem label):"
      },
      {
       "type": "text",
@@ -120,8 +225,8 @@
   ]
  },
  "meta": {
-  "title": "Carbapenem: EOR additions",
-  "relevantTo": "FM Dermatology › Cellulitis",
+  "title": "Carbapenems",
+  "relevantTo": "FM antibiotics",
   "written": "2026-10",
   "differs": null,
   "sources": [
@@ -138,6 +243,14 @@
     "org": "Hikma Pharmaceuticals USA",
     "year": "2026",
     "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8a2a545e-b336-416a-be73-9e0a7ccf6177",
+    "type": "reference",
+    "track": null
+   },
+   {
+    "name": "MSD Manual Professional Edition: Overview of Beta-Lactams",
+    "org": "Merck & Co., Inc. (MSD Manuals)",
+    "year": "2024",
+    "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacteria-and-antibacterial-medications/overview-of-beta-lactams",
     "type": "reference",
     "track": null
    }

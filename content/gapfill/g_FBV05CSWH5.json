@@ -26,6 +26,111 @@
     "content": [
      {
       "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Treats:"
+     },
+     {
+      "type": "text",
+      "text": " gram (+) cocci (not most enterococci or MRSA; some S. pneumo/S. pyogenes resistant), Mycoplasma, Chlamydia, Chlamydophila, Legionella, Campylobacter, T. pallidum, B. burgdorferi; azithro/clarithro add H. flu and MAC."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Know:"
+     },
+     {
+      "type": "text",
+      "text": " used when PCN can't be (group A strep, pneumococcus), but PCN-resistant pneumococci are often macrolide-resistant; often empiric for lower respiratory infections (atypicals); not for meningitis."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Pregnancy:"
+     },
+     {
+      "type": "text",
+      "text": " erythromycin is considered safer than azithro; avoid clarithromycin unless no alternative; erythromycin is compatible w breastfeeding."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 18,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "•",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
       "text": "Mainly bacteriostatic; bind the 50S ribosomal subunit and inhibit protein synth."
      }
     ]
@@ -52,7 +157,7 @@
     "content": [
      {
       "type": "text",
-      "text": "GI upset (mainly erythromycin; less w clarithromycin/azithro; food helps). QT prolongation/torsades (erythromycin most; clarithromycin/azithro less likely to cause arrhythmia). Severe, sometimes fatal hepatotoxicity (azithromycin label). Erythromycin: tinnitus/reversible hearing loss, cholestatic jaundice; ⍉in neonates (pyloric stenosis). May worsen myasthenia gravis."
+      "text": "GI upset (mainly erythromycin; less w clarithromycin/azithro; food helps). QT prolongation/torsades (erythromycin most; clarithromycin/azithro less likely to cause arrhythmia). Severe, sometimes fatal hepatotoxicity (azithromycin label). Erythromycin: tinnitus/reversible hearing loss, cholestatic jaundice; ⍉in neonates unless no other option (pyloric stenosis). May worsen myasthenia gravis."
      }
     ]
    },
@@ -137,8 +242,8 @@
   ]
  },
  "meta": {
-  "title": "Macrolids: EOR additions",
-  "relevantTo": "FM Dermatology › Cellulitis",
+  "title": "Macrolides",
+  "relevantTo": "FM antibiotics",
   "written": "2026-10",
   "differs": null,
   "sources": [
