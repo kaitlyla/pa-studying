@@ -7,7 +7,7 @@
    "links": [
     {
      "target": "r_ZXP26BZDR8",
-     "covers": "Lithium: pre-lithium workup (SCr, electrolytes, TSH, UPT, CBC, EKG); monitoring BUN/Cr, electrolytes/calcium, TSH/PTH, lithium levels"
+     "covers": "Lithium: pre-lithium Dx (SCr, lytes, TSH, UPT, CBC, EKG); monitoring BUN/Cr, lytes/calcium, TSH/PTH, lithium levels"
     },
     {
      "target": "r_TPANAZBQBY",
@@ -19,19 +19,19 @@
     },
     {
      "target": "r_B2PXYX9NYM",
-     "covers": "Clozapine: ANC monitoring, metabolic labs, CRP/eosinophils/troponin"
+     "covers": "Clozapine: ANC monitoring, met labs, CRP/eosinophils/troponin"
     },
     {
      "target": "r_EA1Y488WXM",
-     "covers": "Second-generation antipsychotics: FBG, HbA1c, lipids, BMI after starting or a dose change"
+     "covers": "Second-generation antipsychotics: FBG, HbA1c, lipids, BMI after starting or a dose Δ"
     },
     {
      "target": "r_10MTJZP438",
-     "covers": "Risperidone: metabolic monitoring (FBG, HbA1c, lipids); hyperprolactinemia"
+     "covers": "Risperidone: met monitoring (FBG, HbA1c, lipids); hyperprolactinemia"
     },
     {
      "target": "r_VV867F27G0",
-     "covers": "Tuberoinfundibular pathway: hyperprolactinemia with antipsychotics"
+     "covers": "Tuberoinfundibular pathway: hyperprolactinemia w antipsychotics"
     },
     {
      "target": "r_SJ2VFB8WDA",
@@ -47,15 +47,15 @@
     },
     {
      "target": "r_616SVW4Q0J",
-     "covers": "Schizophrenia exam/workup findings"
+     "covers": "Schizophrenia exam/Dx findings"
     },
     {
      "target": "r_MGF7VZ1FQK",
-     "covers": "Alcohol: GGT, AST:ALT >2, LDH, CDT, MCV"
+     "covers": "EToH: GGT, AST:ALT >2, LDH, CDT, MCV"
     },
     {
      "target": "r_HHCF6DJ4XV",
-     "covers": "Neuroleptic malignant syndrome: CK >1000 IU/L, leukocytosis"
+     "covers": "Neuroleptic malig syndrome: CK >1000 IU/L, leukocytosis"
     }
    ],
    "files": [
@@ -92,7 +92,7 @@
     },
     {
      "target": "r_YKY9B6T6PZ",
-     "covers": "TCAs: QT prolongation, torsades (sodium bicarbonate), overdose"
+     "covers": "TCAs: QT prolongation, torsades (sodium bicarb), OD"
     },
     {
      "target": "r_HXAGVM9BMZ",
@@ -104,7 +104,7 @@
     },
     {
      "target": "r_ZXP26BZDR8",
-     "covers": "Lithium: baseline EKG; bradycardia, abnormal T waves"
+     "covers": "Lithium: baseline EKG; brady, abnorm T waves"
     },
     {
      "target": "r_B2PXYX9NYM",
@@ -112,11 +112,11 @@
     },
     {
      "target": "r_ME84D25QQ0",
-     "covers": "Baseline cardiac evaluation before stimulants — Stimulants: raise HR/BP; avoid with known cardiac abnormalities (HF, recent MI, arrhythmia, moderate-severe HTN)"
+     "covers": "Baseline ♡ eval b4 stimulants — Stimulants: raise HR/BP; ⍉w known ♡ abnormalities (HF, recent MI, arrhythmia, moderate-severe HTN)"
     },
     {
      "target": "r_SJ2VFB8WDA",
-     "covers": "Anorexia nervosa: bradycardia, arrhythmias (QT prolongation)"
+     "covers": "Anorexia nervosa: brady, arrhythmias (QT prolongation)"
     }
    ],
    "files": [
@@ -134,11 +134,11 @@
    "links": [
     {
      "target": "r_CZ6GQ2TG2G",
-     "covers": "Alzheimer disease: MRI diffuse cortical atrophy"
+     "covers": "Alzheimer dz: MRI diffuse cortical atrophy"
     },
     {
      "target": "r_CRJ2455DWM",
-     "covers": "Vascular dementia: MRI white matter lesions, infarcts"
+     "covers": "Vasc dementia: MRI white matter lesions, infarcts"
     },
     {
      "target": "r_T012MZQH76",
@@ -184,7 +184,7 @@
    "links": [
     {
      "target": "r_MGF7VZ1FQK",
-     "covers": "Alcohol screening: AUDIT-C, CAGE, MAST"
+     "covers": "EToH screening: AUDIT-C, CAGE, MAST"
     },
     {
      "target": "r_YMNXQJ3TA1",
@@ -192,7 +192,7 @@
     },
     {
      "target": "r_ME84D25QQ0",
-     "covers": "Baseline cardiac evaluation before stimulants — Stimulants: raise HR/BP; avoid with known cardiac abnormalities (HF, recent MI, arrhythmia, moderate-severe HTN)"
+     "covers": "Baseline ♡ eval b4 stimulants — Stimulants: raise HR/BP; ⍉w known ♡ abnormalities (HF, recent MI, arrhythmia, moderate-severe HTN)"
     }
    ],
    "files": [
@@ -221,61 +221,61 @@
   {
    "id": "agitation",
    "title": "Agitation / aggression",
-   "conds": "Delirium, Schizophrenia, Bipolar disorder, Substance intoxication",
+   "conds": "Delirium, Schizophrenia, Bipolar dx, Substance intoxication",
    "gap": "g_4RSC2FESFZ"
   },
   {
    "id": "etoh-wd",
    "title": "Alcohol withdrawal",
-   "conds": "Alcohol use disorder",
+   "conds": "EToH use dx",
    "gap": "g_RWNJTM6T94"
   },
   {
    "id": "ams",
    "title": "Altered mental status (AMS)",
-   "conds": "Delirium, Major neurocognitive disorder, Substance intoxication/withdrawal",
+   "conds": "Delirium, Major neurocognitive dx, Substance intoxication/w.draw",
    "gap": "g_PH4CM021HV"
   },
   {
    "id": "panic",
    "title": "Anxiety / panic attack",
-   "conds": "Panic disorder, Generalized anxiety disorder",
+   "conds": "Panic dx, gen anxiety dx",
    "gap": "g_50SQ2TQ9QA"
   },
   {
    "id": "catatonia",
    "title": "Catatonia",
-   "conds": "Schizophrenia, Bipolar disorder, Major depressive disorder",
+   "conds": "Schizophrenia, Bipolar dx, Major depressive dx",
    "gap": "g_WFGDGH3SWN"
   },
   {
    "id": "depressed",
    "title": "Depressed mood",
-   "conds": "Major depressive disorder, Persistent depressive disorder, Bipolar disorder",
+   "conds": "Major depressive dx, Persistent depressive dx, Bipolar dx",
    "gap": "g_K771EGPVXD"
   },
   {
    "id": "fever-rigidity",
    "title": "Fever and rigidity on psych meds",
-   "conds": "Neuroleptic malignant syndrome, Serotonin syndrome",
+   "conds": "Neuroleptic malig syndrome, Serotonin syndrome",
    "gap": "g_SAAX89J1JC"
   },
   {
    "id": "psychosis",
    "title": "Hallucinations / new psychosis",
-   "conds": "Schizophrenia, Brief psychotic disorder, Delirium, Substance-induced psychosis",
+   "conds": "Schizophrenia, Brief psychotic dx, Delirium, Substance-induced psychosis",
    "gap": "g_5EBZVP7WJF"
   },
   {
    "id": "hi",
    "title": "Homicidal ideation",
-   "conds": "Schizophrenia, Antisocial personality disorder, Substance intoxication",
+   "conds": "Schizophrenia, Antisocial personality dx, Substance intoxication",
    "gap": "g_Z2FQPYZDNJ"
   },
   {
    "id": "insomnia",
    "title": "Insomnia",
-   "conds": "Insomnia disorder, Major depressive disorder, Generalized anxiety disorder",
+   "conds": "Insomnia dx, Major depressive dx, gen anxiety dx",
    "gap": "g_J7SA30FPB2"
   },
   {
@@ -287,19 +287,19 @@
   {
    "id": "mania",
    "title": "Mania",
-   "conds": "Bipolar I disorder, Substance-induced mood disorder",
+   "conds": "Bipolar I dx, Substance-induced mood dx",
    "gap": "g_XC3C5RCE3R"
   },
   {
    "id": "memory",
    "title": "Memory loss / cognitive decline",
-   "conds": "Major neurocognitive disorder, Delirium, Major depressive disorder",
+   "conds": "Major neurocognitive dx, Delirium, Major depressive dx",
    "gap": "g_VB9RJ4YFFW"
   },
   {
    "id": "overdose",
    "title": "Overdose",
-   "conds": "Substance use disorders, Major depressive disorder",
+   "conds": "Substance use disorders, Major depressive dx",
    "gap": "g_KCKJXMH67B"
   },
   {
@@ -311,7 +311,7 @@
   {
    "id": "si",
    "title": "Suicidal ideation (SI)",
-   "conds": "Major depressive disorder, Bipolar disorder, Borderline personality disorder",
+   "conds": "Major depressive dx, Bipolar dx, Borderline personality dx",
    "gap": "g_SVEE0WANWK"
   }
  ]

@@ -56,7 +56,7 @@
      },
      {
       "type": "text",
-      "text": " 0 = incomplete; 1 = negative; 2 = benign; 3 = probably benign (6 mo f/u, <2% malignancy); "
+      "text": " 0 = incomplete; 1 = (−); 2 = benign; 3 = probably benign (6 mo f/u, <2% malig); "
      },
      {
       "type": "text",
@@ -71,11 +71,11 @@
         }
        }
       ],
-      "text": "4 = suspicious - biopsy"
+      "text": "4 = suspicious - bx"
      },
      {
       "type": "text",
-      "text": " (4A low / 4B intermediate / 4C high); "
+      "text": " (4A ↓ / 4B intermed / 4C ↑); "
      },
      {
       "type": "text",
@@ -90,7 +90,7 @@
         }
        }
       ],
-      "text": "5 = highly suggestive of malignancy (>95%) - biopsy"
+      "text": "5 = highly suggestive of malig (>95%) - bx"
      },
      {
       "type": "text",
@@ -109,7 +109,7 @@
         }
        }
       ],
-      "text": "6 = known biopsy-proven cancer"
+      "text": "6 = known biopsy-proven CA"
      }
     ]
    },
@@ -266,7 +266,7 @@
         }
        }
       ],
-      "text": "d = extremely dense → reduced sensitivity"
+      "text": "d = extremely dense → ↓sensitivity"
      },
      {
       "type": "text",
@@ -311,7 +311,7 @@
      },
      {
       "type": "text",
-      "text": " seen on screening mammography is associated with an approximately 2-fold increased risk of breast cancer"
+      "text": " seen on screening mammography = assoc w an ≈ 2-fold ↑risk of breast CA"
      }
     ]
    },
@@ -337,7 +337,7 @@
         "type": "bold"
        }
       ],
-      "text": "Aspects (abnormal in red)"
+      "text": "Aspects (abnorm in red)"
      }
     ]
    },
@@ -363,7 +363,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Mammograms are breast radiographs, usually 2 or more views of each breast taken at different angles; the breasts are compressed with plastic paddles to optimize visualization of breast tissue and abnormalities"
+      "text": "Mammograms are breast radiographs, USU 2 or more views of each breast taken @ diff angles; the breasts are compressed w plastic paddles to optimize visualization of breast tissue and abnormalities"
      }
     ]
    },
@@ -389,7 +389,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Screening mammograms check for breast cancer in asymptomatic women; diagnostic mammograms are used in women who have breast symptoms, palpable breast masses, or abnormal screening results that require further investigation"
+      "text": "Screening mammograms check for breast CA in aSx women; diagnostic mammograms are used in women who have breast Sx, palpable breast masses, or abnorm screening results that require further investigation"
      }
     ]
    },
@@ -415,7 +415,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Typically about 0.21 mSv of radiation, relatively low compared with other imaging tests that use radiation; radiation exposure is still a concern because breast tissue is sensitive to radiation"
+      "text": "Typically about 0.21 mSv of radiation, relatively ↓compared w other imaging tests that use radiation; radiation exposure = still a concern b/c breast tissue = sensitive to radiation"
      }
     ]
    },
@@ -441,7 +441,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Tomosynthesis, a 3-dimensional technique, can be used: thin tomographic slices minimize the effect of overlapping structures so abnormalities can be better separated from the background; it may reduce the need for repeat mammograms, and clinicians may be able to detect cancers more accurately, especially in patients with dense breasts"
+      "text": "Tomosynthesis, a 3-dimensional technique, can be used: thin tomographic slices minimize the effect of overlapping structures so abnormalities can be better separated from the background; it may reduce the need for repeat mammograms, and clinicians may be able to detect CAs more accurately, esp in pts w dense breasts"
      }
     ]
    },
@@ -467,7 +467,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Abnormal screening mammogram → image-guided biopsy; an abnormal breast MRI is typically evaluated with ultrasound to decide whether biopsy should be guided by ultrasound or MRI"
+      "text": "Abnorm screening mammogram → image-guided bx; an abnorm breast MRI = typically evaluated w US to decide whether bx should be guided by US or MRI"
      }
     ]
    },
@@ -493,7 +493,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Breast symptoms (eg, pain, nipple discharge) or a palpable mass or other abnormality on clinical breast examination are typically evaluated initially with breast ultrasound; if ultrasound is abnormal or indeterminate, mammography is performed; if imaging suggests cancer, biopsy is performed"
+      "text": "Breast Sx (eg, pain, nipple d/c) or a palpable mass or other abnormality on clin breast exam are typically evaluated initially w breast US; if US = abnorm or indeterminate, mammography = performed; if imaging suggests CA, bx = performed"
      }
     ]
    },
@@ -528,7 +528,7 @@
      },
      {
       "type": "text",
-      "text": " breast biopsy should be performed if physical findings (eg, palpable mass) suggest breast cancer, even if mammogram results are negative"
+      "text": " breast bx should be performed if physical findings (eg, palpable mass) suggest breast CA, even if mammogram results are (−)"
      }
     ]
    },
@@ -554,7 +554,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Percutaneous core needle biopsy is preferred to surgical biopsy; stereotactic biopsy (needle biopsy guided by mammography performed in 2 planes) or ultrasound-guided biopsy is commonly used to improve accuracy; clips are placed at the biopsy site so it can be identified with mammography"
+      "text": "Percut core needle bx = preferred to surg bx; stereotactic bx (needle bx guided by mammography performed in 2 planes) or ultrasound-guided bx = commonly used to improve accuracy; clips are placed @ the bx site so it can be identified w mammography"
      }
     ]
    },
@@ -580,7 +580,7 @@
     "content": [
      {
       "type": "text",
-      "text": "A positive biopsy specimen should be analyzed for estrogen and progesterone and HER2 receptors; MRI is often used for preoperative planning and can accurately determine tumor size, chest wall involvement and number of tumors"
+      "text": "A (+) bx specimen should be analyzed for estrogen and progesterone and HER2 receptors; MRI = often used for pre-op planning and can accurately determine tumor size, chest wall involvement and # of tumors"
      }
     ]
    },
@@ -606,7 +606,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Axillary lymph nodes are the most common site of locoregional spread; the most common sites of distant metastases are bone (51%), liver/soft tissue (19%), pleura (16%), lung (14%) and brain (4%)"
+      "text": "Axillary lymph nodes are the MC site of locoregional spread; the MC sites of distant metastases are bone (51%), liver/soft tissue (19%), pleura (16%), lung (14%) and brain (4%)"
      }
     ]
    },
@@ -632,7 +632,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Common indications for bone scanning: bone pain, elevated serum alkaline phosphatase, stage III or IV cancer"
+      "text": "Common indications for bone scanning: bone pain, ↑serum AP, stage III or IV CA"
      }
     ]
    },
@@ -658,7 +658,7 @@
         "type": "bold"
        }
       ],
-      "text": "Causes"
+      "text": "Eti"
      }
     ]
    },
@@ -684,7 +684,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Factors that greatly increase risk: breast cancer in close relatives (particularly if a BRCA gene mutation is present), atypical ductal or lobular hyperplasia, lobular carcinoma in situ, and significant exposure to chest radiation therapy before age 30"
+      "text": "Factors that greatly increase risk: breast CA in close relatives (particularly if a BRCA gene mut = present), atypical ductal or lobular hyperplasia, lobular carcinoma in situ, and sig exposure to chest radiation therapy b4 age 30"
      }
     ]
    },
@@ -710,7 +710,7 @@
     "content": [
      {
       "type": "text",
-      "text": "BRCA1 and BRCA2 mutations increase the risk of developing breast cancer to 70%; prophylactic bilateral mastectomy reduces the risk by 90% and should be offered to women with a BRCA mutation"
+      "text": "BRCA1 and BRCA2 mutations increase the risk of developing breast CA to 70%; prophylactic bilat mastectomy reduces the risk by 90% and should be offered to women w a BRCA mut"
      }
     ]
    },
@@ -736,7 +736,7 @@
     "content": [
      {
       "type": "text",
-      "text": "The most common histologic type is epithelial (carcinoma), developing from cells lining breast ducts or lobules; nonepithelial cancers of the supporting stroma are less common"
+      "text": "The MC histologic type = epithelial (carcinoma), developing from cells lining breast ducts or lobules; nonepithelial CAs of the supporting stroma are less common"
      }
     ]
    },
@@ -762,7 +762,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Ductal carcinoma in situ: neoplastic epithelial lesions confined to the breast ducts, with varying histology and malignant potential; usually detected only by mammography"
+      "text": "Ductal carcinoma in situ: neoplastic epithelial lesions confined to the breast ducts, w varying histo and malig potential; USU detected only by mammography"
      }
     ]
    },
@@ -788,7 +788,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Invasive carcinomas are most frequently adenocarcinoma: approximately 75% are infiltrating ductal and 10% of the remaining cases are infiltrating lobular"
+      "text": "Invasive carcinomas are most frequently adenocarcinoma: ≈ 75% are infiltrating ductal and 10% of the remaining cases are infiltrating lobular"
      }
     ]
    },
@@ -819,11 +819,11 @@
         "type": "bold"
        }
       ],
-      "text": "Mechanism:"
+      "text": "Mech:"
      },
      {
       "type": "text",
-      "text": " invades locally and spreads through the regional lymph nodes, bloodstream, or both; metastatic breast cancer may affect almost any organ, most commonly lungs, liver, bone, brain and skin"
+      "text": " invades locally and spreads thru the regional lymph nodes, bloodstream, or both; metastatic breast CA may affect almost any organ, most commonly lungs, liver, bone, brain and skin"
      }
     ]
    },
@@ -849,7 +849,7 @@
         "type": "bold"
        }
       ],
-      "text": "Symptoms"
+      "text": "Sx"
      }
     ]
    },
@@ -875,7 +875,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Most breast cancers are detected by mammography; breast pain is the sole presenting symptom in only approximately 1 to 2% of cases; infrequently, the presenting symptom is overall breast enlargement or a nondescript thickening"
+      "text": "Most breast CAs are detected by mammography; breast pain = the sole presenting Sx in only ≈ 1 to 2% of cases; infrequently, the presenting Sx = overall breast enlrg or a nondescript thickening"
      }
     ]
    },
@@ -901,7 +901,7 @@
     "content": [
      {
       "type": "text",
-      "text": "A common examination finding is "
+      "text": "A common exam finding = "
      },
      {
       "type": "text",
@@ -916,11 +916,11 @@
         }
        }
       ],
-      "text": "asymmetry or a dominant mass"
+      "text": "asymmetry or a dom mass"
      },
      {
       "type": "text",
-      "text": " distinctly different from the surrounding tissue; diffuse fibrotic changes in a quadrant (usually upper outer) are more characteristic of benign disorders; "
+      "text": " distinctly diff from the surrounding tissue; diffuse fibrotic chgs in a quadrant (USU upper outer) are more characteristic of benign disorders; "
      },
      {
       "type": "text",
@@ -935,11 +935,11 @@
         }
        }
       ],
-      "text": "a slightly firmer thickening in one breast but not the other"
+      "text": "a slightly firmer thickening in one breast but ⍉the other"
      },
      {
       "type": "text",
-      "text": " may be a sign of cancer"
+      "text": " may be a sign of CA"
      }
     ]
    },
@@ -965,7 +965,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Paget disease of the nipple (underlying in situ or invasive carcinoma): "
+      "text": "Paget dz of the nipple (underlying in situ or invasive carcinoma): "
      },
      {
       "type": "text",
@@ -980,11 +980,11 @@
         }
        }
       ],
-      "text": "erythema, crusting, scaling and discharge"
+      "text": "erythema, crusting, scaling and d/c"
      },
      {
       "type": "text",
-      "text": " that usually appear so benign the patient might ignore them; approximately 50 to 60% have a palpable mass at presentation"
+      "text": " that USU appear so benign the pt might ignore them; ≈ 50 to 60% have a palpable mass @ presentation"
      }
     ]
    },
@@ -1010,7 +1010,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Inflammatory breast cancer: "
+      "text": "Inflam breast CA: "
      },
      {
       "type": "text",
@@ -1025,7 +1025,7 @@
         }
        }
       ],
-      "text": "erythema and enlargement of the breast, often without a mass"
+      "text": "erythema and enlrg of the breast, often w.o a mass"
      },
      {
       "type": "text",
@@ -1055,7 +1055,7 @@
     "content": [
      {
       "type": "text",
-      "text": "More advanced cancers: "
+      "text": "More advanced CAs: "
      },
      {
       "type": "text",
@@ -1138,7 +1138,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Metastatic disease may present with associated symptoms and signs (eg, pathologic fracture, abdominal pain, jaundice, dyspnea)"
+      "text": "Metastatic dz may present w assoc Sx/S (eg, pathologic frx, abd pain, jaundice, dyspnea)"
      }
     ]
    },
@@ -1164,7 +1164,7 @@
         "type": "bold"
        }
       ],
-      "text": "Treatment and next step"
+      "text": "Tx and next step"
      }
     ]
    },
@@ -1190,7 +1190,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Stages I to III: surgical removal of the tumor (breast-conserving surgery or mastectomy); radiation therapy depending on stage and surgical procedure; systemic chemotherapy may be given before surgery (neoadjuvant) and/or after (adjuvant); stage IV is treated with systemic therapy and with radiation therapy for focal disease if indicated"
+      "text": "Stages I to III: surg removal of the tumor (breast-conserving surg or mastectomy); radiation therapy depending on stage and surg procedure; systemic chemo may be given b4 surg (neoadjuvant) and/or after (adjuvant); stage IV = treated w systemic therapy and w radiation therapy for focal dz if indicated"
      }
     ]
    },
@@ -1216,7 +1216,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Endocrine therapy (eg, tamoxifen, aromatase inhibitor) if tumors have hormone receptors"
+      "text": "Endo therapy (eg, tamoxifen, aromatase inhibitor) if tumors have hormone receptors"
      }
     ]
    },
@@ -1242,7 +1242,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Tumors in which HER2 receptors are overexpressed are treated with medications that block these receptors"
+      "text": "Tumors in which HER2 receptors are overexpressed are treated w meds that block these receptors"
      }
     ]
    },
@@ -1268,14 +1268,14 @@
     "content": [
      {
       "type": "text",
-      "text": "Consider treating metastatic disease to relieve symptoms (eg, chemotherapy, endocrine therapy, or, for bone metastases, radiation therapy or bisphosphonates), even though survival is unlikely to be prolonged"
+      "text": "Consider treating metastatic dz to relieve Sx (eg, chemo, endo therapy, or, for bone metastases, radiation therapy or bisphosphonates), even though survival = unlikely to be prolonged"
      }
     ]
    }
   ]
  },
  "meta": {
-  "title": "Mammography and BI-RADS: breast cancer",
+  "title": "Mammography and BI-RADS: breast CA",
   "relevantTo": "Breast cancer",
   "written": "2026-10",
   "differs": null,
@@ -1311,7 +1311,7 @@
     "asset": "1d5414990e6ff0b008b83e2e7cfff7ed.jpg",
     "width": 450,
     "height": 329,
-    "caption": "Breast cancer on mammogram: a dense mass (arrows), with the normal breast for comparison",
+    "caption": "Breast CA on mammogram: a dense mass (arrows), w the norm breast for comparison",
     "credit": {
      "author": "Bakerstmd",
      "license": "CC BY-SA 4.0",
