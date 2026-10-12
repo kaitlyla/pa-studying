@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "author": "cara-44174 (all-rounder-01a1295f-8eb7-7611-880d-33f8a39ad65c)",
+ "claims": [
+  {
+   "text": "Cipro: indicated in adults for infectious diarrhea incl Shigella;",
+   "source": 0,
+   "quote": "Ciprofloxacin tablets are indicated in adult patients for treatment of infectious diarrhea caused by Escherichia coli (enterotoxigenic isolates), Campylobacter jejuni, Shigella boydii",
+   "locator": "1.4 Infectious Diarrhea",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "5–7 days.",
+   "source": 0,
+   "quote": "Infectious Diarrhea | 500 mg | every 12 hours | 5 to 7 days",
+   "locator": "2.1 Dosage in Adults",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-12",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "the dosage row alone doesn't tie cipro to Shigella",
+    "resolution": "split into an indication claim (1.4 quote) and a duration claim (2.1 row)"
+   }
+  ]
+ },
+ "block": "g_Q5X75ZT8JC"
+}
