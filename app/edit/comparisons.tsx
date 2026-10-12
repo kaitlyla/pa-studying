@@ -18,6 +18,7 @@ export type Comparison = { name: string; ids: string[] };
 
 export const COMPARISONS_HEADING = "Comparisons";
 export const SAVE_COMPARISON = "Save comparison";
+export const COMPARISONS_NONE = "None saved yet. Open Compare and press Save comparison.";
 export const NAME_IT = "Name it";
 export const COMPARISONS_FAILED = "Couldn’t save the comparison. Check your connection and try again.";
 export const COMPARISON_TAKEN = "You already have a comparison with that name.";
@@ -98,7 +99,11 @@ function useComparisons(guide: string): { owner: boolean; items: Comparison[] } 
   return { owner, items: owner && mine.state === "ready" ? mine.value : published };
 }
 
-/** The sidebar's Comparisons list, under the guide's name. Nothing shows until she has one. */
+/**
+ * The sidebar's Comparisons list, under the guide's name. It is always up for the owner — with a line
+ * saying how to make one while none is saved — so she can see the place her comparisons go; a visitor
+ * sees it only when there is something in it.
+ */
 export function ComparisonsSection({ guide, onNavigate, topics }: { guide: string; onNavigate: () => void; topics: ReadonlyMap<string, string> }): ReactNode {
   const { owner, items } = useComparisons(guide);
   const route = useRoute();
@@ -111,7 +116,15 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
     const ids = c.ids.filter((id) => topics.has(id));
     return ids.length === 0 ? [] : [{ name: c.name, ids }];
   });
-  if (live.length === 0) return null;
+  if (live.length === 0 && !owner) return null;
+  if (live.length === 0) {
+    return (
+      <>
+        <div className="side-sec">{COMPARISONS_HEADING}</div>
+        <p className="side-note">{COMPARISONS_NONE}</p>
+      </>
+    );
+  }
   const open = route.kind === "guide" && route.guide === guide && route.view.kind === "compare" ? route.view.ids.join(",") : null;
 
   const rename = async (from: string): Promise<void> => {

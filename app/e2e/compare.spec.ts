@@ -462,10 +462,12 @@ test.describe("compare", () => {
     await expect(side(page).getByRole("link", { name: "Adrenal insufficiency", exact: true })).toBeVisible();
     await expect.poll(saved).toEqual([{ name: "Adrenal insufficiency", ids: idsOfFour }]);
 
-    // Delete it: the row and the section go, and her file keeps no comparisons.
+    // Delete it: the row goes and, with nothing saved, the section stays up for her with the line that
+    // says how to make one; her file keeps no comparisons.
     await side(page).getByRole("button", { name: "Delete Adrenal insufficiency" }).click();
     await expect(side(page).getByRole("link", { name: "Adrenal insufficiency", exact: true })).toHaveCount(0);
-    await expect(side(page).getByText("Comparisons", { exact: true })).toHaveCount(0);
+    await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
+    await expect(side(page).getByText("None saved yet. Open Compare and press Save comparison.", { exact: true })).toBeVisible();
     await expect.poll(saved).toEqual([]);
   });
 

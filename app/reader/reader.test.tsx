@@ -628,6 +628,32 @@ describe("compare page", () => {
     expect(rows.map((e) => e.textContent)).toEqual(["Adrenal"]);
     expect(must(rows[0], "the row").getAttribute("href")).toBe(`#/eor/fm/compare/${stable().id}`);
   });
+
+  it("the owner with none sees the Comparisons section and a line saying how to make one", async () => {
+    const none: ComparisonsJson = { guide: "fm", comparisons: [] };
+    server.restore();
+    server = serveData(new Map([...files, ["g/fm/comparisons.json", none]]));
+    asOwner(true);
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    await until(() => c.querySelector("aside.side .ent"), "the sidebar's entries");
+    expect([...side(c).querySelectorAll(".side-sec")].map((e) => e.textContent)).toContain("Comparisons");
+    expect(must(side(c).querySelector("p.side-note"), "the empty line").textContent).toBe("None saved yet. Open Compare and press Save comparison.");
+    expect(comparisonsList(c)).toBeNull();
+  });
+
+  it("a visitor with none sees no Comparisons section", async () => {
+    const none: ComparisonsJson = { guide: "fm", comparisons: [] };
+    server.restore();
+    server = serveData(new Map([...files, ["g/fm/comparisons.json", none]]));
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    await until(() => c.querySelector("aside.side .ent"), "the sidebar's entries");
+    expect([...side(c).querySelectorAll(".side-sec")].map((e) => e.textContent)).not.toContain("Comparisons");
+    expect(side(c).querySelector("p.side-note")).toBeNull();
+  });
 });
 
 describe("block page", () => {
