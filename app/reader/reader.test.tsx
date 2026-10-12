@@ -3,7 +3,7 @@
 // review slides and the PDF menu.
 import { act } from "react";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi, type Mock, type MockInstance } from "vitest";
-import type { DocJson, FlagNote, NavJson, SiteJson, SlidesJson, SystemJson } from "../../lib/derive/published.ts";
+import type { ComparisonsJson, DocJson, FlagNote, NavJson, SiteJson, SlidesJson, SystemJson } from "../../lib/derive/published.ts";
 import { BELOW_HEADING } from "../../lib/derive/topics.ts";
 import { DATA_BASE } from "../data/load.ts";
 import { wholeGuideUrl } from "../pdf/download.ts";
@@ -90,6 +90,11 @@ const groupToggle = (c: Element, title: string): HTMLButtonElement =>
   must(groupLink(c, title)?.parentElement?.querySelector<HTMLButtonElement>("button.sys-tog"), `${title} arrow`);
 const entry = (c: Element, title: string): HTMLAnchorElement | null => side(c).querySelector<HTMLAnchorElement>(`a.ent[title="${title}"]`);
 const notFound = (c: Element): boolean => c.querySelector(".notfound h1")?.textContent === "This page isn't on the site";
+/** The sidebar's saved comparisons, when the section is up. */
+const comparisonsList = (c: Element): HTMLUListElement | null => {
+  const head = [...side(c).querySelectorAll(".side-sec")].find((e) => e.textContent === "Comparisons");
+  return head?.nextElementSibling instanceof HTMLUListElement ? head.nextElementSibling : null;
+};
 
 async function press(el: Element, key: string): Promise<void> {
   await act(async () => {
@@ -598,6 +603,30 @@ describe("compare page", () => {
     await until(() => c.querySelector(".cmp-q .tcard"), "a real compare page again");
     await go("#/eor/fm/compare/r_0000000001,r_0000000002,r_0000000003,r_0000000004,r_0000000005");
     await until(() => notFound(c), "five slots not on site");
+  });
+
+  it("a saved comparison whose diagnosis is gone opens on the rest, and is listed without it", async () => {
+    const saved: ComparisonsJson = {
+      guide: "fm",
+      comparisons: [
+        { name: "Adrenal", ids: [stable().id, "r_0000009999"] },
+        { name: "Gone", ids: ["r_0000008888"] },
+      ],
+    };
+    server.restore();
+    server = serveData(new Map([...files, ["g/fm/comparisons.json", saved]]));
+    const a = await renderApp(`#/eor/fm/compare/${stable().id},r_0000009999`);
+    app = a;
+    const c = a.container;
+    // The quadrant the guide still has, and an address without the diagnosis it no longer has.
+    await until(() => c.querySelector(".cmp-q .tcard"), "the quadrant that is left");
+    expect(c.querySelectorAll(".cmp-q")).toHaveLength(1);
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id}`);
+    // The sidebar lists the comparison without that diagnosis, and not one whose diagnoses are all gone.
+    await until(() => comparisonsList(c), "the Comparisons list");
+    const rows = [...must(comparisonsList(c), "the Comparisons list").querySelectorAll("a.ent")];
+    expect(rows.map((e) => e.textContent)).toEqual(["Adrenal"]);
+    expect(must(rows[0], "the row").getAttribute("href")).toBe(`#/eor/fm/compare/${stable().id}`);
   });
 });
 

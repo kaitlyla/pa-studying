@@ -50,3 +50,17 @@ export function entryTitle(nav: NavJson, id: string): string {
   }
   return id;
 }
+
+/**
+ * The guide's diagnoses by id, each with the system that lists it: the sidebar's topic rows in order — the
+ * same set a quadrant's picker offers and a saved comparison names. An id that is not in here is a row the
+ * guide no longer has (or a listed block, which is not a diagnosis).
+ */
+export function topicSystems(nav: NavJson): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const s of nav.systems) {
+    for (const e of s.entries) if (e.kind === "topic") out.set(e.id, s.id);
+    for (const sec of s.sections) for (const e of sec.entries) if (e.kind === "topic") out.set(e.id, s.id);
+  }
+  return out;
+}

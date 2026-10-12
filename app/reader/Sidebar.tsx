@@ -8,7 +8,7 @@ import { Link } from "../shell/Link.tsx";
 import { PendingDocs, RemovedDocs, ComparisonsSection } from "../shell/mounts.tsx";
 import { addToCompare, fileHash, guideBase, guideViewHash, PANCE, useRoute, type GuideView, type Route } from "../shell/route.ts";
 import { Txt } from "../render/Text.tsx";
-import { systemsHeading, useNav, useSite, guideName } from "./data.ts";
+import { systemsHeading, topicSystems, useNav, useSite, guideName } from "./data.ts";
 
 /** What the current route has open in this guide. */
 interface Current {
@@ -377,7 +377,7 @@ export function GuideSidebar({ guide, onNavigate }: { guide: string; onNavigate:
           </>
         )}
       </div>
-      <ComparisonsSection guide={guide} onNavigate={onNavigate} />
+      <ComparisonsSection guide={guide} onNavigate={onNavigate} topics={topicSystems(nav)} />
       <div className="side-sec">{systemsHeading(guide)}</div>
       <div>
         {nav.systems.map((s) => (

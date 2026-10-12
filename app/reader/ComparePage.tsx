@@ -13,8 +13,8 @@ import { FavoriteMenu, SaveComparison } from "../shell/mounts.tsx";
 import { PageHead, type Crumb } from "../shell/Page.tsx";
 import { useOwner } from "../shell/owner.tsx";
 import { addToCompare, guideViewHash, navigate, syncFromLocation } from "../shell/route.ts";
-import { COMPARE, entryTitle, guideCrumbs, useNav, useSite } from "./data.ts";
-import { locateEntry, TopicCard } from "./TopicsPage.tsx";
+import { COMPARE, entryTitle, guideCrumbs, topicSystems, useNav, useSite } from "./data.ts";
+import { TopicCard } from "./TopicsPage.tsx";
 
 /** The guide's diagnoses grouped as the sidebar lists them, for a quadrant's picker. */
 function topicGroups(nav: NavJson): { id: string; title: string; entries: { id: string; title: string }[] }[] {
@@ -32,12 +32,15 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
   const nav = useNav(guide);
   const owner = useOwner().owner;
   const groups = topicGroups(nav);
-  // An old `t/a,b` link parses as this view; an empty slot in it is not a quadrant, so it is dropped.
-  const shown = ids.filter((x) => x !== "");
-  const slots = shown.map((id) => locateEntry(nav, id));
-  shown.forEach((id, i) => {
-    if (slots[i] === null) throw new PageNotFound(`topic ${id}`);
+  // An old `t/a,b` link parses as this view; an empty slot is not a quadrant, and neither is a diagnosis
+  // the guide no longer lists — a saved comparison opens on the quadrants that are still there.
+  const systems = topicSystems(nav);
+  const quadrants = ids.flatMap((id) => {
+    const system = systems.get(id);
+    return system === undefined ? [] : [{ id, system }];
   });
+  if (quadrants.length === 0) throw new PageNotFound(`topic ${ids.find((x) => x !== "") ?? ""}`);
+  const shown = quadrants.map((q) => q.id);
   const titleOf = (id: string): string => entryTitle(nav, id);
   const go = (next: string[]): void => void navigate(guideViewHash(guide, { kind: "compare", ids: next }));
   const pick = (i: number, id: string): void => go(shown.map((x, j) => (j === i ? id : x)));
@@ -47,60 +50,57 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
     if (next !== null) go(next);
   };
 
-  // A multi-topic link from the old stacked page (and any empty slot) lands here; make the address the
-  // canonical compare route, replacing the entry so Back leaves the comparison rather than bouncing.
+  // A multi-topic link from the old stacked page (and any empty slot, or a diagnosis the guide no longer
+  // has) lands here; make the address the canonical compare route, replacing the entry so Back leaves the
+  // comparison rather than bouncing off the old address.
   useLayoutEffect(() => {
-    const canonical = guideViewHash(guide, { kind: "compare", ids: ids.filter((x) => x !== "") });
+    const known = topicSystems(nav);
+    const canonical = guideViewHash(guide, { kind: "compare", ids: ids.filter((id) => known.has(id)) });
     if (location.hash !== canonical) {
       history.replaceState(null, "", canonical);
       syncFromLocation();
     }
-  }, [guide, ids]);
+  }, [guide, ids, nav]);
 
   const crumbs: Crumb[] = [...guideCrumbs(site, guide), { label: COMPARE }];
   return (
     <div className="cmp-page">
       <PageHead crumbs={crumbs} title={COMPARE} tables actions={owner ? <SaveComparison guide={guide} ids={shown} /> : undefined} />
       <div className="cmp-grid">
-        {shown.map((id, i) => {
-          const at = slots[i] ?? null;
-          return (
-            <section className="cmp-q" key={i} aria-label={`${titleOf(id)} (quadrant ${i + 1})`}>
-              <div className="cmp-h">
-                <select aria-label={`Diagnosis ${i + 1}`} value={id} onChange={(e) => pick(i, e.target.value)}>
-                  {groups.map((g) => (
-                    <optgroup key={g.id} label={g.title}>
-                      {g.entries.map((e) => (
-                        <option key={e.id} value={e.id}>{e.title}</option>
-                      ))}
-                    </optgroup>
-                  ))}
-                </select>
-                {owner && (
-                  <FavoriteMenu
-                    guide={guide}
-                    id={id}
-                    others={shown}
-                    groups={groups}
-                    canPick={shown.length < 4}
-                    onPick={fill}
-                    titleOf={titleOf}
-                  />
-                )}
-                {shown.length > 1 && (
-                  <button type="button" className="iconbtn" aria-label={`Remove quadrant ${i + 1}`} onClick={() => go(shown.filter((_, j) => j !== i))}>
-                    <Icon n="x" size={14} />
-                  </button>
-                )}
-              </div>
-              {at !== null && (
-                <div className="cmp-body">
-                  <TopicCard guide={guide} nav={nav} id={id} system={at.system} />
-                </div>
+        {quadrants.map(({ id, system }, i) => (
+          <section className="cmp-q" key={i} aria-label={`${titleOf(id)} (quadrant ${i + 1})`}>
+            <div className="cmp-h">
+              <select aria-label={`Diagnosis ${i + 1}`} value={id} onChange={(e) => pick(i, e.target.value)}>
+                {groups.map((g) => (
+                  <optgroup key={g.id} label={g.title}>
+                    {g.entries.map((e) => (
+                      <option key={e.id} value={e.id}>{e.title}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+              {owner && (
+                <FavoriteMenu
+                  guide={guide}
+                  id={id}
+                  others={shown}
+                  groups={groups}
+                  canPick={shown.length < 4}
+                  onPick={fill}
+                  titleOf={titleOf}
+                />
               )}
-            </section>
-          );
-        })}
+              {shown.length > 1 && (
+                <button type="button" className="iconbtn" aria-label={`Remove quadrant ${i + 1}`} onClick={() => go(shown.filter((_, j) => j !== i))}>
+                  <Icon n="x" size={14} />
+                </button>
+              )}
+            </div>
+            <div className="cmp-body">
+              <TopicCard guide={guide} nav={nav} id={id} system={system} />
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   );

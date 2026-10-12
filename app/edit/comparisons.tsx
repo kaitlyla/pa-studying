@@ -99,13 +99,19 @@ function useComparisons(guide: string): { owner: boolean; items: Comparison[] } 
 }
 
 /** The sidebar's Comparisons list, under the guide's name. Nothing shows until she has one. */
-export function ComparisonsSection({ guide, onNavigate }: { guide: string; onNavigate: () => void }): ReactNode {
+export function ComparisonsSection({ guide, onNavigate, topics }: { guide: string; onNavigate: () => void; topics: ReadonlyMap<string, string> }): ReactNode {
   const { owner, items } = useComparisons(guide);
   const route = useRoute();
   const [editing, setEditing] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
-  if (items.length === 0) return null;
+  // A comparison whose diagnosis the guide no longer lists is listed without it, so the row opens what is
+  // left; one whose diagnoses are all gone is not listed at all — never a row onto an empty page.
+  const live = items.flatMap((c) => {
+    const ids = c.ids.filter((id) => topics.has(id));
+    return ids.length === 0 ? [] : [{ name: c.name, ids }];
+  });
+  if (live.length === 0) return null;
   const open = route.kind === "guide" && route.guide === guide && route.view.kind === "compare" ? route.view.ids.join(",") : null;
 
   const rename = async (from: string): Promise<void> => {
@@ -137,7 +143,7 @@ export function ComparisonsSection({ guide, onNavigate }: { guide: string; onNav
     <>
       <div className="side-sec">{COMPARISONS_HEADING}</div>
       <ul className="gen">
-        {items.map((c) => (
+        {live.map((c) => (
           <li key={c.name}>
             {editing === c.name ? (
               <form

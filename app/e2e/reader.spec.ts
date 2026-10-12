@@ -184,6 +184,12 @@ test.describe("sidebar", () => {
     // A search landing, so the page also has the sticky "Showing matches" bar.
     await open(page, `${guideViewHash(first.g, { kind: "system", system: first.s.id })}?q=the`);
     await expect(main(page).locator("table").first()).toBeVisible();
+    // The heights below are compared between two moments, so both must be measured in one settled layout:
+    // right after the first paint the vendored fonts are still loading, and text laid out in the fallback
+    // face wraps differently — measured on this page: five cells are one line off until they are in.
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+    });
     // Layout sizes (offsetWidth/offsetHeight) are unaffected by a transform; `drawn` is the on-screen scale.
     const layout = (): Promise<{ pageW: number; cols: number[]; cellH: number; heights: number[]; drawn: number; room: number; overflowX: number }> =>
       page.evaluate(() => {
