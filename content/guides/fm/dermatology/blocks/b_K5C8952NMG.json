@@ -50,9 +50,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 0.5,
+      "right": 0,
       "bottom": 0,
-      "left": 0.5
+      "left": 0
      }
     },
     "content": [
@@ -2046,7 +2046,14 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        57.64192307692309,
+        144.8580769230769,
+        226.25,
+        162.95,
+        182.3
+       ]
       },
       "content": [
        {
@@ -2068,7 +2075,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2083,6 +2093,35 @@
              }
             ],
             "text": "SJS & TEN"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "(toxic epidermal necrolysis)"
            }
           ]
          }
@@ -2107,7 +2146,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2128,7 +2170,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2143,7 +2188,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2173,7 +2221,7 @@
               "type": "bold"
              }
             ],
-            "text": "predominantly drug-related"
+            "text": "predom drug-related"
            },
            {
             "type": "text",
@@ -2189,7 +2237,115 @@
               }
              }
             ],
-            "text": "penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants"
+            "text": "penicillin, "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "sulfonamides"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": ", "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "allopurinol"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": ", "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "NSAIDs"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             }
+            ],
+            "text": ", "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF0000"
+              }
+             },
+             {
+              "type": "highlight",
+              "attrs": {
+               "hex": "FFFF00"
+              }
+             }
+            ],
+            "text": "anticonvulsants"
            },
            {
             "type": "text",
@@ -2205,7 +2361,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2258,7 +2417,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2273,7 +2435,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2321,7 +2486,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2369,7 +2537,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2417,7 +2588,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2432,7 +2606,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2516,7 +2693,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2531,7 +2711,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2570,7 +2753,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2603,7 +2789,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2624,7 +2813,7 @@
            },
            {
             "type": "text",
-            "text": ": typically begin on "
+            "text": ": begin on "
            },
            {
             "type": "text",
@@ -2652,7 +2841,7 @@
               "type": "italic"
              }
             ],
-            "text": "rapidly generalizes"
+            "text": "rapidly gen outward -symetrically"
            }
           ]
          },
@@ -2664,7 +2853,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2679,7 +2871,89 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "raised purpuric, target-like lesions w 2 zones of color"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "anchored",
+          "attrs": {
+           "offsetPt": 0,
+           "float": {
+            "dxPt": 239.9,
+            "dyPt": 2.5
+           }
+          },
+          "content": [
+           {
+            "type": "image_block",
+            "attrs": {
+             "asset": "a68ceec791c8859704c95d5452d758e2.jpeg",
+             "widthPt": 174.559222730273,
+             "heightPt": 122.60289315706977,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2732,10 +3006,30 @@
              }
             ],
             "text": "violaceous &/or blistered"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
            },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
-            "text": "; lesions may "
+            "text": "- lesions may "
            },
            {
             "type": "text",
@@ -2751,7 +3045,7 @@
            },
            {
             "type": "text",
-            "text": ", particularly on face & torso"
+            "text": " -esp on face & torso"
            }
           ]
          },
@@ -2763,7 +3057,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2778,7 +3075,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2815,7 +3115,31 @@
            },
            {
             "type": "text",
-            "text": " that develop "
+            "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- develop "
            },
            {
             "type": "text",
@@ -2884,10 +3208,30 @@
              }
             ],
             "text": "rapidly slough"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 27,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
            },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
-            "text": ", leaving "
+            "text": "⤷leaves "
            },
            {
             "type": "text",
@@ -2947,7 +3291,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2962,7 +3309,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3036,7 +3386,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3051,7 +3404,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3085,10 +3441,30 @@
              }
             ],
             "text": "oropharyngeal, conjunctival, urethral, genital, perirectal"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
            },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
-            "text": "; often → pain, poor PO intake, dehydration "
+            "text": "- often → pain, poor PO intake, dehydration "
            }
           ]
          },
@@ -3100,7 +3476,28 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3117,7 +3514,7 @@
               }
              }
             ],
-            "text": "Ocular manifestations"
+            "text": "Ocular Sx"
            },
            {
             "type": "text",
@@ -3178,7 +3575,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3199,7 +3599,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3214,7 +3617,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3244,7 +3650,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3259,7 +3668,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3292,25 +3704,15 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "center",
            "shade": null,
            "borders": null,
            "marker": null
-          },
-          "content": [
-           {
-            "type": "image",
-            "attrs": {
-             "asset": "a68ceec791c8859704c95d5452d758e2.jpeg",
-             "widthPt": 146.4455905511811,
-             "heightPt": 102.85708661417323,
-             "rot": 0,
-             "flipH": false,
-             "flipV": false
-            }
-           }
-          ]
+          }
          }
         ]
        },
@@ -3333,7 +3735,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3360,12 +3765,15 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3386,7 +3794,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3401,7 +3812,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3429,12 +3843,15 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3467,7 +3884,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3482,7 +3902,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3544,7 +3967,7 @@
            },
            {
             "type": "text",
-            "text": ", minimize P, freq application of "
+            "text": ", min P, freq application of "
            },
            {
             "type": "text",
@@ -3560,7 +3983,7 @@
            },
            {
             "type": "text",
-            "text": ", +/- PO disinfectant rinse ("
+            "text": ", ± PO disinfectant rinse ("
            },
            {
             "type": "text",
@@ -3591,7 +4014,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3606,7 +4032,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3636,7 +4065,7 @@
            },
            {
             "type": "text",
-            "text": ": may be effective @ "
+            "text": ": poss help "
            },
            {
             "type": "text",
@@ -3660,7 +4089,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3675,7 +4107,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
