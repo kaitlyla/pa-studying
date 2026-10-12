@@ -12,7 +12,7 @@ import {
   CardMatcher, conditionKey, conditionUses, hasPharm, medsPanel, panelHome, placeCards, sectionCards, sectionKey, stubLabel, topicText, type PharmSystem, type Placements,
 } from "./pharm.ts";
 import type {
-  DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
+  ComparisonsJson, DocJson, DocList, FlagNote, GeneralJson, HomeJson, HostsJson, NavJson, Notes, OtherJson, PartCut, Place, PubBlock, PubCard, PubNote,
   PubFlag, PubGap, PubLink, PubMedsCard, PubMedsClass, PubMedsEdit, PubMedsPart, PubOtherNote, PubPart, PubRefLink, PubPharmSection, PubTopic, RefTabJson, SiteJson, SlidesJson, SystemJson, UpdatesJson,
   VisitsJson, WorkupJson,
 } from "./published.ts";
@@ -27,7 +27,7 @@ import { itemPieces, keptOwn, panelItems, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
 import {
-  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
+  docPath, comparisonsPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
 } from "./published.ts";
 
 export interface PublishResult {
@@ -756,6 +756,11 @@ export function publish(c: Content): PublishResult {
       }
     }
     const visitsNav: NavJson["visits"] = (g.general?.visits ?? []).map((v) => ({ id: v.id, title: v.title }));
+
+    // Her saved comparisons: published for everyone (only the owner can save them), so the sidebar
+    // shows them to a visitor too. The file is written even when she has none, so a read never 404s.
+    const comparisons: ComparisonsJson = { guide: gid, comparisons: (g.comparisons?.comparisons ?? []).map((c) => ({ name: c.name, ids: [...c.ids] })) };
+    files.set(comparisonsPath(gid), comparisons);
 
     // slides
     let slidesNav: NavJson["slides"] = null;

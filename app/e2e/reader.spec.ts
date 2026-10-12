@@ -46,6 +46,7 @@ const guideFile = (nav: NavJson): string => nav.source.replace(/\.[A-Za-z0-9]+$/
 /** The picker's word for a guide's top-level groups (Psychiatry and OB call them sections). */
 const systemsWord = (g: string, n: number): string => (g === "psy" || g === "ob" ? (n === 1 ? "section" : "sections") : n === 1 ? "system" : "systems");
 const topicHash = (g: string, ids: string[]): string => guideViewHash(g, { kind: "topics", ids });
+const compareHash = (g: string, ids: string[]): string => guideViewHash(g, { kind: "compare", ids });
 const pharmHash = (g: string, system: string, section: string | null = null, target: string | null = null): string =>
   guideViewHash(g, { kind: "pharm", system, section, target });
 
@@ -331,7 +332,7 @@ test.describe("sidebar", () => {
     expect(hashOf(page)).toBe(sysHash);
   });
 
-  test("clicking a topic replaces the page; + adds one below; two open each have ✕, read 'Comparing 2 topics', and Close others leaves one", async ({ page }) => {
+  test("clicking a topic replaces the page; the + opens the comparison, which ✕ narrows", async ({ page }) => {
     const { g, list } = topicList(3);
     const [a, b, c] = list;
     if (!a || !b || !c) throw new Error("need three topics");
@@ -342,17 +343,21 @@ test.describe("sidebar", () => {
     await expect(h1(page)).toHaveText(b.title);
     await expect(main(page).locator(".tcard")).toHaveCount(1);
 
-    await side(page).getByRole("link", { name: `Open ${c.title} alongside`, exact: true }).click();
-    await expect.poll(() => hashOf(page)).toBe(topicHash(g, [b.id, c.id]));
-    await expect(h1(page)).toHaveText("Comparing 2 topics");
-    await expect(main(page).locator(".tcard")).toHaveCount(2);
-    await expect(main(page).locator('.tcard .tcard-h button[aria-label^="Close "]')).toHaveCount(2);
-    for (const card of await main(page).locator(".tcard").all()) await expect(card.locator('.tcard-h button[aria-label^="Close "]')).toBeVisible();
+    // The sidebar's + opens the comparison with the diagnosis on screen beside it (no stacked page).
+    await side(page).getByRole("link", { name: `Add ${c.title} to the comparison`, exact: true }).click();
+    await expect.poll(() => hashOf(page)).toBe(compareHash(g, [b.id, c.id]));
+    await expect(h1(page)).toHaveText("Compare");
+    await expect(main(page).locator(".cmp-q")).toHaveCount(2);
+    await expect(main(page).locator(".cmp-q .tcard")).toHaveCount(2);
+    await expect(main(page).locator(`.cmp-q [data-topic="${b.id}"]`)).toBeVisible();
+    await expect(main(page).locator(`.cmp-q [data-topic="${c.id}"]`)).toBeVisible();
 
-    await main(page).getByRole("button", { name: "Close others", exact: true }).click();
-    await expect.poll(() => hashOf(page)).toBe(topicHash(g, [c.id]));
-    await expect(main(page).locator(".tcard")).toHaveCount(1);
-    await expect(h1(page)).toHaveText(c.title);
+    // ✕ takes the second one off; the one left has none, and the address is the canonical compare route.
+    await main(page).getByRole("button", { name: "Remove quadrant 2", exact: true }).click();
+    await expect.poll(() => hashOf(page)).toBe(compareHash(g, [b.id]));
+    await expect(main(page).locator(".cmp-q")).toHaveCount(1);
+    await expect(main(page).locator(`.cmp-q [data-topic="${b.id}"]`)).toBeVisible();
+    await expect(main(page).getByRole("button", { name: /^Remove quadrant/ })).toHaveCount(0);
   });
 
   test("long topic names are cut to two lines with the full name in title; the page header shows the full name", async ({ page }) => {
@@ -533,7 +538,7 @@ test.describe("keyboard and screen reader", () => {
     await check("sidebar arrow", drawer.locator(".sys-tog"));
     await check("sidebar system", drawer.locator("a.sys-name"));
     await check("sidebar entry", drawer.locator("a.ent"));
-    await check("open alongside", drawer.locator("a.alongside"));
+    await check("add to the comparison", drawer.locator("a.alongside"));
   });
 });
 

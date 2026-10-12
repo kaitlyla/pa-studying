@@ -239,6 +239,19 @@ export interface FavoritesFile {
   pairs: [string, string][];
 }
 
+/** The longest name a saved comparison may carry (the sidebar shows it as a subheader). */
+export const COMPARISON_NAME_MAX = 60;
+
+/**
+ * Her saved comparisons for a guide: named quadrant sets she can restore from the sidebar. Published,
+ * unlike FavoritesFile — a visitor sees the list (read-only). Each `ids` holds one to four topic ids in
+ * quadrant order; the names are hers, once each, in her own order.
+ */
+export interface ComparisonsFile {
+  v: 1;
+  comparisons: { name: string; ids: string[] }[];
+}
+
 export interface CardsFile {
   v: 1;
   /**

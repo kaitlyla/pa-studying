@@ -5,8 +5,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { NavEntry, NavJson, NavSystem } from "../../lib/derive/published.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
-import { PendingDocs, RemovedDocs } from "../shell/mounts.tsx";
-import { fileHash, guideBase, guideViewHash, PANCE, useRoute, type GuideView, type Route } from "../shell/route.ts";
+import { PendingDocs, RemovedDocs, ComparisonsSection } from "../shell/mounts.tsx";
+import { addToCompare, fileHash, guideBase, guideViewHash, PANCE, useRoute, type GuideView, type Route } from "../shell/route.ts";
 import { Txt } from "../render/Text.tsx";
 import { systemsHeading, useNav, useSite, guideName } from "./data.ts";
 
@@ -30,7 +30,9 @@ export function sidebarFrom(route: Route, guide: string): string {
 
 function currentOf(route: Route, guide: string): Current {
   if (route.kind === "guide" && route.guide === guide) {
-    return { view: route.view, ids: route.view.kind === "topics" ? route.view.ids : [], file: null };
+    const view = route.view;
+    const ids = view.kind === "topics" ? view.ids : view.kind === "compare" ? view.ids.filter((x) => x !== "") : [];
+    return { view, ids, file: null };
   }
   if (route.kind === "file") return { view: null, ids: [], file: route.doc };
   return { view: null, ids: [], file: null };
@@ -53,8 +55,10 @@ function autoOpen(nav: NavJson, cur: Current): Set<string> {
   }
   if (v.kind === "pharm") out.add(pharmKey(v.system));
   if (v.kind === "visits") out.add(VISITS_KEY);
-  if (v.kind === "topics" || v.kind === "block") {
-    const ids = v.kind === "topics" ? v.ids : [v.id];
+  if (v.kind === "topics" || v.kind === "compare" || v.kind === "block") {
+    // A comparison's quadrants count like the diagnoses open on a topic page: their systems and sections
+    // are open, so the + that adds the next diagnosis is in reach.
+    const ids = v.kind === "block" ? [v.id] : v.ids.filter((x) => x !== "");
     for (const s of nav.systems) {
       if (s.entries.some((e) => ids.includes(e.id))) out.add(sysKey(s.id));
       for (const sec of s.sections) {
@@ -97,6 +101,15 @@ function Entry({ guide, entry, cur, onNavigate }: EntryProps): ReactNode {
   const v = cur.view;
   const open = entry.kind === "topic" ? cur.ids.includes(entry.id) : v?.kind === "block" && v.id === entry.id;
   const to = entry.kind === "topic" ? guideViewHash(guide, { kind: "topics", ids: [entry.id] }) : guideViewHash(guide, { kind: "block", id: entry.id });
+  // The + adds this diagnosis to the comparison: the next free quadrant, or a comparison started with
+  // the diagnosis on screen now (the picker, the ✕ and the menu's fill do the rest). Hidden when the
+  // diagnosis is already on screen or all four quadrants are taken.
+  const compareTo = ((): string | null => {
+    if (entry.kind !== "topic" || open) return null;
+    const quadrants = v?.kind === "compare" ? v.ids : cur.ids;
+    const next = addToCompare(quadrants, entry.id);
+    return next === null ? null : guideViewHash(guide, { kind: "compare", ids: next });
+  })();
   return (
     <li>
       <div className="ent-row">
@@ -116,12 +129,12 @@ function Entry({ guide, entry, cur, onNavigate }: EntryProps): ReactNode {
             <Txt text={entry.title} />
           </span>
         </Link>
-        {entry.kind === "topic" && !open && (
+        {compareTo !== null && (
           <Link
-            to={guideViewHash(guide, { kind: "topics", ids: [...cur.ids, entry.id] })}
+            to={compareTo}
             className="alongside"
-            aria-label={`Open ${entry.title} alongside`}
-            title="Open alongside"
+            aria-label={`Add ${entry.title} to the comparison`}
+            title="Add to the comparison"
             onClick={onNavigate}
           >
             <Icon n="plus" size={14} />
@@ -364,6 +377,7 @@ export function GuideSidebar({ guide, onNavigate }: { guide: string; onNavigate:
           </>
         )}
       </div>
+      <ComparisonsSection guide={guide} onNavigate={onNavigate} />
       <div className="side-sec">{systemsHeading(guide)}</div>
       <div>
         {nav.systems.map((s) => (

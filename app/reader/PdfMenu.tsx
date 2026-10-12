@@ -10,7 +10,7 @@ import { showToast } from "../shell/toast.tsx";
 import { guideFile } from "./data.ts";
 
 export interface PageScope {
-  /** "This topic", "This page (2 topics)", "This section", "This system", "This pharm section", "This system's pharm". */
+  /** "This topic", "This section", "This system", "This pharm section", "This system's pharm". */
   label: string;
   /** What the scope holds, shown under the label. */
   name: string;

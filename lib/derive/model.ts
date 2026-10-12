@@ -1,6 +1,6 @@
 // The loaded content tree the derivations read (tools/build fills it through lib/content).
 import type {
-  AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GapFile,
+  AsIsFile, BlockFile, CardsFile, ChecksFile, ComparisonsFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GapFile,
   GeneralFile, GuideFile, MedsFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, SystemFile, TrimsFile,
   UsesFile, VocabFile, WordDocFile,
 } from "../content/types.ts";
@@ -20,6 +20,8 @@ export interface GuideData {
   preamble: BlockFile[];
   /** EOR guides only. */
   general: GeneralFile | null;
+  /** Her saved comparisons (`comparisons.json`), null when she has none. */
+  comparisons: ComparisonsFile | null;
   systems: SystemData[];
 }
 

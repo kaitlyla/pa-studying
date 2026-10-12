@@ -225,7 +225,9 @@ describe("guide sidebar", () => {
     expect(cur.parentElement?.querySelector("a.alongside")).toBeNull();
     const other = must(entry(c, prinz().title), "Prinzmetal entry");
     expect(other.getAttribute("aria-current")).toBeNull();
-    expect(other.parentElement?.querySelector("a.alongside")?.getAttribute("href")).toBe(`#/eor/fm/t/${stable().id},${prinz().id}`);
+    const plus = must(other.parentElement?.querySelector("a.alongside"), "the + beside Prinzmetal");
+    expect(plus.getAttribute("aria-label")).toBe(`Add ${prinz().title} to the comparison`);
+    expect(plus.getAttribute("href")).toBe(`#/eor/fm/compare/${stable().id},${prinz().id}`);
     expect(groupToggle(c, cad).getAttribute("aria-expanded")).toBe("true");
     expect(groupLink(c, "Cardiovascular")?.getAttribute("aria-current")).toBeNull();
   });
@@ -419,7 +421,7 @@ describe("blocks helpers", () => {
 });
 
 describe("topics page", () => {
-  it("a sidebar topic replaces the page, + adds one below, ✕ and Close others narrow it", async () => {
+  it("a sidebar topic replaces the page; the + opens the comparison and ✕ narrows it", async () => {
     const a = await renderApp(`#/eor/fm/t/${stable().id}`);
     app = a;
     const c = a.container;
@@ -428,6 +430,9 @@ describe("topics page", () => {
     expect(crumbs(c)).toEqual(["EOR", "Family Medicine", "Cardiovascular", "Coronary artery disease", "Stable angina"]);
     expect(c.querySelector(".tcard button[aria-label^='Close ']")).toBeNull();
     expect(row(must(c.querySelector(".tcard"), "card"), R(104))).not.toBeNull();
+    const pageMenu = await openPdfMenu(c);
+    expect(byText(pageMenu, "[role='menuitem']", "This topic")?.textContent).toBe(`This topic${stable().title}`);
+    await press(must(pageMenu.querySelector("[role='menuitem']"), "menu item"), "Escape");
 
     // Clicking a topic replaces the page.
     await click(groupToggle(c, "Cardiovascular — other"));
@@ -437,36 +442,23 @@ describe("topics page", () => {
     expect(c.querySelectorAll("section.tcard")).toHaveLength(1);
     expect(h1(c)).toBe(af().title);
 
-    // "+" adds a second topic below.
+    // The sidebar's + opens the comparison with the diagnosis on screen in the first quadrant.
     await click(groupToggle(c, "Coronary artery disease"));
-    await click(side(c).querySelector(`a.alongside[aria-label="Open ${stable().title} alongside"]`));
-    await until(() => c.querySelectorAll("section.tcard").length === 2, "two cards");
-    expect(location.hash).toBe(`#/eor/fm/t/${R(101)},${stable().id}`);
-    const cards = [...c.querySelectorAll("section.tcard")];
-    expect(cards.map((e) => e.getAttribute("data-topic"))).toEqual([R(101), stable().id]);
-    expect(h1(c)).toBe("Comparing 2 topics");
-    expect(crumbs(c)).toEqual(["EOR", "Family Medicine", "2 topics open"]);
-    expect(cards.map((e) => e.querySelector(".tcard-h b")?.textContent)).toEqual([af().title, stable().title]);
-    expect(cards.map((e) => e.querySelector(".tcard-h .loc")?.textContent)).toEqual(["Cardiovascular", "Cardiovascular"]);
-    expect(cards.map((e) => e.querySelector("button[aria-label^='Close ']")?.getAttribute("aria-label"))).toEqual([`Close ${af().title}`, `Close ${stable().title}`]);
-    const menu = await openPdfMenu(c);
-    expect(byText(menu, "[role='menuitem']", "This page (2 topics)")?.textContent).toBe(`This page (2 topics)${af().title}, ${stable().title}`);
-    await press(must(menu.querySelector("[role='menuitem']"), "menu item"), "Escape");
+    await click(side(c).querySelector(`a.alongside[aria-label="Add ${stable().title} to the comparison"]`));
+    await until(() => c.querySelectorAll(".cmp-q").length === 2, "two quadrants");
+    expect(location.hash).toBe(`#/eor/fm/compare/${R(101)},${stable().id}`);
+    expect(h1(c)).toBe("Compare");
+    expect(crumbs(c)).toEqual(["EOR", "Family Medicine", "Compare"]);
+    expect([...c.querySelectorAll(".cmp-q .tcard")].map((e) => e.getAttribute("data-topic"))).toEqual([R(101), stable().id]);
 
-    // Close others leaves the last one.
-    await click(byText(c, ".main button", "Close others"));
-    await until(() => c.querySelectorAll("section.tcard").length === 1, "one card");
-    expect(location.hash).toBe(`#/eor/fm/t/${stable().id}`);
-    expect(c.querySelector(`section.tcard[data-topic="${stable().id}"]`)).not.toBeNull();
-    expect(byText(c, ".main button", "Close others")).toBeNull();
-
-    // ✕ closes just that one.
-    await go(`#/eor/fm/t/${R(101)},${stable().id}`);
-    await until(() => c.querySelectorAll("section.tcard").length === 2, "two cards again");
-    await click(c.querySelector(`button[aria-label="Close ${stable().title}"]`));
-    await until(() => c.querySelectorAll("section.tcard").length === 1, "one card after ✕");
-    expect(location.hash).toBe(`#/eor/fm/t/${R(101)}`);
-    expect(c.querySelector(`section.tcard[data-topic="${R(101)}"]`)).not.toBeNull();
+    // On the comparison, the + fills the next quadrant, and ✕ takes one off while the rest stay.
+    await click(side(c).querySelector(`a.alongside[aria-label="Add ${prinz().title} to the comparison"]`));
+    await until(() => c.querySelectorAll(".cmp-q").length === 3, "three quadrants");
+    expect(location.hash).toBe(`#/eor/fm/compare/${R(101)},${stable().id},${prinz().id}`);
+    await click(must(c.querySelector("button[aria-label='Remove quadrant 2']"), "remove the second quadrant"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 2, "two quadrants after ✕");
+    expect(location.hash).toBe(`#/eor/fm/compare/${R(101)},${prinz().id}`);
+    expect([...c.querySelectorAll(".cmp-q .tcard")].map((e) => e.getAttribute("data-topic"))).toEqual([R(101), prinz().id]);
   });
 
   it("a topic's below block shows after its meds panel under Additional info, and on its section page under the table holding its last row with no heading", async () => {
@@ -514,14 +506,16 @@ describe("topics page", () => {
     expect(card.textContent).not.toContain(BELOW_HEADING);
   });
 
-  it("topics from two systems compare without a page PDF scope; a flat system's topic has no section crumb", async () => {
+  it("an old two-topic link is the comparison, with no page PDF; a flat system's topic has no section crumb", async () => {
     const a = await renderApp(`#/eor/fm/t/${R(101)},${R(201)}`);
     app = a;
     const c = a.container;
-    await until(() => c.querySelectorAll("section.tcard").length === 2, "two cards");
-    expect([...c.querySelectorAll(".tcard-h .loc")].map((e) => e.textContent)).toEqual(["Cardiovascular", "Pulmonary"]);
-    const menu = await openPdfMenu(c);
-    expect([...menu.querySelectorAll("[role='menuitem']")].map((e) => e.textContent)).toEqual(["Whole guideFamily Medicine EOR · every system, in guide order"]);
+    await until(() => c.querySelectorAll(".cmp-q").length === 2, "two quadrants");
+    // The stacked page is gone: the link lands on the comparison and the address becomes its canonical route.
+    expect(location.hash).toBe(`#/eor/fm/compare/${R(101)},${R(201)}`);
+    expect([...c.querySelectorAll(".cmp-q .tcard")].map((e) => e.getAttribute("data-topic"))).toEqual([R(101), R(201)]);
+    expect(h1(c)).toBe("Compare");
+    expect(c.querySelector(".main .pdfm")).toBeNull();
 
     await go(`#/eor/fm/t/${R(201)}`);
     await until(() => c.querySelectorAll("section.tcard").length === 1, "one card");
@@ -543,7 +537,7 @@ describe("topics page", () => {
 });
 
 describe("compare page", () => {
-  it("the dx page's Compare button opens the view; quadrants add, pick, remove, and show the same card", async () => {
+  it("the dx page's Compare button opens the view; the + adds, the picker swaps, ✕ removes", async () => {
     const a = await renderApp(`#/eor/fm/t/${stable().id}`);
     app = a;
     const c = a.container;
@@ -557,13 +551,17 @@ describe("compare page", () => {
     expect(row(must(first.querySelector(".tcard"), "card"), R(104))).not.toBeNull();
     expect(first.querySelector("button[aria-label^='Remove quadrant']")).toBeNull();
     expect(c.querySelector(".favm")).toBeNull();
+    // The diagnosis on screen is the whole comparison, so no row offers its own +.
+    expect(side(c).querySelector(`a.alongside[aria-label="Add ${stable().title} to the comparison"]`)).toBeNull();
 
-    // Adding a quadrant makes an empty slot the picker fills.
-    await click(byText(c, ".main .acts button", "Add quadrant"));
+    // The sidebar's + adds the next diagnosis beside it: the quadrant's section is open with it.
+    await click(side(c).querySelector(`a.alongside[aria-label="Add ${prinz().title} to the comparison"]`));
     await until(() => c.querySelectorAll(".cmp-q").length === 2, "two quadrants");
-    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id},`);
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id},${prinz().id}`);
+    expect([...c.querySelectorAll(".cmp-q select")].map((e) => (e as HTMLSelectElement).value)).toEqual([stable().id, prinz().id]);
+
+    // A quadrant's picker swaps that quadrant alone.
     const second = must([...c.querySelectorAll(".cmp-q")][1], "second quadrant");
-    expect(second.querySelector(".tcard")).toBeNull();
     const pick = must(second.querySelector("select"), "second picker");
     await act(async () => {
       pick.value = af().id;
@@ -571,18 +569,16 @@ describe("compare page", () => {
     });
     await until(() => c.querySelectorAll(".cmp-q .tcard").length === 2, "two cards");
     expect(location.hash).toBe(`#/eor/fm/compare/${stable().id},${af().id}`);
+    expect(must(c.querySelector(".cmp-q"), "the first quadrant").querySelector(".tcard")?.getAttribute("data-topic")).toBe(stable().id);
 
-    // Up to four: then the add control goes, and a quadrant can be taken off.
-    await click(byText(c, ".main .acts button", "Add quadrant"));
-    await click(byText(c, ".main .acts button", "Add quadrant"));
-    await until(() => c.querySelectorAll(".cmp-q").length === 4, "four quadrants");
-    expect(byText(c, ".main .acts button", "Add quadrant")).toBeNull();
-    await click(must(c.querySelector("button[aria-label='Remove quadrant 1']"), "remove the first quadrant"));
-    await until(() => c.querySelectorAll(".cmp-q").length === 3, "three quadrants");
-    expect(location.hash).toBe(`#/eor/fm/compare/${af().id},,`);
+    // ✕ takes the last one off; with one quadrant left there is no ✕.
+    await click(must(c.querySelector("button[aria-label='Remove quadrant 2']"), "remove the second quadrant"));
+    await until(() => c.querySelectorAll(".cmp-q").length === 1, "one quadrant again");
+    expect(location.hash).toBe(`#/eor/fm/compare/${stable().id}`);
+    expect(c.querySelector("button[aria-label^='Remove quadrant']")).toBeNull();
   });
 
-  it("groups the picker by system, and a topic the guide doesn't have, or five slots, isn't on the site", async () => {
+  it("groups the picker by system; an empty slot drops off, and a topic the guide doesn't have, or five slots, isn't on the site", async () => {
     quietErrors();
     const a = await renderApp(`#/eor/fm/compare/${stable().id}`);
     app = a;
@@ -590,6 +586,11 @@ describe("compare page", () => {
     await until(() => c.querySelector(".cmp-q .tcard"), "card");
     expect([...c.querySelectorAll(".cmp-q select optgroup")].map((g) => g.getAttribute("label"))).toContain("Cardiovascular");
     expect([...c.querySelectorAll(".cmp-q select option")].map((o) => (o as HTMLOptionElement).value)).toContain(af().id);
+
+    // An old address with an empty slot keeps its quadrants and drops the slot from the address.
+    await go(`#/eor/fm/compare/${stable().id},,`);
+    await until(() => location.hash === `#/eor/fm/compare/${stable().id}`, "the empty slot drops off");
+    expect(c.querySelectorAll(".cmp-q")).toHaveLength(1);
 
     await go(`#/eor/fm/compare/r_0000009999`);
     await until(() => notFound(c), "unknown topic not on site");

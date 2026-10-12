@@ -38,6 +38,16 @@ export type GuideView =
   | { kind: "visits"; item: string | null }
   | { kind: "slides"; n: number };
 
+/**
+ * The comparison's quadrants with `id` in its next free slot — the first empty one, else a new quadrant
+ * — or null when all four are taken. One rule for the sidebar's + and the favorites menu's fill.
+ */
+export function addToCompare(ids: readonly string[], id: string): string[] | null {
+  const empty = ids.indexOf("");
+  if (empty >= 0) return ids.map((x, i) => (i === empty ? id : x));
+  return ids.length < 4 ? [...ids, id] : null;
+}
+
 export type RoutePage =
   | { kind: "picker" }
   | { kind: "guide"; guide: string; view: GuideView }
@@ -83,7 +93,10 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
       return a && b && c === undefined ? page({ kind: "section", system: a, section: b }) : NOT_FOUND;
     case "t": {
       const ids = (a ?? "").split(",").filter((x) => x !== "");
-      return ids.length > 0 && b === undefined ? page({ kind: "topics", ids }) : NOT_FOUND;
+      if (b !== undefined || ids.length === 0) return NOT_FOUND;
+      // Several topics used to stack on one page; that page is gone, so a `t/a,b` link is a comparison
+      // (the app replaces the address with the canonical compare route), and more than four keep four.
+      return ids.length > 1 ? page({ kind: "compare", ids: ids.slice(0, 4) }) : page({ kind: "topics", ids });
     }
     case "compare": {
       const slots = (a ?? "").split(",");

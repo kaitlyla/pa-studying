@@ -3,7 +3,7 @@ import {
   checkBlockDir, listDir, listGapBlocks, readContent, readContentIfExists, readSystem, type TreeRoot,
 } from "../../lib/content/fs.ts";
 import type {
-  AsIsFile, BlockFile, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GeneralFile,
+  AsIsFile, BlockFile, CardsFile, ChecksFile, ComparisonsFile, ConceptsFile, DeckFile, EvidenceFile, FileText, FlagsFile, GeneralFile,
   GuideFile, MedsFile, OtherFile, PharmFile, RefTabsFile, SiteFile, SlideMeta, StructureFile, TrimsFile, UsesFile, VocabFile, WordDocFile,
 } from "../../lib/content/types.ts";
 import { TOPIC_BELOW_RE, topicBelowDir, topicBelowPath, TOPIC_MEDS_RE, topicMedsDir, topicMedsPath } from "../../lib/content/files.ts";
@@ -27,6 +27,7 @@ async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<Guid
   const file = await readContent<GuideFile>(root, `${base}/guide.json`);
   const preamble = await readBlocks(root, `${base}/_preamble/blocks`, file.preamble);
   const general = eor ? await readContent<GeneralFile>(root, `${base}/general.json`) : null;
+  const comparisons = await readContentIfExists<ComparisonsFile>(root, `${base}/comparisons.json`);
   const systems = await Promise.all(
     file.systems.map(async (s) => {
       const { system, blocks } = await readSystem(root, id, s.id);
@@ -36,7 +37,7 @@ async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<Guid
       return { file: system, structure, blocks, below, meds };
     }),
   );
-  return { file, preamble, general, systems };
+  return { file, preamble, general, comparisons, systems };
 }
 
 async function loadDocs(root: TreeRoot): Promise<Map<string, DocData>> {

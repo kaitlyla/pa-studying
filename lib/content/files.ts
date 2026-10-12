@@ -5,7 +5,7 @@ import { idSource, SLUG_SOURCE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
 import { GUIDE_IDS } from "./types.ts";
 import {
-  normalizeDoc, validateAsIsFile, validateBlock, validateCards, validateChecks, validateConcepts, validateDeck,
+  normalizeDoc, validateAsIsFile, validateBlock, validateCards, validateChecks, validateComparisons, validateConcepts, validateDeck,
   validateEvidence, validateFavorites, validateFileText, validateFlags, validateGap, validateGeneral, validateGuide, validateMeds, validateOther,
   validatePharmFile, validateRefTabs, validateSite, validateSlide, validateStructure, validateSystem, validateTrims,
   validateUpload, validateUses, validateVocab, validateWordDoc,
@@ -75,6 +75,10 @@ export const topicMedsPath = (guide: string, system: string, topic: string): str
 export const FAVORITES_FILE_RE = pathRe(`content/guides/${named(GUIDE)}/favorites\\.json`);
 export const favoritesPath = (guide: string): string => `content/guides/${guide}/favorites.json`;
 
+/** Her saved comparisons for a guide: `content/guides/<g>/comparisons.json` (published, so a visitor sees the list). */
+export const COMPARISONS_FILE_RE = pathRe(`content/guides/${named(GUIDE)}/comparisons\\.json`);
+export const comparisonsPath = (guide: string): string => `content/guides/${guide}/comparisons.json`;
+
 /** Every JSON file of the content tree, by path pattern, with its validator. */
 const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe("content/site\\.json"), validateSite],
@@ -82,6 +86,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe(`content/guides/${named(GUIDE)}/guide\\.json`), validateGuide],
   [pathRe(`content/guides/${named(GUIDE)}/general\\.json`), validateGeneral],
   [FAVORITES_FILE_RE, validateFavorites],
+  [COMPARISONS_FILE_RE, validateComparisons],
   [pathRe(`content/guides/${GUIDE}/${named(SLUG)}/system\\.json`), validateSystem],
   [pathRe(`content/guides/${GUIDE}/${SLUG}/structure\\.json`), validateStructure],
   [pathRe("content/pharm/cards\\.json"), validateCards],

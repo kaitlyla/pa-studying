@@ -12,9 +12,9 @@ import {
 import type { Checker, Ctx } from "./check.ts";
 import { idRegExp, isId, memberTarget, seriesOfCiteKey, SLUG_RE } from "./ids.ts";
 import type { IdPrefix } from "./ids.ts";
-import { FIXED_SOURCES, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_POPULATIONS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
+import { FIXED_SOURCES, COMPARISON_NAME_MAX, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_POPULATIONS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
-  AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ConceptsFile, DeckFile, EvidenceFile, FavoritesFile, FileText, Flag,
+  AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ComparisonsFile, ConceptsFile, DeckFile, EvidenceFile, FavoritesFile, FileText, Flag,
   FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
@@ -661,6 +661,21 @@ export const validateFavorites: Validator = whole((v, at, ctx) => {
   shapeOf<FavoritesFile>({ v: v1, pairs: arr(favoritePair) }, {})(v, at, ctx);
   const keys = (v as FavoritesFile).pairs.map(([a, b]) => `${a},${b}`);
   if (keys.some((k, i) => i > 0 && (keys[i - 1] as string) >= k)) bad(ctx, `${at}.pairs`, "pairs in sorted order, each once", keys);
+});
+
+/** One saved comparison: a name of hers, and the diagnoses of its quadrants in quadrant order. */
+const comparison: Checker = (v, at, ctx) => {
+  shapeOf<ComparisonsFile["comparisons"][number]>({ name: nonEmpty, ids: uniqueArr(id("r")) }, {})(v, at, ctx);
+  const { name, ids } = v as ComparisonsFile["comparisons"][number];
+  if (ids.length < 1 || ids.length > 4) bad(ctx, `${at}.ids`, "one to four diagnoses (her four quadrants)", ids);
+  if (name !== name.trim() || name.length > COMPARISON_NAME_MAX) bad(ctx, `${at}.name`, `a trimmed name of at most ${COMPARISON_NAME_MAX} characters`, name);
+};
+
+/** Her saved comparisons (site/compare): published, so a visitor reads them too; a name once each. */
+export const validateComparisons: Validator = whole((v, at, ctx) => {
+  shapeOf<ComparisonsFile>({ v: v1, comparisons: arr(comparison) }, {})(v, at, ctx);
+  const names = (v as ComparisonsFile).comparisons.map((c) => c.name);
+  if (new Set(names).size !== names.length) bad(ctx, `${at}.comparisons`, "names once each", names);
 });
 
 // ---- places (20.8) ----------------------------------------------------------------------------

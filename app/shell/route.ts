@@ -7,6 +7,7 @@ import { retryFailedReads } from "../data/load.ts";
 
 export {
   PANCE,
+  addToCompare,
   parseHash,
   guideBase,
   guideViewHash,

@@ -2,7 +2,7 @@
 // violations 20 names.
 import { describe, expect, it } from "vitest";
 import { ContentError } from "./check.ts";
-import { BLOCK_FILE_RE, favoritesPath, inboxItemDir, inboxUploadPath, isContentJSON, partName, serializeFile, UPLOAD_NAME, validateFile } from "./files.ts";
+import { BLOCK_FILE_RE, comparisonsPath, favoritesPath, inboxItemDir, inboxUploadPath, isContentJSON, partName, serializeFile, UPLOAD_NAME, validateFile } from "./files.ts";
 import { checkTrackSeries, isCdcOrg } from "./validate.ts";
 import type { GapFile } from "./types.ts";
 
@@ -14,6 +14,8 @@ const G2 = id("g", 2);
 const R1 = id("r", 1);
 const R2 = id("r", 2);
 const R3 = id("r", 3);
+const R4 = id("r", 4);
+const R5 = id("r", 5);
 
 const para = (text: string, attrs: Record<string, unknown> = {}) => ({ type: "paragraph", attrs, content: [{ type: "text", text }] });
 const doc = (...content: unknown[]) => ({ type: "doc", content });
@@ -1196,5 +1198,35 @@ describe("favorites (site/compare)", () => {
     expect(verdict(path, { v: 1, pairs: [[R2, R3], [R1, R2]] })).toMatch(/sorted order/);
     expect(verdict(path, { v: 1, pairs: [[R1, R2], [R1, R2]] })).toMatch(/sorted order/);
     expect(verdict(path, { v: 1, pairs: [[R1, R2]], page: 1 })).toMatch(/no such key/);
+  });
+});
+
+describe("saved comparisons (site/compare, published)", () => {
+  const path = comparisonsPath("fm");
+  const one = (name: string, ids: unknown[]): unknown => ({ v: 1, comparisons: [{ name, ids }] });
+
+  it("knows exactly the guide's comparisons file", () => {
+    expect(isContentJSON(path)).toBe(true);
+    expect(isContentJSON("content/guides/derm/comparisons.json")).toBe(false);
+    expect(isContentJSON("content/guides/fm/comparisons.json.bak")).toBe(false);
+  });
+
+  it("accepts one to four diagnoses under a name, in her order, names once each", () => {
+    expect(verdict(path, { v: 1, comparisons: [] })).toBe("ok");
+    expect(verdict(path, one("Adrenal", [R1]))).toBe("ok");
+    expect(verdict(path, one("Adrenal", [R3, R1, R2, R4]))).toBe("ok");
+    expect(verdict(path, { v: 1, comparisons: [{ name: "Adrenal", ids: [R1] }, { name: "Cushing's", ids: [R2, R3] }] })).toBe("ok");
+  });
+
+  it("refuses none or five quadrants, a repeated diagnosis, a non-topic and a bad name", () => {
+    expect(verdict(path, one("Adrenal", []))).toMatch(/one to four diagnoses/);
+    expect(verdict(path, one("Adrenal", [R1, R2, R3, R4, R5]))).toMatch(/one to four diagnoses/);
+    expect(verdict(path, one("Adrenal", [R1, R1]))).toMatch(/no duplicate entries/);
+    expect(verdict(path, one("Adrenal", [R1, B1]))).toMatch(/a r_ id/);
+    expect(verdict(path, one("", [R1]))).toMatch(/a non-empty string/);
+    expect(verdict(path, { v: 1, comparisons: [{ name: " x", ids: [R1] }] })).toMatch(/a trimmed name of at most 60 characters/);
+    expect(verdict(path, one("x".repeat(61), [R1]))).toMatch(/a trimmed name of at most 60 characters/);
+    expect(verdict(path, { v: 1, comparisons: [{ name: "Adrenal", ids: [R1] }, { name: "Adrenal", ids: [R2] }] })).toMatch(/names once each/);
+    expect(verdict(path, { v: 1, comparisons: [], page: 1 })).toMatch(/no such key/);
   });
 });

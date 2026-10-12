@@ -2,13 +2,11 @@
 // site through the owner's own save path (50 §50.4) as one content file per guide, so every device she
 // signs in on shows them; a visitor neither reads nor sees them. The pairs a compare quadrant's menu
 // shows come from here, and each change re-reads the file first, so two devices merge instead of losing.
-import { useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent, type ReactNode } from "react";
-import { commitMessage, favoritesPath, serializeFile, type FavoritesFile } from "../../lib/content/index.ts";
+import { Fragment, useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { favoritesPath, type FavoritesFile } from "../../lib/content/index.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { showToast } from "../shell/toast.tsx";
-import { commitChanges } from "./commit.ts";
-import { repo } from "./session.ts";
-import { Snapshot } from "./snapshot.ts";
+import { setOwnerFileValue, useOwnerFile, writeOwnerFile } from "./ownerFile.ts";
 
 /** A pair of topic ids, in id order (the pair stands for both directions). */
 export type Pair = [string, string];
@@ -18,6 +16,7 @@ export const FAVORITES_LOAD_FAILED = "Couldn’t load your favorites.";
 export const NO_FAVORITES = "No saved favorites yet.";
 export const FAVORITES_HEADING = "Saved favorites";
 export const SAVE_HEADING = "Save a favorite";
+export const OPEN_NOW = "Open now";
 export const compareWith = (title: string): string => `Compare with ${title}`;
 export const saveFavorite = (title: string): string => `Save ${title} as a favorite`;
 export const removeFavorite = (title: string): string => `Remove ${title} from favorites`;
@@ -37,54 +36,14 @@ export interface GuideFavorites {
   pairs: Pair[];
 }
 
-const EMPTY: GuideFavorites = { state: "idle", pairs: [] };
-const guides = new Map<string, GuideFavorites>();
-const listeners = new Set<() => void>();
-
-const stateOf = (guide: string): GuideFavorites => guides.get(guide) ?? EMPTY;
-
-function setGuide(guide: string, next: GuideFavorites): void {
-  guides.set(guide, next);
-  for (const l of listeners) l();
-}
-
-function subscribe(cb: () => void): () => void {
-  listeners.add(cb);
-  return () => listeners.delete(cb);
-}
-
-/** Clears the session's cache (tests). */
-export function resetFavoritesForTests(): void {
-  guides.clear();
-  for (const l of listeners) l();
-}
-
 const isEqual = (x: readonly Pair[], y: readonly Pair[]): boolean => JSON.stringify(x) === JSON.stringify(y);
-
-/** The guide's saved pairs as the file holds them, with the snapshot they were read at. */
-async function read(guide: string): Promise<{ pairs: Pair[]; snapshot: Snapshot }> {
-  const { git } = await repo();
-  const snapshot = await Snapshot.at(git);
-  const file = await snapshot.jsonIfExists<FavoritesFile>(favoritesPath(guide));
-  return { pairs: pairList(file?.pairs ?? []), snapshot };
-}
 
 /** The guide's pairs for the menu; read once per session (a change re-reads before it writes). */
 export function useFavorites(guide: string): GuideFavorites {
-  const state = useSyncExternalStore(subscribe, () => stateOf(guide), () => stateOf(guide));
-  useEffect(() => {
-    const now = stateOf(guide);
-    if (now.state === "loading" || now.state === "ready") return;
-    setGuide(guide, { state: "loading", pairs: now.pairs });
-    void read(guide).then(
-      ({ pairs }) => setGuide(guide, { state: "ready", pairs }),
-      (e: unknown) => {
-        console.warn("Couldn’t read your favorites", e);
-        setGuide(guide, { state: "error", pairs: [] });
-      },
-    );
-  }, [guide]);
-  return state;
+  const file = useOwnerFile<Pair[]>(favoritesPath(guide), [], true, async (snapshot) =>
+    pairList((await snapshot.jsonIfExists<FavoritesFile>(favoritesPath(guide)))?.pairs ?? []),
+  );
+  return { state: file.state, pairs: file.value };
 }
 
 /**
@@ -93,38 +52,57 @@ export function useFavorites(guide: string): GuideFavorites {
  */
 export async function setFavorite(guide: string, x: string, y: string, add: boolean, subject: string): Promise<boolean> {
   const path = favoritesPath(guide);
-  try {
-    for (let attempt = 0; attempt < 2; attempt++) {
-      const { pairs, snapshot } = await read(guide);
-      const next = add ? pairList([...pairs, [x, y]]) : pairs.filter(([a, b]) => `${a},${b}` !== pairKey(x, y));
-      if (isEqual(next, pairs)) {
-        setGuide(guide, { state: "ready", pairs });
-        return true;
-      }
-      const { git, site } = await repo();
-      const outcome = await commitChanges({
-        git,
-        base: snapshot.commit,
-        baseFiles: snapshot.files,
-        scope: { files: [path], dirs: [] },
-        changes: [{ path, content: serializeFile(path, { v: 1, pairs: next } satisfies FavoritesFile) }],
-        message: commitMessage(subject, { kind: "favorites" }),
-        author: { name: site.owner.commitName, email: site.owner.commitEmail },
-      });
-      if (outcome.kind === "saved") {
-        setGuide(guide, { state: "ready", pairs: next });
-        return true;
-      }
-      if (outcome.kind !== "conflict") {
-        console.warn("Couldn’t save your favorites", outcome.kind);
-        return false;
-      }
-    }
-    return false;
-  } catch (e) {
-    console.warn("Couldn’t save your favorites", e);
-    return false;
-  }
+  const outcome = await writeOwnerFile<FavoritesFile>(path, "favorites", subject, (file) => {
+    const pairs = pairList(file?.pairs ?? []);
+    const next = add ? pairList([...pairs, [x, y]]) : pairs.filter(([a, b]) => `${a},${b}` !== pairKey(x, y));
+    return isEqual(next, pairs) ? null : { v: 1, pairs: next };
+  });
+  if (outcome.file) setOwnerFileValue(path, pairList(outcome.file.pairs));
+  return outcome.kind !== "failed";
+}
+
+/** The guide's diagnoses, grouped as the sidebar and the quadrant picker list them. */
+export interface DxGroup {
+  id: string;
+  title: string;
+  entries: readonly { id: string; title: string }[];
+}
+
+/** One heading of the menu's save list. */
+export interface SaveGroup {
+  id: string;
+  title: string;
+  entries: { id: string; title: string }[];
+}
+
+export interface MenuModel {
+  /** The saved favorites offered: the partner, when it is not already on screen. */
+  offered: string[];
+  /** The save list: the diagnoses on screen first, then every other one, grouped as the picker lists them. */
+  groups: SaveGroup[];
+}
+
+const OPEN_NOW_ID = "open-now";
+
+/**
+ * What the menu offers for `id`: its saved partners (both ways) that are not on screen, and every
+ * diagnosis of the guide to save — the ones on screen first, then the rest grouped by system. `id`
+ * itself and the saved ones stay out; a diagnosis from the partners above is not listed again below.
+ */
+export function menuModel(groups: readonly DxGroup[], pairs: readonly Pair[], id: string, open: readonly string[]): MenuModel {
+  const titles = new Map(groups.flatMap((g) => g.entries.map((e) => [e.id, e.title] as const)));
+  const here = new Set(open.filter((x) => x !== "" && x !== id));
+  const saved = new Set(pairs.filter(([a, b]) => a === id || b === id).map(([a, b]) => (a === id ? b : a)));
+  const onScreen = [...here].filter((x) => !saved.has(x)).map((x) => ({ id: x, title: titles.get(x) ?? x }));
+  return {
+    offered: [...saved].filter((x) => !here.has(x)),
+    groups: [
+      ...(onScreen.length > 0 ? [{ id: OPEN_NOW_ID, title: OPEN_NOW, entries: onScreen }] : []),
+      ...groups
+        .map((g) => ({ id: g.id, title: g.title, entries: g.entries.filter((e) => e.id !== id && !saved.has(e.id) && !here.has(e.id)) }))
+        .filter((g) => g.entries.length > 0),
+    ],
+  };
 }
 
 export interface FavoriteMenuProps {
@@ -133,6 +111,8 @@ export interface FavoriteMenuProps {
   id: string;
   /** The diagnoses open in the quadrants, this one included. */
   others: readonly string[];
+  /** The guide's diagnoses, grouped as the quadrant picker lists them. */
+  groups: readonly DxGroup[];
   /** There is room for one more: an empty quadrant, or a free slot. */
   canPick: boolean;
   /** She picked a saved partner: the compare view puts it in the next empty quadrant. */
@@ -141,8 +121,12 @@ export interface FavoriteMenuProps {
   titleOf: (dx: string) => string;
 }
 
-/** The favorites menu of one compared diagnosis (owner-only; the compare view mounts it only for her). */
-export function FavoriteMenu({ guide, id, others, canPick, onPick, titleOf }: FavoriteMenuProps): ReactNode {
+/**
+ * The favorites menu of one compared diagnosis (owner-only; the compare view mounts it only for her).
+ * Its save list holds every diagnosis of the guide — the ones on screen first — and it stays open, so
+ * she can favorite several in a row and fill the quadrants one after another.
+ */
+export function FavoriteMenu({ guide, id, others, groups, canPick, onPick, titleOf }: FavoriteMenuProps): ReactNode {
   const fav = useFavorites(guide);
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -167,9 +151,7 @@ export function FavoriteMenu({ guide, id, others, canPick, onPick, titleOf }: Fa
     }
   };
 
-  const partners = fav.pairs.filter(([a, b]) => a === id || b === id).map(([a, b]) => (a === id ? b : a));
-  const open2 = [...new Set(others.filter((x) => x !== "" && x !== id))];
-  const saveable = open2.filter((x) => !partners.includes(x));
+  const model = menuModel(groups, fav.pairs, id, others);
 
   const toggle = async (other: string, add: boolean): Promise<void> => {
     setBusy(true);
@@ -186,10 +168,10 @@ export function FavoriteMenu({ guide, id, others, canPick, onPick, titleOf }: Fa
       {open && (
         <div className="menu" role="menu" aria-label={`Favorites for ${titleOf(id)}`}>
           {fav.state === "error" && <div className="mh">{FAVORITES_LOAD_FAILED}</div>}
-          {partners.length > 0 && <div className="mh">{FAVORITES_HEADING}</div>}
-          {partners.map((p) => (
+          {model.offered.length > 0 && <div className="mh">{FAVORITES_HEADING}</div>}
+          {model.offered.map((p) => (
             <div className="fmenu-row" key={p}>
-              <button type="button" role="menuitem" disabled={!canPick} onClick={() => { setOpen(false); onPick(p); }}>
+              <button type="button" role="menuitem" disabled={!canPick} onClick={() => onPick(p)}>
                 {compareWith(titleOf(p))}
               </button>
               <button type="button" className="iconbtn" aria-label={removeFavorite(titleOf(p))} disabled={busy} onClick={() => void toggle(p, false)}>
@@ -197,13 +179,18 @@ export function FavoriteMenu({ guide, id, others, canPick, onPick, titleOf }: Fa
               </button>
             </div>
           ))}
-          {saveable.length > 0 && <div className="mh">{SAVE_HEADING}</div>}
-          {saveable.map((o) => (
-            <button key={o} type="button" role="menuitem" disabled={busy} onClick={() => void toggle(o, true)}>
-              {saveFavorite(titleOf(o))}
-            </button>
+          {model.groups.length > 0 && <div className="mh">{SAVE_HEADING}</div>}
+          {model.groups.map((g) => (
+            <Fragment key={g.id}>
+              <div className="mh">{g.title}</div>
+              {g.entries.map((e) => (
+                <button key={e.id} type="button" role="menuitem" disabled={busy} onClick={() => void toggle(e.id, true)}>
+                  {saveFavorite(e.title)}
+                </button>
+              ))}
+            </Fragment>
           ))}
-          {fav.state !== "loading" && fav.state !== "error" && partners.length === 0 && saveable.length === 0 && (
+          {fav.state !== "loading" && fav.state !== "error" && model.offered.length === 0 && model.groups.length === 0 && (
             <div className="mh">{NO_FAVORITES}</div>
           )}
         </div>

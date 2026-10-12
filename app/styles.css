@@ -209,6 +209,8 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .cmp-h { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid #eceef2; }
 .cmp-h select { flex: 1; min-width: 0; }
 .cmp-h .favm { position: relative; display: inline-flex; }
+/* The save list holds every diagnosis of the guide, so the menu scrolls instead of growing past the page. */
+.cmp-h .favm .menu { max-height: min(70vh, 640px); overflow: auto; }
 .cmp-body { flex: 1; min-height: 0; overflow: auto; padding: 8px 10px 14px; }
 .cmp-body .tcard { margin-bottom: 0; }
 .fmenu-row { display: flex; align-items: center; gap: 2px; }
@@ -216,6 +218,15 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .is-phone .cmp-grid { display: block; height: auto; min-height: 0; }
 .is-phone .cmp-q + .cmp-q { margin-top: 12px; }
 .is-phone .cmp-body { overflow: visible; }
+/* ---- saved comparisons (site/compare): the sidebar's list and the compare page's Save panel ---- */
+.ent-row .rowact { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; color: #5b6472; opacity: 0; }
+.ent-row:hover .rowact, .rowact:focus-visible, .is-phone .rowact { opacity: 1; }
+.ent-row .rowact:hover { background: #dfe3ea; color: #1f2430; }
+.cmp-rename { display: flex; align-items: center; gap: 4px; padding: 2px 8px 2px 14px; }
+.cmp-rename input { flex: 1; min-width: 0; }
+.acts .savecmp { position: relative; display: inline-flex; }
+.cmp-save input { width: 100%; box-sizing: border-box; }
+.cmp-save-row { display: flex; gap: 6px; margin-top: 6px; }
 .addl { margin-top: 14px; }
 .addl-h { margin: 0 0 4px; font-size: 15px; }
 .stub { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0 12px; padding: 8px 12px; border: 1px dashed #9aa3b2; border-radius: 6px; font-size: 13px; color: #3a4150; text-decoration: none; }

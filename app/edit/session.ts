@@ -431,11 +431,15 @@ export async function done(): Promise<void> {
  */
 function pageAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMoved"]>): { hash: string; key: string } {
   const route = parseHash(currentHash());
-  const ids = route.kind === "guide" && route.view.kind === "topics" ? route.view.ids : [old];
+  const view = route.kind === "guide" ? route.view : null;
+  const ids = view?.kind === "topics" ? view.ids : view?.kind === "compare" ? view.ids.filter((x) => x !== "") : [old];
   const next = [...new Set(ids.flatMap((id) => (id !== old ? [id] : moved.topic !== null ? [moved.topic] : [])))];
   const shown = moved.topic !== null && next.includes(moved.topic) ? moved.topic : next[0];
   return shown !== undefined
-    ? { hash: guideViewHash(moved.guide, { kind: "topics", ids: next }), key: buildPageKey("topic", moved.guide, shown) }
+    ? {
+        hash: guideViewHash(moved.guide, next.length > 1 ? { kind: "compare", ids: next } : { kind: "topics", ids: next }),
+        key: buildPageKey("topic", moved.guide, shown),
+      }
     : { hash: guideViewHash(moved.guide, { kind: "system", system: moved.system }), key: buildPageKey("system", moved.guide, moved.system) };
 }
 

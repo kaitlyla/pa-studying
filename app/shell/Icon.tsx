@@ -2,7 +2,7 @@
 import type { ReactNode } from "react";
 
 export type IconName =
-  | "search" | "chev" | "plus" | "x" | "dl" | "menu" | "hide" | "show" | "pill" | "gap" | "upd" | "ext" | "back";
+  | "search" | "chev" | "plus" | "x" | "dl" | "menu" | "hide" | "show" | "pill" | "gap" | "upd" | "ext" | "back" | "pen";
 
 function paths(n: IconName): ReactNode {
   const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" } as const;
@@ -48,6 +48,13 @@ function paths(n: IconName): ReactNode {
       return <path {...line} d="M9.5 3h3.5v3.5M13 3L7.5 8.5M11 9.5V13H3V5h3.5" />;
     case "back":
       return <path {...line} d="M10 3.5L5.5 8l4.5 4.5" />;
+    case "pen":
+      return (
+        <g {...line} strokeWidth={1.5}>
+          <path d="M11.3 2.9l1.8 1.8-7.6 7.6-2.3.5.5-2.3z" />
+          <path d="M3.2 13.4h9.6" />
+        </g>
+      );
   }
 }
 

@@ -11,6 +11,8 @@ export const homePath = (guide: string): string => `g/${guide}/home.json`;
 export const generalPath = (guide: string, key: string): string => `g/${guide}/general/${key}.json`;
 export const workupPath = (guide: string): string => `g/${guide}/workup.json`;
 export const visitsPath = (guide: string): string => `g/${guide}/visits.json`;
+/** A guide's saved comparisons (published, so a visitor sees the list). */
+export const comparisonsPath = (guide: string): string => `g/${guide}/comparisons.json`;
 export const slidesPath = (guide: string): string => `g/${guide}/slides.json`;
 export const refPath = (tab: string): string => `ref/${tab}.json`;
 /** A reference tab page: `tab`, one of REF_TABS. */
@@ -439,6 +441,12 @@ export interface WorkupJson {
 export interface VisitsJson {
   guide: GuideId;
   items: { id: string; title: string; links: PubLink[]; gaps: PubGap[] }[];
+}
+
+/** Her saved comparisons: names she gave, each restoring its quadrants (`ids`, in quadrant order). */
+export interface ComparisonsJson {
+  guide: GuideId;
+  comparisons: { name: string; ids: string[] }[];
 }
 
 export interface SlidesJson {

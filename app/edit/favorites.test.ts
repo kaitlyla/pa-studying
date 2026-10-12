@@ -6,7 +6,8 @@ import { favoritesPath, parseFile, serializeFile, type FavoritesFile } from "../
 import { WORKER_ORIGIN } from "../auth/config.ts";
 import { DATA_BASE, invalidateData } from "../data/load.ts";
 import { FakeGithub, fakeFetch, type FakeRequest } from "../e2e/fake-github.ts";
-import { pairList, resetFavoritesForTests, setFavorite } from "./favorites.tsx";
+import { menuModel, OPEN_NOW, pairList, setFavorite, type DxGroup } from "./favorites.tsx";
+import { resetOwnerFiles } from "./ownerFile.ts";
 import { retry } from "./github.ts";
 
 const R1 = "r_0000000001";
@@ -71,7 +72,7 @@ function installFetch(): void {
 beforeEach(() => {
   localStorage.clear();
   installLocks();
-  resetFavoritesForTests();
+  resetOwnerFiles();
   fake = new FakeGithub();
   fake.workerOrigin = WORKER_ORIGIN;
   fake.commitFiles({ "content/guides/fm/guide.json": "{}\n" }, { message: "Import" });
@@ -88,6 +89,40 @@ afterEach(() => {
 describe("pair lists", () => {
   it("keeps each pair in id order, sorted, once, and never a topic with itself", () => {
     expect(pairList([[R2, R1], [R3, R3], [R4, R5], [R1, R2]])).toEqual([[R1, R2], [R4, R5]]);
+  });
+});
+
+describe("the menu's lists", () => {
+  /** A guide in sidebar order: two systems, the four diagnoses named as the sidebar names them. */
+  const G: DxGroup[] = [
+    { id: "cardio", title: "Cardiovascular", entries: [{ id: R1, title: "ACS" }, { id: R2, title: "Stable angina" }] },
+    { id: "endo", title: "Endocrine", entries: [{ id: R3, title: "DM" }, { id: R4, title: "Cushing" }] },
+  ];
+
+  it("lists every diagnosis of the guide to save, the ones on screen first", () => {
+    expect(menuModel(G, [], R1, [R1, R3])).toEqual({
+      offered: [],
+      groups: [
+        { id: "open-now", title: OPEN_NOW, entries: [{ id: R3, title: "DM" }] },
+        { id: "cardio", title: "Cardiovascular", entries: [{ id: R2, title: "Stable angina" }] },
+        { id: "endo", title: "Endocrine", entries: [{ id: R4, title: "Cushing" }] },
+      ],
+    });
+  });
+
+  it("offers a saved partner both ways, and neither offers nor saves one already on screen", () => {
+    const pairs = pairList([[R2, R1]]);
+    expect(menuModel(G, pairs, R1, [R1]).offered).toEqual([R2]);
+    expect(menuModel(G, pairs, R2, [R2]).offered).toEqual([R1]);
+    const both = menuModel(G, pairs, R1, [R1, R2]);
+    expect(both.offered).toEqual([]);
+    expect(both.groups.flatMap((g) => g.entries.map((e) => e.id))).toEqual([R3, R4]);
+  });
+
+  it("empties out when the guide has nothing left to save", () => {
+    const small: DxGroup[] = [{ id: "cardio", title: "Cardiovascular", entries: [{ id: R1, title: "ACS" }, { id: R2, title: "Stable angina" }] }];
+    expect(menuModel(small, pairList([[R1, R2]]), R1, [R1])).toEqual({ offered: [R2], groups: [] });
+    expect(menuModel(small, pairList([[R1, R2]]), R1, [R1, R2])).toEqual({ offered: [], groups: [] });
   });
 });
 

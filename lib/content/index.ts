@@ -8,7 +8,7 @@ export {
 } from "./ids.ts";
 export type { AssetExt, IdPrefix } from "./ids.ts";
 export {
-  AS_IS_FILE_RE, BLOCK_FILE_RE, FAVORITES_FILE_RE, favoritesPath, GAP_FILE_RE, gapFilePath, inboxItemDir, inboxUploadPath, partName, UPLOAD_NAME, WORD_DOC_RE, isContentJSON,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, COMPARISONS_FILE_RE, comparisonsPath, FAVORITES_FILE_RE, favoritesPath, GAP_FILE_RE, gapFilePath, inboxItemDir, inboxUploadPath, partName, UPLOAD_NAME, WORD_DOC_RE, isContentJSON,
   parseFile, serializeFile, serializeJSON, TOPIC_BELOW_RE, topicBelowDir, topicBelowPath, TOPIC_MEDS_RE, topicMedsDir, topicMedsPath, validateFile,
 } from "./files.ts";
 export { checkTrackSeries, isCdcOrg } from "./validate.ts";
