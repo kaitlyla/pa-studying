@@ -1,8 +1,7 @@
 {
  "v": 1,
  "add": [
-  "c_STMWWQTHMZ",
-  "c_MTBV2T2NY0"
+  "c_STMWWQTHMZ"
  ],
  "remove": [
   "c_0PDD7Q5DBT",
@@ -9584,13 +9583,13 @@
    "gap": "g_79MJE7G0BG"
   },
   {
-   "target": "c_MTBV2T2NY0",
+   "target": "p_G4NRR53ZFZ",
    "pieces": [
     {
      "kind": "notes",
-     "basePt": 11,
+     "basePt": 8,
      "title": null,
-     "file": "Abx flow charts",
+     "file": "pharm review",
      "doc": {
       "type": "doc",
       "content": [
@@ -9613,1329 +9612,466 @@
           "type": "text",
           "marks": [
            {
-            "type": "bold"
+            "type": "italic"
+           },
+           {
+            "type": "color",
+            "attrs": {
+             "hex": "4472C4"
+            }
            }
           ],
-          "text": "Macrolids"
+          "text": "Erythromycin "
          }
         ]
        },
        {
-        "type": "table",
+        "type": "paragraph",
         "attrs": {
-         "grid": [
-          576
-         ],
-         "indentPt": 0,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 1,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 5,
-          "right": 5,
-          "bottom": 5,
-          "left": 5
-         }
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
         },
         "content": [
          {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_H3QJ6WZG61",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
+          "type": "text",
+          "marks": [
            {
-            "type": "table_cell",
+            "type": "underline",
             "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "auto",
-                "value": 1
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "image",
-                "attrs": {
-                 "asset": "6d0b99e47ddd1dad7303a10326fbf228.png",
-                 "widthPt": 241.12503937007875,
-                 "heightPt": 160.52425196850393,
-                 "rot": 0,
-                 "flipH": false,
-                 "flipV": false
-                }
-               }
-              ]
-             }
-            ]
+             "style": "single"
+            }
            }
-          ]
+          ],
+          "text": "MOA"
+         },
+         {
+          "type": "text",
+          "text": ": binds to the 50S ribosomal subunit, inhibiting protein synth "
          }
         ]
        },
        {
-        "type": "table",
+        "type": "paragraph",
         "attrs": {
-         "grid": [
-          34,
-          110,
-          150,
-          150,
-          150,
-          126
-         ],
-         "indentPt": 0,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "1F3864"
-          }
-         },
-         "cellMarginPt": {
-          "top": 2,
-          "right": 4,
-          "bottom": 2,
-          "left": 4
-         }
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
         },
         "content": [
          {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_2XHEVDS2RK",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": true,
-           "cantSplit": false
-          },
-          "content": [
+          "type": "text",
+          "text": "•↓doses → bacteriostatic "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•↑doses → bactericidal  "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
            {
-            "type": "table_cell",
+            "type": "underline",
             "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "Slide"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "Antibiotic"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Gram-positive"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "(Lt side): inside the petals"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Gram-negative"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "(Rt side): inside the petals"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "Outside the petals"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "Unclear on slide (name runs over a petal's edge)"
-               }
-              ]
-             }
-            ]
+             "style": "single"
+            }
            }
-          ]
+          ],
+          "text": "Spectrum of Activity"
          },
          {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_P9DWQCAG36",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
+          "type": "text",
+          "text": ":"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•broad spectrum of activity: good against gram (+), gram (-), atypical organisms, & organisms other than bacteria (ex, Babesia microti)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
            {
-            "type": "table_cell",
+            "type": "underline",
             "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 9
-                  }
-                 }
-                ],
-                "text": "18"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Azithro &"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Clarithromycin"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Enterococcus"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "faecalis"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "S. pneumoniae"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Strep pyogenes"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "H-flu"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Serratia"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Klebsiella"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "pneumoniae"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "E. coli"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Proteus"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "mirabilis"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Enterobacter spp"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Bacteroides"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "fragilis"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Pseudomonas"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Enterococcus"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "faecium "
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "(VRE)"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Staph aureus"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " (MSSA)"
-               }
-              ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "italic"
-                 },
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": "Staph aureus"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "size",
-                  "attrs": {
-                   "pt": 10
-                  }
-                 }
-                ],
-                "text": " (MRSA)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": null,
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 3,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
+             "style": "single"
+            }
            }
-          ]
+          ],
+          "text": "Clin Use"
+         },
+         {
+          "type": "text",
+          "text": ": "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•strep pharyngitis (PCN allergic pts)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•PNA, C. diphtheriae, topical use in acne "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•safe in preg"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•less gram (-) activity compared w/ others in the class "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Contraindications"
+         },
+         {
+          "type": "text",
+          "text": ": pts on Niacin or statins (↑musc toxicity) "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "SE"
+         },
+         {
+          "type": "text",
+          "text": ":"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•GI upset – ↑peristalsis – diarrhea & abd cramps (esp. Erythromycin)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•ototoxicity: may cause deafness (USU reversible) "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•prolonged QT interval "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•acute cholestatic hepatitis (esp. erythromycin estolate)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Drug Interactions"
+         },
+         {
+          "type": "text",
+          "text": ": cytochrome P450 inhibition "
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "•may increase levels of Warfarin, Digoxin, Theophylline, Carbamazepine, & statins (esp. erythromycin) "
          }
         ]
        }
@@ -10943,7 +10079,7 @@
      }
     }
    ],
-   "gap": "g_8FW9WWW0A9"
+   "gap": "g_FBV05CSWH5"
   }
  ],
  "gaps": [
@@ -11140,24 +10276,6 @@
    ]
   },
   {
-   "target": "c_MTBV2T2NY0",
-   "roles": [
-    {
-     "role": "adjunct",
-     "drugs": "long-term azithromycin",
-     "note": "Recurr exacerbations; preferred in former smokers",
-     "sources": [
-      {
-       "name": "Treatment of Stable COPD",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
-      }
-     ]
-    }
-   ]
-  },
-  {
    "target": "g_5NA0Z7W2YR",
    "roles": [
     {
@@ -11298,6 +10416,24 @@
        "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
        "year": "2026",
        "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_G4NRR53ZFZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "azithromycin (long-term)",
+     "note": "recurr exacerbations; preferred in former smokers",
+     "sources": [
+      {
+       "name": "Treatment of Stable COPD",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
      ]
     }

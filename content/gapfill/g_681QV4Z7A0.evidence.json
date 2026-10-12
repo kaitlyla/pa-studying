@@ -1,0 +1,26 @@
+{
+ "v": 1,
+ "author": "cara-44174 (all-rounder-01a1295f-8eb7-7611-880d-33f8a39ad65c)",
+ "claims": [
+  {
+   "text": "RIPE x2 mo, then INH + RIF x4 or 7 mo (6–9 mo total).",
+   "source": 0,
+   "quote": "These regimens for treating TB disease have an intensive phase of 2 months of isonaizid, rifampin, pyrazinamide, and ethambutol (2HRZE), followed by a continuation phase of either 4 or 7 months of isonaizid and rifampin (4HR or 7HR) for total of 6 to 9 months for treatment.",
+   "locator": "6- to 9-month (2HRZE/4HR or 2HRZE/7HR) treatment regimens",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-12",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "cdc.gov returns 403 to a scripted fetch; quotes were verified against the builder's saved copy of the same CDC page",
+    "resolution": "none needed"
+   }
+  ]
+ },
+ "block": "g_681QV4Z7A0"
+}

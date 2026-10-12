@@ -842,7 +842,8 @@
   "g_ZZSHRSZ3DH",
   "g_C0EJMMYVER",
   "g_XN1ZESBVGD",
-  "g_MS64R60J1E"
+  "g_MS64R60J1E",
+  "g_F4CA06R7VR"
  ],
  "roles": [
   {
@@ -917,7 +918,7 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "rifampin, naltrexone or sertraline",
+     "drugs": "naltrexone or sertraline",
      "note": "cholestatic pruritus",
      "sources": [
       {
@@ -950,6 +951,24 @@
      "role": "adjunct",
      "drugs": "vitamins A, D, E, K; calcium + vit D",
      "note": "chronic cholestasis",
+     "sources": [
+      {
+       "name": "Primary Sclerosing Cholangitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK537181/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F4CA06R7VR",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "rifampin",
+     "note": "cholestatic pruritus",
      "sources": [
       {
        "name": "Primary Sclerosing Cholangitis (StatPearls)",

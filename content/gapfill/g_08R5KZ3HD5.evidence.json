@@ -1,0 +1,50 @@
+{
+ "v": 1,
+ "author": "cara-44174 (all-rounder-01a1295f-8eb7-7611-880d-33f8a39ad65c)",
+ "claims": [
+  {
+   "text": "3HP: 3 mo (weekly);",
+   "source": 0,
+   "quote": "Three months of once-weekly isoniazid plus rifapentine (3HP)",
+   "locator": "Treatment Recommendations › Short-course rifamycin-based regimens",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "4R: 4 mo;",
+   "source": 0,
+   "quote": "Four months of daily rifampin (4R)",
+   "locator": "Treatment Recommendations › Short-course rifamycin-based regimens",
+   "accessed": "2026-10-11"
+  },
+  {
+   "text": "3HR: 3 mo.",
+   "source": 0,
+   "quote": "Three months of daily isoniazid and rifampin (3HR)",
+   "locator": "Treatment Recommendations › Short-course rifamycin-based regimens",
+   "accessed": "2026-10-11"
+  }
+ ],
+ "verification": {
+  "verifier": "hank-19591 (all-rounder-01a12d02-fd9a-7d83-9fad-216fa970c80a)",
+  "at": "2026-10-12",
+  "result": "pass",
+  "notes": [
+   {
+    "claim": 1,
+    "issue": "cdc.gov returns 403 to a scripted fetch; quotes were verified against the builder's saved copy of the same CDC page",
+    "resolution": "none needed"
+   },
+   {
+    "claim": 2,
+    "issue": "cdc.gov returns 403 to a scripted fetch; quotes were verified against the builder's saved copy of the same CDC page",
+    "resolution": "none needed"
+   },
+   {
+    "claim": 3,
+    "issue": "cdc.gov returns 403 to a scripted fetch; quotes were verified against the builder's saved copy of the same CDC page",
+    "resolution": "none needed"
+   }
+  ]
+ },
+ "block": "g_08R5KZ3HD5"
+}

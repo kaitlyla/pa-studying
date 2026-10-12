@@ -842,7 +842,8 @@
   "g_RKM4205ASM",
   "g_2RPKMWZT10",
   "g_XYQEMEX03J",
-  "g_8G5H0NEMNZ"
+  "g_8G5H0NEMNZ",
+  "g_F4CA06R7VR"
  ],
  "roles": [
   {
@@ -917,7 +918,7 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "rifampin, naltrexone or sertraline",
+     "drugs": "naltrexone or sertraline",
      "note": "pruritus",
      "sources": [
       {
@@ -950,6 +951,24 @@
      "role": "adjunct",
      "drugs": "vitamins A, D, E, K",
      "note": "fat malabsorption",
+     "sources": [
+      {
+       "name": "Primary Biliary Cholangitis (PBC)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/fibrosis-and-cirrhosis/primary-biliary-cholangitis-pbc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F4CA06R7VR",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "rifampin",
+     "note": "pruritus",
      "sources": [
       {
        "name": "Primary Biliary Cholangitis (PBC)",
