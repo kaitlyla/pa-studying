@@ -50,9 +50,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 5.4,
+      "right": 0.5,
       "bottom": 0,
-      "left": 5.4
+      "left": 0.5
      }
     },
     "content": [
@@ -85,7 +85,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -97,6 +100,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Desquamation "
@@ -124,7 +133,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -136,6 +148,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -163,7 +181,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -175,6 +196,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clin Manifestations"
@@ -202,7 +229,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -214,6 +244,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Diagnostics"
@@ -241,7 +277,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 6
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -253,6 +292,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Mgnt"
@@ -270,7 +315,14 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        76.89192307692309,
+        162.8,
+        211.9569230769231,
+        154.40473076923078,
+        167.94642307692308
+       ]
       },
       "content": [
        {
@@ -292,7 +344,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -304,6 +359,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Erythema Multiforme"
@@ -331,7 +392,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -343,6 +407,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -357,6 +427,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "009193"
@@ -367,7 +443,47 @@
            },
            {
             "type": "text",
-            "text": "of the skin often following infections or med exposure – MC in young adults 20-40yrs"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "of the skin MC post infections or med exposure "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- MC in young adults 20-40yrs"
            }
           ]
          },
@@ -379,7 +495,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -394,7 +513,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -409,12 +531,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Eti"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -427,7 +563,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -439,12 +578,26 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Infections"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -452,6 +605,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -464,6 +623,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "; M. pneumoniae, VZV, EBV, CMV, coxsackie, parvovirus B19, M. TB, Salmonella, HIV"
            }
           ]
@@ -476,7 +643,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -488,12 +658,26 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Meds"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": NSAIDs, sulfonamides, anticonvulsants, abx  "
            }
           ]
@@ -506,7 +690,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -521,7 +708,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -535,6 +725,12 @@
               "type": "bold"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "shade",
               "attrs": {
                "hex": "F4B083"
@@ -545,6 +741,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -555,12 +759,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "THREE zones"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", well defined borders "
            }
           ]
@@ -586,7 +804,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -596,6 +817,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "highlight",
               "attrs": {
@@ -607,6 +834,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " – "
            },
            {
@@ -614,9 +849,15 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "MC on extremities (hands/ft)"
+            "text": "MC on extensor extremities (hands/ft) -> trunk -> oral/ocular/gential"
            }
           ]
          },
@@ -628,7 +869,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -637,6 +881,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -644,6 +896,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -664,7 +922,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -673,6 +934,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•Intermed surrounding "
            },
            {
@@ -682,40 +951,10 @@
               "type": "bold"
              },
              {
-              "type": "color",
+              "type": "size",
               "attrs": {
-               "hex": "ED7D31"
+               "pt": 7.5
               }
-             }
-            ],
-            "text": "ring of pallor"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "•"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
              },
              {
               "type": "color",
@@ -724,19 +963,7 @@
               }
              }
             ],
-            "text": "Periph erythematous ring"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "ED7D31"
-              }
-             }
-            ],
-            "text": " "
+            "text": "ring of pallor w red surrounding"
            }
           ]
          },
@@ -748,7 +975,60 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "•"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "3 concentric zones of color chgs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -760,6 +1040,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "shade",
@@ -772,6 +1058,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", "
            },
            {
@@ -782,12 +1076,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "blanches"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -800,7 +1108,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -815,7 +1126,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -830,12 +1144,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "(−) Nikolsky sign"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (⍉epidermal detachment)"
            }
           ]
@@ -848,7 +1176,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -863,7 +1194,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -877,6 +1211,12 @@
               "type": "underline",
               "attrs": {
                "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
               }
              },
              {
@@ -890,6 +1230,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": typically mild & "
            },
            {
@@ -900,12 +1248,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "limited to one mucous membrane"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " ("
            },
            {
@@ -913,6 +1275,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -925,6 +1293,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "); conjunctival/urogenital involvement rare  "
            }
           ]
@@ -937,7 +1313,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -952,7 +1331,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -967,12 +1349,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Minor"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": EM "
            },
            {
@@ -983,9 +1379,15 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "w/o or w/ only "
+            "text": "w.o or w only "
            },
            {
             "type": "text",
@@ -1000,6 +1402,12 @@
               "type": "underline",
               "attrs": {
                "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
               }
              }
             ],
@@ -1013,17 +1421,37 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": " mucosal dz"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "; "
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "shade",
               "attrs": {
@@ -1035,6 +1463,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -1047,7 +1483,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1062,13 +1501,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Major"
            },
            {
             "type": "text",
-            "text": ": EM w/ "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": EM w "
            },
            {
             "type": "text",
@@ -1078,12 +1531,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "severe mucosal involvement "
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "+ "
            },
            {
@@ -1091,6 +1558,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1103,11 +1576,25 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " ("
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "shade",
               "attrs": {
@@ -1119,6 +1606,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ")"
            }
           ]
@@ -1144,7 +1639,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1153,6 +1651,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Clin"
            }
           ]
@@ -1165,7 +1671,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1180,7 +1689,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1189,6 +1701,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Bx if dx ⍉clear "
            }
           ]
@@ -1201,7 +1721,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -1242,7 +1765,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1254,6 +1780,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "SELF-LIMITED!!"
@@ -1268,7 +1800,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1283,7 +1818,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1298,12 +1836,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Sxtomatic TX"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": bland "
            },
            {
@@ -1311,12 +1863,26 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "emollients"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " or topical abx applied to eroded areas, IVF for pts w/ mucositis & poor PO intake, antihistamines if pruritic"
            }
           ]
@@ -1329,7 +1895,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1344,7 +1913,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1359,12 +1931,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "HSV"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": acyclovir "
            }
           ]
@@ -1377,7 +1963,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1392,7 +1981,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1401,6 +1993,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "If ophthalmic involvement → "
            },
            {
@@ -1411,12 +2011,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Refer"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
