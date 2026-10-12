@@ -47,7 +47,10 @@ a { color: #2b55a3; }
 .me { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #4a5263; }
 .avatar { width: 26px; height: 26px; border-radius: 13px; }
 .body { flex: 1; min-height: 0; display: flex; }
-.main { flex: 1; min-width: 0; overflow: auto; position: relative; }
+/* The page's scale is computed from this scroll area's width, and its drawn height decides whether a
+   scrollbar shows: reserve the gutter so a space-taking scrollbar cannot change that width, which
+   otherwise flips the two every frame while the drawn page sits at the overflow boundary. */
+.main { flex: 1; min-width: 0; overflow: auto; position: relative; scrollbar-gutter: stable; }
 .main:focus { outline: none; }
 .main-in { padding: 18px 24px 40px; max-width: var(--page-max); }
 /* The bars' slot has no box of its own, so a bar in it sticks within the whole page frame. */
