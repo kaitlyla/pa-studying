@@ -17,11 +17,11 @@
    "accessed": "2026-10-05"
   },
   {
-   "text": "Chronic diarrhea (> 4 weeks), first tests: stool for occult blood, fat (Sudan stain or fecal elastase), electrolytes (osmotic gap) and Giardia antigen or PCR; CBC with differential; celiac serology (IgA tissue transglutaminase); TSH and free T4; fecal calprotectin or lactoferrin to screen for IBD.",
+   "text": "Chronic diarrhea (> 4 weeks): directed by H&P; if that gives no direction, first tests: stool for occult blood, fat (Sudan stain or fecal elastase), electrolytes (osmotic gap) and Giardia antigen or PCR; CBC with differential; celiac serology (IgA tissue transglutaminase); TSH and free T4; fecal calprotectin or lactoferrin to screen for IBD.",
    "source": 0,
-   "quote": "Initial testing should include stool for occult blood, fat (by Sudan stain or fecal elastase), electrolytes (to calculate the stool osmotic gap), and Giardia antigen or polymerase chain reaction test; complete blood count with differential; celiac serology (IgA tissue transglutaminase); thyroid-stimulating hormone (TSH) and free thyroxine (T4); and fecal calprotectin or fecal lactoferrin (to screen for inflammatory bowel disease [IBD]).",
+   "quote": "Chronic diarrhea (> 4 weeks) requires evaluation, as does a shorter (1 to 3 weeks) bout of diarrhea in patients who are immunocompromised or who appear significantly ill. Diagnostic evaluation should be directed by the history and physical examination when possible. If this approach does not provide a diagnosis or direction, a broader approach is needed. Initial testing should include stool for occult blood, fat (by Sudan stain or fecal elastase), electrolytes (to calculate the stool osmotic gap), and Giardia antigen or polymerase chain reaction test; complete blood count with differential; celiac serology (IgA tissue transglutaminase); thyroid-stimulating hormone (TSH) and free thyroxine (T4); and fecal calprotectin or fecal lactoferrin (to screen for inflammatory bowel disease [IBD]).",
    "locator": "Evaluation, Testing",
-   "accessed": "2026-10-05"
+   "accessed": "2026-10-11"
   },
   {
    "text": "Ova and parasites after recent travel to or immigration from high-risk areas; C. difficile testing after recent antibiotics.",
@@ -38,7 +38,7 @@
    "accessed": "2026-10-05"
   },
   {
-   "text": "Stool osmotic gap = 290 − 2 × (stool sodium + stool potassium): < 50 mEq/L means secretory diarrhea, a larger gap osmotic diarrhea.",
+   "text": "Stool osmotic gap = 290 − 2 × (stool sodium + stool potassium): < 50 mEq/L means secretory diarrhea; a larger gap suggests osmotic diarrhea.",
    "source": 0,
    "quote": "The stool osmotic gap, which is calculated 290 − 2 × (stool sodium + stool potassium), indicates whether diarrhea is secretory or osmotic. An osmotic gap < 50 mEq/L indicates secretory diarrhea; a larger gap suggests osmotic diarrhea.",
    "locator": "Evaluation, Testing",
@@ -46,16 +46,10 @@
   }
  ],
  "verification": {
-  "verifier": "im-s12 verifier session (Detective task 01a109fd-461f-7e10-84a9-39d6849fcf0b, dispatched by shay-49353)",
-  "at": "2026-10-05",
+  "verifier": "saul-16811 (all-rounder-01a10e54-f54c-7ee2-9176-652f7b90e5a7)",
+  "at": "2026-10-11",
   "result": "pass",
-  "notes": [
-   {
-    "claim": 0,
-    "issue": "earlier extraction added a space at inline-link boundaries (eg \"( 2 )\" for the page's \"(2)\")",
-    "resolution": "quote re-extracted with tag-aware text and re-matched to the saved live copy; whitespace only (shay-49353 ruling 2026-10-05T03:16Z)"
-   }
-  ]
+  "notes": []
  },
  "block": "g_8GVCV6J07H"
 }
