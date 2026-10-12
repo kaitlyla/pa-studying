@@ -18,7 +18,7 @@ import type { Content, GuideData, SystemData } from "./model.ts";
 import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
-  docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
+  comparisonsPath, docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
   type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type RefTabJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson, type VisitsJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
@@ -3094,7 +3094,7 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const expected = new Map<string, string>([[SITE_PATH, "site"], [HOSTS_PATH, "hosts"], [UPDATES_PATH, "updates"], [OTHER_PATH, "other"]]);
     for (const g of base.guides) {
       const gid = g.file.id;
-      expected.set(homePath(gid), "home").set(navPath(gid), "nav").set(workupPath(gid), "workup").set(visitsPath(gid), "visits").set(slidesPath(gid), "slides");
+      expected.set(homePath(gid), "home").set(navPath(gid), "nav").set(workupPath(gid), "workup").set(visitsPath(gid), "visits").set(slidesPath(gid), "slides").set(comparisonsPath(gid), "comparisons");
       for (const s of g.systems) expected.set(systemPath(gid, s.file.id), "system");
       for (const key of GENERAL_KEYS) expected.set(generalPath(gid, key), "general");
     }
@@ -3105,7 +3105,7 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
       expect(expected.has(path), path).toBe(true);
       kinds.add(expected.get(path) as string);
     }
-    expect([...kinds].sort()).toEqual(["doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "visits", "workup"]);
+    expect([...kinds].sort()).toEqual(["comparisons", "doc", "general", "home", "hosts", "nav", "other", "ref", "site", "slides", "system", "updates", "visits", "workup"]);
   });
 
   it("REF_PATH_RE matches exactly the reference tab paths refPath builds", () => {
