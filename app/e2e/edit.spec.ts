@@ -3588,6 +3588,26 @@ test.describe("processing and failed documents", () => {
 
 // ---- a save the deployed build contains while the served data still predates it ---------------------------------
 
+/**
+ * Leaves a caret at `p` in the editor, retrying if the click is swallowed. A click at a paragraph's very
+ * left edge does not always take a caret — her topic's first row loses it — so the click goes to the
+ * paragraph's middle, and opening a page whose rows hold pictures redraws the editors once the pictures
+ * are read from this device's store, which drops a caret a click had just placed.
+ */
+async function clickIntoCaret(page: Page, p: Locator): Promise<void> {
+  await expect(async () => {
+    await p.click();
+    // prosemirror-view (1.42.6) queues a focus callback that writes back the selection it last read;
+    // a timer queued after the click runs after ProseMirror's.
+    await page.evaluate(() => new Promise<void>((resolve) => setTimeout(resolve, 20)));
+    const holds = await p.evaluate((el) => {
+      const ed = el.closest("[contenteditable='true']");
+      return ed !== null && ed.contains(window.getSelection()?.anchorNode ?? null);
+    });
+    expect(holds, "the editor holds the caret").toBe(true);
+  }).toPass({ timeout: 20_000 });
+}
+
 test("a saved row survives the build that contains it landing while the served data may still be a copy from before", async ({ page, context, baseURL }) => {
   const { fake, build } = await world(context, baseURL, { seed: true });
   const g = "fm";
@@ -3601,12 +3621,21 @@ test("a saved row survives the build that contains it landing while the served d
   await startEditing(page);
   const slot = ref(page, "edit-area").locator(".edit-slot").first();
   const rows = slot.locator("table.nt > tbody > tr:not(.hrow)");
-  await clickIntoEditor(page, rows.first().locator(":scope > td").nth(1).locator("p").first());
-  await ref(page, "tb-row-below").click();
+  const firstCell = rows.first().locator(":scope > td").nth(1).locator("p").first();
+  const before = await rows.count();
+  // Insert the row below the topic's first row (her case). The count assertion keeps a swallowed click —
+  // or a refused insert — from letting the typing below land on the wrong row.
+  await expect(async () => {
+    await clickIntoCaret(page, firstCell);
+    await ref(page, "tb-row-below").click();
+    expect(await rows.count()).toBe(before + 1);
+  }).toPass({ timeout: 20_000 });
   const marker = newMarker();
   // Like her save: the new row's first cell stays empty — a continuation row — and its content goes in a later cell.
-  await clickIntoEditor(page, rows.nth(1).locator(":scope > td").nth(1).locator("p").first());
+  await clickIntoCaret(page, rows.nth(1).locator(":scope > td").nth(1).locator("p").first());
   await page.keyboard.type(marker);
+  await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+  await expect(slot).toContainText(marker);
   await ref(page, "edit-save").click();
   await expect(ref(page, "save-success")).toBeVisible();
 
@@ -3623,7 +3652,6 @@ test("a saved row survives the build that contains it landing while the served d
   // request asks for, so the row must stay on the page rather than be dropped with the build's arrival.
   build.commit = fake.head();
   build.age = "0";
-  page.on("response", (r) => { if (r.url().includes(BUILD_PATH)) console.log("PROBE build.json response", r.status(), JSON.stringify(r.headers())); });
   await page.evaluate((h) => { window.location.hash = h; }, systemHash);
   await expect(page.locator("main h1").first()).toHaveText(/^Dermatology/);
   await page.evaluate((h) => { window.location.hash = h; }, hash);
