@@ -2861,7 +2861,8 @@
   "g_YESPCFJ5V2",
   "g_RG6REN711T",
   "g_GFQX4CWGE5",
-  "g_YHCBYH1NW4"
+  "g_ED5WK3G6Q2",
+  "g_QHVJCRB65T"
  ],
  "roles": [
   {
@@ -3050,12 +3051,30 @@
    ]
   },
   {
-   "target": "g_YHCBYH1NW4",
+   "target": "g_ED5WK3G6Q2",
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "TMP-SMX (dapsone if sulfa allergy)",
-     "note": "PJP ppx; esp bedridden/low-mobility or UFC >5× normal",
+     "drugs": "TMP-SMX",
+     "note": "PJP ppx suggested in severe hypercortisolism; esp bedridden/low-mobility or UFC > 5× normal",
+     "sources": [
+      {
+       "name": "Nieman LK, et al. Treatment of Cushing's Syndrome: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2015;100(8):2807-2831",
+       "org": "Endocrine Society",
+       "year": "2015",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4525003/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QHVJCRB65T",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "dapsone",
+     "note": "PJP ppx if sulfa allergy",
      "sources": [
       {
        "name": "Nieman LK, et al. Treatment of Cushing's Syndrome: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2015;100(8):2807-2831",

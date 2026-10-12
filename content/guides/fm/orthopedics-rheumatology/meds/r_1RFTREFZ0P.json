@@ -5,7 +5,10 @@
  "own": [],
  "gaps": [
   "g_T8R5WGY9W2",
-  "g_927B72WS70"
+  "g_40FEDMM1AD",
+  "g_MEKD1575W0",
+  "g_SKT37K6E5V",
+  "g_2TYECCYG0B"
  ],
  "roles": [
   {
@@ -27,12 +30,12 @@
    ]
   },
   {
-   "target": "g_927B72WS70",
+   "target": "g_40FEDMM1AD",
    "roles": [
     {
      "role": "1st",
-     "drugs": "vancomycin + ceftriaxone",
-     "note": "spinal epidural abscess",
+     "drugs": "vancomycin",
+     "note": "spinal epidural abscess, after blood cx: staph coverage",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
@@ -44,8 +47,75 @@
     },
     {
      "role": "alt",
-     "drugs": "ceftazidime, cefepime or meropenem, + vancomycin",
-     "note": "after neurosurgery or urologic instrumentation",
+     "drugs": "vancomycin",
+     "note": "SEA after neurosurgery or urologic instrumentation, until cx results",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "spinal epidural abscess, after blood cx: anaerobes",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "ceftazidime",
+     "note": "SEA after neurosurgery or urologic instrumentation, w vancomycin",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SKT37K6E5V",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "cefepime",
+     "note": "SEA after neurosurgery or urologic instrumentation, w vancomycin",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-epidural-abscess"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2TYECCYG0B",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "meropenem",
+     "note": "SEA after neurosurgery or urologic instrumentation, w vancomycin",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Spinal Epidural Abscess",
