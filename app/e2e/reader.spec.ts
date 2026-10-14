@@ -19,6 +19,7 @@ import type {
   WorkupJson,
 } from "../../lib/derive/published.ts";
 import { itemTarget, panelItems, scenarioGroups, type PanelEntryItem, type PanelItem } from "../../lib/derive/panel.ts";
+import { rowsByBlock } from "../../lib/derive/topics.ts";
 import { pdfFileName } from "../../lib/pdf/index.ts";
 import { fileHash, guideBase, guideViewHash, isRefTab, otherHash, parseHash, pharmLoc, refHash, TAB_LABELS } from "../../lib/derive/routes.ts";
 
@@ -386,6 +387,33 @@ test.describe("sidebar", () => {
     });
     expect(fit.clamp).toBe("2");
     expect(fit.height).toBeLessThanOrEqual(Math.ceil(2 * fit.lh) + 1);
+  });
+});
+
+test.describe("topic pages", () => {
+  test("a topic's rows that continue into a later table show every table they sit in, in her order", async ({ page }) => {
+    // Derived from the published data: the first topic whose rows span more than one table block.
+    let pick: { g: string; sys: SystemJson; topic: SystemJson["topics"][number]; later: { block: string; rows: string[] } } | null = null;
+    for (const { g, s } of allSystems) {
+      const sys = systemOf(g, s.id);
+      for (const topic of sys.topics) {
+        const later = rowsByBlock(topic.rows, (row) => sys.rows[row]?.block)[1];
+        if (later) {
+          pick = { g, sys, topic, later };
+          break;
+        }
+      }
+      if (pick) break;
+    }
+    if (!pick) throw new Error("no topic's rows continue into a later table");
+    const { g, sys, topic, later } = pick;
+    const firstRow = later.rows.find((row) => sys.rows[row]?.kind === "content") ?? later.rows[0];
+    if (!firstRow) throw new Error("the later table has no rows");
+    await open(page, topicHash(g, [topic.id]));
+    const card = main(page).locator(`section.tcard[data-topic="${topic.id}"]`);
+    await expect(card).toBeVisible();
+    await expect(card.locator(`div.notes[data-anchor="${later.block}"]`)).toBeVisible();
+    await expect(card.locator(`[data-anchor="${firstRow}"]`).first()).toBeVisible();
   });
 });
 

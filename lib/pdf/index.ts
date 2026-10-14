@@ -4,7 +4,7 @@
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import { keepTableRows, noteView } from "../derive/columns.ts";
 import type { FontMapJson, PartCut, PubBlock, SystemJson } from "../derive/published.ts";
-import { belowUnder } from "../derive/topics.ts";
+import { belowUnder, rowsByBlock } from "../derive/topics.ts";
 import { allLinesHidden, hiddenLines, shownParts, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
@@ -43,19 +43,6 @@ export function keepRows(doc: DocJSON, keep: ReadonlySet<string>): DocJSON {
   const content = (doc.content as PMNode[]).map((node) =>
     node.type === "table" ? keepTableRows(node, (node.content ?? []).map((r) => keep.has(String(r.attrs?.id)))) : node);
   return { ...doc, content };
-}
-
-/** Rows grouped by their table block, blocks in the order the rows first appear. */
-function rowsByBlock(system: SystemJson, rowIds: readonly string[]): { block: string; rows: Set<string> }[] {
-  const groups: { block: string; rows: Set<string> }[] = [];
-  for (const id of rowIds) {
-    const block = system.rows[id]?.block;
-    if (block === undefined) throw new Error(`PDF: row ${id} is not in ${system.guide}/${system.id}`);
-    let g = groups.find((x) => x.block === block);
-    if (!g) groups.push((g = { block, rows: new Set() }));
-    g.rows.add(id);
-  }
-  return groups;
 }
 
 function pharmSectionParts(system: SystemJson, sectionId: string, guideBasePt: number): Part[] {
@@ -115,7 +102,11 @@ function select(scope: PdfScope, input: PdfInput): Selection {
   const { system } = input;
   const guideBlock = (b: PubBlock): Part => ({ doc: b.doc, basePt: nav.basePt });
   const rowsPart = (rowIds: readonly string[]): Part[] =>
-    rowsByBlock(system, rowIds).map((g) => ({ doc: keepRows(blockOf(system, g.block).doc, g.rows), basePt: nav.basePt }));
+    rowsByBlock(rowIds, (id) => {
+      const block = system.rows[id]?.block;
+      if (block === undefined) throw new Error(`PDF: row ${id} is not in ${system.guide}/${system.id}`);
+      return block;
+    }).map((g) => ({ doc: keepRows(blockOf(system, g.block).doc, new Set(g.rows)), basePt: nav.basePt }));
   switch (scope.kind) {
     case "topics":
       return {

@@ -309,6 +309,23 @@ export function belowUnder(topics: readonly PubTopic[], shown: readonly string[]
 }
 
 /**
+ * `rowIds` grouped by the block holding each row, blocks in the order their rows first appear: a topic
+ * whose rows continue into a later table shows one group per block (40 §40.2). `blockOf` gives a row's
+ * block (published `SystemJson.rows`), or nothing for a row the caller's page does not hold.
+ */
+export function rowsByBlock(rowIds: readonly string[], blockOf: (rowId: string) => string | undefined): { block: string; rows: string[] }[] {
+  const groups: { block: string; rows: string[] }[] = [];
+  for (const id of rowIds) {
+    const block = blockOf(id);
+    if (block === undefined) continue;
+    const group = groups.find((g) => g.block === block);
+    if (group) group.rows.push(id);
+    else groups.push({ block, rows: [id] });
+  }
+  return groups;
+}
+
+/**
  * A section page's items (40 §40.3), in the order of `blockIds` (the system's blocks): each
  * prose/one-column block that `members` puts in the section, whole (`rows: null`); for each table,
  * its content rows shown under the section, each run preceded once by its heading row. The build,

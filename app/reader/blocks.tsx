@@ -2,7 +2,7 @@
 // update-note placement by target id (40 §40.7).
 import type { ReactNode } from "react";
 import type { FlagNote, Notes, PubBlock, SystemJson } from "../../lib/derive/published.ts";
-import { BELOW_HEADING, belowUnder } from "../../lib/derive/topics.ts";
+import { BELOW_HEADING, belowUnder, rowsByBlock as groupRowsByBlock } from "../../lib/derive/topics.ts";
 import { RichDoc } from "../render/RichDoc.tsx";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Link } from "../shell/Link.tsx";
@@ -26,11 +26,7 @@ export function notesAt(notes: Notes, ids: Iterable<string>): FlagNote[] {
 /** Row ids of each table block of a system. */
 export function rowsByBlock(system: SystemJson): Map<string, string[]> {
   const out = new Map<string, string[]>();
-  for (const [row, r] of Object.entries(system.rows)) {
-    const list = out.get(r.block);
-    if (list) list.push(row);
-    else out.set(r.block, [row]);
-  }
+  for (const { block, rows } of groupRowsByBlock(Object.keys(system.rows), (row) => system.rows[row]?.block)) out.set(block, rows);
   return out;
 }
 

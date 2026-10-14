@@ -466,6 +466,20 @@ describe("topics page", () => {
     expect([...c.querySelectorAll(".cmp-q .tcard")].map((e) => e.getAttribute("data-topic"))).toEqual([R(101), prinz().id]);
   });
 
+  it("shows a topic's rows that continue into a later table, in her order", async () => {
+    const a = await renderApp(`#/eor/fm/t/${stable().id}`);
+    app = a;
+    const c = a.container;
+    const card = await until(() => c.querySelector<HTMLElement>(`section.tcard[data-topic="${stable().id}"]`), "Stable angina card");
+    // Her rows continue into B(13): both tables show, the continuing one after the first.
+    expect(stable().rows.at(-1)).toBe(R(130));
+    const first = must(card.querySelector(`div.notes[data-anchor="${B(10)}"]`), "the topic's first table");
+    const second = must(card.querySelector(`div.notes[data-anchor="${B(13)}"]`), "the table its rows continue into");
+    expect(first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(row(card, R(104))?.textContent).toContain("chest pain on exertion");
+    expect(row(card, R(130))?.textContent).toContain("angina continues here");
+  });
+
   it("a topic's below block shows after its meds panel under Additional info, and on its section page under the table holding its last row with no heading", async () => {
     const BELOW = B(900);
     const withBelow = structuredClone(cv);

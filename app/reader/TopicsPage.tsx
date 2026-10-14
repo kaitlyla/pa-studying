@@ -1,8 +1,10 @@
-// Topic page (40 §40.3, guide-reader/compare): one diagnosis. It shows its update notes above its table,
-// its heading row and rows, its meds panel below, then her Additional info. The Compare button opens the
-// compare view with it in the first quadrant; several diagnoses side by side live on that view.
+// Topic page (40 §40.3, guide-reader/compare): one diagnosis. It shows its update notes above its
+// tables, the rows of every table they continue into, its meds panel below, then her Additional info.
+// The Compare button opens the compare view with it in the first quadrant; several diagnoses side by
+// side live on that view.
 import type { ReactNode } from "react";
 import type { NavJson, PubTopic, SystemJson } from "../../lib/derive/published.ts";
+import { rowsByBlock } from "../../lib/derive/topics.ts";
 import { MedsPanel } from "../pharm/MedsPanel.tsx";
 import { UpdateNotes } from "../render/labels.tsx";
 import { Txt } from "../render/Text.tsx";
@@ -40,8 +42,12 @@ interface TopicCardProps {
 export function TopicCard({ guide, nav, id, system: sysId }: TopicCardProps): ReactNode {
   const system = useSystem(guide, sysId);
   const topic = topicIn(system, id);
-  const first = topic.rows.map((r) => system.rows[r]).find((r) => r !== undefined);
-  const block = first ? system.blocks.find((b) => b.id === first.block) : undefined;
+  // A topic's rows can continue into a later table: every block they sit in shows here, in her order
+  // (the published topic rows are the source of truth).
+  const blocks = rowsByBlock(topic.rows, (row) => system.rows[row]?.block).flatMap(({ block: id, rows }) => {
+    const block = system.blocks.find((b) => b.id === id);
+    return block ? [{ block, rows }] : [];
+  });
   const pageKey = buildPageKey("topic", guide, topic.id);
   const editing = useIsEditing(pageKey);
   return (
@@ -51,9 +57,11 @@ export function TopicCard({ guide, nav, id, system: sysId }: TopicCardProps): Re
           <EditControls pageKey={pageKey} title={topic.title} />
         </span>
       </div>
-      <UpdateNotes notes={notesAt(system.notes, block ? [block.id, ...topic.rows] : topic.rows)} />
+      <UpdateNotes notes={notesAt(system.notes, blocks.flatMap(({ block, rows }) => [block.id, ...rows]))} />
       <EditRegion pageKey={pageKey} title={topic.title}>
-        {block && <NotesBlock block={block} basePt={nav.basePt} rows={topic.rows} />}
+        {blocks.map(({ block, rows }) => (
+          <NotesBlock key={block.id} block={block} basePt={nav.basePt} rows={rows} />
+        ))}
       </EditRegion>
       {/* The meds panel and her own notes and pictures below it; while editing, both are in the editors above. */}
       {!editing && <MedsPanel guide={guide} system={system} systems={nav.systems} topic={topic} basePt={nav.basePt} />}
