@@ -39,6 +39,14 @@ function sectionOf(value: string | undefined): string | null {
 }
 
 /**
+ * A title without the operator's leading "*" — her mark that a diagnosis received additions. It is a
+ * mark, not part of the name, so titles compare on this form (Orchestrator ruling 2026-10-14).
+ */
+function bareTitle(title: string): string {
+  return title.startsWith("*") ? title.slice(1) : title;
+}
+
+/**
  * The section a block (or untitled row) is shown under: its own `members` section, or for a block
  * shown under a listed entry, the section of that entry's listed block.
  */
@@ -201,7 +209,8 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
       else continued = null;
       // A heading label repeating the title of the topic the row would otherwise continue names that
       // topic again, so the row continues it (agent decision, Orchestrator 2026-10-06, amending 40 §40.2).
-      if (text === "" && at === undefined && continued !== null && title === continued.title) title = "";
+      // The name is compared without the "*" additions mark, so starring a diagnosis never splits it.
+      if (text === "" && at === undefined && continued !== null && bareTitle(title) === bareTitle(continued.title)) title = "";
       const joining = attached.get(row.id) ?? [];
       attached.delete(row.id);
       if (unlisted.has(row.id)) {

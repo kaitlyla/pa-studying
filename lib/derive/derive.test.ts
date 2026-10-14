@@ -491,6 +491,18 @@ describe("topics (40 §40.2)", () => {
       expect(deriveTopics([b], structureOf()).topics.map((x) => [x.id, x.title, x.rows])).toEqual([[CIR, "Gout", [CIR, C1]]]);
     });
 
+    // Orchestrator ruling 2026-10-14: the operator's "*" marks a diagnosis that received additions; it
+    // is not part of the name, so it is ignored on either side of the label/title comparison.
+    it("a starred title or a starred label still keeps the rows the label names again", () => {
+      const starred = (title: string, label: string) => [
+        table(B(98), 2, [[GH, "heading", "GI", "About"], [CIR, "content", title, "chronic liver injury"]]),
+        { v: 1, id: B(99), kind: "prose", doc: { type: "doc", content: [{ type: "paragraph" }] }, meta: {} } as unknown as BlockFile,
+        table(B(100), 2, [[CH, "heading", label, "Complications of Portal HTN"], [C1, "content", "", "Esophageal varices"], [C2, "content", "", "Ascites"]]),
+      ];
+      expect(deriveTopics(starred("*Cirrhosis", "Cirrhosis"), structureOf()).topics.map((x) => [x.id, x.title, x.rows])).toEqual([[CIR, "*Cirrhosis", [CIR, C1, C2]]]);
+      expect(deriveTopics(starred("Cirrhosis", "*Cirrhosis"), structureOf()).topics.map((x) => [x.id, x.title, x.rows])).toEqual([[CIR, "Cirrhosis", [CIR, C1, C2]]]);
+    });
+
     it("a different label still starts its own topic, and a titled row keeps its own", () => {
       expect(deriveTopics(blocks("Ascites"), structureOf()).topics.map((x) => [x.id, x.title])).toEqual([[CIR, "Cirrhosis"], [C1, "Ascites"]]);
       expect(deriveTopics(blocks("Cirrhosis"), structureOf({ titled: { [C1]: 1 } })).topics.map((x) => [x.id, x.title, x.rows])).toEqual([
