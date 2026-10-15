@@ -306,7 +306,7 @@
               "type": "bold"
              }
             ],
-            "text": "Transient Ischemic Attack"
+            "text": "*Transient Ischemic Attack"
            }
           ]
          }
@@ -445,130 +445,7 @@
           "content": [
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "3 main types"
-           },
-           {
-            "type": "text",
-            "text": ":"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "embolic"
-           },
-           {
-            "type": "text",
-            "text": ": AFIB, Lt ventricular thrombus"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "lacunar"
-           },
-           {
-            "type": "text",
-            "text": ": penetrating sm vessels"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "lrg a."
-           },
-           {
-            "type": "text",
-            "text": ": ischemia ← AS "
+            "text": "▪︎causes: macrovascular (carotid artery stenosis), microvascular (small-vessel atherosclerosis/vasculitis in brain or retinal artery), cardiac (AFib, cardiomyopathy, valvular dz), noncardiac (sickle cell dz, systemic thrombophilic d/o)"
            }
           ]
          }
@@ -602,34 +479,7 @@
           "content": [
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "highlight",
-              "attrs": {
-               "hex": "FFFF00"
-              }
-             }
-            ],
-            "text": "Neuro deficits lasting <24hrs"
-           },
-           {
-            "type": "text",
-            "text": " – "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "942093"
-              }
-             }
-            ],
-            "text": "most last for a few minutes w/ complete resolution in 1hr"
+            "text": "▪︎acute neuro compromise that resolves on its own w/o tissue damage; time no longer used in TIA definition (most resolve w/in 24 hrs, but a few min of ischemia can cause permanent damage)"
            }
           ]
          },
@@ -1316,6 +1166,48 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎moderate–high risk → aspirin + clopidogrel (DAPT) daily x21 days while awaiting imaging; aspirin 160–325 mg load then 50–100 mg daily; clopidogrel 300–600 mg load then 75 mg daily; combo more protective than either alone"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎10% have stroke w/in 90 days; ABCD² developed to predict 2-day risk but controversial (may not be best predictor)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "     ABCD2 score 0-3: ASA alone"
            }
           ]
@@ -1454,6 +1346,27 @@
            {
             "type": "text",
             "text": "), exercise"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎lipid-lowering (statin) if ↑cholesterol, high CV risk, or atherosclerosis"
            }
           ]
          },
@@ -2577,6 +2490,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎ischemic CVA (MC): thrombus, embolus, or systemic hypoperfusion (massive blood loss, obstructive shock); hemorrhagic = ICH or SAH"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -2894,6 +2828,27 @@
             "text": ": male, ↑ age, ethnicity, family hx"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎+ atherosclerosis, valvular dz, hypercoagulable d/o, vasculitis; cocaine"
+           }
+          ]
          }
         ]
        },
@@ -3135,6 +3090,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎Wallenberg (lateral medullary) infarct: dizziness, difficulty sitting upright, diplopia, nystagmus, ipsilateral arm ataxia + loss of pain/temp in ipsilateral face + contralateral trunk/limbs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "marks": [
              {
               "type": "bold"
@@ -3228,6 +3204,69 @@
              }
             ],
             "text": "may be norm in first 6-24hrs "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎MRI: more sensitive than CT for acute ischemic stroke (but not often initial test in ED – time-consuming, expensive, less available)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎CT findings: loss of gray-white interface, acute hypodensity; rule out hypoglycemia; NIHSS for severity"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎⍉contrast CT in acute ischemic stroke eval; transcranial Doppler assesses vessel patency but ⍉sensitive for acute ischemia"
            }
           ]
          },
@@ -3381,6 +3420,69 @@
            {
             "type": "text",
             "text": "- ♡ monitoring "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎CTA for large-vessel occlusion"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎rule out embolic Eti if large infarct, hemorrhagic conversion, multiple or multi-territory infarcts; pt <45yo w/ suspected embolic stroke → cardiac workup (monitoring + TEE: r/o AFib, valvular dz, PFO)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎hypercoagulable workup: personal/family hx systemic thrombosis, young pt w/o clear Eti, lupus/antiphospholipid Ab"
            }
           ]
          }
@@ -3640,6 +3742,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎large artery occlusion in proximal anterior circulation → mechanical thrombectomy (possible w/in 24 hrs; DAWN/DEFUSE 3 risk-stratify)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -3805,6 +3928,27 @@
            {
             "type": "text",
             "text": "(regardless of LDL level) "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎high-dose statin + antiplatelet (aspirin) started w/in 48 hrs, as soon as oral meds safe"
            }
           ]
          }
