@@ -1260,6 +1260,7 @@
     "captopril",
     "Enalopril",
     "enalapril",
+    "enalaprilat",
     "fosinopril",
     "lisinopril",
     "moexipril",
@@ -2083,6 +2084,7 @@
     "iron sucrose",
     "sodium ferric gluconate",
     "ferumoxytol",
+    "ferric carboxymaltose",
     "Parenteral Fe",
     "Fe dextran",
     "Fe sucrose"
@@ -6630,6 +6632,97 @@
    },
    "for": [
     "antibiotics"
+   ]
+  },
+  {
+   "id": "c_6C9F96TSDY",
+   "file": "pharm-review",
+   "aliases": [
+    "magnesium sulfate",
+    "MgSO4",
+    "IV magnesium",
+    "IV Mg"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
+   ]
+  },
+  {
+   "id": "c_EEEG2SW324",
+   "file": "pharm-review",
+   "aliases": [
+    "calcium gluconate",
+    "calcium chloride"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
+   ]
+  },
+  {
+   "id": "c_MPBX0SKT62",
+   "file": "pharm-review",
+   "aliases": [
+    "potassium chloride",
+    "KCl"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
+   ]
+  },
+  {
+   "id": "c_7EXXP4X9SE",
+   "file": "pharm-review",
+   "aliases": [
+    "hypertonic saline",
+    "3% saline"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
+   ]
+  },
+  {
+   "id": "c_H9NDEWJM6T",
+   "file": "pharm-review",
+   "aliases": [
+    "sodium bicarbonate",
+    "sodium bicarb",
+    "bicarb supp"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
+   ]
+  },
+  {
+   "id": "c_ZPBXVNZ3A4",
+   "file": "pharm-review",
+   "aliases": [
+    "patiromer",
+    "sodium zirconium cyclosilicate",
+    "zirconium cyclosilicate",
+    "sodium polystyrene",
+    "polystyrene sulfonate",
+    "cation exchange resin"
+   ],
+   "home": {
+    "fm": "cardiovascular"
+   },
+   "for": [
+    "antiarrhythmics"
    ]
   }
  ]
