@@ -119,14 +119,15 @@ const beside = need(
 
 /** Her example: DM Type 1 beside Cushing's, the Addisonian crisis and adrenal insufficiency, all FM Endocrine. */
 const herExample = ((): { four: Diagnosis[]; dm: Diagnosis } => {
+  const diagnosisName = (t: Diagnosis): string => t.title.replace(/^\*/, "");
   const all = topicsOf("fm");
   const system = need(
-    [...new Set(all.map((t) => t.system))].find((s) => all.some((t) => t.system === s && /^Cushing/.test(t.title))),
+    [...new Set(all.map((t) => t.system))].find((s) => all.some((t) => t.system === s && /^Cushing/.test(diagnosisName(t)))),
     "FM's system holding Cushing's syndrome",
   );
   const inSystem = all.filter((t) => t.system === system);
   const wanted = [/^DM Type 1\b/, /^Cushing/, /^Adrenal \(Addisonian\)/, /^Adrenal Insufficiency/];
-  const four = wanted.map((re) => need(inSystem.find((t) => re.test(t.title)), `FM Endocrine: ${re.source}`));
+  const four = wanted.map((re) => need(inSystem.find((t) => re.test(diagnosisName(t))), `FM Endocrine: ${re.source}`));
   return { four, dm: need(four[0], "the DM Type 1 diagnosis") };
 })();
 
