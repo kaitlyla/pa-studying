@@ -319,7 +319,7 @@
               }
              }
             ],
-            "text": "Diabetic Retinopathy"
+            "text": "*Diabetic Retinopathy"
            },
            {
             "type": "text",
@@ -464,6 +464,30 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎retinopathy = damage to retina from abnormal blood flow → ⇣vision; other causes: HTN, prematurity"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -495,6 +519,30 @@
              }
             ],
             "text": "RF: A1C ±7%"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎A1c <7% ⇣risk of retinopathy; HTN + DM ⇡risk → good BP control vital to preserving vision"
            }
           ]
          }
@@ -903,7 +951,7 @@
            },
            {
             "type": "text",
-            "text": " growth of new abnorm blood vessels poss ->  vitreous hemorrhage, retinal fibrosis, retinal detachment"
+            "text": " growth of new abnorm blood vessels poss ->  preretinal/vitreous hemorrhage, retinal fibrosis, retinal detachment"
            }
           ]
          }
@@ -1598,6 +1646,30 @@
          {
           "type": "paragraph",
           "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎screening: @ T2 dx; w/in 5y of T1 dx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
            "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
@@ -1722,7 +1794,7 @@
               }
              }
             ],
-            "text": "Hypertensive Retinopathy"
+            "text": "*Hypertensive Retinopathy"
            }
           ]
          }
@@ -1836,6 +1908,30 @@
              }
             ],
             "text": "DM + HTN"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎HTN + DM ⇡ risk of developing diabetic retinopathy → good BP control vital to preserving vision"
            }
           ]
          }
