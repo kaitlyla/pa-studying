@@ -244,6 +244,35 @@
    {
     "type": "paragraph",
     "attrs": {
+     "indLeft": 72,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Off-label: ascites"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
      "indLeft": 108,
      "indRight": 0,
      "indFirst": -18,
@@ -724,6 +753,50 @@
        }
       ],
       "text": "Hypo K/Mg"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 72,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "–",
+      "font": null,
+      "marks": [
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "F1C232"
+        }
+       }
+      ],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "shade",
+        "attrs": {
+         "hex": "F1C232"
+        }
+       }
+      ],
+      "text": "Also AE: dizziness, rash, ↑cholesterol, anorexia, urinary bladder spasm, blurred vision"
      }
     ]
    },
