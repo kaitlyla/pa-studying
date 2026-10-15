@@ -306,7 +306,7 @@
               "type": "bold"
              }
             ],
-            "text": "Acute Pharyngitis/Tonsillitis"
+            "text": "*Acute Pharyngitis/Tonsillitis"
            }
           ]
          }
@@ -365,7 +365,7 @@
            },
            {
             "type": "text",
-            "text": ", rhino/entero, EBV, influenza, RSV, HZV; fungal in pts using inhaled steroids "
+            "text": ", rhino/entero, coronavirus, echovirus, parainfluenza, EBV, influenza, RSV, HZV; fungal in pts using inhaled steroids "
            }
           ]
          }
@@ -458,7 +458,7 @@
            },
            {
             "type": "text",
-            "text": ": cough, hoarseness, coryza, conjunctivitis, diarrhea "
+            "text": ": cough, hoarseness, coryza, conjunctivitis, diarrhea, malaise, fatigue, low-grade fever "
            }
           ]
          }
@@ -658,7 +658,7 @@
               "type": "bold"
              }
             ],
-            "text": "Streptococcal Pharyngitis"
+            "text": "*Streptococcal Pharyngitis"
            }
           ]
          },
@@ -817,6 +817,27 @@
            {
             "type": "text",
             "text": "Highest incidence of rheumatic fever if untx in children 5-15yrs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎MC in children 5-15yo (esp winter + spring); can also occur in adults"
            }
           ]
          }
@@ -1341,6 +1362,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎IM benzathine penicillin G single dose if adherence = a concern"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "marks": [
              {
               "type": "underline",
@@ -1354,6 +1396,27 @@
            {
             "type": "text",
             "text": ": macrolides"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎PCN allergy: cephalexin, cefadroxil (⍉ if immediate-type PCN hypersensitivity), clindamycin, azithromycin, clarithromycin (GAS resistance varies geographically + temporally)"
            }
           ]
          },
@@ -1480,6 +1543,48 @@
            {
             "type": "text",
             "text": "•peritonsillar abscess "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•mastoiditis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•rheumatic heart dz"
            }
           ]
          }

@@ -276,7 +276,7 @@
     "content": [
      {
       "type": "text",
-      "text": "-    Clin Use: GAD"
+      "text": "-    Clin Use: GAD · also N/V + pruritus"
      }
     ]
    },
@@ -300,7 +300,7 @@
     "content": [
      {
       "type": "text",
-      "text": "-    SE: anticholinergic effect"
+      "text": "-    SE: anticholinergic effect · drowsiness, xerostomia, resp depression"
      }
     ]
    },
@@ -325,6 +325,82 @@
      {
       "type": "text",
       "text": "-    Caution: onset 15-30 min    -    QT-prolongation CI (TdP reported)    -    chemically unrelated to phenothiazines/benzos"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 36,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "-    CI pregnancy"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 36,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "-    Beers ≥65: avoid (potent anticholinergic → confusion, dry mouth, constipation; ⇣clearance + tolerance)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "image",
+      "attrs": {
+       "asset": "83c50ba408b0cf66c357431b78bfee51.png",
+       "widthPt": 539.25,
+       "heightPt": 591.75,
+       "rot": 0,
+       "flipH": false,
+       "flipV": false
+      }
      }
     ]
    }
