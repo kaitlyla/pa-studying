@@ -266,7 +266,7 @@
               "type": "bold"
              }
             ],
-            "text": "Ventricular Tachycardia (VT)"
+            "text": "*Ventricular Tachycardia (VT)"
            }
           ]
          }
@@ -432,7 +432,23 @@
            },
            {
             "type": "text",
-            "text": ": ⍉spont termination, "
+            "text": ": "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             }
+            ],
+            "text": "≥30s"
+           },
+           {
+            "type": "text",
+            "text": ", ⍉spont termination, "
            },
            {
             "type": "text",
@@ -445,10 +461,6 @@
              }
             ],
             "text": ">100bpm"
-           },
-           {
-            "type": "text",
-            "text": " "
            }
           ]
          },
@@ -1856,7 +1868,7 @@
               "type": "bold"
              }
             ],
-            "text": "Torsades de pointes "
+            "text": "*Torsades de pointes "
            }
           ]
          },
@@ -2083,7 +2095,7 @@
           "content": [
            {
             "type": "text",
-            "text": "          antiemetics, anticonvulsants"
+            "text": "          antiemetics, anticonvulsants, class IA/IC antidysrhythmics (procainamide, quinidine, propafenone, flecainide), droperidol, phenothiazines, fluoroquinolones"
            }
           ]
          },
@@ -2139,6 +2151,85 @@
              }
             ],
             "text": "hypokalemia, hypomagnesemia, hypocalcemia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "QTc"
+           },
+           {
+            "type": "text",
+            "text": ": nl ~420 ± 20 msec; prolonged = men ≥470, women ≥480; >500 = highly abnl"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎MC lyte cause: hypoMg (common 2/2 loop diuretics + GI losses)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Sx: dizziness, CP, dyspnea, presyncope/syncope"
            }
           ]
          }
@@ -2211,7 +2302,25 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "0432FF"
+              }
+             }
+            ],
+            "text": "Torsades de pointes (“twisting of the points”)"
+           },
+           {
+            "type": "text",
+            "text": ": ▪︎"
            },
            {
             "type": "text",
@@ -2277,7 +2386,7 @@
               "type": "italic"
              }
             ],
-            "text": "rates >200bpm"
+            "text": "HR typically 160-250"
            }
           ]
          },
@@ -2348,7 +2457,7 @@
               }
              }
             ],
-            "text": "IV magnesium sulfate"
+            "text": "IV magnesium sulfate in dextrose"
            },
            {
             "type": "text",
@@ -2457,6 +2566,48 @@
            {
             "type": "text",
             "text": ": ICD"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎remove inciting meds; K + Ca replacement may be needed; recurrent → temp or permanent pacing"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎unstable w/ pulse or severe Sx → cardioversion; pulseless → defibrillate; stable → IV Mg + close monitoring"
            }
           ]
          }

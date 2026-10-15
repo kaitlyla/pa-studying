@@ -1115,7 +1115,7 @@
               "type": "bold"
              }
             ],
-            "text": "Pericardial Effusion"
+            "text": "*Pericardial Effusion"
            }
           ]
          }
@@ -1214,7 +1214,7 @@
            },
            {
             "type": "text",
-            "text": ": viral, idiopathic, immune, malig – lung CA MC, breast second MC, aortic dissection, uremia"
+            "text": ": viral, idiopathic, immune, malig – lung CA MC, breast second MC, aortic dissection, uremia, prior chest radiation"
            }
           ]
          }
@@ -1707,7 +1707,7 @@
               "type": "bold"
              }
             ],
-            "text": "Cardiac Tamponade"
+            "text": "*Cardiac Tamponade"
            }
           ]
          },
@@ -1931,6 +1931,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎⍉confuse w/ tension PTX: hypotension + JVD + absent breath sounds"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -2090,6 +2111,10 @@
              }
             ],
             "text": "diastol collapse of ♡ chambers"
+           },
+           {
+            "type": "text",
+            "text": " (RV wall collapse in diastole; paradoxic septal motion in systole)"
            },
            {
             "type": "text",

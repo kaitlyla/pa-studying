@@ -266,7 +266,7 @@
               "type": "bold"
              }
             ],
-            "text": "Wandering Atrial Pacemaker (WAP) "
+            "text": "*Wandering Atrial Pacemaker (WAP) "
            }
           ]
          },
@@ -586,7 +586,7 @@
               }
              }
             ],
-            "text": "MAT assoc w/ COPD!"
+            "text": "MAT assoc w/ COPD! (rate 100-180)"
            }
           ]
          },
@@ -607,7 +607,7 @@
           "content": [
            {
             "type": "text",
-            "text": "– hypoxia, lyte abnormalities (ex, hypokalemia, hypomagnesemia)  "
+            "text": "– hypoxia, lyte abnormalities (ex, hypokalemia, hypomagnesemia), pulm HTN"
            }
           ]
          }
@@ -1072,6 +1072,43 @@
            {
             "type": "text",
             "text": ": benign, requires ⍉tx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "MAT"
+           },
+           {
+            "type": "text",
+            "text": ": O2, tx underlying condition, rate control"
            }
           ]
          },

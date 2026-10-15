@@ -371,7 +371,7 @@
               "type": "bold"
              }
             ],
-            "text": "Atrial Flutter (AFL)"
+            "text": "*Atrial Flutter (AFL)"
            }
           ]
          },
@@ -1098,7 +1098,7 @@
               }
              }
             ],
-            "text": "atrial rate ~300bpm"
+            "text": "atrial rate 250-300bpm"
            },
            {
             "type": "text",
@@ -1123,7 +1123,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎2:1 atrial-to-ventricular-rate ratio common"
+            "text": "▪︎2:1 atrial-to-ventricular-rate ratio common (AV node conducts every 2nd or 3rd impulse)"
            }
           ]
          },
@@ -1845,7 +1845,7 @@
               "type": "bold"
              }
             ],
-            "text": "Atrial Fibrillation (AFIB)"
+            "text": "*Atrial Fibrillation (AFIB)"
            }
           ]
          },
@@ -2178,7 +2178,7 @@
            },
            {
             "type": "text",
-            "text": ": pulm dz (COPD, PE), ischemia, rheumatic HD, hyperthyroidism, congenital HD, sepsis, acute EToH excess & w.draw (“holiday heart”), ♡ surg "
+            "text": ": pulm dz (COPD, PE), ischemia, rheumatic HD, hyperthyroidism, congenital HD, sepsis, acute EToH excess & w.draw (“holiday heart”), ♡ surg, pericarditis, malignancy, pheochromocytoma, cocaine, sedentary lifestyle, excessive exercise"
            }
           ]
          },
@@ -2549,7 +2549,7 @@
               }
              }
             ],
-            "text": "palpitations, fatigue, dyspnea, dizziness, diaphoresis, HF SXS"
+            "text": "palpitations, fatigue, dyspnea, dizziness, diaphoresis, HF SXS, CP, syncope"
            },
            {
             "type": "text",
@@ -2849,7 +2849,7 @@
               }
              }
             ],
-            "text": "most commonly 90-170bpm w/ higher rates in younger individuals"
+            "text": "ventricular rate 75-175"
            },
            {
             "type": "text",
@@ -2861,7 +2861,7 @@
               }
              }
             ],
-            "text": " "
+            "text": "; most impulses blocked @ AV node"
            }
           ]
          },
@@ -3375,6 +3375,27 @@
              }
             ],
             "text": "Lt atrial enlrg"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎labs: CBC, BMP, TSH, free T4 (esp 1st AFib)"
            }
           ]
          },
@@ -3971,6 +3992,48 @@
            {
             "type": "text",
             "text": "    ▪︎Continuation >4wks based on RFs (CHADS-VASc) "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎cornerstones of chronic AFib = rate control + anticoagulation"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎need for AC by CHA2DS2-VASc; bleeding risk w/ HAS-BLED"
            }
           ]
          },
@@ -4986,6 +5049,27 @@
            {
             "type": "text",
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎consider early rhythm control (w/in 1 yr of dx) in certain pts (ex, HF, Sx)"
            }
           ]
          },
