@@ -300,11 +300,11 @@
        "repeatHeader": false,
        "cantSplit": false,
        "widths": [
-        33.9,
-        104.26597560975605,
-        192.51500000000001,
-        193.41902439024383,
-        249.9
+        21.3,
+        186.9,
+        165.1,
+        178.75,
+        221.95
        ]
       },
       "content": [
@@ -427,7 +427,7 @@
               }
              }
             ],
-            "text": "▪︎MCC of sudden cardiac arrest; after ROSC w/ MI → PCI"
+            "text": "▪︎MCC of sudden cardiac arrest; after ROSC w MI → PCI"
            }
           ]
          },
@@ -546,7 +546,92 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎MC 2/2 atherosclerosis + coronary a. vasospasm; other etiologies: stenosis, pulm HTN, severe systemic HTN, HCM"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎MC 2/2 "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "C00000"
+              }
+             }
+            ],
+            "text": "atherosclerosis "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "+ coronary a. vasospasm"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "other eti: stenosis, pulm HTN, severe systemic HTN, HCM"
            }
           ]
          },
@@ -635,6 +720,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎= demand for blood/O2 > coronary supply → inadequate perfusion/ischemia → angina"
            }
           ]
@@ -798,6 +891,24 @@
             "text": "▪︎STEMI"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
          },
          {
           "type": "paragraph",
@@ -984,7 +1095,7 @@
               }
              }
             ],
-            "text": "▪︎family HX: first-degree ♀︎relative <55yo or ♂︎ relative <45yo    "
+            "text": "▪︎FHX: 1st-degree ♀︎relative <55yo or ♂︎ relative <45yo    "
            }
           ]
          },
@@ -1302,6 +1413,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎hyperlipidemia (↑LDL/TC)"
            }
           ]
@@ -1323,6 +1442,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎MC RFs: HTN + DM"
            }
           ]
@@ -1387,7 +1514,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -1954,7 +2081,7 @@
               }
              }
             ],
-            "text": "  – when 10yr CVD risk >20% in nondiabetics"
+            "text": "  – when 10yr CVD risk >20% in non-DM"
            }
           ]
          },
@@ -1986,7 +2113,7 @@
               }
              }
             ],
-            "text": "  – when 10yr CVD risk >10% in diabetics         "
+            "text": "  – when 10yr CVD risk >10% in DM"
            }
           ]
          }
@@ -2043,7 +2170,7 @@
               }
              }
             ],
-            "text": "2/2 prev = pharm therapy"
+            "text": "2/2 prev = pharm tx"
            }
           ]
          },
@@ -2457,7 +2584,7 @@
               }
              }
             ],
-            "text": "decreases mortality"
+            "text": "↓mortality"
            },
            {
             "type": "text",
@@ -2533,7 +2660,7 @@
               }
              }
             ],
-            "text": "  – ⇣ mortality in pts w/ "
+            "text": "  – ⇣ mortality in pts w "
            },
            {
             "type": "text",
@@ -2566,7 +2693,7 @@
               }
              }
             ],
-            "text": " ACS or those w/ stent "
+            "text": " ACS or those w stent "
            }
           ]
          },
@@ -2904,7 +3031,7 @@
               }
              }
             ],
-            "text": " contraindicated"
+            "text": " CI"
            }
           ]
          },
@@ -2987,7 +3114,7 @@
               }
              }
             ],
-            "text": "⇣ mortality & risk of MI/CVA (ARB if ⍉tolerated)      "
+            "text": "⇣ mortality & risk of MI/CVA (ARB if ⍉tol)      "
            },
            {
             "type": "text",
@@ -3003,7 +3130,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3012,6 +3142,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "▪︎chronic CAD tx also incl nitrates & CCBs (antianginal)"
            }
           ]
@@ -3024,7 +3162,28 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3033,7 +3192,79 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎definitive tx = revascularization; PCI favored for 1-2 vessel dz, no left main, preserved LV fxn; CABG favored for left main, complex multivessel dz, + ⇣LV fxn"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎definitive tx = revascularization"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪PCI favored for 1-2 vessel dz, no left main, preserved LV fxn"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪CABG favored for left main, complex multivessel dz, + ⇣LV fxn"
            }
           ]
          },
@@ -3045,7 +3276,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3054,7 +3288,79 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎DM: PCI acceptable in single-vessel dz; DM + multivessel dz → CABG preferred"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪︎DM: "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪PCI acceptable in single-vessel dz"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "▪DM + multivessel dz → CABG preferred"
            }
           ]
          }
