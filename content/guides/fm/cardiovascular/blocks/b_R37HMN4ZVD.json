@@ -295,7 +295,7 @@
               "type": "bold"
              }
             ],
-            "text": "Stable Angina Pectoris "
+            "text": "*Stable Angina Pectoris "
            }
           ]
          }
@@ -1207,7 +1207,28 @@
               "type": "italic"
              }
             ],
-            "text": "lasts 2-30min"
+            "text": "lasts <15 min (>30 min → think other dx)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎by definition resolve in <30 min"
            }
           ]
          },
@@ -3071,7 +3092,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎triple-vessel dz, particularly w/ LVEF <40%"
+            "text": "▪︎triple-vessel dz, particularly w/ EF <50% or previous transmural MI (CABG also favored w/ EF ≤35%)"
            }
           ]
          },
@@ -3093,6 +3114,27 @@
            {
             "type": "text",
             "text": "▪︎activity-limiting Sx despite optimal medical therapy"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎2-vessel dz w/ DM; UA refractory to pharm; ongoing angina or severe ischemia on noninvasive testing w/ previous MI"
            }
           ]
          }
