@@ -309,7 +309,7 @@
               }
              }
             ],
-            "text": "HTN "
+            "text": "*HTN "
            }
           ]
          }
@@ -449,6 +449,27 @@
              }
             ],
             "text": "onset: 25-50yo"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎RFs: age, obesity, high-Na diet, physical inactivity"
            }
           ]
          },
@@ -1121,6 +1142,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎aSx until end-organ damage (brain, eyes, ♡, kidneys)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "marks": [
              {
               "type": "size",
@@ -1569,6 +1611,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎normal <120/80; elevated SBP 120-129 + DBP <80; stage 1 130-139 OR 80-89; stage 2 ≥140 OR ≥90"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -1886,7 +1949,7 @@
               }
              }
             ],
-            "text": "BP ≥130/80"
+            "text": "BP ≥140/90"
            },
            {
             "type": "text",
@@ -1904,108 +1967,7 @@
               }
              }
             ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "plus"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": " 1 of:  "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 9,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "    » "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "6264FE"
-              }
-             }
-            ],
-            "text": "⊕"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "6264FE"
-              }
-             }
-            ],
-            "text": "ASCVD, ≥65yo, T2DM, CKD, 10y ASCVD risk ≥10%"
+            "text": " alone"
            }
           ]
          },
@@ -2055,7 +2017,7 @@
               }
              }
             ],
-            "text": "BP ≥140/90"
+            "text": "SBP ≥130 or DBP ≥80"
            },
            {
             "type": "text",
@@ -2073,19 +2035,7 @@
               }
              }
             ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "(everyone else)"
+            "text": " AND clinical CVD, DM, CKD, or 10-yr CVD risk ≥7.5% (PREVENT-CVD)"
            }
           ]
          },
@@ -2201,6 +2151,27 @@
              }
             ],
             "text": "stage 2 HTN & >20/10mmHg above target*"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎single-pill combo ⇣pill burden, ⇡compliance"
            }
           ]
          },
@@ -2424,6 +2395,27 @@
              }
             ],
             "text": ": ACEI/ARB + DHP CCB"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎⍉ACEi + ARB combo: dual RAAS blockade ⇡hyperK, hypotension, AKI; no added CV/kidney benefit over monotherapy"
            }
           ]
          },
