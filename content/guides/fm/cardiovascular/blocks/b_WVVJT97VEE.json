@@ -266,7 +266,7 @@
               "type": "bold"
              }
             ],
-            "text": "Premature Atrial Contraction (PAC)"
+            "text": "*Premature Atrial Contraction (PAC)"
            }
           ]
          }
@@ -505,6 +505,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Holter: assess PAC burden (report: total beats, max/min/avg HR, # premature beats, tachydysrhythmia)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -693,7 +714,7 @@
               "type": "bold"
              }
             ],
-            "text": "Premature Ventricular Contraction (PVC)"
+            "text": "*Premature Ventricular Contraction (PVC)"
            }
           ]
          }
@@ -1057,6 +1078,27 @@
              }
             ],
             "text": "≥3 PVCs = nonsustained VTACH "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Holter: assess PVC burden"
            }
           ]
          },

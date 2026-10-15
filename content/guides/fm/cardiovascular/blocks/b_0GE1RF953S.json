@@ -1475,6 +1475,27 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎AFib = long-term complication of chronically ⇡LA pressures; ventricular dysrhythmias = common Eti of sudden death"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
            "line": {
             "rule": "exact",
             "value": 8.5
@@ -2111,6 +2132,27 @@
             "text": "± loud S4, MR, or pulsus biferiens "
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎triple apical impulse (early + late systolic impulses); prominent a wave d/t ⇣RV compliance"
+           }
+          ]
          }
         ]
        },
@@ -2297,6 +2339,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎early closing then reopening of aortic valve; delayed relaxation + filling of LV during diastole"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "▪︎apical HCM variant: LV apex hypertrophy; giant T wave inversions (precordial); spade-shaped LV on echo"
            }
           ]
@@ -2387,6 +2450,27 @@
            {
             "type": "text",
             "text": "▪︎large-amplitude QRS; deep narrow Q waves in inferior/lateral leads (mimic inferior/lateral MI); tall R waves V1-V2 (mimic posterior MI or RVH)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎ECG may be nl or nonspecific ST/T changes; CXR unremarkable"
            }
           ]
          },
@@ -2489,6 +2573,48 @@
              }
             ],
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎AFib → antidysrhythmics or RFA; biventricular pacing/AICD may be used"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎myosin inhibitors (2nd-line) for symptomatic pts; ICD for high-risk pts"
            }
           ]
          },
@@ -2660,10 +2786,7 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
+           "line": null,
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2672,27 +2795,7 @@
           "content": [
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF0000"
-              }
-             }
-            ],
-            "text": "*cautious use of digoxin, nitrates, & diuretics"
+            "text": "*avoid digoxin (⇡contractility → ⇡obstruction), nitrates, diuretics, ACEIs, ARBs (⇣preload)"
            }
           ]
          }
