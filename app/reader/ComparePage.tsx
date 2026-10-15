@@ -1,16 +1,17 @@
-// Compare (40 §40.3, guide-reader/compare): up to four diagnoses of one guide side by side, one per
-// quadrant, each quadrant scrolling on its own (2 x 2 on desktop, stacked on phone). A quadrant shows
-// the same card a topic page shows — notes, meds panel and her own additions — read through the same
-// data layer, so an unsaved or just-saved edit shows here too. The sidebar's + adds the next diagnosis;
-// each quadrant has its picker and its ✕. The owner's favorites menu sits on each quadrant (saved pairs
-// to compare, and every diagnosis of the guide to save, the ones on screen first), and she can save the
-// quadrants as a named comparison.
+// Compare (40 §40.3, guide-reader/compare): the diagnoses of one guide side by side, two per row, one per
+// quadrant, each quadrant scrolling on its own (stacked on phone). A quadrant shows the same card a topic
+// page shows — notes, meds panel and her own additions — read through the same data layer, so an unsaved or
+// just-saved edit shows here too. Her card is drawn stacked (the phone's Stacked layout), so her sections
+// read top to bottom instead of as sideways columns. The sidebar's + adds the next diagnosis; each quadrant
+// has its picker and its ✕, and there is no limit on how many she compares. The owner's favorites menu sits
+// on each quadrant (saved pairs to compare, and every diagnosis of the guide to save, the ones on screen
+// first), and she can save the quadrants as a named comparison.
 import { useLayoutEffect, type ReactNode } from "react";
 import type { NavJson } from "../../lib/derive/published.ts";
 import { PageNotFound } from "../shell/errors.ts";
 import { Icon } from "../shell/Icon.tsx";
 import { FavoriteMenu, SaveComparison } from "../shell/mounts.tsx";
-import { PageHead, type Crumb } from "../shell/Page.tsx";
+import { PageHead, StackedContext, type Crumb } from "../shell/Page.tsx";
 import { useOwner } from "../shell/owner.tsx";
 import { addToCompare, guideViewHash, navigate, syncFromLocation } from "../shell/route.ts";
 import { COMPARE, entryTitle, guideCrumbs, topicSystems, useNav, useSite } from "./data.ts";
@@ -45,10 +46,7 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
   const go = (next: string[]): void => void navigate(guideViewHash(guide, { kind: "compare", ids: next }));
   const pick = (i: number, id: string): void => go(shown.map((x, j) => (j === i ? id : x)));
   /** A saved partner goes to the next free quadrant (the same rule the sidebar's + uses). */
-  const fill = (id: string): void => {
-    const next = addToCompare(shown, id);
-    if (next !== null) go(next);
-  };
+  const fill = (id: string): void => go(addToCompare(shown, id));
 
   // A multi-topic link from the old stacked page (and any empty slot, or a diagnosis the guide no longer
   // has) lands here; make the address the canonical compare route, replacing the entry so Back leaves the
@@ -65,7 +63,7 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
   const crumbs: Crumb[] = [...guideCrumbs(site, guide), { label: COMPARE }];
   return (
     <div className="cmp-page">
-      <PageHead crumbs={crumbs} title={COMPARE} tables actions={owner ? <SaveComparison guide={guide} ids={shown} /> : undefined} />
+      <PageHead crumbs={crumbs} title={COMPARE} actions={owner ? <SaveComparison guide={guide} ids={shown} /> : undefined} />
       <div className="cmp-grid">
         {quadrants.map(({ id, system }, i) => (
           <section className="cmp-q" key={i} aria-label={`${titleOf(id)} (quadrant ${i + 1})`}>
@@ -85,7 +83,6 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
                   id={id}
                   others={shown}
                   groups={groups}
-                  canPick={shown.length < 4}
                   onPick={fill}
                   titleOf={titleOf}
                 />
@@ -97,7 +94,10 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
               )}
             </div>
             <div className="cmp-body">
-              <TopicCard guide={guide} nav={nav} id={id} system={system} />
+              {/* Her card stacked, like the phone's Stacked layout: her sections top to bottom, no sideways columns. */}
+              <StackedContext.Provider value={true}>
+                <TopicCard guide={guide} nav={nav} id={id} system={system} />
+              </StackedContext.Provider>
             </div>
           </section>
         ))}

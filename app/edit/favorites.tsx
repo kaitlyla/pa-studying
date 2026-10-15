@@ -113,9 +113,7 @@ export interface FavoriteMenuProps {
   others: readonly string[];
   /** The guide's diagnoses, grouped as the quadrant picker lists them. */
   groups: readonly DxGroup[];
-  /** There is room for one more: an empty quadrant, or a free slot. */
-  canPick: boolean;
-  /** She picked a saved partner: the compare view puts it in the next empty quadrant. */
+  /** She picked a saved partner: the compare view puts it in the next quadrant. */
   onPick: (dx: string) => void;
   /** The title shown for a diagnosis. */
   titleOf: (dx: string) => string;
@@ -126,7 +124,7 @@ export interface FavoriteMenuProps {
  * Its save list holds every diagnosis of the guide — the ones on screen first — and it stays open, so
  * she can favorite several in a row and fill the quadrants one after another.
  */
-export function FavoriteMenu({ guide, id, others, groups, canPick, onPick, titleOf }: FavoriteMenuProps): ReactNode {
+export function FavoriteMenu({ guide, id, others, groups, onPick, titleOf }: FavoriteMenuProps): ReactNode {
   const fav = useFavorites(guide);
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -171,7 +169,7 @@ export function FavoriteMenu({ guide, id, others, groups, canPick, onPick, title
           {model.offered.length > 0 && <div className="mh">{FAVORITES_HEADING}</div>}
           {model.offered.map((p) => (
             <div className="fmenu-row" key={p}>
-              <button type="button" role="menuitem" disabled={!canPick} onClick={() => onPick(p)}>
+              <button type="button" role="menuitem" onClick={() => onPick(p)}>
                 {compareWith(titleOf(p))}
               </button>
               <button type="button" className="iconbtn" aria-label={removeFavorite(titleOf(p))} disabled={busy} onClick={() => void toggle(p, false)}>

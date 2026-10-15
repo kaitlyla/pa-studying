@@ -16,6 +16,7 @@ const R2 = id("r", 2);
 const R3 = id("r", 3);
 const R4 = id("r", 4);
 const R5 = id("r", 5);
+const R6 = id("r", 6);
 
 const para = (text: string, attrs: Record<string, unknown> = {}) => ({ type: "paragraph", attrs, content: [{ type: "text", text }] });
 const doc = (...content: unknown[]) => ({ type: "doc", content });
@@ -1211,16 +1212,18 @@ describe("saved comparisons (site/compare, published)", () => {
     expect(isContentJSON("content/guides/fm/comparisons.json.bak")).toBe(false);
   });
 
-  it("accepts one to four diagnoses under a name, in her order, names once each", () => {
+  it("accepts one or more diagnoses under a name, in her order, names once each", () => {
     expect(verdict(path, { v: 1, comparisons: [] })).toBe("ok");
     expect(verdict(path, one("Adrenal", [R1]))).toBe("ok");
     expect(verdict(path, one("Adrenal", [R3, R1, R2, R4]))).toBe("ok");
+    // No limit on a comparison's quadrants: five and six save like four do.
+    expect(verdict(path, one("Adrenal", [R1, R2, R3, R4, R5]))).toBe("ok");
+    expect(verdict(path, one("Adrenal", [R1, R2, R3, R4, R5, R6]))).toBe("ok");
     expect(verdict(path, { v: 1, comparisons: [{ name: "Adrenal", ids: [R1] }, { name: "Cushing's", ids: [R2, R3] }] })).toBe("ok");
   });
 
-  it("refuses none or five quadrants, a repeated diagnosis, a non-topic and a bad name", () => {
-    expect(verdict(path, one("Adrenal", []))).toMatch(/one to four diagnoses/);
-    expect(verdict(path, one("Adrenal", [R1, R2, R3, R4, R5]))).toMatch(/one to four diagnoses/);
+  it("refuses none, a repeated diagnosis, a non-topic and a bad name", () => {
+    expect(verdict(path, one("Adrenal", []))).toMatch(/at least one diagnosis/);
     expect(verdict(path, one("Adrenal", [R1, R1]))).toMatch(/no duplicate entries/);
     expect(verdict(path, one("Adrenal", [R1, B1]))).toMatch(/a r_ id/);
     expect(verdict(path, one("", [R1]))).toMatch(/a non-empty string/);

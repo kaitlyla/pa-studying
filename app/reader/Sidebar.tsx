@@ -103,12 +103,11 @@ function Entry({ guide, entry, cur, onNavigate }: EntryProps): ReactNode {
   const to = entry.kind === "topic" ? guideViewHash(guide, { kind: "topics", ids: [entry.id] }) : guideViewHash(guide, { kind: "block", id: entry.id });
   // The + adds this diagnosis to the comparison: the next free quadrant, or a comparison started with
   // the diagnosis on screen now (the picker, the ✕ and the menu's fill do the rest). Hidden when the
-  // diagnosis is already on screen or all four quadrants are taken.
+  // diagnosis is already on screen; a comparison holds as many quadrants as she adds.
   const compareTo = ((): string | null => {
     if (entry.kind !== "topic" || open) return null;
     const quadrants = v?.kind === "compare" ? v.ids : cur.ids;
-    const next = addToCompare(quadrants, entry.id);
-    return next === null ? null : guideViewHash(guide, { kind: "compare", ids: next });
+    return guideViewHash(guide, { kind: "compare", ids: addToCompare(quadrants, entry.id) });
   })();
   return (
     <li>

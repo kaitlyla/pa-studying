@@ -204,12 +204,15 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .tcard-h .loc { font-size: 12px; color: #5b6472; }
 .tcard-h .x { display: flex; gap: 6px; margin-left: auto; }
 
-/* ---- compare (guide-reader/compare): up to four diagnoses side by side, each quadrant scrolling on its own ---- */
+/* ---- compare (guide-reader/compare): the diagnoses side by side, two per row, each quadrant scrolling on
+   its own; a longer comparison adds rows and the page scrolls ---- */
 /* minmax(0, 1fr) and the quadrant's min-width: 0: a quadrant's picker lists every diagnosis and its card holds
    wide tables, so without them each column would take its content's width and the second quadrant would fall
-   off the screen instead of scrolling inside its half. */
-.cmp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 12px; height: calc(100vh - 210px); min-height: 340px; }
-.cmp-q { display: flex; flex-direction: column; min-width: 0; min-height: 0; border: 1px solid #dde1e8; border-radius: 8px; background: #fff; }
+   off the screen instead of scrolling inside its half. A quadrant keeps the height the 2 x 2 grid gave it
+   (half the page under the head), so rows past the first scroll the page while each quadrant still scrolls
+   its own body. */
+.cmp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.cmp-q { height: max(220px, calc(50vh - 111px)); display: flex; flex-direction: column; min-width: 0; min-height: 0; border: 1px solid #dde1e8; border-radius: 8px; background: #fff; }
 .cmp-h { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid #eceef2; }
 .cmp-h select { flex: 1; min-width: 0; }
 .cmp-h .favm { position: relative; display: inline-flex; }
@@ -220,6 +223,7 @@ table.nt td { vertical-align: top; line-height: 1.45; overflow-wrap: break-word;
 .fmenu-row { display: flex; align-items: center; gap: 2px; }
 .fmenu-row > [role="menuitem"] { flex: 1; min-width: 0; }
 .is-phone .cmp-grid { display: block; height: auto; min-height: 0; }
+.is-phone .cmp-q { height: auto; }
 .is-phone .cmp-q + .cmp-q { margin-top: 12px; }
 .is-phone .cmp-body { overflow: visible; }
 /* ---- saved comparisons (site/compare): the sidebar's list and the compare page's Save panel ---- */

@@ -80,6 +80,11 @@ const topicOf = (row: string): SystemJson["topics"][number] => must(cv.topics.fi
 const af = (): SystemJson["topics"][number] => topicOf(R(101));
 const stable = (): SystemJson["topics"][number] => topicOf(R(104));
 const prinz = (): SystemJson["topics"][number] => topicOf(R(123));
+/** A topic of another system (the fixture's fm guide has three). */
+const topicIn = (system: string, row: string): SystemJson["topics"][number] => {
+  const s = must(files.get(`g/fm/s/${system}.json`) as SystemJson | undefined, `the ${system} system`);
+  return must(s.topics.find((t) => t.rows.includes(row)), `topic of ${row}`);
+};
 
 const h1 = (c: Element): string => c.querySelector(".main h1")?.textContent ?? "";
 const crumbs = (c: Element): string[] => [...c.querySelectorAll(".main nav.crumbs .crumb")].map((e) => (e.textContent ?? "").replace("›", ""));
@@ -567,7 +572,8 @@ describe("compare page", () => {
     expect(location.hash).toBe(`#/eor/fm/compare/${stable().id}`);
     const first = must(c.querySelector(".cmp-q"), "first quadrant");
     expect(must(first.querySelector("select"), "first picker").value).toBe(stable().id);
-    expect(row(must(first.querySelector(".tcard"), "card"), R(104))).not.toBeNull();
+    // The quadrant draws her card stacked, so its rows are the stacked blocks, not table rows.
+    expect(must(first.querySelector(".tcard"), "card").querySelector(`[data-anchor="${R(104)}"]`)).not.toBeNull();
     expect(first.querySelector("button[aria-label^='Remove quadrant']")).toBeNull();
     expect(c.querySelector(".favm")).toBeNull();
     // The diagnosis on screen is the whole comparison, so no row offers its own +.
@@ -597,7 +603,7 @@ describe("compare page", () => {
     expect(c.querySelector("button[aria-label^='Remove quadrant']")).toBeNull();
   });
 
-  it("groups the picker by system; an empty slot drops off, and a topic the guide doesn't have, or five slots, isn't on the site", async () => {
+  it("groups the picker by system; an empty slot drops off, an unknown topic isn't on the site, and five quadrants stay", async () => {
     quietErrors();
     const a = await renderApp(`#/eor/fm/compare/${stable().id}`);
     app = a;
@@ -615,8 +621,50 @@ describe("compare page", () => {
     await until(() => notFound(c), "unknown topic not on site");
     await go(`#/eor/fm/compare/${stable().id}`);
     await until(() => c.querySelector(".cmp-q .tcard"), "a real compare page again");
-    await go("#/eor/fm/compare/r_0000000001,r_0000000002,r_0000000003,r_0000000004,r_0000000005");
-    await until(() => notFound(c), "five slots not on site");
+    // No limit: a comparison of every diagnosis the fixture's guide has opens like any other.
+    const five = [af(), stable(), prinz(), topicOf(R(131)), topicIn("pulmonary", R(201))];
+    const hash = `#/eor/fm/compare/${five.map((t) => t.id).join(",")}`;
+    await go(hash);
+    await until(() => c.querySelectorAll(".cmp-q .tcard").length === 5, "five quadrants");
+    expect(location.hash).toBe(hash);
+  });
+
+  it("shows her card stacked in the quadrant while the diagnosis page keeps the table layout", async () => {
+    const a = await renderApp(`#/eor/fm/t/${af().id}`);
+    app = a;
+    const c = a.container;
+    const card = await until(() => c.querySelector(`section.tcard[data-topic="${af().id}"]`), "the diagnosis card");
+    // Her own page draws the table as a grid on a laptop: no stacked blocks anywhere in it.
+    expect(card.querySelector(".notes table.nt")).not.toBeNull();
+    expect(card.querySelector(".stacked")).toBeNull();
+
+    await click(byText(c, ".main .acts button", "Compare"));
+    const quadrant = await until(() => c.querySelector(".cmp-q .tcard"), "the quadrant's card");
+    // The quadrant draws the same card the phone's Stacked layout draws — each column heading above its
+    // text (the AF row's "Presentation" above "irregularly irregular") — and no grid table.
+    const stack = must(quadrant.querySelector(".notes .stacked"), "the stacked card");
+    expect(quadrant.querySelector(".notes table.nt")).toBeNull();
+    expect(must(stack.querySelector(".stk-ch"), "a column heading").textContent).toContain("Presentation");
+    const head = must(stack.querySelector(".stk-ch"), "the heading");
+    const body = must(stack.querySelector(".stk-cb"), "its text");
+    expect(head.compareDocumentPosition(body) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(body.textContent).toContain("irregularly irregular");
+  });
+
+  it("with four quadrants up, the sidebar's + still offers the next diagnosis and the fifth goes on", async () => {
+    const four = [af(), stable(), prinz(), topicOf(R(131))];
+    const a = await renderApp(`#/eor/fm/compare/${four.map((t) => t.id).join(",")}`);
+    app = a;
+    const c = a.container;
+    await until(() => c.querySelectorAll(".cmp-q").length === 4, "four quadrants");
+    // The fifth lives in another system: its row (and +) shows once that group is open.
+    await click(groupToggle(c, "Pulmonary"));
+    const asthma = topicIn("pulmonary", R(201));
+    const plus = must(side(c).querySelector(`a.alongside[aria-label="Add ${asthma.title} to the comparison"]`), "the fifth's +");
+    await click(plus);
+    await until(() => c.querySelectorAll(".cmp-q").length === 5, "five quadrants");
+    expect(location.hash).toBe(`#/eor/fm/compare/${[...four.map((t) => t.id), asthma.id].join(",")}`);
+    expect(must([...c.querySelectorAll(".cmp-q")][4], "the fifth quadrant").querySelector(".tcard")?.getAttribute("data-topic")).toBe(asthma.id);
   });
 
   it("a saved comparison whose diagnosis is gone opens on the rest, and is listed without it", async () => {

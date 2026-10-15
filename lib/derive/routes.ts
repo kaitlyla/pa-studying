@@ -29,7 +29,7 @@ export type GuideView =
   | { kind: "system"; system: string }
   | { kind: "section"; system: string; section: string }
   | { kind: "topics"; ids: string[] }
-  /** Up to four diagnoses side by side (compare): one slot per quadrant, `""` for an empty one. */
+  /** Diagnoses side by side (compare): one slot per quadrant, `""` for an empty one. */
   | { kind: "compare"; ids: string[] }
   | { kind: "block"; id: string }
   | { kind: "pharm"; system: string; section: string | null; target: string | null }
@@ -39,13 +39,13 @@ export type GuideView =
   | { kind: "slides"; n: number };
 
 /**
- * The comparison's quadrants with `id` in its next free slot — the first empty one, else a new quadrant
- * — or null when all four are taken. One rule for the sidebar's + and the favorites menu's fill.
+ * The comparison's quadrants with `id` in its next free slot — the first empty one, else a new quadrant.
+ * One rule for the sidebar's + and the favorites menu's fill; a comparison holds as many as she adds.
  */
-export function addToCompare(ids: readonly string[], id: string): string[] | null {
+export function addToCompare(ids: readonly string[], id: string): string[] {
   const empty = ids.indexOf("");
   if (empty >= 0) return ids.map((x, i) => (i === empty ? id : x));
-  return ids.length < 4 ? [...ids, id] : null;
+  return [...ids, id];
 }
 
 export type RoutePage =
@@ -95,12 +95,12 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
       const ids = (a ?? "").split(",").filter((x) => x !== "");
       if (b !== undefined || ids.length === 0) return NOT_FOUND;
       // Several topics used to stack on one page; that page is gone, so a `t/a,b` link is a comparison
-      // (the app replaces the address with the canonical compare route), and more than four keep four.
-      return ids.length > 1 ? page({ kind: "compare", ids: ids.slice(0, 4) }) : page({ kind: "topics", ids });
+      // (the app replaces the address with the canonical compare route) with every diagnosis it names.
+      return ids.length > 1 ? page({ kind: "compare", ids }) : page({ kind: "topics", ids });
     }
     case "compare": {
       const slots = (a ?? "").split(",");
-      return a !== undefined && b === undefined && slots.length <= 4 ? page({ kind: "compare", ids: slots }) : NOT_FOUND;
+      return a !== undefined && b === undefined ? page({ kind: "compare", ids: slots }) : NOT_FOUND;
     }
     case "b":
       return a && b === undefined ? page({ kind: "block", id: a }) : NOT_FOUND;

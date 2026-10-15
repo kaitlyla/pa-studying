@@ -41,11 +41,15 @@ export function TableModeSwitch(): ReactNode {
   );
 }
 
-/** True when her tables should render stacked (phone, Stacked chosen). */
+/** Set by a container whose tables are always stacked, whatever the phone's switch says (compare quadrants). */
+export const StackedContext = createContext<boolean | null>(null);
+
+/** True when her tables should render stacked (phone, Stacked chosen, or a container that forces it). */
 export function useStacked(): boolean {
+  const forced = useContext(StackedContext);
   const phone = useIsPhone();
   const mode = useTableMode();
-  return phone && mode === "stacked";
+  return forced ?? (phone && mode === "stacked");
 }
 
 export interface PageHeadProps {

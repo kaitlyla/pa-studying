@@ -1,9 +1,9 @@
-// The compare view (40 §40.3, guide-reader/compare) against the built site: up to four diagnoses of one
-// guide — 2 x 2 on desktop, stacked on a phone — each quadrant scrolling on its own, filled by the
-// sidebar's +, each with its picker and its ✕. Her favorite pairs (site/compare) and her named
-// comparisons (public: a visitor sees the list, read-only) are saved to the site through the fake GitHub
-// and read back on a fresh load. Routes and diagnoses are chosen from the published data, so the spec
-// follows the content.
+// The compare view (40 §40.3, guide-reader/compare) against the built site: the diagnoses of one guide —
+// two per row on desktop, stacked on a phone — each quadrant scrolling on its own, its card drawn stacked,
+// filled by the sidebar's +, each with its picker and its ✕, with no limit on how many she compares. Her
+// favorite pairs (site/compare) and her named comparisons (public: a visitor sees the list, read-only) are
+// saved to the site through the fake GitHub and read back on a fresh load. Routes and diagnoses are chosen
+// from the published data, so the spec follows the content.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -76,13 +76,13 @@ function topicsOf(g: string): Diagnosis[] {
   return out;
 }
 
-/** The first guide (site order) whose sidebar lists four diagnoses, its diagnoses biggest first. */
+/** The first guide (site order) whose sidebar lists six diagnoses, its diagnoses biggest first. */
 function guideForCompare(): { g: GuideId; topics: Diagnosis[] } {
   for (const { g } of navs) {
     const topics = topicsOf(g);
-    if (topics.length >= 4) return { g, topics: [...topics].sort((a, b) => b.size - a.size) };
+    if (topics.length >= 6) return { g, topics: [...topics].sort((a, b) => b.size - a.size) };
   }
-  throw new Error("no guide's sidebar lists four diagnoses to compare");
+  throw new Error("no guide's sidebar lists six diagnoses to compare");
 }
 
 const pick = guideForCompare();
@@ -91,7 +91,9 @@ const B = need(pick.topics[1], "a second diagnosis");
 const C = need(pick.topics[2], "a third diagnosis");
 const D = need(pick.topics[3], "a fourth diagnosis");
 const E = need(pick.topics[4], "a fifth diagnosis");
+const F = need(pick.topics[5], "a sixth diagnosis");
 const idsOfFour = pick.topics.slice(0, 4).map((t) => t.id);
+const idsOfSix = pick.topics.slice(0, 6).map((t) => t.id);
 const compareHash = (...ids: string[]): string => guideViewHash(pick.g, { kind: "compare", ids });
 /** Her example is FM's; the picked guide's hash helper is not hers. */
 const fmCompareHash = (...ids: string[]): string => guideViewHash("fm", { kind: "compare", ids });
@@ -111,7 +113,7 @@ const P2 = need(trio[1], "the second diagnosis of a three-diagnosis group");
 
 /** A diagnosis beside a quadrant's row: rendered with that quadrant's group open, so its + is in reach. */
 const beside = need(
-  pick.topics.find((t) => t.system === B.system && t.group === B.group && ![A, B, C, D, E].some((u) => u.id === t.id)),
+  pick.topics.find((t) => t.system === B.system && t.group === B.group && ![A, B, C, D, E, F].some((u) => u.id === t.id)),
   "a diagnosis in the second biggest diagnosis's group",
 );
 
@@ -320,7 +322,41 @@ test.describe("compare", () => {
     expect(new Set(tops.map((y) => Math.round(y))).size).toBe(4);
   });
 
-  test("the owner's menu saves any diagnosis, stays open, fills quadrants, and disables a full grid", async ({ page, context, baseURL }) => {
+  test("six quadrants go two per row, the page scrolls, and each card is drawn stacked", async ({ page }) => {
+    await openPage(page, compareHash(...idsOfSix));
+    const q = quadrants(page);
+    await expect(q).toHaveCount(6);
+    for (const t of [A, B, C, D, E, F]) await expect(page.locator(`[data-topic="${t.id}"]`)).toBeVisible();
+
+    // Two per row: three rows of two, and the page itself scrolls down to the later rows.
+    const boxes = await boxesOf(page);
+    const xs = [...new Set(boxes.map((b) => Math.round(b.x)))].sort((p, r) => p - r);
+    const ys = [...new Set(boxes.map((b) => Math.round(b.y)))].sort((p, r) => p - r);
+    expect(xs).toHaveLength(2);
+    expect(ys).toHaveLength(3);
+    for (const y of ys) expect(boxes.filter((b) => Math.round(b.y) === y)).toHaveLength(2);
+    await expect.poll(() => page.locator("main").evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+
+    // Each quadrant keeps its own scroll box: scrolling the first leaves the other five where they are.
+    const bodies = page.locator(".cmp-body");
+    await expect(bodies).toHaveCount(6);
+    expect(await bodies.evaluateAll((els) => els.map((e) => getComputedStyle(e).overflowY))).toEqual(["auto", "auto", "auto", "auto", "auto", "auto"]);
+    const scrolled = await bodies.evaluateAll((els) => {
+      (els[0] as HTMLElement).scrollTop = (els[0] as HTMLElement).scrollHeight;
+      return els.map((e) => e.scrollTop);
+    });
+    expect(need(scrolled[0], "the first quadrant's scroll position")).toBeGreaterThan(0);
+    expect(scrolled.slice(1)).toEqual([0, 0, 0, 0, 0]);
+
+    // Every quadrant draws her card stacked — the phone's Stacked layout — while the diagnosis's own page
+    // on a laptop keeps the table layout.
+    for (let i = 0; i < 6; i++) await expect(q.nth(i).locator(".notes .stacked").first()).toBeVisible();
+    await openPage(page, guideViewHash(pick.g, { kind: "topics", ids: [A.id] }));
+    await expect(page.locator(".tcard .notes table.nt").first()).toBeVisible();
+    await expect(page.locator(".tcard .stacked")).toHaveCount(0);
+  });
+
+  test("the owner's menu saves any diagnosis, stays open, and fills quadrants past four", async ({ page, context, baseURL }) => {
     const fake = await world(context, baseURL);
     await openPage(page, compareHash(A.id, B.id));
     await signIn(page);
@@ -357,8 +393,7 @@ test.describe("compare", () => {
     await expect(menu).toBeVisible();
     await expect(menu.getByRole("menuitem", { name: `Compare with ${C.title}` })).toHaveCount(0);
 
-    // With room left, a diagnosis beside the quadrants' rows still offers the sidebar's +; saving D and
-    // filling the fourth quadrant from the menu takes the last slot.
+    // The fourth quadrant from the menu.
     await expect(side(page).getByRole("link", { name: `Add ${beside.title} to the comparison`, exact: true })).toHaveCount(1);
     await menu.getByRole("menuitem", { name: `Save ${D.title} as a favorite` }).click();
     await expect(menu).toBeVisible();
@@ -367,10 +402,23 @@ test.describe("compare", () => {
     await expect(quadrants(page)).toHaveCount(4);
     await expect.poll(savedPairs).toEqual([pairKey(A.id, C.id), pairKey(A.id, D.id), pairKey(A.id, E.id)].sort());
 
-    // All four taken: no sidebar row offers the + any more, the favorites left are disabled, and the
-    // save list still works.
+    // No cap: with four quadrants up the favorites left are still offered, and the sidebar's + beside the
+    // quadrants' rows still adds one — the fifth from the menu, the sixth from the +.
+    await expect(menu.getByRole("menuitem", { name: `Compare with ${E.title}` })).toBeEnabled();
+    await menu.getByRole("menuitem", { name: `Compare with ${E.title}` }).click();
+    await expect.poll(() => hashOf(page)).toBe(compareHash(A.id, B.id, C.id, D.id, E.id));
+    await expect(quadrants(page)).toHaveCount(5);
+    await expect(quadrants(page).nth(4).locator(`[data-topic="${E.id}"]`)).toBeVisible();
+    await expect(menu).toBeVisible();
+    await side(page).getByRole("link", { name: `Add ${beside.title} to the comparison`, exact: true }).click();
+    await expect.poll(() => hashOf(page)).toBe(compareHash(A.id, B.id, C.id, D.id, E.id, beside.id));
+    await expect(quadrants(page)).toHaveCount(6);
+    await expect(quadrants(page).nth(5).locator(`[data-topic="${beside.id}"]`)).toBeVisible();
+    // A diagnosis now on screen offers no + of its own again.
     await expect(side(page).getByRole("link", { name: `Add ${beside.title} to the comparison`, exact: true })).toHaveCount(0);
-    await expect(menu.getByRole("menuitem", { name: `Compare with ${E.title}` })).toBeDisabled();
+    // The save list still works with six quadrants up. The sidebar click closed the menu, the way any click
+    // outside it does, so it is opened again first.
+    await quadrants(page).first().getByRole("button", { name: "Favorites" }).click();
     await expect(menu.getByRole("menuitem", { name: `Save ${B.title} as a favorite` })).toBeEnabled();
 
     // The pair works both ways: on a fresh load, C's menu offers comparing with A.
@@ -430,7 +478,8 @@ test.describe("compare", () => {
 
   test("she saves a comparison, leaves, and returns to it from the sidebar — and renames and deletes it", async ({ page, context, baseURL }) => {
     const fake = await world(context, baseURL);
-    await openPage(page, compareHash(...idsOfFour));
+    // Six quadrants: a saved comparison carries as many as she put on the view.
+    await openPage(page, compareHash(...idsOfSix));
     await signIn(page);
 
     await page.getByRole("button", { name: "Save comparison" }).click();
@@ -442,25 +491,25 @@ test.describe("compare", () => {
       const text = fake.readFile(path);
       return text === undefined ? [] : parseFile<ComparisonsFile>(path, text).comparisons;
     };
-    await expect.poll(saved).toEqual([{ name: "Adrenal", ids: idsOfFour }]);
+    await expect.poll(saved).toEqual([{ name: "Adrenal", ids: idsOfSix }]);
     expect(need(fake.commit(fake.head()), "the save commit").message).toContain("Pa-Studying-Kind: comparisons");
 
     // The sidebar lists it under Comparisons, right under the guide's name, and clicking it restores those
     // quadrants — after leaving the comparison and coming back.
     await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
     const row = side(page).getByRole("link", { name: "Adrenal", exact: true });
-    await expect(row).toHaveAttribute("href", compareHash(...idsOfFour));
+    await expect(row).toHaveAttribute("href", compareHash(...idsOfSix));
     await openPage(page, guideViewHash(pick.g, { kind: "home" }));
     await side(page).getByRole("link", { name: "Adrenal", exact: true }).click();
-    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfFour));
-    await expect(quadrants(page)).toHaveCount(4);
+    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfSix));
+    await expect(quadrants(page)).toHaveCount(6);
 
     // Rename it from the sidebar; the row follows, and a fresh load reads the new name from her file.
     await side(page).getByRole("button", { name: "Rename Adrenal" }).click();
     await side(page).getByLabel("New name for Adrenal").fill("Adrenal insufficiency");
     await side(page).getByRole("button", { name: "Save", exact: true }).click();
     await expect(side(page).getByRole("link", { name: "Adrenal insufficiency", exact: true })).toBeVisible();
-    await expect.poll(saved).toEqual([{ name: "Adrenal insufficiency", ids: idsOfFour }]);
+    await expect.poll(saved).toEqual([{ name: "Adrenal insufficiency", ids: idsOfSix }]);
 
     // Delete it: the row goes and, with nothing saved, the section stays up for her with the line that
     // says how to make one; her file keeps no comparisons.
@@ -479,18 +528,18 @@ test.describe("compare", () => {
     await expect(page.getByRole("button", { name: "Save comparison" })).toHaveCount(0);
 
     // What the build writes when she has saved comparisons: the list is published for visitors too.
-    const body: ComparisonsJson = { guide: pick.g, comparisons: [{ name: "Adrenal", ids: idsOfFour }] };
+    const body: ComparisonsJson = { guide: pick.g, comparisons: [{ name: "Adrenal", ids: idsOfSix }] };
     await context.route((url) => url.pathname.endsWith(`/data/${comparisonsDataPath(pick.g)}`), (route) => route.fulfill({ status: 200, headers: { "content-type": "application/json" }, body: JSON.stringify(body) }));
     await openPage(page, guideViewHash(pick.g, { kind: "home" }));
     await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
     const row = side(page).getByRole("link", { name: "Adrenal", exact: true });
-    await expect(row).toHaveAttribute("href", compareHash(...idsOfFour));
+    await expect(row).toHaveAttribute("href", compareHash(...idsOfSix));
     await expect(side(page).getByRole("button", { name: "Rename Adrenal" })).toHaveCount(0);
     await expect(side(page).getByRole("button", { name: "Delete Adrenal" })).toHaveCount(0);
 
     await row.click();
-    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfFour));
-    await expect(quadrants(page)).toHaveCount(4);
+    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfSix));
+    await expect(quadrants(page)).toHaveCount(6);
     await expect(page.getByRole("button", { name: "Save comparison" })).toHaveCount(0);
     await expect(page.locator(".favm")).toHaveCount(0);
   });

@@ -667,7 +667,7 @@ export const validateFavorites: Validator = whole((v, at, ctx) => {
 const comparison: Checker = (v, at, ctx) => {
   shapeOf<ComparisonsFile["comparisons"][number]>({ name: nonEmpty, ids: uniqueArr(id("r")) }, {})(v, at, ctx);
   const { name, ids } = v as ComparisonsFile["comparisons"][number];
-  if (ids.length < 1 || ids.length > 4) bad(ctx, `${at}.ids`, "one to four diagnoses (her four quadrants)", ids);
+  if (ids.length < 1) bad(ctx, `${at}.ids`, "at least one diagnosis", ids);
   if (name !== name.trim() || name.length > COMPARISON_NAME_MAX) bad(ctx, `${at}.name`, `a trimmed name of at most ${COMPARISON_NAME_MAX} characters`, name);
 };
 
