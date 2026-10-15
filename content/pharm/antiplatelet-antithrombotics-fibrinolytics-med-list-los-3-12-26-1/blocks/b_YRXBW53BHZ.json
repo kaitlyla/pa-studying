@@ -398,6 +398,35 @@
    {
     "type": "paragraph",
     "attrs": {
+     "indLeft": 72,
+     "indRight": 0,
+     "indFirst": -18,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": {
+      "rule": "auto",
+      "value": 1
+     },
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": {
+      "text": "-",
+      "font": null,
+      "marks": [],
+      "tabPt": 18
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Acute MI: ASA 162-325mg chewed/crushed (⍉enteric-coated)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
      "indLeft": 36,
      "indRight": 0,
      "indFirst": -18,
@@ -552,6 +581,34 @@
      "borders": null,
      "marker": null
     }
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "image",
+      "attrs": {
+       "asset": "046f9079d9919910e314ad51c2b8e7fc.png",
+       "widthPt": 539.25,
+       "heightPt": 472.5,
+       "rot": 0,
+       "flipH": false,
+       "flipV": false
+      }
+     }
+    ]
    }
   ]
  },
