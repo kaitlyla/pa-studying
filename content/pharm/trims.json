@@ -20,6 +20,7 @@
   "r_2VJV30512B": "ADP-r Antagonists (P2Y12 Inhibitors) | Irreversible: Clopidogrel Prasugrel | Reversible: Ticagrelor (Brilinta) Cangrelor |  | MOA: bind ADP P2Y12 platelet-r, inhibiting ADP-induced platelet aggregation Clin Use: ACS – Clopidogrel: ACS, 2/2 prev of MI, CVA, & PAD | Contraindications: serious active bleed SE: bleed Warnings: stop 7d b4 elective CABG",
   "r_31SNM9WMZ8": "Benzodiazepines (C-IV) Short Acting: Triazolam (Halcion) Intermed Acting: Estazolam (ProSom) Temazepam (Restoril) Long Acting: Flurazepam (Dalmane) Quazepam (Doral) | MOA: modulate GABA transmission thru binding of GABA-A-r benzodiazepine sites (sedative + hypnotic) •reduce sleep latency & # of awakenings Indications in Insomnia: sleep onset/maintenance insomnia, ⍉first line agents •⍉BDZs in preg, Hx of substance abuse, & sleep apnea Considerations: •Short acting: duration 2-5h, assoc w/ rebound insomnia & early Am awakenings •Intermed acting: duration 6-10h, *preferred agent •Long acting: hypnotic actions last 7-8h, active metabolite peaks in 10h & has 50-100h ½ life; assoc w/ “hangover” effects, ⍉in elderly pts (hangover, falls, confusion) | MC SE: somnolence, drowsiness, dizziness •Anterograde Amnesia: highest risk w/ short acting agents Caution in elderly (≥65): slower met allows for drug accum & increases risk for impaired cognition, falls & hip frx, & hangover effects C-IV: risk of abuse/addiction, tolerance & dependence, & w.draw BOXED WARNING: use w/ opioids increase risk for profound sedation, resp depression, coma, & death",
   "r_389YKRC06R": "Risperidone (Risperdal) Paliperidone (Invega) | MOA: ↑D2/5HT2 antagonism, ↑ ⍺1/H1 affinity, ↓/mod. 5HT1A affinity Paliperidone: risperidone’s primary active metabolite, use ⍉recommended in CrCl <10mL/min | ▪︎hyperprolactinemia, highest risk (dose-related) » S/SXS: gynecomastia, galactorrhea, amenorrhea, sexual dysfun » Monitoring: ask about s/sxs every visit until dose = stable",
+  "r_3HNZN5Y8JH": "Isotretinoin | MOA: all 4 of the pathophysiological mechanisms of acne (most effective med) Clin Use: USU reserved for severe or refractory acne | •dry skin & lips (MC), dry eyes •highly teratogenic •must obtain 2 (-) preg tests prior to initiation •Preg tests q monthly while on tx •must commit to 2 forms of contraception (used 1mo prior-1mo after D/C) •↑ TG & cholest •arthralgias, myalgias, hepatitis, leukopenia, premature long bone closure •photosensitivity, worsening of DM, HA, idiopathic IC HTN, fatigue, possibly psychiatric •← severe risk of teratogenesis, prescribers & pts must sign up for iPledge",
   "r_3PEN1TX625": "Indirect Thrombin Inhibitors | UFH Fondaparinux | LMWH: Enoxaparin (Lovenox) Dalteparin |  | MOA: bind to AT-3 to accelerate its activity which enhances inactivation of thrombin & Xa, prevents new clot form Clin Use: ACS, VTE | Contraindications: hx of HIT, active bleed, severe thrombocytopenia SE: bleed, thrombocytopenia, HIT",
   "r_3T0NPS3F7C": "BBs | β1-Selective: Bisoprolol Metoprolol Atenolol Betaxolol |  | ⍺ + β blockers: Carvedilol | MOA: beta-1-r antagonism; ⇣ myocard O2 demand ▪︎⇣ HR (⊖chronotropy), ⇣ contractility (⊖inotropy), ⇣ LV wall tension (⇣ preload) Clin Use: first line agents for chronic stable angina, ACS; *mortality benefit ▪︎ALL ACS pts should have BB initiated w.in first 24h & continued indefinitely Warnings: do ⍉stop BB abruptly (rebound angina), may mask s/sxs of hypoglycemia | Contraindications: RV MI, active HF (pulm edema), 2nd/3rd degree block, asthma, hypotensive, brady, prolonged PR >0.30s, vasospastic (variant) angina » if s/sxs of active HF, delay initiation until HF under control SE: sexual dysfun, sedation, fatigue, depression, hypotension",
   "r_4AZ1H7P53H": "XOIs: Allopurinol Febuxostat | MOA: inhibition of xanthine oxidase (XO) prevents conversion of hypoxanthine to xanthine to uric acid » Allopurinol: first line ULT agent unless ⊕HLA-B*5801 (⇡ risk of hypersensitivity rxn); safe in renal insuff* ▪︎severe hypersensitivity rxns incl SJS/TEN w/ HLA-B*5801 gene; screening requires in Asian pop | » Febuxostat: reserved for pts w/ allopurinol hypersensitivity or intol",
@@ -1766,6 +1767,22 @@
     "r_S6KBMDZVBG",
     "r_WRX826S72C",
     "r_YF55DATKG0"
+   ]
+  },
+  {
+   "block": "b_BRHR6MXSTK",
+   "text": "- SE: dry skin & lips (MC), dry eyes; ↑TG & cholest; arthralgias, myalgias, hepatitis, leukopenia, premature long bone closure; photosensitivity, worsening of DM, HA, idiopathic IC HTN, fatigue, possibly psychiatric",
+   "label": false,
+   "rows": [
+    "r_3HNZN5Y8JH"
+   ]
+  },
+  {
+   "block": "b_BRHR6MXSTK",
+   "text": "- ⍉ in pregnancy (teratogenic → spontaneous abortions + congenital malformations); must enroll in iPledge, receive regular pregnancy tests, + use 2 forms of contraception",
+   "label": false,
+   "rows": [
+    "r_3HNZN5Y8JH"
    ]
   },
   {
