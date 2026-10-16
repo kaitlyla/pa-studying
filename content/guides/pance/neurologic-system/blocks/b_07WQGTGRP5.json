@@ -2428,7 +2428,7 @@
               }
              }
             ],
-            "text": "Neonates"
+            "text": "Neonates (<1 mo)"
            },
            {
             "type": "text",
@@ -2451,7 +2451,7 @@
            },
            {
             "type": "text",
-            "text": ", E. coli, "
+            "text": " (S. agalactiae), E. coli, "
            },
            {
             "type": "text",
@@ -2466,19 +2466,7 @@
               }
              }
             ],
-            "text": "L. monocytogenes"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4081FF"
-              }
-             }
-            ],
-            "text": " "
+            "text": "Listeria"
            }
           ]
          },
@@ -2507,11 +2495,11 @@
               }
              }
             ],
-            "text": "Infants/children"
+            "text": "1–23 mo"
            },
            {
             "type": "text",
-            "text": ": S. pneumo, N. meningitides, "
+            "text": ": S. pneumo, N. meningitidis, plus GBS and E. coli (mainly early infancy) and "
            },
            {
             "type": "text",
@@ -2527,6 +2515,10 @@
              }
             ],
             "text": "Hib"
+           },
+           {
+            "type": "text",
+            "text": " (rare if vaccinated)"
            }
           ]
          },
@@ -2555,11 +2547,11 @@
               }
              }
             ],
-            "text": "Teens/adults"
+            "text": "2–50 y"
            },
            {
             "type": "text",
-            "text": ": N. meningitides (teens), S. pneumo"
+            "text": ": S. pneumo, N. meningitidis"
            }
           ]
          },
@@ -2588,11 +2580,11 @@
               }
              }
             ],
-            "text": ">50yo"
+            "text": ">50 y"
            },
            {
             "type": "text",
-            "text": ": S. pneumo, N. meningitides, "
+            "text": ": S. pneumo, N. meningitidis, "
            },
            {
             "type": "text",
@@ -2607,7 +2599,11 @@
               }
              }
             ],
-            "text": "L. monocytogenes"
+            "text": "Listeria"
+           },
+           {
+            "type": "text",
+            "text": ", aerobic gram− bacilli"
            }
           ]
          },
