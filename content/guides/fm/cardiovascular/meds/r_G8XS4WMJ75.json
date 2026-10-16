@@ -6253,7 +6253,20 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "fondaparinux for 45 days (or LMWH)",
+     "drugs": "fondaparinux for 45 days",
+     "note": "> 3 cm from the saphenofemoral junction and ≥ 5 cm long",
+     "sources": [
+      {
+       "name": "Superficial Venous Thrombosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/superficial-venous-thrombosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "LMWH (enoxaparin) for 45 days",
      "note": "> 3 cm from the saphenofemoral junction and ≥ 5 cm long",
      "sources": [
       {
@@ -6283,8 +6296,8 @@
    "target": "c_0MBJ1P5NT5",
    "roles": [
     {
-     "role": "1st",
-     "drugs": "rivaroxaban",
+     "role": "alt",
+     "drugs": "rivaroxaban for 45 days",
      "note": "> 3 cm from the saphenofemoral junction and ≥ 5 cm long",
      "sources": [
       {
