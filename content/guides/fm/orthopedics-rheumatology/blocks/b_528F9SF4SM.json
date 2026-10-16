@@ -907,7 +907,7 @@
            },
            {
             "type": "text",
-            "text": ": conservative (ex, RICE, NSAIDs, arch/heel support, plantar stretches) "
+            "text": ": conservative (first-line, most resolve in 6–12 mo): stretching (plantar fascia + calf), NSAIDs, heel cups/orthotics, night splints, activity mod, wt loss"
            }
           ]
          },
@@ -991,27 +991,6 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎night splints: if pain persists despite the above; ⍉1st-line (cumbersome, ⇣compliance)"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
             "text": "▪︎compression stockings: no role"
            }
           ]
@@ -1033,7 +1012,23 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎steroid injections if failed conservative measures"
+            "text": "▪︎"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "refractory"
+           },
+           {
+            "type": "text",
+            "text": ": CS injection (risk of fascia rupture/fat pad atrophy), ESWT"
            }
           ]
          },
@@ -1117,44 +1112,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "refractory"
-           },
-           {
-            "type": "text",
-            "text": ": surg "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎surg (partial or complete plantar fascia release + gastrocnemius release) if pain persists after 6–12 mo of nonsurgical mgmt"
+            "text": "▪︎surgery after 6–12 mo failed conservative care: partial plantar fasciotomy ± gastrocnemius recession"
            }
           ]
          }
