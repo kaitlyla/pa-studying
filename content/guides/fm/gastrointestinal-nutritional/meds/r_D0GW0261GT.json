@@ -5549,6 +5549,138 @@
      "population": "Pregnant"
     }
    ]
+  },
+  {
+   "target": "c_12MEEQXZ80",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tinidazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Giardia lamblia"
+    },
+    {
+     "role": "1st",
+     "drugs": "tinidazole",
+     "note": "then paromomycin (luminal agent)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Entamoeba histolytica"
+    }
+   ]
+  },
+  {
+   "target": "c_EN5WNA55Y9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "nitazoxanide",
+     "note": "1–3 yo: nitazoxanide",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Giardia lamblia"
+    },
+    {
+     "role": "alt",
+     "drugs": "nitazoxanide",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Entamoeba histolytica"
+    },
+    {
+     "role": "1st",
+     "drugs": "nitazoxanide",
+     "note": "most pts: supportive care only",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Cryptosporidium parvum"
+    }
+   ]
+  },
+  {
+   "target": "c_7ZJ8DR4A8D",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "paromomycin",
+     "note": "luminal agent; follows metronidazole",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Entamoeba histolytica"
+    },
+    {
+     "role": "1st",
+     "drugs": "paromomycin",
+     "note": "most pts: supportive care only",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Cryptosporidium parvum"
+    }
+   ]
+  },
+  {
+   "target": "c_51EHFX37HR",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "albendazole/mebendazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Giardia lamblia"
+    }
+   ]
   }
  ],
  "classes": [
@@ -5623,6 +5755,10 @@
    "gaps": [
     "g_QG4RGZB19J"
    ]
+  },
+  {
+   "title": "Cryptosporidium parvum",
+   "gaps": []
   }
  ]
 }
