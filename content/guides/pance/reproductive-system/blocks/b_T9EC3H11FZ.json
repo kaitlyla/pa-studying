@@ -4112,7 +4112,7 @@
               }
              }
             ],
-            "text": "♀︎ <30yo"
+            "text": "Palpable breast mass imaging"
            },
            {
             "type": "text",
@@ -4134,11 +4134,29 @@
               }
              }
             ],
-            "text": "U/S imaging of choice"
+            "text": "<30 → US"
            },
            {
             "type": "text",
-            "text": " (higher breast tissue density makes mammography detection more difficult)"
+            "text": " (higher breast tissue density makes mammography detection more difficult); "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "FF40FF"
+              }
+             }
+            ],
+            "text": "30–39 → US or dx mammo (usually both); ≥40 → dx mammo + US"
            }
           ]
          },
@@ -4197,57 +4215,6 @@
            {
             "type": "text",
             "text": "\t\t  spiculated, indistinct, or angular margins"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "shade",
-              "attrs": {
-               "hex": "FF8693"
-              }
-             }
-            ],
-            "text": "♀︎ ≥30yo"
-           },
-           {
-            "type": "text",
-            "text": ": "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": "mammography imaging of choice"
            }
           ]
          },
