@@ -107,6 +107,38 @@ const RULED_OUT = /^[^:,()→⇢⇒🡪🡒⤷➔➜⟶⟹]*?(?<![\p{L}\p{N}])co
 const CLAUSE_IF = /(?<![\p{L}\p{N}])(?:if|unless)(?![\p{L}\p{N}])/iu;
 
 /**
+ * Her words right after a drug, or after her list of drugs, that say it does no good: "triptans
+ * typically ⍉effective", "NSAIDs, corticosteroids, opioids generally ineffective", "steroids ⍉benefit".
+ */
+const INEFFECTIVE = /^[^\S\n]*(?:(?:generally|typically)[^\S\n]+)?(?:ineffective|⍉[^\S\n]?(?:effective|benefit)|not[^\S\n]+effective|no[^\S\n]+benefit)(?![\p{L}\p{N}])/iu;
+
+/**
+ * Whether her item calls the drug word between `before` and `after` ineffective (`INEFFECTIVE`): right
+ * after it, or after the rest of the list of drugs it starts ("NSAIDs, corticosteroids, opioids
+ * generally ineffective"), past a parenthetical of examples. Her "if" before it makes the drug a step
+ * tried first ("TCAs (clomipramine, imipramine) if above ⍉effective"), and a condition after her word
+ * limits it to a case ("bisphosphonate ineffective w/ severe bone loss", "ineffective @ controlling
+ * rate during exercise"): the drug still treats. `drugs` is every drug word.
+ */
+function ineffectiveAfter(before: string, after: string, drugs: RegExp | null): boolean {
+  if (CLAUSE_IF.test(before)) return false;
+  const next = drugs === null ? null : new RegExp(`^[^\\S\\n]*(?:(?:and|or|&)[^\\S\\n]+)?(?:${drugs.source})`, "iu");
+  let rest = after;
+  for (;;) {
+    rest = rest.replace(/^[^\S\n]*\([^()\n]*\)/u, "");
+    const said = INEFFECTIVE.exec(rest);
+    if (said !== null) {
+      const tail = rest.slice(said[0].length);
+      return !CONDITION.test(tail) && !/^\s*@/u.test(tail);
+    }
+    const sep = /^[^\S\n]*[,/][^\S\n]*/u.exec(rest);
+    const drug = sep === null || next === null ? null : next.exec(rest.slice(sep[0].length));
+    if (sep === null || drug === null) return false;
+    rest = rest.slice(sep[0].length + drug[0].length);
+  }
+}
+
+/**
  * Where an item of her notes ends: a new line, a bullet or numbered point, or a semicolon. A list
  * she wraps after a comma goes on: "avoid hepatotoxic drugs: NSAIDs, opiates, ⏎ BDZs (HE)".
  */
@@ -169,9 +201,9 @@ const POINT_END = /[▪•»➀-➓]|\n[^\S\n]*\n/gu;
 /**
  * Whether the item of `text` holding the drug word at `at`–`end` rules it out: an avoid word before
  * it reaches it (`avoidReaches`), it is on the losing side of a comparison, her clause after it calls
- * it contraindicated, her point holding it sets a condition on having the drug (`contrasted`), or it
- * is in her list under a heading of drugs to avoid or of causes (`headedOut`). `drugs` is every drug
- * word.
+ * it contraindicated, her words after it call it ineffective (`ineffectiveAfter`), her point holding
+ * it sets a condition on having the drug (`contrasted`), or it is in her list under a heading of
+ * drugs to avoid or of causes (`headedOut`). `drugs` is every drug word.
  */
 function avoidedAt(text: string, at: number, end: number, drugs: RegExp | null): boolean {
   const before = text.slice(lastEnd(text, at, ITEM_END), at);
@@ -184,7 +216,14 @@ function avoidedAt(text: string, at: number, end: number, drugs: RegExp | null):
   const avoided = [...item.matchAll(AVOID)].some(
     (m) => m.index + m[0].length <= before.length && !pairedLabel(before, m) && avoidReaches(before, m.index + m[0].length, before.length, drugs),
   );
-  return avoided || PASSED_OVER.test(before) || RULED_OUT.test(clause) || contrasted(point, escapeRegExp(text.slice(at, end))) || headedOut(text, at);
+  return (
+    avoided ||
+    PASSED_OVER.test(before) ||
+    RULED_OUT.test(clause) ||
+    ineffectiveAfter(before, after, drugs) ||
+    contrasted(point, escapeRegExp(text.slice(at, end))) ||
+    headedOut(text, at)
+  );
 }
 
 /** Where the last `ends` (global) match before `at` in `text` ends, or 0. */

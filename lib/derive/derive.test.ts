@@ -2073,6 +2073,25 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(m.named("memantine")).toEqual([C(20)]);
     });
 
+    it("her words right after a drug or her list of drugs calling it ineffective name nothing, unless her if or a condition makes it a case", () => {
+      const triptans = { id: C(22), file: "f", aliases: ["triptans"], home: {} };
+      const steroids = { id: C(23), file: "f", aliases: ["corticosteroids", "steroids"], home: {} };
+      const pain = { id: C(24), file: "f", aliases: ["opioids"], home: {} };
+      const tcas = { id: C(25), file: "f", aliases: ["TCAs", "clomipramine", "imipramine"], home: {} };
+      const bisphosphonates = { id: C(26), file: "f", aliases: ["bisphosphonate"], home: {} };
+      const n = new CardMatcher([nsaids, triptans, steroids, pain, tcas, bisphosphonates]);
+      // FM Tension HA, Fibromyalgia, HBV.
+      expect(n.named("•triptans typically ⍉effective")).toEqual([]);
+      expect(n.named("▪︎NSAIDs, corticosteroids, opioids generally ineffective")).toEqual([]);
+      expect(n.named("▪︎steroids ⍉benefit; HBIG may protect")).toEqual([]);
+      expect(n.named("NSAIDs first line; opioids not effective")).toEqual([C(15)]);
+      // Panic Disorder; Osteoporosis: her if, or a condition after her word, keeps the drug.
+      expect(n.named("TCAs (clomipramine, imipramine) if above ⍉effective")).toEqual([C(25)]);
+      expect(n.named("if NSAIDs ineffective → opioids")).toEqual([C(15), C(24)]);
+      expect(n.named("bisphosphonate ineffective w/ severe bone loss")).toEqual([C(26)]);
+      expect(n.named("triptans, opioids")).toEqual([C(22), C(24)]);
+    });
+
     it("a drug word hyphen-joined after non, low, high or a digit is another word; her combination names stay", () => {
       expect(m.namedBy("non-heparin anticoagulants").get(C(11))).toEqual(["anticoagulants"]);
       expect(m.named("low-iron diet")).toEqual([]);
