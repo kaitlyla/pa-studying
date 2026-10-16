@@ -4200,11 +4200,11 @@
               }
              }
             ],
-            "text": "Mod Risk"
+            "text": "Moderate risk"
            },
            {
             "type": "text",
-            "text": " (ex, pts w/ first-degree relative w/ breast CA): "
+            "text": ": 1st-degree relative w/ breast ca (no known mutation), dense breasts → "
            },
            {
             "type": "text",
@@ -4222,26 +4222,47 @@
               }
              }
             ],
-            "text": "screening @ 40yrs every 2yrs"
+            "text": "USPSTF screening (biennial mammo 40–74)"
            },
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": " "
-           },
+            "text": "; calculate lifetime risk (Tyrer-Cuzick); refer for genetic counseling if FHx suggests BRCA."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
             "marks": [
-             {
-              "type": "bold"
-             },
              {
               "type": "underline",
               "attrs": {
@@ -4249,11 +4270,11 @@
               }
              }
             ],
-            "text": "OR"
+            "text": "High risk"
            },
            {
             "type": "text",
-            "text": " "
+            "text": " → "
            },
            {
             "type": "text",
@@ -4271,23 +4292,11 @@
               }
              }
             ],
-            "text": "10yrs prior to the age the first-degree relative was diagnosed"
+            "text": "annual mammo + annual MRI"
            },
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "942093"
-              }
-             }
-            ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "text": "(whichever = earlier) "
+            "text": " (start ~25–30 y): BRCA1/2 or other high-penetrance mutation; untested 1st-degree relative of a carrier; lifetime risk ≥20%; chest RT age 10–30 y."
            }
           ]
          },
