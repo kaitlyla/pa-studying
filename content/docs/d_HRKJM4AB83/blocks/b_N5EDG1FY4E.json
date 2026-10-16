@@ -2223,6 +2223,53 @@
             "text": ": last line for menorrhagia "
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Clin Use"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": only FDA-approved tx for severe pain assoc w/ fibrocystic breast disease"
+           }
+          ]
          }
         ]
        },
@@ -2428,7 +2475,39 @@
            "shade": null,
            "borders": null,
            "marker": null
-          }
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": "Clin Use"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "000000"
+              }
+             }
+            ],
+            "text": ": endometriosis (medical mgmt; also GnRH antagonists)"
+           }
+          ]
          }
         ]
        },
