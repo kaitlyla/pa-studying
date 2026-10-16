@@ -1061,7 +1061,28 @@
            },
            {
             "type": "text",
-            "text": ": ≥1.0 – T score compares pt w/ a healthy 30yo of the same sex "
+            "text": ": ≥1.0"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•T-score = # SD vs peak BMD of healthy young adult (~30 yo). ≤ −2.5 = osteoporosis; −1 to −2.5 = osteopenia"
            }
           ]
          },
@@ -1083,43 +1104,6 @@
            {
             "type": "text",
             "text": "•Z score compares pt w/ an average person of the same age + sex"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "•"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             }
-            ],
-            "text": "osteopenia"
-           },
-           {
-            "type": "text",
-            "text": ": T score -1.0 to -2.5"
            }
           ]
          },
@@ -1355,11 +1339,11 @@
               }
              }
             ],
-            "text": "Screening"
+            "text": "Screen"
            },
            {
             "type": "text",
-            "text": ": "
+            "text": " (USPSTF, B): "
            },
            {
             "type": "text",
@@ -1374,7 +1358,7 @@
               }
              }
             ],
-            "text": "(USPSTF) DEXA in women ≥65 + postmenopausal women <65 w/ RFs; men: insufficient evidence, consider if RFs (eg androgen deprivation therapy)"
+            "text": "♀ ≥65; postmenopausal ♀ <65 w/ ↑ risk (FRAX). ♂: I statement (insufficient evidence); BHOF/Endocrine Society suggest ♂ ≥70"
            },
            {
             "type": "text",
