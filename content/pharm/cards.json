@@ -6635,7 +6635,12 @@
     "tyrosine kinase inhibitors",
     "tyrosine kinase inhibitor",
     "TKIs",
-    "TKI"
+    "TKI",
+    "imatinib",
+    "imatinib mesylate",
+    "dasatinib",
+    "nilotinib",
+    "ponatinib"
    ],
    "home": {
     "fm": "pulmonary"
@@ -6650,7 +6655,10 @@
     "NSCLC",
     "SCLC",
     "non-small cell lung cancer",
-    "small cell lung cancer"
+    "small cell lung cancer",
+    "chronic myeloid leukemia",
+    "chronic myelogenous leukemia",
+    "CML"
    ]
   },
   {
@@ -7605,6 +7613,308 @@
     "immune thrombocytopenia",
     "immune thrombocytopenic purpura",
     "ITP"
+   ]
+  },
+  {
+   "id": "c_8ZZYYTE3PY",
+   "file": "pharm-review",
+   "aliases": [
+    "TPO receptor agonists",
+    "TPO receptor agonist",
+    "TPO-RAs",
+    "TPO-Ras",
+    "TPO-RA",
+    "thrombopoietin receptor agonists",
+    "thrombopoietin receptor agonist",
+    "romiplostim",
+    "eltrombopag"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "immune thrombocytopenia",
+    "immune thrombocytopenic purpura",
+    "idiopathic thrombocytopenic purpura",
+    "ITP"
+   ]
+  },
+  {
+   "id": "c_T38VRXZBBG",
+   "file": "pharm-review",
+   "aliases": [
+    "eculizumab"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "paroxysmal nocturnal hemoglobinuria",
+    "PNH"
+   ]
+  },
+  {
+   "id": "c_BVPQE4VDS5",
+   "file": "pharm-review",
+   "aliases": [
+    "anthracyclines",
+    "anthracycline",
+    "cytarabine",
+    "7 + 3 regimen",
+    "7 + 3"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "acute myeloid leukemia",
+    "acute myelogenous leukemia",
+    "AML",
+    "chronic myeloid leukemia",
+    "chronic myelogenous leukemia",
+    "CML"
+   ]
+  },
+  {
+   "id": "c_BTKJ62E27B",
+   "file": "pharm-review",
+   "aliases": [
+    "interferon alfa",
+    "interferon alpha",
+    "interferon",
+    "IFN alfa",
+    "IFN-α",
+    "IFN"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic myeloid leukemia",
+    "chronic myelogenous leukemia",
+    "CML",
+    "polycythemia vera",
+    "PV"
+   ]
+  },
+  {
+   "id": "c_G5WPKFXVD4",
+   "file": "pharm-review",
+   "aliases": [
+    "fludarabine"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic lymphocytic leukemia",
+    "CLL"
+   ]
+  },
+  {
+   "id": "c_JFFT6KR830",
+   "file": "pharm-review",
+   "aliases": [
+    "BTK inhibitors",
+    "BTK inhibitor",
+    "BTKis",
+    "ibrutinib",
+    "acalabrutinib"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic lymphocytic leukemia",
+    "CLL"
+   ]
+  },
+  {
+   "id": "c_C1K0MMV3Q6",
+   "file": "pharm-review",
+   "aliases": [
+    "venetoclax"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic lymphocytic leukemia",
+    "CLL"
+   ]
+  },
+  {
+   "id": "c_7WAB90K1SE",
+   "file": "pharm-review",
+   "aliases": [
+    "anti-CD20 monoclonal antibodies",
+    "anti-CD20 antibodies",
+    "anti-CD20",
+    "rituximab",
+    "obinutuzumab"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic lymphocytic leukemia",
+    "CLL"
+   ]
+  },
+  {
+   "id": "c_AS25QYHJ1S",
+   "file": "pharm-review",
+   "aliases": [
+    "chlorambucil"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "chronic lymphocytic leukemia",
+    "CLL"
+   ]
+  },
+  {
+   "id": "c_FE1RPFJ385",
+   "file": "pharm-review",
+   "aliases": [
+    "busulfan"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "polycythemia vera",
+    "PV"
+   ]
+  },
+  {
+   "id": "c_WBBNN2WHSJ",
+   "file": "pharm-review",
+   "aliases": [
+    "vitamin K",
+    "vit K",
+    "phytonadione"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "protein C deficiency",
+    "Protein C or S Deficiency",
+    "warfarin-induced skin necrosis"
+   ]
+  },
+  {
+   "id": "c_H9SAGFMDP6",
+   "file": "pharm-review",
+   "aliases": [
+    "protein C concentrate",
+    "FFP",
+    "fresh frozen plasma"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "protein C deficiency",
+    "Protein C or S Deficiency",
+    "warfarin-induced skin necrosis"
+   ]
+  },
+  {
+   "id": "c_AMR2VWWGAB",
+   "file": "pharm-review",
+   "aliases": [
+    "doxorubicin",
+    "ABVD"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "Hodgkin lymphoma",
+    "Hodgkin's lymphoma",
+    "Hodgkin disease",
+    "HL"
+   ],
+   "notDiseases": [
+    "non-Hodgkin",
+    "NHL"
+   ]
+  },
+  {
+   "id": "c_AEXM45147C",
+   "file": "abx-flow-charts",
+   "aliases": [
+    "dapsone"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "G6PD",
+    "glucose-6-phosphate dehydrogenase"
+   ]
+  },
+  {
+   "id": "c_0E1A44PWYM",
+   "file": "abx-flow-charts",
+   "aliases": [
+    "primaquine"
+   ],
+   "home": {
+    "fm": "hematology"
+   },
+   "for": [
+    "heme-onc-medications"
+   ],
+   "diseases": [
+    "G6PD",
+    "glucose-6-phosphate dehydrogenase"
    ]
   }
  ]
