@@ -10,10 +10,10 @@ import { useLayoutEffect, type ReactNode } from "react";
 import type { NavJson } from "../../lib/derive/published.ts";
 import { PageNotFound } from "../shell/errors.ts";
 import { Icon } from "../shell/Icon.tsx";
-import { FavoriteMenu, SaveComparison } from "../shell/mounts.tsx";
+import { FavoriteMenu, SaveComparison, UpdateComparison } from "../shell/mounts.tsx";
 import { PageHead, StackedContext, type Crumb } from "../shell/Page.tsx";
 import { useOwner } from "../shell/owner.tsx";
-import { addToCompare, guideViewHash, navigate, syncFromLocation } from "../shell/route.ts";
+import { addToCompare, guideViewHash, navigate, syncFromLocation, type GuideView } from "../shell/route.ts";
 import { COMPARE, entryTitle, guideCrumbs, topicSystems, useNav, useSite } from "./data.ts";
 import { TopicCard } from "./TopicsPage.tsx";
 
@@ -28,7 +28,10 @@ function topicGroups(nav: NavJson): { id: string; title: string; entries: { id: 
     .filter((s) => s.entries.length > 0);
 }
 
-export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): ReactNode {
+/** The compare route for `ids`, still naming the saved comparison she opened (if any). */
+const compareView = (ids: string[], saved: string | null): GuideView => (saved ? { kind: "compare", ids, saved } : { kind: "compare", ids });
+
+export function ComparePage({ guide, ids, saved }: { guide: string; ids: string[]; saved: string | null }): ReactNode {
   const site = useSite();
   const nav = useNav(guide);
   const owner = useOwner().owner;
@@ -43,7 +46,7 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
   if (quadrants.length === 0) throw new PageNotFound(`topic ${ids.find((x) => x !== "") ?? ""}`);
   const shown = quadrants.map((q) => q.id);
   const titleOf = (id: string): string => entryTitle(nav, id);
-  const go = (next: string[]): void => void navigate(guideViewHash(guide, { kind: "compare", ids: next }));
+  const go = (next: string[]): void => void navigate(guideViewHash(guide, compareView(next, saved)));
   const pick = (i: number, id: string): void => go(shown.map((x, j) => (j === i ? id : x)));
   /** A saved partner goes to the next free quadrant (the same rule the sidebar's + uses). */
   const fill = (id: string): void => go(addToCompare(shown, id));
@@ -53,17 +56,28 @@ export function ComparePage({ guide, ids }: { guide: string; ids: string[] }): R
   // comparison rather than bouncing off the old address.
   useLayoutEffect(() => {
     const known = topicSystems(nav);
-    const canonical = guideViewHash(guide, { kind: "compare", ids: ids.filter((id) => known.has(id)) });
+    const canonical = guideViewHash(guide, compareView(ids.filter((id) => known.has(id)), saved));
     if (location.hash !== canonical) {
       history.replaceState(null, "", canonical);
       syncFromLocation();
     }
-  }, [guide, ids, nav]);
+  }, [guide, ids, nav, saved]);
 
   const crumbs: Crumb[] = [...guideCrumbs(site, guide), { label: COMPARE }];
   return (
     <div className="cmp-page">
-      <PageHead crumbs={crumbs} title={COMPARE} actions={owner ? <SaveComparison guide={guide} ids={shown} /> : undefined} />
+      <PageHead
+        crumbs={crumbs}
+        title={COMPARE}
+        actions={
+          owner ? (
+            <>
+              {saved && <UpdateComparison guide={guide} name={saved} ids={shown} />}
+              <SaveComparison guide={guide} ids={shown} />
+            </>
+          ) : undefined
+        }
+      />
       <div className="cmp-grid">
         {quadrants.map(({ id, system }, i) => (
           <section className="cmp-q" key={i} aria-label={`${titleOf(id)} (quadrant ${i + 1})`}>

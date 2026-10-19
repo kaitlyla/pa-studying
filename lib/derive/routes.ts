@@ -29,8 +29,11 @@ export type GuideView =
   | { kind: "system"; system: string }
   | { kind: "section"; system: string; section: string }
   | { kind: "topics"; ids: string[] }
-  /** Diagnoses side by side (compare): one slot per quadrant, `""` for an empty one. */
-  | { kind: "compare"; ids: string[] }
+  /**
+   * Diagnoses side by side (compare): one slot per quadrant, `""` for an empty one. `saved` names the
+   * saved comparison she opened, kept while she changes its quadrants so she can update it.
+   */
+  | { kind: "compare"; ids: string[]; saved?: string }
   | { kind: "block"; id: string }
   | { kind: "pharm"; system: string; section: string | null; target: string | null }
   | { kind: "general"; key: GeneralKey }
@@ -99,8 +102,9 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
       return ids.length > 1 ? page({ kind: "compare", ids }) : page({ kind: "topics", ids });
     }
     case "compare": {
-      const slots = (a ?? "").split(",");
-      return a !== undefined && b === undefined ? page({ kind: "compare", ids: slots }) : NOT_FOUND;
+      if (a === undefined || c !== undefined) return NOT_FOUND;
+      const slots = a.split(",");
+      return page(b ? { kind: "compare", ids: slots, saved: b } : { kind: "compare", ids: slots });
     }
     case "b":
       return a && b === undefined ? page({ kind: "block", id: a }) : NOT_FOUND;
@@ -185,7 +189,7 @@ export function guideViewHash(guide: string, view: GuideView): string {
     case "topics":
       return `${base}/t/${view.ids.map(enc).join(",")}`;
     case "compare":
-      return `${base}/compare/${view.ids.map(enc).join(",")}`;
+      return `${base}/compare/${view.ids.map(enc).join(",")}${view.saved ? `/${enc(view.saved)}` : ""}`;
     case "block":
       return `${base}/b/${enc(view.id)}`;
     case "pharm": {

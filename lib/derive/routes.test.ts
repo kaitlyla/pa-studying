@@ -30,15 +30,22 @@ describe("compare routes", () => {
     expect(view(`#/eor/fm/compare/${R1},${R2},${R3},${R4},${R5},${R6}`)).toEqual({ kind: "compare", ids: [R1, R2, R3, R4, R5, R6] });
   });
 
-  it("refuses a bare `compare` and a segment after the slots", () => {
+  it("refuses a bare `compare` and more than a name after the slots", () => {
     expect(view("#/eor/fm/compare")).toBe("notfound");
     expect(view("#/eor/fm/compare/")).toBe("notfound");
-    expect(view(`#/eor/fm/compare/${R1}/x`)).toBe("notfound");
+    expect(view(`#/eor/fm/compare/${R1}/x/y`)).toBe("notfound");
+  });
+
+  it("names the saved comparison she opened after the slots", () => {
+    expect(guideViewHash("fm", { kind: "compare", ids: [R1, R2], saved: "Cushing's / adrenal" })).toBe(`#/eor/fm/compare/${R1},${R2}/Cushing's%20%2F%20adrenal`);
+    expect(view(`#/eor/fm/compare/${R1},${R2}/Cushing's%20%2F%20adrenal`)).toEqual({ kind: "compare", ids: [R1, R2], saved: "Cushing's / adrenal" });
+    // A comparison she did not open from the list names none.
+    expect(view(`#/eor/fm/compare/${R1}`)).toEqual({ kind: "compare", ids: [R1] });
   });
 
   it("round-trips every built compare route", () => {
-    for (const ids of [[R1], [R1, ""], ["", R2, R1], [R1, R2, "", ""]]) {
-      const hash = guideViewHash("fm", { kind: "compare", ids });
+    for (const v of [{ ids: [R1] }, { ids: [R1, ""] }, { ids: ["", R2, R1] }, { ids: [R1, R2, "", ""] }, { ids: [R1, R2], saved: "Adrenal" }]) {
+      const hash = guideViewHash("fm", { kind: "compare", ...v });
       const parsed = parseHash(hash);
       expect(parsed.kind).toBe("guide");
       if (parsed.kind === "guide" && parsed.view.kind === "compare") expect(guideViewHash(parsed.guide, parsed.view)).toBe(hash);

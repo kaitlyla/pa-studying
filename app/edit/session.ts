@@ -23,7 +23,7 @@ import {
   buildSave, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownEntries, shownMedsSlots, showsOwn, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
   type SaveBuild,
 } from "./units.ts";
-import { currentHash, guideViewHash, navigate, parseHash } from "../shell/route.ts";
+import { currentHash, guideViewHash, navigate, parseHash, type GuideView } from "../shell/route.ts";
 
 /** Edit start failed for want of a connection (plan wording). */
 export const OPEN_OFFLINE = "Couldn’t open this page for editing — no internet connection.";
@@ -435,9 +435,12 @@ function pageAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMov
   const ids = view?.kind === "topics" ? view.ids : view?.kind === "compare" ? view.ids.filter((x) => x !== "") : [old];
   const next = [...new Set(ids.flatMap((id) => (id !== old ? [id] : moved.topic !== null ? [moved.topic] : [])))];
   const shown = moved.topic !== null && next.includes(moved.topic) ? moved.topic : next[0];
+  // A saved comparison she opened stays named, so she can still update it.
+  const saved = view?.kind === "compare" ? view.saved : undefined;
+  const compareOf = (ids: string[]): GuideView => (saved ? { kind: "compare", ids, saved } : { kind: "compare", ids });
   return shown !== undefined
     ? {
-        hash: guideViewHash(moved.guide, next.length > 1 ? { kind: "compare", ids: next } : { kind: "topics", ids: next }),
+        hash: guideViewHash(moved.guide, next.length > 1 ? compareOf(next) : { kind: "topics", ids: next }),
         key: buildPageKey("topic", moved.guide, shown),
       }
     : { hash: guideViewHash(moved.guide, { kind: "system", system: moved.system }), key: buildPageKey("system", moved.guide, moved.system) };

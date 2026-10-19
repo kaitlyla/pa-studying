@@ -107,7 +107,10 @@ function Entry({ guide, entry, cur, onNavigate }: EntryProps): ReactNode {
   const compareTo = ((): string | null => {
     if (entry.kind !== "topic" || open) return null;
     const quadrants = v?.kind === "compare" ? v.ids : cur.ids;
-    return guideViewHash(guide, { kind: "compare", ids: addToCompare(quadrants, entry.id) });
+    // On a saved comparison she opened, the + keeps it named, so she can update it with the addition.
+    const saved = v?.kind === "compare" ? v.saved : undefined;
+    const ids = addToCompare(quadrants, entry.id);
+    return guideViewHash(guide, saved ? { kind: "compare", ids, saved } : { kind: "compare", ids });
   })();
   return (
     <li>

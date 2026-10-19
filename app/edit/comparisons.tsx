@@ -10,7 +10,7 @@ import { Txt } from "../render/Text.tsx";
 import { Icon } from "../shell/Icon.tsx";
 import { Link } from "../shell/Link.tsx";
 import { useOwner } from "../shell/owner.tsx";
-import { guideViewHash, useRoute } from "../shell/route.ts";
+import { guideViewHash, navigate, useRoute } from "../shell/route.ts";
 import { showToast } from "../shell/toast.tsx";
 import { setOwnerFileValue, useOwnerFile, writeOwnerFile, type FileState } from "./ownerFile.ts";
 
@@ -24,6 +24,9 @@ export const COMPARISONS_FAILED = "Couldn’t save the comparison. Check your co
 export const COMPARISON_TAKEN = "You already have a comparison with that name.";
 export const renameLabel = (name: string): string => `Rename ${name}`;
 export const deleteLabel = (name: string): string => `Delete ${name}`;
+export const moveLabel = (name: string): string => `Move ${name}`;
+export const DRAG_TO_MOVE = "Drag to move";
+export const updateLabel = (name: string): string => `Update ${name}`;
 
 /** The comparisons a file holds, in her order. */
 const listOf = (file: ComparisonsFile | null): Comparison[] => (file?.comparisons ?? []).map((c) => ({ name: c.name, ids: [...c.ids] }));
@@ -58,6 +61,39 @@ export async function renameComparison(guide: string, from: string, to: string):
     const list = listOf(file);
     if (isTaken(list, to, from) || !list.some((c) => c.name === from)) return null;
     return { v: 1, comparisons: list.map((c) => (c.name === from ? { name: to, ids: c.ids } : c)) };
+  });
+  if (outcome.file) setOwnerFileValue(path, listOf(outcome.file));
+  return outcome.kind !== "failed";
+}
+
+/**
+ * Moves a saved comparison to just above (`dir` -1) or just below (`dir` 1) `neighbor` — the comparison
+ * beside it in the list she sees (one commit). Moving past a neighbor rather than by an index keeps the
+ * move right when the file holds a comparison the sidebar does not list, or another device changed it.
+ */
+export async function moveComparison(guide: string, name: string, neighbor: string, dir: -1 | 1): Promise<boolean> {
+  const path = keyOf(guide);
+  const outcome = await writeOwnerFile<ComparisonsFile>(path, "comparisons", `Comparison moved: ${name}`, (file) => {
+    const list = listOf(file);
+    const moving = list.find((c) => c.name === name);
+    const rest = list.filter((c) => c.name !== name);
+    const at = rest.findIndex((c) => c.name === neighbor);
+    if (moving === undefined || at < 0) return null;
+    const next = [...rest.slice(0, dir < 0 ? at : at + 1), moving, ...rest.slice(dir < 0 ? at : at + 1)];
+    return next.every((c, i) => c.name === list[i]?.name) ? null : { v: 1, comparisons: next };
+  });
+  if (outcome.file) setOwnerFileValue(path, listOf(outcome.file));
+  return outcome.kind !== "failed";
+}
+
+/** Replaces the diagnoses a saved comparison holds, keeping its name and place (one commit). */
+export async function setComparisonIds(guide: string, name: string, ids: readonly string[]): Promise<boolean> {
+  const path = keyOf(guide);
+  const outcome = await writeOwnerFile<ComparisonsFile>(path, "comparisons", `Comparison updated: ${name}`, (file) => {
+    const list = listOf(file);
+    const now = list.find((c) => c.name === name);
+    if (ids.length === 0 || now === undefined || now.ids.join(",") === ids.join(",")) return null;
+    return { v: 1, comparisons: list.map((c) => (c.name === name ? { name, ids: [...ids] } : c)) };
   });
   if (outcome.file) setOwnerFileValue(path, listOf(outcome.file));
   return outcome.kind !== "failed";
@@ -110,6 +146,9 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
   const [editing, setEditing] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
+  /** The comparison she is dragging by its grip, and the row it is over. */
+  const [drag, setDrag] = useState<{ name: string; over: string | null } | null>(null);
+  const list = useRef<HTMLUListElement>(null);
   // A comparison whose diagnosis the guide no longer lists is listed without it, so the row opens what is
   // left; one whose diagnoses are all gone is not listed at all — never a row onto an empty page.
   const live = items.flatMap((c) => {
@@ -125,7 +164,11 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
       </>
     );
   }
-  const open = route.kind === "guide" && route.guide === guide && route.view.kind === "compare" ? route.view.ids.join(",") : null;
+  const view = route.kind === "guide" && route.guide === guide && route.view.kind === "compare" ? route.view : null;
+  // The row of the saved comparison she opened stays current while she changes its quadrants; an address
+  // naming no comparison marks the row whose diagnoses it shows.
+  const isOpen = (c: Comparison): boolean => view !== null && (view.saved ? view.saved === c.name : view.ids.join(",") === c.ids.join(","));
+  const names = live.map((c) => c.name);
 
   const rename = async (from: string): Promise<void> => {
     const to = draft.trim();
@@ -141,8 +184,13 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
     setBusy(true);
     const ok = await renameComparison(guide, from, to);
     setBusy(false);
-    if (ok) setEditing(null);
-    else showToast(COMPARISONS_FAILED);
+    if (!ok) {
+      showToast(COMPARISONS_FAILED);
+      return;
+    }
+    setEditing(null);
+    // The open comparison follows its new name, so Update still finds it.
+    if (view?.saved === from) void navigate(guideViewHash(guide, { kind: "compare", ids: view.ids, saved: to }));
   };
 
   const remove = async (name: string): Promise<void> => {
@@ -152,12 +200,33 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
     if (!ok) showToast(COMPARISONS_FAILED);
   };
 
+  const move = async (name: string, neighbor: string, dir: -1 | 1): Promise<void> => {
+    setBusy(true);
+    const ok = await moveComparison(guide, name, neighbor, dir);
+    setBusy(false);
+    if (!ok) showToast(COMPARISONS_FAILED);
+  };
+
+  /** The listed comparison under the pointer, if any. */
+  const rowAt = (x: number, y: number): string | null => {
+    const li = document.elementFromPoint(x, y)?.closest<HTMLElement>("li[data-cmp]");
+    return li && list.current?.contains(li) ? (li.dataset.cmp ?? null) : null;
+  };
+  /** Dropped on a row above, it goes above that row; on a row below, below it. */
+  const dirTo = (name: string, over: string): -1 | 1 => (names.indexOf(over) < names.indexOf(name) ? -1 : 1);
+  const dropClass = (name: string): string => {
+    if (drag === null) return "";
+    if (drag.name === name) return "dragging";
+    if (drag.over !== name) return "";
+    return dirTo(drag.name, name) < 0 ? "drop-before" : "drop-after";
+  };
+
   return (
     <>
       <div className="side-sec">{COMPARISONS_HEADING}</div>
-      <ul className="gen">
-        {live.map((c) => (
-          <li key={c.name}>
+      <ul className="gen" ref={list}>
+        {live.map((c, i) => (
+          <li key={c.name} data-cmp={c.name} className={dropClass(c.name) || undefined}>
             {editing === c.name ? (
               <form
                 className="cmp-rename"
@@ -189,9 +258,9 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
             ) : (
               <div className="ent-row">
                 <Link
-                  to={guideViewHash(guide, { kind: "compare", ids: c.ids })}
-                  className={`ent${open === c.ids.join(",") ? " open" : ""}`}
-                  aria-current={open === c.ids.join(",") ? "page" : undefined}
+                  to={guideViewHash(guide, { kind: "compare", ids: c.ids, saved: c.name })}
+                  className={`ent${isOpen(c) ? " open" : ""}`}
+                  aria-current={isOpen(c) ? "page" : undefined}
                   title={c.name}
                   onClick={onNavigate}
                 >
@@ -201,6 +270,49 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
                 </Link>
                 {owner && (
                   <>
+                    {live.length > 1 && (
+                      // Drag the grip onto another row to move the comparison there; with the grip
+                      // focused, the arrow keys move it one place.
+                      <button
+                        type="button"
+                        className="iconbtn rowact cmp-grip"
+                        aria-label={moveLabel(c.name)}
+                        title={DRAG_TO_MOVE}
+                        disabled={busy}
+                        onPointerDown={(e) => {
+                          if (e.button !== 0) return;
+                          e.preventDefault();
+                          e.currentTarget.setPointerCapture(e.pointerId);
+                          setDrag({ name: c.name, over: null });
+                        }}
+                        onPointerMove={(e) => {
+                          if (drag?.name !== c.name) return;
+                          const over = rowAt(e.clientX, e.clientY);
+                          const next = over === c.name ? null : over;
+                          if (next !== drag.over) setDrag({ name: c.name, over: next });
+                        }}
+                        onPointerUp={(e) => {
+                          if (drag?.name !== c.name) return;
+                          const over = rowAt(e.clientX, e.clientY);
+                          setDrag(null);
+                          if (over !== null && over !== c.name) void move(c.name, over, dirTo(c.name, over));
+                        }}
+                        onPointerCancel={() => setDrag(null)}
+                        onKeyDown={(e) => {
+                          const above = names[i - 1];
+                          const below = names[i + 1];
+                          if (e.key === "ArrowUp" && above !== undefined) {
+                            e.preventDefault();
+                            void move(c.name, above, -1);
+                          } else if (e.key === "ArrowDown" && below !== undefined) {
+                            e.preventDefault();
+                            void move(c.name, below, 1);
+                          }
+                        }}
+                      >
+                        <Icon n="grip" size={13} />
+                      </button>
+                    )}
                     <button
                       type="button"
                       className="iconbtn rowact"
@@ -224,6 +336,31 @@ export function ComparisonsSection({ guide, onNavigate, topics }: { guide: strin
         ))}
       </ul>
     </>
+  );
+}
+
+/**
+ * The compare page's owner-only "Update <name>", on a saved comparison she opened: once she has added,
+ * swapped or removed a quadrant, it saves the quadrants on screen as that comparison's diagnoses. It is
+ * not shown while the quadrants are the ones saved, or when the comparison is no longer hers.
+ */
+export function UpdateComparison({ guide, name, ids }: { guide: string; name: string; ids: readonly string[] }): ReactNode {
+  const mine = useMine(guide, true);
+  const [busy, setBusy] = useState(false);
+  const now = mine.state === "ready" ? mine.value.find((c) => c.name === name) : undefined;
+  if (now === undefined || now.ids.join(",") === ids.join(",")) return null;
+
+  const update = async (): Promise<void> => {
+    setBusy(true);
+    const ok = await setComparisonIds(guide, name, ids);
+    setBusy(false);
+    if (!ok) showToast(COMPARISONS_FAILED);
+  };
+
+  return (
+    <button type="button" className="btn" disabled={busy} onClick={() => void update()}>
+      {updateLabel(name)}
+    </button>
   );
 }
 

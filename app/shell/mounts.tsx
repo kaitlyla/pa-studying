@@ -8,4 +8,4 @@ export type { DocPlace as AddPlace } from "../edit/docs.ts";
 
 export { VersionsPage } from "../edit/VersionsPage.tsx";
 export { FavoriteMenu } from "../edit/favorites.tsx";
-export { ComparisonsSection, SaveComparison } from "../edit/comparisons.tsx";
+export { ComparisonsSection, SaveComparison, UpdateComparison } from "../edit/comparisons.tsx";

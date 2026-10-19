@@ -688,7 +688,7 @@ describe("compare page", () => {
     await until(() => comparisonsList(c), "the Comparisons list");
     const rows = [...must(comparisonsList(c), "the Comparisons list").querySelectorAll("a.ent")];
     expect(rows.map((e) => e.textContent)).toEqual(["Adrenal"]);
-    expect(must(rows[0], "the row").getAttribute("href")).toBe(`#/eor/fm/compare/${stable().id}`);
+    expect(must(rows[0], "the row").getAttribute("href")).toBe(`#/eor/fm/compare/${stable().id}/Adrenal`);
   });
 
   it("the owner with none sees the Comparisons section and a line saying how to make one", async () => {

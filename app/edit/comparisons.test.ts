@@ -6,7 +6,7 @@ import { comparisonsPath, parseFile, serializeFile, type ComparisonsFile } from 
 import { WORKER_ORIGIN } from "../auth/config.ts";
 import { DATA_BASE, invalidateData } from "../data/load.ts";
 import { FakeGithub, fakeFetch, type FakeRequest } from "../e2e/fake-github.ts";
-import { deleteComparison, renameComparison, saveComparison } from "./comparisons.tsx";
+import { deleteComparison, moveComparison, renameComparison, saveComparison, setComparisonIds } from "./comparisons.tsx";
 import { retry } from "./github.ts";
 
 const R1 = "r_0000000001";
@@ -160,5 +160,94 @@ describe("renameComparison and deleteComparison", () => {
     const head = fake.head();
     expect(await deleteComparison("fm", "DM")).toBe(true);
     expect(fake.head()).toBe(head);
+  });
+});
+
+describe("moveComparison", () => {
+  const seed = (): void => {
+    fake.commitFiles({ [PATH]: fileOf([{ name: "Adrenal", ids: [R1, R2] }, { name: "Cushing's", ids: [R3] }, { name: "DM", ids: [R4] }]) }, { message: "seed" });
+  };
+  const names = (): string[] => compsIn(fake.readFile(PATH)).map((c) => c.name);
+
+  it("moves one up past its neighbor and down past its neighbor, keeping every comparison's diagnoses", async () => {
+    seed();
+    expect(await moveComparison("fm", "DM", "Cushing's", -1)).toBe(true);
+    expect(compsIn(fake.readFile(PATH))).toEqual([
+      { name: "Adrenal", ids: [R1, R2] },
+      { name: "DM", ids: [R4] },
+      { name: "Cushing's", ids: [R3] },
+    ]);
+    expect(fake.commit(fake.head())?.message).toBe("Comparison moved: DM\n\nPa-Studying-Kind: comparisons");
+
+    expect(await moveComparison("fm", "Adrenal", "DM", 1)).toBe(true);
+    expect(names()).toEqual(["DM", "Adrenal", "Cushing's"]);
+  });
+
+  it("moves past the neighbor she sees, even when the file holds one the sidebar does not list between them", async () => {
+    // "Gone" sits between them in the file (its diagnoses are no longer in the guide, so the sidebar hides it).
+    fake.commitFiles({ [PATH]: fileOf([{ name: "Adrenal", ids: [R1] }, { name: "Gone", ids: [R2] }, { name: "DM", ids: [R4] }]) }, { message: "seed" });
+    expect(await moveComparison("fm", "DM", "Adrenal", -1)).toBe(true);
+    expect(names()).toEqual(["DM", "Adrenal", "Gone"]);
+  });
+
+  it("commits nothing when the comparison or its neighbor is gone, or it already sits there", async () => {
+    seed();
+    const head = fake.head();
+    expect(await moveComparison("fm", "Nope", "DM", -1)).toBe(true);
+    expect(await moveComparison("fm", "DM", "Nope", -1)).toBe(true);
+    expect(await moveComparison("fm", "Cushing's", "DM", -1)).toBe(true);
+    expect(fake.head()).toBe(head);
+    expect(names()).toEqual(["Adrenal", "Cushing's", "DM"]);
+  });
+
+  it("applies the move to what another device saved meanwhile, losing nothing", async () => {
+    seed();
+    let other = "";
+    fake.fail((r) => {
+      if (!isPatch(r)) return false;
+      other = fake.commitFiles(
+        { [PATH]: fileOf([{ name: "Adrenal", ids: [R1, R2] }, { name: "Cushing's", ids: [R3] }, { name: "DM", ids: [R4] }, { name: "New", ids: [R1] }]) },
+        { message: "Comparison: other device" },
+      );
+      return true;
+    }, { status: 422, body: { message: "Update is not a fast forward" } });
+    expect(await moveComparison("fm", "DM", "Adrenal", -1)).toBe(true);
+    expect(names()).toEqual(["DM", "Adrenal", "Cushing's", "New"]);
+    expect(fake.commit(fake.head())?.parents).toEqual([other]);
+  });
+});
+
+describe("setComparisonIds", () => {
+  it("adds and removes diagnoses in a saved comparison, keeping its name, its place and the others", async () => {
+    fake.commitFiles({ [PATH]: fileOf([{ name: "Adrenal", ids: [R1, R2] }, { name: "Cushing's", ids: [R3] }]) }, { message: "seed" });
+    expect(await setComparisonIds("fm", "Adrenal", [R1, R2, R4])).toBe(true);
+    expect(compsIn(fake.readFile(PATH))).toEqual([
+      { name: "Adrenal", ids: [R1, R2, R4] },
+      { name: "Cushing's", ids: [R3] },
+    ]);
+    expect(fake.commit(fake.head())?.message).toBe("Comparison updated: Adrenal\n\nPa-Studying-Kind: comparisons");
+
+    expect(await setComparisonIds("fm", "Adrenal", [R2, R4])).toBe(true);
+    expect(compsIn(fake.readFile(PATH))).toEqual([
+      { name: "Adrenal", ids: [R2, R4] },
+      { name: "Cushing's", ids: [R3] },
+    ]);
+  });
+
+  it("commits nothing for the same diagnoses, an empty set, or a comparison that is gone", async () => {
+    fake.commitFiles({ [PATH]: fileOf([{ name: "Adrenal", ids: [R1, R2] }]) }, { message: "seed" });
+    const head = fake.head();
+    expect(await setComparisonIds("fm", "Adrenal", [R1, R2])).toBe(true);
+    expect(await setComparisonIds("fm", "Adrenal", [])).toBe(true);
+    expect(await setComparisonIds("fm", "DM", [R3])).toBe(true);
+    expect(fake.head()).toBe(head);
+  });
+
+  it("reports a save GitHub refused, and leaves the file as it was", async () => {
+    const seed = fake.commitFiles({ [PATH]: fileOf([{ name: "Adrenal", ids: [R1] }]) }, { message: "seed" });
+    fake.fail((r) => isPatch(r), { status: 500, body: { message: "boom" } });
+    expect(await setComparisonIds("fm", "Adrenal", [R1, R2])).toBe(false);
+    expect(fake.head()).toBe(seed);
+    expect(compsIn(fake.readFile(PATH))).toEqual([{ name: "Adrenal", ids: [R1] }]);
   });
 });

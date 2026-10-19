@@ -207,7 +207,7 @@ function PageFor({ route }: { route: Route }): ReactNode {
         case "topics":
           return <TopicsPage guide={guide} ids={view.ids} />;
         case "compare":
-          return <ComparePage guide={guide} ids={view.ids} />;
+          return <ComparePage guide={guide} ids={view.ids} saved={view.saved ?? null} />;
         case "block":
           return <BlockPage guide={guide} block={view.id} />;
         case "pharm":

@@ -498,11 +498,13 @@ test.describe("compare", () => {
     // The sidebar lists it under Comparisons, right under the guide's name, and clicking it restores those
     // quadrants — after leaving the comparison and coming back.
     await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
+    // The row's address names the comparison too, so the compare page can update it.
+    const adrenalHash = guideViewHash(pick.g, { kind: "compare", ids: idsOfSix, saved: "Adrenal" });
     const row = side(page).getByRole("link", { name: "Adrenal", exact: true });
-    await expect(row).toHaveAttribute("href", compareHash(...idsOfSix));
+    await expect(row).toHaveAttribute("href", adrenalHash);
     await openPage(page, guideViewHash(pick.g, { kind: "home" }));
     await side(page).getByRole("link", { name: "Adrenal", exact: true }).click();
-    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfSix));
+    await expect.poll(() => hashOf(page)).toBe(adrenalHash);
     await expect(quadrants(page)).toHaveCount(6);
 
     // Rename it from the sidebar; the row follows, and a fresh load reads the new name from her file.
@@ -511,6 +513,8 @@ test.describe("compare", () => {
     await side(page).getByRole("button", { name: "Save", exact: true }).click();
     await expect(side(page).getByRole("link", { name: "Adrenal insufficiency", exact: true })).toBeVisible();
     await expect.poll(saved).toEqual([{ name: "Adrenal insufficiency", ids: idsOfSix }]);
+    // It was open: the address follows the new name, so the compare page still knows which one it is.
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(pick.g, { kind: "compare", ids: idsOfSix, saved: "Adrenal insufficiency" }));
 
     // Delete it: the row goes and, with nothing saved, the section stays up for her with the line that
     // says how to make one; her file keeps no comparisons.
@@ -519,6 +523,79 @@ test.describe("compare", () => {
     await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
     await expect(side(page).getByText("None saved yet. Open Compare and press Save comparison.", { exact: true })).toBeVisible();
     await expect.poll(saved).toEqual([]);
+  });
+
+  test("she drags a comparison to a new place, and adds and removes its diagnoses on the compare page", async ({ page, context, baseURL }) => {
+    const fake = await world(context, baseURL);
+    const path = comparisonsPath(pick.g);
+    const saved = (): ComparisonsFile["comparisons"] => {
+      const text = fake.readFile(path);
+      return text === undefined ? [] : parseFile<ComparisonsFile>(path, text).comparisons;
+    };
+    const saveAs = async (name: string): Promise<void> => {
+      await page.getByRole("button", { name: "Save comparison" }).click();
+      await page.getByRole("textbox", { name: "Name", exact: true }).fill(name);
+      await page.getByRole("button", { name: "Save", exact: true }).click();
+    };
+    const rowNames = (): Promise<string[]> => side(page).locator("li[data-cmp]").evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.cmp ?? ""));
+
+    await openPage(page, compareHash(A.id, B.id));
+    await signIn(page);
+    await saveAs("Big two");
+    await expect.poll(saved).toEqual([{ name: "Big two", ids: [A.id, B.id] }]);
+    await openPage(page, compareHash(P1.id));
+    await saveAs("Group");
+    await expect.poll(saved).toEqual([{ name: "Big two", ids: [A.id, B.id] }, { name: "Group", ids: [P1.id] }]);
+    await expect.poll(rowNames).toEqual(["Big two", "Group"]);
+
+    // Drag "Group" by its grip onto "Big two": it goes above it, in the sidebar and in her file. The
+    // sidebar scrolled to the open diagnosis, so scroll it back to its top, where the Comparisons are.
+    await side(page).locator("li[data-cmp]").first().evaluate((el) => {
+      for (let p = el.parentElement; p; p = p.parentElement) p.scrollTop = 0;
+    });
+    const grip = side(page).getByRole("button", { name: "Move Group" });
+    const from = need(await grip.boundingBox(), "the grip of Group");
+    const onto = need(await side(page).locator('li[data-cmp="Big two"]').boundingBox(), "the Big two row");
+    await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(onto.x + onto.width / 2, onto.y + onto.height / 2, { steps: 8 });
+    await expect(side(page).locator('li[data-cmp="Big two"]')).toHaveClass(/drop-before/);
+    await page.mouse.up();
+    await expect.poll(saved).toEqual([{ name: "Group", ids: [P1.id] }, { name: "Big two", ids: [A.id, B.id] }]);
+    await expect.poll(rowNames).toEqual(["Group", "Big two"]);
+    expect(need(fake.commit(fake.head()), "the move commit").message).toContain("Comparison moved: Group");
+
+    // The arrow keys on a focused grip move it one place too.
+    await side(page).getByRole("button", { name: "Move Group" }).focus();
+    await page.keyboard.press("ArrowDown");
+    await expect.poll(saved).toEqual([{ name: "Big two", ids: [A.id, B.id] }, { name: "Group", ids: [P1.id] }]);
+
+    // Open "Group" from the sidebar: the address names it, and there is nothing to update yet.
+    await side(page).getByRole("link", { name: "Group", exact: true }).click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(pick.g, { kind: "compare", ids: [P1.id], saved: "Group" }));
+    const update = page.getByRole("button", { name: "Update Group" });
+    await expect(update).toHaveCount(0);
+
+    // Add a diagnosis with the sidebar's +: the comparison stays named, and Update saves it.
+    await side(page).locator(`a.alongside[aria-label="Add ${P2.title} to the comparison"]`).click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(pick.g, { kind: "compare", ids: [P1.id, P2.id], saved: "Group" }));
+    await update.click();
+    await expect.poll(saved).toEqual([{ name: "Big two", ids: [A.id, B.id] }, { name: "Group", ids: [P1.id, P2.id] }]);
+    expect(need(fake.commit(fake.head()), "the update commit").message).toContain("Comparison updated: Group");
+    await expect(update).toHaveCount(0);
+
+    // Remove one with its ✕, and Update again.
+    await page.getByRole("button", { name: "Remove quadrant 1" }).click();
+    await expect.poll(() => hashOf(page)).toBe(guideViewHash(pick.g, { kind: "compare", ids: [P2.id], saved: "Group" }));
+    await update.click();
+    await expect.poll(saved).toEqual([{ name: "Big two", ids: [A.id, B.id] }, { name: "Group", ids: [P2.id] }]);
+
+    // A fresh load reads the order and the diagnoses back from her file.
+    await openPage(page, guideViewHash(pick.g, { kind: "home" }));
+    await expect.poll(rowNames).toEqual(["Big two", "Group"]);
+    await side(page).getByRole("link", { name: "Group", exact: true }).click();
+    await expect(quadrants(page)).toHaveCount(1);
+    await expect(quadrants(page).first().locator(`[data-topic="${P2.id}"]`)).toBeVisible();
   });
 
   test("a visitor sees the saved comparisons listed and can open one, with no owner controls", async ({ page, context }) => {
@@ -534,13 +611,19 @@ test.describe("compare", () => {
     await openPage(page, guideViewHash(pick.g, { kind: "home" }));
     await expect(side(page).getByText("Comparisons", { exact: true })).toBeVisible();
     const row = side(page).getByRole("link", { name: "Adrenal", exact: true });
-    await expect(row).toHaveAttribute("href", compareHash(...idsOfSix));
+    const adrenalHash = guideViewHash(pick.g, { kind: "compare", ids: idsOfSix, saved: "Adrenal" });
+    await expect(row).toHaveAttribute("href", adrenalHash);
     await expect(side(page).getByRole("button", { name: "Rename Adrenal" })).toHaveCount(0);
     await expect(side(page).getByRole("button", { name: "Delete Adrenal" })).toHaveCount(0);
+    await expect(side(page).getByRole("button", { name: "Move Adrenal" })).toHaveCount(0);
 
     await row.click();
-    await expect.poll(() => hashOf(page)).toBe(compareHash(...idsOfSix));
+    await expect.poll(() => hashOf(page)).toBe(adrenalHash);
     await expect(quadrants(page)).toHaveCount(6);
+    // Changing the quadrants offers her no Update: only the owner can change a saved comparison.
+    await page.getByRole("button", { name: "Remove quadrant 1" }).click();
+    await expect(quadrants(page)).toHaveCount(5);
+    await expect(page.getByRole("button", { name: "Update Adrenal" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Save comparison" })).toHaveCount(0);
     await expect(page.locator(".favm")).toHaveCount(0);
   });
