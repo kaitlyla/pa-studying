@@ -141,6 +141,132 @@
             "text": "About"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Pneumoconioses = typically restrictive (↓TLC, ↓DLCO)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Exceptions:"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎CWP → often obstructive/mixed (coal dust → chronic bronchitis/emphysema)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎silicosis → restrictive ± mixed (advanced/PMF)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎benign (siderosis/stannosis) → ~nl"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎byssinosis → obstructive (not true pneumoconiosis)"
+           }
+          ]
          }
         ]
        },
@@ -411,11 +537,24 @@
              }
             ],
             "text": "aSx"
-           },
-           {
-            "type": "text",
-            "text": " \t"
-           },
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
             "marks": [
@@ -426,7 +565,7 @@
               }
              }
             ],
-            "text": "S/SXS"
+            "text": "Sx"
            },
            {
             "type": "text",
@@ -448,7 +587,7 @@
               }
              }
             ],
-            "text": "exertional dyspnea MC"
+            "text": "progressive exertional dyspnea (dominant)"
            }
           ]
          },
@@ -469,7 +608,7 @@
           "content": [
            {
             "type": "text",
-            "text": "\t\t\t\t\t\t\t\t▪︎dry cough that transforms into productive"
+            "text": "▪︎± dry cough (later)"
            }
           ]
          },
@@ -490,7 +629,7 @@
           "content": [
            {
             "type": "text",
-            "text": "\t\t\t\t\t\t\t\t▪︎digital clubbing"
+            "text": "▪︎cough & wheeze uncommon — productive cough/wheeze → think coexisting smoking-related dz (COPD/chronic bronchitis)"
            }
           ]
          },
@@ -511,7 +650,19 @@
           "content": [
            {
             "type": "text",
-            "text": "\t\t\t\t\t\t\t\t▪︎bibasilar, fine end-expiratory rales"
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "PE"
+           },
+           {
+            "type": "text",
+            "text": ": bibasilar end-inspiratory (\"Velcro\") crackles · clubbing"
            }
           ]
          },
@@ -958,7 +1109,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Restrictive"
+            "text": "Restrictive (↓TLC, ↓DLCO)"
            }
           ]
          }
