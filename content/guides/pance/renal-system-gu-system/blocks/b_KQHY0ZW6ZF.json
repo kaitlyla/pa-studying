@@ -470,7 +470,49 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
+            "text": "▪︎<5 mm: ~80% pass spont"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": " » NSAIDs (1st-line) + hydration"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎5–10 mm: ~50% pass → MET ("
            },
            {
             "type": "text",
@@ -489,7 +531,7 @@
            },
            {
             "type": "text",
-            "text": " for stones ≤10mm"
+            "text": ")"
            }
           ]
          },
@@ -510,7 +552,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
+            "text": "▪︎>10 mm: urology → "
            },
            {
             "type": "text",
@@ -525,7 +567,7 @@
               }
              }
             ],
-            "text": "extracorporeal shock wave lithotripsy"
+            "text": "URS/ESWL"
            }
           ]
          },
@@ -546,28 +588,7 @@
           "content": [
            {
             "type": "text",
-            "text": " » for stones >5mm but <2cm"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎"
+            "text": "▪︎>2 cm renal/staghorn → "
            },
            {
             "type": "text",
@@ -582,23 +603,49 @@
               }
              }
             ],
-            "text": "percut nephrolithotomy"
-           },
+            "text": "PCNL"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
-           },
+            "text": "⚠️ Obstruction + infection = emergency → decompress (stent/nephrostomy)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
-            "text": "(stones >2cm)"
+            "text": " » also urgent: AKI, solitary kidney, intractable pain/vomiting."
            }
           ]
          }
