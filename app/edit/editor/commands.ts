@@ -14,6 +14,7 @@ import {
   cellLabel, deleteColumnCells, deleteRowRefusal, insertRowRefusal, joiningCell, placedRows, reachLines, rowIdOf, rowScope, rowsLayoutOf, storedCell, tableNow,
   type CellJSON, type RowJSON, type RowsLayout,
 } from "./rowLayout.ts";
+import type { PastedLine } from "./clipboard.ts";
 import { M, N as nodes } from "./types.ts";
 
 /** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
@@ -1328,14 +1329,16 @@ export function docLines(doc: PMNode): string[] {
   return lines;
 }
 
-/** Plain text pasted at `$at`: one paragraph per line, each with the paragraph's attributes and the position's marks. */
-export function plainTextSlice(text: string, $at: ResolvedPos): Fragment {
-  const marks = $at.marks();
-  const lines = text.replace(/\r\n?/g, "\n").split("\n");
+/**
+ * Pasted `lines` at `$at`: one paragraph per line, each with the paragraph's attributes; in a place
+ * that holds no paragraphs, or for one line, the runs inline (lines joined by a space).
+ */
+export function pastedSlice(lines: readonly PastedLine[], $at: ResolvedPos): Fragment {
+  const runs = (line: PastedLine): PMNode[] => line.map((r) => schema.text(r.text, r.marks));
   const para = $at.parent.type === nodes.paragraph ? $at.parent : null;
   if (lines.length === 1 || !para) {
-    const joined = lines.join(" ");
-    return joined ? Fragment.from(schema.text(joined, marks)) : Fragment.empty;
+    const space = schema.text(" ", $at.marks());
+    return Fragment.from(lines.flatMap((line, i) => (i === 0 ? runs(line) : [space, ...runs(line)])));
   }
-  return Fragment.from(lines.map((line) => nodes.paragraph.create({ ...para.attrs }, line ? schema.text(line, marks) : null)));
+  return Fragment.from(lines.map((line) => nodes.paragraph.create({ ...para.attrs }, runs(line))));
 }

@@ -16,6 +16,7 @@ import {
   sizeOptions, splitParagraph, insertSymbol, SYMBOLS, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag, usedColors,
   type Command,
 } from "./commands.ts";
+import { SITE_COPY } from "./clipboard.fixtures.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
 import { cellPadding, MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
@@ -195,23 +196,86 @@ describe("paste", () => {
     view = null;
   });
 
-  it("pasting HTML <b>x</b> inserts plain text x", () => {
+  /** An editor view on `doc` with the caret at `at`, rendered as her editor renders. */
+  function editorOn(doc: DocJSON, at: number): EditorView {
     const host = document.createElement("div");
     document.body.append(host);
-    view = new EditorView(host, {
-      state: createEditorState(docOf(para([text("ab")]))),
+    const v = new EditorView(host, {
+      state: createEditorState(doc),
       nodeViews: nodeViews(11),
       markViews: markViews(11),
       clipboardSerializer: clipboardSerializer(11),
       ...editorProps,
     });
-    view.dispatch(view.state.tr.setSelection(TextSelection.create(view.state.doc, 2)));
-    const event = { clipboardData: { getData: (t: string) => (t === "text/html" ? "<b>x</b>" : "") } } as unknown as ClipboardEvent;
-    const handled = editorProps.handlePaste?.call(null as never, view, event, null as never);
-    expect(handled).toBe(true);
-    const p = view.state.doc.firstChild as PMNode;
-    expect(p.textContent).toBe("axb");
-    p.forEach((child) => expect(child.marks).toEqual([]));
+    v.dispatch(v.state.tr.setSelection(TextSelection.create(v.state.doc, at)));
+    return v;
+  }
+
+  function paste(v: EditorView, data: Readonly<Record<string, string>>): void {
+    const event = { clipboardData: { getData: (t: string) => data[t] ?? "", files: [] } } as unknown as ClipboardEvent;
+    expect(editorProps.handlePaste?.call(null as never, v, event, null as never)).toBe(true);
+  }
+
+  /** Each paragraph of `doc` as its runs: the text, then its marks by name (and color), sorted. */
+  const runsOf = (doc: PMNode): string[][] => {
+    const out: string[][] = [];
+    doc.forEach((p) => {
+      const runs: string[] = [];
+      p.forEach((t) => {
+        const marks = t.marks.map((m) => (m.attrs.hex ? `${m.type.name}:${String(m.attrs.hex)}` : m.type.name)).sort();
+        runs.push([t.text ?? "", ...marks].join("|"));
+      });
+      out.push(runs);
+    });
+    return out;
+  };
+
+  it("a copy from her site pastes one paragraph per line, with its bold, italic, underline, color and highlight", () => {
+    view = editorOn(docOf(para([])), 1);
+    paste(view, SITE_COPY);
+    expect(runsOf(view.state.doc)).toEqual([
+      ["2/2 prev = pharm tx|bold|color:4081FF|italic"],
+      ["»|color:000000", " detect/mgnt early-stage dz |bold|color:4081FF|italic", "b4 SXS onset|bold|color:4081FF|italic|underline"],
+      [
+        "»|color:000000", " early intervention to |bold|color:4081FF|italic", "prevent|bold|color:4081FF|italic|underline", " dz |bold|color:4081FF|italic",
+        "progression|bold|color:4081FF|italic|underline", " & |bold|color:4081FF|italic", "comp|bold|color:4081FF|italic|underline",
+      ],
+      // Her empty paragraph, once — not a blank line between every two.
+      [],
+      ["▪︎", "ASA 81mg QD|color:C140FF|italic", " |color:C140FF", "(", "↓mortality|highlight:51DF98|italic", ")"],
+      ["▪︎clopidogrel & ticagrelor"],
+    ]);
+  });
+
+  it("a copy from another editor pastes its lines and formatting as they were", () => {
+    const red = { type: "color", attrs: { hex: "C00000" } };
+    const yellow = { type: "highlight", attrs: { hex: "FFFF00" } };
+    const source = editorOn(docOf(para([text("one", [{ type: "bold" }, red])]), para([]), para([text("two", [yellow])])), 1);
+    source.dispatch(source.state.tr.setSelection(TextSelection.create(source.state.doc, 1, source.state.doc.content.size - 1)));
+    // Her copy: prosemirror-view's own copy handler fills the clipboard from the editor's serializer.
+    const copied: Record<string, string> = {};
+    const event = new Event("copy", { bubbles: true, cancelable: true });
+    Object.defineProperty(event, "clipboardData", { value: { clearData: () => undefined, setData: (t: string, v: string) => void (copied[t] = v), getData: (t: string) => copied[t] ?? "" } });
+    source.dom.dispatchEvent(event);
+    source.destroy();
+    expect(copied["text/plain"]).toBe("one\n\n\n\ntwo");
+
+    view = editorOn(docOf(para([])), 1);
+    paste(view, copied);
+    expect(runsOf(view.state.doc)).toEqual([["one|bold|color:C00000"], [], ["two|highlight:FFFF00"]]);
+  });
+
+  it("copied formatting replaces the caret's bold, italic, underline, color and highlight, and keeps its other marks", () => {
+    const caret = [{ type: "bold" }, { type: "color", attrs: { hex: "C00000" } }, { type: "size", attrs: { pt: 8 } }];
+    view = editorOn(docOf(para([text("ab", caret)])), 2);
+    paste(view, { "text/html": "<span style=\"color: rgb(0, 0, 255)\">x</span>", "text/plain": "x" });
+    expect(runsOf(view.state.doc)).toEqual([["a|bold|color:C00000|size", "x|color:0000FF|size", "b|bold|color:C00000|size"]]);
+  });
+
+  it("plain text with no HTML takes the caret's marks", () => {
+    view = editorOn(docOf(para([text("ab", [{ type: "italic" }])])), 2);
+    paste(view, { "text/plain": "x" });
+    expect(runsOf(view.state.doc)).toEqual([["axb|italic"]]);
   });
 
   it("multi-line plain text becomes paragraphs with the current paragraph's attributes", () => {

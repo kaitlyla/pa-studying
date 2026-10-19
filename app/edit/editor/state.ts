@@ -11,7 +11,8 @@ import { schema } from "../../../lib/schema.ts";
 import type { DocJSON } from "../../../lib/content/index.ts";
 import { columnDrag } from "./columnDrag.ts";
 import { floatsPlugin } from "./floats.ts";
-import { CONFIRMED_DELETE, guardedCount, isPictureMove, plainTextSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline, type Confirm } from "./commands.ts";
+import { htmlLines, textLines } from "./clipboard.ts";
+import { CONFIRMED_DELETE, guardedCount, isPictureMove, pastedSlice, splitParagraph, toggleBold, toggleItalic, toggleUnderline, type Confirm } from "./commands.ts";
 import { rowsLayoutPlugin, type RowsLayout } from "./rowLayout.ts";
 
 /** Her editor's status text when an edit would remove a picture (`_editor/editor.js` refusePictureRemoval). */
@@ -70,27 +71,21 @@ export function createEditorState(doc: DocJSON | PMNode, opts: EditorOptions = {
   return EditorState.create({ schema, doc: node, plugins: editorPlugins(opts) });
 }
 
-/** Turn pasted HTML into its text (no formatting from the source survives). */
-export function htmlToText(html: string): string {
-  const parsed = new DOMParser().parseFromString(html, "text/html");
-  const blocks = parsed.body.querySelectorAll("p, div, li, tr, h1, h2, h3, h4, h5, h6, br");
-  for (const el of blocks) el.append("\n");
-  return (parsed.body.textContent ?? "").replace(/\n+$/, "");
-}
-
 /**
- * Paste inserts plain text only (each line a paragraph with the caret paragraph's attributes), so no
- * formatting from the source survives. The one drop allowed is a picture dragged to a new place in the
- * same editor; every other drop is refused. (Picture files pasted or dropped: `pictureFileProps`.)
+ * Paste inserts text: each line a paragraph with the caret paragraph's attributes. Copied HTML is read
+ * for its lines and keeps its bold, italic, underline, color and highlight (htmlLines) — its plain text
+ * puts a blank line between paragraphs; plain text alone takes the caret's formatting. The one drop
+ * allowed is a picture dragged to a new place in the same editor; every other drop is refused.
+ * (Picture files pasted or dropped: `pictureFileProps`.)
  */
 export const editorProps: EditorProps = {
   handlePaste: (view, event) => {
     const data = event.clipboardData;
     if (!data) return true;
-    const plain = data.getData("text/plain");
+    const $from = view.state.selection.$from;
     const html = data.getData("text/html");
-    const text = plain !== "" ? plain : html !== "" ? htmlToText(html) : "";
-    const content = plainTextSlice(text, view.state.selection.$from);
+    const lines = html !== "" ? htmlLines(html, $from.marks()) : textLines(data.getData("text/plain"), $from.marks());
+    const content = pastedSlice(lines, $from);
     const open = content.childCount > 0 && content.firstChild?.isBlock ? 1 : 0;
     view.dispatch(view.state.tr.replaceSelection(new Slice(content, open, open)).scrollIntoView());
     return true;
