@@ -2840,7 +2840,7 @@
     {
      "role": "1st",
      "drugs": "amoxicillin",
-     "note": "+ a macrolide (preferred)",
+     "note": "high dose; monotx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -2874,7 +2874,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin, clarithromycin",
-     "note": "+ amoxicillin",
+     "note": "monotx; only if local pneumococcal resistance <25%",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -2888,7 +2888,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin, clarithromycin",
-     "note": "+ Augmentin",
+     "note": "+ Augmentin or a cephalosporin",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3053,9 +3053,9 @@
    "target": "p_ZB7VYFCV14",
    "roles": [
     {
-     "role": "alt",
+     "role": "1st",
      "drugs": "doxycycline",
-     "note": "macrolide alt",
+     "note": "monotx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3067,9 +3067,9 @@
      "scenario": "CAP, outpt"
     },
     {
-     "role": "alt",
+     "role": "1st",
      "drugs": "doxycycline",
-     "note": "macrolide alt",
+     "note": "+ Augmentin or a cephalosporin",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3133,7 +3133,7 @@
     {
      "role": "1st",
      "drugs": "Augmentin",
-     "note": "+ a macrolide (preferred)",
+     "note": "+ doxycycline or a macrolide",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3229,9 +3229,9 @@
    "target": "g_1C3ZKEV6GY",
    "roles": [
     {
-     "role": "alt",
+     "role": "1st",
      "drugs": "levofloxacin, moxifloxacin, gemifloxacin",
-     "note": "monotx",
+     "note": "resp FQ monotx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",

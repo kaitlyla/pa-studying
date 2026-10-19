@@ -3564,7 +3564,28 @@
               }
              }
             ],
-            "text": "Microbiology (only need if inpt)"
+            "text": "Microbiology"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎sputum gram stain/cx + blood cx only if hospitalized w/ severe CAP or empirically treated for MRSA or P. aeruginosa (IDSA)"
            }
           ]
          },
@@ -3781,7 +3802,31 @@
               "type": "italic"
              }
             ],
-            "text": " + "
+            "text": " (high dose) OR "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "doxycycline"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             }
+            ],
+            "text": " OR "
            },
            {
             "type": "text",
@@ -3805,43 +3850,7 @@
               "type": "italic"
              }
             ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "italic"
-             },
-             {
-              "type": "shade",
-              "attrs": {
-               "hex": "FFFF00"
-              }
-             }
-            ],
-            "text": "*preferred"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "  ⤷ Doxycycline = macrolide alt  "
+            "text": " (only if local pneumococcal resistance <25%)"
            }
           ]
          },
@@ -3922,6 +3931,30 @@
               "type": "italic"
              }
             ],
+            "text": " or "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "4472C4"
+              }
+             }
+            ],
+            "text": "cephalosporin"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "italic"
+             }
+            ],
             "text": " + "
            },
            {
@@ -3937,7 +3970,7 @@
               }
              }
             ],
-            "text": "macrolide"
+            "text": "doxycycline"
            },
            {
             "type": "text",
@@ -3946,7 +3979,7 @@
               "type": "italic"
              }
             ],
-            "text": " "
+            "text": " or "
            },
            {
             "type": "text",
@@ -3955,13 +3988,13 @@
               "type": "italic"
              },
              {
-              "type": "shade",
+              "type": "color",
               "attrs": {
-               "hex": "FFFF00"
+               "hex": "4472C4"
               }
              }
             ],
-            "text": "*preferred"
+            "text": "macrolide"
            }
           ]
          },
@@ -3982,28 +4015,7 @@
           "content": [
            {
             "type": "text",
-            "text": "  ⤷ Doxycycline = macrolide alt"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎FQ monotx (alt)"
+            "text": "▪︎OR resp FQ monotx"
            }
           ]
          },
