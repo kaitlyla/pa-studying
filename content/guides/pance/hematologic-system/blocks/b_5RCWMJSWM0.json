@@ -1813,7 +1813,97 @@
               }
              }
             ],
-            "text": "Low-risk (≤60yo, ⊖HX of thrombosis)"
+            "text": "Risk"
+           },
+           {
+            "type": "text",
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎low = <60 yo + no thrombosis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎high = ≥60 yo or prior thrombosis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "Tx (all)"
            },
            {
             "type": "text",
@@ -1853,7 +1943,7 @@
               }
              }
             ],
-            "text": "phlebotomy to maintain Hct <45%"
+            "text": "phlebotomy → Hct <45%"
            }
           ]
          },
@@ -1889,19 +1979,7 @@
               }
              }
             ],
-            "text": "ASA 81mg"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
+            "text": "low-dose ASA (unless contraindicated — extreme thrombocytosis → acquired vWD, check vWF)"
            }
           ]
          },
@@ -2032,7 +2110,7 @@
               }
              }
             ],
-            "text": "High-risk (>60yo, ⊕HX of thrombosis)"
+            "text": "High risk"
            },
            {
             "type": "text",
@@ -2072,7 +2150,7 @@
               }
              }
             ],
-            "text": "phlebotomy to maintain Hct <45%"
+            "text": "+ cytoreduction (hydroxyurea 1st-line; IFN if young/pregnant)"
            }
           ]
          },
@@ -2093,70 +2171,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "ASA 81mg"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎cytoreductive therapy w/ "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "hydroxyurea"
+            "text": "⚠️ Blueprint \"≤60 = low risk\" → use <60 · MSD \"ASA only if sx\" → guidelines: ASA for all unless contraindicated."
            }
           ]
          },
