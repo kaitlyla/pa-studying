@@ -3344,25 +3344,6 @@
             "text": "➂ Sx/exacerbation Hx (mMRC dyspnea scale, CAT score)"
            }
           ]
-         },
-         {
-          "type": "anchored",
-          "attrs": {
-           "offsetPt": 46.080551181102365
-          },
-          "content": [
-           {
-            "type": "image_block",
-            "attrs": {
-             "asset": "145bf335ed4981dfe6ecc499253dfbb1.png",
-             "widthPt": 210.74220472440945,
-             "heightPt": 148.58181102362204,
-             "rot": 0,
-             "flipH": false,
-             "flipV": false
-            }
-           }
-          ]
          }
         ]
        },
@@ -3442,6 +3423,18 @@
              }
             ],
             "text": "fewer Sx, ↓risk"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": " (mMRC 0-1, CAT <10; 0-1 mod exacerbations, ⍉hsp)"
            }
           ]
          },
@@ -3473,129 +3466,7 @@
               }
              }
             ],
-            "text": "▪︎short-acting or long-acting bronchodilator (ie, "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "SABA, "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " SAMA, LABA, "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "000000"
-              }
-             }
-            ],
-            "text": "or"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " LAMA"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ")"
+            "text": "▪︎bronchodilator (long-acting preferred over short-acting, except w/ very occasional breathlessness)"
            }
           ]
          },
@@ -3682,62 +3553,6 @@
              }
             ],
             "text": "more Sx, ↓risk"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "▪︎long-acting bronchodilator (ie, "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "LABA"
            },
            {
             "type": "text",
@@ -3749,402 +3564,7 @@
               }
              }
             ],
-            "text": " or "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "LAMA"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ")"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 9
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "Group C"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ": "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "fewer Sx, ↑risk"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "▪︎"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "LAMA"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 9
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "Group D"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": ": "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "more Sx, ↑risk"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "▪︎"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "LAMA monotx"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "underline",
-              "attrs": {
-               "style": "single"
-              }
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "000000"
-              }
-             }
-            ],
-            "text": "OR"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "combo therapy"
+            "text": " (mMRC ≥2, CAT ≥10; 0-1 mod exacerbations, ⍉hsp)"
            }
           ]
          },
@@ -4210,15 +3630,65 @@
               "attrs": {
                "pt": 7.5
               }
+             }
+            ],
+            "text": " (+ short-acting PRN for Sx relief)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
              },
              {
-              "type": "color",
+              "type": "size",
               "attrs": {
-               "hex": "4472C4"
+               "pt": 7.5
               }
              }
             ],
-            "text": " "
+            "text": "Group E"
            },
            {
             "type": "text",
@@ -4230,7 +3700,7 @@
               }
              }
             ],
-            "text": "if highly "
+            "text": ": "
            },
            {
             "type": "text",
@@ -4248,7 +3718,7 @@
               }
              }
             ],
-            "text": "Sxtomatic"
+            "text": "↑risk, regardless of Sx"
            },
            {
             "type": "text",
@@ -4260,7 +3730,7 @@
               }
              }
             ],
-            "text": " (ex, CAT >20)"
+            "text": " (≥2 mod exacerbations or ≥1 → hsp/yr)"
            }
           ]
          },
@@ -4316,61 +3786,7 @@
               }
              }
             ],
-            "text": "ICS + LABA"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "if "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "B30DEB"
-              }
-             }
-            ],
-            "text": "eosinophils ≥300cell/µL"
+            "text": "LABA + LAMA"
            }
           ]
          },
@@ -4420,7 +3836,127 @@
               }
              }
             ],
-            "text": "*ICS should only be used in combo w/ LABA/LAMA"
+            "text": "*single inhaler tx may be more convenient + effective than multiple inhalers"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Bronchodilators are the backbone. A LAMA or LABA is first-line maintenance, with a SABA (± SAMA) PRN for everyone."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎ICS is add-on only, as triple therapy (LABA + LAMA + ICS) for patients with: eos ≥300, or eos ≥100 plus ≥2 moderate exacerbations or ≥1 hospitalization per year despite LABA + LAMA."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎ICS is unlikely to help when eos <100, and should be avoided with recurrent pneumonia or a history of mycobacterial infection."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎LABA + ICS without a LAMA is no longer encouraged (GOLD 2023+). If ICS is indicated, go straight to triple therapy."
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎ICS adverse effects: pneumonia, oral thrush, hoarseness, bruising."
            }
           ]
          },
@@ -4463,27 +3999,6 @@
            {
             "type": "text",
             "text": "▪︎starting a LAMA → d/c ipratropium (SAMA): avoid 2 muscarinic antagonists concurrently (dry mouth, urinary retention, blurred vision)"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "▪︎ICS (ex, budesonide): only once already on a long-acting bronchodilator + still Sxtomatic (⍉if only on ipratropium)"
            }
           ]
          },
@@ -5081,6 +4596,27 @@
              }
             ],
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎pneumococcal: 19–49yo w/ COPD → PCV20, PCV21, or PCV15; if PCV15 → PPSV23 typically ≥1yr later"
            }
           ]
          },
