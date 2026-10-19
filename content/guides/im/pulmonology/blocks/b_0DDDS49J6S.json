@@ -282,6 +282,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎SPN (≤3 cm; >3 cm = mass → presumed malignant)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "Morphological Classification ⇢\t▪︎"
            },
            {
@@ -1367,45 +1388,7 @@
           "content": [
            {
             "type": "text",
-            "text": "➀ Age\t"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FC5E7D"
-              }
-             }
-            ],
-            "text": "≥60"
-           },
-           {
-            "type": "text",
-            "text": ": "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             }
-            ],
-            "text": ">50% risk"
-           },
-           {
-            "type": "text",
-            "text": "\t➁ RF for lung CA\t▪︎"
+            "text": "➀ Age\t\t➁ RF for lung CA\t▪︎"
            },
            {
             "type": "text",
@@ -1494,6 +1477,27 @@
              }
             ],
             "text": "asbestos exposure"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎risk ↑ w/ size, age (low <35), smoking, upper lobe, spiculation"
            }
           ]
          }
@@ -1899,7 +1903,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Size\t\t\t▪︎solid: ≤8mm\t\t\t\t\t\t▪︎solid: >8mm"
+            "text": "Size\t\t\t▪︎subsolid: <6mm\t\t\t\t\t▪︎subsolid: ≥6mm"
            }
           ]
          },
@@ -1920,7 +1924,112 @@
           "content": [
            {
             "type": "text",
-            "text": "\t\t\t▪︎subsolid: <6mm\t\t\t\t\t▪︎subsolid: ≥6mm"
+            "text": "Fleischner (solid):"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎<6 mm → no routine f/u (<1% malig)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎6–8 mm → CT 6–12 mo"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎>8 mm → CT 3 mo / PET-CT / bx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Benign: popcorn (hamartoma), central/laminated/diffuse Ca²⁺ (granuloma), stable ≥2 yr"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Malignant: spiculated, growth, eccentric Ca²⁺"
            }
           ]
          },
