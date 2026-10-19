@@ -1240,11 +1240,11 @@
               }
              }
             ],
-            "text": "<5mm"
+            "text": "<5 mm"
            },
            {
             "type": "text",
-            "text": ": 80% chance of spont passage"
+            "text": ": ~80% pass spont"
            }
           ]
          },
@@ -1265,67 +1265,7 @@
           "content": [
            {
             "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "IVF, analgesics, antiemetics"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": " "
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "tamsulosin"
+            "text": "- NSAIDs (1st-line) + hydration"
            }
           ]
          },
@@ -1369,11 +1309,11 @@
               }
              }
             ],
-            "text": "5-10mm"
+            "text": "5–10 mm"
            },
            {
             "type": "text",
-            "text": ": 20% chance of spont passage "
+            "text": ": ~50% pass → MET (tamsulosin)"
            }
           ]
          },
@@ -1392,24 +1332,21 @@
            "marker": null
           },
           "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
            {
             "type": "text",
             "marks": [
              {
-              "type": "bold"
-             },
-             {
-              "type": "color",
+              "type": "underline",
               "attrs": {
-               "hex": "4472C4"
+               "style": "single"
               }
              }
             ],
-            "text": "extracorporeal shock wave lithotripsy"
+            "text": ">10 mm"
+           },
+           {
+            "type": "text",
+            "text": ": urology → URS/ESWL"
            }
           ]
          },
@@ -1428,28 +1365,21 @@
            "marker": null
           },
           "content": [
-           {
-            "type": "text",
-            "text": "- "
-           },
            {
             "type": "text",
             "marks": [
              {
-              "type": "bold"
-             },
-             {
-              "type": "color",
+              "type": "underline",
               "attrs": {
-               "hex": "4472C4"
+               "style": "single"
               }
              }
             ],
-            "text": "ureteroscopy w/ or w/o stent"
+            "text": ">2 cm renal/staghorn"
            },
            {
             "type": "text",
-            "text": ": immediate relief of obstruct"
+            "text": " → PCNL"
            }
           ]
          },
@@ -1470,26 +1400,7 @@
           "content": [
            {
             "type": "text",
-            "text": "- "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "4472C4"
-              }
-             }
-            ],
-            "text": "percut nephrolithotomy"
-           },
-           {
-            "type": "text",
-            "text": ": stones >10mm"
+            "text": "⚠️ Obstruction + infection = emergency → decompress (stent/nephrostomy)"
            }
           ]
          },
@@ -1510,7 +1421,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎pain control (NSAIDs, opioids) + antiemetics; IV hydration"
+            "text": "- also urgent: AKI, solitary kidney, intractable pain/vomiting."
            }
           ]
          },
@@ -1531,7 +1442,7 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎urology consult: sepsis, kidney inj, obstruct, or ⍉improvement w/ conservative mgnt"
+            "text": "▪︎pain control also: opioids + antiemetics"
            }
           ]
          },
@@ -1552,7 +1463,28 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎admit: intractable pain or vomiting, infected stone/urosepsis, single kidney w/ sig obstruct, hypercalcemic crisis, urinary extravasation"
+            "text": "▪︎urology consult: sepsis, obstruct, or ⍉improvement w/ conservative mgnt"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎admit also: urosepsis, hypercalcemic crisis, urinary extravasation"
            }
           ]
          },
