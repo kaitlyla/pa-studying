@@ -606,7 +606,7 @@
               }
              }
             ],
-            "text": "▪︎♂ > ♀ in pts <18yo\t\t\t\tcells in individuals w/ a genetic predisposition"
+            "text": "▪︎more common in boys <14 + adult women\t\t\t\tcells in individuals w/ a genetic predisposition"
            }
           ]
          },
@@ -3314,6 +3314,30 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎DDx: expiratory monophonic wheeze best heard over larger airways → tracheomalacia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "marks": [
              {
               "type": "underline",
@@ -4009,7 +4033,133 @@
           "content": [
            {
             "type": "text",
-            "text": "▪︎PFT = gold standard dx; FEV1/FVC + FEV1 both <80% predicted"
+            "text": "▪︎PFT = gold standard dx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎asthma can often be dx by hx + PE alone; ruling out alt dx may be necessary"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎PFTs: obstruction = ↓FEV1/FVC (<0.70 fixed cutoff; asthma guidelines use <LLN ≈ <0.75–0.80 adults)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎FEV1 <80% pred = severity/impairment"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Key = reversibility: post-BD ↑FEV1 ≥12% + ≥200 mL"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎Nl spirometry between attacks → methacholine challenge (+ = ≥20% ↓FEV1; neg essentially r/o asthma)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "⚠️ Asthma = reversible · COPD = fixed (post-BD ratio stays <0.70)"
            }
           ]
          },
@@ -4448,170 +4598,6 @@
              }
             ],
             "text": " obstruct"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "    "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": "⊕"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": "reversibility"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": " "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "= "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": "⇡ "
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "bold"
-             },
-             {
-              "type": "italic"
-             },
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": "FEV1 ≥12% after SABA"
-           },
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             },
-             {
-              "type": "color",
-              "attrs": {
-               "hex": "FF40FF"
-              }
-             }
-            ],
-            "text": " "
            }
           ]
          },
