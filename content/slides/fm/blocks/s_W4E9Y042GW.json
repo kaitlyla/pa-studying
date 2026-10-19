@@ -385,28 +385,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Amoxicillin + macrolide (preferred)"
-       }
-      ]
-     },
-     {
-      "type": "paragraph",
-      "attrs": {
-       "indLeft": 0,
-       "indRight": 0,
-       "indFirst": 0,
-       "spaceBefore": 0,
-       "spaceAfter": 0,
-       "line": null,
-       "align": "left",
-       "shade": null,
-       "borders": null,
-       "marker": null
-      },
-      "content": [
-       {
-        "type": "text",
-        "text": "– Doxycycline = macrolide alt"
+        "text": "Amoxicillin (high dose) OR doxycycline OR macrolide (only if local pneumococcal resistance <25%)"
        }
       ]
      }
@@ -480,22 +459,18 @@
     "quote": "CAP, outpt:"
    },
    {
-    "item": "Amoxicillin + macrolide (preferred)",
+    "item": "Amoxicillin (high dose) OR doxycycline OR macrolide (only if local pneumococcal resistance <25%)",
     "row": "r_1V2BTDQCXY",
-    "quote": "•Amoxicillin + macrolide (preferred)"
-   },
-   {
-    "item": "– Doxycycline = macrolide alt",
-    "row": "r_1V2BTDQCXY",
-    "quote": "– Doxycycline = macrolide alt"
+    "quote": "•Amoxicillin (high dose) OR doxycycline OR macrolide (only if local pneumococcal resistance <25%)"
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
-   "at": "2026-10-05",
+   "verifier": "otis-40408 (detective-01a1523a-7bbd-7c31-8a87-e92c7894ce83)",
+   "at": "2026-10-19",
    "result": "pass",
    "notes": [
-    "\"CPR\" for CRP is her typo, kept verbatim."
+    "\"CPR\" for CRP is her typo, kept verbatim.",
+    "CAP outpt items re-verified after her Q5 answer (earlier pass: detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13), 2026-10-05)"
    ]
   }
  }

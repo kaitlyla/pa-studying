@@ -76,7 +76,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Eti: predominantly drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)"
+        "text": "Eti: predom drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)"
        }
       ]
      },
@@ -165,7 +165,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Cutaneous: typically begin on torso & face; rapidly generalizes"
+        "text": "Cutaneous: begin on torso & face; rapidly gen outward -symetrically"
        }
       ]
      },
@@ -186,7 +186,7 @@
       "content": [
        {
         "type": "text",
-        "text": "SJS: atypical targetoid lesions, often violaceous &/or blistered; lesions may coalesce, particularly on face & torso"
+        "text": "SJS: atypical targetoid lesions, often violaceous &/or blistered"
        }
       ]
      },
@@ -207,7 +207,70 @@
       "content": [
        {
         "type": "text",
-        "text": "TEN: tender, erythematous patches & plaques that develop lrg bullae that coalesce & rapidly slough, leaving lrg, denuded areas of skin"
+        "text": "- lesions may coalesce -esp on face & torso"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "TEN: tender, erythematous patches & plaques"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "- develop lrg bullae that coalesce & rapidly slough"
+       }
+      ]
+     },
+     {
+      "type": "paragraph",
+      "attrs": {
+       "indLeft": 0,
+       "indRight": 0,
+       "indFirst": 0,
+       "spaceBefore": 0,
+       "spaceAfter": 0,
+       "line": null,
+       "align": "left",
+       "shade": null,
+       "borders": null,
+       "marker": null
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "⤷leaves lrg, denuded areas of skin"
        }
       ]
      }
@@ -404,9 +467,9 @@
     "quote": "Rare hypersensitivity rxns affecting the skin & mucosal membranes"
    },
    {
-    "item": "Eti: predominantly drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)",
+    "item": "Eti: predom drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)",
     "row": "r_P9KA41TVK4",
-    "quote": "Eti: predominantly drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)"
+    "quote": "Eti: predom drug-related (penicillin, sulfonamides, allopurinol, NSAIDs, anticonvulsants)"
    },
    {
     "item": "other: infections (M. pneumoniae, influenza)",
@@ -419,19 +482,34 @@
     "quote": "Prodrome: fever, malaise, pharyngitis, eye pain"
    },
    {
-    "item": "Cutaneous: typically begin on torso & face; rapidly generalizes",
+    "item": "Cutaneous: begin on torso & face; rapidly gen outward -symetrically",
     "row": "r_P9KA41TVK4",
-    "quote": "Cutaneous: typically begin on torso & face; rapidly generalizes"
+    "quote": "Cutaneous: begin on torso & face; rapidly gen outward -symetrically"
    },
    {
-    "item": "SJS: atypical targetoid lesions, often violaceous &/or blistered; lesions may coalesce, particularly on face & torso",
+    "item": "SJS: atypical targetoid lesions, often violaceous &/or blistered",
     "row": "r_P9KA41TVK4",
-    "quote": "SJS: atypical targetoid lesions, often violaceous &/or blistered; lesions may coalesce, particularly on face & torso"
+    "quote": "SJS: atypical targetoid lesions, often violaceous &/or blistered"
    },
    {
-    "item": "TEN: tender, erythematous patches & plaques that develop lrg bullae that coalesce & rapidly slough, leaving lrg, denuded areas of skin",
+    "item": "- lesions may coalesce -esp on face & torso",
     "row": "r_P9KA41TVK4",
-    "quote": "TEN: tender, erythematous patches & plaques that develop lrg bullae that coalesce & rapidly slough, leaving lrg, denuded areas of skin"
+    "quote": "- lesions may coalesce -esp on face & torso"
+   },
+   {
+    "item": "TEN: tender, erythematous patches & plaques",
+    "row": "r_P9KA41TVK4",
+    "quote": "TEN: tender, erythematous patches & plaques"
+   },
+   {
+    "item": "- develop lrg bullae that coalesce & rapidly slough",
+    "row": "r_P9KA41TVK4",
+    "quote": "- develop lrg bullae that coalesce & rapidly slough"
+   },
+   {
+    "item": "⤷leaves lrg, denuded areas of skin",
+    "row": "r_P9KA41TVK4",
+    "quote": "⤷leaves lrg, denuded areas of skin"
    },
    {
     "item": "Bx: full thickness skin necrosis",
@@ -465,10 +543,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
-   "at": "2026-10-05",
+   "verifier": "dane-23433 (detective-01a1524c-f8f3-7e92-b8a7-fc6cfd89f9ab)",
+   "at": "2026-10-19",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "stale items rebuilt from her current row text and the whole slide re-verified (earlier pass: detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13), 2026-10-05)"
+   ]
   }
  }
 }

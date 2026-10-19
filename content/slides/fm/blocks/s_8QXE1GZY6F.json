@@ -165,7 +165,7 @@
       "content": [
        {
         "type": "text",
-        "text": "EKG Characteristics: atrial rate ~300bpm, ventricular rate ~150bpm"
+        "text": "EKG Characteristics: atrial rate 250-300bpm, ventricular rate ~150bpm"
        }
       ]
      },
@@ -351,9 +351,9 @@
     "quote": "S/SXS: aSx, palpitations, fatigue, dyspnea, presyncope, s/sxs of HF"
    },
    {
-    "item": "EKG Characteristics: atrial rate ~300bpm, ventricular rate ~150bpm",
+    "item": "EKG Characteristics: atrial rate 250-300bpm, ventricular rate ~150bpm",
     "row": "r_40KWZBZE8Z",
-    "quote": "EKG Characteristics: atrial rate ~300bpm, ventricular rate ~150bpm"
+    "quote": "EKG Characteristics: atrial rate 250-300bpm, ventricular rate ~150bpm"
    },
    {
     "item": "2:1 atrial-to-ventricular-rate ratio common",
@@ -387,10 +387,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
-   "at": "2026-10-05",
+   "verifier": "dane-23433 (detective-01a1524c-f8f3-7e92-b8a7-fc6cfd89f9ab)",
+   "at": "2026-10-19",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "stale items rebuilt from her current row text and the whole slide re-verified (earlier pass: detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13), 2026-10-05)"
+   ]
   }
  }
 }

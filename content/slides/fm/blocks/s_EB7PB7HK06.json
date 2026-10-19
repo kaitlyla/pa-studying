@@ -55,7 +55,7 @@
       "content": [
        {
         "type": "text",
-        "text": "ACS = spectrum of unstable ♡ ischemia"
+        "text": "ACS: unstable ♡ ischemia"
        }
       ]
      },
@@ -378,9 +378,9 @@
   ],
   "evidence": [
    {
-    "item": "ACS = spectrum of unstable ♡ ischemia",
+    "item": "ACS: unstable ♡ ischemia",
     "row": "r_D2B85HSBZN",
-    "quote": "ACS is spectrum of unstable cardiac ischemia"
+    "quote": "ACS: unstable ♡ ischemia"
    },
    {
     "item": "UA ↔ NSTEMI ↔ STEMI",
@@ -439,10 +439,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
-   "at": "2026-10-05",
+   "verifier": "dane-23433 (detective-01a1524c-f8f3-7e92-b8a7-fc6cfd89f9ab)",
+   "at": "2026-10-19",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "stale items rebuilt from her current row text and the whole slide re-verified (earlier pass: detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13), 2026-10-05)"
+   ]
   }
  }
 }

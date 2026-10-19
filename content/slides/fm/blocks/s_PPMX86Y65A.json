@@ -165,7 +165,7 @@
       "content": [
        {
         "type": "text",
-        "text": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx w/ cx"
+        "text": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx: NAAT of the affected site (cx poorly sensitive)"
        }
       ]
      }
@@ -377,9 +377,9 @@
     "quote": "S/SXS: mucopurulent d/c, vulvar itching/burning"
    },
    {
-    "item": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx w/ cx",
+    "item": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx: NAAT of the affected site (cx poorly sensitive)",
     "row": "r_200RVCT50S",
-    "quote": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx w/ cx"
+    "quote": "*be sure to think of gonococcal pharyngitis in anyone w/ persistent pharyngitis, dx: NAAT of the affected site (cx poorly sensitive)"
    },
    {
     "item": "NAAT",
@@ -413,10 +413,12 @@
    }
   ],
   "verification": {
-   "verifier": "detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13)",
-   "at": "2026-10-05",
+   "verifier": "dane-23433 (detective-01a1524c-f8f3-7e92-b8a7-fc6cfd89f9ab)",
+   "at": "2026-10-19",
    "result": "pass",
-   "notes": []
+   "notes": [
+    "stale items rebuilt from her current row text and the whole slide re-verified (earlier pass: detective task 01a109e0-5cb4-7233-9b0a-ed3f3349d7f1 (fm S13), 2026-10-05)"
+   ]
   }
  }
 }

@@ -76,7 +76,7 @@
       "content": [
        {
         "type": "text",
-        "text": "Onset: USU <30 (3/4 diagnosed in childhood)"
+        "text": "Onset: <30 (3/4 dx in childhood)"
        }
       ]
      },
@@ -446,9 +446,9 @@
     "quote": "90% autoimmune – pancreatic β cells fail to respond to stimuli & undergo autoimmune destruction"
    },
    {
-    "item": "Onset: USU <30 (3/4 diagnosed in childhood)",
+    "item": "Onset: <30 (3/4 dx in childhood)",
     "row": "r_G02D86Y37J",
-    "quote": "Onset: usually <30 (3/4 diagnosed in childhood)"
+    "quote": "Onset: <30 (3/4 dx in childhood)"
    },
    {
     "item": "peaks @ 4-6y then again @ 10-14y",
@@ -517,11 +517,12 @@
    }
   ],
   "verification": {
-   "verifier": "shay-49353 (Leader re-check, 03:59Z)",
-   "at": "2026-10-05",
+   "verifier": "dane-23433 (detective-01a1524c-f8f3-7e92-b8a7-fc6cfd89f9ab)",
+   "at": "2026-10-19",
    "result": "pass",
    "notes": [
-    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed."
+    "Changed by generator rules 11–17 after the verifier's pass; Leader re-check passed.",
+    "stale items rebuilt from her current row text and the whole slide re-verified (earlier pass: shay-49353 (Leader re-check, 03:59Z), 2026-10-05)"
    ]
   }
  }
