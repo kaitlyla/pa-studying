@@ -24,8 +24,26 @@ const BLOCKS = new Set(["P", "DIV", "LI", "UL", "OL", "TABLE", "TBODY", "THEAD",
 const PARAGRAPHS = new Set(["P", "LI", "H1", "H2", "H3", "H4", "H5", "H6"]);
 const SKIPPED = new Set(["HEAD", "META", "STYLE", "SCRIPT", "TITLE", "TEMPLATE"]);
 
-/** A CSS color as the schema's 6-digit uppercase hex; null for transparent or a form not read here (named colors). */
-export function cssHex(value: string): string | null {
+/**
+ * A CSS color as the schema's 6-digit uppercase hex, or null for none or transparent. A named color
+ * (Word writes a highlight as `background:yellow`) is resolved by the browser: the computed color of a
+ * probe element holding it.
+ */
+export function cssColorHex(value: string): string | null {
+  if (value === "") return null;
+  const direct = rgbHex(value);
+  if (direct !== null) return direct;
+  const probe = document.createElement("span");
+  probe.style.color = value;
+  if (probe.style.color === "") return null;
+  document.body.append(probe);
+  const computed = getComputedStyle(probe).color;
+  probe.remove();
+  return rgbHex(computed);
+}
+
+/** A hex or rgb()/rgba() color as 6-digit uppercase hex; null for any other form or a transparent one. */
+function rgbHex(value: string): string | null {
   const v = value.trim();
   const short = /^#([0-9a-f]{3})$/i.exec(v);
   if (short) return [...(short[1] as string)].map((c) => c + c).join("").toUpperCase();
@@ -56,9 +74,9 @@ function elementMarks(el: HTMLElement, marks: readonly Mark[]): readonly Mark[] 
   if (deco.includes("underline")) set(M.underline.create());
   // A block's color is the copied page's text color around it, not a color she gave the text.
   if (!BLOCKS.has(tag)) {
-    const color = cssHex(s.color);
+    const color = cssColorHex(s.color);
     if (color) set(M.color.create({ hex: color }));
-    const bg = cssHex(s.backgroundColor);
+    const bg = cssColorHex(s.backgroundColor);
     if (bg) set(M.highlight.create({ hex: bg }));
   }
   return out;
@@ -84,8 +102,12 @@ export function htmlLines(html: string, base: readonly Mark[]): PastedLine[] {
   const walk = (node: Node, marks: readonly Mark[]): void => {
     if (node.nodeType === Node.TEXT_NODE) {
       const raw = node.nodeValue ?? "";
-      // Whitespace between tags that holds a line break is the HTML's own layout, not her text.
-      if (/^\s*$/.test(raw) && /[\r\n]/.test(raw)) return;
+      // Whitespace holding a line break is the HTML's own layout (Word wraps its HTML at 80 columns):
+      // nothing before a line's text, one space within it.
+      if (/^\s*$/.test(raw) && /[\r\n]/.test(raw)) {
+        if (open) line.push({ text: " ", marks });
+        return;
+      }
       line.push({ text: raw.replace(/\r?\n/g, " "), marks });
       open = true;
       return;

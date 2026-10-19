@@ -1,6 +1,31 @@
 // Clipboards captured from real copies, for the paste tests.
 
 /**
+ * Word's HTML clipboard after copying one paragraph of her FM Cardiovascular notes (Myocarditis,
+ * "Viral prodrome…") in "Family Medicine EOR.docx", captured 2026-10-19 from the Windows clipboard's
+ * HTML Format. Kept from `<body>` on, line breaks as LF; the document head left out holds only Word's
+ * style sheet and links to files in her temp folder. "Viral prodrome" is highlighted yellow (a named
+ * color) and the end of the line is bold in a theme color.
+ */
+export const WORD_COPY_HTML = `<body lang=EN-US style='tab-interval:.5in;word-wrap:break-word'>
+<!--StartFragment-->
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-theme-font:
+minor-latin;background:yellow;mso-highlight:yellow'>Viral prodrome</span><span
+style='font-size:8.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-theme-font:minor-latin'>
+– fever, myalgias, malaise for several days followed by <b><span
+style='color:#ED7D31;mso-themecolor:accent2'>sxs of systolic dysfunction
+(dilated cardiomyopathy)<o:p></o:p></span></b></span></p>
+
+<!--EndFragment-->
+</body>
+
+</html>
+`;
+
+/**
  * Chrome's clipboard after copying the first six paragraphs of the FM Cardiovascular CAD "2/2 prev"
  * cell on her live site (https://kaitlyla.github.io/pa-studying/#/eor/fm/s/cardiovascular, captured
  * 2026-10-19 with Ctrl+C and read back with navigator.clipboard.read()). The fourth paragraph is an

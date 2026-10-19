@@ -16,7 +16,7 @@ import {
   sizeOptions, splitParagraph, insertSymbol, SYMBOLS, toggleBold, toggleItalic, toggleUnderline, insertRow, unturnedDrag, usedColors,
   type Command,
 } from "./commands.ts";
-import { SITE_COPY } from "./clipboard.fixtures.ts";
+import { SITE_COPY, WORD_COPY_HTML } from "./clipboard.fixtures.ts";
 import { createEditorState, editorProps, PICTURE_REFUSED } from "./state.ts";
 import { clipboardSerializer, markViews, nodeViews } from "./views.ts";
 import { cellPadding, MIN_FIRST_COLUMN_PCT, tableColumns } from "../../render/styles.ts";
@@ -245,6 +245,16 @@ describe("paste", () => {
       ["▪︎", "ASA 81mg QD|color:C140FF|italic", " |color:C140FF", "(", "↓mortality|highlight:51DF98|italic", ")"],
       ["▪︎clopidogrel & ticagrelor"],
     ]);
+  });
+
+  it("a copy from Word keeps its yellow highlight (a named color) and its bold colored run", () => {
+    view = editorOn(docOf(para([])), 1);
+    paste(view, { "text/html": WORD_COPY_HTML, "text/plain": "Viral prodrome – fever, myalgias, malaise for several days followed by sxs of systolic dysfunction (dilated cardiomyopathy)" });
+    expect(runsOf(view.state.doc)).toEqual([[
+      "Viral prodrome|highlight:FFFF00",
+      " – fever, myalgias, malaise for several days followed by ",
+      "sxs of systolic dysfunction (dilated cardiomyopathy)|bold|color:ED7D31",
+    ]]);
   });
 
   it("a copy from another editor pastes its lines and formatting as they were", () => {
