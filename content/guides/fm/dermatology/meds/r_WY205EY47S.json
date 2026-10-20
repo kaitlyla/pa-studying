@@ -7,7 +7,8 @@
   "c_3R8WTKGPB3",
   "c_JVHE92XFE3",
   "c_P05KHJTR8A",
-  "p_63TZ7SGX5G"
+  "p_63TZ7SGX5G",
+  "c_ZVZ43PBRG2"
  ],
  "own": [
   {
@@ -1876,6 +1877,26 @@
       }
      ],
      "scenario": "MRSA (PO/IV)"
+    }
+   ]
+  },
+  {
+   "target": "c_MTBV2T2NY0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "erythromycin, azithromycin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "PO/IV",
+     "population": "Allergy"
     }
    ]
   }
