@@ -952,13 +952,17 @@ describe("places (20 §20.8)", () => {
     ],
   };
 
-  it("validates general.json: key order, alphabetical workup, EOR guides only", () => {
+  it("validates general.json: key order, alphabetical workup, and only Reference tables in the PANCE guide", () => {
     expect(verdict("content/guides/psy/general.json", general)).toBe("ok");
     expect(verdict("content/guides/psy/general.json", { ...general, topics: [...general.topics].reverse() })).toMatch(/in the order/);
     expect(verdict("content/guides/psy/general.json", { ...general, topics: [general.topics[0], general.topics[0]] })).toMatch(/in the order/);
     expect(verdict("content/guides/psy/general.json", { ...general, workup: [...general.workup].reverse() })).toMatch(/alphabetical/);
     expect(verdict("content/guides/psy/general.json", { ...general, topics: [{ ...general.topics[0], links: [{ target: D1, covers: "x" }] }] })).toMatch(/a r_ or b_ id/);
-    expect(verdict("content/guides/pance/general.json", general)).toMatch(/no general\.json/);
+    const tables = { key: "tables", howto: null, links: [], files: [D1], gaps: [] };
+    expect(verdict("content/guides/pance/general.json", { v: 1, topics: [tables], workup: [] })).toBe("ok");
+    expect(verdict("content/guides/pance/general.json", { v: 1, topics: [], workup: [] })).toBe("ok");
+    expect(verdict("content/guides/pance/general.json", { ...general, workup: [] })).toMatch(/only the tables topic/);
+    expect(verdict("content/guides/pance/general.json", { v: 1, topics: [tables], workup: general.workup })).toMatch(/no workup or visits/);
   });
 
   it("validates well-child visits: a visits topic exactly when there are visits, unique ids, row/block links", () => {

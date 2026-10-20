@@ -22,11 +22,11 @@ async function readByTopic<T>(root: TreeRoot, dir: string, re: RegExp, path: (to
   return new Map(topics.map((t, i) => [t, files[i] as T]));
 }
 
-async function loadGuide(root: TreeRoot, id: string, eor: boolean): Promise<GuideData> {
+async function loadGuide(root: TreeRoot, id: string): Promise<GuideData> {
   const base = `content/guides/${id}`;
   const file = await readContent<GuideFile>(root, `${base}/guide.json`);
   const preamble = await readBlocks(root, `${base}/_preamble/blocks`, file.preamble);
-  const general = eor ? await readContent<GeneralFile>(root, `${base}/general.json`) : null;
+  const general = await readContent<GeneralFile>(root, `${base}/general.json`);
   const comparisons = await readContentIfExists<ComparisonsFile>(root, `${base}/comparisons.json`);
   const systems = await Promise.all(
     file.systems.map(async (s) => {
@@ -101,7 +101,7 @@ export async function loadContent(root: TreeRoot): Promise<Content> {
   const docs = await loadDocs(root);
   const [vocab, guides, cards, trims, uses, pharm, gaps, decks, reftabs, other, flags, concepts, checks] = await Promise.all([
     readContent<VocabFile>(root, "content/vocab/abbreviations.json"),
-    Promise.all(ids.map((g) => loadGuide(root, g, g !== PANCE))),
+    Promise.all(ids.map((g) => loadGuide(root, g))),
     readContent<CardsFile>(root, "content/pharm/cards.json"),
     readContent<TrimsFile>(root, "content/pharm/trims.json"),
     readContent<UsesFile>(root, "content/pharm/uses.json"),

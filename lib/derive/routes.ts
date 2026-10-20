@@ -12,6 +12,7 @@ export const GENERAL_LABELS: Record<GeneralKey, string> = {
   procedures: "Procedures & suturing",
   guidelines: "Guidelines",
   screenings: "Screenings",
+  tables: "Reference tables",
   workup: "Initial workup of common presentations",
   visits: "Well child visits",
 };
@@ -112,7 +113,7 @@ function parseGuideView(guide: string, rest: string[]): RoutePage {
       if (!a || extra.length > 0) return NOT_FOUND;
       return page({ kind: "pharm", system: a, section: b ?? null, target: b ? (c ?? null) : null });
     case "general":
-      return !isPance && a && b === undefined && isGeneralKey(a) ? page({ kind: "general", key: a }) : NOT_FOUND;
+      return a && b === undefined && isGeneralKey(a) ? page({ kind: "general", key: a }) : NOT_FOUND;
     case "workup":
       return !isPance && b === undefined ? page({ kind: "workup", item: a ?? null }) : NOT_FOUND;
     case "visits":

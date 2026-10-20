@@ -2,13 +2,15 @@
 // deployed site contains them, and patched into every published data file her device reads so a page
 // shows her save at once.
 import {
-  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, TOPIC_BELOW_RE, TOPIC_MEDS_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type MedsFile, type OtherFile, type RefTabsFile,
+  AS_IS_FILE_RE, BLOCK_FILE_RE, GAP_FILE_RE, TOPIC_BELOW_RE, TOPIC_MEDS_RE, WORD_DOC_RE, type AsIsFile, type BlockFile, type GapFile, type GeneralFile, type MedsFile, type OtherFile,
+  type RefTabsFile,
   type ReplaceFailed,
   type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { addDoc, type DocState } from "../../lib/derive/doclist.ts";
 import {
-  BUILD_PATH, docPath, DOC_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList, type NavJson,
+  BUILD_PATH, docPath, DOC_PATH_RE, GENERAL_PATH_RE, NAV_PATH_RE, OTHER_PATH, pubFigures, REF_PATH_RE, SYSTEM_PATH_RE, systemPath, type BuildJson, type DocJson, type DocList,
+  type GeneralJson, type NavJson,
   type OtherJson, type PubGap, type PubMedsCard, type PubMedsEdit, type RefTabJson, type SystemJson,
 } from "../../lib/derive/published.ts";
 import { pageCard, publishedEdit } from "../../lib/derive/panel.ts";
@@ -233,6 +235,13 @@ export function patchPublished(
     const r = out as RefTabJson;
     if (tab) r.files = patchDocList(r.files, ix, tab.files);
     r.subs = r.subs.map((sub) => ({ ...sub, notes: shownNotes(sub.notes, shownItems(null, blockShown)) }));
+  }
+  const gen = GENERAL_PATH_RE.exec(path)?.groups;
+  if (gen) {
+    const general = files.get(`content/guides/${gen.guide}/general.json`) as GeneralFile | undefined;
+    const topic = general?.topics.find((t) => t.key === gen.key);
+    const g = out as GeneralJson;
+    if (topic) g.files = patchDocList(g.files, ix, topic.files);
   }
   const docId = DOC_PATH_RE.exec(path)?.groups?.id;
   if (docId) {

@@ -406,7 +406,7 @@ export interface Link {
   covers: string;
 }
 
-export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "workup", "visits"] as const;
+export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "tables", "workup", "visits"] as const;
 export type GeneralKey = (typeof GENERAL_KEYS)[number];
 
 /** A well-child visit's page: links into her notes, then gap blocks (several visits may share one). */

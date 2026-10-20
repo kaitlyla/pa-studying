@@ -4,8 +4,8 @@
 import { createHash } from "node:crypto";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, type ReactNode } from "react";
-import { inboxUploadPath, parseTrailers, serializeFile, type AsIsFile, type OtherFile, type UploadFile, type WordDocFile } from "../../lib/content/index.ts";
-import { BUILD_PATH, docPath, OTHER_PATH, type DocJson, type OtherJson } from "../../lib/derive/published.ts";
+import { inboxUploadPath, parseTrailers, serializeFile, type AsIsFile, type GeneralFile, type OtherFile, type UploadFile, type WordDocFile } from "../../lib/content/index.ts";
+import { BUILD_PATH, docPath, generalPath, OTHER_PATH, type DocJson, type GeneralJson, type OtherJson } from "../../lib/derive/published.ts";
 import { D, doc, para, S } from "../../tools/build/test-fixture.ts";
 import { loadData } from "../data/load.ts";
 import type { FakeRequest } from "../e2e/fake-github.ts";
@@ -31,6 +31,7 @@ const AUTHOR = { name: "kaitlyla", email: "337482200+kaitlyla@users.noreply.gith
 const PDF = `content/files/${D(1)}/file.json`;
 const WORD = `content/docs/${D(5)}/doc.json`;
 const OTHER = "content/places/other.json";
+const FM_GENERAL = "content/guides/fm/general.json";
 
 let fx: Fixture;
 let w: World;
@@ -266,6 +267,33 @@ describe("adding a document (50 §50.9)", () => {
     expect(w.fake.readFile(`content/files/${id}/file.json`)).toBeUndefined();
     const other = await loadData<OtherJson>(OTHER_PATH);
     expect(other.sections.find((s) => s.id === "guidelines")?.files.pending).toEqual([{ id, name: "Lipids", state: "processing" }]);
+  });
+
+  it("adds a document to an EOR's Reference tables topic: the record, then its id at the end of that topic's files", async () => {
+    const id = await startUpload({ git: w.git, author: AUTHOR, file: pdfFile(), name: "Spirometry", place: { kind: "general", guide: "fm", key: "tables" } });
+    await finished();
+    const general = record<GeneralFile>(FM_GENERAL);
+    expect(general.topics.find((t) => t.key === "tables")?.files).toEqual([id]);
+    expect(general.topics.find((t) => t.key === "labs")?.files).toEqual([D(5), D(6), D(7)]);
+    expect(record<AsIsFile>(`content/files/${id}/file.json`).state).toBe("processing");
+    expect(trailersAt(w.fake.head())).toEqual({ kind: "doc-add", changed: [id] });
+    expect(w.fake.dispatches).toEqual([{ workflow: PROCESS_WORKFLOW, ref: "main", inputs: { item: id } }]);
+  });
+
+  it("shows a document added to Reference tables on that topic's page before its record is committed", async () => {
+    asOwner(true);
+    w.fake.fail(blobPost, "network", 1000);
+    const id = await startUpload({ git: w.git, author: AUTHOR, file: pdfFile(), name: "Spirometry", place: { kind: "general", guide: "fm", key: "tables" } });
+    await until(() => (uploadsInProgress()[0]?.status === "offline" ? true : null), "the upload to stop");
+    const tables = await loadData<GeneralJson>(generalPath("fm", "tables"));
+    expect(tables.files.pending).toEqual([{ id, name: "Spirometry", state: "processing" }]);
+    const labs = await loadData<GeneralJson>(generalPath("fm", "labs"));
+    expect(labs.files.pending.map((p) => p.id)).not.toContain(id);
+  });
+
+  it("refuses a general topic the guide doesn't have, writing nothing", async () => {
+    await expect(startUpload({ git: w.git, author: AUTHOR, file: pdfFile(), name: "X", place: { kind: "general", guide: "fm", key: "ekg" } })).rejects.toThrow(/No general topic ekg/);
+    expect(w.fake.writes()).toEqual([]);
   });
 
   it("retries a failed step after 2 s, 4 s and 8 s, on top of each call's own retries", async () => {

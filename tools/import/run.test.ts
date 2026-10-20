@@ -171,7 +171,7 @@ describe("runImport", () => {
       }
       expect(guide.sidebarEnd).toBe(g === "pance" ? id("f/Receptor.pdf") : undefined);
       const general = await readContentIfExists(root, `${base}/general.json`);
-      expect(general).toEqual(g === "pance" ? null : { v: 1, topics: [], workup: [] });
+      expect(general).toEqual({ v: 1, topics: [], workup: [] });
     }
     expect((await readContent<GuideFile>(root, "content/guides/pance/guide.json")).systems[1]!.id).toBe("renal-system-gu-system");
 

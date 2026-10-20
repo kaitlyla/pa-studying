@@ -682,9 +682,8 @@ export const validateComparisons: Validator = whole((v, at, ctx) => {
 
 const link = shapeOf<GeneralFile["topics"][number]["links"][number]>({ target: id("r", "b"), covers: str }, {});
 
-/** `expectId` is the guide of the file's path; the PANCE guide has no general topics. */
+/** `expectId` is the guide of the file's path; the PANCE guide's only general topic is Reference tables. */
 export const validateGeneral: Validator = (v, ctx, expectId) => {
-  if (expectId === "pance") throw new ContentError(ctx.file, "the PANCE guide has no general.json");
   shapeOf<GeneralFile>({
     v: v1,
     topics: arr(shapeOf<GeneralFile["topics"][number]>({ key: oneOf(...GENERAL_KEYS), howto: nullable(nonEmpty), links: arr(link), files: uniqueArr(id("d")), gaps: uniqueArr(id("g")) }, {})),
@@ -693,6 +692,10 @@ export const validateGeneral: Validator = (v, ctx, expectId) => {
     visits: arr(shapeOf<Visit>({ id: slugC, title: nonEmpty, links: arr(link), gaps: uniqueArr(id("g")) }, {})),
   })(v, "", ctx);
   const g = v as GeneralFile;
+  if (expectId === "pance") {
+    if (g.topics.some((t) => t.key !== "tables")) bad(ctx, ".topics", "only the tables topic in the PANCE guide", g.topics.map((t) => t.key));
+    if (g.workup.length > 0 || g.visits !== undefined) bad(ctx, "", "no workup or visits in the PANCE guide", { workup: g.workup.length, visits: g.visits?.length });
+  }
   g.topics.map((t) => GENERAL_KEYS.indexOf(t.key)).reduce((prev, k) => {
     if (k <= prev) bad(ctx, ".topics", `keys once each, in the order ${GENERAL_KEYS.join(", ")}`, g.topics.map((t) => t.key));
     return k;

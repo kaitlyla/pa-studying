@@ -31,6 +31,8 @@ export const unitsPath = (shard: number): string => `search/units-${shard}.json`
 export const NAV_PATH_RE = /^g\/(?<guide>[^/]+)\/nav\.json$/;
 /** A system page: `guide`, `system`. */
 export const SYSTEM_PATH_RE = /^g\/(?<guide>[^/]+)\/s\/(?<system>[^/]+)\.json$/;
+/** A general-topic page: `guide`, `key`. */
+export const GENERAL_PATH_RE = /^g\/(?<guide>[^/]+)\/general\/(?<key>[^/]+)\.json$/;
 /** A document page: `id`. */
 export const DOC_PATH_RE = /^docs\/(?<id>[^/]+)\.json$/;
 

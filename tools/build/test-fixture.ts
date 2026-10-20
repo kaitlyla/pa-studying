@@ -130,6 +130,7 @@ export async function writeFixture(root: string): Promise<void> {
     v: 1,
     topics: [
       { key: "labs", howto: null, links: [{ target: R(101), covers: "AF labs" }, { target: GONE, covers: "deleted" }], files: [D(5), D(6), D(7)], gaps: [G(1)] },
+      { key: "tables", howto: null, links: [], files: [], gaps: [] },
       { key: "workup", howto: null, links: [], files: [], gaps: [] },
       { key: "visits", howto: null, links: [], files: [], gaps: [] },
     ],
@@ -160,6 +161,7 @@ export async function writeFixture(root: string): Promise<void> {
     v: 1, id: "pance", source: "PANCE.docx", page, basePt: 10, preamble: [], sidebarEnd: D(3),
     systems: [{ id: "cardiovascular", title: "Cardiovascular", pct: "13%" }],
   });
+  await w("guides/pance/general.json", { v: 1, topics: [], workup: [] });
   await w("guides/pance/cardiovascular/system.json", { v: 1, id: "cardiovascular", blocks: [B(50)] });
   await w(`guides/pance/cardiovascular/blocks/${B(50)}.json`, block(B(50), "table", tableDoc(2, [[R(500), "content", "Metoprolol", "beta-1"], [R(501), "content", "Propranolol (non-selective)", "beta-1/2"]])));
   await w("guides/pance/cardiovascular/structure.json", {

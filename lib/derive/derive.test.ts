@@ -18,7 +18,7 @@ import type { Content, GuideData, SystemData } from "./model.ts";
 import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
-  comparisonsPath, docPath, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
+  comparisonsPath, docPath, GENERAL_PATH_RE, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
   type DocJson, type DocList, type GeneralJson, type HostsJson, type NavJson, type OtherJson, type RefTabJson, type SiteJson, type SlidesJson, type SystemJson, type UpdatesJson, type VisitsJson,
 } from "./published.ts";
 import { GENERAL_KEYS } from "../content/types.ts";
@@ -1121,13 +1121,13 @@ describe("navigation and pages (40 §40.3)", () => {
   });
 
   it("general keys come in the fixed order and only those present", () => {
-    expect(nav("fm").general).toEqual([{ key: "labs", label: "Labs" }, { key: "workup", label: GENERAL_LABELS.workup }, { key: "visits", label: "Well child visits" }]);
+    expect(nav("fm").general).toEqual([{ key: "labs", label: "Labs" }, { key: "tables", label: "Reference tables" }, { key: "workup", label: GENERAL_LABELS.workup }, { key: "visits", label: "Well child visits" }]);
     const c = mutated((x) => {
       const gen = guide(x, "fm").general;
       gen?.topics.unshift({ key: "screenings", howto: null, links: [], files: [], gaps: [] }, { key: "ekg", howto: null, links: [], files: [], gaps: [] });
     });
     const n = publish(c).files.get("g/fm/nav.json") as NavJson;
-    expect(n.general.map((x) => x.key)).toEqual(["labs", "ekg", "screenings", "workup", "visits"]);
+    expect(n.general.map((x) => x.key)).toEqual(["labs", "ekg", "screenings", "tables", "workup", "visits"]);
   });
 
   it("lists the well-child visits in their stored order, and none for a guide without them", () => {
@@ -3144,6 +3144,14 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     const others = [...out.files.keys()].filter((p) => !REF_TABS.some((tab) => p === refPath(tab)));
     expect(others.length).toBeGreaterThan(10);
     for (const p of [...others, refPath("nope"), `x/${refPath("labs")}`, `${refPath("labs")}.bak`]) expect(REF_PATH_RE.test(p), p).toBe(false);
+  });
+
+  it("GENERAL_PATH_RE matches exactly the general-topic paths generalPath builds", () => {
+    expect(GENERAL_PATH_RE.exec(generalPath("fm", "tables"))?.groups).toEqual({ guide: "fm", key: "tables" });
+    const general = new Set(base.guides.flatMap((g) => GENERAL_KEYS.map((k) => generalPath(g.file.id, k))));
+    const others = [...out.files.keys()].filter((p) => !general.has(p));
+    expect(others.length).toBeGreaterThan(10);
+    for (const p of [...others, `x/${generalPath("fm", "labs")}`, `${generalPath("fm", "labs")}.bak`]) expect(GENERAL_PATH_RE.test(p), p).toBe(false);
   });
 
   it("every search unit sharing a route carries a distinct anchor", () => {

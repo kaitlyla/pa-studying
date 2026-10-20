@@ -143,7 +143,7 @@ class Importer {
       ...(sidebarEnd !== undefined ? { sidebarEnd } : {}),
     };
     await this.write(`${base}/guide.json`, guide);
-    if (g !== "pance") await this.write(`${base}/general.json`, { v: 1, topics: [], workup: [] } satisfies GeneralFile);
+    await this.write(`${base}/general.json`, { v: 1, topics: [], workup: [] } satisfies GeneralFile);
   }
 
   /** A Word document shown as a page (`docs/<d>/`). */

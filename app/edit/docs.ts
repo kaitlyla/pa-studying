@@ -3,8 +3,8 @@
 // which are neither versions nor an Original (Orchestrator ruling 2026-10-05 00:55Z, amending 50 §50.4
 // and §50.6; dismissing a failed replacement's note per the ruling of 2026-10-04 20:39Z).
 import {
-  commitMessage, serializeFile, type AsIsFile, type DeckFile, type FileKind, type OtherFile, type RefTabsFile, type Trailers,
-  type WordDocFile,
+  commitMessage, serializeFile, type AsIsFile, type DeckFile, type FileKind, type GeneralFile, type GeneralKey, type OtherFile, type RefTabsFile,
+  type Trailers, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { commitChanges, type CommitOutcome, type FileScope } from "./commit.ts";
 import type { Git, Identity, TreeChange } from "./github.ts";
@@ -13,8 +13,8 @@ import { Snapshot } from "./snapshot.ts";
 /** A document action's result; on `saved`, the content files it wrote, for the local overlay. */
 export type DocOutcome = (CommitOutcome & { kind: Exclude<CommitOutcome["kind"], "saved"> }) | { kind: "saved"; commit: string; files: Map<string, unknown> };
 
-/** A list she can add a document to (50 §50.7): an Other section, or a reference tab. */
-export type DocPlace = { kind: "other"; section: string } | { kind: "ref"; tab: string };
+/** A list she can add a document to (50 §50.7): an Other section, a reference tab, or an EOR's general topic. */
+export type DocPlace = { kind: "other"; section: string } | { kind: "ref"; tab: string } | { kind: "general"; guide: string; key: GeneralKey };
 
 export interface DocRequest {
   git: Git;
@@ -118,7 +118,12 @@ export function renameDoc(req: DocRequest & { name: string }): Promise<DocOutcom
 }
 
 /** The places file holding `place`'s list, and that file with `docId` appended to the list. */
-function appendTo(place: DocPlace, docId: string, file: OtherFile | RefTabsFile): OtherFile | RefTabsFile {
+function appendTo(place: DocPlace, docId: string, file: PlacesFile): PlacesFile {
+  if (place.kind === "general") {
+    const general = file as GeneralFile;
+    if (!general.topics.some((t) => t.key === place.key)) throw new Error(`No general topic ${place.key} in ${place.guide}`);
+    return { ...general, topics: general.topics.map((t) => (t.key === place.key && !t.files.includes(docId) ? { ...t, files: [...t.files, docId] } : t)) };
+  }
   if (place.kind === "other") {
     const other = file as OtherFile;
     if (!other.sections.some((s) => s.id === place.section)) throw new Error(`No Other section ${place.section}`);
@@ -131,7 +136,12 @@ function appendTo(place: DocPlace, docId: string, file: OtherFile | RefTabsFile)
   return tab.files.includes(docId) ? tabs : { ...tabs, [key]: { ...tab, files: [...tab.files, docId] } };
 }
 
-export const placesPath = (place: DocPlace): string => (place.kind === "other" ? OTHER_PLACES : REF_PLACES);
+type PlacesFile = OtherFile | RefTabsFile | GeneralFile;
+
+export function placesPath(place: DocPlace): string {
+  if (place.kind === "general") return `content/guides/${place.guide}/general.json`;
+  return place.kind === "other" ? OTHER_PLACES : REF_PLACES;
+}
 
 /** The record of an added document while it is processing (20 §20.5); `original` is her file's name. */
 export function processingRecord(docId: string, name: string, kind: FileKind, fileName: string): AsIsFile {
@@ -141,7 +151,7 @@ export function processingRecord(docId: string, name: string, kind: FileKind, fi
 /** The files that show an added document at the end of `place`'s list, from the places file at `head`. */
 export async function addedFiles(head: Snapshot, place: DocPlace, record: AsIsFile): Promise<Map<string, unknown>> {
   const places = placesPath(place);
-  const next = appendTo(place, record.id, await head.json<OtherFile | RefTabsFile>(places));
+  const next = appendTo(place, record.id, await head.json<PlacesFile>(places));
   return new Map<string, unknown>([[`content/files/${record.id}/file.json`, record], [places, next]]);
 }
 

@@ -3236,6 +3236,32 @@ test.describe("documents", () => {
     expect(JSON.parse(need(fake.readFile(`content/files/${id}/file.json`), "the added record"))).toMatchObject({ state: "processing", original: "Lipids 2024.pdf" });
   });
 
+  test("Reference tables: a visitor sees no Add; signed in, Add lists the document on the topic page, and it is still there after a reload", async ({ page, context, baseURL }) => {
+    const g = need(inGuides((id, n) => (n.general.some((x) => x.key === "tables") ? id : undefined)), "EOR with a Reference tables topic");
+    const tables = readData<GeneralJson>(generalPath(g, "tables"));
+    const hash = guideViewHash(g, { kind: "general", key: "tables" });
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, hash);
+    await expect(page.locator("main h1").first()).toContainText("Reference tables");
+    await expect(ref(page, "add-doc")).toHaveCount(0);
+
+    await signIn(page);
+    await ref(page, "add-doc").click();
+    const dialog = page.getByRole("dialog", { name: `Add a document to ${tables.label} for ${need(site.eors.find((e) => e.id === g), "guide").name}` });
+    await ref(dialog, "add-doc-file").setInputFiles(smallPdf("Spirometry reading table.pdf"));
+    await ref(dialog, "add-doc-confirm").click();
+    await expect(dialog).toBeHidden();
+    await expect(ref(page, "pending-docs").locator("li").last()).toContainText("Spirometry reading table");
+    await expect.poll(() => fake.dispatches.length, { timeout: 120_000 }).toBe(1);
+    const id = String(need(fake.dispatches[0], "dispatch").inputs.item);
+    const general = JSON.parse(need(fake.readFile(`content/guides/${g}/general.json`), "general.json")) as { topics: { key: string; files: string[] }[] };
+    expect(need(general.topics.find((t) => t.key === "tables"), "tables topic").files.at(-1)).toBe(id);
+
+    await page.reload();
+    await expect(page.locator("main h1").first()).toContainText("Reference tables");
+    await expect(ref(page, "pending-docs").locator("li").last()).toContainText("Spirometry reading table");
+  });
+
   const asIsDoc = (): DocRef => need(place().files.files.find((f) => f.kind === "pdf"), `PDF listed in Other › ${place().title}`);
 
   test("Rename checks the name, renames, and Undo renames back", async ({ page, context, baseURL }) => {
