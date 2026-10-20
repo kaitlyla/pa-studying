@@ -526,7 +526,7 @@ describe("general and places", () => {
     await refused(["general", "fm", await draft("b", gen({ topics: [{ key: "labs", howto: null, links: [], files: [D(9)], gaps: [] }] }))], new RegExp(`${D(9)} names nothing`), [GEN]);
     await refused(["general", "fm", await draft("c", gen({ workup: [{ id: "x", title: "X", conds: "", gap: G(9) }] }))], new RegExp(`${G(9)} names nothing`), [GEN]);
     await refused(["general", "fm", await draft("d", gen({ workup: [...gen().workup].reverse() }))], /alphabetical order/, [GEN]);
-    await refused(["general", "pance", await draft("e", gen())], /no general\.json/, [GEN]);
+    await refused(["general", "pance", await draft("e", gen())], /only the tables topic in the PANCE guide/, [GEN]);
   });
 
   it("writes well-child visits, and refuses a visit's unknown link target or gap", async () => {
