@@ -2,7 +2,8 @@
  "v": 1,
  "add": [],
  "remove": [
-  "c_MTBV2T2NY0"
+  "c_MTBV2T2NY0",
+  "c_ZVZ43PBRG2"
  ],
  "own": [
   {
@@ -805,22 +806,7 @@
     {
      "role": "1st",
      "drugs": "doxycycline",
-     "note": "contraindicated in 2nd and 3rd trimesters",
-     "sources": [
-      {
-       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
-       "org": "Centers for Disease Control and Prevention (CDC)",
-       "year": "2021",
-       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
-      }
-     ],
-     "scenario": "Treatment",
-     "population": "Pregnant"
-    },
-    {
-     "role": "1st",
-     "drugs": "doxycycline",
-     "note": "children ≥8 yrs",
+     "note": "children ≥8 y only",
      "sources": [
       {
        "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
@@ -854,7 +840,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin",
-     "note": "single dose (preferred in preg)",
+     "note": "single dose; preferred in preg (instead of doxycycline)",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -875,7 +861,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin",
-     "note": "children ≥45 kg, or ≥8 yrs",
+     "note": "children ≥8 y, or <8 y if ≥45 kg",
      "sources": [
       {
        "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",

@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "add": [
+  "c_ZV3PYTWDRT"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [],
+ "roles": [
+  {
+   "target": "c_63QY6YSHKS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "PPI",
+     "note": "bismuth quadruple (PPI + bismuth + tetracycline + metronidazole) x14d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peptic Ulcer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/peptic-ulcer-disease"
+      },
+      {
+       "name": "Helicobacter pylori Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/helicobacter-pylori-infection"
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    }
+   ]
+  },
+  {
+   "target": "c_ZV3PYTWDRT",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "bismuth subsalicylate",
+     "note": "bismuth quadruple (PPI + bismuth + tetracycline + metronidazole) x14d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peptic Ulcer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/peptic-ulcer-disease"
+      },
+      {
+       "name": "Helicobacter pylori Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/helicobacter-pylori-infection"
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    }
+   ]
+  },
+  {
+   "target": "c_ZVZ43PBRG2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tetracycline",
+     "note": "bismuth quadruple (PPI + bismuth + tetracycline + metronidazole) x14d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peptic Ulcer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/peptic-ulcer-disease"
+      },
+      {
+       "name": "Helicobacter pylori Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/helicobacter-pylori-infection"
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    }
+   ]
+  },
+  {
+   "target": "c_YSYYSQ9VG4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "bismuth quadruple (PPI + bismuth + tetracycline + metronidazole) x14d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peptic Ulcer Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/peptic-ulcer-disease"
+      },
+      {
+       "name": "Helicobacter pylori Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/gastritis-and-peptic-ulcer-disease/helicobacter-pylori-infection"
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "PCN allergy → metro instead of amoxicillin in triple therapy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "H. pylori (+)",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "c_58MCDAZQHM",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "amoxicillin",
+     "note": "triple therapy: omeprazole + clarithromycin + amoxicillin; ⍉appropriate as empiric 1st-line in most US settings (⇡ macrolide resistance)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    },
+    {
+     "role": "alt",
+     "drugs": "amoxicillin",
+     "note": "rifabutin triple (omeprazole + amoxicillin + rifabutin): tx-experienced/refractory, esp after bismuth quadruple failure",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    }
+   ]
+  },
+  {
+   "target": "c_MTBV2T2NY0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "clarithromycin",
+     "note": "triple therapy: omeprazole + clarithromycin + amoxicillin; ⍉appropriate as empiric 1st-line in most US settings (⇡ macrolide resistance)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "H. pylori (+)"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "H. pylori (+)",
+   "gaps": []
+  }
+ ]
+}

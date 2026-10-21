@@ -14,8 +14,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ER+: aromatase inhibitor (anastrozole, exemestane, letrozole), postmenopausal",
-     "note": null,
+     "drugs": "aromatase inhibitor (anastrozole, exemestane, letrozole)",
+     "note": "ER+, postmenopausal",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -27,8 +27,8 @@
     },
     {
      "role": "1st",
-     "drugs": "ER+: tamoxifen, premenopausal (or postmenopausal and AI-intolerant)",
-     "note": null,
+     "drugs": "tamoxifen",
+     "note": "ER+, premenopausal (or postmenopausal + AI-intolerant)",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -40,8 +40,8 @@
     },
     {
      "role": "1st",
-     "drugs": "HER2+: trastuzumab with chemotherapy",
-     "note": null,
+     "drugs": "trastuzumab + chemo",
+     "note": "HER2+",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -53,8 +53,8 @@
     },
     {
      "role": "1st",
-     "drugs": "High-risk features: combination chemotherapy (eg, ACT: doxorubicin + cyclophosphamide → paclitaxel)",
-     "note": null,
+     "drugs": "combo chemo (eg, ACT: doxorubicin + cyclophosphamide → paclitaxel)",
+     "note": "high-risk features",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -66,8 +66,8 @@
     },
     {
      "role": "1st",
-     "drugs": "Triple negative: pembrolizumab with chemotherapy",
-     "note": null,
+     "drugs": "pembrolizumab + chemo",
+     "note": "triple (−)",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -79,8 +79,8 @@
     },
     {
      "role": "alt",
-     "drugs": "Premenopausal high-risk: aromatase inhibitor + ovarian suppression",
-     "note": null,
+     "drugs": "aromatase inhibitor + ovarian suppression",
+     "note": "premenopausal, high-risk",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -92,8 +92,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "Pertuzumab added to trastuzumab if nodes are involved",
-     "note": null,
+     "drugs": "pertuzumab",
+     "note": "HER2+: added to trastuzumab if nodes involved",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -105,8 +105,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "Fulvestrant; CDK4/6 inhibitors (ribociclib, abemaciclib) with endocrine therapy (advanced/metastatic)",
-     "note": null,
+     "drugs": "fulvestrant; CDK4/6 inhibitors (ribociclib, abemaciclib) + endocrine tx",
+     "note": "advanced/metastatic",
      "sources": [
       {
        "name": "Breast Cancer",
@@ -123,8 +123,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Risk reduction (↑risk women): tamoxifen, raloxifene or AI",
-     "note": null,
+     "drugs": "tamoxifen, raloxifene or AI",
+     "note": "risk reduction (↑risk women)",
      "sources": [
       {
        "name": "USPSTF Recommendation: Breast Cancer: Medication Use to Reduce Risk (September 3, 2019)",
@@ -141,8 +141,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "On AI: bisphosphonate or denosumab",
-     "note": null,
+     "drugs": "bisphosphonate or denosumab",
+     "note": "bone health on AI",
      "sources": [
       {
        "name": "Assessment and management of bone health in women with oestrogen receptor-positive breast cancer receiving endocrine therapy: position statement summary. Med J Aust. 2019;211(5):224-229 (abstract, PubMed)",

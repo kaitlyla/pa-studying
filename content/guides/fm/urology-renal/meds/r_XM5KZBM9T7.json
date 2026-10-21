@@ -3,7 +3,8 @@
  "add": [],
  "remove": [
   "c_VXA8SDW8G2",
-  "c_MTBV2T2NY0"
+  "c_MTBV2T2NY0",
+  "c_ZVZ43PBRG2"
  ],
  "own": [
   {
@@ -408,7 +409,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone (IM)",
-     "note": "Preg: ceftriaxone, plus chlamydia tx if ⍉excluded",
+     "note": "same regimen (500mg IM x1)",
      "sources": [
       {
        "name": "Gonococcal Infections Among Adolescents and Adults - STI Treatment Guidelines, 2021",
@@ -474,36 +475,6 @@
     {
      "role": "1st",
      "drugs": "doxycycline",
-     "note": "contraindicated in the 2nd and 3rd trimesters",
-     "sources": [
-      {
-       "name": "Chlamydial Infections - STI Treatment Guidelines, 2021",
-       "org": "CDC",
-       "year": "2021",
-       "url": "https://www.cdc.gov/std/treatment-guidelines/chlamydia.htm"
-      }
-     ],
-     "scenario": "Gonorrhea",
-     "population": "Pregnant"
-    },
-    {
-     "role": "1st",
-     "drugs": "doxycycline",
-     "note": "contraindicated in the 2nd and 3rd trimesters",
-     "sources": [
-      {
-       "name": "Chlamydial Infections - STI Treatment Guidelines, 2021",
-       "org": "CDC",
-       "year": "2021",
-       "url": "https://www.cdc.gov/std/treatment-guidelines/chlamydia.htm"
-      }
-     ],
-     "scenario": "Chlamydia",
-     "population": "Pregnant"
-    },
-    {
-     "role": "1st",
-     "drugs": "doxycycline",
      "note": "children ≥8 y only",
      "sources": [
       {
@@ -550,7 +521,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin",
-     "note": "recommended chlamydia tx in preg (if chlamydia ⍉excluded)",
+     "note": "instead of doxycycline, if chlamydia ⍉excluded",
      "sources": [
       {
        "name": "Chlamydial Infections - STI Treatment Guidelines, 2021",
@@ -593,6 +564,25 @@
      "population": "Peds"
     }
    ]
+  },
+  {
+   "target": "c_YSYYSQ9VG4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "2g PO x1",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Trichomonas (men)"
+    }
+   ]
   }
  ],
  "scenarios": [
@@ -602,6 +592,10 @@
   },
   {
    "title": "Chlamydia",
+   "gaps": []
+  },
+  {
+   "title": "Trichomonas (men)",
    "gaps": []
   }
  ]

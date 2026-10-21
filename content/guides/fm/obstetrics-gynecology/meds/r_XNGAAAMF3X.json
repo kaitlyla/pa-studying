@@ -2517,21 +2517,29 @@
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 0,
+         "indLeft": 54,
          "indRight": 0,
-         "indFirst": 0,
+         "indFirst": -18,
          "spaceBefore": 0,
          "spaceAfter": 0,
-         "line": null,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
          "align": "left",
          "shade": null,
          "borders": null,
-         "marker": null
+         "marker": {
+          "text": "–",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
         },
         "content": [
          {
           "type": "text",
-          "text": "▪︎can trigger psoriasis flares"
+          "text": "can trigger psoriasis flares"
          }
         ]
        },
@@ -3534,8 +3542,8 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "Danazol or tamoxifen, brief course, for severe pain",
-     "note": null,
+     "drugs": "danazol or tamoxifen",
+     "note": "brief course for severe pain",
      "sources": [
       {
        "name": "Mastalgia (Breast Pain)",
@@ -3570,8 +3578,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Breast pain, ⍉monotx",
-     "note": null,
+     "drugs": "evening primrose oil",
+     "note": "adjunct for breast pain; ⍉monotx",
      "sources": [
       {
        "name": "StatPearls: Fibrocystic Breast Disease",
@@ -3583,6 +3591,42 @@
        "name": "Site owner's answer to a review question (relayed by zeke-69273, 2026-10-11)",
        "org": "Course notes",
        "year": "2026",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "p_CQ28P9R0M1",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "danazol",
+     "note": "more severe sxs; only FDA-approved tx for severe pain",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_DMNJJNQQAV",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "tamoxifen",
+     "note": "more severe sxs",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
        "url": null
       }
      ]

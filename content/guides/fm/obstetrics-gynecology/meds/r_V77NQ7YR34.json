@@ -2,9 +2,9 @@
  "v": 1,
  "add": [],
  "remove": [
-  "c_VXA8SDW8G2",
   "c_MTBV2T2NY0",
-  "c_YSYYSQ9VG4"
+  "c_YSYYSQ9VG4",
+  "c_ZVZ43PBRG2"
  ],
  "own": [
   {
@@ -1330,7 +1330,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone (IV)",
-     "note": null,
+     "note": "1g IV q24h",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1344,7 +1344,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone (IM)",
-     "note": "single dose (weight-based)",
+     "note": "500mg IM x1 (1g if ≥150kg)",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1388,7 +1388,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone",
-     "note": "Preg: hospitalize, IV Tx",
+     "note": "inpt tx indicated (IV)",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1414,7 +1414,7 @@
     {
      "role": "1st",
      "drugs": "doxycycline",
-     "note": "PO after 24–48h of sustained improvement; 14 days total",
+     "note": "100mg PO q12h; PO after 24–48h of sustained improvement to complete 14d",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1506,6 +1506,84 @@
      ],
      "scenario": "Inpatient",
      "population": "Pregnant"
+    },
+    {
+     "role": "alt",
+     "drugs": "azithromycin ± metronidazole",
+     "note": "cephalosporin allergy (low GC risk + reliable f/u): azithro 500mg IV qd x1–2 doses → 250mg PO qd (7d total) ± metronidazole 500mg TID x12–14d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ],
+     "scenario": "Outpatient",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "c_VXA8SDW8G2",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "cefotetan or cefoxitin (+ doxycycline)",
+     "note": "cefotetan 2g IV q12h or cefoxitin 2g IV q6h + doxycycline 100mg PO/IV q12h; cefoxitin covers N. gonorrhoeae → ⍉need ceftriaxone at d/c",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "c_JVHE92XFE3",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "clindamycin + gentamicin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "c_QAXJA0677A",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "gentamicin + clindamycin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpatient"
     }
    ]
   }
