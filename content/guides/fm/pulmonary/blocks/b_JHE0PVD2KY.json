@@ -49,9 +49,9 @@
      },
      "cellMarginPt": {
       "top": 0,
-      "right": 5.4,
+      "right": 0.5,
       "bottom": 0,
-      "left": 5.4
+      "left": 0.5
      }
     },
     "content": [
@@ -84,7 +84,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -112,7 +115,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -124,6 +130,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -151,7 +163,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -163,6 +178,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clin Manifestations/Diagnostics"
@@ -190,7 +211,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -202,6 +226,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Mgnt "
@@ -219,7 +249,13 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        25.02162500000003,
+        294.8,
+        281.7283750000001,
+        172.45
+       ]
       },
       "content": [
        {
@@ -241,7 +277,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -253,9 +292,15 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "*Tuberculosis (TB)"
+            "text": "*TB"
            }
           ]
          },
@@ -299,7 +344,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -314,6 +362,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -334,7 +388,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -343,6 +400,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -355,6 +420,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "942093"
@@ -365,6 +436,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (rod-shaped), "
            },
            {
@@ -377,6 +456,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "942093"
@@ -387,6 +472,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", "
            },
            {
@@ -399,6 +492,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "942093"
@@ -409,6 +508,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (won’t gram stain)"
            }
           ]
@@ -421,7 +528,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -430,6 +540,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•begins in lungs, can disseminate; MC in resource-limited countries, rare in US"
            }
           ]
@@ -442,7 +560,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -451,6 +572,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•lungs MC site → LNs, vertebrae, meninges"
            }
           ]
@@ -463,7 +592,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -472,6 +604,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•non-spore-forming, nonmotile"
            }
           ]
@@ -484,7 +624,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -499,7 +642,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -514,12 +660,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "TB Dz"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": newer term for active TB "
            },
            {
@@ -530,6 +690,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -550,7 +716,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -565,12 +734,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "TB infect"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": newer term for latent TB (LTBI) "
            },
            {
@@ -581,6 +764,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -601,7 +790,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -610,6 +802,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•LTBI PATHO: delayed-type hypersensitivity; T cells → cell-mediated immune response → caseating granulomas; dormant unless IS → bacteria multiply → active TB"
            }
           ]
@@ -622,7 +822,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -637,7 +840,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -652,12 +858,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Transmission"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": airborne resp droplet inhalation "
            }
           ]
@@ -670,7 +890,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -679,6 +902,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•from an infected pt w/ active dz"
            }
           ]
@@ -691,7 +922,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -706,12 +940,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "RF"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            }
           ]
@@ -724,7 +972,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -733,6 +984,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•IS (ex, HIV, steroids, diabetes, TNF-alpha inhibitors)"
            }
           ]
@@ -745,7 +1004,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -754,6 +1016,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•drug use (ex, homelessness, incarceration), tobacco & EToH abuse "
            }
           ]
@@ -766,7 +1036,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -775,6 +1048,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•malnutrition, vitD deficiency"
            }
           ]
@@ -787,7 +1068,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -796,6 +1080,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•systemic dz (ex, silicosis, hematologic malig, CKD, celiac dz, cirrhosis, COPD)"
            }
           ]
@@ -808,7 +1100,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -817,6 +1112,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•children <5yo, older adults, household contacts, travel to endemic area"
            }
           ]
@@ -829,7 +1132,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -838,6 +1144,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•crowding/poor ventilation (ex, hospitals, nursing homes, homeless shelters, college dorms)"
            }
           ]
@@ -850,7 +1164,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -859,6 +1176,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•high-risk health care settings (ex, urban coastal hsp, facilities serving ↓SES pts or many immigrants from high-risk countries)"
            }
           ]
@@ -871,7 +1196,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -880,6 +1208,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•born in a TB-endemic area, organ transplant"
            }
           ]
@@ -892,7 +1228,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -901,7 +1240,15 @@
           "content": [
            {
             "type": "text",
-            "text": "RF for progression (latent → active): IS (ex, HIV, chemo, steroids, biologics), DM, kidney inj"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "RF for progression (latent → active): IS (ex, HIV, chemo, steroids, biologics), DM, kidney inj, malignancy"
            }
           ]
          },
@@ -913,16 +1260,26 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
-           "align": "left",
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "center",
            "shade": null,
            "borders": null,
            "marker": null
           },
           "content": [
            {
-            "type": "text",
-            "text": "•also malignancy"
+            "type": "image",
+            "attrs": {
+             "asset": "95a87701b98e3a02c9326992729cfd3c.png",
+             "widthPt": 286.5754366749043,
+             "heightPt": 127.30666846616734,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
            }
           ]
          },
@@ -934,22 +1291,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -964,327 +1309,28 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "center",
            "shade": null,
            "borders": null,
            "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
+          },
+          "content": [
+           {
+            "type": "image",
+            "attrs": {
+             "asset": "78f72a05e40503d544232c1e1a6bc127.png",
+             "widthPt": 276.3226011818292,
+             "heightPt": 157.63369866077505,
+             "rot": 0,
+             "flipH": false,
+             "flipV": false
+            }
+           }
+          ]
          }
         ]
        },
@@ -1307,7 +1353,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1322,12 +1371,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Primary TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": USU aSx w/ ⍉radiographic signs"
            }
           ]
@@ -1340,7 +1403,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1355,12 +1421,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Progress Primary TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1371,6 +1451,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1391,7 +1477,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1406,7 +1495,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1421,12 +1513,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "LTBI"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": aSx, PPD⊕ "
            },
            {
@@ -1437,6 +1543,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "*⍉transmissible "
@@ -1451,7 +1563,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1460,6 +1575,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•Lifetime risk of reactivation = 10% w/ 5% w.in first 18mo"
            }
           ]
@@ -1472,7 +1595,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1481,6 +1607,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•HIV: baseline PPD; annual testing if initial test ⊖ + ongoing RFs (communal living, active drug use, incarceration)"
            }
           ]
@@ -1493,7 +1627,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1502,6 +1639,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•TST: tuberculin injected just beneath the skin of the volar forearm (27-gauge, bevel up) → pale 1.0cm wheal; read 48-72h → measure induration"
            }
           ]
@@ -1514,7 +1659,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1523,6 +1671,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•TST (Mantoux) = intradermal PPD; type IV HSR; measure transverse diameter of induration (⍉erythema)"
            }
           ]
@@ -1535,7 +1691,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1544,6 +1703,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•⊕TST by mm of induration + RF:"
            }
           ]
@@ -1556,7 +1723,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1565,6 +1735,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – ≥5mm: recent TB contact, CXR c/w prior TB, organ transplant, TNF-alpha inhibitors, chronic steroids"
            }
           ]
@@ -1577,7 +1755,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1586,6 +1767,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – ≥5mm also: clin evidence of TB dz, other IS"
            }
           ]
@@ -1598,7 +1787,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1607,6 +1799,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – ≥10mm: immigration from high-prevalence country <5yrs ago, IVDU, residents/employees of high-risk settings (shelters, correctional facilities, hospitals, nursing homes), children <4yo or exposed to high-risk adults"
            }
           ]
@@ -1619,7 +1819,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1628,6 +1831,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – ≥10mm also: mycobacteriology lab workers, comorbid (ex, DM, severe kidney dz, Hodgkin, lymphoma, malnutrition), <90% IBW, children born in high-prevalence regions"
            }
           ]
@@ -1640,7 +1851,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1649,6 +1863,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – ≥15mm: no known RF"
            }
           ]
@@ -1661,7 +1883,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1670,6 +1895,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•HIV: TST ⊕ = ≥5mm induration"
            }
           ]
@@ -1682,7 +1915,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1691,6 +1927,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•⍉gold strd for LTBI dx; PPD induration width vs pt's RFs → need for further testing (USU CXR)"
            }
           ]
@@ -1703,7 +1947,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1712,6 +1959,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•IGRA (blood): specific for TB infect but can't distinguish latent vs active"
            }
           ]
@@ -1724,7 +1979,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1733,6 +1991,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•IGRA: more expensive + sometimes less available, but preferred (⍉return visit to read; distinguishes ⊕TST d/t BCG or nontuberculous mycobacteria)"
            }
           ]
@@ -1745,7 +2011,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1754,6 +2023,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•asx pt w/ 1 ⊕screen → confirm w/ IGRA; both ⊕ → eval for active TB (CXR, other imaging, sputum)"
            }
           ]
@@ -1766,7 +2043,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1775,6 +2055,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•⊕screen → CXR + clin eval to determine latent vs active"
            }
           ]
@@ -1787,7 +2075,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1802,12 +2093,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Active pulm/Reactivation TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1818,6 +2123,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1832,6 +2143,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
@@ -1842,6 +2159,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "(starts dry, becomes productive), hemoptysis, "
            },
            {
@@ -1854,6 +2179,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "ED7D31"
@@ -1864,6 +2195,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ", LAD, pleuritic CP "
            }
           ]
@@ -1876,7 +2215,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1885,6 +2227,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•sputum may become green + foul-smelling"
            }
           ]
@@ -1897,7 +2247,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1906,6 +2259,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•PE ⍉reliable → labs + CXR for any pt w/ suspicious pulm Sx"
            }
           ]
@@ -1918,7 +2279,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1927,6 +2291,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•Rasmussen aneurysm: pulm A. aneurysm that begins in a TB cavity + spreads to the bronchial arteries → rupture = massive hemoptysis"
            }
           ]
@@ -1939,7 +2311,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1948,6 +2323,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•PE: classically post-tussive apical rales"
            }
           ]
@@ -1960,7 +2343,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1975,7 +2361,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1990,12 +2379,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "CXR"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2003,6 +2406,12 @@
             "marks": [
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "*findings var & nonspecific "
@@ -2017,7 +2426,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2026,6 +2438,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2036,12 +2456,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Primary TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": hilar &/or mediastinal LAD, pleural effusion, segmental or lobar consolidation"
            }
           ]
@@ -2054,7 +2488,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2063,6 +2500,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•primary TB consolidation ⇢ middle &/or lower lobe"
            }
           ]
@@ -2075,7 +2520,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2084,6 +2532,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2094,12 +2550,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "LTBI"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2110,6 +2580,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2122,6 +2598,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "periph calcified nodule & hilar LAD)"
            }
           ]
@@ -2134,7 +2618,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2143,6 +2630,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2153,12 +2648,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Reactivation TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2169,6 +2678,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2183,6 +2698,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "EC33F7"
@@ -2201,7 +2722,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2210,6 +2734,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – also upper lobe infiltrates"
            }
           ]
@@ -2222,7 +2754,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2231,6 +2766,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2241,12 +2784,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "AIDS, CD4+ <200"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": diffuse, miliary, hilar/mediastinal LAD"
            }
           ]
@@ -2259,7 +2816,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2274,7 +2834,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2289,12 +2852,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Sputum"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2305,12 +2882,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "x3 samples, ≥8h apart, ± 1 early-morning specimen"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -2323,7 +2914,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2332,6 +2926,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2342,6 +2944,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2362,7 +2970,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2371,6 +2982,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "  – "
            },
            {
@@ -2378,6 +2997,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "⊕"
@@ -2390,6 +3015,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "NAAT w/ or w/o "
@@ -2399,6 +3030,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "⊕"
@@ -2411,6 +3048,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "AFB smear = sufficient for DX in at-risk pts"
@@ -2425,7 +3068,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2440,12 +3086,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Definitive"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2453,6 +3113,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2473,6 +3139,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "EC33F7"
@@ -2483,6 +3155,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -2495,7 +3175,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2504,6 +3187,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•AFB cx of resp secretions = gold strd; sample via flexible bronchoscopy w/ bronchial washings"
            }
           ]
@@ -2516,7 +3207,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2525,6 +3219,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•cx: identifies species + drug susceptibility"
            }
           ]
@@ -2537,7 +3239,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2546,6 +3251,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•AFB stain: less sensitive than cx but fast; cx growth can take up to 8wks"
            }
           ]
@@ -2558,7 +3271,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2573,7 +3289,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2591,12 +3310,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Extrapulm TB"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            }
           ]
@@ -2609,7 +3342,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2618,6 +3354,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•sus extrapulm TB → bx required"
            }
           ]
@@ -2630,7 +3374,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2639,6 +3386,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•tissue bx: granulomatous inflam w/ caseation necrosis"
            }
           ]
@@ -2651,7 +3406,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2660,6 +3418,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2670,6 +3436,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2682,6 +3454,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": osteolytic lesions on plain film"
            }
           ]
@@ -2694,7 +3474,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2703,6 +3486,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2715,6 +3506,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "0432FF"
@@ -2725,6 +3522,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2735,6 +3540,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2755,7 +3566,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2764,41 +3578,15 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•meningitis, ocular, renal, pericarditis, salpingitis, peritonitis, intestinal"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "center",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
-         },
-         {
-          "type": "anchored",
-          "attrs": {
-           "offsetPt": -2.707716535433071
-          },
-          "content": [
-           {
-            "type": "image_block",
-            "attrs": {
-             "asset": "95a87701b98e3a02c9326992729cfd3c.png",
-             "widthPt": 247.25,
-             "heightPt": 109.85,
-             "rot": 0,
-             "flipH": false,
-             "flipV": false
-            }
            }
           ]
          }
@@ -2823,7 +3611,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2838,12 +3629,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "First"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2854,6 +3659,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2874,7 +3685,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2883,11 +3697,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2899,6 +3727,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (RIF)"
            }
           ]
@@ -2911,7 +3747,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2920,11 +3759,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2936,6 +3789,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (INH)"
            }
           ]
@@ -2948,7 +3809,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2957,11 +3821,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2973,6 +3851,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (PZA)"
            }
           ]
@@ -2985,7 +3871,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2994,11 +3883,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3010,6 +3913,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " (EMB)"
            }
           ]
@@ -3022,7 +3933,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3037,7 +3951,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3052,12 +3969,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Then"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -3068,6 +3999,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -3088,7 +4025,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3097,11 +4037,25 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3113,11 +4067,25 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "+ "
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3129,6 +4097,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
@@ -3141,7 +4117,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3150,6 +4129,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Alt (susceptible dz): 4mo INH + rifapentine + PZA + moxifloxacin"
            }
           ]
@@ -3162,7 +4149,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3171,6 +4161,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•monitor LFTs; add vit B6 (pyridoxine) → prevent periph neuropathy d/t INH"
            }
           ]
@@ -3183,7 +4181,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3192,6 +4193,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•MDR-TB: INH-monoresistance regimen, BPaLM, or BPaL based on resistance patterns"
            }
           ]
@@ -3204,7 +4213,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3213,6 +4225,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•streptomycin may replace EMB if EMB ⍉tolerated"
            }
           ]
@@ -3225,7 +4245,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3240,7 +4263,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3255,12 +4281,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Latent TB infect (3 options)"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -3273,7 +4313,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3282,6 +4325,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -3292,6 +4343,12 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -3305,6 +4362,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3324,7 +4387,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3334,6 +4400,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3353,6 +4425,12 @@
               "type": "italic"
              },
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "000000"
@@ -3364,6 +4442,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -3383,7 +4467,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3392,6 +4479,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -3402,12 +4497,26 @@
              },
              {
               "type": "italic"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "3HR"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": INH + RIF QD x3mo"
            }
           ]
@@ -3420,7 +4529,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3429,6 +4541,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•alt: INH x9mo + pyridoxine (B6)"
            }
           ]
@@ -3441,7 +4561,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3450,6 +4573,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•exact regimen + monitoring (pt age, comorbidities) per ID specialists + local health dept"
            }
           ]
@@ -3462,7 +4593,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3471,6 +4605,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•alt also: INH x6mo"
            }
           ]
@@ -3483,7 +4625,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3492,6 +4637,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "MDR-TB: FQ (ex, levofloxacin) = 2nd-line; linezolid = last-line (severe SE, poor long-term tolerance)"
            }
           ]
@@ -3504,7 +4657,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3513,6 +4669,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Inpt active TB: negative-pressure isolation room; clinicians wear N95"
            }
           ]
@@ -3525,7 +4689,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3534,6 +4701,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "Prognosis: good w/ tx; MCC tx failure = ⍉taking meds"
            }
           ]
@@ -3546,7 +4721,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -3555,6 +4733,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•fatal w/o tx; mortality ⇡ in resource-limited countries"
            }
           ]
@@ -3573,25 +4759,6 @@
            "borders": null,
            "marker": null
           }
-         },
-         {
-          "type": "anchored",
-          "attrs": {
-           "offsetPt": -3.85
-          },
-          "content": [
-           {
-            "type": "image_block",
-            "attrs": {
-             "asset": "78f72a05e40503d544232c1e1a6bc127.png",
-             "widthPt": 146.01866141732285,
-             "heightPt": 83.1863779527559,
-             "rot": 0,
-             "flipH": false,
-             "flipV": false
-            }
-           }
-          ]
          }
         ]
        }
