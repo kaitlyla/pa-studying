@@ -479,6 +479,32 @@ test.describe("phone and laptop layouts", () => {
     await expect(page.getByRole("search").getByRole("textbox", { name: "Search all notes" })).toBeVisible();
   });
 
+  test("a Word document's file page fills the page column at 1440 px and fits a 390 px phone", async ({ page }) => {
+    const doc = docs.find((d) => d.kind === "word" && (d.blocks ?? []).length > 0);
+    if (!doc) throw new Error("the published content has no Word document");
+    const fits = (): Promise<{ box: number; column: number; overflow: boolean }> =>
+      page.evaluate(() => {
+        const box = document.querySelector<HTMLElement>("main .wordpage");
+        const column = box?.parentElement?.parentElement;
+        const scroller = document.querySelector<HTMLElement>("main");
+        if (!box || !column || !scroller) throw new Error("no Word page");
+        return { box: box.offsetWidth, column: column.clientWidth, overflow: scroller.scrollWidth > scroller.clientWidth };
+      });
+
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await open(page, fileHash(doc.id, null));
+    await expect(h1(page)).toHaveText(doc.name);
+    await expect(main(page).locator(".wordpage")).toBeVisible();
+    const wide = await fits();
+    expect(wide.box).toBeGreaterThan(860);
+    expect(wide.box).toBe(wide.column);
+    expect(wide.overflow).toBe(false);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect.poll(async () => (await fits()).box).toBeLessThanOrEqual(390);
+    expect((await fits()).overflow).toBe(false);
+  });
+
   test("at laptop width no table on FM Cardiovascular starts left of its scroll box (her tables reach into Word's page margin)", async ({ page }) => {
     const s = navOf("fm").systems.find((x) => x.id === "cardiovascular");
     if (!s) throw new Error("FM has no cardiovascular system");
