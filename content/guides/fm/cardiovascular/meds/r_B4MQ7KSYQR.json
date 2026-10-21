@@ -179,7 +179,7 @@
          },
          {
           "type": "text",
-          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)  "
+          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)"
          }
         ]
        },
@@ -275,7 +275,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•Treponema pallidum "
+          "text": "•Treponema pallidum"
          }
         ]
        },
@@ -308,7 +308,7 @@
          },
          {
           "type": "text",
-          "text": ": strep pharyngitis, oral or dental infections, syphilis "
+          "text": ": strep pharyngitis, oral or dental infections, syphilis"
          }
         ]
        },
@@ -391,7 +391,7 @@
          },
          {
           "type": "text",
-          "text": ": "
+          "text": ":"
          }
         ]
        },
@@ -456,18 +456,6 @@
            }
           ],
           "text": "Ampicillin"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "4472C4"
-            }
-           }
-          ],
-          "text": " "
          }
         ]
        },
@@ -500,7 +488,7 @@
          },
          {
           "type": "text",
-          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)  "
+          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)"
          }
         ]
        },
@@ -587,7 +575,7 @@
          },
          {
           "type": "text",
-          "text": ": UTIs in preg, Listeria monocytogenes, acute otitis media, Lyme dz, dental infections, Enterococcal infections "
+          "text": ": UTIs in preg, Listeria monocytogenes, acute otitis media, Lyme dz, dental infections, Enterococcal infections"
          }
         ]
        },
@@ -670,7 +658,7 @@
          },
          {
           "type": "text",
-          "text": ": "
+          "text": ":"
          }
         ]
        },
@@ -799,7 +787,7 @@
          },
          {
           "type": "text",
-          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)  "
+          "text": ": bactericidal via inhibition of cell wall synth (via beta-lactam ring)"
          }
         ]
        },
@@ -874,7 +862,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•⍉active against Enterococcus, MRSA, or gram (-) "
+          "text": "•⍉active against Enterococcus, MRSA, or gram (-)"
          }
         ]
        },
@@ -1086,7 +1074,7 @@
          },
          {
           "type": "text",
-          "text": ": bactericidal via inhibition of cell wall synth but are intrinsically effective against beta-lactamase producing bacteria "
+          "text": ": bactericidal via inhibition of cell wall synth but are intrinsically effective against beta-lactamase producing bacteria"
          }
         ]
        },
@@ -1215,7 +1203,7 @@
          },
          {
           "type": "text",
-          "text": ": skin/soft tissue infections (staph, strep) "
+          "text": ": skin/soft tissue infections (staph, strep)"
          }
         ]
        },
@@ -1297,7 +1285,7 @@
             }
            }
           ],
-          "text": "RIF "
+          "text": "RIF"
          }
         ]
        },
@@ -1346,7 +1334,7 @@
          },
          {
           "type": "text",
-          "text": "; binding alters its conformation and inhibits RNA synth; bactericidal "
+          "text": "; binding alters its conformation and inhibits RNA synth; bactericidal"
          }
         ]
        },
@@ -1400,7 +1388,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•broad spectrum "
+          "text": "•broad spectrum"
          }
         ]
        },
@@ -1454,7 +1442,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•effects ← his release – skin (flushing, rash, pruritis), flu-like syndrome "
+          "text": "•effects ← his release – skin (flushing, rash, pruritis), flu-like syndrome"
          }
         ]
        },
@@ -1475,7 +1463,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•red-orange body fluids "
+          "text": "•red-orange body fluids"
          }
         ]
        },
@@ -1496,7 +1484,7 @@
         "content": [
          {
           "type": "text",
-          "text": "•hepatitis "
+          "text": "•hepatitis"
          }
         ]
        }
@@ -1668,21 +1656,6 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone",
-     "note": "CI in premature neonates (to postmenstrual age 41 wk); hyperbilirubinemic neonates should ⍉be treated",
-     "sources": [
-      {
-       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=128bb292-d174-4769-b3e6-9f16617f31e3"
-      }
-     ],
-     "scenario": "Viridans strep",
-     "population": "Peds"
-    },
-    {
-     "role": "1st",
-     "drugs": "ceftriaxone",
      "note": null,
      "sources": [
       {
@@ -1710,19 +1683,19 @@
      "population": "Allergy"
     },
     {
+     "scenario": "HACEK",
+     "population": "Pregnant",
      "role": "1st",
      "drugs": "ceftriaxone",
-     "note": "CI in premature neonates (to postmenstrual age 41 wk); hyperbilirubinemic neonates should ⍉be treated",
+     "note": "preferred in preg",
      "sources": [
       {
-       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=128bb292-d174-4769-b3e6-9f16617f31e3"
+       "name": "Infective Endocarditis During Pregnancy: Challenges and Future Directions",
+       "org": "J Clin Med",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12194181/"
       }
-     ],
-     "scenario": "HACEK",
-     "population": "Peds"
+     ]
     }
    ]
   },
@@ -1815,6 +1788,21 @@
      "scenario": "Viridans strep"
     },
     {
+     "scenario": "Viridans strep",
+     "population": "Pregnant",
+     "role": "1st",
+     "drugs": "penicillin G",
+     "note": "PCN G or ceftriaxone alone (⍉gentamicin)",
+     "sources": [
+      {
+       "name": "Infective Endocarditis During Pregnancy: Challenges and Future Directions",
+       "org": "J Clin Med",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12194181/"
+      }
+     ]
+    },
+    {
      "role": "1st",
      "drugs": "penicillin G",
      "note": "W gentamicin; or ampicillin",
@@ -1846,6 +1834,21 @@
       }
      ],
      "scenario": "Enterococci"
+    },
+    {
+     "scenario": "Enterococci",
+     "population": "Pregnant",
+     "role": "1st",
+     "drugs": "ampicillin",
+     "note": "w ceftriaxone instead of gentamicin",
+     "sources": [
+      {
+       "name": "Infective Endocarditis During Pregnancy: Challenges and Future Directions",
+       "org": "J Clin Med",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12194181/"
+      }
+     ]
     },
     {
      "role": "1st",
@@ -1932,21 +1935,6 @@
     {
      "role": "adjunct",
      "drugs": "gentamicin",
-     "note": "aminoglycosides can cause fetal harm in preg (boxed warning)",
-     "sources": [
-      {
-       "name": "Gentamicin Sulfate Injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=977180b3-a222-4282-d485-4a3217674305"
-      }
-     ],
-     "scenario": "MSSA",
-     "population": "Pregnant"
-    },
-    {
-     "role": "adjunct",
-     "drugs": "gentamicin",
      "note": "PVE: w vanco + RIF",
      "sources": [
       {
@@ -1961,21 +1949,6 @@
     {
      "role": "adjunct",
      "drugs": "gentamicin",
-     "note": "aminoglycosides can cause fetal harm in preg (boxed warning)",
-     "sources": [
-      {
-       "name": "Gentamicin Sulfate Injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=977180b3-a222-4282-d485-4a3217674305"
-      }
-     ],
-     "scenario": "MRSA",
-     "population": "Pregnant"
-    },
-    {
-     "role": "adjunct",
-     "drugs": "gentamicin",
      "note": "W PCN G or ceftriaxone",
      "sources": [
       {
@@ -1986,21 +1959,6 @@
       }
      ],
      "scenario": "Viridans strep"
-    },
-    {
-     "role": "adjunct",
-     "drugs": "gentamicin",
-     "note": "aminoglycosides can cause fetal harm in preg (boxed warning)",
-     "sources": [
-      {
-       "name": "Gentamicin Sulfate Injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=977180b3-a222-4282-d485-4a3217674305"
-      }
-     ],
-     "scenario": "Viridans strep",
-     "population": "Pregnant"
     },
     {
      "role": "adjunct",
@@ -2030,21 +1988,6 @@
      ],
      "scenario": "Enterococci",
      "population": "Allergy"
-    },
-    {
-     "role": "adjunct",
-     "drugs": "gentamicin",
-     "note": "aminoglycosides can cause fetal harm in preg (boxed warning)",
-     "sources": [
-      {
-       "name": "Gentamicin Sulfate Injection prescribing information (FDA label, DailyMed)",
-       "org": "Hospira, Inc.",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=977180b3-a222-4282-d485-4a3217674305"
-      }
-     ],
-     "scenario": "Enterococci",
-     "population": "Pregnant"
     }
    ]
   }

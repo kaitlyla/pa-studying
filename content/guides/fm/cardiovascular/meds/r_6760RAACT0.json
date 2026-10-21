@@ -353,7 +353,7 @@
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": -72,
+               "indLeft": 0,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
@@ -370,7 +370,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Monitoring: LFTs,    SCr, BUN,    CBC"
+                "text": "Monitoring: LFTs, SCr, BUN, CBC"
                }
               ]
              }
@@ -442,7 +442,7 @@
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 0,
+               "indLeft": 18,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
@@ -544,7 +544,7 @@
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 0,
+               "indLeft": 36,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
@@ -561,7 +561,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "  – "
+                "text": "– "
                },
                {
                 "type": "text",
@@ -574,10 +574,6 @@
                  }
                 ],
                 "text": "cardioprotective effects 75-160mg"
-               },
-               {
-                "type": "text",
-                "text": " "
                }
               ]
              },
@@ -613,14 +609,14 @@
                },
                {
                 "type": "text",
-                "text": ": ACS (chewed) "
+                "text": ": ACS (chewed)"
                }
               ]
              },
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 0,
+               "indLeft": 18,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
@@ -637,7 +633,31 @@
               "content": [
                {
                 "type": "text",
-                "text": "- Prevent: CVA    - primary MI -↓thrombus size &"
+                "text": "- Prevent: CVA"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 18,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": {
+                "rule": "exact",
+                "value": 8.5
+               },
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "- primary MI -↓thrombus size &"
                },
                {
                 "type": "text",
@@ -653,14 +673,38 @@
                },
                {
                 "type": "text",
-                "text": "pre & post MI      - CV death        "
+                "text": "pre & post MI"
                }
               ]
              },
              {
               "type": "paragraph",
               "attrs": {
-               "indLeft": 0,
+               "indLeft": 18,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": {
+                "rule": "exact",
+                "value": 8.5
+               },
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "- CV death"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 18,
                "indRight": 0,
                "indFirst": 0,
                "spaceBefore": 0,
@@ -842,27 +886,9 @@
                },
                {
                 "type": "text",
-                "text": ": tinnitus, severe skin rash (rare) "
+                "text": ": tinnitus, severe skin rash (rare)"
                }
               ]
-             },
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 18,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": {
-                "rule": "exact",
-                "value": 8.5
-               },
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
              },
              {
               "type": "paragraph",
@@ -1029,10 +1055,6 @@
            }
           ],
           "text": " (TXA2))"
-         },
-         {
-          "type": "text",
-          "text": "   "
          }
         ]
        },
@@ -1098,7 +1120,7 @@
             }
            }
           ],
-          "text": "Inhibit platelet aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam"
+          "text": "Inhibit platelet aggregate - Analgesic - Antipyretic - Anti-inflam"
          }
         ]
        }
@@ -1192,7 +1214,7 @@
          },
          {
           "type": "text",
-          "text": "eakdown -> ↑cAMP in PLT & blood vessels -> inhibit platelet aggregation & vasodilates  "
+          "text": "eakdown -> ↑cAMP in PLT & blood vessels -> inhibit platelet aggregation & vasodilates"
          }
         ]
        },
@@ -1262,7 +1284,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Off label use: Buerger dz             -    Vasc sclerosis complicating DM                        -    Sx tx of Chronic cerebral ischemia "
+          "text": "Off label use: Buerger dz - Vasc sclerosis complicating DM - Sx tx of Chronic cerebral ischemia"
          }
         ]
        },
@@ -1291,7 +1313,7 @@
         "content": [
          {
           "type": "text",
-          "text": "SE:   -   GI effects     -     HA"
+          "text": "SE: - GI effects - HA"
          }
         ]
        },
@@ -1401,14 +1423,14 @@
             }
            }
           ],
-          "text": "MOA: methylxanthine derivative (like theophylline =) -but pentoxifylline ⍉have bronchodilator effects   "
+          "text": "MOA: methylxanthine derivative (like theophylline =) -but pentoxifylline ⍉have bronchodilator effects"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 0,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": 0,
          "spaceBefore": 0,
@@ -1433,7 +1455,7 @@
             }
            }
           ],
-          "text": "                                -    inhibit "
+          "text": "- inhibit "
          },
          {
           "type": "text",
@@ -1493,14 +1515,14 @@
             }
            }
           ],
-          "text": "ity "
+          "text": "ity"
          }
         ]
        },
        {
         "type": "paragraph",
         "attrs": {
-         "indLeft": 0,
+         "indLeft": 54,
          "indRight": 0,
          "indFirst": 0,
          "spaceBefore": 0,
@@ -1525,7 +1547,7 @@
             }
            }
           ],
-          "text": "                                -     ↓[plasma fibrinogen] & ↑ fibrinolytic activity->  "
+          "text": "- ↓[plasma fibrinogen] & ↑ fibrinolytic activity-> "
          },
          {
           "type": "text",
@@ -1555,7 +1577,7 @@
             }
            }
           ],
-          "text": "  -> ↑blood flow to microcirc -> ↑tissue O2  "
+          "text": " -> ↑blood flow to microcirc -> ↑tissue O2"
          }
         ]
        },
@@ -1596,7 +1618,7 @@
             }
            }
           ],
-          "text": " PAD: 2nd line, pt cannot use cilostazol "
+          "text": " PAD: 2nd line, pt cannot use cilostazol"
          }
         ]
        }
@@ -1773,7 +1795,7 @@
         "content": [
          {
           "type": "text",
-          "text": "DI: poss dose adjust   -"
+          "text": "DI: poss dose adjust -"
          },
          {
           "type": "text",
@@ -1785,7 +1807,7 @@
             }
            }
           ],
-          "text": "CYP3A4  -    P-GP"
+          "text": "CYP3A4 - P-GP"
          }
         ]
        },
@@ -1814,7 +1836,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Monitoring: None -drug levels are predictable "
+          "text": "Monitoring: None -drug levels are predictable"
          }
         ]
        },
@@ -1851,7 +1873,7 @@
          },
          {
           "type": "text",
-          "text": " (Xarelto) "
+          "text": " (Xarelto)"
          }
         ]
        },

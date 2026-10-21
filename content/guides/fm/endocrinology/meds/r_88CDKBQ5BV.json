@@ -13,7 +13,10 @@
   "c_Y55RXRWBW9",
   "c_5QVPZZ6A5E"
  ],
- "remove": [],
+ "remove": [
+  "c_2DFJN72MSS",
+  "c_N0JMHXH79G"
+ ],
  "own": [
   {
    "target": "c_XKXCX65ZTY",
@@ -393,7 +396,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "↓hepatic glucose prod "
+                "text": "↓hepatic glucose prod"
                }
               ]
              }
@@ -626,7 +629,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Severe renal or hepatic impairment "
+                "text": "Severe renal or hepatic impairment"
                }
               ]
              },
@@ -1050,7 +1053,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "↑glucose-dependent insulin secretion "
+                "text": "↑glucose-dependent insulin secretion"
                }
               ]
              }
@@ -1120,7 +1123,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "- reduction of CV events "
+                "text": "- reduction of CV events"
                }
               ]
              }
@@ -1191,10 +1194,6 @@
                  }
                 ],
                 "text": "pancreatitis"
-               },
-               {
-                "type": "text",
-                "text": " "
                }
               ]
              }
@@ -1283,7 +1282,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Medullary thyroid CA "
+                "text": "Medullary thyroid CA"
                }
               ]
              }
@@ -1387,7 +1386,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use: "
+          "text": "Clin Use:"
          }
         ]
        },
@@ -1474,7 +1473,7 @@
         "content": [
          {
           "type": "text",
-          "text": "SE: GI: N/V/D/C    -   pancreatitis (rare)   -   kidney dysfun (rare)"
+          "text": "SE: GI: N/V/D/C - pancreatitis (rare) - kidney dysfun (rare)"
          }
         ]
        },
@@ -1519,7 +1518,7 @@
          },
          {
           "type": "text",
-          "text": "  -   "
+          "text": " - "
          },
          {
           "type": "text",
@@ -1535,7 +1534,7 @@
          },
          {
           "type": "text",
-          "text": "      -   hypersensitivity"
+          "text": " - hypersensitivity"
          }
         ]
        },
@@ -1666,7 +1665,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Pt ed: ⍉controlled substance     -    very expensive   -   "
+          "text": "Pt ed: ⍉controlled substance - very expensive - "
          },
          {
           "type": "text",
@@ -1678,11 +1677,7 @@
             }
            }
           ],
-          "text": "avg 5.8 kg loss @ 1 yr "
-         },
-         {
-          "type": "text",
-          "text": " "
+          "text": "avg 5.8 kg loss @ 1 yr"
          }
         ]
        },
@@ -1764,7 +1759,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Pt ed: ⍉controlled substance    -   very expensive   "
+          "text": "Pt ed: ⍉controlled substance - very expensive"
          }
         ]
        },
@@ -1970,7 +1965,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Pt ed: ⍉controlled substance    -   very expensive"
+          "text": "Pt ed: ⍉controlled substance - very expensive"
          }
         ]
        },
@@ -2551,7 +2546,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Combo "
+                "text": "Combo"
                }
               ]
              },
@@ -2588,18 +2583,6 @@
                  }
                 ],
                 "text": "CV risk reduction"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "009193"
-                  }
-                 }
-                ],
-                "text": " "
                }
               ]
              }
@@ -2670,18 +2653,6 @@
                  }
                 ],
                 "text": "UTI, yeast infections"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "ED7D31"
-                  }
-                 }
-                ],
-                "text": " "
                }
               ]
              }
@@ -2841,7 +2812,7 @@
             }
            }
           ],
-          "text": "Serum K "
+          "text": "Serum K"
          }
         ]
        },
@@ -2899,7 +2870,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↓ preload -> ↑ osmosis & NP ->  ↓ vol "
+          "text": "↓ preload -> ↑ osmosis & NP -> ↓ vol"
          }
         ]
        },
@@ -2928,7 +2899,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↓ afterload -> ↓ BP via osmosis -> ↓ SNS -> ↓ BP \t-> ↓ a. stiffness"
+          "text": "↓ afterload -> ↓ BP via osmosis -> ↓ SNS -> ↓ BP -> ↓ a. stiffness"
          }
         ]
        },
@@ -2957,7 +2928,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use:   - DM2\t       - HF: ↓mortality, morbidity in CV * HFrEF"
+          "text": "Clin Use: - DM2 - HF: ↓mortality, morbidity in CV * HFrEF"
          }
         ]
        },
@@ -3027,7 +2998,7 @@
             }
            }
           ],
-          "text": "Ensure eGFR ≥ 25 b4 starting "
+          "text": "Ensure eGFR ≥ 25 b4 starting"
          }
         ]
        },
@@ -3067,7 +3038,7 @@
             }
            }
           ],
-          "text": "Dapagliflozin (Farxiga) "
+          "text": "Dapagliflozin (Farxiga)"
          }
         ]
        },
@@ -3154,7 +3125,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Poss ↓ ♡ remodel "
+          "text": "Poss ↓ ♡ remodel"
          }
         ]
        },
@@ -3194,42 +3165,7 @@
             }
            }
           ],
-          "text": "Empagliflozin (Jardiance)  "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "bold"
-           },
-           {
-            "type": "underline",
-            "attrs": {
-             "style": "single"
-            }
-           }
-          ],
-          "text": "\\"
+          "text": "Empagliflozin (Jardiance)"
          }
         ]
        }
@@ -3339,7 +3275,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉ ace (angiotensin 1→ 2) -> "
+          "text": "⍉ ace (angiotensin 1→ 2) ->"
          }
         ]
        },
@@ -3380,7 +3316,7 @@
             }
            }
           ],
-          "text": "(↓ afterload)  "
+          "text": "(↓ afterload)"
          }
         ]
        },
@@ -3409,7 +3345,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↓ aldosterone secrete ->  ↓ Na/H2O retention "
+          "text": "↓ aldosterone secrete -> ↓ Na/H2O retention "
          },
          {
           "type": "text",
@@ -3450,7 +3386,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↓ bradykinin breakdown (NO) -> ↓vasoconstrict & ↑prostaglandin "
+          "text": "↓ bradykinin breakdown (NO) -> ↓vasoconstrict & ↑prostaglandin"
          }
         ]
        },
@@ -3574,7 +3510,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Slow DM nephropathy & ↓ albuminuria -> renal protective "
+          "text": "Slow DM nephropathy & ↓ albuminuria -> renal protective"
          }
         ]
        },
@@ -3632,7 +3568,7 @@
         "content": [
          {
           "type": "text",
-          "text": "End stage-> makes worse "
+          "text": "End stage-> makes worse"
          }
         ]
        },
@@ -3690,7 +3626,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: "
+          "text": "Administration:"
          }
         ]
        },
@@ -4046,7 +3982,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Acute renal failure w severe B/L renal a. Stenosis "
+          "text": "Acute renal failure w severe B/L renal a. Stenosis"
          }
         ]
        },
@@ -4141,7 +4077,7 @@
             }
            }
           ],
-          "text": "Teratogenic "
+          "text": "Teratogenic"
          }
         ]
        },
@@ -4199,7 +4135,7 @@
         "content": [
          {
           "type": "text",
-          "text": "CKD: check 1wk b4 "
+          "text": "CKD: check 1wk b4"
          }
         ]
        },
@@ -4228,7 +4164,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Monitoring: "
+          "text": "Monitoring:"
          }
         ]
        },
@@ -4533,7 +4469,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Oral or parenteral "
+          "text": "Oral or parenteral"
          }
         ]
        },
@@ -4562,7 +4498,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Enaloprit (active form) -> short duration "
+          "text": "Enaloprit (active form) -> short duration"
          }
         ]
        },
@@ -4843,7 +4779,7 @@
             "type": "bold"
            }
           ],
-          "text": "Quinapril (Accupril) "
+          "text": "Quinapril (Accupril)"
          }
         ]
        },
@@ -4877,7 +4813,7 @@
             "type": "bold"
            }
           ],
-          "text": "Ramipril (Altace) "
+          "text": "Ramipril (Altace)"
          }
         ]
        }
@@ -4898,368 +4834,6 @@
      "doc": {
       "type": "doc",
       "content": [
-       {
-        "type": "table",
-        "attrs": {
-         "grid": [
-          99,
-          238.5,
-          234,
-          202.5
-         ],
-         "indentPt": -27.25,
-         "borders": {
-          "top": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "right": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "bottom": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "left": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideH": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          },
-          "insideV": {
-           "style": "single",
-           "widthPt": 0.5,
-           "color": "000000"
-          }
-         },
-         "cellMarginPt": {
-          "top": 0,
-          "right": 5.4,
-          "bottom": 0,
-          "left": 5.4
-         }
-        },
-        "content": [
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_163VW2414A",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "73FDD6",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "HF PHARM"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "73FDD6",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "MOA"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "73FDD6",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "Indications/Contraindications"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "73FDD6",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": "SE/Other"
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         },
-         {
-          "type": "table_row",
-          "attrs": {
-           "id": "r_WNX5FSBNS6",
-           "kind": "content",
-           "minHeightPt": null,
-           "repeatHeader": false,
-           "cantSplit": false
-          },
-          "content": [
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              }
-             }
-            ]
-           },
-           {
-            "type": "table_cell",
-            "attrs": {
-             "colspan": 1,
-             "rowspan": 1,
-             "colwidth": null,
-             "fill": "F2F2F2",
-             "vAlign": "top",
-             "borders": null
-            },
-            "content": [
-             {
-              "type": "paragraph",
-              "attrs": {
-               "indLeft": 0,
-               "indRight": 0,
-               "indFirst": 0,
-               "spaceBefore": 0,
-               "spaceAfter": 0,
-               "line": null,
-               "align": "left",
-               "shade": null,
-               "borders": null,
-               "marker": null
-              },
-              "content": [
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "underline",
-                  "attrs": {
-                   "style": "single"
-                  }
-                 }
-                ],
-                "text": "SE"
-               },
-               {
-                "type": "text",
-                "text": ": dizziness, HA, rash "
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       },
        {
         "type": "paragraph",
         "attrs": {
@@ -5378,7 +4952,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Since ⍉ effect bradykinin -> more selective to angiotensin effects "
+          "text": "Since ⍉ effect bradykinin -> more selective to angiotensin effects"
          }
         ]
        },
@@ -5494,7 +5068,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Also like ACEi w DM nephropathy & renal protective "
+          "text": "Also like ACEi w DM nephropathy & renal protective"
          }
         ]
        },
@@ -5668,7 +5242,7 @@
         "content": [
          {
           "type": "text",
-          "text": "SE:"
+          "text": "SE: dizziness, HA, rash"
          }
         ]
        },
@@ -5734,7 +5308,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Acute renal failure w B/L renal a. stenosis "
+          "text": "Acute renal failure w B/L renal a. stenosis"
          }
         ]
        },
@@ -6055,7 +5629,7 @@
         "content": [
          {
           "type": "text",
-          "text": "50mg, QD or BID "
+          "text": "50mg, QD or BID"
          }
         ]
        },
@@ -6163,7 +5737,7 @@
             }
            }
           ],
-          "text": "Valsartan (Diovan)   "
+          "text": "Valsartan (Diovan)"
          }
         ]
        }
@@ -6273,7 +5847,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Compete w HMG-CoA fro HMG-CoA reductase (liver enzyme that form mevalonic acid)  ->inhibit enzyme  -> ↓[cellular cholest] -> "
+          "text": "Compete w HMG-CoA fro HMG-CoA reductase (liver enzyme that form mevalonic acid) ->inhibit enzyme -> ↓[cellular cholest] ->"
          }
         ]
        },
@@ -6305,7 +5879,7 @@
             }
            }
           ],
-          "text": "1. stim surface LDL R ->uptake LDL    2. ↓VLDL into blood    3. Net ↓blood LDL, ↑HDL, ↓TG "
+          "text": "1. stim surface LDL R ->uptake LDL 2. ↓VLDL into blood 3. Net ↓blood LDL, ↑HDL, ↓TG"
          }
         ]
        },
@@ -6682,7 +6256,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Eliminated via feces "
+          "text": "Eliminated via feces"
          }
         ]
        },
@@ -6769,7 +6343,7 @@
         "content": [
          {
           "type": "text",
-          "text": "↑ LFT                   \t-     Hyperglycemia "
+          "text": "↑ LFT - Hyperglycemia"
          }
         ]
        },
@@ -6856,7 +6430,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Myalgias: USU ⍉ ↑ CPK, try alt statin or hold and so 2nd trial "
+          "text": "Myalgias: USU ⍉ ↑ CPK, try alt statin or hold and so 2nd trial"
          }
         ]
        },
@@ -6885,7 +6459,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Rhabdomyolysis: CPK> 10,000 OR CPK 10x norm + ↑ SCr OR need IVF  -Reversible on d/c "
+          "text": "Rhabdomyolysis: CPK> 10,000 OR CPK 10x norm + ↑ SCr OR need IVF -Reversible on d/c"
          }
         ]
        },
@@ -6926,7 +6500,7 @@
             }
            }
           ],
-          "text": "Teratogenic, RENAL adj "
+          "text": "Teratogenic, RENAL adj"
          }
         ]
        },
@@ -6955,7 +6529,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Active liver dz, chronic idiopathic ↑ liver enzymes "
+          "text": "Active liver dz, chronic idiopathic ↑ liver enzymes"
          }
         ]
        },
@@ -6984,7 +6558,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Food ⍉ affect absorb "
+          "text": "Food ⍉ affect absorb"
          }
         ]
        },
@@ -7013,7 +6587,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Met CYP3A4:  meds ↑ these statin levels"
+          "text": "Met CYP3A4: meds ↑ these statin levels"
          }
         ]
        },
@@ -7153,7 +6727,7 @@
             }
            }
           ],
-          "text": "Efficacy: fasting lipid (6-8Wk post-start/titrate + periodically) -baseline & % from baseline "
+          "text": "Efficacy: fasting lipid (6-8Wk post-start/titrate + periodically) -baseline & % from baseline"
          }
         ]
        },
@@ -7211,7 +6785,7 @@
         "content": [
          {
           "type": "text",
-          "text": "CPK: baseline if ↑ risk myalgia-rhabdomyolysis "
+          "text": "CPK: baseline if ↑ risk myalgia-rhabdomyolysis"
          }
         ]
        },
@@ -7269,7 +6843,7 @@
         "content": [
          {
           "type": "text",
-          "text": "CPK elev: "
+          "text": "CPK elev:"
          }
         ]
        },
@@ -7434,7 +7008,7 @@
             }
            }
           ],
-          "text": "↑ lipophilic "
+          "text": "↑ lipophilic"
          }
         ]
        },
@@ -7463,7 +7037,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: long ½ life -> ⍉ have to be Pm dose "
+          "text": "Administration: long ½ life -> ⍉ have to be Pm dose"
          }
         ]
        },
@@ -7537,7 +7111,7 @@
         "content": [
          {
           "type": "text",
-          "text": "only statin ⍉ need renal adj "
+          "text": "only statin ⍉ need renal adj"
          }
         ]
        },
@@ -7631,7 +7205,7 @@
             }
            }
           ],
-          "text": "↑ lipophilic "
+          "text": "↑ lipophilic"
          }
         ]
        },
@@ -7660,7 +7234,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Contraindications: CYP2C9 (metabolised), ⍉ w bile acid sequesterant "
+          "text": "Contraindications: CYP2C9 (metabolised), ⍉ w bile acid sequesterant"
          }
         ]
        },
@@ -7713,7 +7287,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Class: mod-low intensity "
+          "text": "Class: mod-low intensity"
          }
         ]
        },
@@ -7742,7 +7316,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: w food "
+          "text": "Administration: w food"
          }
         ]
        },
@@ -7840,7 +7414,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Class: mod intensity "
+          "text": "Class: mod intensity"
          }
         ]
        },
@@ -7869,7 +7443,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: highest bioavailability "
+          "text": "Administration: highest bioavailability"
          }
         ]
        },
@@ -7951,7 +7525,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Class:mod-low intensity  "
+          "text": "Class:mod-low intensity"
          }
         ]
        },
@@ -7992,11 +7566,7 @@
             }
            }
           ],
-          "text": "↑ hydrophilic "
-         },
-         {
-          "type": "text",
-          "text": " "
+          "text": "↑ hydrophilic"
          }
         ]
        },
@@ -8025,7 +7595,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Contraindications: "
+          "text": "Contraindications:"
          }
         ]
        },
@@ -8091,7 +7661,7 @@
             }
            }
           ],
-          "text": "Bile acid-sequestesterants sig ↓ [serum] ->take 1-4 hr post bile-acid s. "
+          "text": "Bile acid-sequestesterants sig ↓ [serum] ->take 1-4 hr post bile-acid s."
          }
         ]
        },
@@ -8185,7 +7755,7 @@
             }
            }
           ],
-          "text": "↑↑↑ Hydrophilic "
+          "text": "↑↑↑ Hydrophilic"
          }
         ]
        },
@@ -8214,7 +7784,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: long ½ life -> ⍉ have to be Pm dose "
+          "text": "Administration: long ½ life -> ⍉ have to be Pm dose"
          }
         ]
        },
@@ -8296,7 +7866,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Class: mod-low intensity "
+          "text": "Class: mod-low intensity"
          }
         ]
        },
@@ -8337,11 +7907,7 @@
             }
            }
           ],
-          "text": "↑↑↑ lipophilic  "
-         },
-         {
-          "type": "text",
-          "text": " "
+          "text": "↑↑↑ lipophilic"
          }
         ]
        },
@@ -8674,7 +8240,7 @@
                   }
                  }
                 ],
-                "text": "ASA "
+                "text": "ASA"
                }
               ]
              }
@@ -8863,7 +8429,7 @@
                },
                {
                 "type": "text",
-                "text": ": GI irritate, erosive gastritis, ↑bleed time, gastric ulceration/bleed, salicylism (tinnitus, deafness, HA, confusion, ↑pulse & RRs), hypervent, resp alkalosis, hypersensitivity (rash, SJS/TEN), Reyes syndrome (fulminating hepatitis w/ cerebral edema) "
+                "text": ": GI irritate, erosive gastritis, ↑bleed time, gastric ulceration/bleed, salicylism (tinnitus, deafness, HA, confusion, ↑pulse & RRs), hypervent, resp alkalosis, hypersensitivity (rash, SJS/TEN), Reyes syndrome (fulminating hepatitis w/ cerebral edema)"
                }
               ]
              }
@@ -8925,7 +8491,7 @@
         "content": [
          {
           "type": "text",
-          "text": "ASA: COX-1 selective (↓dose) "
+          "text": "ASA: COX-1 selective (↓dose)"
          }
         ]
        },
@@ -8992,7 +8558,7 @@
             }
            }
           ],
-          "text": " inhibit COX-1 → antiplatelet (platelet life  ~7-10d -⍉synth new TXA2)"
+          "text": " inhibit COX-1 → antiplatelet (platelet life ~7-10d -⍉synth new TXA2)"
          }
         ]
        },
@@ -9021,7 +8587,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin use: "
+          "text": "Clin use:"
          }
         ]
        },
@@ -9589,7 +9155,7 @@
                 }
                }
               ],
-              "text": "Correction factor: 1500/TDD (how much 1 unit will ↓ BG) "
+              "text": "Correction factor: 1500/TDD (how much 1 unit will ↓ BG)"
              }
             ]
            }
@@ -9888,18 +9454,6 @@
            }
           ],
           "text": "21 units"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "4472C4"
-            }
-           }
-          ],
-          "text": " "
          }
         ]
        },
@@ -9956,7 +9510,7 @@
          },
          {
           "type": "text",
-          "text": "– given as long-acting QD "
+          "text": "– given as long-acting QD"
          }
         ]
        },
@@ -9998,18 +9552,6 @@
            }
           ],
           "text": "24 carbs covered for each unit of insulin"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "4472C4"
-            }
-           }
-          ],
-          "text": " "
          }
         ]
        },
@@ -10315,18 +9857,6 @@
                  }
                 ],
                 "text": "2 units"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": " "
                }
               ]
              }
@@ -10762,7 +10292,7 @@
             }
            }
           ],
-          "text": "2 units "
+          "text": "2 units"
          }
         ]
        },
@@ -10830,18 +10360,6 @@
            }
           ],
           "text": "2 + 2 = 4 units as prandial bolus"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "70AD47"
-            }
-           }
-          ],
-          "text": " "
          }
         ]
        }
@@ -11364,7 +10882,7 @@
                },
                {
                 "type": "text",
-                "text": ": acute pancreatitis "
+                "text": ": acute pancreatitis"
                }
               ]
              }
@@ -11656,15 +11174,6 @@
                  }
                 ],
                 "text": "Sulfonylureas"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 }
-                ],
-                "text": " "
                }
               ]
              },
@@ -11787,21 +11296,6 @@
                  }
                 ],
                 "text": "tolbutamide, chlorpropamide"
-               },
-               {
-                "type": "text",
-                "marks": [
-                 {
-                  "type": "bold"
-                 },
-                 {
-                  "type": "color",
-                  "attrs": {
-                   "hex": "4472C4"
-                  }
-                 }
-                ],
-                "text": " "
                }
               ]
              }
@@ -11847,7 +11341,7 @@
                },
                {
                 "type": "text",
-                "text": ": stimulates pancreatic β cell insulin release "
+                "text": ": stimulates pancreatic β cell insulin release"
                }
               ]
              }
@@ -11893,7 +11387,7 @@
                },
                {
                 "type": "text",
-                "text": ": addition to metformin or initial therapy "
+                "text": ": addition to metformin or initial therapy"
                }
               ]
              }
@@ -11939,7 +11433,7 @@
                },
                {
                 "type": "text",
-                "text": ": hypoglycemia "
+                "text": ": hypoglycemia"
                }
               ]
              },
@@ -12459,7 +11953,7 @@
                },
                {
                 "type": "text",
-                "text": ": combo w/ metformin or monotx "
+                "text": ": combo w/ metformin or monotx"
                }
               ]
              }
@@ -12505,7 +11999,7 @@
                },
                {
                 "type": "text",
-                "text": ": hypoglycemia, wt gain "
+                "text": ": hypoglycemia, wt gain"
                }
               ]
              }
@@ -12910,7 +12404,7 @@
                },
                {
                 "type": "text",
-                "text": ": increases insulin sensitivity @ periph-r sites "
+                "text": ": increases insulin sensitivity @ periph-r sites"
                }
               ]
              },
@@ -12998,7 +12492,7 @@
                },
                {
                 "type": "text",
-                "text": ": HF, preg, DM I "
+                "text": ": HF, preg, DM I"
                }
               ]
              }
@@ -13044,7 +12538,7 @@
                },
                {
                 "type": "text",
-                "text": ": periph edema, fluid retention, CHF, hepatotoxicity "
+                "text": ": periph edema, fluid retention, CHF, hepatotoxicity"
                }
               ]
              },
@@ -13470,7 +12964,7 @@
                },
                {
                 "type": "text",
-                "text": ": delays intestinal glucose absorb "
+                "text": ": delays intestinal glucose absorb"
                }
               ]
              }
@@ -13544,7 +13038,7 @@
                },
                {
                 "type": "text",
-                "text": ": GI (flatulence, diarrhea), hepatitis "
+                "text": ": GI (flatulence, diarrhea), hepatitis"
                }
               ]
              }
@@ -13683,7 +13177,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use: "
+          "text": "Clin Use:"
          }
         ]
        },
@@ -13741,7 +13235,7 @@
         "content": [
          {
           "type": "text",
-          "text": "admin: "
+          "text": "admin:"
          }
         ]
        },
@@ -13840,7 +13334,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Contraindication: chronic malabsorb syndrome    -   "
+          "text": "Contraindication: chronic malabsorb syndrome - "
          },
          {
           "type": "text",
@@ -13881,7 +13375,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Cholestasis    -   ⍉proven safe in "
+          "text": "Cholestasis - ⍉proven safe in "
          },
          {
           "type": "text",
@@ -13938,7 +13432,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Drug interaction: ↓absorb of fat-soluble vit (A,D,E,K) "
+          "text": "Drug interaction: ↓absorb of fat-soluble vit (A,D,E,K)"
          }
         ]
        },
@@ -14445,7 +13939,7 @@
         "content": [
          {
           "type": "text",
-          "text": "SE: N/V/C    -   HA    -   dizzy    -    ↑BP & ↑HR"
+          "text": "SE: N/V/C - HA - dizzy - ↑BP & ↑HR"
          }
         ]
        },
@@ -14476,37 +13970,13 @@
           "type": "text",
           "marks": [
            {
-            "type": "color",
-            "attrs": {
-             "hex": "FFFFFF"
-            }
-           },
-           {
             "type": "shade",
             "attrs": {
              "hex": "990000"
             }
            }
           ],
-          "text": "BBW: suicidal thoughts & behaviors    -    neuropsych rxns"
-         },
-         {
-          "type": "text",
-          "marks": [
-           {
-            "type": "color",
-            "attrs": {
-             "hex": "990000"
-            }
-           },
-           {
-            "type": "shade",
-            "attrs": {
-             "hex": "990000"
-            }
-           }
-          ],
-          "text": "aa"
+          "text": "BBW: suicidal thoughts & behaviors - neuropsych rxns"
          }
         ]
        },
@@ -14535,7 +14005,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Contraindication: uncontrolled HTN   -  "
+          "text": "Contraindication: uncontrolled HTN - "
          },
          {
           "type": "text",
@@ -14551,7 +14021,7 @@
          },
          {
           "type": "text",
-          "text": "   -  "
+          "text": " - "
          },
          {
           "type": "text",
@@ -14592,7 +14062,7 @@
         "content": [
          {
           "type": "text",
-          "text": "drug/ETOH w.draw   -   chronic opioid use   -   "
+          "text": "drug/ETOH w.draw - chronic opioid use - "
          },
          {
           "type": "text",
@@ -14773,7 +14243,7 @@
         "content": [
          {
           "type": "text",
-          "text": "controlled substance b/c phentermine "
+          "text": "controlled substance b/c phentermine"
          }
         ]
        },
@@ -14802,7 +14272,7 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: "
+          "text": "MOA:"
          }
         ]
        },
@@ -14889,7 +14359,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use: "
+          "text": "Clin Use:"
          }
         ]
        },
@@ -15063,7 +14533,7 @@
             }
            }
           ],
-          "text": "  -   phentermine"
+          "text": " - phentermine"
          }
         ]
        },
@@ -15170,7 +14640,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Pt ed: controlled substance (↑abuse potential) -b/c phentermine "
+          "text": "Pt ed: controlled substance (↑abuse potential) -b/c phentermine"
          }
         ]
        },
@@ -15339,11 +14809,11 @@
             "type": "bold"
            }
           ],
-          "text": "Brand/Generics:                                                                                              "
+          "text": "Brand/Generics: "
          },
          {
           "type": "text",
-          "text": "-    Orlistat (Xenical, Ali)"
+          "text": "- Orlistat (Xenical, Ali)"
          },
          {
           "type": "text",
@@ -15352,35 +14822,11 @@
             "type": "bold"
            }
           ],
-          "text": "     "
+          "text": " "
          },
          {
           "type": "text",
-          "text": "                -    Tirzepatide (Mounjaro)          -    Semaglutide (Wegovy, Ozempic)   "
-         }
-        ]
-       },
-       {
-        "type": "paragraph",
-        "attrs": {
-         "indLeft": 0,
-         "indRight": 0,
-         "indFirst": 0,
-         "spaceBefore": 0,
-         "spaceAfter": 0,
-         "line": {
-          "rule": "auto",
-          "value": 1.0791666666666666
-         },
-         "align": "left",
-         "shade": null,
-         "borders": null,
-         "marker": null
-        },
-        "content": [
-         {
-          "type": "text",
-          "text": " Levothyroxine (Levoxyl, Synthroid)         -   Ibandronate (Boniva)          -    Risendronate (Actonel)                -    Alendronate (Fosamax)          -     Phentermine (Adipex P)   "
+          "text": " - Tirzepatide (Mounjaro) - Semaglutide (Wegovy, Ozempic) - Phentermine (Adipex P)"
          }
         ]
        }
@@ -15748,6 +15194,60 @@
        "org": "American Diabetes Association (ADA)",
        "year": "2026",
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690184/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_0HMZ0B7E7Z",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "bile acid sequestrant (colesevelam)",
+     "note": "other options",
+     "sources": [
+      {
+       "name": "Welchol (colesevelam hydrochloride) label",
+       "org": "DailyMed (NLM)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=89cbd0a3-2d1b-41db-8c97-35ec67b7b09f"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_R33DHA2WC9",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "dopamine agonist (bromocriptine)",
+     "note": "other options",
+     "sources": [
+      {
+       "name": "Medications for Diabetes Mellitus Treatment",
+       "org": "MSD Manual Professional Edition",
+       "year": "",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/medications-for-diabetes-mellitus-treatment"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_DER922Z4SG",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "pramlintide",
+     "note": "other options",
+     "sources": [
+      {
+       "name": "Medications for Diabetes Mellitus Treatment",
+       "org": "MSD Manual Professional Edition",
+       "year": "",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/medications-for-diabetes-mellitus-treatment"
       }
      ]
     }
