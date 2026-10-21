@@ -5,7 +5,8 @@
  ],
  "remove": [
   "c_MTBV2T2NY0",
-  "c_8XW495JD17"
+  "c_8XW495JD17",
+  "c_W3T72E7Z57"
  ],
  "own": [
   {
@@ -5641,8 +5642,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Antibiotic ointment (bacitracin/polymyxin B) until the defect heals (no evidence it lowers infection)",
-     "note": null,
+     "drugs": "bacitracin ointment",
+     "note": "until the defect heals (no evidence it ↓infection)",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5659,8 +5660,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Antibiotic ointment (bacitracin/polymyxin B) until the defect heals (no evidence it lowers infection)",
-     "note": null,
+     "drugs": "polymyxin B/bacitracin ointment",
+     "note": "until the defect heals (no evidence it ↓infection)",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5677,8 +5678,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Antibiotic ointment (erythromycin) until the defect heals (no evidence it lowers infection)",
-     "note": null,
+     "drugs": "erythromycin ointment",
+     "note": "until the defect heals (no evidence it ↓infection)",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5695,8 +5696,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Oral analgesics (your table: NSAIDs)",
-     "note": null,
+     "drugs": "oral NSAIDs",
+     "note": "pain",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5719,8 +5720,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Topical anesthetic for the first 24 h of a simple abrasion (ACEP); continued use is controversial",
-     "note": null,
+     "drugs": "topical anesthetic (proparacaine)",
+     "note": "first 24 h of a simple abrasion (ACEP); continued use controversial",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5737,8 +5738,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Larger abrasions: one dose of a short-acting cycloplegic (cyclopentolate 1% or homatropine 5%)",
-     "note": null,
+     "drugs": "cyclopentolate 1% or homatropine 5% (1 dose)",
+     "note": "larger abrasions (severe pain)",
      "sources": [
       {
        "name": "Corneal Abrasions and Foreign Bodies",
@@ -5773,7 +5774,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin ointment",
+     "drugs": "ciprofloxacin or ofloxacin",
      "note": "contact lens wearers: antipseudomonal coverage",
      "sources": [
       {
@@ -5787,6 +5788,24 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/injuries-poisoning/eye-trauma/corneal-abrasions-and-foreign-bodies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_QAXJA0677A",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tobramycin or gentamicin",
+     "note": "contact lens wearers: antipseudomonal coverage",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
       }
      ]
     }

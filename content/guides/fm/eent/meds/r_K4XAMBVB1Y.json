@@ -2504,29 +2504,11 @@
    ]
   },
   {
-   "target": "p_9QKZ5FRW7J",
-   "roles": [
-    {
-     "role": "1st",
-     "drugs": "Fungal: amphotericin B (yeast), voriconazole",
-     "note": null,
-     "sources": [
-      {
-       "name": "Corneal Ulcer",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/eye-disorders/corneal-disorders/corneal-ulcer"
-      }
-     ]
-    }
-   ]
-  },
-  {
    "target": "g_4BS87DXF2T",
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Cycloplegic: atropine 1% or scopolamine 0.25% TID (your table: cyclopentolate)",
+     "drugs": "cyclopentolate; atropine 1% or scopolamine 0.25% TID",
      "note": "⍉ophthalmic scopolamine FDA-listed (Drugs@FDA: transdermal only)",
      "sources": [
       {
@@ -2550,8 +2532,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Very selectively, prednisolone acetate drop (ophthalmologist only; not with HSV or thinning)",
-     "note": null,
+     "drugs": "prednisolone acetate drops",
+     "note": "very selectively (ophthalmologist only); ⍉ w HSV or corneal thinning",
      "sources": [
       {
        "name": "Corneal Ulcer",
@@ -2560,6 +2542,43 @@
        "url": "https://www.msdmanuals.com/professional/eye-disorders/corneal-disorders/corneal-ulcer"
       }
      ]
+    }
+   ]
+  },
+  {
+   "target": "c_W3N02QZ15S",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "topical steroids",
+     "note": "noninfectious corneal ulcers",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_MTBV2T2NY0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "erythromycin ointment",
+     "note": "pts who do ⍉wear contact lenses",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
     }
    ]
   },
@@ -2592,23 +2611,15 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin (topical)",
-     "note": null,
+     "drugs": "ciprofloxacin, moxifloxacin or gatifloxacin drops",
+     "note": "must cover Pseudomonas + S. aureus",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
        "year": "",
        "url": null
-      }
-     ],
-     "scenario": "Treatment"
-    },
-    {
-     "role": "1st",
-     "drugs": "moxifloxacin or gatifloxacin drops",
-     "note": null,
-     "sources": [
+      },
       {
        "name": "Corneal Ulcer",
        "org": "MSD Manual Professional Edition",
@@ -2627,6 +2638,13 @@
    "members": [
     "p_9QKZ5FRW7J",
     "g_A1JP5REKPR"
+   ]
+  },
+  {
+   "title": "Corticosteroids",
+   "members": [
+    "c_W3N02QZ15S",
+    "g_CYNWXSM12N"
    ]
   }
  ],

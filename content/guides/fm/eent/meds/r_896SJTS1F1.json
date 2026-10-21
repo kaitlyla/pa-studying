@@ -3,7 +3,9 @@
  "add": [
   "c_FHJ5EZAEK6"
  ],
- "remove": [],
+ "remove": [
+  "c_Z3W9VNTMAH"
+ ],
  "own": [
   {
    "target": "c_ZJBYRE8N73",
@@ -5744,8 +5746,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Glucocorticoids: optional burst then taper; earlier is better (within 24 h beat 25–72 h in one small series); helps vestibular recovery on caloric testing, symptom benefit uncertain (Cochrane 2011: none shown; 2022 meta-analysis: some benefit in the acute phase); your table says first line",
-     "note": null,
+     "drugs": "prednisone 10-day taper",
+     "note": "start early (≤72 h); helps vestibular recovery, Sx benefit uncertain",
      "sources": [
       {
        "name": "Vestibular Neuronitis",
@@ -5786,7 +5788,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Anticholinergic antiemetics: prochlorperazine or promethazine PR or PO q6–8h",
+     "drugs": "prochlorperazine or promethazine PR/PO q6–8h",
      "note": null,
      "sources": [
       {
@@ -5804,8 +5806,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Antihistamines, short-term only (longer use delays vestibular compensation and raises fall risk)",
-     "note": null,
+     "drugs": "diphenhydramine",
+     "note": "short-term only (longer use delays vestibular compensation, ↑fall risk)",
      "sources": [
       {
        "name": "Vestibular Neuronitis",
@@ -5828,32 +5830,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Antihistamines (eg, meclizine), short-term only (longer use delays vestibular compensation and raises fall risk)",
-     "note": null,
-     "sources": [
-      {
-       "name": "Vestibular Neuronitis",
-       "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/inner-ear-disorders/vestibular-neuronitis"
-      },
-      {
-       "name": "Your guide table under this diagnosis",
-       "org": "",
-       "year": "",
-       "url": null
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "target": "p_YRVTJGYF8D",
-   "roles": [
-    {
-     "role": "adjunct",
-     "drugs": "Antihistamines (eg, meclizine), short-term only (longer use delays vestibular compensation and raises fall risk)",
-     "note": null,
+     "drugs": "meclizine",
+     "note": "short-term only (longer use delays vestibular compensation, ↑fall risk)",
      "sources": [
       {
        "name": "Vestibular Neuronitis",
@@ -5876,8 +5854,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Benzodiazepines, short-term only (longer use delays vestibular compensation and raises fall risk)",
-     "note": null,
+     "drugs": "alprazolam or diazepam",
+     "note": "short-term only (longer use delays vestibular compensation, ↑fall risk)",
      "sources": [
       {
        "name": "Vestibular Neuronitis",
@@ -5900,8 +5878,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "N/V",
-     "note": null,
+     "drugs": "ondansetron",
+     "note": "N/V",
      "sources": [
       {
        "name": "StatPearls: Labyrinthitis",
@@ -5914,11 +5892,29 @@
    ]
   },
   {
+   "target": "c_M1Y90NS53A",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "metoclopramide",
+     "note": "N/V",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
    "target": "g_MEKD1575W0",
    "roles": [
     {
      "role": "1st",
-     "drugs": "ceftriaxone (IV); ceftazidime",
+     "drugs": "bacterial labyrinthitis: ceftriaxone (IV); ceftazidime",
      "note": "purulent (bact) labyrinthitis only; ceftazidime for nosocomial infect (Pseudomonas)",
      "sources": [
       {
@@ -5944,7 +5940,8 @@
    "title": "Antiemetics",
    "members": [
     "c_FHJ5EZAEK6",
-    "g_NSR2KDGXJS"
+    "g_NSR2KDGXJS",
+    "c_M1Y90NS53A"
    ]
   }
  ]

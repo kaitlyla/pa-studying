@@ -11955,7 +11955,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Maintenance diuretic: hydrochlorothiazide/triamterene 25/37.5 mg PO daily",
+     "drugs": "Maintenance: HCTZ/triamterene 25/37.5 mg PO daily",
      "note": null,
      "sources": [
       {
@@ -11973,7 +11973,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Maintenance diuretic: hydrochlorothiazide/triamterene 25/37.5 mg PO daily",
+     "drugs": "Maintenance: triamterene (combined w HCTZ)",
      "note": null,
      "sources": [
       {
@@ -11991,7 +11991,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Maintenance diuretic: acetazolamide 250 mg PO BID",
+     "drugs": "Maintenance: acetazolamide 250 mg PO BID",
      "note": null,
      "sources": [
       {
@@ -12051,7 +12051,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Acute attacks: ondansetron is the 2nd-line antiemetic",
+     "drugs": "Acute attacks: ondansetron (2nd-line antiemetic)",
      "note": null,
      "sources": [
       {
@@ -12069,8 +12069,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Acute attacks: antihistamines (diphenhydramine) to sedate the vestibular system; not prophylactic",
-     "note": null,
+     "drugs": "Acute attacks: diphenhydramine",
+     "note": "sedates the vestibular system; not prophylactic",
      "sources": [
       {
        "name": "Meniere Disease",
@@ -12087,8 +12087,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Acute attacks: antihistamines (meclizine) to sedate the vestibular system; not prophylactic",
-     "note": null,
+     "drugs": "Acute attacks: meclizine or cyclizine",
+     "note": "sedates the vestibular system; not prophylactic",
      "sources": [
       {
        "name": "Meniere Disease",
@@ -12105,26 +12105,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Acute attacks: benzodiazepines (diazepam) to sedate the vestibular system; not prophylactic",
-     "note": null,
-     "sources": [
-      {
-       "name": "Meniere Disease",
-       "org": "MSD Manual Professional Edition",
-       "year": "2025",
-       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/inner-ear-disorders/meniere-disease"
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "target": "p_60AZ16Z6CM",
-   "roles": [
-    {
-     "role": "adjunct",
-     "drugs": "Acute attacks: antihistamines (diphenhydramine, meclizine, cyclizine) or benzodiazepines (diazepam) to sedate the vestibular system; not prophylactic",
-     "note": null,
+     "drugs": "Acute attacks: diazepam",
+     "note": "sedates the vestibular system; not prophylactic",
      "sources": [
       {
        "name": "Meniere Disease",
