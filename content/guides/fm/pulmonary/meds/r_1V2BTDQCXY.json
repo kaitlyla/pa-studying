@@ -10,7 +10,9 @@
   "c_3R8WTKGPB3",
   "c_MTBV2T2NY0",
   "c_PRXDPX2MT3",
-  "c_8XW495JD17"
+  "c_8XW495JD17",
+  "c_ZVZ43PBRG2",
+  "c_N0JMHXH79G"
  ],
  "own": [
   {
@@ -2854,17 +2856,31 @@
     {
      "role": "1st",
      "drugs": "amoxicillin",
-     "note": "< 5 y: USU the drug of choice; ≥ 5 y: amoxicillin, or + a macrolide particularly if an atypical pathogen can't be excluded",
+     "note": "< 5 y: amoxicillin = USU drug of choice; ≥ 5 y: amoxicillin ± macrolide if atypical ⍉excluded",
      "sources": [
       {
-       "name": "Community-Acquired Pneumonia",
-       "org": "MSD Manual Professional Edition",
-       "year": "2026",
-       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+       "name": "The Management of Community-Acquired Pneumonia in Infants and Children Older Than 3 Months of Age (PIDS/IDSA guideline)",
+       "org": "Pediatric Infectious Diseases Society; Infectious Diseases Society of America",
+       "year": "2011",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7107838/"
       }
      ],
      "scenario": "CAP, outpt",
      "population": "Peds"
+    },
+    {
+     "role": "2nd",
+     "drugs": "amoxicillin",
+     "note": "high dose + doxy (⍉want QT prolong)",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, outpt"
     }
    ]
   },
@@ -2874,7 +2890,7 @@
     {
      "role": "1st",
      "drugs": "azithromycin, clarithromycin",
-     "note": "monotx; only if local pneumococcal resistance <25%",
+     "note": "monotx; only if local S. pneumo macrolide resistance <25%",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -2947,9 +2963,60 @@
     },
     {
      "role": "1st",
-     "drugs": "clarithromycin",
-     "note": "⍉recommended unless ⍉alt therapy = appropriate",
+     "drugs": "azithromycin",
+     "note": "preg w PCN allergy → 3rd-gen ceph + azithro; ⍉ceph → clindamycin + azithro",
      "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, outpt",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "preg w PCN allergy → 3rd-gen ceph + azithro; ⍉ceph → clindamycin + azithro",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "preg w PCN allergy → 3rd-gen ceph + azithro",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, inpt, ⍉ICU",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "+ amoxicillin or Augmentin; clarithro ⍉ unless ⍉alt tx appropriate",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      },
       {
        "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
        "org": "DIRECTRX (FDA label, DailyMed)",
@@ -2962,14 +3029,14 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin, clarithromycin",
-     "note": "⍉ if hypersensitivity to any macrolide",
+     "drugs": "azithromycin",
+     "note": "+ amoxicillin or Augmentin; clarithro ⍉ unless ⍉alt tx appropriate",
      "sources": [
       {
-       "name": "Azithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "SANDOZ INC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec619299-e0ef-44dd-acdb-8c53bbfc5b8a"
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
       },
       {
        "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
@@ -2979,73 +3046,28 @@
       }
      ],
      "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
-     "drugs": "clarithromycin",
-     "note": "⍉recommended unless ⍉alt therapy = appropriate",
-     "sources": [
-      {
-       "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "DIRECTRX (FDA label, DailyMed)",
-       "year": "2025",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d22bd12c-737b-4aab-e053-2995a90aff60"
-      }
-     ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
-     "population": "Pregnant"
-    },
-    {
-     "role": "1st",
-     "drugs": "azithromycin, clarithromycin",
-     "note": "⍉ if hypersensitivity to any macrolide",
-     "sources": [
-      {
-       "name": "Azithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "SANDOZ INC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec619299-e0ef-44dd-acdb-8c53bbfc5b8a"
-      },
-      {
-       "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "DIRECTRX (FDA label, DailyMed)",
-       "year": "2025",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d22bd12c-737b-4aab-e053-2995a90aff60"
-      }
-     ],
-     "scenario": "CAP, inpt, ⍉ICU",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
-     "drugs": "clarithromycin",
-     "note": "⍉recommended unless ⍉alt therapy = appropriate",
-     "sources": [
-      {
-       "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "DIRECTRX (FDA label, DailyMed)",
-       "year": "2025",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d22bd12c-737b-4aab-e053-2995a90aff60"
-      }
-     ],
-     "scenario": "CAP, inpt, ⍉ICU",
      "population": "Pregnant"
     },
     {
      "role": "1st",
      "drugs": "azithromycin",
-     "note": "⍉ if hypersensitivity to any macrolide",
+     "note": "+ Unasyn or a 3rd-gen ceph; clarithro ⍉ unless ⍉alt tx appropriate",
      "sources": [
       {
-       "name": "Azithromycin tablets prescribing information (FDA label, DailyMed)",
-       "org": "SANDOZ INC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec619299-e0ef-44dd-acdb-8c53bbfc5b8a"
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      },
+      {
+       "name": "Clarithromycin tablets prescribing information (FDA label, DailyMed)",
+       "org": "DIRECTRX (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d22bd12c-737b-4aab-e053-2995a90aff60"
       }
      ],
-     "scenario": "CAP, inpt, ICU",
-     "population": "Allergy"
+     "scenario": "CAP, inpt, ⍉ICU",
+     "population": "Pregnant"
     }
    ]
   },
@@ -3098,21 +3120,6 @@
     {
      "role": "alt",
      "drugs": "doxycycline",
-     "note": "⍉ if hypersensitivity to any tetracycline",
-     "sources": [
-      {
-       "name": "Doxycycline hyclate tablets prescribing information (FDA label, DailyMed)",
-       "org": "DIRECT_RX (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2ad2b85f-2479-c7cd-e063-6294a90acca1"
-      }
-     ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
-     "population": "Allergy"
-    },
-    {
-     "role": "alt",
-     "drugs": "doxycycline",
      "note": "≤ 8 y: only for severe or life-threatening infect when benefit outweighs risk (tooth discoloration)",
      "sources": [
       {
@@ -3124,6 +3131,21 @@
      ],
      "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
      "population": "Peds"
+    },
+    {
+     "role": "alt",
+     "drugs": "doxycycline",
+     "note": "if allergic to macrolides",
+     "sources": [
+      {
+       "name": "Community-Acquired Pneumonia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      }
+     ],
+     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "population": "Allergy"
     }
    ]
   },
@@ -3167,13 +3189,19 @@
     {
      "role": "1st",
      "drugs": "Unasyn",
-     "note": "+ azithro (preferred) or + a FQ",
+     "note": "+ azithro (preferred) or + a resp FQ",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
        "year": "",
        "url": null
+      },
+      {
+       "name": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia (ATS/IDSA guideline)",
+       "org": "American Thoracic Society; Infectious Diseases Society of America",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ],
      "scenario": "CAP, inpt, ICU"
@@ -3222,6 +3250,20 @@
      ],
      "scenario": "CAP, inpt, ICU",
      "population": "Allergy"
+    },
+    {
+     "role": "2nd",
+     "drugs": "Unasyn",
+     "note": "+ azithro, clarithro or doxy (⍉want QT prolong → + doxy)",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, inpt, ⍉ICU"
     }
    ]
   },
@@ -3249,7 +3291,7 @@
      "scenario": "CAP, outpt w comorbidity or abx in last 3mo"
     },
     {
-     "role": "alt",
+     "role": "2nd",
      "drugs": "levofloxacin, moxifloxacin, gemifloxacin",
      "note": "monotx",
      "sources": [
@@ -3264,6 +3306,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
       }
      ],
      "scenario": "CAP, inpt, ⍉ICU"
@@ -3305,27 +3353,6 @@
     {
      "role": "alt",
      "drugs": "levofloxacin, moxifloxacin",
-     "note": "⍉ if hypersensitivity to any quinolone",
-     "sources": [
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      },
-      {
-       "name": "AVELOX (moxifloxacin) tablets prescribing information (FDA label, DailyMed)",
-       "org": "REDPHARM DRUG INC. (FDA label, DailyMed)",
-       "year": "2011",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
-      }
-     ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
-     "population": "Allergy"
-    },
-    {
-     "role": "alt",
-     "drugs": "levofloxacin, moxifloxacin",
      "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
      "sources": [
       {
@@ -3342,132 +3369,6 @@
       }
      ],
      "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
-     "population": "Elderly"
-    },
-    {
-     "role": "alt",
-     "drugs": "levofloxacin, moxifloxacin",
-     "note": "⍉ if hypersensitivity to any quinolone",
-     "sources": [
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      },
-      {
-       "name": "AVELOX (moxifloxacin) tablets prescribing information (FDA label, DailyMed)",
-       "org": "REDPHARM DRUG INC. (FDA label, DailyMed)",
-       "year": "2011",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
-      }
-     ],
-     "scenario": "CAP, inpt, ⍉ICU",
-     "population": "Allergy"
-    },
-    {
-     "role": "alt",
-     "drugs": "levofloxacin, moxifloxacin",
-     "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
-     "sources": [
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      },
-      {
-       "name": "AVELOX (moxifloxacin) tablets prescribing information (FDA label, DailyMed)",
-       "org": "REDPHARM DRUG INC. (FDA label, DailyMed)",
-       "year": "2011",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
-      }
-     ],
-     "scenario": "CAP, inpt, ⍉ICU",
-     "population": "Elderly"
-    },
-    {
-     "role": "alt",
-     "drugs": "levofloxacin, moxifloxacin",
-     "note": "⍉ if hypersensitivity to any quinolone",
-     "sources": [
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      },
-      {
-       "name": "AVELOX (moxifloxacin) tablets prescribing information (FDA label, DailyMed)",
-       "org": "REDPHARM DRUG INC. (FDA label, DailyMed)",
-       "year": "2011",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
-      }
-     ],
-     "scenario": "CAP, inpt, ICU",
-     "population": "Allergy"
-    },
-    {
-     "role": "alt",
-     "drugs": "levofloxacin, moxifloxacin",
-     "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
-     "sources": [
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      },
-      {
-       "name": "AVELOX (moxifloxacin) tablets prescribing information (FDA label, DailyMed)",
-       "org": "REDPHARM DRUG INC. (FDA label, DailyMed)",
-       "year": "2011",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
-      }
-     ],
-     "scenario": "CAP, inpt, ICU",
-     "population": "Elderly"
-    },
-    {
-     "role": "1st",
-     "drugs": "cipro, levofloxacin",
-     "note": "⍉ if hypersensitivity to any quinolone",
-     "sources": [
-      {
-       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "(FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
-      },
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      }
-     ],
-     "scenario": "Sus Pseudomonas",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
-     "drugs": "cipro, levofloxacin",
-     "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
-     "sources": [
-      {
-       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "(FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
-      },
-      {
-       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
-       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
-      }
-     ],
-     "scenario": "Sus Pseudomonas",
      "population": "Elderly"
     },
     {
@@ -3484,6 +3385,51 @@
      ],
      "scenario": "Sus Pseudomonas",
      "population": "Peds"
+    },
+    {
+     "role": "alt",
+     "drugs": "levofloxacin, moxifloxacin, gemifloxacin",
+     "note": "β-lactam + macrolide allergy → resp FQ monotx; ⍉ in preg",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, outpt",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "levofloxacin, moxifloxacin, gemifloxacin",
+     "note": "β-lactam + macrolide allergy → resp FQ monotx; ⍉ in preg",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "levofloxacin, moxifloxacin, gemifloxacin",
+     "note": "β-lactam + macrolide allergy → resp FQ monotx; ⍉ in preg",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      }
+     ],
+     "scenario": "CAP, inpt, ⍉ICU",
+     "population": "Allergy"
     }
    ]
   },
@@ -3493,7 +3439,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone, cefotaxime",
-     "note": "+ a macrolide",
+     "note": "+ azithro or another macrolide",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3506,6 +3452,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
       }
      ],
      "scenario": "CAP, inpt, ⍉ICU"
@@ -3513,7 +3465,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone, cefotaxime",
-     "note": "+ azithro (preferred) or + a FQ",
+     "note": "+ azithro (preferred) or + a resp FQ",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3526,6 +3478,12 @@
        "org": "MSD Manual Professional Edition",
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      },
+      {
+       "name": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia (ATS/IDSA guideline)",
+       "org": "American Thoracic Society; Infectious Diseases Society of America",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ],
      "scenario": "CAP, inpt, ICU"
@@ -3567,48 +3525,6 @@
     },
     {
      "role": "1st",
-     "drugs": "ceftriaxone, cefotaxime",
-     "note": "⍉ if hypersensitivity to any cephalosporin",
-     "sources": [
-      {
-       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
-       "org": "CIVICA, INC. (FDA label, DailyMed)",
-       "year": "2024",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
-      },
-      {
-       "name": "Cefotaxime injection prescribing information (FDA label, DailyMed)",
-       "org": "HIKMA PHARMACEUTICALS USA INC. (FDA label, DailyMed)",
-       "year": "2024",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ef1a6dc6-bc3d-4f09-8f92-7ff328f56561"
-      }
-     ],
-     "scenario": "CAP, inpt, ⍉ICU",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
-     "drugs": "ceftriaxone, cefotaxime",
-     "note": "⍉ if hypersensitivity to any cephalosporin",
-     "sources": [
-      {
-       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
-       "org": "CIVICA, INC. (FDA label, DailyMed)",
-       "year": "2024",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
-      },
-      {
-       "name": "Cefotaxime injection prescribing information (FDA label, DailyMed)",
-       "org": "HIKMA PHARMACEUTICALS USA INC. (FDA label, DailyMed)",
-       "year": "2024",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ef1a6dc6-bc3d-4f09-8f92-7ff328f56561"
-      }
-     ],
-     "scenario": "CAP, inpt, ICU",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
      "drugs": "ceftriaxone",
      "note": "⍉ in hyperbilirubinemic neonates (bili encephalopathy risk)",
      "sources": [
@@ -3621,6 +3537,26 @@
      ],
      "scenario": "CAP, inpt, ICU",
      "population": "Peds"
+    },
+    {
+     "role": "2nd",
+     "drugs": "cefotaxime",
+     "note": "+ azithro, clarithro or doxy; or ceftaroline (5th-gen) + azithro, clarithro or doxy",
+     "sources": [
+      {
+       "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
+       "org": "",
+       "year": "2025",
+       "url": null
+      },
+      {
+       "name": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia (ATS/IDSA guideline)",
+       "org": "American Thoracic Society; Infectious Diseases Society of America",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
+      }
+     ],
+     "scenario": "CAP, inpt, ⍉ICU"
     }
    ]
   },
@@ -3644,13 +3580,19 @@
     {
      "role": "1st",
      "drugs": "ertapenem",
-     "note": "+ azithro (preferred) or + a FQ",
+     "note": "+ azithro (preferred) or + a resp FQ",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
        "org": "",
        "year": "",
        "url": null
+      },
+      {
+       "name": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia (ATS/IDSA guideline)",
+       "org": "American Thoracic Society; Infectious Diseases Society of America",
+       "year": "2019",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
       }
      ],
      "scenario": "CAP, inpt, ICU"
@@ -3990,15 +3932,11 @@
   },
   {
    "title": "Sus MRSA",
-   "gaps": [
-    "g_FQ1PPV7XGW"
-   ]
+   "gaps": []
   },
   {
    "title": "Sus Pseudomonas",
-   "gaps": [
-    "g_FQ1PPV7XGW"
-   ]
+   "gaps": []
   },
   {
    "title": "Nosocomial (HAP/VAP)",
