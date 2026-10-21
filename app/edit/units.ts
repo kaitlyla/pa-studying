@@ -3,7 +3,7 @@
 import {
   GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, isId, listedHead, newId, serializeFile, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type MedsFile, type MedsPiece, type OtherFile,
-  type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
+  type MedsRoleTag, type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { entryPieces, fileAdds, pageCard } from "../../lib/derive/panel.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
@@ -114,6 +114,76 @@ export interface MedsChoice {
   remove: string[];
   original: string[];
   cut?: string[];
+  /** The stored role labels she took off (roleKey; absent when none). */
+  roleOff?: string[];
+  /** Her wording of stored role labels' drugs and note, by roleKey (absent when none). */
+  roleText?: Record<string, RoleWording>;
+}
+
+/** A role label's wording she can change: the drugs it names and its note (null: none). */
+export interface RoleWording {
+  drugs: string | null;
+  note: string | null;
+}
+
+/** A stored role label's key: its target and its place in that target's stored labels. */
+export const roleKey = (target: string, index: number): string => `${target}#${index}`;
+
+/** One stored role label of a panel as the open edit shows it: its key, its target, and the label with her wording. */
+export interface ShownRole {
+  key: string;
+  target: string;
+  tag: MedsRoleTag;
+}
+
+/** Each stored role label of `part` under `choice`, her wording applied, those she took off left out (in stored order). */
+export function shownRoles(part: Pick<MedsPart, "file">, choice: MedsChoice): ShownRole[] {
+  return (part.file?.roles ?? []).flatMap((r) =>
+    r.roles.flatMap((tag, i): ShownRole[] => {
+      const key = roleKey(r.target, i);
+      if (choice.roleOff?.includes(key)) return [];
+      const text = choice.roleText?.[key];
+      return [{ key, target: r.target, tag: text ? { ...tag, ...text } : tag }];
+    }),
+  );
+}
+
+/** The stored role labels she took off under `choice`, each with its stored label (for Put back). */
+export function removedRoles(part: Pick<MedsPart, "file">, choice: MedsChoice): ShownRole[] {
+  return (part.file?.roles ?? []).flatMap((r) =>
+    r.roles.flatMap((tag, i): ShownRole[] => (choice.roleOff?.includes(roleKey(r.target, i)) ? [{ key: roleKey(r.target, i), target: r.target, tag }] : [])),
+  );
+}
+
+/** `choice` with the role labels `keys` off the panel. */
+export function rolesOff(choice: MedsChoice, keys: readonly string[]): MedsChoice {
+  const off = [...(choice.roleOff ?? [])];
+  for (const k of keys) if (!off.includes(k)) off.push(k);
+  return off.length > 0 ? { ...choice, roleOff: off } : choice;
+}
+
+/** `choice` with role label `key` back on the panel. */
+export function roleBack(choice: MedsChoice, key: string): MedsChoice {
+  const off = (choice.roleOff ?? []).filter((k) => k !== key);
+  const out: MedsChoice = { ...choice, roleOff: off };
+  if (off.length === 0) delete out.roleOff;
+  return out;
+}
+
+/**
+ * `choice` with her wording `text` for role label `key` (blank drugs or note: none). Wording equal to
+ * the stored label's is no change.
+ */
+export function rewordRole(part: Pick<MedsPart, "file">, choice: MedsChoice, key: string, text: RoleWording): MedsChoice {
+  const stored = shownRoles(part, { add: [], remove: [], original: [] }).find((r) => r.key === key)?.tag;
+  const clean = (s: string | null): string | null => (s === null || s.trim() === "" ? null : s);
+  const wording = { drugs: clean(text.drugs), note: clean(text.note) };
+  const roleText = { ...(choice.roleText ?? {}) };
+  if (stored && stored.drugs === wording.drugs && stored.note === wording.note) delete roleText[key];
+  else roleText[key] = wording;
+  const out: MedsChoice = { ...choice, roleText };
+  if (Object.keys(roleText).length === 0) delete out.roleText;
+  return out;
 }
 
 /** The entries of `part` worked out from her notes. */
@@ -731,9 +801,14 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
   // A card shown only because she edited it (fileAdds) stays implied by her version, as stored.
   const implied = new Set(fileChoice(part).add.filter((id) => !part.file?.add.includes(id)));
   const add = choice.add.filter((id) => !(implied.has(id) && own.has(id)));
-  // The sourced cards placed in the panel and the role labels are kept as stored: the editor changes neither.
+  // The sourced cards placed in the panel are kept as stored. The role labels are as she left them:
+  // her wording applied, those she took off gone, and a target left with none drops out.
   const gaps = part.file?.gaps ?? [];
-  const roles = part.file?.roles ?? [];
+  const kept = shownRoles(part, choice);
+  const roles = (part.file?.roles ?? []).flatMap((r) => {
+    const tags: MedsRoleTag[] = kept.filter((x) => x.target === r.target).map((x) => x.tag);
+    return tags.length > 0 ? [{ target: r.target, roles: tags }] : [];
+  });
   // Her drug classes keep the entries still shown (an entry she took off leaves its class); a class
   // left with one entry is no class.
   const stays = (t: string): boolean => (isId("g", t) ? gaps.includes(t) && !choice.remove.includes(t) : shown.has(t));
@@ -747,7 +822,7 @@ function medsAfter(part: MedsPart, chosen: MedsChoice, docs: ReadonlyMap<string,
       const gap = ownGap.get(target);
       return gap === undefined ? { target, pieces } : { target, pieces, gap };
     }),
-    ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles: roles.map((r) => ({ ...r })) } : {}),
+    ...(gaps.length > 0 ? { gaps: [...gaps] } : {}), ...(roles.length > 0 ? { roles } : {}),
     ...(classes.length > 0 ? { classes } : {}),
     ...(scenarios !== undefined ? { scenarios: scenarios.map((s) => ({ title: s.title, gaps: [...s.gaps] })) } : {}),
   };

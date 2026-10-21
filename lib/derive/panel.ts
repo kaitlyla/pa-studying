@@ -203,22 +203,53 @@ export function panelItems(topic: Pick<PubTopic, "meds" | "medsEdit">): PanelIte
  * One entry under a scenario of a panel shown by scenario: the entry, its roles for that scenario, and
  * whether this is the first scenario it shows under (search lands there).
  */
-export interface ScenarioEntry {
-  item: PanelEntryItem;
+export interface ScenarioPlace<T> {
+  item: T;
   roles: MedsRoleTag[];
   first: boolean;
 }
+export type ScenarioEntry = ScenarioPlace<PanelEntryItem>;
 
 /**
  * One scenario of a panel shown by scenario: its title, the gap blocks under its header, its entries
  * ordered by role (their roles there for no population), then each patient group with roles there, in
  * MEDS_POPULATIONS order, with its entries ordered by role.
  */
-export interface ScenarioGroup {
+export interface ScenarioGroupOf<T, G> {
   title: string;
-  gaps: PubGap[];
-  entries: ScenarioEntry[];
-  populations: { population: MedsPopulation; entries: ScenarioEntry[] }[];
+  gaps: G[];
+  entries: ScenarioPlace<T>[];
+  populations: { population: MedsPopulation; entries: ScenarioPlace<T>[] }[];
+}
+export type ScenarioGroup = ScenarioGroupOf<PanelEntryItem, PubGap>;
+
+/**
+ * Entries `items` (in panel order, classes opened up) under each of `scenarios`: every entry with a
+ * role for it, ordered by role then panel order; an entry with roles for several scenarios (or patient
+ * groups) shows under each, and only its first place is `first`. The reader and the editor both group
+ * a panel shown by scenario this way.
+ */
+export function byScenario<T, G>(
+  items: readonly T[], target: (item: T) => string, roles: (item: T) => readonly MedsRoleTag[], scenarios: readonly { title: string; gaps: G[] }[],
+): ScenarioGroupOf<T, G>[] {
+  const seen = new Set<string>();
+  const under = (pick: (r: MedsRoleTag) => boolean): ScenarioPlace<T>[] => {
+    const found = items.flatMap((item) => {
+      const picked = roles(item).filter(pick);
+      return picked.length > 0 ? [{ item, roles: picked }] : [];
+    });
+    return byRole(found, (x) => x.roles).map(({ item, roles: picked }) => {
+      const t = target(item);
+      const first = !seen.has(t);
+      seen.add(t);
+      return { item, roles: picked, first };
+    });
+  };
+  return scenarios.map((s) => {
+    const entries = under((r) => r.scenario === s.title && r.population === undefined);
+    const populations = MEDS_POPULATIONS.map((population) => ({ population, entries: under((r) => r.scenario === s.title && r.population === population) })).filter((p) => p.entries.length > 0);
+    return { title: s.title, gaps: s.gaps, entries, populations };
+  });
 }
 
 /**
@@ -234,24 +265,7 @@ export function scenarioGroups(topic: Pick<PubTopic, "meds" | "medsEdit">): { gr
   const intro = new Set(scenarios.flatMap((s) => s.gaps.map((g) => g.id)));
   const all = panelItems(topic).filter((x) => !(x.kind === "gap" && intro.has(x.gap.id)));
   const items = all.flatMap((x) => (x.kind === "class" ? x.members : [x]));
-  const seen = new Set<string>();
-  const under = (pick: (r: MedsRoleTag) => boolean): ScenarioEntry[] => {
-    const found = items.flatMap((item) => {
-      const roles = item.roles.filter(pick);
-      return roles.length > 0 ? [{ item, roles }] : [];
-    });
-    return byRole(found, (x) => x.roles).map(({ item, roles }) => {
-      const t = itemTarget(item);
-      const first = !seen.has(t);
-      seen.add(t);
-      return { item, roles, first };
-    });
-  };
-  const groups = scenarios.map((s): ScenarioGroup => {
-    const entries = under((r) => r.scenario === s.title && r.population === undefined);
-    const populations = MEDS_POPULATIONS.map((population) => ({ population, entries: under((r) => r.scenario === s.title && r.population === population) })).filter((p) => p.entries.length > 0);
-    return { title: s.title, gaps: s.gaps, entries, populations };
-  });
+  const groups = byScenario(items, itemTarget, (x) => x.roles, scenarios);
   // Her file puts no entry with a scenario role in a class, so a class here is wholly unscenario'd.
   const rest = all.filter((x) => x.kind === "class" || !x.roles.some((r) => r.scenario !== undefined));
   return { groups, rest };

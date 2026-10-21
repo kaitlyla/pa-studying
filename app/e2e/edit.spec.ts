@@ -2903,6 +2903,57 @@ test.describe("her own meds panel for a condition", () => {
     await expect(page.locator(`section.tcard[data-topic="${t.id}"] .meds section.phc[data-anchor="${gap.id}"]`)).toHaveCount(0);
   });
 
+  test("a scenario's patient group shows while editing; Remove this group and Put back, then saved, her panel file drops just that group's labels and the page its heading", async ({ page, context, baseURL }) => {
+    // A condition whose panel file has scenarios and a role label for a patient group, in the real content.
+    const groups = new Map<string, { system: string; scenario: string; population: string }>();
+    const t = need(
+      findTopic((g, system, id) => {
+        const edit = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id)?.medsEdit;
+        if (!edit?.scenarios) return false;
+        const tag = Object.values(edit.roles).flat().find((r) => r.scenario !== undefined && r.population !== undefined);
+        if (tag?.scenario === undefined || tag.population === undefined) return false;
+        groups.set(id, { system, scenario: tag.scenario, population: tag.population });
+        return true;
+      }),
+      "topic whose panel file has a scenario with a patient group",
+    );
+    const { system, scenario, population } = need(groups.get(t.id), "that patient group");
+    const medsFile = topicMedsPath(t.g, system, t.id);
+    const label = `${scenario}: ${population}`;
+    const groupIn = (where: Locator): Locator => where.locator(`section.meds-pop[aria-label=${JSON.stringify(label)}]`);
+
+    const { fake } = await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await expect(groupIn(page.locator(`section.tcard[data-topic="${t.id}"] .meds`))).toHaveCount(1);
+    await signIn(page);
+    const area = await startEditing(page);
+    const panel = area.locator("section.meds-edit");
+    const group = groupIn(panel);
+    await expect(group.locator('[data-ref="meds-label"]').first()).toBeVisible();
+
+    await ref(group, "meds-group-remove").click();
+    await expect(group).toHaveCount(0);
+    const removed = ref(panel, "meds-labels-removed");
+    await expect(removed.locator("li").first()).toBeVisible();
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    // One Put back per label the group held.
+    while (await removed.count() > 0) await removed.locator('[data-ref="meds-label-put-back"]').first().click();
+    await expect(group).toHaveCount(1);
+    await expect(ref(page, "edit-dirty-state")).toHaveText("No changes yet");
+
+    const before = JSON.parse(need(fake.readFile(medsFile), "her panel file before")) as MedsFile;
+    await ref(group, "meds-group-remove").click();
+    await ref(page, "edit-save").click();
+    await expect(ref(page, "save-success")).toBeVisible();
+    expect([...changedFiles(fake).keys()]).toEqual([medsFile]);
+    const saved = JSON.parse(need(fake.readFile(medsFile), "her panel file")) as MedsFile;
+    const kept = (before.roles ?? [])
+      .map((x) => ({ ...x, roles: x.roles.filter((r) => !(r.scenario === scenario && r.population === population)) }))
+      .filter((x) => x.roles.length > 0);
+    expect(saved).toEqual({ ...before, roles: kept });
+    await expect(groupIn(page.locator(`section.tcard[data-topic="${t.id}"] .meds`))).toHaveCount(0);
+  });
+
   test("Delete row on a box that is a one-row table deletes the table, and the box goes from her version", async ({ page, context, baseURL }) => {
     // A condition without her own panel whose card shows several boxes, one of them a one-row table.
     const boxes = new Map<string, { system: string; card: string; text: string; count: number }>();

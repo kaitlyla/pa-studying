@@ -11,7 +11,8 @@ import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import {
-  buildSave, cutBox, entryGapParts, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, sameLook, shownEntries, shownMedsSlots, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
+  buildSave, cutBox, entryGapParts, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, removedRoles, rewordRole, roleBack, roleKey, rolesOff, sameLook, shownEntries, shownMedsSlots,
+  shownRoles, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
 } from "./units.ts";
 
 const CV = "content/guides/fm/cardiovascular";
@@ -1065,6 +1066,66 @@ describe("a topic's meds panel", () => {
       const unit = await unitAt(`topic:fm:${R(104)}`);
       const part = only(unit, "meds");
       expect(savedMeds(buildSave(unit, new Map(), TODAY, { meds: choose(part, { add: [C(3)] }) }))).toEqual({ ...byScenario, add: [C(3)] });
+    });
+
+    describe("her changes to the role labels", () => {
+      // G(2): one Severe label; C(2): a Mild label, then an Allergy and a Pregnant label under Mild.
+      const allergy = { ...tag, role: "alt" as const, drugs: "cipro", note: "PCN allergy", scenario: "Mild", population: "Allergy" as const };
+      const pregnant = { ...tag, drugs: "amox", note: "safe in preg", scenario: "Mild", population: "Pregnant" as const };
+      const labelled: MedsFile = {
+        ...file,
+        scenarios: [{ title: "Mild", gaps: [G(3)] }, { title: "Severe", gaps: [] }],
+        roles: [{ target: G(2), roles: [{ ...tag, scenario: "Severe" }] }, { target: C(2), roles: [{ ...tag, role: "2nd", scenario: "Mild" }, allergy, pregnant] }],
+      };
+      beforeEach(() => {
+        store(R(104), labelled);
+      });
+      const save = (unit: EditUnit, part: MedsPart, choice: MedsChoice): ReturnType<typeof buildSave> => buildSave(unit, new Map(), TODAY, { meds: new Map([[part.topic, choice]]) });
+
+      it("Remove takes one label off: the save drops it and keeps the target's other labels", async () => {
+        const unit = await unitAt(`topic:fm:${R(104)}`);
+        const part = only(unit, "meds");
+        const off = rolesOff(fileChoice(part), [roleKey(C(2), 1)]);
+        expect(shownRoles(part, off).map((r) => r.tag)).not.toContainEqual(allergy);
+        expect(removedRoles(part, off).map((r) => r.tag)).toEqual([allergy]);
+        expect(savedMeds(save(unit, part, off)).roles).toEqual([labelled.roles?.[0], { target: C(2), roles: [{ ...tag, role: "2nd", scenario: "Mild" }, pregnant] }]);
+      });
+
+      it("removing a group's labels drops them all; a target left with no label drops out of roles", async () => {
+        const unit = await unitAt(`topic:fm:${R(104)}`);
+        const part = only(unit, "meds");
+        const groupOff = rolesOff(fileChoice(part), [roleKey(C(2), 1), roleKey(C(2), 2)]);
+        expect(savedMeds(save(unit, part, groupOff)).roles).toEqual([labelled.roles?.[0], { target: C(2), roles: [{ ...tag, role: "2nd", scenario: "Mild" }] }]);
+        const allOff = rolesOff(groupOff, [roleKey(G(2), 0)]);
+        expect(savedMeds(save(unit, part, allOff)).roles).toEqual([{ target: C(2), roles: [{ ...tag, role: "2nd", scenario: "Mild" }] }]);
+      });
+
+      it("Put back restores a label: the choice is the stored one again and the save changes nothing", async () => {
+        const unit = await unitAt(`topic:fm:${R(104)}`);
+        const part = only(unit, "meds");
+        const back = roleBack(rolesOff(fileChoice(part), [roleKey(C(2), 1)]), roleKey(C(2), 1));
+        expect(back).toEqual(fileChoice(part));
+        expect(save(unit, part, back).changes).toEqual([]);
+      });
+
+      it("her wording replaces a label's drugs and note, keeping its role, scenario, group and sources; blank is none, and the stored wording is no change", async () => {
+        const unit = await unitAt(`topic:fm:${R(104)}`);
+        const part = only(unit, "meds");
+        const key = roleKey(C(2), 2);
+        const worded = rewordRole(part, fileChoice(part), key, { drugs: "amoxicillin", note: "  " });
+        expect(worded.roleText).toEqual({ [key]: { drugs: "amoxicillin", note: null } });
+        expect(savedMeds(save(unit, part, worded)).roles?.[1]?.roles[2]).toEqual({ ...pregnant, drugs: "amoxicillin", note: null });
+        expect(rewordRole(part, worded, key, { drugs: pregnant.drugs, note: pregnant.note })).toEqual(fileChoice(part));
+      });
+
+      it("a label taken off keeps its stored wording for Put back, whatever she typed first", async () => {
+        const unit = await unitAt(`topic:fm:${R(104)}`);
+        const part = only(unit, "meds");
+        const key = roleKey(C(2), 1);
+        const c = rolesOff(rewordRole(part, fileChoice(part), key, { drugs: "levo", note: null }), [key]);
+        expect(removedRoles(part, c).map((r) => r.tag)).toEqual([allergy]);
+        expect(savedMeds(save(unit, part, roleBack(c, key))).roles?.[1]?.roles[1]).toEqual({ ...allergy, drugs: "levo", note: null });
+      });
     });
 
     it("a file holding only sourced cards is kept, not deleted, when she changes nothing else", async () => {

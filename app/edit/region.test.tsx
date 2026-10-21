@@ -28,7 +28,7 @@ import {
 } from "./session.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import { fileChoice, shownMedsSlots } from "./units.ts";
-import { ADD_CARD, ADDED_LATER, MEDS_HEADING, PUT_BACK, REMOVED_HEADING } from "./MedsEdit.tsx";
+import { ADD_CARD, ADDED_LATER, EDITED_ABOVE, MEDS_HEADING, PUT_BACK, REMOVE_GROUP, REMOVED_HEADING, REMOVED_LABELS } from "./MedsEdit.tsx";
 
 const KEY = `topic:fm:${R(101)}`;
 
@@ -384,6 +384,53 @@ describe("EditControls and EditRegion", () => {
       await until(() => !editorText(ccb).includes(gapText), "the block gone with her version");
       await click(q(ccb, "meds-mine"));
       await until(() => editorText(ccb).includes(gapText), "the block back with her version");
+    });
+
+    it("a panel with scenarios shows them and their patient groups; a label's wording and a whole group come off and back", async () => {
+      const src = { name: "Atrial Fibrillation", org: "MSD Manual", year: "2026", url: null };
+      const stored: MedsFile = {
+        v: 1, add: [], remove: [], own: [],
+        scenarios: [{ title: "Mild", gaps: [] }, { title: "Severe", gaps: [] }],
+        roles: [{
+          target: C(1),
+          roles: [
+            { role: "1st", drugs: "diltiazem", note: null, sources: [src], scenario: "Mild" },
+            { role: "alt", drugs: "verapamil", note: "if allergic to diltiazem", sources: [src], scenario: "Mild", population: "Allergy" },
+            { role: "2nd", drugs: null, note: "rate control", sources: [src], scenario: "Severe" },
+          ],
+        }],
+      };
+      w.fake.commitFiles({ [MEDS_FILE]: serializeFile(MEDS_FILE, stored) });
+      const { root, panel } = await openPanel();
+      expect([...panel.querySelectorAll("section.meds-scn")].map((s) => s.getAttribute("aria-label"))).toEqual(["Mild", "Severe"]);
+      const group = (): HTMLElement | null => panel.querySelector<HTMLElement>('section.meds-pop[aria-label="Mild: Allergy"]');
+      expect(need(group()).textContent).toContain(REMOVE_GROUP);
+      // The card's editors are at its first place only; its later places show their labels.
+      expect(shownCards(panel)).toEqual([`meds-${C(1)}`, `meds-${C(1)}@0.Allergy`, `meds-${C(1)}@1`]);
+      expect(need(card(panel, C(1))).querySelectorAll('[contenteditable="true"]').length).toBeGreaterThan(0);
+      const later = need(panel.querySelector<HTMLElement>(`section.phc[data-anchor="meds-${C(1)}@1"]`));
+      expect(later.querySelector('[contenteditable="true"]')).toBeNull();
+      expect(later.querySelector(".meds-above")?.textContent).toBe(EDITED_ABOVE);
+
+      // Her wording for a label; typing the stored text back is no change.
+      const note = need(q(need(group()), "meds-label-note")) as HTMLInputElement;
+      expect(note.value).toBe("if allergic to diltiazem");
+      type(note, "only if allergic");
+      await until(() => dirtyState(root) !== "No changes yet", "the edit dirty");
+      type(note, "if allergic to diltiazem");
+      await until(() => dirtyState(root) === "No changes yet", "the edit clean again");
+
+      await click(q(need(group()), "meds-group-remove"));
+      await until(() => group() === null, "the Allergy group off the panel");
+      const off = need(q(panel, "meds-labels-removed"));
+      expect(off.textContent).toContain(REMOVED_LABELS);
+      expect([...off.querySelectorAll("li")].map((li) => li.textContent)).toEqual([expect.stringContaining("if allergic to diltiazem")]);
+      expect(dirtyState(root)).not.toBe("No changes yet");
+
+      await click(q(off, "meds-label-put-back"));
+      await until(() => group(), "the Allergy group back");
+      expect(q(panel, "meds-labels-removed")).toBeNull();
+      expect(dirtyState(root)).toBe("No changes yet");
     });
   });
 

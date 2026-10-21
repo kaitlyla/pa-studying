@@ -12,6 +12,11 @@ div.meds-add { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4
 div.meds-add input { min-height: 36px; padding: 6px 10px; border: 1px solid #c3c9d4; border-radius: 6px; font: inherit; }
 div.meds-add ul { margin: 0; padding-left: 18px; }
 .btn.meds-add { margin: 10px 0 4px; }
+.role-edit li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; }
+.role-in { min-width: 8em; padding: 2px 6px; border: 1px solid #c3c9d4; border-radius: 4px; font: inherit; }
+.role-in.role-note { flex: 1 1 16em; }
+.meds-pop-t .linkbtn { font-weight: 400; }
+.meds-above { margin: 4px 0; font-size: 12px; color: #5b6472; }
 
 /* a topic's below area while editing */
 .below-edit { margin-top: 14px; padding-top: 8px; border-top: 1px dashed #c9ced8; }
