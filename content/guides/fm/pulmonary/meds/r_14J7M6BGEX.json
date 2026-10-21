@@ -2398,8 +2398,7 @@
   }
  ],
  "gaps": [
-  "g_681QV4Z7A0",
-  "g_08R5KZ3HD5"
+  "g_681QV4Z7A0"
  ],
  "roles": [
   {
@@ -2426,15 +2425,72 @@
      "scenario": "TB dz (active)"
     },
     {
-     "role": "1st",
-     "drugs": "Isoniazid",
-     "note": "3HP ⍉recommended in preg (or if expecting to become preg during it)",
+     "role": "2nd",
+     "drugs": "rifapentine",
+     "note": "4mo INH + rifapentine + PZA + moxifloxacin (susceptible dz)",
      "sources": [
       {
-       "name": "Treatment for Latent TB Infection",
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "TB dz (active)"
+    },
+    {
+     "role": "1st",
+     "drugs": "rifampin, isoniazid, ethambutol",
+     "note": "INH + RIF + EMB x2mo, then INH + RIF x7mo (9mo total) if PZA ⍉used; + B6 w INH",
+     "sources": [
+      {
+       "name": "Tuberculosis Clinical Care and Treatment During Pregnancy",
        "org": "Centers for Disease Control and Prevention (CDC)",
        "year": "2025",
-       "url": "https://www.cdc.gov/tb/hcp/treatment/latent-tuberculosis-infection.html"
+       "url": "https://www.cdc.gov/tb/hcp/clinical-care/pregnancy.html"
+      }
+     ],
+     "scenario": "TB dz (active)",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "rifapentine",
+     "note": "3HP: INH + rifapentine q1wk x3mo",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Latent TB infect"
+    },
+    {
+     "role": "1st",
+     "drugs": "rifampin",
+     "note": "4R: RIF QD x4mo",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Latent TB infect"
+    },
+    {
+     "role": "1st",
+     "drugs": "rifampin, isoniazid",
+     "note": "4R, 3HR, or INH x6–9mo + B6; most can delay tx until 2–3mo postpartum; ⍉3HP (also ⍉if expecting to become preg during it)",
+     "sources": [
+      {
+       "name": "Tuberculosis Clinical Care and Treatment During Pregnancy",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/tb/hcp/clinical-care/pregnancy.html"
       }
      ],
      "scenario": "Latent TB infect",
@@ -2442,29 +2498,14 @@
     },
     {
      "role": "1st",
-     "drugs": "rifapentine",
-     "note": "3HP ⍉for children < 2 y",
+     "drugs": "rifampin, isoniazid",
+     "note": "4R or 3HR (both OK at any age); 3HP only ≥2 y",
      "sources": [
       {
-       "name": "Treatment for Latent TB Infection",
-       "org": "Centers for Disease Control and Prevention (CDC)",
-       "year": "2025",
-       "url": "https://www.cdc.gov/tb/hcp/treatment/latent-tuberculosis-infection.html"
-      }
-     ],
-     "scenario": "Latent TB infect",
-     "population": "Peds"
-    },
-    {
-     "role": "1st",
-     "drugs": null,
-     "note": null,
-     "sources": [
-      {
-       "name": "Treatment for Latent TB Infection",
-       "org": "Centers for Disease Control and Prevention (CDC)",
-       "year": "2025",
-       "url": "https://www.cdc.gov/tb/hcp/treatment/latent-tuberculosis-infection.html"
+       "name": "Guidelines for the Treatment of Latent Tuberculosis Infection: Recommendations from the National Tuberculosis Controllers Association and CDC, 2020",
+       "org": "National Tuberculosis Controllers Association (NTCA) and CDC",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7041302/"
       }
      ],
      "scenario": "Latent TB infect",
@@ -2494,6 +2535,34 @@
       }
      ],
      "scenario": "TB dz (active)"
+    },
+    {
+     "role": "1st",
+     "drugs": "isoniazid",
+     "note": "3HR: INH + RIF QD x3mo",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Latent TB infect"
+    },
+    {
+     "role": "2nd",
+     "drugs": "isoniazid",
+     "note": "INH x6mo or x9mo + pyridoxine (B6)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Latent TB infect"
     }
    ]
   },
@@ -2557,9 +2626,7 @@
   },
   {
    "title": "Latent TB infect",
-   "gaps": [
-    "g_08R5KZ3HD5"
-   ]
+   "gaps": []
   }
  ]
 }

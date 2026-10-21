@@ -3734,7 +3734,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -3796,7 +3796,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -3858,7 +3858,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -3920,7 +3920,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -3982,20 +3982,34 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 36,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
            "line": {
             "rule": "exact",
-            "value": 9
+            "value": 8
            },
            "align": "left",
            "shade": null,
            "borders": null,
            "marker": null
-          }
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "– streptomycin may replace EMB if EMB ⍉tolerated"
+           }
+          ]
          },
          {
           "type": "paragraph",
@@ -4074,7 +4088,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4191,38 +4205,6 @@
               }
              }
             ],
-            "text": "Alt (susceptible dz): 4mo INH + rifapentine + PZA + moxifloxacin"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
             "text": "•monitor LFTs; add vit B6 (pyridoxine) → prevent periph neuropathy d/t INH"
            }
           ]
@@ -4255,9 +4237,27 @@
               }
              }
             ],
-            "text": "•MDR-TB: INH-monoresistance regimen, BPaLM, or BPaL based on resistance patterns"
+            "text": "Alt (susceptible dz): 4mo INH + rifapentine + PZA + moxifloxacin"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
          },
          {
           "type": "paragraph",
@@ -4287,7 +4287,71 @@
               }
              }
             ],
-            "text": "•streptomycin may replace EMB if EMB ⍉tolerated"
+            "text": "Drug-resistant TB (based on resistance patterns): INH-monoresistance regimen; MDR-TB → BPaLM or BPaL"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "•BPaLM = bedaquiline + pretomanid + linezolid + moxifloxacin x6mo; FQ-resistant → BPaL (⍉moxifloxacin)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "•FQ (ex, levofloxacin) = 2nd-line TB drug; linezolid = MDR-TB only, ⍉initial tx (severe SE: anemia, thrombocytopenia; poor long-term tolerance)"
            }
           ]
          },
@@ -4362,7 +4426,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4436,7 +4500,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4516,7 +4580,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4578,7 +4642,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4603,14 +4667,14 @@
               }
              }
             ],
-            "text": "•alt: INH x9mo + pyridoxine (B6)"
+            "text": "•alt: INH x6mo or x9mo + pyridoxine (B6)"
            }
           ]
          },
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4647,61 +4711,12 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
+           "line": null,
            "align": "left",
            "shade": null,
            "borders": null,
            "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "•alt also: INH x6mo"
-           }
-          ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": {
-            "rule": "exact",
-            "value": 8
-           },
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          },
-          "content": [
-           {
-            "type": "text",
-            "marks": [
-             {
-              "type": "size",
-              "attrs": {
-               "pt": 7.5
-              }
-             }
-            ],
-            "text": "MDR-TB: FQ (ex, levofloxacin) = 2nd-line; linezolid = last-line (severe SE, poor long-term tolerance)"
-           }
-          ]
+          }
          },
          {
           "type": "paragraph",
@@ -4770,7 +4785,7 @@
          {
           "type": "paragraph",
           "attrs": {
-           "indLeft": 0,
+           "indLeft": 18,
            "indRight": 0,
            "indFirst": 0,
            "spaceBefore": 0,
@@ -4798,21 +4813,6 @@
             "text": "•fatal w/o tx; mortality ⇡ in resource-limited countries"
            }
           ]
-         },
-         {
-          "type": "paragraph",
-          "attrs": {
-           "indLeft": 0,
-           "indRight": 0,
-           "indFirst": 0,
-           "spaceBefore": 0,
-           "spaceAfter": 0,
-           "line": null,
-           "align": "left",
-           "shade": null,
-           "borders": null,
-           "marker": null
-          }
          }
         ]
        }

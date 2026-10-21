@@ -10165,7 +10165,7 @@
     {
      "role": "1st",
      "drugs": "single long-acting bronchodilator: LABA",
-     "note": "GOLD group A (few Sx, ⍉exacerbations)",
+     "note": "pick 1: LABA or LAMA",
      "sources": [
       {
        "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
@@ -10179,25 +10179,13 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
-    },
-    {
-     "role": "1st",
-     "drugs": "LABA (w a LAMA)",
-     "note": "initial therapy for most pts (GOLD group B: dyspnea; group E: exacerbations)",
-     "sources": [
-      {
-       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
-       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
-       "year": "2026",
-       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
-      }
-     ]
+     ],
+     "scenario": "GOLD group A: few Sx, ⍉exacerbations"
     },
     {
      "role": "2nd",
      "drugs": "LABA (w a LAMA)",
-     "note": "first escalation (for group A pts started on one bronchodilator)",
+     "note": "persistent dyspnea on one → LABA + LAMA",
      "sources": [
       {
        "name": "Treatment of Stable COPD",
@@ -10211,7 +10199,36 @@
        "year": "2026",
        "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
       }
-     ]
+     ],
+     "scenario": "GOLD group A: few Sx, ⍉exacerbations"
+    },
+    {
+     "role": "1st",
+     "drugs": "LABA (w a LAMA)",
+     "note": "initial tx",
+     "sources": [
+      {
+       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      }
+     ],
+     "scenario": "GOLD group B: more Sx (dyspnea), ⍉exacerbations"
+    },
+    {
+     "role": "1st",
+     "drugs": "LABA (w a LAMA)",
+     "note": "initial tx",
+     "sources": [
+      {
+       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      }
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
     }
    ]
   },
@@ -10221,7 +10238,7 @@
     {
      "role": "1st",
      "drugs": "single long-acting bronchodilator: LAMA",
-     "note": "GOLD group A (few Sx, ⍉exacerbations)",
+     "note": "pick 1: LABA or LAMA",
      "sources": [
       {
        "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
@@ -10235,25 +10252,13 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
-    },
-    {
-     "role": "1st",
-     "drugs": "LAMA (w a LABA)",
-     "note": "initial therapy for most pts (GOLD group B: dyspnea; group E: exacerbations)",
-     "sources": [
-      {
-       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
-       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
-       "year": "2026",
-       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
-      }
-     ]
+     ],
+     "scenario": "GOLD group A: few Sx, ⍉exacerbations"
     },
     {
      "role": "2nd",
      "drugs": "LAMA (w a LABA)",
-     "note": "first escalation (for group A pts started on one bronchodilator)",
+     "note": "persistent dyspnea on one → LABA + LAMA",
      "sources": [
       {
        "name": "Treatment of Stable COPD",
@@ -10267,7 +10272,36 @@
        "year": "2026",
        "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
       }
-     ]
+     ],
+     "scenario": "GOLD group A: few Sx, ⍉exacerbations"
+    },
+    {
+     "role": "1st",
+     "drugs": "LAMA (w a LABA)",
+     "note": "initial tx",
+     "sources": [
+      {
+       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      }
+     ],
+     "scenario": "GOLD group B: more Sx (dyspnea), ⍉exacerbations"
+    },
+    {
+     "role": "1st",
+     "drugs": "LAMA (w a LABA)",
+     "note": "initial tx",
+     "sources": [
+      {
+       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      }
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
     }
    ]
   },
@@ -10277,7 +10311,7 @@
     {
      "role": "1st",
      "drugs": "short-acting bronchodilator (albuterol)",
-     "note": "rescue, prescribed to all pts",
+     "note": "PRN, prescribed to all pts",
      "sources": [
       {
        "name": "Treatment of Stable COPD",
@@ -10285,7 +10319,8 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
+     ],
+     "scenario": "Rescue, all GOLD groups"
     }
    ]
   },
@@ -10295,7 +10330,7 @@
     {
      "role": "1st",
      "drugs": "short-acting bronchodilator (ipratropium)",
-     "note": "rescue, prescribed to all pts",
+     "note": "PRN (± w SABA), prescribed to all pts",
      "sources": [
       {
        "name": "Treatment of Stable COPD",
@@ -10303,7 +10338,8 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
+     ],
+     "scenario": "Rescue, all GOLD groups"
     }
    ]
   },
@@ -10311,9 +10347,9 @@
    "target": "c_1Y8MCFQ7S7",
    "roles": [
     {
-     "role": "2nd",
+     "role": "1st",
      "drugs": "LABA + LAMA + ICS",
-     "note": "consider triple @ start if eos ≥300; on escalation consider if eos ≥100 (GOLD)",
+     "note": "start w triple if eos ≥300",
      "sources": [
       {
        "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
@@ -10321,7 +10357,22 @@
        "year": "2026",
        "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
       }
-     ]
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
+    },
+    {
+     "role": "2nd",
+     "drugs": "LABA + LAMA + ICS",
+     "note": "exacerbations on LABA + LAMA + eos ≥100 → triple",
+     "sources": [
+      {
+       "name": "GOLD 2026 Pocket Guide (Global Strategy for the Diagnosis, Management, and Prevention of COPD), v1.1",
+       "org": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+       "year": "2026",
+       "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+      }
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
     }
    ]
   },
@@ -10339,7 +10390,8 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
     }
    ]
   },
@@ -10503,20 +10555,28 @@
        "year": "2026",
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-stable-copd"
       }
-     ]
+     ],
+     "scenario": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr"
     }
    ]
   }
  ],
- "classes": [
+ "scenarios": [
   {
-   "title": "Bronchodilators",
-   "members": [
-    "c_EK0ER25RKG",
-    "c_VFE09ZVEV6",
-    "c_9P71DW56HK",
-    "c_B616JSKCNF"
-   ]
+   "title": "GOLD group A: few Sx, ⍉exacerbations",
+   "gaps": []
+  },
+  {
+   "title": "GOLD group B: more Sx (dyspnea), ⍉exacerbations",
+   "gaps": []
+  },
+  {
+   "title": "GOLD group E: ≥2 mod exacerbations or ≥1 hsp/yr",
+   "gaps": []
+  },
+  {
+   "title": "Rescue, all GOLD groups",
+   "gaps": []
   }
  ]
 }
