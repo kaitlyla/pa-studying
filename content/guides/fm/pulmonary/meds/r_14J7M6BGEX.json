@@ -2427,27 +2427,7 @@
     },
     {
      "role": "1st",
-     "drugs": "rifapentine, rifampin",
-     "note": "3HP: rifapentine + INH wkly; 4R: RIF alone; 3HR: RIF + INH",
-     "sources": [
-      {
-       "name": "Your guide table under this diagnosis",
-       "org": "",
-       "year": "",
-       "url": null
-      },
-      {
-       "name": "Latent Tuberculosis (StatPearls)",
-       "org": "StatPearls Publishing (NCBI Bookshelf)",
-       "year": "2024",
-       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
-      }
-     ],
-     "scenario": "Latent TB infect"
-    },
-    {
-     "role": "1st",
-     "drugs": "rifapentine",
+     "drugs": "Isoniazid",
      "note": "3HP ⍉recommended in preg (or if expecting to become preg during it)",
      "sources": [
       {
@@ -2477,8 +2457,8 @@
     },
     {
      "role": "1st",
-     "drugs": "rifampin",
-     "note": "4R and 3HR: children of all ages (HIV-negative)",
+     "drugs": null,
+     "note": null,
      "sources": [
       {
        "name": "Treatment for Latent TB Infection",
@@ -2489,42 +2469,6 @@
      ],
      "scenario": "Latent TB infect",
      "population": "Peds"
-    },
-    {
-     "role": "1st",
-     "drugs": "rifampin",
-     "note": "⍉ if hypersensitivity to any rifamycin",
-     "sources": [
-      {
-       "name": "Rifampin capsules prescribing information (FDA label, DailyMed)",
-       "org": "COUPLER LLC (FDA label, DailyMed)",
-       "year": "2025",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=410a314f-83bf-d9b3-e063-6294a90a872c"
-      }
-     ],
-     "scenario": "TB dz (active)",
-     "population": "Allergy"
-    },
-    {
-     "role": "1st",
-     "drugs": "rifapentine, rifampin",
-     "note": "⍉ if hypersensitivity to any rifamycin",
-     "sources": [
-      {
-       "name": "PRIFTIN (rifapentine) tablets prescribing information (FDA label, DailyMed)",
-       "org": "SANOFI-AVENTIS U.S. LLC (FDA label, DailyMed)",
-       "year": "2026",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3a64fb70-b85e-43d9-8bcd-7e893f568ae1"
-      },
-      {
-       "name": "Rifampin capsules prescribing information (FDA label, DailyMed)",
-       "org": "COUPLER LLC (FDA label, DailyMed)",
-       "year": "2025",
-       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=410a314f-83bf-d9b3-e063-6294a90a872c"
-      }
-     ],
-     "scenario": "Latent TB infect",
-     "population": "Allergy"
     }
    ]
   },
@@ -2550,56 +2494,6 @@
       }
      ],
      "scenario": "TB dz (active)"
-    },
-    {
-     "role": "1st",
-     "drugs": "isoniazid",
-     "note": "3HP: + rifapentine wkly; 3HR: + RIF daily",
-     "sources": [
-      {
-       "name": "Your guide table under this diagnosis",
-       "org": "",
-       "year": "",
-       "url": null
-      },
-      {
-       "name": "Latent Tuberculosis (StatPearls)",
-       "org": "StatPearls Publishing (NCBI Bookshelf)",
-       "year": "2024",
-       "url": "https://www.ncbi.nlm.nih.gov/books/NBK599527/"
-      }
-     ],
-     "scenario": "Latent TB infect"
-    },
-    {
-     "role": "1st",
-     "drugs": "isoniazid",
-     "note": "give pyridoxine (B6) w INH: neuropathy risk",
-     "sources": [
-      {
-       "name": "Treatment for Drug-Susceptible Tuberculosis Disease",
-       "org": "Centers for Disease Control and Prevention (CDC)",
-       "year": "2025",
-       "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
-      }
-     ],
-     "scenario": "TB dz (active)",
-     "population": "Elderly"
-    },
-    {
-     "role": "1st",
-     "drugs": "isoniazid",
-     "note": "give pyridoxine (B6) w INH: neuropathy risk",
-     "sources": [
-      {
-       "name": "Treatment for Drug-Susceptible Tuberculosis Disease",
-       "org": "Centers for Disease Control and Prevention (CDC)",
-       "year": "2025",
-       "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
-      }
-     ],
-     "scenario": "TB dz (active)",
-     "population": "Pregnant"
     }
    ]
   },
