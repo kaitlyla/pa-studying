@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_C0AY621HNH",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "MMR vaccine:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    HIV: ⍉give if CD4 <200/µL; CD4 >200/µL can + should receive MMR in a 1- or 2-part series if no immunity"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    mumps: unvaccinated individuals at highest risk"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_PXV7EDFSPR"
+  }
+ ],
+ "roles": [
+  {
+   "target": "c_C0AY621HNH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "MMR vaccine (live attenuated)",
+     "note": "prevention; ⍉in preg",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "M-M-R II (measles, mumps, and rubella virus vaccine live) prescribing information (FDA label, DailyMed)",
+       "org": "Merck Sharp & Dohme",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0a9e384f-e717-436b-b9a0-15e53cef0862"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

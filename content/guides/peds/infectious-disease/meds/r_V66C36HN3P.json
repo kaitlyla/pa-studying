@@ -1,0 +1,75 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_MTBV2T2NY0"
+ ],
+ "own": [],
+ "gaps": [
+  "g_FBV05CSWH5",
+  "g_ED5WK3G6Q2",
+  "g_YWFWVZ27AQ"
+ ],
+ "roles": [
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin, erythromycin, clarithromycin",
+     "note": "erythro x14 d or azithro x5 d preferred; ≤ 6 wk: azithro (erythro ↑IHPS)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Pertussis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/pertussis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "≥ 2 mo, macrolide-intolerant/hypersensitive",
+     "sources": [
+      {
+       "name": "Pertussis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/pertussis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YWFWVZ27AQ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DTaP vaccine",
+     "note": "2, 4, 6 mo; 15–18 mo; 4–6 y",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

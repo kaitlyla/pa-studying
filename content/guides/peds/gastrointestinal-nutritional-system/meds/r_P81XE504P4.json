@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_MEKD1575W0",
+  "g_SRPS1P3G88",
+  "g_AY9HS5QMXR",
+  "g_483PHTK6ZZ"
+ ],
+ "roles": [
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "3rd-gen cephalosporin (preferred)",
+     "note": "+ metronidazole; gram (−) & anaerobic coverage",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Appendicitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/appendicitis"
+      }
+     ],
+     "scenario": "Surg (before appendectomy)"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "+ metronidazole; ↑likelihood of recurr",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Appendicitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+      }
+     ],
+     "scenario": "Nonsurgical"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "⍉ if hypersensitivity to any cephalosporin",
+     "sources": [
+      {
+       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
+       "org": "CIVICA, INC. (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
+      }
+     ],
+     "scenario": "Nonsurgical",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "⍉ in hyperbilirubinemic neonates (bili encephalopathy risk)",
+     "sources": [
+      {
+       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
+       "org": "CIVICA, INC. (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
+      }
+     ],
+     "scenario": "Nonsurgical",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_SRPS1P3G88",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "piperacillin-tazobactam",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Appendicitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/appendicitis"
+      }
+     ],
+     "scenario": "Surg (before appendectomy)"
+    },
+    {
+     "role": "1st",
+     "drugs": "piperacillin-tazobactam",
+     "note": "⍉ if allergy to any penicillin, cephalosporin or β-lactamase inhibitor",
+     "sources": [
+      {
+       "name": "Piperacillin and tazobactam for injection prescribing information (FDA label, DailyMed)",
+       "org": "CIVICA, INC. (FDA label, DailyMed)",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7aebc0e6-89db-4ef0-b5ab-d6b3199bcfc4"
+      }
+     ],
+     "scenario": "Surg (before appendectomy)",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "+ a cephalosporin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Appendicitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/appendicitis"
+      }
+     ],
+     "scenario": "Surg (before appendectomy)"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "+ ceftriaxone; ↑likelihood of recurr",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Appendicitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/"
+      }
+     ],
+     "scenario": "Nonsurgical"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "⍉ if hypersensitivity to any nitroimidazole",
+     "sources": [
+      {
+       "name": "FLAGYL (metronidazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "PFIZER LABORATORIES DIV PFIZER INC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384"
+      }
+     ],
+     "scenario": "Surg (before appendectomy)",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "⍉ if hypersensitivity to any nitroimidazole",
+     "sources": [
+      {
+       "name": "FLAGYL (metronidazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "PFIZER LABORATORIES DIV PFIZER INC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384"
+      }
+     ],
+     "scenario": "Nonsurgical",
+     "population": "Allergy"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Surg (before appendectomy)",
+   "gaps": [
+    "g_AY9HS5QMXR"
+   ]
+  },
+  {
+   "title": "Nonsurgical",
+   "gaps": []
+  }
+ ]
+}

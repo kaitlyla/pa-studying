@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_MTBV2T2NY0"
+ ],
+ "own": [],
+ "gaps": [
+  "g_FBV05CSWH5",
+  "g_G88KSJEKCM",
+  "g_F4CA06R7VR",
+  "g_8MP31DQJKW"
+ ],
+ "roles": [
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clarithromycin",
+     "note": "+ ethambutol x12 mo (± RIF)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin or clarithromycin",
+     "note": "HIV ppx (advanced immunosuppression, not on suppressive ART): CD4 < 750 (< 1 y), < 500 (1–5 y), < 200 (≥ 6 y)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Guidelines for the Prevention and Treatment of Opportunistic Infections in Children With and Exposed to HIV: Mycobacterium avium Complex Disease",
+       "org": "National Institutes of Health (NIH), clinicalinfo.hiv.gov",
+       "year": "2026",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/pediatric-opportunistic-infection/mycobacterium-avium-complex-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G88KSJEKCM",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ethambutol",
+     "note": "+ clarithromycin x12 mo; M. kansasii: + RIF",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F4CA06R7VR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rifampin",
+     "note": "± w clarithro + ethambutol; M. kansasii: RIF + ethambutol",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8MP31DQJKW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "macrolides",
+     "note": "children's cervical lymphadenitis: excision USU adequate; abx if recurrent/recalcitrant",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

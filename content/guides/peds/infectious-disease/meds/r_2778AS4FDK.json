@@ -1,0 +1,265 @@
+{
+ "v": 1,
+ "add": [
+  "c_58MCDAZQHM"
+ ],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_MTBV2T2NY0"
+ ],
+ "own": [],
+ "gaps": [
+  "g_M2DCQ8JC31",
+  "g_MEKD1575W0",
+  "g_FBV05CSWH5",
+  "g_R91E0562QC",
+  "g_0XS8T20Y8W"
+ ],
+ "roles": [
+  {
+   "target": "c_35QBPAGSVX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NSAIDs",
+     "note": "Sx relief",
+     "sources": [
+      {
+       "name": "Lyme Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/spirochetes/lyme-disease"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_M2DCQ8JC31",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefuroxime",
+     "note": "preferred",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Early disseminated",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "14-21 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Carditis w/ severe/symptomatic AV block"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IV)",
+     "note": "2–4 wks",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Arthritis unresponsive to PO therapy"
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "erythromycin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Early disseminated",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "10-21 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Early localized"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "21 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Early disseminated"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "21-28 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Late disseminated"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "contraindicated in preg",
+     "sources": [
+      {
+       "name": "Lyme Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/spirochetes/lyme-disease"
+      }
+     ],
+     "scenario": "Early localized",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "contraindicated in preg",
+     "sources": [
+      {
+       "name": "Lyme Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/spirochetes/lyme-disease"
+      }
+     ],
+     "scenario": "Early disseminated",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "contraindicated in preg",
+     "sources": [
+      {
+       "name": "Lyme Disease",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/spirochetes/lyme-disease"
+      }
+     ],
+     "scenario": "Late disseminated",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "AAP: any age; IDSA: some reserve doxy in young children unable to tolerate β-lactams",
+     "sources": [
+      {
+       "name": "AAN/ACR/IDSA 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease",
+       "org": "Infectious Diseases Society of America (IDSA)",
+       "year": "2020",
+       "url": "https://www.idsociety.org/practice-guideline/lyme-disease/"
+      }
+     ],
+     "scenario": "Early localized",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "amoxicillin",
+     "note": "arthritis: PO doxy (or amox/cefuroxime) x28d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "AAN/ACR/IDSA 2020 Guidelines for the Prevention, Diagnosis and Treatment of Lyme Disease",
+       "org": "Infectious Diseases Society of America (IDSA)",
+       "year": "2020",
+       "url": "https://www.idsociety.org/practice-guideline/lyme-disease/"
+      }
+     ],
+     "scenario": "Late disseminated"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Early localized",
+   "gaps": []
+  },
+  {
+   "title": "Early disseminated",
+   "gaps": []
+  },
+  {
+   "title": "Carditis w/ severe/symptomatic AV block",
+   "gaps": []
+  },
+  {
+   "title": "Late disseminated",
+   "gaps": []
+  },
+  {
+   "title": "Arthritis unresponsive to PO therapy",
+   "gaps": []
+  }
+ ]
+}

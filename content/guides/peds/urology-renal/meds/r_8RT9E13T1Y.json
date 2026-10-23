@@ -1,0 +1,192 @@
+{
+ "v": 1,
+ "add": [
+  "c_YSYYSQ9VG4",
+  "c_C0D2B6WSHB"
+ ],
+ "remove": [
+  "c_P05KHJTR8A",
+  "c_VXA8SDW8G2"
+ ],
+ "own": [],
+ "gaps": [
+  "g_ATXD9CNQTJ",
+  "g_3QJ74PQ6WK",
+  "g_ED5WK3G6Q2",
+  "g_1C3ZKEV6GY",
+  "g_MEKD1575W0",
+  "g_XQDJ872MXZ",
+  "g_9ZBTMPHEA4"
+ ],
+ "roles": [
+  {
+   "target": "g_ATXD9CNQTJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "phenazopyridine",
+     "note": "severe dysuria, ⍉more than 2 days",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "⍉trimethoprim in the 1st trimester and sulfamethoxazole in the 3rd",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    },
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "contraindicated under 2 months of age",
+     "sources": [
+      {
+       "name": "BACTRIM (sulfamethoxazole and trimethoprim) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    },
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "oral, nontoxic children; 7–10 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Urinary Tract Infection (UTI) in Children",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "fluoroquinolone",
+     "note": "only selected children (eg, > 1 y w complicated MDR gram (−) UTI)",
+     "sources": [
+      {
+       "name": "Urinary Tract Infection (UTI) in Children",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefixime",
+     "note": "x14d (her row); MSD: 7–10 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Urinary Tract Infection (UTI) in Children",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_XQDJ872MXZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cephalexin",
+     "note": "oral, nontoxic children",
+     "sources": [
+      {
+       "name": "Urinary Tract Infection (UTI) in Children",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "amoxicillin/clavulanate (Augmentin)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Urinary Tract Infection (UTI) in Children",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": [
+    "g_3QJ74PQ6WK"
+   ]
+  }
+ ]
+}

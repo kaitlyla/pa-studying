@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_MTBV2T2NY0",
+  "c_8XW495JD17",
+  "c_ZVZ43PBRG2"
+ ],
+ "own": [],
+ "gaps": [
+  "g_R91E0562QC",
+  "g_1C3ZKEV6GY",
+  "g_FBV05CSWH5",
+  "g_ED5WK3G6Q2",
+  "g_JDBFJ16DVJ"
+ ],
+ "roles": [
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tetracyclines",
+     "note": "doxy ≤ 8 y: only for severe or life-threatening infect when benefit outweighs risk (tooth discoloration)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Doxycycline hyclate tablets prescribing information (FDA label, DailyMed)",
+       "org": "DIRECT_RX (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2ad2b85f-2479-c7cd-e063-6294a90acca1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluoroquinolones",
+     "note": "cipro: ⍉a 1st choice in children (joint/periarticular adverse rxns)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "Hikma Pharmaceuticals USA Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "macrolides",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sulfonamides",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_JDBFJ16DVJ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "minocycline or doxycycline, clarithromycin, or RIF + ethambutol",
+     "note": "her notes: x4–6 wk; MSD: 3–6 mo effective; healing may occur spontaneously",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

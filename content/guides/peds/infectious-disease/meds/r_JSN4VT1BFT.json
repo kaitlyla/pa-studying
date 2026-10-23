@@ -1,0 +1,75 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_P05KHJTR8A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_ED5WK3G6Q2",
+  "g_MGXJR2X73Q"
+ ],
+ "roles": [
+  {
+   "target": "g_MGXJR2X73Q",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "sulfadiazine + pyrimethamine + folinic acid",
+     "note": "folinic acid prevents folate depletion",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin + pyrimethamine + leucovorin",
+     "note": "sulfonamide hypersensitivity",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "TMP-SMX",
+     "note": "HIV ppx if Toxoplasma-seropositive: CD4 ≤ 100 (≥ 6 y), ≤ 500 (1–5 y), ≤ 750 (< 1 y)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Guidelines for the Prevention and Treatment of Opportunistic Infections in Children With and Exposed to HIV: Toxoplasmosis",
+       "org": "National Institutes of Health (NIH), clinicalinfo.hiv.gov",
+       "year": "2025",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/pediatric-opportunistic-infection/toxoplasmosis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "add": [
+  "c_REWNSEXRX4"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_S53JCR23A8",
+  "g_TE30DXQ28D"
+ ],
+ "roles": [
+  {
+   "target": "g_S53JCR23A8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "entecavir or tenofovir",
+     "note": "chronic HBV, HBeAg+ (2–<18 y) w ↑ALT + HBV DNA; w a pediatric hepatologist; entecavir ≥ 2 y, TAF ≥ 6 y & ≥ 25 kg",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Update on Prevention, Diagnosis, and Treatment of Chronic Hepatitis B: AASLD 2018 Hepatitis B Guidance (Hepatology 2018;67(4):1560-1599)",
+       "org": "American Association for the Study of Liver Diseases (AASLD)",
+       "year": "2018",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5975958/"
+      },
+      {
+       "name": "Neonatal Hepatitis B Virus (HBV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-hepatitis-b-virus-hbv-infection"
+      },
+      {
+       "name": "VEMLIDY (tenofovir alafenamide) prescribing information (FDA label, DailyMed)",
+       "org": "Gilead Sciences",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=72e6b33c-0351-4070-9172-eeaa186c01d2"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "tenofovir from 28 wks",
+     "note": "preg, HBV DNA >200,000 IU/mL",
+     "sources": [
+      {
+       "name": "Hepatitis B, Chronic",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-b-chronic"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TE30DXQ28D",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "HepB vaccine (birth, 1–2 mo, 6–18 mo); HBIG + vaccine w.in 12 h if mother HBsAg+",
+     "note": "prevention; ⍉if allergic to baker's yeast",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Child and Adolescent Immunization Schedule Notes",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/vaccines/hcp/imz-schedules/child-adolescent-notes.html"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

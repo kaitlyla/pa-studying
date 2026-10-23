@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_WVQZFN03MY",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Herpes antivirals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Herpes labialis (recurrent): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    acyclovir: HSV, herpes zoster, varicella; ⍉active vs influenza A or B"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_15RP1P8BDE"
+  }
+ ],
+ "roles": [
+  {
+   "target": "c_WVQZFN03MY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "acyclovir (mother)",
+     "note": "h/o genital HSV: start at 36 wk",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV acyclovir",
+     "note": "SEM x14 d; CNS or disseminated x21 d",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Neonatal Herpes Simplex Virus (HSV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-herpes-simplex-virus-hsv-infection"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "PO acyclovir TID",
+     "note": "F/U x6 mo",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Neonatal Herpes Simplex Virus (HSV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-herpes-simplex-virus-hsv-infection"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
