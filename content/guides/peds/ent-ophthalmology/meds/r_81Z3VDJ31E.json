@@ -1,0 +1,52 @@
+{
+ "v": 1,
+ "add": [
+  "c_58MCDAZQHM",
+  "c_P05KHJTR8A",
+  "c_YSYYSQ9VG4"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_40FEDMM1AD",
+  "g_MEKD1575W0"
+ ],
+ "roles": [
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin (IV)",
+     "note": "w ceftriaxone/cefotaxime; admit",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefotaxime (IV)",
+     "note": "w vanco; admit",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

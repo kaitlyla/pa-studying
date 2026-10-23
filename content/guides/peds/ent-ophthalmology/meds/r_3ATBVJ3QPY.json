@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_8XW495JD17"
+ ],
+ "own": [],
+ "gaps": [
+  "g_KANYQJ4WED",
+  "g_GSJ40R2V9M",
+  "g_1C3ZKEV6GY",
+  "g_0XS8T20Y8W"
+ ],
+ "roles": [
+  {
+   "target": "g_KANYQJ4WED",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prophylactic antibiotic drops only if contaminants may have entered",
+     "note": null,
+     "sources": [
+      {
+       "name": "Traumatic Perforation of the Tympanic Membrane",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/traumatic-perforation-of-the-tympanic-membrane"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "If infected: fluoroquinolone drops (ciprofloxacin or ofloxacin) alone are usually enough",
+     "note": null,
+     "sources": [
+      {
+       "name": "Traumatic Perforation of the Tympanic Membrane",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/traumatic-perforation-of-the-tympanic-membrane"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GSJ40R2V9M",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Traumatic Perforation of the Tympanic Membrane",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/traumatic-perforation-of-the-tympanic-membrane"
+      },
+      {
+       "name": "StatPearls: Tympanic Membrane Perforation",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-30703/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluoroquinolone drops (ciprofloxacin or ofloxacin)",
+     "note": "if infected; alone USU enough",
+     "sources": [
+      {
+       "name": "Traumatic Perforation of the Tympanic Membrane",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/traumatic-perforation-of-the-tympanic-membrane"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "amoxicillin (PO)",
+     "note": "if infected; 7 days",
+     "sources": [
+      {
+       "name": "Traumatic Perforation of the Tympanic Membrane",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/traumatic-perforation-of-the-tympanic-membrane"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

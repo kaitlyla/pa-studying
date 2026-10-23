@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_JVHE92XFE3",
+  "c_P05KHJTR8A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_ASRB06FGJF",
+  "g_ED5WK3G6Q2",
+  "g_0XS8T20Y8W",
+  "g_9ZBTMPHEA4",
+  "g_MEKD1575W0"
+ ],
+ "roles": [
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clindamycin (PO)",
+     "note": "monotherapy, MRSA coverage; outpt if > 1 y and mild",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "w amoxicillin, Augmentin or cefpodoxime",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "amoxicillin",
+     "note": "w TMP-SMX",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "amoxicillin-clavulanate (Augmentin)",
+     "note": "w TMP-SMX",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "cefpodoxime",
+     "note": "w TMP-SMX",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "add": [
+  "c_SF27NAYRSX"
+ ],
+ "remove": [
+  "c_ZJBYRE8N73"
+ ],
+ "own": [],
+ "gaps": [
+  "g_X4EAREFTRD",
+  "g_5ETBJBP08E",
+  "g_Y6H3CNCNE0"
+ ],
+ "roles": [
+  {
+   "target": "g_X4EAREFTRD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Severe photophobia or affected vision: prednisolone acetate 1% QID (ophthalmologist; rule out HSV first)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Viral Conjunctivitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/conjunctival-and-scleral-disorders/viral-conjunctivitis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Topical cyclosporine if steroid drops are limited by adverse effects",
+     "note": null,
+     "sources": [
+      {
+       "name": "Viral Conjunctivitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/conjunctival-and-scleral-disorders/viral-conjunctivitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5ETBJBP08E",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "HSV keratitis; HZO",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Herpes Simplex Keratitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-23858/"
+      },
+      {
+       "name": "StatPearls: Herpes Zoster Ophthalmicus",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-35540/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Y6H3CNCNE0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Tears, cool compresses",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Viral Conjunctivitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-19894/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "Antihistamines",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Viral Conjunctivitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-19894/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

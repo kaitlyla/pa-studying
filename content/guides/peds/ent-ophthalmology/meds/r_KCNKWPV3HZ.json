@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "add": [
+  "c_CSF60KE111",
+  "c_3R8WTKGPB3",
+  "c_PRXDPX2MT3"
+ ],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_JVHE92XFE3"
+ ],
+ "own": [],
+ "gaps": [
+  "g_70P1TGFFYF",
+  "g_ZE7E3S0P8N",
+  "g_ASRB06FGJF",
+  "g_9ZBTMPHEA4"
+ ],
+ "roles": [
+  {
+   "target": "g_70P1TGFFYF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZE7E3S0P8N",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Peritonsillar Abscess",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27029/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clindamycin",
+     "note": "W drainage; 10 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peritonsillar Abscess and Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/peritonsillar-abscess-and-cellulitis"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Augmentin (PO)",
+     "note": "W drainage; 10 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Peritonsillar Abscess and Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/peritonsillar-abscess-and-cellulitis"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

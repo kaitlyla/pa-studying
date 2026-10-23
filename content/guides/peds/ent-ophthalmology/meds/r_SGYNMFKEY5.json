@@ -1,0 +1,51 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_3R8WTKGPB3",
+  "c_JVHE92XFE3"
+ ],
+ "own": [],
+ "gaps": [
+  "g_40FEDMM1AD",
+  "g_ASRB06FGJF"
+ ],
+ "roles": [
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin (IV)",
+     "note": "or clindamycin × 4 wk; w middle ear or mastoid drainage",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clindamycin (IV)",
+     "note": "or vanco × 4 wk; w middle ear or mastoid drainage",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

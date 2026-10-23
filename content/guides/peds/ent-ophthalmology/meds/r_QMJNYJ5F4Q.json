@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_8XW495JD17"
+ ],
+ "own": [],
+ "gaps": [
+  "g_20EERJ8RZX",
+  "g_2XX18JYWMP",
+  "g_1C3ZKEV6GY",
+  "g_MEKD1575W0",
+  "g_SRPS1P3G88",
+  "g_SKT37K6E5V"
+ ],
+ "roles": [
+  {
+   "target": "g_20EERJ8RZX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2XX18JYWMP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Fungal: amphotericin B",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Fungal: voriconazole",
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Necrotizing (Malignant) Otitis Externa",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-24674/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "W ceftazidime, piperacillin/tazobactam or cefepime; 6–8 wks",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "⍉a drug of first choice in children (more adverse rxns, incl. joints)",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "Hikma Pharmaceuticals USA Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftazidime",
+     "note": "W cipro; 6–8 wks",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_SRPS1P3G88",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "piperacillin/tazobactam",
+     "note": "W cipro; 6–8 wks",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_SKT37K6E5V",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefepime",
+     "note": "W cipro; 6–8 wks",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

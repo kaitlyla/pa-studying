@@ -1,0 +1,76 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_MTBV2T2NY0"
+ ],
+ "own": [],
+ "gaps": [
+  "g_MEKD1575W0",
+  "g_FBV05CSWH5"
+ ],
+ "roles": [
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefotaxime",
+     "note": "gonococcal",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Gonococcal Infections Among Neonates (Sexually Transmitted Infections Treatment Guidelines, 2021)",
+       "org": "Centers for Disease Control and Prevention",
+       "year": "2022",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-neonates.htm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "erythromycin (PO)",
+     "note": "C. trachomatis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "erythromycin 0.5% ointment",
+     "note": "prophylaxis right after birth (gonococcal); doesn't prevent chlamydial conjunctivitis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Gonococcal Infections Among Neonates (Sexually Transmitted Infections Treatment Guidelines, 2021)",
+       "org": "Centers for Disease Control and Prevention",
+       "year": "2022",
+       "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-neonates.htm"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

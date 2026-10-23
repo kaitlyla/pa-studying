@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "add": [
+  "c_35QBPAGSVX"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_T37EDZHPEQ",
+  "g_ZNAZSYQQ9N",
+  "g_027EWQMK5N",
+  "g_6JWA2ACSKT"
+ ],
+ "roles": [
+  {
+   "target": "g_T37EDZHPEQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Mild: OTC antihistamine drop (eg, ketotifen)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Allergic Conjunctivitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/conjunctival-and-scleral-disorders/allergic-conjunctivitis"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "Rx antihistamine drops (olopatadine, bepotastine, azelastine, cetirizine), mast cell stabilizers (nedocromil, cromolyn) or NSAID drops (ketorolac)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Allergic Conjunctivitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/conjunctival-and-scleral-disorders/allergic-conjunctivitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ZNAZSYQQ9N",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Recalcitrant: steroid drops (loteprednol, fluorometholone, prednisolone acetate) by an ophthalmologist; topical cyclosporine",
+     "note": null,
+     "sources": [
+      {
+       "name": "Allergic Conjunctivitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/eye-disorders/conjunctival-and-scleral-disorders/allergic-conjunctivitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_027EWQMK5N",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Allergic Conjunctivitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-19890/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6JWA2ACSKT",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": null,
+     "note": null,
+     "sources": [
+      {
+       "name": "StatPearls: Allergic Conjunctivitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-19890/"
+      },
+      {
+       "name": "Seidman MD, et al. Clinical practice guideline: Allergic rhinitis. Otolaryngol Head Neck Surg. 2015;152(1 Suppl):S1-S43 (abstract, PubMed)",
+       "org": "Otolaryngology–Head and Neck Surgery (AAO-HNSF)",
+       "year": "2015",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/25644617/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

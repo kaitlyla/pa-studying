@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_3R8WTKGPB3"
+ ],
+ "own": [],
+ "gaps": [
+  "g_MEKD1575W0",
+  "g_0XS8T20Y8W",
+  "g_DD4NZPT1GQ",
+  "g_40FEDMM1AD",
+  "g_F4CA06R7VR",
+  "g_36AHK9G6PM"
+ ],
+ "roles": [
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefotaxime",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "MSD Manual Professional Edition: Epiglottitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/epiglottitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ampicillin",
+     "note": "± w ceftriaxone/cefotaxime",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DD4NZPT1GQ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "penicillin",
+     "note": "± w ceftriaxone/cefotaxime",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vancomycin",
+     "note": "± w ceftriaxone/cefotaxime",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F4CA06R7VR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rifampin",
+     "note": "prophylaxis for all close contacts",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_36AHK9G6PM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "dexamethasone",
+     "note": "airway edema",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Hib vaccine",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "MSD Manual Professional Edition: Epiglottitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/epiglottitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
