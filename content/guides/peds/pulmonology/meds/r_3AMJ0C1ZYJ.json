@@ -1,0 +1,71 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_3R8WTKGPB3",
+  "c_JVHE92XFE3"
+ ],
+ "own": [],
+ "gaps": [
+  "g_ASRB06FGJF",
+  "g_40FEDMM1AD",
+  "g_M2DCQ8JC31"
+ ],
+ "roles": [
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clindamycin",
+     "note": "w a 2nd-gen cephalosporin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin",
+     "note": "instead of clindamycin, w a 2nd-gen cephalosporin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_M2DCQ8JC31",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "2nd-gen cephalosporin",
+     "note": "w clindamycin or vanco",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

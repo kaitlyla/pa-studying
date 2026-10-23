@@ -1,0 +1,503 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_YC3SWRW6Z9",
+  "c_3R8WTKGPB3",
+  "c_MTBV2T2NY0",
+  "c_8XW495JD17",
+  "c_N0JMHXH79G",
+  "c_JVHE92XFE3",
+  "c_P05KHJTR8A",
+  "c_QAXJA0677A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_Y2KV8EJ8CY",
+  "g_1C3ZKEV6GY",
+  "g_MEKD1575W0",
+  "g_2TYECCYG0B",
+  "g_40FEDMM1AD",
+  "g_EHGA516G4Z",
+  "g_SRPS1P3G88",
+  "g_SKT37K6E5V",
+  "g_FBV05CSWH5",
+  "g_0XS8T20Y8W",
+  "g_9ZBTMPHEA4",
+  "g_R91E0562QC",
+  "g_XCTA55TKXS",
+  "g_ASRB06FGJF",
+  "g_ED5WK3G6Q2",
+  "g_BRV0B1ZFH3"
+ ],
+ "roles": [
+  {
+   "target": "g_Y2KV8EJ8CY",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "influenza: oseltamivir, zanamivir, peramivir or baloxavir; varicella: acyclovir",
+     "note": null,
+     "sources": [
+      {
+       "name": "Community-Acquired Pneumonia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ampicillin",
+     "note": "w gentamicin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Neonates"
+    },
+    {
+     "role": "1st",
+     "drugs": "amoxicillin",
+     "note": "± azithro",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Outpt, >3 mo"
+    },
+    {
+     "role": "1st",
+     "drugs": "ampicillin",
+     "note": "± azithro",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpt, >3 mo"
+    }
+   ]
+  },
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "gentamicin",
+     "note": "w ampicillin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Neonates"
+    },
+    {
+     "role": "1st",
+     "drugs": "gentamicin",
+     "note": "+ Bactrim, meropenem, ceftazidime, cefepime or clindamycin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "erythromycin",
+     "note": "C. trachomatis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Neonates"
+    },
+    {
+     "role": "adjunct",
+     "drugs": "azithromycin",
+     "note": "± w amoxicillin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Outpt, >3 mo"
+    },
+    {
+     "role": "adjunct",
+     "drugs": "azithromycin",
+     "note": "± w ampicillin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpt, >3 mo"
+    },
+    {
+     "role": "adjunct",
+     "drugs": "azithromycin",
+     "note": "added to the typical tx",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Atypical"
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": "PCN allergy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Outpt, >3 mo",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin",
+     "note": "PCN allergy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpt, >3 mo",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "clindamycin",
+     "note": "w ceftriaxone",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Complicated"
+    },
+    {
+     "role": "1st",
+     "drugs": "clindamycin",
+     "note": "w an aminoglycoside (gentamicin)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "levofloxacin",
+     "note": "PCN allergy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Outpt, >3 mo",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "levofloxacin",
+     "note": "PCN allergy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Inpt, >3 mo",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "w clindamycin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Complicated"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "w vanco",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "ICU"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftazidime",
+     "note": "w an aminoglycoside (gentamicin)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin",
+     "note": "w ceftriaxone",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "ICU"
+    }
+   ]
+  },
+  {
+   "target": "g_EHGA516G4Z",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "linezolid",
+     "note": "MRSA: alternative to vancomycin",
+     "sources": [
+      {
+       "name": "The Management of Community-Acquired Pneumonia in Infants and Children Older Than 3 Months of Age: Clinical Practice Guidelines by the Pediatric Infectious Diseases Society and the Infectious Diseases Society of America (Bradley JS, et al. Clin Infect Dis 2011;53:e25-e76)",
+       "org": "Pediatric Infectious Diseases Society / Infectious Diseases Society of America (Clin Infect Dis)",
+       "year": "2011",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7107838/"
+      }
+     ],
+     "scenario": "ICU"
+    }
+   ]
+  },
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "doxycycline",
+     "note": "children >7 y",
+     "sources": [
+      {
+       "name": "The Management of Community-Acquired Pneumonia in Infants and Children Older Than 3 Months of Age: Clinical Practice Guidelines by the Pediatric Infectious Diseases Society and the Infectious Diseases Society of America (Bradley JS, et al. Clin Infect Dis 2011;53:e25-e76)",
+       "org": "Pediatric Infectious Diseases Society / Infectious Diseases Society of America (Clin Infect Dis)",
+       "year": "2011",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7107838/"
+      }
+     ],
+     "scenario": "Atypical"
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX (Bactrim)",
+     "note": "w an aminoglycoside (gentamicin)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_2TYECCYG0B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "meropenem",
+     "note": "w an aminoglycoside (gentamicin)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_SKT37K6E5V",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefepime",
+     "note": "w an aminoglycoside (gentamicin)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "HAP"
+    }
+   ]
+  },
+  {
+   "target": "g_BRV0B1ZFH3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "PCV13",
+     "note": "6 wk–5 y: 2, 4, 6 and 12–15 mo",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Neonates",
+   "gaps": []
+  },
+  {
+   "title": "Outpt, >3 mo",
+   "gaps": []
+  },
+  {
+   "title": "Inpt, >3 mo",
+   "gaps": []
+  },
+  {
+   "title": "Complicated",
+   "gaps": []
+  },
+  {
+   "title": "ICU",
+   "gaps": []
+  },
+  {
+   "title": "Atypical",
+   "gaps": []
+  },
+  {
+   "title": "HAP",
+   "gaps": []
+  }
+ ]
+}

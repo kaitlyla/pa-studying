@@ -1,0 +1,77 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_EK0ER25RKG",
+  "c_CSF60KE111"
+ ],
+ "own": [],
+ "gaps": [
+  "g_JWRE28QK62"
+ ],
+ "roles": [
+  {
+   "target": "g_JWRE28QK62",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antipyretics",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "nirsevimab or clesrovimab",
+     "note": "RSV prevention",
+     "sources": [
+      {
+       "name": "StatPearls: Respiratory Syncytial Virus Infection in Children",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28424/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "aerosolized ribavirin",
+     "note": "select immunocompromised pts",
+     "sources": [
+      {
+       "name": "StatPearls: Respiratory Syncytial Virus Infection in Children",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28424/"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "nebulized albuterol",
+     "note": "trial only, esp severe resp compromise; ⍉routine in healthy infants",
+     "sources": [
+      {
+       "name": "StatPearls: Pediatric Bronchiolitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-26822/"
+      },
+      {
+       "name": "StatPearls: Respiratory Syncytial Virus Infection in Children",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28424/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
