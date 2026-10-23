@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_6GNDTQNF13",
+  "g_P4RWDGYDXK"
+ ],
+ "roles": [
+  {
+   "target": "g_6GNDTQNF13",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "supportive measures",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "analgesics, antiemetics, IV fluids",
+     "note": "supportive",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "antiretroviral therapy",
+     "note": "HIV meningitis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P4RWDGYDXK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "empiric bacterial-meningitis abx",
+     "note": "partially treated pts",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_WVQZFN03MY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Suspected HSV or VZV meningitis (or any suspicion of HSV encephalitis): empiric acyclovir, stopped if PCR is negative",
+     "note": null,
+     "sources": [
+      {
+       "name": "Viral Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

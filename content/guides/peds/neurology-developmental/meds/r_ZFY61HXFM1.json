@@ -1,0 +1,279 @@
+{
+ "v": 1,
+ "add": [
+  "c_JT9GMEDEPW",
+  "c_8XW495JD17",
+  "c_SDQVCGRZZJ"
+ ],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_3R8WTKGPB3",
+  "c_58MCDAZQHM",
+  "c_QAXJA0677A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_VM76Y9JBJW",
+  "g_S7HNN1BNPG",
+  "g_40FEDMM1AD",
+  "g_MEKD1575W0",
+  "g_XCTA55TKXS",
+  "g_K4TJJRDG7V",
+  "g_PD678J5KX0",
+  "g_0XS8T20Y8W"
+ ],
+ "roles": [
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "gentamicin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Neonatal Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
+      }
+     ],
+     "scenario": "< 1 month"
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vancomycin",
+     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "> 50 y"
+    },
+    {
+     "role": "1st",
+     "drugs": "vancomycin",
+     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "1 mo–50 y"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefotaxime",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "> 50 y"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefotaxime",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "1 mo–50 y"
+    }
+   ]
+  },
+  {
+   "target": "g_VM76Y9JBJW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Dexamethasone just before or with the first antibiotic dose",
+     "note": null,
+     "sources": [
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_S7HNN1BNPG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal vaccines",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Acute Bacterial Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      },
+      {
+       "name": "Use of the GSK MenACWY-CRM/MenB-4C Pentavalent Meningococcal Vaccine Among Persons Aged ≥10 Years: Recommendations of the ACIP. MMWR Morb Mortal Wkly Rep 2026;75(1)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12782235/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ampicillin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Neonatal Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
+      }
+     ],
+     "scenario": "< 1 month"
+    },
+    {
+     "role": "1st",
+     "drugs": "ampicillin",
+     "note": "Listeria",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "> 50 y"
+    },
+    {
+     "role": "alt",
+     "drugs": "ampicillin",
+     "note": "Listeria poss: add ampicillin",
+     "sources": [
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "1 mo–50 y",
+     "population": "Pregnant"
+    },
+    {
+     "role": "alt",
+     "drugs": "ampicillin",
+     "note": "infants < 3 months: ampicillin + ceftriaxone or cefotaxime",
+     "sources": [
+      {
+       "name": "Acute Bacterial Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/acute-bacterial-meningitis"
+      }
+     ],
+     "scenario": "1 mo–50 y",
+     "population": "Peds"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "< 1 month",
+   "gaps": [
+    "g_PD678J5KX0"
+   ]
+  },
+  {
+   "title": "> 50 y",
+   "gaps": [
+    "g_K4TJJRDG7V"
+   ]
+  },
+  {
+   "title": "1 mo–50 y",
+   "gaps": [
+    "g_K4TJJRDG7V"
+   ]
+  }
+ ]
+}
