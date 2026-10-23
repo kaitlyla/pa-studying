@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_QGSM02W2WS",
+  "g_8EHTP9B80G"
+ ],
+ "roles": [
+  {
+   "target": "g_QGSM02W2WS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Coal Worker Pneumoconiosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-and-occupational-pulmonary-diseases/coal-worker-pneumoconiosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8EHTP9B80G",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bronchodilators (COPD tx)",
+     "note": "airflow obstruct",
+     "sources": [
+      {
+       "name": "Coal Worker Pneumoconiosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/environmental-and-occupational-pulmonary-diseases/coal-worker-pneumoconiosis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

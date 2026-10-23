@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "add": [
+  "c_W3N02QZ15S"
+ ],
+ "remove": [
+  "c_FHBEK18ECJ"
+ ],
+ "own": [],
+ "gaps": [
+  "g_XSN7M6QRG2",
+  "g_6YCE4NDCPM",
+  "g_M8QDHWKHDG",
+  "g_XQDJ872MXZ",
+  "g_7Q66N4DEG4"
+ ],
+ "roles": [
+  {
+   "target": "g_XSN7M6QRG2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "emollients + topical corticosteroid",
+     "note": "stasis derm",
+     "sources": [
+      {
+       "name": "StatPearls: Venous Insufficiency",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_6YCE4NDCPM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "pentoxifylline (w compression)",
+     "note": "venous ulcers",
+     "sources": [
+      {
+       "name": "Chronic Venous Insufficiency and Post-Thrombotic Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/chronic-venous-insufficiency-and-post-thrombotic-syndrome"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XQDJ872MXZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral cephalexin",
+     "note": "only for superimposed cellulitis",
+     "sources": [
+      {
+       "name": "Chronic Venous Insufficiency and Post-Thrombotic Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/chronic-venous-insufficiency-and-post-thrombotic-syndrome"
+      },
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7Q66N4DEG4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral dicloxacillin",
+     "note": "only for superimposed cellulitis",
+     "sources": [
+      {
+       "name": "Chronic Venous Insufficiency and Post-Thrombotic Syndrome",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/peripheral-venous-disorders/chronic-venous-insufficiency-and-post-thrombotic-syndrome"
+      },
+      {
+       "name": "Cellulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/bacterial-skin-infections/cellulitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

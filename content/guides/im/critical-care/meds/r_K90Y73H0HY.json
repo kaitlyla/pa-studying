@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "add": [
+  "c_CSF60KE111"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_CSF60KE111",
+   "pieces": [],
+   "gap": "g_FRFEBENPZH"
+  }
+ ],
+ "gaps": [
+  "g_7A68CHZRS0",
+  "g_WFPWY9GCV7",
+  "g_BGWN7DQNPD",
+  "g_2TR35NEQRV",
+  "g_Q99GK6EZ2M"
+ ],
+ "roles": [
+  {
+   "target": "g_WFPWY9GCV7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV crystalloids (± colloids)",
+     "note": "keep MAP ≥ 85-90 mm Hg for 5-7 days (spinal cord perfusion)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Trauma",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/spinal-trauma/spinal-trauma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7A68CHZRS0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "vasopressors",
+     "note": "keep MAP ≥ 85-90 mm Hg for 5-7 days (spinal cord perfusion)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Trauma",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/spinal-trauma/spinal-trauma"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "norepinephrine (chronotropic + inotropic vasopressor)",
+     "note": "injury above T6-T7",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Trauma",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/spinal-trauma/spinal-trauma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_CSF60KE111",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "high-dose methylprednisolone (24-h infusion)",
+     "note": "not routinely recommended; some experts use it for selected pts within 8 h of injury",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Spinal Trauma",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/spinal-trauma/spinal-trauma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_BGWN7DQNPD",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "epinephrine",
+     "note": "rare persistent refractory hypotension",
+     "sources": [
+      {
+       "name": "StatPearls: Neurogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28979/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2TR35NEQRV",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "atropine or glycopyrrolate",
+     "note": "bradycardia",
+     "sources": [
+      {
+       "name": "StatPearls: Neurogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28979/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Q99GK6EZ2M",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "isoproterenol; theophylline or aminophylline",
+     "note": "refractory bradycardia",
+     "sources": [
+      {
+       "name": "StatPearls: Neurogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28979/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

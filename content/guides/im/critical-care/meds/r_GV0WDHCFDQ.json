@@ -1,0 +1,283 @@
+{
+ "v": 1,
+ "add": [
+  "c_CSF60KE111",
+  "c_EZZFKKZ98Q"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_CSF60KE111",
+   "pieces": [],
+   "gap": "g_3NDFST5S5B"
+  },
+  {
+   "target": "c_EZZFKKZ98Q",
+   "pieces": [],
+   "gap": "g_4D4M6CS2DA"
+  }
+ ],
+ "gaps": [
+  "g_40FEDMM1AD",
+  "g_SRPS1P3G88",
+  "g_MEKD1575W0",
+  "g_XCTA55TKXS",
+  "g_ASRB06FGJF",
+  "g_483PHTK6ZZ",
+  "g_RX29QZ9M4P",
+  "g_KAK3MKXTTF",
+  "g_K1R0JYQCAD"
+ ],
+ "roles": [
+  {
+   "target": "g_KAK3MKXTTF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "balanced isotonic crystalloid",
+     "note": "first-line to restore perfusion",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "albumin",
+     "note": "may be considered after large crystalloid volumes",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "broad-spectrum IV abx, empiric gram-positive: vancomycin",
+     "note": "as soon as possible after cultures; narrow once the source or cultures are known",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SRPS1P3G88",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "piperacillin/tazobactam",
+     "note": "as soon as possible after cultures; choice by suspected source and local antibiogram",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "3rd-gen cephalosporin (ceftriaxone: your notes)",
+     "note": "as soon as possible after cultures; choice by suspected source and local antibiogram",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "asplenic pts",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "aminoglycoside (gentamicin: your notes)",
+     "note": "as soon as possible after cultures; choice by suspected source and local antibiogram",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RX29QZ9M4P",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "norepinephrine",
+     "note": "first-line vasopressor; initial target MAP 65 mm Hg",
+     "sources": [
+      {
+       "name": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (Evans L, et al. Intensive Care Med 2021;47:1181-1247)",
+       "org": "Society of Critical Care Medicine / European Society of Intensive Care Medicine",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "vasopressin",
+     "note": "added when MAP stays inadequate on norepinephrine (rather than ↑norepinephrine dose)",
+     "sources": [
+      {
+       "name": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (Evans L, et al. Intensive Care Med 2021;47:1181-1247)",
+       "org": "Society of Critical Care Medicine / European Society of Intensive Care Medicine",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "epinephrine",
+     "note": "added when MAP stays inadequate despite norepinephrine + vasopressin",
+     "sources": [
+      {
+       "name": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (Evans L, et al. Intensive Care Med 2021;47:1181-1247)",
+       "org": "Society of Critical Care Medicine / European Society of Intensive Care Medicine",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_CSF60KE111",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "glucocorticoids (hydrocortisone)",
+     "note": "refractory septic shock (no cortisol test needed), or documented adrenal insufficiency",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_EZZFKKZ98Q",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "insulin infusion",
+     "note": "keep glucose 110-180 mg/dL",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_K1R0JYQCAD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "empiric antifungal",
+     "note": "immunocompromised pts",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Sepsis and Septic Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "clindamycin",
+     "note": "abdominal infection",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "abdominal infection",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

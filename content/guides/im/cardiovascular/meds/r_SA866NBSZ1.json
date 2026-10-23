@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_Q9Y3RRBKX0",
+  "g_8EWNB064PC",
+  "g_8RGQZ7Y48P"
+ ],
+ "roles": [
+  {
+   "target": "g_Q9Y3RRBKX0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "diuretics (cautious)",
+     "note": "congestion; pts are preload dep",
+     "sources": [
+      {
+       "name": "Restrictive Cardiomyopathy",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/restrictive-cardiomyopathy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8EWNB064PC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "tafamidis or acoramidis (TTR stabilizer); vutrisiran (TTR silencer)",
+     "note": "ATTR cardiomyopathy",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      },
+      {
+       "name": "Amyloidosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hematology/amyloidosis/amyloidosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8RGQZ7Y48P",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "anticoagulant",
+     "note": "AF, AFL or intracardiac thrombus; amyloid AF regardless of CHA2DS2-VASc",
+     "sources": [
+      {
+       "name": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+       "org": "American Heart Association / American College of Cardiology / Heart Failure Society of America (AHA/ACC/HFSA)",
+       "year": "2022",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/35363499/"
+      },
+      {
+       "name": "Restrictive Cardiomyopathy",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/restrictive-cardiomyopathy"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

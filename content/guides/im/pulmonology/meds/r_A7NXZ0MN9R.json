@@ -1,0 +1,67 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_6XQW34JDR4",
+  "g_084SNN3S90",
+  "g_Z10XX3A8P1"
+ ],
+ "roles": [
+  {
+   "target": "g_6XQW34JDR4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "supplemental O2",
+     "note": "still hypoxemic on PAP; never alone",
+     "sources": [
+      {
+       "name": "StatPearls: Obesity-Hypoventilation Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27204/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_084SNN3S90",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "acetazolamide, medroxyprogesterone",
+     "note": "last resort; sparse evidence; theophylline not recommended",
+     "sources": [
+      {
+       "name": "StatPearls: Obesity-Hypoventilation Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27204/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Z10XX3A8P1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "tirzepatide (weight loss)",
+     "note": "FDA-approved for OSA, not yet for OHS",
+     "sources": [
+      {
+       "name": "StatPearls: Obesity-Hypoventilation Syndrome",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27204/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

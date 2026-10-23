@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_F4WQDS4H23",
+  "g_VNXNEPZDMZ",
+  "g_SKCJA28A26",
+  "g_V30YSSAXR3",
+  "g_WRVZ197DBE"
+ ],
+ "roles": [
+  {
+   "target": "g_F4WQDS4H23",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pirfenidone or nintedanib",
+     "note": "slow progression; neither shown better",
+     "sources": [
+      {
+       "name": "Idiopathic Pulmonary Fibrosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/idiopathic-pulmonary-fibrosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "nerandomilast (oral PDE4B inhibitor)",
+     "note": "FDA-approved for IPF in 2025; slows FVC decline",
+     "sources": [
+      {
+       "name": "FDA approves drug to treat idiopathic pulmonary fibrosis (Jascayd, nerandomilast)",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.fda.gov/drugs/news-events-human-drugs/fda-approves-drug-treat-idiopathic-pulmonary-fibrosis"
+      },
+      {
+       "name": "JASCAYD (nerandomilast) tablets, prescribing information (DailyMed SPL v6)",
+       "org": "Boehringer Ingelheim (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fa1b14c6-957f-d326-5099-911bfe33e391"
+      },
+      {
+       "name": "FDA Integrated Review, NDA 218764: Jascayd (nerandomilast), p. 26",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2025",
+       "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2025/218764Orig1s000IntegratedR.pdf"
+      },
+      {
+       "name": "Your clinical review edit (FM Pulmonary pharm review, Oct 8, 2026)",
+       "org": "Your notes",
+       "year": "2026",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VNXNEPZDMZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SKCJA28A26",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "supplemental O2",
+     "note": null,
+     "sources": [
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (IPF)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/idiopathic-pulmonary-fibrosis-ipf"
+      },
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "smoking cessation",
+     "note": null,
+     "sources": [
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (IPF)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/idiopathic-pulmonary-fibrosis-ipf"
+      },
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_V30YSSAXR3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "systemic corticosteroids",
+     "note": "acute exacerbation; use cautiously",
+     "sources": [
+      {
+       "name": "Acute exacerbation in fibrotic interstitial lung disease: an international working group report. Am J Respir Crit Care Med, 1 Oct 2026",
+       "org": "American Journal of Respiratory and Critical Care Medicine",
+       "year": "2026",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13624799/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WRVZ197DBE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": null,
+     "note": "GERD Sx only",
+     "sources": [
+      {
+       "name": "Idiopathic Pulmonary Fibrosis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

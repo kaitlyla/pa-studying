@@ -1,0 +1,115 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VTCP7P7SZ4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_TAW4Z3Y1D1",
+  "g_MET5QSJKPV"
+ ],
+ "roles": [
+  {
+   "target": "g_TAW4Z3Y1D1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "fluconazole or itraconazole",
+     "note": "mild to moderate disease (most immunocompetent pts w mild pulmonary infection need none; fluconazole 3-6 mo may be considered if Sx prolonged or severe)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "lipid amphotericin B, then an oral triazole once stable",
+     "note": "severe disease",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "amphotericin B",
+     "note": "Preg, 1st trimester: severe or extrapulmonary disease (avoid triazoles: teratogenic)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "fluconazole, then lifelong azole maintenance",
+     "note": "meningeal disease",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "oral fluconazole or itraconazole maintenance",
+     "note": "immunocompromised: until CD4 > 250 on ART",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "voriconazole or posaconazole",
+     "note": "mild to moderate nonmeningeal extrapulmonary disease (not well studied)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Coccidioidomycosis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/coccidioidomycosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MET5QSJKPV",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "intrathecal amphotericin B",
+     "note": "spinal arachnoiditis",
+     "sources": [
+      {
+       "name": "StatPearls: Coccidioidomycosis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-19667/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

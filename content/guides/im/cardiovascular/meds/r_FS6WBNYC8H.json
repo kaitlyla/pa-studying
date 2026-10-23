@@ -1,0 +1,56 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM"
+ ],
+ "own": [],
+ "gaps": [
+  "g_DD4NZPT1GQ",
+  "g_G912DY2SFR"
+ ],
+ "roles": [
+  {
+   "target": "g_DD4NZPT1GQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prophylaxis: benzathine PCN G IM every 3–4 wk",
+     "note": "⍉carditis: 5 yr or to age 21; carditis w/o residual dz: 10 yr or to age 21; residual Hdz: 10 yr or to age 40",
+     "sources": [
+      {
+       "name": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+       "org": "American College of Cardiology / American Heart Association (ACC/AHA)",
+       "year": "2020",
+       "url": "https://doi.org/10.1161/CIR.0000000000000923"
+      },
+      {
+       "name": "Rheumatic Fever",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/rheumatic-fever"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G912DY2SFR",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ACE inhibitors, diuretics, beta-blockers",
+     "note": "heart failure from valve disease",
+     "sources": [
+      {
+       "name": "StatPearls: Rheumatic Heart Disease",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28514/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

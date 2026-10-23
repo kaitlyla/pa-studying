@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_CNPDSMTXBA",
+  "g_2H7MGBSB2E"
+ ],
+ "roles": [
+  {
+   "target": "g_CNPDSMTXBA",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "polidocanol (sclerotherapy)",
+     "note": "small veins < 6 mm, reticular and spider veins",
+     "sources": [
+      {
+       "name": "StatPearls: Varicose Veins",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-30987/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2H7MGBSB2E",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "oral pain medications",
+     "note": "w compression stockings and leg elevation",
+     "sources": [
+      {
+       "name": "StatPearls: Varicose Veins",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-30987/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

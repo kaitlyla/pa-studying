@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "add": [
+  "c_1W9T6QFWR7",
+  "c_ZJVQB3DDA6"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_1W9T6QFWR7",
+   "pieces": [],
+   "gap": "g_ZTKPD85WS9"
+  },
+  {
+   "target": "c_ZJVQB3DDA6",
+   "pieces": [],
+   "gap": "g_HK67KC9CRC"
+  }
+ ],
+ "gaps": [
+  "g_68FDFEMHH3",
+  "g_NW0HTP9Q7V"
+ ],
+ "roles": [
+  {
+   "target": "g_68FDFEMHH3",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "O2, IV fluids, vasopressors (± inotropes)",
+     "note": "temporizing while arranging drainage",
+     "sources": [
+      {
+       "name": "StatPearls: Cardiac Tamponade",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK431090/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_1W9T6QFWR7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "anticoagulation",
+     "note": "massive PE w shock (or catheter-directed thrombolysis or embolectomy)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_ZJVQB3DDA6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "thrombolysis",
+     "note": "massive PE w shock (or catheter-directed thrombolysis or embolectomy)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NW0HTP9Q7V",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "dobutamine",
+     "note": "inotropic support",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "epinephrine",
+     "note": "inotropic support",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "norepinephrine, then vasopressin if refractory",
+     "note": "shock persisting after judicious IV crystalloids",
+     "sources": [
+      {
+       "name": "StatPearls: Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28970/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

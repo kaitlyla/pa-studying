@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_65FZ0BB435",
+  "g_Z2D3WJX98W",
+  "g_VKXE2VX9DZ"
+ ],
+ "roles": [
+  {
+   "target": "g_65FZ0BB435",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral glucose or sucrose (15 g, rule of 15s)",
+     "note": "pt able to eat or drink; recheck in 15 min",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Hypoglycemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/hypoglycemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VKXE2VX9DZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV dextrose (50% bolus ± 5-10% infusion)",
+     "note": "hospitalized adults or adolescents; continuous infusion if prolonged or severe",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Hypoglycemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/hypoglycemia"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "octreotide",
+     "note": "severe hypoglycemia from sulfonylurea ingestion, w dextrose",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Hypoglycemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/hypoglycemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Z2D3WJX98W",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "glucagon (SC/IM, nasal) or dasiglucagon",
+     "note": "unable to eat or drink; little effect if glycogen is depleted (fasting, prolonged hypoglycemia)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Hypoglycemia",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/hypoglycemia"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

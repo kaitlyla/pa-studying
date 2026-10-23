@@ -1,0 +1,86 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_15YTCZRKHR",
+  "g_Y2ZKJPTSW5",
+  "g_TJW0CJBYH6",
+  "g_5F7P60QYHS"
+ ],
+ "roles": [
+  {
+   "target": "g_15YTCZRKHR",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pemetrexed + cisplatin or carboplatin (w folic acid and vitamin B12)",
+     "note": "standard chemotherapy",
+     "sources": [
+      {
+       "name": "StatPearls: Malignant Mesothelioma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25030/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Y2ZKJPTSW5",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bevacizumab",
+     "note": "added to chemotherapy in eligible pts",
+     "sources": [
+      {
+       "name": "StatPearls: Malignant Mesothelioma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25030/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_TJW0CJBYH6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "nivolumab + ipilimumab",
+     "note": "unresectable",
+     "sources": [
+      {
+       "name": "StatPearls: Malignant Mesothelioma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25030/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5F7P60QYHS",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "pembrolizumab",
+     "note": "refractory",
+     "sources": [
+      {
+       "name": "StatPearls: Malignant Mesothelioma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-25030/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

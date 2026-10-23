@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "add": [
+  "c_7BRMRHJ4E1",
+  "c_6WH0EEY3ZA"
+ ],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_7BRMRHJ4E1",
+   "pieces": [],
+   "gap": "g_G1JF87H1ZG"
+  },
+  {
+   "target": "c_6WH0EEY3ZA",
+   "pieces": [],
+   "gap": "g_MMQJAK7GT6"
+  }
+ ],
+ "gaps": [
+  "g_2F4Z24SPW3",
+  "g_QBTH5D2VX6",
+  "g_S23KK7WMHQ",
+  "g_G1C0VXH7NJ",
+  "g_RRZ9J5N805",
+  "g_J1GQ1MAT8J"
+ ],
+ "roles": [
+  {
+   "target": "g_S23KK7WMHQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "treat the cause: PCI, CABG or thrombolysis for coronary thrombosis",
+     "note": "cardiogenic shock from acute MI",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "atropine, then isoproterenol",
+     "note": "atropine pending pacemaker; isoproterenol occasionally if atropine fails; not advised w myocardial ischemia from CAD",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "amrinone (inamrinone)",
+     "note": "inotropic support if refractory",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_7BRMRHJ4E1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "dobutamine",
+     "note": "moderate hypotension (MAP 70-90 mm Hg)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2F4Z24SPW3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "norepinephrine (vasopressor)",
+     "note": "severe hypotension (MAP < 70 mm Hg)",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "epinephrine",
+     "note": "inotropic support",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QBTH5D2VX6",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "balanced crystalloid (cautious boluses)",
+     "note": "PAOP low or normal",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_6WH0EEY3ZA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vasodilators (nitroprusside, nitroglycerin)",
+     "note": "without severe hypotension; ± w a vasopressor",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G1C0VXH7NJ",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "milrinone",
+     "note": "inotrope",
+     "sources": [
+      {
+       "name": "StatPearls: Cardiogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18914/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_RRZ9J5N805",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "aspirin and heparin",
+     "note": "shock from MI or ACS",
+     "sources": [
+      {
+       "name": "StatPearls: Cardiogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18914/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J1GQ1MAT8J",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "loop diuretic (furosemide)",
+     "note": "volume overload, edema",
+     "sources": [
+      {
+       "name": "StatPearls: Cardiogenic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18914/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

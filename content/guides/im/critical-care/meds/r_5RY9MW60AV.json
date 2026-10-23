@@ -1,0 +1,93 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_SXMWE4XZV9",
+  "g_5WQHJFDZ94",
+  "g_SD0VXW4VH0"
+ ],
+ "roles": [
+  {
+   "target": "g_SXMWE4XZV9",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "balanced crystalloid",
+     "note": "nonhemorrhagic hypovolemia: fluid resuscitation until clinical parameters normalize",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "blood products: RBCs, FFP, platelets (1:1:1)",
+     "note": "hemorrhagic shock: as soon as possible, w surgical control of bleeding first",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "balanced crystalloid (restricted volume)",
+     "note": "hemorrhagic shock, as needed",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5WQHJFDZ94",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vasopressors",
+     "note": "hemorrhagic shock: refractory hypotension, traditionally only after volume is restored and bleeding controlled",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Shock",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SD0VXW4VH0",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "tranexamic acid",
+     "note": "moderate to severe hemorrhage, within 3 h of injury",
+     "sources": [
+      {
+       "name": "StatPearls: Hypovolemia and Hypovolemic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28977/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
