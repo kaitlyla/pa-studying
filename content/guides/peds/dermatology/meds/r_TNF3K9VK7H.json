@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_Z25Q55Y76T",
+  "g_H4RTV3HJ2A",
+  "g_EZ1JPM1FX7"
+ ],
+ "roles": [
+  {
+   "target": "g_Z25Q55Y76T",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "All patients: improved hygiene and clean clothes; hot-wash (≥130°F) and high-heat dry clothing and bedding",
+     "note": null,
+     "sources": [
+      {
+       "name": "About Body Lice",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/lice/about/body-lice.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_H4RTV3HJ2A",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "Lice or nits on body hair, or co-infestation: permethrin cream to the whole body; outbreaks: oral ivermectin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pediculosis Corporis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482148/"
+      },
+      {
+       "name": "Body lice and scabies among unsheltered migrants (PLoS Negl Trop Dis, 2025)",
+       "org": "PLoS Neglected Tropical Diseases (PMC12694801)",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12694801/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EZ1JPM1FX7",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Itch: topical corticosteroids, oral antihistamines",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pediculosis Corporis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK482148/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

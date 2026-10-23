@@ -1,0 +1,371 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_VTCP7P7SZ4",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Oral antifungals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Tinea versicolor, extensive + recurrent: oral antifungals (pts prefer for convenience, but more AEs — liver damage, harmful drug interactions → use sparingly); fluconazole = safest oral agent, weekly x2–4 wk; once every 6 mo if high risk of recurrence"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Ketoconazole: ⍉1st-line oral agent d/t risk of drug-induced hepatitis"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Ketoconazole: ⇣cortisol in Cushing dz when ⍉surg candidate (w/ cabergoline, metyrapone)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Tinea capitis: topical tx ineffective → oral antifungal — griseofulvin (1st-line), terbinafine (alternative 1st-line), itraconazole (if 1st-line tx fail)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Candidal balanitis: PO fluconazole"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_JQ50DFNR2P"
+  }
+ ],
+ "gaps": [
+  "g_Q511SCW6HA"
+ ],
+ "roles": [
+  {
+   "target": "g_Q511SCW6HA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical antifungals (safest; often prolonged): terbinafine (fungicidal, shorter course), azoles, ciclopirox; your table also butenafine, tolnaftate, terbinafine 1% ×1 wk",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Overview of Dermatophytoses",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_6A310YK0Y7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical antifungals (safest; often prolonged): azoles",
+     "note": "nystatin ineffective for tinea; use clotrimazole",
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Overview of Dermatophytoses",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Tinea Corporis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK544360/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical antifungals (safest; often prolonged): azoles",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Overview of Dermatophytoses",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "Drying agents: antifungal powders (eg, miconazole)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical antifungals (safest; often prolonged): ciclopirox",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Overview of Dermatophytoses",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical antifungals (safest; often prolonged): terbinafine (fungicidal, shorter course); your table also terbinafine 1% ×1 wk",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Overview of Dermatophytoses",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/overview-of-dermatophytoses"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_VTCP7P7SZ4",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Oral itraconazole or terbinafine for a more durable response (plus a topical to reduce recurrence); your table also fluconazole",
+     "note": "itraconazole label: not established in pediatric pts",
+     "sources": [
+      {
+       "name": "Tinea Pedis (Athlete's Foot)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-pedis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "SPORANOX (itraconazole) prescribing information (FDA label, DailyMed)",
+       "org": "Janssen Pharmaceuticals, Inc.",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a4d555fa-787c-40fb-bb7d-b0d4f7318fd0"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

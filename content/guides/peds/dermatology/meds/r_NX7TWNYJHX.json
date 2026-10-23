@@ -1,0 +1,427 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_VTCP7P7SZ4",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Oral antifungals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Tinea versicolor, extensive + recurrent: oral antifungals (pts prefer for convenience, but more AEs — liver damage, harmful drug interactions → use sparingly); fluconazole = safest oral agent, weekly x2–4 wk; once every 6 mo if high risk of recurrence"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Ketoconazole: ⍉1st-line oral agent d/t risk of drug-induced hepatitis"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Ketoconazole: ⇣cortisol in Cushing dz when ⍉surg candidate (w/ cabergoline, metyrapone)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Tinea capitis: topical tx ineffective → oral antifungal — griseofulvin (1st-line), terbinafine (alternative 1st-line), itraconazole (if 1st-line tx fail)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": null,
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Candidal balanitis: PO fluconazole"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_F3EF7M7QG8"
+  }
+ ],
+ "gaps": [
+  "g_5C016C1S3S",
+  "g_PC9Y13Z85X"
+ ],
+ "roles": [
+  {
+   "target": "g_5C016C1S3S",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical terbinafine, miconazole, clotrimazole, ketoconazole, econazole, ciclopirox or naftifine BID ×10–14 days; your table also butenafine. Combination antifungal-corticosteroid products such as clotrimazole-betamethasone generally should be avoided (AAFP)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_PC9Y13Z85X",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "Prevent recurrence: treat coexisting tinea pedis; avoid walking barefoot, footwear in public facilities",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554602/"
+      },
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_6A310YK0Y7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Topical miconazole BID ×10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical clotrimazole BID ×10–14 days. Combination antifungal-corticosteroid products such as clotrimazole-betamethasone generally should be avoided (AAFP)",
+     "note": "nystatin ineffective for tinea; use clotrimazole",
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Tinea Corporis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK544360/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical ketoconazole BID ×10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical econazole BID ×10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical ciclopirox BID ×10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Topical terbinafine BID ×10–14 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Diagnosis and Management of Tinea Infections. Am Fam Physician",
+       "org": "American Family Physician (AAFP)",
+       "year": "2025",
+       "url": "https://www.aafp.org/afp/2025/1000/tinea-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_VTCP7P7SZ4",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "Refractory, inflammatory or widespread: oral terbinafine for 3–6 weeks; your table also griseofulvin",
+     "note": "griseofulvin label: not established ≤ 2 y",
+     "sources": [
+      {
+       "name": "Tinea Cruris (Jock Itch)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/tinea-cruris-jock-itch"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Griseofulvin tablets, USP (microsize) prescribing information (FDA label, DailyMed)",
+       "org": "Heritage Pharmaceuticals Inc d/b/a Avet Pharmaceuticals Inc",
+       "year": "2025",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1c26d7a6-17d9-4a95-a4ee-cfc5fe6bb95d"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
