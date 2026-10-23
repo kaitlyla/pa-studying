@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_YC3SWRW6Z9",
+  "c_8XW495JD17",
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_1C3ZKEV6GY",
+  "g_9ZBTMPHEA4",
+  "g_SKT37K6E5V",
+  "g_2TYECCYG0B",
+  "g_40FEDMM1AD",
+  "g_483PHTK6ZZ"
+ ],
+ "roles": [
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "outpatient",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "moxifloxacin",
+     "note": "outpatient",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "amoxicillin-clavulanate",
+     "note": "outpatient",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SKT37K6E5V",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefepime",
+     "note": "anti-pseudomonal",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2TYECCYG0B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "imipenem",
+     "note": "anti-pseudomonal",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vancomycin",
+     "note": "unstable: added to monotherapy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "metronidazole",
+     "note": "unstable, abdominal source: added to monotherapy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

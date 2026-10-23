@@ -1,0 +1,95 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_ZCDD0523CS",
+  "g_KGBX2ZT6NP"
+ ],
+ "roles": [
+  {
+   "target": "g_ZCDD0523CS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "encephalopathy: dimercaprol + CaNa2EDTA",
+     "note": "dimercaprol >= 4 hrs b4 the first EDTA dose",
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "no encephalopathy: succimer orally",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "symptomatic without encephalopathy: dimercaprol + CaNa2EDTA for 5 days",
+     "note": null,
+     "sources": [
+      {
+       "name": "Lead Poisoning",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/lead-poisoning"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "succimer (inpatient)",
+     "note": "moderate (PbB 45–69 mcg/dL)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "CaNa2EDTA",
+     "note": "if PO not tolerated",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "succimer + CaNa2EDTA",
+     "note": "w.o encephalopathy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

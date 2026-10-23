@@ -1,0 +1,53 @@
+{
+ "v": 1,
+ "add": [
+  "c_3CN7HA6JRH",
+  "c_C1K0MMV3Q6",
+  "c_AS25QYHJ1S"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_AQSZ1TBKAP",
+  "g_DDJYEAQ588",
+  "g_1NK4QFA1X5"
+ ],
+ "roles": [
+  {
+   "target": "g_DDJYEAQ588",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IVIG (gamma-globulin)",
+     "note": "hypogammaglobulinemia w refractory infections, or ≥ 2 severe infections w.in 6 months",
+     "sources": [
+      {
+       "name": "Chronic Lymphocytic Leukemia (CLL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-lymphocytic-leukemia-cll"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AQSZ1TBKAP",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ibrutinib, rituximab, alemtuzumab",
+     "note": "intermediate/high-risk, symptomatic or progressive",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

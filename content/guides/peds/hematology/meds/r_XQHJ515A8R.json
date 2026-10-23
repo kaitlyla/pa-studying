@@ -1,0 +1,72 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_EPCKX0YFXH",
+  "g_FBAHG3GABF"
+ ],
+ "roles": [
+  {
+   "target": "g_EPCKX0YFXH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "iron chelation (deferasirox, deferiprone)",
+     "note": "transfusional Fe overload: ferritin > 1000 ng/mL or after about 1-2 years of transfusions",
+     "sources": [
+      {
+       "name": "Thalassemias",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      },
+      {
+       "name": "JADENU (deferasirox) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2020",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fee89140-fff1-4443-9f42-24ac004fcda1"
+      },
+      {
+       "name": "FERRIPROX (deferiprone) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=946718ff-df43-1baa-74d1-e5bcfbe8ad86"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FBAHG3GABF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "gene therapy (betibeglogene (Zynteglo), exa-cel (Casgevy)) or allogeneic SCT",
+     "note": "potentially curative; transfusion-dependent β-thal",
+     "sources": [
+      {
+       "name": "Thalassemias",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hematology/anemias-caused-by-hemolysis/thalassemias"
+      },
+      {
+       "name": "ZYNTEGLO (betibeglogene autotemcel) label",
+       "org": "DailyMed (NLM)",
+       "year": "2022",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=86931613-c262-47f5-8202-bc31fa69ad3d"
+      },
+      {
+       "name": "CASGEVY (exagamglogene autotemcel) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7c3e12ad-e2fe-4d3f-a630-ea7364d9e846"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
