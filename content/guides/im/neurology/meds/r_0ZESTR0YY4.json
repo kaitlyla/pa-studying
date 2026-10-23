@@ -1,0 +1,93 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_R3C657DER9",
+  "g_FWXP8BYMNA"
+ ],
+ "roles": [
+  {
+   "target": "g_R3C657DER9",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "ART, deferred 4–6 wks",
+     "note": "HIV; ⍉routine steroids",
+     "sources": [
+      {
+       "name": "Guidelines for the Prevention and Treatment of Opportunistic Infections in Adults and Adolescents With HIV: Cryptococcosis",
+       "org": "NIH / CDC / HIV Medicine Association of IDSA (clinicalinfo.hiv.gov)",
+       "year": "2024",
+       "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/cryptococcosis"
+      },
+      {
+       "name": "Boulware DR, et al. Timing of antiretroviral therapy after diagnosis of cryptococcal meningitis (COAT). N Engl J Med 2014;370(26):2487-2498",
+       "org": "New England Journal of Medicine",
+       "year": "2014",
+       "url": "https://pubmed.ncbi.nlm.nih.gov/24963568/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FWXP8BYMNA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Induction: IV liposomal amphotericin B + oral flucytosine, 2 weeks with advanced HIV (2–4 weeks without HIV); amphotericin B deoxycholate if no lipid form",
+     "note": null,
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungi/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "Advanced HIV: single high-dose IV liposomal amphotericin B on day 1 + oral flucytosine and fluconazole for 2 weeks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungi/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Consolidation: oral fluconazole × 8 weeks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungi/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "Maintenance: oral fluconazole (6–12 months without HIV; with HIV until CD4 >100 on ART). Itraconazole at the same dose is acceptable (check levels)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungi/cryptococcosis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

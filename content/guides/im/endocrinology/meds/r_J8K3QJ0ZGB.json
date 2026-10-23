@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_MEKD1575W0",
+  "g_40FEDMM1AD",
+  "g_ASRB06FGJF",
+  "g_G7479P5J5H",
+  "g_483PHTK6ZZ",
+  "g_XQDJ872MXZ",
+  "g_9ZBTMPHEA4"
+ ],
+ "roles": [
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": null,
+     "sources": [
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "alt",
+     "drugs": "ceftriaxone",
+     "note": "contraindicated w hypersensitivity to any cephalosporin",
+     "sources": [
+      {
+       "name": "Ceftriaxone for Injection, Hikma",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    },
+    {
+     "role": "alt",
+     "drugs": "ceftriaxone",
+     "note": "contraindicated in premature neonates (to 41 wk postmenstrual age); ⍉for hyperbilirubinemic neonates (bili displacement)",
+     "sources": [
+      {
+       "name": "Ceftriaxone for Injection, Hikma",
+       "org": "U.S. Food and Drug Administration (FDA)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "vancomycin",
+     "note": "if MRSA sus",
+     "sources": [
+      {
+       "name": "Quintero, Yazbeck, Sweeney. Thyroiditis: Evaluation and Treatment. Am Fam Physician 2021;104(6):609-617",
+       "org": "American Family Physician (AAFP)",
+       "year": "2021",
+       "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      },
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "clindamycin",
+     "note": "anaerobes, if a pyriform sinus fistula = sus",
+     "sources": [
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "metronidazole",
+     "note": "anaerobes, if a pyriform sinus fistula = sus",
+     "sources": [
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_XQDJ872MXZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefazolin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "alt",
+     "drugs": "cefazolin",
+     "note": "contraindicated w cephalosporin allergy",
+     "sources": [
+      {
+       "name": "Cefazolin for Injection USP, Hikma label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1dc9de56-e259-4546-a1db-23119a8a088e"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "amoxicillin-clavulanate",
+     "note": "hospitalize; adjust to cx; drain abscess urgently if the airway = threatened",
+     "sources": [
+      {
+       "name": "Quintero, Yazbeck, Sweeney. Thyroiditis: Evaluation and Treatment. Am Fam Physician 2021;104(6):609-617",
+       "org": "American Family Physician (AAFP)",
+       "year": "2021",
+       "url": "https://www.aafp.org/pubs/afp/issues/2021/1200/p609.html"
+      },
+      {
+       "name": "Acute Suppurative and Subacute Thyroiditis: From Diagnosis to Management. J Clin Med 2025;14:3233",
+       "org": "Journal of Clinical Medicine",
+       "year": "2025",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "alt",
+     "drugs": "amoxicillin-clavulanate",
+     "note": "contraindicated after a serious hypersensitivity rxn to another beta-lactam (ex, penicillins or cephalosporins)",
+     "sources": [
+      {
+       "name": "Amoxicillin and Clavulanate Potassium Tablets label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a1d6bf78-4bb7-469e-ba39-318e14aaee29"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": [
+    "g_G7479P5J5H"
+   ]
+  }
+ ]
+}

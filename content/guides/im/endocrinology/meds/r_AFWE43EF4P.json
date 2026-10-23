@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_7WED3HZVHS",
+  "g_0CM3R885H0"
+ ],
+ "roles": [
+  {
+   "target": "g_7WED3HZVHS",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "somatostatin receptor ligands: octreotide, lanreotide",
+     "note": "a mainstay of drug therapy when surgery (transsphenoidal resection, the 1st-line treatment) isn't possible or doesn't cure",
+     "sources": [
+      {
+       "name": "Gigantism and Acromegaly",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/gigantism-and-acromegaly"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "pasireotide",
+     "note": "if octreotide or lanreotide fails",
+     "sources": [
+      {
+       "name": "Gigantism and Acromegaly",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/gigantism-and-acromegaly"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "cabergoline",
+     "note": "mild disease, alone or with a somatostatin receptor ligand",
+     "sources": [
+      {
+       "name": "Gigantism and Acromegaly",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/gigantism-and-acromegaly"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "pegvisomant (growth hormone receptor antagonist)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Gigantism and Acromegaly",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/gigantism-and-acromegaly"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0CM3R885H0",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "bromocriptine",
+     "note": "less effective than somatostatin analogs; cabergoline is more potent; has been used in pregnancy",
+     "sources": [
+      {
+       "name": "StatPearls: Acromegaly",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK431086/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

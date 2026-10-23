@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_JC5RKB4RJ6",
+  "g_7SWA1V6YXS",
+  "g_68JHN4QCCH"
+ ],
+ "roles": [
+  {
+   "target": "g_JC5RKB4RJ6",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antihypertensive medications (with smoking cessation)",
+     "note": "unruptured aneurysms: risk-factor control, as appropriate",
+     "sources": [
+      {
+       "name": "Brain Aneurysms",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/stroke/brain-aneurysms"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "antibiotics",
+     "note": "mycotic (infected) aneurysms",
+     "sources": [
+      {
+       "name": "Brain Aneurysms",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/stroke/brain-aneurysms"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7SWA1V6YXS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "nimodipine",
+     "note": "after rupture (SAH): prevents vasospasm-related ischemia",
+     "sources": [
+      {
+       "name": "StatPearls: Cerebral Aneurysm",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507902/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_68JHN4QCCH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "DVT and seizure prophylaxis",
+     "note": "ongoing management",
+     "sources": [
+      {
+       "name": "StatPearls: Cerebral Aneurysm",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK507902/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

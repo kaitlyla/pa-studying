@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_WVQZFN03MY",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Herpes antivirals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Herpes labialis (recurrent): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    acyclovir: HSV, herpes zoster, varicella; ⍉active vs influenza A or B"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_VRSRE305B7"
+  }
+ ],
+ "gaps": [
+  "g_6GNDTQNF13",
+  "g_P4RWDGYDXK"
+ ],
+ "roles": [
+  {
+   "target": "g_6GNDTQNF13",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "supportive measures",
+     "note": null,
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_P4RWDGYDXK",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "empiric bacterial-meningitis abx",
+     "note": "partially treated pts",
+     "sources": [
+      {
+       "name": "MSD Manual Professional Edition: Viral Meningitis",
+       "org": "Merck & Co., Inc. (MSD Manuals)",
+       "year": "2026",
+       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_WVQZFN03MY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Suspected HSV or VZV meningitis (or any suspicion of HSV encephalitis): empiric acyclovir, stopped if PCR is negative",
+     "note": null,
+     "sources": [
+      {
+       "name": "Viral Meningitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

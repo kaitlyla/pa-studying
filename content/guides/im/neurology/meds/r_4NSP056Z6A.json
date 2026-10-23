@@ -1,0 +1,293 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_WVQZFN03MY",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Herpes antivirals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Herpes labialis (recurrent): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    acyclovir: HSV, herpes zoster, varicella; ⍉active vs influenza A or B"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_6MN3KNTDVP"
+  }
+ ],
+ "gaps": [
+  "g_79NEEQ68GW",
+  "g_YGFPVGJNG0",
+  "g_W2V5AEW2Z7",
+  "g_Y8DRM5HKEE",
+  "g_4V3PTWX77K",
+  "g_4SD1Q1KBQ2"
+ ],
+ "roles": [
+  {
+   "target": "c_WVQZFN03MY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV acyclovir",
+     "note": "start promptly, until HSV/VZV is excluded; usually 14 days",
+     "sources": [
+      {
+       "name": "Encephalitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/encephalitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_79NEEQ68GW",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "ganciclovir",
+     "note": "CMV encephalitis",
+     "sources": [
+      {
+       "name": "Encephalitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/encephalitis"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "empiric antibiotics",
+     "note": "until bacterial meningitis is excluded (see Bacterial Meningitis)",
+     "sources": [
+      {
+       "name": "Encephalitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/encephalitis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "glucocorticoids; plasma exchange or IVIG",
+     "note": "acute disseminated encephalomyelitis (immune-mediated)",
+     "sources": [
+      {
+       "name": "Encephalitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/encephalitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YGFPVGJNG0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "foscarnet or cidofovir IV",
+     "note": "acyclovir-resistant HSV",
+     "sources": [
+      {
+       "name": "StatPearls: Herpes Simplex Encephalitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK557643/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_W2V5AEW2Z7",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "valproic acid or phenytoin; benzodiazepines",
+     "note": "seizures; status epilepticus",
+     "sources": [
+      {
+       "name": "StatPearls: Viral Encephalitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470162/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_Y8DRM5HKEE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "steroids, mannitol",
+     "note": "↑ICP; limited data",
+     "sources": [
+      {
+       "name": "StatPearls: Viral Encephalitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470162/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4V3PTWX77K",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antipsychotics (short term)",
+     "note": "behavior changes",
+     "sources": [
+      {
+       "name": "StatPearls: Viral Encephalitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470162/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4SD1Q1KBQ2",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "corticosteroids w acyclovir",
+     "note": "VZV encephalitis, immunocompetent",
+     "sources": [
+      {
+       "name": "StatPearls: Viral Encephalitis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470162/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

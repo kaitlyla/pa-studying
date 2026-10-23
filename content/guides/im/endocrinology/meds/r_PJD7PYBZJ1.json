@@ -1,0 +1,283 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_0SF3F6ADK1",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 7.5,
+     "title": null,
+     "file": "Epilepsy_and_Neurodegen Dz_ med list",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1.0791666666666666
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           }
+          ],
+          "text": "Dopamine Agonists (prolactinoma):"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Prolactinoma (⇡prolactin → hyperprolactinemia): Rx = dopamine agonists (cabergoline, bromocriptine)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Bromocriptine: also a T2DM med class"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": {
+          "text": "-",
+          "font": null,
+          "marks": [],
+          "tabPt": 18
+         }
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "Cushing dz (⍉surg candidate): cabergoline ⇣cortisol (w/ ketoconazole, metyrapone)"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_891CE74S3B"
+  }
+ ],
+ "gaps": [
+  "g_3VSVS3ESYN",
+  "g_7R3XBXGT8W",
+  "g_7JEMDRF0RW",
+  "g_YVXVWXDNC7"
+ ],
+ "roles": [
+  {
+   "target": "c_0SF3F6ADK1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cabergoline",
+     "note": "prolactinoma: the treatment of choice",
+     "sources": [
+      {
+       "name": "Prolactinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/prolactinoma"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "bromocriptine",
+     "note": "prolactinoma",
+     "sources": [
+      {
+       "name": "Prolactinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/prolactinoma"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "cabergoline",
+     "note": "acromegaly, mild disease",
+     "sources": [
+      {
+       "name": "Gigantism and Acromegaly",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/gigantism-and-acromegaly"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "bromocriptine",
+     "note": "acromegaly, with surgery (your table); dopamine agonists are less effective than somatostatin analogs",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "StatPearls: Acromegaly",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK431086/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_3VSVS3ESYN",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "somatostatin analogs; pegvisomant",
+     "note": "GH-secreting adenoma: IGF-1 still ↑ after surgery, or not a surgical candidate",
+     "sources": [
+      {
+       "name": "StatPearls: Pituitary Adenoma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554451/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7R3XBXGT8W",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "cabergoline, pasireotide; metyrapone, osilodrostat, levoketoconazole, mitotane; mifepristone",
+     "note": "Cushing disease: persistent, recurrent, or bridge to definitive tx",
+     "sources": [
+      {
+       "name": "StatPearls: Pituitary Adenoma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554451/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7JEMDRF0RW",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "glucocorticoid replacement (temporary)",
+     "note": "after Cushing disease surgery, until the HPA axis recovers",
+     "sources": [
+      {
+       "name": "StatPearls: Pituitary Adenoma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554451/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YVXVWXDNC7",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "methimazole or somatostatin analogs",
+     "note": "TSH-secreting adenoma, before surgery",
+     "sources": [
+      {
+       "name": "StatPearls: Pituitary Adenoma",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK554451/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_EEEG2SW324",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "pharm review",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Calcium gluconate / calcium chloride:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Also: corrects hypocalcemia"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_0466CMRRHM"
+  }
+ ],
+ "gaps": [
+  "g_ZV67QFHB6V",
+  "g_8BTHBEN8D1",
+  "g_Z07S0ABZBT",
+  "g_HTFGG2G95T",
+  "g_1YVTT67PHZ"
+ ],
+ "roles": [
+  {
+   "target": "g_ZV67QFHB6V",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral calcium + calcitriol",
+     "note": "hypoparathyroidism can't activate cholecalciferol",
+     "sources": [
+      {
+       "name": "Hypocalcemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hypocalcemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8BTHBEN8D1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV calcium gluconate",
+     "note": "acute symptomatic hypocalcemia (tetany)",
+     "sources": [
+      {
+       "name": "Hypocalcemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hypocalcemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_EEEG2SW324",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV calcium gluconate",
+     "note": "acute symptomatic hypocalcemia (tetany)",
+     "sources": [
+      {
+       "name": "Hypocalcemia",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/nephrology/electrolyte-disorders/hypocalcemia"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_HTFGG2G95T",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "palopegteriparatide (PTH analog)",
+     "note": "adults; not studied for acute post-surgical hypoparathyroidism",
+     "sources": [
+      {
+       "name": "YORVIPATH (palopegteriparatide) injection prescribing information (FDA label, DailyMed)",
+       "org": "Ascendis Pharma, Endocrinology, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a1fa23fd-c434-443e-9a17-5750578c8602"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1YVTT67PHZ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "hydrochlorothiazide",
+     "note": "↓urinary calcium excretion",
+     "sources": [
+      {
+       "name": "StatPearls: Hypoparathyroidism",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK441899/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

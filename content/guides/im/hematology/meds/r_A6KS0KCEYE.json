@@ -1,0 +1,115 @@
+{
+ "v": 1,
+ "add": [
+  "c_3CN7HA6JRH",
+  "c_C1K0MMV3Q6",
+  "c_AS25QYHJ1S"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_CE7H2VADJ3",
+  "g_T8YH3BE5R8",
+  "g_DDJYEAQ588",
+  "g_YBH3K6DPQ6"
+ ],
+ "roles": [
+  {
+   "target": "g_CE7H2VADJ3",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "BTK inhibitor (acalabrutinib, zanubrutinib; ibrutinib)",
+     "note": "once Sx develop; acalabrutinib/zanubrutinib fewer off-target effects",
+     "sources": [
+      {
+       "name": "Chronic Lymphocytic Leukemia (CLL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-lymphocytic-leukemia-cll"
+      },
+      {
+       "name": "BRUKINSA (zanubrutinib) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3e08fe23-d70e-424c-bc51-1222e320f902"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_T8YH3BE5R8",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "venetoclax + acalabrutinib",
+     "note": "previously untx CLL/SLL",
+     "sources": [
+      {
+       "name": "CALQUENCE (acalabrutinib) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dd4835ef-e1bc-4997-a399-1ffa2556fbfe"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "prophylactic hydration + anti-hyperuricemic",
+     "note": "B4 the first venetoclax dose (TLS)",
+     "sources": [
+      {
+       "name": "VENCLEXTA (venetoclax) label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b118a40d-6b56-cee3-10f6-ded821a97018"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DDJYEAQ588",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "IVIG (gamma-globulin)",
+     "note": "hypogammaglobulinemia w refractory infections, or ≥ 2 severe infections w.in 6 months",
+     "sources": [
+      {
+       "name": "Chronic Lymphocytic Leukemia (CLL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-lymphocytic-leukemia-cll"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_YBH3K6DPQ6",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "corticosteroids (± early rituximab if severe)",
+     "note": "warm AIHA complicating CLL",
+     "sources": [
+      {
+       "name": "Chronic Lymphocytic Leukemia (CLL)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/oncology/leukemias/chronic-lymphocytic-leukemia-cll"
+      },
+      {
+       "name": "The diagnosis and treatment of autoimmune hemolytic anemia in adults: Recommendations from the First International Consensus Meeting (Blood Rev 2020; abstract)",
+       "org": "Blood Rev",
+       "year": "2020",
+       "url": "https://europepmc.org/article/MED/31839434"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
