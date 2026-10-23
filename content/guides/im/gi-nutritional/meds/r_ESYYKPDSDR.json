@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_8XW495JD17",
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_Q47F09B2KX",
+  "g_1C3ZKEV6GY",
+  "g_SX1GCYVBEJ",
+  "g_483PHTK6ZZ"
+ ],
+ "roles": [
+  {
+   "target": "g_Q47F09B2KX",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "acetaminophen",
+     "note": "pain; ⍉NSAIDs",
+     "sources": [
+      {
+       "name": "Diverticular Disease of the Colon (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK541110/"
+      },
+      {
+       "name": "Colonic Diverticulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/colonic-diverticulitis?autoredirectid=4008"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cipro, levofloxacin",
+     "note": "+ metronidazole",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Diverticulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/diverticulitis"
+      }
+     ],
+     "scenario": "Uncomplicated"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro, levofloxacin",
+     "note": "⍉ if hypersensitivity to any quinolone",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      },
+      {
+       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
+      }
+     ],
+     "scenario": "Uncomplicated",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro, levofloxacin",
+     "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      },
+      {
+       "name": "Levofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "CHARTWELL RX, LLC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5c6c117c-9d91-48f4-9aaa-ee70b99218c2"
+      }
+     ],
+     "scenario": "Uncomplicated",
+     "population": "Elderly"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro",
+     "note": "⍉a 1st choice in children (joint/periarticular adverse rxns)",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ],
+     "scenario": "Uncomplicated",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "+ cipro or levofloxacin",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Diverticulitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/diverticular-disease/diverticulitis"
+      }
+     ],
+     "scenario": "Uncomplicated"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "⍉ if hypersensitivity to any nitroimidazole",
+     "sources": [
+      {
+       "name": "FLAGYL (metronidazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "PFIZER LABORATORIES DIV PFIZER INC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384"
+      }
+     ],
+     "scenario": "Uncomplicated",
+     "population": "Allergy"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Uncomplicated",
+   "gaps": [
+    "g_SX1GCYVBEJ"
+   ]
+  }
+ ]
+}

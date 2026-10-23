@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_MTBV2T2NY0",
+  "c_8XW495JD17"
+ ],
+ "own": [],
+ "gaps": [
+  "g_CYBFMHTFZQ",
+  "g_1C3ZKEV6GY",
+  "g_FBV05CSWH5",
+  "g_MEKD1575W0",
+  "g_ED5WK3G6Q2"
+ ],
+ "roles": [
+  {
+   "target": "g_CYBFMHTFZQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "rehydration: oral or IV fluids",
+     "note": "mild infect = supportive tx",
+     "sources": [
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "severe illness or at-risk pts (young children, older adults, immunocompromised); guided by suscep testing; ⍉if cipro MIC ≥ 0.12 μg/mL even if reported suscep (CDC HAN); monitor closely and report tx failures",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "HAN 00401: CDC Recommendations for Diagnosing and Managing Shigella Strains with Possible Reduced Susceptibility to Ciprofloxacin",
+       "org": "CDC",
+       "year": "2017",
+       "url": "https://archive.cdc.gov/emergency_cdc_gov/han/han00401.asp"
+      },
+      {
+       "name": "HAN 00411: Update - CDC Recommendations for Managing and Reporting Shigella Infections with Possible Reduced Susceptibility to Ciprofloxacin",
+       "org": "CDC",
+       "year": "2018",
+       "url": "https://archive.cdc.gov/emergency_cdc_gov/han/han00411_1719330497.asp"
+      },
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      },
+      {
+       "name": "Shigella: Clinical Care",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin (PO)",
+     "note": "same indications as cipro",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      },
+      {
+       "name": "Shigella: Clinical Care",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin (PO)",
+     "note": "for children",
+     "sources": [
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IV)",
+     "note": "same indications as cipro",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      },
+      {
+       "name": "Shigella: Clinical Care",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IV)",
+     "note": "for children",
+     "sources": [
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "TMP-SMX",
+     "note": "resistance likely; var by region",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Shigellosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

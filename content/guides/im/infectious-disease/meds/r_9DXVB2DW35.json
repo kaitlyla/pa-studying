@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VTCP7P7SZ4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_CYZTNNHGNB"
+ ],
+ "roles": [
+  {
+   "target": "g_CYZTNNHGNB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "meningitis induction: IV liposomal amphotericin B + oral flucytosine",
+     "note": "2 weeks in advanced HIV, 2 to 4 weeks otherwise; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "then consolidation: oral fluconazole 8 weeks, then maintenance oral fluconazole",
+     "note": "maintenance 6 to 12 months; in advanced HIV until CD4 > 100 on ART; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "meningitis induction in advanced HIV: single high-dose liposomal amphotericin B (day 1) + 2 weeks oral flucytosine and fluconazole",
+     "note": "no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "amphotericin B deoxycholate",
+     "note": "if lipid amphotericin isn't available; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "itraconazole (same dose as fluconazole)",
+     "note": "maintenance in advanced HIV; check serum levels; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "pulmonary or other nonmeningeal disease: oral fluconazole",
+     "note": "6 to 12 months; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cryptococcosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/cryptococcosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "HIV prophylaxis: fluconazole if CD4 < 100",
+     "note": "your table; MSD's cryptococcosis page doesn't address primary prophylaxis; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

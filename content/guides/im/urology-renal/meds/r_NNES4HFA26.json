@@ -1,0 +1,330 @@
+{
+ "v": 1,
+ "add": [
+  "c_YC3SWRW6Z9",
+  "c_T406RB52CF",
+  "c_3R8WTKGPB3",
+  "c_P05KHJTR8A"
+ ],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_VXA8SDW8G2",
+  "c_8XW495JD17",
+  "c_QAXJA0677A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_7D8Q82P52D",
+  "g_2QHX9HG6AJ",
+  "g_1C3ZKEV6GY",
+  "g_MEKD1575W0",
+  "g_SKT37K6E5V",
+  "g_XCTA55TKXS",
+  "g_9ZBTMPHEA4",
+  "g_SRPS1P3G88",
+  "g_0XS8T20Y8W"
+ ],
+ "roles": [
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin, levofloxacin",
+     "note": "if < 10% local FQ resistance",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Outpatient"
+    },
+    {
+     "role": "1st",
+     "drugs": "IV ciprofloxacin or levofloxacin",
+     "note": "choose by severity of illness, RF for resistant uropathogens and pt factors (local antibiogram if available, in sepsis); ⍉an FQ if one was used in the past 12 months",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "IDSA 2025 Guideline on Complicated Urinary Tract Infections",
+       "org": "Infectious Diseases Society of America (IDSA)",
+       "year": "2025",
+       "url": "https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/"
+      },
+      {
+       "name": "Your clinical review edit (FM Urology-Renal pharm review, Oct 8, 2026)",
+       "org": "Your notes",
+       "year": "2026",
+       "url": null
+      }
+     ],
+     "scenario": "Inpatient"
+    },
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin, levofloxacin",
+     "note": "contraindicated in children",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Outpatient",
+     "population": "Peds"
+    },
+    {
+     "role": "1st",
+     "drugs": "IV ciprofloxacin or levofloxacin",
+     "note": "contraindicated in children",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IV)",
+     "note": "⍉multidrug-resistance risk",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "IDSA 2025 Guideline on Complicated Urinary Tract Infections",
+       "org": "Infectious Diseases Society of America (IDSA)",
+       "year": "2025",
+       "url": "https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/"
+      },
+      {
+       "name": "Your clinical review edit (FM Urology-Renal pharm review, Oct 8, 2026)",
+       "org": "Your notes",
+       "year": "2026",
+       "url": null
+      }
+     ],
+     "scenario": "Inpatient"
+    },
+    {
+     "role": "2nd",
+     "drugs": "cefotaxime",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IV)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Pregnancy"
+    }
+   ]
+  },
+  {
+   "target": "g_SKT37K6E5V",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "cefepime",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "gentamicin (+ ampicillin)",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "ampicillin/sulbactam",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "g_SRPS1P3G88",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "piperacillin/tazobactam",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  },
+  {
+   "target": "g_0XS8T20Y8W",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "ampicillin (+ gentamicin)",
+     "note": "USU reserved for critical illness or obstruct",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Inpatient"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Outpatient",
+   "gaps": [
+    "g_7D8Q82P52D"
+   ]
+  },
+  {
+   "title": "Inpatient",
+   "gaps": [
+    "g_2QHX9HG6AJ"
+   ]
+  },
+  {
+   "title": "Pregnancy",
+   "gaps": []
+  }
+ ]
+}

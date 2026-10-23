@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_ED5WK3G6Q2",
+  "g_ASRB06FGJF",
+  "g_827XJKE7B1",
+  "g_QWEGX898QN"
+ ],
+ "roles": [
+  {
+   "target": "g_827XJKE7B1",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pyrimethamine + sulfadiazine + leucovorin (folinic acid)",
+     "note": "immunocompetent with visceral or severe/persistent disease: 2 to 4 weeks; immunocompromised or CNS: higher pyrimethamine dose, at least 6 weeks",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "clindamycin + pyrimethamine + leucovorin",
+     "note": "sulfonamide hypersensitivity",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "atovaquone ± pyrimethamine + leucovorin",
+     "note": "sulfonamide intolerance",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "spiramycin",
+     "note": "Pregnant: acute infection in the first 18 weeks without fetal infection; pyrimethamine is a teratogen (not in the first or early second trimester)",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "trimethoprim/sulfamethoxazole",
+     "note": "if pyrimethamine isn't available",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "HIV prophylaxis: trimethoprim/sulfamethoxazole",
+     "note": "IgG-positive with CD4 < 100",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_QWEGX898QN",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "corticosteroids",
+     "note": "ocular toxoplasmosis inflammation",
+     "sources": [
+      {
+       "name": "Toxoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/toxoplasmosis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

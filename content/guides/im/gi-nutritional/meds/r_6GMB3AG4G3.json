@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_7FMXDNFT3K",
+  "g_XV6RS1Q773"
+ ],
+ "roles": [
+  {
+   "target": "g_7FMXDNFT3K",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "chemoradiation, then esophageal resection (T2 or deeper, or any node involvement)",
+     "note": "anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Esophageal Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/esophageal-cancer"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "chemotherapy: cisplatin + 5-fluorouracil (your table: 5-FU)",
+     "note": "anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Esophageal Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/esophageal-cancer"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "nivolumab (immunotherapy) after surgery that followed neoadjuvant chemoradiation",
+     "note": "anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Esophageal Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/tumors-of-the-gastrointestinal-tract/esophageal-cancer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XV6RS1Q773",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "paclitaxel + carboplatin w radiation (CROSS)",
+     "note": "localized cancer, before resection",
+     "sources": [
+      {
+       "name": "StatPearls: Esophageal Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-21327/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

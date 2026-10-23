@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_MTBV2T2NY0",
+  "c_QAXJA0677A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_FBV05CSWH5",
+  "g_F4CA06R7VR",
+  "g_G88KSJEKCM",
+  "g_XCTA55TKXS"
+ ],
+ "roles": [
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin or clarithromycin + ethambutol + rifampin or rifabutin",
+     "note": "pulmonary MAC; at least 12 months after culture conversion",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "HIV prophylaxis: azithromycin or clarithromycin",
+     "note": "CD4 < 50 and not on ART, viremic on ART, or not fully suppressible (rule out disseminated MAC first); MSD gives the indication, the drugs are from your table",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_F4CA06R7VR",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin or clarithromycin + ethambutol + rifampin or rifabutin",
+     "note": "pulmonary MAC; at least 12 months after culture conversion",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "ethambutol + a rifamycin + an aminoglycoside",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_G88KSJEKCM",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin or clarithromycin + ethambutol + rifampin or rifabutin",
+     "note": "pulmonary MAC; at least 12 months after culture conversion",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "ethambutol + a rifamycin + an aminoglycoside",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "parenteral amikacin or streptomycin",
+     "note": "macrolide-resistant or cavitary disease: added for 2 to 3 months (your table: life-threatening disease)",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "amikacin liposome inhalation (or inhaled amikacin)",
+     "note": "persistent infection despite 6 months of therapy",
+     "sources": [
+      {
+       "name": "Nontuberculous Mycobacterial Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/mycobacteria/nontuberculous-mycobacterial-infections"
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "ethambutol + a rifamycin + an aminoglycoside",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

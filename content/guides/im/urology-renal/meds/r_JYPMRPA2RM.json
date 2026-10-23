@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_FJHANPYAZS",
+  "g_VFW2YBSPMH",
+  "g_4X1SAYGZ09",
+  "g_XK8N2XFRG8"
+ ],
+ "roles": [
+  {
+   "target": "g_FJHANPYAZS",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "intravesical chemotherapy (mitomycin C or gemcitabine) within 24 hours after transurethral resection",
+     "note": "non-muscle-invasive; repeated instillations may reduce recurrence (your table: intravesical chemo); anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Bladder Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/bladder-cancer"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "intravesical BCG",
+     "note": "carcinoma in situ and other high-grade non-muscle-invasive cancers; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Bladder Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/bladder-cancer"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "neoadjuvant cisplatin-based chemotherapy, then radical cystectomy",
+     "note": "muscle-invasive (≥ T2); anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Bladder Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/bladder-cancer"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "nivolumab after cystectomy",
+     "note": "significant residual disease after neoadjuvant chemotherapy, or cisplatin-ineligible; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Bladder Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/bladder-cancer"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "metastatic: cisplatin-based chemotherapy, or enfortumab vedotin + pembrolizumab",
+     "note": "maintenance avelumab after chemotherapy; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Bladder Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/bladder-cancer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_VFW2YBSPMH",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "intravesical doxorubicin or epirubicin",
+     "note": "intermediate-risk NMIBC (with mitomycin C as the other intravesical chemo)",
+     "sources": [
+      {
+       "name": "StatPearls: Bladder Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18354/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4X1SAYGZ09",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "MVAC (methotrexate, vinblastine, doxorubicin, cisplatin)",
+     "note": "neoadjuvant, before cystectomy",
+     "sources": [
+      {
+       "name": "StatPearls: Bladder Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18354/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XK8N2XFRG8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antituberculosis drugs (ethambutol, isoniazid, rifampicin) + oral steroids",
+     "note": "BCG infection after intravesical BCG",
+     "sources": [
+      {
+       "name": "StatPearls: Bladder Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18354/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

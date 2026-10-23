@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_83DJ8J85W7",
+  "g_N5HK2WD8N6",
+  "g_0RWGCDV1RS",
+  "g_720YH1C0HE"
+ ],
+ "roles": [
+  {
+   "target": "g_83DJ8J85W7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "androgen deprivation therapy: LHRH agonist (leuprolide, goserelin, triptorelin) or antagonist",
+     "note": "locally advanced or metastatic cancer, with or without radiation; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Prostate Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/prostate-cancer"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "antiandrogen (flutamide, bicalutamide, nilutamide)",
+     "note": "added for total androgen blockade; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Prostate Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/prostate-cancer"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "docetaxel; abiraterone; enzalutamide, darolutamide or apalutamide",
+     "note": "metastatic disease; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Prostate Cancer",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/prostate-cancer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_N5HK2WD8N6",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "SSRIs or venlafaxine first; then gabapentin or megestrol; medroxyprogesterone if severe",
+     "note": "hot flashes on hormonal therapy",
+     "sources": [
+      {
+       "name": "StatPearls: Prostate Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27833/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_0RWGCDV1RS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "zoledronic acid or denosumab",
+     "note": "castrate-resistant cancer w bone metastases",
+     "sources": [
+      {
+       "name": "StatPearls: Prostate Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27833/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_720YH1C0HE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "calcium + vitamin D + a bisphosphonate or denosumab",
+     "note": "bone loss on long-term hormonal therapy",
+     "sources": [
+      {
+       "name": "StatPearls: Prostate Cancer",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-27833/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

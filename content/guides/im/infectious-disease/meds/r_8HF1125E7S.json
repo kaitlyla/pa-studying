@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_4RGRGJNBDW",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Chloroquine:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Malaria: MC resistant to chloroquine"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    G6PD deficiency: antimalarials = oxidative stressor → hemolysis risk"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_58GACPSGP5"
+  }
+ ],
+ "gaps": [
+  "g_AFGE94DDEA",
+  "g_R91E0562QC",
+  "g_ASRB06FGJF",
+  "g_XVYZ5N2YRB"
+ ],
+ "roles": [
+  {
+   "target": "g_XVYZ5N2YRB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "artemether/lumefantrine or atovaquone/proguanil",
+     "note": "uncomplicated P. falciparum or unknown species; take with food; not recommended in pregnancy (esp. 1st trimester) unless other options are unavailable",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "mefloquine",
+     "note": "any age, including pregnancy; contraindicated with psychiatric disorders, seizures or cardiac conduction problems",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV artesunate",
+     "note": "severe malaria; start interim oral therapy (eg, artemether/lumefantrine) if it can't be obtained within 24 hours",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "quinine sulfate + doxycycline, tetracycline or clindamycin",
+     "note": "3 days (7 days if acquired in Southeast Asia)",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ASRB06FGJF",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "quinine sulfate + doxycycline, tetracycline or clindamycin",
+     "note": "3 days (7 days if acquired in Southeast Asia)",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_4RGRGJNBDW",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "chloroquine (or hydroxychloroquine)",
+     "note": "chloroquine-sensitive areas; P. vivax/ovale outside Papua New Guinea and Indonesia; P. malariae, P. knowlesi",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AFGE94DDEA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "primaquine or tafenoquine",
+     "note": "P. vivax/ovale: eliminate liver hypnozoites to prevent relapse; screen for G6PD deficiency first; primaquine contraindicated in pregnancy",
+     "sources": [
+      {
+       "name": "Malaria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/extraintestinal-protozoa/malaria"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

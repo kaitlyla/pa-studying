@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM"
+ ],
+ "own": [],
+ "gaps": [
+  "g_DD4NZPT1GQ",
+  "g_R91E0562QC",
+  "g_MEKD1575W0",
+  "g_WS3WE8ETWH"
+ ],
+ "roles": [
+  {
+   "target": "g_DD4NZPT1GQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "penicillin G benzathine 2.4 million units IM once",
+     "note": "primary, secondary and early latent; same regardless of HIV status; the treatment of choice in pregnancy",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "penicillin G benzathine 2.4 million units IM weekly x3",
+     "note": "late latent, unknown duration, or benign/cardiovascular tertiary",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "aqueous penicillin G IV every 4 hours, 10 to 14 days",
+     "note": "neurosyphilis, ocular or otic syphilis",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "penicillin G procaine IM + probenecid, 10 to 14 days",
+     "note": "neurosyphilis, ocular or otic syphilis",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "doxycycline 14 days (28 days if late latent or unknown duration)",
+     "note": "nonpregnant, significant penicillin allergy",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "ceftriaxone",
+     "note": "early syphilis (10 to 14 days; optimal dose unknown); neurosyphilis with penicillin allergy (14 days; cephalosporin cross-sensitivity)",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_WS3WE8ETWH",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "analgesics; oral carbamazepine",
+     "note": "tabes dorsalis lightning pains",
+     "sources": [
+      {
+       "name": "Syphilis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/sexually-transmitted-infections-stis/syphilis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

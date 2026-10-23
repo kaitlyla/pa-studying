@@ -1,0 +1,76 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_MTBV2T2NY0",
+  "c_2DFJN72MSS"
+ ],
+ "own": [],
+ "gaps": [
+  "g_FBV05CSWH5",
+  "g_ED5WK3G6Q2"
+ ],
+ "roles": [
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "5 days; preferred in infants ≤ 6 weeks old (erythromycin carries a higher risk of infantile hypertrophic pyloric stenosis)",
+     "sources": [
+      {
+       "name": "Pertussis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/pertussis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "erythromycin",
+     "note": "14 days",
+     "sources": [
+      {
+       "name": "Pertussis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/pertussis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "trimethoprim/sulfamethoxazole",
+     "note": "≥ 2 months old and intolerant of or hypersensitive to macrolides",
+     "sources": [
+      {
+       "name": "Pertussis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/pertussis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,286 @@
+{
+ "v": 1,
+ "add": [
+  "c_58MCDAZQHM",
+  "c_YSYYSQ9VG4",
+  "c_YZTH5AY18E",
+  "c_5XBFY455Q4"
+ ],
+ "remove": [
+  "c_8XW495JD17",
+  "c_P05KHJTR8A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_ATXD9CNQTJ",
+  "g_5Z47G6PP7C",
+  "g_MPAFNV1NWN",
+  "g_FD4YYX3VVY",
+  "g_ED5WK3G6Q2",
+  "g_1C3ZKEV6GY"
+ ],
+ "roles": [
+  {
+   "target": "g_ATXD9CNQTJ",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "phenazopyridine",
+     "note": "severe dysuria, ⍉more than 2 days",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5Z47G6PP7C",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "prevention: topical vaginal estrogen",
+     "note": "postmenopausal w atrophic vaginitis or urethritis",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "prevention: methenamine",
+     "note": "older adults w CrCl > 30 mL/min",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "prevention: cranberry products",
+     "note": "may be considered, w behavioral measures",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FD4YYX3VVY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "nitrofurantoin",
+     "note": "women; ⍉if CrCl < 60 (label); ⍉for men",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      },
+      {
+       "name": "MACROBID (nitrofurantoin monohydrate/macrocrystals) capsule label",
+       "org": "DailyMed (NLM)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=28bc9ec9-b8db-4ece-a14a-8bcf618cbf7e"
+      },
+      {
+       "name": "American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults",
+       "org": "American Geriatrics Society",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "nitrofurantoin",
+     "note": "Beers: ⍉if CrCl <30 mL/min or for long-term suppression",
+     "sources": [
+      {
+       "name": "American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults",
+       "org": "American Geriatrics Society",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Elderly"
+    },
+    {
+     "role": "1st",
+     "drugs": "nitrofurantoin",
+     "note": "considered safe in early preg",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    }
+   ]
+  },
+  {
+   "target": "g_ED5WK3G6Q2",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "women; men: 7 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "Beers: ⍉if CrCl <15 mL/min",
+     "sources": [
+      {
+       "name": "American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults",
+       "org": "American Geriatrics Society",
+       "year": "2023",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Elderly"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "⍉trimethoprim in the 1st trimester and sulfamethoxazole in the 3rd",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "TMP-SMX",
+     "note": "contraindicated under 2 months of age",
+     "sources": [
+      {
+       "name": "BACTRIM (sulfamethoxazole and trimethoprim) tablet label",
+       "org": "DailyMed (NLM)",
+       "year": "",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "2nd",
+     "drugs": "fluoroquinolone",
+     "note": "less desirable; FQ if cystitis recurs w.in 1-2 wks (cx the urine)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "2nd",
+     "drugs": "fluoroquinolone",
+     "note": "contraindicated in preg",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    },
+    {
+     "role": "2nd",
+     "drugs": "fluoroquinolone",
+     "note": "contraindicated in children",
+     "sources": [
+      {
+       "name": "Bacterial Urinary Tract Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": [
+    "g_MPAFNV1NWN"
+   ]
+  }
+ ]
+}

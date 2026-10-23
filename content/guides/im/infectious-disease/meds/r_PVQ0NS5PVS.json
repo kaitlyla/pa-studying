@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_AE66ZK2796",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Rabies post-exposure prophylaxis (RIG + vaccine):"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Not previously vaccinated: RIG 20 IU/kg around the wound site as much as possible + remainder IM at an anatomically distant site; vaccine 1 mL IM (deltoid) days 0, 3, 7, 14 (immunocompromised: days 0, 3, 7, 14, 28)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Previously vaccinated: RIG ⍉indicated + vaccine 1 mL IM (deltoid) days 0, 3"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Vaccine = HDCV or PCECV"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_T0M8RDDM6W"
+  }
+ ],
+ "gaps": [
+  "g_WJK2WDZE9M",
+  "g_J9VFMEB2Y8",
+  "g_5A12ZDEYEG",
+  "g_AH0N5FKJG1"
+ ],
+ "roles": [
+  {
+   "target": "c_AE66ZK2796",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "postexposure: rabies immune globulin 20 IU/kg infiltrated around the wound + rabies vaccine (HDCV or PCECV)",
+     "note": "vaccine days 0, 3, 7 and 14; a 5th dose on day 28 if immunosuppressed",
+     "sources": [
+      {
+       "name": "Rabies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/rabies"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "previously vaccinated: rabies vaccine on days 0 and 3, no immune globulin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Rabies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/rabies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J9VFMEB2Y8",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "heavy sedation: ketamine, midazolam",
+     "note": "clinical rabies: supportive care only",
+     "sources": [
+      {
+       "name": "Rabies",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/neurologic-disorders/brain-infections/rabies"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_5A12ZDEYEG",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "low-dose haloperidol",
+     "note": "clinical rabies, palliative care: agitation and anxiety",
+     "sources": [
+      {
+       "name": "StatPearls: Rabies",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28157/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AH0N5FKJG1",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "opioids",
+     "note": "clinical rabies, symptom management: pain",
+     "sources": [
+      {
+       "name": "StatPearls: Rabies",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28157/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

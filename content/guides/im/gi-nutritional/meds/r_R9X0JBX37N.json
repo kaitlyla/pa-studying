@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "add": [
+  "c_63QY6YSHKS",
+  "c_F324EPRYCJ"
+ ],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_6WS22D2547",
+  "g_8BM6TSX3X8"
+ ],
+ "roles": [
+  {
+   "target": "g_6WS22D2547",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "PPI or H2 blocker",
+     "note": "acid suppression",
+     "sources": [
+      {
+       "name": "Esophagitis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK442012/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_8BM6TSX3X8",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "vonoprazan",
+     "note": "erosive esophagitis",
+     "sources": [
+      {
+       "name": "Gastroesophageal Reflux Disease (GERD)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/gastroesophageal-reflux-disease-gerd"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "title": "Acid suppressants",
+   "members": [
+    "g_6WS22D2547",
+    "g_8BM6TSX3X8"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM"
+ ],
+ "own": [],
+ "gaps": [
+  "g_DD4NZPT1GQ",
+  "g_483PHTK6ZZ",
+  "g_RFP98J6QGG",
+  "g_A35APHB4YA",
+  "g_63JVB8WNDE"
+ ],
+ "roles": [
+  {
+   "target": "g_RFP98J6QGG",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "heptavalent equine botulinum antitoxin (HBAT)",
+     "note": "all forms; give as soon as clinically diagnosed, don't wait for test results",
+     "sources": [
+      {
+       "name": "Botulism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "human botulism immune globulin (BabyBIG)",
+     "note": "infant botulism types A and B",
+     "sources": [
+      {
+       "name": "Botulism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DD4NZPT1GQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "penicillin G",
+     "note": "wound botulism, with debridement",
+     "sources": [
+      {
+       "name": "Botulism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "wound botulism, with debridement (MSD: penicillin or metronidazole)",
+     "sources": [
+      {
+       "name": "Botulism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_A35APHB4YA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "activated charcoal or purgatives",
+     "note": "known or suspected exposure to contaminated food; via gastric tube with the airway protected if symptoms are significant",
+     "sources": [
+      {
+       "name": "Botulism",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_63JVB8WNDE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "tetanus vaccination",
+     "note": "wound botulism",
+     "sources": [
+      {
+       "name": "StatPearls: Botulism",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-18469/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

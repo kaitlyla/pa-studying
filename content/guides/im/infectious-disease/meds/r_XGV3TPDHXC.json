@@ -1,0 +1,305 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_WVQZFN03MY",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 11,
+     "title": null,
+     "file": "Abx flow charts",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Herpes antivirals:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Herpes labialis (recurrent): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    acyclovir: HSV, herpes zoster, varicella; ⍉active vs influenza A or B"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_XSBSSMAP69"
+  }
+ ],
+ "gaps": [
+  "g_A4FJ3PQWPY",
+  "g_FFJTBQWGYE",
+  "g_7Q66N4DEG4",
+  "g_S64VCQYXZ7"
+ ],
+ "roles": [
+  {
+   "target": "c_WVQZFN03MY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral acyclovir, valacyclovir or famciclovir",
+     "note": "primary and recurrent genital herpes; primary mucocutaneous infection; most effective within 1 day of lesion onset; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Genital Herpes",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/genital-herpes"
+      },
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "recurrent or severe herpes labialis: famciclovir 1500 mg once, or valacyclovir 2 g every 12 hours for 1 day",
+     "note": "no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "topical acyclovir, penciclovir 1% cream or docosanol 10% cream",
+     "note": "mild recurrent labialis, started early; oral antivirals are at least as effective; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV acyclovir",
+     "note": "encephalitis (14 to 21 days), neonatal herpes, immunocompromised or disseminated disease; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_S64VCQYXZ7",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "topical trifluridine",
+     "note": "keratitis, with an ophthalmologist; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "foscarnet",
+     "note": "acyclovir-resistant HSV (almost only in immunocompromised patients); no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_A4FJ3PQWPY",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "topical anesthetics: viscous lidocaine, benzocaine, dyclonine",
+     "note": "gingivostomatitis or pharyngitis pain",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FFJTBQWGYE",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "mupirocin (topical); penicillinase-resistant beta-lactam if severe",
+     "note": "secondary bacterial infection",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7Q66N4DEG4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "mupirocin (topical); penicillinase-resistant beta-lactam if severe",
+     "note": "secondary bacterial infection",
+     "sources": [
+      {
+       "name": "Herpes Simplex Virus (HSV) Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/herpes-simplex-virus-hsv-infections"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

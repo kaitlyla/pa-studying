@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_8XW495JD17"
+ ],
+ "own": [],
+ "gaps": [
+  "g_GXBD4T0V61",
+  "g_A2MT2HCD44",
+  "g_1C3ZKEV6GY"
+ ],
+ "roles": [
+  {
+   "target": "g_GXBD4T0V61",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral or IV fluids",
+     "note": "uncomp gastroenteritis",
+     "sources": [
+      {
+       "name": "Nontyphoidal Salmonella Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "severe dz only: severe diarrhea, bacteremia or extraintestinal infect, or people @ risk of invasive dz (infants, ≥50 w AS, IS, ♡ or major joint dz); uncomp cases get ⍉abx",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Salmonella: Clinical Overview",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2024",
+       "url": "https://www.cdc.gov/salmonella/hcp/clinical-overview/index.html"
+      },
+      {
+       "name": "Nontyphoidal Salmonella Infections",
+       "org": "MSD Manual Professional Edition",
+       "year": "2024",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "ciprofloxacin",
+     "note": "⍉a first-choice drug in children (more joint and other adverse rxns)",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets label",
+       "org": "DailyMed (NLM)",
+       "year": "2020",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6fd3da0b-7428-ac8f-e053-2a91aa0aed9f"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": [
+    "g_A2MT2HCD44"
+   ]
+  }
+ ]
+}

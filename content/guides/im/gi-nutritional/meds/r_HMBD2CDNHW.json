@@ -1,0 +1,92 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_SK1541JCHA",
+  "g_AKAYJWZ9HQ"
+ ],
+ "roles": [
+  {
+   "target": "g_SK1541JCHA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": null,
+     "note": "chronic HDV",
+     "sources": [
+      {
+       "name": "HEPCLUDEX (bulevirtide) prescribing information (FDA label, DailyMed)",
+       "org": "Gilead Sciences, Inc. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=12391cc2-38c2-4cf5-86d3-2be9370127fc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_AKAYJWZ9HQ",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "interferon alfa (off-label)",
+     "note": null,
+     "sources": [
+      {
+       "name": "Hepatitis D (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470436/"
+      },
+      {
+       "name": "Hepatitis D",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-d"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "entecavir or tenofovir",
+     "note": "suppress HBV",
+     "sources": [
+      {
+       "name": "Hepatitis D (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470436/"
+      },
+      {
+       "name": "Hepatitis D",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-d"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "HBV vaccine",
+     "note": "prevention",
+     "sources": [
+      {
+       "name": "Hepatitis D (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470436/"
+      },
+      {
+       "name": "Hepatitis D",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/hepatitis/hepatitis-d"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

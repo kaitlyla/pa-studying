@@ -1,0 +1,74 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_C9RG7CPHDN"
+ ],
+ "roles": [
+  {
+   "target": "g_C9RG7CPHDN",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral valganciclovir or IV ganciclovir",
+     "note": "IV for severe disease; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cytomegalovirus (CMV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/cytomegalovirus-cmv-infection"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "2nd",
+     "drugs": "foscarnet or cidofovir",
+     "note": "resistance or intolerance to ganciclovir; nephrotoxic; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cytomegalovirus (CMV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/cytomegalovirus-cmv-infection"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "maribavir",
+     "note": "refractory or resistant CMV after transplant; not with ganciclovir/valganciclovir; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Cytomegalovirus (CMV) Infection",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/herpesviruses/cytomegalovirus-cmv-infection"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "HIV prophylaxis: valganciclovir if CD4 ≤ 50",
+     "note": "your table; MSD covers prophylaxis only in transplant patients (ganciclovir, valganciclovir, foscarnet, letermovir); no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

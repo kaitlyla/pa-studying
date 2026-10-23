@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_6W0WEDCD43",
+  "g_SNCZ7T3NAB",
+  "g_DR3PMDJR8J",
+  "g_SRPS1P3G88",
+  "g_MEKD1575W0",
+  "g_2TYECCYG0B"
+ ],
+ "roles": [
+  {
+   "target": "g_6W0WEDCD43",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "antiemetics; analgesics",
+     "note": null,
+     "sources": [
+      {
+       "name": "Choledocholithiasis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK441961/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SNCZ7T3NAB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pip-tazo, cefotaxime or meropenem",
+     "note": "if cholangitis",
+     "sources": [
+      {
+       "name": "Choledocholithiasis and Cholangitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/choledocholithiasis-and-cholangitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DR3PMDJR8J",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "rectal indomethacin 50-100 mg",
+     "note": "PD manipulated during ERCP",
+     "sources": [
+      {
+       "name": "Choledocholithiasis (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2023",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK441961/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_SRPS1P3G88",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "pip-tazo",
+     "note": "empiric, if cholangitis",
+     "sources": [
+      {
+       "name": "Choledocholithiasis and Cholangitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/choledocholithiasis-and-cholangitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cefotaxime",
+     "note": "empiric, if cholangitis",
+     "sources": [
+      {
+       "name": "Choledocholithiasis and Cholangitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/choledocholithiasis-and-cholangitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_2TYECCYG0B",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "meropenem",
+     "note": "empiric, if cholangitis",
+     "sources": [
+      {
+       "name": "Choledocholithiasis and Cholangitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/choledocholithiasis-and-cholangitis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

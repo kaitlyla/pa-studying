@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_VDWXD1H9YM",
+  "g_R91E0562QC"
+ ],
+ "roles": [
+  {
+   "target": "g_VDWXD1H9YM",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "chloramphenicol",
+     "note": "the only alt; higher death risk than tetracyclines; ⍉oral form in the US",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment"
+    }
+   ]
+  },
+  {
+   "target": "g_R91E0562QC",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "7-10 days, until afebrile for 3 days; start on sus, best w.in the first 5 days",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "recommended for children of all ages, incl under 8",
+     "sources": [
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    },
+    {
+     "role": "1st",
+     "drugs": "doxycycline",
+     "note": "recommended in preg",
+     "sources": [
+      {
+       "name": "Clinical Care of Rocky Mountain Spotted Fever",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2025",
+       "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

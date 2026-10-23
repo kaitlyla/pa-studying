@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_8XW495JD17",
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_PXF7HTN70B",
+  "g_1C3ZKEV6GY",
+  "g_483PHTK6ZZ",
+  "g_9ZBTMPHEA4"
+ ],
+ "roles": [
+  {
+   "target": "g_PXF7HTN70B",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "analgesics; laxatives/fiber; sitz baths",
+     "note": "after I&D",
+     "sources": [
+      {
+       "name": "Anorectal Abscess (StatPearls)",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/NBK459167/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_1C3ZKEV6GY",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "cipro",
+     "note": "+ metronidazole; fever, IS, diabetes or marked cellulitis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Anorectal Abscess",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/anorectal-disorders/anorectal-abscess"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro",
+     "note": "⍉ if hypersensitivity to any quinolone",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro",
+     "note": "tendinitis/tendon rupture risk ↑ in pts over 60",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)",
+     "population": "Elderly"
+    },
+    {
+     "role": "1st",
+     "drugs": "cipro",
+     "note": "⍉a 1st choice in children (joint/periarticular adverse rxns)",
+     "sources": [
+      {
+       "name": "Ciprofloxacin tablets prescribing information (FDA label, DailyMed)",
+       "org": "(FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "+ cipro; fever, IS, diabetes or marked cellulitis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      },
+      {
+       "name": "Anorectal Abscess",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/gastrointestinal-disorders/anorectal-disorders/anorectal-abscess"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "⍉ if hypersensitivity to any nitroimidazole",
+     "sources": [
+      {
+       "name": "FLAGYL (metronidazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "PFIZER LABORATORIES DIV PFIZER INC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)",
+     "population": "Allergy"
+    }
+   ]
+  },
+  {
+   "target": "g_9ZBTMPHEA4",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "Augmentin",
+     "note": null,
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)"
+    },
+    {
+     "role": "1st",
+     "drugs": "Augmentin",
+     "note": "⍉ if serious hypersensitivity (eg, anaphylaxis, SJS) to any β-lactam (eg, penicillins, cephalosporins)",
+     "sources": [
+      {
+       "name": "Amoxicillin and clavulanate potassium tablets prescribing information (FDA label, DailyMed)",
+       "org": "REMEDYREPACK INC. (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e5b0770d-1301-498e-a4ed-41874d7bf225"
+      }
+     ],
+     "scenario": "Perianal abscess (w I&D)",
+     "population": "Allergy"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Perianal abscess (w I&D)",
+   "gaps": []
+  }
+ ]
+}

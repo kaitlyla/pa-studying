@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "add": [
+  "c_Z3W9VNTMAH",
+  "c_FHJ5EZAEK6",
+  "c_M1Y90NS53A",
+  "c_B5WV8AJCNS",
+  "c_YBD74XV7V6",
+  "c_YN5JKKW1N1",
+  "c_YW4GDJBHAS"
+ ],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_YSYYSQ9VG4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_2VQ7K8J6RM",
+  "g_MEKD1575W0",
+  "g_483PHTK6ZZ"
+ ],
+ "roles": [
+  {
+   "target": "g_2VQ7K8J6RM",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "NSAID (ketorolac) or opioid",
+     "note": "pain",
+     "sources": [
+      {
+       "name": "Acute Cholecystitis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/acute-cholecystitis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "+ metronidazole; then cholecystectomy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "⍉ if hypersensitivity to any cephalosporin",
+     "sources": [
+      {
+       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
+       "org": "CIVICA, INC. (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "⍉ in hyperbilirubinemic neonates (bili encephalopathy risk)",
+     "sources": [
+      {
+       "name": "Ceftriaxone for injection prescribing information (FDA label, DailyMed)",
+       "org": "CIVICA, INC. (FDA label, DailyMed)",
+       "year": "2024",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=96f3fc1e-84f4-4e9b-91ac-19a1692f227a"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  },
+  {
+   "target": "g_483PHTK6ZZ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "+ ceftriaxone; then cholecystectomy",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "metronidazole",
+     "note": "⍉ if hypersensitivity to any nitroimidazole",
+     "sources": [
+      {
+       "name": "FLAGYL (metronidazole) capsules prescribing information (FDA label, DailyMed)",
+       "org": "PFIZER LABORATORIES DIV PFIZER INC (FDA label, DailyMed)",
+       "year": "2026",
+       "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_58MCDAZQHM",
+  "c_MTBV2T2NY0",
+  "c_QAXJA0677A"
+ ],
+ "own": [],
+ "gaps": [
+  "g_DD4NZPT1GQ",
+  "g_FBV05CSWH5",
+  "g_XCTA55TKXS",
+  "g_40FEDMM1AD",
+  "g_EHGA516G4Z",
+  "g_QHQKS7ZCBV"
+ ],
+ "roles": [
+  {
+   "target": "g_QHQKS7ZCBV",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "diphtheria antitoxin",
+     "note": "all cases, empirically, without waiting for culture",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_FBV05CSWH5",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "erythromycin",
+     "note": "14 days (switch to oral when tolerated)",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "azithromycin",
+     "note": "14 days; preferred in some guidelines",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "close contacts: erythromycin x7-10d or benzathine penicillin G x1",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_DD4NZPT1GQ",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "procaine penicillin G IM, then oral penicillin",
+     "note": "14 days total",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "endocarditis: penicillin + aminoglycoside",
+     "note": "your table; MSD's diphtheria page doesn't cover endocarditis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "close contacts: erythromycin x7-10d or benzathine penicillin G x1",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_40FEDMM1AD",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "vancomycin or linezolid",
+     "note": "antibiotic resistance detected",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EHGA516G4Z",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "vancomycin or linezolid",
+     "note": "antibiotic resistance detected",
+     "sources": [
+      {
+       "name": "Diphtheria",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_XCTA55TKXS",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "endocarditis: penicillin + aminoglycoside",
+     "note": "your table; MSD's diphtheria page doesn't cover endocarditis",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

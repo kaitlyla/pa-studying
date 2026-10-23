@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [
+  {
+   "target": "c_MPBX0SKT62",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "pharm review",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Potassium chloride:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Hypokalemia: IV potassium chloride (corrects hypokalemia)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    SE: pill-induced esophagitis — take w/ ≥8 oz water + stand upright ≥30 min"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "gap": "g_5SDP2PBMVR"
+  }
+ ],
+ "gaps": [
+  "g_0JNR6X3QPA",
+  "g_4YF304ZQ4T",
+  "g_GGXDFDF2XX"
+ ],
+ "roles": [
+  {
+   "target": "g_0JNR6X3QPA",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral sodium and water",
+     "note": "mild-moderate deficit, conscious and not vomiting",
+     "sources": [
+      {
+       "name": "Volume Depletion",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/nephrology/fluid-metabolism/volume-depletion"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV 0.9% saline or Ringer's lactate",
+     "note": "severe deficit or oral replacement impractical (your table: 20 mL/kg NS or LR boluses)",
+     "sources": [
+      {
+       "name": "Volume Depletion",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/nephrology/fluid-metabolism/volume-depletion"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "c_MPBX0SKT62",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "maintenance D5½NS + 20 mEq KCl",
+     "note": "your table",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_4YF304ZQ4T",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "tranexamic acid",
+     "note": "active hemorrhage, within 3 h of injury",
+     "sources": [
+      {
+       "name": "StatPearls: Hypovolemia and Hypovolemic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28977/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_GGXDFDF2XX",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "plasma, platelets, packed RBCs (1:1:1)",
+     "note": "hemorrhagic shock",
+     "sources": [
+      {
+       "name": "StatPearls: Hypovolemia and Hypovolemic Shock",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2025",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-28977/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

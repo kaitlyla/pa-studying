@@ -1,0 +1,42 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_ARAVXNNJZF"
+ ],
+ "roles": [
+  {
+   "target": "g_ARAVXNNJZF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "IV normal saline",
+     "note": "contrast prophylaxis when indicated",
+     "sources": [
+      {
+       "name": "Use of Intravenous Iodinated Contrast Media in Patients With Kidney Disease: Consensus Statements from the ACR and the NKF (Kidney Med 2020)",
+       "org": "ACR/NKF",
+       "year": "2020",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7525144/"
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV fluids",
+     "note": "rhabdomyolysis, to prevent AKI",
+     "sources": [
+      {
+       "name": "Rhabdomyolysis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2026",
+       "url": "https://www.msdmanuals.com/professional/nephrology/acute-kidney-injury/rhabdomyolysis"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

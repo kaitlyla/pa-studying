@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VXA8SDW8G2",
+  "c_MTBV2T2NY0"
+ ],
+ "own": [],
+ "gaps": [
+  "g_MEKD1575W0"
+ ],
+ "roles": [
+  {
+   "target": "g_MEKD1575W0",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IM)",
+     "note": "single dose (weight-based)",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "alt",
+     "drugs": "cefixime (PO)",
+     "note": "single dose",
+     "sources": [
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ],
+     "scenario": "Treatment"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone or cefixime",
+     "note": "PCN cross-reactivity rare (<1%) w 3rd-gen cephalosporins",
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Allergy"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone (IM)",
+     "note": "single dose",
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Pregnant"
+    },
+    {
+     "role": "1st",
+     "drugs": "ceftriaxone",
+     "note": "neonates: give cautiously w hyperbilirubinemia, esp. preterm",
+     "sources": [
+      {
+       "name": "Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187 (PMC8344968)",
+       "org": "Centers for Disease Control and Prevention (CDC)",
+       "year": "2021",
+       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
+      }
+     ],
+     "scenario": "Treatment",
+     "population": "Peds"
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Treatment",
+   "gaps": []
+  }
+ ]
+}

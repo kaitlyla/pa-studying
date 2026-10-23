@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_M88EFNH2ZF"
+ ],
+ "roles": [
+  {
+   "target": "g_M88EFNH2ZF",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "metastatic: immune checkpoint inhibitor combinations (± targeted therapy)",
+     "note": "first-line systemic treatment; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Renal Cell Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/renal-cell-carcinoma"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "targeted therapy: sunitinib, sorafenib, bevacizumab, pazopanib, cabozantinib, axitinib, lenvatinib; temsirolimus, everolimus",
+     "note": "advanced disease (your table: molecularly targeted agents); anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Renal Cell Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/renal-cell-carcinoma"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "interferon alfa-2b or IL-2",
+     "note": "about 10 to 20% respond (your table: interleukin-2); anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Renal Cell Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/renal-cell-carcinoma"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "adjunct",
+     "drugs": "pembrolizumab or sunitinib after nephrectomy",
+     "note": "high-risk resected clear cell RCC; anticancer drug: no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Renal Cell Carcinoma",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/oncology/genitourinary-cancers/renal-cell-carcinoma"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

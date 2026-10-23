@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [],
+ "own": [],
+ "gaps": [
+  "g_NGT2RJ73GN",
+  "g_8Q45HKJCXB",
+  "g_J9N1RNMSW6",
+  "g_EVAE6HE9FA"
+ ],
+ "roles": [
+  {
+   "target": "g_8Q45HKJCXB",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "topical azole: clotrimazole, ketoconazole or miconazole (miconazole powder 2 times a day for 2 to 3 weeks)",
+     "note": "no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Candidiasis (Mucocutaneous)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/candidiasis-mucocutaneous"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "oral fluconazole once a week for 2 to 4 weeks",
+     "note": "extensive intertriginous candidiasis, topical antifungal at the same time; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Candidiasis (Mucocutaneous)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/candidiasis-mucocutaneous"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_NGT2RJ73GN",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "drying agents: Burow solution compresses; 20% aluminum chloride antiperspirant",
+     "note": "with the antifungal; drying alone if no yeast or bacteria",
+     "sources": [
+      {
+       "name": "Candidiasis (Mucocutaneous)",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/candidiasis-mucocutaneous"
+      },
+      {
+       "name": "Intertrigo",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/dermatologic-disorders/fungal-skin-infections/intertrigo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_J9N1RNMSW6",
+   "roles": [
+    {
+     "role": "alt",
+     "drugs": "topical nystatin",
+     "note": "candidal intertrigo",
+     "sources": [
+      {
+       "name": "StatPearls: Intertrigo",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-23652/"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_EVAE6HE9FA",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "triple paste (aluminum acetate, zinc oxide, petrolatum)",
+     "note": "reduces friction and irritation",
+     "sources": [
+      {
+       "name": "StatPearls: Intertrigo",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2024",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-23652/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "v": 1,
+ "add": [],
+ "remove": [
+  "c_VTCP7P7SZ4"
+ ],
+ "own": [],
+ "gaps": [
+  "g_B4RC5PTT8Q",
+  "g_7AV9Q905P4"
+ ],
+ "roles": [
+  {
+   "target": "g_B4RC5PTT8Q",
+   "roles": [
+    {
+     "role": "1st",
+     "drugs": "oral itraconazole",
+     "note": "mild-moderate disease (acute: only if no improvement after 1 month or immunocompromised, 6 to 12 weeks; chronic cavitary: 12 to 24 months); no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Histoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/histoplasmosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "1st",
+     "drugs": "IV liposomal amphotericin B, then oral itraconazole",
+     "note": "severe or disseminated disease; itraconazole for 12 months after stabilizing; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Histoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/histoplasmosis"
+      },
+      {
+       "name": "Your guide table under this diagnosis",
+       "org": "",
+       "year": "",
+       "url": null
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "posaconazole or isavuconazonium",
+     "note": "may be effective; fluconazole and voriconazole may be less effective; no card (your 10-06 ruling); listed as a role only",
+     "sources": [
+      {
+       "name": "Histoplasmosis",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/fungal-infections/histoplasmosis"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "target": "g_7AV9Q905P4",
+   "roles": [
+    {
+     "role": "adjunct",
+     "drugs": "methylprednisolone (w amphotericin B)",
+     "note": "severe pulmonary disease",
+     "sources": [
+      {
+       "name": "StatPearls: Histoplasmosis",
+       "org": "StatPearls Publishing (NCBI Bookshelf)",
+       "year": "2026",
+       "url": "https://www.ncbi.nlm.nih.gov/books/n/statpearls/article-22910/"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
