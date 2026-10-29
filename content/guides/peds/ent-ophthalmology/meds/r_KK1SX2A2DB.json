@@ -1015,7 +1015,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1246,7 +1246,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2591,7 +2591,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -3444,7 +3444,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -3529,7 +3529,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "NSAIDs (non-selective)"
+                "text": "NSAIDs (⍉selective)"
                }
               ]
              }
@@ -3966,7 +3966,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108032/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -3986,7 +3986,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7108032/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -3996,7 +3996,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin or clarithromycin",
+     "drugs": "azithro or clarithromycin",
      "note": "PCN allergy",
      "sources": [
       {
@@ -4030,12 +4030,12 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/tonsillopharyngitis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "PCN allergy; clarithro ⍉ in preg unless ⍉alt tx appropriate",
      "sources": [
       {
@@ -4051,7 +4051,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4d42821d-ce7a-7d64-e063-6294a90a0875"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -4077,7 +4077,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/tonsillopharyngitis"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -4097,7 +4097,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/tonsillopharyngitis"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -4116,14 +4116,14 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/oral-and-pharyngeal-disorders/tonsillopharyngitis"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

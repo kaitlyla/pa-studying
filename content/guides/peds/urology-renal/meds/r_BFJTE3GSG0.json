@@ -31,7 +31,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "IV ciprofloxacin",
+     "drugs": "IV cipro",
      "note": "only selected children (eg, > 1 y w complicated MDR gram (−) UTI)",
      "sources": [
       {
@@ -47,11 +47,11 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "alt",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "only selected children (eg, > 1 y w complicated MDR gram (−) UTI)",
      "sources": [
       {
@@ -61,7 +61,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     }
    ]
   },
@@ -86,7 +86,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "2nd",
@@ -106,7 +106,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -126,7 +126,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Pregnancy"
+     "scenario": "Preg"
     },
     {
      "role": "1st",
@@ -140,7 +140,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     }
    ]
   },
@@ -165,7 +165,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -190,7 +190,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -215,7 +215,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -229,7 +229,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     }
    ]
   },
@@ -254,7 +254,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -279,7 +279,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -298,7 +298,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     }
    ]
   },
@@ -317,7 +317,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     },
     {
      "role": "alt",
@@ -331,24 +331,24 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Outpatient",
+   "title": "Outpt",
    "gaps": []
   },
   {
-   "title": "Inpatient",
+   "title": "Inpt",
    "gaps": [
     "g_N0ABT3XYPA"
    ]
   },
   {
-   "title": "Pregnancy",
+   "title": "Preg",
    "gaps": []
   }
  ]

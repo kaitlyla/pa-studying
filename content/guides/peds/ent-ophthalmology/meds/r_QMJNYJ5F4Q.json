@@ -70,7 +70,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "W ceftazidime, piperacillin/tazobactam or cefepime; 6–8 wks",
      "sources": [
       {
@@ -80,11 +80,11 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "⍉a drug of first choice in children (more adverse rxns, incl. joints)",
      "sources": [
       {
@@ -94,7 +94,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3b3d22dc-df09-4910-8c9b-1204eeedbd68"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -114,7 +114,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -133,7 +133,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -152,14 +152,14 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

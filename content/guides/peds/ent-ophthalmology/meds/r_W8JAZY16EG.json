@@ -382,7 +382,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1858,7 +1858,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2491,7 +2491,7 @@
             }
            }
           ],
-          "text": "Drug of choice "
+          "text": "DOC "
          },
          {
           "type": "text",
@@ -2725,7 +2725,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉inhibit platelet aggregate          **⍉GI ulceration -unlike NSAID"
+          "text": "⍉inhibit PLT aggregate          **⍉GI ulceration -unlike NSAID"
          }
         ]
        },
@@ -3014,7 +3014,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    Nasal polyps: sm → topical intranasal corticosteroids; a short course of oral corticosteroids also alleviates Sx; use after polypectomy to ⇣ risk of recurr"
+          "text": "-    Nasal polyps: sm → topical intranasal corticosteroids; a short course of PO corticosteroids also alleviates Sx; use after polypectomy to ⇣ risk of recurr"
          }
         ]
        },
@@ -3106,7 +3106,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Chronic sinusitis with polyps: short systemic glucocorticoid course (1–3 wk), then doxycycline (3 wk)",
+     "drugs": "Chronic sinusitis w polyps: short systemic glucocorticoid course (1–3 wk), then doxycycline (3 wk)",
      "note": null,
      "sources": [
       {
@@ -3134,7 +3134,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -3148,7 +3148,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -3186,7 +3186,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -3206,7 +3206,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -3226,7 +3226,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -3271,7 +3271,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

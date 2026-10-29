@@ -933,7 +933,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1757,7 +1757,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2368,7 +2368,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2858,7 +2858,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "inhaled corticosteroid",
+     "drugs": "ICS",
      "note": "only w coexisting asthma or ABPA",
      "sources": [
       {
@@ -2913,7 +2913,7 @@
     {
      "role": "adjunct",
      "drugs": null,
-     "note": "prevention",
+     "note": "prev",
      "sources": [
       {
        "name": "Bronchiectasis",
@@ -3050,7 +3050,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "exacerbation prev (≥3/yr), ⊖Pseudomonas; ≥3mo",
      "sources": [
       {

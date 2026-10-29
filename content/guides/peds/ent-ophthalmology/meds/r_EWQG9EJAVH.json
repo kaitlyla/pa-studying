@@ -383,7 +383,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -989,7 +989,7 @@
             }
            }
           ],
-          "text": "Drug of choice "
+          "text": "DOC "
          },
          {
           "type": "text",
@@ -1223,7 +1223,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉inhibit platelet aggregate          **⍉GI ulceration -unlike NSAID"
+          "text": "⍉inhibit PLT aggregate          **⍉GI ulceration -unlike NSAID"
          }
         ]
        },
@@ -1486,7 +1486,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin or clarithromycin",
+     "drugs": "azithro or clarithromycin",
      "note": "PCN allergy",
      "sources": [
       {
@@ -1496,7 +1496,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
@@ -1511,7 +1511,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4d42821d-ce7a-7d64-e063-6294a90a0875"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -1531,7 +1531,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -1545,7 +1545,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/otitis-media-acute"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -1565,7 +1565,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -1579,7 +1579,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/otitis-media-acute"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -1599,7 +1599,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -1618,14 +1618,14 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

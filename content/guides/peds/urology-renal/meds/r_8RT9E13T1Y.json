@@ -52,13 +52,13 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
      "role": "alt",
      "drugs": "TMP-SMX",
-     "note": "contraindicated under 2 months of age",
+     "note": "contraindicated under 2 mo of age",
      "sources": [
       {
        "name": "BACTRIM (sulfamethoxazole and trimethoprim) tablet label",
@@ -67,13 +67,13 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     },
     {
      "role": "alt",
      "drugs": "TMP-SMX",
-     "note": "oral, nontoxic children; 7–10 days",
+     "note": "PO, nontoxic children; 7–10 days",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -88,7 +88,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -107,7 +107,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -132,7 +132,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -142,7 +142,7 @@
     {
      "role": "1st",
      "drugs": "cephalexin",
-     "note": "oral, nontoxic children",
+     "note": "PO, nontoxic children",
      "sources": [
       {
        "name": "Urinary Tract Infection (UTI) in Children",
@@ -151,7 +151,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -176,14 +176,14 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/miscellaneous-bacterial-infections-in-infants-and-children/urinary-tract-infection-uti-in-children"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": [
     "g_3QJ74PQ6WK"
    ]

@@ -190,7 +190,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -796,7 +796,7 @@
             }
            }
           ],
-          "text": "Drug of choice "
+          "text": "DOC "
          },
          {
           "type": "text",
@@ -1030,7 +1030,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉inhibit platelet aggregate          **⍉GI ulceration -unlike NSAID"
+          "text": "⍉inhibit PLT aggregate          **⍉GI ulceration -unlike NSAID"
          }
         ]
        },
@@ -1820,7 +1820,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -2673,7 +2673,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2758,7 +2758,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "NSAIDs (non-selective)"
+                "text": "NSAIDs (⍉selective)"
                }
               ]
              }
@@ -3104,7 +3104,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Analgesia: acetaminophen at fixed intervals",
+     "drugs": "Analgesia: acetaminophen @ fixed intervals",
      "note": null,
      "sources": [
       {
@@ -3128,7 +3128,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Analgesia: NSAIDs at fixed intervals",
+     "drugs": "Analgesia: NSAIDs @ fixed intervals",
      "note": null,
      "sources": [
       {
@@ -3152,7 +3152,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Ciprodex (ciprofloxacin/dexamethasone) drops",
+     "drugs": "Ciprodex (cipro/dexamethasone) drops",
      "note": "7–10 days",
      "sources": [
       {
@@ -3178,7 +3178,7 @@
     },
     {
      "role": "1st",
-     "drugs": "Ciprodex (ciprofloxacin/dexamethasone) drops",
+     "drugs": "Ciprodex (cipro/dexamethasone) drops",
      "note": "FQ drops only (⍉ototoxic drops); 7–10 days",
      "sources": [
       {
@@ -3200,7 +3200,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/external-ear-disorders/external-otitis-acute"
       }
      ],
-     "scenario": "TM perforation"
+     "scenario": "TM perf"
     }
    ]
   },
@@ -3242,7 +3242,7 @@
    "gaps": []
   },
   {
-   "title": "TM perforation",
+   "title": "TM perf",
    "gaps": []
   }
  ]

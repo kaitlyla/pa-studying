@@ -2897,7 +2897,7 @@
                   }
                  }
                 ],
-                "text": "MOA/Indications "
+                "text": "MOA/Clin Use "
                }
               ]
              }
@@ -5483,7 +5483,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -7662,7 +7662,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -9475,7 +9475,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+          "text": "-    HSV keratitis: acyclovir eye drops, or PO therapy"
          }
         ]
        },
@@ -9522,7 +9522,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Ramsay Hunt: oral acyclovir + corticosteroids",
+     "drugs": "Ramsay Hunt: PO acyclovir + corticosteroids",
      "note": null,
      "sources": [
       {
@@ -9540,7 +9540,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Ramsay Hunt: oral acyclovir + corticosteroids",
+     "drugs": "Ramsay Hunt: PO acyclovir + corticosteroids",
      "note": null,
      "sources": [
       {
@@ -9678,7 +9678,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Postexposure prophylaxis in high-risk patients: varicella-zoster immune globulin (VariZIG) IM, within 10 days of exposure",
+     "drugs": "Postexposure prophylaxis in high-risk pts: varicella-zoster immune globulin (VariZIG) IM, w.in 10 days of exposure",
      "note": null,
      "sources": [
       {
@@ -9702,7 +9702,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Prevention: varicella vaccine, 2 doses (healthy children, susceptible adults)",
+     "drugs": "Prevention: varicella vax, 2 doses (healthy children, suscep adults)",
      "note": null,
      "sources": [
       {
@@ -9715,7 +9715,7 @@
     },
     {
      "role": "alt",
-     "drugs": "Postexposure: varicella vaccine within 5 days of exposure",
+     "drugs": "Postexposure: varicella vax w.in 5 days of exposure",
      "note": null,
      "sources": [
       {
@@ -9733,7 +9733,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Supportive: acetaminophen for chickenpox fever (no aspirin, Reye syndrome); systemic analgesics for zoster pain",
+     "drugs": "Supportive: acetaminophen for chickenpox fever (⍉ ASA, Reye syndrome); systemic analgesics for zoster pain",
      "note": null,
      "sources": [
       {
@@ -9757,7 +9757,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Chickenpox itch: oral antihistamines, colloidal oatmeal baths, calamine lotion, wet compresses",
+     "drugs": "Chickenpox itch: PO antihistamines, colloidal oatmeal baths, calamine lotion, wet compresses",
      "note": null,
      "sources": [
       {
@@ -9781,8 +9781,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Chickenpox at risk of moderate-severe disease (≥12 y unvaccinated, eczema, chronic lung disease, long-term salicylates, steroids/immunosuppressants, household secondary case): oral valacyclovir, famciclovir or acyclovir",
-     "note": "oral acyclovir label: ⍉established < 2 y; famciclovir label: efficacy ⍉established in pediatric pts",
+     "drugs": "Chickenpox @ risk of moderate-severe dz (≥12 y unvaccinated, eczema, chronic lung dz, long-term salicylates, steroids/immunosuppressants, household 2/2 case): PO valacyclovir, famciclovir or acyclovir",
+     "note": "PO acyclovir label: ⍉established < 2 y; famciclovir label: efficacy ⍉established in pediatric pts",
      "sources": [
       {
        "name": "Chickenpox",
@@ -9831,8 +9831,8 @@
     },
     {
      "role": "1st",
-     "drugs": "Herpes zoster: oral acyclovir, valacyclovir or famciclovir within 72 h, 7–10 days",
-     "note": "oral acyclovir label: ⍉established < 2 y; valacyclovir label: zoster ⍉established < 18 y; famciclovir label: efficacy ⍉established in pediatric pts",
+     "drugs": "Herpes zoster: PO acyclovir, valacyclovir or famciclovir w.in 72 h, 7–10 days",
+     "note": "PO acyclovir label: ⍉established < 2 y; valacyclovir label: zoster ⍉established < 18 y; famciclovir label: efficacy ⍉established in pediatric pts",
      "sources": [
       {
        "name": "Herpes Zoster and Postherpetic Neuralgia: Common Questions and Answers. Am Fam Physician",
@@ -9874,8 +9874,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "Zoster ophthalmicus: oral antivirals ± acyclovir ophthalmic; consult ophthalmology",
-     "note": "oral acyclovir label: ⍉established < 2 y",
+     "drugs": "Zoster ophthalmicus: PO antivirals ± acyclovir ophthalmic; consult ophthalmology",
+     "note": "PO acyclovir label: ⍉established < 2 y",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",

@@ -166,7 +166,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: First pass met -> ↓ oral bioavailability"
+          "text": "Administration: First pass met -> ↓ PO bioavailability"
          }
         ]
        },
@@ -3040,7 +3040,7 @@
         "content": [
          {
           "type": "text",
-          "text": "oral, parenteral (⍉GI -IV, IM, SC)"
+          "text": "PO, parenteral (⍉GI -IV, IM, SC)"
          }
         ]
        },
@@ -3829,7 +3829,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -4810,7 +4810,7 @@
         "content": [
          {
           "type": "text",
-          "text": "1st PO active diuretic, IV (only IV) or oral"
+          "text": "1st PO active diuretic, IV (only IV) or PO"
          }
         ]
        },
@@ -4892,7 +4892,7 @@
         "content": [
          {
           "type": "text",
-          "text": "More potent  -lower doses, Oral "
+          "text": "More potent  -lower doses, PO "
          }
         ]
        }
@@ -5227,7 +5227,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications "
+                "text": "Clin Use/Contraindications "
                }
               ]
              }
@@ -6418,7 +6418,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Oral, QD dosing"
+          "text": "PO, QD dosing"
          }
         ]
        },
@@ -7244,7 +7244,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Oral or parenteral "
+          "text": "PO or parenteral "
          }
         ]
        },
@@ -8253,7 +8253,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -8956,7 +8956,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: Orally active, QD"
+          "text": "Administration: PO active, QD"
          }
         ]
        },
@@ -9790,7 +9790,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -11000,7 +11000,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -11615,7 +11615,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ACE inhibitor",
+     "drugs": "ACEi",
      "note": "reduce systemic and intraglomerular P and proteinuria",
      "sources": [
       {
@@ -11717,7 +11717,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "high-dose corticosteroids >= 2 months",
+     "drugs": "↑dose corticosteroids >= 2 mo",
      "note": "FSGS",
      "sources": [
       {
@@ -11802,8 +11802,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "prevention: pneumococcal and yearly influenza vaccines",
-     "note": "may delay live vaccines on certain meds",
+     "drugs": "prev: pneumococcal and yearly influenza vax",
+     "note": "may delay live vax on certain meds",
      "sources": [
       {
        "name": "Nephrotic Syndrome in Children",
