@@ -439,10 +439,15 @@ export interface WorkupJson {
   items: { id: string; title: string; conds: string; gap: PubGap }[];
 }
 
-/** The well-child visits, in age order. */
+/**
+ * The well-child visits page: her notes and files shown above the list (the `visits` topic's), then
+ * the visits in age order, each with its notes, links and gap blocks.
+ */
 export interface VisitsJson {
   guide: GuideId;
-  items: { id: string; title: string; links: PubLink[]; gaps: PubGap[] }[];
+  notes: PubNote[];
+  files: DocList;
+  items: { id: string; title: string; notes: PubNote[]; links: PubLink[]; gaps: PubGap[] }[];
 }
 
 /** Her saved comparisons: names she gave, each restoring its quadrants (`ids`, in quadrant order). */
@@ -469,10 +474,11 @@ export interface PubRefLink extends PubLink {
 
 /**
  * One of her notes on a place page (content PlaceNote): a heading, or a block of one of her Word pages
- * with that page's base size; `column` (or null): show only the table's first column and that one;
- * `rows` (or null): show only the table's first row and those of its rows (lib/derive/columns.ts).
+ * or guides with its base size; `column` (or null): show only the table's first column and that one,
+ * and the `also` columns when given; `rows` (or null): show only the table's first row and those of
+ * its rows, cut to `column` when both are given (lib/derive/columns.ts noteView).
  */
-export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null; rows: string[] | null };
+export type PubNote = { heading: string } | { block: PubBlock; basePt: number; column: number | null; also?: number[]; rows: string[] | null };
 
 /** A reference-tab page (content RefSub); `group` and `intro` are null when the sub has none. */
 export interface PubRefSub {

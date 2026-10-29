@@ -864,6 +864,19 @@ describe("pharm (20 §20.6, §20.7)", () => {
     expect(verdict(sPath, { ...structure, sections: [], members: { [R3]: R1 } })).toBe("ok");
   });
 
+  it("accepts an unlisted block shown on the visit pages instead of its system's (@visits), with or without sections", () => {
+    const b3 = id("b", 3);
+    expect(verdict(sPath, { ...structure, members: { ...structure.members, [b3]: "@visits" } })).toBe("ok");
+    expect(verdict(sPath, { ...structure, sections: [], members: { [b3]: "@visits" } })).toBe("ok");
+  });
+
+  it.each([
+    ["a row", { members: { ...structure.members, [R1]: "@visits" } }],
+    ["a listed block", { members: { ...structure.members, [b1]: "@visits" } }],
+  ])("refuses @visits on %s", (_name, over) => {
+    expect(verdict(sPath, { ...structure, ...over })).toMatch(/the visit pages only on an unlisted block/);
+  });
+
   it("accepts a block recorded under a listed block (a run listed as one entry), with or without sections", () => {
     const b3 = id("b", 3);
     expect(verdict(sPath, { ...structure, members: { ...structure.members, [b3]: b1 } })).toBe("ok");
@@ -985,6 +998,30 @@ describe("places (20 §20.8)", () => {
     expect(verdict(at, { ...withVisits, topics: [visitsTopic, ...general.topics] })).toMatch(/in the order/);
   });
 
+  it("validates notes on the visits page and on a visit: a block cut to rows and a column with `also` columns after it", () => {
+    const B1 = id("b", 1);
+    const notes = [{ heading: "Vaccines" }, { block: B1, rows: [id("r", 1)], column: 5, also: [15] }];
+    const visitsTopic = { key: "visits", howto: null, notes, links: [], files: [], gaps: [] };
+    const withVisits = (n: unknown[], topic: Record<string, unknown> = visitsTopic) => ({
+      ...general, topics: [...general.topics, topic], visits: [{ id: "2-months", title: "2 mo", notes: n, links: [], gaps: [] }],
+    });
+    const at = "content/guides/psy/general.json";
+    expect(verdict(at, withVisits(notes))).toBe("ok");
+    // `also` needs a column, and lists columns right of it in increasing order.
+    for (const n of [{ block: B1, also: [3] }, { block: B1, column: 5, also: [5] }, { block: B1, column: 5, also: [9, 7] }, { block: B1, column: 5, also: [] }]) {
+      expect(verdict(at, withVisits([n])), JSON.stringify(n)).toMatch(/visits\[0\]\.notes\[0\]: expected a note/);
+    }
+    // Notes on any other general topic are refused.
+    const labs = { ...general.topics[0], notes };
+    expect(verdict(at, { ...withVisits(notes), topics: [labs, ...withVisits(notes).topics.slice(1)] })).toMatch(/notes only on the visits topic/);
+  });
+
+  it("keeps `also` and rows-with-column to place notes: an Other section's notes refuse both", () => {
+    const withNote = (n: unknown) => other((s) => (s.id === "vitamins" ? { ...s, notes: [n] } : s));
+    expect(verdict("content/places/other.json", withNote({ block: id("b", 1), column: 2, also: [3] }))).toMatch(/notes\[0\]/);
+    expect(verdict("content/places/other.json", withNote({ block: id("b", 1), column: 2, rows: [id("r", 1)] }))).toMatch(/notes\[0\]/);
+  });
+
   it("validates reftabs.json", () => {
     const tab = { subs: [{ id: "cbc", title: "CBC", links: [], gaps: [G1] }], files: [D1] };
     expect(verdict("content/places/reftabs.json", { v: 1, labs: tab, imaging: tab, ekg: tab, anatomy: tab })).toBe("ok");
@@ -1018,7 +1055,7 @@ describe("places (20 §20.8)", () => {
     const reftabs = (notes: unknown) => verdict("content/places/reftabs.json", { v: 1, labs: withNotes(notes), imaging: empty, ekg: empty, anatomy: empty });
     expect(reftabs([{ heading: "Fat-soluble" }, { block: id("b", 1) }, { block: id("b", 1), column: 3 }])).toBe("ok");
     for (const bad of [[{ heading: "" }], [{ block: G1 }], [{ block: id("b", 1), column: 0 }], [{ block: id("b", 1), column: 1.5 }], [{ heading: "x", block: id("b", 1) }], [{}]]) {
-      expect(reftabs(bad), JSON.stringify(bad)).toMatch(/notes\[0\]: expected a note: \{ heading \} or \{ block, column\? \| rows\? \}/);
+      expect(reftabs(bad), JSON.stringify(bad)).toMatch(/notes\[0\]: expected a note: \{ heading \} or \{ block, column\?, also\?, rows\? \}/);
     }
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: id("b", 1), column: 2 }] } : s)))).toBe("ok");
     expect(verdict("content/places/other.json", other((s) => (s.id === "vitamins" ? { ...s, notes: [{ block: D1 }] } : s)))).toMatch(/notes\[0\]/);

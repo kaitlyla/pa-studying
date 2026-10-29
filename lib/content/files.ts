@@ -71,6 +71,9 @@ export const TOPIC_MEDS_RE = pathRe(`content/guides/${GUIDE}/${SLUG}/meds/(?<top
 export const topicMedsDir = (guide: string, system: string): string => `content/guides/${guide}/${system}/meds`;
 export const topicMedsPath = (guide: string, system: string, topic: string): string => `${topicMedsDir(guide, system)}/${topic}.json`;
 
+/** A guide system's record: `content/guides/<g>/<system>/system.json`, the guide in `guide`, the system in `id`. */
+export const SYSTEM_FILE_RE = pathRe(`content/guides/(?<guide>${GUIDE})/${named(SLUG)}/system\\.json`);
+
 /** Her comparison favorites for a guide: `content/guides/<g>/favorites.json` (read by the owner's app, never published). */
 export const FAVORITES_FILE_RE = pathRe(`content/guides/${named(GUIDE)}/favorites\\.json`);
 export const favoritesPath = (guide: string): string => `content/guides/${guide}/favorites.json`;
@@ -87,7 +90,7 @@ const ROUTES: readonly [RegExp, Validator][] = [
   [pathRe(`content/guides/${named(GUIDE)}/general\\.json`), validateGeneral],
   [FAVORITES_FILE_RE, validateFavorites],
   [COMPARISONS_FILE_RE, validateComparisons],
-  [pathRe(`content/guides/${GUIDE}/${named(SLUG)}/system\\.json`), validateSystem],
+  [SYSTEM_FILE_RE, validateSystem],
   [pathRe(`content/guides/${GUIDE}/${SLUG}/structure\\.json`), validateStructure],
   [pathRe("content/pharm/cards\\.json"), validateCards],
   [pathRe("content/pharm/trims\\.json"), validateTrims],

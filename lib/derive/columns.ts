@@ -13,16 +13,20 @@ import { collapse, nodeText, type PMNode } from "./text.ts";
  * the table grid, so merged cells land where the renderers draw them: a cell covering several kept
  * columns is kept once across them, and a row span keeps the rows it covers among those kept. The
  * label column keeps its width and the other kept columns share the rest of the table's, in their
- * proportions. Null when `doc` is not a single table or has no such columns.
+ * proportions. `also`: grid columns kept after those, in increasing order (a notes column beside the
+ * column cut). Null when `doc` is not a single table or has no such columns.
  */
-export function columnView(doc: DocJSON, column: number, label: number | null = 0, width = 1): { title: string; doc: DocJSON } | null {
+export function columnView(
+  doc: DocJSON, column: number, label: number | null = 0, width = 1, also: readonly number[] = [],
+): { title: string; doc: DocJSON } | null {
   const table = tableNode({ id: "", doc }) as PMNode | null;
   if (!table || !Number.isInteger(column) || column < 0 || !Number.isInteger(width) || width < 1) return null;
   if (label !== null && (!Number.isInteger(label) || label < 0 || column <= label)) return null;
   const rows = table.content ?? [];
   const { cells, columns } = placeCells(rows);
   if (column + width > columns) return null;
-  const range = Array.from({ length: width }, (_, i) => column + i);
+  const range = [...Array.from({ length: width }, (_, i) => column + i), ...also];
+  if (range.some((c, i) => !Number.isInteger(c) || c >= columns || (i > 0 && c <= (range[i - 1] as number)))) return null;
   const keptCols = label === null ? range : [label, ...range];
   const covers = (p: PlacedCell<PMNode>, row: number, col: number): boolean =>
     p.row <= row && row < p.row + p.rowspan && p.col <= col && col < p.col + p.colspan;
@@ -64,11 +68,13 @@ export function columnView(doc: DocJSON, column: number, label: number | null = 
  * A stored block's doc as a note (a place note, a pharm part) shows it: whole; cut to some rows
  * (rowsView); cut to one column, titled with that column's first-row text (columnView); or both,
  * the rows and then that column of them, titled with the column's text in the first kept row. A cut
- * with `columns` shows that many grid columns from `column` on, with no label column. Null when the
- * cut does not apply to `doc`.
+ * with `columns` shows that many grid columns from `column` on, with no label column; one with
+ * `also` keeps those grid columns after the column cut. Null when the cut does not apply to `doc`.
  */
 export function noteView(
-  doc: DocJSON, cut: { column?: number | null; columns?: number | null; label?: number | null; rows?: readonly string[] | null }, opts: RowsOptions,
+  doc: DocJSON,
+  cut: { column?: number | null; columns?: number | null; label?: number | null; rows?: readonly string[] | null; also?: readonly number[] | null },
+  opts: RowsOptions,
 ): { title: string | null; doc: DocJSON } | null {
   let view = doc;
   if (cut.rows !== undefined && cut.rows !== null) {
@@ -78,7 +84,7 @@ export function noteView(
   }
   if (cut.column !== undefined && cut.column !== null) {
     const range = cut.columns !== undefined && cut.columns !== null;
-    return range ? columnView(view, cut.column, null, cut.columns as number) : columnView(view, cut.column, cut.label ?? 0);
+    return range ? columnView(view, cut.column, null, cut.columns as number) : columnView(view, cut.column, cut.label ?? 0, 1, cut.also ?? []);
   }
   return { title: null, doc: view };
 }

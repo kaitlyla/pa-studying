@@ -92,6 +92,22 @@ describe("columnView: one column of a table, under its first-row text", () => {
     expect(((view?.doc as DocJSON).content[0] as PMNode).attrs?.grid).toEqual([60, 220]);
   });
 
+  it("keeps the `also` columns after the chosen one, sharing the rest of the width with it in proportion", () => {
+    const view = columnView(vitamins, 1, 0, 1, [3]);
+    expect(view?.title).toBe("Vitamin A");
+    expect(shape(view?.doc as DocJSON)).toEqual([["r1", "RDA", "900 mcg", "15 mg"], ["r2", "Toxicity", "Liver damage", "Bleeding"]]);
+    expect(((view?.doc as DocJSON).content[0] as PMNode).attrs?.grid).toEqual([60, 150, 210]);
+    // noteView passes a place note's `also` through, after its rows cut.
+    expect(shape(noteView(vitamins, { rows: ["r2"], column: 1, also: [3] }, { firstRow: true })?.doc as DocJSON)).toEqual([["r2", "Toxicity", "Liver damage", "Bleeding"]]);
+  });
+
+  it("is null for `also` columns not right of the chosen one in increasing order, or not in the table", () => {
+    expect(columnView(vitamins, 2, 0, 1, [2])).toBeNull();
+    expect(columnView(vitamins, 1, 0, 1, [1])).toBeNull();
+    expect(columnView(vitamins, 1, 0, 1, [3, 2])).toBeNull();
+    expect(columnView(vitamins, 1, 0, 1, [4])).toBeNull();
+  });
+
   it("is null for a label column not left of the chosen one", () => {
     expect(columnView(vitamins, 2, 2)).toBeNull();
     expect(columnView(vitamins, 1, 2)).toBeNull();

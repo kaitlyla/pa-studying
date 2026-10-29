@@ -15,7 +15,7 @@ import type { IdPrefix } from "./ids.ts";
 import { FIXED_SOURCES, COMPARISON_NAME_MAX, GAP_FIGURE_HEIGHT_PT, GAP_FIGURE_WIDTH_PT, GENERAL_KEYS, GUIDE_IDS, MEDS_POPULATIONS, MEDS_ROLES, OTHER_GAP_SECTIONS, OTHER_SECTION_IDS, UPLOAD_EXTS } from "./types.ts";
 import type {
   AsIsFile, BlockFile, BlockKind, BlockNote, CardsFile, ChecksFile, ComparisonsFile, ConceptsFile, DeckFile, EvidenceFile, FavoritesFile, FileText, Flag,
-  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceNote,
+  FlagsFile, GapFigure, GapFile, GapMeta, GapSource, GeneralFile, GuideFile, MedsClassGroup, MedsFile, MedsPiece, MedsRoleTag, MedsScenario, OtherFile, OtherNote, PageSetup, PharmFile, PharmPart, PlaceBlockNote, PlaceNote,
   RefLink, RefSub, RefTab, RefTabsFile, Removed, ReplaceFailed, Replacing, SiteFile, SlideMeta, StructureFile, SystemFile, Track, TrackBase,
   TrimsFile, UploadFile, UsesFile, Visit, VocabFile, WordDocFile,
 } from "./types.ts";
@@ -628,11 +628,13 @@ export const validateStructure: Validator = (v, ctx) => {
   if (otherAt !== -1 && otherAt !== sectionIds.length - 1) bad(ctx, ".sections", `"other" last`, sectionIds);
   // A value is a section id, or (rows only) the id of the topic the row is recorded under
   // (Orchestrator ruling 2026-10-04 04:44Z), or (blocks only) the listed block whose entry the block
-  // is shown under; a system without sections has only the latter two.
+  // is shown under, or VISITS_MEMBER (blocks only); a system without sections has only the latter three.
   for (const [k, value] of Object.entries(s.members)) {
     const target = memberTarget(value);
     if ("topic" in target) {
       if (!isId("r", k) || target.topic === k) bad(ctx, `.members.${k}`, "a topic id only on another row", value);
+    } else if ("visits" in target) {
+      if (!isId("b", k) || s.listed[k] !== undefined) bad(ctx, `.members.${k}`, "the visit pages only on an unlisted block", value);
     } else if ("listed" in target) {
       if (!isId("b", k) || s.listed[k] !== undefined || s.listed[target.listed] === undefined) {
         bad(ctx, `.members.${k}`, "a listed block id only on another, unlisted block", value);
@@ -686,12 +688,17 @@ const link = shapeOf<GeneralFile["topics"][number]["links"][number]>({ target: i
 export const validateGeneral: Validator = (v, ctx, expectId) => {
   shapeOf<GeneralFile>({
     v: v1,
-    topics: arr(shapeOf<GeneralFile["topics"][number]>({ key: oneOf(...GENERAL_KEYS), howto: nullable(nonEmpty), links: arr(link), files: uniqueArr(id("d")), gaps: uniqueArr(id("g")) }, {})),
+    topics: arr(shapeOf<GeneralFile["topics"][number]>(
+      { key: oneOf(...GENERAL_KEYS), howto: nullable(nonEmpty), links: arr(link), files: uniqueArr(id("d")), gaps: uniqueArr(id("g")) }, { notes: placeNotes },
+    )),
     workup: arr(shapeOf<GeneralFile["workup"][number]>({ id: slugC, title: nonEmpty, conds: str, gap: id("g") }, {})),
   }, {
-    visits: arr(shapeOf<Visit>({ id: slugC, title: nonEmpty, links: arr(link), gaps: uniqueArr(id("g")) }, {})),
+    visits: arr(shapeOf<Visit>({ id: slugC, title: nonEmpty, links: arr(link), gaps: uniqueArr(id("g")) }, { notes: placeNotes })),
   })(v, "", ctx);
   const g = v as GeneralFile;
+  g.topics.forEach((t, i) => {
+    if (t.notes !== undefined && t.key !== "visits") bad(ctx, `.topics[${i}].notes`, "notes only on the visits topic", t.key);
+  });
   if (expectId === "pance") {
     if (g.topics.some((t) => t.key !== "tables")) bad(ctx, ".topics", "only the tables topic in the PANCE guide", g.topics.map((t) => t.key));
     if (g.workup.length > 0 || g.visits !== undefined) bad(ctx, "", "no workup or visits in the PANCE guide", { workup: g.workup.length, visits: g.visits?.length });
@@ -731,16 +738,26 @@ const diseasesC: Checker = (v, at, ctx) => {
   uniqueArr(nonEmpty)(v, at, ctx);
   if ((v as unknown[]).length === 0) bad(ctx, at, "at least one condition", v);
 };
-/** A Word block, whole, cut to one column, or cut to some rows — not both. */
+/** A Word block, whole, cut to one column, or cut to some rows — not both (an Other outline item, a pharm part's cut). */
 const blockNote: Checker = (v, at, ctx) => {
   shapeOf<BlockNote>({ block: id("b") }, { column: columnC, rows: rowsC })(v, at, ctx);
   const n = v as BlockNote;
   if (n.column !== undefined && n.rows !== undefined) bad(ctx, at, "column or rows, not both", v);
 };
+/** A place note's block: whole, cut to some rows, cut to one column (and `also` columns after it), or both. */
+const placeBlockNote: Checker = (v, at, ctx) => {
+  shapeOf<PlaceBlockNote>({ block: id("b") }, { column: columnC, also: uniqueArr(columnC), rows: rowsC })(v, at, ctx);
+  const n = v as PlaceBlockNote;
+  if (n.also === undefined) return;
+  if (n.column === undefined) bad(ctx, `${at}.also`, "columns only with column", n.also);
+  else if (n.also.length === 0 || n.also.some((c, i) => c <= (i === 0 ? (n.column as number) : (n.also as number[])[i - 1] as number))) {
+    bad(ctx, `${at}.also`, "at least one column, each right of column and of the one before", n.also);
+  }
+};
 const placeNote = either(
-  "a note: { heading } or { block, column? | rows? }",
+  "a note: { heading } or { block, column?, also?, rows? }",
   shapeOf<Extract<PlaceNote, { heading: string }>>({ heading: nonEmpty }, {}),
-  blockNote,
+  placeBlockNote,
 );
 const placeNotes = arr(placeNote);
 

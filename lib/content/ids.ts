@@ -28,12 +28,19 @@ export function isId(prefix: IdPrefix, value: unknown): value is string {
 }
 
 /**
- * What a structure.json `members` value names: a row id is a recorded topic, a block id the listed
- * block whose entry a block is shown under (a run of blocks listed as one entry), anything else a
- * section id.
+ * The structure.json `members` value of a block shown on its guide's well-child visit pages (in the
+ * notes of GeneralFile `visits` and of the `visits` topic) instead of on its system's pages.
  */
-export function memberTarget(value: string): { topic: string } | { listed: string } | { section: string } {
+export const VISITS_MEMBER = "@visits";
+
+/**
+ * What a structure.json `members` value names: a row id is a recorded topic, a block id the listed
+ * block whose entry a block is shown under (a run of blocks listed as one entry), VISITS_MEMBER the
+ * guide's well-child visit pages, anything else a section id.
+ */
+export function memberTarget(value: string): { topic: string } | { listed: string } | { visits: true } | { section: string } {
   if (isId("r", value)) return { topic: value };
+  if (value === VISITS_MEMBER) return { visits: true };
   return isId("b", value) ? { listed: value } : { section: value };
 }
 

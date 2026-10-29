@@ -517,10 +517,7 @@ test.describe("phone and laptop layouts", () => {
     expect(offsets.filter((d) => d < 0)).toEqual([]);
   });
 
-  test("at 1280 and 390 px every placed picture on Peds Developmental milestones lies inside the page column (her Word offset reaches into the page margin)", async ({ page }) => {
-    const s = navOf("peds").systems.find((x) => x.id === "neurology-developmental");
-    const sec = s?.sections.find((x) => x.id === "developmental-milestones");
-    if (!s || !sec) throw new Error("Peds has no Neurology/Developmental › Developmental milestones section");
+  test("at 1280 and 390 px every placed picture with the Peds well child visits (her developmental milestones) lies inside the page column (her Word offset reaches into the page margin)", async ({ page }) => {
     const outside = (): Promise<{ n: number; out: number[][] }> =>
       main(page).evaluate((m) => {
         const col = m.querySelector<HTMLElement>(".main-in")?.getBoundingClientRect();
@@ -530,7 +527,7 @@ test.describe("phone and laptop layouts", () => {
       });
     for (const width of [1280, 390]) {
       await page.setViewportSize({ width, height: 900 });
-      await open(page, guideViewHash("peds", { kind: "section", system: s.id, section: sec.id }));
+      await open(page, guideViewHash("peds", { kind: "visits", item: null }));
       await expect(main(page).locator(".anchored img").first()).toBeVisible();
       const r = await outside();
       expect(r.n).toBeGreaterThan(0);
@@ -857,6 +854,8 @@ test.describe("general topics, workup and Other", () => {
     await open(page, guideViewHash(g, { kind: "visits", item: null }));
     await expect(h1(page)).toContainText(`Well child visits for ${guideName(g)}`);
     await expect(main(page).locator(".visits-page .lnk > li .lt")).toHaveText(data.items.map((x) => x.title));
+    await expect(main(page).locator(".visits-page .place-notes")).toHaveCount(data.notes.length > 0 ? 1 : 0);
+    await expect(main(page).locator(".visits-page .place-notes .pn-h")).toHaveText(data.notes.flatMap((n) => ("heading" in n ? [n.heading] : [])));
     const group = side(page).locator("li.grp").filter({ has: page.locator(".grp-row .sys-name", { hasText: "Well child visits" }) });
     await expect(group.locator(".grp-n")).toHaveText(String(data.items.length));
 
@@ -865,6 +864,7 @@ test.describe("general topics, workup and Other", () => {
     await expect(main(page).locator(".vis-h")).toHaveText(first.title);
     await expect(main(page).locator(".visits-page .gsec .lnk > li")).toHaveCount(first.links.length);
     await expect(main(page).locator(".visits-page section.gap")).toHaveCount(first.gaps.length);
+    await expect(main(page).locator(".visits-page .place-notes .pn-h")).toHaveText(first.notes.flatMap((n) => ("heading" in n ? [n.heading] : [])));
     const firstGap = first.gaps[0];
     if (!firstGap) throw new Error(`${first.title} has no gap block`);
     await expect(main(page).locator(".visits-page section.gap").first()).toHaveAttribute("data-anchor", firstGap.id);

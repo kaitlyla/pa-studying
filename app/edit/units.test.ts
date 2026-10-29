@@ -218,6 +218,30 @@ describe("loading a page key", () => {
     expect(build.changed).toEqual([B(61)]);
   });
 
+  it("visits keys: guide blocks shown as notes are edited in their system's files; a block moved to the visit pages leaves the system unit", async () => {
+    const GENERAL = "content/guides/fm/general.json";
+    const structure = json<StructureFile>(w.fake.readFile(CV_STRUCTURE));
+    structure.members[B(14)] = "@visits";
+    const general = json<{ topics: Record<string, unknown>[]; visits: Record<string, unknown>[] }>(w.fake.readFile(GENERAL));
+    general.topics = general.topics.map((t) => (t.key === "visits" ? { ...t, notes: [{ heading: "Mnemonics" }, { block: B(14) }] } : t));
+    general.visits = general.visits.map((v) => (v.id === "2-months" ? { id: v.id, title: v.title, notes: [{ block: B(13), rows: [R(131)] }], links: v.links, gaps: v.gaps } : v));
+    w.fake.commitFiles({ [CV_STRUCTURE]: serializeFile(CV_STRUCTURE, structure), [GENERAL]: serializeFile(GENERAL, general) });
+
+    const landing = await unitAt("general:fm:visits");
+    expect(landing.parts.map((p) => (p.kind === "block" ? p.block.id : p.kind))).toEqual([B(14)]);
+    const moved = only(landing, "block");
+    expect(moved.path).toBe(blockPath(14));
+    expect(moved.slot.basePt).toBe(10);
+    const visit = await unitAt("visit:fm:2-months");
+    expect(visit.parts.map((p) => (p.kind === "gap" ? p.gap.id : p.kind === "block" ? p.block.id : p.kind))).toEqual([B(13), G(4), G(5)]);
+    expect((await unitAt("system:fm:cardiovascular")).parts.flatMap((p) => (p.kind === "block" ? [p.block.id] : []))).not.toContain(B(14));
+
+    const edited = clone(moved.slot.doc);
+    const build = buildSave(landing, new Map([[moved.slot.id, setCell(edited, R(140), 0, "Mnemonic (edited)")]]), TODAY);
+    expect(build.changes.map((c) => c.path)).toEqual([blockPath(14)]);
+    expect(build.changed).toEqual([B(14)]);
+  });
+
   it("other key with an outline: the blocks of its Word doc items in order (a PDF or removed doc adds none), then its gap blocks", async () => {
     const OTHER = "content/places/other.json";
     const other = json<{ sections: Record<string, unknown>[] }>(w.fake.readFile(OTHER));

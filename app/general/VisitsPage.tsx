@@ -1,9 +1,11 @@
-// Well child visits (general-topic/visits): the visits in age order; each opens a page with the links
-// into her notes and the gap blocks for that visit.
+// Well child visits (general-topic/visits): her notes and files for all visits, then the visits in age
+// order; each opens a page with her notes for that visit, the links into her notes and its gap blocks.
 import type { ReactNode } from "react";
 import { visitsPath, type DocList, type VisitsJson } from "../../lib/derive/published.ts";
 import { GENERAL_LABELS } from "../../lib/derive/routes.ts";
 import { useData } from "../data/load.ts";
+import { FileChips } from "../files/FileChip.tsx";
+import { PlaceNotes } from "./PlaceNotes.tsx";
 import { Txt } from "../render/Text.tsx";
 import { guideCrumbs, guideName, useSite } from "../reader/data.ts";
 import { PageNotFound } from "../shell/errors.ts";
@@ -59,15 +61,27 @@ export function VisitsPage({ guide, item: itemId }: { guide: string; item: strin
             <Txt text={item.title} />
           </h2>
           <EditRegion pageKey={pageKey} title={item.title}>
-            <ThreeParts links={item.links} files={NO_FILES} gaps={item.gaps} coveredFor={name} />
+            <ThreeParts notes={item.notes} links={item.links} files={NO_FILES} gaps={item.gaps} coveredFor={name} />
           </EditRegion>
         </section>
       </div>
     );
   }
+  const pageKey = buildPageKey("general", guide, "visits");
+  const hasFiles = data.files.files.length + data.files.removed.length + data.files.pending.length > 0;
   return (
     <div className="visits-page">
-      <PageHead crumbs={crumbs} title={head} />
+      <PageHead crumbs={crumbs} title={head} actions={data.notes.length > 0 ? <EditControls pageKey={pageKey} title={`${label} for ${name}`} /> : undefined} />
+      {data.notes.length > 0 && (
+        <EditRegion pageKey={pageKey} title={label}>
+          <PlaceNotes notes={data.notes} />
+        </EditRegion>
+      )}
+      {hasFiles && (
+        <div className="gsec">
+          <FileChips list={data.files} />
+        </div>
+      )}
       <ul className="lnk">
         {data.items.map((x) => (
           <li key={x.id}>

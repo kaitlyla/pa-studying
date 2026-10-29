@@ -22,7 +22,9 @@ import {
   refHash, refLoc, slidesLoc, systemLoc, TAB_LABELS, UPDATES_LOC, UPDATES_PART, UPDATES_ROUTE, visitLoc, workupLoc, type GuideView, type SiteIndex,
 } from "./routes.ts";
 import { assetsOf, codePointsOf, collapse, docText, firstCell, nodeText, searchText, tableOf, type PMNode } from "./text.ts";
-import { blockSection, checkMembers, deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, type SystemTopics, type Topic } from "./topics.ts";
+import {
+  blockSection, checkMembers, deriveTopics, inSystem, navEntries, publishedRows, publishedSections, publishedTopics, rowSection, systemBlocks, type SystemTopics, type Topic,
+} from "./topics.ts";
 import { itemPieces, keptOwn, panelItems, publishedEdit } from "./panel.ts";
 import { addDoc } from "./doclist.ts";
 import { shownItems, type ShownItems } from "./placeNotes.ts";
@@ -47,6 +49,8 @@ export interface PublishResult {
 interface Sys {
   guide: GuideData;
   data: SystemData;
+  /** The blocks on the system's pages, in order (systemBlocks): `data.blocks` but those shown on the visit pages. */
+  blocks: BlockFile[];
   topics: SystemTopics;
   pharm: PharmSystem;
 }
@@ -57,6 +61,9 @@ const pharmView = (system: string, section: string | null = null, target: string
   ({ kind: "pharm", system, section, target });
 
 const pub = (b: BlockFile): PubBlock => ({ id: b.id, kind: b.kind, doc: b.doc });
+
+/** A guide's well-child visits topic, whose notes and files the visits page shows above the visits. */
+const visitsTopic = (g: GuideData): NonNullable<GuideData["general"]>["topics"][number] | undefined => g.general?.topics.find((t) => t.key === "visits");
 
 /** The row ids of a table block, in order; none for a prose block. */
 function tableRowIds(b: BlockFile): string[] {
@@ -158,7 +165,9 @@ export function publish(c: Content): PublishResult {
   for (const g of c.guides) {
     for (const data of g.systems) {
       const topics = deriveTopics(data.blocks, data.structure);
-      const s: Sys = { guide: g, data, topics, pharm: { guide: g.file.id, system: data.file.id, structure: data.structure, topics, partFiles } };
+      const s: Sys = {
+        guide: g, data, blocks: systemBlocks(data.blocks, data.structure), topics, pharm: { guide: g.file.id, system: data.file.id, structure: data.structure, topics, partFiles },
+      };
       systems.push(s);
       for (const b of data.blocks) blockSys.set(b.id, s);
       for (const id of topics.rows.keys()) rowSys.set(id, s);
@@ -347,7 +356,8 @@ export function publish(c: Content): PublishResult {
   for (const s of systems) {
     const st = s.data.structure;
     const sys = s.data.file.id;
-    for (const b of s.data.blocks) {
+    // A block shown on the visit pages is hosted there (placeNotes).
+    for (const b of s.blocks) {
       const ps = pharmSectionOf(s, b.id);
       if (ps !== null) hosts[b.id] = { route: view(s, pharmView(sys, ps)), loc: pharmLoc(ix, g0(s), sys) };
       else if (listedHead(st, b.id) !== null) {
@@ -495,14 +505,22 @@ export function publish(c: Content): PublishResult {
       return d?.kind === "word" && visible(d) ? d.blocks.map((b) => ({ note: { block: b.id }, part })) : [];
     });
   };
-  // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page;
-  // a table row opens on the first place showing it, which for a note showing some rows can be a later one.
+  /** Her guides' blocks, each with its guide's base size; `moved`: shown on the visit pages instead of its system's (inSystem). */
+  const guideBlocks = new Map<string, { block: BlockFile; basePt: number; moved: boolean }>();
+  for (const s of systems) for (const b of s.data.blocks) guideBlocks.set(b.id, { block: b, basePt: s.guide.file.basePt, moved: !inSystem(s.data.structure, b.id) });
+  /** The block a place note shows: a block of a visible Word page or of a guide. */
+  const noteBlock = (id: string): { block: BlockFile; basePt: number } | undefined => wordBlocks.get(id) ?? guideBlocks.get(id);
+  // A block of her Word pages shown as notes on a place page opens there (its first such place), not on the File page,
+  // as does a guide block shown on the visit pages instead of its system's; a guide block its system's pages show opens there.
+  // A table row opens on the first place showing it, which for a note showing some rows can be a later one.
   const noteHome = new Map<string, { place: Place; tab: string; title: string }>();
   const rowHome = new Map<string, { place: Place; tab: string; title: string; block: string }>();
+  /** A block that opens where it shows as notes: one of her Word pages' or a guide block moved to the visit pages. */
+  const homedNote = (id: string): { block: BlockFile } | undefined => wordBlocks.get(id) ?? (guideBlocks.get(id)?.moved ? guideBlocks.get(id) : undefined);
   const placeNotes = (notes: readonly PlaceNote[] | undefined, place: Place, tab: string, title: string): void => {
     for (const n of notes ?? []) {
       if (!("block" in n)) continue;
-      const w = wordBlocks.get(n.block);
+      const w = homedNote(n.block);
       if (!w) continue;
       if (!noteHome.has(n.block)) noteHome.set(n.block, { place, tab, title });
       for (const r of shownRows(n, w.block)) if (!rowHome.has(r)) rowHome.set(r, { place, tab, title, block: n.block });
@@ -512,6 +530,32 @@ export function publish(c: Content): PublishResult {
   // An Other outline's block opens on its part's page.
   for (const sec of c.other.sections) {
     for (const { note, part } of otherShown(sec)) placeNotes([note], { route: otherHash(sec.id, part), loc: otherLoc(ix, sec.id) }, "other", sec.title);
+  }
+  // A block the visits page shows whole opens there; otherwise each visit's notes come first, so a row a visit
+  // shows opens on that visit's page.
+  for (const g of c.guides) {
+    const gid = g.file.id;
+    const shown = new Set<string>();
+    const visitNotes = (notes: readonly PlaceNote[] | undefined, place: Place, title: string): void => {
+      for (const n of notes ?? []) if ("block" in n) shown.add(n.block);
+      placeNotes(notes, place, tabOf(g), title);
+    };
+    const landingNotes = visitsTopic(g)?.notes;
+    const landing = { route: guideViewHash(gid, { kind: "visits", item: null }), loc: generalLoc(ix, gid, "visits") };
+    for (const n of landingNotes ?? []) {
+      if ("block" in n && n.rows === undefined && n.column === undefined && homedNote(n.block) && !noteHome.has(n.block)) {
+        noteHome.set(n.block, { place: landing, tab: tabOf(g), title: GENERAL_LABELS.visits });
+      }
+    }
+    for (const v of g.general?.visits ?? []) visitNotes(v.notes, { route: guideViewHash(gid, { kind: "visits", item: v.id }), loc: visitLoc(ix, gid, v.title) }, v.title);
+    visitNotes(landingNotes, landing, GENERAL_LABELS.visits);
+    // A block shown on the visit pages instead of its system's must be shown there.
+    for (const s of systems) {
+      if (s.guide !== g) continue;
+      for (const b of s.data.blocks) {
+        if (!inSystem(s.data.structure, b.id) && !shown.has(b.id)) throw new BuildError(b.id, `members shows it on the visit pages of ${gid}, but no visits note shows it`);
+      }
+    }
   }
   for (const [id, home] of noteHome) hosts[id] = home.place;
   // A row is hosted by its block unless it first shows on another page.
@@ -545,8 +589,10 @@ export function publish(c: Content): PublishResult {
   const links = (file: string, ls: readonly RefLink[]): PubRefLink[] => {
     const out: PubRefLink[] = [];
     for (const l of ls) {
-      const host = hosts[l.target];
-      if (!exists(l.target) || !host) {
+      // A row of a table shown as notes opens where it first shows (its block's page, unless another).
+      const noteRow = rowHome.get(l.target);
+      const host = hosts[l.target] ?? noteRow?.place;
+      if ((!exists(l.target) && !noteRow) || !host) {
         dropped.push({ file, id: l.target });
         continue;
       }
@@ -611,9 +657,9 @@ export function publish(c: Content): PublishResult {
       (d.text?.pages ?? []).forEach((t, i) => units.push({ ...base, title: `${d.file.name} · p. ${i + 1}`, at: `p${i + 1}`, text: searchText(t) }));
     }
   };
-  /** The shownItems rule for a place listing `docs`: blocks show while on a visible Word page. */
-  const placeShown = (docs: DocList | null): ShownItems => shownItems(docs, (id) => wordBlocks.has(id));
-  /** A place's notes; a block no longer on a visible Word page (its page removed, or the block deleted) is dropped. */
+  /** The shownItems rule for a place listing `docs`: blocks show while on a visible Word page, or in a guide. */
+  const placeShown = (docs: DocList | null): ShownItems => shownItems(docs, (id) => noteBlock(id) !== undefined);
+  /** A place's notes; a block no longer on a visible Word page or in a guide (its page removed, or the block deleted) is dropped. */
   const placeNoteList = (file: string, ns: readonly PlaceNote[] | undefined, shown: ShownItems = placeShown(null)): PubNote[] => {
     const out: PubNote[] = [];
     for (const n of ns ?? []) {
@@ -621,7 +667,7 @@ export function publish(c: Content): PublishResult {
         out.push({ heading: n.heading });
         continue;
       }
-      const w = shown.block(n.block) ? wordBlocks.get(n.block) : undefined;
+      const w = shown.block(n.block) ? noteBlock(n.block) : undefined;
       if (!w) {
         dropped.push({ file, id: n.block });
         continue;
@@ -630,14 +676,14 @@ export function publish(c: Content): PublishResult {
       const inTable = tableRowIds(w.block);
       for (const r of n.rows ?? []) if (!inTable.includes(r)) dropped.push({ file, id: r });
       const rows = n.rows?.filter((r) => inTable.includes(r)) ?? null;
-      out.push({ block: pub(w.block), basePt: w.basePt, column: n.column ?? null, rows });
+      out.push({ block: pub(w.block), basePt: w.basePt, column: n.column ?? null, ...(n.also ? { also: n.also } : {}), rows });
     }
     return out;
   };
   const noteUnits = new Set<string>();
   const noteUnit = (id: string): void => {
     const home = noteHome.get(id);
-    const w = wordBlocks.get(id);
+    const w = noteBlock(id);
     if (!home || !w || noteUnits.has(id)) return;
     noteUnits.add(id);
     const at = (h: { place: Place; tab: string; title: string }): { base: UnitBase; title: string } =>
@@ -671,6 +717,12 @@ export function publish(c: Content): PublishResult {
       if (topic) return topic.title;
       if (info?.kind === "heading") return collapse(rs.topics.headings.get(id)?.label ?? "");
       const row = rs.topics.tables.get(info?.block ?? "")?.rows.find((r) => r.id === id);
+      return row ? collapse(firstCell(row)) : "";
+    }
+    const noteRow = rowHome.get(id);
+    const noteTable = noteRow ? noteBlock(noteRow.block) : undefined;
+    if (noteTable) {
+      const row = tableOf(noteTable.block)?.rows.find((r) => r.id === id);
       return row ? collapse(firstCell(row)) : "";
     }
     const bs = blockSys.get(id);
@@ -742,15 +794,21 @@ export function publish(c: Content): PublishResult {
           gapUnit(w.gap);
         }
       }
+      const topic = visitsTopic(g);
+      noteUnitsOf(topic?.notes);
       for (const v of g.general.visits ?? []) {
         const route = guideViewHash(gid, { kind: "visits", item: v.id });
         units.push({ tab, title: collapse(v.title), loc: generalLoc(ix, gid, "visits"), route, at: null, label: "notes", text: searchText(v.title) });
+        noteUnitsOf(v.notes);
         for (const id of v.gaps) gapUnit(id);
       }
       if (g.general.visits?.length) {
+        const file = `content/guides/${gid}/general.json`;
         const out: VisitsJson = {
           guide: gid,
-          items: g.general.visits.map((v) => ({ id: v.id, title: v.title, links: links(`content/guides/${gid}/general.json`, v.links), gaps: v.gaps.map(gap) })),
+          notes: placeNoteList(file, topic?.notes),
+          files: docList(topic?.files ?? []),
+          items: g.general.visits.map((v) => ({ id: v.id, title: v.title, notes: placeNoteList(file, v.notes), links: links(file, v.links), gaps: v.gaps.map(gap) })),
         };
         files.set(visitsPath(gid), out);
       }
@@ -834,7 +892,8 @@ export function publish(c: Content): PublishResult {
     const t = s.topics;
     const tab = tabOf(s.guide);
     const summary = s.guide.file.systems.find((x) => x.id === sys);
-    const blockOrder = s.data.blocks.map((b) => b.id);
+    const blockOrder = s.blocks.map((b) => b.id);
+    // Every block's pictures ship, those shown on the visit pages included.
     usedBlocks(s.data.blocks);
 
     const panelSections: SystemJson["panelSections"] = {};
@@ -950,14 +1009,14 @@ export function publish(c: Content): PublishResult {
     const pageIds = [...blockOrder, ...t.rows.keys()];
     const out: SystemJson = {
       guide: gid, id: sys, title: summary?.title ?? sys, pct: summary?.pct ?? "",
-      blocks: s.data.blocks.map(pub),
+      blocks: s.blocks.map(pub),
       ...publishedRows(t),
       topics, stubs, sections, pharm, panelSections, cards, parts: partsOut, notesBlocks, trims, uses, notes: notesFor(pageIds),
     };
     files.set(systemPath(gid, sys), out);
 
     // search units: block/row order, then pharm units, then pharm files
-    for (const b of s.data.blocks) {
+    for (const b of s.blocks) {
       if (t.proseBlocks.includes(b.id)) {
         const sec = st.sections.length > 0 ? blockSection(st, b.id) : null;
         const head = listedHead(st, b.id);

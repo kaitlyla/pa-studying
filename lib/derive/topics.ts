@@ -33,6 +33,21 @@ function recordedTopic(structure: StructureFile, rowId: string): string | null {
   return target !== null && "topic" in target ? target.topic : null;
 }
 
+/**
+ * Whether a block is on its system's pages: every block but those `members` shows on the guide's
+ * well-child visit pages instead (VISITS_MEMBER). Topics, sections, the sidebar, the system page and
+ * its PDFs, search and hosts all take a system's blocks through this.
+ */
+export function inSystem(structure: StructureFile, blockId: string): boolean {
+  const v = structure.members[blockId];
+  return v === undefined || !("visits" in memberTarget(v));
+}
+
+/** The blocks of `blocks` (a system's, in order) that are on its pages (inSystem). */
+export function systemBlocks<B extends { id: string }>(blocks: readonly B[], structure: StructureFile): B[] {
+  return blocks.filter((b) => inSystem(structure, b.id));
+}
+
 function sectionOf(value: string | undefined): string | null {
   const target = value === undefined ? null : memberTarget(value);
   return target !== null && "section" in target ? target.section : null;
@@ -90,8 +105,8 @@ export interface SystemTopics {
 }
 
 /**
- * Topics of one system's blocks in order (40 §40.2). Throws a BuildError for a `titled` or
- * `unlisted` entry that does not fit. A `titled` row must be a content row of a topic table; one
+ * Topics of one system's blocks in order (40 §40.2), of those on its pages (inSystem). Throws a
+ * BuildError for a `titled` or `unlisted` entry that does not fit. A `titled` row must be a content row of a topic table; one
  * titled by a heading cell must sit directly below a heading row (rows recorded under it in between
  * aside) whose named cell is non-empty. An `unlisted` row must be a content row of a non-drug table
  * that would start a topic.
@@ -139,7 +154,7 @@ function derive(blocks: readonly BlockFile[], structure: StructureFile, strict: 
   /** The listed entry the previous block is shown under. */
   let prevHead: string | null = null;
 
-  for (const block of blocks) {
+  for (const block of systemBlocks(blocks, structure)) {
     const head = listedHead(structure, block.id);
     // A run listed as one entry is its listed block and the blocks recorded under it, directly below it.
     if (strict && head !== null && head !== block.id && head !== prevHead) {

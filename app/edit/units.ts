@@ -1,14 +1,14 @@
 // Edit units (plan 50 §50.2): what a page key makes editable, read from Git at one commit, and the
 // files a save writes (50 §50.4 Save). Pure apart from reading the snapshot and published nav data.
 import {
-  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, isId, listedHead, newId, serializeFile, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
+  GAP_CONTENT_HEIGHT_PT, GAP_CONTENT_PT, gapFilePath, isId, listedHead, newId, serializeFile, SYSTEM_FILE_RE, systemRowOrder, tableNode, topicBelowPath, topicMedsPath, updateStructure, WORD_DOC_RE,
   type BlockFile, type CardsFile, type DeckFile, type DocJSON, type GapFile, type GapMeta, type GeneralFile, type GuideFile, type MedsFile, type MedsPiece, type OtherFile,
   type MedsRoleTag, type OtherNote, type PageSetup, type PharmFile, type PlaceNote, type RefTabsFile, type SlideMeta, type StructureFile, type SystemFile, type WordDocFile,
 } from "../../lib/content/index.ts";
 import { entryPieces, fileAdds, pageCard } from "../../lib/derive/panel.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
-import { checkMembers, deriveTopics, fitTopicRows, sectionItems, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, sectionItems, systemBlocks, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, PubMedsCard, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -497,20 +497,32 @@ async function gapParts(snap: Snapshot, ids: readonly (string | null | undefined
 }
 
 /**
- * The Word-page blocks a place page shows as notes (PlaceNote), each once in order, edited whole as on
- * their File page. A block no longer on a page of hers that is shown is left out, as the page leaves it out.
+ * The Word-page and guide blocks a place page shows as notes (PlaceNote), each once in order, edited
+ * whole as on their File page or system page. A block no longer on a page of hers that is shown, or
+ * in its system, is left out, as the page leaves it out.
  */
 async function placeNoteParts(snap: Snapshot, notes: readonly PlaceNote[] | undefined): Promise<Part[]> {
   const ids = [...new Set((notes ?? []).flatMap((n) => ("block" in n ? [n.block] : [])))];
   const docFiles = [...snap.files.keys()].filter((p) => WORD_DOC_RE.test(p));
+  const systemFiles = [...snap.files.keys()].filter((p) => SYSTEM_FILE_RE.test(p));
   const parts: Part[] = [];
   for (const id of ids) {
     const docFile = docFiles.find((p) => snap.has(blockFileIn(dirOf(p), id)));
-    if (!docFile) continue;
-    const word = await snap.json<WordDocFile>(docFile);
-    if (word.removed !== null || !word.blocks.includes(id)) continue;
-    const path = blockFileIn(dirOf(docFile), id);
-    parts.push(blockPart(path, await snap.json<BlockFile>(path), { kind: "doc", path: docFile }, word.basePt, contentArea(word.page)));
+    if (docFile) {
+      const word = await snap.json<WordDocFile>(docFile);
+      if (word.removed !== null || !word.blocks.includes(id)) continue;
+      const path = blockFileIn(dirOf(docFile), id);
+      parts.push(blockPart(path, await snap.json<BlockFile>(path), { kind: "doc", path: docFile }, word.basePt, contentArea(word.page)));
+      continue;
+    }
+    const systemFile = systemFiles.find((p) => snap.has(blockFileIn(dirOf(p), id)));
+    const at = systemFile === undefined ? undefined : SYSTEM_FILE_RE.exec(systemFile)?.groups;
+    if (!at) continue;
+    const sys = await loadSystem(snap, at.guide as string, at.id as string);
+    const block = sys.blocks.find((b) => b.id === id);
+    if (!block) continue;
+    const { basePt, area } = await guideFacts(snap, sys.guide);
+    parts.push(sysBlockPart(sys, block, basePt, area));
   }
   return parts;
 }
@@ -624,7 +636,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
       const t = deriveTopics(sys.blocks, sys.structure);
       const drug = new Map(sys.structure.drugTables.map((d) => [d.block, d]));
       const parts: Part[] = [];
-      for (const b of sys.blocks) {
+      // A block shown on the visit pages instead is edited there (the visit unit).
+      for (const b of systemBlocks(sys.blocks, sys.structure)) {
         const stored = t.tables.get(b.id);
         if (drug.has(b.id)) parts.push({ kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" });
         else parts.push(wholeBlockPart(sys, t, b, basePt, area));
@@ -683,7 +696,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
     case "general": {
       const { guide, key: gkey } = k;
       const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
-      return unit(await gapParts(snap, general.topics.find((t) => t.key === gkey)?.gaps ?? []));
+      const topic = general.topics.find((t) => t.key === gkey);
+      return unit([...(await placeNoteParts(snap, topic?.notes)), ...(await gapParts(snap, topic?.gaps ?? []))]);
     }
     case "workup": {
       const { guide, item } = k;
@@ -693,7 +707,8 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
     case "visit": {
       const { guide, item } = k;
       const general = await snap.json<GeneralFile>(`content/guides/${guide}/general.json`);
-      return unit(await gapParts(snap, general.visits?.find((v) => v.id === item)?.gaps ?? []));
+      const visit = general.visits?.find((v) => v.id === item);
+      return unit([...(await placeNoteParts(snap, visit?.notes)), ...(await gapParts(snap, visit?.gaps ?? []))]);
     }
     case "ref": {
       const { tab, sub } = k;

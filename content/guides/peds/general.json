@@ -647,8 +647,37 @@
    "key": "visits",
    "howto": null,
    "links": [],
-   "files": [],
-   "gaps": []
+   "files": [
+    "d_JFW3D5GF8M",
+    "d_Y3WR84415Y"
+   ],
+   "gaps": [],
+   "notes": [
+    {
+     "heading": "Anticipatory guidance"
+    },
+    {
+     "block": "b_68Q21T7A1E"
+    },
+    {
+     "block": "b_69Q65SAS12"
+    },
+    {
+     "heading": "Developmental milestones"
+    },
+    {
+     "block": "b_PY9QYQ3MC0"
+    },
+    {
+     "block": "b_KZYMT7PWZE"
+    },
+    {
+     "heading": "Immunization guidelines"
+    },
+    {
+     "block": "b_1P335V0QJA"
+    }
+   ]
   }
  ],
  "workup": [
@@ -813,11 +842,32 @@
   {
    "id": "newborn",
    "title": "Newborn",
-   "links": [
+   "notes": [
     {
-     "target": "r_7EE1HW5PQQ",
-     "covers": "Anticipatory guidance for Birth/3-5d: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_7EE1HW5PQQ"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_T1N1HXCHEV"
+     ],
+     "column": 3,
+     "also": [
+      15
+     ]
+    }
+   ],
+   "links": [
     {
      "target": "b_W4ZPN1KPZ0",
      "covers": "Hearing: newborn tests (ABR, OAE)"
@@ -825,54 +875,99 @@
     {
      "target": "r_P0E2YP0BGW",
      "covers": "Congenital hypothyroidism: newborn screening"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 1st: Birth, w/in 24hr · RSV nirsevimab/beyfortus: w/in 1 wk of birth"
     }
    ],
    "gaps": [
     "g_DFJD6HKMQ6",
     "g_Z3S96XN6MA",
     "g_PSA9QDQJT2",
-    "g_SV793RKAN2"
+    "g_SV793RKAN2",
+    "g_D0S5KD3MDS"
    ]
   },
   {
    "id": "3-5-days",
    "title": "3 to 5 days",
-   "links": [
+   "notes": [
     {
-     "target": "r_7EE1HW5PQQ",
-     "covers": "Anticipatory guidance for Birth/3-5d: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
+    },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_7EE1HW5PQQ"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_T1N1HXCHEV"
+     ],
+     "column": 3,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_0P3CRQTKZ2"
     }
    ],
+   "links": [],
    "gaps": [
     "g_14MZ54ETGH",
     "g_J45501RD36",
-    "g_XG3Q1BJ23Q",
     "g_ENAWKPEZFA",
-    "g_KGWVFPCNF0"
+    "g_KGWVFPCNF0",
+    "g_D0S5KD3MDS"
    ]
   },
   {
    "id": "1-month",
    "title": "By 1 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_G998G488GV",
-     "covers": "Anticipatory guidance for 2wks-1mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 2nd: 1-2M"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_G998G488GV"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ"
+     ],
+     "column": 4,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NP34DXCRYE"
+    },
+    {
+     "block": "b_6WYTFDNW6T"
     }
    ],
+   "links": [],
    "gaps": [
     "g_Z322DKNW0Y",
     "g_02KERGERV2",
-    "g_3F78E28E6N",
-    "g_31SBJ3MC6Z",
     "g_2JCZN3DH4Z",
     "g_42TKTYQ7GV"
    ]
@@ -880,20 +975,46 @@
   {
    "id": "2-months",
    "title": "2 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_2ZM9DYMMRH",
-     "covers": "Anticipatory guidance for 2mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 2nd: 1-2M · DTaP 1st: 2M · Hib 1st: 2M (PRP-T brand) · Hib 1st: 2M (PRP-OMP brand) · IPV (Polio) 1st: 2M · PCV15/PCV20 1st: 2M · RV (Rotavirus) 1st: 2M"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_2ZM9DYMMRH"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_W38ZZJ7S91",
+      "r_50QXC0D8KZ",
+      "r_7KP3T0KQY3",
+      "r_T1V5DYQRB4",
+      "r_RJ1GYWE211",
+      "r_PDKYK3XP7B"
+     ],
+     "column": 5,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_0EKN6ANDQ3"
     }
    ],
+   "links": [],
    "gaps": [
     "g_WPDRH96B1A",
     "g_3KZ4DZFEZ2",
-    "g_31SBJ3MC6Z",
     "g_99Q435FY4W",
     "g_QYDZ960DH7",
     "g_SN08KKX89N"
@@ -902,20 +1023,45 @@
   {
    "id": "4-months",
    "title": "4 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_B4ME21HAF6",
-     "covers": "Anticipatory guidance for 4mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: DTaP 2nd: 4M · Hib 2nd: 4M (PRP-T brand) · Hib 2nd: 4M (PRP-OMP brand) · IPV (Polio) 2nd: 4M · PCV15/PCV20 2nd: 4M · RV (Rotavirus) 2nd: 4M"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_B4ME21HAF6"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_W38ZZJ7S91",
+      "r_50QXC0D8KZ",
+      "r_7KP3T0KQY3",
+      "r_T1V5DYQRB4",
+      "r_RJ1GYWE211",
+      "r_PDKYK3XP7B"
+     ],
+     "column": 6,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_CYGQY02A5P"
     }
    ],
+   "links": [],
    "gaps": [
     "g_YHME75ANT3",
     "g_Z5D3CPYAHG",
-    "g_31SBJ3MC6Z",
     "g_762C9X873V",
     "g_YWD8SYCPD1",
     "g_V27MRYPQKB"
@@ -924,20 +1070,46 @@
   {
    "id": "6-months",
    "title": "6 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_784VAJ13Q3",
-     "covers": "Anticipatory guidance for 6mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 3rd: 6-18M · DTaP 3rd: 6M · Hib 3rd: 6M (PRP-T brand; PRP-OMP brand has ⍉6M dose) · IPV (Polio) 3rd: 6-18M · PCV15/PCV20 3rd: 6M · RV (Rotavirus) 3rd: 6M *RotaTeq · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_784VAJ13Q3"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_W38ZZJ7S91",
+      "r_50QXC0D8KZ",
+      "r_T1V5DYQRB4",
+      "r_RJ1GYWE211",
+      "r_PDKYK3XP7B",
+      "r_QM0W90PGDC"
+     ],
+     "column": 7,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_QDK0HTEPCC"
     }
    ],
+   "links": [],
    "gaps": [
     "g_9EWPQFJ3NF",
     "g_HTS16VEQQQ",
-    "g_31SBJ3MC6Z",
     "g_6KXRYKXJR1",
     "g_FV2XYJ2FYV",
     "g_RW9HVPT87D"
@@ -946,22 +1118,44 @@
   {
    "id": "9-months",
    "title": "9 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_9Q6CJDFHHH",
-     "covers": "Anticipatory guidance for 9mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 3rd: 6-18M · IPV (Polio) 3rd: 6-18M · RSV 8-19M during RSV season (October -March) · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_9Q6CJDFHHH"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_T1V5DYQRB4",
+      "r_T1N1HXCHEV",
+      "r_QM0W90PGDC"
+     ],
+     "column": 8,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_R629RHGKDQ"
     }
    ],
+   "links": [],
    "gaps": [
     "g_M0CH5PFFV4",
     "g_SQYFBM9R6G",
     "g_JFCMZ5DQRE",
-    "g_T25STKAPRS",
-    "g_31SBJ3MC6Z",
     "g_QBMSF57AK7",
     "g_S1SG8E1MXV"
    ]
@@ -969,11 +1163,46 @@
   {
    "id": "12-months",
    "title": "12 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_SFZ9CTMH5X",
-     "covers": "Anticipatory guidance for 12mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_SFZ9CTMH5X"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_50QXC0D8KZ",
+      "r_7KP3T0KQY3",
+      "r_T1V5DYQRB4",
+      "r_RJ1GYWE211",
+      "r_JB51T62T4A",
+      "r_JDX5D1SWBB",
+      "r_7Q3VA5EBCJ",
+      "r_T1N1HXCHEV",
+      "r_QM0W90PGDC"
+     ],
+     "column": 9,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_R5BN7522H7"
+    }
+   ],
+   "links": [
     {
      "target": "r_SFS2QJ26R7",
      "covers": "IDA: Fe studies"
@@ -981,18 +1210,12 @@
     {
      "target": "r_N6QWQ7ENS1",
      "covers": "Lead poisoning"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 3rd: 6-18M · IPV (Polio) 3rd: 6-18M · Hib booster: 12-15M (PRP-T brand) · Hib booster: 12-15M (PRP-OMP brand) · PCV15/PCV20 4th: 12-15M · MMR 1st: 12-15M · Varicella 1st: 12-15M · HepA 1st & 2nd: 12-23M, 6-12M apart · RSV 8-19M during RSV season (October -March) · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
     }
    ],
    "gaps": [
     "g_EHBEWR70JV",
     "g_890QAH9YRG",
     "g_YPQV832GEQ",
-    "g_161GSYQHYV",
-    "g_31SBJ3MC6Z",
     "g_GZ0Q28ADHB",
     "g_EQN014Y05F"
    ]
@@ -1000,22 +1223,51 @@
   {
    "id": "15-months",
    "title": "15 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_WGRH3E5MA9",
-     "covers": "Anticipatory guidance for 15mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 3rd: 6-18M · IPV (Polio) 3rd: 6-18M · DTaP 4th: 15-18M · Hib booster: 12-15M (PRP-T brand) · Hib booster: 12-15M (PRP-OMP brand) · PCV15/PCV20 4th: 12-15M · MMR 1st: 12-15M · Varicella 1st: 12-15M · HepA 1st & 2nd: 12-23M, 6-12M apart · RSV 8-19M during RSV season (October -March) · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_WGRH3E5MA9"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_W38ZZJ7S91",
+      "r_50QXC0D8KZ",
+      "r_7KP3T0KQY3",
+      "r_T1V5DYQRB4",
+      "r_RJ1GYWE211",
+      "r_JB51T62T4A",
+      "r_JDX5D1SWBB",
+      "r_7Q3VA5EBCJ",
+      "r_T1N1HXCHEV",
+      "r_QM0W90PGDC"
+     ],
+     "column": 10,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_N27NHQH0T7"
     }
    ],
+   "links": [],
    "gaps": [
     "g_0WXYQARV6E",
     "g_ACZ7NJNAGQ",
     "g_GZDHB2PKZ2",
-    "g_DMCHFBC95H",
-    "g_31SBJ3MC6Z",
     "g_ZV5X7GGTMW",
     "g_YVYK3DMB18"
    ]
@@ -1023,22 +1275,46 @@
   {
    "id": "18-months",
    "title": "18 mo",
-   "links": [
+   "notes": [
     {
-     "target": "r_WSHMCP7QY5",
-     "covers": "Anticipatory guidance for 18mo: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: HepB 3rd: 6-18M · IPV (Polio) 3rd: 6-18M · DTaP 4th: 15-18M · HepA 1st & 2nd: 12-23M, 6-12M apart · RSV 8-19M during RSV season (October -March) · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_WSHMCP7QY5"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_Y965J32PAZ",
+      "r_W38ZZJ7S91",
+      "r_T1V5DYQRB4",
+      "r_7Q3VA5EBCJ",
+      "r_T1N1HXCHEV",
+      "r_QM0W90PGDC"
+     ],
+     "column": 11,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_V9DM2VREJA"
     }
    ],
+   "links": [],
    "gaps": [
     "g_18WXG6QESZ",
     "g_752TCV7649",
     "g_WH3MK7GSQ4",
-    "g_ZVS8SS732D",
-    "g_31SBJ3MC6Z",
     "g_GB0SX63VAT",
     "g_Y8TT4EC0H2"
    ]
@@ -1046,11 +1322,38 @@
   {
    "id": "24-months",
    "title": "2 yr (24 mo)",
-   "links": [
+   "notes": [
     {
-     "target": "r_4GZ8YNVA9S",
-     "covers": "Anticipatory guidance for 2y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_4GZ8YNVA9S"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_7Q3VA5EBCJ",
+      "r_QM0W90PGDC"
+     ],
+     "column": 12,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NWB65BVY2J"
+    }
+   ],
+   "links": [
     {
      "target": "r_N6QWQ7ENS1",
      "covers": "Lead poisoning"
@@ -1058,18 +1361,12 @@
     {
      "target": "r_4540XWD970",
      "covers": "Obesity: BMI yearly"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
     }
    ],
    "gaps": [
     "g_7KEW2X8EN4",
     "g_2F64R1KH3V",
     "g_1YFGPG5FMG",
-    "g_9XH7WTQGP7",
-    "g_31SBJ3MC6Z",
     "g_2N6QNRVC9R",
     "g_6AGTPG8KNE"
    ]
@@ -1077,18 +1374,41 @@
   {
    "id": "30-months",
    "title": "2½ yr (30 mo)",
-   "links": [
+   "notes": [
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "heading": "Anticipatory guidance"
+    },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_4GZ8YNVA9S"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_QM0W90PGDC"
+     ],
+     "column": 12,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_FGF8QWN5QE"
     }
    ],
+   "links": [],
    "gaps": [
     "g_7Y3KDPJM3N",
     "g_J3C342NH14",
     "g_AN2ZFY855K",
-    "g_K70644DRWG",
-    "g_31SBJ3MC6Z",
     "g_QBKH89QWPT",
     "g_SC0S20X5EJ"
    ]
@@ -1096,26 +1416,46 @@
   {
    "id": "3-years",
    "title": "3 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_KRE69NRK4Z",
-     "covers": "Anticipatory guidance for 3y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_KRE69NRK4Z"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_QM0W90PGDC"
+     ],
+     "column": 12,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_FRPXXR77GW"
+    }
+   ],
+   "links": [
     {
      "target": "b_4W6DDZXT7X",
      "covers": "Strabismus: cover test"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
     }
    ],
    "gaps": [
     "g_6Q9XPDSGVM",
     "g_K49VYGV2WZ",
     "g_HRQ0AGBX3H",
-    "g_0E4NGHCMP1",
-    "g_31SBJ3MC6Z",
     "g_RWDHHE9X88",
     "g_5NS2HMZ4MB"
    ]
@@ -1123,26 +1463,50 @@
   {
    "id": "4-years",
    "title": "4 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_10ZH8RRP5B",
-     "covers": "Anticipatory guidance for 4y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_10ZH8RRP5B"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_W38ZZJ7S91",
+      "r_T1V5DYQRB4",
+      "r_JB51T62T4A",
+      "r_JDX5D1SWBB",
+      "r_QM0W90PGDC"
+     ],
+     "column": 13,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_7CYJ9MMBV7"
+    }
+   ],
+   "links": [
     {
      "target": "b_4W6DDZXT7X",
      "covers": "Strabismus: cover test"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: DTaP 5th: 4-6yr · IPV (Polio) 4th: 4-6yr · MMR 2nd: 4-6yr · Varicella 2nd: 4-6yr · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
     }
    ],
    "gaps": [
     "g_8QF7SPE90N",
     "g_Y3TZ79A420",
     "g_YWMN2EV4W7",
-    "g_PP7TDWHN27",
-    "g_31SBJ3MC6Z",
     "g_43VBAW6XK7",
     "g_X0J086C4NT"
    ]
@@ -1150,26 +1514,50 @@
   {
    "id": "5-years",
    "title": "5 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_DHQF9DZ1D8",
-     "covers": "Anticipatory guidance for 5y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
+    {
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_DHQF9DZ1D8"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_W38ZZJ7S91",
+      "r_T1V5DYQRB4",
+      "r_JB51T62T4A",
+      "r_JDX5D1SWBB",
+      "r_QM0W90PGDC"
+     ],
+     "column": 13,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_A20NAEZMN8"
+    }
+   ],
+   "links": [
     {
      "target": "b_4W6DDZXT7X",
      "covers": "Strabismus: cover test"
-    },
-    {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: DTaP 5th: 4-6yr · IPV (Polio) 4th: 4-6yr · MMR 2nd: 4-6yr · Varicella 2nd: 4-6yr · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
     }
    ],
    "gaps": [
     "g_YY4Y9WS8QV",
     "g_GQ9K2NFSR5",
     "g_1YB2GGM304",
-    "g_TG6GQNNFYQ",
-    "g_31SBJ3MC6Z",
     "g_J9308GVXT6",
     "g_SDD5HB8NF4"
    ]
@@ -1177,20 +1565,44 @@
   {
    "id": "6-years",
    "title": "6 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_A1QXBXCDX2",
-     "covers": "Anticipatory guidance for 6y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: DTaP 5th: 4-6yr · IPV (Polio) 4th: 4-6yr · MMR 2nd: 4-6yr · Varicella 2nd: 4-6yr · Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_A1QXBXCDX2"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TE0HGY793Z",
+     "rows": [
+      "r_W38ZZJ7S91",
+      "r_T1V5DYQRB4",
+      "r_JB51T62T4A",
+      "r_JDX5D1SWBB",
+      "r_QM0W90PGDC"
+     ],
+     "column": 14,
+     "also": [
+      15
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_Y0811WWH0J"
     }
    ],
+   "links": [],
    "gaps": [
     "g_YY4Y9WS8QV",
     "g_1YB2GGM304",
-    "g_TG6GQNNFYQ",
     "g_FKGWHXE6Y3",
     "g_SDD5HB8NF4"
    ]
@@ -1198,21 +1610,27 @@
   {
    "id": "7-years",
    "title": "7 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_64GH8S5MKY",
-     "covers": "Anticipatory guidance for 7-10y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_64GH8S5MKY"
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NWFSP88G8D"
     }
    ],
+   "links": [],
    "gaps": [
     "g_N1NM95ZY8S",
     "g_WY1P6T4Z2Q",
-    "g_QY9RSZTAS7",
-    "g_BAV3T7E7B1",
     "g_6AKX3DVVZ4",
     "g_XPBSESAS8T"
    ]
@@ -1220,21 +1638,27 @@
   {
    "id": "8-years",
    "title": "8 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_64GH8S5MKY",
-     "covers": "Anticipatory guidance for 7-10y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_TE0HGY793Z",
-     "covers": "Vax: Influenza all children +6M; 1st time if <8yr -> 2 doses +4wks apart · COVID-19 all children +6M, CDC schedule"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_64GH8S5MKY"
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NWFSP88G8D"
     }
    ],
+   "links": [],
    "gaps": [
     "g_N1NM95ZY8S",
     "g_WY1P6T4Z2Q",
-    "g_QY9RSZTAS7",
-    "g_BAV3T7E7B1",
     "g_V5S2442MZZ",
     "g_XPBSESAS8T"
    ]
@@ -1242,21 +1666,42 @@
   {
    "id": "9-years",
    "title": "9 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_64GH8S5MKY",
-     "covers": "Anticipatory guidance for 7-10y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_64GH8S5MKY"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_18SGXXEE3V",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 2,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NWFSP88G8D"
     }
    ],
+   "links": [],
    "gaps": [
     "g_3VH8D6BCAQ",
     "g_CC14JM9F7J",
-    "g_QY9RSZTAS7",
-    "g_BAV3T7E7B1",
     "g_NN36991JYB",
     "g_M0XTN0PXFW"
    ]
@@ -1264,21 +1709,42 @@
   {
    "id": "10-years",
    "title": "10 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_64GH8S5MKY",
-     "covers": "Anticipatory guidance for 7-10y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_64GH8S5MKY"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_18SGXXEE3V",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 3,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_NWFSP88G8D"
     }
    ],
+   "links": [],
    "gaps": [
     "g_3VH8D6BCAQ",
     "g_CC14JM9F7J",
-    "g_QY9RSZTAS7",
-    "g_BAV3T7E7B1",
     "g_WWSEJFCMV6",
     "g_M0XTN0PXFW"
    ]
@@ -1286,21 +1752,44 @@
   {
    "id": "11-years",
    "title": "11 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_D0391JFGP8",
-     "covers": "Anticipatory guidance for 11-13y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: TDap booster: 11-12yr · MenACWY 1st: 11-12yr · HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_D0391JFGP8"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_7YQ6JBERK1",
+      "r_18SGXXEE3V",
+      "r_Z0RD8V2M01",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 4,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_BMZ50118MS"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AYSES6A6PV",
     "g_NVQMVGP6RC",
-    "g_0V03EN7ZT3",
-    "g_BAV3T7E7B1",
     "g_A6SFZHYSGJ",
     "g_EAY5A3F1P0"
    ]
@@ -1308,21 +1797,44 @@
   {
    "id": "12-years",
    "title": "12 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_D0391JFGP8",
-     "covers": "Anticipatory guidance for 11-13y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: TDap booster: 11-12yr · MenACWY 1st: 11-12yr · HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_D0391JFGP8"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_7YQ6JBERK1",
+      "r_18SGXXEE3V",
+      "r_Z0RD8V2M01",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 5,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_BMZ50118MS"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AYSES6A6PV",
     "g_NVQMVGP6RC",
-    "g_0V03EN7ZT3",
-    "g_BAV3T7E7B1",
     "g_XJBTCX63XZ",
     "g_EAY5A3F1P0"
    ]
@@ -1330,21 +1842,42 @@
   {
    "id": "13-years",
    "title": "13 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_D0391JFGP8",
-     "covers": "Anticipatory guidance for 11-13y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_D0391JFGP8"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_18SGXXEE3V",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 6,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_BMZ50118MS"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AYSES6A6PV",
     "g_NVQMVGP6RC",
-    "g_0V03EN7ZT3",
-    "g_BAV3T7E7B1",
     "g_9PGQ3R09XF",
     "g_EAY5A3F1P0"
    ]
@@ -1352,21 +1885,42 @@
   {
    "id": "14-years",
    "title": "14 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_GHZJKV0K04",
-     "covers": "Anticipatory guidance for 14-16y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: HPV 2 dose series: b/n ages 9-14yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_GHZJKV0K04"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_18SGXXEE3V",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 7,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_BMZ50118MS"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AYSES6A6PV",
     "g_NVQMVGP6RC",
-    "g_0V03EN7ZT3",
-    "g_BAV3T7E7B1",
     "g_TSQRTGBR0Y",
     "g_EAY5A3F1P0"
    ]
@@ -1374,21 +1928,42 @@
   {
    "id": "15-years",
    "title": "15 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_GHZJKV0K04",
-     "covers": "Anticipatory guidance for 14-16y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: HPV 3 dose series: ±15yr · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_GHZJKV0K04"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_BFH7XN8QNZ",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 8,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_0NBTP402WT"
     }
    ],
+   "links": [],
    "gaps": [
     "g_CBKD7GAN0A",
     "g_2NKWPDF2HQ",
-    "g_Q6HXV57AMT",
-    "g_BAV3T7E7B1",
     "g_0DQ4ZX8467",
     "g_76DP1NW4X0"
    ]
@@ -1396,21 +1971,44 @@
   {
    "id": "16-years",
    "title": "16 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_GHZJKV0K04",
-     "covers": "Anticipatory guidance for 14-16y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: MenACWY booster: 16yr · MenB teens 16-18 yrs, 2 doses, shared decision · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_GHZJKV0K04"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_BFH7XN8QNZ",
+      "r_Z0RD8V2M01",
+      "r_DSY9S1KMKA",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 9,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_0NBTP402WT"
     }
    ],
+   "links": [],
    "gaps": [
     "g_CBKD7GAN0A",
     "g_2NKWPDF2HQ",
-    "g_Q6HXV57AMT",
-    "g_BAV3T7E7B1",
     "g_BGY9W9HGSH",
     "g_76DP1NW4X0"
    ]
@@ -1418,21 +2016,43 @@
   {
    "id": "17-years",
    "title": "17 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_TXMWT01XPG",
-     "covers": "Anticipatory guidance for 17-21y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: MenB teens 16-18 yrs, 2 doses, shared decision · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_TXMWT01XPG"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_BFH7XN8QNZ",
+      "r_DSY9S1KMKA",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 10,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_0NBTP402WT"
     }
    ],
+   "links": [],
    "gaps": [
     "g_CBKD7GAN0A",
     "g_2NKWPDF2HQ",
-    "g_Q6HXV57AMT",
-    "g_BAV3T7E7B1",
     "g_JF40RPK4SD",
     "g_76DP1NW4X0"
    ]
@@ -1440,21 +2060,43 @@
   {
    "id": "18-years",
    "title": "18 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_TXMWT01XPG",
-     "covers": "Anticipatory guidance for 17-21y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: MenB teens 16-18 yrs, 2 doses, shared decision · Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_TXMWT01XPG"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_7YRVXP5CNY",
+     "rows": [
+      "r_BFH7XN8QNZ",
+      "r_DSY9S1KMKA",
+      "r_FZPSRYBZ62",
+      "r_20A638JD8P"
+     ],
+     "column": 11,
+     "also": [
+      12
+     ]
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_07VPTTH6D2"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AVJM9WPHMH",
     "g_7EK2PPYRE7",
-    "g_XSXEFDXF65",
-    "g_BAV3T7E7B1",
     "g_HX09QEHBHD",
     "g_MY8134V6TE"
    ]
@@ -1462,21 +2104,33 @@
   {
    "id": "19-years",
    "title": "19 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_TXMWT01XPG",
-     "covers": "Anticipatory guidance for 17-21y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_TXMWT01XPG"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TZPJ07KHGH"
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_07VPTTH6D2"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AVJM9WPHMH",
     "g_7EK2PPYRE7",
-    "g_XSXEFDXF65",
-    "g_BAV3T7E7B1",
     "g_VVCXMKB6NB",
     "g_MY8134V6TE"
    ]
@@ -1484,21 +2138,33 @@
   {
    "id": "20-years",
    "title": "20 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_TXMWT01XPG",
-     "covers": "Anticipatory guidance for 17-21y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_TXMWT01XPG"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TZPJ07KHGH"
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_07VPTTH6D2"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AVJM9WPHMH",
     "g_7EK2PPYRE7",
-    "g_XSXEFDXF65",
-    "g_BAV3T7E7B1",
     "g_A6422KSPD2",
     "g_MY8134V6TE"
    ]
@@ -1506,21 +2172,33 @@
   {
    "id": "21-years",
    "title": "21 yr",
-   "links": [
+   "notes": [
     {
-     "target": "r_TXMWT01XPG",
-     "covers": "Anticipatory guidance for 17-21y: preventative measures, nutrition, development"
+     "heading": "Anticipatory guidance"
     },
     {
-     "target": "b_7YRVXP5CNY",
-     "covers": "Vax: Influenza all adolescents, annually · COVID-19 all adolescents, per CDC guidelines"
+     "block": "b_69Q65SAS12",
+     "rows": [
+      "r_TXMWT01XPG"
+     ]
+    },
+    {
+     "heading": "Vaccines"
+    },
+    {
+     "block": "b_TZPJ07KHGH"
+    },
+    {
+     "heading": "Well-child reference (sourced)"
+    },
+    {
+     "block": "b_07VPTTH6D2"
     }
    ],
+   "links": [],
    "gaps": [
     "g_AVJM9WPHMH",
     "g_7EK2PPYRE7",
-    "g_XSXEFDXF65",
-    "g_BAV3T7E7B1",
     "g_T5ZW6H6ZRX",
     "g_MY8134V6TE"
    ]

@@ -409,17 +409,25 @@ export interface Link {
 export const GENERAL_KEYS = ["labs", "ekg", "imaging", "anatomy", "procedures", "guidelines", "screenings", "tables", "workup", "visits"] as const;
 export type GeneralKey = (typeof GENERAL_KEYS)[number];
 
-/** A well-child visit's page: links into her notes, then gap blocks (several visits may share one). */
+/**
+ * A well-child visit's page: her notes shown on it (as on a place page), links into her notes, then
+ * gap blocks (several visits may share one).
+ */
 export interface Visit {
   id: string;
   title: string;
+  notes?: PlaceNote[];
   links: Link[];
   gaps: string[];
 }
 
 export interface GeneralFile {
   v: 1;
-  topics: { key: GeneralKey; howto: string | null; links: Link[]; files: string[]; gaps: string[] }[];
+  /**
+   * `notes`: only on the `visits` topic, her notes shown on the visits page above the list of
+   * visits (as on a place page); `files` are listed there too.
+   */
+  topics: { key: GeneralKey; howto: string | null; notes?: PlaceNote[]; links: Link[]; files: string[]; gaps: string[] }[];
   workup: { id: string; title: string; conds: string; gap: string }[];
   /** Well-child visits in age order; listed under the `visits` topic, which is present exactly when there are some. */
   visits?: Visit[];
@@ -434,14 +442,16 @@ export interface RefLink extends Link {
 }
 
 /**
- * Her own notes shown on a place page (a reference-tab topic or an Other section), above its gap
- * blocks, in order. `heading`: a heading for finding one's way, not part of her notes. `block`: a
- * block of one of her Word pages, as stored; with `column` n (≥ 1), a table block shows only its
- * first column and column n, from its second row on, under column n's first-row text; with `rows`
- * (its row ids, not with `column`), a table block shows only its first row and those rows, in table
- * order. The same row may be shown by several notes.
+ * Her own notes shown on a place page (a reference-tab topic, an Other section, a well-child visit),
+ * above its gap blocks, in order. `heading`: a heading for finding one's way, not part of her notes.
+ * `block`: a block of one of her Word pages or guides, as stored; with `column` n (≥ 1), a table
+ * block shows only its first column and column n, from its second row on, under column n's first-row
+ * text, and with `also` the grid columns listed there after column n (each further right); with
+ * `rows` (its row ids), a table block shows only its first row and those rows, in table order — with
+ * `column` too, that column cut of those rows. The same row may be shown by several notes.
  */
-export type PlaceNote = { heading: string } | BlockNote;
+export type PlaceNote = { heading: string } | PlaceBlockNote;
+export type PlaceBlockNote = BlockNote & { also?: number[] };
 export type BlockNote = { block: string; column?: number; rows?: string[] };
 
 /**

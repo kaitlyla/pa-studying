@@ -16,9 +16,9 @@ import type { TableAttrs } from "../../lib/schemaTypes.ts";
 import { schema } from "../../lib/schema.ts";
 import { commitMessage, inboxItemDir, partName, serializeFile, topicMedsPath, type MedsFile, type MedsRoleTag } from "../../lib/content/index.ts";
 import {
-  BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, workupPath,
+  BUILD_PATH, docPath, generalPath, navPath, OTHER_PATH, refPath, SITE_PATH, slidesPath, systemPath, visitsPath, workupPath,
   type BuildJson, type DocJson, type DocRef, type GeneralJson, type NavEntry, type NavJson, type OtherJson, type PubGap, type RefTabJson,
-  type SiteJson, type SlidesJson, type SystemJson, type WorkupJson,
+  type SiteJson, type SlidesJson, type SystemJson, type VisitsJson, type WorkupJson,
 } from "../../lib/derive/published.ts";
 import { classAnchor, entryPieces, itemTarget, panelItems } from "../../lib/derive/panel.ts";
 import { fileHash, guideViewHash, otherHash, PANCE, REF_TABS, refHash, versionsHash } from "../../lib/derive/routes.ts";
@@ -1766,6 +1766,41 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     await expect(shown.locator(".gapc")).toHaveCount(0);
     await expect(shown.locator(".gap-src")).toBeVisible();
   });
+});
+
+test("an edit to a guide block shown with the well child visits saves to its own block file, and the visits page shows it", async ({ page, context, baseURL }) => {
+  // The first prose block of her notes for all visits, and the system folder holding its file.
+  const { g, block } = need(
+    inGuides((g) => {
+      if (!existsSync(join(DATA, visitsPath(g)))) return undefined;
+      const v = readData<VisitsJson>(visitsPath(g));
+      const note = v.notes.find((n) => "block" in n && n.block.kind === "prose" && findPath(n.block.doc, (x) => x.type === "text") !== null);
+      return note && "block" in note ? { g, block: note.block } : undefined;
+    }),
+    "prose block in a guide's notes for all well child visits",
+  );
+  const system = need(
+    readdirSync(join(CONTENT, "guides", g)).find((s) => existsSync(join(CONTENT, "guides", g, s, "blocks", `${block.id}.json`))),
+    `system folder holding ${block.id}`,
+  );
+  const blockPath = `content/guides/${g}/${system}/blocks/${block.id}.json`;
+  const first = String(nodeAt(block.doc, need(findPath(block.doc, (x) => x.type === "text"), "text")).text);
+  const { fake } = await world(context, baseURL, { seed: true });
+  await openPage(page, guideViewHash(g, { kind: "visits", item: null }));
+  await signIn(page);
+  const area = await startEditing(page);
+  const marker = newMarker();
+  await clickIntoEditor(page, area.locator(".edit-slot p").filter({ hasText: first }).first());
+  await page.keyboard.press("Home");
+  await page.keyboard.type(marker);
+  await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+
+  await ref(page, "edit-save").click();
+  await expect(ref(page, "save-success")).toBeVisible();
+  const saved = changedFiles(fake);
+  expect([...saved.keys()]).toEqual([blockPath]);
+  expect(saved.get(blockPath)).toContain(marker);
+  await expect(page.locator("main .visits-page .place-notes")).toContainText(marker);
 });
 
 // ---- 5. conflict ----------------------------------------------------------------------------------------

@@ -3101,6 +3101,66 @@ describe("published data and invariants (40 §40.1, §40.8)", () => {
     ]);
   });
 
+  describe("a guide block shown on the visit pages instead of its system's (members @visits)", () => {
+    const moved = (withNote: boolean, more: (x: Content) => void = () => {}): Content => mutated((x) => {
+      system(x, "fm", "cardiovascular").structure.members[B(14)] = "@visits";
+      const general = guide(x, "fm").general;
+      if (!general) throw new Error("fm has no general.json");
+      const topic = general.topics.find((t) => t.key === "visits");
+      if (!topic) throw new Error("fm has no visits topic");
+      if (withNote) topic.notes = [{ heading: "Mnemonics" }, { block: B(14) }];
+      const newborn = general.visits?.[0];
+      if (!newborn) throw new Error("fm has no visits");
+      newborn.notes = [{ block: B(10), rows: [R(101)], column: 1, also: [2] }];
+      more(x);
+    });
+
+    it("leaves its system's page, sections and search, and shows on the visits page, hosted there", () => {
+      const res = publish(moved(true));
+      const sys = res.files.get(systemPath("fm", "cardiovascular")) as SystemJson;
+      expect(sys.blocks.map((b) => b.id)).toEqual([B(10), B(11), B(12), B(13)]);
+      expect(sys.sections.flatMap((s) => s.items.map((i) => i.block))).not.toContain(B(14));
+      const v = res.files.get(visitsPath("fm")) as VisitsJson;
+      expect(v.notes.map((n) => ("heading" in n ? n.heading : [n.block.id, n.column, n.rows]))).toEqual(["Mnemonics", [B(14), null, null]]);
+      const landing = guideViewHash("fm", { kind: "visits", item: null });
+      expect((res.files.get(HOSTS_PATH) as HostsJson)[B(14)]?.route).toBe(landing);
+      // Its text is found on the visits page only (the one-column table's row is the unit's anchor).
+      expect(res.units.filter((u) => u.text.includes("Mnemonic")).map((u) => [u.route, u.at])).toEqual([[landing, R(140)]]);
+    });
+
+    it("a visit's note may cut a block still in its system to some rows, one column and `also` columns after it", () => {
+      const v = publish(moved(true)).files.get(visitsPath("fm")) as VisitsJson;
+      const [note] = v.items[0]?.notes ?? [];
+      expect(note && "block" in note ? [note.block.id, note.rows, note.column, note.also] : null).toEqual([B(10), [R(101)], 1, [2]]);
+      // The block stays on its system's page.
+      expect((publish(moved(true)).files.get(systemPath("fm", "cardiovascular")) as SystemJson).blocks.map((b) => b.id)).toContain(B(10));
+    });
+
+    it("a table the visits page shows whole opens there, while a row a visit shows opens on that visit", () => {
+      const hosts = publish(moved(true, (x) => {
+        const newborn = guide(x, "fm").general?.visits?.[0];
+        if (!newborn) throw new Error("fm has no visits");
+        newborn.notes = [{ block: B(14), rows: [R(140)] }];
+      })).files.get(HOSTS_PATH) as HostsJson;
+      expect(hosts[B(14)]?.route).toBe(guideViewHash("fm", { kind: "visits", item: null }));
+      expect(hosts[R(140)]?.route).toBe(guideViewHash("fm", { kind: "visits", item: "newborn" }));
+    });
+
+    it("a link to a row of the moved table opens on the visits page showing it, titled by its first cell", () => {
+      const res = publish(moved(true, (x) => {
+        guide(x, "fm").general?.topics.unshift({ key: "screenings", howto: null, links: [{ target: R(140), covers: "" }], files: [], gaps: [] });
+      }));
+      const [link] = (res.files.get(generalPath("fm", "screenings")) as GeneralJson).links;
+      expect(link?.route).toBe(guideViewHash("fm", { kind: "visits", item: null }));
+      expect(link?.title).toMatch(/^Mnemonic/);
+      expect(res.dropped.map((d) => d.id)).not.toContain(R(140));
+    });
+
+    it("the build fails when no visits note shows it", () => {
+      expect(buildError(() => publish(moved(false))).message).toContain(B(14));
+    });
+  });
+
   it("every route the build emits round-trips through the shared parser", () => {
     const routes = new Set<string>();
     const collect = (v: unknown): void => {

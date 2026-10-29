@@ -418,6 +418,40 @@ describe("well child visits", () => {
     ]);
   });
 
+  it("shows her notes and files for all visits above the list, and a visit's own notes before its links", async () => {
+    const fx = await publishFixture((content) => {
+      const fm = content.guides.find((g) => g.file.id === "fm");
+      const cv = fm?.systems.find((s) => s.file.id === "cardiovascular");
+      const topic = fm?.general?.topics.find((t) => t.key === "visits");
+      const newborn = fm?.general?.visits?.[0];
+      if (!cv || !topic || !newborn) throw new Error("no fm visits fixture");
+      cv.structure.members[B(14)] = "@visits";
+      Object.assign(topic, { notes: [{ heading: "Mnemonics" }, { block: B(14) }], files: [D(5)] });
+      newborn.notes = [{ block: B(10), rows: [R(101)], column: 1 }];
+    });
+    server.restore();
+    server = serveData(fx.published);
+    const a = await renderApp("#/eor/fm/visits");
+    app = a;
+    const main = mainOf(a);
+    const notes = await until(() => main.querySelector<HTMLElement>(".visits-page .place-notes"), "landing notes");
+    expect(notes.querySelector(".pn-h")?.textContent).toBe("Mnemonics");
+    expect(visibleText(notes)).toContain("Mnemonic");
+    const chip = main.querySelector(".visits-page .fchip");
+    expect(chip).not.toBeNull();
+    const list = main.querySelector(".visits-page .lnk");
+    if (!list || !chip) throw new Error("no visits list or file chip");
+    expect(before(notes, chip)).toBe(true);
+    expect(before(chip, list)).toBe(true);
+
+    await go("#/eor/fm/visits/newborn");
+    const own = await until(() => main.querySelector<HTMLElement>(".visits-page .place-notes"), "newborn notes");
+    expect(own.querySelector(`[data-anchor="${R(101)}"]`)).not.toBeNull();
+    const links = main.querySelector(".visits-page .lnk");
+    if (!links) throw new Error("no newborn links");
+    expect(before(own, links)).toBe(true);
+  });
+
   it("is a closed sidebar group under the general topics until a visit page opens it, marking the open visit", async () => {
     const a = await renderApp("#/eor/fm/general/labs");
     app = a;

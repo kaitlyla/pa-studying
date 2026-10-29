@@ -16,7 +16,7 @@ import {
 import { pageCard, publishedEdit } from "../../lib/derive/panel.ts";
 import { shownItems, shownNotes } from "../../lib/derive/placeNotes.ts";
 import { PANCE } from "../../lib/derive/routes.ts";
-import { deriveTopics, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
+import { deriveTopics, inSystem, navEntries, publishedRows, publishedSections, publishedTopics } from "../../lib/derive/topics.ts";
 import { DATA_BASE, invalidateData, loadData, NotFoundError, setDataOverlay } from "../data/load.ts";
 import type { Git } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
@@ -130,7 +130,8 @@ function rederiveSystem(
   meds: ReadonlyMap<string, MedsFile | null>,
 ): SystemJson {
   const byId = new Map(sys.blocks.map((b) => [b.id, b]));
-  const ids = order ?? sys.blocks.map((b) => b.id);
+  // system.json orders every block of the system; its page shows those on it (inSystem).
+  const ids = (order ?? sys.blocks.map((b) => b.id)).filter((id) => inSystem(structure, id));
   const blocks = ids.map((id) => {
     const o = ix.blocks.get(id);
     return o ? { id, kind: o.kind, doc: o.doc } : byId.get(id);
