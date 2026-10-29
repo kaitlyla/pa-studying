@@ -447,7 +447,7 @@ function Anchored({ node }: { node: PMNode & NodeJSON<"anchored"> }): ReactNode 
     );
   }
   // A floating picture not drawn floating (on a phone) is drawn in its place, as far right as it floats.
-  const offsetPt = float ? Math.max(0, float.dxPt) : node.attrs.offsetPt;
+  const offsetPt = float ? float.dxPt : node.attrs.offsetPt;
   return (
     <div className="anchored">
       <div style={{ marginLeft: anchoredOffset(offsetPt, childWidthPt(child), basePt), width: "fit-content", maxWidth: "100%" }}>

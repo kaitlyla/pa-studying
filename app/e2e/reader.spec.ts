@@ -516,6 +516,27 @@ test.describe("phone and laptop layouts", () => {
     expect(offsets.length).toBeGreaterThan(0);
     expect(offsets.filter((d) => d < 0)).toEqual([]);
   });
+
+  test("at 1280 and 390 px every placed picture on Peds Developmental milestones lies inside the page column (her Word offset reaches into the page margin)", async ({ page }) => {
+    const s = navOf("peds").systems.find((x) => x.id === "neurology-developmental");
+    const sec = s?.sections.find((x) => x.id === "developmental-milestones");
+    if (!s || !sec) throw new Error("Peds has no Neurology/Developmental › Developmental milestones section");
+    const outside = (): Promise<{ n: number; out: number[][] }> =>
+      main(page).evaluate((m) => {
+        const col = m.querySelector<HTMLElement>(".main-in")?.getBoundingClientRect();
+        if (!col) throw new Error("no page column");
+        const rs = [...m.querySelectorAll<HTMLElement>(".anchored img")].map((i) => i.getBoundingClientRect());
+        return { n: rs.length, out: rs.filter((r) => r.left < col.left - 0.5 || r.right > col.right + 0.5).map((r) => [r.left, r.right, col.left, col.right]) };
+      });
+    for (const width of [1280, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await open(page, guideViewHash("peds", { kind: "section", system: s.id, section: sec.id }));
+      await expect(main(page).locator(".anchored img").first()).toBeVisible();
+      const r = await outside();
+      expect(r.n).toBeGreaterThan(0);
+      expect(r.out, `at ${width} px`).toEqual([]);
+    }
+  });
 });
 
 test.describe("keyboard and screen reader", () => {

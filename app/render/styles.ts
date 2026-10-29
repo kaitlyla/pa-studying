@@ -233,9 +233,13 @@ export function textboxStyle(a: TextboxAttrs, basePt: number): CSSProperties {
   return s;
 }
 
-/** The offset of an anchored child: `min(offset, container − child width)`. */
+/**
+ * The offset of an anchored child: `max(0, min(offset, container − child width))`, as the PDF places it.
+ * Never negative: a Word offset into the left margin, or a child wider than the container, would
+ * otherwise push the child past the column's clipped left edge.
+ */
 export function anchoredOffset(offsetPt: number, childWidthPt: number, basePt: number): string {
-  return `min(${em(offsetPt, basePt)}, calc(100% - ${em(childWidthPt, basePt)}))`;
+  return `max(0em, min(${em(offsetPt, basePt)}, calc(100% - ${em(childWidthPt, basePt)})))`;
 }
 
 export function ruleStyle(color: string, widthPt: number, basePt: number): CSSProperties {

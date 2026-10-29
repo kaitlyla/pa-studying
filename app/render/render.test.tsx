@@ -411,13 +411,19 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     }
   });
 
-  it("clamps an anchored child's offset to the container: min(offset, 100% − child width)", async () => {
-    expect(anchoredOffset(220, 110, 11)).toBe("min(20em, calc(100% - 10em))");
+  it("clamps an anchored child's offset to the container: max(0, min(offset, 100% − child width))", async () => {
+    expect(anchoredOffset(220, 110, 11)).toBe("max(0em, min(20em, calc(100% - 10em)))");
     const c = await render(<RichDoc basePt={11} doc={docOf({ type: "anchored", attrs: { offsetPt: 220 }, content: [{ type: "image_block", attrs: image }] })} />);
     const holder = c.querySelector<HTMLElement>(".anchored > div");
     // jsdom serializes the calc() inside min() without the calc keyword; the exact string is asserted above.
-    expect(holder?.style.marginLeft).toBe("min(20em, 100% - 10em)");
+    expect(holder?.style.marginLeft).toBe("max(0em, min(20em, 100% - 10em))");
     expect(holder?.querySelector("img")).not.toBeNull();
+  });
+
+  it("never offsets an anchored child left of the container, even for a Word offset into the left margin", async () => {
+    expect(anchoredOffset(-27.5, 550, 11)).toBe("max(0em, min(-2.5em, calc(100% - 50em)))");
+    const c = await render(<RichDoc basePt={11} doc={docOf({ type: "anchored", attrs: { offsetPt: -27.5 }, content: [{ type: "image_block", attrs: image }] })} />);
+    expect(c.querySelector<HTMLElement>(".anchored > div")?.style.marginLeft).toMatch(/^max\(0em, /);
   });
 
   it("draws a doc with a floating picture in one frame: the picture out of the flow at its offset in em, and a region start for the body, each cell and after each table", async () => {
@@ -440,7 +446,7 @@ describe("pictures, text boxes, anchored content, drawings and rules", () => {
     const inCell: PMNode = { type: "table_cell", attrs: { colspan: 1, rowspan: 1, colwidth: null, fill: null, vAlign: "top", borders: null }, content: [floating, para("beside")] };
     const c = await render(<RichDoc basePt={11} doc={docOf(tableNode([50, 50], [row("h", [cell("Name"), cell("Col")], "heading"), row("r1", [cell("AF"), inCell])]))} stacked />);
     expect(c.querySelector(".float-pic")).toBeNull();
-    expect(c.querySelector<HTMLElement>(".stacked .anchored > div")?.style.marginLeft).toBe("min(2em, 100% - 10em)");
+    expect(c.querySelector<HTMLElement>(".stacked .anchored > div")?.style.marginLeft).toBe("max(0em, min(2em, 100% - 10em))");
   });
 
   it("draws a text box with its width, border, fill and Word's default insets", async () => {
