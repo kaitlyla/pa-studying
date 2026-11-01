@@ -1,43 +1,433 @@
 {
  "v": 1,
- "lastRun": "2026-10-04",
- "nextRun": "2026-11-01",
+ "lastRun": "2026-11-01",
+ "nextRun": "2026-12-01",
  "sources": [
   {
    "id": "uspstf",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
   },
   {
    "id": "gold",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
   },
   {
    "id": "gina",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
   },
   {
    "id": "ada",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
   },
   {
    "id": "hf",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
   },
   {
    "id": "cpr",
-   "lastSuccess": "2026-10-04",
-   "lastAttempt": "2026-10-04",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
    "status": "ok"
+  },
+  {
+   "id": "cite:aact-eapcct-single-dose-activated-charcoal",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-aom",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-adhd",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-bronchiolitis",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-obesity",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-febrile-infants",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-uti",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-media-young-minds",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-hyperbilirubinemia",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-pediatric-hypertension",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aap-safe-sleep",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:aapa-ethical-conduct",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aasld-idsa-hcv",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aasm-hypersomnolence",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aba-burn-resuscitation",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-acs",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acc-aha-aortic",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-af",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acc-aha-dyslipidemia",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acc-aha-hypertension",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acc-aha-pad",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-periop",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acc-aha-vhd",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-bradycardia",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-svt",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acc-aha-syncope",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acg-acute-pancreatitis",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:acog-co-803-adolescent-confidentiality",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acog-co-737-expedited-partner-therapy",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acog-co-819-informed-consent",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:acog-co-796-sexual-misconduct",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:ada-hyperglycemic-crises",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-ie-adults",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-ie-prevention",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-kawasaki",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-acc-ccd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:aha-acc-high-blood-pressure",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:aha-acc-hcm",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-acc-ventricular-arrhythmias",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aha-asa-acute-ischemic-stroke",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:apa-aud",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:apa-bpd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:apa-eating",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:apa-schizophrenia",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:asam-aw",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:asam-oud",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:ash-vte-surgical",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:ata-dtc",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:ats-idsa-cap",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:aua-stones-surgical",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:baveno-portal-hypertension",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:esc-pericardial",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:idsa-ats-hap-vap",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:kdigo-ckd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:naepp-asthma",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:pituitary-society-cushing",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
+  },
+  {
+   "id": "cite:ssc-adults",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:ssc-sepsis",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:svs-aaa",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:tokyo-guidelines",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:va-dod-bd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:va-dod-insomnia",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:va-dod-mdd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:va-dod-ptsd",
+   "lastSuccess": "2026-11-01",
+   "lastAttempt": "2026-11-01",
+   "status": "ok"
+  },
+  {
+   "id": "cite:wses-esophageal-emergencies",
+   "lastSuccess": null,
+   "lastAttempt": "2026-11-01",
+   "status": "fail"
   }
  ],
  "seen": {
@@ -317,7 +707,72 @@
   "gina": 2026,
   "ada": 2026,
   "hf": 2022,
-  "cpr": 2025
+  "cpr": 2025,
+  "cite:aact-eapcct-single-dose-activated-charcoal": 2005,
+  "cite:aap-aom": 2013,
+  "cite:aap-adhd": 2019,
+  "cite:aap-bronchiolitis": 2014,
+  "cite:aap-obesity": 2023,
+  "cite:aap-febrile-infants": 2021,
+  "cite:aap-uti": 2011,
+  "cite:aap-media-young-minds": 2016,
+  "cite:aap-hyperbilirubinemia": 2022,
+  "cite:aap-pediatric-hypertension": 2017,
+  "cite:aap-safe-sleep": 2022,
+  "cite:aapa-ethical-conduct": 2024,
+  "cite:aasld-idsa-hcv": 2019,
+  "cite:aasm-hypersomnolence": 2021,
+  "cite:aba-burn-resuscitation": 2024,
+  "cite:acc-aha-acs": 2025,
+  "cite:acc-aha-aortic": 2022,
+  "cite:acc-aha-af": 2023,
+  "cite:acc-aha-dyslipidemia": 2026,
+  "cite:acc-aha-hypertension": 2025,
+  "cite:acc-aha-pad": 2024,
+  "cite:acc-aha-periop": 2026,
+  "cite:acc-aha-vhd": 2020,
+  "cite:acc-aha-bradycardia": 2018,
+  "cite:acc-aha-svt": 2015,
+  "cite:acc-aha-syncope": 2017,
+  "cite:acg-acute-pancreatitis": 2024,
+  "cite:acog-co-803-adolescent-confidentiality": 2020,
+  "cite:acog-co-737-expedited-partner-therapy": 2018,
+  "cite:acog-co-819-informed-consent": 2021,
+  "cite:acog-co-796-sexual-misconduct": 2020,
+  "cite:ada-hyperglycemic-crises": 2024,
+  "cite:aha-ie-adults": 2015,
+  "cite:aha-ie-prevention": 2021,
+  "cite:aha-kawasaki": 2024,
+  "cite:aha-acc-ccd": 2023,
+  "cite:aha-acc-high-blood-pressure": 2025,
+  "cite:aha-acc-hcm": 2024,
+  "cite:aha-acc-ventricular-arrhythmias": 2017,
+  "cite:aha-asa-acute-ischemic-stroke": 2026,
+  "cite:apa-aud": 2018,
+  "cite:apa-bpd": 2025,
+  "cite:apa-eating": 2023,
+  "cite:apa-schizophrenia": 2020,
+  "cite:asam-aw": 2020,
+  "cite:asam-oud": 2020,
+  "cite:ash-vte-surgical": 2019,
+  "cite:ata-dtc": 2025,
+  "cite:ats-idsa-cap": 2019,
+  "cite:aua-stones-surgical": 2026,
+  "cite:baveno-portal-hypertension": 2022,
+  "cite:esc-pericardial": 2015,
+  "cite:idsa-ats-hap-vap": 2016,
+  "cite:kdigo-ckd": 2024,
+  "cite:naepp-asthma": 2020,
+  "cite:pituitary-society-cushing": 2021,
+  "cite:ssc-adults": 2026,
+  "cite:ssc-sepsis": 2026,
+  "cite:svs-aaa": 2018,
+  "cite:tokyo-guidelines": 2018,
+  "cite:va-dod-bd": 2023,
+  "cite:va-dod-insomnia": 2025,
+  "cite:va-dod-mdd": 2022,
+  "cite:va-dod-ptsd": 2023,
+  "cite:wses-esophageal-emergencies": 2019
  },
  "seenUrl": {
   "/uspstf/recommendation/abdominal-aortic-aneurysm-screening#1": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening",
