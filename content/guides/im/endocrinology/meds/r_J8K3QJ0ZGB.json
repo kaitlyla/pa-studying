@@ -28,7 +28,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "alt",
@@ -42,7 +42,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
@@ -57,7 +57,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -67,7 +67,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "vancomycin",
+     "drugs": "vanco",
      "note": "if MRSA sus",
      "sources": [
       {
@@ -83,7 +83,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -102,7 +102,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -121,7 +121,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -140,7 +140,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "alt",
@@ -154,7 +154,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1dc9de56-e259-4546-a1db-23119a8a088e"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -180,7 +180,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12072761/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "alt",
@@ -194,7 +194,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a1d6bf78-4bb7-469e-ba39-318e14aaee29"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     }
    ]
@@ -202,7 +202,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": [
     "g_G7479P5J5H"
    ]

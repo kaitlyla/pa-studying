@@ -304,7 +304,7 @@
         "content": [
          {
           "type": "text",
-          "text": "oral, parenteral (⍉GI -IV, IM, SC)"
+          "text": "PO, parenteral (⍉GI -IV, IM, SC)"
          }
         ]
        },
@@ -552,7 +552,7 @@
             }
            }
           ],
-          "text": "Also AE: dizziness, rash, ↑cholesterol, anorexia, urinary bladder spasm, blurred vision"
+          "text": "Also AE: dizziness, rash, ↑cholest, anorexia, urinary bladder spasm, blurred vision"
          }
         ]
        },
@@ -1754,7 +1754,7 @@
             }
            }
           ],
-          "text": "Bisphosphonates"
+          "text": "Bisphos"
          },
          {
           "type": "text",
@@ -2406,7 +2406,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Ibandronate (Boniva) (oral, IV)"
+          "text": "Ibandronate (Boniva) (PO, IV)"
          }
         ]
        },
@@ -2546,7 +2546,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Risedronate (Actonel) (oral)"
+          "text": "Risedronate (Actonel) (PO)"
          }
         ]
        },
@@ -2930,7 +2930,7 @@
                   }
                  }
                 ],
-                "text": "Bisphosphonates"
+                "text": "Bisphos"
                },
                {
                 "type": "text",
@@ -3194,7 +3194,7 @@
                },
                {
                 "type": "text",
-                "text": ": esophagitis, MSK sxs, hypocalcemia, GI (oral) – abd pain, dyspepsia, N/V, dysphagia, heartburn "
+                "text": ": esophagitis, MSK sxs, hypocalcemia, GI (PO) – abd pain, dyspepsia, N/V, dysphagia, heartburn "
                }
               ]
              },
@@ -3242,7 +3242,7 @@
                },
                {
                 "type": "text",
-                "text": ": osteonecrosis of the jaw (ONJ), atypical femur fractures – limit tx to 3-5yrs in pts w/ ↓risk of frx"
+                "text": ": osteonecrosis of the jaw (ONJ), atypical femur frx – limit tx to 3-5yrs in pts w/ ↓risk of frx"
                }
               ]
              },
@@ -3584,7 +3584,7 @@
                },
                {
                 "type": "text",
-                "text": ": hypocalcemia (assoc w/ tetany/seizures), ↑risk of malig w/ long-term use, hypersensitivity to salmon-derived prod, Ab form, nasal spray (nasal ulcerations, epistaxis, rhinitis)"
+                "text": ": hypocalcemia (assoc w/ tetany/sz), ↑risk of malig w/ long-term use, hypersensitivity to salmon-derived prod, Ab form, nasal spray (nasal ulcerations, epistaxis, rhinitis)"
                }
               ]
              }
@@ -3619,7 +3619,7 @@
     {
      "role": "alt",
      "drugs": "cinacalcet",
-     "note": "primary HPT with severe hypercalcemia when parathyroidectomy (the 1st-line treatment) isn't possible",
+     "note": "primary HPT w severe hypercalcemia when parathyroidectomy (the 1st-line tx) isn't poss",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3632,7 +3632,7 @@
     {
      "role": "adjunct",
      "drugs": "cinacalcet",
-     "note": "secondary HPT (renal failure)",
+     "note": "2/2 HPT (renal failure)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3650,7 +3650,7 @@
     {
      "role": "adjunct",
      "drugs": "IV saline",
-     "note": "very high calcium (your table)",
+     "note": "very ↑calcium (your table)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3668,7 +3668,7 @@
     {
      "role": "adjunct",
      "drugs": "furosemide",
-     "note": "very high calcium (your table)",
+     "note": "very ↑calcium (your table)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3686,7 +3686,7 @@
     {
      "role": "adjunct",
      "drugs": "calcitonin",
-     "note": "very high calcium (your table)",
+     "note": "very ↑calcium (your table)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3698,7 +3698,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "bisphosphonate",
+     "drugs": "bisphos",
      "note": "osteoporosis",
      "sources": [
       {
@@ -3717,7 +3717,7 @@
     {
      "role": "1st",
      "drugs": "phosphate binders (calcium carbonate, sevelamer) + dietary phosphate restriction",
-     "note": "secondary HPT (renal failure)",
+     "note": "2/2 HPT (renal failure)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3735,7 +3735,7 @@
     {
      "role": "adjunct",
      "drugs": "calcitriol or paricalcitol",
-     "note": "secondary HPT (renal failure)",
+     "note": "2/2 HPT (renal failure)",
      "sources": [
       {
        "name": "Hypercalcemia",
@@ -3753,7 +3753,7 @@
     {
      "role": "alt",
      "drugs": "etelcalcetide",
-     "note": "secondary HPT (calcimimetic, like cinacalcet)",
+     "note": "2/2 HPT (calcimimetic, like cinacalcet)",
      "sources": [
       {
        "name": "StatPearls: Secondary Hyperparathyroidism",
@@ -3771,7 +3771,7 @@
     {
      "role": "alt",
      "drugs": "sevelamer or lanthanum carbonate",
-     "note": "secondary HPT: calcium-free binders preferred over calcium-containing",
+     "note": "2/2 HPT: calcium-free binders preferred over calcium-containing",
      "sources": [
       {
        "name": "StatPearls: Secondary Hyperparathyroidism",
@@ -3788,7 +3788,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "vitamin D repletion",
+     "drugs": "vitD repletion",
      "note": "primary HPT: correct deficiency",
      "sources": [
       {
@@ -3806,7 +3806,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "denosumab or bisphosphonates",
+     "drugs": "denosumab or bisphos",
      "note": "primary HPT: ↑BMD, don't normalize calcium",
      "sources": [
       {

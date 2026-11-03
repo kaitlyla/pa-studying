@@ -185,7 +185,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -373,7 +373,7 @@
                },
                {
                 "type": "text",
-                "text": ": MC product for oral replace therapy"
+                "text": ": MC product for PO replace therapy"
                }
               ]
              }
@@ -751,7 +751,7 @@
             }
            }
           ],
-          "text": "Ferrous salts (oral)"
+          "text": "Ferrous salts (PO)"
          }
         ]
        },
@@ -1053,7 +1053,7 @@
             }
            }
           ],
-          "text": "Bisglicinato ferroso quelatom, Bis-glycino iron II, Bisglycino-iron (II) chelate, Eisen(II)-bisglycinat,Ferrous glycinate, Iron glycinate"
+          "text": "Bisglicinato ferroso quelatom, Bis-glycino Fe II, Bisglycino-iron (II) chelate, Eisen(II)-bisglycinat,Ferrous glycinate, Fe glycinate"
          }
         ]
        },
@@ -1689,8 +1689,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "oral iron 65 mg elemental (eg, ferrous sulfate 325 mg) every other day",
-     "note": "30 minutes AC; cont >= 6 months after Hb corrects; find the bleed source",
+     "drugs": "PO Fe 65 mg elemental (eg, ferrous sulfate 325 mg) QOD",
+     "note": "30 min AC; cont >= 6 mo after Hb corrects; find the bleed source",
      "sources": [
       {
        "name": "Iron Deficiency Anemia",
@@ -1708,7 +1708,7 @@
     {
      "role": "2nd",
      "drugs": "parenteral iron (initial cumulative dose about 1000 mg)",
-     "note": "oral Fe ⍉tolerated or ineffective, ongoing lrg losses, or rapid repletion needed (severe anemia, surg, 3rd trimester)",
+     "note": "PO Fe ⍉tolerated or ineffective, ongoing lrg losses, or rapid repletion needed (severe anemia, surg, 3rd trimester)",
      "sources": [
       {
        "name": "Iron Deficiency Anemia",
@@ -1720,7 +1720,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "ascorbic acid 500 mg (or orange juice) with the iron",
+     "drugs": "ascorbic acid 500 mg (or orange juice) w the Fe",
      "note": "enhances absorb; optional (RCT: Fe alone equivalent)",
      "sources": [
       {
@@ -1744,7 +1744,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "H. pylori eradication: bismuth quadruple therapy x14 days",
+     "drugs": "H. pylori eradication: bismuth quadruple therapy x14D",
      "note": "H. pylori+ (H. pylori ↓Fe absorb)",
      "sources": [
       {
@@ -1768,7 +1768,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "low-dose oral iron 30 mg/day",
+     "drugs": "↓dose PO Fe 30 mg/day",
      "note": "Prev in preg: start @ the first prenatal visit",
      "sources": [
       {

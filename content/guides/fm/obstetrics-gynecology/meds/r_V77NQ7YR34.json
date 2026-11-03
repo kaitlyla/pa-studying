@@ -229,7 +229,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -964,7 +964,7 @@
                   }
                  }
                 ],
-                "text": "Coverage/Indications"
+                "text": "Coverage/Clin Use"
                }
               ]
              }
@@ -1142,7 +1142,7 @@
                   }
                  }
                 ],
-                "text": "Indications (parasitic infections)"
+                "text": "Indications (parasitic infect)"
                },
                {
                 "type": "text",
@@ -1236,7 +1236,7 @@
                   }
                  }
                 ],
-                "text": "GI infections: amebic dysentery, Giardia lamblia "
+                "text": "GI infect: amebic dysentery, Giardia lamblia "
                }
               ]
              }
@@ -1339,7 +1339,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -1353,7 +1353,7 @@
        "url": null
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     },
     {
      "role": "1st",
@@ -1367,7 +1367,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Inpatient",
+     "scenario": "Inpt",
      "population": "Allergy"
     },
     {
@@ -1382,7 +1382,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Outpatient",
+     "scenario": "Outpt",
      "population": "Allergy"
     },
     {
@@ -1403,7 +1403,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Inpatient",
+     "scenario": "Inpt",
      "population": "Pregnant"
     }
    ]
@@ -1423,7 +1423,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -1437,7 +1437,7 @@
        "url": null
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     }
    ]
   },
@@ -1456,7 +1456,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -1470,7 +1470,7 @@
        "url": null
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     },
     {
      "role": "1st",
@@ -1484,7 +1484,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient",
+     "scenario": "Inpt",
      "population": "Pregnant"
     }
    ]
@@ -1494,7 +1494,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "instead of doxycycline",
      "sources": [
       {
@@ -1504,13 +1504,13 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient",
+     "scenario": "Inpt",
      "population": "Pregnant"
     },
     {
      "role": "alt",
-     "drugs": "azithromycin ± metronidazole",
-     "note": "cephalosporin allergy (low GC risk + reliable f/u): azithro 500mg IV qd x1–2 doses → 250mg PO qd (7d total) ± metronidazole 500mg TID x12–14d",
+     "drugs": "azithro ± metronidazole",
+     "note": "cephalosporin allergy (↓GC risk + reliable f/u): azithro 500mg IV qd x1–2 doses → 250mg PO qd (7d total) ± metronidazole 500mg TID x12–14d",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1525,7 +1525,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Outpatient",
+     "scenario": "Outpt",
      "population": "Allergy"
     }
    ]
@@ -1536,7 +1536,7 @@
     {
      "role": "2nd",
      "drugs": "cefotetan or cefoxitin (+ doxycycline)",
-     "note": "cefotetan 2g IV q12h or cefoxitin 2g IV q6h + doxycycline 100mg PO/IV q12h; cefoxitin covers N. gonorrhoeae → ⍉need ceftriaxone at d/c",
+     "note": "cefotetan 2g IV q12h or cefoxitin 2g IV q6h + doxycycline 100mg PO/IV q12h; cefoxitin covers N. gonorrhoeae → ⍉need ceftriaxone @ d/c",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1545,7 +1545,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -1564,7 +1564,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -1583,18 +1583,18 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Inpatient",
+   "title": "Inpt",
    "gaps": []
   },
   {
-   "title": "Outpatient",
+   "title": "Outpt",
    "gaps": []
   }
  ]

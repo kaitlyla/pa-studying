@@ -325,7 +325,7 @@
         "content": [
          {
           "type": "text",
-          "text": "oral, parenteral (⍉GI -IV, IM, SC)"
+          "text": "PO, parenteral (⍉GI -IV, IM, SC)"
          }
         ]
        },
@@ -573,7 +573,7 @@
             }
            }
           ],
-          "text": "Also AE: dizziness, rash, ↑cholesterol, anorexia, urinary bladder spasm, blurred vision"
+          "text": "Also AE: dizziness, rash, ↑cholest, anorexia, urinary bladder spasm, blurred vision"
          }
         ]
        },
@@ -954,7 +954,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1957,7 +1957,7 @@
         "content": [
          {
           "type": "text",
-          "text": "More potent  -lower doses, Oral "
+          "text": "More potent  -lower doses, PO "
          }
         ]
        }
@@ -2143,7 +2143,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications "
+                "text": "Clin Use/Contraindications "
                }
               ]
              }
@@ -2452,8 +2452,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "IV sodium bicarbonate",
-     "note": "severe metabolic acidosis (pH < 7.0); generally safe for normal-gap acidosis, controversial for high-gap (lactic, keto) acidosis",
+     "drugs": "IV sodium bicarb",
+     "note": "severe met acidosis (pH < 7.0); generally safe for normal-gap acidosis, controversial for high-gap (lactic, keto) acidosis",
      "sources": [
       {
        "name": "Metabolic Acidosis",
@@ -2471,7 +2471,7 @@
     },
     {
      "role": "1st",
-     "drugs": "RTA alkali: sodium bicarbonate, potassium bicarbonate, sodium citrate; potassium citrate if hypokalemic or calcium stones",
+     "drugs": "RTA alkali: sodium bicarb, potassium bicarb, sodium citrate; potassium citrate if hypokalemic or calcium stones",
      "note": "types 1 and 2",
      "sources": [
       {
@@ -2495,8 +2495,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "hydrochlorothiazide",
-     "note": "type 2 (proximal) RTA, difficult cases",
+     "drugs": "HCTZ",
+     "note": "type 2 (prox) RTA, difficult cases",
      "sources": [
       {
        "name": "Renal Tubular Acidosis",
@@ -2519,7 +2519,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "furosemide (potassium-wasting diuretic) with dietary potassium restriction",
+     "drugs": "furosemide (potassium-wasting diuretic) w dietary potassium restriction",
      "note": "type 4 RTA hyperkalemia",
      "sources": [
       {
@@ -2544,7 +2544,7 @@
     {
      "role": "adjunct",
      "drugs": "fludrocortisone",
-     "note": "type 4 RTA, a few patients; caution with hypertension, heart failure or edema",
+     "note": "type 4 RTA, a few pts; caution w HTN, HF or edema",
      "sources": [
       {
        "name": "Renal Tubular Acidosis",
@@ -2562,7 +2562,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "oral or parenteral potassium chloride",
+     "drugs": "PO or parenteral KCl",
      "note": "potassium depletion",
      "sources": [
       {
@@ -2575,8 +2575,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "vitamin D + calcium supplements",
-     "note": "RTA bone disease (osteomalacia, rickets)",
+     "drugs": "vitD + calcium supp",
+     "note": "RTA bone dz (osteomalacia, rickets)",
      "sources": [
       {
        "name": "Renal Tubular Acidosis",
@@ -2589,7 +2589,7 @@
     {
      "role": "1st",
      "drugs": "fomepizole + hemodialysis",
-     "note": "ethylene glycol or methanol poisoning (MSD names hemodialysis; fomepizole is from your table)",
+     "note": "ethylene glycol or methanol poisoning (MSD names hemodialysis; fomepizole = from your table)",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -2613,7 +2613,7 @@
     {
      "role": "1st",
      "drugs": "insulin",
-     "note": "diabetic ketoacidosis",
+     "note": "DKA",
      "sources": [
       {
        "name": "StatPearls: Anion Gap and Non-Anion Gap Metabolic Acidosis",
@@ -2648,7 +2648,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "activated charcoal; IV sodium bicarbonate",
+     "drugs": "activated charcoal; IV sodium bicarb",
      "note": "salicylate poisoning: alkalinize serum and urine",
      "sources": [
       {

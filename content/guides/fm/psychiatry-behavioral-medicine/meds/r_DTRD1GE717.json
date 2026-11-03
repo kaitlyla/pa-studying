@@ -185,7 +185,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -886,7 +886,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2049,7 +2049,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2806,7 +2806,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉active PO (formulated w oral opioids to deter IV abuse)"
+          "text": "⍉active PO (formulated w PO opioids to deter IV abuse)"
          }
         ]
        },
@@ -2995,7 +2995,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: orally active                -    longer duration"
+          "text": "Admin: PO active                -    longer duration"
          }
         ]
        },
@@ -3058,7 +3058,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "overdose: naloxone 0.4-2 mg IV (IM, SC or intranasal if no IV), repeated as needed",
+     "drugs": "OD: naloxone 0.4-2 mg IV (IM, SC or intranasal if ⍉IV), repeated prn",
      "note": "observe: naloxone = shorter-acting than many opioids",
      "sources": [
       {
@@ -3084,7 +3084,7 @@
     },
     {
      "role": "1st",
-     "drugs": "prevention: take-home naloxone (no prescription needed in the US)",
+     "drugs": "prev: take-home naloxone (⍉ Rx needed in the US)",
      "note": "friends or family can rescue an apneic pt",
      "sources": [
       {
@@ -3127,7 +3127,7 @@
     },
     {
      "role": "1st",
-     "drugs": "buprenorphine + naloxone (SL combination)",
+     "drugs": "buprenorphine + naloxone (SL combo)",
      "note": "office-based; naloxone deters inj",
      "sources": [
       {
@@ -3229,7 +3229,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "extended-release buprenorphine injection (Sublocade, Brixadi)",
+     "drugs": "ER buprenorphine inj (Sublocade, Brixadi)",
      "note": "after a transmucosal buprenorphine start or already on buprenorphine",
      "sources": [
       {

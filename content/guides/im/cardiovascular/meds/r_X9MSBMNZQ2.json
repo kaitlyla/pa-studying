@@ -185,7 +185,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications "
+                "text": "Clin Use/Contraindications "
                }
               ]
              }
@@ -570,7 +570,7 @@
                },
                {
                 "type": "text",
-                "text": ": Parkinson’s, motion sickness, resp disorders, GI disorders, urinary disorders, hyperhidrosis"
+                "text": ": Parkinson’s, motion sickness, resp dx, GI dx, urinary dx, hyperhidrosis"
                }
               ]
              }
@@ -961,7 +961,7 @@
     {
      "role": "1st",
      "drugs": "atropine",
-     "note": "unstable bradycardia (temporizing, w transcutaneous pacing)",
+     "note": "unstable brady (temporizing, w transcutaneous pacing)",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Emergency Treatment of Arrhythmias",
@@ -979,7 +979,7 @@
     {
      "role": "1st",
      "drugs": "isoproterenol",
-     "note": "unstable bradycardia (temporizing, w transcutaneous pacing)",
+     "note": "unstable brady (temporizing, w transcutaneous pacing)",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Emergency Treatment of Arrhythmias",
@@ -996,8 +996,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "dopamine or epinephrine infusion",
-     "note": "resistant bradycardia",
+     "drugs": "DA or Epi infusion",
+     "note": "resistant brady",
      "sources": [
       {
        "name": "StatPearls: Sinus Bradycardia",
@@ -1015,7 +1015,7 @@
     {
      "role": "adjunct",
      "drugs": "glucagon; calcium",
-     "note": "drug-induced: beta-blocker toxicity (glucagon), CCB overdose (calcium)",
+     "note": "drug-induced: BB toxicity (glucagon), CCB OD (calcium)",
      "sources": [
       {
        "name": "StatPearls: Sinus Bradycardia",

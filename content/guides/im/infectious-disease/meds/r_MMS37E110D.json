@@ -20,7 +20,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "rehydration: oral or IV fluids",
+     "drugs": "rehydration: PO or IVF",
      "note": "mild infect = supportive tx",
      "sources": [
       {
@@ -38,7 +38,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "severe illness or at-risk pts (young children, older adults, immunocompromised); guided by suscep testing; ⍉if cipro MIC ≥ 0.12 μg/mL even if reported suscep (CDC HAN); monitor closely and report tx failures",
      "sources": [
       {
@@ -72,7 +72,7 @@
        "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -81,7 +81,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin (PO)",
+     "drugs": "azithro (PO)",
      "note": "same indications as cipro",
      "sources": [
       {
@@ -103,11 +103,11 @@
        "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin (PO)",
+     "drugs": "azithro (PO)",
      "note": "for children",
      "sources": [
       {
@@ -117,7 +117,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -149,7 +149,7 @@
        "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -163,7 +163,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -189,14 +189,14 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

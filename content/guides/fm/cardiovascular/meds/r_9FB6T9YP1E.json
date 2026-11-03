@@ -186,7 +186,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -1890,7 +1890,7 @@
         "content": [
          {
           "type": "text",
-          "text": "1st PO active diuretic, IV (only IV) or oral"
+          "text": "1st PO active diuretic, IV (only IV) or PO"
          }
         ]
        },
@@ -1953,7 +1953,7 @@
         "content": [
          {
           "type": "text",
-          "text": "More potent -lower doses, Oral"
+          "text": "More potent -lower doses, PO"
          }
         ]
        },
@@ -2233,7 +2233,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -3862,7 +3862,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Aortic regurg: afterload reduction (limited role: pre-op or ⍉surgical candidates)"
+          "text": "Aortic regurg: afterload reduction (limited role: pre-op or ⍉surg candidates)"
          }
         ]
        },
@@ -3920,7 +3920,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Oral, QD dosing"
+          "text": "PO, QD dosing"
          }
         ]
        },
@@ -4036,7 +4036,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉ combo w ARB: dual RAAS blockade ⇡hyperK, hypotension, AKI; no added CV/kidney benefit over monotx"
+          "text": "⍉ combo w ARB: dual RAAS blockade ⇡hyperK, hypotension, AKI; ⍉added CV/kidney benefit over monotx"
          }
         ]
        },
@@ -4639,7 +4639,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Oral or parenteral"
+          "text": "PO or parenteral"
          }
         ]
        },
@@ -4697,7 +4697,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Enalaprilat (IV): onset 15-30 min; precipitous ⇣BP in high-renin states; preferred in acute LV failure; avoid in acute MI"
+          "text": "Enalaprilat (IV): onset 15-30 min; precipitous ⇣BP in high-renin states; preferred in acute LV failure; ⍉in acute MI"
          }
         ]
        },
@@ -5176,7 +5176,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -6404,7 +6404,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Aortic regurg: afterload reduction (limited role: pre-op or ⍉surgical candidates)"
+          "text": "Aortic regurg: afterload reduction (limited role: pre-op or ⍉surg candidates)"
          }
         ]
        },
@@ -6520,7 +6520,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: Orally active, QD"
+          "text": "Administration: PO active, QD"
          }
         ]
        },
@@ -7014,7 +7014,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -8939,7 +8939,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Also: systolic HTN; cyclosporine-induced HTN"
+          "text": "Also: systol HTN; cyclosporine-induced HTN"
          }
         ]
        },
@@ -9084,7 +9084,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: oral"
+          "text": "Administration: PO"
          }
         ]
        },
@@ -11110,7 +11110,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -11976,7 +11976,7 @@
                   }
                  }
                 ],
-                "text": "⍉non-selective in reactive airway dz"
+                "text": "⍉⍉selective in reactive airway dz"
                }
               ]
              },
@@ -12005,7 +12005,7 @@
                   }
                  }
                 ],
-                "text": "•IV prod primarily used in HTN crisis or when oral therapy = ⍉feasible"
+                "text": "•IV prod primarily used in HTN crisis or when PO therapy = ⍉feasible"
                }
               ]
              },
@@ -12094,7 +12094,7 @@
                   }
                  }
                 ],
-                "text": " line w/o compelling indications"
+                "text": " line w/o compelling Clin Use"
                }
               ]
              },
@@ -14957,7 +14957,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ACE inhibitor",
+     "drugs": "ACEi",
      "note": "any one as initial monotx",
      "sources": [
       {
@@ -14970,7 +14970,7 @@
     },
     {
      "role": "1st",
-     "drugs": "ACE inhibitor + diuretic or CCB",
+     "drugs": "ACEi + diuretic or CCB",
      "note": "stage 2",
      "sources": [
       {
@@ -15019,7 +15019,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "dihydropyridine CCB",
+     "drugs": "DHP CCB",
      "note": "any one as initial monotx",
      "sources": [
       {
@@ -15032,7 +15032,7 @@
     },
     {
      "role": "1st",
-     "drugs": "extended-release nifedipine",
+     "drugs": "ER nifedipine",
      "note": "Preg",
      "sources": [
       {
@@ -15050,7 +15050,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "beta-blocker",
+     "drugs": "BB",
      "note": "only w a compelling indication (CAD, HF, post-MI)",
      "sources": [
       {
@@ -15191,7 +15191,7 @@
     {
      "role": "adjunct",
      "drugs": "baxdrostat",
-     "note": "add-on w other antihypertensives",
+     "note": "add-on w other antiHTN",
      "sources": [
       {
        "name": "Novel Drug Approvals for 2026",

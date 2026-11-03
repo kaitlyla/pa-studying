@@ -835,7 +835,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1463,7 +1463,7 @@
     {
      "role": "adjunct",
      "drugs": "hydrocortisone 200 mg/day IV 4-7 days",
-     "note": "severe CAP, immunocompetent inpatients; ⍉in influenza PNA",
+     "note": "severe CAP, immunocompetent inpt; ⍉in influenza PNA",
      "sources": [
       {
        "name": "Community-Acquired Pneumonia",
@@ -1499,7 +1499,7 @@
     {
      "role": "adjunct",
      "drugs": null,
-     "note": "prevention",
+     "note": "prev",
      "sources": [
       {
        "name": "Community-Acquired Pneumonia (StatPearls)",
@@ -1587,7 +1587,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo"
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo"
     },
     {
      "role": "2nd",
@@ -1667,7 +1667,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fe9226f8-64f4-4eff-8339-ed3fce0896f2"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Elderly"
     },
     {
@@ -1712,7 +1712,7 @@
        "url": null
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Allergy"
     },
     {
@@ -2208,7 +2208,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin, clarithromycin",
+     "drugs": "azithro, clarithromycin",
      "note": "monotx; only if local S. pneumo macrolide resistance <25%",
      "sources": [
       {
@@ -2222,7 +2222,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin, clarithromycin",
+     "drugs": "azithro, clarithromycin",
      "note": "+ Augmentin or a cephalosporin",
      "sources": [
       {
@@ -2238,11 +2238,11 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo"
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin, clarithromycin",
+     "drugs": "azithro, clarithromycin",
      "note": "+ an antipneumococcal β-lactam",
      "sources": [
       {
@@ -2262,7 +2262,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "+ an antipneumococcal β-lactam (preferred)",
      "sources": [
       {
@@ -2282,7 +2282,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "preg w PCN allergy → 3rd-gen ceph + azithro; ⍉ceph → clindamycin + azithro",
      "sources": [
       {
@@ -2297,7 +2297,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "preg w PCN allergy → 3rd-gen ceph + azithro; ⍉ceph → clindamycin + azithro",
      "sources": [
       {
@@ -2307,12 +2307,12 @@
        "url": null
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Allergy"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "preg w PCN allergy → 3rd-gen ceph + azithro",
      "sources": [
       {
@@ -2327,7 +2327,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "+ amoxicillin or Augmentin; clarithro ⍉ unless ⍉alt tx appropriate",
      "sources": [
       {
@@ -2348,7 +2348,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "+ amoxicillin or Augmentin; clarithro ⍉ unless ⍉alt tx appropriate",
      "sources": [
       {
@@ -2364,12 +2364,12 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d22bd12c-737b-4aab-e053-2995a90aff60"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Pregnant"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "+ Unasyn or a 3rd-gen ceph; clarithro ⍉ unless ⍉alt tx appropriate",
      "sources": [
       {
@@ -2396,7 +2396,7 @@
     {
      "role": "1st",
      "drugs": "amoxicillin",
-     "note": "high dose; monotx",
+     "note": "↑dose; monotx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -2410,7 +2410,7 @@
     {
      "role": "1st",
      "drugs": "amoxicillin",
-     "note": "< 5 y: amoxicillin = USU drug of choice; ≥ 5 y: amoxicillin ± macrolide if atypical ⍉excluded",
+     "note": "< 5 y: amoxicillin = USU DOC; ≥ 5 y: amoxicillin ± macrolide if atypical ⍉excluded",
      "sources": [
       {
        "name": "The Management of Community-Acquired Pneumonia in Infants and Children Older Than 3 Months of Age (PIDS/IDSA guideline)",
@@ -2425,7 +2425,7 @@
     {
      "role": "2nd",
      "drugs": "amoxicillin",
-     "note": "high dose + doxy (⍉want QT prolong)",
+     "note": "↑dose + doxy (⍉want QT prolong)",
      "sources": [
       {
        "name": "Pneumonia Learning Outcomes Med List (your Pharm_Examples file)",
@@ -2459,7 +2459,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo"
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo"
     },
     {
      "role": "1st",
@@ -2507,7 +2507,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e5b0770d-1301-498e-a4ed-41874d7bf225"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Allergy"
     },
     {
@@ -2585,7 +2585,7 @@
        "url": null
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo"
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo"
     },
     {
      "role": "alt",
@@ -2614,7 +2614,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2ad2b85f-2479-c7cd-e063-6294a90acca1"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Peds"
     },
     {
@@ -2629,7 +2629,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/community-acquired-pneumonia"
       }
      ],
-     "scenario": "CAP, outpt w comorbidity or abx in last 3mo",
+     "scenario": "CAP, outpt w comorbid or abx in last 3mo",
      "population": "Allergy"
     }
    ]
@@ -2643,7 +2643,7 @@
    ]
   },
   {
-   "title": "CAP, outpt w comorbidity or abx in last 3mo",
+   "title": "CAP, outpt w comorbid or abx in last 3mo",
    "gaps": [
     "g_FQ1PPV7XGW"
    ]

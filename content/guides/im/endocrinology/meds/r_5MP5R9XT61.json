@@ -716,7 +716,7 @@
         "content": [
          {
           "type": "text",
-          "text": "More potent  -lower doses, Oral "
+          "text": "More potent  -lower doses, PO "
          }
         ]
        }
@@ -3036,7 +3036,7 @@
         "content": [
          {
           "type": "text",
-          "text": "▪︎CYP3A4 inducer → ⇡dexamethasone metabolism → impaired cortisol suppression on DST"
+          "text": "▪︎CYP3A4 inducer → ⇡dexamethasone met → impaired cortisol suppression on DST"
          }
         ]
        },
@@ -3370,7 +3370,7 @@
                },
                {
                 "type": "text",
-                "text": ": sz disorders, bipolar disorders, trigeminal neuralgia (DOC), central DI "
+                "text": ": sz dx, bipolar dx, trigeminal neuralgia (DOC), central DI "
                }
               ]
              }
@@ -3614,7 +3614,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -3875,8 +3875,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "desmopressin",
-     "note": "central DI: the drug of choice",
+     "drugs": "DDAVP",
+     "note": "central DI: the DOC",
      "sources": [
       {
        "name": "Arginine Vasopressin Deficiency (Central Diabetes Insipidus)",
@@ -3894,7 +3894,7 @@
     {
      "role": "alt",
      "drugs": "carbamazepine",
-     "note": "central DI: inferior to desmopressin, so seldom used",
+     "note": "central DI: inferior to DDAVP, so seldom used",
      "sources": [
       {
        "name": "Arginine Vasopressin Deficiency (Central Diabetes Insipidus)",
@@ -3912,7 +3912,7 @@
     {
      "role": "alt",
      "drugs": "thiazide diuretic",
-     "note": "central DI, nonhormonal, especially partial DI",
+     "note": "central DI, nonhormonal, esp partial DI",
      "sources": [
       {
        "name": "Arginine Vasopressin Deficiency (Central Diabetes Insipidus)",
@@ -3924,8 +3924,8 @@
     },
     {
      "role": "1st",
-     "drugs": "thiazide diuretic (hydrochlorothiazide)",
-     "note": "nephrogenic DI, if symptoms persist despite free water and a low-salt, low-protein diet",
+     "drugs": "thiazide diuretic (HCTZ)",
+     "note": "nephrogenic DI, if Sx persist despite free H2O and a low-salt, low-protein diet",
      "sources": [
       {
        "name": "Arginine Vasopressin Resistance",
@@ -3943,7 +3943,7 @@
     {
      "role": "alt",
      "drugs": "prostaglandin inhibitor (NSAID)",
-     "note": "central DI, nonhormonal, especially partial DI",
+     "note": "central DI, nonhormonal, esp partial DI",
      "sources": [
       {
        "name": "Arginine Vasopressin Deficiency (Central Diabetes Insipidus)",
@@ -3956,7 +3956,7 @@
     {
      "role": "adjunct",
      "drugs": "indomethacin (NSAID)",
-     "note": "nephrogenic DI, if symptoms persist",
+     "note": "nephrogenic DI, if Sx persist",
      "sources": [
       {
        "name": "Arginine Vasopressin Resistance",
@@ -3974,7 +3974,7 @@
     {
      "role": "adjunct",
      "drugs": "amiloride",
-     "note": "nephrogenic DI, if symptoms persist",
+     "note": "nephrogenic DI, if Sx persist",
      "sources": [
       {
        "name": "Arginine Vasopressin Resistance",
@@ -3992,7 +3992,7 @@
     {
      "role": "alt",
      "drugs": "chlorpropamide",
-     "note": "central DI (AVP-D); inferior to desmopressin, seldom used",
+     "note": "central DI (AVP-D); inferior to DDAVP, seldom used",
      "sources": [
       {
        "name": "StatPearls: Arginine Vasopressin Disorder (Diabetes Insipidus)",

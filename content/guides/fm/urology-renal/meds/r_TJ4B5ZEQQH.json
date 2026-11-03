@@ -189,7 +189,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -905,7 +905,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -990,7 +990,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "NSAIDs (non-selective)"
+                "text": "NSAIDs (⍉selective)"
                }
               ]
              }
@@ -1886,7 +1886,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -3105,7 +3105,7 @@
             }
            }
           ],
-          "text": "Admin: parenteral (IV, epidural, intrathecal), oral transmucus, SL, buccal, IN, transdermal"
+          "text": "Admin: parenteral (IV, epidural, intrathecal), PO transmucus, SL, buccal, IN, transdermal"
          }
         ]
        },
@@ -3836,7 +3836,7 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "opioid (morphine; fentanyl for rapid onset) if NSAIDs are contraindicated or not enough",
+     "drugs": "opioid (morphine; fentanyl for rapid onset) if NSAIDs are contraindicated or ⍉enough",
      "note": "renal colic; NSAIDs relieve pain as well or better w less vomiting (EAU)",
      "sources": [
       {
@@ -3884,7 +3884,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "prevention: thiazide (chlorthalidone, indapamide) + potassium citrate",
+     "drugs": "prev: thiazide (chlorthalidone, indapamide) + potassium citrate",
      "note": "hypercalciuria",
      "sources": [
       {
@@ -3902,7 +3902,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "antibiotics + urgent decompression (ureteral stent or nephrostomy)",
+     "drugs": "abx + urgent decompression (ureteral stent or nephrostomy)",
      "note": "Infect + obstruct",
      "sources": [
       {
@@ -3938,7 +3938,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "prevention: allopurinol",
+     "drugs": "prev: allopurinol",
      "note": "hyperuricosuria if diet can't Δ; recurr calcium stones",
      "sources": [
       {
@@ -3957,7 +3957,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "prevention: potassium citrate",
+     "drugs": "prev: potassium citrate",
      "note": "uric acid stones: urine pH 6-6.5",
      "sources": [
       {

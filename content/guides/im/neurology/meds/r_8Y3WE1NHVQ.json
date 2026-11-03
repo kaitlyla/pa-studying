@@ -79,7 +79,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    Herpes labialis (recurrent): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
+          "text": "-    Herpes labialis (recurr): acyclovir, famciclovir, or valacyclovir; topical penciclovir or docosanol; prophylaxis (acyclovir or valacyclovir) if ≥6 outbreaks/yr"
          }
         ]
        },
@@ -103,7 +103,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    HSV keratitis: acyclovir eye drops, or oral therapy"
+          "text": "-    HSV keratitis: acyclovir eye drops, or PO therapy"
          }
         ]
        },
@@ -170,7 +170,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
       }
      ],
-     "scenario": "< 1 month"
+     "scenario": "< 1 mo"
     }
    ]
   },
@@ -179,8 +179,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "vancomycin",
-     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "drugs": "vanco",
+     "note": "start as soon as blood cx are drawn, b4 LP or CT",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -199,8 +199,8 @@
     },
     {
      "role": "1st",
-     "drugs": "vancomycin",
-     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "drugs": "vanco",
+     "note": "start as soon as blood cx are drawn, b4 LP or CT",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -269,7 +269,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Dexamethasone just before or with the first antibiotic dose",
+     "drugs": "Dexamethasone just b4 or w the first antibiotic dose",
      "note": null,
      "sources": [
       {
@@ -287,8 +287,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal (PCV20/PCV21) vaccines",
-     "note": "prevention",
+     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal (PCV20/PCV21) vax",
+     "note": "prev",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Acute Bacterial Meningitis",
@@ -333,7 +333,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
       }
      ],
-     "scenario": "< 1 month"
+     "scenario": "< 1 mo"
     },
     {
      "role": "1st",
@@ -373,7 +373,7 @@
     {
      "role": "alt",
      "drugs": "ampicillin",
-     "note": "infants < 3 months: ampicillin + ceftriaxone or cefotaxime",
+     "note": "infants < 3 mo: ampicillin + ceftriaxone or cefotaxime",
      "sources": [
       {
        "name": "Acute Bacterial Meningitis",
@@ -392,7 +392,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Add acyclovir empirically: HSV encephalitis can mimic early bacterial meningitis",
+     "drugs": "Add acyclovir empirically: HSV encephalitis can mimic early bact meningitis",
      "note": null,
      "sources": [
       {
@@ -408,7 +408,7 @@
  ],
  "scenarios": [
   {
-   "title": "< 1 month",
+   "title": "< 1 mo",
    "gaps": [
     "g_PD678J5KX0"
    ]

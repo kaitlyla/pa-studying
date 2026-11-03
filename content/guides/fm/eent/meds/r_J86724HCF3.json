@@ -190,7 +190,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -424,7 +424,7 @@
                },
                {
                 "type": "text",
-                "text": ": much lower incidence of GI & hematologic disorders than ASA"
+                "text": ": much lower incidence of GI & hematologic dx than ASA"
                }
               ]
              },
@@ -796,7 +796,7 @@
             }
            }
           ],
-          "text": "Drug of choice "
+          "text": "DOC "
          },
          {
           "type": "text",
@@ -1030,7 +1030,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉inhibit platelet aggregate          **⍉GI ulceration -unlike NSAID"
+          "text": "⍉inhibit PLT aggregate          **⍉GI ulceration -unlike NSAID"
          }
         ]
        },
@@ -1387,7 +1387,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1472,7 +1472,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "NSAIDs (non-selective)"
+                "text": "NSAIDs (⍉selective)"
                }
               ]
              }
@@ -2364,7 +2364,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -3172,7 +3172,7 @@
                   }
                  }
                 ],
-                "text": "Coverage/Indications"
+                "text": "Coverage/Clin Use"
                }
               ]
              }
@@ -3500,7 +3500,7 @@
                   }
                  }
                 ],
-                "text": ": superfic Candida fungal infections of the skin"
+                "text": ": superfic Candida fungal infect of the skin"
                }
               ]
              }
@@ -3772,7 +3772,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Analgesia: acetaminophen at fixed intervals",
+     "drugs": "Analgesia: acetaminophen @ fixed intervals",
      "note": null,
      "sources": [
       {
@@ -3796,7 +3796,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Analgesia: NSAIDs at fixed intervals",
+     "drugs": "Analgesia: NSAIDs @ fixed intervals",
      "note": null,
      "sources": [
       {
@@ -3820,7 +3820,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Fungal OE: antimycotic solution (eg, nystatin, clotrimazole); not with a perforated TM",
+     "drugs": "Fungal OE: antimycotic solution (eg, nystatin, clotrimazole); ⍉ w a perforated TM",
      "note": null,
      "sources": [
       {
@@ -3856,7 +3856,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Ciprodex (ciprofloxacin/dexamethasone) drops",
+     "drugs": "Ciprodex (cipro/dexamethasone) drops",
      "note": "7–10 days",
      "sources": [
       {
@@ -3882,7 +3882,7 @@
     },
     {
      "role": "1st",
-     "drugs": "Ciprodex (ciprofloxacin/dexamethasone) drops",
+     "drugs": "Ciprodex (cipro/dexamethasone) drops",
      "note": "FQ drops only (⍉ototoxic drops); 7–10 days",
      "sources": [
       {
@@ -3904,7 +3904,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/external-ear-disorders/external-otitis-acute"
       }
      ],
-     "scenario": "TM perforation"
+     "scenario": "TM perf"
     }
    ]
   },
@@ -3946,7 +3946,7 @@
    "gaps": []
   },
   {
-   "title": "TM perforation",
+   "title": "TM perf",
    "gaps": []
   }
  ]

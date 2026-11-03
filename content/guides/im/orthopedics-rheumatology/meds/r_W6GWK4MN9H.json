@@ -228,7 +228,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "↓dose oral, IV, or intraarticular"
+                "text": "↓dose PO, IV, or intraarticular"
                }
               ]
              }
@@ -2842,7 +2842,7 @@
     {
      "role": "1st",
      "drugs": "glucocorticoids",
-     "note": "all patients",
+     "note": "all pts",
      "sources": [
       {
        "name": "Polyarteritis Nodosa (PAN)",
@@ -2860,7 +2860,7 @@
     {
      "role": "1st",
      "drugs": "cyclophosphamide + glucocorticoids",
-     "note": "severe disease",
+     "note": "severe dz",
      "sources": [
       {
        "name": "Polyarteritis Nodosa (PAN)",
@@ -2872,8 +2872,8 @@
     },
     {
      "role": "alt",
-     "drugs": "methotrexate or azathioprine",
-     "note": "mild to moderate disease",
+     "drugs": "MTX or azathioprine",
+     "note": "mild-mod dz",
      "sources": [
       {
        "name": "Polyarteritis Nodosa (PAN)",
@@ -2885,7 +2885,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "antiviral drugs + plasma exchange (short glucocorticoid course)",
+     "drugs": "antiviral drugs + plasma exchg (short glucocorticoid course)",
      "note": "hepatitis B-associated PAN",
      "sources": [
       {
@@ -2898,8 +2898,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "antihypertensives",
-     "note": "treat hypertension aggressively; no class named",
+     "drugs": "antiHTN",
+     "note": "tx HTN aggressively; ⍉class named",
      "sources": [
       {
        "name": "Polyarteritis Nodosa (PAN)",
@@ -2916,8 +2916,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "methotrexate",
-     "note": "mild to moderate disease",
+     "drugs": "MTX",
+     "note": "mild-mod dz",
      "sources": [
       {
        "name": "Polyarteritis Nodosa (PAN)",
@@ -2934,8 +2934,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ACE inhibitor",
-     "note": "hypertension",
+     "drugs": "ACEi",
+     "note": "HTN",
      "sources": [
       {
        "name": "StatPearls: Polyarteritis Nodosa",
@@ -2952,8 +2952,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "calcium channel blockers",
-     "note": "hypertension, if GFR falls > 30% on an ACE inhibitor",
+     "drugs": "CCBs",
+     "note": "HTN, if GFR falls > 30% on an ACEi",
      "sources": [
       {
        "name": "StatPearls: Polyarteritis Nodosa",
@@ -2988,8 +2988,8 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "biologic agents",
-     "note": "recalcitrant disease",
+     "drugs": "bio agents",
+     "note": "recalcitrant dz",
      "sources": [
       {
        "name": "StatPearls: Polyarteritis Nodosa",

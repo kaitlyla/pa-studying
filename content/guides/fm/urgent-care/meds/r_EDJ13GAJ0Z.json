@@ -320,7 +320,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Oral Xa inhibitors:   -     Apixaban (Eliquis)    -    Edoxaban (Lixiana, Savaysa)     -    Rivaroxaban (Xarelto)"
+                "text": "PO Xa inhibitors:   -     Apixaban (Eliquis)    -    Edoxaban (Lixiana, Savaysa)     -    Rivaroxaban (Xarelto)"
                }
               ]
              }
@@ -488,8 +488,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "warfarin: vitamin K, prothrombin complex concentrate (PCC)",
-     "note": "major bleed: 4F-PCC rather than plasma + vit K 5–10 mg slow IV. ⍉bleed: INR 4.5–10 ⍉routine vit K; INR >10 oral vit K",
+     "drugs": "warfarin: vit K, prothrombin complex concentrate (PCC)",
+     "note": "major bleed: 4F-PCC rather than plasma + vit K 5–10 mg slow IV. ⍉bleed: INR 4.5–10 ⍉routine vit K; INR >10 PO vit K",
      "sources": [
       {
        "name": "General Principles of Poisoning",
@@ -520,7 +520,7 @@
     },
     {
      "role": "alt",
-     "drugs": "oral factor Xa inhibitors: 4-factor PCC",
+     "drugs": "PO factor Xa inhibitors: 4-factor PCC",
      "note": "may be considered if andexanet alfa unavailable; 50 U/kg IV; reserve for life-threatening bleed. Andexanet alfa withdrawn from the US market (Dec 2025). GI bleed on a DOAC: ACG-CAG 2022 suggests against PCC; selective use may be justified for a life-threatening GI bleed w the last DOAC dose w.in 24 h",
      "sources": [
       {
@@ -581,7 +581,7 @@
     },
     {
      "role": "alt",
-     "drugs": "fresh frozen plasma",
+     "drugs": "FFP",
      "note": "only if PCC unavailable",
      "sources": [
       {

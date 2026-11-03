@@ -699,7 +699,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Giant cell arteritis: high-dose prednisone PO (IV methylprednisolone if vision loss)"
+          "text": "GCA: ↑dose prednisone PO (IV methylprednisolone if vision loss)"
          }
         ]
        },
@@ -1747,7 +1747,7 @@
          },
          {
           "type": "text",
-          "text": "   -via inhibit acetylation of cyclooxygenase-1 (COX-1) -> ↓platelet activate, ↓vascoconstriction"
+          "text": "   -via inhibit acetylation of cyclooxygenase-1 (COX-1) -> ↓PLT activate, ↓vascoconstriction"
          }
         ]
        },
@@ -1791,7 +1791,7 @@
             }
            }
           ],
-          "text": "Inhibit platelet aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam "
+          "text": "Inhibit PLT aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam "
          }
         ]
        },
@@ -2924,7 +2924,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "•used alone or given in combo w/ MTX or other DMARDs, but ⍉w/ other biologics – when given w/ MTX → inhibition & slowing of struct joint damage, improvement of physical funct, & achievement of major clin response in adults w/ moderately-severely active RA "
+                "text": "•used alone or given in combo w/ MTX or other DMARDs, but ⍉w/ other bio – when given w/ MTX → inhibition & slowing of struct joint damage, improvement of physical funct, & achievement of major clin response in adults w/ moderately-severely active RA "
                }
               ]
              },
@@ -2972,7 +2972,7 @@
                },
                {
                 "type": "text",
-                "text": ": live vaccines "
+                "text": ": live vax "
                }
               ]
              },
@@ -3159,7 +3159,7 @@
                },
                {
                 "type": "text",
-                "text": ": ↑risk of serious infections (bact, invasive fungal, viral, TB)"
+                "text": ": ↑risk of serious infect (bact, invasive fungal, viral, TB)"
                }
               ]
              }
@@ -4104,7 +4104,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "prednisone 40-60 mg/day (IV methylprednisolone if visual symptoms)",
+     "drugs": "prednisone 40-60 mg/day (IV methylprednisolone if visual Sx)",
      "note": "start right away to prevent blindness",
      "sources": [
       {
@@ -4123,7 +4123,7 @@
     {
      "role": "1st",
      "drugs": "tocilizumab",
-     "note": "with the glucocorticoid at the start (steroid-sparing)",
+     "note": "w the glucocorticoid @ the start (steroid-sparing)",
      "sources": [
       {
        "name": "Giant Cell Arteritis",
@@ -4140,7 +4140,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "methotrexate",
+     "drugs": "MTX",
      "note": "if tocilizumab can't be used",
      "sources": [
       {
@@ -4176,8 +4176,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "antiresorptive medication",
-     "note": "older patients on long-term prednisone",
+     "drugs": "antiresorb med",
+     "note": "older pts on long-term prednisone",
      "sources": [
       {
        "name": "Giant Cell Arteritis",

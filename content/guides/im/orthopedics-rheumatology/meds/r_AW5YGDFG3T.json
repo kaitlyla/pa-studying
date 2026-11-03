@@ -1062,7 +1062,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -7830,7 +7830,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: PO; initial months + concurrent NSAID/corticosteroid/colchicine (prevent flare)"
+          "text": "Admin: PO; initial mo + concurrent NSAID/corticosteroid/colchicine (prevent flare)"
          }
         ]
        },
@@ -8694,7 +8694,7 @@
                },
                {
                 "type": "text",
-                "text": ": rash, acute gout attacks, nausea, diarrhea, ↑LFTs "
+                "text": ": rash, acute gout attacks, N/D, ↑LFTs "
                }
               ]
              },
@@ -8907,8 +8907,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "acute flare: colchicine (1.2 mg, then 0.6 mg 1 hour later)",
-     "note": "chosen by comorbidities and contraindications; start early",
+     "drugs": "acute flare: colchicine (1.2 mg, then 0.6 mg 1 hr later)",
+     "note": "chosen by comorbid and contraindications; start early",
      "sources": [
       {
        "name": "Gout",
@@ -8920,7 +8920,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "prophylaxis: colchicine 0.6 mg once or twice a day",
+     "drugs": "prophylaxis: colchicine 0.6 mg QD or BID",
      "note": "prophylaxis against flares",
      "sources": [
       {
@@ -8939,7 +8939,7 @@
     {
      "role": "1st",
      "drugs": "acute flare: NSAIDs",
-     "note": "chosen by comorbidities and contraindications; start early",
+     "note": "chosen by comorbid and contraindications; start early",
      "sources": [
       {
        "name": "Gout",
@@ -8951,7 +8951,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "prophylaxis: daily low-dose NSAID",
+     "drugs": "prophylaxis: daily ↓dose NSAID",
      "note": "prophylaxis against flares",
      "sources": [
       {
@@ -8970,7 +8970,7 @@
     {
      "role": "1st",
      "drugs": "acute flare: glucocorticoids",
-     "note": "chosen by comorbidities and contraindications; start early",
+     "note": "chosen by comorbid and contraindications; start early",
      "sources": [
       {
        "name": "Gout",
@@ -8982,7 +8982,7 @@
     },
     {
      "role": "1st",
-     "drugs": "glucocorticoids: intra-articular injection after aspiration, or oral prednisone about 0.5 mg/kg/day with taper",
+     "drugs": "glucocorticoids: intra-articular inj after aspiration, or PO prednisone about 0.5 mg/kg/day w taper",
      "note": "intra-articular esp for monoarticular flares (septic arthritis excluded); oral/IM/IV for multi joints",
      "sources": [
       {
@@ -9013,8 +9013,8 @@
     },
     {
      "role": "alt",
-     "drugs": "pegloticase IV every 2 weeks",
-     "note": "other treatments failed to lower urate, or a heavy tophus burden; boxed: G6PD hemolysis; stop oral ULT first; MTX co-tx (label)",
+     "drugs": "pegloticase IV Q2wks",
+     "note": "other tx failed to lower urate, or a heavy tophus burden; boxed: G6PD hemolysis; stop oral ULT first; MTX co-tx (label)",
      "sources": [
       {
        "name": "Gout",
@@ -9037,7 +9037,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "urate-lowering: allopurinol (start ≤100 mg daily, lower in CKD stage ≥3, eg ≤50 mg; titrate to urate <6 mg/dL, up to 800 mg). ACR conditionally recommends HLA-B*5801 testing before allopurinol in patients of Southeast Asian descent (eg, Han Chinese, Korean, Thai) and African American patients (ACR 2020)",
+     "drugs": "urate-lowering: allopurinol (start ≤100 mg daily, lower in CKD stage ≥3, eg ≤50 mg; titrate to urate <6 mg/dL, up to 800 mg). ACR conditionally recommends HLA-B*5801 testing b4 allopurinol in pts of Southeast Asian descent (eg, Han Chinese, Korean, Thai) and African American pts (ACR 2020)",
      "note": "preferred initial urate-lowering therapy",
      "sources": [
       {

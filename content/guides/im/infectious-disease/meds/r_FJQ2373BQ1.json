@@ -16,7 +16,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "oral or IV fluids",
+     "drugs": "PO or IVF",
      "note": "uncomp gastroenteritis",
      "sources": [
       {
@@ -34,7 +34,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "severe dz only: severe diarrhea, bacteremia or extraintestinal infect, or people @ risk of invasive dz (infants, ≥50 w AS, IS, ♡ or major joint dz); uncomp cases get ⍉abx",
      "sources": [
       {
@@ -56,11 +56,11 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
-     "drugs": "ciprofloxacin",
+     "drugs": "cipro",
      "note": "⍉a first-choice drug in children (more joint and other adverse rxns)",
      "sources": [
       {
@@ -70,7 +70,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6fd3da0b-7428-ac8f-e053-2a91aa0aed9f"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -78,7 +78,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": [
     "g_A2MT2HCD44"
    ]

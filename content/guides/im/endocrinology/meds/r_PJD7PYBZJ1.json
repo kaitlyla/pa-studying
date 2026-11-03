@@ -39,7 +39,7 @@
             "type": "bold"
            }
           ],
-          "text": "Dopamine Agonists (prolactinoma):"
+          "text": "DA Agonists (prolactinoma):"
          }
         ]
        },
@@ -68,7 +68,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Prolactinoma (⇡prolactin → hyperprolactinemia): Rx = dopamine agonists (cabergoline, bromocriptine)"
+          "text": "Prolactinoma (⇡PRL → hyperprolactinemia): Rx = DA agonists (cabergoline, bromocriptine)"
          }
         ]
        },
@@ -150,7 +150,7 @@
     {
      "role": "1st",
      "drugs": "cabergoline",
-     "note": "prolactinoma: the treatment of choice",
+     "note": "prolactinoma: the tx of choice",
      "sources": [
       {
        "name": "Prolactinoma",
@@ -176,7 +176,7 @@
     {
      "role": "alt",
      "drugs": "cabergoline",
-     "note": "acromegaly, mild disease",
+     "note": "acromegaly, mild dz",
      "sources": [
       {
        "name": "Gigantism and Acromegaly",
@@ -189,7 +189,7 @@
     {
      "role": "adjunct",
      "drugs": "bromocriptine",
-     "note": "acromegaly, with surgery (your table); dopamine agonists are less effective than somatostatin analogs",
+     "note": "acromegaly, w surg (your table); DA agonists are less effective than somatostatin analogs",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -213,7 +213,7 @@
     {
      "role": "alt",
      "drugs": "somatostatin analogs; pegvisomant",
-     "note": "GH-secreting adenoma: IGF-1 still ↑ after surgery, or not a surgical candidate",
+     "note": "GH-secreting adenoma: IGF-1 still ↑ after surg, or ⍉a surg candidate",
      "sources": [
       {
        "name": "StatPearls: Pituitary Adenoma",
@@ -231,7 +231,7 @@
     {
      "role": "alt",
      "drugs": "cabergoline, pasireotide; metyrapone, osilodrostat, levoketoconazole, mitotane; mifepristone",
-     "note": "Cushing disease: persistent, recurrent, or bridge to definitive tx",
+     "note": "Cushing dz: persistent, recurr, or bridge to definitive tx",
      "sources": [
       {
        "name": "StatPearls: Pituitary Adenoma",
@@ -248,8 +248,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "glucocorticoid replacement (temporary)",
-     "note": "after Cushing disease surgery, until the HPA axis recovers",
+     "drugs": "glucocorticoid replace (temp)",
+     "note": "after Cushing dz surg, until the HPA axis recovers",
      "sources": [
       {
        "name": "StatPearls: Pituitary Adenoma",
@@ -267,7 +267,7 @@
     {
      "role": "adjunct",
      "drugs": "methimazole or somatostatin analogs",
-     "note": "TSH-secreting adenoma, before surgery",
+     "note": "TSH-secreting adenoma, b4 surg",
      "sources": [
       {
        "name": "StatPearls: Pituitary Adenoma",

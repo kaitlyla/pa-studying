@@ -443,7 +443,7 @@
                   }
                  }
                 ],
-                "text": "COX-1 inhibition = TXA2 inhibition = ↓ platelet activate/aggregation, ↓ vasodilate"
+                "text": "COX-1 inhibition = TXA2 inhibition = ↓ PLT activate/aggregation, ↓ vasodilate"
                }
               ]
              },
@@ -767,7 +767,7 @@
             }
            }
           ],
-          "text": "Inhibit platelet aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam "
+          "text": "Inhibit PLT aggregate    -   Analgesic    -  Antipyretic    -  Anti-inflam "
          }
         ]
        },
@@ -1350,7 +1350,7 @@
          },
          {
           "type": "text",
-          "text": "eakdown -> ↑cAMP in PLT & blood vessels -> inhibit platelet aggregation & vasodilates  "
+          "text": "eakdown -> ↑cAMP in PLT & blood vessels -> inhibit PLT aggregation & vasodilates  "
          }
         ]
        },
@@ -1842,7 +1842,7 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: direct, selective, reversible inhib of free + clot-bound factor Xa -> ⇣platelet activation + fibrin clot formation"
+          "text": "MOA: direct, selective, reversible inhib of free + clot-bound Xa -> ⇣PLT activate + fibrin clot form"
          }
         ]
        },
@@ -1866,7 +1866,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Off-label: HIT, recurrent stroke/TIA prevention"
+          "text": "Off-label: HIT, recurr CVA/TIA prev"
          }
         ]
        },
@@ -1914,7 +1914,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Boxed warning: premature d/c of any oral anticoagulant ⇡thrombotic events - if stopped for a reason other than pathological bleeding or completion of tx, cover w another anticoagulant; spinal/epidural hematoma"
+          "text": "Boxed warning: premature d/c of any PO anticoag ⇡thrombotic events - if stopped for a reason other than pathological bleed or completion of tx, cover w another anticoag; spinal/epidural hematoma"
          }
         ]
        },
@@ -2614,7 +2614,7 @@
                   }
                  }
                 ],
-                "text": "inhibiting ADP-induced platelet aggregation"
+                "text": "inhibiting ADP-induced PLT aggregation"
                },
                {
                 "type": "text",
@@ -2907,7 +2907,7 @@
             }
            }
           ],
-          "text": "MOA: inhibit ADP bind to P2Y12-r on platelets->"
+          "text": "MOA: inhibit ADP bind to P2Y12-r on PLT->"
          },
          {
           "type": "text",
@@ -3342,7 +3342,7 @@
         "content": [
          {
           "type": "text",
-          "text": "▪︎TIA (moderate–high risk): DAPT w/ aspirin x21 days — 300–600 mg load then 75 mg daily"
+          "text": "▪︎TIA (mod–↑risk): DAPT w/ ASA x21D — 300–600 mg load then 75 mg daily"
          }
         ]
        },
@@ -3763,7 +3763,7 @@
             }
            }
           ],
-          "text": ": form less metabolite, ↓platelet funct  "
+          "text": ": form less metabolite, ↓PLT funct  "
          }
         ]
        },
@@ -5868,7 +5868,7 @@
                },
                {
                 "type": "text",
-                "text": ": bind the ADP P2Y12 platelet-r, inhibiting ADP-mediated platelet aggregation "
+                "text": ": bind the ADP P2Y12 platelet-r, inhibiting ADP-mediated PLT aggregation "
                }
               ]
              }
@@ -6183,7 +6183,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "antiplatelet (aspirin or clopidogrel)",
+     "drugs": "antiplatelet (ASA or clopidogrel)",
      "note": "all Sxtomatic pts",
      "sources": [
       {
@@ -6201,7 +6201,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "rivaroxaban 2.5 mg + aspirin",
+     "drugs": "rivaroxaban 2.5 mg + ASA",
      "note": "cuts CV events",
      "sources": [
       {
@@ -6291,7 +6291,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "SGLT2 inhibitor",
+     "drugs": "SGLT2i",
      "note": "PAD + T2DM",
      "sources": [
       {
@@ -6327,8 +6327,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "annual influenza vaccine",
-     "note": "prevention",
+     "drugs": "annual influenza vax",
+     "note": "prev",
      "sources": [
       {
        "name": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",

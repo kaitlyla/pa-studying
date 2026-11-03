@@ -208,7 +208,7 @@
                   }
                  }
                 ],
-                "text": "Coverage/Indications"
+                "text": "Coverage/Clin Use"
                }
               ]
              }
@@ -386,7 +386,7 @@
                   }
                  }
                 ],
-                "text": "Indications (parasitic infections)"
+                "text": "Indications (parasitic infect)"
                },
                {
                 "type": "text",
@@ -480,7 +480,7 @@
                   }
                  }
                 ],
-                "text": "GI infections: amebic dysentery, Giardia lamblia "
+                "text": "GI infect: amebic dysentery, Giardia lamblia "
                }
               ]
              }
@@ -535,7 +535,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "Recurrent",
+     "drugs": "Recurr",
      "note": null,
      "sources": [
       {
@@ -569,7 +569,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -583,7 +583,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -603,7 +603,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -617,7 +617,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
@@ -632,7 +632,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -640,7 +640,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

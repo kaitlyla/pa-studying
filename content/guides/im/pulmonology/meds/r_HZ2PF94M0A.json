@@ -931,7 +931,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1715,7 +1715,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1808,7 +1808,7 @@
                   }
                  }
                 ],
-                "text": "Bisphosphonates"
+                "text": "Bisphos"
                },
                {
                 "type": "text",
@@ -1982,7 +1982,7 @@
                },
                {
                 "type": "text",
-                "text": ": esophagitis, MSK sxs, hypocalcemia, GI (oral) – abd pain, dyspepsia, N/V, dysphagia, heartburn "
+                "text": ": esophagitis, MSK sxs, hypocalcemia, GI (PO) – abd pain, dyspepsia, N/V, dysphagia, heartburn "
                }
               ]
              },
@@ -2030,7 +2030,7 @@
                },
                {
                 "type": "text",
-                "text": ": osteonecrosis of the jaw (ONJ), atypical femur fractures – limit tx to 3-5yrs in pts w/ ↓risk of frx"
+                "text": ": osteonecrosis of the jaw (ONJ), atypical femur frx – limit tx to 3-5yrs in pts w/ ↓risk of frx"
                }
               ]
              },
@@ -2148,7 +2148,7 @@
             }
            }
           ],
-          "text": "Bisphosphonates"
+          "text": "Bisphos"
          },
          {
           "type": "text",
@@ -3597,7 +3597,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -4514,7 +4514,7 @@
                },
                {
                 "type": "text",
-                "text": ": preg/lactation, administration of live vaccines, immunocompromised pts ⍉recommended "
+                "text": ": preg/lactation, administration of live vax, immunocompromised pts ⍉recommended "
                }
               ]
              }
@@ -5947,7 +5947,7 @@
             }
            }
           ],
-          "text": " = less platelet effect"
+          "text": " = less PLT effect"
          }
         ]
        },
@@ -6877,7 +6877,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -6962,7 +6962,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "NSAIDs (non-selective)"
+                "text": "NSAIDs (⍉selective)"
                }
               ]
              }
@@ -7486,7 +7486,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -7864,7 +7864,7 @@
                },
                {
                 "type": "text",
-                "text": ": dysphonia (difficulty speaking), hoarseness, oral candidiasis, pneumonia, bruising "
+                "text": ": dysphonia (difficulty speaking), hoarseness, oral candidiasis, PNA, bruising "
                }
               ]
              },
@@ -7912,7 +7912,7 @@
                },
                {
                 "type": "text",
-                "text": ": ↑doses for prolonged periods may cause adrenal suppression, increase risk of fractures, & stunted growth in children "
+                "text": ": ↑doses for prolonged periods may cause adrenal suppression, increase risk of frx, & stunted growth in children "
                }
               ]
              }
@@ -8033,7 +8033,7 @@
             }
            }
           ],
-          "text": "Administration: Oral ->⍉tol -> dilute inj solution w SW for inj oral or parenteral"
+          "text": "Administration: PO ->⍉tol -> dilute inj solution w SW for inj PO or parenteral"
          }
         ]
        },
@@ -8062,7 +8062,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Parenteral (IV, subcut, deep IM) -> only if oral ⍉feasible "
+          "text": "Parenteral (IV, subcut, deep IM) -> only if PO ⍉feasible "
          }
         ]
        },
@@ -8161,7 +8161,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use also: chronic hemolysis (supplement)"
+          "text": "Clin Use also: chronic hemolysis (supp)"
          }
         ]
        }
@@ -8201,8 +8201,8 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "methotrexate",
-     "note": "MC steroid-sparing drug; full effect may take 6-12 months",
+     "drugs": "MTX",
+     "note": "MC steroid-sparing drug; full effect may take 6-12 mo",
      "sources": [
       {
        "name": "Sarcoidosis",
@@ -8263,7 +8263,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "infliximab (with low-dose methotrexate or azathioprine)",
+     "drugs": "infliximab (w ↓dose MTX or azathioprine)",
      "note": "refractory or intolerant; screen for latent TB",
      "sources": [
       {
@@ -8299,7 +8299,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "inhaled corticosteroid",
+     "drugs": "ICS",
      "note": "cough from endobronchial dz",
      "sources": [
       {
@@ -8335,7 +8335,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "folic acid 1 mg daily (with methotrexate)",
+     "drugs": "folic acid 1 mg daily (w MTX)",
      "note": "to prevent tx side effects",
      "sources": [
       {

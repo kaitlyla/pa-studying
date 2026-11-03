@@ -38,7 +38,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "prevention: topical vaginal estrogen",
+     "drugs": "prev: topical vaginal estrogen",
      "note": "postmenopausal w atrophic vaginitis or urethritis",
      "sources": [
       {
@@ -51,7 +51,7 @@
     },
     {
      "role": "alt",
-     "drugs": "prevention: methenamine",
+     "drugs": "prev: methenamine",
      "note": "older adults w CrCl > 30 mL/min",
      "sources": [
       {
@@ -64,7 +64,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "prevention: cranberry products",
+     "drugs": "prev: cranberry prod",
      "note": "may be considered, w behavioral measures",
      "sources": [
       {
@@ -110,7 +110,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -124,7 +124,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Elderly"
     },
     {
@@ -139,7 +139,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -165,7 +165,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -179,7 +179,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12478568/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Elderly"
     },
     {
@@ -194,13 +194,13 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
      "role": "1st",
      "drugs": "TMP-SMX",
-     "note": "contraindicated under 2 months of age",
+     "note": "contraindicated under 2 mo of age",
      "sources": [
       {
        "name": "BACTRIM (sulfamethoxazole and trimethoprim) tablet label",
@@ -209,7 +209,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -235,7 +235,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "2nd",
@@ -249,7 +249,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
@@ -264,7 +264,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -272,7 +272,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": [
     "g_MPAFNV1NWN"
    ]

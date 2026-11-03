@@ -188,7 +188,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1314,7 +1314,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "2nd",
@@ -1334,7 +1334,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -1368,7 +1368,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
@@ -1383,13 +1383,13 @@
        "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
      "role": "1st",
      "drugs": "TMP-SMX",
-     "note": "⍉ < 2 months of age",
+     "note": "⍉ < 2 mo of age",
      "sources": [
       {
        "name": "Sulfamethoxazole and trimethoprim tablets prescribing information (FDA label, DailyMed)",
@@ -1398,7 +1398,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=29df8839-3dfa-0b2b-c5a3-906db6997b3b"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     },
     {
@@ -1419,7 +1419,7 @@
     {
      "role": "1st",
      "drugs": "TMP-SMX",
-     "note": "⍉ < 2 months of age",
+     "note": "⍉ < 2 mo of age",
      "sources": [
       {
        "name": "Sulfamethoxazole and trimethoprim tablets prescribing information (FDA label, DailyMed)",
@@ -1454,7 +1454,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "alt",
@@ -1482,7 +1482,7 @@
        "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
@@ -1523,7 +1523,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -1548,7 +1548,7 @@
        "url": "https://www.msdmanuals.com/professional/pulmonary-disorders/pneumonia/pneumocystis-jirovecii-pneumonia"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "2nd",
@@ -1562,7 +1562,7 @@
        "url": "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/pneumocystis"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -1570,7 +1570,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": [
     "g_4YQTA74TRX"
    ]

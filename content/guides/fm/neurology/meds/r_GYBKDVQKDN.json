@@ -209,7 +209,7 @@
                   }
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -472,7 +472,7 @@
                   }
                  }
                 ],
-                "text": "Neonatal HSV (birth to 3 months)"
+                "text": "Neonatal HSV (birth to 3 mo)"
                }
               ]
              }
@@ -846,7 +846,7 @@
          },
          {
           "type": "text",
-          "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (seizures), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
+          "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (sz), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
          }
         ]
        }
@@ -888,7 +888,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
       }
      ],
-     "scenario": "< 1 month"
+     "scenario": "< 1 mo"
     },
     {
      "role": "1st",
@@ -928,7 +928,7 @@
     {
      "role": "alt",
      "drugs": "ampicillin",
-     "note": "infants < 3 months: ampicillin + ceftriaxone or cefotaxime",
+     "note": "infants < 3 mo: ampicillin + ceftriaxone or cefotaxime",
      "sources": [
       {
        "name": "Acute Bacterial Meningitis",
@@ -963,7 +963,7 @@
        "url": "https://www.msdmanuals.com/professional/pediatrics/infections-in-neonates/neonatal-bacterial-meningitis"
       }
      ],
-     "scenario": "< 1 month"
+     "scenario": "< 1 mo"
     }
    ]
   },
@@ -972,8 +972,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "vancomycin",
-     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "drugs": "vanco",
+     "note": "start as soon as blood cx are drawn, b4 LP or CT",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -992,8 +992,8 @@
     },
     {
      "role": "1st",
-     "drugs": "vancomycin",
-     "note": "start as soon as blood cultures are drawn, b4 LP or CT",
+     "drugs": "vanco",
+     "note": "start as soon as blood cx are drawn, b4 LP or CT",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -1062,7 +1062,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "Add acyclovir empirically: HSV encephalitis can mimic early bacterial meningitis",
+     "drugs": "Add acyclovir empirically: HSV encephalitis can mimic early bact meningitis",
      "note": null,
      "sources": [
       {
@@ -1080,7 +1080,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Dexamethasone just before or with the first antibiotic dose",
+     "drugs": "Dexamethasone just b4 or w the first antibiotic dose",
      "note": null,
      "sources": [
       {
@@ -1098,8 +1098,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal (PCV20/PCV21) vaccines",
-     "note": "prevention",
+     "drugs": "Hib, meningococcal (MenACWY, MenB) and pneumococcal (PCV20/PCV21) vax",
+     "note": "prev",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Acute Bacterial Meningitis",
@@ -1126,7 +1126,7 @@
  ],
  "scenarios": [
   {
-   "title": "< 1 month",
+   "title": "< 1 mo",
    "gaps": [
     "g_PD678J5KX0"
    ]

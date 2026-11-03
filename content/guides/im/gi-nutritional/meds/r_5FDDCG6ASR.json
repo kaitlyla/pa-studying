@@ -1256,7 +1256,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -3196,7 +3196,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "typhoid: prednisone 20-40 mg daily x3 days (dexamethasone if delirium, coma or shock)",
+     "drugs": "typhoid: prednisone 20-40 mg daily x3D (dexamethasone if delirium, coma or shock)",
      "note": "severe toxicity",
      "sources": [
       {
@@ -3263,7 +3263,7 @@
     {
      "role": "adjunct",
      "drugs": "rotavirus; cholera (travel); typhoid (travel)",
-     "note": "prevention",
+     "note": "prev",
      "sources": [
       {
        "name": "ROTATEQ (rotavirus vaccine, live, oral, pentavalent) prescribing information (FDA label, DailyMed)",
@@ -3317,7 +3317,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "vancomycin (oral)",
+     "drugs": "vanco (PO)",
      "note": "stop the causative abx",
      "sources": [
       {
@@ -3553,7 +3553,7 @@
     {
      "role": "1st",
      "drugs": "ceftriaxone",
-     "note": "empiric; then definitive tx based on cultures",
+     "note": "empiric; then definitive tx based on cx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -3778,7 +3778,7 @@
     {
      "role": "1st",
      "drugs": "TMP-SMX",
-     "note": "⍉ < 2 months of age",
+     "note": "⍉ < 2 mo of age",
      "sources": [
       {
        "name": "Sulfamethoxazole and trimethoprim tablets prescribing information (FDA label, DailyMed)",
@@ -4062,7 +4062,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "metronidazole (oral)",
+     "drugs": "metronidazole (PO)",
      "note": "only if vanco and fidaxomicin are unavailable",
      "sources": [
       {
@@ -4199,7 +4199,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin (x3d), erythromycin (x5d)",
+     "drugs": "azithro (x3d), erythromycin (x5d)",
      "note": "usu supportive; can shorten duration when given early in illness",
      "sources": [
       {
@@ -4219,7 +4219,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "may ↓ duration",
      "sources": [
       {
@@ -4239,7 +4239,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "PO, after initial ceftriaxone",
      "sources": [
       {
@@ -4259,8 +4259,8 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
-     "note": "empiric; then definitive tx based on cultures",
+     "drugs": "azithro",
+     "note": "empiric; then definitive tx based on cx",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -4279,7 +4279,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "PO; adults + children",
      "sources": [
       {
@@ -4299,7 +4299,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": null,
      "sources": [
       {
@@ -4319,7 +4319,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "children: PO azithro or IV ceftriaxone",
      "sources": [
       {
@@ -4334,7 +4334,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {
@@ -4349,7 +4349,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {
@@ -4364,7 +4364,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {
@@ -4379,7 +4379,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {
@@ -4394,7 +4394,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {
@@ -4409,7 +4409,7 @@
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "⍉ if hypersensitivity to any macrolide",
      "sources": [
       {

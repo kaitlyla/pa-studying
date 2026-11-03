@@ -226,7 +226,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "↓dose oral, IV, or intraarticular"
+                "text": "↓dose PO, IV, or intraarticular"
                }
               ]
              }
@@ -2855,8 +2855,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "methotrexate",
-     "note": "started with the steroid; azathioprine or tacrolimus preferred over methotrexate with interstitial lung disease",
+     "drugs": "MTX",
+     "note": "started w the steroid; azathioprine or tacrolimus preferred over MTX w ILD",
      "sources": [
       {
        "name": "Idiopathic Inflammatory Myopathies",
@@ -2873,8 +2873,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "methotrexate, azathioprine or tacrolimus",
-     "note": "started with the steroid; azathioprine or tacrolimus preferred over methotrexate with interstitial lung disease",
+     "drugs": "MTX, azathioprine or tacrolimus",
+     "note": "started w the steroid; azathioprine or tacrolimus preferred over MTX w ILD",
      "sources": [
       {
        "name": "Idiopathic Inflammatory Myopathies",
@@ -2900,7 +2900,7 @@
     {
      "role": "1st",
      "drugs": "IVIG",
-     "note": "preferred with dysphagia or respiratory muscle weakness",
+     "note": "preferred w dysphagia or resp musc weakness",
      "sources": [
       {
        "name": "Idiopathic Inflammatory Myopathies",
@@ -2912,8 +2912,8 @@
     },
     {
      "role": "adjunct",
-     "drugs": "Pneumocystis prophylaxis; vaccines",
-     "note": "if combination immunosuppressive therapy is used",
+     "drugs": "Pneumocystis prophylaxis; vax",
+     "note": "if combo immunosuppressive therapy = used",
      "sources": [
       {
        "name": "Idiopathic Inflammatory Myopathies",

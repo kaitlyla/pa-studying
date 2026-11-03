@@ -146,7 +146,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -612,7 +612,7 @@
                },
                {
                 "type": "text",
-                "text": ": pts w/ hx of substance use disorders (particularly "
+                "text": ": pts w/ hx of substance use dx (particularly "
                },
                {
                 "type": "text",
@@ -945,7 +945,7 @@
                   }
                  }
                 ],
-                "text": "tonic-clonic seizures "
+                "text": "tonic-clonic sz "
                }
               ]
              },
@@ -5443,7 +5443,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -5940,7 +5940,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: orally active                -    longer duration"
+          "text": "Admin: PO active                -    longer duration"
          }
         ]
        },
@@ -6134,7 +6134,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "MOA/Indications"
+                "text": "MOA/Clin Use"
                }
               ]
              }
@@ -7058,7 +7058,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    Admin: oral · IM"
+          "text": "-    Admin: PO · IM"
          }
         ]
        },
@@ -7281,7 +7281,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Clin Use also: chronic hemolysis (supplement)"
+          "text": "Clin Use also: chronic hemolysis (supp)"
          }
         ]
        },
@@ -7318,7 +7318,7 @@
             }
            }
           ],
-          "text": "Administration: Oral ->⍉tol -> dilute inj solution w SW for inj oral or parenteral"
+          "text": "Administration: PO ->⍉tol -> dilute inj solution w SW for inj PO or parenteral"
          }
         ]
        },
@@ -7347,7 +7347,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Parenteral (IV, subcut, deep IM) -> only if oral ⍉feasible "
+          "text": "Parenteral (IV, subcut, deep IM) -> only if PO ⍉feasible "
          }
         ]
        },
@@ -7439,7 +7439,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "withdrawal: benzodiazepines (diazepam 5-10 mg IV or orally hourly; lorazepam 1-2 mg; chlordiazepoxide for less severe)",
+     "drugs": "w.draw: benzodiazepines (diazepam 5-10 mg IV or PO hourly; lorazepam 1-2 mg; chlordiazepoxide for less severe)",
      "note": "mainstay; delirium tremens needs ↑dose IV benzodiazepines; lorazepam or oxazepam w sig liver dz",
      "sources": [
       {
@@ -7476,7 +7476,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "multivitamins and magnesium (with IV fluids)",
+     "drugs": "MVIs and magnesium (w IVF)",
      "note": "IVF in intoxication; outpt w.draw supportive care",
      "sources": [
       {
@@ -7495,7 +7495,7 @@
     },
     {
      "role": "1st",
-     "drugs": "acamprosate 2 g orally daily",
+     "drugs": "acamprosate 2 g PO daily",
      "note": "may decrease relapse and drinking days",
      "sources": [
       {
@@ -7526,7 +7526,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "daily multivitamin with 400 mcg folic acid",
+     "drugs": "daily MVI w 400 mcg folic acid",
      "note": "IVF in intoxication; outpt w.draw supportive care",
      "sources": [
       {
@@ -7550,7 +7550,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "use disorder: naltrexone 50 mg orally daily or 380 mg IM monthly",
+     "drugs": "use dx: naltrexone 50 mg PO daily or 380 mg IM monthly",
      "note": "decreases relapse and drinking days; w counseling",
      "sources": [
       {
@@ -7568,7 +7568,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "haloperidol, only with benzodiazepines",
+     "drugs": "haloperidol, only w benzodiazepines",
      "note": "hallucinations or agitation that benzodiazepines alone don't control; never alone",
      "sources": [
       {
@@ -7592,7 +7592,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "withdrawal: carbamazepine or gabapentin",
+     "drugs": "w.draw: carbamazepine or gabapentin",
      "note": "mild outpt w.draw; adjunct to benzodiazepines or when they are contraindicated",
      "sources": [
       {
@@ -7617,7 +7617,7 @@
     },
     {
      "role": "alt",
-     "drugs": "use disorder: gabapentin or topiramate",
+     "drugs": "use dx: gabapentin or topiramate",
      "note": "off-label: ⍉FDA-approved for AUD",
      "sources": [
       {
@@ -7647,7 +7647,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "withdrawal: phenobarbital IV",
+     "drugs": "w.draw: phenobarbital IV",
      "note": "Alt, or w benzodiazepines if they alone fail",
      "sources": [
       {

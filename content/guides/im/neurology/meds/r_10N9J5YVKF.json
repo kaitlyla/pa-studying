@@ -349,7 +349,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉active PO (formulated w oral opioids to deter IV abuse)"
+          "text": "⍉active PO (formulated w PO opioids to deter IV abuse)"
          }
         ]
        },
@@ -1282,7 +1282,7 @@
     {
      "role": "1st",
      "drugs": "thiamine 100 mg IV or IM",
-     "note": "given routinely, before glucose",
+     "note": "given routinely, b4 glucose",
      "sources": [
       {
        "name": "Overview of Coma and Impaired Consciousness",
@@ -1300,7 +1300,7 @@
     {
      "role": "1st",
      "drugs": "50% dextrose 50 mL IV",
-     "note": "if glucose is low, after thiamine",
+     "note": "if glucose = ↓, after thiamine",
      "sources": [
       {
        "name": "Overview of Coma and Impaired Consciousness",
@@ -1318,7 +1318,7 @@
     {
      "role": "1st",
      "drugs": "naloxone",
-     "note": "suspected opioid overdose",
+     "note": "sus opioid OD",
      "sources": [
       {
        "name": "Overview of Coma and Impaired Consciousness",
@@ -1336,7 +1336,7 @@
     {
      "role": "alt",
      "drugs": "flumazenil",
-     "note": "benzodiazepine overdose",
+     "note": "benzodiazepine OD",
      "sources": [
       {
        "name": "Overview of Coma and Impaired Consciousness",
@@ -1354,7 +1354,7 @@
     {
      "role": "adjunct",
      "drugs": "amantadine",
-     "note": "neurostimulant after traumatic brain injury",
+     "note": "neurostimulant after TBI",
      "sources": [
       {
        "name": "Overview of Coma and Impaired Consciousness",
@@ -1372,7 +1372,7 @@
     {
      "role": "adjunct",
      "drugs": "hyperosmolar therapy",
-     "note": "↑ICP suspected",
+     "note": "↑ICP sus",
      "sources": [
       {
        "name": "StatPearls: Coma",

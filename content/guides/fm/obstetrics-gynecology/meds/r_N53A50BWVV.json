@@ -228,7 +228,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -801,7 +801,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -815,7 +815,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -825,7 +825,7 @@
    "roles": [
     {
      "role": "alt",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "single dose",
      "sources": [
       {
@@ -835,11 +835,11 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "single dose; preferred in preg (instead of doxycycline)",
      "sources": [
       {
@@ -855,12 +855,12 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     },
     {
      "role": "1st",
-     "drugs": "azithromycin",
+     "drugs": "azithro",
      "note": "children ≥8 y, or <8 y if ≥45 kg",
      "sources": [
       {
@@ -870,7 +870,7 @@
        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8344968/"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -878,7 +878,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

@@ -30,7 +30,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "ciprofloxacin, levofloxacin",
+     "drugs": "cipro, levofloxacin",
      "note": "if < 10% local FQ resistance",
      "sources": [
       {
@@ -46,12 +46,12 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Outpatient"
+     "scenario": "Outpt"
     },
     {
      "role": "1st",
-     "drugs": "IV ciprofloxacin or levofloxacin",
-     "note": "choose by severity of illness, RF for resistant uropathogens and pt factors (local antibiogram if available, in sepsis); ⍉an FQ if one was used in the past 12 months",
+     "drugs": "IV cipro or levofloxacin",
+     "note": "choose by severity of illness, RF for resistant uropathogens and pt factors (local antibiogram if available, in sepsis); ⍉an FQ if one was used in the past 12 mo",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -78,11 +78,11 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
-     "drugs": "ciprofloxacin, levofloxacin",
+     "drugs": "cipro, levofloxacin",
      "note": "contraindicated in children",
      "sources": [
       {
@@ -92,12 +92,12 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Outpatient",
+     "scenario": "Outpt",
      "population": "Peds"
     },
     {
      "role": "1st",
-     "drugs": "IV ciprofloxacin or levofloxacin",
+     "drugs": "IV cipro or levofloxacin",
      "note": "contraindicated in children",
      "sources": [
       {
@@ -107,7 +107,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient",
+     "scenario": "Inpt",
      "population": "Peds"
     }
    ]
@@ -139,7 +139,7 @@
        "url": null
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "2nd",
@@ -159,7 +159,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     },
     {
      "role": "1st",
@@ -179,7 +179,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Pregnancy"
+     "scenario": "Preg"
     }
    ]
   },
@@ -204,7 +204,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -229,7 +229,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -254,7 +254,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -279,7 +279,7 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   },
@@ -304,26 +304,26 @@
        "url": "https://www.msdmanuals.com/professional/infectious-diseases/urinary-tract-infections/bacterial-urinary-tract-infections"
       }
      ],
-     "scenario": "Inpatient"
+     "scenario": "Inpt"
     }
    ]
   }
  ],
  "scenarios": [
   {
-   "title": "Outpatient",
+   "title": "Outpt",
    "gaps": [
     "g_7D8Q82P52D"
    ]
   },
   {
-   "title": "Inpatient",
+   "title": "Inpt",
    "gaps": [
     "g_2QHX9HG6AJ"
    ]
   },
   {
-   "title": "Pregnancy",
+   "title": "Preg",
    "gaps": []
   }
  ]

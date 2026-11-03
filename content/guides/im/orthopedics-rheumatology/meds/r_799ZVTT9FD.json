@@ -226,7 +226,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "↓dose oral, IV, or intraarticular"
+                "text": "↓dose PO, IV, or intraarticular"
                }
               ]
              }
@@ -3245,7 +3245,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "low-dose prednisone (15-20 mg/day)",
+     "drugs": "↓dose prednisone (15-20 mg/day)",
      "note": "rapid response",
      "sources": [
       {
@@ -3264,7 +3264,7 @@
     {
      "role": "2nd",
      "drugs": "sarilumab (IL-6 inhibitor)",
-     "note": "inadequate response or can't taper",
+     "note": "inadeq response or can't taper",
      "sources": [
       {
        "name": "Polymyalgia Rheumatica",
@@ -3281,8 +3281,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "methotrexate",
-     "note": "added to GCs early in high relapse risk or GC-AE risk (EULAR/ACR via StatPearls); limited data (MSD)",
+     "drugs": "MTX",
+     "note": "added to GCs early in ↑relapse risk or GC-AE risk (EULAR/ACR via StatPearls); limited data (MSD)",
      "sources": [
       {
        "name": "StatPearls: Polymyalgia Rheumatica",
@@ -3305,7 +3305,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "bisphosphonate",
+     "drugs": "bisphos",
      "note": "long-term glucocorticoids",
      "sources": [
       {
@@ -3360,7 +3360,7 @@
     {
      "role": "alt",
      "drugs": "tocilizumab",
-     "note": "relapse or insufficient response to GCs",
+     "note": "relapse or insuff response to GCs",
      "sources": [
       {
        "name": "StatPearls: Polymyalgia Rheumatica",
@@ -3377,7 +3377,7 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "calcium + vitamin D",
+     "drugs": "calcium + vitD",
      "note": "long-term steroids",
      "sources": [
       {

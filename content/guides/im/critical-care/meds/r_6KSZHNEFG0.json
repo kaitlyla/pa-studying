@@ -31,7 +31,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "treat the cause: PCI, CABG or thrombolysis for coronary thrombosis",
+     "drugs": "tx the cause: PCI, CABG or thrombolysis for coronary thrombosis",
      "note": "cardiogenic shock from acute MI",
      "sources": [
       {
@@ -45,7 +45,7 @@
     {
      "role": "alt",
      "drugs": "atropine, then isoproterenol",
-     "note": "atropine pending pacemaker; isoproterenol occasionally if atropine fails; not advised w myocardial ischemia from CAD",
+     "note": "atropine pending pacemaker; isoproterenol occasionally if atropine fails; ⍉advised w myocard ischemia from CAD",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Shock",
@@ -76,7 +76,7 @@
     {
      "role": "1st",
      "drugs": "dobutamine",
-     "note": "moderate hypotension (MAP 70-90 mm Hg)",
+     "note": "mod hypotension (MAP 70-90 mm Hg)",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Shock",
@@ -93,7 +93,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "norepinephrine (vasopressor)",
+     "drugs": "NE (vasopressor)",
      "note": "severe hypotension (MAP < 70 mm Hg)",
      "sources": [
       {
@@ -106,7 +106,7 @@
     },
     {
      "role": "alt",
-     "drugs": "epinephrine",
+     "drugs": "Epi",
      "note": "inotropic support",
      "sources": [
       {
@@ -125,7 +125,7 @@
     {
      "role": "adjunct",
      "drugs": "balanced crystalloid (cautious boluses)",
-     "note": "PAOP low or normal",
+     "note": "PAOP ↓ or norm",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Shock",
@@ -142,8 +142,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "vasodilators (nitroprusside, nitroglycerin)",
-     "note": "without severe hypotension; ± w a vasopressor",
+     "drugs": "vasodilators (nitroprusside, NTG)",
+     "note": "w.o severe hypotension; ± w a vasopressor",
      "sources": [
       {
        "name": "MSD Manual Professional Edition: Shock",
@@ -178,7 +178,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "aspirin and heparin",
+     "drugs": "ASA and heparin",
      "note": "shock from MI or ACS",
      "sources": [
       {
@@ -197,7 +197,7 @@
     {
      "role": "adjunct",
      "drugs": "loop diuretic (furosemide)",
-     "note": "volume overload, edema",
+     "note": "vol overload, edema",
      "sources": [
       {
        "name": "StatPearls: Cardiogenic Shock",

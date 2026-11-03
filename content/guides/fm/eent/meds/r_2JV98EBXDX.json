@@ -380,7 +380,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -614,7 +614,7 @@
                },
                {
                 "type": "text",
-                "text": ": much lower incidence of GI & hematologic disorders than ASA"
+                "text": ": much lower incidence of GI & hematologic dx than ASA"
                }
               ]
              },
@@ -986,7 +986,7 @@
             }
            }
           ],
-          "text": "Drug of choice "
+          "text": "DOC "
          },
          {
           "type": "text",
@@ -1220,7 +1220,7 @@
         "content": [
          {
           "type": "text",
-          "text": "⍉inhibit platelet aggregate          **⍉GI ulceration -unlike NSAID"
+          "text": "⍉inhibit PLT aggregate          **⍉GI ulceration -unlike NSAID"
          }
         ]
        },
@@ -1617,7 +1617,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -1916,7 +1916,7 @@
                },
                {
                 "type": "text",
-                "text": ": UTIs in preg, Listeria monocytogenes, acute otitis media, Lyme dz, dental infections, Enterococcal infections "
+                "text": ": UTIs in preg, Listeria monocytogenes, acute otitis media, Lyme dz, dental infect, Enterococcal infect "
                }
               ]
              }
@@ -1962,7 +1962,7 @@
                },
                {
                 "type": "text",
-                "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (seizures), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
+                "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (sz), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
                }
               ]
              }
@@ -2200,7 +2200,7 @@
                   "type": "bold"
                  }
                 ],
-                "text": "Indications/Contraindications"
+                "text": "Clin Use/Contraindications"
                }
               ]
              }
@@ -2541,7 +2541,7 @@
                },
                {
                 "type": "text",
-                "text": ": acute otitis media, acute sinusitis, animal/human bites, dental infections, skin/soft tissue infections  "
+                "text": ": acute otitis media, acute sinusitis, animal/human bites, dental infect, skin/soft tissue infect  "
                }
               ]
              }
@@ -2587,7 +2587,7 @@
                },
                {
                 "type": "text",
-                "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (seizures), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
+                "text": ": hypersensitivity, GI (N/V/D), neurotoxicity (sz), acute interstitial nephritis, hematologic (thrombocytopenia, neutropenia, methemoglobinemia)"
                }
               ]
              }
@@ -2697,7 +2697,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -2711,7 +2711,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/otitis-media-acute"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -2731,7 +2731,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -2745,7 +2745,7 @@
        "url": "https://www.msdmanuals.com/professional/ear-nose-and-throat-disorders/middle-ear-and-tympanic-membrane-disorders/otitis-media-acute"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     }
    ]
@@ -2755,7 +2755,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "azithromycin or clarithromycin",
+     "drugs": "azithro or clarithromycin",
      "note": "PCN allergy",
      "sources": [
       {
@@ -2765,7 +2765,7 @@
        "url": null
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Allergy"
     },
     {
@@ -2780,7 +2780,7 @@
        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4d42821d-ce7a-7d64-e063-6294a90a0875"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -2788,7 +2788,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]

@@ -14,7 +14,7 @@
     {
      "role": "alt",
      "drugs": "chloramphenicol",
-     "note": "the only alt; higher death risk than tetracyclines; ⍉oral form in the US",
+     "note": "the only alt; higher death risk than tetracyclines; ⍉PO form in the US",
      "sources": [
       {
        "name": "Your guide table under this diagnosis",
@@ -29,7 +29,7 @@
        "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     }
    ]
   },
@@ -54,7 +54,7 @@
        "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment"
+     "scenario": "Tx"
     },
     {
      "role": "1st",
@@ -68,7 +68,7 @@
        "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Peds"
     },
     {
@@ -83,7 +83,7 @@
        "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
       }
      ],
-     "scenario": "Treatment",
+     "scenario": "Tx",
      "population": "Pregnant"
     }
    ]
@@ -91,7 +91,7 @@
  ],
  "scenarios": [
   {
-   "title": "Treatment",
+   "title": "Tx",
    "gaps": []
   }
  ]
