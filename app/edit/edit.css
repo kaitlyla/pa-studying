@@ -66,7 +66,8 @@ div.meds-add ul { margin: 0; padding-left: 18px; }
 
 /* editors */
 .editing .edit-slot { margin-bottom: 8px; }
-.editing .ProseMirror { outline: 2px solid #9db5e3; outline-offset: -2px; white-space: pre-wrap; word-wrap: break-word; }
+/* a table wider than the editor scrolls sideways inside it, as the page's .ntw box does, instead of widening the page */
+.editing .ProseMirror { overflow-x: auto; outline: 2px solid #9db5e3; outline-offset: -2px; white-space: pre-wrap; word-wrap: break-word; }
 .editing .ProseMirror:focus { outline: 2px solid #2b55a3; }
 .editing .ProseMirror-selectednode { outline: 3px solid #2b55a3; }
 .editing .stub { display: block; margin: 6px 0; }

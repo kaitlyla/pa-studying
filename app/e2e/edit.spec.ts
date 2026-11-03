@@ -11,6 +11,7 @@ import { expect, test, type BrowserContext, type Locator, type Page } from "@pla
 import sharp from "sharp";
 import { buildPageKey } from "../edit/pageKey.ts";
 import { CELL_MARGIN_STEP_PT, COLUMN_STEP_PT, moveColumnBorder } from "../edit/editor/commands.ts";
+import { BORDER_GRAB_PX } from "../edit/editor/columnDrag.ts";
 import { MIN_FIRST_COLUMN_PCT, tableColumns } from "../render/styles.ts";
 import type { TableAttrs } from "../../lib/schemaTypes.ts";
 import { schema } from "../../lib/schema.ts";
@@ -179,6 +180,9 @@ const findTopic = (fits: (g: string, system: string, id: string) => boolean = ()
 const topic = findTopic();
 /** Such a topic with a meds panel. */
 const medsTopic = findTopic((g, system, id) => (readData<SystemJson>(systemPath(g, system)).topics.find((t) => t.id === id)?.meds.length ?? 0) > 0);
+/** A topic whose meds panel has a role chip naming a long list of drugs: one line of it is wider than a half-screen window. */
+const longRoleTopic = findTopic((g, system, id) =>
+  Object.values(readData<SystemJson>(systemPath(g, system)).topics.find((t) => t.id === id)?.medsEdit?.roles ?? {}).flat().some((r) => (r.drugs ?? "").length >= 150));
 
 interface PictureTarget {
   g: string;
@@ -423,8 +427,14 @@ async function startEditing(page: Page): Promise<Locator> {
  * moves late, so arrow or Shift+arrow presses made before that timer runs can be undone by it. A
  * timer with the same delay queued after the click runs after ProseMirror's.
  */
+/**
+ * Where a test clicks a paragraph to put the cursor in it: near its start, but past the column border's
+ * grab zone, which reaches into the text of a table whose cell margins are narrower than Word's default.
+ */
+const IN_TEXT = { position: { x: BORDER_GRAB_PX + 4, y: 2 } };
+
 async function clickIntoEditor(page: Page, p: Locator): Promise<void> {
-  await p.click({ position: { x: 1, y: 2 } });
+  await p.click(IN_TEXT);
   await page.evaluate(() => new Promise<void>((resolve) => setTimeout(resolve, 20)));
 }
 
@@ -848,8 +858,11 @@ test.describe("toolbar limits", () => {
     // As typeMarker does, at the start of the topic row's second cell, but with 7.5 chosen first: what
     // she types next takes it.
     const slot = ref(page, "edit-area").locator(".edit-slot").first();
-    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await clickIntoEditor(page, slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first());
     await page.keyboard.press("Home");
+    // The editor takes up the caret Home moved on the selectionchange after it; the size box takes the
+    // focus before that otherwise, and the editor puts the caret back where the click left it.
+    await page.evaluate(() => new Promise<void>((resolve) => setTimeout(resolve, 20)));
     await ref(page, "tb-size").selectOption("7.5");
     await expect(ref(page, "tb-size")).toHaveValue("7.5");
     await page.keyboard.type(marker);
@@ -878,7 +891,7 @@ test.describe("toolbar limits", () => {
     const cell = slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1);
     const cellWidth = (): Promise<number> => cell.evaluate((td) => td.getBoundingClientRect().width);
     const widthBefore = await cellWidth();
-    await cell.locator("p").first().click({ position: { x: 1, y: 2 } });
+    await cell.locator("p").first().click(IN_TEXT);
     await expect(ref(page, "tb-col-wider")).toBeVisible();
     await clickN(ref(page, "tb-col-wider"), 3);
     await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
@@ -922,7 +935,7 @@ test.describe("toolbar limits", () => {
     await signIn(page);
     await startEditing(page);
     const slot = ref(page, "edit-area").locator(".edit-slot").first();
-    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1).locator("p").first().click(IN_TEXT);
     const wider = ref(page, "tb-col-wider");
     await expect(wider).toBeEnabled();
     for (let i = 0; i < 300 && (await wider.isEnabled()); i++) await wider.click();
@@ -1045,14 +1058,14 @@ test.describe("toolbar limits", () => {
     const row = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt > tbody > tr:not(.hrow)").first();
     const cells = row.locator(":scope > td");
     // Delete the third cell's column in this topic: she confirms, its text goes and the cell to its left takes its width.
-    await cells.nth(2).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await cells.nth(2).locator("p").first().click(IN_TEXT);
     await ref(page, "tb-col-delete").click();
     const confirm = page.getByRole("dialog", { name: `Delete this column in ${t.title}?` });
     await expect(confirm).toBeVisible();
     await ref(confirm, "confirm-ok").click();
     await expect(cells).toHaveCount(beforeCells.length - 1);
     // Then the name column wider.
-    await cells.nth(0).locator("p").first().click({ position: { x: 1, y: 2 } });
+    await cells.nth(0).locator("p").first().click(IN_TEXT);
     await clickN(ref(page, "tb-col-wider"), 3);
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
@@ -1100,7 +1113,7 @@ test.describe("toolbar limits", () => {
     const nameCell = editTable.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").first();
     const editBefore = await padding(cell);
     const nameBefore = await padding(nameCell);
-    await cell.locator("p").first().click({ position: { x: 1, y: 2 } });
+    await cell.locator("p").first().click(IN_TEXT);
     await expect(ref(page, "tb-cell-sides-more")).toBeVisible();
     await clickN(ref(page, "tb-cell-sides-more"), 3);
     await clickN(ref(page, "tb-cell-tb-more"), 3);
@@ -2399,6 +2412,41 @@ test.describe("pictures and highlight colors", () => {
       await expect(ref(page, menu)).toHaveCount(0);
     }
   });
+
+  test("in a half-screen window the page being edited stays the window's width: a wide table scrolls sideways inside its editor and the meds panel fits", async ({ page, context, baseURL }) => {
+    await world(context, baseURL, { seed: true });
+    await page.setViewportSize({ width: 768, height: 900 });
+    await openPage(page, need(longRoleTopic, "topic with a long role chip").hash);
+    await signIn(page);
+    await startEditing(page);
+    const editor = ref(page, "edit-area").locator(".edit-slot").first().locator(".ProseMirror").first();
+    const table = editor.locator("table.nt").first();
+    await expect(table).toBeVisible();
+    // The premise: the table's minimum width is more than this editor holds.
+    expect(await table.evaluate((tb) => tb.getBoundingClientRect().width)).toBeGreaterThan(await editor.evaluate((e) => e.clientWidth));
+    // The page area does not scroll sideways, which would slide the toolbar, title and notes off the left of the window.
+    const pageWide = (): Promise<{ scroll: number; client: number }> => page.locator("main").first().evaluate((m) => ({ scroll: m.scrollWidth, client: m.clientWidth }));
+    const wide = await pageWide();
+    expect(wide.scroll).toBeLessThanOrEqual(wide.client + 1);
+    // Each role chip wraps inside its entry's header rather than running past it.
+    const chips = page.locator(".meds-edit .phc-h .rolec");
+    expect(await chips.count()).toBeGreaterThan(0);
+    const outside = await chips.evaluateAll((els) => els.filter((c) => c.getBoundingClientRect().right > (c.closest("button") as HTMLElement).getBoundingClientRect().right + 0.5).map((c) => c.textContent));
+    expect(outside).toEqual([]);
+    // The table's last column is reached by scrolling the editor, and a click there lands in that cell.
+    const lastCell = table.locator(":scope > tbody > tr:not(.hrow)").first().locator(":scope > td").last();
+    await lastCell.scrollIntoViewIfNeeded();
+    const reached = await lastCell.evaluate((td) => {
+      const b = td.getBoundingClientRect();
+      // Low in the cell's visible part: its top can sit under the sticky toolbar.
+      const hit = document.elementFromPoint(b.right - 8, Math.min(b.bottom, innerHeight) - 20);
+      return { right: b.right, hit: hit !== null && td.contains(hit), scrolled: (td.closest(".ProseMirror") as HTMLElement).scrollLeft };
+    });
+    expect(reached.scrolled).toBeGreaterThan(0);
+    expect(reached.right).toBeLessThanOrEqual(768);
+    expect(reached.hit).toBe(true);
+    expect((await pageWide()).scroll).toBeLessThanOrEqual(wide.client + 1);
+  });
 });
 
 test("beside the open sidebar the page is drawn smaller but the toolbar is full size, stays at the top while scrolling, and works", async ({ page, context, baseURL }) => {
@@ -2739,7 +2787,7 @@ test("an edit to a card's rows of her page table saves to her one stored table, 
   }
   if (cellText === null) throw new Error(`every paragraph of row ${row} also appears elsewhere in the edit area`);
   const marker = newMarker();
-  await paragraph(cellText).click({ position: { x: 1, y: 2 } });
+  await clickIntoEditor(page, paragraph(cellText));
   await page.keyboard.press("Home");
   await page.keyboard.type(marker);
   await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");

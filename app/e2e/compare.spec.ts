@@ -119,15 +119,16 @@ const beside = need(
 
 /** Her example: DM Type 1 beside Cushing's, the Addisonian crisis and adrenal insufficiency, all FM Endocrine. */
 const herExample = ((): { four: Diagnosis[]; dm: Diagnosis } => {
-  const diagnosisName = (t: Diagnosis): string => t.title.replace(/^\*/, "");
+  // By topic id (each topic's first row), which her title edits and abbreviation passes leave alone.
+  const wanted = [
+    ["r_G02D86Y37J", "DM Type 1"],
+    ["r_CAXVPGAVA3", "Cushing's syndrome"],
+    ["r_CRQJW1WFG7", "Adrenal (Addisonian) crisis"],
+    ["r_DZ65TE5YMN", "adrenal insufficiency"],
+  ] as const;
   const all = topicsOf("fm");
-  const system = need(
-    [...new Set(all.map((t) => t.system))].find((s) => all.some((t) => t.system === s && /^Cushing/.test(diagnosisName(t)))),
-    "FM's system holding Cushing's syndrome",
-  );
-  const inSystem = all.filter((t) => t.system === system);
-  const wanted = [/^DM Type 1\b/, /^Cushing/, /^Adrenal \(Addisonian\)/, /^Adrenal Insufficiency/];
-  const four = wanted.map((re) => need(inSystem.find((t) => re.test(diagnosisName(t))), `FM Endocrine: ${re.source}`));
+  const four = wanted.map(([id, what]) => need(all.find((t) => t.id === id), `FM Endocrine: ${what} (${id})`));
+  if (new Set(four.map((t) => t.system)).size !== 1) throw new Error("her four FM Endocrine diagnoses are no longer in one system");
   return { four, dm: need(four[0], "the DM Type 1 diagnosis") };
 })();
 

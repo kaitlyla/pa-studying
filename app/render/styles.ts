@@ -170,9 +170,12 @@ export function tableIndent(indentPt: number, basePt: number): string {
 
 /** Word's default table cell margins (pt): what the screen's reading padding of a cell stands for. */
 export const WORD_CELL_MARGINS: CellMargins = { top: 0, right: 5.4, bottom: 0, left: 5.4 };
-/** The screen's reading padding of a cell with Word's default margins (px). */
+/**
+ * The screen's reading padding of a cell with Word's default margins (px). The sides are Word's own 5.4pt
+ * (7.2px), so a narrow column fits as much text as it does in Word before wrapping.
+ */
 const READING_PAD_Y_PX = 7;
-const READING_PAD_X_PX = 10;
+const READING_PAD_X_PX = 7;
 
 /** One side of cellPadding: `px` grown or shrunk by how far her margin `pt` is from Word's default. */
 function padSide(px: number, pt: number, dflt: number, basePt: number): string {

@@ -789,7 +789,7 @@ describe("cell text margins", () => {
       expect(pads()).toEqual(Array(4).fill(probe.style.padding));
       expect(pads()).not.toEqual(padsBefore);
       const padLeft = (): string[] => [...host.querySelectorAll("td")].map((td) => td.style.getPropertyValue("--cell-pad-left"));
-      expect(padLeft()).toEqual(Array(4).fill("max(0px, calc(10px + 0.1em))"));
+      expect(padLeft()).toEqual(Array(4).fill("max(0px, calc(7px + 0.1em))"));
       // Only the padding changed: each cell keeps its fill and the borders of its place.
       const withoutPadding = (s: string): string => s.replace(/(padding|--cell-pad-left):[^;]*;\s*/g, "");
       expect(styles().map(withoutPadding)).toEqual(before.map(withoutPadding));
