@@ -567,7 +567,7 @@
                   }
                  }
                 ],
-                "text": ": gen sz, sedation, 1"
+                "text": ": gen sz · sedation · 1"
                },
                {
                 "type": "text",
@@ -657,7 +657,7 @@
                   }
                  }
                 ],
-                "text": ": sedation, ataxia, paradoxical rxn"
+                "text": ": sedation · ataxia · paradoxical rxn"
                }
               ]
              },
@@ -719,7 +719,7 @@
                   }
                  }
                 ],
-                "text": ": suicide risk, monitor BP after dose "
+                "text": ": suicide risk · monitor BP after dose "
                }
               ]
              }
@@ -1081,7 +1081,7 @@
         "content": [
          {
           "type": "text",
-          "text": "admin: 0.1 mg/kg IV, max rate 2 mg/min; max 4 mg/dose"
+          "text": "admin: 0.1 mg/kg IV, max rate 2 mg/min - max 4 mg/dose"
          }
         ]
        },
@@ -1221,7 +1221,7 @@
         "content": [
          {
           "type": "text",
-          "text": "admin: IV or PR (rectal); 0.15–0.2 mg/kg IV (5–10 mg typical, max 10 mg/dose)"
+          "text": "admin: IV or PR (rectal) - 0.15–0.2 mg/kg IV (5–10 mg typical, max 10 mg/dose)"
          }
         ]
        },
@@ -1361,7 +1361,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: Short 1/2 life; 0.2 mg/kg IV or 10 mg IM (max 10 mg/dose)"
+          "text": "Admin: Short 1/2 life - 0.2 mg/kg IV or 10 mg IM (max 10 mg/dose)"
          }
         ]
        }
@@ -1457,7 +1457,7 @@
             }
            }
           ],
-          "text": "          -    MOA: ⍉absorb, hyperosmolar->attract+hold H2O in intestinal lumen->stim bowl mvt "
+          "text": "          -    MOA: ⍉absorb - hyperosmolar → attract+hold H2O in intestinal lumen → stim bowl mvt "
          }
         ]
        },
@@ -1515,7 +1515,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration:  powder, pill, rectal "
+          "text": "Administration:  powder · pill · rectal "
          }
         ]
        },
@@ -1544,7 +1544,7 @@
         "content": [
          {
           "type": "text",
-          "text": "SE: typically ⍉ habit forming "
+          "text": "SE: ⍉ habit forming "
          }
         ]
        },
@@ -1573,7 +1573,7 @@
         "content": [
          {
           "type": "text",
-          "text": "GI Sx: flatulence, abd cramp, diarrhea"
+          "text": "GI Sx: flatulence · abd cramp · diarrhea"
          }
         ]
        },
@@ -1997,7 +1997,7 @@
                },
                {
                 "type": "text",
-                "text": ": opioid antagonist; competitive antagonism of all opioid receptors w greatest effects @ mu-r"
+                "text": ": opioid antagonist - competitive antagonism of all opioid receptors w greatest effects @ mu-r"
                }
               ]
              }
@@ -2319,7 +2319,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: 1/2life 30-81min (relapse resp depress poss)"
+          "text": "Admin: ½ life 30-81min (relapse resp depress poss)"
          }
         ]
        },
@@ -2406,7 +2406,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Pt ed: ed family; co-Rx if - prior OD, opioid + benzo/CNS depress, ↑dose, SUD"
+          "text": "Pt ed: ed family - co-Rx if - prior OD · opioid + benzo/CNS depress · ↑dose · SUD"
          }
         ]
        }
@@ -2489,7 +2489,7 @@
             }
            }
           ],
-          "text": "rapid induction of anesthesia; often induce w IV then maintain w inhaled; may be used alone for short procedures; lower doses → sedation"
+          "text": "rapid induction of anesthesia - often induce w IV then maintain w inhaled - may be used alone for short procedures - lower doses → sedation"
          }
         ]
        },
@@ -2565,7 +2565,7 @@
             }
            }
           ],
-          "text": "poor analgesia; sig nausea; little musc relaxation; laryngospasm"
+          "text": "poor analgesia · sig nausea · little musc relaxation · laryngospasm"
          }
         ]
        },
@@ -2637,7 +2637,11 @@
             }
            }
           ],
-          "text": "induction ~30–40 sec; lipid-soluble; "
+          "text": "induction ~30–40 sec · lipid-soluble"
+         },
+         {
+          "type": "text",
+          "text": " · "
          },
          {
           "type": "text",
@@ -2744,7 +2748,7 @@
             }
            }
           ],
-          "text": "anesthesia induction or sedation; sedative + amnestic"
+          "text": "anesthesia induction or sedation - sedative + amnestic"
          }
         ]
        },
@@ -2866,7 +2870,7 @@
             }
            }
           ],
-          "text": " → may use w ketamine to temper; preferred for very short procedures"
+          "text": " → may use w ketamine to temper - preferred for very short procedures"
          }
         ]
        }
@@ -3256,7 +3260,7 @@
                   }
                  }
                 ],
-                "text": ": barbiturate – binds to GABA-r potentiating GABA-mediated CNS inhibition "
+                "text": ": barbiturate - binds to GABA-r potentiating GABA-mediated CNS inhibition "
                }
               ]
              }
@@ -3376,7 +3380,7 @@
                   }
                  }
                 ],
-                "text": ": permanent neuro deficit if injected into or near periph nerves, depression, osteoporosis, irritability "
+                "text": ": permanent neuro deficit if injected into or near periph nerves · depression · osteoporosis · irritability "
                }
               ]
              }
@@ -3440,7 +3444,7 @@
         "content": [
          {
           "type": "text",
-          "text": "MOA: (+) allosteric modulator of GABA-A-r -> "
+          "text": "MOA: (+) allosteric modulator of GABA-A-r → "
          },
          {
           "type": "text",
@@ -4003,7 +4007,7 @@
                },
                {
                 "type": "text",
-                "text": ": act directly @ parasympathetic postganglionic cholinergic muscarinic receptors & compete reversibly w/ ACh for receptor binding "
+                "text": ": act directly @ parasympathetic postganglionic cholinergic muscarinic receptors & compete reversibly w ACh for receptor binding "
                }
               ]
              },
@@ -4072,7 +4076,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "•↑ HR, ↑ BP"
+                "text": "•↑ HR · ↑ BP"
                }
               ]
              },
@@ -4535,7 +4539,7 @@
     {
      "role": "adjunct",
      "drugs": "activated charcoal",
-     "note": "selective, ⍉routine: potentially serious ingestion, ideally ≤1 h, protected airway",
+     "note": "selective · ⍉routine: potentially serious ingestion · ideally ≤1 h · protected airway",
      "sources": [
       {
        "name": "Position Statement: Single-Dose Activated Charcoal. J Toxicol Clin Toxicol 1997;35(7):721-741",
@@ -4739,7 +4743,7 @@
     {
      "role": "adjunct",
      "drugs": "sodium bicarb",
-     "note": "antidote for tricyclic antidepressants; urine alkalinization",
+     "note": "antidote for tricyclic antidepressants - urine alkalinization",
      "sources": [
       {
        "name": "General Principles of Poisoning",
@@ -4795,7 +4799,7 @@
     },
     {
      "role": "adjunct",
-     "drugs": "calcium; ↑dose IV insulin w IV glucose",
+     "drugs": "calcium - ↑dose IV insulin w IV glucose",
      "note": "CCB toxicity",
      "sources": [
       {
@@ -4809,7 +4813,7 @@
     {
      "role": "adjunct",
      "drugs": "IV lipid emulsion",
-     "note": "BB or CCB toxicity; ♡ toxins (eg, bupivacaine)",
+     "note": "BB or CCB toxicity - ♡ toxins (ex, bupivacaine)",
      "sources": [
       {
        "name": "General Principles of Poisoning",
@@ -4892,7 +4896,7 @@
     {
      "role": "adjunct",
      "drugs": "physostigmine",
-     "note": "anticholinergic syndrome; controversial, toxicologist consult",
+     "note": "anticholinergic syndrome - controversial · toxicologist consult",
      "sources": [
       {
        "name": "General Principles of Poisoning",
@@ -4916,7 +4920,7 @@
     {
      "role": "adjunct",
      "drugs": "flumazenil",
-     "note": "benzodiazepines; controversial; ⍉serious cyclic antidepressant OD (sz)",
+     "note": "benzodiazepines - controversial - ⍉serious cyclic antidepressant OD (sz)",
      "sources": [
       {
        "name": "General Principles of Poisoning",

@@ -184,7 +184,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: PO, IV, rectal, SC, intrathecal, SL"
+          "text": "Admin: PO · IV · rectal · SC · intrathecal · SL"
          }
         ]
        },
@@ -357,7 +357,7 @@
         "content": [
          {
           "type": "text",
-          "text": "morphine-3-glucuronide (neuroexcite → accum → neurotox, myoclonus, delirium, sz; ↑risk renal insuff)"
+          "text": "morphine-3-glucuronide (neuroexcite → accum → neurotox · myoclonus · delirium · sz - ↑risk renal insuff)"
          }
         ]
        },
@@ -1103,8 +1103,8 @@
    "roles": [
     {
      "role": "adjunct",
-     "drugs": "IV opioid analgesia: fentanyl 50–100 mcg, morphine 4–6 mg",
-     "note": "doesn't mask peritoneal signs",
+     "drugs": "IV opioid analgesia: fentanyl 50–100 mcg · morphine 4–6 mg",
+     "note": "⍉mask peritoneal signs",
      "sources": [
       {
        "name": "Acute Abdominal Pain",
@@ -1139,8 +1139,8 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "IV PPI (eg, pantoprazole)",
-     "note": "Poss upper GI bleed; use if bleed ulcer confirmed",
+     "drugs": "IV PPI (ex, pantoprazole)",
+     "note": "Poss upper GI bleed - use if bleed ulcer confirmed",
      "sources": [
       {
        "name": "Overview of Gastrointestinal Bleeding",
@@ -1158,7 +1158,7 @@
     {
      "role": "alt",
      "drugs": "cefotaxime or ceftriaxone",
-     "note": "mild IAI, w metronidazole; may still be an option",
+     "note": "mild IAI w metronidazole - may still be an option",
      "sources": [
       {
        "name": "2017 WSES guidelines for management of intra-abdominal infections (World J Emerg Surg 2017;12:29)",
@@ -1176,7 +1176,7 @@
     {
      "role": "alt",
      "drugs": "metronidazole",
-     "note": "mild IAI, w a 3rd-gen cephalosporin",
+     "note": "mild IAI w 3rd-gen cephalosporin",
      "sources": [
       {
        "name": "2017 WSES guidelines for management of intra-abdominal infections (World J Emerg Surg 2017;12:29)",

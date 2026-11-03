@@ -332,7 +332,7 @@
                   }
                  }
                 ],
-                "text": ": GI (irritate, gastritis, PUD, bleed), ↑bleed time, ↓GFR, ischemia, acute renal failure, salt/H2O retention, CHF risk, rash, SJS, asthmatics (bronchospasm, dyspnea, wheezing), aseptic meningitis, exacerbation of anemia, rebound HA"
+                "text": ": GI (irritate · gastritis · PUD · bleed) · ↑bleed time · ↓GFR · ischemia · acute renal failure · salt/H2O retention · CHF risk · rash · SJS · asthmatics (bronchospasm · dyspnea · wheezing) · aseptic meningitis · exacerbation of anemia · rebound HA"
                }
               ]
              },
@@ -447,7 +447,7 @@
                },
                {
                 "type": "text",
-                "text": ", PUD), "
+                "text": " · PUD) · "
                },
                {
                 "type": "text",
@@ -466,7 +466,7 @@
                },
                {
                 "type": "text",
-                "text": ", CV (increase bleed)"
+                "text": " · CV (increase bleed)"
                }
               ]
              }
@@ -927,7 +927,7 @@
             }
            }
           ],
-          "text": "CNS: HA, tinnitus, dizzy      -   renal/hepatic tox: AKF if vol deplete "
+          "text": "CNS: HA · tinnitus · dizzy      -   renal/hepatic tox: AKF if vol deplete "
          }
         ]
        },
@@ -1123,7 +1123,7 @@
             }
            }
           ],
-          "text": "edema -> ↓antiHTN meds & ↑AKI (esp CKD, HF, cirrhosis, vol deplete) -unopposed vasoconstrict"
+          "text": "edema → ↓antiHTN meds & ↑AKI (esp CKD · HF · cirrhosis · vol deplete) -unopposed vasoconstrict"
          }
         ]
        },
@@ -1197,7 +1197,7 @@
             }
            }
           ],
-          "text": "GI bleed/ulcer, dyspepsia → take w food"
+          "text": "GI bleed/ulcer · dyspepsia → take w food"
          }
         ]
        },
@@ -1273,7 +1273,7 @@
             }
            }
           ],
-          "text": "↑serious CV thrombotic events (MI, CVA) -poss fatal (↑if CVD or RF)"
+          "text": "↑serious CV thrombotic events (MI · CVA) -poss fatal (↑if CVD or RF)"
          }
         ]
        },
@@ -1322,7 +1322,7 @@
             }
            }
           ],
-          "text": "↑serious GI events: bleed, ulcer, perforat"
+          "text": "↑serious GI events: bleed · ulcer · perforat"
          },
          {
           "type": "text",
@@ -1364,7 +1364,7 @@
             }
            }
           ],
-          "text": " -poss fatal (↑risk: age, corticosteroids, anticoag, ulcer hx, ↑dose)"
+          "text": " -poss fatal (↑risk: age · corticosteroids · anticoag · ulcer hx · ↑dose)"
          }
         ]
        },
@@ -1606,7 +1606,7 @@
             }
            }
           ],
-          "text": "♡: ↑CV thrombotic risk -> ⍉chronic if CVD hx"
+          "text": "♡: ↑CV thrombotic risk → ⍉chronic if CVD hx"
          }
         ]
        },
@@ -1643,7 +1643,7 @@
             }
            }
           ],
-          "text": "preg: ⍉ ±20wk -> fetal renal dysfun, oligohydramnios"
+          "text": "preg: ⍉ ±20wk → fetal renal dysfun · oligohydramnios"
          }
         ]
        },
@@ -1680,7 +1680,7 @@
             }
            }
           ],
-          "text": "⍉ ±30wk -> premature closure ductus arteriosus"
+          "text": "⍉ ±30wk → premature closure ductus arteriosus"
          }
         ]
        },
@@ -1755,7 +1755,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "capsaicin cream, lidocaine patches",
+     "drugs": "capsaicin cream · lidocaine patches",
      "note": "⍉high-quality tx studies",
      "sources": [
       {
@@ -1769,7 +1769,7 @@
     {
      "role": "2nd",
      "drugs": "corticosteroid inj",
-     "note": "only if Sx don't improve w traditional therapy; inadeq evidence",
+     "note": "only if Sx ⍉improve w traditional therapy - inadeq evidence",
      "sources": [
       {
        "name": "Mott T, et al. Costochondritis: Rapid Evidence Review. Am Fam Physician 2021;104(1):73-78",
