@@ -183,7 +183,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Administration: PO, IV, rectal"
+          "text": "Administration: PO · IV · rectal"
          }
         ]
        },
@@ -285,7 +285,7 @@
             }
            }
           ],
-          "text": "Death on sudden w/draw"
+          "text": "Death on sudden w.draw"
          }
         ]
        },
@@ -431,7 +431,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: IV for critically ill, PO, rectal"
+          "text": "Admin: IV for critically ill · PO · rectal"
          }
         ]
        },
@@ -496,7 +496,7 @@
         "content": [
          {
           "type": "text",
-          "text": "Admin: IV for critically ill, PO, rectal"
+          "text": "Admin: IV for critically ill · PO · rectal"
          }
         ]
        },
@@ -1132,7 +1132,7 @@
                },
                {
                 "type": "text",
-                "text": ": cortisol, as well as other steroid hormones, binds to intracell receptors – the steroid-receptor complex enters the nucleus and acts as a transcription factor to turn on certain genes, causing synth of specific proteins which are responsible for its physiological actions"
+                "text": ": cortisol, as well as other steroid hormones, binds to intracell receptors - steroid-receptor complex enters nucleus & acts as transcription factor to turn on certain genes → synth of specific proteins responsible for its physiological actions"
                }
               ]
              },
@@ -1227,7 +1227,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Increases BG, increases protein catabolism from musc/bone, antagonist of insulin "
+                "text": "↑BG · ↑protein catabolism from musc/bone · antagonist of insulin "
                }
               ]
              },
@@ -1326,7 +1326,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Decreases cap permeability & local edema"
+                "text": "↓cap permeability & local edema"
                }
               ]
              },
@@ -1352,7 +1352,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Inhibits his release from mast cells"
+                "text": "↓his release from mast cells"
                }
               ]
              },
@@ -1420,7 +1420,7 @@
               "content": [
                {
                 "type": "text",
-                "text": "Mineralocorticoid effects: salt/H2O retention, potassium loss"
+                "text": "Mineralocorticoid effects: salt/H2O retention · ↓K⁺"
                }
               ]
              }
@@ -1539,7 +1539,7 @@
                },
                {
                 "type": "text",
-                "text": ": ↑appetite/wt gain, fluid retention, emotional instability, insomnia, indigestion, bitter taste, ↑BP/BG"
+                "text": ": ↑appetite/wt gain · fluid retention · emotional instability · insomnia · indigestion · bitter taste · ↑BP/BG"
                }
               ]
              },
@@ -1587,7 +1587,7 @@
                },
                {
                 "type": "text",
-                "text": ": osteoporosis, GI (ulceration, bleed), psychiatric (mood, psychosis), cataracts, glaucoma, CV (HTN, edema, hypokalemia), diabetes, hyperlipidemia, Cushingoid syndrome, growth failure, impaired wound heal, adrenal suppression, IS "
+                "text": ": osteoporosis · GI (ulceration, bleed) · psychiatric (mood, psychosis) · cataracts · glaucoma · CV (HTN, edema, hypokalemia) · diabetes · hyperlipidemia · Cushingoid syndrome · growth failure · impaired wound heal · adrenal suppression · IS "
                }
               ]
              }
@@ -1754,7 +1754,7 @@
                },
                {
                 "type": "text",
-                "text": ": saturates the Fc receptors on mononuclear cells and decreases destruction of opsonized PLT by macrophages"
+                "text": ": saturates Fc receptors on mononuclear cells & ↓destruction of opsonized PLT by macrophages"
                }
               ]
              },
@@ -1805,7 +1805,7 @@
                },
                {
                 "type": "text",
-                "text": ": alternate to IVIG; immunosuppressive that decreases autoantibody prod "
+                "text": ": alt to IVIG - immunosuppressive that ↓autoantibody prod "
                }
               ]
              },
@@ -1856,7 +1856,7 @@
                },
                {
                 "type": "text",
-                "text": ": CNS hemorrhage, severe thrombocytopenia, refractory "
+                "text": ": CNS hemorrhage · severe thrombocytopenia · refractory "
                }
               ]
              }
@@ -2333,7 +2333,7 @@
     {
      "role": "adjunct",
      "drugs": "methylprednisolone 1 g IV daily x3D",
-     "note": "life-threatening bleed; easier to give than IVIG but may be less effective",
+     "note": "life-threatening bleed - easier to give than IVIG but may be less effective",
      "sources": [
       {
        "name": "Immune Thrombocytopenia (ITP)",
@@ -2368,7 +2368,7 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "IVIG 1 g/kg daily x1-2 days or anti-D 75 mcg/kg IV (Rh-positive, spleen intact)",
+     "drugs": "IVIG 1 g/kg daily x1-2 days or anti-D 75 mcg/kg IV (Rh-positive + spleen intact)",
      "note": "life-threatening bleed",
      "sources": [
       {
@@ -2381,7 +2381,7 @@
     },
     {
      "role": "2nd",
-     "drugs": "rituximab, rilzabrutinib",
+     "drugs": "rituximab · rilzabrutinib",
      "note": "persistent or refractory ITP, or deferring splenectomy",
      "sources": [
       {
@@ -2399,7 +2399,7 @@
    "roles": [
     {
      "role": "2nd",
-     "drugs": "TPO receptor agonist (romiplostim, eltrombopag, avatrombopag), fostamatinib",
+     "drugs": "TPO receptor agonist (romiplostim · eltrombopag · avatrombopag) - fostamatinib",
      "note": "persistent or refractory ITP, or deferring splenectomy",
      "sources": [
       {
@@ -2418,7 +2418,7 @@
     {
      "role": "1st",
      "drugs": "children: short-course glucocorticoids (≤ 7 days)",
-     "note": "⍉life-threatening mucosal bleed or ↓QoL; ⍉ or minor bleed: observation",
+     "note": "⍉life-threatening mucosal bleed or ↓QoL - ⍉ or minor bleed: observation",
      "sources": [
       {
        "name": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (Blood Adv 2019)",
