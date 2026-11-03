@@ -8,14 +8,14 @@ import { schema } from "../../../lib/schema.ts";
 import { newId } from "../../../lib/content/index.ts";
 import { cropOrNull, keptFraction } from "../../../lib/crop.ts";
 import type { Crop, ImageAttrs, TableAttrs } from "../../../lib/schemaTypes.ts";
-import { ownRowWidths, type PlacedCell } from "../../../lib/wordFormat.ts";
+import { cellIndent, ownRowWidths, type PlacedCell } from "../../../lib/wordFormat.ts";
 import { tableColumns } from "../../render/styles.ts";
 import {
   cellLabel, deleteColumnCells, deleteRowRefusal, insertRowRefusal, joiningCell, placedRows, reachLines, rowIdOf, rowScope, rowsLayoutOf, storedCell, tableNow,
   type CellJSON, type RowJSON, type RowsLayout,
 } from "./rowLayout.ts";
 import type { PastedLine } from "./clipboard.ts";
-import { M, N as nodes } from "./types.ts";
+import { cellMarginLeftAt, M, N as nodes } from "./types.ts";
 
 /** Meta key set only by Delete picture and Delete row after their confirm (see the picture guard). */
 export const CONFIRMED_DELETE = "pa-confirmed-delete";
@@ -298,12 +298,12 @@ function selectedParagraphs(state: EditorState): { node: PMNode; pos: number }[]
   return out;
 }
 
-function updateParagraphs(state: EditorState, dispatch: Dispatch | undefined, change: (p: PMNode) => Record<string, unknown>): boolean {
+function updateParagraphs(state: EditorState, dispatch: Dispatch | undefined, change: (p: PMNode, pos: number) => Record<string, unknown>): boolean {
   const paras = selectedParagraphs(state);
   if (paras.length === 0) return false;
   if (dispatch) {
     const tr = state.tr;
-    for (const { node, pos } of paras) tr.setNodeMarkup(pos, undefined, { ...node.attrs, ...change(node) });
+    for (const { node, pos } of paras) tr.setNodeMarkup(pos, undefined, { ...node.attrs, ...change(node, pos) });
     dispatch(tr);
   }
   return true;
@@ -341,11 +341,19 @@ export function changeSpace(which: "spaceBefore" | "spaceAfter", dir: 1 | -1): C
   }));
 }
 
-/** Move paragraph left/right: `indLeft` ± 9 pt (negative allowed). */
+/**
+ * Move paragraph left/right: `indLeft` ± 9 pt. Outside a table it may go negative; in a cell it stops
+ * with the paragraph's leftmost line on the cell's line (cellIndent), the last step landing exactly there.
+ */
 export function moveParagraph(dir: 1 | -1): Command {
-  return (state, dispatch) => updateParagraphs(state, dispatch, (p) => ({
-    indLeft: roundHalf((p.attrs.indLeft as number) + dir * 9),
-  }));
+  return (state, dispatch) => updateParagraphs(state, dispatch, (p, pos) => {
+    const indFirst = p.attrs.indFirst as number;
+    const marginLeft = cellMarginLeftAt(state.doc.resolve(pos));
+    if (marginLeft === undefined) return { indLeft: roundHalf((p.attrs.indLeft as number) + dir * 9) };
+    // From the indent as drawn: one she saved past the line moves from the line.
+    const from = cellIndent(p.attrs.indLeft as number, indFirst, marginLeft).indLeft;
+    return { indLeft: cellIndent(roundHalf(from + dir * 9), indFirst, marginLeft).indLeft };
+  });
 }
 
 /** Enter: split the paragraph, giving the new one all of its attributes (marker included). */

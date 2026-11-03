@@ -186,11 +186,12 @@ function Marker({ marker }: { marker: ListMarker }): ReactNode {
   );
 }
 
-function Paragraph({ node }: { node: PMNode & NodeJSON<"paragraph"> }): ReactNode {
+/** `cellMarginLeftPt`: the left margin of the table cell it is directly in, if it is in one. */
+function Paragraph({ node, cellMarginLeftPt }: { node: PMNode & NodeJSON<"paragraph">; cellMarginLeftPt?: number }): ReactNode {
   const { basePt, pharmNotes } = useContext(RenderCtx);
   const a = node.attrs;
   const content = node.content ?? [];
-  const style = paragraphStyle(a, basePt);
+  const style = paragraphStyle(a, basePt, cellMarginLeftPt);
   if (pharmNotes) {
     const text = inlineText(content);
     if (DIVIDER_RE.test(text)) {
@@ -256,7 +257,7 @@ function Cell({ placed, colspan, rowspan, edges, borders, margins }: CellProps):
     >
       {/* Holds the room its text keeps clear of the pictures over it (watchFloats draws it). */}
       {floats && <div className={FX} aria-hidden="true" />}
-      <Blocks nodes={placed.node.content ?? []} />
+      <Blocks nodes={placed.node.content ?? []} cellMarginLeftPt={margins.left} />
     </td>
   );
 }
@@ -316,7 +317,8 @@ function fillOf(cell: PlacedCell | null): CSSProperties | undefined {
 }
 
 /** Phone: each row as its label, its name, then each column under its column heading, fills kept. */
-function StackedTable({ rows }: { rows: DrawRow[] }): ReactNode {
+function StackedTable({ rows, margins }: { rows: DrawRow[]; margins: CellMargins }): ReactNode {
+  const m = margins.left;
   let heading: DrawRow | null = null;
   const out: ReactNode[] = [];
   rows.forEach((r, i) => {
@@ -326,7 +328,7 @@ function StackedTable({ rows }: { rows: DrawRow[] }): ReactNode {
       if (label && inlineText(label.node.content?.[0]?.content).trim() !== "") {
         out.push(
           <div key={`h${i}`} className="stk-label" style={fillOf(label)} data-anchor={r.row.id}>
-            <Blocks nodes={label.node.content ?? []} />
+            <Blocks nodes={label.node.content ?? []} cellMarginLeftPt={m} />
           </div>,
         );
       }
@@ -338,7 +340,7 @@ function StackedTable({ rows }: { rows: DrawRow[] }): ReactNode {
       <div key={i} className="stk" data-anchor={r.row.id}>
         {nameCell && (
           <div className="stk-name" style={fillOf(nameCell)}>
-            <Blocks nodes={nameCell.node.content ?? []} />
+            <Blocks nodes={nameCell.node.content ?? []} cellMarginLeftPt={m} />
           </div>
         )}
         {r.cells
@@ -349,11 +351,11 @@ function StackedTable({ rows }: { rows: DrawRow[] }): ReactNode {
               <div key={ci} className="stk-col">
                 {h && (
                   <div className="stk-ch" style={fillOf(h)}>
-                    <Blocks nodes={h.node.content ?? []} />
+                    <Blocks nodes={h.node.content ?? []} cellMarginLeftPt={m} />
                   </div>
                 )}
                 <div className="stk-cb" style={fillOf(c.cell)}>
-                  <Blocks nodes={c.cell.node.content ?? []} />
+                  <Blocks nodes={c.cell.node.content ?? []} cellMarginLeftPt={m} />
                 </div>
               </div>
             );
@@ -376,7 +378,7 @@ function Table({ node }: { node: PMNode & NodeJSON<"table"> }): ReactNode {
   // Nested tables (a table inside a cell) always show in full as a grid.
   return (
     <TableViewCtx.Provider value={{ rows: null, stacked: false }}>
-      {view.stacked ? <StackedTable rows={rows} /> : <GridTable node={node} rows={rows} />}
+      {view.stacked ? <StackedTable rows={rows} margins={node.attrs.cellMarginPt} /> : <GridTable node={node} rows={rows} />}
     </TableViewCtx.Provider>
   );
 }
@@ -471,9 +473,10 @@ function SlideCard({ node }: { node: PMNode }): ReactNode {
   );
 }
 
-function Block({ node }: { node: PMNode }): ReactNode {
+/** `cellMarginLeftPt`: the left margin of the table cell the blocks are directly in, if they are in one. */
+function Block({ node, cellMarginLeftPt }: { node: PMNode; cellMarginLeftPt?: number }): ReactNode {
   const { basePt } = useContext(RenderCtx);
-  if (isNode(node, "paragraph")) return <Paragraph node={node} />;
+  if (isNode(node, "paragraph")) return <Paragraph node={node} cellMarginLeftPt={cellMarginLeftPt} />;
   if (isNode(node, "heading_line")) {
     return (
       <h3 className="heading-line">
@@ -497,8 +500,8 @@ function Block({ node }: { node: PMNode }): ReactNode {
   return null;
 }
 
-function Blocks({ nodes }: { nodes: readonly PMNode[] }): ReactNode {
-  return nodes.map((n, i) => <Block key={i} node={n} />);
+function Blocks({ nodes, cellMarginLeftPt }: { nodes: readonly PMNode[]; cellMarginLeftPt?: number }): ReactNode {
+  return nodes.map((n, i) => <Block key={i} node={n} cellMarginLeftPt={cellMarginLeftPt} />);
 }
 
 export interface RichDocProps {

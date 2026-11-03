@@ -5,7 +5,7 @@ import type { AnchoredFloat, Border, CellBorders, Crop, DrawingShape as Shape, L
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
 import { CARLITO_LINE_FACTOR, faceOf, spaceWidth, textWidth } from "./metrics.ts";
 import { drawingSvg } from "./svg.ts";
-import { borderVisible as visible, cellSide, drawnGrid, ownRowWidths, placeCells, tableColumns, TAB_STOP_PT as TAB_STOP, TEXTBOX_INSET_X_PT as BOX_INSET_X, TEXTBOX_INSET_Y_PT as BOX_INSET_Y, underlineKind, type PlacedCell } from "../wordFormat.ts";
+import { borderVisible as visible, cellIndent, cellSide, drawnGrid, ownRowWidths, placeCells, tableColumns, TAB_STOP_PT as TAB_STOP, TEXTBOX_INSET_X_PT as BOX_INSET_X, TEXTBOX_INSET_Y_PT as BOX_INSET_Y, underlineKind, type PlacedCell } from "../wordFormat.ts";
 import { imageKey, type Content, type ImageData, type ImageVariant } from "./types.ts";
 import { SITE_URL } from "../site.ts";
 
@@ -44,6 +44,8 @@ interface Ctx {
   flow: boolean;
   /** The frame of a picture floating in this column: the doc's column itself, or a table cell's table. */
   frame: FloatFrame;
+  /** Directly in a table cell: its left margin as drawn, pt, which no paragraph's line starts left of (cellIndent). */
+  cellMarginLeft?: number;
 }
 
 const attr = <T>(n: { attrs?: Record<string, unknown> }, key: string, dflt: T): T => (n.attrs?.[key] as T | undefined) ?? dflt;
@@ -185,9 +187,10 @@ function placed(ctx: Ctx, node: Content): Content {
 }
 
 function paragraph(node: PMNode, ctx: Ctx): Content[] {
-  const indLeft = attr(node, "indLeft", 0);
-  const indRight = attr(node, "indRight", 0);
   const indFirst = attr(node, "indFirst", 0);
+  const ownLeft = attr(node, "indLeft", 0);
+  const indLeft = ctx.cellMarginLeft === undefined ? ownLeft : cellIndent(ownLeft, indFirst, ctx.cellMarginLeft).indLeft;
+  const indRight = attr(node, "indRight", 0);
   const spaceBefore = attr(node, "spaceBefore", 0);
   const spaceAfter = attr(node, "spaceAfter", 0);
   const align = attr(node, "align", "left");
@@ -311,7 +314,7 @@ function textbox(n: PMNode, ctx: Ctx): Content & { width: number } {
   const fill = attr<string | null>(n, "fill", null);
   const bw = visible(border) ? border.widthPt : 0;
   const inner = Math.max(1, width - 2 * BOX_INSET_X - 2 * bw);
-  const cell: Content = { stack: blocks(n.content ?? [], { ...ctx, width: inner, flow: false }), border: [true, true, true, true].map(() => bw > 0), borderColor: Array(4).fill(visible(border) ? hex(border.color) : "#000000") };
+  const cell: Content = { stack: blocks(n.content ?? [], { ...ctx, width: inner, flow: false, cellMarginLeft: undefined }), border: [true, true, true, true].map(() => bw > 0), borderColor: Array(4).fill(visible(border) ? hex(border.color) : "#000000") };
   if (fill) cell.fillColor = hex(fill);
   return {
     width,
@@ -341,7 +344,7 @@ function drawing(n: PMNode, ctx: Ctx): Content & { width: number } {
     const border = attr<Border | null>(t, "border", null);
     const fill = attr<string | null>(t, "fill", null);
     const bw = visible(border) ? border.widthPt : 0;
-    const cell: Content = { stack: blocks(t.content ?? [], { ...ctx, width: Math.max(1, tw - 2 * bw), flow: false }), border: Array(4).fill(bw > 0), borderColor: Array(4).fill(visible(border) ? hex(border.color) : "#000000") };
+    const cell: Content = { stack: blocks(t.content ?? [], { ...ctx, width: Math.max(1, tw - 2 * bw), flow: false, cellMarginLeft: undefined }), border: Array(4).fill(bw > 0), borderColor: Array(4).fill(visible(border) ? hex(border.color) : "#000000") };
     if (fill) cell.fillColor = hex(fill);
     stack.push({
       relativePosition: { x: attr(t, "x", 0) * scale, y: (attr(t, "y", 0) - h) * scale },
@@ -471,7 +474,7 @@ function table(n: PMNode, ctx: Ctx): Content {
     const frame = { left: -((starts[p.col] ?? 0) + left), width: tableWidth };
     const cell: Content = {
       margin: [left, 0, right, 0],
-      stack: blocks(p.node.content ?? [], { ...ctx, width: Math.max(1, span - left - right), flow: false, frame }),
+      stack: blocks(p.node.content ?? [], { ...ctx, width: Math.max(1, span - left - right), flow: false, frame, cellMarginLeft: left }),
       border: order.map((b) => b !== null),
       borderColor: order.map((b) => (b ? hex(b.color) : "#000000")),
     };

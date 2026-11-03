@@ -16,14 +16,15 @@ import { cropOrNull } from "../../../lib/crop.ts";
 import { FLOAT_PIC } from "../../render/floats.ts";
 import { drawnGrid, placeCells } from "../../../lib/wordFormat.ts";
 import type { ImageAttrs, ListMarker, MarkJSON, NodeAttrs } from "../../../lib/schemaTypes.ts";
-import { N } from "./types.ts";
+import { cellMarginLeftAt, N } from "./types.ts";
 
 /** Copies a React style object onto a DOM element. */
 export function applyStyle(el: HTMLElement, style: CSSProperties | null | undefined): void {
   if (!style) return;
   for (const [k, v] of Object.entries(style)) {
     if (v === undefined || v === null) continue;
-    (el.style as unknown as Record<string, string>)[k] = String(v);
+    if (k.startsWith("--")) el.style.setProperty(k, String(v));
+    else (el.style as unknown as Record<string, string>)[k] = String(v);
   }
 }
 
@@ -164,9 +165,10 @@ function pictureDom(a: ImageAttrs, basePt: number, extra: CSSProperties | null):
 
 export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
   return {
-    paragraph: (node) => {
+    paragraph: (node, view, getPos) => {
       const a = attrsOf(node, "paragraph");
-      const p = el("p", paragraphStyle(a, basePt));
+      const pos = getPos();
+      const p = el("p", paragraphStyle(a, basePt, pos === undefined ? undefined : cellMarginLeftAt(view.state.doc.resolve(pos))));
       if (a.marker) p.append(markerSpan(a.marker, basePt));
       const content = el("span", null, "pm-inline");
       p.append(content);
@@ -250,8 +252,11 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
           if (!next.sameMarkup(current)) {
             // The table's own attributes changed (column widths, cell margins). ProseMirror would move the
             // unchanged cells' views into a new table view as they are, keeping the margins and borders
-            // they were drawn with, so the table redraws itself and its cells here.
+            // they were drawn with, so the table redraws itself and its cells here, and with a new left
+            // margin the paragraphs in them, whose reach into it is drawn from it (paragraphStyle).
             draw(next);
+            const marginLeft = attrsOf(next, "table").cellMarginPt.left;
+            const newMargin = marginLeft !== attrsOf(current, "table").cellMarginPt.left;
             const rows = body.children;
             next.forEach((row, rowOffset, r) => {
               const tds = rows[r]?.children;
@@ -260,6 +265,13 @@ export function nodeViews(basePt: number): Record<string, NodeViewConstructor> {
                 if (!(td instanceof HTMLTableCellElement)) return;
                 td.removeAttribute("style");
                 applyStyle(td, tableCellStyle(cell, next, rowOffset + 1 + cellOffset, basePt));
+                if (!newMargin) return;
+                cell.forEach((child, _offset, k) => {
+                  const p = td.children[k];
+                  if (child.type !== N.paragraph || !(p instanceof HTMLParagraphElement)) return;
+                  p.removeAttribute("style");
+                  applyStyle(p, paragraphStyle(attrsOf(child, "paragraph"), basePt, marginLeft));
+                });
               });
             });
           }

@@ -123,6 +123,28 @@ export function shownCells<C>(cells: readonly PlacedCell<C>[], shown: readonly n
   });
 }
 
+/** A paragraph's left indent in a table cell (cellIndent). */
+export interface CellIndent {
+  /** The left indent, pt, raised where needed so that no line of the paragraph starts left of the cell's line. */
+  indLeft: number;
+  /** How much of the cell's left margin (0–1) the paragraph's leftmost line reaches into. */
+  reach: number;
+}
+
+/**
+ * Her left indent in a cell whose left margin is `marginLeftPt`. An indent may reach into the margin,
+ * but a paragraph moved further left stops with its leftmost line (the first line of a hanging indent,
+ * the others otherwise) on the cell's line: the screen, the PDF and Move left all draw it from this.
+ */
+export function cellIndent(indLeft: number, indFirst: number, marginLeftPt: number): CellIndent {
+  const margin = Math.max(0, marginLeftPt);
+  const hang = Math.min(0, indFirst);
+  // To the hundredth of a point, so a raised indent is stored without float noise (+ 0 turns −0 into 0).
+  const left = Math.round(Math.max(indLeft, -margin - hang) * 100) / 100 + 0;
+  const leftmost = left + hang;
+  return { indLeft: left, reach: leftmost < 0 ? Math.min(1, -leftmost / margin) : 0 };
+}
+
 /**
  * The narrowest the screen draws a table's first (name) column, in % of the table, for widths that
  * came from her Word files (guide-reader/table-spacing; widths she set in the editor are drawn as set).

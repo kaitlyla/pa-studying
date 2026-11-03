@@ -826,4 +826,13 @@ describe("paragraphStyle", () => {
     expect(s.lineHeight).toBeUndefined();
     expect(vi.isMockFunction(paragraphStyle)).toBe(false);
   });
+
+  it("in a cell, draws an indent into the cell's margin as that share of its padding, and never past the line", () => {
+    expect(paragraphStyle({ indLeft: 6 }, 12, 5.4).marginLeft).toBe("0.5em");
+    expect(paragraphStyle({ indLeft: -2.7 }, 12, 5.4).marginLeft).toBe("calc(0em - 0.5 * var(--cell-pad-left))");
+    expect(paragraphStyle({ indLeft: -30 }, 12, 5.4).marginLeft).toBe("calc(0em - 1 * var(--cell-pad-left))");
+    // A hanging first line lands on the line; the other lines sit its hang to the right.
+    expect(paragraphStyle({ indLeft: -30, indFirst: -6 }, 12, 5.4)).toMatchObject({ marginLeft: "calc(0.5em - 1 * var(--cell-pad-left))", textIndent: "-0.5em" });
+    expect(paragraphStyle({ indLeft: -30 }, 12).marginLeft).toBe("-2.5em");
+  });
 });

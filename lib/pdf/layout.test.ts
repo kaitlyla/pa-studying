@@ -235,6 +235,18 @@ describe("tables", () => {
     expect(lay.vLineWidth?.(0)).toBe(1.5);
   });
 
+  it("starts a cell paragraph indented past the cell's line exactly on it, a hanging first line included", () => {
+    const rows = [row("r_AAAAAAAAA1", "content", [
+      { type: "table_cell", attrs: {}, content: [para("past", { indLeft: -30 }), para("hang", { indLeft: -30, indFirst: -4 }), para("in", { indLeft: -3 })] },
+      cell("b"),
+    ])];
+    const t = tableOf(first(build(doc(table([50, 100], rows, { cellMarginPt: { top: 0, right: 4, bottom: 0, left: 6 } })), "table")));
+    const [past, hang, inside] = (t.body[0]?.[0]?.stack ?? []) as Content[];
+    expect(past).toMatchObject({ margin: [-6, 0, 0, 0] });
+    expect(hang).toMatchObject({ margin: [-2, 0, 0, 0], leadingIndent: -4 });
+    expect(inside).toMatchObject({ margin: [-3, 0, 0, 0] });
+  });
+
   it("repeats the leading repeatHeader rows and keeps rows whole only when every row is cantSplit", () => {
     const h = (id: string, extra: Record<string, unknown>) => row(id, "heading", ["H", "h"], extra);
     const c = (id: string, extra: Record<string, unknown> = {}) => row(id, "content", ["c", "d"], extra);

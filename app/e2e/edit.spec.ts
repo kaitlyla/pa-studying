@@ -788,7 +788,7 @@ test.describe("unsaved changes", () => {
 // ---- 4. toolbar limits ------------------------------------------------------------------------------
 
 test.describe("toolbar limits", () => {
-  test("A− floors at 4 pt, Tighter at 0.8 × font size, Above/Below at 0, and the indent goes negative", async ({ page, context, baseURL }) => {
+  test("A− floors at 4 pt, Tighter at 0.8 × font size, Above/Below at 0, and Move left stops with the text on the cell's line", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
@@ -798,7 +798,7 @@ test.describe("toolbar limits", () => {
     await typeMarker(page, marker);
     for (let i = 0; i < marker.length; i++) await page.keyboard.press("Shift+ArrowLeft");
 
-    // Enough moves to take any of her indents (well under 180 pt) past zero.
+    // Enough moves to take any of her indents (well under 180 pt) to the cell's line and past it.
     const leftMoves = 20;
 
     await clickN(ref(page, "tb-smaller"), 30);
@@ -806,22 +806,36 @@ test.describe("toolbar limits", () => {
     await clickN(ref(page, "tb-above-less"), 30);
     await clickN(ref(page, "tb-below-less"), 30);
     await clickN(ref(page, "tb-left"), leftMoves);
+
+    // Drawn: the paragraph's leftmost line starts on the cell's left line (its border's inner edge), not past it.
+    const td = ref(page, "edit-area").locator(".edit-slot").first().locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1);
+    const { line, text } = await td.evaluate((cell) => {
+      const p = cell.querySelector("p");
+      if (!p) throw new Error("no paragraph in the cell");
+      const range = document.createRange();
+      range.selectNodeContents(p);
+      const lefts = [...range.getClientRects()].filter((r) => r.width > 0).map((r) => r.left);
+      return { line: cell.getBoundingClientRect().left + parseFloat(getComputedStyle(cell).borderLeftWidth), text: Math.min(...lefts) };
+    });
+    expect(Math.abs(text - line), `text at ${text}, the cell's line at ${line}`).toBeLessThan(0.75);
+
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
 
     const saved = savedParagraph(fake, marker);
     const p = nodeAt(saved.after, saved.path);
-    const original = nodeAt(saved.before, saved.path);
     const run = firstText(p);
     expect(String(run.text).startsWith(marker)).toBe(true);
     expect(sizeMark(run)).toBe(4);
     expect(attrsOf(p).line).toEqual({ rule: "exact", value: roundHalf(0.8 * 4) });
     expect(numAttr(p, "spaceBefore")).toBe(0);
     expect(numAttr(p, "spaceAfter")).toBe(0);
-    let indent = numAttr(original, "indLeft");
-    for (let i = 0; i < leftMoves; i++) indent = roundHalf(indent - 9);
-    expect(numAttr(p, "indLeft")).toBe(indent);
-    expect(numAttr(p, "indLeft")).toBeLessThan(0);
+    // Stored: the indent that puts the leftmost line (a hanging first line included) on the cell's line.
+    // The paragraph's ancestors are the prefixes of its path ending at an index into a `content` array.
+    const ancestors = [...Array(saved.path.length).keys()].map((n) => saved.path.slice(0, saved.path.length - n)).filter((q) => typeof q[q.length - 1] === "number");
+    const tablePath = need(ancestors.find((q) => nodeAt(saved.after, q).type === "table"), "the paragraph's table");
+    const marginLeft = (attrsOf(nodeAt(saved.after, tablePath)).cellMarginPt as { left: number }).left;
+    expect(numAttr(p, "indLeft")).toBe(Math.round((-marginLeft - Math.min(0, numAttr(p, "indFirst"))) * 100) / 100 + 0);
   });
 
   test("the size box sets 7.5 pt, and the save keeps it", async ({ page, context, baseURL }) => {

@@ -788,13 +788,29 @@ describe("cell text margins", () => {
       probe.style.padding = cellPadding({ top: 1, right: 6.5, bottom: 1, left: 6.5 }, 11);
       expect(pads()).toEqual(Array(4).fill(probe.style.padding));
       expect(pads()).not.toEqual(padsBefore);
+      const padLeft = (): string[] => [...host.querySelectorAll("td")].map((td) => td.style.getPropertyValue("--cell-pad-left"));
+      expect(padLeft()).toEqual(Array(4).fill("max(0px, calc(10px + 0.1em))"));
       // Only the padding changed: each cell keeps its fill and the borders of its place.
-      const withoutPadding = (s: string): string => s.replace(/padding:[^;]*;\s*/, "");
+      const withoutPadding = (s: string): string => s.replace(/(padding|--cell-pad-left):[^;]*;\s*/g, "");
       expect(styles().map(withoutPadding)).toEqual(before.map(withoutPadding));
       // Undo draws the old margins again.
       undo(view.state, view.dispatch);
       undo(view.state, view.dispatch);
       expect(styles()).toEqual(before);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("redraw a cell paragraph reaching into the left margin by its new share when the margin changes", () => {
+    const d = docOf(table([row(rid(1), [{ type: "table_cell", attrs: {}, content: [para([text("A")], { indLeft: -2.7 })] }, cell("B")])]));
+    const host = document.createElement("div");
+    const view = new EditorView(host, { state: at(createEditorState(d), "A"), nodeViews: nodeViews(11), markViews: markViews(11), ...editorProps });
+    try {
+      const p = (): HTMLElement => host.querySelector("td p") as HTMLElement;
+      expect(p().style.marginLeft).toBe("calc(0em - 0.5 * var(--cell-pad-left))");
+      expect(changeCellMargins("sides", 1)(view.state, view.dispatch)).toBe(true);
+      expect(p().style.marginLeft).toBe("calc(0em - 0.4154 * var(--cell-pad-left))");
     } finally {
       view.destroy();
     }
@@ -834,6 +850,21 @@ describe("paragraph spacing and indent", () => {
   it("Move paragraph left may make the indent negative", () => {
     const state = run(one({ indLeft: 4 }), moveParagraph(-1));
     expect(state.doc.firstChild?.attrs.indLeft).toBe(-5);
+  });
+
+  it("Move paragraph left in a cell stops with the text on the cell's line, the last step snapping to it", () => {
+    const inCell = (attrs: Record<string, unknown>) =>
+      at(createEditorState(docOf(table([row(rid(1), [{ type: "table_cell", attrs: {}, content: [para([text("p")], attrs)] }, cell("B")])]))), "p");
+    const indLeft = (s: EditorState) => s.doc.firstChild?.firstChild?.firstChild?.firstChild?.attrs.indLeft as number;
+    let state = run(inCell({ indLeft: 4 }), moveParagraph(-1));
+    expect(indLeft(state)).toBe(-5);
+    state = run(state, moveParagraph(-1));
+    expect(indLeft(state)).toBe(-MARGINS.left);
+    state = run(state, moveParagraph(-1));
+    expect(indLeft(state)).toBe(-MARGINS.left);
+    // A hanging first line is the leftmost line; one saved past the line moves right from the line.
+    expect(indLeft(run(inCell({ indLeft: -20, indFirst: -4 }), moveParagraph(-1)))).toBe(-1.4);
+    expect(indLeft(run(inCell({ indLeft: -20 }), moveParagraph(1)))).toBe(3.5);
   });
 });
 

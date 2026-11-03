@@ -7,7 +7,7 @@ import type { CSSProperties } from "react";
 import { FONT_FAMILIES } from "../../lib/fonts.ts";
 import { cropOrNull, keptFraction } from "../../lib/crop.ts";
 import type { Border, CellBorders, CellMargins, Crop, ImageAttrs, MarkJSON, ParagraphAttrs, TableBorders, TextboxAttrs } from "../../lib/schemaTypes.ts";
-import { borderVisible, cellSide, TAB_STOP_PT, TEXTBOX_INSET_X_PT, TEXTBOX_INSET_Y_PT, underlineKind, type UnderlineKind } from "../../lib/wordFormat.ts";
+import { borderVisible, cellIndent, cellSide, TAB_STOP_PT, TEXTBOX_INSET_X_PT, TEXTBOX_INSET_Y_PT, underlineKind, type UnderlineKind } from "../../lib/wordFormat.ts";
 
 export type { Border, MarkJSON, ParagraphAttrs, TableBorders } from "../../lib/schemaTypes.ts";
 export { MIN_FIRST_COLUMN_PCT, tableColumns } from "../../lib/wordFormat.ts";
@@ -46,9 +46,29 @@ function sideStyles(sides: CellBorders | null | undefined, basePt: number): CSSP
   return out;
 }
 
-export function paragraphStyle(a: Partial<ParagraphAttrs>, basePt: number): CSSProperties {
+/**
+ * A cell's drawn left padding, set on every element that draws a table cell's content (the cell, and
+ * a phone's stacked boxes in styles.css), so a paragraph reaching into it knows how far its line is.
+ */
+export const CELL_PAD_LEFT = "--cell-pad-left";
+
+/**
+ * A paragraph's left margin: her indent, or for one directly in a table cell whose left margin is
+ * `cellMarginLeftPt`, the indent cellIndent allows, with the part reaching into the cell's margin drawn
+ * as that share of the cell's drawn padding, so a paragraph at the limit starts exactly on the line.
+ */
+function leftMargin(a: Partial<ParagraphAttrs>, basePt: number, cellMarginLeftPt: number | undefined): string {
+  if (cellMarginLeftPt === undefined) return em(a.indLeft ?? 0, basePt);
+  const indFirst = a.indFirst ?? 0;
+  const { indLeft, reach } = cellIndent(a.indLeft ?? 0, indFirst, cellMarginLeftPt);
+  if (reach === 0) return em(indLeft, basePt);
+  // Its leftmost line (indLeft plus a hanging first line) lands `reach` of the padding left of the text edge.
+  return `calc(${em(-Math.min(0, indFirst), basePt)} - ${Math.round(reach * 10000) / 10000} * var(${CELL_PAD_LEFT}))`;
+}
+
+export function paragraphStyle(a: Partial<ParagraphAttrs>, basePt: number, cellMarginLeftPt?: number): CSSProperties {
   const s: CSSProperties = {
-    marginLeft: em(a.indLeft ?? 0, basePt),
+    marginLeft: leftMargin(a, basePt, cellMarginLeftPt),
     marginRight: em(a.indRight ?? 0, basePt),
     textIndent: em(a.indFirst ?? 0, basePt),
     marginTop: em(a.spaceBefore ?? 0, basePt),
@@ -154,25 +174,31 @@ export const WORD_CELL_MARGINS: CellMargins = { top: 0, right: 5.4, bottom: 0, l
 const READING_PAD_Y_PX = 7;
 const READING_PAD_X_PX = 10;
 
+/** One side of cellPadding: `px` grown or shrunk by how far her margin `pt` is from Word's default. */
+function padSide(px: number, pt: number, dflt: number, basePt: number): string {
+  const d = pt - dflt;
+  return d === 0 ? `${px}px` : `max(0px, calc(${px}px + ${em(d, basePt)}))`;
+}
+
 /**
  * A cell's padding on screen: the reading padding, grown or shrunk by how far the table's margins are
  * from Word's default, so a table she never changed looks as it always has and her changes show.
  */
 export function cellPadding(m: CellMargins, basePt: number): string {
-  const side = (px: number, pt: number, dflt: number): string => {
-    const d = pt - dflt;
-    return d === 0 ? `${px}px` : `max(0px, calc(${px}px + ${em(d, basePt)}))`;
-  };
   return [
-    side(READING_PAD_Y_PX, m.top, WORD_CELL_MARGINS.top),
-    side(READING_PAD_X_PX, m.right, WORD_CELL_MARGINS.right),
-    side(READING_PAD_Y_PX, m.bottom, WORD_CELL_MARGINS.bottom),
-    side(READING_PAD_X_PX, m.left, WORD_CELL_MARGINS.left),
+    padSide(READING_PAD_Y_PX, m.top, WORD_CELL_MARGINS.top, basePt),
+    padSide(READING_PAD_X_PX, m.right, WORD_CELL_MARGINS.right, basePt),
+    padSide(READING_PAD_Y_PX, m.bottom, WORD_CELL_MARGINS.bottom, basePt),
+    padSide(READING_PAD_X_PX, m.left, WORD_CELL_MARGINS.left, basePt),
   ].join(" ");
 }
 
 export function cellStyle(a: CellAttrs, basePt: number, table: TableBorders | null, edges: CellEdges, margins: CellMargins = WORD_CELL_MARGINS): CSSProperties {
-  const s: CSSProperties = { verticalAlign: a.vAlign === "center" ? "middle" : (a.vAlign ?? "top"), padding: cellPadding(margins, basePt) };
+  const s: CSSProperties = {
+    verticalAlign: a.vAlign === "center" ? "middle" : (a.vAlign ?? "top"),
+    padding: cellPadding(margins, basePt),
+    [CELL_PAD_LEFT as string]: padSide(READING_PAD_X_PX, margins.left, WORD_CELL_MARGINS.left, basePt),
+  };
   if (a.fill) s.background = hexColor(a.fill);
   if (table) {
     s.borderTop = borderCss(cellSide(table, a.borders, "top", edges.top), basePt);

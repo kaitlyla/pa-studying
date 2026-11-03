@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { borderVisible, cellSide, drawnGrid, edgeBorder, mergedRowGroups, ownRowWidths, placeCells, rowWidthsProblem, underlineKind } from "./wordFormat.ts";
+import { borderVisible, cellIndent, cellSide, drawnGrid, edgeBorder, mergedRowGroups, ownRowWidths, placeCells, rowWidthsProblem, underlineKind } from "./wordFormat.ts";
 
 describe("underlineKind", () => {
   it.each([
@@ -165,5 +165,25 @@ describe("rowWidthsProblem", () => {
 
   it("names merged rows whose widths differ", () => {
     expect(rowWidthsProblem(table(row("a", [1, 2], 2), single("b")))).toBe("rows a, b share a merged cell but not their widths");
+  });
+});
+
+describe("cellIndent", () => {
+  it("keeps an indent that stays right of the cell's line, reaching into the margin by its share", () => {
+    expect(cellIndent(4, 0, 5.4)).toEqual({ indLeft: 4, reach: 0 });
+    expect(cellIndent(-2.7, 0, 5.4)).toEqual({ indLeft: -2.7, reach: 0.5 });
+  });
+
+  it("raises an indent past the line so the paragraph starts exactly on it", () => {
+    expect(cellIndent(-14, 0, 5.4)).toEqual({ indLeft: -5.4, reach: 1 });
+  });
+
+  it("measures a hanging indent by its first line, and a first-line indent by the other lines", () => {
+    expect(cellIndent(-14, -4, 5.4)).toEqual({ indLeft: -1.4, reach: 1 });
+    expect(cellIndent(-14, 9, 5.4)).toEqual({ indLeft: -5.4, reach: 1 });
+  });
+
+  it("allows nothing left of the text edge in a cell without a left margin", () => {
+    expect(cellIndent(-9, 0, 0)).toEqual({ indLeft: 0, reach: 0 });
   });
 });
