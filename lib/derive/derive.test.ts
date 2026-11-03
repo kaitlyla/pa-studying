@@ -15,7 +15,7 @@ import { B, C, D, G, GONE, P, PHARM_PAGE, R, S, tableDoc, U, writeFixture, write
 import { uncoveredText } from "./coverage.ts";
 import { BuildError } from "./errors.ts";
 import type { Content, GuideData, SystemData } from "./model.ts";
-import { type Card, CardMatcher, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
+import { type Card, CardMatcher, longForm, meantCards, medsPanel, panelHome, type PharmPlace, phraseMatcher, sectionRowCards, stubLabel, topicText, treatmentColumn } from "./pharm.ts";
 import { publish, type PublishResult } from "./publish.ts";
 import {
   comparisonsPath, docPath, GENERAL_PATH_RE, generalPath, homePath, HOSTS_PATH, navPath, OTHER_PATH, REF_PATH_RE, refPath, SITE_PATH, slidesPath, systemPath, UPDATES_PATH, visitsPath, workupPath,
@@ -2090,6 +2090,9 @@ describe("pharm (40 §40.4–§40.5)", () => {
       expect(n.named("if NSAIDs ineffective → opioids")).toEqual([C(15), C(24)]);
       expect(n.named("bisphosphonate ineffective w/ severe bone loss")).toEqual([C(26)]);
       expect(n.named("triptans, opioids")).toEqual([C(22), C(24)]);
+      // Anorexia nervosa: her "but" conceding a use keeps the drug.
+      expect(n.named("TCAs ⍉effective, but may be used for comorbid anxiety")).toEqual([C(25)]);
+      expect(n.named("TCAs ⍉effective")).toEqual([]);
     });
 
     it("a drug word hyphen-joined after non, low, high or a digit is another word; her combination names stay", () => {
@@ -2248,7 +2251,7 @@ describe("pharm (40 §40.4–§40.5)", () => {
     });
 
     it("her abbreviation list's w (with) names her choice", () => {
-      expect(m.named("anticoagulation w warfarin (INR 2-3)")).toEqual([C(1)]);
+      expect(m.named(longForm("anticoagulation w warfarin (INR 2-3)"))).toEqual([C(1)]);
     });
 
     it("her abbreviation list's incl (including) gives examples, which do not narrow the class word", () => {
@@ -2259,7 +2262,47 @@ describe("pharm (40 §40.4–§40.5)", () => {
       // FM Urgent Care, Anticoagulants: "- Direct thrombin inhibitors: Idarucizumab ⏎ - Factor Xa inhibitors – Andexanet under investigation".
       expect(m.named("- Direct thrombin inhibitors: Idarucizumab")).toEqual([C(4)]);
       expect(m.named("dabigatran – andexanet")).toEqual([C(4)]);
+      // Her Short Style dash: "- Xa inhibitors - Andexanet under investigation".
+      expect(m.named(longForm("- dabigatran - andexanet under investigation"))).toEqual([C(4)]);
       expect(m.named("Direct thrombin inhibitors: dabigatran")).toEqual([C(3)]);
+    });
+  });
+
+  describe("her Short Style marks read as the older ones (`longForm`)", () => {
+    it("reads her list's ' · ' as a comma, her clause's ' - ' as a semicolon and her 'w' as 'w/'", () => {
+      expect(longForm("NSAIDs · corticosteroids · opioids generally ineffective")).toBe("NSAIDs, corticosteroids, opioids generally ineffective");
+      expect(longForm("⍉FDA-approved - haloperidol")).toBe("⍉FDA-approved; haloperidol");
+      expect(longForm("sxs control w afterload reducers")).toBe("sxs control w/ afterload reducers");
+      expect(longForm("W hx of sz")).toBe("W/ hx of sz");
+    });
+
+    it("leaves her bullets, her negative sign and the words her marks sit inside as they are", () => {
+      for (const kept of ["- loop diuretics\n· ACEI", "avoid (-) inotropes", "FDA-approved", "w/ warfarin", "how to", "2w course", "1st-line", "Rescue antiemetics – if N/V"]) {
+        expect(longForm(kept)).toBe(kept);
+      }
+    });
+
+    const nsaids = { id: C(1), file: "f", aliases: ["NSAIDs"], home: {} };
+    const steroids = { id: C(2), file: "f", aliases: ["corticosteroids"], home: {} };
+    const antihist = { id: C(3), file: "f", aliases: ["antihistamines", "haloperidol"], home: {} };
+    const loop = { id: C(4), file: "f", aliases: ["furosemide"], home: {}, classWords: ["diuretics"] };
+    const m = new CardMatcher([nsaids, steroids, antihist, loop]);
+    const short = (text: string) => m.named(longForm(text));
+
+    it("an avoid word's reach and her ineffective list stop and carry where her commas and semicolons make them", () => {
+      // FM Urticaria "⍉triggers · antihist"; FM Delirium "⍉FDA-approved - haloperidol"; FM Fibromyalgia.
+      expect(short("⍉triggers · antihistamines")).toEqual(m.named("⍉triggers, antihistamines"));
+      expect(short("⍉triggers · antihistamines")).toEqual([C(3)]);
+      expect(short("⍉FDA-approved - haloperidol")).toEqual([C(3)]);
+      expect(short("⍉NSAIDs · corticosteroids")).toEqual([]);
+      expect(short("NSAIDs · corticosteroids · haloperidol generally ineffective")).toEqual([]);
+    });
+
+    it("a class word in her list line or after her w is not a heading of the list below it", () => {
+      // FM Dilated cardiomyopathy: "HF TX: ACEI · BB · diuretics", "sxs control w afterload reducers or diuretics".
+      expect(short("HF TX: NSAIDs · BB · diuretics\n•spironolactone")).toEqual([C(1), C(4)]);
+      expect(short("sxs control w afterload reducers or diuretics\n•spironolactone")).toEqual([C(4)]);
+      expect(m.named("sxs control w/ afterload reducers or diuretics\n•spironolactone")).toEqual([C(4)]);
     });
   });
 

@@ -118,7 +118,8 @@ const INEFFECTIVE = /^[^\S\n]*(?:(?:generally|typically)[^\S\n]+)?(?:ineffective
  * generally ineffective"), past a parenthetical of examples. Her "if" before it makes the drug a step
  * tried first ("TCAs (clomipramine, imipramine) if above ⍉effective"), and a condition after her word
  * limits it to a case ("bisphosphonate ineffective w/ severe bone loss", "ineffective @ controlling
- * rate during exercise"): the drug still treats. `drugs` is every drug word.
+ * rate during exercise"), as does her "but" conceding a use ("SSRIs ⍉effective, but may be used for
+ * comorbid anxiety"): the drug still treats. `drugs` is every drug word.
  */
 function ineffectiveAfter(before: string, after: string, drugs: RegExp | null): boolean {
   if (CLAUSE_IF.test(before)) return false;
@@ -129,7 +130,7 @@ function ineffectiveAfter(before: string, after: string, drugs: RegExp | null): 
     const said = INEFFECTIVE.exec(rest);
     if (said !== null) {
       const tail = rest.slice(said[0].length);
-      return !CONDITION.test(tail) && !/^\s*@/u.test(tail);
+      return !CONDITION.test(tail) && !/^\s*(?:@|,?\s*but(?![\p{L}\p{N}]))/iu.test(tail);
     }
     const sep = /^[^\S\n]*[,/][^\S\n]*/u.exec(rest);
     const drug = sep === null || next === null ? null : next.exec(rest.slice(sep[0].length));
@@ -143,6 +144,23 @@ function ineffectiveAfter(before: string, after: string, drugs: RegExp | null): 
  * she wraps after a comma goes on: "avoid hepatotoxic drugs: NSAIDs, opiates, ⏎ BDZs (HE)".
  */
 const ITEM_END = /[;▪•»➀-➓]|(?<!,[^\S\n]*)\n/gu;
+
+/**
+ * Her Short Style marks, each with the older form every rule of the matcher reads: " · " between
+ * words is her list's comma ("NSAIDs · corticosteroids · opioids"), " - " between words her clause's
+ * semicolon ("⍉FDA-approved - haloperidol"), and "w" before a word her "w/" ("control w afterload
+ * reducers"). A dash or dot opening a line is her bullet, and "(-)" her negative sign.
+ */
+const SHORT_FORMS: readonly [RegExp, string][] = [
+  [/(?<=[^\s(])[^\S\n]+·[^\S\n]+(?=[^\s)])/gu, ", "],
+  [/(?<=[^\s(])[^\S\n]+-[^\S\n]+(?=[^\s)])/gu, "; "],
+  [/(?<![\p{L}\p{N}/.'’-])(w)[^\S\n]+(?=[\p{L}\p{N}(])/giu, "$1/ "],
+];
+
+/** Her treatment text (NFC) as the matcher reads it: her Short Style marks in their older form (`SHORT_FORMS`). */
+export function longForm(text: string): string {
+  return SHORT_FORMS.reduce((t, [re, to]) => t.replace(re, to), text.normalize("NFC"));
+}
 
 /**
  * Whether the avoid word ending at `from` in `item` reaches the drug word at `to`: through her list of
@@ -177,11 +195,8 @@ function avoidReaches(item: string, from: number, to: number, drugs: RegExp | nu
 /** Her words for drugs ending the text before a colon: "hepatotoxic drugs:". */
 const DRUGS_HEAD = /(?<![\p{L}\p{N}])(?:drugs|meds|medications|agents)\s*$/iu;
 
-/**
- * A list element of hers that says when to avoid, not what: "AVOID in inferior, PDE-5 inhibitor in last 24h";
- * "w" is her list's with.
- */
-const CONDITION = /^\s*(?:(?:in|if|w\/|with|after|during|when|for|unless)(?![\p{L}\p{N}])|w(?=\s))/iu;
+/** A list element of hers that says when to avoid, not what: "AVOID in inferior, PDE-5 inhibitor in last 24h". */
+const CONDITION = /^\s*(?:in|if|w\/|with|after|during|when|for|unless)(?![\p{L}\p{N}])/iu;
 
 /**
  * Whether her avoid word at `m` is a word of a slash pair with a word that does not stop a drug —
@@ -380,11 +395,8 @@ function unavoided(re: RegExp | null, text: string, drugs: RegExp | null, option
  */
 const PARENTHETICAL = /^[^\S\n]*\((?![^\S\n]*(?:e\.?\s?g\b|ex\b|such as\b|including\b|incl\b))([^()\n]*)\)/iu;
 
-/**
- * Her drug named with "w/" right after a word, naming her choice the same way: "anticoagulate w/ Warfarin"
- * (her list's "w" too).
- */
-const WITH_CHOICE = /^[^\S\n]*(?:w\/|with(?![\p{L}\p{N}])|w(?=[^\S\n]))([^\n,;()]*)/iu;
+/** Her drug named with "w/" right after a word, naming her choice the same way: "anticoagulate w/ Warfarin". */
+const WITH_CHOICE = /^[^\S\n]*(?:w\/|with(?![\p{L}\p{N}]))([^\n,;()]*)/iu;
 
 /** Her card of reversal agents, by its own name: the antidotes she lists under a drug she reverses. */
 const ANTIDOTE_CARD = /^(?:reversal agents?|antidotes?)$/iu;
@@ -507,7 +519,8 @@ export class CardMatcher {
     }
     const antidotes = this.cards.filter((c) => this.membersOf(c.id).some((m) => m.aliases.some((a) => ANTIDOTE_CARD.test(a))));
     const antidoteWords = phraseSource(antidotes.flatMap((c) => this.membersOf(c.id).flatMap((m) => m.aliases)));
-    this.antidoteHead = antidoteWords === null ? null : new RegExp(`^[^\\S\\n]*(?::|[–—]|-(?=[^\\S\\n]))[^\\S\\n]*${antidoteWords}`, "iu");
+    // Her dash between words reads as her semicolon (`longForm`): "Xa inhibitors - Andexanet".
+    this.antidoteHead = antidoteWords === null ? null : new RegExp(`^[^\\S\\n]*(?::|[–—;]|-(?=[^\\S\\n]))[^\\S\\n]*${antidoteWords}`, "iu");
   }
 
   /**
@@ -647,6 +660,7 @@ export class CardMatcher {
    * sign or followed by "not" anywhere in the item names nothing (`avoidedAt`).
    */
   namedBy(text: string): Map<string, string[]> {
+    // `text` is in her long form (`longForm`): her Short Style marks are read as the older ones.
     const nfc = text.normalize("NFC");
     const masked = this.aliases ? nfc.replace(this.aliases, (m) => " ".repeat(m.length)) : nfc;
     // Every drug name in her text, longest first: "opioid" in her "mu-opioid antagonists" names only
@@ -1240,7 +1254,7 @@ export function medsPanel(
   const picked: { row: Row; section: string; cards: string[] }[] = [];
   const seen = new Set<string>();
   const column = treatmentColumn(s.topics, topic);
-  const text = (column ?? topicText(s.topics, topic)).normalize("NFC");
+  const text = longForm(column ?? topicText(s.topics, topic));
   const byRow = new Map(s.structure.pharmSections.flatMap((ps) => [...sectionCardsByRow(matcher, s, ps)]));
   const rowCards = new Set([...byRow.values()].flat());
   const namedBy = matcher.namedBy(text);
