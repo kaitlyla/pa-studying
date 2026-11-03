@@ -26,7 +26,7 @@
     "content": [
      {
       "type": "text",
-      "text": "Contraindicated in systemic fungal infect. ⍉live vax @ immunosuppressive doses. Caution: HF, HTN, renal insuff; peptic ulcer, diverticulitis (perf risk)."
+      "text": "⍉systemic fungal infect. ⍉live vax @ immunosuppressive doses. Caution: HF · HTN · renal insuff; peptic ulcer · diverticulitis (perf risk)"
      }
     ]
    },
@@ -52,7 +52,7 @@
     "content": [
      {
       "type": "text",
-      "text": "CYP3A4 inducers (phenytoin, carbamazepine, RIF, barbiturates) may require a higher steroid dose; inhibitors (ketoconazole, itraconazole, ritonavir, erythromycin) raise levels. NSAIDs/ASA: ↑ GI SE. Warfarin: response USU inhibited; monitor INR often. K-depleting diuretics: watch for hypokalemia."
+      "text": "CYP3A4 inducers (phenytoin · carbamazepine · RIF · barbiturates) may require ↑steroid dose - inhibitors (ketoconazole · itraconazole · ritonavir · erythromycin) raise levels. NSAIDs/ASA: ↑ GI SE. Warfarin: response USU inhibited - monitor INR often. K-depleting diuretics: watch for hypokalemia"
      }
     ]
    },
@@ -83,11 +83,24 @@
         "type": "bold"
        }
       ],
-      "text": "Watch for infect. Long-term:"
+      "text": "Watch for infect."
      },
      {
       "type": "text",
-      "text": " consider osteoporosis prev (calcium, vitD, bisphos, wt-bearing exercise); use the lowest effective dose and duration."
+      "text": " "
+     },
+     {
+      "type": "text",
+      "marks": [
+       {
+        "type": "bold"
+       }
+      ],
+      "text": "Long-term:"
+     },
+     {
+      "type": "text",
+      "text": " consider osteoporosis prev (calcium · vitD · bisphos · wt-bearing exercise) - use lowest effective dose & duration"
      }
     ]
    }
