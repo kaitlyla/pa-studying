@@ -32,9 +32,14 @@ export interface TextBlock {
   lineHeight: number;
 }
 
-/** A run of flowing text: its box, and its blocks (top first). */
+/**
+ * A run of flowing text: its box, and its blocks (top first). `grows`: it grows with its text (a table
+ * cell), so text sent below a picture goes below all of it, though the region now ends above the
+ * picture's bottom; body text ends at the next table, which the picture's lower part covers instead.
+ */
 export interface Region extends Box {
   blocks?: readonly TextBlock[];
+  grows?: boolean;
 }
 
 /**
@@ -101,7 +106,7 @@ export function layoutFloats(frames: readonly Frame[], regions: readonly Region[
         const x1 = Math.min(at.left + p.width, c.left + c.width);
         const y0 = Math.max(at.top, c.top);
         const y1 = Math.min(at.top + p.height, c.top + c.height);
-        return x1 > x0 && y1 > y0 ? { x0, x1, y0, y1 } : null;
+        return x1 > x0 && y1 > y0 ? { x0, x1, y0, y1, bottom: at.top + p.height } : null;
       })
       .filter((s) => s !== null)
       .sort((a, b) => a.y0 - b.y0);
@@ -112,6 +117,7 @@ export function layoutFloats(frames: readonly Frame[], regions: readonly Region[
         last.x0 = Math.min(last.x0, s.x0);
         last.x1 = Math.max(last.x1, s.x1);
         last.y1 = Math.max(last.y1, s.y1);
+        last.bottom = Math.max(last.bottom, s.bottom);
       } else merged.push({ ...s });
     }
     return merged.flatMap((s) => besidePicture(c, s, minSide));
@@ -135,8 +141,12 @@ export function layoutFloats(frames: readonly Frame[], regions: readonly Region[
  * The room starts at the top of the line the picture's top cuts into: a line moves aside only for
  * room that starts at or above it, and would otherwise stay under the picture. A block's lines above
  * the picture are drawn where its line height puts them, since no room is kept beside them.
+ *
+ * `span` is the part of the picture over the region, `bottom` the picture's own bottom. In a region
+ * that grows, text sent below is kept clear down to `bottom`: room ending at the region's end would
+ * leave it there, under the picture, and only reach `bottom` a line per layout as the region grew.
  */
-function besidePicture(c: Region, span: { x0: number; x1: number; y0: number; y1: number }, minSide: number): Exclusion[] {
+function besidePicture(c: Region, span: { x0: number; x1: number; y0: number; y1: number; bottom: number }, minSide: number): Exclusion[] {
   const cut = (c.blocks ?? []).find((b) => b.top <= span.y0 && span.y0 < b.bottom);
   const lineTop = cut && cut.lineHeight > 0 ? cut.lineTop + Math.floor((span.y0 - cut.lineTop) / cut.lineHeight + 1e-6) * cut.lineHeight : span.y0;
   const s = { ...span, y0: Math.max(c.top, cut ? cut.top : c.top, Math.min(span.y0, lineTop)) };
@@ -150,8 +160,11 @@ function besidePicture(c: Region, span: { x0: number; x1: number; y0: number; y1
     if (last && last.side === side && Math.abs(last.width - width) < 0.5 && Math.abs(last.top + last.height - (y0 - c.top)) < 0.5) last.height = y1 - c.top - last.top;
     else out.push({ side, top: y0 - c.top, width, height: y1 - y0 });
   };
+  // Where text sent below the picture from `y0` starts: past all of it in a region that grows, when
+  // the region has text there to send.
+  const below = (y0: number): number => (c.grows && (c.blocks ?? []).some((b) => b.bottom > y0) ? Math.max(s.y1, s.bottom) : s.y1);
   if (Math.max(leftRoom, rightRoom) < minSide) {
-    keep("left", s.y0, s.y1, c.width);
+    keep("left", s.y0, below(s.y0), c.width);
     return out;
   }
   const textLeft = rightRoom < leftRoom;
@@ -173,7 +186,7 @@ function besidePicture(c: Region, span: { x0: number; x1: number; y0: number; y1
     keep(side, y, y0, plain);
     const { room, width } = beside(b);
     if (room < minSide) {
-      keep("left", y0, s.y1, c.width);
+      keep("left", y0, below(y0), c.width);
       return out;
     }
     keep(side, y0, y1, width);
@@ -335,7 +348,7 @@ export function measureFloats(frame: HTMLElement): MeasuredFloats | null {
       starts.push({ top: y(r.top), bottom: y(r.bottom), indent, hang: Math.max(0, -parseFloat(cs.textIndent) || 0), lineTop, lineHeight });
     }
     starts.sort((a, b) => a.top - b.top);
-    regions.push({ left, top, width: f.width / s, height: Math.max(0, bottom - top), blocks: starts });
+    regions.push({ left, top, width: f.width / s, height: Math.max(0, bottom - top), blocks: starts, grows: td instanceof HTMLTableCellElement });
     regionEls.push(fx);
   }
 

@@ -71,6 +71,26 @@ describe("layoutFloats", () => {
     expect(out.exclusions).toEqual([[{ side: "left", top: 10, width: 200, height: 40 }]]);
   });
 
+  it("in a table cell, sends text below all of a picture reaching past the cell's end, not to where the cell ends now", () => {
+    // Cell A ends at 100; the picture over its last block runs on to 160, with no room beside it.
+    const blocks = [blk({ top: 0, bottom: 40 }), blk({ top: 40, bottom: 100, indent: 30, hang: 30 })];
+    const out = layoutFloats(table, [{ ...cellA, blocks, grows: true }], [pic({ left: 0, top: 45, width: 150, height: 115 })], 20);
+    expect(out.exclusions).toEqual([[{ side: "left", top: 45, width: 150, height: 115 }]]);
+    // Through a block with no room beside it, too, though the block above it ran beside the picture.
+    const narrow = [blk({ top: 0, bottom: 50 }), blk({ top: 50, bottom: 100, indent: 140 })];
+    const beside = layoutFloats(table, [{ ...cellA, blocks: narrow, grows: true }], [pic({ left: 0, top: 10, width: 70, height: 150 })], 20);
+    expect(beside.exclusions).toEqual([[
+      { side: "left", top: 10, width: 70, height: 40 },
+      { side: "left", top: 50, width: 150, height: 110 },
+    ]]);
+    // Body text ends at the next table, which the picture's lower part covers instead.
+    const body = layoutFloats(table, [{ ...cellA, blocks }], [pic({ left: 0, top: 45, width: 150, height: 115 })], 20);
+    expect(body.exclusions).toEqual([[{ side: "left", top: 45, width: 150, height: 55 }]]);
+    // A cell whose text all ends above the picture sends none below, so it does not grow.
+    const above = layoutFloats(table, [{ ...cellA, blocks: [blk({ top: 0, bottom: 40 })], grows: true }], [pic({ left: 0, top: 45, width: 150, height: 115 })], 20);
+    expect(above.exclusions).toEqual([[{ side: "left", top: 45, width: 150, height: 55 }]]);
+  });
+
   it("measures the room left of a picture from where a block's text starts", () => {
     const cell = { ...cellA, blocks: [blk({ top: 0, bottom: 100, indent: 90 })] };
     const out = layoutFloats(table, [cell], [pic({ left: 100, top: 10, width: 50, height: 20 })], 20);
