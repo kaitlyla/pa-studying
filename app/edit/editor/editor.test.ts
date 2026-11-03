@@ -627,8 +627,12 @@ describe("column width", () => {
 
 describe("dragging a column border", () => {
   const gridOf = (view: EditorView): unknown => view.state.doc.firstChild?.attrs.grid;
+  // Where her text is drawn: jsdom lays out nothing, so each test says (none by default).
+  let textBoxes: DOMRect[] = [];
+  Object.defineProperty(Range.prototype, "getClientRects", { configurable: true, value: () => textBoxes });
   // A 600 px table of grid [100, 200, 300] pt: 1 px is 1 pt, columns A 0–100, B 100–300, C 300–600.
   const mount = (grid = [100, 200, 300]): EditorView => {
+    textBoxes = [];
     const state = createEditorState(docOf(table([row(rid(1), [cell("A"), cell("B"), cell("C")]), row(rid(2), [cell("D", { colspan: 3 })])], grid)));
     const view = new EditorView(document.createElement("div"), { state, nodeViews: nodeViews(11), markViews: markViews(11) });
     const box = (left: number, width: number): (() => DOMRect) => () =>
@@ -695,6 +699,26 @@ describe("dragging a column border", () => {
       mouse(td(view, 2), "mousedown", 301);
       mouse(document, "mouseup", 1000);
       expect(gridOf(view)).toEqual([100, 600 - 100 - MIN_COLUMN_PT, MIN_COLUMN_PT]);
+    } finally {
+      view.destroy();
+    }
+  });
+
+  it("her text drawn against a border is not the border: the pointer on it neither shows the resize pointer nor drags", () => {
+    const view = mount();
+    try {
+      // A table whose cell margins draw no padding: C's text starts on its left border.
+      textBoxes = [{ left: 300.5, right: 330, top: 0, bottom: 40, width: 29.5, height: 40, x: 300.5, y: 0, toJSON: () => ({}) } as DOMRect];
+      mouse(td(view, 2), "mousemove", 302);
+      expect(view.dom.style.cursor).toBe("");
+      Object.defineProperty(document, "elementFromPoint", { configurable: true, value: () => null });
+      expect(mouse(td(view, 2), "mousedown", 302).defaultPrevented).toBe(false);
+      mouse(document, "mouseup", 340);
+      expect(document.querySelector(".col-drag-guide")).toBeNull();
+      expect(gridOf(view)).toEqual([100, 200, 300]);
+      // Off her text, the same border still grabs.
+      mouse(td(view, 1), "mousemove", 298);
+      expect(view.dom.style.cursor).toBe("col-resize");
     } finally {
       view.destroy();
     }

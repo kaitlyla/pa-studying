@@ -10,7 +10,22 @@ import type { ColumnBorder, Confirm } from "./commands.ts";
 /** How close to a cell's edge, in px, the pointer grabs the border. */
 export const BORDER_GRAB_PX = 4;
 
-/** The column border under the pointer, if any: the left or right edge of the cell it is over. */
+/**
+ * Whether the point is over her text in `cell`, as drawn. A table whose cell margins are narrower than
+ * Word's draws its text against the border, inside the grab zone: a click there is for the text.
+ */
+function overText(cell: Element, x: number, y: number): boolean {
+  const doc = cell.ownerDocument;
+  const texts = doc.createTreeWalker(cell, NodeFilter.SHOW_TEXT);
+  const range = doc.createRange();
+  for (let n = texts.nextNode(); n; n = texts.nextNode()) {
+    range.selectNodeContents(n);
+    for (const r of range.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true;
+  }
+  return false;
+}
+
+/** The column border under the pointer, if any: the left or right edge of the cell it is over, off her text. */
 export function borderAt(view: EditorView, event: MouseEvent): ColumnBorder | null {
   const target = event.target;
   if (!(target instanceof Element)) return null;
@@ -18,7 +33,7 @@ export function borderAt(view: EditorView, event: MouseEvent): ColumnBorder | nu
   if (!td || !view.dom.contains(td)) return null;
   const box = td.getBoundingClientRect();
   const side = box.right - event.clientX <= BORDER_GRAB_PX ? "right" : event.clientX - box.left <= BORDER_GRAB_PX ? "left" : null;
-  if (!side) return null;
+  if (!side || overText(td, event.clientX, event.clientY)) return null;
   let pos: number;
   try {
     pos = view.posAtDOM(td, 0);

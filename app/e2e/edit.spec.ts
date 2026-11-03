@@ -994,6 +994,40 @@ test.describe("toolbar limits", () => {
     expectEdges(await drawnEdges(shownTable, t.id), storedEdges(rowIn(after, t.id), saved), "the topic row");
   });
 
+  test("a click on the first letter of a cell's text drawn against its border puts the cursor there; it does not grab the border", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    await world(context, baseURL, { seed: true });
+    await openPage(page, t.hash);
+    await signIn(page);
+    await startEditing(page);
+    const slot = ref(page, "edit-area").locator(".edit-slot").first();
+    const cell = slot.locator("table.nt > tbody > tr:not(.hrow)").first().locator(":scope > td").nth(1);
+    const p = cell.locator("p").first();
+    await p.scrollIntoViewIfNeeded();
+    const at = await p.evaluate((el) => {
+      const text = document.createTreeWalker(el, NodeFilter.SHOW_TEXT).nextNode();
+      const td = el.closest("td");
+      if (!text || !td) return null;
+      const letter = document.createRange();
+      letter.setStart(text, 0);
+      letter.setEnd(text, 1);
+      const box = letter.getBoundingClientRect();
+      return { x: box.left + 1, y: box.top + box.height / 2, inset: box.left - td.getBoundingClientRect().left };
+    });
+    const { x, y, inset } = need(at, "the cell's first letter");
+    // Her table's cell margins, narrower than Word's, draw its text inside the border's grab zone.
+    expect(inset).toBeLessThan(BORDER_GRAB_PX);
+    await page.mouse.move(x, y);
+    await expect(cell).not.toHaveCSS("cursor", "col-resize");
+    await page.mouse.down();
+    await page.mouse.up();
+    await expect(page.locator(".col-drag-guide")).toHaveCount(0);
+    await page.evaluate(() => new Promise<void>((resolve) => setTimeout(resolve, 20)));
+    await page.keyboard.type("ZQX");
+    await expect(ref(page, "edit-dirty-state")).toHaveText("Unsaved changes");
+    await expect(p).toContainText("ZQX");
+  });
+
   test("dragging the first column's border left on a topic page narrows a name column drawn at the screen's minimum, and the save keeps her width in that topic's rows and the page draws it", async ({ page, context, baseURL }) => {
     const t = needTopic();
     const { fake } = await world(context, baseURL, { seed: true });
