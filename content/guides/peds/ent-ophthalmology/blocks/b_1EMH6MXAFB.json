@@ -85,7 +85,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -113,7 +116,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -125,6 +131,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "About"
@@ -152,7 +164,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -164,6 +179,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clin Manifestations"
@@ -191,7 +212,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -203,6 +227,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Diagnostics"
@@ -230,7 +260,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "center",
            "shade": null,
            "borders": null,
@@ -242,6 +275,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Mgnt"
@@ -1751,7 +1790,14 @@
        "kind": "content",
        "minHeightPt": null,
        "repeatHeader": false,
-       "cantSplit": false
+       "cantSplit": false,
+       "widths": [
+        67.85,
+        186.24380979099456,
+        190.59844999298636,
+        159.7258493477346,
+        169.58189086828446
+       ]
       },
       "content": [
        {
@@ -1773,7 +1819,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1785,6 +1834,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Rhinitis "
@@ -1812,7 +1867,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1827,12 +1885,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Types"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -1845,7 +1917,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1854,6 +1929,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -1864,12 +1947,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Allergic"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1877,6 +1974,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1891,6 +1994,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "009193"
@@ -1901,7 +2010,111 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "mast cell his release ← allergens (pollen · dust · mold)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "RF:  "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- FHx atopy"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "- male"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 18,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "-early abx use "
            }
           ]
          },
@@ -1913,7 +2126,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1922,6 +2138,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -1932,12 +2156,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Infectious"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -1945,6 +2183,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -1965,7 +2209,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -1974,6 +2221,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -1984,13 +2239,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Vasomotor"
            },
            {
             "type": "text",
-            "text": ": nonallergic & noninfectious dilate of the blood vessels (temp Δ · strong smells · humidity) "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": nonallergic & noninfectious dilate of the blood vessels (temp Δ · strong smells · humidity)"
            }
           ]
          }
@@ -2015,7 +2284,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2024,7 +2296,15 @@
           "content": [
            {
             "type": "text",
-            "text": "•sneezing · nasal congestion · itching "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- sneezing "
            }
           ]
          },
@@ -2036,7 +2316,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2045,13 +2328,56 @@
           "content": [
            {
             "type": "text",
-            "text": "•"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- nasal congestion/obstruction · itching "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "- "
            },
            {
             "type": "text",
             "marks": [
              {
-              "type": "bold"
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2084,7 +2410,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2099,7 +2428,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2114,13 +2446,27 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Allergic"
            },
            {
             "type": "text",
-            "text": ": +/- bluish discoloration around the eyes "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": ": ± periorbital bluish discoloration (allergic shiner), nasal salute "
            }
           ]
          },
@@ -2132,7 +2478,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2147,7 +2496,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2162,12 +2514,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "PE"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -2180,7 +2546,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2189,6 +2558,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2199,19 +2576,59 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Allergic"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
            },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
            {
             "type": "text",
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2220,11 +2637,58 @@
               }
              }
             ],
-            "text": "pale or violaceous boggy turbinates · nasal polyps"
+            "text": "- pale or violaceous boggy turbinates "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 9,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
+              "type": "color",
+              "attrs": {
+               "hex": "942093"
+              }
+             }
+            ],
+            "text": "- nasal polyps"
            },
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2236,6 +2700,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "w "
            },
            {
@@ -2243,6 +2715,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2257,6 +2735,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "942093"
@@ -2267,7 +2751,15 @@
            },
            {
             "type": "text",
-            "text": "of the conjunctiva - may develop “allergic shiner” purple discoloration around the eyes or a nasal bridge crease from constant rubbing"
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": "of the conjunctiva"
            }
           ]
          },
@@ -2279,7 +2771,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2288,6 +2783,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2298,12 +2801,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Viral"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2311,6 +2828,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2324,6 +2847,12 @@
            {
             "type": "text",
             "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
              {
               "type": "color",
               "attrs": {
@@ -2356,7 +2885,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2371,12 +2903,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Allergic"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -2389,7 +2935,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2398,6 +2947,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "- "
            },
            {
@@ -2405,13 +2962,27 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
-            "text": "intranasal corticosteroids"
+            "text": "IN corticosteroids"
            },
            {
             "type": "text",
-            "text": " first line for allergic or nasal polyps "
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
+            "text": " 1st-line for allergic or nasal polyps "
            }
           ]
          },
@@ -2423,7 +2994,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2432,6 +3006,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "- antihist · mast cell stabilizers (cromolyn) · short-term decongestants "
            }
           ]
@@ -2444,7 +3026,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2453,6 +3038,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "- anticholinergics can be used for rhinorrhea "
            }
           ]
@@ -2465,7 +3058,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2474,6 +3070,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "- avoidance & enviro control · exposure reduction "
            }
           ]
@@ -2486,7 +3090,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2501,7 +3108,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2516,12 +3126,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Intranasal Steroids"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2529,6 +3153,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2549,7 +3179,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2558,6 +3191,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2568,12 +3209,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Clin Use"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": most effective med for allergic rhinitis esp. w "
            },
            {
@@ -2586,6 +3241,12 @@
               "type": "underline",
               "attrs": {
                "style": "single"
+              }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
               }
              }
             ],
@@ -2601,7 +3262,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 9
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2616,7 +3280,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2631,12 +3298,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Decongestants"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ":"
            }
           ]
@@ -2649,7 +3330,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2658,6 +3342,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2668,12 +3360,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "MOA"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": improve congestion "
            }
           ]
@@ -2686,7 +3392,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2695,6 +3404,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2705,12 +3422,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "Intranasal"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2718,6 +3449,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2738,7 +3475,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2747,6 +3487,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "     -use >3-5d → "
            },
            {
@@ -2754,6 +3502,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2768,6 +3522,12 @@
             "type": "text",
             "marks": [
              {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             },
+             {
               "type": "color",
               "attrs": {
                "hex": "FF0000"
@@ -2778,6 +3538,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "(rebound congestion)"
            }
           ]
@@ -2790,7 +3558,10 @@
            "indFirst": 0,
            "spaceBefore": 0,
            "spaceAfter": 0,
-           "line": null,
+           "line": {
+            "rule": "exact",
+            "value": 8
+           },
            "align": "left",
            "shade": null,
            "borders": null,
@@ -2799,6 +3570,14 @@
           "content": [
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": "•"
            },
            {
@@ -2809,12 +3588,26 @@
               "attrs": {
                "style": "single"
               }
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              }
             ],
             "text": "PO"
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": ": "
            },
            {
@@ -2822,6 +3615,12 @@
             "marks": [
              {
               "type": "bold"
+             },
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
              },
              {
               "type": "color",
@@ -2834,6 +3633,14 @@
            },
            {
             "type": "text",
+            "marks": [
+             {
+              "type": "size",
+              "attrs": {
+               "pt": 7.5
+              }
+             }
+            ],
             "text": " "
            }
           ]
