@@ -306,7 +306,7 @@
               "type": "bold"
              }
             ],
-            "text": "Acute Otitis Media"
+            "text": "*Acute Otitis Media"
            }
           ]
          }
@@ -389,6 +389,48 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Clin defn: bulging TM or new-onset otorrhea ⍉← acute OE - MC reason for abx in children"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "MC infants & young children - can also develop in adults"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -435,11 +477,11 @@
               }
              }
             ],
-            "text": "peak age 6-18mo"
+            "text": "peak age 6-24mo"
            },
            {
             "type": "text",
-            "text": ", day care, pacifier or bottle use, "
+            "text": ", FHx, day care, pacifier or bottle use, "
            },
            {
             "type": "text",
@@ -518,11 +560,11 @@
               }
              }
             ],
-            "text": "S. pneumoniae (MC)"
+            "text": "H. flu (nontypable) · S. pneumoniae"
            },
            {
             "type": "text",
-            "text": " · H. flu · M. catarrhalis"
+            "text": " · M. catarrhalis · S. pyogenes - ↓S. pneumoniae ← PCV13 vax"
            }
           ]
          },
@@ -592,6 +634,48 @@
             "text": " → blockage of the Eustachian tube "
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "fluid accumulates behind the blocked tube → becomes infected - USU preceded or followed by OME (uninfected middle ear fluid)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Eustachian tube dysfun (ETD) = MC contributing factor"
+           }
+          ]
          }
         ]
        },
@@ -659,6 +743,27 @@
            {
             "type": "text",
             "text": " · stuffiness · conductive hearing loss "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Infants & young children: ear rubbing or tugging · fussiness · restlessness · poor feeding · vomiting · diarrhea"
            }
           ]
          },
@@ -807,7 +912,91 @@
            },
            {
             "type": "text",
-            "text": " · loss of landmarks "
+            "text": " · loss of landmarks · purulent fluid "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•TM opaque or cloudy · acute perforation w otorrhea"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•TM may appear pale or yellow w pus behind it"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•light reflex ↓ or absent (norm TM → bright light reflex)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•norm: aerated middle ear - TM translucent · slightly convex · mobile"
            }
           ]
          },
@@ -844,6 +1033,27 @@
            {
             "type": "text",
             "text": "Acute: <3wks · chronic: >3mo"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Effusion + acute inflam → mod-severe otalgia · fever · bulging erythematous TM - sx develop rapidly over 24-48hrs - may have otorrhea or pus"
            }
           ]
          }
@@ -907,7 +1117,7 @@
               }
              }
             ],
-            "text": "↓TM mobility"
+            "text": "↓ or absent TM mobility"
            },
            {
             "type": "text",
@@ -924,6 +1134,27 @@
            {
             "type": "text",
             "text": "(most sensitive)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Clin dx - children: pneumatic otoscopy ⍉always performed → dx w signs of middle ear effusion & inflam (bulging TM)"
            }
           ]
          },
@@ -1017,7 +1248,28 @@
               }
              }
             ],
-            "text": "amoxicillin 80-90mg/kg/d x10-14d"
+            "text": "amoxicillin 80-90mg/kg/d divided BID x10-14d"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•amoxicillin first line esp. if ⍉β-lactam w.in last 30d · ⍉purulent conjunctivitis · ⍉hx of recurr AOM"
            }
           ]
          },
@@ -1091,7 +1343,154 @@
            },
            {
             "type": "text",
-            "text": ": azithro · clarithromycin"
+            "text": ": cephalosporin (cefdinir · ceftriaxone) - macrolides (azithro · clarithromycin) ⍉indicated ← pneumococcal resistance - fallback only if PCNs & cephalosporins both precluded"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•TMP-SMX: ⍉role in empiric tx ← S. pneumoniae & H. flu resistance - only if documented susceptibility & preferred agents can't be used"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•Augmentin first line if β-lactam w.in last 30d · purulent conjunctivitis (otitis-conjunctivitis syndrome) · hx of recurr AOM ← H. flu (can be amoxicillin-resistant · Augmentin-susceptible)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•consider observation period if ≥2yo · immunocompetent & mild sx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•immediate abx vs watchful waiting (start abx if sx worsen or ⍉improve after 48-72hrs) - based on age · parental preference · severity"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•immediate abx: <6mo · 6mo-2yo (unilat or bilat) · ≥2yo toxic-appearing · persistent otalgia 48hrs · fever ≥102.2°F in past 48hrs · uncertain f/u"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•watchful waiting: 6mo-2yo w mild sx (mild otalgia · fever <102.2°F) & unilat · ≥2yo w mild sx & ⍉otorrhea"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉topical benzocaine for ear pain if <2yo - risk of methemoglobinemia - ⍉topical analgesics (benzocaine · lidocaine) if TM perf"
            }
           ]
          },
@@ -1254,6 +1653,518 @@
      {
       "type": "table_row",
       "attrs": {
+       "id": "r_BVGG1HEEGV",
+       "kind": "content",
+       "minHeightPt": null,
+       "repeatHeader": false,
+       "cantSplit": false
+      },
+      "content": [
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "D883FF",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "*Otitis Media with Effusion (OME)"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F1E4FA",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Fluid in the middle ear w.o s/sxs of acute infect"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "PATHO"
+           },
+           {
+            "type": "text",
+            "text": ": develops after a viral URI or AOM - inflam & Eustachian tube dysfun (ETD) impair drainage of middle ear secretions"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "RF"
+           },
+           {
+            "type": "text",
+            "text": ": recent URI · allergic rhinitis · day care · tobacco smoke exposure · craniofacial abnorm (cleft palate) · conditions assoc w ETD"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F1E4FA",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Hearing difficulty · ear fullness · speech & language concerns rather than pain or fever"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "underline",
+              "attrs": {
+               "style": "single"
+              }
+             }
+            ],
+            "text": "PE"
+           },
+           {
+            "type": "text",
+            "text": ":"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•dull or opaque TM w an air-fluid level or visible bubbles"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F1E4FA",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Middle ear effusion w.o acute inflam findings"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Pneumatic otoscopy"
+           },
+           {
+            "type": "text",
+            "text": ": ↓TM mobility - most reliable PE finding"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Dull TMs w air-fluid levels & ⍉marked bulging → OME rather than AOM"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "table_cell",
+        "attrs": {
+         "colspan": 1,
+         "rowspan": 1,
+         "colwidth": null,
+         "fill": "F1E4FA",
+         "vAlign": "top",
+         "borders": null
+        },
+        "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "Observation"
+           },
+           {
+            "type": "text",
+            "text": " - most resolve spont w.in wks-months"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•abx · corticosteroids · antihist & decongestants ⍉improve outcomes in uncomp OME"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Hearing eval & refer for "
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "tympanostomy tubes"
+           },
+           {
+            "type": "text",
+            "text": " if persistent effusion w sig hearing loss · speech delay · recurr episodes or struct abnorm of the TM"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "table_row",
+      "attrs": {
        "id": "r_PSER2MMEM2",
        "kind": "content",
        "minHeightPt": null,
@@ -1294,7 +2205,7 @@
               "type": "bold"
              }
             ],
-            "text": "Otitis Externa"
+            "text": "*Otitis Externa"
            }
           ]
          }
@@ -1496,7 +2407,28 @@
            },
            {
             "type": "text",
-            "text": "(use of Q-tips) · age 7-12 · aberrant ear wax"
+            "text": "(use of Q-tips · scratching) · age 7-12 (can occur at any age) · aberrant ear wax"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•occlusive ear devices (earplugs · earphones · hearing aids) · prior radiation · dermatologic conditions (allergic contact dermatitis · psoriasis · atopic derm)"
            }
           ]
          },
@@ -1677,7 +2609,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Auricular d/c · ear P or fullness · hearing loss"
+            "text": "Malodorous auricular d/c · ear P or fullness · hearing loss (if severe canal swelling)"
            }
           ]
          },
@@ -1760,6 +2692,27 @@
              }
             ],
             "text": "purulent auricular d/c"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•pain w pinna or auricle mvt - canal erythematous & edematous ± debris (yellow · brown · white · gray)"
            }
           ]
          }
@@ -1876,6 +2829,42 @@
            {
             "type": "text",
             "text": ": BC > AC"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "TM USU norm unless canal swelling blocks the view - norm mobility on pneumatic otoscopy"
            }
           ]
          }
@@ -2072,6 +3061,208 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•otic aminoglycoside or FQ ± topical glucocorticoid → relieves pruritus & pain"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•mild (minimal canal edema · minor discomfort & pruritus): acetic acid-hydrocortisone otic drops"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•moderate (canal partially occluded by edema · intermediate pain & pruritus): topical abx + glucocorticoid (cipro-hydrocortisone · neomycin-polymyxin B-hydrocortisone)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•severe (canal completely occluded · intense pain & pruritus): same drops + wick - deep tissue involvement → add systemic cipro or ofloxacin"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•otomycosis (fungal OE): clotrimazole otic solution BID x10-14d"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•avoid further mech trauma - drying agent (1:1 isopropyl alc & white vinegar) acidifies the ear"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•"
+           },
+           {
+            "type": "text",
+            "marks": [
+             {
+              "type": "bold"
+             }
+            ],
+            "text": "wick"
+           },
+           {
+            "type": "text",
+            "text": " if sig canal edema - helps topical abx enter"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•recalcitrant (esp. periauricular cellulitis): PO FQ"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•IS or DM w persistent OE → refer for specialty eval"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -2154,7 +3345,7 @@
               "type": "bold"
              }
             ],
-            "text": "Malig (Necrotizing) Otitis Externa"
+            "text": "*Malig (Necrotizing) Otitis Externa"
            }
           ]
          }
@@ -2215,7 +3406,7 @@
            },
            {
             "type": "text",
-            "text": "(temporal bone · soft tissue & cartilage) - comp of acute otitis externa "
+            "text": "(temporal bone · soft tissue & cartilage) - comp of acute otitis externa - osteomyelitis of the skull base in IS or DM pts - w.o prompt tx may extend into the middle fossa floor · clivus · contralat skull base "
            }
           ]
          },
@@ -2383,6 +3574,69 @@
             "text": ") · ↑dose glucocorticoid therapy · chemo · advanced HIV"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "older pts w DM (↑cerumen pH · ear canal microangiopathy) - children: rare - underlying malignancy (leukemia) or malnourished"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Pseudomonas found in H2O - often hx of aural H2O exposure - less common: S. aureus · Aspergillus fumigatus (fungal) · Proteus mirabilis · Klebsiella oxytoca · Burkholderia cepacia"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "May extend via fissures of Santorini (vertical fissures in anterior external auditory canal cartilage)"
+           }
+          ]
          }
         ]
        },
@@ -2483,6 +3737,90 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•otorrhea unresponsive to tx · periauricular pain · swelling"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•more severe pain · nocturnal pain · pain w chewing vs uncomplicated OE - ⍉respond to topical tx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•children: fever · leukocytosis · bacteremia - facial n. involvement more likely (closer to ear canal than adults) - CN 9 · 10 · 11 at jugular foramen"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•comp: meningitis · brain abscess · dural sinus thrombophlebitis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -2530,6 +3868,48 @@
              }
             ],
             "text": "severe auricular pain on traction of the ear canal or tragus"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•exquisite tenderness of external ear · purulent otorrhea · macerated granulation tissue"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "ddx Bell palsy (HSV): unilat CN 7 palsy - can't close eyelid · facial droop · hyperacusis · pain around jaw - ⍉granulation tissue or otorrhea"
            }
           ]
          }
@@ -2663,6 +4043,48 @@
             "text": "- confirms dx - bx most accurate"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Clin + labs + imaging: ↑ESR & CRP (monitor course) · gram stain & cx of granulation tissue or drainage · blood cx"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "CT → early bone erosion · MRI → extent of dz & monitor tx response"
+           }
+          ]
          }
         ]
        },
@@ -2754,6 +4176,90 @@
             "text": "•piperacillin-tazobactam · ceftazidime · cefepime"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•antipseudomonal FQ x several months (often IV)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•IV cipro → PO cipro once clin improvement & ↓ESR/CRP"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•bony erosion or multiple CN neuropathies: cipro + antipseudomonal β-lactam (piperacillin · piperacillin-tazobactam · ceftazidime · cefepime · meropenem)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•Aspergillus: voriconazole or amphotericin B >12wks"
+           }
+          ]
          }
         ]
        }
@@ -2802,7 +4308,7 @@
               "type": "bold"
              }
             ],
-            "text": "Mastoiditis"
+            "text": "*Mastoiditis"
            }
           ]
          }
@@ -2936,7 +4442,7 @@
            },
            {
             "type": "text",
-            "text": ": USU a comp of acute otitis media"
+            "text": ": MC comp of untx acute otitis media - suppurative ext of infect into the mastoid air cells"
            }
           ]
          },
@@ -2985,6 +4491,27 @@
            {
             "type": "text",
             "text": ": S. pneumoniae · H. flu · M. catarrhalis · S. aureus · S. pyogenes "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Early & sufficient tx of AOM = most important factor to ↓risk"
            }
           ]
          }
@@ -3070,7 +4597,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•fever · lethargy · malaise "
+            "text": "•persistent fever · lethargy · malaise "
            }
           ]
          },
@@ -3213,7 +4740,7 @@
               }
              }
             ],
-            "text": "mastoid tenderness · edema & erythema"
+            "text": "mastoid (postauricular) tenderness · edema & erythema"
            }
           ]
          },
@@ -3287,6 +4814,27 @@
           "content": [
            {
             "type": "text",
+            "text": "Clin - imaging ⍉necessary if characteristic findings"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "marks": [
              {
               "type": "bold"
@@ -3299,6 +4847,27 @@
              }
             ],
             "text": "CT w contrast of temporal bone "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•if dx unclear → fluid in mastoid air cells · irregular mastoid cortex"
            }
           ]
          },
@@ -3430,6 +4999,48 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•uncomplicated: admit · IV abx + middle ear drainage (myringotomy) - PO abx alone or myringotomy alone insufficient"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•no recent abx & ⍉recurrent OM: ampicillin-sulbactam alone - recent abx or recurrent OM: piperacillin-tazobactam"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -3462,6 +5073,27 @@
            {
             "type": "text",
             "text": ": mastoidectomy"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•comp (meningitis · epidural or subdural abscess · facial n. palsy · labyrinthitis · hearing loss · osteomyelitis · venous sinus thrombosis) → mastoidectomy + IV abx + myringotomy"
            }
           ]
          }
@@ -3512,7 +5144,7 @@
               "type": "bold"
              }
             ],
-            "text": "Tympanic Membrane Perf"
+            "text": "*Tympanic Membrane Perf"
            }
           ]
          }
@@ -3690,6 +5322,69 @@
              }
             ],
             "text": "otitis media"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Others: FB · blast · ↑barometric P"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Comp of AOM: ↑middle ear P → central ischemia → necrosis → perf"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Perforated AOM: nontypeable H. flu MC isolated pathogen (esp. infants & toddlers)"
            }
           ]
          }
@@ -3934,6 +5629,27 @@
             "text": "+/- conductive hearing loss"
            }
           ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "AOM-related perf: defect of TM on otoscopy w concurrent otorrhea"
+           }
+          ]
          }
         ]
        },
@@ -3995,6 +5711,27 @@
           "content": [
            {
             "type": "text",
+            "text": "90% heal in a few months - TM capable of regeneration"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "Topical abx in some (ofloxacin)"
            }
           ]
@@ -4016,7 +5753,91 @@
           "content": [
            {
             "type": "text",
+            "text": "Topical ofloxacin: children w tympanostomy tubes w otorrhea or traumatic perf (contaminated H2O) - ⍉studied in acute perf ← AOM"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "⍉H2O & topical aminoglycosides in the ear"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Keep ear dry · analgesics · abx for contaminated injuries"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "AOM w perf: PO amoxicillin or Augmentin x10d - ⍉azithro (spontaneous perf → likely H. flu → Augmentin first line)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "⍉topical analgesics (benzocaine · lidocaine) if TM perf"
            }
           ]
          },
@@ -4060,11 +5881,11 @@
               }
              }
             ],
-            "text": "Persists >2mo"
+            "text": "Persists >3mo"
            },
            {
             "type": "text",
-            "text": ": surg"
+            "text": ": refer to ENT for further eval (surg)"
            }
           ]
          }
