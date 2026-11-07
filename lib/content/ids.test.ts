@@ -37,6 +37,7 @@ describe("ids", () => {
     const hex = createHash("sha256").update(bytes).digest("hex").slice(0, 32);
     expect(await assetName(bytes, ".png")).toBe(`${hex}.png`);
     expect(await assetName(bytes, ".JPG")).toBe(`${hex}.jpg`);
+    expect(await assetName(bytes, ".webp")).toBe(`${hex}.webp`);
     await expect(assetName(bytes, ".bmp")).rejects.toThrow(/Unsupported asset extension/);
   });
 

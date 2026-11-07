@@ -20,6 +20,7 @@ import { decide, guideDigest, headCommit, outsideBuild, publish, releaseRecord, 
 const PNG = `${"a".repeat(32)}.png`;
 const GIF = `${"b".repeat(32)}.gif`;
 const JPG = `${"c".repeat(32)}.jpg`;
+const WEBP = `${"e".repeat(32)}.webp`;
 const HEAD = "1".repeat(40);
 const OLD = "2".repeat(40);
 
@@ -266,6 +267,20 @@ describe("imageDataUrl", () => {
     const { data } = await png.removeAlpha().raw().toBuffer({ resolveWithObject: true });
     expect([data[0], data[2]]).toEqual([255, 0]);
     expect([data[data.length - 3], data[data.length - 1]]).toEqual([0, 255]);
+  });
+
+  it("converts an unturned lossless WebP to a PNG with the same pixels", async () => {
+    const dir = join(tmp, "assets");
+    await mkdir(dir);
+    await (await picture()).webp({ lossless: true }).toFile(join(dir, WEBP));
+    const url = await imageDataUrl(dir, { asset: WEBP, rot: 0, flipH: false, flipV: false });
+    expect(url.startsWith("data:image/png;base64,")).toBe(true);
+    expect((await sharp(decode(url)).metadata()).format).toBe("png");
+    const raw = async (input: Buffer) => sharp(input).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    const [got, want] = await Promise.all([raw(decode(url)), raw(await readFile(join(dir, WEBP)))]);
+    expect([got.info.width, got.info.height]).toEqual([4, 2]);
+    expect(got.data.equals(want.data)).toBe(true);
+    expect([got.data[0], got.data[2], got.data[got.data.length - 3], got.data[got.data.length - 1]]).toEqual([255, 0, 0, 255]);
   });
 
   it("mirrors a PNG horizontally, so its blue half comes first", async () => {

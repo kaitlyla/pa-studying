@@ -9,6 +9,7 @@ describe("storedMime", () => {
     [`${"c".repeat(32)}.jpeg`, "image/jpeg"],
     [`${"c".repeat(32)}.JPG`, "image/jpeg"],
     [`${"b".repeat(32)}.gif`, null],
+    [`${"e".repeat(32)}.webp`, null],
     [`${"d".repeat(32)}.tiff`, null],
     ["noextension", null],
   ])("%s → %s", (asset, mime) => {
@@ -21,6 +22,7 @@ describe("embedsAsStored", () => {
     [{ asset: PNG, rot: 0, flipH: false, flipV: false }, true],
     [{ asset: `${"c".repeat(32)}.jpg`, rot: 0, flipH: false, flipV: false }, true],
     [{ asset: `${"b".repeat(32)}.gif`, rot: 0, flipH: false, flipV: false }, false],
+    [{ asset: `${"e".repeat(32)}.webp`, rot: 0, flipH: false, flipV: false }, false],
     [{ asset: `${"d".repeat(32)}.tiff`, rot: 0, flipH: false, flipV: false }, false],
     [{ asset: PNG, rot: 90, flipH: false, flipV: false }, false],
     [{ asset: PNG, rot: 0, flipH: true, flipV: false }, false],

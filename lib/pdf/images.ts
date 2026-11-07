@@ -6,7 +6,7 @@ import type { ImageVariant } from "./types.ts";
 /** MIME types of the stored formats pdfmake embeds directly, by lower-case file extension. */
 export const EMBED_MIME: Readonly<Record<string, string>> = { png: "image/png", jpeg: "image/jpeg", jpg: "image/jpeg" };
 
-/** The MIME type of an asset pdfmake can embed as stored, or null (GIF and anything else). */
+/** The MIME type of an asset pdfmake can embed as stored, or null (GIF, WebP and anything else). */
 export function storedMime(asset: string): string | null {
   return EMBED_MIME[asset.slice(asset.lastIndexOf(".") + 1).toLowerCase()] ?? null;
 }

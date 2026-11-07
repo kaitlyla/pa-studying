@@ -13,7 +13,7 @@ async function readJson<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf8")) as T;
 }
 
-/** An image variant as a data URL: PNG/JPEG bytes as stored; GIF and cropped/turned/flipped pictures as PNG via sharp. */
+/** An image variant as a data URL: PNG/JPEG bytes as stored; GIF, WebP and cropped/turned/flipped pictures as PNG via sharp. */
 export async function imageDataUrl(assetsDir: string, v: ImageVariant): Promise<string> {
   const bytes = await readFile(join(assetsDir, v.asset));
   if (embedsAsStored(v)) return `data:${storedMime(v.asset)};base64,${bytes.toString("base64")}`;

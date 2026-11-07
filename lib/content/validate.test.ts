@@ -127,7 +127,7 @@ describe("rich-text schema (20 §20.13)", () => {
     const shape = { geom: "rect", x: 0, y: 0, w: 10, h: 10, rot: 0, flipH: false, flipV: true, stroke: { color: "000000", widthPt: 1, dash: null }, fill: "FFFFFF", head: null, tail: "arrow", asset: null };
     const v = block("prose", doc(
       { type: "paragraph", content: [{ type: "text", text: "a" }, { type: "hard_break" }, { type: "page_break" }, { type: "image", attrs: { asset, widthPt: 20, heightPt: 10, rot: 90, flipH: true } }] },
-      { type: "anchored", attrs: { offsetPt: 10 }, content: [{ type: "image_block", attrs: { asset, widthPt: 20, heightPt: 10 } }] },
+      { type: "anchored", attrs: { offsetPt: 10 }, content: [{ type: "image_block", attrs: { asset: `${"0123456789abcdef".repeat(2)}.webp`, widthPt: 20, heightPt: 10 } }] },
       { type: "textbox", attrs: { widthPt: 100, fill: "FFFF00", border: { style: "single", widthPt: 0.5, color: "000000" }, inline: true }, content: [para("box")] },
       { type: "drawing", attrs: { widthPt: 50, heightPt: 50, shapes: [shape] }, content: [{ type: "drawing_text", attrs: { x: 1, y: 1, w: 10, h: 10 }, content: [para("t")] }] },
       para("p", { line: { rule: "exact", value: 12 }, shade: "D9D9D9", borders: { top: null, right: null, bottom: { style: "single", widthPt: 1, color: "000000" }, left: null } }),
@@ -524,6 +524,7 @@ describe("gap-fill (20 §20.9)", () => {
     expect(verdict(path, gap([], { figures: [] }))).toBe("ok");
     expect(verdict(path, gap([], { figures: [fig({ asset: "assets/x.png" })] }))).toMatch(/\.meta\.figures\[0\]\.asset: expected a stored asset name/);
     expect(verdict(path, gap([], { figures: [fig({ asset: `${"0f".repeat(16)}.svg` })] }))).toMatch(/stored asset name/);
+    expect(verdict(path, gap([], { figures: [fig({ asset: `${"0f".repeat(16)}.webp` })] }))).toBe("ok");
     expect(verdict(path, gap([], { figures: [fig({ width: 0 })] }))).toMatch(/\.width: expected a positive integer/);
     expect(verdict(path, gap([], { figures: [fig({ caption: " " })] }))).toMatch(/\.caption: expected a non-empty string/);
     expect(verdict(path, gap([], { figures: [fig({}, { page: "http://commons.wikimedia.org/wiki/File:AF.jpg" })] }))).toMatch(/\.credit\.page: expected an https URL/);

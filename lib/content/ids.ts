@@ -66,7 +66,7 @@ export function newDeviceId(): string {
   return crockford(10);
 }
 
-export const ASSET_EXTS = [".png", ".jpeg", ".jpg", ".gif"] as const;
+export const ASSET_EXTS = [".png", ".jpeg", ".jpg", ".gif", ".webp"] as const;
 export type AssetExt = (typeof ASSET_EXTS)[number];
 
 /** Content-addressed asset name: hex of the first 16 bytes of SHA-256 of the bytes, plus the original extension. */

@@ -2,7 +2,7 @@
 // lib/content; the importer, build, renderer, PDF builder and editor all import this object.
 import { Schema } from "prosemirror-model";
 import type { NodeSpec, MarkSpec, AttributeSpec, Node as PMNode } from "prosemirror-model";
-import { idRegExp } from "./content/ids.ts";
+import { ASSET_EXTS, idRegExp } from "./content/ids.ts";
 import { DASH_STYLES, isDashStyle } from "./drawing.ts";
 import type { Crop, MarkAttrs, NodeAttrs } from "./schemaTypes.ts";
 
@@ -19,7 +19,7 @@ const isObj = (v: unknown): v is Record<string, unknown> =>
 const isNum = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
 
 export const HEX_RE = /^[0-9A-F]{6}$/;
-export const ASSET_RE = /^[0-9a-f]{32}\.(png|jpeg|jpg|gif)$/;
+export const ASSET_RE = new RegExp(`^[0-9a-f]{32}\\.(?:${ASSET_EXTS.map((e) => e.slice(1)).join("|")})$`);
 const ROW_ID_RE = idRegExp("r");
 
 /** A link target the content may hold: http(s), mailto, or an internal hash route. */
