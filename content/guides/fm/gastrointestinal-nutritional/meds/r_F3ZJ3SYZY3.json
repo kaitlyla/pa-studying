@@ -543,7 +543,20 @@
    "roles": [
     {
      "role": "1st",
-     "drugs": "single dose of pyrantel pamoate or albendazole, repeated in 2 wks",
+     "drugs": "single dose of albendazole, repeated in 2 wks",
+     "note": null,
+     "sources": [
+      {
+       "name": "Pinworm Infestation",
+       "org": "MSD Manual Professional Edition",
+       "year": "2025",
+       "url": "https://www.msdmanuals.com/professional/infectious-diseases/nematodes-roundworms/pinworm-infestation"
+      }
+     ]
+    },
+    {
+     "role": "alt",
+     "drugs": "pyrantel pamoate = OTC alt",
      "note": null,
      "sources": [
       {
