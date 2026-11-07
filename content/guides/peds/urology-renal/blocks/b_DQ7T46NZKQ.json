@@ -100,7 +100,7 @@
               "type": "bold"
              }
             ],
-            "text": "Acute Glomerulonephritis (AGN)"
+            "text": "*Acute Glomerulonephritis (AGN)"
            }
           ]
          },
@@ -549,6 +549,27 @@
           "content": [
            {
             "type": "text",
+            "text": "•PSGN: rare - common infectious cause of AGN"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "•"
            },
            {
@@ -685,6 +706,48 @@
            {
             "type": "text",
             "text": "•↑anti-streptolysin (ASO) titers · ↓serum complement (C3)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•asymptomatic or hematuria · proteinuria · gen edema · ↑BP - also fever · abd pain · ↓UO"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•urine dark/cola-colored (RBCs) · frothy (protein)"
            }
           ]
          }
@@ -1813,6 +1876,48 @@
           "content": [
            {
             "type": "text",
+            "text": "ddx ATN: epithelial or muddy brown casts (⍉RBC casts) ← ischemia · drug toxicity · endogenous dz - ⍉strep assoc"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "vs nephrotic syndrome: oval fat bodies (⍉RBC casts)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "•proteinuria ("
            },
            {
@@ -2132,7 +2237,7 @@
            },
            {
             "type": "text",
-            "text": " · ↓serum complement"
+            "text": " or (+) strep cx + clin Sx · ↓serum complement (C3 · CH50) · RBC casts"
            }
           ]
          },
@@ -2738,7 +2843,11 @@
               }
              }
             ],
-            "text": "supportive + abx"
+            "text": "supportive (Na & H2O restriction) + abx"
+           },
+           {
+            "type": "text",
+            "text": " only if strep infect still present - furosemide if edema & HTN"
            }
           ]
          },

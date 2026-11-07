@@ -99,7 +99,7 @@
               "type": "bold"
              }
             ],
-            "text": "Acute Bronchiolitis"
+            "text": "*Acute Bronchiolitis"
            }
           ]
          }
@@ -324,6 +324,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•viral LRTI in children <2y in fall & winter - inflam → ↑mucus · edema · sm airway obstruct · atelectasis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -371,6 +392,10 @@
              }
             ],
             "text": "RSV MCC"
+           },
+           {
+            "type": "text",
+            "text": " (paramyxovirus - outbreaks in fall & winter)"
            }
           ]
          },
@@ -391,7 +416,49 @@
           "content": [
            {
             "type": "text",
-            "text": "•Rhinovirus · Adenovirus · Influenza virus · Parainfluenza virus"
+            "text": "•contagious - spread by direct contact w nasal secretions · airborne droplets · fomites"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•all ages but most severe in young infants - peak 3-6mo · MCC LRTI in 1st yr of life"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•Rhinovirus (2nd MCC) · Adenovirus · Influenza virus · Parainfluenza virus · coronavirus · human metapneumovirus"
            }
           ]
          },
@@ -455,6 +522,10 @@
              }
             ],
             "text": "infants 2mo-2yrs MC affected"
+           },
+           {
+            "type": "text",
+            "text": " - major cause of illness & hsp in children <2y"
            }
           ]
          },
@@ -475,7 +546,91 @@
           "content": [
            {
             "type": "text",
-            "text": "•<6mo in age · exposure to cigarette smoke · lack of breastfeed · prematurity (<37wks) · crowded conditions (day care)"
+            "text": "•<3mo in age · exposure to cigarette smoke · prematurity (<37wks, esp <29wks) · crowded conditions (day care) · C-section · ↓birth wt · chronic lung dz/airway insuff · congenital heart, lung or immune deficiency"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "RF for severe dz: <3mo · prematurity · ↓birth wt · chronic airway dz or airway abnorm · CHD · neuro dz · immunodeficiency"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "RF: <37wks · ↓birth wt · <12wks · chronic pulm dz · sig CHD · immunodeficiency"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Exacerbating: 2nd-hand smoke · crowded living · high altitude"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "⍉RF: formula feeding (breast milk protective) · post-term birth (↑fetal & neonatal mortality after 40wks) - vaginal delivery → milder dz than C-section"
            }
           ]
          }
@@ -521,7 +676,7 @@
            },
            {
             "type": "text",
-            "text": " (fever · URI sxs) for 1-2d → "
+            "text": " (fever · URI sxs) for 1-3d (fever · nasal congestion · rhinorrhea) → LRI → "
            },
            {
             "type": "text",
@@ -537,6 +692,48 @@
              }
             ],
             "text": "resp distress"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•then LRTI Sx: poor feeding · progressive cough · wheezing"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•early: fussiness · poor feeding · low-grade fever · runny nose · congestion · apnea"
            }
           ]
          },
@@ -673,6 +870,153 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•polyphonic wheezing"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Tachypnea in NB = RR >70"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "PE: tachy · retractions · crying · agitation - wheezing & crackles"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•↑RR · fever · fine rales · hypoxia · otitis media"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•severe: progressive resp distress · tachypnea · nasal flaring · retractions · irritability · cyanosis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Self-limited - peaks 3-5d then gradual improvement - mild resolves over 1-3wks"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•<12wks or exacerbating factors/comorbid → prolonged course & comps: dehydration · aspiration PNA · apnea · resp failure · rarely 2ndry bact infect"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -725,7 +1069,28 @@
           "content": [
            {
             "type": "text",
-            "text": "•hypoxemia"
+            "text": "•persistently ↑resp effort: tachypnea · nasal flaring · IC/subcostal/suprasternal retractions · accessory musc use · grunting"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•hypoxemia (SpO2 <95%)"
            }
           ]
          },
@@ -767,7 +1132,28 @@
           "content": [
            {
             "type": "text",
-            "text": "•Resp failure"
+            "text": "•acute resp failure"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Nonsevere = none of the above"
            }
           ]
          }
@@ -900,7 +1286,49 @@
           "content": [
            {
             "type": "text",
-            "text": "•⍉routinely performed - may be used to r/o other Eti "
+            "text": "•patchy atelectasis"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Blood work only if bact infect suspected"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉routinely performed - may be used to r/o other Eti · high risk · underlying conditions or comps "
            }
           ]
          },
@@ -937,6 +1365,90 @@
            {
             "type": "text",
             "text": "Nasal washings → monoclonal Ab testing "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Labs for RSV: rapid nasal swab · PCR · ELISA · immunofluorescent assay - may help in some cases"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•clin + age + season + PE - confirm: rapid NP RSV test · ABG · CBC · pulse ox · blood cx · serum chem · UA"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•toxic → CXR to r/o bact PNA or CHF"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "*dx severity → determines tx"
            }
           ]
          },
@@ -1032,6 +1544,69 @@
           "content": [
            {
             "type": "text",
+            "text": "•O2 = best tx in young children - hydration · nasal & oral suctioning · cardioresp monitoring · fever mgnt"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉1st-line meds: ⍉α/β agonists (⍉albuterol · ⍉Epi) · ⍉abx · ⍉antivirals · ⍉decongestants · ⍉steroids - only in select severe dz/comps"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•healthy children recover fully w supportive care"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "     •humidified O2 "
            }
           ]
@@ -1074,7 +1649,7 @@
           "content": [
            {
             "type": "text",
-            "text": "     •nebulized saline/racemic epi "
+            "text": "     •⍉nebulized hypertonic saline · ⍉racemic Epi · ⍉albuterol · ⍉corticosteroids (⍉improve outcomes) "
            }
           ]
          },
@@ -1113,6 +1688,90 @@
            "borders": null,
            "marker": null
           }
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Nonsevere → home: adequate hydration · freq nasal suctioning · humidified air · close monitoring for progression"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•bulb suctioning for nasal congestion · monitor for clin decline"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉bronchodilators · ⍉glucocorticoids · ⍉leukotriene inhibitors in immunocompetent infants w nonsevere dz"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉inhaled glucocorticoids (⍉budesonide · ⍉dexamethasone · ⍉fluticasone) - ⍉prevent recurr wheezing · ⍉montelukast - ⍉effect on course or prev"
+           }
+          ]
          },
          {
           "type": "paragraph",
@@ -1180,6 +1839,90 @@
              }
             ],
             "text": "O2 sat <95-96% · <3mo · RR >70 · nasal flaring · retractions · to atelectasis on CXR"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•toxic appearance · poor feeding · lethargy · dehydration · mod-severe resp distress (nasal flaring · IC/subcostal/suprasternal retractions · RR >70 · dyspnea · cyanosis) · apnea · hypoxemia · parents unable to care at home"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Severe/inpt: fluid mgnt w close I&O monitoring · freq nasal suctioning · supplemental O2 PRN · ± inhaled bronchodilator"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•resp support to keep SpO2 >90-92% - heated humidified HFNC or CPAP before intubation if stable · intubation if hemodynamically unstable"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•resp failure → HFNC · CPAP or intubation"
            }
           ]
          },
@@ -1268,6 +2011,90 @@
            {
             "type": "text",
             "text": " during 1st yr of life for children <29wks · Sxtomatic chronic lung dz of prematurity · congenital Hdz · neuromusc difficulties · immunodeficiency "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•nirsevimab: long-acting mAb (passive immunization) - extended ½ life → single IM inj covers RSV season - infants <8mo born during/entering 1st RSV season + certain high-risk 8-19mo entering 2nd season"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•clesrovimab: alt mAb for infants <8mo in 1st RSV season"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•⍉RSV vax for children (mAbs = passive immunity) - vax available for older adults & preg pts"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Parent ed: hand hygiene · clean surfaces · ↓cigarette smoke exposure · avoid sick contacts & crowded areas during RSV season - breastfeeding ↓severe dz"
            }
           ]
          }

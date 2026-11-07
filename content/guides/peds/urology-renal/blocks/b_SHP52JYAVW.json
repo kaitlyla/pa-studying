@@ -99,7 +99,7 @@
               "type": "bold"
              }
             ],
-            "text": "Nephrotic Syndrome "
+            "text": "*Nephrotic Syndrome "
            }
           ]
          }
@@ -301,7 +301,7 @@
           "content": [
            {
             "type": "text",
-            "text": "Kidney dz characterized by "
+            "text": "Kidney dz (↑permeability across basement membrane) characterized by severe "
            },
            {
             "type": "text",
@@ -472,6 +472,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•children - often preceded by URI"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -536,7 +557,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•may be seen w SLE · viral hepatitis · malaria · meds (Penicillamine) · hypocomplementemia "
+            "text": "•may be seen w SLE · viral hepatitis (HBV · HCV) · gold · malig · malaria · meds (Penicillamine) · hypocomplementemia "
            }
           ]
          },
@@ -598,7 +619,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•in setting of HTN · heroin · HIV"
+            "text": "•in setting of HTN · heroin/IVDU · HIV - ESKD"
            }
           ]
          },
@@ -817,7 +838,7 @@
            },
            {
             "type": "text",
-            "text": ") USU "
+            "text": " · periph · scrotal) - pitting USU "
            },
            {
             "type": "text",
@@ -943,7 +964,7 @@
           "content": [
            {
             "type": "text",
-            "text": "•"
+            "text": "•hypercoagulability (renal vein thrombosis) · "
            },
            {
             "type": "text",
@@ -1145,7 +1166,11 @@
               }
              }
             ],
-            "text": "24hr urine protein >3.5g/d gold strd"
+            "text": "24hr urine protein >3.5g/d (children >50mg/kg/d) gold strd"
+           },
+           {
+            "type": "text",
+            "text": " - UA oval fat bodies & proteinuria → 24hr collection"
            },
            {
             "type": "text",
@@ -1412,7 +1437,28 @@
            },
            {
             "type": "text",
-            "text": " - 1st-line for Minimal Δ Dz · FSGS"
+            "text": " - 1st-line for Minimal Δ Dz · FSGS - titrated prednisone 1st-line (↑steroid responsiveness)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•alkylating agent (ex, cyclophosphamide) can tx idiopathic NS in children - ⍉1st-line (strong AEs)"
            }
           ]
          },
