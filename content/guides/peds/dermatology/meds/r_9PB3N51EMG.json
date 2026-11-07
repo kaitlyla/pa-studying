@@ -152,6 +152,30 @@
        {
         "type": "paragraph",
         "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Urticaria: H1 blockers initial - 2nd-gen = 1st-line over 1st-gen (less sedating · better SE profile · fewer drug interactions · less freq dosing)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
          "indLeft": 0,
          "indRight": 0,
          "indFirst": 0,
@@ -5689,6 +5713,27 @@
                {
                 "type": "text",
                 "text": ":"
+               }
+              ]
+             },
+             {
+              "type": "paragraph",
+              "attrs": {
+               "indLeft": 0,
+               "indRight": 0,
+               "indFirst": 0,
+               "spaceBefore": 0,
+               "spaceAfter": 0,
+               "line": null,
+               "align": "left",
+               "shade": null,
+               "borders": null,
+               "marker": null
+              },
+              "content": [
+               {
+                "type": "text",
+                "text": "Urticaria: only if prominent angioedema or urticaria persisting beyond a few days"
                }
               ]
              },
