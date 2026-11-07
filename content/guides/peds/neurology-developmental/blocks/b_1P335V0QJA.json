@@ -179,7 +179,7 @@
     "content": [
      {
       "type": "text",
-      "text": "PCV13 – pneumococcal"
+      "text": "PCV15/PCV20 – pneumococcal"
      }
     ]
    },
@@ -301,6 +301,114 @@
       "type": "text",
       "marks": [
        {
+        "type": "bold"
+       }
+      ],
+      "text": "12mo WCC"
+     },
+     {
+      "type": "text",
+      "text": ": HepA (1st) · Hib (3rd/final) · PCV15/PCV20 (4th/final) · MMR & varicella (1st of 2 - 2nd @ 4-6y)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "DTaP 4th dose @ 15-18mo · RV & PCV 2nd dose @ 4mo"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "CI (rare): anaphylaxis to prior vaccine · immunodeficiency & preg (live vaccines only) · hx of intussusception (RV only)"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Thimerosal removed from all single-dose vaccines (2001) - only multi-dose flu vials & one Td vaccine"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    }
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "text",
+      "marks": [
+       {
         "type": "highlight",
         "attrs": {
          "hex": "00FFFF"
@@ -372,6 +480,49 @@
      {
       "type": "text",
       "text": ": immunodeficiency dx · HIV · anatomical or funct asplenia · chronic renal failure or nephrotic syndrome · CSF leak · cochlear implant "
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    }
+   },
+   {
+    "type": "paragraph",
+    "attrs": {
+     "indLeft": 0,
+     "indRight": 0,
+     "indFirst": 0,
+     "spaceBefore": 0,
+     "spaceAfter": 0,
+     "line": null,
+     "align": "left",
+     "shade": null,
+     "borders": null,
+     "marker": null
+    },
+    "content": [
+     {
+      "type": "image",
+      "attrs": {
+       "asset": "bf7bacd28f36bad0298ae0fac6b6fae4.png",
+       "widthPt": 537.75,
+       "heightPt": 455.25,
+       "rot": 0,
+       "flipH": false,
+       "flipV": false
+      }
      }
     ]
    },
