@@ -414,6 +414,13 @@ async function dragHandle(page: Page, handle: string, dx: number, dy: number, es
     return x >= 0 && y >= 0 && x < view.width && y < view.height;
   };
   await expect.poll(onScreen, { message: `the ${handle} handle is on screen` }).toBe(true);
+  // The handles follow scrolling and layout from a frame loop, so a scroll just made (bringing the picture
+  // into view) moves them on the next frame: let two frames pass before reading where the handle is. While
+  // a test holds the page's frames, the wait uses the real ones and leaves the held callbacks held.
+  await page.evaluate(() => new Promise<void>((done) => {
+    const raf = (window as HeldFrames).heldFrames?.real ?? window.requestAnimationFrame.bind(window);
+    raf(() => raf(() => done()));
+  }));
   const knob = need(await ref(page, `pic-handle-${handle}`).boundingBox(), `the ${handle} handle`);
   const x = knob.x + knob.width / 2;
   const y = knob.y + knob.height / 2;
