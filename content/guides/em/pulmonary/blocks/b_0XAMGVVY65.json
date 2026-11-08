@@ -266,7 +266,7 @@
               "type": "bold"
              }
             ],
-            "text": "COPD"
+            "text": "*COPD"
            }
           ]
          }
@@ -2207,6 +2207,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "EKG (emphysema): tall P II/III/aVF · RAD · PR & ST depression II/III/aVF · poor R wave progression · low voltage"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -2667,6 +2688,27 @@
            {
             "type": "text",
             "text": "▪︎ICS = add-on only as triple therapy (LABA + LAMA + ICS) for pts w: eos ≥300 or eos ≥100 plus ≥2 mod exacerbations or ≥1 hsp per yr despite LABA + LAMA"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎also: smoke cessation · vax · O2 · NIPPV · abx (severe/infect/mech ventilation)"
            }
           ]
          },
@@ -3603,7 +3645,7 @@
               "type": "bold"
              }
             ],
-            "text": "Acute Exacerbation of COPD (AECOPD)"
+            "text": "*Acute Exacerbation of COPD (AECOPD)"
            }
           ]
          }
@@ -3837,6 +3879,27 @@
            {
             "type": "text",
             "text": " · enviro pollution · PE"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎infect (viral/bact) = majority · also aspiration"
            }
           ]
          },
@@ -4440,6 +4503,27 @@
           "content": [
            {
             "type": "text",
+            "text": "▪︎HF vs COPD hard w CAD + COPD hx - CXR/labs (BNP) differentiate"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "▪︎"
            },
            {
@@ -4751,6 +4835,27 @@
            "shade": null,
            "borders": null,
            "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎SABA + SAMA (ipratropium) 1st line - MDI or neb"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
           }
          },
          {
@@ -4779,6 +4884,27 @@
              }
             ],
             "text": "Systemic steroids (PO/IV) x5d"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎PO preferred unless can't tolerate - IV ⍉superior"
            }
           ]
          },
@@ -4917,6 +5043,48 @@
              }
             ],
             "text": "indicated if 2+ cardinal Sx chgs"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎or mech ventilation"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "▪︎@ d/c: macrolide (azithro) or doxy - by local resistance · amox ⍉adequate · Augmentin if RF poor outcome/resistance (≥65 · >2 exacerbations/yr · ♡ dz)"
            }
           ]
          },
