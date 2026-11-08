@@ -345,8 +345,48 @@ async function hideSidebar(page: Page): Promise<void> {
   await expect.poll(() => pageTransform(page)).toBe("");
 }
 
-/** Drags a selected picture's handle by (dx, dy) screen px with the mouse; Escape before letting go when `escape`. */
-async function dragHandle(page: Page, handle: string, dx: number, dy: number, escape = false): Promise<void> {
+type HeldFrames = Window & { heldFrames?: { real: typeof requestAnimationFrame; queue: FrameRequestCallback[] } };
+
+/** Holds the page's animation frames, as a slow machine leaves time between them, until releaseFrames. */
+async function holdFrames(page: Page): Promise<void> {
+  await page.evaluate(async () => {
+    const w = window as HeldFrames;
+    const real = window.requestAnimationFrame.bind(window);
+    const queue: FrameRequestCallback[] = [];
+    w.heldFrames = { real, queue };
+    window.requestAnimationFrame = (cb) => queue.push(cb);
+    // A frame asked for already still comes; once it has, every frame loop is waiting on a held one.
+    await new Promise<void>((done) => real(() => real(() => done())));
+  });
+}
+
+async function releaseFrames(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    const w = window as HeldFrames;
+    const held = w.heldFrames;
+    if (!held) throw new Error("frames were not held");
+    window.requestAnimationFrame = held.real;
+    delete w.heldFrames;
+    for (const cb of held.queue) held.real(cb);
+  });
+}
+
+/** How far a side handle's middle is from the edge of the picture it sits on, in px. */
+async function handleOffEdge(img: Locator, handle: "e" | "w"): Promise<number> {
+  return img.evaluate((pic, h) => {
+    const knob = document.querySelector(`[data-ref="pic-handle-${h}"]`);
+    if (!knob) throw new Error(`no ${h} handle`);
+    const k = knob.getBoundingClientRect();
+    const r = pic.getBoundingClientRect();
+    return k.left + k.width / 2 - (h === "e" ? r.right : r.left);
+  }, handle);
+}
+
+/**
+ * Drags a selected picture's handle by (dx, dy) screen px with the mouse; Escape before letting go when
+ * `escape`. `midway` runs once the mouse has moved, before Escape and letting go.
+ */
+async function dragHandle(page: Page, handle: string, dx: number, dy: number, escape = false, midway?: () => Promise<void>): Promise<void> {
   const view = need(page.viewportSize(), "the viewport size");
   // The mouse presses the handle's middle, so that is what must be on screen.
   const onScreen = async (): Promise<boolean> => {
@@ -363,6 +403,7 @@ async function dragHandle(page: Page, handle: string, dx: number, dy: number, es
   await page.mouse.move(x, y);
   await page.mouse.down();
   await page.mouse.move(x + dx, y + dy, { steps: 8 });
+  await midway?.();
   if (escape) await page.keyboard.press("Escape");
   await page.mouse.up();
 }
@@ -1773,7 +1814,12 @@ test.describe("a gap block's picture size and Show as my notes", () => {
     }
 
     // Escape before letting go: nothing changes.
-    await dragHandle(page, "e", -80, 0, true);
+    // With the page's frames held, as on a slow machine, the handle stays on the picture's edge as it
+    // moves and as it snaps back: the next press, made right away, lands on it.
+    await holdFrames(page);
+    await dragHandle(page, "e", -80, 0, true, async () => expect(await handleOffEdge(img, "e")).toBeCloseTo(0, 0));
+    expect(await handleOffEdge(img, "e")).toBeCloseTo(0, 0);
+    await releaseFrames(page);
     expect(await drawnSize(img)).toEqual(before);
     await expect(ref(page, "edit-dirty-state")).not.toHaveText("Unsaved changes");
 

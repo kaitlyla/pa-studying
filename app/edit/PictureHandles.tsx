@@ -63,13 +63,15 @@ export function PictureHandles({ find, basePt, size, limit, turn = {}, onResize,
   const kept = useRef<HTMLImageElement>(null);
   const cropOn = cropping !== null;
   const crop = cropping?.crop ?? null;
-  // Crop mode: the crop a drag would make (null: the picture's own), drawn by the place loop below.
+  // Crop mode: the crop a drag would make (null: the picture's own), drawn by `place` below.
   const dragged = useRef<{ crop: Crop | null } | null>(null);
+  // Puts the handles (and the crop view) on the picture as it is drawn now.
+  const place = useRef<() => void>(() => {});
   const { rot = 0, flipH = false, flipV = false } = turn;
 
-  // The handles follow the picture wherever it moves (scrolling, the sidebar, the window, a new size).
-  // In crop mode the picture is hidden behind the faded whole file and the kept part drawn over it, and
-  // the handles sit on that kept part.
+  // The handles follow the picture wherever it moves (scrolling, the sidebar, the window, a new size),
+  // checked every frame. In crop mode the picture is hidden behind the faded whole file and the kept part
+  // drawn over it, and the handles sit on that kept part.
   useLayoutEffect(() => {
     let frame = 0;
     let hidden: HTMLElement | null = null;
@@ -78,7 +80,7 @@ export function PictureHandles({ find, basePt, size, limit, turn = {}, onResize,
       hidden = el;
       if (el) el.style.visibility = "hidden";
     };
-    const place = (): void => {
+    const sync = (): void => {
       const el = box.current;
       const pic = find();
       const r = pic instanceof HTMLElement && pic.isConnected ? pic.getBoundingClientRect() : null;
@@ -111,11 +113,16 @@ export function PictureHandles({ find, basePt, size, limit, turn = {}, onResize,
         el.hidden = !shown || shown.width <= 0;
         if (shown) Object.assign(el.style, { left: `${shown.left}px`, top: `${shown.top}px`, width: `${shown.width}px`, height: `${shown.height}px` });
       }
-      frame = requestAnimationFrame(place);
     };
-    place();
+    const tick = (): void => {
+      sync();
+      frame = requestAnimationFrame(tick);
+    };
+    place.current = sync;
+    tick();
     return () => {
       cancelAnimationFrame(frame);
+      place.current = () => {};
       show(null);
     };
   }, [find, cropOn, crop, rot, flipH, flipV]);
@@ -144,14 +151,18 @@ export function PictureHandles({ find, basePt, size, limit, turn = {}, onResize,
     const view = knob.ownerDocument.defaultView ?? window;
     const drag = (ev: PointerEvent) => unturnedDrag(handle, (ev.clientX - x0) * ptPerPx, (ev.clientY - y0) * ptPerPx, turn);
 
+    // Each change to the picture moves the handles with it at once: until the next frame they would
+    // sit where it was, and a press there would miss them.
     const move = (ev: PointerEvent): void => {
       const d = drag(ev);
       if (cropping) dragged.current = { crop: draggedPictureCrop({ size: start, crop }, d.handle, d.dx, d.dy, limit).crop };
       else preview(img, draggedPictureSize(start, d.handle, d.dx, d.dy, limit), basePt);
+      place.current();
     };
     const stop = (): void => {
       dragged.current = null;
       if (!cropping) img.style.cssText = css;
+      place.current();
       knob.removeEventListener("pointermove", move);
       knob.removeEventListener("pointerup", up);
       knob.removeEventListener("pointercancel", stop);
