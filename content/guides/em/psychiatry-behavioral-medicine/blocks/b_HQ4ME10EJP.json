@@ -887,7 +887,7 @@
               "type": "bold"
              }
             ],
-            "text": "Opioids"
+            "text": "*Opioids"
            }
           ]
          }
@@ -1247,6 +1247,27 @@
            {
             "type": "text",
             "text": " · impairment in attention or memory "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•↓RR · ↓mental status · pinpoint pupils"
            }
           ]
          },
@@ -2158,7 +2179,7 @@
               "type": "bold"
              }
             ],
-            "text": "Sedatives, Hypnotics, Anxiolytics "
+            "text": "*Sedatives, Hypnotics, Anxiolytics "
            }
           ]
          }
@@ -2286,6 +2307,27 @@
              }
             ],
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•BDZs require endogenous GABA to open Cl channel (unlike barbiturates)"
            }
           ]
          }
@@ -2473,6 +2515,48 @@
            {
             "type": "text",
             "text": " · impairment in attention/memory · stupor or coma "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "BDZ toxicity: CNS depression (slurred speech · lethargy · ataxia · coma) w essentially norm VS & midposition pupils (⍉Δ pupil size unlike opioids)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•resp depression uncommon in isolated PO ingestion - more likely w coingestion (EToH · opioids)"
            }
           ]
          }
@@ -2979,7 +3063,7 @@
               }
              }
             ],
-            "text": "flumazenil"
+            "text": "supportive (cardiac monitoring · end-tidal CO2 · pulse oximetry · head of bed elevation) · exclude coingestants & coexisting dx (trauma · ↓BG · rhabdo · aspiration pneumonitis) - 6hr ED observation → admit to monitored unit if still Sxtomatic"
            },
            {
             "type": "text",
@@ -2992,6 +3076,48 @@
              }
             ],
             "text": " "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•consider flumazenil if severe sxs in BDZ-naive pts"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "ddx quetiapine OD: somnolence + antimuscarinic-like (tachy) + Na channel blockade"
            }
           ]
          },
@@ -4369,7 +4495,7 @@
               "type": "bold"
              }
             ],
-            "text": "Tobacco "
+            "text": "*Tobacco "
            }
           ]
          }
@@ -4899,6 +5025,10 @@
              }
             ],
             "text": "bupropion · varenicline (Chantix)"
+           },
+           {
+            "type": "text",
+            "text": " - nicotinic acetylcholine-r partial agonist"
            }
           ]
          }
