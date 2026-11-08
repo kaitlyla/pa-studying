@@ -24,7 +24,7 @@ import { recordSaved } from "./overlay.ts";
 import { repo, SAVE_FAILED, SAVE_OFFLINE, useIsEditing } from "./session.ts";
 import { Snapshot } from "./snapshot.ts";
 import {
-  CHOOSE_FILE, checkUpload, defaultName, DOC_ACCEPT, fileProblem, inboxOriginal, localOriginal, NAME_BLANK, retryUpload, saveBlob, startUpload,
+  CHOOSE_FILE, defaultName, DOC_ACCEPT, fileProblem, inboxOriginal, localOriginal, NAME_BLANK, retryUpload, saveBlob, startUpload,
   storedOriginal, useUploads,
 } from "./upload.ts";
 
@@ -174,13 +174,11 @@ export function DocActions({ doc, from = null }: { doc: DocJson; from?: string |
       showToast(bad);
       return;
     }
-    const problem = await asOwner(async (git, author) => {
-      const p = await checkUpload(git, file, doc.id);
-      if (p === null) await startUpload({ git, author, file, name: doc.name, replaceId: doc.id });
-      return p ?? "";
+    const started = await asOwner(async (git, author) => {
+      await startUpload({ git, author, file, name: doc.name, replaceId: doc.id });
+      return true;
     });
-    if (problem === null) return;
-    showToast(problem === "" ? REPLACED(doc.name, file.name) : problem);
+    if (started) showToast(REPLACED(doc.name, file.name));
   };
 
   const remove = async (): Promise<void> => {
@@ -277,17 +275,12 @@ export function AddDocument({ place, title }: { place: DocPlace; title: string }
       return;
     }
     setBusy(true);
-    const problem = await asOwner(async (git, author) => {
-      const p = await checkUpload(git, file);
-      if (p === null) await startUpload({ git, author, file, name: n, place });
-      return p ?? "";
+    const started = await asOwner(async (git, author) => {
+      await startUpload({ git, author, file, name: n, place });
+      return true;
     });
     setBusy(false);
-    if (problem === null) return;
-    if (problem !== "") {
-      setErr(problem);
-      return;
-    }
+    if (!started) return;
     close();
     showToast(ADDED(n));
   };

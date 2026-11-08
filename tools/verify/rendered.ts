@@ -18,7 +18,7 @@ export interface Host {
 export interface RenderedOptions {
   postCuration: boolean;
   log: (line: string) => void;
-  /** Serves the built site and returns its base URL (ending in `/pa-studying/`) and a stop function. */
+  /** Serves the built site and returns its base URL (the server root, ending in `/`) and a stop function. */
   serve?: (root: string) => Promise<{ base: string; stop: () => Promise<void> }>;
 }
 
@@ -94,7 +94,7 @@ export async function buildAndPreview(root: string): Promise<{ base: string; sto
   await run(win ? "npm.cmd" : "npm", ["run", "build:data"], root);
   await run(win ? "npx.cmd" : "npx", ["vite", "build"], root);
   const preview = await startPreview(root);
-  return { base: `http://localhost:${preview.port}/pa-studying/`, stop: preview.stop };
+  return { base: `http://localhost:${preview.port}/`, stop: preview.stop };
 }
 
 /** Adds rendered-check discrepancies (and `unhosted` info at the import run) to each report. */

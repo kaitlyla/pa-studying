@@ -42,7 +42,7 @@ export function workerOriginCsp(origin: () => string = () => readWorkerOrigin())
 
 export default defineConfig({
   root: "app",
-  base: "/pa-studying/",
+  base: "/",
   publicDir: "public",
   plugins: [react(), workerOriginCsp()],
   build: {

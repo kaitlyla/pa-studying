@@ -17,7 +17,7 @@ describe("Http", () => {
     expect(init.redirect).toBe("follow");
     expect(timeout).toHaveBeenCalledWith(FETCH_TIMEOUT_MS);
     expect(init.signal).toBe(timeout.mock.results[0]!.value);
-    expect(USER_AGENT).toBe("PA-Studying-guideline-check (+https://kaitlyla.github.io/pa-studying/)");
+    expect(USER_AGENT).toBe("PA-Studying-guideline-check (+https://pa-studying.pages.dev/)");
   });
 
   it("throws on a non-2xx status, a network error and invalid JSON", async () => {

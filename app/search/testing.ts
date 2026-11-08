@@ -5,7 +5,7 @@ import type { VocabFile } from "../../lib/content/types.ts";
 import type { WorkerLike } from "./client.ts";
 import { serveEngine, type WorkerRequest, type WorkerResponse } from "./engine.ts";
 
-export const BASE = "http://site.test/pa-studying/data/search/";
+export const BASE = "http://site.test/data/search/";
 
 export const VOCAB: VocabFile = {
   v: 1,

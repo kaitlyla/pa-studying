@@ -11,13 +11,13 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: `http://127.0.0.1:${PORT}/pa-studying/`,
+    baseURL: `http://127.0.0.1:${PORT}/`,
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
     command: `npx vite preview --host 127.0.0.1 --port ${PORT} --strictPort`,
     cwd: projectRoot,
-    url: `http://127.0.0.1:${PORT}/pa-studying/`,
+    url: `http://127.0.0.1:${PORT}/`,
     reuseExistingServer: !process.env.CI,
   },
 });

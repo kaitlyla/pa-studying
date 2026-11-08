@@ -63,8 +63,10 @@ const postJson = (path: string, body: unknown) =>
 describe("origin check", () => {
   it.each([
     ["https://evil.example"],
-    ["https://kaitlyla.github.io.evil.example"],
-    ["http://kaitlyla.github.io"],
+    ["https://pa-studying.pages.dev.evil.example"],
+    ["http://pa-studying.pages.dev"],
+    // The site's previous GitHub Pages origin, which now only redirects.
+    ["https://kaitlyla.github.io"],
     [null],
   ])("answers 403 with an empty body and no CORS header for Origin %s", async (origin) => {
     const calls = mockFetch();
@@ -83,7 +85,7 @@ describe("preflight", () => {
   it("answers OPTIONS with 204 and the four CORS headers", async () => {
     const response = await worker.fetch(request("/token", { method: "OPTIONS" }), env);
     expect(response.status).toBe(204);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(response.headers.get("Access-Control-Allow-Methods")).toBe("POST");
     expect(response.headers.get("Access-Control-Allow-Headers")).toBe("Content-Type");
     expect(response.headers.get("Access-Control-Max-Age")).toBe("86400");
@@ -105,7 +107,7 @@ describe("POST /token", () => {
     const response = await worker.fetch(postJson("/token", { code: "the-code", code_verifier: "the-verifier" }), env);
 
     expect(response.status).toBe(200);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(await response.json()).toStrictEqual({
       access_token: "ghu_access",
       expires_in: 28800,
@@ -132,7 +134,7 @@ describe("POST /token", () => {
     mockFetch(jsonResponse(200, { error: "bad_verification_code", error_description: "The code passed is incorrect or expired." }));
     const response = await worker.fetch(postJson("/token", { code: "stale", code_verifier: "v" }), env);
     expect(response.status).toBe(400);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(await response.json()).toStrictEqual({ error: "bad_verification_code" });
   });
 });
@@ -159,7 +161,7 @@ describe("POST /revoke", () => {
     const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), env);
 
     expect(response.status).toBe(204);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(calls).toHaveLength(1);
     const [call] = calls;
     expect(call!.url).toBe(`https://api.github.com/applications/${CLIENT_ID}/token`);
@@ -180,7 +182,7 @@ describe("POST /revoke", () => {
     mockFetch(jsonResponse(500, { message: "Server Error" }));
     const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), env);
     expect(response.status).toBe(502);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
   });
 });
 
@@ -192,7 +194,7 @@ describe("failure paths", () => {
       env,
     );
     expect(response.status).toBe(400);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(await response.json()).toStrictEqual({ error: "invalid_request" });
     expect(calls).toHaveLength(0);
   });
@@ -209,7 +211,7 @@ describe("failure paths", () => {
     mockFetch(new TypeError("fetch failed"));
     const response = await worker.fetch(postJson("/token", { code: "c", code_verifier: "v" }), env);
     expect(response.status).toBe(502);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(await response.json()).toStrictEqual({ error: "upstream_unreachable" });
   });
 
@@ -233,7 +235,7 @@ describe("failure paths", () => {
     mockFetch(new TypeError("fetch failed"));
     const response = await worker.fetch(postJson("/revoke", { access_token: "ghu_access" }), env);
     expect(response.status).toBe(502);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
     expect(await response.text()).toBe("");
   });
 
@@ -260,7 +262,7 @@ describe("unknown routes", () => {
     const req = typeof make === "function" ? make() : make;
     const response = await worker.fetch(req, env);
     expect(response.status).toBe(404);
-    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://kaitlyla.github.io");
+    expect(response.headers.get("Access-Control-Allow-Origin")).toBe("https://pa-studying.pages.dev");
   });
 });
 

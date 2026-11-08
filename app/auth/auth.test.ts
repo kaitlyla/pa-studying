@@ -46,7 +46,7 @@ beforeEach(() => {
   events = [];
   localStorage.clear();
   installLocks();
-  history.replaceState(null, "", "/pa-studying/#/eor/fm");
+  history.replaceState(null, "", "/#/eor/fm");
   window.name = "";
 });
 
@@ -59,7 +59,7 @@ describe("the return from GitHub", () => {
   it("stops with the failure state, posting nothing, when state differs from pa.oauth", async () => {
     stubFetch(() => tokens(1));
     localStorage.setItem("pa.oauth", JSON.stringify({ state: "expected", verifier: "v" }));
-    history.replaceState(null, "", "/pa-studying/?code=c1&state=other#/eor/fm");
+    history.replaceState(null, "", "/?code=c1&state=other#/eor/fm");
 
     expect(await exchangeReturnCode()).toBe("failed");
     expect(calls).toEqual([]);
@@ -73,7 +73,7 @@ describe("the return from GitHub", () => {
     stubFetch(() => tokens(1));
     vi.spyOn(Date, "now").mockReturnValue(1_000_000);
     localStorage.setItem("pa.oauth", JSON.stringify({ state: "s1", verifier: "ver1" }));
-    history.replaceState(null, "", "/pa-studying/?code=c1&state=s1#/other");
+    history.replaceState(null, "", "/?code=c1&state=s1#/other");
 
     expect(await exchangeReturnCode()).toBe("signed-in");
     expect(calls).toEqual([{ url: `${WORKER_ORIGIN}/token`, body: { code: "c1", code_verifier: "ver1" } }]);
@@ -85,7 +85,7 @@ describe("the return from GitHub", () => {
   it("fails without storing tokens when the Worker answers 400", async () => {
     stubFetch(() => new Response(JSON.stringify({ error: "bad_verification_code" }), { status: 400 }));
     localStorage.setItem("pa.oauth", JSON.stringify({ state: "s1", verifier: "ver1" }));
-    history.replaceState(null, "", "/pa-studying/?code=c1&state=s1");
+    history.replaceState(null, "", "/?code=c1&state=s1");
 
     expect(await exchangeReturnCode()).toBe("failed");
     expect(readAuth()).toBeNull();

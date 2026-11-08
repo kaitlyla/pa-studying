@@ -35,7 +35,7 @@ const ROUTES: Record<string, { title: string; body: string }> = {
 function serveApp(): Promise<Server> {
   const server = createServer((req, res) => {
     const url = req.url ?? "";
-    const data = /^\/pa-studying\/data\/(\w+)\.json$/.exec(url);
+    const data = /^\/data\/(\w+)\.json$/.exec(url);
     if (data && ROUTES[data[1]!]) {
       setTimeout(() => {
         res.writeHead(200, { "content-type": "application/json" });
@@ -43,7 +43,7 @@ function serveApp(): Promise<Server> {
       }, 300);
       return;
     }
-    if (url === "/pa-studying/") {
+    if (url === "/") {
       res.writeHead(200, { "content-type": "text/html" });
       res.end(APP);
       return;
@@ -79,7 +79,7 @@ describe("renderedCheck in Chromium", () => {
     }));
     const report: SourceReport = { source: "notes.docx", counts: {}, discrepancies: [], info: [] };
     const server = await serveApp();
-    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/pa-studying/`;
+    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/`;
     let stopped = false;
     const lines: string[] = [];
     try {
@@ -116,7 +116,7 @@ describe("renderedCheck in Chromium", () => {
     }));
     const report: SourceReport = { source: "notes.docx", counts: {}, discrepancies: [], info: [] };
     const server = await serveApp();
-    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/pa-studying/`;
+    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/`;
     try {
       await renderedCheck(root, new Map([[report, [shownEarlier, lost]]]), {
         postCuration: true, log: () => undefined, serve: async () => ({ base, stop: async () => undefined }),

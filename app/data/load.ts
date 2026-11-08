@@ -40,8 +40,8 @@ function bump(): void {
 }
 
 async function fetchJson(path: string): Promise<unknown> {
-  // Pages serves data with max-age=600; revalidate so a re-read after her save is deployed is never
-  // answered from the browser's stale copy (an unchanged file costs a 304).
+  // Revalidate so a re-read after her save is deployed is never answered from the browser's stale
+  // copy, whatever cache lifetime the host sends (an unchanged file costs a 304).
   const res = await fetch(DATA_BASE + path, { cache: "no-cache" }).catch((e: unknown) => {
     throw new DataOfflineError(path, { cause: e });
   });

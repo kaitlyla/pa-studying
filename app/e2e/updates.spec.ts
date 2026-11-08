@@ -86,8 +86,8 @@ const TYPES: Record<string, string> = { ".json": "application/json", ".png": "im
 
 /** Serves the spec's build for every data request (the app reads `<base>data/<path>`). */
 async function serveBuild(page: Page): Promise<void> {
-  await page.route("**/pa-studying/data/**", async (route) => {
-    const rel = decodeURIComponent(new URL(route.request().url()).pathname.replace(/^\/pa-studying\/data\//, ""));
+  await page.route("**/data/**", async (route) => {
+    const rel = decodeURIComponent(new URL(route.request().url()).pathname.replace(/^\/data\//, ""));
     try {
       const body = await readFile(join(data, ...rel.split("/")));
       await route.fulfill({ status: 200, body, contentType: TYPES[extname(rel)] ?? "application/octet-stream" });

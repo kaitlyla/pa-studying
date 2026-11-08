@@ -279,8 +279,8 @@ interface World {
 }
 
 /**
- * GitHub Pages answers a missing data file (an unpublished document's docs/<d>.json) with 404;
- * `vite preview` would answer it with index.html.
+ * The live site answers a missing data file (an unpublished document's docs/<d>.json) with 404 (Cloudflare
+ * Pages serves the site's 404.html); `vite preview` would answer it with index.html.
  */
 async function missingDataIs404(context: BrowserContext): Promise<void> {
   await context.route(
@@ -292,7 +292,7 @@ async function missingDataIs404(context: BrowserContext): Promise<void> {
   );
 }
 
-async function world(context: BrowserContext, baseURL: string | undefined, opts: { seed?: boolean; login?: string; siteBytes?: number } = {}): Promise<World> {
+async function world(context: BrowserContext, baseURL: string | undefined, opts: { seed?: boolean; login?: string } = {}): Promise<World> {
   if (!baseURL) throw new Error("the Playwright config sets no baseURL");
   const [owner, repo] = site.repo.split("/");
   const id = opts.login === undefined ? site.owner.id : site.owner.id + 1;
@@ -305,7 +305,7 @@ async function world(context: BrowserContext, baseURL: string | undefined, opts:
   const seed = opts.seed
     ? fake.commitFiles(contentFiles(), { message: commitMessage("Import her source files", { kind: "import" }), date: IMPORT_DATE })
     : fake.head();
-  const build: World["build"] = { commit: seed, siteBytes: opts.siteBytes ?? 300_000_000 };
+  const build: World["build"] = { commit: seed, siteBytes: 300_000_000 };
   let fetches = 0;
   // Context routes: the sign-in popup's first navigation happens before its Page exists.
   await routeFakeGithub(context, fake, { workerOrigin: WORKER_ORIGIN, returnUrl: baseURL });
@@ -3348,12 +3348,12 @@ test.describe("Add document checks leave nothing uploaded", () => {
     nothingUploaded(fake);
   });
 
-  test("a file over 100 MB is refused", async ({ page, context, baseURL }, testInfo) => {
+  test("a file over 25 MB is refused", async ({ page, context, baseURL }, testInfo) => {
     const { fake } = await world(context, baseURL, { seed: true });
     const path = testInfo.outputPath("Huge scan.pdf");
     const fd = openSync(path, "w");
     try {
-      ftruncateSync(fd, 101 * MiB);
+      ftruncateSync(fd, 26 * MiB);
     } finally {
       closeSync(fd);
     }
@@ -3361,22 +3361,9 @@ test.describe("Add document checks leave nothing uploaded", () => {
     await signIn(page);
     const dialog = await openAdd(page);
     await ref(dialog, "add-doc-file").setInputFiles(path);
-    await expect(ref(dialog, "add-doc-error")).toHaveText("This file is 101 MB. The site’s free hosting holds files up to 100 MB.");
+    await expect(ref(dialog, "add-doc-error")).toHaveText("This file is 26 MB. The site’s free hosting holds files up to 25 MB.");
     await ref(dialog, "add-doc-confirm").click();
     await expect(ref(dialog, "add-doc-error")).toHaveText("Choose a file first.");
-    nothingUploaded(fake);
-  });
-
-  test("a file that would take the site past 1 GB is refused", async ({ page, context, baseURL }) => {
-    const { fake } = await world(context, baseURL, { seed: true, siteBytes: 1_000_000_000 - 10 });
-    await openPage(page, placeHash());
-    await signIn(page);
-    const dialog = await openAdd(page);
-    await ref(dialog, "add-doc-file").setInputFiles(smallPdf("Lipids 2024.pdf"));
-    await expect(ref(dialog, "add-doc-error")).toHaveCount(0);
-    await ref(dialog, "add-doc-confirm").click();
-    await expect(ref(dialog, "add-doc-error")).toHaveText("The site’s free hosting is full (1 GB). Remove a document to make room.");
-    await expect(dialog).toBeVisible();
     nothingUploaded(fake);
   });
 });

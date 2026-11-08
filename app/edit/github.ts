@@ -144,13 +144,6 @@ export class Git {
     return out;
   }
 
-  /** Every blob of a commit's tree, by path → bytes. */
-  async sizes(commit: string): Promise<Map<string, number>> {
-    const out = new Map<string, number>();
-    for (const e of await this.tree(commit)) if (e.type === "blob") out.set(e.path, e.size ?? 0);
-    return out;
-  }
-
   async blobBytes(sha: string): Promise<Uint8Array> {
     const res = await ghCall(`${this.base}/git/blobs/${sha}`, { accept: RAW });
     if (res.status !== 200) throw new ApiError(res.status, `blob ${sha}: HTTP ${res.status}`);

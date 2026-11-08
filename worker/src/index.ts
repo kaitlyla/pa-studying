@@ -11,8 +11,8 @@ export interface Env {
   REVOKE_MODE?: string;
 }
 
-export const SITE_ORIGIN = "https://kaitlyla.github.io";
-export const SITE_URL = "https://kaitlyla.github.io/pa-studying/";
+export const SITE_ORIGIN = "https://pa-studying.pages.dev";
+export const SITE_URL = "https://pa-studying.pages.dev/";
 const REPO = "kaitlyla/pa-studying";
 const GUIDELINE_WORKFLOW = "guideline-check.yml";
 const OAUTH_TOKEN_URL = "https://github.com/login/oauth/access_token";

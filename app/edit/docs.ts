@@ -217,11 +217,3 @@ export function restoreDoc(req: DocRequest): Promise<DocOutcome> {
     };
   });
 }
-
-/** Bytes the document's stored files take at main's head (subtracted from the site space on Replace). */
-export async function storedBytes(git: Git, docId: string): Promise<number> {
-  const sizes = await git.sizes(await git.ref());
-  let total = 0;
-  for (const [path, size] of sizes) if (path.startsWith(`content/docs/${docId}/`) || path.startsWith(`content/files/${docId}/`)) total += size;
-  return total;
-}

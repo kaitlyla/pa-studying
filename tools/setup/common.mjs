@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 export const HOST = "127.0.0.1";
 export const PORT = 8977;
 export const LOOPBACK = `http://${HOST}:${PORT}`;
-export const SITE_URL = "https://kaitlyla.github.io/pa-studying/";
+export const SITE_URL = "https://pa-studying.pages.dev/";
 export const OWNER = "kaitlyla";
 export const REPO = "pa-studying";
 export const API = "https://api.github.com";

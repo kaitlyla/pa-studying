@@ -6,25 +6,22 @@ import {
   inboxItemDir, inboxUploadPath, newId, parseFile, partName, serializeFile, UPLOAD_EXTS, UPLOAD_KIND, UPLOAD_NAME, type UploadExt,
   type UploadFile,
 } from "../../lib/content/index.ts";
-import { BUILD_PATH, type BuildJson } from "../../lib/derive/published.ts";
 import { waitForSignIn } from "../auth/auth.ts";
 import { SignedOutError } from "../auth/session.ts";
-import { DATA_BASE } from "../data/load.ts";
-import { addDocRecord, addedFiles, markReplacing, processingRecord, storedBytes, type DocOutcome, type DocPlace } from "./docs.ts";
+import { addDocRecord, addedFiles, markReplacing, processingRecord, type DocOutcome, type DocPlace } from "./docs.ts";
 import { ApiError, NetworkError, retry, type Git, type Identity } from "./github.ts";
 import { dropUnsaved, recordSaved, showUnsaved } from "./overlay.ts";
 import { Snapshot } from "./snapshot.ts";
 
 /** The file picker's accept list (UI other-tab/add-doc). */
 export const DOC_ACCEPT = UPLOAD_EXTS.map((e) => `.${e}`).join(",");
-/** The largest file she can add (50 §50.7 check 2). */
-export const MAX_FILE_BYTES = 100 * 1024 * 1024;
-/** The site's hosting limit (50 §50.7 check 3, operator ruling 2C). */
-export const SITE_LIMIT_BYTES = 1_000_000_000;
+/**
+ * The largest file she can add (50 §50.7 check 2): the original is published as-is, and Cloudflare
+ * Pages serves files up to 25 MiB.
+ */
+export const MAX_FILE_BYTES = 25 * 1024 * 1024;
 /** Raw bytes per uploaded part (50 §50.9 step 3). */
 export const PART_BYTES = 16 * 1024 * 1024;
-/** Kept on the site twice: the original plus its converted view (50 §50.7 check 3). */
-const STORED_TWICE: ReadonlySet<UploadExt> = new Set(["ppt", "pptx", "doc"]);
 /** Waits before the retries of a failed step 3–7 (50 §50.9). */
 export const STEP_RETRY_MS = [2000, 4000, 8000] as const;
 /** Inbox branches older than this are left over from closed tabs (50 §50.9). */
@@ -34,8 +31,7 @@ export const PROCESS_WORKFLOW = "process-inbox.yml";
 // ---- wording (signed mockup ui-edit.js / ui-app.js; plan 50 §50.7, §50.9 for the rest) -----------
 
 export const TYPE_REFUSED = "That file type can’t be added. Use a Word file, a PDF, an image (PNG or JPG) or a PowerPoint.";
-export const TOO_BIG = (bytes: number): string => `This file is ${(bytes / 1048576).toFixed(0)} MB. The site’s free hosting holds files up to 100 MB.`;
-export const SITE_FULL = "The site’s free hosting is full (1 GB). Remove a document to make room.";
+export const TOO_BIG = (bytes: number): string => `This file is ${(bytes / 1048576).toFixed(0)} MB. The site’s free hosting holds files up to 25 MB.`;
 export const CHOOSE_FILE = "Choose a file first.";
 export const NAME_BLANK = "Give the document a name.";
 
@@ -53,39 +49,14 @@ export function defaultName(fileName: string): string {
   return fileName.replace(/\.[^.]+$/, "");
 }
 
-/** Checks 1 and 2 of 50 §50.7: the first failure's message, or null. */
+/**
+ * The checks for adding or replacing a document with `file` (50 §50.7 checks 1 and 2): the first
+ * failure's message, or null. Cloudflare Pages has no total-size cap, so the 1 GB site check is gone.
+ */
 export function fileProblem(file: { name: string; size: number }): string | null {
   if (uploadExt(file.name) === null) return TYPE_REFUSED;
   if (file.size > MAX_FILE_BYTES) return TOO_BIG(file.size);
   return null;
-}
-
-/** Check 3 of 50 §50.7 for a file of `size` bytes: the message when the site would pass 1 GB, or null. */
-export function spaceProblem(siteBytes: number, size: number, ext: UploadExt, replacedBytes = 0): string | null {
-  const projected = siteBytes + size * (STORED_TWICE.has(ext) ? 2 : 1) - replacedBytes;
-  return projected > SITE_LIMIT_BYTES ? SITE_FULL : null;
-}
-
-/** `build.json.siteBytes` as deployed now. A connection failure is a NetworkError. */
-export async function readSiteBytes(): Promise<number> {
-  let res: Response;
-  try {
-    res = await fetch(`${DATA_BASE}${BUILD_PATH}`, { cache: "no-store" });
-  } catch (e) {
-    if (e instanceof TypeError) throw new NetworkError();
-    throw e;
-  }
-  if (!res.ok) throw new Error(`${BUILD_PATH}: HTTP ${res.status}`);
-  return ((await res.json()) as BuildJson).siteBytes;
-}
-
-/** All three checks for adding (`replaceId` absent) or replacing a document with `file`. */
-export async function checkUpload(git: Git, file: { name: string; size: number }, replaceId?: string): Promise<string | null> {
-  const problem = fileProblem(file);
-  if (problem !== null) return problem;
-  const ext = uploadExt(file.name) as UploadExt;
-  const [site, replaced] = await Promise.all([readSiteBytes(), replaceId === undefined ? 0 : storedBytes(git, replaceId)]);
-  return spaceProblem(site, file.size, ext, replaced);
 }
 
 // ---- encoding ------------------------------------------------------------------------------------

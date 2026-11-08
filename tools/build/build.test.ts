@@ -10,7 +10,7 @@ import {
 import { FONTS } from "../../lib/fonts.ts";
 import { loadIndex, runSearch, SHARD_SIZE, Vocab, type SearchUnit } from "../../lib/search/index.ts";
 import { searchCoverage } from "./coverage.ts";
-import { finish, FILE_LIMIT, SITE_LIMIT } from "./finish.ts";
+import { finish, FILE_COUNT_LIMIT, FILE_LIMIT } from "./finish.ts";
 import { build, currentCommit, isoNow } from "./index.ts";
 import { D, PNG, writeFixture } from "./test-fixture.ts";
 
@@ -103,9 +103,9 @@ describe("post-build size step", () => {
     return n;
   };
 
-  it("uses the GitHub Pages limits: 100 MiB per file, 1 GB per site", () => {
-    expect(FILE_LIMIT).toBe(104_857_600);
-    expect(SITE_LIMIT).toBe(1_000_000_000);
+  it("uses the Cloudflare Pages limits: 25 MiB per file, 20,000 files per site", () => {
+    expect(FILE_LIMIT).toBe(26_214_400);
+    expect(FILE_COUNT_LIMIT).toBe(20_000);
   });
 
   it("writes the total size of dist into build.json siteBytes", async () => {
@@ -119,20 +119,20 @@ describe("post-build size step", () => {
     expect(now - bytes).toBe(String(bytes).length - 1);
   });
 
-  it("fails naming a file over the per-file limit, and the site over the site limit", async () => {
+  it("fails naming a file over the per-file limit, and the site over the file-count limit, with no total-size cap", async () => {
     const dist = await mkdtemp(join(tmpdir(), "pa-finish-"));
     try {
       await mkdir(join(dist, "data"), { recursive: true });
       await writeFile(join(dist, "data", "build.json"), "{}");
       await writeFile(join(dist, "data", "big.bin"), new Uint8Array(11));
       let e: unknown = null;
-      await finish(dist, { file: 10, site: 1000 }).catch((x: unknown) => { e = x; });
+      await finish(dist, { file: 10, files: 1000 }).catch((x: unknown) => { e = x; });
       expect(e).toBeInstanceOf(BuildError);
       expect((e as BuildError).id).toBe("data/big.bin");
       e = null;
-      await finish(dist, { file: 100, site: 12 }).catch((x: unknown) => { e = x; });
+      await finish(dist, { file: 100, files: 1 }).catch((x: unknown) => { e = x; });
       expect((e as BuildError).id).toBe("dist");
-      await expect(finish(dist, { file: 100, site: 13 })).resolves.toBe(13);
+      await expect(finish(dist, { file: 100, files: 2 })).resolves.toBe(13);
     } finally {
       await rm(dist, { recursive: true, force: true });
     }

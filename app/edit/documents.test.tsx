@@ -16,14 +16,14 @@ import {
   ADDED, AddDocument, DocActions, FAILED_NOTE, PendingDocPage, PROCESSING_NOTE, RemovedDocs, RENAMED, REMOVE_BODY, REMOVED, REPLACED, RESTORED,
   UploadProblem,
 } from "./DocActions.tsx";
-import { removeDoc, renameDoc, restoreDoc, storedBytes } from "./docs.ts";
+import { removeDoc, renameDoc, restoreDoc } from "./docs.ts";
 import { retry } from "./github.ts";
 import { memoryStore } from "./idb.ts";
 import { setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import { SAVE_OFFLINE } from "./session.ts";
 import {
-  CHOOSE_FILE, checkUpload, defaultName, fileProblem, inboxOriginal, MAX_FILE_BYTES, NAME_BLANK, PROCESS_WORKFLOW, resetUploadsForTests, retryUpload,
-  SITE_FULL, SITE_LIMIT_BYTES, spaceProblem, startUpload, TOO_BIG, TYPE_REFUSED, uploadExt, uploadsInProgress,
+  CHOOSE_FILE, defaultName, fileProblem, inboxOriginal, MAX_FILE_BYTES, NAME_BLANK, PROCESS_WORKFLOW, resetUploadsForTests, retryUpload,
+  startUpload, TOO_BIG, TYPE_REFUSED, uploadExt, uploadsInProgress,
 } from "./upload.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 
@@ -111,35 +111,13 @@ describe("upload checks (50 §50.7)", () => {
     expect(defaultName("a.b.docx")).toBe("a.b");
   });
 
-  it("refuses other file types, then files over 100 MB, at exactly the limit", () => {
+  it("refuses other file types, then files over Cloudflare Pages' 25 MiB, at exactly the limit", () => {
     expect(fileProblem({ name: "notes.txt", size: 1 })).toBe(TYPE_REFUSED);
     expect(TYPE_REFUSED).toBe("That file type can’t be added. Use a Word file, a PDF, an image (PNG or JPG) or a PowerPoint.");
+    expect(MAX_FILE_BYTES).toBe(26_214_400);
     expect(fileProblem({ name: "big.pdf", size: MAX_FILE_BYTES })).toBeNull();
     expect(fileProblem({ name: "big.pdf", size: MAX_FILE_BYTES + 1 })).toBe(TOO_BIG(MAX_FILE_BYTES + 1));
-    expect(TOO_BIG(150 * 1048576)).toBe("This file is 150 MB. The site’s free hosting holds files up to 100 MB.");
-  });
-
-  it("refuses a file that would take the site past 1 GB, counting PowerPoints and .doc twice and subtracting a replaced file", () => {
-    expect(spaceProblem(SITE_LIMIT_BYTES - 10, 10, "pdf")).toBeNull();
-    expect(spaceProblem(SITE_LIMIT_BYTES - 10, 11, "pdf")).toBe(SITE_FULL);
-    expect(spaceProblem(SITE_LIMIT_BYTES - 20, 10, "pptx")).toBeNull();
-    expect(spaceProblem(SITE_LIMIT_BYTES - 19, 10, "pptx")).toBe(SITE_FULL);
-    expect(spaceProblem(SITE_LIMIT_BYTES - 19, 10, "doc")).toBe(SITE_FULL);
-    expect(spaceProblem(SITE_LIMIT_BYTES - 19, 10, "docx")).toBeNull();
-    expect(spaceProblem(SITE_LIMIT_BYTES, 10, "pdf", 10)).toBeNull();
-    expect(SITE_FULL).toBe("The site’s free hosting is full (1 GB). Remove a document to make room.");
-  });
-
-  it("checkUpload reads the deployed siteBytes and, for a replace, subtracts the document's stored bytes at main", async () => {
-    const stored = [...under(`content/files/${D(1)}/`).keys()].reduce((n, p) => n + (w.fake.readBytes(p)?.byteLength ?? 0), 0);
-    expect(stored).toBeGreaterThan(0);
-    expect(await storedBytes(w.git, D(1))).toBe(stored);
-    w.stop();
-    w = startWorld(fx, withBuild(SITE_LIMIT_BYTES - 5));
-    const file = { name: "ACLS 2025.pdf", size: stored + 5 };
-    expect(await checkUpload(w.git, file, D(1))).toBeNull();
-    expect(await checkUpload(w.git, file)).toBe(SITE_FULL);
-    expect(await checkUpload(w.git, { name: "x.txt", size: 1 })).toBe(TYPE_REFUSED);
+    expect(TOO_BIG(30 * 1048576)).toBe("This file is 30 MB. The site’s free hosting holds files up to 25 MB.");
   });
 });
 
@@ -416,7 +394,7 @@ describe("DocActions", () => {
     expect(w.fake.writes()).toEqual([]);
   });
 
-  it("Replace checks the space, starts the upload and says the previous file is kept", async () => {
+  it("Replace starts the upload and says the previous file is kept", async () => {
     asOwner(true);
     const root = await render(<DocActions doc={publishedDoc(D(1))} />);
     await pickFile(ref(root, "doc-replace-file"), pdfFile("ACLS 2025.pdf"));
@@ -459,16 +437,17 @@ describe("AddDocument", () => {
     expect((ref(document.body, "add-doc-name") as HTMLInputElement).value).toBe("Lipid guideline");
   });
 
-  it("refuses a file that would fill the site, in the dialog, without uploading", async () => {
+  it("adds a file when the site is already past GitHub Pages' old 1 GB limit", async () => {
     w.stop();
-    w = startWorld(fx, withBuild(SITE_LIMIT_BYTES));
+    w = startWorld(fx, withBuild(1_500_000_000));
     asOwner(true);
     const root = await render(<AddDocument place={place} title="Guidelines" />);
     await click(ref(root, "add-doc"));
     await pickFile(ref(document.body, "add-doc-file"), pdfFile());
     await click(ref(document.body, "add-doc-confirm"));
-    await until(() => (ref(document.body, "add-doc-error")?.textContent === SITE_FULL ? true : null), "the space error");
-    expect(w.fake.writes()).toEqual([]);
+    await toastShows(ADDED("Lipids 2024"));
+    await finished();
+    expect(w.fake.dispatches).toHaveLength(1);
   });
 
   it("shows a visitor nothing", async () => {
