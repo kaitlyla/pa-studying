@@ -788,7 +788,7 @@
               "type": "bold"
              }
             ],
-            "text": "Contact Derm "
+            "text": "*Contact Derm "
            }
           ]
          }
@@ -1603,7 +1603,7 @@
               "type": "bold"
              }
             ],
-            "text": "Atopic Dermatitis (Eczema)"
+            "text": "*Atopic Dermatitis (Eczema)"
            }
           ]
          }
@@ -2334,6 +2334,27 @@
          "borders": null
         },
         "content": [
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Emollients: initial tx of choice · allergen avoidance"
+           }
+          ]
+         },
          {
           "type": "paragraph",
           "attrs": {

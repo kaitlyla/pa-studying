@@ -1354,7 +1354,7 @@
               "type": "bold"
              }
             ],
-            "text": "Angioedema "
+            "text": "*Angioedema "
            }
           ]
          }
@@ -1917,6 +1917,10 @@
            },
            {
             "type": "text",
+            "text": " - hereditary: C1 esterase replacement or FFP"
+           },
+           {
+            "type": "text",
             "marks": [
              {
               "type": "color",
@@ -2006,7 +2010,7 @@
               "type": "bold"
              }
             ],
-            "text": "Urticaria (Hives)"
+            "text": "*Urticaria (Hives)"
            }
           ]
          }
@@ -2241,7 +2245,7 @@
           "content": [
            {
             "type": "text",
-            "text": "- chronic (>6wks)"
+            "text": "- acute (<6wks) · chronic (>6wks)"
            }
           ]
          },
@@ -2354,6 +2358,48 @@
           "content": [
            {
             "type": "text",
+            "text": "•burning sensation"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "•erythematous plaque w central pallor ± deeper dermal swelling (angioedema)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
             "text": "•USU "
            },
            {
@@ -2368,6 +2414,48 @@
            {
             "type": "text",
             "text": " (often disappearing w.in 24hrs)"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "May be initial sx of anaphylaxis → monitor vitals & resp status closely"
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Drug allergy: urticarial rash · oropharyngeal swelling · resp distress & wheezing · hypotension"
            }
           ]
          }
@@ -2671,7 +2759,7 @@
            },
            {
             "type": "text",
-            "text": ": "
+            "text": " or w angioedema: short course PO "
            },
            {
             "type": "text",
@@ -2684,7 +2772,28 @@
            },
            {
             "type": "text",
-            "text": " "
+            "text": " (USU ⍉necessary) "
+           }
+          ]
+         },
+         {
+          "type": "paragraph",
+          "attrs": {
+           "indLeft": 0,
+           "indRight": 0,
+           "indFirst": 0,
+           "spaceBefore": 0,
+           "spaceAfter": 0,
+           "line": null,
+           "align": "left",
+           "shade": null,
+           "borders": null,
+           "marker": null
+          },
+          "content": [
+           {
+            "type": "text",
+            "text": "Anaphylaxis: epi"
            }
           ]
          }
