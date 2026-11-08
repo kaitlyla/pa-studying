@@ -529,6 +529,10 @@ test.describe("phone and laptop layouts", () => {
       await page.setViewportSize({ width, height: 900 });
       await open(page, guideViewHash("peds", { kind: "visits", item: null }));
       await expect(main(page).locator(".anchored img").first()).toBeVisible();
+      // The second open keeps the same hash, so the page is not reloaded: until the app has switched to the
+      // layout this width calls for, the pictures still stand where the previous width put them.
+      if (width < 900) await expect(page.locator(".site")).toHaveClass(/\bis-phone\b/);
+      else await expect(page.locator(".site")).not.toHaveClass(/\bis-phone\b/);
       const r = await outside();
       expect(r.n).toBeGreaterThan(0);
       expect(r.out, `at ${width} px`).toEqual([]);
