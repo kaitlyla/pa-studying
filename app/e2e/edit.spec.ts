@@ -180,6 +180,19 @@ const findTopic = (fits: (g: string, system: string, id: string) => boolean = ()
 const topic = findTopic();
 /** Such a topic with a meds panel. */
 const medsTopic = findTopic((g, system, id) => (readData<SystemJson>(systemPath(g, system)).topics.find((t) => t.id === id)?.meds.length ?? 0) > 0);
+/** Such a topic with a meds panel and nothing under Additional info yet. */
+const bareMedsTopic = findTopic((g, system, id) => {
+  const t = readData<SystemJson>(systemPath(g, system)).topics.find((x) => x.id === id);
+  return (t?.meds.length ?? 0) > 0 && t?.below === null;
+});
+/**
+ * A picture added on this device: until the site serves it, it shows from this device's copy (a blob:
+ * URL), while pictures already on the page come from the site. Tests find the one they added by this,
+ * whatever the topic already shows.
+ */
+const ADDED_IMG = 'img[src^="blob:"]';
+/** The stored file name of a picture's bytes (lib/content's content-addressed asset name). */
+const assetName = (bytes: Buffer, ext: string): string => `${createHash("sha256").update(bytes).digest("hex").slice(0, 32)}.${ext}`;
 /** A topic whose meds panel has a role chip naming a long list of drugs: one line of it is wider than a half-screen window. */
 const longRoleTopic = findTopic((g, system, id) =>
   Object.values(readData<SystemJson>(systemPath(g, system)).topics.find((t) => t.id === id)?.medsEdit?.roles ?? {}).flat().some((r) => (r.drugs ?? "").length >= 150));
@@ -210,6 +223,7 @@ function findPicture(where: "cell" | "page"): PictureTarget | null {
     const page = guide.page;
     const margins = isRec(page.margins) ? page.margins : {};
     const pageContent = Number(page.widthPt) - Number(margins.left) - Number(margins.right);
+    const pageContentHeight = Number(page.heightPt) - Number(margins.top) - Number(margins.bottom);
     for (const system of readdirSync(join(guidesDir, g))) {
       if (system === "_preamble") continue;
       const sysDir = join(guidesDir, g, system);
@@ -256,7 +270,10 @@ function findPicture(where: "cell" | "page"): PictureTarget | null {
         };
         visit(block.doc, null, false);
       }
-      const pick = found.find((p) => seen.get(p.asset) === 1 && !Number.isNaN(p.limit) && p.limit > 30 && p.widthPt > 30);
+      // The picture's width must be what stops it growing: one taller than the page content at the width
+      // limit stops at the page height first (pictureLimit caps both).
+      const widthBound = (p: (typeof found)[number]): boolean => (p.heightPt * p.limit) / p.widthPt <= pageContentHeight;
+      const pick = found.find((p) => seen.get(p.asset) === 1 && !Number.isNaN(p.limit) && p.limit > 30 && p.widthPt > 30 && widthBound(p));
       if (pick) return { ...pick, g, system, hash: guideViewHash(g, { kind: "system", system }) };
     }
   }
@@ -1933,7 +1950,7 @@ test.describe("pictures and highlight colors", () => {
   const PNG_BYTES = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
 
   test("a picture added under Additional info, after the meds panel, shows at once and is saved with its bytes and the below block", async ({ page, context, baseURL }) => {
-    const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
+    const t = need(bareMedsTopic, "topic with a meds panel and no Additional info whose first row is in a block file under content/");
     const { fake } = await world(context, baseURL, { seed: true });
     await openPage(page, t.hash);
     const card = page.locator(`section.tcard[data-topic="${t.id}"]`);
@@ -1991,12 +2008,12 @@ test.describe("pictures and highlight colors", () => {
     await signIn(page);
     const area = await startEditing(page);
     const below = area.getByRole("region", { name: "Additional info" });
-    await below.locator(".ProseMirror p").first().click();
+    await caretAtEnd(below);
     const wide = await sharp({ create: { width: 2000, height: 1000, channels: 3, background: { r: 200, g: 120, b: 80 } } }).png().toBuffer();
     const chooser = page.waitForEvent("filechooser");
     await ref(page, "tb-pic-add").click();
     await (await chooser).setFiles({ name: "wide.png", mimeType: "image/png", buffer: wide });
-    const img = below.locator("img:not(.ProseMirror-separator)");
+    const img = below.locator(ADDED_IMG);
     await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(2000);
     // Its width in em as set (the stored widthPt over the base size), and as laid out in the column.
     const look = () => img.evaluate((el) => {
@@ -2016,15 +2033,12 @@ test.describe("pictures and highlight colors", () => {
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
-    expect(belowFiles).toHaveLength(1);
-    const saved = JSON.parse(need(belowFiles[0], "the below file")[1]) as unknown;
-    const pic = attrsOf(nodeAt(saved, need(findPath(saved, (n) => n.type === "image"), "the picture in the below file")));
+    const pic = savedBelowPicture(fake, assetName(wide, "png"));
     // The saved width is the one set in the editor (em × base size), height kept in proportion.
     const basePt = Number(pic.widthPt) / after.setEm;
     expect(Number(pic.widthPt)).toBeCloseTo((before.shownEm / 1.15) * basePt, 1);
     expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(0.5, 6);
-    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(ADDED_IMG);
     await expect(shown).toHaveCount(1);
     expect(await shown.evaluate((el) => parseFloat((el as HTMLImageElement).style.width))).toBeCloseTo(after.setEm, 3);
   });
@@ -2032,38 +2046,49 @@ test.describe("pictures and highlight colors", () => {
   /**
    * Opens the meds topic for editing, beside the open sidebar (the page drawn smaller) or with it hidden,
    * and adds a `w`×`h` picture under Additional info (one color, or the given file, picked as `name`); it
-   * is left selected.
+   * is left selected. Returns it and its stored file name.
    */
-  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden", file?: Buffer, name = "pic.png"): Promise<Locator> {
+  async function addBelowPicture(page: Page, t: TopicTarget, w: number, h: number, sidebar: "open" | "hidden", file?: Buffer, name = "pic.png"): Promise<{ img: Locator; asset: string }> {
     await openPage(page, t.hash);
     if (sidebar === "open") expect(await sidebarScale(page)).toBeLessThan(0.9);
     else await hideSidebar(page);
     await signIn(page);
     const below = (await startEditing(page)).getByRole("region", { name: "Additional info" });
-    await below.locator(".ProseMirror p").first().click();
+    await caretAtEnd(below);
     const png = file ?? await sharp({ create: { width: w, height: h, channels: 3, background: { r: 80, g: 140, b: 200 } } }).png().toBuffer();
     const chooser = page.waitForEvent("filechooser");
     await ref(page, "tb-pic-add").click();
     await (await chooser).setFiles({ name, mimeType: name.endsWith(".jpg") ? "image/jpeg" : "image/png", buffer: png });
-    const img = below.locator("img:not(.ProseMirror-separator)");
+    const img = below.locator(ADDED_IMG);
     await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(w);
     await expect(ref(page, "pic-handles")).toBeVisible();
-    return img;
+    // Added after whatever the area already holds, it may sit below the window: bring it, and its handles, into view.
+    await img.evaluate((e) => e.scrollIntoView({ block: "center" }));
+    return { img, asset: assetName(png, name.endsWith(".jpg") ? "jpg" : "png") };
   }
 
-  /** The one picture in the save's below file. */
-  const savedBelowPicture = (fake: FakeGithub): Rec => {
+  /**
+   * Puts the caret at the end of an Additional info area, after anything it already holds: a click on
+   * its text could select a picture already there, which an added picture would replace.
+   */
+  async function caretAtEnd(below: Locator): Promise<void> {
+    await below.locator(".ProseMirror").focus();
+    await below.page().keyboard.press("Control+End");
+  }
+
+  /** The picture stored as `asset` in the save's one below file. */
+  const savedBelowPicture = (fake: FakeGithub, asset: string): Rec => {
     const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
     expect(belowFiles).toHaveLength(1);
     const saved = JSON.parse(need(belowFiles[0], "the below file")[1]) as unknown;
-    return attrsOf(nodeAt(saved, need(findPath(saved, (n) => n.type === "image"), "the picture in the below file")));
+    return attrsOf(nodeAt(saved, need(findPath(saved, (n) => n.type === "image" && attrsOf(n).asset === asset), "the added picture in the below file")));
   };
 
   for (const sidebar of ["hidden", "open"] as const) {
     test(`a corner handle resizes a picture in proportion and a side handle squishes it, ${sidebar === "open" ? "with the page drawn smaller beside the open sidebar" : "at full size"}; the shape saves and shows`, async ({ page, context, baseURL }) => {
       const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
       const { fake } = await world(context, baseURL, { seed: true });
-      const img = await addBelowPicture(page, t, 400, 200, sidebar);
+      const { img, asset } = await addBelowPicture(page, t, 400, 200, sidebar);
       const before = await drawnSize(img);
 
       // The corner follows the pointer along the side that moved more, the other side in proportion.
@@ -2087,11 +2112,11 @@ test.describe("pictures and highlight colors", () => {
 
       await ref(page, "edit-save").click();
       await expect(ref(page, "save-success")).toBeVisible();
-      const pic = savedBelowPicture(fake);
+      const pic = savedBelowPicture(fake, asset);
       const ratio = Number(pic.heightPt) / Number(pic.widthPt);
       expect(ratio).toBeCloseTo(squished.h / squished.w, 2);
       expect(ratio).not.toBeCloseTo(0.5, 2);
-      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(ADDED_IMG);
       const onPage = await drawnSize(shown);
       expect(onPage.h / onPage.w).toBeCloseTo(ratio, 2);
     });
@@ -2105,18 +2130,17 @@ test.describe("pictures and highlight colors", () => {
       .jpeg()
       .withMetadata({ orientation: 6 })
       .toBuffer();
-    const img = await addBelowPicture(page, t, 200, 400, "hidden", photo, "photo.jpg");
+    const { img, asset } = await addBelowPicture(page, t, 200, 400, "hidden", photo, "photo.jpg");
     const drawn = await drawnSize(img);
     expect(drawn.h / drawn.w).toBeCloseTo(2, 2);
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const pic = savedBelowPicture(fake);
+    // Stored under the name of her file's own bytes, so found by it: sideways bytes and orientation tag included.
+    const pic = savedBelowPicture(fake, asset);
     expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(2, 6);
-    expect(String(pic.asset)).toMatch(/^[0-9a-f]{32}\.jpg$/);
-    // Her file is saved as she picked it, sideways bytes and orientation tag included.
-    expect(Buffer.from(need(fake.readBytes(`content/assets/${String(pic.asset)}`), "the saved photo")).equals(photo)).toBe(true);
-    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    expect(Buffer.from(need(fake.readBytes(`content/assets/${asset}`), "the saved photo")).equals(photo)).toBe(true);
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(ADDED_IMG);
     const onPage = await drawnSize(shown);
     expect(onPage.h / onPage.w).toBeCloseTo(2, 2);
   });
@@ -2124,7 +2148,7 @@ test.describe("pictures and highlight colors", () => {
   test("a stretched picture keeps its shape when a narrow window draws it narrower than its width", async ({ page, context, baseURL }) => {
     const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
     const { fake } = await world(context, baseURL, { seed: true });
-    const img = await addBelowPicture(page, t, 600, 300, "hidden");
+    const { img, asset } = await addBelowPicture(page, t, 600, 300, "hidden");
     const before = await drawnSize(img);
     // Pulled down: taller, the width unchanged.
     await dragHandle(page, "s", 0, 120);
@@ -2134,12 +2158,12 @@ test.describe("pictures and highlight colors", () => {
 
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const pic = savedBelowPicture(fake);
+    const pic = savedBelowPicture(fake, asset);
     const ratio = Number(pic.heightPt) / Number(pic.widthPt);
     expect(ratio).toBeCloseTo(stretched.h / stretched.w, 2);
 
     await page.setViewportSize({ width: 360, height: 800 });
-    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img");
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(ADDED_IMG);
     await shown.scrollIntoViewIfNeeded();
     const narrow = await drawnSize(shown);
     // The column caps it, and its height comes down with it.
@@ -2168,8 +2192,9 @@ test.describe("pictures and highlight colors", () => {
       // Red on the left half, blue on the right.
       const blueHalf = await sharp({ create: { width: 200, height: 200, channels: 3, background: { r: 0, g: 0, b: 255 } } }).png().toBuffer();
       const file = await sharp({ create: { width: 400, height: 200, channels: 3, background: { r: 255, g: 0, b: 0 } } }).composite([{ input: blueHalf, left: 200, top: 0 }]).png().toBuffer();
-      const img = await addBelowPicture(page, t, 400, 200, sidebar, file);
-      const below = page.locator('[data-ref="edit-area"]').getByRole("region", { name: "Additional info" });
+      const { img, asset } = await addBelowPicture(page, t, 400, 200, sidebar, file);
+      // The box a cropped picture is drawn in: the added picture's, not any the topic already shows.
+      const boxed = page.locator('[data-ref="edit-area"]').getByRole("region", { name: "Additional info" }).locator(".pic-crop").filter({ has: page.locator(ADDED_IMG) });
       await img.evaluate((e) => e.scrollIntoView({ block: "center" }));
       const before = await drawnSize(img);
       const crop = ref(page, "tb-pic-crop");
@@ -2194,7 +2219,6 @@ test.describe("pictures and highlight colors", () => {
       await page.keyboard.press("Escape");
       await expect(crop).toHaveAttribute("aria-pressed", "false");
       await expect(ref(page, "pic-crop-ghost")).toHaveCount(0);
-      const boxed = below.locator(".pic-crop");
       await expect(boxed).toHaveCount(1);
       const cropped = await drawnSize(boxed);
       expect(cropped.w).toBeCloseTo(before.w / 2, 0);
@@ -2203,7 +2227,7 @@ test.describe("pictures and highlight colors", () => {
 
       // Reset crop: the whole picture again, drawn exactly as before, as the img itself.
       await ref(page, "tb-pic-uncrop").click();
-      await expect(below.locator(".pic-crop")).toHaveCount(0);
+      await expect(boxed).toHaveCount(0);
       await expect(ref(page, "tb-pic-uncrop")).toHaveCount(0);
       expect(await img.evaluate((e) => e.parentElement?.classList.contains("pic-crop"))).toBe(false);
       const whole = await drawnSize(img);
@@ -2212,19 +2236,20 @@ test.describe("pictures and highlight colors", () => {
 
       // Cropped again, then saved.
       await crop.click();
+      await img.evaluate((e) => e.scrollIntoView({ block: "center" }));
       await dragHandle(page, "e", -before.w / 2, 0);
       await page.keyboard.press("Escape");
-      await expect(below.locator(".pic-crop")).toHaveCount(1);
+      await expect(boxed).toHaveCount(1);
       await ref(page, "edit-save").click();
       await expect(ref(page, "save-success")).toBeVisible();
-      const pic = savedBelowPicture(fake);
+      const pic = savedBelowPicture(fake, asset);
       const saved = pic.crop as { l: number; t: number; r: number; b: number };
       expect([saved.l, saved.t, saved.b]).toEqual([0, 0, 0]);
       expect(saved.r).toBeCloseTo(0.5, 2);
       // The box is the kept part: as tall as before and half as wide, so square.
       expect(Number(pic.heightPt) / Number(pic.widthPt)).toBeCloseTo(1, 2);
 
-      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(".pic");
+      const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(".pic").filter({ has: page.locator(ADDED_IMG) });
       await expect(shown).toHaveCount(1);
       await shown.scrollIntoViewIfNeeded();
       await expect.poll(() => shown.evaluate((e) => e.querySelector("img")?.naturalWidth ?? 0)).toBe(400);
@@ -2237,12 +2262,13 @@ test.describe("pictures and highlight colors", () => {
   test("an uncropped picture on the page is the img itself, drawn at its stored size", async ({ page, context, baseURL }) => {
     const t = need(medsTopic, "topic with a meds panel whose first row is in a block file under content/");
     const { fake } = await world(context, baseURL, { seed: true });
-    await addBelowPicture(page, t, 400, 200, "hidden");
+    const { asset } = await addBelowPicture(page, t, 400, 200, "hidden");
     await ref(page, "edit-save").click();
     await expect(ref(page, "save-success")).toBeVisible();
-    const pic = savedBelowPicture(fake);
+    const pic = savedBelowPicture(fake, asset);
     expect(pic).not.toHaveProperty("crop");
-    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(".pic");
+    // The added picture's own .pic: the img itself when uncropped.
+    const shown = page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(`${ADDED_IMG}.pic`);
     await expect(shown).toHaveCount(1);
     await shown.scrollIntoViewIfNeeded();
     await expect.poll(() => shown.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBe(400);
@@ -2267,7 +2293,7 @@ test.describe("pictures and highlight colors", () => {
       const area = await startEditing(page);
       const below = area.getByRole("region", { name: "Additional info" });
       const editor = below.locator(".ProseMirror");
-      await editor.locator("p").first().click();
+      await caretAtEnd(below);
       // A copied picture arrives as a file on the clipboard (or the drag), with no text.
       await editor.evaluate((el, { b64, how }) => {
         const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
@@ -2280,20 +2306,20 @@ test.describe("pictures and highlight colors", () => {
           el.dispatchEvent(new DragEvent("drop", { dataTransfer: data, clientX: box.left + 2, clientY: box.top + box.height / 2, bubbles: true, cancelable: true }));
         }
       }, { b64: PNG_BYTES.toString("base64"), how });
-      const img = below.locator("img:not(.ProseMirror-separator)");
+      const img = below.locator(ADDED_IMG);
       await expect(img).toHaveCount(1);
       await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(1);
 
       await ref(page, "edit-save").click();
       await expect(ref(page, "save-success")).toBeVisible();
-      const name = `${createHash("sha256").update(PNG_BYTES).digest("hex").slice(0, 32)}.png`;
+      const name = assetName(PNG_BYTES, "png");
       expect(Buffer.from(need(fake.readBytes(`content/assets/${name}`), "the saved picture"))).toEqual(PNG_BYTES);
       // One upload path: the bytes went up once, as a base64 blob through the Git Data API.
       expect(blobPosts(fake, PNG_BYTES.toString("base64").slice(0, 40))).toHaveLength(1);
       const belowFiles = [...changedFiles(fake)].filter(([path]) => /\/below\/r_[0-9A-Z]{10}\.json$/.test(path));
       expect(belowFiles).toHaveLength(1);
       expect(belowFiles[0]?.[1]).toContain(name);
-      await expect(page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator("img")).toHaveJSProperty("naturalWidth", 1);
+      await expect(page.locator(`section.tcard[data-topic="${t.id}"]`).getByRole("region", { name: "Additional info" }).locator(ADDED_IMG)).toHaveJSProperty("naturalWidth", 1);
     });
   }
 
