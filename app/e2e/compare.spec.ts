@@ -175,8 +175,8 @@ function contentFiles(): Record<string, Uint8Array> {
 }
 
 /**
- * GitHub Pages answers a missing data file (an unpublished document's docs/<d>.json) with 404;
- * `vite preview` would answer it with index.html.
+ * The live site answers a missing data file (an unpublished document's docs/<d>.json) with 404 (Cloudflare
+ * Pages serves the site's 404.html); `vite preview` would answer it with index.html.
  */
 async function missingDataIs404(context: BrowserContext): Promise<void> {
   await context.route(

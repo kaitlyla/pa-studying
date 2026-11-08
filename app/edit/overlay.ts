@@ -270,14 +270,18 @@ const unsaved = new Map<string, unknown>();
 let git: Git | null = null;
 let timer: ReturnType<typeof setInterval> | null = null;
 
-/** GitHub Pages' own cache lifetime: what it serves when a response's `Cache-Control` says nothing. */
+/**
+ * The cache lifetime assumed when a response's `Cache-Control` names no `max-age`: the longest a
+ * static host here has served (GitHub Pages' 600 s), so an unknown lifetime never prunes early.
+ */
 const PAGES_CACHE_SECONDS = 600;
 
 /**
- * Until when the bytes a page reads may still be the copies fetched before the deployed build: Pages
- * serves every file with `max-age=600`, its CDN answers from its own copy whatever the request asks
- * for, and it drops a query key, so a read can keep returning the pre-deploy file for up to one cache
- * lifetime after the build lands. An entry the build contains must not be dropped before then.
+ * Until when the bytes a page reads may still be the copies fetched before the deployed build: the
+ * host's CDN may answer from its own copy for the response's `max-age` whatever the request asks for,
+ * so a read can keep returning the pre-deploy file for up to one cache lifetime after the build lands
+ * (Cloudflare Pages sends `max-age=0`, so there the window closes at once). An entry the build contains
+ * must not be dropped before then.
  */
 let servedMayLagUntil = 0;
 let laggedBuild: string | null = null;

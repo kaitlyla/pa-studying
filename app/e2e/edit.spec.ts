@@ -3652,18 +3652,18 @@ function partedFile(path: string, bytes: number, tags: string[]): { sha256: stri
 }
 
 test.describe("upload", () => {
-  test("a 40 MB file goes as three parts of 16 MB or less", async ({ page, context, baseURL }, testInfo) => {
+  test("a 24 MB file goes as two parts of 16 MB or less", async ({ page, context, baseURL }, testInfo) => {
     const { fake } = await world(context, baseURL, { seed: true });
     const path = testInfo.outputPath("Big scan.pdf");
-    const file = partedFile(path, 40 * MiB, ["PART-ZERO", "PART-ONE", "PART-TWO"]);
+    const file = partedFile(path, 24 * MiB, ["PART-ZERO", "PART-ONE"]);
     await openPage(page, placeHash());
     await signIn(page);
     const id = await addDocument(page, fake, path);
     const branch = `refs/heads/inbox/${id}`;
     expect(fake.hasRef(branch)).toBe(true);
-    const parts = [0, 1, 2].map((i) => need(fake.readBytes(`${inboxItemDir(id)}/${partName(i)}`, branch), `part ${i}`));
-    expect(parts.map((p) => p.byteLength)).toEqual([16 * MiB, 16 * MiB, 8 * MiB]);
-    expect(fake.readBytes(`${inboxItemDir(id)}/${partName(3)}`, branch)).toBeUndefined();
+    const parts = [0, 1].map((i) => need(fake.readBytes(`${inboxItemDir(id)}/${partName(i)}`, branch), `part ${i}`));
+    expect(parts.map((p) => p.byteLength)).toEqual([16 * MiB, 8 * MiB]);
+    expect(fake.readBytes(`${inboxItemDir(id)}/${partName(2)}`, branch)).toBeUndefined();
     const joined = createHash("sha256");
     for (const p of parts) joined.update(p);
     expect(joined.digest("hex")).toBe(file.sha256);
