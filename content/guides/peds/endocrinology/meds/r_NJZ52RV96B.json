@@ -7192,7 +7192,7 @@
         "content": [
          {
           "type": "text",
-          "text": "-    DKA: K <3.5mEq/L → HOLD insulin - give IV KCl 20–40mEq/L until K >3.5 - K 3.5–5.3 → 20–30mEq/L in IV fluid (maintain serum K 4–5mEq/L)"
+          "text": "-    DKA: K <3.5mEq/L → HOLD insulin - give IV KCl 20–40mEq/L until K >3.5 - normal/low K → start fluids w ~40mEq/L K · hyperK → hold K until UOP confirmed (maintain serum K 4–5mEq/L)"
          }
         ]
        },
@@ -7225,6 +7225,153 @@
     }
    ],
    "gap": "g_QSYT00ZASD"
+  },
+  {
+   "target": "c_H9NDEWJM6T",
+   "pieces": [
+    {
+     "kind": "notes",
+     "basePt": 8,
+     "title": null,
+     "file": "pharm review",
+     "doc": {
+      "type": "doc",
+      "content": [
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 0,
+         "indRight": 0,
+         "indFirst": 0,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "marks": [
+           {
+            "type": "bold"
+           },
+           {
+            "type": "underline",
+            "attrs": {
+             "style": "single"
+            }
+           }
+          ],
+          "text": "Sodium bicarb:"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Hyperkalemia: redistribution — sodium bicarb (less effective; 5–10 min, 1–2 hr)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    DKA: only given if pH <6.90 (assoc w comp of overcorrection + ↑cerebral edema)"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    Poisonings: VT → sodium bicarb"
+         }
+        ]
+       },
+       {
+        "type": "paragraph",
+        "attrs": {
+         "indLeft": 36,
+         "indRight": 0,
+         "indFirst": -18,
+         "spaceBefore": 0,
+         "spaceAfter": 0,
+         "line": {
+          "rule": "auto",
+          "value": 1
+         },
+         "align": "left",
+         "shade": null,
+         "borders": null,
+         "marker": null
+        },
+        "content": [
+         {
+          "type": "text",
+          "text": "-    CKD met acidosis: bicarb supp"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ]
   }
  ],
  "gaps": [
