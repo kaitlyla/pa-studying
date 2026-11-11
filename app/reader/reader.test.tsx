@@ -485,7 +485,7 @@ describe("topics page", () => {
     expect(row(card, R(130))?.textContent).toContain("angina continues here");
   });
 
-  it("a topic's below block shows after its meds panel under Additional info, and on its section page under the table holding its last row with no heading", async () => {
+  it("a topic's below block shows after its meds panel under Additional info on its own page, and not on its section or system page", async () => {
     const BELOW = B(900);
     const withBelow = structuredClone(cv);
     const murmurs = must(cv.blocks.find((b) => b.id === B(11)), "B11 prose");
@@ -512,12 +512,14 @@ describe("topics page", () => {
 
     await go("#/eor/fm/sec/cardiovascular/cad");
     const page = await until(() => c.querySelector<HTMLElement>(".section-page"), "section page");
-    const shown = must(page.querySelector(`[data-anchor="${BELOW}"]`), "below block on the section page");
-    const tableOfLastRow = must(page.querySelector(`div.notes[data-anchor="${B(13)}"]`), "B13 table");
-    expect(tableOfLastRow.nextElementSibling).toBe(shown);
-    expect(page.querySelectorAll(`[data-anchor="${BELOW}"]`)).toHaveLength(1);
-    // Her answer: the heading is on the condition's page only.
-    expect(page.textContent).not.toContain(BELOW_HEADING);
+    // The table holding the topic's last row is on the page, and nothing of hers follows it.
+    must(page.querySelector(`div.notes[data-anchor="${B(13)}"]`), "B13 table");
+    expect(page.querySelector(`[data-anchor="${BELOW}"]`)).toBeNull();
+
+    await go("#/eor/fm/s/cardiovascular");
+    const sys = await until(() => c.querySelector<HTMLElement>(".system-page"), "system page");
+    must(sys.querySelector(`div.notes[data-anchor="${B(13)}"]`), "B13 table on the system page");
+    expect(sys.querySelector(`[data-anchor="${BELOW}"]`)).toBeNull();
   });
 
   it("a topic with nothing added below shows no Additional info heading", async () => {

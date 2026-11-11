@@ -768,17 +768,18 @@ describe("a topic's below area", () => {
     expect(emptied.changed).toEqual([first.id]);
   });
 
-  it("shows under its table on the section and system pages, after the table holding the topic's last row", async () => {
-    const saved = await addBelow("under the table");
+  it("is edited on its topic's page only: the section and system pages hold no below part", async () => {
+    const saved = await addBelow("topic page only");
+    expect(only(await unitAt(`topic:fm:${R(101)}`), "below").block?.id).toBe(saved.id);
     // R101 is in section "other" (see the system-page delete test above).
     const section = await unitAt("section:fm:cardiovascular:other");
-    const kinds = (u: EditUnit): string[] => u.parts.map((p) => (p.kind === "below" ? `below ${p.topic}` : p.kind === "rows" ? `rows ${p.block.id}` : p.kind));
-    expect(kinds(section)).toContain(`below ${R(101)}`);
-    expect(kinds(section)[kinds(section).indexOf(`below ${R(101)}`) - 1]).toBe(`rows ${B(10)}`);
-    expect(only(section, "below").block?.id).toBe(saved.id);
+    const kinds = (u: EditUnit): string[] => u.parts.map((p) => (p.kind === "rows" ? `rows ${p.block.id}` : p.kind));
+    expect(kinds(section)).toContain(`rows ${B(10)}`);
+    expect(kinds(section)).not.toContain("below");
 
     const system = await unitAt("system:fm:cardiovascular");
-    expect(kinds(system).slice(0, 2)).toEqual([`rows ${B(10)}`, `below ${R(101)}`]);
+    expect(kinds(system)[0]).toBe(`rows ${B(10)}`);
+    expect(kinds(system)).not.toContain("below");
   });
 
   it("follows its topic when a save gives the topic a new first row", async () => {

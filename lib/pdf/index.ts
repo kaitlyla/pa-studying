@@ -4,7 +4,7 @@
 import type { DocJSON, PageSetup } from "../content/types.ts";
 import { keepTableRows, noteView } from "../derive/columns.ts";
 import type { FontMapJson, PartCut, PubBlock, SystemJson } from "../derive/published.ts";
-import { belowUnder, rowsByBlock } from "../derive/topics.ts";
+import { rowsByBlock } from "../derive/topics.ts";
 import { allLinesHidden, hiddenLines, shownParts, tableRows, withoutLines } from "../derive/trim.ts";
 import type { PMNode } from "../schemaTypes.ts";
 import { FontSplitter, TEXT_FAMILY } from "./fonts.ts";
@@ -123,20 +123,12 @@ function select(scope: PdfScope, input: PdfInput): Selection {
       if (!section) throw new Error(`PDF: section ${scope.id} is not in ${system.guide}/${system.id}`);
       return {
         ...base,
-        parts: section.items.flatMap((item) =>
-          item.rows === null ? [guideBlock(blockOf(system, item.block))] : [...rowsPart(item.rows), ...belowUnder(system.topics, item.rows).map(guideBlock)]),
+        parts: section.items.flatMap((item) => (item.rows === null ? [guideBlock(blockOf(system, item.block))] : rowsPart(item.rows))),
       };
     }
-    case "system": {
-      // Every block in guide order; drug tables in full at their place (pdf/rules/druginpdf), each
-      // table followed by the below blocks of the topics ending in it.
-      const rows = new Map<string, string[]>();
-      for (const [id, r] of Object.entries(system.rows)) rows.set(r.block, [...(rows.get(r.block) ?? []), id]);
-      return {
-        ...base,
-        parts: system.blocks.filter((b) => NOTE_KINDS.has(b.kind)).flatMap((b) => [guideBlock(b), ...belowUnder(system.topics, rows.get(b.id) ?? []).map(guideBlock)]),
-      };
-    }
+    case "system":
+      // Every block in guide order; drug tables in full at their place (pdf/rules/druginpdf).
+      return { ...base, parts: system.blocks.filter((b) => NOTE_KINDS.has(b.kind)).map(guideBlock) };
     case "pharmSection":
       return { ...base, parts: pharmSectionParts(system, scope.id, nav.basePt) };
     case "systemPharm":

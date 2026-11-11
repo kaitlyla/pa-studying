@@ -3,7 +3,7 @@ import type { BlockFile, StructureFile } from "../content/types.ts";
 import { BuildError } from "./errors.ts";
 import { listedHead, resolutionRows } from "../content/tables.ts";
 import { memberTarget } from "../content/ids.ts";
-import type { NavEntry, NavSystem, PubBlock, PubMedsCard, PubMedsEdit, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
+import type { NavEntry, NavSystem, PubMedsCard, PubMedsEdit, PubRow, PubSectionItem, PubTopic, SystemJson } from "./published.ts";
 import { collapse, firstCell, readRows, tableOf, type Table } from "./text.ts";
 
 export interface Topic {
@@ -304,24 +304,11 @@ export function publishedTopics(
   });
 }
 
-/** The heading over a topic's below block wherever it is read, and its area's label while editing (her wording). */
-export const BELOW_HEADING = "Additional info";
-
 /**
- * Where a topic's below block shows besides its own page (her choice: section and system pages and
- * their PDFs too): right under the table holding the topic's last row, wherever that row is shown.
- * Of `topics`, those with a below block whose last row is among `shown` (one table's rows on a page),
- * in topic order.
+ * The heading over a topic's below block, and its area's label while editing (her wording). The block
+ * shows on its topic's own page only, never on section or system pages or their PDFs (her choice).
  */
-export function topicsBelow<T extends { rows: readonly string[] }>(topics: readonly T[], shown: readonly string[], hasBelow: (topic: T) => boolean): T[] {
-  const set = new Set(shown);
-  return topics.filter((t) => hasBelow(t) && t.rows.length > 0 && set.has(t.rows[t.rows.length - 1] as string));
-}
-
-/** The published below blocks under a table showing `shown` rows (topicsBelow over PubTopic). */
-export function belowUnder(topics: readonly PubTopic[], shown: readonly string[]): PubBlock[] {
-  return topicsBelow(topics, shown, (t) => t.below !== null && t.below !== undefined).map((t) => t.below as PubBlock);
-}
+export const BELOW_HEADING = "Additional info";
 
 /**
  * `rowIds` grouped by the block holding each row, blocks in the order their rows first appear: a topic

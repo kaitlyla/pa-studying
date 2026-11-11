@@ -51,7 +51,7 @@ describe("scope content", () => {
     for (const f of FORBIDDEN) expect(text).not.toContain(f);
   });
 
-  it("puts a topic's below block after its rows on its page, and after the table holding its last row in its section and system", () => {
+  it("puts a topic's below block after its rows on its page, and leaves it out of its section and system", () => {
     const s = cardioSystem();
     const angina = s.topics.find((t) => t.id === "r_AAAAAAAAA1");
     if (!angina) throw new Error("no Angina topic");
@@ -59,10 +59,9 @@ describe("scope content", () => {
     const input: PdfInput = { nav, system: s };
     const scoped = (scope: PdfScope): string[] => lines(buildDocDefinition(scope, input, fontmap).content);
     expect(scoped({ kind: "topics", ids: ["r_AAAAAAAAA1"] })).toEqual([...T1_HEAD, ...T1_A, "BELOW note"]);
-    expect(scoped({ kind: "section", id: "cad" })).toEqual([...T1_HEAD, ...T1_A, "BELOW note", "Murmurs note"]);
-    // Myocarditis' section shows the same table but not Angina's last row.
+    expect(scoped({ kind: "section", id: "cad" })).toEqual([...T1_HEAD, ...T1_A, "Murmurs note"]);
     expect(scoped({ kind: "section", id: "inf" })).toEqual([...T1_HEAD, ...T1_B]);
-    expect(scoped({ kind: "system" })).toEqual([INTRO, ...T1_HEAD, ...T1_A, ...T1_B, "BELOW note", ...D1, "Murmurs note", ...D2]);
+    expect(scoped({ kind: "system" })).toEqual([INTRO, ...T1_HEAD, ...T1_A, ...T1_B, ...D1, "Murmurs note", ...D2]);
   });
 
   it("prints a picture in a topic's below block at the width she set", () => {

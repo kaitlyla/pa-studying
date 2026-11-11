@@ -8,7 +8,7 @@ import {
 import { entryPieces, fileAdds, pageCard } from "../../lib/derive/panel.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
-import { checkMembers, deriveTopics, fitTopicRows, sectionItems, systemBlocks, topicsBelow, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, sectionItems, systemBlocks, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, PubMedsCard, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -411,13 +411,6 @@ async function medsPart(snap: Snapshot, sys: SystemCtx, topic: string, basePt: n
   return { kind: "meds", path, file, topic, sys, entries, catalog };
 }
 
-/** The below blocks shown under a table whose `shown` rows a section or system page shows (topicsBelow). */
-async function belowParts(snap: Snapshot, sys: SystemCtx, t: SystemTopics, shown: readonly string[], basePt: number, area: ContentArea): Promise<Part[]> {
-  const topics = topicsBelow(t.topics, shown, (x) => snap.has(topicBelowPath(sys.guide, sys.system, x.id)));
-  const blocks = await snap.many<BlockFile>(topics.map((x) => topicBelowPath(sys.guide, sys.system, x.id)));
-  return topics.map((x, i) => belowPart(sys, x.id, blocks[i] as BlockFile, basePt, area));
-}
-
 /**
  * How a gap block is shown apart from its text: the width (pt) each figure is shown at, by asset,
  * for the figures that have one; the height (pt) of each she squished or stretched, by asset (absent
@@ -625,7 +618,7 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const b = byId.get(item.block);
         if (!b) throw new UnitError(`Block ${item.block} is no longer in ${sys.system}`);
         if (item.rows === null) parts.push(sysBlockPart(sys, b, basePt, area));
-        else parts.push(rowsPart(sys, t, b, item.rows, basePt, area), ...(await belowParts(snap, sys, t, item.rows, basePt, area)));
+        else parts.push(rowsPart(sys, t, b, item.rows, basePt, area));
       }
       return unit(parts);
     }
@@ -641,7 +634,6 @@ export async function loadUnit(key: string, snap: Snapshot): Promise<EditUnit> {
         const stored = t.tables.get(b.id);
         if (drug.has(b.id)) parts.push({ kind: "stub", block: b.id, label: stored ? stubLabel(stored) : "" });
         else parts.push(wholeBlockPart(sys, t, b, basePt, area));
-        parts.push(...(await belowParts(snap, sys, t, (stored?.rows ?? []).map((r) => r.id), basePt, area)));
       }
       return unit(parts);
     }

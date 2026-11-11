@@ -24,7 +24,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { docText, nodeText, tableOf } from "./text.ts";
-import { belowUnder, checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicsBelow, withHeadings, type Topic } from "./topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 import { byRole, classPieces, entryPieces, itemTarget, pageCard, panelEntries, panelItems, publishedEdit, roleRank, rowSource, scenarioGroups, shownPieces, type PanelItem, type PanelPiece, type RowSource } from "./panel.ts";
 import type { PMNode } from "./text.ts";
@@ -650,21 +650,6 @@ describe("a topic's below block (her notes and pictures under the topic)", () =>
     const unit = res.units.find((u) => u.at === R(104) && u.label === "notes");
     expect(unit?.text).toContain("angina strip below");
     expect(out.units.find((u) => u.at === R(104) && u.label === "notes")?.text).not.toContain("angina strip below");
-  });
-
-  it("shows under the table holding the topic's last row, and not under its other tables", () => {
-    const sys = publish(withBelow()).files.get(systemPath("fm", "cardiovascular")) as SystemJson;
-    const rows = sys.topics.find((t) => t.id === R(104))?.rows ?? [];
-    expect(rows.at(-1)).toBe(R(130));
-    expect(belowUnder(sys.topics, [R(130), R(131)]).map((b) => b.id)).toEqual([B(900)]);
-    expect(belowUnder(sys.topics, [R(100), R(101), R(102), R(103), R(104)])).toEqual([]);
-  });
-
-  it("topicsBelow keeps topic order and needs both a below block and the last row shown", () => {
-    const topics = [{ id: "a", rows: ["1", "2"] }, { id: "b", rows: ["3"] }, { id: "c", rows: ["4"] }, { id: "d", rows: [] }];
-    const has = (t: { id: string }): boolean => t.id !== "c";
-    expect(topicsBelow(topics, ["4", "3", "2"], has).map((t) => t.id)).toEqual(["a", "b"]);
-    expect(topicsBelow(topics, ["1"], has)).toEqual([]);
   });
 });
 
