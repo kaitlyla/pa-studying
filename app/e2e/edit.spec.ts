@@ -1279,6 +1279,35 @@ test.describe("toolbar limits", () => {
     await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 
+  test("Delete topic asks first, Cancel keeps it, and Delete takes it off the site and out of the sidebar in one commit", async ({ page, context, baseURL }) => {
+    const t = needTopic();
+    const { fake, seed } = await world(context, baseURL, { seed: true });
+    const inSidebar = page.locator("#site-sidebar").locator(`a[href="${t.hash}"]`);
+    await openPage(page, t.hash);
+    await signIn(page);
+    await expect(inSidebar.first()).toBeAttached();
+    await startEditing(page);
+    const confirm = page.getByRole("dialog", { name: `Delete “${t.title}”?` });
+
+    await ref(page, "edit-delete-topic").click();
+    await expect(confirm).toContainText("To bring it back, open Versions on the system page");
+    await confirm.getByRole("button", { name: "Cancel" }).click();
+    await expect(confirm).toBeHidden();
+    expect(fake.head()).toBe(seed);
+    await expect(ref(page, "edit-area")).toBeVisible();
+
+    await ref(page, "edit-delete-topic").click();
+    await ref(confirm, "confirm-ok").click();
+    await expect(ref(page, "topic-deleted")).toContainText(`Deleted “${t.title}”.`);
+    await expect.poll(() => new URL(page.url()).hash).toBe(t.systemHash);
+    await expect(ref(page, "edit-area")).toHaveCount(0);
+    const head = need(fake.commit(fake.head()), "the delete commit");
+    expect(head.parents).toEqual([seed]);
+    expect(head.message.split(NL)[0]).toBe(`Delete topic: ${t.title}`);
+    expect(fake.readFile(t.blockPath) ?? "").not.toContain(t.id);
+    await expect(inSidebar).toHaveCount(0);
+  });
+
   test("deleting a row that holds a picture names the pictures in the confirm, and Cancel keeps it", async ({ page, context, baseURL }) => {
     const pic = need(findPicture("cell"), "picture in a table cell on a system page");
     await world(context, baseURL, { seed: true });

@@ -8,7 +8,7 @@ import {
 import { entryPieces, fileAdds, pageCard } from "../../lib/derive/panel.ts";
 import { cardGroup, stubLabel } from "../../lib/derive/pharm.ts";
 import { schema } from "../../lib/schema.ts";
-import { checkMembers, deriveTopics, fitTopicRows, sectionItems, systemBlocks, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, sectionItems, systemBlocks, topicRowsToDelete, withHeadings, type SystemTopics } from "../../lib/derive/topics.ts";
 import { navPath, systemPath } from "../../lib/derive/published.ts";
 import type { NavJson, PubMedsCard, SystemJson } from "../../lib/derive/published.ts";
 import { loadData } from "../data/load.ts";
@@ -16,7 +16,7 @@ import { GAP_BASE_PT } from "../render/index.ts";
 import type { FileScope } from "./commit.ts";
 import type { ContentArea } from "./editor/commands.ts";
 import type { TreeChange } from "./github.ts";
-import { followMergedWidths, partialRows, spliceShown, type RowJSON as LayoutRow, type RowsLayout } from "./editor/rowLayout.ts";
+import { deleteRows, followMergedWidths, partialRows, spliceShown, type RowJSON as LayoutRow, type RowsLayout } from "./editor/rowLayout.ts";
 import { parsePageKey, type PageKind } from "./pageKey.ts";
 import type { Snapshot } from "./snapshot.ts";
 
@@ -1245,6 +1245,76 @@ export async function buildRestore(unit: EditUnit, version: EditUnit, today = lo
     out.set(path, value);
   }
   return { ...build, changes, files: out, changed: [...changed] };
+}
+
+/**
+ * Delete topic: the files that take topic page `unit`'s topic off the site in one save — its rows, and
+ * each heading row only they sit under (topicRowsToDelete), out of their tables (a merged cell they
+ * share with rows that stay moves to those rows, as Delete row moves it), a table left with no rows out
+ * of its system, and the structure.json entries of what goes. Her Additional info and meds panel files
+ * for the topic stay in Git where they are, not shown (as when its rows are deleted one by one), so
+ * restoring the version before the delete from the system page's Versions brings the whole topic back.
+ * `scope` is the page's file set, with system.json when a table goes.
+ */
+export async function buildTopicDelete(unit: EditUnit): Promise<{ build: SaveBuild; scope: FileScope }> {
+  const part = unit.parts.find((p): p is RowsPart => p.kind === "rows");
+  if (unit.topic === null || !part) throw new UnitError(`${unit.key} is not a topic page`);
+  const { sys } = part;
+  const t = deriveTopics(sys.blocks, sys.structure);
+  const ids = topicRowsToDelete(t, unit.topic);
+  if (ids === null) throw new UnitError(`Topic ${unit.topic} is no longer in ${sys.system}`);
+  const gone = new Set(ids);
+  const tables = new Set(ids.map((id) => t.rows.get(id)?.block));
+  const files = new Map<string, unknown>();
+  const blocks: BlockFile[] = [];
+  const goneBlocks: string[] = [];
+  for (const block of sys.blocks) {
+    if (!tables.has(block.id)) {
+      blocks.push(block);
+      continue;
+    }
+    const path = blockPath(sys, block.id);
+    const table = tableOrThrow(block);
+    const rows = deleteRows(table.content as LayoutRow[], gone);
+    if (rows.length === 0) {
+      goneBlocks.push(block.id);
+      files.set(path, null);
+      continue;
+    }
+    const normalized = JSON.parse(canonical(path, { ...block, doc: { type: "doc", content: [{ ...table, content: rows }] } })) as BlockFile;
+    files.set(path, normalized);
+    blocks.push(normalized);
+  }
+  const cleared = updateStructure(sys.structure, { order: [], deleted: [...ids, ...goneBlocks], table: part.block.id });
+  const structure = fitTopicRows(blocks, {
+    ...cleared,
+    drugTables: cleared.drugTables.filter((d) => !goneBlocks.includes(d.block)),
+    pharmSections: cleared.pharmSections.map((s) => ({ ...s, tables: s.tables.filter((b) => !goneBlocks.includes(b)) })),
+  });
+  // The build's own checks (40 §40.1/§40.2): the delete never commits a tree the next publish would reject.
+  checkMembers(sys.system, deriveTopics(blocks, structure), structure);
+  files.set(sys.structurePath, structure);
+  const scope = { files: [...unit.scope.files], dirs: [...unit.scope.dirs] };
+  if (goneBlocks.length > 0) {
+    const path = systemFilePath(sys);
+    const file = await unit.snapshot.json<SystemFile>(path);
+    files.set(path, { ...file, blocks: file.blocks.filter((b) => !goneBlocks.includes(b)) });
+    scope.files = [...new Set([...scope.files, path])].sort();
+  }
+  const changes: TreeChange[] = [];
+  const out = new Map<string, unknown>();
+  for (const [path, value] of files) {
+    if (value === null) {
+      changes.push({ path, sha: null });
+      out.set(path, null);
+      continue;
+    }
+    const text = canonical(path, value);
+    if (text === (await unit.snapshot.text(path))) continue;
+    changes.push({ path, content: text });
+    out.set(path, value);
+  }
+  return { build: { changes, files: out, changed: [...ids, ...goneBlocks], topicMoved: { guide: sys.guide, system: sys.system, topic: null } }, scope };
 }
 
 /**

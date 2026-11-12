@@ -60,6 +60,25 @@ const spanOf = (cell: CellJSON, rowspan: unknown): CellJSON => {
   return { ...cell, attrs };
 };
 
+/**
+ * `rows` without the rows `gone` (ids), as Delete row takes one out: a merged cell keeps the rows of its
+ * span that stay, and one starting in a deleted row moves, in its column, to the first row of its span
+ * that stays. A cell whose rows all go goes with them.
+ */
+export function deleteRows(rows: readonly RowJSON[], gone: ReadonlySet<string>): RowJSON[] {
+  const placed = placedRows(rows);
+  const kept = rows.map((r) => !gone.has(rowIdOf(r)));
+  const cells: PlacedCell<CellJSON>[][] = rows.map(() => []);
+  for (const c of placed.flat()) {
+    const span = kept.slice(c.row, c.row + c.rowspan);
+    const at = span.indexOf(true);
+    if (at === -1) continue;
+    const rowspan = span.filter(Boolean).length;
+    cells[c.row + at]?.push({ ...c, node: rowspan === c.rowspan ? c.node : spanOf(c.node, rowspan) });
+  }
+  return rows.flatMap((r, i) => (kept[i] ? [{ ...r, content: (cells[i] ?? []).sort((a, b) => a.col - b.col).map((c) => c.node) }] : []));
+}
+
 /** The stored rows `shown` (ids) and the cells each draws when only they are shown (shownCells). */
 function projection(stored: readonly RowJSON[], shown: readonly string[]): { at: number[]; placed: PlacedCell<CellJSON>[][]; drawn: ShownCell<CellJSON>[][] } {
   const index = new Map(stored.map((r, i) => [rowIdOf(r), i]));

@@ -30,7 +30,7 @@ import { clipboardSerializer, markViews, nodeViews } from "./editor/views.ts";
 import { editorConfirm, widthConfirm } from "./dialogs.tsx";
 import { MedsFrame } from "./MedsEdit.tsx";
 import {
-  copyWithToast, currentLook, dismissBanner, done, dropEmptyBox, getEditStore, isCardBox, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED,
+  copyWithToast, currentLook, deleteTopic, dismissBanner, done, dropEmptyBox, getEditStore, isCardBox, LOAD_NEWER, loadNewer, openDocs, registerView, restoreDraft, save, SAVE_CONFLICT, SAVE_FAILED,
   SAVE_OFFLINE, setGapLook, startEdit, useEdit, viewChanged, type Banner,
 } from "./session.ts";
 import { entryGapParts, figuresWithLook, gapLook, medsGapParts, type Part, type Slot } from "./units.ts";
@@ -631,6 +631,9 @@ function Toolbar(): ReactNode {
       </div>
       <span className="estat" data-ref="edit-status-row">
         <span data-ref="edit-dirty-state">{edit?.saving ? "Saving…" : edit?.dirty ? "Unsaved changes" : "No changes yet"}</span>
+        {edit?.unit?.topic != null && (
+          <button type="button" className="btn danger" disabled={edit.saving} onClick={() => void deleteTopic(editorConfirm)} data-ref="edit-delete-topic">Delete topic</button>
+        )}
         <button type="button" className="btn" onClick={() => void done()} data-ref="edit-done">Done</button>
         <button type="button" className="btn pri" disabled={!edit?.dirty || edit.saving} onClick={() => void save()} data-ref="edit-save">Save</button>
       </span>
@@ -668,6 +671,8 @@ export function SaveBanner({ banner }: { banner: Banner }): ReactNode {
       );
     case "restored":
       return <div className="banner ok" role="status" data-ref="restored"><span className="bt"><b>Restored</b> the version from {banner.from}. The version it replaced is kept in Versions.</span><span className="ba">{dismiss}</span></div>;
+    case "deleted":
+      return <div className="banner ok" role="status" data-ref="topic-deleted"><span className="bt"><b>Deleted “{banner.title}”.</b> It leaves the site within a few minutes. To bring it back, open Versions on the system page.</span><span className="ba">{dismiss}</span></div>;
     case "loaded":
       return <div className="banner info" role="status" data-ref="loaded"><span className="bt">Showing the newer version saved at {banner.at}.{banner.copied && " Your copied changes are on the clipboard."}</span><span className="ba">{dismiss}</span></div>;
   }

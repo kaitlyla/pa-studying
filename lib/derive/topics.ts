@@ -393,6 +393,22 @@ export function withHeadings(t: SystemTopics, rowIds: readonly string[]): string
 }
 
 /**
+ * The rows deleting topic `id` takes out, in table order: the topic's rows, and each heading row over
+ * them that no other row sits under. A heading row another topic, a drug row or an untitled row sits
+ * under stays. Null when `id` starts no topic.
+ */
+export function topicRowsToDelete(t: SystemTopics, id: string): string[] | null {
+  const topic = t.topics.find((x) => x.id === id);
+  if (!topic) return null;
+  const own = new Set(topic.rows);
+  const shared = new Set<string>();
+  for (const [rowId, info] of t.rows) {
+    if (info.kind === "content" && info.heading !== null && !own.has(rowId)) shared.add(info.heading);
+  }
+  return withHeadings(t, topic.rows).filter((r) => own.has(r) || !shared.has(r));
+}
+
+/**
  * Section coverage (40 §40.1): in a system with sections, every topic's first row, every untitled
  * row and every prose/one-column block has a `members` entry naming one of the sections.
  */

@@ -24,7 +24,7 @@ import {
 import { GENERAL_KEYS } from "../content/types.ts";
 import { fileLocation, GENERAL_LABELS, guideBase, guideViewHash, otherHash, parseHash, REF_TABS, refHash } from "./routes.ts";
 import { docText, nodeText, tableOf } from "./text.ts";
-import { checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, withHeadings, type Topic } from "./topics.ts";
+import { checkMembers, deriveTopics, fitTopicRows, navEntries, publishedRows, publishedSections, sectionItems, topicRowsToDelete, withHeadings, type Topic } from "./topics.ts";
 import { addDoc } from "./doclist.ts";
 import { byRole, classPieces, entryPieces, itemTarget, pageCard, panelEntries, panelItems, publishedEdit, roleRank, rowSource, scenarioGroups, shownPieces, type PanelItem, type PanelPiece, type RowSource } from "./panel.ts";
 import type { PMNode } from "./text.ts";
@@ -346,6 +346,40 @@ describe("topics (40 §40.2)", () => {
       const e = buildError(() => deriveTopics(blocks, structureOf({ members: { [X]: F } })));
       expect(e.id).toBe(X);
       expect(e.message).toMatch(/not a later topic or untitled row of the same table/);
+    });
+  });
+
+  describe("the rows deleting a topic takes out (topicRowsToDelete)", () => {
+    const [H1, A, A2, B1, H2, C1, D1, X] = [R(920), R(921), R(922), R(923), R(924), R(925), R(926), R(927)];
+    const first = () => table(B(92), 2, [
+      [H1, "heading", "ARRHYTHMIAS", "P"], [A, "content", "Alpha", "a"], [A2, "content", "", "a more"], [B1, "content", "Bravo", "b"],
+      [H2, "heading", "Charlie", "P"], [C1, "content", "", "c"],
+    ]);
+    const second = () => table(B(93), 2, [[X, "content", "", "c continues"], [D1, "content", "Delta", "d"]]);
+
+    it("takes the topic's rows; a heading row a sibling topic sits under stays", () => {
+      const t = deriveTopics([first(), second()], structureOf());
+      expect(topicRowsToDelete(t, A)).toEqual([A, A2]);
+      expect(topicRowsToDelete(t, B1)).toEqual([B1]);
+    });
+
+    it("takes the heading row only it sits under, and its rows in the next table", () => {
+      const t = deriveTopics([first(), second()], structureOf());
+      expect(t.topics.find((x) => x.id === C1)?.rows).toEqual([C1, X]);
+      expect(topicRowsToDelete(t, C1)).toEqual([H2, C1, X]);
+    });
+
+    it("takes the rows recorded under the topic, and keeps a heading row an untitled row sits under", () => {
+      const blocks = [table(B(94), 2, [[H1, "heading", "", "P"], [A, "content", "Alpha", "a"], [X, "content", "", "x"], [B1, "content", "Bravo", "b"]])];
+      const t = deriveTopics(blocks, structureOf({ members: { [X]: B1 }, unlisted: [A] }));
+      expect(t.untitled).toEqual([A]);
+      expect(topicRowsToDelete(t, B1)).toEqual([X, B1]);
+    });
+
+    it("is null for an id that starts no topic", () => {
+      const t = deriveTopics([first(), second()], structureOf());
+      expect(topicRowsToDelete(t, A2)).toBeNull();
+      expect(topicRowsToDelete(t, H1)).toBeNull();
     });
   });
 

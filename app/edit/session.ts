@@ -10,17 +10,17 @@ import { SAVING_AGAIN, waitForSignIn } from "../auth/auth.ts";
 import { showToast } from "../shell/toast.tsx";
 import { schema } from "../../lib/schema.ts";
 import { docLines } from "./editor/commands.ts";
-import { commitChanges } from "./commit.ts";
+import { commitChanges, type FileScope } from "./commit.ts";
 import { DataOfflineError, loadData } from "../data/load.ts";
 import { deviceId, versionTime } from "./format.ts";
-import { Git, NetworkError } from "./github.ts";
+import { Git, NetworkError, type TreeChange } from "./github.ts";
 import { kvStore, type KvStore } from "./idb.ts";
 import { recordSaved } from "./overlay.ts";
 import { pictureChanges } from "./pictures.ts";
 import { Snapshot } from "./snapshot.ts";
 import { buildPageKey } from "./pageKey.ts";
 import {
-  buildSave, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownEntries, shownMedsSlots, showsOwn, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
+  buildSave, buildTopicDelete, cutBox, fileChoice, gapLook, isBlankDoc, loadUnit, sameChoice, sameLook, shownEntries, shownMedsSlots, showsOwn, slotDocs, UnitError, type EditUnit, type GapLook, type MedsChoice, type MedsPart,
   type SaveBuild,
 } from "./units.ts";
 import { currentHash, guideViewHash, navigate, parseHash, type GuideView } from "../shell/route.ts";
@@ -54,7 +54,9 @@ export type Banner =
   | { kind: "conflict"; at: string }
   /** `copied`: her changes were copied before the reload, so the banner may say they're on the clipboard. */
   | { kind: "loaded"; at: string; copied: boolean }
-  | { kind: "restored"; from: string };
+  | { kind: "restored"; from: string }
+  /** Delete topic took the topic titled `title` off the site. */
+  | { kind: "deleted"; title: string };
 
 export interface EditState {
   key: string;
@@ -446,6 +448,60 @@ function pageAfterTopicMoved(old: string, moved: NonNullable<SaveBuild["topicMov
     : { hash: guideViewHash(moved.guide, { kind: "system", system: moved.system }), key: buildPageKey("system", moved.guide, moved.system) };
 }
 
+/**
+ * Commits `build` for the open edit (50 §50.4), with the `extra` tree entries (pictures). Landed: the
+ * edit closes, and she lands on the page its topic's rows went to when the build moved the open topic,
+ * else stays, with `banner` there. Otherwise the edit stays open with the conflict, offline or failed banner.
+ */
+async function commitEdit(
+  edit: EditState, unit: EditUnit, build: SaveBuild, how: { subject: string; scope: FileScope; extra?: readonly TreeChange[]; banner: Banner },
+): Promise<boolean> {
+  const { git, site } = await repo();
+  const message = commitMessage(how.subject, {
+    kind: "edit", page: edit.key, changed: build.changed.length > 0 ? build.changed : unit.ids.slice(0, 1), device: deviceId(),
+  });
+  const outcome = await commitChanges({
+    git, base: unit.snapshot.commit, baseFiles: unit.snapshot.files, scope: how.scope, changes: [...build.changes, ...(how.extra ?? [])], message,
+    author: { name: site.owner.commitName, email: site.owner.commitEmail },
+  });
+  if (outcome.kind === "saved") {
+    await recordSaved(build.files, outcome.commit);
+    resetEditState();
+    dropKeptDraft();
+    set({ edit: null, unsaved: null, pageBanner: null });
+    const moved = build.topicMoved;
+    let key = edit.key;
+    if (moved && unit.topic !== null) {
+      const page = pageAfterTopicMoved(unit.topic, moved);
+      await navigate(page.hash);
+      key = page.key;
+    }
+    showPageBanner(key, how.banner);
+    return true;
+  }
+  if (outcome.kind === "conflict") {
+    conflicted = true;
+    await keepDraft("Couldn’t keep the conflicting changes on this device");
+    setEdit({ saving: false, banner: { kind: "conflict", at: versionTime(outcome.at) } });
+  } else {
+    setEdit({ saving: false, banner: { kind: outcome.kind === "offline" ? "offline" : "failed" } });
+  }
+  return false;
+}
+
+/** A save or Delete topic that threw `e`: signed out, it runs `again` once she signs in; else the offline or failed banner. */
+async function commitThrew(e: unknown, again: () => Promise<boolean>): Promise<boolean> {
+  if (e instanceof SignedOutError) {
+    setEdit({ saving: false });
+    // The edits stay in the views; after sign-in the same save runs again.
+    return (await waitForSignIn()) ? again() : false;
+  }
+  const offline = isOffline(e);
+  if (!offline) console.error("Save failed", e);
+  setEdit({ saving: false, banner: { kind: offline ? "offline" : "failed" } });
+  return false;
+}
+
 /** Save (50 §50.4). Resolves to whether the edit closed with everything saved. */
 export async function save(): Promise<boolean> {
   const edit = store.edit;
@@ -459,48 +515,47 @@ export async function save(): Promise<boolean> {
       discardEdit();
       return true;
     }
-    const { git, site } = await repo();
+    const { git } = await repo();
     const pictures = await pictureChanges(git, docs.values(), slotDocs(unit).values(), unit.snapshot.files);
-    const message = commitMessage(`Edit: ${edit.title}`, {
-      kind: "edit", page: edit.key, changed: build.changed.length > 0 ? build.changed : unit.ids.slice(0, 1), device: deviceId(),
-    });
-    const outcome = await commitChanges({
-      git, base: unit.snapshot.commit, baseFiles: unit.snapshot.files, scope: unit.scope, changes: [...build.changes, ...pictures], message,
-      author: { name: site.owner.commitName, email: site.owner.commitEmail },
-    });
-    if (outcome.kind === "saved") {
-      await recordSaved(build.files, outcome.commit);
-      resetEditState();
-      dropKeptDraft();
-      set({ edit: null, unsaved: null, pageBanner: null });
-      const moved = build.topicMoved;
-      let key = edit.key;
-      if (moved && unit.topic !== null) {
-        const page = pageAfterTopicMoved(unit.topic, moved);
-        await navigate(page.hash);
-        key = page.key;
-      }
-      showPageBanner(key, { kind: "saved" });
-      return true;
-    }
-    if (outcome.kind === "conflict") {
-      conflicted = true;
-      await keepDraft("Couldn’t keep the conflicting changes on this device");
-      setEdit({ saving: false, banner: { kind: "conflict", at: versionTime(outcome.at) } });
-    } else {
-      setEdit({ saving: false, banner: { kind: outcome.kind === "offline" ? "offline" : "failed" } });
-    }
-    return false;
+    return await commitEdit(edit, unit, build, { subject: `Edit: ${edit.title}`, scope: unit.scope, extra: pictures, banner: { kind: "saved" } });
   } catch (e) {
-    if (e instanceof SignedOutError) {
-      setEdit({ saving: false });
-      // The edits stay in the views; after sign-in the same save runs again.
-      return (await waitForSignIn()) ? save() : false;
-    }
-    const offline = isOffline(e);
-    if (!offline) console.error("Save failed", e);
-    setEdit({ saving: false, banner: { kind: offline ? "offline" : "failed" } });
-    return false;
+    return commitThrew(e, save);
+  }
+}
+
+/** The confirm before Delete topic: what goes, and where she gets it back. */
+export function deleteTopicPrompt(title: string, dirty: boolean): string[] {
+  return [
+    `Delete “${title}”?`,
+    "Its rows, Additional info and meds panel go from the site.",
+    ...(dirty ? ["Your unsaved changes on this page go too."] : []),
+    "To bring it back, open Versions on the system page and restore the version before this one.",
+  ];
+}
+
+/**
+ * Delete topic, after her confirm: the open topic page's topic leaves the site in one save
+ * (buildTopicDelete), and she lands where a save deleting its first row would leave her. Resolves to
+ * whether it was deleted.
+ */
+export async function deleteTopic(confirm: (lines: string[]) => Promise<boolean>): Promise<boolean> {
+  const edit = store.edit;
+  const unit = edit?.unit;
+  if (!edit || !unit || unit.topic === null || edit.saving) return false;
+  if (!(await confirm(deleteTopicPrompt(edit.title, isDirty())))) return false;
+  return commitDelete(unit);
+}
+
+/** Delete topic of `unit` once she confirmed: only while the same page is still open and not saving. */
+async function commitDelete(unit: EditUnit): Promise<boolean> {
+  const edit = getEditStore().edit;
+  if (edit?.unit !== unit || edit.saving) return false;
+  setEdit({ saving: true, banner: null });
+  try {
+    const { build, scope } = await buildTopicDelete(unit);
+    return await commitEdit(edit, unit, build, { subject: `Delete topic: ${edit.title}`, scope, banner: { kind: "deleted", title: edit.title } });
+  } catch (e) {
+    return commitThrew(e, () => commitDelete(unit));
   }
 }
 

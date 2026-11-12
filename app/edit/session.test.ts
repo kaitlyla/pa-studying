@@ -15,7 +15,7 @@ import { markViews, nodeViews } from "./editor/views.ts";
 import { memoryStore, type KvStore } from "./idb.ts";
 import { overlayEntries, setOverlayStoreForTests, stopOverlay, type OverlayEntry } from "./overlay.ts";
 import {
-  confirmLeave, copyChanges, currentLook, currentMeds, discardEdit, dropEmptyBox, getEditStore, isCardBox, loadNewer, mountedEditor, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
+  confirmLeave, copyChanges, currentLook, currentMeds, deleteTopic, deleteTopicPrompt, discardEdit, dropEmptyBox, getEditStore, isCardBox, loadNewer, mountedEditor, onBeforeUnload, OPEN_FAILED, OPEN_OFFLINE,
   OPEN_PAGE_CHANGED, registerView, resolveUnsaved, restoreDraft, save, saveDraft, setDraftStoreForTests, setGapLook, setMeds, startEdit,
   viewChanged, type Draft,
 } from "./session.ts";
@@ -289,6 +289,57 @@ describe("save", () => {
     expect(edit().banner).toEqual({ kind: "failed" });
     expect(w.fake.head()).toBe(before);
     expect(editorText()).toContain("more AF text (new)");
+  });
+});
+
+describe("Delete topic", () => {
+  it("declined at the confirm, nothing is committed and the edit stays open", async () => {
+    await openAndType();
+    const before = w.fake.head();
+    const asked: string[][] = [];
+
+    expect(await deleteTopic((lines) => { asked.push(lines); return Promise.resolve(false); })).toBe(false);
+
+    expect(asked).toEqual([deleteTopicPrompt("Atrial fibrillation", true)]);
+    expect(asked[0]).toContain("Your unsaved changes on this page go too.");
+    expect(w.fake.head()).toBe(before);
+    expect(edit().unit?.topic).not.toBeNull();
+  });
+
+  it("confirmed, one commit takes the topic off the site and she lands on the system page with Deleted there", async () => {
+    await navigate(guideViewHash("fm", { kind: "topics", ids: [R(101)] }));
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    const before = w.fake.head();
+
+    expect(await deleteTopic(() => Promise.resolve(true))).toBe(true);
+
+    const head = w.fake.commit(w.fake.head());
+    expect(head?.parents).toEqual([before]);
+    expect(head?.message.split("\n")[0]).toBe("Delete topic: Atrial fibrillation");
+    expect(parseTrailers(head?.message ?? "")).toMatchObject({ kind: "edit", page: KEY });
+    expect(repoText()).not.toContain(R(101));
+    expect(getEditStore().edit).toBeNull();
+    const landed = guideViewHash("fm", { kind: "system", system: "cardiovascular" });
+    expect(currentHash()).toBe(landed);
+    expect(getEditStore().pageBanner).toEqual({
+      key: buildPageKey("system", "fm", "cardiovascular"), banner: { kind: "deleted", title: "Atrial fibrillation" }, hash: landed,
+    });
+    const sys = await loadData<SystemJson>(systemPath("fm", "cardiovascular"));
+    expect(sys.topics.map((t) => t.title)).not.toContain("Atrial fibrillation");
+    const nav = await loadData<NavJson>("g/fm/nav.json");
+    const titles = nav.systems.flatMap((s) => [...s.entries, ...s.sections.flatMap((x) => x.entries)]).map((e) => e.title);
+    expect(titles).not.toContain("Atrial fibrillation");
+  });
+
+  it("does nothing when the page she confirmed for is no longer the one open", async () => {
+    expect(await startEdit(KEY, "Atrial fibrillation")).toBe(true);
+    mountEditors();
+    const before = w.fake.head();
+
+    expect(await deleteTopic(() => { discardEdit(); return Promise.resolve(true); })).toBe(false);
+
+    expect(w.fake.head()).toBe(before);
   });
 });
 

@@ -11,7 +11,7 @@ import { publishFixture } from "../testing.tsx";
 import { Snapshot } from "./snapshot.ts";
 import { loadFixture, startWorld, type Fixture, type World } from "./testkit.ts";
 import {
-  buildSave, cutBox, entryGapParts, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, removedRoles, rewordRole, roleBack, roleKey, rolesOff, sameLook, shownEntries, shownMedsSlots,
+  buildRestore, buildSave, buildTopicDelete, cutBox, entryGapParts, entrySlots, fileChoice, gapLook, loadUnit, localDate, medsGapParts, removedRoles, rewordRole, roleBack, roleKey, rolesOff, sameLook, shownEntries, shownMedsSlots,
   shownRoles, takeOff, uncut, UnitError, type EditUnit, type MedsChoice, type MedsPart, type Part,
 } from "./units.ts";
 
@@ -792,6 +792,103 @@ describe("a topic's below area", () => {
     expect(build.topicMoved?.topic).toBe(R(105));
     expect(json<BlockFile>(changeOf(build, belowPath(R(105))))).toEqual(saved);
     expect(build.changes).toContainEqual({ path: belowPath(R(101)), sha: null });
+  });
+});
+
+describe("Delete topic (buildTopicDelete)", () => {
+  // In the fixture, Stable angina R104 is titled by heading row R103 (no other row under it) and
+  // continues into B13's first row R130; B13 then starts Heart failure R131.
+  const SYSTEM = `${CV}/system.json`;
+  const belowPath = `${CV}/below/${R(104)}.json`;
+  const commit = (changes: ReturnType<typeof buildSave>["changes"]): void => {
+    w.fake.commitFiles(Object.fromEntries(changes.map((c) => [c.path, "content" in c ? c.content : null])));
+  };
+  const topicsOf = (blocks: BlockFile[], structure: StructureFile): string[] => deriveTopics(blocks, structure).topics.map((t) => t.id);
+
+  it("takes the topic's rows out of every table they are in, with the heading row only they sit under, in a tree the build accepts", async () => {
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const { build, scope } = await buildTopicDelete(unit);
+
+    expect(build.changes.map((c) => c.path).sort()).toEqual([blockPath(10), blockPath(13), CV_STRUCTURE].sort());
+    expect(build.changed).toEqual([R(103), R(104), R(130)]);
+    const b10 = json<BlockFile>(changeOf(build, blockPath(10)));
+    const b13 = json<BlockFile>(changeOf(build, blockPath(13)));
+    expect(rowIds(b10.doc)).toEqual([R(100), R(101), R(102)]);
+    expect(rowIds(b13.doc)).toEqual([R(131)]);
+    const structure = json<StructureFile>(changeOf(build, CV_STRUCTURE));
+    expect(R(104) in structure.members).toBe(false);
+    expect(structure.members).toMatchObject({ [R(101)]: "other", [R(123)]: "cad", [R(131)]: "other" });
+    const sys = only(unit, "rows").sys;
+    const blocks = sys.blocks.map((b) => (b.id === b10.id ? b10 : b.id === b13.id ? b13 : b));
+    expect(topicsOf(blocks, structure)).toEqual([R(101), R(123), R(131)]);
+    expect(() => checkMembers("cardiovascular", deriveTopics(blocks, structure), structure)).not.toThrow();
+    expect(build.files.get(CV_STRUCTURE)).toEqual(structure);
+    expect(scope).toEqual(unit.scope);
+  });
+
+  it("leaves her Additional info and meds panel files for the topic in Git, and a restore from the system page's Versions brings the whole topic back", async () => {
+    const page = await unitAt(`topic:fm:${R(104)}`);
+    const prose = { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: "ECG strip" }] }] } as DocJSON;
+    commit(buildSave(page, new Map([[only(page, "below").slot.id, prose]]), TODAY).changes);
+    const before = await Snapshot.at(w.git);
+
+    const { build } = await buildTopicDelete(await unitAt(`topic:fm:${R(104)}`));
+    expect(build.changes.map((c) => c.path)).not.toContain(belowPath);
+    expect(build.changes.map((c) => c.path).some((p) => p.includes("/meds/"))).toBe(false);
+    commit(build.changes);
+    await expect(unitAt(`topic:fm:${R(104)}`)).rejects.toThrow(UnitError);
+
+    const system = await unitAt("system:fm:cardiovascular");
+    const restored = await buildRestore(system, await loadUnit("system:fm:cardiovascular", before), TODAY);
+    commit(restored.changes);
+    const back = await unitAt(`topic:fm:${R(104)}`);
+    expect(back.parts.filter((p) => p.kind === "rows").map((p) => (p.kind === "rows" ? p.shown : []))).toEqual([[R(103), R(104)], [R(130)]]);
+    expect(((only(back, "below").slot.doc.content[0] as Node).content ?? []).map((t) => t.text)).toEqual(["ECG strip"]);
+    expect(only(back, "rows").sys.structure.members[R(104)]).toBe("cad");
+  });
+
+  it("a table left with no rows goes from system.json, and system.json joins the save's file set", async () => {
+    // B13 holding only R130, the end of Stable angina.
+    const b13 = JSON.parse(new TextDecoder().decode(fx.files[blockPath(13)])) as BlockFile;
+    const table = b13.doc.content[0] as Node;
+    table.content = (table.content ?? []).filter((r) => r.attrs?.id === R(130));
+    const st = JSON.parse(new TextDecoder().decode(fx.files[CV_STRUCTURE])) as StructureFile;
+    delete st.members[R(131)];
+    w.fake.commitFiles({ [blockPath(13)]: serializeFile(blockPath(13), b13), [CV_STRUCTURE]: serializeFile(CV_STRUCTURE, st) }, { message: "Trim" });
+
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    const { build, scope } = await buildTopicDelete(unit);
+    expect(build.changes).toContainEqual({ path: blockPath(13), sha: null });
+    expect(build.files.get(blockPath(13))).toBeNull();
+    expect(json<{ blocks: string[] }>(changeOf(build, SYSTEM)).blocks).toEqual([B(10), B(11), B(12), B(14)]);
+    expect(build.changed).toEqual([R(103), R(104), R(130), B(13)]);
+    expect(scope.files).toContain(SYSTEM);
+    expect(scope.files).toEqual([...new Set([...unit.scope.files, SYSTEM])].sort());
+  });
+
+  it("a cell merged from the topic's rows over a row that stays moves to that row, its text kept", async () => {
+    // Her R102 cell in column 1 ("more AF text") merged down over R103, the next topic's heading row.
+    const b10 = JSON.parse(new TextDecoder().decode(fx.files[blockPath(10)])) as BlockFile;
+    const stored = rowsOfDoc(b10.doc);
+    const r102 = stored.find((r) => r.attrs?.id === R(102)) as Node;
+    const r103 = stored.find((r) => r.attrs?.id === R(103)) as Node;
+    (r102.content?.[1] as Node).attrs = { ...(r102.content?.[1] as Node).attrs, rowspan: 2 };
+    r103.content = (r103.content ?? []).filter((_, i) => i !== 1);
+    w.fake.commitFiles({ [blockPath(10)]: serializeFile(blockPath(10), b10) }, { message: "Merge" });
+
+    const { build } = await buildTopicDelete(await unitAt(`topic:fm:${R(101)}`));
+    expect(build.changed).toEqual([R(100), R(101), R(102)]);
+    const saved = json<BlockFile>(changeOf(build, blockPath(10)));
+    expect(rowIds(saved.doc)).toEqual([R(103), R(104)]);
+    const heading = rowsOfDoc(saved.doc)[0] as Node;
+    expect((heading.content ?? []).map((_, i) => cellText(heading, i))).toEqual(["Stable angina", "more AF text", "T"]);
+    expect((heading.content ?? []).map((c) => c.attrs?.rowspan ?? 1)).toEqual([1, 1, 1]);
+  });
+
+  it("refuses a page that is not a topic page, or a topic gone since the page opened", async () => {
+    await expect(buildTopicDelete(await unitAt("system:fm:cardiovascular"))).rejects.toThrow(UnitError);
+    const unit = await unitAt(`topic:fm:${R(104)}`);
+    await expect(buildTopicDelete({ ...unit, topic: R(130) })).rejects.toThrow(`Topic ${R(130)} is no longer in cardiovascular`);
   });
 });
 
